@@ -431,7 +431,7 @@ export type RetrieveToolResponseBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 export type RetrieveToolResponseBody2 = {
@@ -780,7 +780,7 @@ export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4V2YYNGG9ZBG4MV435S"),
+  _id: z.string().default("01K9510EDNHZ7MF2WVJ45N24ZY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -836,7 +836,7 @@ export const RetrieveToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody5
 > = z.object({
-  id: z.string().default("01K94ZA4V2YYNGG9ZBG4MV435S"),
+  id: z.string().default("01K9510EDNHZ7MF2WVJ45N24ZY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1220,7 +1220,7 @@ export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4V1JXH8B4NJH13BXTWT"),
+  _id: z.string().default("01K9510EDK9CQ05FFM7050K90S"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1274,7 +1274,7 @@ export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody4
 > = z.object({
-  id: z.string().default("01K94ZA4V1JXH8B4NJH13BXTWT"),
+  id: z.string().default("01K9510EDK9CQ05FFM7050K90S"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1700,7 +1700,7 @@ export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4TYGJSCB8B2JCXCGFY2"),
+  _id: z.string().default("01K9510EDHWHYNGGNER3JSV4K6"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1754,7 +1754,7 @@ export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody3
 > = z.object({
-  id: z.string().default("01K94ZA4TYGJSCB8B2JCXCGFY2"),
+  id: z.string().default("01K9510EDHWHYNGGNER3JSV4K6"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1868,7 +1868,7 @@ export const RetrieveToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -1876,7 +1876,7 @@ export type RetrieveToolResponseBodyJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   schema: { [k: string]: any };
-  strict: boolean | null;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -1888,7 +1888,7 @@ export const RetrieveToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /**
@@ -1932,7 +1932,7 @@ export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4TXRV465ZF3AHHFYHHM"),
+  _id: z.string().default("01K9510EDG1KZZKKK03F2M31SH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1985,7 +1985,7 @@ export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody2
 > = z.object({
-  id: z.string().default("01K94ZA4TXRV465ZF3AHHFYHHM"),
+  id: z.string().default("01K9510EDG1KZZKKK03F2M31SH"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2157,7 +2157,7 @@ export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4TWARWVW4QCQ4JJQZNJ"),
+  _id: z.string().default("01K9510EDF3MFSJ556VH6P1W6T"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2209,7 +2209,7 @@ export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody1
 > = z.object({
-  id: z.string().default("01K94ZA4TWARWVW4QCQ4JJQZNJ"),
+  id: z.string().default("01K9510EDF3MFSJ556VH6P1W6T"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

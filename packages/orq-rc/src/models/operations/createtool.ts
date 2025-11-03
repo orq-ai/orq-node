@@ -384,7 +384,7 @@ export type RequestBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -912,7 +912,7 @@ export type ResponseBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 export type ResponseBody2 = {
@@ -2084,7 +2084,7 @@ export const RequestBodyJsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -2092,7 +2092,7 @@ export type RequestBodyJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   schema: { [k: string]: any };
-  strict: boolean | null;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -2104,7 +2104,7 @@ export const RequestBodyJsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /**
@@ -2601,7 +2601,7 @@ export const ResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4SGPE9B2AXN2T71VBS2"),
+  _id: z.string().default("01K9510EC1SRTMHY134Y2CA2JC"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2656,7 +2656,7 @@ export const ResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody5
 > = z.object({
-  id: z.string().default("01K94ZA4SGPE9B2AXN2T71VBS2"),
+  id: z.string().default("01K9510EC1SRTMHY134Y2CA2JC"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3015,7 +3015,7 @@ export const ResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4SFC4CSGM0NSR7A7Y6T"),
+  _id: z.string().default("01K9510EC0J661WNM6VG9ZQMW2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3069,7 +3069,7 @@ export const ResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody4
 > = z.object({
-  id: z.string().default("01K94ZA4SFC4CSGM0NSR7A7Y6T"),
+  id: z.string().default("01K9510EC0J661WNM6VG9ZQMW2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3467,7 +3467,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4SDA9DPVDPKSZW8RZ2B"),
+  _id: z.string().default("01K9510EBYQRVMRXTK5DW1YMS7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3519,7 +3519,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody3
 > = z.object({
-  id: z.string().default("01K94ZA4SDA9DPVDPKSZW8RZ2B"),
+  id: z.string().default("01K9510EBYQRVMRXTK5DW1YMS7"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3624,7 +3624,7 @@ export const ResponseBodyJsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -3632,7 +3632,7 @@ export type ResponseBodyJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   schema: { [k: string]: any };
-  strict: boolean | null;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -3644,7 +3644,7 @@ export const ResponseBodyJsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /**
@@ -3684,7 +3684,7 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4SCVR8VHYECC8KYTM9F"),
+  _id: z.string().default("01K9510EBXJ6CBWHTMS2T3TV4G"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3737,7 +3737,7 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody2
 > = z.object({
-  id: z.string().default("01K94ZA4SCVR8VHYECC8KYTM9F"),
+  id: z.string().default("01K9510EBXJ6CBWHTMS2T3TV4G"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3905,7 +3905,7 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K94ZA4SARARCQ52R4HVCX946"),
+  _id: z.string().default("01K9510EBWEEZ0R1Z5QZCDVK0V"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3957,7 +3957,7 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody1
 > = z.object({
-  id: z.string().default("01K94ZA4SARARCQ52R4HVCX946"),
+  id: z.string().default("01K9510EBWEEZ0R1Z5QZCDVK0V"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
