@@ -434,7 +434,7 @@ export type DuplicateToolResponseBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 export type DuplicateToolResponseBody2 = {
@@ -788,7 +788,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K90EABDXK66VMXXGH0VH1CTA"),
+  _id: z.string().default("01K953WCH6FV46YD3FDF40CG8T"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -844,7 +844,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K90EABDXK66VMXXGH0VH1CTA"),
+  id: z.string().default("01K953WCH6FV46YD3FDF40CG8T"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1232,7 +1232,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K90EABDVW221A6E1V5YQW814"),
+  _id: z.string().default("01K953WCH4DF8X5XM9C496PAEX"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1286,7 +1286,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K90EABDVW221A6E1V5YQW814"),
+  id: z.string().default("01K953WCH4DF8X5XM9C496PAEX"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1713,7 +1713,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K90EABDRYDB0BT1TWPH8TX03"),
+  _id: z.string().default("01K953WCH17SMP5ZF57QVCYJ7W"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1767,7 +1767,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K90EABDRYDB0BT1TWPH8TX03"),
+  id: z.string().default("01K953WCH17SMP5ZF57QVCYJ7W"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1882,7 +1882,7 @@ export const DuplicateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -1890,7 +1890,7 @@ export type DuplicateToolResponseBodyJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   schema: { [k: string]: any };
-  strict: boolean | null;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -1902,7 +1902,7 @@ export const DuplicateToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /**
@@ -1947,7 +1947,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K90EABDPM3XHGHFCBA3PV4S8"),
+  _id: z.string().default("01K953WCGZFHGWWFMXNM3DYVY9"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2000,7 +2000,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K90EABDPM3XHGHFCBA3PV4S8"),
+  id: z.string().default("01K953WCGZFHGWWFMXNM3DYVY9"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2173,7 +2173,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K90EABDMYCWNA097R3FE6M5W"),
+  _id: z.string().default("01K953WCGXJ2880MZCP00GPKFP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2225,7 +2225,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K90EABDMYCWNA097R3FE6M5W"),
+  id: z.string().default("01K953WCGXJ2880MZCP00GPKFP"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

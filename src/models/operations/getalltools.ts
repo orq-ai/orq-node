@@ -435,7 +435,7 @@ export type DataJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 export type Data2 = {
@@ -793,7 +793,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K90EABBA74WWXHRNBVSMFQCB"),
+    _id: z.string().default("01K953WCFA16RNAF3FDTY6KKG5"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -846,7 +846,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K90EABBA74WWXHRNBVSMFQCB"),
+  id: z.string().default("01K953WCFA16RNAF3FDTY6KKG5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1189,7 +1189,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K90EABB75J5D2N7NH3ZF3M8H"),
+    _id: z.string().default("01K953WCF84V6ETB2H5GSY9ZGE"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1241,7 +1241,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K90EABB75J5D2N7NH3ZF3M8H"),
+  id: z.string().default("01K953WCF84V6ETB2H5GSY9ZGE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1624,7 +1624,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K90EABB42WYTQR5P54XFJ07N"),
+    _id: z.string().default("01K953WCF4FJJRXZ3XAVZ7QWER"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1676,7 +1676,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K90EABB42WYTQR5P54XFJ07N"),
+  id: z.string().default("01K953WCF4FJJRXZ3XAVZ7QWER"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1781,7 +1781,7 @@ export const DataJsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -1789,7 +1789,7 @@ export type DataJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   schema: { [k: string]: any };
-  strict: boolean | null;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -1801,7 +1801,7 @@ export const DataJsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   schema: z.record(z.any()),
-  strict: z.nullable(z.boolean().default(false)),
+  strict: z.boolean().optional(),
 });
 
 /**
@@ -1834,7 +1834,7 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K90EABB2CHKVGEPZQZXP9ERH"),
+    _id: z.string().default("01K953WCF35DV0TBVXF6RGTZWF"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1887,7 +1887,7 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K90EABB2CHKVGEPZQZXP9ERH"),
+  id: z.string().default("01K953WCF35DV0TBVXF6RGTZWF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2048,7 +2048,7 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K90EABB0CNZQBDVHC7QPV7XV"),
+    _id: z.string().default("01K953WCF1F3CH63G4JYGCFZWF"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -2100,7 +2100,7 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K90EABB0CNZQBDVHC7QPV7XV"),
+  id: z.string().default("01K953WCF1F3CH63G4JYGCFZWF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
