@@ -15,8 +15,8 @@ let value: GetPromptVersionResponseBody = {
         role: "exception",
         content: [
           {
-            type: "file",
-            file: {},
+            type: "text",
+            text: "<value>",
           },
         ],
       },

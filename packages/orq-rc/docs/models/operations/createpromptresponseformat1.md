@@ -6,12 +6,19 @@
 import { CreatePromptResponseFormat1 } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptResponseFormat1 = {
-  type: "text",
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+    schema: {
+      "key": "<value>",
+    },
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                             | [operations.CreatePromptResponseFormatPromptsRequestType](../../models/operations/createpromptresponseformatpromptsrequesttype.md) | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                             | [operations.CreatePromptResponseFormatType](../../models/operations/createpromptresponseformattype.md)             | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `jsonSchema`                                                                                                       | [operations.CreatePromptResponseFormatJsonSchema](../../models/operations/createpromptresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

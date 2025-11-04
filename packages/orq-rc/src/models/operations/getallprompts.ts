@@ -444,7 +444,7 @@ export type GetAllPromptsContent2 =
   | GetAllPrompts23;
 
 /**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type GetAllPromptsContent =
   | string
@@ -478,9 +478,12 @@ export type GetAllPromptsMessages = {
    */
   role: GetAllPromptsRole;
   /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content: string | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>;
+  content:
+    | string
+    | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>
+    | null;
   toolCalls?: Array<GetAllPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -2116,14 +2119,16 @@ export const GetAllPromptsMessages$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: GetAllPromptsRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => GetAllPrompts21$inboundSchema),
-      z.lazy(() => GetAllPrompts22$inboundSchema),
-      z.lazy(() => GetAllPrompts23$inboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => GetAllPrompts21$inboundSchema),
+        z.lazy(() => GetAllPrompts22$inboundSchema),
+        z.lazy(() => GetAllPrompts23$inboundSchema),
+      ])),
+    ]),
+  ),
   tool_calls: z.array(z.lazy(() => GetAllPromptsToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.string().optional(),
@@ -2143,7 +2148,8 @@ export type GetAllPromptsMessages$Outbound = {
       | GetAllPrompts21$Outbound
       | GetAllPrompts22$Outbound
       | GetAllPrompts23$Outbound
-    >;
+    >
+    | null;
   tool_calls?: Array<GetAllPromptsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -2155,14 +2161,18 @@ export const GetAllPromptsMessages$outboundSchema: z.ZodType<
   GetAllPromptsMessages
 > = z.object({
   role: GetAllPromptsRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => GetAllPrompts21$outboundSchema),
-      z.lazy(() => GetAllPrompts22$outboundSchema),
-      z.lazy(() => GetAllPrompts23$outboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => GetAllPrompts21$outboundSchema),
+          z.lazy(() => GetAllPrompts22$outboundSchema),
+          z.lazy(() => GetAllPrompts23$outboundSchema),
+        ]),
+      ),
+    ]),
+  ),
   toolCalls: z.array(z.lazy(() => GetAllPromptsToolCalls$outboundSchema))
     .optional(),
   toolCallId: z.string().optional(),

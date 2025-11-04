@@ -12,6 +12,6 @@ let value: CreateMemoryStoreEmbeddingConfig = {
 
 ## Fields
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `model`                             | *operations.CreateMemoryStoreModel* | :heavy_check_mark:                  | N/A                                 |
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `model`                                         | *operations.CreateMemoryStoreMemoryStoresModel* | :heavy_check_mark:                              | N/A                                             |

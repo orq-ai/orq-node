@@ -21,8 +21,8 @@ let value: GetOnePromptPrompt = {
         role: "expected_output",
         content: [
           {
-            type: "file",
-            file: {},
+            type: "text",
+            text: "<value>",
           },
         ],
       },

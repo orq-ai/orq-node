@@ -46,6 +46,643 @@ export type ListAgentTasksRequest = {
   status?: Status | undefined;
 };
 
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const ListAgentTasksVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type ListAgentTasksVoice = ClosedEnum<typeof ListAgentTasksVoice>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const ListAgentTasksFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type ListAgentTasksFormat = ClosedEnum<typeof ListAgentTasksFormat>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type ListAgentTasksAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: ListAgentTasksVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: ListAgentTasksFormat;
+};
+
+export const ListAgentTasksResponseFormatAgentsResponseType = {
+  JsonSchema: "json_schema",
+} as const;
+export type ListAgentTasksResponseFormatAgentsResponseType = ClosedEnum<
+  typeof ListAgentTasksResponseFormatAgentsResponseType
+>;
+
+export type ListAgentTasksResponseFormatJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+export type ListAgentTasksResponseFormat3 = {
+  type: ListAgentTasksResponseFormatAgentsResponseType;
+  jsonSchema: ListAgentTasksResponseFormatJsonSchema;
+};
+
+export const ListAgentTasksResponseFormatAgentsType = {
+  JsonObject: "json_object",
+} as const;
+export type ListAgentTasksResponseFormatAgentsType = ClosedEnum<
+  typeof ListAgentTasksResponseFormatAgentsType
+>;
+
+export type ListAgentTasksResponseFormat2 = {
+  type: ListAgentTasksResponseFormatAgentsType;
+};
+
+export const ListAgentTasksResponseFormatType = {
+  Text: "text",
+} as const;
+export type ListAgentTasksResponseFormatType = ClosedEnum<
+  typeof ListAgentTasksResponseFormatType
+>;
+
+export type ListAgentTasksResponseFormat1 = {
+  type: ListAgentTasksResponseFormatType;
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type ListAgentTasksResponseFormat =
+  | ListAgentTasksResponseFormat3
+  | ListAgentTasksResponseFormat1
+  | ListAgentTasksResponseFormat2;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type ListAgentTasksStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type ListAgentTasksStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+/**
+ * Enables or disables the thinking mode capability
+ */
+export const ListAgentTasksType = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+/**
+ * Enables or disables the thinking mode capability
+ */
+export type ListAgentTasksType = ClosedEnum<typeof ListAgentTasksType>;
+
+export type ListAgentTasksThinking = {
+  /**
+   * Enables or disables the thinking mode capability
+   */
+  type: ListAgentTasksType;
+  /**
+   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
+   */
+  budgetTokens: number;
+};
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const ListAgentTasksToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type ListAgentTasksToolChoiceType = ClosedEnum<
+  typeof ListAgentTasksToolChoiceType
+>;
+
+export type ListAgentTasksToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+};
+
+export type ListAgentTasksToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: ListAgentTasksToolChoiceType | undefined;
+  function: ListAgentTasksToolChoiceFunction;
+};
+
+export const ListAgentTasksToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type ListAgentTasksToolChoice1 = ClosedEnum<
+  typeof ListAgentTasksToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type ListAgentTasksToolChoice =
+  | ListAgentTasksToolChoice2
+  | ListAgentTasksToolChoice1;
+
+export const ListAgentTasksModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type ListAgentTasksModalities = ClosedEnum<
+  typeof ListAgentTasksModalities
+>;
+
+/**
+ * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ */
+export type ListAgentTasksWebSearchOptions = {
+  /**
+   * Whether to enable web search for this request.
+   */
+  enabled?: boolean | undefined;
+};
+
+/**
+ * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
+ */
+export type ListAgentTasksParameters = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: ListAgentTasksAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | ListAgentTasksResponseFormat3
+    | ListAgentTasksResponseFormat1
+    | ListAgentTasksResponseFormat2
+    | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: string | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: ListAgentTasksStreamOptions | null | undefined;
+  thinking?: ListAgentTasksThinking | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | ListAgentTasksToolChoice2
+    | ListAgentTasksToolChoice1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<ListAgentTasksModalities> | null | undefined;
+  /**
+   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+   */
+  webSearchOptions?: ListAgentTasksWebSearchOptions | undefined;
+};
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const ListAgentTasksFallbackModelsVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type ListAgentTasksFallbackModelsVoice = ClosedEnum<
+  typeof ListAgentTasksFallbackModelsVoice
+>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const ListAgentTasksFallbackModelsFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type ListAgentTasksFallbackModelsFormat = ClosedEnum<
+  typeof ListAgentTasksFallbackModelsFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type ListAgentTasksFallbackModelsAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: ListAgentTasksFallbackModelsVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: ListAgentTasksFallbackModelsFormat;
+};
+
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
+  {
+    JsonSchema: "json_schema",
+  } as const;
+export type ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
+  >;
+
+export type ListAgentTasksResponseFormatAgentsJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+export type ListAgentTasksResponseFormatAgents3 = {
+  type:
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType;
+  jsonSchema: ListAgentTasksResponseFormatAgentsJsonSchema;
+};
+
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType =
+  {
+    JsonObject: "json_object",
+  } as const;
+export type ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType
+  >;
+
+export type ListAgentTasksResponseFormatAgents2 = {
+  type: ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType;
+};
+
+export const ListAgentTasksResponseFormatAgentsResponse200Type = {
+  Text: "text",
+} as const;
+export type ListAgentTasksResponseFormatAgentsResponse200Type = ClosedEnum<
+  typeof ListAgentTasksResponseFormatAgentsResponse200Type
+>;
+
+export type ListAgentTasksResponseFormatAgents1 = {
+  type: ListAgentTasksResponseFormatAgentsResponse200Type;
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type ListAgentTasksFallbackModelsResponseFormat =
+  | ListAgentTasksResponseFormatAgents3
+  | ListAgentTasksResponseFormatAgents1
+  | ListAgentTasksResponseFormatAgents2;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type ListAgentTasksFallbackModelsStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type ListAgentTasksFallbackModelsStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+/**
+ * Enables or disables the thinking mode capability
+ */
+export const ListAgentTasksFallbackModelsType = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+/**
+ * Enables or disables the thinking mode capability
+ */
+export type ListAgentTasksFallbackModelsType = ClosedEnum<
+  typeof ListAgentTasksFallbackModelsType
+>;
+
+export type ListAgentTasksFallbackModelsThinking = {
+  /**
+   * Enables or disables the thinking mode capability
+   */
+  type: ListAgentTasksFallbackModelsType;
+  /**
+   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
+   */
+  budgetTokens: number;
+};
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const ListAgentTasksToolChoiceAgentsType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type ListAgentTasksToolChoiceAgentsType = ClosedEnum<
+  typeof ListAgentTasksToolChoiceAgentsType
+>;
+
+export type ListAgentTasksToolChoiceAgentsFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+};
+
+export type ListAgentTasksToolChoiceAgents2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: ListAgentTasksToolChoiceAgentsType | undefined;
+  function: ListAgentTasksToolChoiceAgentsFunction;
+};
+
+export const ListAgentTasksToolChoiceAgents1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type ListAgentTasksToolChoiceAgents1 = ClosedEnum<
+  typeof ListAgentTasksToolChoiceAgents1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type ListAgentTasksFallbackModelsToolChoice =
+  | ListAgentTasksToolChoiceAgents2
+  | ListAgentTasksToolChoiceAgents1;
+
+export const ListAgentTasksFallbackModelsModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type ListAgentTasksFallbackModelsModalities = ClosedEnum<
+  typeof ListAgentTasksFallbackModelsModalities
+>;
+
+/**
+ * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ */
+export type ListAgentTasksFallbackModelsWebSearchOptions = {
+  /**
+   * Whether to enable web search for this request.
+   */
+  enabled?: boolean | undefined;
+};
+
+export type ListAgentTasksFallbackModelsParameters = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: ListAgentTasksFallbackModelsAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | ListAgentTasksResponseFormatAgents3
+    | ListAgentTasksResponseFormatAgents1
+    | ListAgentTasksResponseFormatAgents2
+    | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: string | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: ListAgentTasksFallbackModelsStreamOptions | null | undefined;
+  thinking?: ListAgentTasksFallbackModelsThinking | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | ListAgentTasksToolChoiceAgents2
+    | ListAgentTasksToolChoiceAgents1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<ListAgentTasksFallbackModelsModalities> | null | undefined;
+  /**
+   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+   */
+  webSearchOptions?: ListAgentTasksFallbackModelsWebSearchOptions | undefined;
+};
+
+export type ListAgentTasksFallbackModels2 = {
+  /**
+   * Fallback model ID
+   */
+  id: string;
+  integrationId?: string | null | undefined;
+  parameters?: ListAgentTasksFallbackModelsParameters | undefined;
+};
+
+export type ListAgentTasksFallbackModels =
+  | ListAgentTasksFallbackModels2
+  | string;
+
 export type ListAgentTasksModel = {
   /**
    * The database ID of the primary model
@@ -56,17 +693,16 @@ export type ListAgentTasksModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Optional array of fallback model IDs that will be used automatically in order if the primary model fails
+   * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
    */
-  fallbackModels?: Array<string> | null | undefined;
+  parameters?: ListAgentTasksParameters | undefined;
   /**
-   * Maximum number of tokens for model responses
+   * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
-  maxTokens?: number | undefined;
-  /**
-   * Temperature setting for model responses
-   */
-  temperature?: number | undefined;
+  fallbackModels?:
+    | Array<ListAgentTasksFallbackModels2 | string>
+    | null
+    | undefined;
 };
 
 /**
@@ -304,6 +940,2529 @@ export function listAgentTasksRequestFromJSON(
 }
 
 /** @internal */
+export const ListAgentTasksVoice$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksVoice
+> = z.nativeEnum(ListAgentTasksVoice);
+
+/** @internal */
+export const ListAgentTasksVoice$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksVoice
+> = ListAgentTasksVoice$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksVoice$ {
+  /** @deprecated use `ListAgentTasksVoice$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksVoice$inboundSchema;
+  /** @deprecated use `ListAgentTasksVoice$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksVoice$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFormat$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFormat
+> = z.nativeEnum(ListAgentTasksFormat);
+
+/** @internal */
+export const ListAgentTasksFormat$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFormat
+> = ListAgentTasksFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFormat$ {
+  /** @deprecated use `ListAgentTasksFormat$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFormat$inboundSchema;
+  /** @deprecated use `ListAgentTasksFormat$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksFormat$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksAudio$inboundSchema: z.ZodType<
+  ListAgentTasksAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: ListAgentTasksVoice$inboundSchema,
+  format: ListAgentTasksFormat$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const ListAgentTasksAudio$outboundSchema: z.ZodType<
+  ListAgentTasksAudio$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksAudio
+> = z.object({
+  voice: ListAgentTasksVoice$outboundSchema,
+  format: ListAgentTasksFormat$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksAudio$ {
+  /** @deprecated use `ListAgentTasksAudio$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksAudio$inboundSchema;
+  /** @deprecated use `ListAgentTasksAudio$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksAudio$outboundSchema;
+  /** @deprecated use `ListAgentTasksAudio$Outbound` instead. */
+  export type Outbound = ListAgentTasksAudio$Outbound;
+}
+
+export function listAgentTasksAudioToJSON(
+  listAgentTasksAudio: ListAgentTasksAudio,
+): string {
+  return JSON.stringify(
+    ListAgentTasksAudio$outboundSchema.parse(listAgentTasksAudio),
+  );
+}
+
+export function listAgentTasksAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsResponseType> = z
+    .nativeEnum(ListAgentTasksResponseFormatAgentsResponseType);
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsResponseType> =
+    ListAgentTasksResponseFormatAgentsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsResponseType$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsResponseType$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().optional(),
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormatJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatJsonSchema$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormatJsonSchema
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatJsonSchema$ {
+  /** @deprecated use `ListAgentTasksResponseFormatJsonSchema$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatJsonSchema$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatJsonSchema$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatJsonSchema$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatJsonSchema$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormatJsonSchema$Outbound;
+}
+
+export function listAgentTasksResponseFormatJsonSchemaToJSON(
+  listAgentTasksResponseFormatJsonSchema:
+    ListAgentTasksResponseFormatJsonSchema,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormatJsonSchema$outboundSchema.parse(
+      listAgentTasksResponseFormatJsonSchema,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormatJsonSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormatJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormat3$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsResponseType$inboundSchema,
+  json_schema: z.lazy(() =>
+    ListAgentTasksResponseFormatJsonSchema$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormat3$Outbound = {
+  type: string;
+  json_schema: ListAgentTasksResponseFormatJsonSchema$Outbound;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormat3$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormat3
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsResponseType$outboundSchema,
+  jsonSchema: z.lazy(() =>
+    ListAgentTasksResponseFormatJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormat3$ {
+  /** @deprecated use `ListAgentTasksResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksResponseFormat3$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksResponseFormat3$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat3$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormat3$Outbound;
+}
+
+export function listAgentTasksResponseFormat3ToJSON(
+  listAgentTasksResponseFormat3: ListAgentTasksResponseFormat3,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormat3$outboundSchema.parse(
+      listAgentTasksResponseFormat3,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsType$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsType> = z.nativeEnum(
+    ListAgentTasksResponseFormatAgentsType,
+  );
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsType> =
+    ListAgentTasksResponseFormatAgentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsType$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsType$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormat2$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsType$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormat2$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormat2
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormat2$ {
+  /** @deprecated use `ListAgentTasksResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksResponseFormat2$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksResponseFormat2$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat2$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormat2$Outbound;
+}
+
+export function listAgentTasksResponseFormat2ToJSON(
+  listAgentTasksResponseFormat2: ListAgentTasksResponseFormat2,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormat2$outboundSchema.parse(
+      listAgentTasksResponseFormat2,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksResponseFormatType
+> = z.nativeEnum(ListAgentTasksResponseFormatType);
+
+/** @internal */
+export const ListAgentTasksResponseFormatType$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksResponseFormatType
+> = ListAgentTasksResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatType$ {
+  /** @deprecated use `ListAgentTasksResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksResponseFormatType$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksResponseFormatType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormat1$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksResponseFormatType$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormat1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormat1$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat1$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormat1
+> = z.object({
+  type: ListAgentTasksResponseFormatType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormat1$ {
+  /** @deprecated use `ListAgentTasksResponseFormat1$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksResponseFormat1$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat1$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksResponseFormat1$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat1$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormat1$Outbound;
+}
+
+export function listAgentTasksResponseFormat1ToJSON(
+  listAgentTasksResponseFormat1: ListAgentTasksResponseFormat1,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormat1$outboundSchema.parse(
+      listAgentTasksResponseFormat1,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormat1FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormat1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormat1' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormat$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListAgentTasksResponseFormat3$inboundSchema),
+  z.lazy(() => ListAgentTasksResponseFormat1$inboundSchema),
+  z.lazy(() => ListAgentTasksResponseFormat2$inboundSchema),
+]);
+
+/** @internal */
+export type ListAgentTasksResponseFormat$Outbound =
+  | ListAgentTasksResponseFormat3$Outbound
+  | ListAgentTasksResponseFormat1$Outbound
+  | ListAgentTasksResponseFormat2$Outbound;
+
+/** @internal */
+export const ListAgentTasksResponseFormat$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormat$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormat
+> = z.union([
+  z.lazy(() => ListAgentTasksResponseFormat3$outboundSchema),
+  z.lazy(() => ListAgentTasksResponseFormat1$outboundSchema),
+  z.lazy(() => ListAgentTasksResponseFormat2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormat$ {
+  /** @deprecated use `ListAgentTasksResponseFormat$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksResponseFormat$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksResponseFormat$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormat$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormat$Outbound;
+}
+
+export function listAgentTasksResponseFormatToJSON(
+  listAgentTasksResponseFormat: ListAgentTasksResponseFormat,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormat$outboundSchema.parse(
+      listAgentTasksResponseFormat,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksStop$inboundSchema: z.ZodType<
+  ListAgentTasksStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+/** @internal */
+export type ListAgentTasksStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const ListAgentTasksStop$outboundSchema: z.ZodType<
+  ListAgentTasksStop$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksStop
+> = z.union([z.string(), z.array(z.string())]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksStop$ {
+  /** @deprecated use `ListAgentTasksStop$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksStop$inboundSchema;
+  /** @deprecated use `ListAgentTasksStop$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksStop$outboundSchema;
+  /** @deprecated use `ListAgentTasksStop$Outbound` instead. */
+  export type Outbound = ListAgentTasksStop$Outbound;
+}
+
+export function listAgentTasksStopToJSON(
+  listAgentTasksStop: ListAgentTasksStop,
+): string {
+  return JSON.stringify(
+    ListAgentTasksStop$outboundSchema.parse(listAgentTasksStop),
+  );
+}
+
+export function listAgentTasksStopFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksStreamOptions$inboundSchema: z.ZodType<
+  ListAgentTasksStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksStreamOptions$outboundSchema: z.ZodType<
+  ListAgentTasksStreamOptions$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksStreamOptions
+> = z.object({
+  includeUsage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    includeUsage: "include_usage",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksStreamOptions$ {
+  /** @deprecated use `ListAgentTasksStreamOptions$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksStreamOptions$inboundSchema;
+  /** @deprecated use `ListAgentTasksStreamOptions$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksStreamOptions$outboundSchema;
+  /** @deprecated use `ListAgentTasksStreamOptions$Outbound` instead. */
+  export type Outbound = ListAgentTasksStreamOptions$Outbound;
+}
+
+export function listAgentTasksStreamOptionsToJSON(
+  listAgentTasksStreamOptions: ListAgentTasksStreamOptions,
+): string {
+  return JSON.stringify(
+    ListAgentTasksStreamOptions$outboundSchema.parse(
+      listAgentTasksStreamOptions,
+    ),
+  );
+}
+
+export function listAgentTasksStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksType
+> = z.nativeEnum(ListAgentTasksType);
+
+/** @internal */
+export const ListAgentTasksType$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksType
+> = ListAgentTasksType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksType$ {
+  /** @deprecated use `ListAgentTasksType$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksType$inboundSchema;
+  /** @deprecated use `ListAgentTasksType$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksThinking$inboundSchema: z.ZodType<
+  ListAgentTasksThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksType$inboundSchema,
+  budget_tokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "budget_tokens": "budgetTokens",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksThinking$Outbound = {
+  type: string;
+  budget_tokens: number;
+};
+
+/** @internal */
+export const ListAgentTasksThinking$outboundSchema: z.ZodType<
+  ListAgentTasksThinking$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksThinking
+> = z.object({
+  type: ListAgentTasksType$outboundSchema,
+  budgetTokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    budgetTokens: "budget_tokens",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksThinking$ {
+  /** @deprecated use `ListAgentTasksThinking$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksThinking$inboundSchema;
+  /** @deprecated use `ListAgentTasksThinking$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksThinking$outboundSchema;
+  /** @deprecated use `ListAgentTasksThinking$Outbound` instead. */
+  export type Outbound = ListAgentTasksThinking$Outbound;
+}
+
+export function listAgentTasksThinkingToJSON(
+  listAgentTasksThinking: ListAgentTasksThinking,
+): string {
+  return JSON.stringify(
+    ListAgentTasksThinking$outboundSchema.parse(listAgentTasksThinking),
+  );
+}
+
+export function listAgentTasksThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceType
+> = z.nativeEnum(ListAgentTasksToolChoiceType);
+
+/** @internal */
+export const ListAgentTasksToolChoiceType$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceType
+> = ListAgentTasksToolChoiceType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceType$ {
+  /** @deprecated use `ListAgentTasksToolChoiceType$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoiceType$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceType$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoiceType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceFunction$inboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type ListAgentTasksToolChoiceFunction$Outbound = {
+  name?: string | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksToolChoiceFunction$outboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceFunction$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksToolChoiceFunction
+> = z.object({
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceFunction$ {
+  /** @deprecated use `ListAgentTasksToolChoiceFunction$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoiceFunction$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceFunction$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoiceFunction$outboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceFunction$Outbound` instead. */
+  export type Outbound = ListAgentTasksToolChoiceFunction$Outbound;
+}
+
+export function listAgentTasksToolChoiceFunctionToJSON(
+  listAgentTasksToolChoiceFunction: ListAgentTasksToolChoiceFunction,
+): string {
+  return JSON.stringify(
+    ListAgentTasksToolChoiceFunction$outboundSchema.parse(
+      listAgentTasksToolChoiceFunction,
+    ),
+  );
+}
+
+export function listAgentTasksToolChoiceFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksToolChoiceFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksToolChoiceFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoice2$inboundSchema: z.ZodType<
+  ListAgentTasksToolChoice2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksToolChoiceType$inboundSchema.optional(),
+  function: z.lazy(() => ListAgentTasksToolChoiceFunction$inboundSchema),
+});
+
+/** @internal */
+export type ListAgentTasksToolChoice2$Outbound = {
+  type?: string | undefined;
+  function: ListAgentTasksToolChoiceFunction$Outbound;
+};
+
+/** @internal */
+export const ListAgentTasksToolChoice2$outboundSchema: z.ZodType<
+  ListAgentTasksToolChoice2$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksToolChoice2
+> = z.object({
+  type: ListAgentTasksToolChoiceType$outboundSchema.optional(),
+  function: z.lazy(() => ListAgentTasksToolChoiceFunction$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoice2$ {
+  /** @deprecated use `ListAgentTasksToolChoice2$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoice2$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoice2$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoice2$outboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoice2$Outbound` instead. */
+  export type Outbound = ListAgentTasksToolChoice2$Outbound;
+}
+
+export function listAgentTasksToolChoice2ToJSON(
+  listAgentTasksToolChoice2: ListAgentTasksToolChoice2,
+): string {
+  return JSON.stringify(
+    ListAgentTasksToolChoice2$outboundSchema.parse(listAgentTasksToolChoice2),
+  );
+}
+
+export function listAgentTasksToolChoice2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksToolChoice2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksToolChoice2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksToolChoice2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoice1$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoice1
+> = z.nativeEnum(ListAgentTasksToolChoice1);
+
+/** @internal */
+export const ListAgentTasksToolChoice1$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoice1
+> = ListAgentTasksToolChoice1$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoice1$ {
+  /** @deprecated use `ListAgentTasksToolChoice1$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoice1$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoice1$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoice1$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksToolChoice$inboundSchema: z.ZodType<
+  ListAgentTasksToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListAgentTasksToolChoice2$inboundSchema),
+  ListAgentTasksToolChoice1$inboundSchema,
+]);
+
+/** @internal */
+export type ListAgentTasksToolChoice$Outbound =
+  | ListAgentTasksToolChoice2$Outbound
+  | string;
+
+/** @internal */
+export const ListAgentTasksToolChoice$outboundSchema: z.ZodType<
+  ListAgentTasksToolChoice$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksToolChoice
+> = z.union([
+  z.lazy(() => ListAgentTasksToolChoice2$outboundSchema),
+  ListAgentTasksToolChoice1$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoice$ {
+  /** @deprecated use `ListAgentTasksToolChoice$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoice$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoice$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoice$outboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoice$Outbound` instead. */
+  export type Outbound = ListAgentTasksToolChoice$Outbound;
+}
+
+export function listAgentTasksToolChoiceToJSON(
+  listAgentTasksToolChoice: ListAgentTasksToolChoice,
+): string {
+  return JSON.stringify(
+    ListAgentTasksToolChoice$outboundSchema.parse(listAgentTasksToolChoice),
+  );
+}
+
+export function listAgentTasksToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksModalities$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksModalities
+> = z.nativeEnum(ListAgentTasksModalities);
+
+/** @internal */
+export const ListAgentTasksModalities$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksModalities
+> = ListAgentTasksModalities$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksModalities$ {
+  /** @deprecated use `ListAgentTasksModalities$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksModalities$inboundSchema;
+  /** @deprecated use `ListAgentTasksModalities$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksModalities$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksWebSearchOptions$inboundSchema: z.ZodType<
+  ListAgentTasksWebSearchOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.boolean().optional(),
+});
+
+/** @internal */
+export type ListAgentTasksWebSearchOptions$Outbound = {
+  enabled?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksWebSearchOptions$outboundSchema: z.ZodType<
+  ListAgentTasksWebSearchOptions$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksWebSearchOptions
+> = z.object({
+  enabled: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksWebSearchOptions$ {
+  /** @deprecated use `ListAgentTasksWebSearchOptions$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksWebSearchOptions$inboundSchema;
+  /** @deprecated use `ListAgentTasksWebSearchOptions$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksWebSearchOptions$outboundSchema;
+  /** @deprecated use `ListAgentTasksWebSearchOptions$Outbound` instead. */
+  export type Outbound = ListAgentTasksWebSearchOptions$Outbound;
+}
+
+export function listAgentTasksWebSearchOptionsToJSON(
+  listAgentTasksWebSearchOptions: ListAgentTasksWebSearchOptions,
+): string {
+  return JSON.stringify(
+    ListAgentTasksWebSearchOptions$outboundSchema.parse(
+      listAgentTasksWebSearchOptions,
+    ),
+  );
+}
+
+export function listAgentTasksWebSearchOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksWebSearchOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksWebSearchOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksWebSearchOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksParameters$inboundSchema: z.ZodType<
+  ListAgentTasksParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(z.lazy(() => ListAgentTasksAudio$inboundSchema)).optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => ListAgentTasksResponseFormat3$inboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormat1$inboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormat2$inboundSchema),
+  ]).optional(),
+  reasoning_effort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => ListAgentTasksStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => ListAgentTasksThinking$inboundSchema).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => ListAgentTasksToolChoice2$inboundSchema),
+    ListAgentTasksToolChoice1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(ListAgentTasksModalities$inboundSchema))
+    .optional(),
+  web_search_options: z.lazy(() => ListAgentTasksWebSearchOptions$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "web_search_options": "webSearchOptions",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksParameters$Outbound = {
+  audio?: ListAgentTasksAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | ListAgentTasksResponseFormat3$Outbound
+    | ListAgentTasksResponseFormat1$Outbound
+    | ListAgentTasksResponseFormat2$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?: ListAgentTasksStreamOptions$Outbound | null | undefined;
+  thinking?: ListAgentTasksThinking$Outbound | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: ListAgentTasksToolChoice2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  web_search_options?: ListAgentTasksWebSearchOptions$Outbound | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksParameters$outboundSchema: z.ZodType<
+  ListAgentTasksParameters$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksParameters
+> = z.object({
+  audio: z.nullable(z.lazy(() => ListAgentTasksAudio$outboundSchema))
+    .optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => ListAgentTasksResponseFormat3$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormat1$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormat2$outboundSchema),
+  ]).optional(),
+  reasoningEffort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => ListAgentTasksStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => ListAgentTasksThinking$outboundSchema).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => ListAgentTasksToolChoice2$outboundSchema),
+    ListAgentTasksToolChoice1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(z.array(ListAgentTasksModalities$outboundSchema))
+    .optional(),
+  webSearchOptions: z.lazy(() => ListAgentTasksWebSearchOptions$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+    webSearchOptions: "web_search_options",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksParameters$ {
+  /** @deprecated use `ListAgentTasksParameters$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksParameters$inboundSchema;
+  /** @deprecated use `ListAgentTasksParameters$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksParameters$outboundSchema;
+  /** @deprecated use `ListAgentTasksParameters$Outbound` instead. */
+  export type Outbound = ListAgentTasksParameters$Outbound;
+}
+
+export function listAgentTasksParametersToJSON(
+  listAgentTasksParameters: ListAgentTasksParameters,
+): string {
+  return JSON.stringify(
+    ListAgentTasksParameters$outboundSchema.parse(listAgentTasksParameters),
+  );
+}
+
+export function listAgentTasksParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsVoice
+> = z.nativeEnum(ListAgentTasksFallbackModelsVoice);
+
+/** @internal */
+export const ListAgentTasksFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsVoice
+> = ListAgentTasksFallbackModelsVoice$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsVoice$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsVoice$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModelsVoice$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsVoice$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsVoice$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsFormat
+> = z.nativeEnum(ListAgentTasksFallbackModelsFormat);
+
+/** @internal */
+export const ListAgentTasksFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsFormat
+> = ListAgentTasksFallbackModelsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsFormat$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsFormat$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModelsFormat$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsFormat$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsAudio$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: ListAgentTasksFallbackModelsVoice$inboundSchema,
+  format: ListAgentTasksFallbackModelsFormat$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksFallbackModelsAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModelsAudio$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsAudio$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModelsAudio
+> = z.object({
+  voice: ListAgentTasksFallbackModelsVoice$outboundSchema,
+  format: ListAgentTasksFallbackModelsFormat$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsAudio$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsAudio$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModelsAudio$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsAudio$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsAudio$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsAudio$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsAudio$Outbound;
+}
+
+export function listAgentTasksFallbackModelsAudioToJSON(
+  listAgentTasksFallbackModelsAudio: ListAgentTasksFallbackModelsAudio,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsAudio$outboundSchema.parse(
+      listAgentTasksFallbackModelsAudio,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModelsAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksFallbackModelsAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModelsAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType,
+  );
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
+  > =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsJsonSchema$inboundSchema:
+  z.ZodType<
+    ListAgentTasksResponseFormatAgentsJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
+
+/** @internal */
+export type ListAgentTasksResponseFormatAgentsJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsJsonSchema$outboundSchema:
+  z.ZodType<
+    ListAgentTasksResponseFormatAgentsJsonSchema$Outbound,
+    z.ZodTypeDef,
+    ListAgentTasksResponseFormatAgentsJsonSchema
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsJsonSchema$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsJsonSchema$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsJsonSchema$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsJsonSchema$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsJsonSchema$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsJsonSchema$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormatAgentsJsonSchema$Outbound;
+}
+
+export function listAgentTasksResponseFormatAgentsJsonSchemaToJSON(
+  listAgentTasksResponseFormatAgentsJsonSchema:
+    ListAgentTasksResponseFormatAgentsJsonSchema,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormatAgentsJsonSchema$outboundSchema.parse(
+      listAgentTasksResponseFormatAgentsJsonSchema,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatAgentsJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentTasksResponseFormatAgentsJsonSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksResponseFormatAgentsJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentTasksResponseFormatAgentsJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents3$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  json_schema: z.lazy(() =>
+    ListAgentTasksResponseFormatAgentsJsonSchema$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormatAgents3$Outbound = {
+  type: string;
+  json_schema: ListAgentTasksResponseFormatAgentsJsonSchema$Outbound;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents3$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents3$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormatAgents3
+> = z.object({
+  type:
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  jsonSchema: z.lazy(() =>
+    ListAgentTasksResponseFormatAgentsJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgents3$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgents3$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgents3$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents3$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgents3$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents3$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormatAgents3$Outbound;
+}
+
+export function listAgentTasksResponseFormatAgents3ToJSON(
+  listAgentTasksResponseFormatAgents3: ListAgentTasksResponseFormatAgents3,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormatAgents3$outboundSchema.parse(
+      listAgentTasksResponseFormatAgents3,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatAgents3FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormatAgents3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksResponseFormatAgents3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormatAgents3' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType
+  > =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents2$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormatAgents2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents2$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents2$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormatAgents2
+> = z.object({
+  type:
+    ListAgentTasksResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgents2$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgents2$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgents2$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents2$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgents2$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents2$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormatAgents2$Outbound;
+}
+
+export function listAgentTasksResponseFormatAgents2ToJSON(
+  listAgentTasksResponseFormatAgents2: ListAgentTasksResponseFormatAgents2,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormatAgents2$outboundSchema.parse(
+      listAgentTasksResponseFormatAgents2,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatAgents2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormatAgents2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksResponseFormatAgents2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormatAgents2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsResponse200Type> = z
+    .nativeEnum(ListAgentTasksResponseFormatAgentsResponse200Type);
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgentsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksResponseFormatAgentsResponse200Type> =
+    ListAgentTasksResponseFormatAgentsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgentsResponse200Type$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200Type$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgentsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgentsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents1$inboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsResponse200Type$inboundSchema,
+});
+
+/** @internal */
+export type ListAgentTasksResponseFormatAgents1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ListAgentTasksResponseFormatAgents1$outboundSchema: z.ZodType<
+  ListAgentTasksResponseFormatAgents1$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksResponseFormatAgents1
+> = z.object({
+  type: ListAgentTasksResponseFormatAgentsResponse200Type$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksResponseFormatAgents1$ {
+  /** @deprecated use `ListAgentTasksResponseFormatAgents1$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksResponseFormatAgents1$inboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents1$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksResponseFormatAgents1$outboundSchema;
+  /** @deprecated use `ListAgentTasksResponseFormatAgents1$Outbound` instead. */
+  export type Outbound = ListAgentTasksResponseFormatAgents1$Outbound;
+}
+
+export function listAgentTasksResponseFormatAgents1ToJSON(
+  listAgentTasksResponseFormatAgents1: ListAgentTasksResponseFormatAgents1,
+): string {
+  return JSON.stringify(
+    ListAgentTasksResponseFormatAgents1$outboundSchema.parse(
+      listAgentTasksResponseFormatAgents1,
+    ),
+  );
+}
+
+export function listAgentTasksResponseFormatAgents1FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksResponseFormatAgents1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksResponseFormatAgents1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksResponseFormatAgents1' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsResponseFormat$inboundSchema:
+  z.ZodType<ListAgentTasksFallbackModelsResponseFormat, z.ZodTypeDef, unknown> =
+    z.union([
+      z.lazy(() => ListAgentTasksResponseFormatAgents3$inboundSchema),
+      z.lazy(() => ListAgentTasksResponseFormatAgents1$inboundSchema),
+      z.lazy(() => ListAgentTasksResponseFormatAgents2$inboundSchema),
+    ]);
+
+/** @internal */
+export type ListAgentTasksFallbackModelsResponseFormat$Outbound =
+  | ListAgentTasksResponseFormatAgents3$Outbound
+  | ListAgentTasksResponseFormatAgents1$Outbound
+  | ListAgentTasksResponseFormatAgents2$Outbound;
+
+/** @internal */
+export const ListAgentTasksFallbackModelsResponseFormat$outboundSchema:
+  z.ZodType<
+    ListAgentTasksFallbackModelsResponseFormat$Outbound,
+    z.ZodTypeDef,
+    ListAgentTasksFallbackModelsResponseFormat
+  > = z.union([
+    z.lazy(() => ListAgentTasksResponseFormatAgents3$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents1$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents2$outboundSchema),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsResponseFormat$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsResponseFormat$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsResponseFormat$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsResponseFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsResponseFormat$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsResponseFormat$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsResponseFormat$Outbound;
+}
+
+export function listAgentTasksFallbackModelsResponseFormatToJSON(
+  listAgentTasksFallbackModelsResponseFormat:
+    ListAgentTasksFallbackModelsResponseFormat,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsResponseFormat$outboundSchema.parse(
+      listAgentTasksFallbackModelsResponseFormat,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentTasksFallbackModelsResponseFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsResponseFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentTasksFallbackModelsResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsStop$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+/** @internal */
+export type ListAgentTasksFallbackModelsStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const ListAgentTasksFallbackModelsStop$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsStop$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModelsStop
+> = z.union([z.string(), z.array(z.string())]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsStop$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsStop$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModelsStop$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsStop$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksFallbackModelsStop$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsStop$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsStop$Outbound;
+}
+
+export function listAgentTasksFallbackModelsStopToJSON(
+  listAgentTasksFallbackModelsStop: ListAgentTasksFallbackModelsStop,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsStop$outboundSchema.parse(
+      listAgentTasksFallbackModelsStop,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsStopFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModelsStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksFallbackModelsStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModelsStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsStreamOptions$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksFallbackModelsStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModelsStreamOptions$outboundSchema:
+  z.ZodType<
+    ListAgentTasksFallbackModelsStreamOptions$Outbound,
+    z.ZodTypeDef,
+    ListAgentTasksFallbackModelsStreamOptions
+  > = z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsStreamOptions$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsStreamOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsStreamOptions$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsStreamOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsStreamOptions$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsStreamOptions$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsStreamOptions$Outbound;
+}
+
+export function listAgentTasksFallbackModelsStreamOptionsToJSON(
+  listAgentTasksFallbackModelsStreamOptions:
+    ListAgentTasksFallbackModelsStreamOptions,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsStreamOptions$outboundSchema.parse(
+      listAgentTasksFallbackModelsStreamOptions,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentTasksFallbackModelsStreamOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsStreamOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentTasksFallbackModelsStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsType
+> = z.nativeEnum(ListAgentTasksFallbackModelsType);
+
+/** @internal */
+export const ListAgentTasksFallbackModelsType$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksFallbackModelsType
+> = ListAgentTasksFallbackModelsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsType$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsType$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModelsType$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsType$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksFallbackModelsType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsThinking$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksFallbackModelsType$inboundSchema,
+  budget_tokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "budget_tokens": "budgetTokens",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksFallbackModelsThinking$Outbound = {
+  type: string;
+  budget_tokens: number;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModelsThinking$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsThinking$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModelsThinking
+> = z.object({
+  type: ListAgentTasksFallbackModelsType$outboundSchema,
+  budgetTokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    budgetTokens: "budget_tokens",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsThinking$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsThinking$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsThinking$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsThinking$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsThinking$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsThinking$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsThinking$Outbound;
+}
+
+export function listAgentTasksFallbackModelsThinkingToJSON(
+  listAgentTasksFallbackModelsThinking: ListAgentTasksFallbackModelsThinking,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsThinking$outboundSchema.parse(
+      listAgentTasksFallbackModelsThinking,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModelsThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModelsThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceAgentsType
+> = z.nativeEnum(ListAgentTasksToolChoiceAgentsType);
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceAgentsType
+> = ListAgentTasksToolChoiceAgentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceAgentsType$ {
+  /** @deprecated use `ListAgentTasksToolChoiceAgentsType$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoiceAgentsType$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksToolChoiceAgentsType$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgentsFunction$inboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceAgentsFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type ListAgentTasksToolChoiceAgentsFunction$Outbound = {
+  name?: string | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgentsFunction$outboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceAgentsFunction$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksToolChoiceAgentsFunction
+> = z.object({
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceAgentsFunction$ {
+  /** @deprecated use `ListAgentTasksToolChoiceAgentsFunction$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksToolChoiceAgentsFunction$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgentsFunction$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksToolChoiceAgentsFunction$outboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgentsFunction$Outbound` instead. */
+  export type Outbound = ListAgentTasksToolChoiceAgentsFunction$Outbound;
+}
+
+export function listAgentTasksToolChoiceAgentsFunctionToJSON(
+  listAgentTasksToolChoiceAgentsFunction:
+    ListAgentTasksToolChoiceAgentsFunction,
+): string {
+  return JSON.stringify(
+    ListAgentTasksToolChoiceAgentsFunction$outboundSchema.parse(
+      listAgentTasksToolChoiceAgentsFunction,
+    ),
+  );
+}
+
+export function listAgentTasksToolChoiceAgentsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksToolChoiceAgentsFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksToolChoiceAgentsFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksToolChoiceAgentsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgents2$inboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceAgents2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentTasksToolChoiceAgentsType$inboundSchema.optional(),
+  function: z.lazy(() => ListAgentTasksToolChoiceAgentsFunction$inboundSchema),
+});
+
+/** @internal */
+export type ListAgentTasksToolChoiceAgents2$Outbound = {
+  type?: string | undefined;
+  function: ListAgentTasksToolChoiceAgentsFunction$Outbound;
+};
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgents2$outboundSchema: z.ZodType<
+  ListAgentTasksToolChoiceAgents2$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksToolChoiceAgents2
+> = z.object({
+  type: ListAgentTasksToolChoiceAgentsType$outboundSchema.optional(),
+  function: z.lazy(() => ListAgentTasksToolChoiceAgentsFunction$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceAgents2$ {
+  /** @deprecated use `ListAgentTasksToolChoiceAgents2$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoiceAgents2$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgents2$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoiceAgents2$outboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgents2$Outbound` instead. */
+  export type Outbound = ListAgentTasksToolChoiceAgents2$Outbound;
+}
+
+export function listAgentTasksToolChoiceAgents2ToJSON(
+  listAgentTasksToolChoiceAgents2: ListAgentTasksToolChoiceAgents2,
+): string {
+  return JSON.stringify(
+    ListAgentTasksToolChoiceAgents2$outboundSchema.parse(
+      listAgentTasksToolChoiceAgents2,
+    ),
+  );
+}
+
+export function listAgentTasksToolChoiceAgents2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksToolChoiceAgents2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksToolChoiceAgents2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksToolChoiceAgents2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceAgents1
+> = z.nativeEnum(ListAgentTasksToolChoiceAgents1);
+
+/** @internal */
+export const ListAgentTasksToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentTasksToolChoiceAgents1
+> = ListAgentTasksToolChoiceAgents1$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksToolChoiceAgents1$ {
+  /** @deprecated use `ListAgentTasksToolChoiceAgents1$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksToolChoiceAgents1$inboundSchema;
+  /** @deprecated use `ListAgentTasksToolChoiceAgents1$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksToolChoiceAgents1$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsToolChoice$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListAgentTasksToolChoiceAgents2$inboundSchema),
+  ListAgentTasksToolChoiceAgents1$inboundSchema,
+]);
+
+/** @internal */
+export type ListAgentTasksFallbackModelsToolChoice$Outbound =
+  | ListAgentTasksToolChoiceAgents2$Outbound
+  | string;
+
+/** @internal */
+export const ListAgentTasksFallbackModelsToolChoice$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsToolChoice$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModelsToolChoice
+> = z.union([
+  z.lazy(() => ListAgentTasksToolChoiceAgents2$outboundSchema),
+  ListAgentTasksToolChoiceAgents1$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsToolChoice$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsToolChoice$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsToolChoice$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsToolChoice$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsToolChoice$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsToolChoice$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsToolChoice$Outbound;
+}
+
+export function listAgentTasksFallbackModelsToolChoiceToJSON(
+  listAgentTasksFallbackModelsToolChoice:
+    ListAgentTasksFallbackModelsToolChoice,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsToolChoice$outboundSchema.parse(
+      listAgentTasksFallbackModelsToolChoice,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModelsToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModelsToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsModalities$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksFallbackModelsModalities> = z.nativeEnum(
+    ListAgentTasksFallbackModelsModalities,
+  );
+
+/** @internal */
+export const ListAgentTasksFallbackModelsModalities$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentTasksFallbackModelsModalities> =
+    ListAgentTasksFallbackModelsModalities$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsModalities$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsModalities$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsModalities$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsModalities$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsModalities$outboundSchema;
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsWebSearchOptions$inboundSchema:
+  z.ZodType<
+    ListAgentTasksFallbackModelsWebSearchOptions,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean().optional(),
+  });
+
+/** @internal */
+export type ListAgentTasksFallbackModelsWebSearchOptions$Outbound = {
+  enabled?: boolean | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModelsWebSearchOptions$outboundSchema:
+  z.ZodType<
+    ListAgentTasksFallbackModelsWebSearchOptions$Outbound,
+    z.ZodTypeDef,
+    ListAgentTasksFallbackModelsWebSearchOptions
+  > = z.object({
+    enabled: z.boolean().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsWebSearchOptions$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsWebSearchOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsWebSearchOptions$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsWebSearchOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsWebSearchOptions$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsWebSearchOptions$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsWebSearchOptions$Outbound;
+}
+
+export function listAgentTasksFallbackModelsWebSearchOptionsToJSON(
+  listAgentTasksFallbackModelsWebSearchOptions:
+    ListAgentTasksFallbackModelsWebSearchOptions,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsWebSearchOptions$outboundSchema.parse(
+      listAgentTasksFallbackModelsWebSearchOptions,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsWebSearchOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentTasksFallbackModelsWebSearchOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsWebSearchOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentTasksFallbackModelsWebSearchOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModelsParameters$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(
+    z.lazy(() => ListAgentTasksFallbackModelsAudio$inboundSchema),
+  ).optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => ListAgentTasksResponseFormatAgents3$inboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents1$inboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents2$inboundSchema),
+  ]).optional(),
+  reasoning_effort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => ListAgentTasksFallbackModelsStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => ListAgentTasksFallbackModelsThinking$inboundSchema)
+    .optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => ListAgentTasksToolChoiceAgents2$inboundSchema),
+    ListAgentTasksToolChoiceAgents1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(
+    z.array(ListAgentTasksFallbackModelsModalities$inboundSchema),
+  ).optional(),
+  web_search_options: z.lazy(() =>
+    ListAgentTasksFallbackModelsWebSearchOptions$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "web_search_options": "webSearchOptions",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksFallbackModelsParameters$Outbound = {
+  audio?: ListAgentTasksFallbackModelsAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | ListAgentTasksResponseFormatAgents3$Outbound
+    | ListAgentTasksResponseFormatAgents1$Outbound
+    | ListAgentTasksResponseFormatAgents2$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?:
+    | ListAgentTasksFallbackModelsStreamOptions$Outbound
+    | null
+    | undefined;
+  thinking?: ListAgentTasksFallbackModelsThinking$Outbound | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: ListAgentTasksToolChoiceAgents2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  web_search_options?:
+    | ListAgentTasksFallbackModelsWebSearchOptions$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModelsParameters$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModelsParameters$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModelsParameters
+> = z.object({
+  audio: z.nullable(
+    z.lazy(() => ListAgentTasksFallbackModelsAudio$outboundSchema),
+  ).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => ListAgentTasksResponseFormatAgents3$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents1$outboundSchema),
+    z.lazy(() => ListAgentTasksResponseFormatAgents2$outboundSchema),
+  ]).optional(),
+  reasoningEffort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => ListAgentTasksFallbackModelsStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => ListAgentTasksFallbackModelsThinking$outboundSchema)
+    .optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => ListAgentTasksToolChoiceAgents2$outboundSchema),
+    ListAgentTasksToolChoiceAgents1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(
+    z.array(ListAgentTasksFallbackModelsModalities$outboundSchema),
+  ).optional(),
+  webSearchOptions: z.lazy(() =>
+    ListAgentTasksFallbackModelsWebSearchOptions$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+    webSearchOptions: "web_search_options",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModelsParameters$ {
+  /** @deprecated use `ListAgentTasksFallbackModelsParameters$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAgentTasksFallbackModelsParameters$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsParameters$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAgentTasksFallbackModelsParameters$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModelsParameters$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModelsParameters$Outbound;
+}
+
+export function listAgentTasksFallbackModelsParametersToJSON(
+  listAgentTasksFallbackModelsParameters:
+    ListAgentTasksFallbackModelsParameters,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModelsParameters$outboundSchema.parse(
+      listAgentTasksFallbackModelsParameters,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModelsParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentTasksFallbackModelsParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModelsParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModels2$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModels2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  integration_id: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() => ListAgentTasksFallbackModelsParameters$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+  });
+});
+
+/** @internal */
+export type ListAgentTasksFallbackModels2$Outbound = {
+  id: string;
+  integration_id?: string | null | undefined;
+  parameters?: ListAgentTasksFallbackModelsParameters$Outbound | undefined;
+};
+
+/** @internal */
+export const ListAgentTasksFallbackModels2$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModels2$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModels2
+> = z.object({
+  id: z.string(),
+  integrationId: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() =>
+    ListAgentTasksFallbackModelsParameters$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    integrationId: "integration_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModels2$ {
+  /** @deprecated use `ListAgentTasksFallbackModels2$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModels2$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModels2$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksFallbackModels2$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModels2$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModels2$Outbound;
+}
+
+export function listAgentTasksFallbackModels2ToJSON(
+  listAgentTasksFallbackModels2: ListAgentTasksFallbackModels2,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModels2$outboundSchema.parse(
+      listAgentTasksFallbackModels2,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModels2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModels2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksFallbackModels2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModels2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentTasksFallbackModels$inboundSchema: z.ZodType<
+  ListAgentTasksFallbackModels,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListAgentTasksFallbackModels2$inboundSchema),
+  z.string(),
+]);
+
+/** @internal */
+export type ListAgentTasksFallbackModels$Outbound =
+  | ListAgentTasksFallbackModels2$Outbound
+  | string;
+
+/** @internal */
+export const ListAgentTasksFallbackModels$outboundSchema: z.ZodType<
+  ListAgentTasksFallbackModels$Outbound,
+  z.ZodTypeDef,
+  ListAgentTasksFallbackModels
+> = z.union([
+  z.lazy(() => ListAgentTasksFallbackModels2$outboundSchema),
+  z.string(),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListAgentTasksFallbackModels$ {
+  /** @deprecated use `ListAgentTasksFallbackModels$inboundSchema` instead. */
+  export const inboundSchema = ListAgentTasksFallbackModels$inboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModels$outboundSchema` instead. */
+  export const outboundSchema = ListAgentTasksFallbackModels$outboundSchema;
+  /** @deprecated use `ListAgentTasksFallbackModels$Outbound` instead. */
+  export type Outbound = ListAgentTasksFallbackModels$Outbound;
+}
+
+export function listAgentTasksFallbackModelsToJSON(
+  listAgentTasksFallbackModels: ListAgentTasksFallbackModels,
+): string {
+  return JSON.stringify(
+    ListAgentTasksFallbackModels$outboundSchema.parse(
+      listAgentTasksFallbackModels,
+    ),
+  );
+}
+
+export function listAgentTasksFallbackModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentTasksFallbackModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentTasksFallbackModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentTasksFallbackModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentTasksModel$inboundSchema: z.ZodType<
   ListAgentTasksModel,
   z.ZodTypeDef,
@@ -311,14 +3470,17 @@ export const ListAgentTasksModel$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
-  fallback_models: z.nullable(z.array(z.string())).optional(),
-  max_tokens: z.number().int().optional(),
-  temperature: z.number().optional(),
+  parameters: z.lazy(() => ListAgentTasksParameters$inboundSchema).optional(),
+  fallback_models: z.nullable(
+    z.array(z.union([
+      z.lazy(() => ListAgentTasksFallbackModels2$inboundSchema),
+      z.string(),
+    ])),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "integration_id": "integrationId",
     "fallback_models": "fallbackModels",
-    "max_tokens": "maxTokens",
   });
 });
 
@@ -326,9 +3488,11 @@ export const ListAgentTasksModel$inboundSchema: z.ZodType<
 export type ListAgentTasksModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
-  fallback_models?: Array<string> | null | undefined;
-  max_tokens?: number | undefined;
-  temperature?: number | undefined;
+  parameters?: ListAgentTasksParameters$Outbound | undefined;
+  fallback_models?:
+    | Array<ListAgentTasksFallbackModels2$Outbound | string>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -339,14 +3503,17 @@ export const ListAgentTasksModel$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
-  fallbackModels: z.nullable(z.array(z.string())).optional(),
-  maxTokens: z.number().int().optional(),
-  temperature: z.number().optional(),
+  parameters: z.lazy(() => ListAgentTasksParameters$outboundSchema).optional(),
+  fallbackModels: z.nullable(
+    z.array(z.union([
+      z.lazy(() => ListAgentTasksFallbackModels2$outboundSchema),
+      z.string(),
+    ])),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     integrationId: "integration_id",
     fallbackModels: "fallback_models",
-    maxTokens: "max_tokens",
   });
 });
 

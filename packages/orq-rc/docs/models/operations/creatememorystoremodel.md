@@ -3,11 +3,10 @@
 
 ## Supported Types
 
-### `operations.CreateMemoryStoreModel1`
+### `operations.Model1`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel1 =
-  "cohere/embed-multilingual-v3.0";
+const value: operations.Model1 = "cohere/embed-multilingual-v3.0";
 ```
 
 ### `operations.CreateMemoryStoreModel2`
@@ -17,144 +16,129 @@ const value: operations.CreateMemoryStoreModel2 =
   "cohere/embed-multilingual-light-v3.0";
 ```
 
-### `operations.CreateMemoryStoreModel3`
+### `operations.Model3`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel3 =
-  "cohere/embed-english-light-v3.0";
+const value: operations.Model3 = "cohere/embed-english-light-v3.0";
 ```
 
-### `operations.CreateMemoryStoreModel4`
+### `operations.Model4`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel4 = "cohere/embed-english-v3.0";
+const value: operations.Model4 = "cohere/embed-english-v3.0";
 ```
 
-### `operations.CreateMemoryStoreModel5`
+### `operations.Model5`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel5 = "cohere/embed-v4.0";
+const value: operations.Model5 = "cohere/embed-v4.0";
 ```
 
-### `operations.CreateMemoryStoreModel6`
+### `operations.Model6`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel6 =
-  "azure/text-embedding-ada-002";
+const value: operations.Model6 = "azure/text-embedding-ada-002";
 ```
 
-### `operations.CreateMemoryStoreModel7`
+### `operations.Seven`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel7 =
-  "azure/text-embedding-3-small";
+const value: operations.Seven = "azure/text-embedding-3-small";
 ```
 
-### `operations.CreateMemoryStoreModel8`
+### `operations.Eight`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel8 =
-  "openai/text-embedding-3-large";
+const value: operations.Eight = "openai/text-embedding-3-large";
 ```
 
-### `operations.CreateMemoryStoreModel9`
+### `operations.Nine`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel9 =
-  "openai/text-embedding-3-small";
+const value: operations.Nine = "openai/text-embedding-3-small";
 ```
 
-### `operations.CreateMemoryStoreModel10`
+### `operations.Ten`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel10 =
-  "openai/text-embedding-ada-002";
+const value: operations.Ten = "openai/text-embedding-ada-002";
 ```
 
-### `operations.CreateMemoryStoreModel11`
+### `operations.Eleven`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel11 =
-  "google/gemini-embedding-001";
+const value: operations.Eleven = "google/gemini-embedding-001";
 ```
 
-### `operations.CreateMemoryStoreModel12`
+### `operations.Twelve`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel12 =
-  "google/text-multilingual-embedding-002";
+const value: operations.Twelve = "google/text-multilingual-embedding-002";
 ```
 
-### `operations.CreateMemoryStoreModel13`
+### `operations.Thirteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel13 =
-  "google/multimodalembedding@001";
+const value: operations.Thirteen = "google/multimodalembedding@001";
 ```
 
-### `operations.CreateMemoryStoreModel14`
+### `operations.Fourteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel14 =
-  "google-ai/text-embedding-004";
+const value: operations.Fourteen = "google-ai/text-embedding-004";
 ```
 
-### `operations.CreateMemoryStoreModel15`
+### `operations.Fifteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel15 = "mistral/mistral-embed";
+const value: operations.Fifteen = "mistral/mistral-embed";
 ```
 
-### `operations.CreateMemoryStoreModel16`
+### `operations.Sixteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel16 = "jina/jina-clip-v1";
+const value: operations.Sixteen = "jina/jina-clip-v1";
 ```
 
-### `operations.CreateMemoryStoreModel17`
+### `operations.Seventeen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel17 =
-  "jina/jina-embeddings-v2-base-es";
+const value: operations.Seventeen = "jina/jina-embeddings-v2-base-es";
 ```
 
-### `operations.CreateMemoryStoreModel18`
+### `operations.Eighteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel18 =
-  "jina/jina-embeddings-v2-base-en";
+const value: operations.Eighteen = "jina/jina-embeddings-v2-base-en";
 ```
 
-### `operations.CreateMemoryStoreModel19`
+### `operations.Nineteen`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel19 =
-  "jina/jina-embeddings-v2-base-zh";
+const value: operations.Nineteen = "jina/jina-embeddings-v2-base-zh";
 ```
 
-### `operations.CreateMemoryStoreModel20`
+### `operations.Twenty`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel20 =
-  "jina/jina-embeddings-v2-base-code";
+const value: operations.Twenty = "jina/jina-embeddings-v2-base-code";
 ```
 
-### `operations.CreateMemoryStoreModel21`
+### `operations.TwentyOne`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel21 =
-  "jina/jina-embeddings-v2-base-de";
+const value: operations.TwentyOne = "jina/jina-embeddings-v2-base-de";
 ```
 
-### `operations.CreateMemoryStoreModel22`
+### `operations.TwentyTwo`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel22 = "jina/jina-clip-v2";
+const value: operations.TwentyTwo = "jina/jina-clip-v2";
 ```
 
-### `operations.CreateMemoryStoreModel23`
+### `operations.TwentyThree`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel23 = "jina/jina-embeddings-v3";
+const value: operations.TwentyThree = "jina/jina-embeddings-v3";
 ```
 

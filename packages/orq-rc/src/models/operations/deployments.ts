@@ -497,7 +497,7 @@ export type Deployments21 = {
 export type DeploymentsContent2 = Deployments21 | Deployments22 | Deployments23;
 
 /**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type DeploymentsContent =
   | string
@@ -531,9 +531,9 @@ export type DeploymentsMessages = {
    */
   role: DeploymentsRole;
   /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content: string | Array<Deployments21 | Deployments22 | Deployments23>;
+  content: string | Array<Deployments21 | Deployments22 | Deployments23> | null;
   toolCalls?: Array<DeploymentsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -2294,14 +2294,16 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: DeploymentsRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => Deployments21$inboundSchema),
-      z.lazy(() => Deployments22$inboundSchema),
-      z.lazy(() => Deployments23$inboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => Deployments21$inboundSchema),
+        z.lazy(() => Deployments22$inboundSchema),
+        z.lazy(() => Deployments23$inboundSchema),
+      ])),
+    ]),
+  ),
   tool_calls: z.array(z.lazy(() => DeploymentsToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.string().optional(),
@@ -2319,7 +2321,8 @@ export type DeploymentsMessages$Outbound = {
     | string
     | Array<
       Deployments21$Outbound | Deployments22$Outbound | Deployments23$Outbound
-    >;
+    >
+    | null;
   tool_calls?: Array<DeploymentsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -2331,14 +2334,16 @@ export const DeploymentsMessages$outboundSchema: z.ZodType<
   DeploymentsMessages
 > = z.object({
   role: DeploymentsRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => Deployments21$outboundSchema),
-      z.lazy(() => Deployments22$outboundSchema),
-      z.lazy(() => Deployments23$outboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => Deployments21$outboundSchema),
+        z.lazy(() => Deployments22$outboundSchema),
+        z.lazy(() => Deployments23$outboundSchema),
+      ])),
+    ]),
+  ),
   toolCalls: z.array(z.lazy(() => DeploymentsToolCalls$outboundSchema))
     .optional(),
   toolCallId: z.string().optional(),

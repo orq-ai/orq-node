@@ -13,7 +13,7 @@ let value: PromptConfig = {
   messages: [
     {
       role: "user",
-      content: "<value>",
+      content: null,
     },
   ],
 };
