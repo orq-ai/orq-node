@@ -1,12 +1,6 @@
 # ResponseFormat
 
-An object specifying the format that the model must output. 
-
- Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema 
-
- Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
-
-Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
+An object specifying the format that the model must output
 
 
 ## Supported Types
@@ -15,14 +9,7 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ```typescript
 const value: operations.ResponseFormat1 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {
-      "key": "<value>",
-      "key1": "<value>",
-    },
-  },
+  type: "text",
 };
 ```
 
@@ -38,25 +25,10 @@ const value: operations.ResponseFormat2 = {
 
 ```typescript
 const value: operations.ResponseFormat3 = {
-  type: "text",
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+  },
 };
-```
-
-### `operations.ResponseFormat4`
-
-```typescript
-const value: operations.ResponseFormat4 = "opus";
-```
-
-### `operations.Five`
-
-```typescript
-const value: operations.Five = "url";
-```
-
-### `operations.Six`
-
-```typescript
-const value: operations.Six = "srt";
 ```
 

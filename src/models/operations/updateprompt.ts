@@ -392,7 +392,7 @@ export type UpdatePromptContent2 =
   | UpdatePrompt23;
 
 /**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type UpdatePromptContent =
   | string
@@ -424,9 +424,12 @@ export type UpdatePromptMessages = {
    */
   role: UpdatePromptRole;
   /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content: string | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>;
+  content:
+    | string
+    | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>
+    | null;
   toolCalls?: Array<UpdatePromptToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1559,7 +1562,7 @@ export type UpdatePromptContentPromptsResponse2 =
   | UpdatePrompt2PromptsResponse3;
 
 /**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type UpdatePromptPromptsContent =
   | string
@@ -1597,7 +1600,7 @@ export type UpdatePromptPromptsResponseMessages = {
    */
   role: UpdatePromptPromptsRole;
   /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
   content:
     | string
@@ -1605,7 +1608,8 @@ export type UpdatePromptPromptsResponseMessages = {
       | UpdatePrompt2PromptsResponse1
       | UpdatePrompt2PromptsResponse2
       | UpdatePrompt2PromptsResponse3
-    >;
+    >
+    | null;
   toolCalls?: Array<UpdatePromptPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -3083,14 +3087,16 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: UpdatePromptRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => UpdatePrompt21$inboundSchema),
-      z.lazy(() => UpdatePrompt22$inboundSchema),
-      z.lazy(() => UpdatePrompt23$inboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => UpdatePrompt21$inboundSchema),
+        z.lazy(() => UpdatePrompt22$inboundSchema),
+        z.lazy(() => UpdatePrompt23$inboundSchema),
+      ])),
+    ]),
+  ),
   tool_calls: z.array(z.lazy(() => UpdatePromptToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.string().optional(),
@@ -3110,7 +3116,8 @@ export type UpdatePromptMessages$Outbound = {
       | UpdatePrompt21$Outbound
       | UpdatePrompt22$Outbound
       | UpdatePrompt23$Outbound
-    >;
+    >
+    | null;
   tool_calls?: Array<UpdatePromptToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -3122,14 +3129,16 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
   UpdatePromptMessages
 > = z.object({
   role: UpdatePromptRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => UpdatePrompt21$outboundSchema),
-      z.lazy(() => UpdatePrompt22$outboundSchema),
-      z.lazy(() => UpdatePrompt23$outboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => UpdatePrompt21$outboundSchema),
+        z.lazy(() => UpdatePrompt22$outboundSchema),
+        z.lazy(() => UpdatePrompt23$outboundSchema),
+      ])),
+    ]),
+  ),
   toolCalls: z.array(z.lazy(() => UpdatePromptToolCalls$outboundSchema))
     .optional(),
   toolCallId: z.string().optional(),
@@ -7768,14 +7777,18 @@ export const UpdatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: UpdatePromptPromptsRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => UpdatePrompt2PromptsResponse1$inboundSchema),
-      z.lazy(() => UpdatePrompt2PromptsResponse2$inboundSchema),
-      z.lazy(() => UpdatePrompt2PromptsResponse3$inboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => UpdatePrompt2PromptsResponse1$inboundSchema),
+          z.lazy(() => UpdatePrompt2PromptsResponse2$inboundSchema),
+          z.lazy(() => UpdatePrompt2PromptsResponse3$inboundSchema),
+        ]),
+      ),
+    ]),
+  ),
   tool_calls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.string().optional(),
@@ -7795,7 +7808,8 @@ export type UpdatePromptPromptsResponseMessages$Outbound = {
       | UpdatePrompt2PromptsResponse1$Outbound
       | UpdatePrompt2PromptsResponse2$Outbound
       | UpdatePrompt2PromptsResponse3$Outbound
-    >;
+    >
+    | null;
   tool_calls?: Array<UpdatePromptPromptsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -7807,14 +7821,18 @@ export const UpdatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
   UpdatePromptPromptsResponseMessages
 > = z.object({
   role: UpdatePromptPromptsRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => UpdatePrompt2PromptsResponse1$outboundSchema),
-      z.lazy(() => UpdatePrompt2PromptsResponse2$outboundSchema),
-      z.lazy(() => UpdatePrompt2PromptsResponse3$outboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => UpdatePrompt2PromptsResponse1$outboundSchema),
+          z.lazy(() => UpdatePrompt2PromptsResponse2$outboundSchema),
+          z.lazy(() => UpdatePrompt2PromptsResponse3$outboundSchema),
+        ]),
+      ),
+    ]),
+  ),
   toolCalls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$outboundSchema))
     .optional(),
   toolCallId: z.string().optional(),

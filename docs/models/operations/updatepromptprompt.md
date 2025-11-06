@@ -19,12 +19,7 @@ let value: UpdatePromptPrompt = {
     messages: [
       {
         role: "system",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        content: [],
       },
     ],
   },

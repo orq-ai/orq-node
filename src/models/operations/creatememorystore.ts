@@ -114,19 +114,21 @@ export const Model3 = {
 } as const;
 export type Model3 = ClosedEnum<typeof Model3>;
 
-export const Model2 = {
+export const CreateMemoryStoreModel2 = {
   CohereEmbedMultilingualLightV30: "cohere/embed-multilingual-light-v3.0",
 } as const;
-export type Model2 = ClosedEnum<typeof Model2>;
+export type CreateMemoryStoreModel2 = ClosedEnum<
+  typeof CreateMemoryStoreModel2
+>;
 
 export const Model1 = {
   CohereEmbedMultilingualV30: "cohere/embed-multilingual-v3.0",
 } as const;
 export type Model1 = ClosedEnum<typeof Model1>;
 
-export type Model =
+export type CreateMemoryStoreModel =
   | Model1
-  | Model2
+  | CreateMemoryStoreModel2
   | Model3
   | Model4
   | Model5
@@ -152,7 +154,7 @@ export type Model =
 export type EmbeddingConfig = {
   model:
     | Model1
-    | Model2
+    | CreateMemoryStoreModel2
     | Model3
     | Model4
     | Model5
@@ -349,11 +351,11 @@ export type CreateMemoryStoreModel3 = ClosedEnum<
   typeof CreateMemoryStoreModel3
 >;
 
-export const CreateMemoryStoreModel2 = {
+export const CreateMemoryStoreModelMemoryStores2 = {
   CohereEmbedMultilingualLightV30: "cohere/embed-multilingual-light-v3.0",
 } as const;
-export type CreateMemoryStoreModel2 = ClosedEnum<
-  typeof CreateMemoryStoreModel2
+export type CreateMemoryStoreModelMemoryStores2 = ClosedEnum<
+  typeof CreateMemoryStoreModelMemoryStores2
 >;
 
 export const CreateMemoryStoreModel1 = {
@@ -363,9 +365,9 @@ export type CreateMemoryStoreModel1 = ClosedEnum<
   typeof CreateMemoryStoreModel1
 >;
 
-export type CreateMemoryStoreModel =
+export type CreateMemoryStoreMemoryStoresModel =
   | CreateMemoryStoreModel1
-  | CreateMemoryStoreModel2
+  | CreateMemoryStoreModelMemoryStores2
   | CreateMemoryStoreModel3
   | CreateMemoryStoreModel4
   | CreateMemoryStoreModel5
@@ -391,7 +393,7 @@ export type CreateMemoryStoreModel =
 export type CreateMemoryStoreEmbeddingConfig = {
   model:
     | CreateMemoryStoreModel1
-    | CreateMemoryStoreModel2
+    | CreateMemoryStoreModelMemoryStores2
     | CreateMemoryStoreModel3
     | CreateMemoryStoreModel4
     | CreateMemoryStoreModel5
@@ -856,22 +858,24 @@ export namespace Model3$ {
 }
 
 /** @internal */
-export const Model2$inboundSchema: z.ZodNativeEnum<typeof Model2> = z
-  .nativeEnum(Model2);
+export const CreateMemoryStoreModel2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateMemoryStoreModel2
+> = z.nativeEnum(CreateMemoryStoreModel2);
 
 /** @internal */
-export const Model2$outboundSchema: z.ZodNativeEnum<typeof Model2> =
-  Model2$inboundSchema;
+export const CreateMemoryStoreModel2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateMemoryStoreModel2
+> = CreateMemoryStoreModel2$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model2$ {
-  /** @deprecated use `Model2$inboundSchema` instead. */
-  export const inboundSchema = Model2$inboundSchema;
-  /** @deprecated use `Model2$outboundSchema` instead. */
-  export const outboundSchema = Model2$outboundSchema;
+export namespace CreateMemoryStoreModel2$ {
+  /** @deprecated use `CreateMemoryStoreModel2$inboundSchema` instead. */
+  export const inboundSchema = CreateMemoryStoreModel2$inboundSchema;
+  /** @deprecated use `CreateMemoryStoreModel2$outboundSchema` instead. */
+  export const outboundSchema = CreateMemoryStoreModel2$outboundSchema;
 }
 
 /** @internal */
@@ -894,35 +898,38 @@ export namespace Model1$ {
 }
 
 /** @internal */
-export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
-  .union([
-    Model1$inboundSchema,
-    Model2$inboundSchema,
-    Model3$inboundSchema,
-    Model4$inboundSchema,
-    Model5$inboundSchema,
-    Model6$inboundSchema,
-    Seven$inboundSchema,
-    Eight$inboundSchema,
-    Nine$inboundSchema,
-    Ten$inboundSchema,
-    Eleven$inboundSchema,
-    Twelve$inboundSchema,
-    Thirteen$inboundSchema,
-    Fourteen$inboundSchema,
-    Fifteen$inboundSchema,
-    Sixteen$inboundSchema,
-    Seventeen$inboundSchema,
-    Eighteen$inboundSchema,
-    Nineteen$inboundSchema,
-    Twenty$inboundSchema,
-    TwentyOne$inboundSchema,
-    TwentyTwo$inboundSchema,
-    TwentyThree$inboundSchema,
-  ]);
+export const CreateMemoryStoreModel$inboundSchema: z.ZodType<
+  CreateMemoryStoreModel,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  Model1$inboundSchema,
+  CreateMemoryStoreModel2$inboundSchema,
+  Model3$inboundSchema,
+  Model4$inboundSchema,
+  Model5$inboundSchema,
+  Model6$inboundSchema,
+  Seven$inboundSchema,
+  Eight$inboundSchema,
+  Nine$inboundSchema,
+  Ten$inboundSchema,
+  Eleven$inboundSchema,
+  Twelve$inboundSchema,
+  Thirteen$inboundSchema,
+  Fourteen$inboundSchema,
+  Fifteen$inboundSchema,
+  Sixteen$inboundSchema,
+  Seventeen$inboundSchema,
+  Eighteen$inboundSchema,
+  Nineteen$inboundSchema,
+  Twenty$inboundSchema,
+  TwentyOne$inboundSchema,
+  TwentyTwo$inboundSchema,
+  TwentyThree$inboundSchema,
+]);
 
 /** @internal */
-export type Model$Outbound =
+export type CreateMemoryStoreModel$Outbound =
   | string
   | string
   | string
@@ -948,13 +955,13 @@ export type Model$Outbound =
   | string;
 
 /** @internal */
-export const Model$outboundSchema: z.ZodType<
-  Model$Outbound,
+export const CreateMemoryStoreModel$outboundSchema: z.ZodType<
+  CreateMemoryStoreModel$Outbound,
   z.ZodTypeDef,
-  Model
+  CreateMemoryStoreModel
 > = z.union([
   Model1$outboundSchema,
-  Model2$outboundSchema,
+  CreateMemoryStoreModel2$outboundSchema,
   Model3$outboundSchema,
   Model4$outboundSchema,
   Model5$outboundSchema,
@@ -982,26 +989,30 @@ export const Model$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model$ {
-  /** @deprecated use `Model$inboundSchema` instead. */
-  export const inboundSchema = Model$inboundSchema;
-  /** @deprecated use `Model$outboundSchema` instead. */
-  export const outboundSchema = Model$outboundSchema;
-  /** @deprecated use `Model$Outbound` instead. */
-  export type Outbound = Model$Outbound;
+export namespace CreateMemoryStoreModel$ {
+  /** @deprecated use `CreateMemoryStoreModel$inboundSchema` instead. */
+  export const inboundSchema = CreateMemoryStoreModel$inboundSchema;
+  /** @deprecated use `CreateMemoryStoreModel$outboundSchema` instead. */
+  export const outboundSchema = CreateMemoryStoreModel$outboundSchema;
+  /** @deprecated use `CreateMemoryStoreModel$Outbound` instead. */
+  export type Outbound = CreateMemoryStoreModel$Outbound;
 }
 
-export function modelToJSON(model: Model): string {
-  return JSON.stringify(Model$outboundSchema.parse(model));
+export function createMemoryStoreModelToJSON(
+  createMemoryStoreModel: CreateMemoryStoreModel,
+): string {
+  return JSON.stringify(
+    CreateMemoryStoreModel$outboundSchema.parse(createMemoryStoreModel),
+  );
 }
 
-export function modelFromJSON(
+export function createMemoryStoreModelFromJSON(
   jsonString: string,
-): SafeParseResult<Model, SDKValidationError> {
+): SafeParseResult<CreateMemoryStoreModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Model$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Model' from JSON`,
+    (x) => CreateMemoryStoreModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMemoryStoreModel' from JSON`,
   );
 }
 
@@ -1013,7 +1024,7 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.union([
     Model1$inboundSchema,
-    Model2$inboundSchema,
+    CreateMemoryStoreModel2$inboundSchema,
     Model3$inboundSchema,
     Model4$inboundSchema,
     Model5$inboundSchema,
@@ -1074,7 +1085,7 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
 > = z.object({
   model: z.union([
     Model1$outboundSchema,
-    Model2$outboundSchema,
+    CreateMemoryStoreModel2$outboundSchema,
     Model3$outboundSchema,
     Model4$outboundSchema,
     Model5$outboundSchema,
@@ -1646,24 +1657,26 @@ export namespace CreateMemoryStoreModel3$ {
 }
 
 /** @internal */
-export const CreateMemoryStoreModel2$inboundSchema: z.ZodNativeEnum<
-  typeof CreateMemoryStoreModel2
-> = z.nativeEnum(CreateMemoryStoreModel2);
+export const CreateMemoryStoreModelMemoryStores2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateMemoryStoreModelMemoryStores2
+> = z.nativeEnum(CreateMemoryStoreModelMemoryStores2);
 
 /** @internal */
-export const CreateMemoryStoreModel2$outboundSchema: z.ZodNativeEnum<
-  typeof CreateMemoryStoreModel2
-> = CreateMemoryStoreModel2$inboundSchema;
+export const CreateMemoryStoreModelMemoryStores2$outboundSchema:
+  z.ZodNativeEnum<typeof CreateMemoryStoreModelMemoryStores2> =
+    CreateMemoryStoreModelMemoryStores2$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateMemoryStoreModel2$ {
-  /** @deprecated use `CreateMemoryStoreModel2$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryStoreModel2$inboundSchema;
-  /** @deprecated use `CreateMemoryStoreModel2$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryStoreModel2$outboundSchema;
+export namespace CreateMemoryStoreModelMemoryStores2$ {
+  /** @deprecated use `CreateMemoryStoreModelMemoryStores2$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateMemoryStoreModelMemoryStores2$inboundSchema;
+  /** @deprecated use `CreateMemoryStoreModelMemoryStores2$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateMemoryStoreModelMemoryStores2$outboundSchema;
 }
 
 /** @internal */
@@ -1688,13 +1701,13 @@ export namespace CreateMemoryStoreModel1$ {
 }
 
 /** @internal */
-export const CreateMemoryStoreModel$inboundSchema: z.ZodType<
-  CreateMemoryStoreModel,
+export const CreateMemoryStoreMemoryStoresModel$inboundSchema: z.ZodType<
+  CreateMemoryStoreMemoryStoresModel,
   z.ZodTypeDef,
   unknown
 > = z.union([
   CreateMemoryStoreModel1$inboundSchema,
-  CreateMemoryStoreModel2$inboundSchema,
+  CreateMemoryStoreModelMemoryStores2$inboundSchema,
   CreateMemoryStoreModel3$inboundSchema,
   CreateMemoryStoreModel4$inboundSchema,
   CreateMemoryStoreModel5$inboundSchema,
@@ -1719,7 +1732,7 @@ export const CreateMemoryStoreModel$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type CreateMemoryStoreModel$Outbound =
+export type CreateMemoryStoreMemoryStoresModel$Outbound =
   | string
   | string
   | string
@@ -1745,13 +1758,13 @@ export type CreateMemoryStoreModel$Outbound =
   | string;
 
 /** @internal */
-export const CreateMemoryStoreModel$outboundSchema: z.ZodType<
-  CreateMemoryStoreModel$Outbound,
+export const CreateMemoryStoreMemoryStoresModel$outboundSchema: z.ZodType<
+  CreateMemoryStoreMemoryStoresModel$Outbound,
   z.ZodTypeDef,
-  CreateMemoryStoreModel
+  CreateMemoryStoreMemoryStoresModel
 > = z.union([
   CreateMemoryStoreModel1$outboundSchema,
-  CreateMemoryStoreModel2$outboundSchema,
+  CreateMemoryStoreModelMemoryStores2$outboundSchema,
   CreateMemoryStoreModel3$outboundSchema,
   CreateMemoryStoreModel4$outboundSchema,
   CreateMemoryStoreModel5$outboundSchema,
@@ -1779,30 +1792,34 @@ export const CreateMemoryStoreModel$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateMemoryStoreModel$ {
-  /** @deprecated use `CreateMemoryStoreModel$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryStoreModel$inboundSchema;
-  /** @deprecated use `CreateMemoryStoreModel$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryStoreModel$outboundSchema;
-  /** @deprecated use `CreateMemoryStoreModel$Outbound` instead. */
-  export type Outbound = CreateMemoryStoreModel$Outbound;
+export namespace CreateMemoryStoreMemoryStoresModel$ {
+  /** @deprecated use `CreateMemoryStoreMemoryStoresModel$inboundSchema` instead. */
+  export const inboundSchema = CreateMemoryStoreMemoryStoresModel$inboundSchema;
+  /** @deprecated use `CreateMemoryStoreMemoryStoresModel$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateMemoryStoreMemoryStoresModel$outboundSchema;
+  /** @deprecated use `CreateMemoryStoreMemoryStoresModel$Outbound` instead. */
+  export type Outbound = CreateMemoryStoreMemoryStoresModel$Outbound;
 }
 
-export function createMemoryStoreModelToJSON(
-  createMemoryStoreModel: CreateMemoryStoreModel,
+export function createMemoryStoreMemoryStoresModelToJSON(
+  createMemoryStoreMemoryStoresModel: CreateMemoryStoreMemoryStoresModel,
 ): string {
   return JSON.stringify(
-    CreateMemoryStoreModel$outboundSchema.parse(createMemoryStoreModel),
+    CreateMemoryStoreMemoryStoresModel$outboundSchema.parse(
+      createMemoryStoreMemoryStoresModel,
+    ),
   );
 }
 
-export function createMemoryStoreModelFromJSON(
+export function createMemoryStoreMemoryStoresModelFromJSON(
   jsonString: string,
-): SafeParseResult<CreateMemoryStoreModel, SDKValidationError> {
+): SafeParseResult<CreateMemoryStoreMemoryStoresModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateMemoryStoreModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMemoryStoreModel' from JSON`,
+    (x) =>
+      CreateMemoryStoreMemoryStoresModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMemoryStoreMemoryStoresModel' from JSON`,
   );
 }
 
@@ -1814,7 +1831,7 @@ export const CreateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.union([
     CreateMemoryStoreModel1$inboundSchema,
-    CreateMemoryStoreModel2$inboundSchema,
+    CreateMemoryStoreModelMemoryStores2$inboundSchema,
     CreateMemoryStoreModel3$inboundSchema,
     CreateMemoryStoreModel4$inboundSchema,
     CreateMemoryStoreModel5$inboundSchema,
@@ -1875,7 +1892,7 @@ export const CreateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
 > = z.object({
   model: z.union([
     CreateMemoryStoreModel1$outboundSchema,
-    CreateMemoryStoreModel2$outboundSchema,
+    CreateMemoryStoreModelMemoryStores2$outboundSchema,
     CreateMemoryStoreModel3$outboundSchema,
     CreateMemoryStoreModel4$outboundSchema,
     CreateMemoryStoreModel5$outboundSchema,

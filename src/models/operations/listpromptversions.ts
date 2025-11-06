@@ -452,7 +452,7 @@ export type ListPromptVersionsContent2 =
   | ListPromptVersions23;
 
 /**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type ListPromptVersionsContent =
   | string
@@ -484,11 +484,12 @@ export type ListPromptVersionsMessages = {
    */
   role: ListPromptVersionsRole;
   /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
   content:
     | string
-    | Array<ListPromptVersions21 | ListPromptVersions22 | ListPromptVersions23>;
+    | Array<ListPromptVersions21 | ListPromptVersions22 | ListPromptVersions23>
+    | null;
   toolCalls?: Array<ListPromptVersionsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -2130,14 +2131,18 @@ export const ListPromptVersionsMessages$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: ListPromptVersionsRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => ListPromptVersions21$inboundSchema),
-      z.lazy(() => ListPromptVersions22$inboundSchema),
-      z.lazy(() => ListPromptVersions23$inboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => ListPromptVersions21$inboundSchema),
+          z.lazy(() => ListPromptVersions22$inboundSchema),
+          z.lazy(() => ListPromptVersions23$inboundSchema),
+        ]),
+      ),
+    ]),
+  ),
   tool_calls: z.array(z.lazy(() => ListPromptVersionsToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.string().optional(),
@@ -2157,7 +2162,8 @@ export type ListPromptVersionsMessages$Outbound = {
       | ListPromptVersions21$Outbound
       | ListPromptVersions22$Outbound
       | ListPromptVersions23$Outbound
-    >;
+    >
+    | null;
   tool_calls?: Array<ListPromptVersionsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -2169,14 +2175,18 @@ export const ListPromptVersionsMessages$outboundSchema: z.ZodType<
   ListPromptVersionsMessages
 > = z.object({
   role: ListPromptVersionsRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => ListPromptVersions21$outboundSchema),
-      z.lazy(() => ListPromptVersions22$outboundSchema),
-      z.lazy(() => ListPromptVersions23$outboundSchema),
-    ])),
-  ]),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => ListPromptVersions21$outboundSchema),
+          z.lazy(() => ListPromptVersions22$outboundSchema),
+          z.lazy(() => ListPromptVersions23$outboundSchema),
+        ]),
+      ),
+    ]),
+  ),
   toolCalls: z.array(z.lazy(() => ListPromptVersionsToolCalls$outboundSchema))
     .optional(),
   toolCallId: z.string().optional(),

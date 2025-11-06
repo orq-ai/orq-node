@@ -10,6 +10,670 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const StreamRunAgentModelVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type StreamRunAgentModelVoice = ClosedEnum<
+  typeof StreamRunAgentModelVoice
+>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const StreamRunAgentModelFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type StreamRunAgentModelFormat = ClosedEnum<
+  typeof StreamRunAgentModelFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type StreamRunAgentModelAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: StreamRunAgentModelVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: StreamRunAgentModelFormat;
+};
+
+export const StreamRunAgentResponseFormatAgentsRequestType = {
+  JsonSchema: "json_schema",
+} as const;
+export type StreamRunAgentResponseFormatAgentsRequestType = ClosedEnum<
+  typeof StreamRunAgentResponseFormatAgentsRequestType
+>;
+
+export type StreamRunAgentResponseFormatJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+export type StreamRunAgentResponseFormat3 = {
+  type: StreamRunAgentResponseFormatAgentsRequestType;
+  jsonSchema: StreamRunAgentResponseFormatJsonSchema;
+};
+
+export const StreamRunAgentResponseFormatAgentsType = {
+  JsonObject: "json_object",
+} as const;
+export type StreamRunAgentResponseFormatAgentsType = ClosedEnum<
+  typeof StreamRunAgentResponseFormatAgentsType
+>;
+
+export type StreamRunAgentResponseFormat2 = {
+  type: StreamRunAgentResponseFormatAgentsType;
+};
+
+export const StreamRunAgentResponseFormatType = {
+  Text: "text",
+} as const;
+export type StreamRunAgentResponseFormatType = ClosedEnum<
+  typeof StreamRunAgentResponseFormatType
+>;
+
+export type StreamRunAgentResponseFormat1 = {
+  type: StreamRunAgentResponseFormatType;
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type StreamRunAgentModelResponseFormat =
+  | StreamRunAgentResponseFormat3
+  | StreamRunAgentResponseFormat1
+  | StreamRunAgentResponseFormat2;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type StreamRunAgentModelStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type StreamRunAgentModelStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+/**
+ * Enables or disables the thinking mode capability
+ */
+export const StreamRunAgentModelType = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+/**
+ * Enables or disables the thinking mode capability
+ */
+export type StreamRunAgentModelType = ClosedEnum<
+  typeof StreamRunAgentModelType
+>;
+
+export type StreamRunAgentModelThinking = {
+  /**
+   * Enables or disables the thinking mode capability
+   */
+  type: StreamRunAgentModelType;
+  /**
+   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
+   */
+  budgetTokens: number;
+};
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const StreamRunAgentToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type StreamRunAgentToolChoiceType = ClosedEnum<
+  typeof StreamRunAgentToolChoiceType
+>;
+
+export type StreamRunAgentToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+};
+
+export type StreamRunAgentToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: StreamRunAgentToolChoiceType | undefined;
+  function: StreamRunAgentToolChoiceFunction;
+};
+
+export const StreamRunAgentToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type StreamRunAgentToolChoice1 = ClosedEnum<
+  typeof StreamRunAgentToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type StreamRunAgentModelToolChoice =
+  | StreamRunAgentToolChoice2
+  | StreamRunAgentToolChoice1;
+
+export const StreamRunAgentModelModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type StreamRunAgentModelModalities = ClosedEnum<
+  typeof StreamRunAgentModelModalities
+>;
+
+/**
+ * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ */
+export type StreamRunAgentModelWebSearchOptions = {
+  /**
+   * Whether to enable web search for this request.
+   */
+  enabled?: boolean | undefined;
+};
+
+/**
+ * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models.
+ */
+export type StreamRunAgentModelParameters = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: StreamRunAgentModelAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | StreamRunAgentResponseFormat3
+    | StreamRunAgentResponseFormat1
+    | StreamRunAgentResponseFormat2
+    | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: string | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: StreamRunAgentModelStreamOptions | null | undefined;
+  thinking?: StreamRunAgentModelThinking | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | StreamRunAgentToolChoice2
+    | StreamRunAgentToolChoice1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<StreamRunAgentModelModalities> | null | undefined;
+  /**
+   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+   */
+  webSearchOptions?: StreamRunAgentModelWebSearchOptions | undefined;
+};
+
+/**
+ * Model configuration with parameters
+ */
+export type StreamRunAgentModel2 = {
+  /**
+   * Model ID or provider/model string
+   */
+  id: string;
+  /**
+   * Optional integration ID for custom configurations
+   */
+  integrationId?: string | null | undefined;
+  /**
+   * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models.
+   */
+  parameters?: StreamRunAgentModelParameters | undefined;
+};
+
+/**
+ * The language model that powers the agent. Can be a simple string (e.g., "openai/gpt-4o") or an object with model ID and parameters. The model must support tool calling capabilities.
+ */
+export type StreamRunAgentModel = StreamRunAgentModel2 | string;
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const StreamRunAgentFallbackModelsVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type StreamRunAgentFallbackModelsVoice = ClosedEnum<
+  typeof StreamRunAgentFallbackModelsVoice
+>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const StreamRunAgentFallbackModelsFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type StreamRunAgentFallbackModelsFormat = ClosedEnum<
+  typeof StreamRunAgentFallbackModelsFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type StreamRunAgentFallbackModelsAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: StreamRunAgentFallbackModelsVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: StreamRunAgentFallbackModelsFormat;
+};
+
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type =
+  {
+    JsonSchema: "json_schema",
+  } as const;
+export type StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type =
+  ClosedEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type
+  >;
+
+export type StreamRunAgentResponseFormatAgentsJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+export type StreamRunAgentResponseFormatAgents3 = {
+  type: StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type;
+  jsonSchema: StreamRunAgentResponseFormatAgentsJsonSchema;
+};
+
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
+  {
+    JsonObject: "json_object",
+  } as const;
+export type StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
+  ClosedEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
+  >;
+
+export type StreamRunAgentResponseFormatAgents2 = {
+  type: StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType;
+};
+
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyType = {
+  Text: "text",
+} as const;
+export type StreamRunAgentResponseFormatAgentsRequestRequestBodyType =
+  ClosedEnum<typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyType>;
+
+export type StreamRunAgentResponseFormatAgents1 = {
+  type: StreamRunAgentResponseFormatAgentsRequestRequestBodyType;
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type StreamRunAgentFallbackModelsResponseFormat =
+  | StreamRunAgentResponseFormatAgents3
+  | StreamRunAgentResponseFormatAgents1
+  | StreamRunAgentResponseFormatAgents2;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type StreamRunAgentFallbackModelsStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type StreamRunAgentFallbackModelsStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+/**
+ * Enables or disables the thinking mode capability
+ */
+export const StreamRunAgentFallbackModelsType = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+/**
+ * Enables or disables the thinking mode capability
+ */
+export type StreamRunAgentFallbackModelsType = ClosedEnum<
+  typeof StreamRunAgentFallbackModelsType
+>;
+
+export type StreamRunAgentFallbackModelsThinking = {
+  /**
+   * Enables or disables the thinking mode capability
+   */
+  type: StreamRunAgentFallbackModelsType;
+  /**
+   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
+   */
+  budgetTokens: number;
+};
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const StreamRunAgentToolChoiceAgentsType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type StreamRunAgentToolChoiceAgentsType = ClosedEnum<
+  typeof StreamRunAgentToolChoiceAgentsType
+>;
+
+export type StreamRunAgentToolChoiceAgentsFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+};
+
+export type StreamRunAgentToolChoiceAgents2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: StreamRunAgentToolChoiceAgentsType | undefined;
+  function: StreamRunAgentToolChoiceAgentsFunction;
+};
+
+export const StreamRunAgentToolChoiceAgents1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type StreamRunAgentToolChoiceAgents1 = ClosedEnum<
+  typeof StreamRunAgentToolChoiceAgents1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type StreamRunAgentFallbackModelsToolChoice =
+  | StreamRunAgentToolChoiceAgents2
+  | StreamRunAgentToolChoiceAgents1;
+
+export const StreamRunAgentFallbackModelsModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type StreamRunAgentFallbackModelsModalities = ClosedEnum<
+  typeof StreamRunAgentFallbackModelsModalities
+>;
+
+/**
+ * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ */
+export type StreamRunAgentFallbackModelsWebSearchOptions = {
+  /**
+   * Whether to enable web search for this request.
+   */
+  enabled?: boolean | undefined;
+};
+
+export type StreamRunAgentFallbackModelsParameters = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: StreamRunAgentFallbackModelsAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | StreamRunAgentResponseFormatAgents3
+    | StreamRunAgentResponseFormatAgents1
+    | StreamRunAgentResponseFormatAgents2
+    | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: string | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: StreamRunAgentFallbackModelsStreamOptions | null | undefined;
+  thinking?: StreamRunAgentFallbackModelsThinking | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | StreamRunAgentToolChoiceAgents2
+    | StreamRunAgentToolChoiceAgents1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<StreamRunAgentFallbackModelsModalities> | null | undefined;
+  /**
+   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+   */
+  webSearchOptions?: StreamRunAgentFallbackModelsWebSearchOptions | undefined;
+};
+
+export type StreamRunAgentFallbackModels2 = {
+  /**
+   * Fallback model ID
+   */
+  id: string;
+  integrationId?: string | null | undefined;
+  parameters?: StreamRunAgentFallbackModelsParameters | undefined;
+};
+
+export type StreamRunAgentFallbackModels =
+  | StreamRunAgentFallbackModels2
+  | string;
+
+/**
  * Tool message
  */
 export const StreamRunAgentRoleToolMessage = {
@@ -744,13 +1408,13 @@ export type StreamRunAgentRequestBody = {
    */
   taskId?: string | undefined;
   /**
-   * The language model that powers the agent. The model must support tool calling capabilities.
+   * The language model that powers the agent. Can be a simple string (e.g., "openai/gpt-4o") or an object with model ID and parameters. The model must support tool calling capabilities.
    */
-  model: string;
+  model: StreamRunAgentModel2 | string;
   /**
-   * Optional array of fallback model IDs to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities.
+   * Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities.
    */
-  fallbackModels?: Array<string> | undefined;
+  fallbackModels?: Array<StreamRunAgentFallbackModels2 | string> | undefined;
   /**
    * Specifies the agent's function and area of expertise.
    */
@@ -829,6 +1493,2664 @@ export type StreamRunAgentResponseBody = {
    */
   data: string;
 };
+
+/** @internal */
+export const StreamRunAgentModelVoice$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelVoice
+> = z.nativeEnum(StreamRunAgentModelVoice);
+
+/** @internal */
+export const StreamRunAgentModelVoice$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelVoice
+> = StreamRunAgentModelVoice$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelVoice$ {
+  /** @deprecated use `StreamRunAgentModelVoice$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelVoice$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelVoice$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelVoice$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentModelFormat$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelFormat
+> = z.nativeEnum(StreamRunAgentModelFormat);
+
+/** @internal */
+export const StreamRunAgentModelFormat$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelFormat
+> = StreamRunAgentModelFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelFormat$ {
+  /** @deprecated use `StreamRunAgentModelFormat$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelFormat$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelFormat$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentModelAudio$inboundSchema: z.ZodType<
+  StreamRunAgentModelAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: StreamRunAgentModelVoice$inboundSchema,
+  format: StreamRunAgentModelFormat$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentModelAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const StreamRunAgentModelAudio$outboundSchema: z.ZodType<
+  StreamRunAgentModelAudio$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelAudio
+> = z.object({
+  voice: StreamRunAgentModelVoice$outboundSchema,
+  format: StreamRunAgentModelFormat$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelAudio$ {
+  /** @deprecated use `StreamRunAgentModelAudio$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelAudio$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelAudio$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelAudio$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelAudio$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelAudio$Outbound;
+}
+
+export function streamRunAgentModelAudioToJSON(
+  streamRunAgentModelAudio: StreamRunAgentModelAudio,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelAudio$outboundSchema.parse(streamRunAgentModelAudio),
+  );
+}
+
+export function streamRunAgentModelAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentResponseFormatAgentsRequestType> = z
+    .nativeEnum(StreamRunAgentResponseFormatAgentsRequestType);
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentResponseFormatAgentsRequestType> =
+    StreamRunAgentResponseFormatAgentsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsRequestType$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestType$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().optional(),
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormatJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatJsonSchema$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormatJsonSchema
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatJsonSchema$ {
+  /** @deprecated use `StreamRunAgentResponseFormatJsonSchema$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatJsonSchema$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatJsonSchema$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatJsonSchema$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatJsonSchema$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormatJsonSchema$Outbound;
+}
+
+export function streamRunAgentResponseFormatJsonSchemaToJSON(
+  streamRunAgentResponseFormatJsonSchema:
+    StreamRunAgentResponseFormatJsonSchema,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormatJsonSchema$outboundSchema.parse(
+      streamRunAgentResponseFormatJsonSchema,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormatJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormatJsonSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormatJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormat3$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsRequestType$inboundSchema,
+  json_schema: z.lazy(() =>
+    StreamRunAgentResponseFormatJsonSchema$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormat3$Outbound = {
+  type: string;
+  json_schema: StreamRunAgentResponseFormatJsonSchema$Outbound;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormat3$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormat3
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsRequestType$outboundSchema,
+  jsonSchema: z.lazy(() =>
+    StreamRunAgentResponseFormatJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormat3$ {
+  /** @deprecated use `StreamRunAgentResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentResponseFormat3$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentResponseFormat3$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat3$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormat3$Outbound;
+}
+
+export function streamRunAgentResponseFormat3ToJSON(
+  streamRunAgentResponseFormat3: StreamRunAgentResponseFormat3,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormat3$outboundSchema.parse(
+      streamRunAgentResponseFormat3,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsType$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentResponseFormatAgentsType> = z.nativeEnum(
+    StreamRunAgentResponseFormatAgentsType,
+  );
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentResponseFormatAgentsType> =
+    StreamRunAgentResponseFormatAgentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsType$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsType$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormat2$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsType$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormat2$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormat2
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormat2$ {
+  /** @deprecated use `StreamRunAgentResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentResponseFormat2$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentResponseFormat2$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat2$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormat2$Outbound;
+}
+
+export function streamRunAgentResponseFormat2ToJSON(
+  streamRunAgentResponseFormat2: StreamRunAgentResponseFormat2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormat2$outboundSchema.parse(
+      streamRunAgentResponseFormat2,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentResponseFormatType
+> = z.nativeEnum(StreamRunAgentResponseFormatType);
+
+/** @internal */
+export const StreamRunAgentResponseFormatType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentResponseFormatType
+> = StreamRunAgentResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatType$ {
+  /** @deprecated use `StreamRunAgentResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentResponseFormatType$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentResponseFormatType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormat1$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentResponseFormatType$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormat1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormat1$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormat1$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormat1
+> = z.object({
+  type: StreamRunAgentResponseFormatType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormat1$ {
+  /** @deprecated use `StreamRunAgentResponseFormat1$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentResponseFormat1$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat1$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentResponseFormat1$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormat1$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormat1$Outbound;
+}
+
+export function streamRunAgentResponseFormat1ToJSON(
+  streamRunAgentResponseFormat1: StreamRunAgentResponseFormat1,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormat1$outboundSchema.parse(
+      streamRunAgentResponseFormat1,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormat1FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormat1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormat1' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelResponseFormat$inboundSchema: z.ZodType<
+  StreamRunAgentModelResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamRunAgentResponseFormat3$inboundSchema),
+  z.lazy(() => StreamRunAgentResponseFormat1$inboundSchema),
+  z.lazy(() => StreamRunAgentResponseFormat2$inboundSchema),
+]);
+
+/** @internal */
+export type StreamRunAgentModelResponseFormat$Outbound =
+  | StreamRunAgentResponseFormat3$Outbound
+  | StreamRunAgentResponseFormat1$Outbound
+  | StreamRunAgentResponseFormat2$Outbound;
+
+/** @internal */
+export const StreamRunAgentModelResponseFormat$outboundSchema: z.ZodType<
+  StreamRunAgentModelResponseFormat$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelResponseFormat
+> = z.union([
+  z.lazy(() => StreamRunAgentResponseFormat3$outboundSchema),
+  z.lazy(() => StreamRunAgentResponseFormat1$outboundSchema),
+  z.lazy(() => StreamRunAgentResponseFormat2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelResponseFormat$ {
+  /** @deprecated use `StreamRunAgentModelResponseFormat$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelResponseFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelResponseFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentModelResponseFormat$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelResponseFormat$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelResponseFormat$Outbound;
+}
+
+export function streamRunAgentModelResponseFormatToJSON(
+  streamRunAgentModelResponseFormat: StreamRunAgentModelResponseFormat,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelResponseFormat$outboundSchema.parse(
+      streamRunAgentModelResponseFormat,
+    ),
+  );
+}
+
+export function streamRunAgentModelResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelStop$inboundSchema: z.ZodType<
+  StreamRunAgentModelStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+/** @internal */
+export type StreamRunAgentModelStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const StreamRunAgentModelStop$outboundSchema: z.ZodType<
+  StreamRunAgentModelStop$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelStop
+> = z.union([z.string(), z.array(z.string())]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelStop$ {
+  /** @deprecated use `StreamRunAgentModelStop$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelStop$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelStop$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelStop$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelStop$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelStop$Outbound;
+}
+
+export function streamRunAgentModelStopToJSON(
+  streamRunAgentModelStop: StreamRunAgentModelStop,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelStop$outboundSchema.parse(streamRunAgentModelStop),
+  );
+}
+
+export function streamRunAgentModelStopFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelStreamOptions$inboundSchema: z.ZodType<
+  StreamRunAgentModelStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentModelStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentModelStreamOptions$outboundSchema: z.ZodType<
+  StreamRunAgentModelStreamOptions$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelStreamOptions
+> = z.object({
+  includeUsage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    includeUsage: "include_usage",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelStreamOptions$ {
+  /** @deprecated use `StreamRunAgentModelStreamOptions$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelStreamOptions$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelStreamOptions$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelStreamOptions$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelStreamOptions$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelStreamOptions$Outbound;
+}
+
+export function streamRunAgentModelStreamOptionsToJSON(
+  streamRunAgentModelStreamOptions: StreamRunAgentModelStreamOptions,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelStreamOptions$outboundSchema.parse(
+      streamRunAgentModelStreamOptions,
+    ),
+  );
+}
+
+export function streamRunAgentModelStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelType
+> = z.nativeEnum(StreamRunAgentModelType);
+
+/** @internal */
+export const StreamRunAgentModelType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelType
+> = StreamRunAgentModelType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelType$ {
+  /** @deprecated use `StreamRunAgentModelType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelType$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelType$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentModelThinking$inboundSchema: z.ZodType<
+  StreamRunAgentModelThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentModelType$inboundSchema,
+  budget_tokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "budget_tokens": "budgetTokens",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentModelThinking$Outbound = {
+  type: string;
+  budget_tokens: number;
+};
+
+/** @internal */
+export const StreamRunAgentModelThinking$outboundSchema: z.ZodType<
+  StreamRunAgentModelThinking$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelThinking
+> = z.object({
+  type: StreamRunAgentModelType$outboundSchema,
+  budgetTokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    budgetTokens: "budget_tokens",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelThinking$ {
+  /** @deprecated use `StreamRunAgentModelThinking$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelThinking$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelThinking$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelThinking$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelThinking$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelThinking$Outbound;
+}
+
+export function streamRunAgentModelThinkingToJSON(
+  streamRunAgentModelThinking: StreamRunAgentModelThinking,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelThinking$outboundSchema.parse(
+      streamRunAgentModelThinking,
+    ),
+  );
+}
+
+export function streamRunAgentModelThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceType
+> = z.nativeEnum(StreamRunAgentToolChoiceType);
+
+/** @internal */
+export const StreamRunAgentToolChoiceType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceType
+> = StreamRunAgentToolChoiceType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceType$ {
+  /** @deprecated use `StreamRunAgentToolChoiceType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoiceType$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceType$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoiceType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceFunction$inboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type StreamRunAgentToolChoiceFunction$Outbound = {
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentToolChoiceFunction$outboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceFunction$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentToolChoiceFunction
+> = z.object({
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceFunction$ {
+  /** @deprecated use `StreamRunAgentToolChoiceFunction$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoiceFunction$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceFunction$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoiceFunction$outboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceFunction$Outbound` instead. */
+  export type Outbound = StreamRunAgentToolChoiceFunction$Outbound;
+}
+
+export function streamRunAgentToolChoiceFunctionToJSON(
+  streamRunAgentToolChoiceFunction: StreamRunAgentToolChoiceFunction,
+): string {
+  return JSON.stringify(
+    StreamRunAgentToolChoiceFunction$outboundSchema.parse(
+      streamRunAgentToolChoiceFunction,
+    ),
+  );
+}
+
+export function streamRunAgentToolChoiceFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentToolChoiceFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentToolChoiceFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoice2$inboundSchema: z.ZodType<
+  StreamRunAgentToolChoice2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentToolChoiceType$inboundSchema.optional(),
+  function: z.lazy(() => StreamRunAgentToolChoiceFunction$inboundSchema),
+});
+
+/** @internal */
+export type StreamRunAgentToolChoice2$Outbound = {
+  type?: string | undefined;
+  function: StreamRunAgentToolChoiceFunction$Outbound;
+};
+
+/** @internal */
+export const StreamRunAgentToolChoice2$outboundSchema: z.ZodType<
+  StreamRunAgentToolChoice2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentToolChoice2
+> = z.object({
+  type: StreamRunAgentToolChoiceType$outboundSchema.optional(),
+  function: z.lazy(() => StreamRunAgentToolChoiceFunction$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoice2$ {
+  /** @deprecated use `StreamRunAgentToolChoice2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoice2$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoice2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoice2$outboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoice2$Outbound` instead. */
+  export type Outbound = StreamRunAgentToolChoice2$Outbound;
+}
+
+export function streamRunAgentToolChoice2ToJSON(
+  streamRunAgentToolChoice2: StreamRunAgentToolChoice2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentToolChoice2$outboundSchema.parse(streamRunAgentToolChoice2),
+  );
+}
+
+export function streamRunAgentToolChoice2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentToolChoice2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentToolChoice2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentToolChoice2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoice1$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoice1
+> = z.nativeEnum(StreamRunAgentToolChoice1);
+
+/** @internal */
+export const StreamRunAgentToolChoice1$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoice1
+> = StreamRunAgentToolChoice1$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoice1$ {
+  /** @deprecated use `StreamRunAgentToolChoice1$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoice1$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoice1$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoice1$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentModelToolChoice$inboundSchema: z.ZodType<
+  StreamRunAgentModelToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamRunAgentToolChoice2$inboundSchema),
+  StreamRunAgentToolChoice1$inboundSchema,
+]);
+
+/** @internal */
+export type StreamRunAgentModelToolChoice$Outbound =
+  | StreamRunAgentToolChoice2$Outbound
+  | string;
+
+/** @internal */
+export const StreamRunAgentModelToolChoice$outboundSchema: z.ZodType<
+  StreamRunAgentModelToolChoice$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelToolChoice
+> = z.union([
+  z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
+  StreamRunAgentToolChoice1$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelToolChoice$ {
+  /** @deprecated use `StreamRunAgentModelToolChoice$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelToolChoice$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelToolChoice$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelToolChoice$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelToolChoice$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelToolChoice$Outbound;
+}
+
+export function streamRunAgentModelToolChoiceToJSON(
+  streamRunAgentModelToolChoice: StreamRunAgentModelToolChoice,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelToolChoice$outboundSchema.parse(
+      streamRunAgentModelToolChoice,
+    ),
+  );
+}
+
+export function streamRunAgentModelToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelModalities$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelModalities
+> = z.nativeEnum(StreamRunAgentModelModalities);
+
+/** @internal */
+export const StreamRunAgentModelModalities$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelModalities
+> = StreamRunAgentModelModalities$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelModalities$ {
+  /** @deprecated use `StreamRunAgentModelModalities$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelModalities$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelModalities$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelModalities$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentModelWebSearchOptions$inboundSchema: z.ZodType<
+  StreamRunAgentModelWebSearchOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.boolean().optional(),
+});
+
+/** @internal */
+export type StreamRunAgentModelWebSearchOptions$Outbound = {
+  enabled?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentModelWebSearchOptions$outboundSchema: z.ZodType<
+  StreamRunAgentModelWebSearchOptions$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelWebSearchOptions
+> = z.object({
+  enabled: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelWebSearchOptions$ {
+  /** @deprecated use `StreamRunAgentModelWebSearchOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentModelWebSearchOptions$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelWebSearchOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentModelWebSearchOptions$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelWebSearchOptions$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelWebSearchOptions$Outbound;
+}
+
+export function streamRunAgentModelWebSearchOptionsToJSON(
+  streamRunAgentModelWebSearchOptions: StreamRunAgentModelWebSearchOptions,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelWebSearchOptions$outboundSchema.parse(
+      streamRunAgentModelWebSearchOptions,
+    ),
+  );
+}
+
+export function streamRunAgentModelWebSearchOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelWebSearchOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentModelWebSearchOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelWebSearchOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelParameters$inboundSchema: z.ZodType<
+  StreamRunAgentModelParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(z.lazy(() => StreamRunAgentModelAudio$inboundSchema))
+    .optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => StreamRunAgentResponseFormat3$inboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormat1$inboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormat2$inboundSchema),
+  ]).optional(),
+  reasoning_effort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => StreamRunAgentModelStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => StreamRunAgentModelThinking$inboundSchema).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => StreamRunAgentToolChoice2$inboundSchema),
+    StreamRunAgentToolChoice1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(StreamRunAgentModelModalities$inboundSchema))
+    .optional(),
+  web_search_options: z.lazy(() =>
+    StreamRunAgentModelWebSearchOptions$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "web_search_options": "webSearchOptions",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentModelParameters$Outbound = {
+  audio?: StreamRunAgentModelAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | StreamRunAgentResponseFormat3$Outbound
+    | StreamRunAgentResponseFormat1$Outbound
+    | StreamRunAgentResponseFormat2$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?: StreamRunAgentModelStreamOptions$Outbound | null | undefined;
+  thinking?: StreamRunAgentModelThinking$Outbound | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: StreamRunAgentToolChoice2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  web_search_options?: StreamRunAgentModelWebSearchOptions$Outbound | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentModelParameters$outboundSchema: z.ZodType<
+  StreamRunAgentModelParameters$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelParameters
+> = z.object({
+  audio: z.nullable(z.lazy(() => StreamRunAgentModelAudio$outboundSchema))
+    .optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => StreamRunAgentResponseFormat3$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormat1$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormat2$outboundSchema),
+  ]).optional(),
+  reasoningEffort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => StreamRunAgentModelStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => StreamRunAgentModelThinking$outboundSchema).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
+    StreamRunAgentToolChoice1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(z.array(StreamRunAgentModelModalities$outboundSchema))
+    .optional(),
+  webSearchOptions: z.lazy(() =>
+    StreamRunAgentModelWebSearchOptions$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+    webSearchOptions: "web_search_options",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModelParameters$ {
+  /** @deprecated use `StreamRunAgentModelParameters$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModelParameters$inboundSchema;
+  /** @deprecated use `StreamRunAgentModelParameters$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModelParameters$outboundSchema;
+  /** @deprecated use `StreamRunAgentModelParameters$Outbound` instead. */
+  export type Outbound = StreamRunAgentModelParameters$Outbound;
+}
+
+export function streamRunAgentModelParametersToJSON(
+  streamRunAgentModelParameters: StreamRunAgentModelParameters,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelParameters$outboundSchema.parse(
+      streamRunAgentModelParameters,
+    ),
+  );
+}
+
+export function streamRunAgentModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModel2$inboundSchema: z.ZodType<
+  StreamRunAgentModel2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  integration_id: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() => StreamRunAgentModelParameters$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentModel2$Outbound = {
+  id: string;
+  integration_id?: string | null | undefined;
+  parameters?: StreamRunAgentModelParameters$Outbound | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentModel2$outboundSchema: z.ZodType<
+  StreamRunAgentModel2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModel2
+> = z.object({
+  id: z.string(),
+  integrationId: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() => StreamRunAgentModelParameters$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    integrationId: "integration_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModel2$ {
+  /** @deprecated use `StreamRunAgentModel2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModel2$inboundSchema;
+  /** @deprecated use `StreamRunAgentModel2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModel2$outboundSchema;
+  /** @deprecated use `StreamRunAgentModel2$Outbound` instead. */
+  export type Outbound = StreamRunAgentModel2$Outbound;
+}
+
+export function streamRunAgentModel2ToJSON(
+  streamRunAgentModel2: StreamRunAgentModel2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModel2$outboundSchema.parse(streamRunAgentModel2),
+  );
+}
+
+export function streamRunAgentModel2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModel2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModel2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModel2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModel$inboundSchema: z.ZodType<
+  StreamRunAgentModel,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => StreamRunAgentModel2$inboundSchema), z.string()]);
+
+/** @internal */
+export type StreamRunAgentModel$Outbound =
+  | StreamRunAgentModel2$Outbound
+  | string;
+
+/** @internal */
+export const StreamRunAgentModel$outboundSchema: z.ZodType<
+  StreamRunAgentModel$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModel
+> = z.union([z.lazy(() => StreamRunAgentModel2$outboundSchema), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentModel$ {
+  /** @deprecated use `StreamRunAgentModel$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentModel$inboundSchema;
+  /** @deprecated use `StreamRunAgentModel$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentModel$outboundSchema;
+  /** @deprecated use `StreamRunAgentModel$Outbound` instead. */
+  export type Outbound = StreamRunAgentModel$Outbound;
+}
+
+export function streamRunAgentModelToJSON(
+  streamRunAgentModel: StreamRunAgentModel,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModel$outboundSchema.parse(streamRunAgentModel),
+  );
+}
+
+export function streamRunAgentModelFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModel' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsVoice
+> = z.nativeEnum(StreamRunAgentFallbackModelsVoice);
+
+/** @internal */
+export const StreamRunAgentFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsVoice
+> = StreamRunAgentFallbackModelsVoice$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsVoice$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsVoice$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModelsVoice$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsVoice$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsVoice$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsFormat
+> = z.nativeEnum(StreamRunAgentFallbackModelsFormat);
+
+/** @internal */
+export const StreamRunAgentFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsFormat
+> = StreamRunAgentFallbackModelsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsFormat$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsFormat$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModelsFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsFormat$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsAudio$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: StreamRunAgentFallbackModelsVoice$inboundSchema,
+  format: StreamRunAgentFallbackModelsFormat$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentFallbackModelsAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelsAudio$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsAudio$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModelsAudio
+> = z.object({
+  voice: StreamRunAgentFallbackModelsVoice$outboundSchema,
+  format: StreamRunAgentFallbackModelsFormat$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsAudio$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsAudio$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModelsAudio$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsAudio$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsAudio$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsAudio$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsAudio$Outbound;
+}
+
+export function streamRunAgentFallbackModelsAudioToJSON(
+  streamRunAgentFallbackModelsAudio: StreamRunAgentFallbackModelsAudio,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsAudio$outboundSchema.parse(
+      streamRunAgentFallbackModelsAudio,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModelsAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentFallbackModelsAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModelsAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type
+  > = z.nativeEnum(
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type,
+  );
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type
+  > =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema:
+  z.ZodType<
+    StreamRunAgentResponseFormatAgentsJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
+
+/** @internal */
+export type StreamRunAgentResponseFormatAgentsJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema:
+  z.ZodType<
+    StreamRunAgentResponseFormatAgentsJsonSchema$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentResponseFormatAgentsJsonSchema
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsJsonSchema$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsJsonSchema$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormatAgentsJsonSchema$Outbound;
+}
+
+export function streamRunAgentResponseFormatAgentsJsonSchemaToJSON(
+  streamRunAgentResponseFormatAgentsJsonSchema:
+    StreamRunAgentResponseFormatAgentsJsonSchema,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema.parse(
+      streamRunAgentResponseFormatAgentsJsonSchema,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormatAgentsJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentResponseFormatAgentsJsonSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentResponseFormatAgentsJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents3$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema,
+  json_schema: z.lazy(() =>
+    StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormatAgents3$Outbound = {
+  type: string;
+  json_schema: StreamRunAgentResponseFormatAgentsJsonSchema$Outbound;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents3$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents3$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormatAgents3
+> = z.object({
+  type:
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema,
+  jsonSchema: z.lazy(() =>
+    StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgents3$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgents3$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgents3$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents3$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgents3$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents3$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormatAgents3$Outbound;
+}
+
+export function streamRunAgentResponseFormatAgents3ToJSON(
+  streamRunAgentResponseFormatAgents3: StreamRunAgentResponseFormatAgents3,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormatAgents3$outboundSchema.parse(
+      streamRunAgentResponseFormatAgents3,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormatAgents3FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormatAgents3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentResponseFormatAgents3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormatAgents3' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
+  > = z.nativeEnum(
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType,
+  );
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
+  > =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents2$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormatAgents2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents2$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormatAgents2
+> = z.object({
+  type:
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgents2$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgents2$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgents2$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents2$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgents2$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents2$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormatAgents2$Outbound;
+}
+
+export function streamRunAgentResponseFormatAgents2ToJSON(
+  streamRunAgentResponseFormatAgents2: StreamRunAgentResponseFormatAgents2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormatAgents2$outboundSchema.parse(
+      streamRunAgentResponseFormatAgents2,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormatAgents2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormatAgents2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentResponseFormatAgents2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormatAgents2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyType
+  > = z.nativeEnum(StreamRunAgentResponseFormatAgentsRequestRequestBodyType);
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentResponseFormatAgentsRequestRequestBodyType
+  > = StreamRunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgentsRequestRequestBodyType$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents1$inboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentResponseFormatAgents1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const StreamRunAgentResponseFormatAgents1$outboundSchema: z.ZodType<
+  StreamRunAgentResponseFormatAgents1$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentResponseFormatAgents1
+> = z.object({
+  type: StreamRunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentResponseFormatAgents1$ {
+  /** @deprecated use `StreamRunAgentResponseFormatAgents1$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentResponseFormatAgents1$inboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents1$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentResponseFormatAgents1$outboundSchema;
+  /** @deprecated use `StreamRunAgentResponseFormatAgents1$Outbound` instead. */
+  export type Outbound = StreamRunAgentResponseFormatAgents1$Outbound;
+}
+
+export function streamRunAgentResponseFormatAgents1ToJSON(
+  streamRunAgentResponseFormatAgents1: StreamRunAgentResponseFormatAgents1,
+): string {
+  return JSON.stringify(
+    StreamRunAgentResponseFormatAgents1$outboundSchema.parse(
+      streamRunAgentResponseFormatAgents1,
+    ),
+  );
+}
+
+export function streamRunAgentResponseFormatAgents1FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentResponseFormatAgents1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentResponseFormatAgents1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentResponseFormatAgents1' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsResponseFormat$inboundSchema:
+  z.ZodType<StreamRunAgentFallbackModelsResponseFormat, z.ZodTypeDef, unknown> =
+    z.union([
+      z.lazy(() => StreamRunAgentResponseFormatAgents3$inboundSchema),
+      z.lazy(() => StreamRunAgentResponseFormatAgents1$inboundSchema),
+      z.lazy(() => StreamRunAgentResponseFormatAgents2$inboundSchema),
+    ]);
+
+/** @internal */
+export type StreamRunAgentFallbackModelsResponseFormat$Outbound =
+  | StreamRunAgentResponseFormatAgents3$Outbound
+  | StreamRunAgentResponseFormatAgents1$Outbound
+  | StreamRunAgentResponseFormatAgents2$Outbound;
+
+/** @internal */
+export const StreamRunAgentFallbackModelsResponseFormat$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelsResponseFormat$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelsResponseFormat
+  > = z.union([
+    z.lazy(() => StreamRunAgentResponseFormatAgents3$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents1$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents2$outboundSchema),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsResponseFormat$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsResponseFormat$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsResponseFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsResponseFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsResponseFormat$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsResponseFormat$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsResponseFormat$Outbound;
+}
+
+export function streamRunAgentFallbackModelsResponseFormatToJSON(
+  streamRunAgentFallbackModelsResponseFormat:
+    StreamRunAgentFallbackModelsResponseFormat,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsResponseFormat$outboundSchema.parse(
+      streamRunAgentFallbackModelsResponseFormat,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelsResponseFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsResponseFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelsResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsStop$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+/** @internal */
+export type StreamRunAgentFallbackModelsStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const StreamRunAgentFallbackModelsStop$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsStop$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModelsStop
+> = z.union([z.string(), z.array(z.string())]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsStop$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsStop$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModelsStop$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsStop$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentFallbackModelsStop$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsStop$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsStop$Outbound;
+}
+
+export function streamRunAgentFallbackModelsStopToJSON(
+  streamRunAgentFallbackModelsStop: StreamRunAgentFallbackModelsStop,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsStop$outboundSchema.parse(
+      streamRunAgentFallbackModelsStop,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsStopFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModelsStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentFallbackModelsStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModelsStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsStreamOptions$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentFallbackModelsStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelsStreamOptions$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelsStreamOptions$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelsStreamOptions
+  > = z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsStreamOptions$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsStreamOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsStreamOptions$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsStreamOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsStreamOptions$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsStreamOptions$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsStreamOptions$Outbound;
+}
+
+export function streamRunAgentFallbackModelsStreamOptionsToJSON(
+  streamRunAgentFallbackModelsStreamOptions:
+    StreamRunAgentFallbackModelsStreamOptions,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsStreamOptions$outboundSchema.parse(
+      streamRunAgentFallbackModelsStreamOptions,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelsStreamOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsStreamOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelsStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsType
+> = z.nativeEnum(StreamRunAgentFallbackModelsType);
+
+/** @internal */
+export const StreamRunAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentFallbackModelsType
+> = StreamRunAgentFallbackModelsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsType$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModelsType$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsType$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentFallbackModelsType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsThinking$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentFallbackModelsType$inboundSchema,
+  budget_tokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "budget_tokens": "budgetTokens",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentFallbackModelsThinking$Outbound = {
+  type: string;
+  budget_tokens: number;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelsThinking$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsThinking$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModelsThinking
+> = z.object({
+  type: StreamRunAgentFallbackModelsType$outboundSchema,
+  budgetTokens: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    budgetTokens: "budget_tokens",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsThinking$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsThinking$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsThinking$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsThinking$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsThinking$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsThinking$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsThinking$Outbound;
+}
+
+export function streamRunAgentFallbackModelsThinkingToJSON(
+  streamRunAgentFallbackModelsThinking: StreamRunAgentFallbackModelsThinking,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsThinking$outboundSchema.parse(
+      streamRunAgentFallbackModelsThinking,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModelsThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModelsThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceAgentsType
+> = z.nativeEnum(StreamRunAgentToolChoiceAgentsType);
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceAgentsType
+> = StreamRunAgentToolChoiceAgentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceAgentsType$ {
+  /** @deprecated use `StreamRunAgentToolChoiceAgentsType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoiceAgentsType$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentToolChoiceAgentsType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceAgentsFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type StreamRunAgentToolChoiceAgentsFunction$Outbound = {
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgentsFunction$outboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceAgentsFunction$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentToolChoiceAgentsFunction
+> = z.object({
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceAgentsFunction$ {
+  /** @deprecated use `StreamRunAgentToolChoiceAgentsFunction$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentToolChoiceAgentsFunction$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgentsFunction$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentToolChoiceAgentsFunction$outboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgentsFunction$Outbound` instead. */
+  export type Outbound = StreamRunAgentToolChoiceAgentsFunction$Outbound;
+}
+
+export function streamRunAgentToolChoiceAgentsFunctionToJSON(
+  streamRunAgentToolChoiceAgentsFunction:
+    StreamRunAgentToolChoiceAgentsFunction,
+): string {
+  return JSON.stringify(
+    StreamRunAgentToolChoiceAgentsFunction$outboundSchema.parse(
+      streamRunAgentToolChoiceAgentsFunction,
+    ),
+  );
+}
+
+export function streamRunAgentToolChoiceAgentsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentToolChoiceAgentsFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentToolChoiceAgentsFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentToolChoiceAgentsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgents2$inboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceAgents2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentToolChoiceAgentsType$inboundSchema.optional(),
+  function: z.lazy(() => StreamRunAgentToolChoiceAgentsFunction$inboundSchema),
+});
+
+/** @internal */
+export type StreamRunAgentToolChoiceAgents2$Outbound = {
+  type?: string | undefined;
+  function: StreamRunAgentToolChoiceAgentsFunction$Outbound;
+};
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgents2$outboundSchema: z.ZodType<
+  StreamRunAgentToolChoiceAgents2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentToolChoiceAgents2
+> = z.object({
+  type: StreamRunAgentToolChoiceAgentsType$outboundSchema.optional(),
+  function: z.lazy(() => StreamRunAgentToolChoiceAgentsFunction$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceAgents2$ {
+  /** @deprecated use `StreamRunAgentToolChoiceAgents2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoiceAgents2$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgents2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoiceAgents2$outboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgents2$Outbound` instead. */
+  export type Outbound = StreamRunAgentToolChoiceAgents2$Outbound;
+}
+
+export function streamRunAgentToolChoiceAgents2ToJSON(
+  streamRunAgentToolChoiceAgents2: StreamRunAgentToolChoiceAgents2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentToolChoiceAgents2$outboundSchema.parse(
+      streamRunAgentToolChoiceAgents2,
+    ),
+  );
+}
+
+export function streamRunAgentToolChoiceAgents2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentToolChoiceAgents2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentToolChoiceAgents2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentToolChoiceAgents2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceAgents1
+> = z.nativeEnum(StreamRunAgentToolChoiceAgents1);
+
+/** @internal */
+export const StreamRunAgentToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentToolChoiceAgents1
+> = StreamRunAgentToolChoiceAgents1$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentToolChoiceAgents1$ {
+  /** @deprecated use `StreamRunAgentToolChoiceAgents1$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentToolChoiceAgents1$inboundSchema;
+  /** @deprecated use `StreamRunAgentToolChoiceAgents1$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentToolChoiceAgents1$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsToolChoice$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamRunAgentToolChoiceAgents2$inboundSchema),
+  StreamRunAgentToolChoiceAgents1$inboundSchema,
+]);
+
+/** @internal */
+export type StreamRunAgentFallbackModelsToolChoice$Outbound =
+  | StreamRunAgentToolChoiceAgents2$Outbound
+  | string;
+
+/** @internal */
+export const StreamRunAgentFallbackModelsToolChoice$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsToolChoice$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModelsToolChoice
+> = z.union([
+  z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
+  StreamRunAgentToolChoiceAgents1$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsToolChoice$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsToolChoice$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsToolChoice$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsToolChoice$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsToolChoice$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsToolChoice$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsToolChoice$Outbound;
+}
+
+export function streamRunAgentFallbackModelsToolChoiceToJSON(
+  streamRunAgentFallbackModelsToolChoice:
+    StreamRunAgentFallbackModelsToolChoice,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsToolChoice$outboundSchema.parse(
+      streamRunAgentFallbackModelsToolChoice,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModelsToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModelsToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsModalities$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelsModalities> = z.nativeEnum(
+    StreamRunAgentFallbackModelsModalities,
+  );
+
+/** @internal */
+export const StreamRunAgentFallbackModelsModalities$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelsModalities> =
+    StreamRunAgentFallbackModelsModalities$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsModalities$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsModalities$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsModalities$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsModalities$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsModalities$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsWebSearchOptions$inboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelsWebSearchOptions,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean().optional(),
+  });
+
+/** @internal */
+export type StreamRunAgentFallbackModelsWebSearchOptions$Outbound = {
+  enabled?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelsWebSearchOptions$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelsWebSearchOptions$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelsWebSearchOptions
+  > = z.object({
+    enabled: z.boolean().optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsWebSearchOptions$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsWebSearchOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsWebSearchOptions$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsWebSearchOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsWebSearchOptions$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsWebSearchOptions$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsWebSearchOptions$Outbound;
+}
+
+export function streamRunAgentFallbackModelsWebSearchOptionsToJSON(
+  streamRunAgentFallbackModelsWebSearchOptions:
+    StreamRunAgentFallbackModelsWebSearchOptions,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsWebSearchOptions$outboundSchema.parse(
+      streamRunAgentFallbackModelsWebSearchOptions,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsWebSearchOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelsWebSearchOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsWebSearchOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelsWebSearchOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelsParameters$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(
+    z.lazy(() => StreamRunAgentFallbackModelsAudio$inboundSchema),
+  ).optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => StreamRunAgentResponseFormatAgents3$inboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents1$inboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents2$inboundSchema),
+  ]).optional(),
+  reasoning_effort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => StreamRunAgentFallbackModelsStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => StreamRunAgentFallbackModelsThinking$inboundSchema)
+    .optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => StreamRunAgentToolChoiceAgents2$inboundSchema),
+    StreamRunAgentToolChoiceAgents1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(
+    z.array(StreamRunAgentFallbackModelsModalities$inboundSchema),
+  ).optional(),
+  web_search_options: z.lazy(() =>
+    StreamRunAgentFallbackModelsWebSearchOptions$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "web_search_options": "webSearchOptions",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentFallbackModelsParameters$Outbound = {
+  audio?: StreamRunAgentFallbackModelsAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | StreamRunAgentResponseFormatAgents3$Outbound
+    | StreamRunAgentResponseFormatAgents1$Outbound
+    | StreamRunAgentResponseFormatAgents2$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?:
+    | StreamRunAgentFallbackModelsStreamOptions$Outbound
+    | null
+    | undefined;
+  thinking?: StreamRunAgentFallbackModelsThinking$Outbound | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: StreamRunAgentToolChoiceAgents2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  web_search_options?:
+    | StreamRunAgentFallbackModelsWebSearchOptions$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelsParameters$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModelsParameters$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModelsParameters
+> = z.object({
+  audio: z.nullable(
+    z.lazy(() => StreamRunAgentFallbackModelsAudio$outboundSchema),
+  ).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => StreamRunAgentResponseFormatAgents3$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents1$outboundSchema),
+    z.lazy(() => StreamRunAgentResponseFormatAgents2$outboundSchema),
+  ]).optional(),
+  reasoningEffort: z.string().optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => StreamRunAgentFallbackModelsStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.lazy(() => StreamRunAgentFallbackModelsThinking$outboundSchema)
+    .optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
+    StreamRunAgentToolChoiceAgents1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(
+    z.array(StreamRunAgentFallbackModelsModalities$outboundSchema),
+  ).optional(),
+  webSearchOptions: z.lazy(() =>
+    StreamRunAgentFallbackModelsWebSearchOptions$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+    webSearchOptions: "web_search_options",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModelsParameters$ {
+  /** @deprecated use `StreamRunAgentFallbackModelsParameters$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentFallbackModelsParameters$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsParameters$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFallbackModelsParameters$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModelsParameters$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModelsParameters$Outbound;
+}
+
+export function streamRunAgentFallbackModelsParametersToJSON(
+  streamRunAgentFallbackModelsParameters:
+    StreamRunAgentFallbackModelsParameters,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelsParameters$outboundSchema.parse(
+      streamRunAgentFallbackModelsParameters,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModelsParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelsParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModelsParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModels2$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModels2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  integration_id: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() => StreamRunAgentFallbackModelsParameters$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentFallbackModels2$Outbound = {
+  id: string;
+  integration_id?: string | null | undefined;
+  parameters?: StreamRunAgentFallbackModelsParameters$Outbound | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModels2$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModels2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModels2
+> = z.object({
+  id: z.string(),
+  integrationId: z.nullable(z.string()).optional(),
+  parameters: z.lazy(() =>
+    StreamRunAgentFallbackModelsParameters$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    integrationId: "integration_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModels2$ {
+  /** @deprecated use `StreamRunAgentFallbackModels2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModels2$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModels2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentFallbackModels2$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModels2$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModels2$Outbound;
+}
+
+export function streamRunAgentFallbackModels2ToJSON(
+  streamRunAgentFallbackModels2: StreamRunAgentFallbackModels2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModels2$outboundSchema.parse(
+      streamRunAgentFallbackModels2,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModels2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModels2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentFallbackModels2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModels2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModels$inboundSchema: z.ZodType<
+  StreamRunAgentFallbackModels,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamRunAgentFallbackModels2$inboundSchema),
+  z.string(),
+]);
+
+/** @internal */
+export type StreamRunAgentFallbackModels$Outbound =
+  | StreamRunAgentFallbackModels2$Outbound
+  | string;
+
+/** @internal */
+export const StreamRunAgentFallbackModels$outboundSchema: z.ZodType<
+  StreamRunAgentFallbackModels$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentFallbackModels
+> = z.union([
+  z.lazy(() => StreamRunAgentFallbackModels2$outboundSchema),
+  z.string(),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentFallbackModels$ {
+  /** @deprecated use `StreamRunAgentFallbackModels$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFallbackModels$inboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModels$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentFallbackModels$outboundSchema;
+  /** @deprecated use `StreamRunAgentFallbackModels$Outbound` instead. */
+  export type Outbound = StreamRunAgentFallbackModels$Outbound;
+}
+
+export function streamRunAgentFallbackModelsToJSON(
+  streamRunAgentFallbackModels: StreamRunAgentFallbackModels,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModels$outboundSchema.parse(
+      streamRunAgentFallbackModels,
+    ),
+  );
+}
+
+export function streamRunAgentFallbackModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentFallbackModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentFallbackModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFallbackModels' from JSON`,
+  );
+}
 
 /** @internal */
 export const StreamRunAgentRoleToolMessage$inboundSchema: z.ZodNativeEnum<
@@ -4170,8 +7492,16 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   key: z.string(),
   task_id: z.string().optional(),
-  model: z.string(),
-  fallback_models: z.array(z.string()).optional(),
+  model: z.union([
+    z.lazy(() => StreamRunAgentModel2$inboundSchema),
+    z.string(),
+  ]),
+  fallback_models: z.array(
+    z.union([
+      z.lazy(() => StreamRunAgentFallbackModels2$inboundSchema),
+      z.string(),
+    ]),
+  ).optional(),
   role: z.string(),
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentMessage$inboundSchema),
@@ -4208,8 +7538,10 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
 export type StreamRunAgentRequestBody$Outbound = {
   key: string;
   task_id?: string | undefined;
-  model: string;
-  fallback_models?: Array<string> | undefined;
+  model: StreamRunAgentModel2$Outbound | string;
+  fallback_models?:
+    | Array<StreamRunAgentFallbackModels2$Outbound | string>
+    | undefined;
   role: string;
   instructions: string;
   message: StreamRunAgentMessage$Outbound;
@@ -4236,8 +7568,16 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   key: z.string(),
   taskId: z.string().optional(),
-  model: z.string(),
-  fallbackModels: z.array(z.string()).optional(),
+  model: z.union([
+    z.lazy(() => StreamRunAgentModel2$outboundSchema),
+    z.string(),
+  ]),
+  fallbackModels: z.array(
+    z.union([
+      z.lazy(() => StreamRunAgentFallbackModels2$outboundSchema),
+      z.string(),
+    ]),
+  ).optional(),
   role: z.string(),
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentMessage$outboundSchema),

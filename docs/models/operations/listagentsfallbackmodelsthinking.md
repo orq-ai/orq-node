@@ -1,0 +1,19 @@
+# ListAgentsFallbackModelsThinking
+
+## Example Usage
+
+```typescript
+import { ListAgentsFallbackModelsThinking } from "@orq-ai/node/models/operations";
+
+let value: ListAgentsFallbackModelsThinking = {
+  type: "enabled",
+  budgetTokens: 6037.27,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                        | [operations.ListAgentsFallbackModelsType](../../models/operations/listagentsfallbackmodelstype.md)                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                            | Enables or disables the thinking mode capability                                                                                                                                                                              |
+| `budgetTokens`                                                                                                                                                                                                                | *number*                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`. |

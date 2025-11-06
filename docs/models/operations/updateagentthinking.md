@@ -1,0 +1,19 @@
+# UpdateAgentThinking
+
+## Example Usage
+
+```typescript
+import { UpdateAgentThinking } from "@orq-ai/node/models/operations";
+
+let value: UpdateAgentThinking = {
+  type: "enabled",
+  budgetTokens: 5701.81,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                        | [operations.UpdateAgentType](../../models/operations/updateagenttype.md)                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Enables or disables the thinking mode capability                                                                                                                                                                              |
+| `budgetTokens`                                                                                                                                                                                                                | *number*                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`. |

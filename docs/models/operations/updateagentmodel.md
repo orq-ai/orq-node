@@ -1,21 +1,21 @@
 # UpdateAgentModel
 
-## Example Usage
+The primary language model that powers the agent. Can be a simple string (e.g., "anthropic/claude-3-sonnet-20240229") or an object with model ID and parameters.
+
+
+## Supported Types
+
+### `string`
 
 ```typescript
-import { UpdateAgentModel } from "@orq-ai/node/models/operations";
+const value: string = "<value>";
+```
 
-let value: UpdateAgentModel = {
+### `operations.UpdateAgentModel2`
+
+```typescript
+const value: operations.UpdateAgentModel2 = {
   id: "<id>",
 };
 ```
 
-## Fields
-
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                     | *string*                                                                                                 | :heavy_check_mark:                                                                                       | The database ID of the primary model                                                                     |
-| `integrationId`                                                                                          | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | Optional integration ID for custom model configurations                                                  |
-| `fallbackModels`                                                                                         | *string*[]                                                                                               | :heavy_minus_sign:                                                                                       | Optional array of fallback model IDs that will be used automatically in order if the primary model fails |
-| `maxTokens`                                                                                              | *number*                                                                                                 | :heavy_minus_sign:                                                                                       | Maximum number of tokens for model responses                                                             |
-| `temperature`                                                                                            | *number*                                                                                                 | :heavy_minus_sign:                                                                                       | Temperature setting for model responses                                                                  |
