@@ -4783,7 +4783,7 @@ export const StreamRunAgentAgentToolInputRunCurrentDateTool$inboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -4792,7 +4792,7 @@ export const StreamRunAgentAgentToolInputRunCurrentDateTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunCurrentDateTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4804,7 +4804,7 @@ export const StreamRunAgentAgentToolInputRunCurrentDateTool$outboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4860,7 +4860,7 @@ export const StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$inboundSchema
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -4869,7 +4869,7 @@ export const StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$inboundSchema
 /** @internal */
 export type StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4881,7 +4881,7 @@ export const StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$outboundSchem
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4937,7 +4937,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$inboundSc
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -4947,7 +4947,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$inboundSc
 export type StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$Outbound =
   {
     type: string;
-    requires_approval: boolean;
+    requires_approval?: boolean | undefined;
   };
 
 /** @internal */
@@ -4959,7 +4959,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$outboundS
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5013,7 +5013,7 @@ export const StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$inboundSche
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5022,7 +5022,7 @@ export const StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$inboundSche
 /** @internal */
 export type StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5034,7 +5034,7 @@ export const StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$outboundSch
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5088,7 +5088,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$inboundSche
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools7Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5097,7 +5097,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$inboundSche
 /** @internal */
 export type StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5109,7 +5109,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$outboundSch
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools7Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5163,7 +5163,7 @@ export const StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$inboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5172,7 +5172,7 @@ export const StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5184,7 +5184,7 @@ export const StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$outboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5240,7 +5240,7 @@ export const StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$inboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5249,7 +5249,7 @@ export const StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5261,7 +5261,7 @@ export const StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$outboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5314,7 +5314,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveAgentsTool$inboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5323,7 +5323,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveAgentsTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunRetrieveAgentsTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5335,7 +5335,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveAgentsTool$outboundSchema:
   > = z.object({
     type:
       StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5385,7 +5385,7 @@ export const StreamRunAgentAgentToolInputRunCallSubAgentTool$inboundSchema:
     unknown
   > = z.object({
     type: StreamRunAgentAgentToolInputRunAgentsRequestType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5394,7 +5394,7 @@ export const StreamRunAgentAgentToolInputRunCallSubAgentTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunCallSubAgentTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5405,7 +5405,7 @@ export const StreamRunAgentAgentToolInputRunCallSubAgentTool$outboundSchema:
     StreamRunAgentAgentToolInputRunCallSubAgentTool
   > = z.object({
     type: StreamRunAgentAgentToolInputRunAgentsRequestType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5455,7 +5455,7 @@ export const StreamRunAgentAgentToolInputRunWebScraperTool$inboundSchema:
     unknown
   > = z.object({
     type: StreamRunAgentAgentToolInputRunAgentsType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5464,7 +5464,7 @@ export const StreamRunAgentAgentToolInputRunWebScraperTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunWebScraperTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5475,7 +5475,7 @@ export const StreamRunAgentAgentToolInputRunWebScraperTool$outboundSchema:
     StreamRunAgentAgentToolInputRunWebScraperTool
   > = z.object({
     type: StreamRunAgentAgentToolInputRunAgentsType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5525,7 +5525,7 @@ export const StreamRunAgentAgentToolInputRunGoogleSearchTool$inboundSchema:
     unknown
   > = z.object({
     type: StreamRunAgentAgentToolInputRunType$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -5534,7 +5534,7 @@ export const StreamRunAgentAgentToolInputRunGoogleSearchTool$inboundSchema:
 /** @internal */
 export type StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -5545,7 +5545,7 @@ export const StreamRunAgentAgentToolInputRunGoogleSearchTool$outboundSchema:
     StreamRunAgentAgentToolInputRunGoogleSearchTool
   > = z.object({
     type: StreamRunAgentAgentToolInputRunType$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
