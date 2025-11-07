@@ -58,7 +58,6 @@ export type CreateFeedbackResponseBody = {
 /** @internal */
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.number(), z.array(z.string())]);
-
 /** @internal */
 export type Value$Outbound = string | number | Array<string>;
 
@@ -69,23 +68,9 @@ export const Value$outboundSchema: z.ZodType<
   Value
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Value$ {
-  /** @deprecated use `Value$inboundSchema` instead. */
-  export const inboundSchema = Value$inboundSchema;
-  /** @deprecated use `Value$outboundSchema` instead. */
-  export const outboundSchema = Value$outboundSchema;
-  /** @deprecated use `Value$Outbound` instead. */
-  export type Outbound = Value$Outbound;
-}
-
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
 }
-
 export function valueFromJSON(
   jsonString: string,
 ): SafeParseResult<Value, SDKValidationError> {
@@ -111,7 +96,6 @@ export const CreateFeedbackRequestBody$inboundSchema: z.ZodType<
     "trace_id": "traceId",
   });
 });
-
 /** @internal */
 export type CreateFeedbackRequestBody$Outbound = {
   property: string;
@@ -135,19 +119,6 @@ export const CreateFeedbackRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateFeedbackRequestBody$ {
-  /** @deprecated use `CreateFeedbackRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateFeedbackRequestBody$inboundSchema;
-  /** @deprecated use `CreateFeedbackRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateFeedbackRequestBody$outboundSchema;
-  /** @deprecated use `CreateFeedbackRequestBody$Outbound` instead. */
-  export type Outbound = CreateFeedbackRequestBody$Outbound;
-}
-
 export function createFeedbackRequestBodyToJSON(
   createFeedbackRequestBody: CreateFeedbackRequestBody,
 ): string {
@@ -155,7 +126,6 @@ export function createFeedbackRequestBodyToJSON(
     CreateFeedbackRequestBody$outboundSchema.parse(createFeedbackRequestBody),
   );
 }
-
 export function createFeedbackRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateFeedbackRequestBody, SDKValidationError> {
@@ -172,7 +142,6 @@ export const CreateFeedbackValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.array(z.string())]);
-
 /** @internal */
 export type CreateFeedbackValue$Outbound = string | number | Array<string>;
 
@@ -183,19 +152,6 @@ export const CreateFeedbackValue$outboundSchema: z.ZodType<
   CreateFeedbackValue
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateFeedbackValue$ {
-  /** @deprecated use `CreateFeedbackValue$inboundSchema` instead. */
-  export const inboundSchema = CreateFeedbackValue$inboundSchema;
-  /** @deprecated use `CreateFeedbackValue$outboundSchema` instead. */
-  export const outboundSchema = CreateFeedbackValue$outboundSchema;
-  /** @deprecated use `CreateFeedbackValue$Outbound` instead. */
-  export type Outbound = CreateFeedbackValue$Outbound;
-}
-
 export function createFeedbackValueToJSON(
   createFeedbackValue: CreateFeedbackValue,
 ): string {
@@ -203,7 +159,6 @@ export function createFeedbackValueToJSON(
     CreateFeedbackValue$outboundSchema.parse(createFeedbackValue),
   );
 }
-
 export function createFeedbackValueFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateFeedbackValue, SDKValidationError> {
@@ -229,7 +184,6 @@ export const CreateFeedbackResponseBody$inboundSchema: z.ZodType<
     "trace_id": "traceId",
   });
 });
-
 /** @internal */
 export type CreateFeedbackResponseBody$Outbound = {
   property: string;
@@ -254,19 +208,6 @@ export const CreateFeedbackResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateFeedbackResponseBody$ {
-  /** @deprecated use `CreateFeedbackResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateFeedbackResponseBody$inboundSchema;
-  /** @deprecated use `CreateFeedbackResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateFeedbackResponseBody$outboundSchema;
-  /** @deprecated use `CreateFeedbackResponseBody$Outbound` instead. */
-  export type Outbound = CreateFeedbackResponseBody$Outbound;
-}
-
 export function createFeedbackResponseBodyToJSON(
   createFeedbackResponseBody: CreateFeedbackResponseBody,
 ): string {
@@ -274,7 +215,6 @@ export function createFeedbackResponseBodyToJSON(
     CreateFeedbackResponseBody$outboundSchema.parse(createFeedbackResponseBody),
   );
 }
-
 export function createFeedbackResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateFeedbackResponseBody, SDKValidationError> {

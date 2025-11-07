@@ -605,7 +605,6 @@ export const DeploymentsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type DeploymentsRequest$Outbound = {
   limit: number;
@@ -629,19 +628,6 @@ export const DeploymentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsRequest$ {
-  /** @deprecated use `DeploymentsRequest$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsRequest$inboundSchema;
-  /** @deprecated use `DeploymentsRequest$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsRequest$outboundSchema;
-  /** @deprecated use `DeploymentsRequest$Outbound` instead. */
-  export type Outbound = DeploymentsRequest$Outbound;
-}
-
 export function deploymentsRequestToJSON(
   deploymentsRequest: DeploymentsRequest,
 ): string {
@@ -649,7 +635,6 @@ export function deploymentsRequestToJSON(
     DeploymentsRequest$outboundSchema.parse(deploymentsRequest),
   );
 }
-
 export function deploymentsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsRequest, SDKValidationError> {
@@ -664,65 +649,28 @@ export function deploymentsRequestFromJSON(
 export const DeploymentsObject$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsObject
 > = z.nativeEnum(DeploymentsObject);
-
 /** @internal */
 export const DeploymentsObject$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsObject
 > = DeploymentsObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsObject$ {
-  /** @deprecated use `DeploymentsObject$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsObject$inboundSchema;
-  /** @deprecated use `DeploymentsObject$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsObject$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsType
 > = z.nativeEnum(DeploymentsType);
-
 /** @internal */
 export const DeploymentsType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsType
 > = DeploymentsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsType$ {
-  /** @deprecated use `DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsResponseType
 > = z.nativeEnum(DeploymentsDeploymentsResponseType);
-
 /** @internal */
 export const DeploymentsDeploymentsResponseType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsResponseType
 > = DeploymentsDeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentsDeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentsDeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentsDeploymentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsParameters$inboundSchema: z.ZodType<
@@ -735,7 +683,6 @@ export const DeploymentsParameters$inboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
   additionalProperties: z.boolean().optional(),
 });
-
 /** @internal */
 export type DeploymentsParameters$Outbound = {
   type: string;
@@ -756,19 +703,6 @@ export const DeploymentsParameters$outboundSchema: z.ZodType<
   additionalProperties: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsParameters$ {
-  /** @deprecated use `DeploymentsParameters$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsParameters$inboundSchema;
-  /** @deprecated use `DeploymentsParameters$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsParameters$outboundSchema;
-  /** @deprecated use `DeploymentsParameters$Outbound` instead. */
-  export type Outbound = DeploymentsParameters$Outbound;
-}
-
 export function deploymentsParametersToJSON(
   deploymentsParameters: DeploymentsParameters,
 ): string {
@@ -776,7 +710,6 @@ export function deploymentsParametersToJSON(
     DeploymentsParameters$outboundSchema.parse(deploymentsParameters),
   );
 }
-
 export function deploymentsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsParameters, SDKValidationError> {
@@ -798,7 +731,6 @@ export const DeploymentsFunction$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   parameters: z.lazy(() => DeploymentsParameters$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentsFunction$Outbound = {
   name: string;
@@ -819,19 +751,6 @@ export const DeploymentsFunction$outboundSchema: z.ZodType<
   parameters: z.lazy(() => DeploymentsParameters$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsFunction$ {
-  /** @deprecated use `DeploymentsFunction$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsFunction$inboundSchema;
-  /** @deprecated use `DeploymentsFunction$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsFunction$outboundSchema;
-  /** @deprecated use `DeploymentsFunction$Outbound` instead. */
-  export type Outbound = DeploymentsFunction$Outbound;
-}
-
 export function deploymentsFunctionToJSON(
   deploymentsFunction: DeploymentsFunction,
 ): string {
@@ -839,7 +758,6 @@ export function deploymentsFunctionToJSON(
     DeploymentsFunction$outboundSchema.parse(deploymentsFunction),
   );
 }
-
 export function deploymentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsFunction, SDKValidationError> {
@@ -860,7 +778,6 @@ export const DeploymentsTools$inboundSchema: z.ZodType<
   function: z.lazy(() => DeploymentsFunction$inboundSchema),
   id: z.number().optional(),
 });
-
 /** @internal */
 export type DeploymentsTools$Outbound = {
   type: string;
@@ -879,19 +796,6 @@ export const DeploymentsTools$outboundSchema: z.ZodType<
   id: z.number().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsTools$ {
-  /** @deprecated use `DeploymentsTools$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsTools$inboundSchema;
-  /** @deprecated use `DeploymentsTools$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsTools$outboundSchema;
-  /** @deprecated use `DeploymentsTools$Outbound` instead. */
-  export type Outbound = DeploymentsTools$Outbound;
-}
-
 export function deploymentsToolsToJSON(
   deploymentsTools: DeploymentsTools,
 ): string {
@@ -899,7 +803,6 @@ export function deploymentsToolsToJSON(
     DeploymentsTools$outboundSchema.parse(deploymentsTools),
   );
 }
-
 export function deploymentsToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsTools, SDKValidationError> {
@@ -914,129 +817,55 @@ export function deploymentsToolsFromJSON(
 export const DeploymentsModelType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsModelType
 > = z.nativeEnum(DeploymentsModelType);
-
 /** @internal */
 export const DeploymentsModelType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsModelType
 > = DeploymentsModelType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsModelType$ {
-  /** @deprecated use `DeploymentsModelType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsModelType$inboundSchema;
-  /** @deprecated use `DeploymentsModelType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsModelType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsFormat$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsFormat
 > = z.nativeEnum(DeploymentsFormat);
-
 /** @internal */
 export const DeploymentsFormat$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsFormat
 > = DeploymentsFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsFormat$ {
-  /** @deprecated use `DeploymentsFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsFormat$inboundSchema;
-  /** @deprecated use `DeploymentsFormat$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsFormat$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat6
 > = z.nativeEnum(DeploymentsResponseFormat6);
-
 /** @internal */
 export const DeploymentsResponseFormat6$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat6
 > = DeploymentsResponseFormat6$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat6$ {
-  /** @deprecated use `DeploymentsResponseFormat6$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat6$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat6$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat6$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat5
 > = z.nativeEnum(DeploymentsResponseFormat5);
-
 /** @internal */
 export const DeploymentsResponseFormat5$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat5
 > = DeploymentsResponseFormat5$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat5$ {
-  /** @deprecated use `DeploymentsResponseFormat5$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat5$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat5$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat5$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat4
 > = z.nativeEnum(DeploymentsResponseFormat4);
-
 /** @internal */
 export const DeploymentsResponseFormat4$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat4
 > = DeploymentsResponseFormat4$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat4$ {
-  /** @deprecated use `DeploymentsResponseFormat4$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat4$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat4$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat4$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsResponseFormatDeploymentsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsType> = z
     .nativeEnum(DeploymentsResponseFormatDeploymentsType);
-
 /** @internal */
 export const DeploymentsResponseFormatDeploymentsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsType> =
     DeploymentsResponseFormatDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormatDeploymentsType$ {
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentsResponseFormatDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentsResponseFormatDeploymentsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsResponseFormat3$inboundSchema: z.ZodType<
@@ -1046,7 +875,6 @@ export const DeploymentsResponseFormat3$inboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentsResponseFormatDeploymentsType$inboundSchema,
 });
-
 /** @internal */
 export type DeploymentsResponseFormat3$Outbound = {
   type: string;
@@ -1061,19 +889,6 @@ export const DeploymentsResponseFormat3$outboundSchema: z.ZodType<
   type: DeploymentsResponseFormatDeploymentsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat3$ {
-  /** @deprecated use `DeploymentsResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat3$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat3$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat3$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormat3$Outbound;
-}
-
 export function deploymentsResponseFormat3ToJSON(
   deploymentsResponseFormat3: DeploymentsResponseFormat3,
 ): string {
@@ -1081,7 +896,6 @@ export function deploymentsResponseFormat3ToJSON(
     DeploymentsResponseFormat3$outboundSchema.parse(deploymentsResponseFormat3),
   );
 }
-
 export function deploymentsResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat3, SDKValidationError> {
@@ -1096,22 +910,10 @@ export function deploymentsResponseFormat3FromJSON(
 export const DeploymentsResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormatType
 > = z.nativeEnum(DeploymentsResponseFormatType);
-
 /** @internal */
 export const DeploymentsResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormatType
 > = DeploymentsResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormatType$ {
-  /** @deprecated use `DeploymentsResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormatType$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormatType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
@@ -1121,7 +923,6 @@ export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentsResponseFormatType$inboundSchema,
 });
-
 /** @internal */
 export type DeploymentsResponseFormat2$Outbound = {
   type: string;
@@ -1136,19 +937,6 @@ export const DeploymentsResponseFormat2$outboundSchema: z.ZodType<
   type: DeploymentsResponseFormatType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat2$ {
-  /** @deprecated use `DeploymentsResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat2$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat2$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat2$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormat2$Outbound;
-}
-
 export function deploymentsResponseFormat2ToJSON(
   deploymentsResponseFormat2: DeploymentsResponseFormat2,
 ): string {
@@ -1156,7 +944,6 @@ export function deploymentsResponseFormat2ToJSON(
     DeploymentsResponseFormat2$outboundSchema.parse(deploymentsResponseFormat2),
   );
 }
-
 export function deploymentsResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat2, SDKValidationError> {
@@ -1171,24 +958,10 @@ export function deploymentsResponseFormat2FromJSON(
 export const DeploymentsResponseFormatDeploymentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> = z
     .nativeEnum(DeploymentsResponseFormatDeploymentsResponseType);
-
 /** @internal */
 export const DeploymentsResponseFormatDeploymentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> =
     DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormatDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentsResponseFormatDeploymentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -1201,7 +974,6 @@ export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
-
 /** @internal */
 export type DeploymentsResponseFormatJsonSchema$Outbound = {
   name: string;
@@ -1222,21 +994,6 @@ export const DeploymentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   schema: z.record(z.any()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormatJsonSchema$ {
-  /** @deprecated use `DeploymentsResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentsResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentsResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormatJsonSchema$Outbound;
-}
-
 export function deploymentsResponseFormatJsonSchemaToJSON(
   deploymentsResponseFormatJsonSchema: DeploymentsResponseFormatJsonSchema,
 ): string {
@@ -1246,7 +1003,6 @@ export function deploymentsResponseFormatJsonSchemaToJSON(
     ),
   );
 }
-
 export function deploymentsResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormatJsonSchema, SDKValidationError> {
@@ -1271,7 +1027,6 @@ export const DeploymentsResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type DeploymentsResponseFormat1$Outbound = {
   type: string;
@@ -1292,19 +1047,6 @@ export const DeploymentsResponseFormat1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat1$ {
-  /** @deprecated use `DeploymentsResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat1$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat1$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat1$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormat1$Outbound;
-}
-
 export function deploymentsResponseFormat1ToJSON(
   deploymentsResponseFormat1: DeploymentsResponseFormat1,
 ): string {
@@ -1312,7 +1054,6 @@ export function deploymentsResponseFormat1ToJSON(
     DeploymentsResponseFormat1$outboundSchema.parse(deploymentsResponseFormat1),
   );
 }
-
 export function deploymentsResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat1, SDKValidationError> {
@@ -1336,7 +1077,6 @@ export const DeploymentsResponseFormat$inboundSchema: z.ZodType<
   DeploymentsResponseFormat5$inboundSchema,
   DeploymentsResponseFormat6$inboundSchema,
 ]);
-
 /** @internal */
 export type DeploymentsResponseFormat$Outbound =
   | DeploymentsResponseFormat1$Outbound
@@ -1360,19 +1100,6 @@ export const DeploymentsResponseFormat$outboundSchema: z.ZodType<
   DeploymentsResponseFormat6$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat$ {
-  /** @deprecated use `DeploymentsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormat$Outbound;
-}
-
 export function deploymentsResponseFormatToJSON(
   deploymentsResponseFormat: DeploymentsResponseFormat,
 ): string {
@@ -1380,7 +1107,6 @@ export function deploymentsResponseFormatToJSON(
     DeploymentsResponseFormat$outboundSchema.parse(deploymentsResponseFormat),
   );
 }
-
 export function deploymentsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat, SDKValidationError> {
@@ -1395,85 +1121,37 @@ export function deploymentsResponseFormatFromJSON(
 export const DeploymentsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsPhotoRealVersion
 > = z.nativeEnum(DeploymentsPhotoRealVersion);
-
 /** @internal */
 export const DeploymentsPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsPhotoRealVersion
 > = DeploymentsPhotoRealVersion$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsPhotoRealVersion$ {
-  /** @deprecated use `DeploymentsPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsPhotoRealVersion$inboundSchema;
-  /** @deprecated use `DeploymentsPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsPhotoRealVersion$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsEncodingFormat
 > = z.nativeEnum(DeploymentsEncodingFormat);
-
 /** @internal */
 export const DeploymentsEncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsEncodingFormat
 > = DeploymentsEncodingFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsEncodingFormat$ {
-  /** @deprecated use `DeploymentsEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsEncodingFormat$inboundSchema;
-  /** @deprecated use `DeploymentsEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsEncodingFormat$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsReasoningEffort
 > = z.nativeEnum(DeploymentsReasoningEffort);
-
 /** @internal */
 export const DeploymentsReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsReasoningEffort
 > = DeploymentsReasoningEffort$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsReasoningEffort$ {
-  /** @deprecated use `DeploymentsReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsReasoningEffort$inboundSchema;
-  /** @deprecated use `DeploymentsReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsReasoningEffort$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsVerbosity
 > = z.nativeEnum(DeploymentsVerbosity);
-
 /** @internal */
 export const DeploymentsVerbosity$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsVerbosity
 > = DeploymentsVerbosity$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsVerbosity$ {
-  /** @deprecated use `DeploymentsVerbosity$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsVerbosity$inboundSchema;
-  /** @deprecated use `DeploymentsVerbosity$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsVerbosity$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
@@ -1513,7 +1191,6 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-
 /** @internal */
 export type DeploymentsModelParameters$Outbound = {
   temperature?: number | undefined;
@@ -1583,19 +1260,6 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsModelParameters$ {
-  /** @deprecated use `DeploymentsModelParameters$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsModelParameters$inboundSchema;
-  /** @deprecated use `DeploymentsModelParameters$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsModelParameters$outboundSchema;
-  /** @deprecated use `DeploymentsModelParameters$Outbound` instead. */
-  export type Outbound = DeploymentsModelParameters$Outbound;
-}
-
 export function deploymentsModelParametersToJSON(
   deploymentsModelParameters: DeploymentsModelParameters,
 ): string {
@@ -1603,7 +1267,6 @@ export function deploymentsModelParametersToJSON(
     DeploymentsModelParameters$outboundSchema.parse(deploymentsModelParameters),
   );
 }
-
 export function deploymentsModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsModelParameters, SDKValidationError> {
@@ -1618,64 +1281,28 @@ export function deploymentsModelParametersFromJSON(
 export const DeploymentsProvider$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsProvider
 > = z.nativeEnum(DeploymentsProvider);
-
 /** @internal */
 export const DeploymentsProvider$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsProvider
 > = DeploymentsProvider$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsProvider$ {
-  /** @deprecated use `DeploymentsProvider$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsProvider$inboundSchema;
-  /** @deprecated use `DeploymentsProvider$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsProvider$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentsRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsRole
 > = z.nativeEnum(DeploymentsRole);
-
 /** @internal */
 export const DeploymentsRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsRole
 > = DeploymentsRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsRole$ {
-  /** @deprecated use `DeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsRole$outboundSchema;
-}
-
 /** @internal */
 export const Deployments2DeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof Deployments2DeploymentsType
 > = z.nativeEnum(Deployments2DeploymentsType);
-
 /** @internal */
 export const Deployments2DeploymentsType$outboundSchema: z.ZodNativeEnum<
   typeof Deployments2DeploymentsType
 > = Deployments2DeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments2DeploymentsType$ {
-  /** @deprecated use `Deployments2DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = Deployments2DeploymentsType$inboundSchema;
-  /** @deprecated use `Deployments2DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = Deployments2DeploymentsType$outboundSchema;
-}
 
 /** @internal */
 export const Deployments2File$inboundSchema: z.ZodType<
@@ -1692,7 +1319,6 @@ export const Deployments2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type Deployments2File$Outbound = {
   file_data?: string | undefined;
@@ -1717,19 +1343,6 @@ export const Deployments2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments2File$ {
-  /** @deprecated use `Deployments2File$inboundSchema` instead. */
-  export const inboundSchema = Deployments2File$inboundSchema;
-  /** @deprecated use `Deployments2File$outboundSchema` instead. */
-  export const outboundSchema = Deployments2File$outboundSchema;
-  /** @deprecated use `Deployments2File$Outbound` instead. */
-  export type Outbound = Deployments2File$Outbound;
-}
-
 export function deployments2FileToJSON(
   deployments2File: Deployments2File,
 ): string {
@@ -1737,7 +1350,6 @@ export function deployments2FileToJSON(
     Deployments2File$outboundSchema.parse(deployments2File),
   );
 }
-
 export function deployments2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments2File, SDKValidationError> {
@@ -1757,7 +1369,6 @@ export const Deployments23$inboundSchema: z.ZodType<
   type: Deployments2DeploymentsType$inboundSchema,
   file: z.lazy(() => Deployments2File$inboundSchema),
 });
-
 /** @internal */
 export type Deployments23$Outbound = {
   type: string;
@@ -1774,23 +1385,9 @@ export const Deployments23$outboundSchema: z.ZodType<
   file: z.lazy(() => Deployments2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments23$ {
-  /** @deprecated use `Deployments23$inboundSchema` instead. */
-  export const inboundSchema = Deployments23$inboundSchema;
-  /** @deprecated use `Deployments23$outboundSchema` instead. */
-  export const outboundSchema = Deployments23$outboundSchema;
-  /** @deprecated use `Deployments23$Outbound` instead. */
-  export type Outbound = Deployments23$Outbound;
-}
-
 export function deployments23ToJSON(deployments23: Deployments23): string {
   return JSON.stringify(Deployments23$outboundSchema.parse(deployments23));
 }
-
 export function deployments23FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments23, SDKValidationError> {
@@ -1805,22 +1402,10 @@ export function deployments23FromJSON(
 export const Deployments2Type$inboundSchema: z.ZodNativeEnum<
   typeof Deployments2Type
 > = z.nativeEnum(Deployments2Type);
-
 /** @internal */
 export const Deployments2Type$outboundSchema: z.ZodNativeEnum<
   typeof Deployments2Type
 > = Deployments2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments2Type$ {
-  /** @deprecated use `Deployments2Type$inboundSchema` instead. */
-  export const inboundSchema = Deployments2Type$inboundSchema;
-  /** @deprecated use `Deployments2Type$outboundSchema` instead. */
-  export const outboundSchema = Deployments2Type$outboundSchema;
-}
 
 /** @internal */
 export const Deployments2ImageUrl$inboundSchema: z.ZodType<
@@ -1832,7 +1417,6 @@ export const Deployments2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-
 /** @internal */
 export type Deployments2ImageUrl$Outbound = {
   id?: string | undefined;
@@ -1851,19 +1435,6 @@ export const Deployments2ImageUrl$outboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments2ImageUrl$ {
-  /** @deprecated use `Deployments2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = Deployments2ImageUrl$inboundSchema;
-  /** @deprecated use `Deployments2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = Deployments2ImageUrl$outboundSchema;
-  /** @deprecated use `Deployments2ImageUrl$Outbound` instead. */
-  export type Outbound = Deployments2ImageUrl$Outbound;
-}
-
 export function deployments2ImageUrlToJSON(
   deployments2ImageUrl: Deployments2ImageUrl,
 ): string {
@@ -1871,7 +1442,6 @@ export function deployments2ImageUrlToJSON(
     Deployments2ImageUrl$outboundSchema.parse(deployments2ImageUrl),
   );
 }
-
 export function deployments2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments2ImageUrl, SDKValidationError> {
@@ -1895,7 +1465,6 @@ export const Deployments22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type Deployments22$Outbound = {
   type: string;
@@ -1916,23 +1485,9 @@ export const Deployments22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments22$ {
-  /** @deprecated use `Deployments22$inboundSchema` instead. */
-  export const inboundSchema = Deployments22$inboundSchema;
-  /** @deprecated use `Deployments22$outboundSchema` instead. */
-  export const outboundSchema = Deployments22$outboundSchema;
-  /** @deprecated use `Deployments22$Outbound` instead. */
-  export type Outbound = Deployments22$Outbound;
-}
-
 export function deployments22ToJSON(deployments22: Deployments22): string {
   return JSON.stringify(Deployments22$outboundSchema.parse(deployments22));
 }
-
 export function deployments22FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments22, SDKValidationError> {
@@ -1947,24 +1502,10 @@ export function deployments22FromJSON(
 export const Deployments2DeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof Deployments2DeploymentsResponseType
 > = z.nativeEnum(Deployments2DeploymentsResponseType);
-
 /** @internal */
 export const Deployments2DeploymentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof Deployments2DeploymentsResponseType> =
     Deployments2DeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments2DeploymentsResponseType$ {
-  /** @deprecated use `Deployments2DeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    Deployments2DeploymentsResponseType$inboundSchema;
-  /** @deprecated use `Deployments2DeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    Deployments2DeploymentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const Deployments21$inboundSchema: z.ZodType<
@@ -1975,7 +1516,6 @@ export const Deployments21$inboundSchema: z.ZodType<
   type: Deployments2DeploymentsResponseType$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type Deployments21$Outbound = {
   type: string;
@@ -1992,23 +1532,9 @@ export const Deployments21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deployments21$ {
-  /** @deprecated use `Deployments21$inboundSchema` instead. */
-  export const inboundSchema = Deployments21$inboundSchema;
-  /** @deprecated use `Deployments21$outboundSchema` instead. */
-  export const outboundSchema = Deployments21$outboundSchema;
-  /** @deprecated use `Deployments21$Outbound` instead. */
-  export type Outbound = Deployments21$Outbound;
-}
-
 export function deployments21ToJSON(deployments21: Deployments21): string {
   return JSON.stringify(Deployments21$outboundSchema.parse(deployments21));
 }
-
 export function deployments21FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments21, SDKValidationError> {
@@ -2029,7 +1555,6 @@ export const DeploymentsContent2$inboundSchema: z.ZodType<
   z.lazy(() => Deployments22$inboundSchema),
   z.lazy(() => Deployments23$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentsContent2$Outbound =
   | Deployments21$Outbound
@@ -2047,19 +1572,6 @@ export const DeploymentsContent2$outboundSchema: z.ZodType<
   z.lazy(() => Deployments23$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsContent2$ {
-  /** @deprecated use `DeploymentsContent2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsContent2$inboundSchema;
-  /** @deprecated use `DeploymentsContent2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsContent2$outboundSchema;
-  /** @deprecated use `DeploymentsContent2$Outbound` instead. */
-  export type Outbound = DeploymentsContent2$Outbound;
-}
-
 export function deploymentsContent2ToJSON(
   deploymentsContent2: DeploymentsContent2,
 ): string {
@@ -2067,7 +1579,6 @@ export function deploymentsContent2ToJSON(
     DeploymentsContent2$outboundSchema.parse(deploymentsContent2),
   );
 }
-
 export function deploymentsContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsContent2, SDKValidationError> {
@@ -2091,7 +1602,6 @@ export const DeploymentsContent$inboundSchema: z.ZodType<
     z.lazy(() => Deployments23$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentsContent$Outbound =
   | string
@@ -2113,19 +1623,6 @@ export const DeploymentsContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsContent$ {
-  /** @deprecated use `DeploymentsContent$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsContent$inboundSchema;
-  /** @deprecated use `DeploymentsContent$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsContent$outboundSchema;
-  /** @deprecated use `DeploymentsContent$Outbound` instead. */
-  export type Outbound = DeploymentsContent$Outbound;
-}
-
 export function deploymentsContentToJSON(
   deploymentsContent: DeploymentsContent,
 ): string {
@@ -2133,7 +1630,6 @@ export function deploymentsContentToJSON(
     DeploymentsContent$outboundSchema.parse(deploymentsContent),
   );
 }
-
 export function deploymentsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsContent, SDKValidationError> {
@@ -2148,22 +1644,10 @@ export function deploymentsContentFromJSON(
 export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsType
 > = z.nativeEnum(DeploymentsDeploymentsType);
-
 /** @internal */
 export const DeploymentsDeploymentsType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsType
 > = DeploymentsDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsDeploymentsType$ {
-  /** @deprecated use `DeploymentsDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentsDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsDeploymentsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
@@ -2174,7 +1658,6 @@ export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-
 /** @internal */
 export type DeploymentsDeploymentsFunction$Outbound = {
   name: string;
@@ -2191,19 +1674,6 @@ export const DeploymentsDeploymentsFunction$outboundSchema: z.ZodType<
   arguments: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsDeploymentsFunction$ {
-  /** @deprecated use `DeploymentsDeploymentsFunction$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsDeploymentsFunction$inboundSchema;
-  /** @deprecated use `DeploymentsDeploymentsFunction$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsDeploymentsFunction$outboundSchema;
-  /** @deprecated use `DeploymentsDeploymentsFunction$Outbound` instead. */
-  export type Outbound = DeploymentsDeploymentsFunction$Outbound;
-}
-
 export function deploymentsDeploymentsFunctionToJSON(
   deploymentsDeploymentsFunction: DeploymentsDeploymentsFunction,
 ): string {
@@ -2213,7 +1683,6 @@ export function deploymentsDeploymentsFunctionToJSON(
     ),
   );
 }
-
 export function deploymentsDeploymentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsDeploymentsFunction, SDKValidationError> {
@@ -2235,7 +1704,6 @@ export const DeploymentsToolCalls$inboundSchema: z.ZodType<
   type: DeploymentsDeploymentsType$inboundSchema,
   function: z.lazy(() => DeploymentsDeploymentsFunction$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentsToolCalls$Outbound = {
   id?: string | undefined;
@@ -2256,19 +1724,6 @@ export const DeploymentsToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => DeploymentsDeploymentsFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsToolCalls$ {
-  /** @deprecated use `DeploymentsToolCalls$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsToolCalls$inboundSchema;
-  /** @deprecated use `DeploymentsToolCalls$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsToolCalls$outboundSchema;
-  /** @deprecated use `DeploymentsToolCalls$Outbound` instead. */
-  export type Outbound = DeploymentsToolCalls$Outbound;
-}
-
 export function deploymentsToolCallsToJSON(
   deploymentsToolCalls: DeploymentsToolCalls,
 ): string {
@@ -2276,7 +1731,6 @@ export function deploymentsToolCallsToJSON(
     DeploymentsToolCalls$outboundSchema.parse(deploymentsToolCalls),
   );
 }
-
 export function deploymentsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsToolCalls, SDKValidationError> {
@@ -2313,7 +1767,6 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type DeploymentsMessages$Outbound = {
   role: string;
@@ -2354,19 +1807,6 @@ export const DeploymentsMessages$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsMessages$ {
-  /** @deprecated use `DeploymentsMessages$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsMessages$inboundSchema;
-  /** @deprecated use `DeploymentsMessages$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsMessages$outboundSchema;
-  /** @deprecated use `DeploymentsMessages$Outbound` instead. */
-  export type Outbound = DeploymentsMessages$Outbound;
-}
-
 export function deploymentsMessagesToJSON(
   deploymentsMessages: DeploymentsMessages,
 ): string {
@@ -2374,7 +1814,6 @@ export function deploymentsMessagesToJSON(
     DeploymentsMessages$outboundSchema.parse(deploymentsMessages),
   );
 }
-
 export function deploymentsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsMessages, SDKValidationError> {
@@ -2403,7 +1842,6 @@ export const DeploymentsPromptConfig$inboundSchema: z.ZodType<
     "model_parameters": "modelParameters",
   });
 });
-
 /** @internal */
 export type DeploymentsPromptConfig$Outbound = {
   tools: Array<DeploymentsTools$Outbound>;
@@ -2433,19 +1871,6 @@ export const DeploymentsPromptConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsPromptConfig$ {
-  /** @deprecated use `DeploymentsPromptConfig$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsPromptConfig$inboundSchema;
-  /** @deprecated use `DeploymentsPromptConfig$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsPromptConfig$outboundSchema;
-  /** @deprecated use `DeploymentsPromptConfig$Outbound` instead. */
-  export type Outbound = DeploymentsPromptConfig$Outbound;
-}
-
 export function deploymentsPromptConfigToJSON(
   deploymentsPromptConfig: DeploymentsPromptConfig,
 ): string {
@@ -2453,7 +1878,6 @@ export function deploymentsPromptConfigToJSON(
     DeploymentsPromptConfig$outboundSchema.parse(deploymentsPromptConfig),
   );
 }
-
 export function deploymentsPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsPromptConfig, SDKValidationError> {
@@ -2482,7 +1906,6 @@ export const DeploymentsData$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-
 /** @internal */
 export type DeploymentsData$Outbound = {
   id: string;
@@ -2513,25 +1936,11 @@ export const DeploymentsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsData$ {
-  /** @deprecated use `DeploymentsData$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsData$inboundSchema;
-  /** @deprecated use `DeploymentsData$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsData$outboundSchema;
-  /** @deprecated use `DeploymentsData$Outbound` instead. */
-  export type Outbound = DeploymentsData$Outbound;
-}
-
 export function deploymentsDataToJSON(
   deploymentsData: DeploymentsData,
 ): string {
   return JSON.stringify(DeploymentsData$outboundSchema.parse(deploymentsData));
 }
-
 export function deploymentsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsData, SDKValidationError> {
@@ -2556,7 +1965,6 @@ export const DeploymentsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type DeploymentsResponseBody$Outbound = {
   object: string;
@@ -2579,19 +1987,6 @@ export const DeploymentsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseBody$ {
-  /** @deprecated use `DeploymentsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseBody$inboundSchema;
-  /** @deprecated use `DeploymentsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseBody$outboundSchema;
-  /** @deprecated use `DeploymentsResponseBody$Outbound` instead. */
-  export type Outbound = DeploymentsResponseBody$Outbound;
-}
-
 export function deploymentsResponseBodyToJSON(
   deploymentsResponseBody: DeploymentsResponseBody,
 ): string {
@@ -2599,7 +1994,6 @@ export function deploymentsResponseBodyToJSON(
     DeploymentsResponseBody$outboundSchema.parse(deploymentsResponseBody),
   );
 }
-
 export function deploymentsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseBody, SDKValidationError> {

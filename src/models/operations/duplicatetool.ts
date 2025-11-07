@@ -591,7 +591,6 @@ export const DuplicateToolRequest$inboundSchema: z.ZodType<
     "tool_id": "toolId",
   });
 });
-
 /** @internal */
 export type DuplicateToolRequest$Outbound = {
   tool_id: string;
@@ -610,19 +609,6 @@ export const DuplicateToolRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolRequest$ {
-  /** @deprecated use `DuplicateToolRequest$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolRequest$inboundSchema;
-  /** @deprecated use `DuplicateToolRequest$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolRequest$outboundSchema;
-  /** @deprecated use `DuplicateToolRequest$Outbound` instead. */
-  export type Outbound = DuplicateToolRequest$Outbound;
-}
-
 export function duplicateToolRequestToJSON(
   duplicateToolRequest: DuplicateToolRequest,
 ): string {
@@ -630,7 +616,6 @@ export function duplicateToolRequestToJSON(
     DuplicateToolRequest$outboundSchema.parse(duplicateToolRequest),
   );
 }
-
 export function duplicateToolRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolRequest, SDKValidationError> {
@@ -648,26 +633,12 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$inbo
   > = z.nativeEnum(
     DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus,
   );
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema:
   z.ZodNativeEnum<
     typeof DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus
   > =
     DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
@@ -676,7 +647,6 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboun
   > = z.nativeEnum(
     DuplicateToolResponseBodyToolsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
@@ -684,40 +654,14 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$outbou
   > =
     DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyLanguage
 > = z.nativeEnum(DuplicateToolResponseBodyLanguage);
-
 /** @internal */
 export const DuplicateToolResponseBodyLanguage$outboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyLanguage
 > = DuplicateToolResponseBodyLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyLanguage$ {
-  /** @deprecated use `DuplicateToolResponseBodyLanguage$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyLanguage$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyLanguage$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyLanguage$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
@@ -729,7 +673,6 @@ export const DuplicateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
   language: DuplicateToolResponseBodyLanguage$inboundSchema,
   code: z.string(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyCodeTool$Outbound = {
   parameters?: { [k: string]: any } | undefined;
@@ -748,20 +691,6 @@ export const DuplicateToolResponseBodyCodeTool$outboundSchema: z.ZodType<
   code: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyCodeTool$ {
-  /** @deprecated use `DuplicateToolResponseBodyCodeTool$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyCodeTool$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyCodeTool$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyCodeTool$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyCodeTool$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyCodeTool$Outbound;
-}
-
 export function duplicateToolResponseBodyCodeToolToJSON(
   duplicateToolResponseBodyCodeTool: DuplicateToolResponseBodyCodeTool,
 ): string {
@@ -771,7 +700,6 @@ export function duplicateToolResponseBodyCodeToolToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyCodeToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyCodeTool, SDKValidationError> {
@@ -788,7 +716,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGRS74BM6QZZF1Q6DCH8"),
+  _id: z.string().default("01K9EV08FFQ7ZX29ZH7DHWMWG2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -818,7 +746,6 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
     "code_tool": "codeTool",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBody5$Outbound = {
   _id: string;
@@ -844,7 +771,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K9CJXGRS74BM6QZZF1Q6DCH8"),
+  id: z.string().default("01K9EV08FFQ7ZX29ZH7DHWMWG2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -875,19 +802,6 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody5$ {
-  /** @deprecated use `DuplicateToolResponseBody5$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody5$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody5$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody5$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody5$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody5$Outbound;
-}
-
 export function duplicateToolResponseBody5ToJSON(
   duplicateToolResponseBody5: DuplicateToolResponseBody5,
 ): string {
@@ -895,7 +809,6 @@ export function duplicateToolResponseBody5ToJSON(
     DuplicateToolResponseBody5$outboundSchema.parse(duplicateToolResponseBody5),
   );
 }
-
 export function duplicateToolResponseBody5FromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody5, SDKValidationError> {
@@ -910,47 +823,19 @@ export function duplicateToolResponseBody5FromJSON(
 export const DuplicateToolResponseBodyToolsResponse200Status$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponse200Status> = z
     .nativeEnum(DuplicateToolResponseBodyToolsResponse200Status);
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200Status$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponse200Status> =
     DuplicateToolResponseBodyToolsResponse200Status$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200Status$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200Status$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200Status$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200Status$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200Status$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponse200Type> = z
     .nativeEnum(DuplicateToolResponseBodyToolsResponse200Type);
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponse200Type> =
     DuplicateToolResponseBodyToolsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200Type$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200Type$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyHeaders$inboundSchema: z.ZodType<
@@ -961,7 +846,6 @@ export const DuplicateToolResponseBodyHeaders$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyHeaders$Outbound = {
   value: string;
@@ -978,19 +862,6 @@ export const DuplicateToolResponseBodyHeaders$outboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyHeaders$ {
-  /** @deprecated use `DuplicateToolResponseBodyHeaders$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyHeaders$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyHeaders$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyHeaders$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyHeaders$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyHeaders$Outbound;
-}
-
 export function duplicateToolResponseBodyHeadersToJSON(
   duplicateToolResponseBodyHeaders: DuplicateToolResponseBodyHeaders,
 ): string {
@@ -1000,7 +871,6 @@ export function duplicateToolResponseBodyHeadersToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyHeaders, SDKValidationError> {
@@ -1018,26 +888,12 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$inbou
   > = z.nativeEnum(
     DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type,
   );
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type
   > =
     DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyInputSchema$inboundSchema: z.ZodType<
@@ -1050,7 +906,6 @@ export const DuplicateToolResponseBodyInputSchema$inboundSchema: z.ZodType<
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyInputSchema$Outbound = {
   type: string;
@@ -1070,21 +925,6 @@ export const DuplicateToolResponseBodyInputSchema$outboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyInputSchema$ {
-  /** @deprecated use `DuplicateToolResponseBodyInputSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyInputSchema$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyInputSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyInputSchema$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyInputSchema$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyInputSchema$Outbound;
-}
-
 export function duplicateToolResponseBodyInputSchemaToJSON(
   duplicateToolResponseBodyInputSchema: DuplicateToolResponseBodyInputSchema,
 ): string {
@@ -1094,7 +934,6 @@ export function duplicateToolResponseBodyInputSchemaToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyInputSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyInputSchema, SDKValidationError> {
@@ -1110,24 +949,10 @@ export function duplicateToolResponseBodyInputSchemaFromJSON(
 export const DuplicateToolResponseBodyConnectionType$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyConnectionType> = z
     .nativeEnum(DuplicateToolResponseBodyConnectionType);
-
 /** @internal */
 export const DuplicateToolResponseBodyConnectionType$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyConnectionType> =
     DuplicateToolResponseBodyConnectionType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyConnectionType$ {
-  /** @deprecated use `DuplicateToolResponseBodyConnectionType$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyConnectionType$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyConnectionType$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyConnectionType$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyMcp$inboundSchema: z.ZodType<
@@ -1154,7 +979,6 @@ export const DuplicateToolResponseBodyMcp$inboundSchema: z.ZodType<
     "connection_type": "connectionType",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyMcp$Outbound = {
   server_id: string;
@@ -1193,19 +1017,6 @@ export const DuplicateToolResponseBodyMcp$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyMcp$ {
-  /** @deprecated use `DuplicateToolResponseBodyMcp$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyMcp$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyMcp$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyMcp$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyMcp$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyMcp$Outbound;
-}
-
 export function duplicateToolResponseBodyMcpToJSON(
   duplicateToolResponseBodyMcp: DuplicateToolResponseBodyMcp,
 ): string {
@@ -1215,7 +1026,6 @@ export function duplicateToolResponseBodyMcpToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyMcpFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyMcp, SDKValidationError> {
@@ -1232,7 +1042,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGRR7VJ1BH035M4RDRKR"),
+  _id: z.string().default("01K9EV08FDHCVPH6ME36G9WKAJ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1260,7 +1070,6 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBody4$Outbound = {
   _id: string;
@@ -1286,7 +1095,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K9CJXGRR7VJ1BH035M4RDRKR"),
+  id: z.string().default("01K9EV08FDHCVPH6ME36G9WKAJ"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1314,19 +1123,6 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody4$ {
-  /** @deprecated use `DuplicateToolResponseBody4$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody4$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody4$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody4$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody4$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody4$Outbound;
-}
-
 export function duplicateToolResponseBody4ToJSON(
   duplicateToolResponseBody4: DuplicateToolResponseBody4,
 ): string {
@@ -1334,7 +1130,6 @@ export function duplicateToolResponseBody4ToJSON(
     DuplicateToolResponseBody4$outboundSchema.parse(duplicateToolResponseBody4),
   );
 }
-
 export function duplicateToolResponseBody4FromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody4, SDKValidationError> {
@@ -1349,68 +1144,28 @@ export function duplicateToolResponseBody4FromJSON(
 export const DuplicateToolResponseBodyToolsResponseStatus$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponseStatus> = z
     .nativeEnum(DuplicateToolResponseBodyToolsResponseStatus);
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponseStatus$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponseStatus> =
     DuplicateToolResponseBodyToolsResponseStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponseStatus$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponseStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponseStatus$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponseStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponseStatus$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponseType> = z
     .nativeEnum(DuplicateToolResponseBodyToolsResponseType);
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsResponseType> =
     DuplicateToolResponseBodyToolsResponseType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponseType$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponseType$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponseType$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyMethod
 > = z.nativeEnum(DuplicateToolResponseBodyMethod);
-
 /** @internal */
 export const DuplicateToolResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyMethod
 > = DuplicateToolResponseBodyMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyMethod$ {
-  /** @deprecated use `DuplicateToolResponseBodyMethod$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyMethod$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyMethod$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyMethod$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
@@ -1423,7 +1178,6 @@ export const DuplicateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   headers: z.record(z.string()).optional(),
   body: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyBlueprint$Outbound = {
   url: string;
@@ -1444,20 +1198,6 @@ export const DuplicateToolResponseBodyBlueprint$outboundSchema: z.ZodType<
   body: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyBlueprint$ {
-  /** @deprecated use `DuplicateToolResponseBodyBlueprint$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyBlueprint$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyBlueprint$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyBlueprint$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyBlueprint$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyBlueprint$Outbound;
-}
-
 export function duplicateToolResponseBodyBlueprintToJSON(
   duplicateToolResponseBodyBlueprint: DuplicateToolResponseBodyBlueprint,
 ): string {
@@ -1467,7 +1207,6 @@ export function duplicateToolResponseBodyBlueprintToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyBlueprintFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyBlueprint, SDKValidationError> {
@@ -1486,7 +1225,6 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$inbou
   > = z.nativeEnum(
     DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type,
   );
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$outboundSchema:
   z.ZodNativeEnum<
@@ -1494,26 +1232,12 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$outbo
   > =
     DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyDefaultValue$inboundSchema: z.ZodType<
   DuplicateToolResponseBodyDefaultValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DuplicateToolResponseBodyDefaultValue$Outbound =
   | string
@@ -1527,21 +1251,6 @@ export const DuplicateToolResponseBodyDefaultValue$outboundSchema: z.ZodType<
   DuplicateToolResponseBodyDefaultValue
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyDefaultValue$ {
-  /** @deprecated use `DuplicateToolResponseBodyDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyDefaultValue$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyDefaultValue$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyDefaultValue$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyDefaultValue$Outbound;
-}
-
 export function duplicateToolResponseBodyDefaultValueToJSON(
   duplicateToolResponseBodyDefaultValue: DuplicateToolResponseBodyDefaultValue,
 ): string {
@@ -1551,7 +1260,6 @@ export function duplicateToolResponseBodyDefaultValueToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyDefaultValueFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyDefaultValue, SDKValidationError> {
@@ -1580,7 +1288,6 @@ export const DuplicateToolResponseBodyArguments$inboundSchema: z.ZodType<
     "default_value": "defaultValue",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyArguments$Outbound = {
   type: string;
@@ -1607,20 +1314,6 @@ export const DuplicateToolResponseBodyArguments$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyArguments$ {
-  /** @deprecated use `DuplicateToolResponseBodyArguments$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyArguments$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyArguments$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyArguments$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyArguments$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyArguments$Outbound;
-}
-
 export function duplicateToolResponseBodyArgumentsToJSON(
   duplicateToolResponseBodyArguments: DuplicateToolResponseBodyArguments,
 ): string {
@@ -1630,7 +1323,6 @@ export function duplicateToolResponseBodyArgumentsToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyArgumentsFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyArguments, SDKValidationError> {
@@ -1653,7 +1345,6 @@ export const DuplicateToolResponseBodyHttp$inboundSchema: z.ZodType<
     z.lazy(() => DuplicateToolResponseBodyArguments$inboundSchema),
   ).optional(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyHttp$Outbound = {
   blueprint: DuplicateToolResponseBodyBlueprint$Outbound;
@@ -1674,19 +1365,6 @@ export const DuplicateToolResponseBodyHttp$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyHttp$ {
-  /** @deprecated use `DuplicateToolResponseBodyHttp$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyHttp$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyHttp$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyHttp$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyHttp$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyHttp$Outbound;
-}
-
 export function duplicateToolResponseBodyHttpToJSON(
   duplicateToolResponseBodyHttp: DuplicateToolResponseBodyHttp,
 ): string {
@@ -1696,7 +1374,6 @@ export function duplicateToolResponseBodyHttpToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyHttpFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyHttp, SDKValidationError> {
@@ -1713,7 +1390,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGRPB86DX347M38K8KX0"),
+  _id: z.string().default("01K9EV08FCK4CAPSPBJ02MXGZA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1741,7 +1418,6 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBody3$Outbound = {
   _id: string;
@@ -1767,7 +1443,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K9CJXGRPB86DX347M38K8KX0"),
+  id: z.string().default("01K9EV08FCK4CAPSPBJ02MXGZA"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1796,19 +1472,6 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody3$ {
-  /** @deprecated use `DuplicateToolResponseBody3$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody3$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody3$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody3$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody3$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody3$Outbound;
-}
-
 export function duplicateToolResponseBody3ToJSON(
   duplicateToolResponseBody3: DuplicateToolResponseBody3,
 ): string {
@@ -1816,7 +1479,6 @@ export function duplicateToolResponseBody3ToJSON(
     DuplicateToolResponseBody3$outboundSchema.parse(duplicateToolResponseBody3),
   );
 }
-
 export function duplicateToolResponseBody3FromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody3, SDKValidationError> {
@@ -1832,46 +1494,19 @@ export const DuplicateToolResponseBodyToolsStatus$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsStatus> = z.nativeEnum(
     DuplicateToolResponseBodyToolsStatus,
   );
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsStatus$outboundSchema:
   z.ZodNativeEnum<typeof DuplicateToolResponseBodyToolsStatus> =
     DuplicateToolResponseBodyToolsStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsStatus$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyToolsStatus$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsStatus$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsType$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyToolsType
 > = z.nativeEnum(DuplicateToolResponseBodyToolsType);
-
 /** @internal */
 export const DuplicateToolResponseBodyToolsType$outboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyToolsType
 > = DuplicateToolResponseBodyToolsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyToolsType$ {
-  /** @deprecated use `DuplicateToolResponseBodyToolsType$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyToolsType$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyToolsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyToolsType$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
@@ -1884,7 +1519,6 @@ export const DuplicateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   schema: z.record(z.any()),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyJsonSchema$Outbound = {
   name: string;
@@ -1905,21 +1539,6 @@ export const DuplicateToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyJsonSchema$ {
-  /** @deprecated use `DuplicateToolResponseBodyJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    DuplicateToolResponseBodyJsonSchema$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyJsonSchema$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyJsonSchema$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyJsonSchema$Outbound;
-}
-
 export function duplicateToolResponseBodyJsonSchemaToJSON(
   duplicateToolResponseBodyJsonSchema: DuplicateToolResponseBodyJsonSchema,
 ): string {
@@ -1929,7 +1548,6 @@ export function duplicateToolResponseBodyJsonSchemaToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyJsonSchema, SDKValidationError> {
@@ -1947,7 +1565,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGRN51HXM41MYK4892GN"),
+  _id: z.string().default("01K9EV08FBS06YMJH6DE1MXSH5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1974,7 +1592,6 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBody2$Outbound = {
   _id: string;
@@ -2000,7 +1617,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K9CJXGRN51HXM41MYK4892GN"),
+  id: z.string().default("01K9EV08FBS06YMJH6DE1MXSH5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2028,19 +1645,6 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody2$ {
-  /** @deprecated use `DuplicateToolResponseBody2$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody2$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody2$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody2$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody2$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody2$Outbound;
-}
-
 export function duplicateToolResponseBody2ToJSON(
   duplicateToolResponseBody2: DuplicateToolResponseBody2,
 ): string {
@@ -2048,7 +1652,6 @@ export function duplicateToolResponseBody2ToJSON(
     DuplicateToolResponseBody2$outboundSchema.parse(duplicateToolResponseBody2),
   );
 }
-
 export function duplicateToolResponseBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody2, SDKValidationError> {
@@ -2063,43 +1666,19 @@ export function duplicateToolResponseBody2FromJSON(
 export const DuplicateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyStatus
 > = z.nativeEnum(DuplicateToolResponseBodyStatus);
-
 /** @internal */
 export const DuplicateToolResponseBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyStatus
 > = DuplicateToolResponseBodyStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyStatus$ {
-  /** @deprecated use `DuplicateToolResponseBodyStatus$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyStatus$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyStatus$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyStatus$outboundSchema;
-}
-
 /** @internal */
 export const DuplicateToolResponseBodyType$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyType
 > = z.nativeEnum(DuplicateToolResponseBodyType);
-
 /** @internal */
 export const DuplicateToolResponseBodyType$outboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyType
 > = DuplicateToolResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyType$ {
-  /** @deprecated use `DuplicateToolResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyType$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DuplicateToolResponseBodyFunction$inboundSchema: z.ZodType<
@@ -2112,7 +1691,6 @@ export const DuplicateToolResponseBodyFunction$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   parameters: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type DuplicateToolResponseBodyFunction$Outbound = {
   name: string;
@@ -2133,20 +1711,6 @@ export const DuplicateToolResponseBodyFunction$outboundSchema: z.ZodType<
   parameters: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBodyFunction$ {
-  /** @deprecated use `DuplicateToolResponseBodyFunction$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBodyFunction$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    DuplicateToolResponseBodyFunction$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBodyFunction$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBodyFunction$Outbound;
-}
-
 export function duplicateToolResponseBodyFunctionToJSON(
   duplicateToolResponseBodyFunction: DuplicateToolResponseBodyFunction,
 ): string {
@@ -2156,7 +1720,6 @@ export function duplicateToolResponseBodyFunctionToJSON(
     ),
   );
 }
-
 export function duplicateToolResponseBodyFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBodyFunction, SDKValidationError> {
@@ -2173,7 +1736,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGRM70MW7B0MJMGMWCRA"),
+  _id: z.string().default("01K9EV08F9G310FXQDD05D1MKG"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2199,7 +1762,6 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-
 /** @internal */
 export type DuplicateToolResponseBody1$Outbound = {
   _id: string;
@@ -2225,7 +1787,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K9CJXGRM70MW7B0MJMGMWCRA"),
+  id: z.string().default("01K9EV08F9G310FXQDD05D1MKG"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2252,19 +1814,6 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody1$ {
-  /** @deprecated use `DuplicateToolResponseBody1$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody1$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody1$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody1$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody1$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody1$Outbound;
-}
-
 export function duplicateToolResponseBody1ToJSON(
   duplicateToolResponseBody1: DuplicateToolResponseBody1,
 ): string {
@@ -2272,7 +1821,6 @@ export function duplicateToolResponseBody1ToJSON(
     DuplicateToolResponseBody1$outboundSchema.parse(duplicateToolResponseBody1),
   );
 }
-
 export function duplicateToolResponseBody1FromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody1, SDKValidationError> {
@@ -2295,7 +1843,6 @@ export const DuplicateToolResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => DuplicateToolResponseBody4$inboundSchema),
   z.lazy(() => DuplicateToolResponseBody5$inboundSchema),
 ]);
-
 /** @internal */
 export type DuplicateToolResponseBody$Outbound =
   | DuplicateToolResponseBody1$Outbound
@@ -2317,19 +1864,6 @@ export const DuplicateToolResponseBody$outboundSchema: z.ZodType<
   z.lazy(() => DuplicateToolResponseBody5$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody$ {
-  /** @deprecated use `DuplicateToolResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody$Outbound;
-}
-
 export function duplicateToolResponseBodyToJSON(
   duplicateToolResponseBody: DuplicateToolResponseBody,
 ): string {
@@ -2337,7 +1871,6 @@ export function duplicateToolResponseBodyToJSON(
     DuplicateToolResponseBody$outboundSchema.parse(duplicateToolResponseBody),
   );
 }
-
 export function duplicateToolResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DuplicateToolResponseBody, SDKValidationError> {

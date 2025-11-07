@@ -214,44 +214,19 @@ export type CreateBudgetResponseBody = {
 export const CreateBudgetRequestBodyBudgetsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyBudgetsType
 > = z.nativeEnum(CreateBudgetRequestBodyBudgetsType);
-
 /** @internal */
 export const CreateBudgetRequestBodyBudgetsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyBudgetsType
 > = CreateBudgetRequestBodyBudgetsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetRequestBodyBudgetsType$ {
-  /** @deprecated use `CreateBudgetRequestBodyBudgetsType$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetRequestBodyBudgetsType$inboundSchema;
-  /** @deprecated use `CreateBudgetRequestBodyBudgetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateBudgetRequestBodyBudgetsType$outboundSchema;
-}
-
 /** @internal */
 export const RequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyPeriod
 > = z.nativeEnum(RequestBodyPeriod);
-
 /** @internal */
 export const RequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyPeriod
 > = RequestBodyPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyPeriod$ {
-  /** @deprecated use `RequestBodyPeriod$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyPeriod$inboundSchema;
-  /** @deprecated use `RequestBodyPeriod$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyPeriod$outboundSchema;
-}
 
 /** @internal */
 export const WorkspaceBudget$inboundSchema: z.ZodType<
@@ -263,7 +238,6 @@ export const WorkspaceBudget$inboundSchema: z.ZodType<
   period: RequestBodyPeriod$inboundSchema,
   amount: z.number(),
 });
-
 /** @internal */
 export type WorkspaceBudget$Outbound = {
   type: string;
@@ -282,25 +256,11 @@ export const WorkspaceBudget$outboundSchema: z.ZodType<
   amount: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WorkspaceBudget$ {
-  /** @deprecated use `WorkspaceBudget$inboundSchema` instead. */
-  export const inboundSchema = WorkspaceBudget$inboundSchema;
-  /** @deprecated use `WorkspaceBudget$outboundSchema` instead. */
-  export const outboundSchema = WorkspaceBudget$outboundSchema;
-  /** @deprecated use `WorkspaceBudget$Outbound` instead. */
-  export type Outbound = WorkspaceBudget$Outbound;
-}
-
 export function workspaceBudgetToJSON(
   workspaceBudget: WorkspaceBudget,
 ): string {
   return JSON.stringify(WorkspaceBudget$outboundSchema.parse(workspaceBudget));
 }
-
 export function workspaceBudgetFromJSON(
   jsonString: string,
 ): SafeParseResult<WorkspaceBudget, SDKValidationError> {
@@ -315,43 +275,19 @@ export function workspaceBudgetFromJSON(
 export const CreateBudgetRequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyType
 > = z.nativeEnum(CreateBudgetRequestBodyType);
-
 /** @internal */
 export const CreateBudgetRequestBodyType$outboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyType
 > = CreateBudgetRequestBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetRequestBodyType$ {
-  /** @deprecated use `CreateBudgetRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateBudgetRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetRequestBodyType$outboundSchema;
-}
-
 /** @internal */
 export const CreateBudgetRequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyPeriod
 > = z.nativeEnum(CreateBudgetRequestBodyPeriod);
-
 /** @internal */
 export const CreateBudgetRequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetRequestBodyPeriod
 > = CreateBudgetRequestBodyPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetRequestBodyPeriod$ {
-  /** @deprecated use `CreateBudgetRequestBodyPeriod$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetRequestBodyPeriod$inboundSchema;
-  /** @deprecated use `CreateBudgetRequestBodyPeriod$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetRequestBodyPeriod$outboundSchema;
-}
 
 /** @internal */
 export const ContactBudget$inboundSchema: z.ZodType<
@@ -368,7 +304,6 @@ export const ContactBudget$inboundSchema: z.ZodType<
     "entity_id": "entityId",
   });
 });
-
 /** @internal */
 export type ContactBudget$Outbound = {
   type: string;
@@ -393,23 +328,9 @@ export const ContactBudget$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContactBudget$ {
-  /** @deprecated use `ContactBudget$inboundSchema` instead. */
-  export const inboundSchema = ContactBudget$inboundSchema;
-  /** @deprecated use `ContactBudget$outboundSchema` instead. */
-  export const outboundSchema = ContactBudget$outboundSchema;
-  /** @deprecated use `ContactBudget$Outbound` instead. */
-  export type Outbound = ContactBudget$Outbound;
-}
-
 export function contactBudgetToJSON(contactBudget: ContactBudget): string {
   return JSON.stringify(ContactBudget$outboundSchema.parse(contactBudget));
 }
-
 export function contactBudgetFromJSON(
   jsonString: string,
 ): SafeParseResult<ContactBudget, SDKValidationError> {
@@ -429,7 +350,6 @@ export const CreateBudgetRequestBody$inboundSchema: z.ZodType<
   z.lazy(() => ContactBudget$inboundSchema),
   z.lazy(() => WorkspaceBudget$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateBudgetRequestBody$Outbound =
   | ContactBudget$Outbound
@@ -445,19 +365,6 @@ export const CreateBudgetRequestBody$outboundSchema: z.ZodType<
   z.lazy(() => WorkspaceBudget$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetRequestBody$ {
-  /** @deprecated use `CreateBudgetRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetRequestBody$inboundSchema;
-  /** @deprecated use `CreateBudgetRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetRequestBody$outboundSchema;
-  /** @deprecated use `CreateBudgetRequestBody$Outbound` instead. */
-  export type Outbound = CreateBudgetRequestBody$Outbound;
-}
-
 export function createBudgetRequestBodyToJSON(
   createBudgetRequestBody: CreateBudgetRequestBody,
 ): string {
@@ -465,7 +372,6 @@ export function createBudgetRequestBodyToJSON(
     CreateBudgetRequestBody$outboundSchema.parse(createBudgetRequestBody),
   );
 }
-
 export function createBudgetRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateBudgetRequestBody, SDKValidationError> {
@@ -480,43 +386,19 @@ export function createBudgetRequestBodyFromJSON(
 export const CreateBudgetType$inboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetType
 > = z.nativeEnum(CreateBudgetType);
-
 /** @internal */
 export const CreateBudgetType$outboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetType
 > = CreateBudgetType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetType$ {
-  /** @deprecated use `CreateBudgetType$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetType$inboundSchema;
-  /** @deprecated use `CreateBudgetType$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetType$outboundSchema;
-}
-
 /** @internal */
 export const CreateBudgetPeriod$inboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetPeriod
 > = z.nativeEnum(CreateBudgetPeriod);
-
 /** @internal */
 export const CreateBudgetPeriod$outboundSchema: z.ZodNativeEnum<
   typeof CreateBudgetPeriod
 > = CreateBudgetPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetPeriod$ {
-  /** @deprecated use `CreateBudgetPeriod$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetPeriod$inboundSchema;
-  /** @deprecated use `CreateBudgetPeriod$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetPeriod$outboundSchema;
-}
 
 /** @internal */
 export const CreateBudgetBudget$inboundSchema: z.ZodType<
@@ -527,7 +409,6 @@ export const CreateBudgetBudget$inboundSchema: z.ZodType<
   period: CreateBudgetPeriod$inboundSchema,
   amount: z.number(),
 });
-
 /** @internal */
 export type CreateBudgetBudget$Outbound = {
   period: string;
@@ -544,19 +425,6 @@ export const CreateBudgetBudget$outboundSchema: z.ZodType<
   amount: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetBudget$ {
-  /** @deprecated use `CreateBudgetBudget$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetBudget$inboundSchema;
-  /** @deprecated use `CreateBudgetBudget$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetBudget$outboundSchema;
-  /** @deprecated use `CreateBudgetBudget$Outbound` instead. */
-  export type Outbound = CreateBudgetBudget$Outbound;
-}
-
 export function createBudgetBudgetToJSON(
   createBudgetBudget: CreateBudgetBudget,
 ): string {
@@ -564,7 +432,6 @@ export function createBudgetBudgetToJSON(
     CreateBudgetBudget$outboundSchema.parse(createBudgetBudget),
   );
 }
-
 export function createBudgetBudgetFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateBudgetBudget, SDKValidationError> {
@@ -593,7 +460,6 @@ export const Consumption$inboundSchema: z.ZodType<
     "period_end": "periodEnd",
   });
 });
-
 /** @internal */
 export type Consumption$Outbound = {
   current_amount: number;
@@ -621,23 +487,9 @@ export const Consumption$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Consumption$ {
-  /** @deprecated use `Consumption$inboundSchema` instead. */
-  export const inboundSchema = Consumption$inboundSchema;
-  /** @deprecated use `Consumption$outboundSchema` instead. */
-  export const outboundSchema = Consumption$outboundSchema;
-  /** @deprecated use `Consumption$Outbound` instead. */
-  export type Outbound = Consumption$Outbound;
-}
-
 export function consumptionToJSON(consumption: Consumption): string {
   return JSON.stringify(Consumption$outboundSchema.parse(consumption));
 }
-
 export function consumptionFromJSON(
   jsonString: string,
 ): SafeParseResult<Consumption, SDKValidationError> {
@@ -664,7 +516,7 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.614Z",
+    "2025-11-07T09:40:03.824Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -674,7 +526,6 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
     "is_active": "isActive",
   });
 });
-
 /** @internal */
 export type CreateBudgetResponseBody$Outbound = {
   _id: string;
@@ -702,7 +553,7 @@ export const CreateBudgetResponseBody$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => Consumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.614Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.824Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -713,19 +564,6 @@ export const CreateBudgetResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBudgetResponseBody$ {
-  /** @deprecated use `CreateBudgetResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateBudgetResponseBody$inboundSchema;
-  /** @deprecated use `CreateBudgetResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateBudgetResponseBody$outboundSchema;
-  /** @deprecated use `CreateBudgetResponseBody$Outbound` instead. */
-  export type Outbound = CreateBudgetResponseBody$Outbound;
-}
-
 export function createBudgetResponseBodyToJSON(
   createBudgetResponseBody: CreateBudgetResponseBody,
 ): string {
@@ -733,7 +571,6 @@ export function createBudgetResponseBodyToJSON(
     CreateBudgetResponseBody$outboundSchema.parse(createBudgetResponseBody),
   );
 }
-
 export function createBudgetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateBudgetResponseBody, SDKValidationError> {

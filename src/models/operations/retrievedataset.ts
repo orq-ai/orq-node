@@ -71,7 +71,6 @@ export const RetrieveDatasetRequest$inboundSchema: z.ZodType<
     "dataset_id": "datasetId",
   });
 });
-
 /** @internal */
 export type RetrieveDatasetRequest$Outbound = {
   dataset_id: string;
@@ -90,19 +89,6 @@ export const RetrieveDatasetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasetRequest$ {
-  /** @deprecated use `RetrieveDatasetRequest$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasetRequest$inboundSchema;
-  /** @deprecated use `RetrieveDatasetRequest$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasetRequest$outboundSchema;
-  /** @deprecated use `RetrieveDatasetRequest$Outbound` instead. */
-  export type Outbound = RetrieveDatasetRequest$Outbound;
-}
-
 export function retrieveDatasetRequestToJSON(
   retrieveDatasetRequest: RetrieveDatasetRequest,
 ): string {
@@ -110,7 +96,6 @@ export function retrieveDatasetRequestToJSON(
     RetrieveDatasetRequest$outboundSchema.parse(retrieveDatasetRequest),
   );
 }
-
 export function retrieveDatasetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasetRequest, SDKValidationError> {
@@ -135,7 +120,6 @@ export const RetrieveDatasetMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-
 /** @internal */
 export type RetrieveDatasetMetadata$Outbound = {
   total_versions: number;
@@ -157,19 +141,6 @@ export const RetrieveDatasetMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasetMetadata$ {
-  /** @deprecated use `RetrieveDatasetMetadata$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasetMetadata$inboundSchema;
-  /** @deprecated use `RetrieveDatasetMetadata$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasetMetadata$outboundSchema;
-  /** @deprecated use `RetrieveDatasetMetadata$Outbound` instead. */
-  export type Outbound = RetrieveDatasetMetadata$Outbound;
-}
-
 export function retrieveDatasetMetadataToJSON(
   retrieveDatasetMetadata: RetrieveDatasetMetadata,
 ): string {
@@ -177,7 +148,6 @@ export function retrieveDatasetMetadataToJSON(
     RetrieveDatasetMetadata$outboundSchema.parse(retrieveDatasetMetadata),
   );
 }
-
 export function retrieveDatasetMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasetMetadata, SDKValidationError> {
@@ -204,7 +174,7 @@ export const RetrieveDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.304Z",
+    "2025-11-07T09:40:03.490Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -216,7 +186,6 @@ export const RetrieveDatasetResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-
 /** @internal */
 export type RetrieveDatasetResponseBody$Outbound = {
   _id: string;
@@ -244,7 +213,7 @@ export const RetrieveDatasetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -257,19 +226,6 @@ export const RetrieveDatasetResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasetResponseBody$ {
-  /** @deprecated use `RetrieveDatasetResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasetResponseBody$inboundSchema;
-  /** @deprecated use `RetrieveDatasetResponseBody$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasetResponseBody$outboundSchema;
-  /** @deprecated use `RetrieveDatasetResponseBody$Outbound` instead. */
-  export type Outbound = RetrieveDatasetResponseBody$Outbound;
-}
-
 export function retrieveDatasetResponseBodyToJSON(
   retrieveDatasetResponseBody: RetrieveDatasetResponseBody,
 ): string {
@@ -279,7 +235,6 @@ export function retrieveDatasetResponseBodyToJSON(
     ),
   );
 }
-
 export function retrieveDatasetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasetResponseBody, SDKValidationError> {

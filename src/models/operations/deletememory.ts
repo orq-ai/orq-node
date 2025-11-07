@@ -33,7 +33,6 @@ export const DeleteMemoryRequest$inboundSchema: z.ZodType<
     "memory_id": "memoryId",
   });
 });
-
 /** @internal */
 export type DeleteMemoryRequest$Outbound = {
   memory_store_key: string;
@@ -55,19 +54,6 @@ export const DeleteMemoryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteMemoryRequest$ {
-  /** @deprecated use `DeleteMemoryRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteMemoryRequest$inboundSchema;
-  /** @deprecated use `DeleteMemoryRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteMemoryRequest$outboundSchema;
-  /** @deprecated use `DeleteMemoryRequest$Outbound` instead. */
-  export type Outbound = DeleteMemoryRequest$Outbound;
-}
-
 export function deleteMemoryRequestToJSON(
   deleteMemoryRequest: DeleteMemoryRequest,
 ): string {
@@ -75,7 +61,6 @@ export function deleteMemoryRequestToJSON(
     DeleteMemoryRequest$outboundSchema.parse(deleteMemoryRequest),
   );
 }
-
 export function deleteMemoryRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteMemoryRequest, SDKValidationError> {

@@ -863,7 +863,6 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListAgentsRequest$Outbound = {
   limit: number;
@@ -887,19 +886,6 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsRequest$ {
-  /** @deprecated use `ListAgentsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsRequest$inboundSchema;
-  /** @deprecated use `ListAgentsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsRequest$outboundSchema;
-  /** @deprecated use `ListAgentsRequest$Outbound` instead. */
-  export type Outbound = ListAgentsRequest$Outbound;
-}
-
 export function listAgentsRequestToJSON(
   listAgentsRequest: ListAgentsRequest,
 ): string {
@@ -907,7 +893,6 @@ export function listAgentsRequestToJSON(
     ListAgentsRequest$outboundSchema.parse(listAgentsRequest),
   );
 }
-
 export function listAgentsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsRequest, SDKValidationError> {
@@ -922,64 +907,28 @@ export function listAgentsRequestFromJSON(
 export const ListAgentsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsObject
 > = z.nativeEnum(ListAgentsObject);
-
 /** @internal */
 export const ListAgentsObject$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsObject
 > = ListAgentsObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsObject$ {
-  /** @deprecated use `ListAgentsObject$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsObject$inboundSchema;
-  /** @deprecated use `ListAgentsObject$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsObject$outboundSchema;
-}
-
 /** @internal */
 export const ListAgentsStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsStatus
 > = z.nativeEnum(ListAgentsStatus);
-
 /** @internal */
 export const ListAgentsStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsStatus
 > = ListAgentsStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsStatus$ {
-  /** @deprecated use `ListAgentsStatus$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsStatus$inboundSchema;
-  /** @deprecated use `ListAgentsStatus$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsStatus$outboundSchema;
-}
-
 /** @internal */
 export const ListAgentsToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolApprovalRequired
 > = z.nativeEnum(ListAgentsToolApprovalRequired);
-
 /** @internal */
 export const ListAgentsToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolApprovalRequired
 > = ListAgentsToolApprovalRequired$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolApprovalRequired$ {
-  /** @deprecated use `ListAgentsToolApprovalRequired$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolApprovalRequired$inboundSchema;
-  /** @deprecated use `ListAgentsToolApprovalRequired$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolApprovalRequired$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsConditions$inboundSchema: z.ZodType<
@@ -991,7 +940,6 @@ export const ListAgentsConditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-
 /** @internal */
 export type ListAgentsConditions$Outbound = {
   condition: string;
@@ -1010,19 +958,6 @@ export const ListAgentsConditions$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsConditions$ {
-  /** @deprecated use `ListAgentsConditions$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsConditions$inboundSchema;
-  /** @deprecated use `ListAgentsConditions$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsConditions$outboundSchema;
-  /** @deprecated use `ListAgentsConditions$Outbound` instead. */
-  export type Outbound = ListAgentsConditions$Outbound;
-}
-
 export function listAgentsConditionsToJSON(
   listAgentsConditions: ListAgentsConditions,
 ): string {
@@ -1030,7 +965,6 @@ export function listAgentsConditionsToJSON(
     ListAgentsConditions$outboundSchema.parse(listAgentsConditions),
   );
 }
-
 export function listAgentsConditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsConditions, SDKValidationError> {
@@ -1063,7 +997,6 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type ListAgentsTools$Outbound = {
   id: string;
@@ -1099,25 +1032,11 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsTools$ {
-  /** @deprecated use `ListAgentsTools$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsTools$inboundSchema;
-  /** @deprecated use `ListAgentsTools$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsTools$outboundSchema;
-  /** @deprecated use `ListAgentsTools$Outbound` instead. */
-  export type Outbound = ListAgentsTools$Outbound;
-}
-
 export function listAgentsToolsToJSON(
   listAgentsTools: ListAgentsTools,
 ): string {
   return JSON.stringify(ListAgentsTools$outboundSchema.parse(listAgentsTools));
 }
-
 export function listAgentsToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsTools, SDKValidationError> {
@@ -1147,7 +1066,6 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-
 /** @internal */
 export type ListAgentsSettings$Outbound = {
   max_iterations: number;
@@ -1176,19 +1094,6 @@ export const ListAgentsSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsSettings$ {
-  /** @deprecated use `ListAgentsSettings$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsSettings$inboundSchema;
-  /** @deprecated use `ListAgentsSettings$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsSettings$outboundSchema;
-  /** @deprecated use `ListAgentsSettings$Outbound` instead. */
-  export type Outbound = ListAgentsSettings$Outbound;
-}
-
 export function listAgentsSettingsToJSON(
   listAgentsSettings: ListAgentsSettings,
 ): string {
@@ -1196,7 +1101,6 @@ export function listAgentsSettingsToJSON(
     ListAgentsSettings$outboundSchema.parse(listAgentsSettings),
   );
 }
-
 export function listAgentsSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsSettings, SDKValidationError> {
@@ -1211,43 +1115,19 @@ export function listAgentsSettingsFromJSON(
 export const ListAgentsVoice$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsVoice
 > = z.nativeEnum(ListAgentsVoice);
-
 /** @internal */
 export const ListAgentsVoice$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsVoice
 > = ListAgentsVoice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsVoice$ {
-  /** @deprecated use `ListAgentsVoice$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsVoice$inboundSchema;
-  /** @deprecated use `ListAgentsVoice$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsVoice$outboundSchema;
-}
-
 /** @internal */
 export const ListAgentsFormat$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFormat
 > = z.nativeEnum(ListAgentsFormat);
-
 /** @internal */
 export const ListAgentsFormat$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFormat
 > = ListAgentsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFormat$ {
-  /** @deprecated use `ListAgentsFormat$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFormat$inboundSchema;
-  /** @deprecated use `ListAgentsFormat$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFormat$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsAudio$inboundSchema: z.ZodType<
@@ -1258,7 +1138,6 @@ export const ListAgentsAudio$inboundSchema: z.ZodType<
   voice: ListAgentsVoice$inboundSchema,
   format: ListAgentsFormat$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsAudio$Outbound = {
   voice: string;
@@ -1275,25 +1154,11 @@ export const ListAgentsAudio$outboundSchema: z.ZodType<
   format: ListAgentsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsAudio$ {
-  /** @deprecated use `ListAgentsAudio$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsAudio$inboundSchema;
-  /** @deprecated use `ListAgentsAudio$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsAudio$outboundSchema;
-  /** @deprecated use `ListAgentsAudio$Outbound` instead. */
-  export type Outbound = ListAgentsAudio$Outbound;
-}
-
 export function listAgentsAudioToJSON(
   listAgentsAudio: ListAgentsAudio,
 ): string {
   return JSON.stringify(ListAgentsAudio$outboundSchema.parse(listAgentsAudio));
 }
-
 export function listAgentsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsAudio, SDKValidationError> {
@@ -1308,24 +1173,10 @@ export function listAgentsAudioFromJSON(
 export const ListAgentsResponseFormatAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponseType> = z
     .nativeEnum(ListAgentsResponseFormatAgentsResponseType);
-
 /** @internal */
 export const ListAgentsResponseFormatAgentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponseType> =
     ListAgentsResponseFormatAgentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsResponseType$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsResponseFormatAgentsResponseType$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -1338,7 +1189,6 @@ export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type ListAgentsResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
@@ -1359,20 +1209,6 @@ export const ListAgentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatJsonSchema$ {
-  /** @deprecated use `ListAgentsResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormatJsonSchema$Outbound;
-}
-
 export function listAgentsResponseFormatJsonSchemaToJSON(
   listAgentsResponseFormatJsonSchema: ListAgentsResponseFormatJsonSchema,
 ): string {
@@ -1382,7 +1218,6 @@ export function listAgentsResponseFormatJsonSchemaToJSON(
     ),
   );
 }
-
 export function listAgentsResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormatJsonSchema, SDKValidationError> {
@@ -1407,7 +1242,6 @@ export const ListAgentsResponseFormat3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type ListAgentsResponseFormat3$Outbound = {
   type: string;
@@ -1428,19 +1262,6 @@ export const ListAgentsResponseFormat3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormat3$ {
-  /** @deprecated use `ListAgentsResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormat3$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormat3$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat3$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormat3$Outbound;
-}
-
 export function listAgentsResponseFormat3ToJSON(
   listAgentsResponseFormat3: ListAgentsResponseFormat3,
 ): string {
@@ -1448,7 +1269,6 @@ export function listAgentsResponseFormat3ToJSON(
     ListAgentsResponseFormat3$outboundSchema.parse(listAgentsResponseFormat3),
   );
 }
-
 export function listAgentsResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormat3, SDKValidationError> {
@@ -1463,23 +1283,10 @@ export function listAgentsResponseFormat3FromJSON(
 export const ListAgentsResponseFormatAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsResponseFormatAgentsType
 > = z.nativeEnum(ListAgentsResponseFormatAgentsType);
-
 /** @internal */
 export const ListAgentsResponseFormatAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsResponseFormatAgentsType
 > = ListAgentsResponseFormatAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsType$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatAgentsType$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormat2$inboundSchema: z.ZodType<
@@ -1489,7 +1296,6 @@ export const ListAgentsResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsResponseFormatAgentsType$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsResponseFormat2$Outbound = {
   type: string;
@@ -1504,19 +1310,6 @@ export const ListAgentsResponseFormat2$outboundSchema: z.ZodType<
   type: ListAgentsResponseFormatAgentsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormat2$ {
-  /** @deprecated use `ListAgentsResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormat2$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormat2$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat2$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormat2$Outbound;
-}
-
 export function listAgentsResponseFormat2ToJSON(
   listAgentsResponseFormat2: ListAgentsResponseFormat2,
 ): string {
@@ -1524,7 +1317,6 @@ export function listAgentsResponseFormat2ToJSON(
     ListAgentsResponseFormat2$outboundSchema.parse(listAgentsResponseFormat2),
   );
 }
-
 export function listAgentsResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormat2, SDKValidationError> {
@@ -1539,22 +1331,10 @@ export function listAgentsResponseFormat2FromJSON(
 export const ListAgentsResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsResponseFormatType
 > = z.nativeEnum(ListAgentsResponseFormatType);
-
 /** @internal */
 export const ListAgentsResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsResponseFormatType
 > = ListAgentsResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatType$ {
-  /** @deprecated use `ListAgentsResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatType$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormatType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormat1$inboundSchema: z.ZodType<
@@ -1564,7 +1344,6 @@ export const ListAgentsResponseFormat1$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsResponseFormatType$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsResponseFormat1$Outbound = {
   type: string;
@@ -1579,19 +1358,6 @@ export const ListAgentsResponseFormat1$outboundSchema: z.ZodType<
   type: ListAgentsResponseFormatType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormat1$ {
-  /** @deprecated use `ListAgentsResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormat1$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormat1$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat1$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormat1$Outbound;
-}
-
 export function listAgentsResponseFormat1ToJSON(
   listAgentsResponseFormat1: ListAgentsResponseFormat1,
 ): string {
@@ -1599,7 +1365,6 @@ export function listAgentsResponseFormat1ToJSON(
     ListAgentsResponseFormat1$outboundSchema.parse(listAgentsResponseFormat1),
   );
 }
-
 export function listAgentsResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormat1, SDKValidationError> {
@@ -1620,7 +1385,6 @@ export const ListAgentsResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsResponseFormat1$inboundSchema),
   z.lazy(() => ListAgentsResponseFormat2$inboundSchema),
 ]);
-
 /** @internal */
 export type ListAgentsResponseFormat$Outbound =
   | ListAgentsResponseFormat3$Outbound
@@ -1638,19 +1402,6 @@ export const ListAgentsResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => ListAgentsResponseFormat2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormat$ {
-  /** @deprecated use `ListAgentsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormat$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormat$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormat$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormat$Outbound;
-}
-
 export function listAgentsResponseFormatToJSON(
   listAgentsResponseFormat: ListAgentsResponseFormat,
 ): string {
@@ -1658,7 +1409,6 @@ export function listAgentsResponseFormatToJSON(
     ListAgentsResponseFormat$outboundSchema.parse(listAgentsResponseFormat),
   );
 }
-
 export function listAgentsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormat, SDKValidationError> {
@@ -1675,7 +1425,6 @@ export const ListAgentsStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type ListAgentsStop$Outbound = string | Array<string>;
 
@@ -1686,23 +1435,9 @@ export const ListAgentsStop$outboundSchema: z.ZodType<
   ListAgentsStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsStop$ {
-  /** @deprecated use `ListAgentsStop$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsStop$inboundSchema;
-  /** @deprecated use `ListAgentsStop$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsStop$outboundSchema;
-  /** @deprecated use `ListAgentsStop$Outbound` instead. */
-  export type Outbound = ListAgentsStop$Outbound;
-}
-
 export function listAgentsStopToJSON(listAgentsStop: ListAgentsStop): string {
   return JSON.stringify(ListAgentsStop$outboundSchema.parse(listAgentsStop));
 }
-
 export function listAgentsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsStop, SDKValidationError> {
@@ -1725,7 +1460,6 @@ export const ListAgentsStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type ListAgentsStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -1744,19 +1478,6 @@ export const ListAgentsStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsStreamOptions$ {
-  /** @deprecated use `ListAgentsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsStreamOptions$inboundSchema;
-  /** @deprecated use `ListAgentsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsStreamOptions$outboundSchema;
-  /** @deprecated use `ListAgentsStreamOptions$Outbound` instead. */
-  export type Outbound = ListAgentsStreamOptions$Outbound;
-}
-
 export function listAgentsStreamOptionsToJSON(
   listAgentsStreamOptions: ListAgentsStreamOptions,
 ): string {
@@ -1764,7 +1485,6 @@ export function listAgentsStreamOptionsToJSON(
     ListAgentsStreamOptions$outboundSchema.parse(listAgentsStreamOptions),
   );
 }
-
 export function listAgentsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsStreamOptions, SDKValidationError> {
@@ -1779,22 +1499,10 @@ export function listAgentsStreamOptionsFromJSON(
 export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsType
 > = z.nativeEnum(ListAgentsType);
-
 /** @internal */
 export const ListAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsType
 > = ListAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsType$ {
-  /** @deprecated use `ListAgentsType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsType$inboundSchema;
-  /** @deprecated use `ListAgentsType$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsThinking$inboundSchema: z.ZodType<
@@ -1809,7 +1517,6 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type ListAgentsThinking$Outbound = {
   type: string;
@@ -1830,19 +1537,6 @@ export const ListAgentsThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsThinking$ {
-  /** @deprecated use `ListAgentsThinking$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsThinking$inboundSchema;
-  /** @deprecated use `ListAgentsThinking$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsThinking$outboundSchema;
-  /** @deprecated use `ListAgentsThinking$Outbound` instead. */
-  export type Outbound = ListAgentsThinking$Outbound;
-}
-
 export function listAgentsThinkingToJSON(
   listAgentsThinking: ListAgentsThinking,
 ): string {
@@ -1850,7 +1544,6 @@ export function listAgentsThinkingToJSON(
     ListAgentsThinking$outboundSchema.parse(listAgentsThinking),
   );
 }
-
 export function listAgentsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsThinking, SDKValidationError> {
@@ -1865,22 +1558,10 @@ export function listAgentsThinkingFromJSON(
 export const ListAgentsToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceType
 > = z.nativeEnum(ListAgentsToolChoiceType);
-
 /** @internal */
 export const ListAgentsToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceType
 > = ListAgentsToolChoiceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceType$ {
-  /** @deprecated use `ListAgentsToolChoiceType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceType$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceType$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoiceType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsToolChoiceFunction$inboundSchema: z.ZodType<
@@ -1890,7 +1571,6 @@ export const ListAgentsToolChoiceFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type ListAgentsToolChoiceFunction$Outbound = {
   name?: string | undefined;
@@ -1905,19 +1585,6 @@ export const ListAgentsToolChoiceFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceFunction$ {
-  /** @deprecated use `ListAgentsToolChoiceFunction$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceFunction$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceFunction$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoiceFunction$outboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceFunction$Outbound` instead. */
-  export type Outbound = ListAgentsToolChoiceFunction$Outbound;
-}
-
 export function listAgentsToolChoiceFunctionToJSON(
   listAgentsToolChoiceFunction: ListAgentsToolChoiceFunction,
 ): string {
@@ -1927,7 +1594,6 @@ export function listAgentsToolChoiceFunctionToJSON(
     ),
   );
 }
-
 export function listAgentsToolChoiceFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsToolChoiceFunction, SDKValidationError> {
@@ -1947,7 +1613,6 @@ export const ListAgentsToolChoice2$inboundSchema: z.ZodType<
   type: ListAgentsToolChoiceType$inboundSchema.optional(),
   function: z.lazy(() => ListAgentsToolChoiceFunction$inboundSchema),
 });
-
 /** @internal */
 export type ListAgentsToolChoice2$Outbound = {
   type?: string | undefined;
@@ -1964,19 +1629,6 @@ export const ListAgentsToolChoice2$outboundSchema: z.ZodType<
   function: z.lazy(() => ListAgentsToolChoiceFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoice2$ {
-  /** @deprecated use `ListAgentsToolChoice2$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoice2$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoice2$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoice2$outboundSchema;
-  /** @deprecated use `ListAgentsToolChoice2$Outbound` instead. */
-  export type Outbound = ListAgentsToolChoice2$Outbound;
-}
-
 export function listAgentsToolChoice2ToJSON(
   listAgentsToolChoice2: ListAgentsToolChoice2,
 ): string {
@@ -1984,7 +1636,6 @@ export function listAgentsToolChoice2ToJSON(
     ListAgentsToolChoice2$outboundSchema.parse(listAgentsToolChoice2),
   );
 }
-
 export function listAgentsToolChoice2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsToolChoice2, SDKValidationError> {
@@ -1999,22 +1650,10 @@ export function listAgentsToolChoice2FromJSON(
 export const ListAgentsToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoice1
 > = z.nativeEnum(ListAgentsToolChoice1);
-
 /** @internal */
 export const ListAgentsToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoice1
 > = ListAgentsToolChoice1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoice1$ {
-  /** @deprecated use `ListAgentsToolChoice1$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoice1$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoice1$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoice1$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsToolChoice$inboundSchema: z.ZodType<
@@ -2025,7 +1664,6 @@ export const ListAgentsToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsToolChoice2$inboundSchema),
   ListAgentsToolChoice1$inboundSchema,
 ]);
-
 /** @internal */
 export type ListAgentsToolChoice$Outbound =
   | ListAgentsToolChoice2$Outbound
@@ -2041,19 +1679,6 @@ export const ListAgentsToolChoice$outboundSchema: z.ZodType<
   ListAgentsToolChoice1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoice$ {
-  /** @deprecated use `ListAgentsToolChoice$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoice$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoice$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoice$outboundSchema;
-  /** @deprecated use `ListAgentsToolChoice$Outbound` instead. */
-  export type Outbound = ListAgentsToolChoice$Outbound;
-}
-
 export function listAgentsToolChoiceToJSON(
   listAgentsToolChoice: ListAgentsToolChoice,
 ): string {
@@ -2061,7 +1686,6 @@ export function listAgentsToolChoiceToJSON(
     ListAgentsToolChoice$outboundSchema.parse(listAgentsToolChoice),
   );
 }
-
 export function listAgentsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsToolChoice, SDKValidationError> {
@@ -2076,22 +1700,10 @@ export function listAgentsToolChoiceFromJSON(
 export const ListAgentsModalities$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsModalities
 > = z.nativeEnum(ListAgentsModalities);
-
 /** @internal */
 export const ListAgentsModalities$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsModalities
 > = ListAgentsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsModalities$ {
-  /** @deprecated use `ListAgentsModalities$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsModalities$inboundSchema;
-  /** @deprecated use `ListAgentsModalities$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsModalities$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsWebSearchOptions$inboundSchema: z.ZodType<
@@ -2101,7 +1713,6 @@ export const ListAgentsWebSearchOptions$inboundSchema: z.ZodType<
 > = z.object({
   enabled: z.boolean().optional(),
 });
-
 /** @internal */
 export type ListAgentsWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -2116,19 +1727,6 @@ export const ListAgentsWebSearchOptions$outboundSchema: z.ZodType<
   enabled: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsWebSearchOptions$ {
-  /** @deprecated use `ListAgentsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsWebSearchOptions$inboundSchema;
-  /** @deprecated use `ListAgentsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsWebSearchOptions$outboundSchema;
-  /** @deprecated use `ListAgentsWebSearchOptions$Outbound` instead. */
-  export type Outbound = ListAgentsWebSearchOptions$Outbound;
-}
-
 export function listAgentsWebSearchOptionsToJSON(
   listAgentsWebSearchOptions: ListAgentsWebSearchOptions,
 ): string {
@@ -2136,7 +1734,6 @@ export function listAgentsWebSearchOptionsToJSON(
     ListAgentsWebSearchOptions$outboundSchema.parse(listAgentsWebSearchOptions),
   );
 }
-
 export function listAgentsWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsWebSearchOptions, SDKValidationError> {
@@ -2203,7 +1800,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type ListAgentsParameters$Outbound = {
   audio?: ListAgentsAudio$Outbound | null | undefined;
@@ -2291,19 +1887,6 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsParameters$ {
-  /** @deprecated use `ListAgentsParameters$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsParameters$inboundSchema;
-  /** @deprecated use `ListAgentsParameters$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsParameters$outboundSchema;
-  /** @deprecated use `ListAgentsParameters$Outbound` instead. */
-  export type Outbound = ListAgentsParameters$Outbound;
-}
-
 export function listAgentsParametersToJSON(
   listAgentsParameters: ListAgentsParameters,
 ): string {
@@ -2311,7 +1894,6 @@ export function listAgentsParametersToJSON(
     ListAgentsParameters$outboundSchema.parse(listAgentsParameters),
   );
 }
-
 export function listAgentsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsParameters, SDKValidationError> {
@@ -2326,43 +1908,19 @@ export function listAgentsParametersFromJSON(
 export const ListAgentsFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsVoice
 > = z.nativeEnum(ListAgentsFallbackModelsVoice);
-
 /** @internal */
 export const ListAgentsFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsVoice
 > = ListAgentsFallbackModelsVoice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsVoice$ {
-  /** @deprecated use `ListAgentsFallbackModelsVoice$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsVoice$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsVoice$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsVoice$outboundSchema;
-}
-
 /** @internal */
 export const ListAgentsFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsFormat
 > = z.nativeEnum(ListAgentsFallbackModelsFormat);
-
 /** @internal */
 export const ListAgentsFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsFormat
 > = ListAgentsFallbackModelsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsFormat$ {
-  /** @deprecated use `ListAgentsFallbackModelsFormat$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsFormat$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsFormat$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsFormat$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsFallbackModelsAudio$inboundSchema: z.ZodType<
@@ -2373,7 +1931,6 @@ export const ListAgentsFallbackModelsAudio$inboundSchema: z.ZodType<
   voice: ListAgentsFallbackModelsVoice$inboundSchema,
   format: ListAgentsFallbackModelsFormat$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsFallbackModelsAudio$Outbound = {
   voice: string;
@@ -2390,19 +1947,6 @@ export const ListAgentsFallbackModelsAudio$outboundSchema: z.ZodType<
   format: ListAgentsFallbackModelsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsAudio$ {
-  /** @deprecated use `ListAgentsFallbackModelsAudio$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsAudio$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsAudio$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsAudio$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsAudio$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsAudio$Outbound;
-}
-
 export function listAgentsFallbackModelsAudioToJSON(
   listAgentsFallbackModelsAudio: ListAgentsFallbackModelsAudio,
 ): string {
@@ -2412,7 +1956,6 @@ export function listAgentsFallbackModelsAudioToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsAudio, SDKValidationError> {
@@ -2430,26 +1973,12 @@ export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
   > =
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
@@ -2462,7 +1991,6 @@ export const ListAgentsResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type ListAgentsResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
@@ -2483,21 +2011,6 @@ export const ListAgentsResponseFormatAgentsJsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsJsonSchema$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsResponseFormatAgentsJsonSchema$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsJsonSchema$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsJsonSchema$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormatAgentsJsonSchema$Outbound;
-}
-
 export function listAgentsResponseFormatAgentsJsonSchemaToJSON(
   listAgentsResponseFormatAgentsJsonSchema:
     ListAgentsResponseFormatAgentsJsonSchema,
@@ -2508,7 +2021,6 @@ export function listAgentsResponseFormatAgentsJsonSchemaToJSON(
     ),
   );
 }
-
 export function listAgentsResponseFormatAgentsJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2541,7 +2053,6 @@ export const ListAgentsResponseFormatAgents3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type ListAgentsResponseFormatAgents3$Outbound = {
   type: string;
@@ -2565,19 +2076,6 @@ export const ListAgentsResponseFormatAgents3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgents3$ {
-  /** @deprecated use `ListAgentsResponseFormatAgents3$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatAgents3$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents3$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormatAgents3$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents3$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormatAgents3$Outbound;
-}
-
 export function listAgentsResponseFormatAgents3ToJSON(
   listAgentsResponseFormatAgents3: ListAgentsResponseFormatAgents3,
 ): string {
@@ -2587,7 +2085,6 @@ export function listAgentsResponseFormatAgents3ToJSON(
     ),
   );
 }
-
 export function listAgentsResponseFormatAgents3FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormatAgents3, SDKValidationError> {
@@ -2605,26 +2102,12 @@ export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboun
   > = z.nativeEnum(
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONType
   > =
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormatAgents2$inboundSchema: z.ZodType<
@@ -2635,7 +2118,6 @@ export const ListAgentsResponseFormatAgents2$inboundSchema: z.ZodType<
   type:
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsResponseFormatAgents2$Outbound = {
   type: string;
@@ -2651,19 +2133,6 @@ export const ListAgentsResponseFormatAgents2$outboundSchema: z.ZodType<
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgents2$ {
-  /** @deprecated use `ListAgentsResponseFormatAgents2$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatAgents2$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents2$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormatAgents2$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents2$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormatAgents2$Outbound;
-}
-
 export function listAgentsResponseFormatAgents2ToJSON(
   listAgentsResponseFormatAgents2: ListAgentsResponseFormatAgents2,
 ): string {
@@ -2673,7 +2142,6 @@ export function listAgentsResponseFormatAgents2ToJSON(
     ),
   );
 }
-
 export function listAgentsResponseFormatAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormatAgents2, SDKValidationError> {
@@ -2688,24 +2156,10 @@ export function listAgentsResponseFormatAgents2FromJSON(
 export const ListAgentsResponseFormatAgentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponse200Type> = z
     .nativeEnum(ListAgentsResponseFormatAgentsResponse200Type);
-
 /** @internal */
 export const ListAgentsResponseFormatAgentsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponse200Type> =
     ListAgentsResponseFormatAgentsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgentsResponse200Type$ {
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsResponseFormatAgentsResponse200Type$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgentsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsResponseFormatAgentsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsResponseFormatAgents1$inboundSchema: z.ZodType<
@@ -2715,7 +2169,6 @@ export const ListAgentsResponseFormatAgents1$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsResponseFormatAgentsResponse200Type$inboundSchema,
 });
-
 /** @internal */
 export type ListAgentsResponseFormatAgents1$Outbound = {
   type: string;
@@ -2730,19 +2183,6 @@ export const ListAgentsResponseFormatAgents1$outboundSchema: z.ZodType<
   type: ListAgentsResponseFormatAgentsResponse200Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseFormatAgents1$ {
-  /** @deprecated use `ListAgentsResponseFormatAgents1$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseFormatAgents1$inboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents1$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseFormatAgents1$outboundSchema;
-  /** @deprecated use `ListAgentsResponseFormatAgents1$Outbound` instead. */
-  export type Outbound = ListAgentsResponseFormatAgents1$Outbound;
-}
-
 export function listAgentsResponseFormatAgents1ToJSON(
   listAgentsResponseFormatAgents1: ListAgentsResponseFormatAgents1,
 ): string {
@@ -2752,7 +2192,6 @@ export function listAgentsResponseFormatAgents1ToJSON(
     ),
   );
 }
-
 export function listAgentsResponseFormatAgents1FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseFormatAgents1, SDKValidationError> {
@@ -2773,7 +2212,6 @@ export const ListAgentsFallbackModelsResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsResponseFormatAgents1$inboundSchema),
   z.lazy(() => ListAgentsResponseFormatAgents2$inboundSchema),
 ]);
-
 /** @internal */
 export type ListAgentsFallbackModelsResponseFormat$Outbound =
   | ListAgentsResponseFormatAgents3$Outbound
@@ -2791,21 +2229,6 @@ export const ListAgentsFallbackModelsResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => ListAgentsResponseFormatAgents2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsResponseFormat$ {
-  /** @deprecated use `ListAgentsFallbackModelsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsFallbackModelsResponseFormat$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsResponseFormat$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsResponseFormat$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsResponseFormat$Outbound;
-}
-
 export function listAgentsFallbackModelsResponseFormatToJSON(
   listAgentsFallbackModelsResponseFormat:
     ListAgentsFallbackModelsResponseFormat,
@@ -2816,7 +2239,6 @@ export function listAgentsFallbackModelsResponseFormatToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsResponseFormat, SDKValidationError> {
@@ -2834,7 +2256,6 @@ export const ListAgentsFallbackModelsStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type ListAgentsFallbackModelsStop$Outbound = string | Array<string>;
 
@@ -2845,19 +2266,6 @@ export const ListAgentsFallbackModelsStop$outboundSchema: z.ZodType<
   ListAgentsFallbackModelsStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsStop$ {
-  /** @deprecated use `ListAgentsFallbackModelsStop$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsStop$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsStop$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsStop$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsStop$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsStop$Outbound;
-}
-
 export function listAgentsFallbackModelsStopToJSON(
   listAgentsFallbackModelsStop: ListAgentsFallbackModelsStop,
 ): string {
@@ -2867,7 +2275,6 @@ export function listAgentsFallbackModelsStopToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsStop, SDKValidationError> {
@@ -2890,7 +2297,6 @@ export const ListAgentsFallbackModelsStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type ListAgentsFallbackModelsStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -2909,21 +2315,6 @@ export const ListAgentsFallbackModelsStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsStreamOptions$ {
-  /** @deprecated use `ListAgentsFallbackModelsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsFallbackModelsStreamOptions$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsStreamOptions$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsStreamOptions$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsStreamOptions$Outbound;
-}
-
 export function listAgentsFallbackModelsStreamOptionsToJSON(
   listAgentsFallbackModelsStreamOptions: ListAgentsFallbackModelsStreamOptions,
 ): string {
@@ -2933,7 +2324,6 @@ export function listAgentsFallbackModelsStreamOptionsToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsStreamOptions, SDKValidationError> {
@@ -2949,22 +2339,10 @@ export function listAgentsFallbackModelsStreamOptionsFromJSON(
 export const ListAgentsFallbackModelsType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsType
 > = z.nativeEnum(ListAgentsFallbackModelsType);
-
 /** @internal */
 export const ListAgentsFallbackModelsType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsType
 > = ListAgentsFallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsType$ {
-  /** @deprecated use `ListAgentsFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsType$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsFallbackModelsThinking$inboundSchema: z.ZodType<
@@ -2979,7 +2357,6 @@ export const ListAgentsFallbackModelsThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type ListAgentsFallbackModelsThinking$Outbound = {
   type: string;
@@ -3000,19 +2377,6 @@ export const ListAgentsFallbackModelsThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsThinking$ {
-  /** @deprecated use `ListAgentsFallbackModelsThinking$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsThinking$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsThinking$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModelsThinking$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsThinking$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsThinking$Outbound;
-}
-
 export function listAgentsFallbackModelsThinkingToJSON(
   listAgentsFallbackModelsThinking: ListAgentsFallbackModelsThinking,
 ): string {
@@ -3022,7 +2386,6 @@ export function listAgentsFallbackModelsThinkingToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsThinking, SDKValidationError> {
@@ -3037,22 +2400,10 @@ export function listAgentsFallbackModelsThinkingFromJSON(
 export const ListAgentsToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceAgentsType
 > = z.nativeEnum(ListAgentsToolChoiceAgentsType);
-
 /** @internal */
 export const ListAgentsToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceAgentsType
 > = ListAgentsToolChoiceAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceAgentsType$ {
-  /** @deprecated use `ListAgentsToolChoiceAgentsType$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceAgentsType$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgentsType$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoiceAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsToolChoiceAgentsFunction$inboundSchema: z.ZodType<
@@ -3062,7 +2413,6 @@ export const ListAgentsToolChoiceAgentsFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type ListAgentsToolChoiceAgentsFunction$Outbound = {
   name?: string | undefined;
@@ -3077,20 +2427,6 @@ export const ListAgentsToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceAgentsFunction$ {
-  /** @deprecated use `ListAgentsToolChoiceAgentsFunction$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceAgentsFunction$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgentsFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsToolChoiceAgentsFunction$outboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgentsFunction$Outbound` instead. */
-  export type Outbound = ListAgentsToolChoiceAgentsFunction$Outbound;
-}
-
 export function listAgentsToolChoiceAgentsFunctionToJSON(
   listAgentsToolChoiceAgentsFunction: ListAgentsToolChoiceAgentsFunction,
 ): string {
@@ -3100,7 +2436,6 @@ export function listAgentsToolChoiceAgentsFunctionToJSON(
     ),
   );
 }
-
 export function listAgentsToolChoiceAgentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsToolChoiceAgentsFunction, SDKValidationError> {
@@ -3121,7 +2456,6 @@ export const ListAgentsToolChoiceAgents2$inboundSchema: z.ZodType<
   type: ListAgentsToolChoiceAgentsType$inboundSchema.optional(),
   function: z.lazy(() => ListAgentsToolChoiceAgentsFunction$inboundSchema),
 });
-
 /** @internal */
 export type ListAgentsToolChoiceAgents2$Outbound = {
   type?: string | undefined;
@@ -3138,19 +2472,6 @@ export const ListAgentsToolChoiceAgents2$outboundSchema: z.ZodType<
   function: z.lazy(() => ListAgentsToolChoiceAgentsFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceAgents2$ {
-  /** @deprecated use `ListAgentsToolChoiceAgents2$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceAgents2$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgents2$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoiceAgents2$outboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgents2$Outbound` instead. */
-  export type Outbound = ListAgentsToolChoiceAgents2$Outbound;
-}
-
 export function listAgentsToolChoiceAgents2ToJSON(
   listAgentsToolChoiceAgents2: ListAgentsToolChoiceAgents2,
 ): string {
@@ -3160,7 +2481,6 @@ export function listAgentsToolChoiceAgents2ToJSON(
     ),
   );
 }
-
 export function listAgentsToolChoiceAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsToolChoiceAgents2, SDKValidationError> {
@@ -3175,22 +2495,10 @@ export function listAgentsToolChoiceAgents2FromJSON(
 export const ListAgentsToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceAgents1
 > = z.nativeEnum(ListAgentsToolChoiceAgents1);
-
 /** @internal */
 export const ListAgentsToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsToolChoiceAgents1
 > = ListAgentsToolChoiceAgents1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsToolChoiceAgents1$ {
-  /** @deprecated use `ListAgentsToolChoiceAgents1$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsToolChoiceAgents1$inboundSchema;
-  /** @deprecated use `ListAgentsToolChoiceAgents1$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsToolChoiceAgents1$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsFallbackModelsToolChoice$inboundSchema: z.ZodType<
@@ -3201,7 +2509,6 @@ export const ListAgentsFallbackModelsToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsToolChoiceAgents2$inboundSchema),
   ListAgentsToolChoiceAgents1$inboundSchema,
 ]);
-
 /** @internal */
 export type ListAgentsFallbackModelsToolChoice$Outbound =
   | ListAgentsToolChoiceAgents2$Outbound
@@ -3217,20 +2524,6 @@ export const ListAgentsFallbackModelsToolChoice$outboundSchema: z.ZodType<
   ListAgentsToolChoiceAgents1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsToolChoice$ {
-  /** @deprecated use `ListAgentsFallbackModelsToolChoice$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsToolChoice$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsToolChoice$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsToolChoice$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsToolChoice$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsToolChoice$Outbound;
-}
-
 export function listAgentsFallbackModelsToolChoiceToJSON(
   listAgentsFallbackModelsToolChoice: ListAgentsFallbackModelsToolChoice,
 ): string {
@@ -3240,7 +2533,6 @@ export function listAgentsFallbackModelsToolChoiceToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsToolChoice, SDKValidationError> {
@@ -3256,23 +2548,10 @@ export function listAgentsFallbackModelsToolChoiceFromJSON(
 export const ListAgentsFallbackModelsModalities$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsModalities
 > = z.nativeEnum(ListAgentsFallbackModelsModalities);
-
 /** @internal */
 export const ListAgentsFallbackModelsModalities$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsFallbackModelsModalities
 > = ListAgentsFallbackModelsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsModalities$ {
-  /** @deprecated use `ListAgentsFallbackModelsModalities$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsModalities$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsModalities$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsModalities$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
@@ -3282,7 +2561,6 @@ export const ListAgentsFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
 > = z.object({
   enabled: z.boolean().optional(),
 });
-
 /** @internal */
 export type ListAgentsFallbackModelsWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -3297,21 +2575,6 @@ export const ListAgentsFallbackModelsWebSearchOptions$outboundSchema: z.ZodType<
   enabled: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsWebSearchOptions$ {
-  /** @deprecated use `ListAgentsFallbackModelsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsFallbackModelsWebSearchOptions$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsWebSearchOptions$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsWebSearchOptions$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsWebSearchOptions$Outbound;
-}
-
 export function listAgentsFallbackModelsWebSearchOptionsToJSON(
   listAgentsFallbackModelsWebSearchOptions:
     ListAgentsFallbackModelsWebSearchOptions,
@@ -3322,7 +2585,6 @@ export function listAgentsFallbackModelsWebSearchOptionsToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3399,7 +2661,6 @@ export const ListAgentsFallbackModelsParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type ListAgentsFallbackModelsParameters$Outbound = {
   audio?: ListAgentsFallbackModelsAudio$Outbound | null | undefined;
@@ -3496,20 +2757,6 @@ export const ListAgentsFallbackModelsParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModelsParameters$ {
-  /** @deprecated use `ListAgentsFallbackModelsParameters$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModelsParameters$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsFallbackModelsParameters$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModelsParameters$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModelsParameters$Outbound;
-}
-
 export function listAgentsFallbackModelsParametersToJSON(
   listAgentsFallbackModelsParameters: ListAgentsFallbackModelsParameters,
 ): string {
@@ -3519,7 +2766,6 @@ export function listAgentsFallbackModelsParametersToJSON(
     ),
   );
 }
-
 export function listAgentsFallbackModelsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModelsParameters, SDKValidationError> {
@@ -3546,7 +2792,6 @@ export const ListAgentsFallbackModels2$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type ListAgentsFallbackModels2$Outbound = {
   id: string;
@@ -3570,19 +2815,6 @@ export const ListAgentsFallbackModels2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModels2$ {
-  /** @deprecated use `ListAgentsFallbackModels2$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModels2$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModels2$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModels2$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModels2$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModels2$Outbound;
-}
-
 export function listAgentsFallbackModels2ToJSON(
   listAgentsFallbackModels2: ListAgentsFallbackModels2,
 ): string {
@@ -3590,7 +2822,6 @@ export function listAgentsFallbackModels2ToJSON(
     ListAgentsFallbackModels2$outboundSchema.parse(listAgentsFallbackModels2),
   );
 }
-
 export function listAgentsFallbackModels2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModels2, SDKValidationError> {
@@ -3610,7 +2841,6 @@ export const ListAgentsFallbackModels$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsFallbackModels2$inboundSchema),
   z.string(),
 ]);
-
 /** @internal */
 export type ListAgentsFallbackModels$Outbound =
   | ListAgentsFallbackModels2$Outbound
@@ -3626,19 +2856,6 @@ export const ListAgentsFallbackModels$outboundSchema: z.ZodType<
   z.string(),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsFallbackModels$ {
-  /** @deprecated use `ListAgentsFallbackModels$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsFallbackModels$inboundSchema;
-  /** @deprecated use `ListAgentsFallbackModels$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsFallbackModels$outboundSchema;
-  /** @deprecated use `ListAgentsFallbackModels$Outbound` instead. */
-  export type Outbound = ListAgentsFallbackModels$Outbound;
-}
-
 export function listAgentsFallbackModelsToJSON(
   listAgentsFallbackModels: ListAgentsFallbackModels,
 ): string {
@@ -3646,7 +2863,6 @@ export function listAgentsFallbackModelsToJSON(
     ListAgentsFallbackModels$outboundSchema.parse(listAgentsFallbackModels),
   );
 }
-
 export function listAgentsFallbackModelsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsFallbackModels, SDKValidationError> {
@@ -3678,7 +2894,6 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
     "fallback_models": "fallbackModels",
   });
 });
-
 /** @internal */
 export type ListAgentsModel$Outbound = {
   id: string;
@@ -3712,25 +2927,11 @@ export const ListAgentsModel$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsModel$ {
-  /** @deprecated use `ListAgentsModel$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsModel$inboundSchema;
-  /** @deprecated use `ListAgentsModel$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsModel$outboundSchema;
-  /** @deprecated use `ListAgentsModel$Outbound` instead. */
-  export type Outbound = ListAgentsModel$Outbound;
-}
-
 export function listAgentsModelToJSON(
   listAgentsModel: ListAgentsModel,
 ): string {
   return JSON.stringify(ListAgentsModel$outboundSchema.parse(listAgentsModel));
 }
-
 export function listAgentsModelFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsModel, SDKValidationError> {
@@ -3750,7 +2951,6 @@ export const ListAgentsTeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-
 /** @internal */
 export type ListAgentsTeamOfAgents$Outbound = {
   key: string;
@@ -3767,19 +2967,6 @@ export const ListAgentsTeamOfAgents$outboundSchema: z.ZodType<
   role: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsTeamOfAgents$ {
-  /** @deprecated use `ListAgentsTeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsTeamOfAgents$inboundSchema;
-  /** @deprecated use `ListAgentsTeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsTeamOfAgents$outboundSchema;
-  /** @deprecated use `ListAgentsTeamOfAgents$Outbound` instead. */
-  export type Outbound = ListAgentsTeamOfAgents$Outbound;
-}
-
 export function listAgentsTeamOfAgentsToJSON(
   listAgentsTeamOfAgents: ListAgentsTeamOfAgents,
 ): string {
@@ -3787,7 +2974,6 @@ export function listAgentsTeamOfAgentsToJSON(
     ListAgentsTeamOfAgents$outboundSchema.parse(listAgentsTeamOfAgents),
   );
 }
-
 export function listAgentsTeamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsTeamOfAgents, SDKValidationError> {
@@ -3810,7 +2996,6 @@ export const ListAgentsMetrics$inboundSchema: z.ZodType<
     "total_cost": "totalCost",
   });
 });
-
 /** @internal */
 export type ListAgentsMetrics$Outbound = {
   total_cost: number;
@@ -3829,19 +3014,6 @@ export const ListAgentsMetrics$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsMetrics$ {
-  /** @deprecated use `ListAgentsMetrics$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsMetrics$inboundSchema;
-  /** @deprecated use `ListAgentsMetrics$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsMetrics$outboundSchema;
-  /** @deprecated use `ListAgentsMetrics$Outbound` instead. */
-  export type Outbound = ListAgentsMetrics$Outbound;
-}
-
 export function listAgentsMetricsToJSON(
   listAgentsMetrics: ListAgentsMetrics,
 ): string {
@@ -3849,7 +3021,6 @@ export function listAgentsMetricsToJSON(
     ListAgentsMetrics$outboundSchema.parse(listAgentsMetrics),
   );
 }
-
 export function listAgentsMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsMetrics, SDKValidationError> {
@@ -3872,7 +3043,6 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type ListAgentsKnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -3891,19 +3061,6 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBases$ {
-  /** @deprecated use `ListAgentsKnowledgeBases$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsKnowledgeBases$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBases$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsKnowledgeBases$outboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBases$Outbound` instead. */
-  export type Outbound = ListAgentsKnowledgeBases$Outbound;
-}
-
 export function listAgentsKnowledgeBasesToJSON(
   listAgentsKnowledgeBases: ListAgentsKnowledgeBases,
 ): string {
@@ -3911,7 +3068,6 @@ export function listAgentsKnowledgeBasesToJSON(
     ListAgentsKnowledgeBases$outboundSchema.parse(listAgentsKnowledgeBases),
   );
 }
-
 export function listAgentsKnowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsKnowledgeBases, SDKValidationError> {
@@ -3926,22 +3082,10 @@ export function listAgentsKnowledgeBasesFromJSON(
 export const ListAgentsHiddenPanels$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsHiddenPanels
 > = z.nativeEnum(ListAgentsHiddenPanels);
-
 /** @internal */
 export const ListAgentsHiddenPanels$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsHiddenPanels
 > = ListAgentsHiddenPanels$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsHiddenPanels$ {
-  /** @deprecated use `ListAgentsHiddenPanels$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsHiddenPanels$inboundSchema;
-  /** @deprecated use `ListAgentsHiddenPanels$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsHiddenPanels$outboundSchema;
-}
 
 /** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
@@ -3988,7 +3132,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "hidden_panels": "hiddenPanels",
   });
 });
-
 /** @internal */
 export type ListAgentsData$Outbound = {
   _id: string;
@@ -4062,23 +3205,9 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsData$ {
-  /** @deprecated use `ListAgentsData$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsData$inboundSchema;
-  /** @deprecated use `ListAgentsData$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsData$outboundSchema;
-  /** @deprecated use `ListAgentsData$Outbound` instead. */
-  export type Outbound = ListAgentsData$Outbound;
-}
-
 export function listAgentsDataToJSON(listAgentsData: ListAgentsData): string {
   return JSON.stringify(ListAgentsData$outboundSchema.parse(listAgentsData));
 }
-
 export function listAgentsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsData, SDKValidationError> {
@@ -4103,7 +3232,6 @@ export const ListAgentsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListAgentsResponseBody$Outbound = {
   object: string;
@@ -4126,19 +3254,6 @@ export const ListAgentsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsResponseBody$ {
-  /** @deprecated use `ListAgentsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListAgentsResponseBody$inboundSchema;
-  /** @deprecated use `ListAgentsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListAgentsResponseBody$outboundSchema;
-  /** @deprecated use `ListAgentsResponseBody$Outbound` instead. */
-  export type Outbound = ListAgentsResponseBody$Outbound;
-}
-
 export function listAgentsResponseBodyToJSON(
   listAgentsResponseBody: ListAgentsResponseBody,
 ): string {
@@ -4146,7 +3261,6 @@ export function listAgentsResponseBodyToJSON(
     ListAgentsResponseBody$outboundSchema.parse(listAgentsResponseBody),
   );
 }
-
 export function listAgentsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAgentsResponseBody, SDKValidationError> {

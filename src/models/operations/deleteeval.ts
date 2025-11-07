@@ -19,7 +19,6 @@ export const DeleteEvalRequest$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeleteEvalRequest$Outbound = {
   id: string;
@@ -34,19 +33,6 @@ export const DeleteEvalRequest$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteEvalRequest$ {
-  /** @deprecated use `DeleteEvalRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteEvalRequest$inboundSchema;
-  /** @deprecated use `DeleteEvalRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteEvalRequest$outboundSchema;
-  /** @deprecated use `DeleteEvalRequest$Outbound` instead. */
-  export type Outbound = DeleteEvalRequest$Outbound;
-}
-
 export function deleteEvalRequestToJSON(
   deleteEvalRequest: DeleteEvalRequest,
 ): string {
@@ -54,7 +40,6 @@ export function deleteEvalRequestToJSON(
     DeleteEvalRequest$outboundSchema.parse(deleteEvalRequest),
   );
 }
-
 export function deleteEvalRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteEvalRequest, SDKValidationError> {

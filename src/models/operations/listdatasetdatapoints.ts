@@ -800,7 +800,6 @@ export const ListDatasetDatapointsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsRequest$Outbound = {
   dataset_id: string;
@@ -827,19 +826,6 @@ export const ListDatasetDatapointsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsRequest$ {
-  /** @deprecated use `ListDatasetDatapointsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsRequest$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsRequest$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsRequest$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsRequest$Outbound;
-}
-
 export function listDatasetDatapointsRequestToJSON(
   listDatasetDatapointsRequest: ListDatasetDatapointsRequest,
 ): string {
@@ -849,7 +835,6 @@ export function listDatasetDatapointsRequestToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsRequest, SDKValidationError> {
@@ -864,22 +849,10 @@ export function listDatasetDatapointsRequestFromJSON(
 export const ListDatasetDatapointsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsObject
 > = z.nativeEnum(ListDatasetDatapointsObject);
-
 /** @internal */
 export const ListDatasetDatapointsObject$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsObject
 > = ListDatasetDatapointsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsObject$ {
-  /** @deprecated use `ListDatasetDatapointsObject$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsObject$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsObject$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsObject$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema:
@@ -888,26 +861,12 @@ export const ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole
   > = z.nativeEnum(
     ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole,
   );
-
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
   z.ZodNativeEnum<
     typeof ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole
   > =
     ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsResponseContent$inboundSchema:
@@ -916,7 +875,6 @@ export const ListDatasetDatapointsMessagesDatasetsResponseContent$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type ListDatasetDatapointsMessagesDatasetsResponseContent$Outbound =
   | string
@@ -930,22 +888,6 @@ export const ListDatasetDatapointsMessagesDatasetsResponseContent$outboundSchema
     ListDatasetDatapointsMessagesDatasetsResponseContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsResponseContent$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponseContent$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponseContent$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponseContent$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponseContent$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponseContent$Outbound` instead. */
-  export type Outbound =
-    ListDatasetDatapointsMessagesDatasetsResponseContent$Outbound;
-}
-
 export function listDatasetDatapointsMessagesDatasetsResponseContentToJSON(
   listDatasetDatapointsMessagesDatasetsResponseContent:
     ListDatasetDatapointsMessagesDatasetsResponseContent,
@@ -956,7 +898,6 @@ export function listDatasetDatapointsMessagesDatasetsResponseContentToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesDatasetsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -988,7 +929,6 @@ export const ListDatasetDatapointsMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesToolMessage$Outbound = {
   role: string;
@@ -1012,21 +952,6 @@ export const ListDatasetDatapointsMessagesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesToolMessage$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesToolMessage$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesToolMessage$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesToolMessage$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesToolMessage$Outbound;
-}
-
 export function listDatasetDatapointsMessagesToolMessageToJSON(
   listDatasetDatapointsMessagesToolMessage:
     ListDatasetDatapointsMessagesToolMessage,
@@ -1037,7 +962,6 @@ export function listDatasetDatapointsMessagesToolMessageToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1061,26 +985,12 @@ export const ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType
   > =
     ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapoints2RefusalContentPart$inboundSchema: z.ZodType<
@@ -1092,7 +1002,6 @@ export const ListDatasetDatapoints2RefusalContentPart$inboundSchema: z.ZodType<
     ListDatasetDatapoints2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema,
   refusal: z.string(),
 });
-
 /** @internal */
 export type ListDatasetDatapoints2RefusalContentPart$Outbound = {
   type: string;
@@ -1110,21 +1019,6 @@ export const ListDatasetDatapoints2RefusalContentPart$outboundSchema: z.ZodType<
   refusal: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2RefusalContentPart$ {
-  /** @deprecated use `ListDatasetDatapoints2RefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2RefusalContentPart$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2RefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2RefusalContentPart$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2RefusalContentPart$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2RefusalContentPart$Outbound;
-}
-
 export function listDatasetDatapoints2RefusalContentPartToJSON(
   listDatasetDatapoints2RefusalContentPart:
     ListDatasetDatapoints2RefusalContentPart,
@@ -1135,7 +1029,6 @@ export function listDatasetDatapoints2RefusalContentPartToJSON(
     ),
   );
 }
-
 export function listDatasetDatapoints2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1159,7 +1052,6 @@ export const ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$inboun
   > = z.nativeEnum(
     ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
@@ -1167,41 +1059,14 @@ export const ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$outbou
   > =
     ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$ {
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsAnnotationsDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsAnnotationsDatasetsType> = z
     .nativeEnum(ListDatasetDatapointsAnnotationsDatasetsType);
-
 /** @internal */
 export const ListDatasetDatapointsAnnotationsDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsAnnotationsDatasetsType> =
     ListDatasetDatapointsAnnotationsDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotationsDatasetsType$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotationsDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsAnnotationsDatasetsType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotationsDatasetsType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsAnnotationsFilePath$inboundSchema: z.ZodType<
@@ -1215,7 +1080,6 @@ export const ListDatasetDatapointsAnnotationsFilePath$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsAnnotationsFilePath$Outbound = {
   file_id: string;
@@ -1234,21 +1098,6 @@ export const ListDatasetDatapointsAnnotationsFilePath$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotationsFilePath$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsAnnotationsFilePath$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotationsFilePath$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFilePath$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsAnnotationsFilePath$Outbound;
-}
-
 export function listDatasetDatapointsAnnotationsFilePathToJSON(
   listDatasetDatapointsAnnotationsFilePath:
     ListDatasetDatapointsAnnotationsFilePath,
@@ -1259,7 +1108,6 @@ export function listDatasetDatapointsAnnotationsFilePathToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsAnnotationsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1296,7 +1144,6 @@ export const ListDatasetDatapointsAnnotations2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsAnnotations2$Outbound = {
   type: string;
@@ -1327,20 +1174,6 @@ export const ListDatasetDatapointsAnnotations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotations2$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotations2$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsAnnotations2$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotations2$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotations2$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotations2$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsAnnotations2$Outbound;
-}
-
 export function listDatasetDatapointsAnnotations2ToJSON(
   listDatasetDatapointsAnnotations2: ListDatasetDatapointsAnnotations2,
 ): string {
@@ -1350,7 +1183,6 @@ export function listDatasetDatapointsAnnotations2ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsAnnotations2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsAnnotations2, SDKValidationError> {
@@ -1366,24 +1198,10 @@ export const ListDatasetDatapointsAnnotationsType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsAnnotationsType> = z.nativeEnum(
     ListDatasetDatapointsAnnotationsType,
   );
-
 /** @internal */
 export const ListDatasetDatapointsAnnotationsType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsAnnotationsType> =
     ListDatasetDatapointsAnnotationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotationsType$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotationsType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsAnnotationsType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotationsType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsAnnotationsFileCitation$inboundSchema:
@@ -1399,7 +1217,6 @@ export const ListDatasetDatapointsAnnotationsFileCitation$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type ListDatasetDatapointsAnnotationsFileCitation$Outbound = {
   file_id: string;
@@ -1421,21 +1238,6 @@ export const ListDatasetDatapointsAnnotationsFileCitation$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotationsFileCitation$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsAnnotationsFileCitation$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotationsFileCitation$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotationsFileCitation$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsAnnotationsFileCitation$Outbound;
-}
-
 export function listDatasetDatapointsAnnotationsFileCitationToJSON(
   listDatasetDatapointsAnnotationsFileCitation:
     ListDatasetDatapointsAnnotationsFileCitation,
@@ -1446,7 +1248,6 @@ export function listDatasetDatapointsAnnotationsFileCitationToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsAnnotationsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1483,7 +1284,6 @@ export const ListDatasetDatapointsAnnotations1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsAnnotations1$Outbound = {
   type: string;
@@ -1514,20 +1314,6 @@ export const ListDatasetDatapointsAnnotations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsAnnotations1$ {
-  /** @deprecated use `ListDatasetDatapointsAnnotations1$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsAnnotations1$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotations1$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsAnnotations1$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsAnnotations1$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsAnnotations1$Outbound;
-}
-
 export function listDatasetDatapointsAnnotations1ToJSON(
   listDatasetDatapointsAnnotations1: ListDatasetDatapointsAnnotations1,
 ): string {
@@ -1537,7 +1323,6 @@ export function listDatasetDatapointsAnnotations1ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsAnnotations1FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsAnnotations1, SDKValidationError> {
@@ -1557,7 +1342,6 @@ export const ListDatasetDatapoints2Annotations$inboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsAnnotations1$inboundSchema),
   z.lazy(() => ListDatasetDatapointsAnnotations2$inboundSchema),
 ]);
-
 /** @internal */
 export type ListDatasetDatapoints2Annotations$Outbound =
   | ListDatasetDatapointsAnnotations1$Outbound
@@ -1573,20 +1357,6 @@ export const ListDatasetDatapoints2Annotations$outboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsAnnotations2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2Annotations$ {
-  /** @deprecated use `ListDatasetDatapoints2Annotations$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2Annotations$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2Annotations$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2Annotations$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2Annotations$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2Annotations$Outbound;
-}
-
 export function listDatasetDatapoints2AnnotationsToJSON(
   listDatasetDatapoints2Annotations: ListDatasetDatapoints2Annotations,
 ): string {
@@ -1596,7 +1366,6 @@ export function listDatasetDatapoints2AnnotationsToJSON(
     ),
   );
 }
-
 export function listDatasetDatapoints2AnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints2Annotations, SDKValidationError> {
@@ -1623,7 +1392,6 @@ export const ListDatasetDatapoints2TextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type ListDatasetDatapoints2TextContentPart$Outbound = {
   type: string;
@@ -1653,21 +1421,6 @@ export const ListDatasetDatapoints2TextContentPart$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2TextContentPart$ {
-  /** @deprecated use `ListDatasetDatapoints2TextContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2TextContentPart$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2TextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2TextContentPart$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2TextContentPart$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2TextContentPart$Outbound;
-}
-
 export function listDatasetDatapoints2TextContentPartToJSON(
   listDatasetDatapoints2TextContentPart: ListDatasetDatapoints2TextContentPart,
 ): string {
@@ -1677,7 +1430,6 @@ export function listDatasetDatapoints2TextContentPartToJSON(
     ),
   );
 }
-
 export function listDatasetDatapoints2TextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints2TextContentPart, SDKValidationError> {
@@ -1698,7 +1450,6 @@ export const ListDatasetDatapointsContentDatasets2$inboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapoints2TextContentPart$inboundSchema),
   z.lazy(() => ListDatasetDatapoints2RefusalContentPart$inboundSchema),
 ]);
-
 /** @internal */
 export type ListDatasetDatapointsContentDatasets2$Outbound =
   | ListDatasetDatapoints2TextContentPart$Outbound
@@ -1714,21 +1465,6 @@ export const ListDatasetDatapointsContentDatasets2$outboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapoints2RefusalContentPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsContentDatasets2$ {
-  /** @deprecated use `ListDatasetDatapointsContentDatasets2$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsContentDatasets2$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsContentDatasets2$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsContentDatasets2$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsContentDatasets2$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsContentDatasets2$Outbound;
-}
-
 export function listDatasetDatapointsContentDatasets2ToJSON(
   listDatasetDatapointsContentDatasets2: ListDatasetDatapointsContentDatasets2,
 ): string {
@@ -1738,7 +1474,6 @@ export function listDatasetDatapointsContentDatasets2ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsContentDatasets2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsContentDatasets2, SDKValidationError> {
@@ -1763,7 +1498,6 @@ export const ListDatasetDatapointsMessagesDatasetsContent$inboundSchema:
       z.lazy(() => ListDatasetDatapoints2RefusalContentPart$inboundSchema),
     ])),
   ]);
-
 /** @internal */
 export type ListDatasetDatapointsMessagesDatasetsContent$Outbound =
   | string
@@ -1786,21 +1520,6 @@ export const ListDatasetDatapointsMessagesDatasetsContent$outboundSchema:
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsContent$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsContent$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsContent$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsContent$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesDatasetsContent$Outbound;
-}
-
 export function listDatasetDatapointsMessagesDatasetsContentToJSON(
   listDatasetDatapointsMessagesDatasetsContent:
     ListDatasetDatapointsMessagesDatasetsContent,
@@ -1811,7 +1530,6 @@ export function listDatasetDatapointsMessagesDatasetsContentToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesDatasetsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1832,24 +1550,10 @@ export function listDatasetDatapointsMessagesDatasetsContentFromJSON(
 export const ListDatasetDatapointsMessagesDatasetsResponse200Role$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsResponse200Role> =
     z.nativeEnum(ListDatasetDatapointsMessagesDatasetsResponse200Role);
-
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsResponse200Role$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsResponse200Role> =
     ListDatasetDatapointsMessagesDatasetsResponse200Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsResponse200Role$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponse200Role$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponse200Role$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponse200Role$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponse200Role$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesAudio$inboundSchema: z.ZodType<
@@ -1859,7 +1563,6 @@ export const ListDatasetDatapointsMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesAudio$Outbound = {
   id: string;
@@ -1874,20 +1577,6 @@ export const ListDatasetDatapointsMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesAudio$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsMessagesAudio$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesAudio$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesAudio$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesAudio$Outbound;
-}
-
 export function listDatasetDatapointsMessagesAudioToJSON(
   listDatasetDatapointsMessagesAudio: ListDatasetDatapointsMessagesAudio,
 ): string {
@@ -1897,7 +1586,6 @@ export function listDatasetDatapointsMessagesAudioToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsMessagesAudio, SDKValidationError> {
@@ -1913,23 +1601,10 @@ export function listDatasetDatapointsMessagesAudioFromJSON(
 export const ListDatasetDatapointsMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsMessagesType
 > = z.nativeEnum(ListDatasetDatapointsMessagesType);
-
 /** @internal */
 export const ListDatasetDatapointsMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsMessagesType
 > = ListDatasetDatapointsMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesType$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesType$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsMessagesType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesFunction$inboundSchema: z.ZodType<
@@ -1940,7 +1615,6 @@ export const ListDatasetDatapointsMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -1957,21 +1631,6 @@ export const ListDatasetDatapointsMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesFunction$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesFunction$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesFunction$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesFunction$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesFunction$Outbound;
-}
-
 export function listDatasetDatapointsMessagesFunctionToJSON(
   listDatasetDatapointsMessagesFunction: ListDatasetDatapointsMessagesFunction,
 ): string {
@@ -1981,7 +1640,6 @@ export function listDatasetDatapointsMessagesFunctionToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsMessagesFunction, SDKValidationError> {
@@ -2003,7 +1661,6 @@ export const ListDatasetDatapointsMessagesToolCalls$inboundSchema: z.ZodType<
   type: ListDatasetDatapointsMessagesType$inboundSchema,
   function: z.lazy(() => ListDatasetDatapointsMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesToolCalls$Outbound = {
   id: string;
@@ -2022,21 +1679,6 @@ export const ListDatasetDatapointsMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => ListDatasetDatapointsMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesToolCalls$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesToolCalls$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesToolCalls$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesToolCalls$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesToolCalls$Outbound;
-}
-
 export function listDatasetDatapointsMessagesToolCallsToJSON(
   listDatasetDatapointsMessagesToolCalls:
     ListDatasetDatapointsMessagesToolCalls,
@@ -2047,7 +1689,6 @@ export function listDatasetDatapointsMessagesToolCallsToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsMessagesToolCalls, SDKValidationError> {
@@ -2098,7 +1739,6 @@ export const ListDatasetDatapointsMessagesAssistantMessage$inboundSchema:
       "redacted_reasoning": "redactedReasoning",
     });
   });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesAssistantMessage$Outbound = {
   content?:
@@ -2161,21 +1801,6 @@ export const ListDatasetDatapointsMessagesAssistantMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesAssistantMessage$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesAssistantMessage$Outbound;
-}
-
 export function listDatasetDatapointsMessagesAssistantMessageToJSON(
   listDatasetDatapointsMessagesAssistantMessage:
     ListDatasetDatapointsMessagesAssistantMessage,
@@ -2186,7 +1811,6 @@ export function listDatasetDatapointsMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2207,47 +1831,19 @@ export function listDatasetDatapointsMessagesAssistantMessageFromJSON(
 export const ListDatasetDatapointsMessagesDatasetsResponseRole$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsResponseRole> = z
     .nativeEnum(ListDatasetDatapointsMessagesDatasetsResponseRole);
-
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsResponseRole$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsResponseRole> =
     ListDatasetDatapointsMessagesDatasetsResponseRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsResponseRole$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponseRole$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsResponseRole$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponse200Type> = z
     .nativeEnum(ListDatasetDatapoints2DatasetsResponse200Type);
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponse200Type> =
     ListDatasetDatapoints2DatasetsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2DatasetsResponse200Type$ {
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200Type$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2DatasetsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapoints2File$inboundSchema: z.ZodType<
@@ -2264,7 +1860,6 @@ export const ListDatasetDatapoints2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapoints2File$Outbound = {
   file_data?: string | undefined;
@@ -2289,19 +1884,6 @@ export const ListDatasetDatapoints2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2File$ {
-  /** @deprecated use `ListDatasetDatapoints2File$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2File$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2File$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2File$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2File$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2File$Outbound;
-}
-
 export function listDatasetDatapoints2FileToJSON(
   listDatasetDatapoints2File: ListDatasetDatapoints2File,
 ): string {
@@ -2309,7 +1891,6 @@ export function listDatasetDatapoints2FileToJSON(
     ListDatasetDatapoints2File$outboundSchema.parse(listDatasetDatapoints2File),
   );
 }
-
 export function listDatasetDatapoints2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints2File, SDKValidationError> {
@@ -2329,7 +1910,6 @@ export const ListDatasetDatapoints24$inboundSchema: z.ZodType<
   type: ListDatasetDatapoints2DatasetsResponse200Type$inboundSchema,
   file: z.lazy(() => ListDatasetDatapoints2File$inboundSchema),
 });
-
 /** @internal */
 export type ListDatasetDatapoints24$Outbound = {
   type: string;
@@ -2346,19 +1926,6 @@ export const ListDatasetDatapoints24$outboundSchema: z.ZodType<
   file: z.lazy(() => ListDatasetDatapoints2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints24$ {
-  /** @deprecated use `ListDatasetDatapoints24$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints24$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints24$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints24$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints24$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints24$Outbound;
-}
-
 export function listDatasetDatapoints24ToJSON(
   listDatasetDatapoints24: ListDatasetDatapoints24,
 ): string {
@@ -2366,7 +1933,6 @@ export function listDatasetDatapoints24ToJSON(
     ListDatasetDatapoints24$outboundSchema.parse(listDatasetDatapoints24),
   );
 }
-
 export function listDatasetDatapoints24FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints24, SDKValidationError> {
@@ -2381,45 +1947,19 @@ export function listDatasetDatapoints24FromJSON(
 export const ListDatasetDatapoints2DatasetsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponseType> = z
     .nativeEnum(ListDatasetDatapoints2DatasetsResponseType);
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponseType> =
     ListDatasetDatapoints2DatasetsResponseType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2DatasetsResponseType$ {
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapoints2DatasetsResponseType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2DatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2DatasetsResponseType$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapoints2Format$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Format
 > = z.nativeEnum(ListDatasetDatapoints2Format);
-
 /** @internal */
 export const ListDatasetDatapoints2Format$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Format
 > = ListDatasetDatapoints2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2Format$ {
-  /** @deprecated use `ListDatasetDatapoints2Format$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2Format$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2Format$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2Format$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapoints2InputAudio$inboundSchema: z.ZodType<
@@ -2430,7 +1970,6 @@ export const ListDatasetDatapoints2InputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: ListDatasetDatapoints2Format$inboundSchema,
 });
-
 /** @internal */
 export type ListDatasetDatapoints2InputAudio$Outbound = {
   data: string;
@@ -2447,19 +1986,6 @@ export const ListDatasetDatapoints2InputAudio$outboundSchema: z.ZodType<
   format: ListDatasetDatapoints2Format$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2InputAudio$ {
-  /** @deprecated use `ListDatasetDatapoints2InputAudio$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2InputAudio$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2InputAudio$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2InputAudio$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2InputAudio$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2InputAudio$Outbound;
-}
-
 export function listDatasetDatapoints2InputAudioToJSON(
   listDatasetDatapoints2InputAudio: ListDatasetDatapoints2InputAudio,
 ): string {
@@ -2469,7 +1995,6 @@ export function listDatasetDatapoints2InputAudioToJSON(
     ),
   );
 }
-
 export function listDatasetDatapoints2InputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints2InputAudio, SDKValidationError> {
@@ -2493,7 +2018,6 @@ export const ListDatasetDatapoints23$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapoints23$Outbound = {
   type: string;
@@ -2514,19 +2038,6 @@ export const ListDatasetDatapoints23$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints23$ {
-  /** @deprecated use `ListDatasetDatapoints23$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints23$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints23$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints23$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints23$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints23$Outbound;
-}
-
 export function listDatasetDatapoints23ToJSON(
   listDatasetDatapoints23: ListDatasetDatapoints23,
 ): string {
@@ -2534,7 +2045,6 @@ export function listDatasetDatapoints23ToJSON(
     ListDatasetDatapoints23$outboundSchema.parse(listDatasetDatapoints23),
   );
 }
-
 export function listDatasetDatapoints23FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints23, SDKValidationError> {
@@ -2549,44 +2059,19 @@ export function listDatasetDatapoints23FromJSON(
 export const ListDatasetDatapoints2DatasetsType$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2DatasetsType
 > = z.nativeEnum(ListDatasetDatapoints2DatasetsType);
-
 /** @internal */
 export const ListDatasetDatapoints2DatasetsType$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2DatasetsType
 > = ListDatasetDatapoints2DatasetsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2DatasetsType$ {
-  /** @deprecated use `ListDatasetDatapoints2DatasetsType$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2DatasetsType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2DatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapoints2DatasetsType$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapoints2Detail$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Detail
 > = z.nativeEnum(ListDatasetDatapoints2Detail);
-
 /** @internal */
 export const ListDatasetDatapoints2Detail$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Detail
 > = ListDatasetDatapoints2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2Detail$ {
-  /** @deprecated use `ListDatasetDatapoints2Detail$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2Detail$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2Detail$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2Detail$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapoints2ImageUrl$inboundSchema: z.ZodType<
@@ -2597,7 +2082,6 @@ export const ListDatasetDatapoints2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: ListDatasetDatapoints2Detail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type ListDatasetDatapoints2ImageUrl$Outbound = {
   url: string;
@@ -2614,19 +2098,6 @@ export const ListDatasetDatapoints2ImageUrl$outboundSchema: z.ZodType<
   detail: ListDatasetDatapoints2Detail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2ImageUrl$ {
-  /** @deprecated use `ListDatasetDatapoints2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2ImageUrl$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2ImageUrl$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2ImageUrl$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints2ImageUrl$Outbound;
-}
-
 export function listDatasetDatapoints2ImageUrlToJSON(
   listDatasetDatapoints2ImageUrl: ListDatasetDatapoints2ImageUrl,
 ): string {
@@ -2636,7 +2107,6 @@ export function listDatasetDatapoints2ImageUrlToJSON(
     ),
   );
 }
-
 export function listDatasetDatapoints2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints2ImageUrl, SDKValidationError> {
@@ -2660,7 +2130,6 @@ export const ListDatasetDatapoints22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapoints22$Outbound = {
   type: string;
@@ -2681,19 +2150,6 @@ export const ListDatasetDatapoints22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints22$ {
-  /** @deprecated use `ListDatasetDatapoints22$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints22$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints22$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints22$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints22$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints22$Outbound;
-}
-
 export function listDatasetDatapoints22ToJSON(
   listDatasetDatapoints22: ListDatasetDatapoints22,
 ): string {
@@ -2701,7 +2157,6 @@ export function listDatasetDatapoints22ToJSON(
     ListDatasetDatapoints22$outboundSchema.parse(listDatasetDatapoints22),
   );
 }
-
 export function listDatasetDatapoints22FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints22, SDKValidationError> {
@@ -2716,22 +2171,10 @@ export function listDatasetDatapoints22FromJSON(
 export const ListDatasetDatapoints2Type$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Type
 > = z.nativeEnum(ListDatasetDatapoints2Type);
-
 /** @internal */
 export const ListDatasetDatapoints2Type$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapoints2Type
 > = ListDatasetDatapoints2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints2Type$ {
-  /** @deprecated use `ListDatasetDatapoints2Type$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints2Type$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints2Type$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints2Type$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapoints21$inboundSchema: z.ZodType<
@@ -2742,7 +2185,6 @@ export const ListDatasetDatapoints21$inboundSchema: z.ZodType<
   type: ListDatasetDatapoints2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type ListDatasetDatapoints21$Outbound = {
   type: string;
@@ -2759,19 +2201,6 @@ export const ListDatasetDatapoints21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapoints21$ {
-  /** @deprecated use `ListDatasetDatapoints21$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapoints21$inboundSchema;
-  /** @deprecated use `ListDatasetDatapoints21$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapoints21$outboundSchema;
-  /** @deprecated use `ListDatasetDatapoints21$Outbound` instead. */
-  export type Outbound = ListDatasetDatapoints21$Outbound;
-}
-
 export function listDatasetDatapoints21ToJSON(
   listDatasetDatapoints21: ListDatasetDatapoints21,
 ): string {
@@ -2779,7 +2208,6 @@ export function listDatasetDatapoints21ToJSON(
     ListDatasetDatapoints21$outboundSchema.parse(listDatasetDatapoints21),
   );
 }
-
 export function listDatasetDatapoints21FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapoints21, SDKValidationError> {
@@ -2801,7 +2229,6 @@ export const ListDatasetDatapointsContent2$inboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapoints23$inboundSchema),
   z.lazy(() => ListDatasetDatapoints24$inboundSchema),
 ]);
-
 /** @internal */
 export type ListDatasetDatapointsContent2$Outbound =
   | ListDatasetDatapoints21$Outbound
@@ -2821,19 +2248,6 @@ export const ListDatasetDatapointsContent2$outboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapoints24$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsContent2$ {
-  /** @deprecated use `ListDatasetDatapointsContent2$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsContent2$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsContent2$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsContent2$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsContent2$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsContent2$Outbound;
-}
-
 export function listDatasetDatapointsContent2ToJSON(
   listDatasetDatapointsContent2: ListDatasetDatapointsContent2,
 ): string {
@@ -2843,7 +2257,6 @@ export function listDatasetDatapointsContent2ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsContent2, SDKValidationError> {
@@ -2868,7 +2281,6 @@ export const ListDatasetDatapointsMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => ListDatasetDatapoints24$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type ListDatasetDatapointsMessagesContent$Outbound =
   | string
@@ -2894,21 +2306,6 @@ export const ListDatasetDatapointsMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesContent$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesContent$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesContent$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesContent$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesContent$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesContent$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesContent$Outbound;
-}
-
 export function listDatasetDatapointsMessagesContentToJSON(
   listDatasetDatapointsMessagesContent: ListDatasetDatapointsMessagesContent,
 ): string {
@@ -2918,7 +2315,6 @@ export function listDatasetDatapointsMessagesContentToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsMessagesContent, SDKValidationError> {
@@ -2948,7 +2344,6 @@ export const ListDatasetDatapointsMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesUserMessage$Outbound = {
   role: string;
@@ -2982,21 +2377,6 @@ export const ListDatasetDatapointsMessagesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesUserMessage$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesUserMessage$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesUserMessage$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesUserMessage$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesUserMessage$Outbound;
-}
-
 export function listDatasetDatapointsMessagesUserMessageToJSON(
   listDatasetDatapointsMessagesUserMessage:
     ListDatasetDatapointsMessagesUserMessage,
@@ -3007,7 +2387,6 @@ export function listDatasetDatapointsMessagesUserMessageToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3028,24 +2407,10 @@ export function listDatasetDatapointsMessagesUserMessageFromJSON(
 export const ListDatasetDatapointsMessagesDatasetsRole$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsRole> = z
     .nativeEnum(ListDatasetDatapointsMessagesDatasetsRole);
-
 /** @internal */
 export const ListDatasetDatapointsMessagesDatasetsRole$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsMessagesDatasetsRole> =
     ListDatasetDatapointsMessagesDatasetsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDatasetsRole$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDatasetsRole$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDatasetsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDatasetsRole$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesSystemMessage$inboundSchema:
@@ -3055,7 +2420,6 @@ export const ListDatasetDatapointsMessagesSystemMessage$inboundSchema:
       content: z.string(),
       name: z.string().optional(),
     });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesSystemMessage$Outbound = {
   role: string;
@@ -3075,21 +2439,6 @@ export const ListDatasetDatapointsMessagesSystemMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesSystemMessage$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesSystemMessage$Outbound;
-}
-
 export function listDatasetDatapointsMessagesSystemMessageToJSON(
   listDatasetDatapointsMessagesSystemMessage:
     ListDatasetDatapointsMessagesSystemMessage,
@@ -3100,7 +2449,6 @@ export function listDatasetDatapointsMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3121,23 +2469,10 @@ export function listDatasetDatapointsMessagesSystemMessageFromJSON(
 export const ListDatasetDatapointsMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsMessagesRole
 > = z.nativeEnum(ListDatasetDatapointsMessagesRole);
-
 /** @internal */
 export const ListDatasetDatapointsMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetDatapointsMessagesRole
 > = ListDatasetDatapointsMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesRole$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsMessagesRole$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsMessagesDeveloperMessage$inboundSchema:
@@ -3150,7 +2485,6 @@ export const ListDatasetDatapointsMessagesDeveloperMessage$inboundSchema:
     content: z.string(),
     name: z.string().optional(),
   });
-
 /** @internal */
 export type ListDatasetDatapointsMessagesDeveloperMessage$Outbound = {
   role: string;
@@ -3170,21 +2504,6 @@ export const ListDatasetDatapointsMessagesDeveloperMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessagesDeveloperMessage$ {
-  /** @deprecated use `ListDatasetDatapointsMessagesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsMessagesDeveloperMessage$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsMessagesDeveloperMessage$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessagesDeveloperMessage$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessagesDeveloperMessage$Outbound;
-}
-
 export function listDatasetDatapointsMessagesDeveloperMessageToJSON(
   listDatasetDatapointsMessagesDeveloperMessage:
     ListDatasetDatapointsMessagesDeveloperMessage,
@@ -3195,7 +2514,6 @@ export function listDatasetDatapointsMessagesDeveloperMessageToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3224,7 +2542,6 @@ export const ListDatasetDatapointsMessages$inboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsMessagesUserMessage$inboundSchema),
   z.lazy(() => ListDatasetDatapointsMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type ListDatasetDatapointsMessages$Outbound =
   | ListDatasetDatapointsMessagesToolMessage$Outbound
@@ -3246,19 +2563,6 @@ export const ListDatasetDatapointsMessages$outboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsMessages$ {
-  /** @deprecated use `ListDatasetDatapointsMessages$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsMessages$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessages$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsMessages$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsMessages$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsMessages$Outbound;
-}
-
 export function listDatasetDatapointsMessagesToJSON(
   listDatasetDatapointsMessages: ListDatasetDatapointsMessages,
 ): string {
@@ -3268,7 +2572,6 @@ export function listDatasetDatapointsMessagesToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsMessages, SDKValidationError> {
@@ -3283,71 +2586,29 @@ export function listDatasetDatapointsMessagesFromJSON(
 export const ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsEvaluationType> = z
     .nativeEnum(ListDatasetDatapointsEvaluationsEvaluationType);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsEvaluationType> =
     ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsEvaluationType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsEvaluationsSource$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsSource> = z.nativeEnum(
     ListDatasetDatapointsEvaluationsSource,
   );
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsSource$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsSource> =
     ListDatasetDatapointsEvaluationsSource$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsSource$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsSource$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsSource$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsSource$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsSource$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsType> = z
     .nativeEnum(ListDatasetDatapointsEvaluationsDatasetsType);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsType> =
     ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
@@ -3361,7 +2622,7 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.381Z",
+    "2025-11-07T09:40:15.651Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema,
   values: z.array(z.string()),
@@ -3373,7 +2634,6 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsEvaluations3$Outbound = {
   id: string;
@@ -3397,7 +2657,7 @@ export const ListDatasetDatapointsEvaluations3$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: ListDatasetDatapointsEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.381Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.651Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema,
   values: z.array(z.string()),
@@ -3410,20 +2670,6 @@ export const ListDatasetDatapointsEvaluations3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluations3$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluations3$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsEvaluations3$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations3$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluations3$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations3$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsEvaluations3$Outbound;
-}
-
 export function listDatasetDatapointsEvaluations3ToJSON(
   listDatasetDatapointsEvaluations3: ListDatasetDatapointsEvaluations3,
 ): string {
@@ -3433,7 +2679,6 @@ export function listDatasetDatapointsEvaluations3ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsEvaluations3FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsEvaluations3, SDKValidationError> {
@@ -3451,7 +2696,6 @@ export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inbo
   > = z.nativeEnum(
     ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType,
   );
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema:
   z.ZodNativeEnum<
@@ -3459,67 +2703,26 @@ export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outb
   > =
     ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDatasetDatapointsEvaluationsDatasetsResponseSource
   > = z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsResponseSource);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema:
   z.ZodNativeEnum<
     typeof ListDatasetDatapointsEvaluationsDatasetsResponseSource
   > = ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsResponseSource$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsType> = z.nativeEnum(
     ListDatasetDatapointsEvaluationsType,
   );
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsType> =
     ListDatasetDatapointsEvaluationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
@@ -3535,7 +2738,7 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.380Z",
+    "2025-11-07T09:40:15.650Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsType$inboundSchema,
   value: z.number(),
@@ -3547,7 +2750,6 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsEvaluations2$Outbound = {
   id: string;
@@ -3573,7 +2775,7 @@ export const ListDatasetDatapointsEvaluations2$outboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.380Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.650Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsType$outboundSchema,
   value: z.number(),
@@ -3586,20 +2788,6 @@ export const ListDatasetDatapointsEvaluations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluations2$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluations2$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsEvaluations2$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations2$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluations2$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations2$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsEvaluations2$Outbound;
-}
-
 export function listDatasetDatapointsEvaluations2ToJSON(
   listDatasetDatapointsEvaluations2: ListDatasetDatapointsEvaluations2,
 ): string {
@@ -3609,7 +2797,6 @@ export function listDatasetDatapointsEvaluations2ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsEvaluations2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsEvaluations2, SDKValidationError> {
@@ -3625,71 +2812,29 @@ export const ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchem
   z.ZodNativeEnum<
     typeof ListDatasetDatapointsEvaluationsDatasetsEvaluationType
   > = z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsEvaluationType);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema:
   z.ZodNativeEnum<
     typeof ListDatasetDatapointsEvaluationsDatasetsEvaluationType
   > = ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsEvaluationType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsSource> = z
     .nativeEnum(ListDatasetDatapointsEvaluationsDatasetsSource);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsSource> =
     ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsSource$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsResponseType> =
     z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsResponseType);
-
 /** @internal */
 export const ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsResponseType> =
     ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluationsDatasetsResponseType$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
@@ -3706,7 +2851,7 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.379Z",
+    "2025-11-07T09:40:15.649Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema,
   value: z.string(),
@@ -3718,7 +2863,6 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsEvaluations1$Outbound = {
   id: string;
@@ -3745,7 +2889,7 @@ export const ListDatasetDatapointsEvaluations1$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.379Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.649Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema,
   value: z.string(),
@@ -3758,20 +2902,6 @@ export const ListDatasetDatapointsEvaluations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluations1$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluations1$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsEvaluations1$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations1$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsEvaluations1$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations1$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsEvaluations1$Outbound;
-}
-
 export function listDatasetDatapointsEvaluations1ToJSON(
   listDatasetDatapointsEvaluations1: ListDatasetDatapointsEvaluations1,
 ): string {
@@ -3781,7 +2911,6 @@ export function listDatasetDatapointsEvaluations1ToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsEvaluations1FromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsEvaluations1, SDKValidationError> {
@@ -3802,7 +2931,6 @@ export const ListDatasetDatapointsEvaluations$inboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsEvaluations2$inboundSchema),
   z.lazy(() => ListDatasetDatapointsEvaluations3$inboundSchema),
 ]);
-
 /** @internal */
 export type ListDatasetDatapointsEvaluations$Outbound =
   | ListDatasetDatapointsEvaluations1$Outbound
@@ -3820,19 +2948,6 @@ export const ListDatasetDatapointsEvaluations$outboundSchema: z.ZodType<
   z.lazy(() => ListDatasetDatapointsEvaluations3$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsEvaluations$ {
-  /** @deprecated use `ListDatasetDatapointsEvaluations$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsEvaluations$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsEvaluations$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsEvaluations$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsEvaluations$Outbound;
-}
-
 export function listDatasetDatapointsEvaluationsToJSON(
   listDatasetDatapointsEvaluations: ListDatasetDatapointsEvaluations,
 ): string {
@@ -3842,7 +2957,6 @@ export function listDatasetDatapointsEvaluationsToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsEvaluationsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsEvaluations, SDKValidationError> {
@@ -3888,7 +3002,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.304Z",
+    "2025-11-07T09:40:03.490Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3901,7 +3015,6 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsData$Outbound = {
   _id: string;
@@ -3969,7 +3082,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -3983,19 +3096,6 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsData$ {
-  /** @deprecated use `ListDatasetDatapointsData$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsData$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsData$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetDatapointsData$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsData$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsData$Outbound;
-}
-
 export function listDatasetDatapointsDataToJSON(
   listDatasetDatapointsData: ListDatasetDatapointsData,
 ): string {
@@ -4003,7 +3103,6 @@ export function listDatasetDatapointsDataToJSON(
     ListDatasetDatapointsData$outboundSchema.parse(listDatasetDatapointsData),
   );
 }
-
 export function listDatasetDatapointsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsData, SDKValidationError> {
@@ -4028,7 +3127,6 @@ export const ListDatasetDatapointsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListDatasetDatapointsResponseBody$Outbound = {
   object: string;
@@ -4051,20 +3149,6 @@ export const ListDatasetDatapointsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetDatapointsResponseBody$ {
-  /** @deprecated use `ListDatasetDatapointsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetDatapointsResponseBody$inboundSchema;
-  /** @deprecated use `ListDatasetDatapointsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    ListDatasetDatapointsResponseBody$outboundSchema;
-  /** @deprecated use `ListDatasetDatapointsResponseBody$Outbound` instead. */
-  export type Outbound = ListDatasetDatapointsResponseBody$Outbound;
-}
-
 export function listDatasetDatapointsResponseBodyToJSON(
   listDatasetDatapointsResponseBody: ListDatasetDatapointsResponseBody,
 ): string {
@@ -4074,7 +3158,6 @@ export function listDatasetDatapointsResponseBodyToJSON(
     ),
   );
 }
-
 export function listDatasetDatapointsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetDatapointsResponseBody, SDKValidationError> {

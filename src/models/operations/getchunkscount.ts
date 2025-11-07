@@ -52,7 +52,6 @@ export const GetChunksCountRequestBody$inboundSchema: z.ZodType<
   enabled: z.boolean().optional(),
   status: z.string().optional(),
 });
-
 /** @internal */
 export type GetChunksCountRequestBody$Outbound = {
   q: string;
@@ -71,19 +70,6 @@ export const GetChunksCountRequestBody$outboundSchema: z.ZodType<
   status: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetChunksCountRequestBody$ {
-  /** @deprecated use `GetChunksCountRequestBody$inboundSchema` instead. */
-  export const inboundSchema = GetChunksCountRequestBody$inboundSchema;
-  /** @deprecated use `GetChunksCountRequestBody$outboundSchema` instead. */
-  export const outboundSchema = GetChunksCountRequestBody$outboundSchema;
-  /** @deprecated use `GetChunksCountRequestBody$Outbound` instead. */
-  export type Outbound = GetChunksCountRequestBody$Outbound;
-}
-
 export function getChunksCountRequestBodyToJSON(
   getChunksCountRequestBody: GetChunksCountRequestBody,
 ): string {
@@ -91,7 +77,6 @@ export function getChunksCountRequestBodyToJSON(
     GetChunksCountRequestBody$outboundSchema.parse(getChunksCountRequestBody),
   );
 }
-
 export function getChunksCountRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetChunksCountRequestBody, SDKValidationError> {
@@ -118,7 +103,6 @@ export const GetChunksCountRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type GetChunksCountRequest$Outbound = {
   knowledge_id: string;
@@ -144,19 +128,6 @@ export const GetChunksCountRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetChunksCountRequest$ {
-  /** @deprecated use `GetChunksCountRequest$inboundSchema` instead. */
-  export const inboundSchema = GetChunksCountRequest$inboundSchema;
-  /** @deprecated use `GetChunksCountRequest$outboundSchema` instead. */
-  export const outboundSchema = GetChunksCountRequest$outboundSchema;
-  /** @deprecated use `GetChunksCountRequest$Outbound` instead. */
-  export type Outbound = GetChunksCountRequest$Outbound;
-}
-
 export function getChunksCountRequestToJSON(
   getChunksCountRequest: GetChunksCountRequest,
 ): string {
@@ -164,7 +135,6 @@ export function getChunksCountRequestToJSON(
     GetChunksCountRequest$outboundSchema.parse(getChunksCountRequest),
   );
 }
-
 export function getChunksCountRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetChunksCountRequest, SDKValidationError> {
@@ -183,7 +153,6 @@ export const GetChunksCountResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   count: z.number(),
 });
-
 /** @internal */
 export type GetChunksCountResponseBody$Outbound = {
   count: number;
@@ -198,19 +167,6 @@ export const GetChunksCountResponseBody$outboundSchema: z.ZodType<
   count: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetChunksCountResponseBody$ {
-  /** @deprecated use `GetChunksCountResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetChunksCountResponseBody$inboundSchema;
-  /** @deprecated use `GetChunksCountResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetChunksCountResponseBody$outboundSchema;
-  /** @deprecated use `GetChunksCountResponseBody$Outbound` instead. */
-  export type Outbound = GetChunksCountResponseBody$Outbound;
-}
-
 export function getChunksCountResponseBodyToJSON(
   getChunksCountResponseBody: GetChunksCountResponseBody,
 ): string {
@@ -218,7 +174,6 @@ export function getChunksCountResponseBodyToJSON(
     GetChunksCountResponseBody$outboundSchema.parse(getChunksCountResponseBody),
   );
 }
-
 export function getChunksCountResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetChunksCountResponseBody, SDKValidationError> {

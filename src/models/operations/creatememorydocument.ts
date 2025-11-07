@@ -59,7 +59,6 @@ export const CreateMemoryDocumentRequestBody$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.record(z.string()),
 });
-
 /** @internal */
 export type CreateMemoryDocumentRequestBody$Outbound = {
   text: string;
@@ -76,19 +75,6 @@ export const CreateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryDocumentRequestBody$ {
-  /** @deprecated use `CreateMemoryDocumentRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryDocumentRequestBody$inboundSchema;
-  /** @deprecated use `CreateMemoryDocumentRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryDocumentRequestBody$outboundSchema;
-  /** @deprecated use `CreateMemoryDocumentRequestBody$Outbound` instead. */
-  export type Outbound = CreateMemoryDocumentRequestBody$Outbound;
-}
-
 export function createMemoryDocumentRequestBodyToJSON(
   createMemoryDocumentRequestBody: CreateMemoryDocumentRequestBody,
 ): string {
@@ -98,7 +84,6 @@ export function createMemoryDocumentRequestBodyToJSON(
     ),
   );
 }
-
 export function createMemoryDocumentRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryDocumentRequestBody, SDKValidationError> {
@@ -126,7 +111,6 @@ export const CreateMemoryDocumentRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type CreateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
@@ -152,19 +136,6 @@ export const CreateMemoryDocumentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryDocumentRequest$ {
-  /** @deprecated use `CreateMemoryDocumentRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryDocumentRequest$inboundSchema;
-  /** @deprecated use `CreateMemoryDocumentRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryDocumentRequest$outboundSchema;
-  /** @deprecated use `CreateMemoryDocumentRequest$Outbound` instead. */
-  export type Outbound = CreateMemoryDocumentRequest$Outbound;
-}
-
 export function createMemoryDocumentRequestToJSON(
   createMemoryDocumentRequest: CreateMemoryDocumentRequest,
 ): string {
@@ -174,7 +145,6 @@ export function createMemoryDocumentRequestToJSON(
     ),
   );
 }
-
 export function createMemoryDocumentRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryDocumentRequest, SDKValidationError> {
@@ -211,7 +181,6 @@ export const CreateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type CreateMemoryDocumentResponseBody$Outbound = {
   _id: string;
@@ -253,19 +222,6 @@ export const CreateMemoryDocumentResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryDocumentResponseBody$ {
-  /** @deprecated use `CreateMemoryDocumentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryDocumentResponseBody$inboundSchema;
-  /** @deprecated use `CreateMemoryDocumentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryDocumentResponseBody$outboundSchema;
-  /** @deprecated use `CreateMemoryDocumentResponseBody$Outbound` instead. */
-  export type Outbound = CreateMemoryDocumentResponseBody$Outbound;
-}
-
 export function createMemoryDocumentResponseBodyToJSON(
   createMemoryDocumentResponseBody: CreateMemoryDocumentResponseBody,
 ): string {
@@ -275,7 +231,6 @@ export function createMemoryDocumentResponseBodyToJSON(
     ),
   );
 }
-
 export function createMemoryDocumentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryDocumentResponseBody, SDKValidationError> {

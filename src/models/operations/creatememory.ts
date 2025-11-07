@@ -58,7 +58,6 @@ export const CreateMemoryRequestBody$inboundSchema: z.ZodType<
     "entity_id": "entityId",
   });
 });
-
 /** @internal */
 export type CreateMemoryRequestBody$Outbound = {
   entity_id: string;
@@ -79,19 +78,6 @@ export const CreateMemoryRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryRequestBody$ {
-  /** @deprecated use `CreateMemoryRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryRequestBody$inboundSchema;
-  /** @deprecated use `CreateMemoryRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryRequestBody$outboundSchema;
-  /** @deprecated use `CreateMemoryRequestBody$Outbound` instead. */
-  export type Outbound = CreateMemoryRequestBody$Outbound;
-}
-
 export function createMemoryRequestBodyToJSON(
   createMemoryRequestBody: CreateMemoryRequestBody,
 ): string {
@@ -99,7 +85,6 @@ export function createMemoryRequestBodyToJSON(
     CreateMemoryRequestBody$outboundSchema.parse(createMemoryRequestBody),
   );
 }
-
 export function createMemoryRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryRequestBody, SDKValidationError> {
@@ -124,7 +109,6 @@ export const CreateMemoryRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type CreateMemoryRequest$Outbound = {
   memory_store_key: string;
@@ -146,19 +130,6 @@ export const CreateMemoryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryRequest$ {
-  /** @deprecated use `CreateMemoryRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryRequest$inboundSchema;
-  /** @deprecated use `CreateMemoryRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryRequest$outboundSchema;
-  /** @deprecated use `CreateMemoryRequest$Outbound` instead. */
-  export type Outbound = CreateMemoryRequest$Outbound;
-}
-
 export function createMemoryRequestToJSON(
   createMemoryRequest: CreateMemoryRequest,
 ): string {
@@ -166,7 +137,6 @@ export function createMemoryRequestToJSON(
     CreateMemoryRequest$outboundSchema.parse(createMemoryRequest),
   );
 }
-
 export function createMemoryRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryRequest, SDKValidationError> {
@@ -202,7 +172,6 @@ export const CreateMemoryResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type CreateMemoryResponseBody$Outbound = {
   _id: string;
@@ -242,19 +211,6 @@ export const CreateMemoryResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateMemoryResponseBody$ {
-  /** @deprecated use `CreateMemoryResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateMemoryResponseBody$inboundSchema;
-  /** @deprecated use `CreateMemoryResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateMemoryResponseBody$outboundSchema;
-  /** @deprecated use `CreateMemoryResponseBody$Outbound` instead. */
-  export type Outbound = CreateMemoryResponseBody$Outbound;
-}
-
 export function createMemoryResponseBodyToJSON(
   createMemoryResponseBody: CreateMemoryResponseBody,
 ): string {
@@ -262,7 +218,6 @@ export function createMemoryResponseBodyToJSON(
     CreateMemoryResponseBody$outboundSchema.parse(createMemoryResponseBody),
   );
 }
-
 export function createMemoryResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryResponseBody, SDKValidationError> {

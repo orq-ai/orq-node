@@ -65,16 +65,3 @@ export const GetAgentTaskResponseBody$outboundSchema: z.ZodType<
   .pipe(z.object({
     message: z.string(),
   }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentTaskResponseBody$ {
-  /** @deprecated use `GetAgentTaskResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetAgentTaskResponseBody$inboundSchema;
-  /** @deprecated use `GetAgentTaskResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetAgentTaskResponseBody$outboundSchema;
-  /** @deprecated use `GetAgentTaskResponseBody$Outbound` instead. */
-  export type Outbound = GetAgentTaskResponseBody$Outbound;
-}

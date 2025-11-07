@@ -62,7 +62,6 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
     "entity_id": "entityId",
   });
 });
-
 /** @internal */
 export type UpdateMemoryRequestBody$Outbound = {
   entity_id: string;
@@ -83,19 +82,6 @@ export const UpdateMemoryRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryRequestBody$ {
-  /** @deprecated use `UpdateMemoryRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryRequestBody$inboundSchema;
-  /** @deprecated use `UpdateMemoryRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryRequestBody$outboundSchema;
-  /** @deprecated use `UpdateMemoryRequestBody$Outbound` instead. */
-  export type Outbound = UpdateMemoryRequestBody$Outbound;
-}
-
 export function updateMemoryRequestBodyToJSON(
   updateMemoryRequestBody: UpdateMemoryRequestBody,
 ): string {
@@ -103,7 +89,6 @@ export function updateMemoryRequestBodyToJSON(
     UpdateMemoryRequestBody$outboundSchema.parse(updateMemoryRequestBody),
   );
 }
-
 export function updateMemoryRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryRequestBody, SDKValidationError> {
@@ -130,7 +115,6 @@ export const UpdateMemoryRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateMemoryRequest$Outbound = {
   memory_store_key: string;
@@ -155,19 +139,6 @@ export const UpdateMemoryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryRequest$ {
-  /** @deprecated use `UpdateMemoryRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryRequest$inboundSchema;
-  /** @deprecated use `UpdateMemoryRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryRequest$outboundSchema;
-  /** @deprecated use `UpdateMemoryRequest$Outbound` instead. */
-  export type Outbound = UpdateMemoryRequest$Outbound;
-}
-
 export function updateMemoryRequestToJSON(
   updateMemoryRequest: UpdateMemoryRequest,
 ): string {
@@ -175,7 +146,6 @@ export function updateMemoryRequestToJSON(
     UpdateMemoryRequest$outboundSchema.parse(updateMemoryRequest),
   );
 }
-
 export function updateMemoryRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryRequest, SDKValidationError> {
@@ -211,7 +181,6 @@ export const UpdateMemoryResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type UpdateMemoryResponseBody$Outbound = {
   _id: string;
@@ -251,19 +220,6 @@ export const UpdateMemoryResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryResponseBody$ {
-  /** @deprecated use `UpdateMemoryResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryResponseBody$inboundSchema;
-  /** @deprecated use `UpdateMemoryResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryResponseBody$outboundSchema;
-  /** @deprecated use `UpdateMemoryResponseBody$Outbound` instead. */
-  export type Outbound = UpdateMemoryResponseBody$Outbound;
-}
-
 export function updateMemoryResponseBodyToJSON(
   updateMemoryResponseBody: UpdateMemoryResponseBody,
 ): string {
@@ -271,7 +227,6 @@ export function updateMemoryResponseBodyToJSON(
     UpdateMemoryResponseBody$outboundSchema.parse(updateMemoryResponseBody),
   );
 }
-
 export function updateMemoryResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryResponseBody, SDKValidationError> {

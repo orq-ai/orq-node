@@ -65,16 +65,3 @@ export const UpdatePromptResponseBody$outboundSchema: z.ZodType<
   .pipe(z.object({
     message: z.string(),
   }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseBody$ {
-  /** @deprecated use `UpdatePromptResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseBody$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseBody$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseBody$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseBody$Outbound;
-}

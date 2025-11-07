@@ -1728,108 +1728,46 @@ export type UpdatePromptPrompt = {
 export const UpdatePromptFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptFormat
 > = z.nativeEnum(UpdatePromptFormat);
-
 /** @internal */
 export const UpdatePromptFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptFormat
 > = UpdatePromptFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptFormat$ {
-  /** @deprecated use `UpdatePromptFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptFormat$outboundSchema;
-}
-
 /** @internal */
 export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof ResponseFormat6
 > = z.nativeEnum(ResponseFormat6);
-
 /** @internal */
 export const ResponseFormat6$outboundSchema: z.ZodNativeEnum<
   typeof ResponseFormat6
 > = ResponseFormat6$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat6$ {
-  /** @deprecated use `ResponseFormat6$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat6$inboundSchema;
-  /** @deprecated use `ResponseFormat6$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat6$outboundSchema;
-}
-
 /** @internal */
 export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof ResponseFormat5
 > = z.nativeEnum(ResponseFormat5);
-
 /** @internal */
 export const ResponseFormat5$outboundSchema: z.ZodNativeEnum<
   typeof ResponseFormat5
 > = ResponseFormat5$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat5$ {
-  /** @deprecated use `ResponseFormat5$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat5$inboundSchema;
-  /** @deprecated use `ResponseFormat5$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat5$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat4
 > = z.nativeEnum(UpdatePromptResponseFormat4);
-
 /** @internal */
 export const UpdatePromptResponseFormat4$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat4
 > = UpdatePromptResponseFormat4$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat4$ {
-  /** @deprecated use `UpdatePromptResponseFormat4$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat4$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat4$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat4$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsRequestType> = z
     .nativeEnum(UpdatePromptResponseFormatPromptsRequestType);
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsRequestType> =
     UpdatePromptResponseFormatPromptsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsRequestType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsRequestType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormat3$inboundSchema: z.ZodType<
@@ -1839,7 +1777,6 @@ export const UpdatePromptResponseFormat3$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdatePromptResponseFormatPromptsRequestType$inboundSchema,
 });
-
 /** @internal */
 export type UpdatePromptResponseFormat3$Outbound = {
   type: string;
@@ -1854,19 +1791,6 @@ export const UpdatePromptResponseFormat3$outboundSchema: z.ZodType<
   type: UpdatePromptResponseFormatPromptsRequestType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat3$ {
-  /** @deprecated use `UpdatePromptResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat3$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat3$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat3$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormat3$Outbound;
-}
-
 export function updatePromptResponseFormat3ToJSON(
   updatePromptResponseFormat3: UpdatePromptResponseFormat3,
 ): string {
@@ -1876,7 +1800,6 @@ export function updatePromptResponseFormat3ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat3, SDKValidationError> {
@@ -1892,24 +1815,10 @@ export const UpdatePromptResponseFormatPromptsType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsType> = z.nativeEnum(
     UpdatePromptResponseFormatPromptsType,
   );
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsType> =
     UpdatePromptResponseFormatPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormat2$inboundSchema: z.ZodType<
@@ -1919,7 +1828,6 @@ export const UpdatePromptResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdatePromptResponseFormatPromptsType$inboundSchema,
 });
-
 /** @internal */
 export type UpdatePromptResponseFormat2$Outbound = {
   type: string;
@@ -1934,19 +1842,6 @@ export const UpdatePromptResponseFormat2$outboundSchema: z.ZodType<
   type: UpdatePromptResponseFormatPromptsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat2$ {
-  /** @deprecated use `UpdatePromptResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat2$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat2$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat2$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormat2$Outbound;
-}
-
 export function updatePromptResponseFormat2ToJSON(
   updatePromptResponseFormat2: UpdatePromptResponseFormat2,
 ): string {
@@ -1956,7 +1851,6 @@ export function updatePromptResponseFormat2ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat2, SDKValidationError> {
@@ -1971,22 +1865,10 @@ export function updatePromptResponseFormat2FromJSON(
 export const UpdatePromptResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormatType
 > = z.nativeEnum(UpdatePromptResponseFormatType);
-
 /** @internal */
 export const UpdatePromptResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormatType
 > = UpdatePromptResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatType$ {
-  /** @deprecated use `UpdatePromptResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormatType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormatType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -1999,7 +1881,6 @@ export const UpdatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
-
 /** @internal */
 export type UpdatePromptResponseFormatJsonSchema$Outbound = {
   name: string;
@@ -2020,21 +1901,6 @@ export const UpdatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
   schema: z.record(z.any()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatJsonSchema$ {
-  /** @deprecated use `UpdatePromptResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatJsonSchema$Outbound;
-}
-
 export function updatePromptResponseFormatJsonSchemaToJSON(
   updatePromptResponseFormatJsonSchema: UpdatePromptResponseFormatJsonSchema,
 ): string {
@@ -2044,7 +1910,6 @@ export function updatePromptResponseFormatJsonSchemaToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormatJsonSchema, SDKValidationError> {
@@ -2069,7 +1934,6 @@ export const UpdatePromptResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type UpdatePromptResponseFormat1$Outbound = {
   type: string;
@@ -2090,19 +1954,6 @@ export const UpdatePromptResponseFormat1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat1$ {
-  /** @deprecated use `UpdatePromptResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat1$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat1$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat1$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormat1$Outbound;
-}
-
 export function updatePromptResponseFormat1ToJSON(
   updatePromptResponseFormat1: UpdatePromptResponseFormat1,
 ): string {
@@ -2112,7 +1963,6 @@ export function updatePromptResponseFormat1ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat1, SDKValidationError> {
@@ -2136,7 +1986,6 @@ export const UpdatePromptResponseFormat$inboundSchema: z.ZodType<
   ResponseFormat5$inboundSchema,
   ResponseFormat6$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdatePromptResponseFormat$Outbound =
   | UpdatePromptResponseFormat1$Outbound
@@ -2160,19 +2009,6 @@ export const UpdatePromptResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat6$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat$ {
-  /** @deprecated use `UpdatePromptResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormat$Outbound;
-}
-
 export function updatePromptResponseFormatToJSON(
   updatePromptResponseFormat: UpdatePromptResponseFormat,
 ): string {
@@ -2180,7 +2016,6 @@ export function updatePromptResponseFormatToJSON(
     UpdatePromptResponseFormat$outboundSchema.parse(updatePromptResponseFormat),
   );
 }
-
 export function updatePromptResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat, SDKValidationError> {
@@ -2195,85 +2030,37 @@ export function updatePromptResponseFormatFromJSON(
 export const UpdatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPhotoRealVersion
 > = z.nativeEnum(UpdatePromptPhotoRealVersion);
-
 /** @internal */
 export const UpdatePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPhotoRealVersion
 > = UpdatePromptPhotoRealVersion$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPhotoRealVersion$ {
-  /** @deprecated use `UpdatePromptPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPhotoRealVersion$inboundSchema;
-  /** @deprecated use `UpdatePromptPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPhotoRealVersion$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptEncodingFormat
 > = z.nativeEnum(UpdatePromptEncodingFormat);
-
 /** @internal */
 export const UpdatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptEncodingFormat
 > = UpdatePromptEncodingFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptEncodingFormat$ {
-  /** @deprecated use `UpdatePromptEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptEncodingFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptEncodingFormat$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptReasoningEffort
 > = z.nativeEnum(UpdatePromptReasoningEffort);
-
 /** @internal */
 export const UpdatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptReasoningEffort
 > = UpdatePromptReasoningEffort$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptReasoningEffort$ {
-  /** @deprecated use `UpdatePromptReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptReasoningEffort$inboundSchema;
-  /** @deprecated use `UpdatePromptReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptReasoningEffort$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVerbosity
 > = z.nativeEnum(UpdatePromptVerbosity);
-
 /** @internal */
 export const UpdatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVerbosity
 > = UpdatePromptVerbosity$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptVerbosity$ {
-  /** @deprecated use `UpdatePromptVerbosity$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptVerbosity$inboundSchema;
-  /** @deprecated use `UpdatePromptVerbosity$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptVerbosity$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
@@ -2313,7 +2100,6 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-
 /** @internal */
 export type UpdatePromptModelParameters$Outbound = {
   temperature?: number | undefined;
@@ -2383,19 +2169,6 @@ export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptModelParameters$ {
-  /** @deprecated use `UpdatePromptModelParameters$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptModelParameters$inboundSchema;
-  /** @deprecated use `UpdatePromptModelParameters$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptModelParameters$outboundSchema;
-  /** @deprecated use `UpdatePromptModelParameters$Outbound` instead. */
-  export type Outbound = UpdatePromptModelParameters$Outbound;
-}
-
 export function updatePromptModelParametersToJSON(
   updatePromptModelParameters: UpdatePromptModelParameters,
 ): string {
@@ -2405,7 +2178,6 @@ export function updatePromptModelParametersToJSON(
     ),
   );
 }
-
 export function updatePromptModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptModelParameters, SDKValidationError> {
@@ -2419,63 +2191,27 @@ export function updatePromptModelParametersFromJSON(
 /** @internal */
 export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
   .nativeEnum(Provider);
-
 /** @internal */
 export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
   Provider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Provider$ {
-  /** @deprecated use `Provider$inboundSchema` instead. */
-  export const inboundSchema = Provider$inboundSchema;
-  /** @deprecated use `Provider$outboundSchema` instead. */
-  export const outboundSchema = Provider$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptRole
 > = z.nativeEnum(UpdatePromptRole);
-
 /** @internal */
 export const UpdatePromptRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptRole
 > = UpdatePromptRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptRole$ {
-  /** @deprecated use `UpdatePromptRole$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptRole$inboundSchema;
-  /** @deprecated use `UpdatePromptRole$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptRole$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsRequestType
 > = z.nativeEnum(UpdatePrompt2PromptsRequestType);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsRequestType
 > = UpdatePrompt2PromptsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestType$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsRequestType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2File$inboundSchema: z.ZodType<
@@ -2492,7 +2228,6 @@ export const UpdatePrompt2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2File$Outbound = {
   file_data?: string | undefined;
@@ -2517,19 +2252,6 @@ export const UpdatePrompt2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2File$ {
-  /** @deprecated use `UpdatePrompt2File$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2File$inboundSchema;
-  /** @deprecated use `UpdatePrompt2File$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2File$outboundSchema;
-  /** @deprecated use `UpdatePrompt2File$Outbound` instead. */
-  export type Outbound = UpdatePrompt2File$Outbound;
-}
-
 export function updatePrompt2FileToJSON(
   updatePrompt2File: UpdatePrompt2File,
 ): string {
@@ -2537,7 +2259,6 @@ export function updatePrompt2FileToJSON(
     UpdatePrompt2File$outboundSchema.parse(updatePrompt2File),
   );
 }
-
 export function updatePrompt2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2File, SDKValidationError> {
@@ -2557,7 +2278,6 @@ export const UpdatePrompt23$inboundSchema: z.ZodType<
   type: UpdatePrompt2PromptsRequestType$inboundSchema,
   file: z.lazy(() => UpdatePrompt2File$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePrompt23$Outbound = {
   type: string;
@@ -2574,23 +2294,9 @@ export const UpdatePrompt23$outboundSchema: z.ZodType<
   file: z.lazy(() => UpdatePrompt2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt23$ {
-  /** @deprecated use `UpdatePrompt23$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt23$inboundSchema;
-  /** @deprecated use `UpdatePrompt23$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt23$outboundSchema;
-  /** @deprecated use `UpdatePrompt23$Outbound` instead. */
-  export type Outbound = UpdatePrompt23$Outbound;
-}
-
 export function updatePrompt23ToJSON(updatePrompt23: UpdatePrompt23): string {
   return JSON.stringify(UpdatePrompt23$outboundSchema.parse(updatePrompt23));
 }
-
 export function updatePrompt23FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt23, SDKValidationError> {
@@ -2605,22 +2311,10 @@ export function updatePrompt23FromJSON(
 export const UpdatePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsType
 > = z.nativeEnum(UpdatePrompt2PromptsType);
-
 /** @internal */
 export const UpdatePrompt2PromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsType
 > = UpdatePrompt2PromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsType$ {
-  /** @deprecated use `UpdatePrompt2PromptsType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2ImageUrl$inboundSchema: z.ZodType<
@@ -2631,7 +2325,6 @@ export const UpdatePrompt2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-
 /** @internal */
 export type UpdatePrompt2ImageUrl$Outbound = {
   url: string;
@@ -2648,19 +2341,6 @@ export const UpdatePrompt2ImageUrl$outboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2ImageUrl$ {
-  /** @deprecated use `UpdatePrompt2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2ImageUrl$inboundSchema;
-  /** @deprecated use `UpdatePrompt2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2ImageUrl$outboundSchema;
-  /** @deprecated use `UpdatePrompt2ImageUrl$Outbound` instead. */
-  export type Outbound = UpdatePrompt2ImageUrl$Outbound;
-}
-
 export function updatePrompt2ImageUrlToJSON(
   updatePrompt2ImageUrl: UpdatePrompt2ImageUrl,
 ): string {
@@ -2668,7 +2348,6 @@ export function updatePrompt2ImageUrlToJSON(
     UpdatePrompt2ImageUrl$outboundSchema.parse(updatePrompt2ImageUrl),
   );
 }
-
 export function updatePrompt2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2ImageUrl, SDKValidationError> {
@@ -2692,7 +2371,6 @@ export const UpdatePrompt22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type UpdatePrompt22$Outbound = {
   type: string;
@@ -2713,23 +2391,9 @@ export const UpdatePrompt22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt22$ {
-  /** @deprecated use `UpdatePrompt22$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt22$inboundSchema;
-  /** @deprecated use `UpdatePrompt22$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt22$outboundSchema;
-  /** @deprecated use `UpdatePrompt22$Outbound` instead. */
-  export type Outbound = UpdatePrompt22$Outbound;
-}
-
 export function updatePrompt22ToJSON(updatePrompt22: UpdatePrompt22): string {
   return JSON.stringify(UpdatePrompt22$outboundSchema.parse(updatePrompt22));
 }
-
 export function updatePrompt22FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt22, SDKValidationError> {
@@ -2744,22 +2408,10 @@ export function updatePrompt22FromJSON(
 export const UpdatePrompt2Type$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Type
 > = z.nativeEnum(UpdatePrompt2Type);
-
 /** @internal */
 export const UpdatePrompt2Type$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Type
 > = UpdatePrompt2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Type$ {
-  /** @deprecated use `UpdatePrompt2Type$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Type$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Type$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt21$inboundSchema: z.ZodType<
@@ -2770,7 +2422,6 @@ export const UpdatePrompt21$inboundSchema: z.ZodType<
   type: UpdatePrompt2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type UpdatePrompt21$Outbound = {
   type: string;
@@ -2787,23 +2438,9 @@ export const UpdatePrompt21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt21$ {
-  /** @deprecated use `UpdatePrompt21$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt21$inboundSchema;
-  /** @deprecated use `UpdatePrompt21$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt21$outboundSchema;
-  /** @deprecated use `UpdatePrompt21$Outbound` instead. */
-  export type Outbound = UpdatePrompt21$Outbound;
-}
-
 export function updatePrompt21ToJSON(updatePrompt21: UpdatePrompt21): string {
   return JSON.stringify(UpdatePrompt21$outboundSchema.parse(updatePrompt21));
 }
-
 export function updatePrompt21FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt21, SDKValidationError> {
@@ -2824,7 +2461,6 @@ export const UpdatePromptContent2$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt22$inboundSchema),
   z.lazy(() => UpdatePrompt23$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptContent2$Outbound =
   | UpdatePrompt21$Outbound
@@ -2842,19 +2478,6 @@ export const UpdatePromptContent2$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt23$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptContent2$ {
-  /** @deprecated use `UpdatePromptContent2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptContent2$inboundSchema;
-  /** @deprecated use `UpdatePromptContent2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptContent2$outboundSchema;
-  /** @deprecated use `UpdatePromptContent2$Outbound` instead. */
-  export type Outbound = UpdatePromptContent2$Outbound;
-}
-
 export function updatePromptContent2ToJSON(
   updatePromptContent2: UpdatePromptContent2,
 ): string {
@@ -2862,7 +2485,6 @@ export function updatePromptContent2ToJSON(
     UpdatePromptContent2$outboundSchema.parse(updatePromptContent2),
   );
 }
-
 export function updatePromptContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContent2, SDKValidationError> {
@@ -2886,7 +2508,6 @@ export const UpdatePromptContent$inboundSchema: z.ZodType<
     z.lazy(() => UpdatePrompt23$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type UpdatePromptContent$Outbound =
   | string
@@ -2908,19 +2529,6 @@ export const UpdatePromptContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptContent$ {
-  /** @deprecated use `UpdatePromptContent$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptContent$inboundSchema;
-  /** @deprecated use `UpdatePromptContent$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptContent$outboundSchema;
-  /** @deprecated use `UpdatePromptContent$Outbound` instead. */
-  export type Outbound = UpdatePromptContent$Outbound;
-}
-
 export function updatePromptContentToJSON(
   updatePromptContent: UpdatePromptContent,
 ): string {
@@ -2928,7 +2536,6 @@ export function updatePromptContentToJSON(
     UpdatePromptContent$outboundSchema.parse(updatePromptContent),
   );
 }
-
 export function updatePromptContentFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContent, SDKValidationError> {
@@ -2943,22 +2550,10 @@ export function updatePromptContentFromJSON(
 export const UpdatePromptType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptType
 > = z.nativeEnum(UpdatePromptType);
-
 /** @internal */
 export const UpdatePromptType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptType
 > = UpdatePromptType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptType$ {
-  /** @deprecated use `UpdatePromptType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptType$inboundSchema;
-  /** @deprecated use `UpdatePromptType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptFunction$inboundSchema: z.ZodType<
@@ -2969,7 +2564,6 @@ export const UpdatePromptFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-
 /** @internal */
 export type UpdatePromptFunction$Outbound = {
   name: string;
@@ -2986,19 +2580,6 @@ export const UpdatePromptFunction$outboundSchema: z.ZodType<
   arguments: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptFunction$ {
-  /** @deprecated use `UpdatePromptFunction$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptFunction$inboundSchema;
-  /** @deprecated use `UpdatePromptFunction$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptFunction$outboundSchema;
-  /** @deprecated use `UpdatePromptFunction$Outbound` instead. */
-  export type Outbound = UpdatePromptFunction$Outbound;
-}
-
 export function updatePromptFunctionToJSON(
   updatePromptFunction: UpdatePromptFunction,
 ): string {
@@ -3006,7 +2587,6 @@ export function updatePromptFunctionToJSON(
     UpdatePromptFunction$outboundSchema.parse(updatePromptFunction),
   );
 }
-
 export function updatePromptFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptFunction, SDKValidationError> {
@@ -3028,7 +2608,6 @@ export const UpdatePromptToolCalls$inboundSchema: z.ZodType<
   type: UpdatePromptType$inboundSchema,
   function: z.lazy(() => UpdatePromptFunction$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePromptToolCalls$Outbound = {
   id?: string | undefined;
@@ -3049,19 +2628,6 @@ export const UpdatePromptToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => UpdatePromptFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptToolCalls$ {
-  /** @deprecated use `UpdatePromptToolCalls$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptToolCalls$inboundSchema;
-  /** @deprecated use `UpdatePromptToolCalls$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptToolCalls$outboundSchema;
-  /** @deprecated use `UpdatePromptToolCalls$Outbound` instead. */
-  export type Outbound = UpdatePromptToolCalls$Outbound;
-}
-
 export function updatePromptToolCallsToJSON(
   updatePromptToolCalls: UpdatePromptToolCalls,
 ): string {
@@ -3069,7 +2635,6 @@ export function updatePromptToolCallsToJSON(
     UpdatePromptToolCalls$outboundSchema.parse(updatePromptToolCalls),
   );
 }
-
 export function updatePromptToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptToolCalls, SDKValidationError> {
@@ -3106,7 +2671,6 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type UpdatePromptMessages$Outbound = {
   role: string;
@@ -3149,19 +2713,6 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessages$ {
-  /** @deprecated use `UpdatePromptMessages$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessages$inboundSchema;
-  /** @deprecated use `UpdatePromptMessages$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessages$outboundSchema;
-  /** @deprecated use `UpdatePromptMessages$Outbound` instead. */
-  export type Outbound = UpdatePromptMessages$Outbound;
-}
-
 export function updatePromptMessagesToJSON(
   updatePromptMessages: UpdatePromptMessages,
 ): string {
@@ -3169,7 +2720,6 @@ export function updatePromptMessagesToJSON(
     UpdatePromptMessages$outboundSchema.parse(updatePromptMessages),
   );
 }
-
 export function updatePromptMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessages, SDKValidationError> {
@@ -3183,21 +2733,9 @@ export function updatePromptMessagesFromJSON(
 /** @internal */
 export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
   .nativeEnum(ModelType);
-
 /** @internal */
 export const ModelType$outboundSchema: z.ZodNativeEnum<typeof ModelType> =
   ModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelType$ {
-  /** @deprecated use `ModelType$inboundSchema` instead. */
-  export const inboundSchema = ModelType$inboundSchema;
-  /** @deprecated use `ModelType$outboundSchema` instead. */
-  export const outboundSchema = ModelType$outboundSchema;
-}
 
 /** @internal */
 export const PromptConfig$inboundSchema: z.ZodType<
@@ -3223,7 +2761,6 @@ export const PromptConfig$inboundSchema: z.ZodType<
     "is_private": "isPrivate",
   });
 });
-
 /** @internal */
 export type PromptConfig$Outbound = {
   stream?: boolean | undefined;
@@ -3262,23 +2799,9 @@ export const PromptConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PromptConfig$ {
-  /** @deprecated use `PromptConfig$inboundSchema` instead. */
-  export const inboundSchema = PromptConfig$inboundSchema;
-  /** @deprecated use `PromptConfig$outboundSchema` instead. */
-  export const outboundSchema = PromptConfig$outboundSchema;
-  /** @deprecated use `PromptConfig$Outbound` instead. */
-  export type Outbound = PromptConfig$Outbound;
-}
-
 export function promptConfigToJSON(promptConfig: PromptConfig): string {
   return JSON.stringify(PromptConfig$outboundSchema.parse(promptConfig));
 }
-
 export function promptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<PromptConfig, SDKValidationError> {
@@ -3293,43 +2816,19 @@ export function promptConfigFromJSON(
 export const UpdatePromptUseCases$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptUseCases
 > = z.nativeEnum(UpdatePromptUseCases);
-
 /** @internal */
 export const UpdatePromptUseCases$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptUseCases
 > = UpdatePromptUseCases$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptUseCases$ {
-  /** @deprecated use `UpdatePromptUseCases$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptUseCases$inboundSchema;
-  /** @deprecated use `UpdatePromptUseCases$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptUseCases$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLanguage
 > = z.nativeEnum(UpdatePromptLanguage);
-
 /** @internal */
 export const UpdatePromptLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLanguage
 > = UpdatePromptLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptLanguage$ {
-  /** @deprecated use `UpdatePromptLanguage$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptLanguage$inboundSchema;
-  /** @deprecated use `UpdatePromptLanguage$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptLanguage$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptMetadata$inboundSchema: z.ZodType<
@@ -3344,7 +2843,6 @@ export const UpdatePromptMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-
 /** @internal */
 export type UpdatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
@@ -3365,19 +2863,6 @@ export const UpdatePromptMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMetadata$ {
-  /** @deprecated use `UpdatePromptMetadata$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMetadata$inboundSchema;
-  /** @deprecated use `UpdatePromptMetadata$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMetadata$outboundSchema;
-  /** @deprecated use `UpdatePromptMetadata$Outbound` instead. */
-  export type Outbound = UpdatePromptMetadata$Outbound;
-}
-
 export function updatePromptMetadataToJSON(
   updatePromptMetadata: UpdatePromptMetadata,
 ): string {
@@ -3385,7 +2870,6 @@ export function updatePromptMetadataToJSON(
     UpdatePromptMetadata$outboundSchema.parse(updatePromptMetadata),
   );
 }
-
 export function updatePromptMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMetadata, SDKValidationError> {
@@ -3400,24 +2884,10 @@ export function updatePromptMetadataFromJSON(
 export const UpdatePromptMessagesPromptsRequestRequestBodyRole$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsRequestRequestBodyRole> = z
     .nativeEnum(UpdatePromptMessagesPromptsRequestRequestBodyRole);
-
 /** @internal */
 export const UpdatePromptMessagesPromptsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsRequestRequestBodyRole> =
     UpdatePromptMessagesPromptsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesPromptsRequestRequestBodyRole$ {
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptMessagesPromptsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesPromptsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptMessagesPromptsRequestContent$inboundSchema: z.ZodType<
@@ -3425,7 +2895,6 @@ export const UpdatePromptMessagesPromptsRequestContent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type UpdatePromptMessagesPromptsRequestContent$Outbound =
   | string
@@ -3439,21 +2908,6 @@ export const UpdatePromptMessagesPromptsRequestContent$outboundSchema:
     UpdatePromptMessagesPromptsRequestContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesPromptsRequestContent$ {
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestContent$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptMessagesPromptsRequestContent$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestContent$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesPromptsRequestContent$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestContent$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesPromptsRequestContent$Outbound;
-}
-
 export function updatePromptMessagesPromptsRequestContentToJSON(
   updatePromptMessagesPromptsRequestContent:
     UpdatePromptMessagesPromptsRequestContent,
@@ -3464,7 +2918,6 @@ export function updatePromptMessagesPromptsRequestContentToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesPromptsRequestContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3495,7 +2948,6 @@ export const UpdatePromptMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type UpdatePromptMessagesToolMessage$Outbound = {
   role: string;
@@ -3518,19 +2970,6 @@ export const UpdatePromptMessagesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesToolMessage$ {
-  /** @deprecated use `UpdatePromptMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesToolMessage$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesToolMessage$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesToolMessage$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesToolMessage$Outbound;
-}
-
 export function updatePromptMessagesToolMessageToJSON(
   updatePromptMessagesToolMessage: UpdatePromptMessagesToolMessage,
 ): string {
@@ -3540,7 +2979,6 @@ export function updatePromptMessagesToolMessageToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesToolMessage, SDKValidationError> {
@@ -3558,26 +2996,12 @@ export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$in
   > = z.nativeEnum(
     UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType,
   );
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType
   > =
     UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2RefusalContentPart$inboundSchema: z.ZodType<
@@ -3589,7 +3013,6 @@ export const UpdatePrompt2RefusalContentPart$inboundSchema: z.ZodType<
     UpdatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType$inboundSchema,
   refusal: z.string(),
 });
-
 /** @internal */
 export type UpdatePrompt2RefusalContentPart$Outbound = {
   type: string;
@@ -3607,19 +3030,6 @@ export const UpdatePrompt2RefusalContentPart$outboundSchema: z.ZodType<
   refusal: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2RefusalContentPart$ {
-  /** @deprecated use `UpdatePrompt2RefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2RefusalContentPart$inboundSchema;
-  /** @deprecated use `UpdatePrompt2RefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2RefusalContentPart$outboundSchema;
-  /** @deprecated use `UpdatePrompt2RefusalContentPart$Outbound` instead. */
-  export type Outbound = UpdatePrompt2RefusalContentPart$Outbound;
-}
-
 export function updatePrompt2RefusalContentPartToJSON(
   updatePrompt2RefusalContentPart: UpdatePrompt2RefusalContentPart,
 ): string {
@@ -3629,7 +3039,6 @@ export function updatePrompt2RefusalContentPartToJSON(
     ),
   );
 }
-
 export function updatePrompt2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2RefusalContentPart, SDKValidationError> {
@@ -3645,47 +3054,20 @@ export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$inboundSc
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type
   > = z.nativeEnum(UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type
   > = UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages3Type$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptAnnotationsPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptAnnotationsPromptsType
 > = z.nativeEnum(UpdatePromptAnnotationsPromptsType);
-
 /** @internal */
 export const UpdatePromptAnnotationsPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptAnnotationsPromptsType
 > = UpdatePromptAnnotationsPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotationsPromptsType$ {
-  /** @deprecated use `UpdatePromptAnnotationsPromptsType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptAnnotationsPromptsType$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptAnnotationsPromptsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptAnnotationsFilePath$inboundSchema: z.ZodType<
@@ -3699,7 +3081,6 @@ export const UpdatePromptAnnotationsFilePath$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type UpdatePromptAnnotationsFilePath$Outbound = {
   file_id: string;
@@ -3718,19 +3099,6 @@ export const UpdatePromptAnnotationsFilePath$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotationsFilePath$ {
-  /** @deprecated use `UpdatePromptAnnotationsFilePath$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptAnnotationsFilePath$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsFilePath$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptAnnotationsFilePath$outboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsFilePath$Outbound` instead. */
-  export type Outbound = UpdatePromptAnnotationsFilePath$Outbound;
-}
-
 export function updatePromptAnnotationsFilePathToJSON(
   updatePromptAnnotationsFilePath: UpdatePromptAnnotationsFilePath,
 ): string {
@@ -3740,7 +3108,6 @@ export function updatePromptAnnotationsFilePathToJSON(
     ),
   );
 }
-
 export function updatePromptAnnotationsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptAnnotationsFilePath, SDKValidationError> {
@@ -3769,7 +3136,6 @@ export const UpdatePromptAnnotations2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type UpdatePromptAnnotations2$Outbound = {
   type: string;
@@ -3798,19 +3164,6 @@ export const UpdatePromptAnnotations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotations2$ {
-  /** @deprecated use `UpdatePromptAnnotations2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptAnnotations2$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotations2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptAnnotations2$outboundSchema;
-  /** @deprecated use `UpdatePromptAnnotations2$Outbound` instead. */
-  export type Outbound = UpdatePromptAnnotations2$Outbound;
-}
-
 export function updatePromptAnnotations2ToJSON(
   updatePromptAnnotations2: UpdatePromptAnnotations2,
 ): string {
@@ -3818,7 +3171,6 @@ export function updatePromptAnnotations2ToJSON(
     UpdatePromptAnnotations2$outboundSchema.parse(updatePromptAnnotations2),
   );
 }
-
 export function updatePromptAnnotations2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptAnnotations2, SDKValidationError> {
@@ -3833,22 +3185,10 @@ export function updatePromptAnnotations2FromJSON(
 export const UpdatePromptAnnotationsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptAnnotationsType
 > = z.nativeEnum(UpdatePromptAnnotationsType);
-
 /** @internal */
 export const UpdatePromptAnnotationsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptAnnotationsType
 > = UpdatePromptAnnotationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotationsType$ {
-  /** @deprecated use `UpdatePromptAnnotationsType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptAnnotationsType$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptAnnotationsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptAnnotationsFileCitation$inboundSchema: z.ZodType<
@@ -3863,7 +3203,6 @@ export const UpdatePromptAnnotationsFileCitation$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type UpdatePromptAnnotationsFileCitation$Outbound = {
   file_id: string;
@@ -3884,21 +3223,6 @@ export const UpdatePromptAnnotationsFileCitation$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotationsFileCitation$ {
-  /** @deprecated use `UpdatePromptAnnotationsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptAnnotationsFileCitation$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptAnnotationsFileCitation$outboundSchema;
-  /** @deprecated use `UpdatePromptAnnotationsFileCitation$Outbound` instead. */
-  export type Outbound = UpdatePromptAnnotationsFileCitation$Outbound;
-}
-
 export function updatePromptAnnotationsFileCitationToJSON(
   updatePromptAnnotationsFileCitation: UpdatePromptAnnotationsFileCitation,
 ): string {
@@ -3908,7 +3232,6 @@ export function updatePromptAnnotationsFileCitationToJSON(
     ),
   );
 }
-
 export function updatePromptAnnotationsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptAnnotationsFileCitation, SDKValidationError> {
@@ -3940,7 +3263,6 @@ export const UpdatePromptAnnotations1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type UpdatePromptAnnotations1$Outbound = {
   type: string;
@@ -3971,19 +3293,6 @@ export const UpdatePromptAnnotations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptAnnotations1$ {
-  /** @deprecated use `UpdatePromptAnnotations1$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptAnnotations1$inboundSchema;
-  /** @deprecated use `UpdatePromptAnnotations1$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptAnnotations1$outboundSchema;
-  /** @deprecated use `UpdatePromptAnnotations1$Outbound` instead. */
-  export type Outbound = UpdatePromptAnnotations1$Outbound;
-}
-
 export function updatePromptAnnotations1ToJSON(
   updatePromptAnnotations1: UpdatePromptAnnotations1,
 ): string {
@@ -3991,7 +3300,6 @@ export function updatePromptAnnotations1ToJSON(
     UpdatePromptAnnotations1$outboundSchema.parse(updatePromptAnnotations1),
   );
 }
-
 export function updatePromptAnnotations1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptAnnotations1, SDKValidationError> {
@@ -4011,7 +3319,6 @@ export const UpdatePrompt2Annotations$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptAnnotations1$inboundSchema),
   z.lazy(() => UpdatePromptAnnotations2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePrompt2Annotations$Outbound =
   | UpdatePromptAnnotations1$Outbound
@@ -4027,19 +3334,6 @@ export const UpdatePrompt2Annotations$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptAnnotations2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Annotations$ {
-  /** @deprecated use `UpdatePrompt2Annotations$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Annotations$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Annotations$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Annotations$outboundSchema;
-  /** @deprecated use `UpdatePrompt2Annotations$Outbound` instead. */
-  export type Outbound = UpdatePrompt2Annotations$Outbound;
-}
-
 export function updatePrompt2AnnotationsToJSON(
   updatePrompt2Annotations: UpdatePrompt2Annotations,
 ): string {
@@ -4047,7 +3341,6 @@ export function updatePrompt2AnnotationsToJSON(
     UpdatePrompt2Annotations$outboundSchema.parse(updatePrompt2Annotations),
   );
 }
-
 export function updatePrompt2AnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2Annotations, SDKValidationError> {
@@ -4073,7 +3366,6 @@ export const UpdatePrompt2TextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type UpdatePrompt2TextContentPart$Outbound = {
   type: string;
@@ -4102,19 +3394,6 @@ export const UpdatePrompt2TextContentPart$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2TextContentPart$ {
-  /** @deprecated use `UpdatePrompt2TextContentPart$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2TextContentPart$inboundSchema;
-  /** @deprecated use `UpdatePrompt2TextContentPart$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2TextContentPart$outboundSchema;
-  /** @deprecated use `UpdatePrompt2TextContentPart$Outbound` instead. */
-  export type Outbound = UpdatePrompt2TextContentPart$Outbound;
-}
-
 export function updatePrompt2TextContentPartToJSON(
   updatePrompt2TextContentPart: UpdatePrompt2TextContentPart,
 ): string {
@@ -4124,7 +3403,6 @@ export function updatePrompt2TextContentPartToJSON(
     ),
   );
 }
-
 export function updatePrompt2TextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2TextContentPart, SDKValidationError> {
@@ -4144,7 +3422,6 @@ export const UpdatePromptContentPromptsRequest2$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt2TextContentPart$inboundSchema),
   z.lazy(() => UpdatePrompt2RefusalContentPart$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptContentPromptsRequest2$Outbound =
   | UpdatePrompt2TextContentPart$Outbound
@@ -4160,20 +3437,6 @@ export const UpdatePromptContentPromptsRequest2$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt2RefusalContentPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptContentPromptsRequest2$ {
-  /** @deprecated use `UpdatePromptContentPromptsRequest2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptContentPromptsRequest2$inboundSchema;
-  /** @deprecated use `UpdatePromptContentPromptsRequest2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptContentPromptsRequest2$outboundSchema;
-  /** @deprecated use `UpdatePromptContentPromptsRequest2$Outbound` instead. */
-  export type Outbound = UpdatePromptContentPromptsRequest2$Outbound;
-}
-
 export function updatePromptContentPromptsRequest2ToJSON(
   updatePromptContentPromptsRequest2: UpdatePromptContentPromptsRequest2,
 ): string {
@@ -4183,7 +3446,6 @@ export function updatePromptContentPromptsRequest2ToJSON(
     ),
   );
 }
-
 export function updatePromptContentPromptsRequest2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContentPromptsRequest2, SDKValidationError> {
@@ -4207,7 +3469,6 @@ export const UpdatePromptMessagesPromptsContent$inboundSchema: z.ZodType<
     z.lazy(() => UpdatePrompt2RefusalContentPart$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type UpdatePromptMessagesPromptsContent$Outbound =
   | string
@@ -4229,20 +3490,6 @@ export const UpdatePromptMessagesPromptsContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesPromptsContent$ {
-  /** @deprecated use `UpdatePromptMessagesPromptsContent$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesPromptsContent$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesPromptsContent$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsContent$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesPromptsContent$Outbound;
-}
-
 export function updatePromptMessagesPromptsContentToJSON(
   updatePromptMessagesPromptsContent: UpdatePromptMessagesPromptsContent,
 ): string {
@@ -4252,7 +3499,6 @@ export function updatePromptMessagesPromptsContentToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesPromptsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsContent, SDKValidationError> {
@@ -4269,24 +3515,10 @@ export const UpdatePromptMessagesPromptsRequestRole$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsRequestRole> = z.nativeEnum(
     UpdatePromptMessagesPromptsRequestRole,
   );
-
 /** @internal */
 export const UpdatePromptMessagesPromptsRequestRole$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsRequestRole> =
     UpdatePromptMessagesPromptsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesPromptsRequestRole$ {
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptMessagesPromptsRequestRole$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesPromptsRequestRole$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptMessagesAudio$inboundSchema: z.ZodType<
@@ -4296,7 +3528,6 @@ export const UpdatePromptMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type UpdatePromptMessagesAudio$Outbound = {
   id: string;
@@ -4311,19 +3542,6 @@ export const UpdatePromptMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesAudio$ {
-  /** @deprecated use `UpdatePromptMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesAudio$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesAudio$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesAudio$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesAudio$Outbound;
-}
-
 export function updatePromptMessagesAudioToJSON(
   updatePromptMessagesAudio: UpdatePromptMessagesAudio,
 ): string {
@@ -4331,7 +3549,6 @@ export function updatePromptMessagesAudioToJSON(
     UpdatePromptMessagesAudio$outboundSchema.parse(updatePromptMessagesAudio),
   );
 }
-
 export function updatePromptMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesAudio, SDKValidationError> {
@@ -4346,22 +3563,10 @@ export function updatePromptMessagesAudioFromJSON(
 export const UpdatePromptMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesType
 > = z.nativeEnum(UpdatePromptMessagesType);
-
 /** @internal */
 export const UpdatePromptMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesType
 > = UpdatePromptMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesType$ {
-  /** @deprecated use `UpdatePromptMessagesType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesType$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptMessagesFunction$inboundSchema: z.ZodType<
@@ -4372,7 +3577,6 @@ export const UpdatePromptMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type UpdatePromptMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -4389,19 +3593,6 @@ export const UpdatePromptMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesFunction$ {
-  /** @deprecated use `UpdatePromptMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesFunction$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesFunction$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesFunction$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesFunction$Outbound;
-}
-
 export function updatePromptMessagesFunctionToJSON(
   updatePromptMessagesFunction: UpdatePromptMessagesFunction,
 ): string {
@@ -4411,7 +3602,6 @@ export function updatePromptMessagesFunctionToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesFunction, SDKValidationError> {
@@ -4432,7 +3622,6 @@ export const UpdatePromptMessagesToolCalls$inboundSchema: z.ZodType<
   type: UpdatePromptMessagesType$inboundSchema,
   function: z.lazy(() => UpdatePromptMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePromptMessagesToolCalls$Outbound = {
   id: string;
@@ -4451,19 +3640,6 @@ export const UpdatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => UpdatePromptMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesToolCalls$ {
-  /** @deprecated use `UpdatePromptMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesToolCalls$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesToolCalls$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesToolCalls$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesToolCalls$Outbound;
-}
-
 export function updatePromptMessagesToolCallsToJSON(
   updatePromptMessagesToolCalls: UpdatePromptMessagesToolCalls,
 ): string {
@@ -4473,7 +3649,6 @@ export function updatePromptMessagesToolCallsToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesToolCalls, SDKValidationError> {
@@ -4518,7 +3693,6 @@ export const UpdatePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type UpdatePromptMessagesAssistantMessage$Outbound = {
   content?:
@@ -4574,21 +3748,6 @@ export const UpdatePromptMessagesAssistantMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesAssistantMessage$ {
-  /** @deprecated use `UpdatePromptMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesAssistantMessage$Outbound;
-}
-
 export function updatePromptMessagesAssistantMessageToJSON(
   updatePromptMessagesAssistantMessage: UpdatePromptMessagesAssistantMessage,
 ): string {
@@ -4598,7 +3757,6 @@ export function updatePromptMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesAssistantMessage, SDKValidationError> {
@@ -4614,47 +3772,21 @@ export function updatePromptMessagesAssistantMessageFromJSON(
 export const UpdatePromptMessagesPromptsRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsRole
 > = z.nativeEnum(UpdatePromptMessagesPromptsRole);
-
 /** @internal */
 export const UpdatePromptMessagesPromptsRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsRole
 > = UpdatePromptMessagesPromptsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesPromptsRole$ {
-  /** @deprecated use `UpdatePromptMessagesPromptsRole$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesPromptsRole$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesPromptsRole$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesPromptsRole$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type
   > = z.nativeEnum(UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type
   > = UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsFile$inboundSchema: z.ZodType<
@@ -4671,7 +3803,6 @@ export const UpdatePrompt2PromptsFile$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsFile$Outbound = {
   file_data?: string | undefined;
@@ -4696,19 +3827,6 @@ export const UpdatePrompt2PromptsFile$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsFile$ {
-  /** @deprecated use `UpdatePrompt2PromptsFile$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsFile$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsFile$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsFile$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsFile$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsFile$Outbound;
-}
-
 export function updatePrompt2PromptsFileToJSON(
   updatePrompt2PromptsFile: UpdatePrompt2PromptsFile,
 ): string {
@@ -4716,7 +3834,6 @@ export function updatePrompt2PromptsFileToJSON(
     UpdatePrompt2PromptsFile$outboundSchema.parse(updatePrompt2PromptsFile),
   );
 }
-
 export function updatePrompt2PromptsFileFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsFile, SDKValidationError> {
@@ -4736,7 +3853,6 @@ export const UpdatePrompt24$inboundSchema: z.ZodType<
   type: UpdatePrompt2PromptsRequestRequestBodyPromptMessages2Type$inboundSchema,
   file: z.lazy(() => UpdatePrompt2PromptsFile$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePrompt24$Outbound = {
   type: string;
@@ -4754,23 +3870,9 @@ export const UpdatePrompt24$outboundSchema: z.ZodType<
   file: z.lazy(() => UpdatePrompt2PromptsFile$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt24$ {
-  /** @deprecated use `UpdatePrompt24$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt24$inboundSchema;
-  /** @deprecated use `UpdatePrompt24$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt24$outboundSchema;
-  /** @deprecated use `UpdatePrompt24$Outbound` instead. */
-  export type Outbound = UpdatePrompt24$Outbound;
-}
-
 export function updatePrompt24ToJSON(updatePrompt24: UpdatePrompt24): string {
   return JSON.stringify(UpdatePrompt24$outboundSchema.parse(updatePrompt24));
 }
-
 export function updatePrompt24FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt24, SDKValidationError> {
@@ -4786,46 +3888,20 @@ export const UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$inboundSch
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType
   > = z.nativeEnum(UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType
   > = UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePrompt2Format$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Format
 > = z.nativeEnum(UpdatePrompt2Format);
-
 /** @internal */
 export const UpdatePrompt2Format$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Format
 > = UpdatePrompt2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Format$ {
-  /** @deprecated use `UpdatePrompt2Format$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Format$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Format$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Format$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2InputAudio$inboundSchema: z.ZodType<
@@ -4836,7 +3912,6 @@ export const UpdatePrompt2InputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: UpdatePrompt2Format$inboundSchema,
 });
-
 /** @internal */
 export type UpdatePrompt2InputAudio$Outbound = {
   data: string;
@@ -4853,19 +3928,6 @@ export const UpdatePrompt2InputAudio$outboundSchema: z.ZodType<
   format: UpdatePrompt2Format$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2InputAudio$ {
-  /** @deprecated use `UpdatePrompt2InputAudio$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2InputAudio$inboundSchema;
-  /** @deprecated use `UpdatePrompt2InputAudio$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2InputAudio$outboundSchema;
-  /** @deprecated use `UpdatePrompt2InputAudio$Outbound` instead. */
-  export type Outbound = UpdatePrompt2InputAudio$Outbound;
-}
-
 export function updatePrompt2InputAudioToJSON(
   updatePrompt2InputAudio: UpdatePrompt2InputAudio,
 ): string {
@@ -4873,7 +3935,6 @@ export function updatePrompt2InputAudioToJSON(
     UpdatePrompt2InputAudio$outboundSchema.parse(updatePrompt2InputAudio),
   );
 }
-
 export function updatePrompt2InputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2InputAudio, SDKValidationError> {
@@ -4897,7 +3958,6 @@ export const UpdatePrompt2Prompts3$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2Prompts3$Outbound = {
   type: string;
@@ -4918,19 +3978,6 @@ export const UpdatePrompt2Prompts3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Prompts3$ {
-  /** @deprecated use `UpdatePrompt2Prompts3$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Prompts3$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts3$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Prompts3$outboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts3$Outbound` instead. */
-  export type Outbound = UpdatePrompt2Prompts3$Outbound;
-}
-
 export function updatePrompt2Prompts3ToJSON(
   updatePrompt2Prompts3: UpdatePrompt2Prompts3,
 ): string {
@@ -4938,7 +3985,6 @@ export function updatePrompt2Prompts3ToJSON(
     UpdatePrompt2Prompts3$outboundSchema.parse(updatePrompt2Prompts3),
   );
 }
-
 export function updatePrompt2Prompts3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2Prompts3, SDKValidationError> {
@@ -4953,45 +3999,19 @@ export function updatePrompt2Prompts3FromJSON(
 export const UpdatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsRequestRequestBodyPromptType> = z
     .nativeEnum(UpdatePrompt2PromptsRequestRequestBodyPromptType);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyPromptType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsRequestRequestBodyPromptType> =
     UpdatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyPromptType$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyPromptType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyPromptType$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePrompt2Detail$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Detail
 > = z.nativeEnum(UpdatePrompt2Detail);
-
 /** @internal */
 export const UpdatePrompt2Detail$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Detail
 > = UpdatePrompt2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Detail$ {
-  /** @deprecated use `UpdatePrompt2Detail$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Detail$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Detail$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Detail$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsImageUrl$inboundSchema: z.ZodType<
@@ -5002,7 +4022,6 @@ export const UpdatePrompt2PromptsImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: UpdatePrompt2Detail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsImageUrl$Outbound = {
   url: string;
@@ -5019,19 +4038,6 @@ export const UpdatePrompt2PromptsImageUrl$outboundSchema: z.ZodType<
   detail: UpdatePrompt2Detail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsImageUrl$ {
-  /** @deprecated use `UpdatePrompt2PromptsImageUrl$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsImageUrl$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsImageUrl$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsImageUrl$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsImageUrl$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsImageUrl$Outbound;
-}
-
 export function updatePrompt2PromptsImageUrlToJSON(
   updatePrompt2PromptsImageUrl: UpdatePrompt2PromptsImageUrl,
 ): string {
@@ -5041,7 +4047,6 @@ export function updatePrompt2PromptsImageUrlToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsImageUrl, SDKValidationError> {
@@ -5065,7 +4070,6 @@ export const UpdatePrompt2Prompts2$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2Prompts2$Outbound = {
   type: string;
@@ -5086,19 +4090,6 @@ export const UpdatePrompt2Prompts2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Prompts2$ {
-  /** @deprecated use `UpdatePrompt2Prompts2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Prompts2$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Prompts2$outboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts2$Outbound` instead. */
-  export type Outbound = UpdatePrompt2Prompts2$Outbound;
-}
-
 export function updatePrompt2Prompts2ToJSON(
   updatePrompt2Prompts2: UpdatePrompt2Prompts2,
 ): string {
@@ -5106,7 +4097,6 @@ export function updatePrompt2Prompts2ToJSON(
     UpdatePrompt2Prompts2$outboundSchema.parse(updatePrompt2Prompts2),
   );
 }
-
 export function updatePrompt2Prompts2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2Prompts2, SDKValidationError> {
@@ -5121,24 +4111,10 @@ export function updatePrompt2Prompts2FromJSON(
 export const UpdatePrompt2PromptsRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsRequestRequestBodyType> = z
     .nativeEnum(UpdatePrompt2PromptsRequestRequestBodyType);
-
 /** @internal */
 export const UpdatePrompt2PromptsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsRequestRequestBodyType> =
     UpdatePrompt2PromptsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsRequestRequestBodyType$ {
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2Prompts1$inboundSchema: z.ZodType<
@@ -5149,7 +4125,6 @@ export const UpdatePrompt2Prompts1$inboundSchema: z.ZodType<
   type: UpdatePrompt2PromptsRequestRequestBodyType$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type UpdatePrompt2Prompts1$Outbound = {
   type: string;
@@ -5166,19 +4141,6 @@ export const UpdatePrompt2Prompts1$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2Prompts1$ {
-  /** @deprecated use `UpdatePrompt2Prompts1$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2Prompts1$inboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts1$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2Prompts1$outboundSchema;
-  /** @deprecated use `UpdatePrompt2Prompts1$Outbound` instead. */
-  export type Outbound = UpdatePrompt2Prompts1$Outbound;
-}
-
 export function updatePrompt2Prompts1ToJSON(
   updatePrompt2Prompts1: UpdatePrompt2Prompts1,
 ): string {
@@ -5186,7 +4148,6 @@ export function updatePrompt2Prompts1ToJSON(
     UpdatePrompt2Prompts1$outboundSchema.parse(updatePrompt2Prompts1),
   );
 }
-
 export function updatePrompt2Prompts1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2Prompts1, SDKValidationError> {
@@ -5208,7 +4169,6 @@ export const UpdatePromptContentPrompts2$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt2Prompts3$inboundSchema),
   z.lazy(() => UpdatePrompt24$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptContentPrompts2$Outbound =
   | UpdatePrompt2Prompts1$Outbound
@@ -5228,19 +4188,6 @@ export const UpdatePromptContentPrompts2$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt24$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptContentPrompts2$ {
-  /** @deprecated use `UpdatePromptContentPrompts2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptContentPrompts2$inboundSchema;
-  /** @deprecated use `UpdatePromptContentPrompts2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptContentPrompts2$outboundSchema;
-  /** @deprecated use `UpdatePromptContentPrompts2$Outbound` instead. */
-  export type Outbound = UpdatePromptContentPrompts2$Outbound;
-}
-
 export function updatePromptContentPrompts2ToJSON(
   updatePromptContentPrompts2: UpdatePromptContentPrompts2,
 ): string {
@@ -5250,7 +4197,6 @@ export function updatePromptContentPrompts2ToJSON(
     ),
   );
 }
-
 export function updatePromptContentPrompts2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContentPrompts2, SDKValidationError> {
@@ -5275,7 +4221,6 @@ export const UpdatePromptMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => UpdatePrompt24$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type UpdatePromptMessagesContent$Outbound =
   | string
@@ -5301,19 +4246,6 @@ export const UpdatePromptMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesContent$ {
-  /** @deprecated use `UpdatePromptMessagesContent$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesContent$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesContent$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesContent$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesContent$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesContent$Outbound;
-}
-
 export function updatePromptMessagesContentToJSON(
   updatePromptMessagesContent: UpdatePromptMessagesContent,
 ): string {
@@ -5323,7 +4255,6 @@ export function updatePromptMessagesContentToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesContent, SDKValidationError> {
@@ -5352,7 +4283,6 @@ export const UpdatePromptMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type UpdatePromptMessagesUserMessage$Outbound = {
   role: string;
@@ -5386,19 +4316,6 @@ export const UpdatePromptMessagesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesUserMessage$ {
-  /** @deprecated use `UpdatePromptMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesUserMessage$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesUserMessage$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesUserMessage$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesUserMessage$Outbound;
-}
-
 export function updatePromptMessagesUserMessageToJSON(
   updatePromptMessagesUserMessage: UpdatePromptMessagesUserMessage,
 ): string {
@@ -5408,7 +4325,6 @@ export function updatePromptMessagesUserMessageToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesUserMessage, SDKValidationError> {
@@ -5423,22 +4339,10 @@ export function updatePromptMessagesUserMessageFromJSON(
 export const UpdatePromptMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesRole
 > = z.nativeEnum(UpdatePromptMessagesRole);
-
 /** @internal */
 export const UpdatePromptMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesRole
 > = UpdatePromptMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesRole$ {
-  /** @deprecated use `UpdatePromptMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesRole$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptMessagesSystemMessage$inboundSchema: z.ZodType<
@@ -5450,7 +4354,6 @@ export const UpdatePromptMessagesSystemMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type UpdatePromptMessagesSystemMessage$Outbound = {
   role: string;
@@ -5469,20 +4372,6 @@ export const UpdatePromptMessagesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptMessagesSystemMessage$ {
-  /** @deprecated use `UpdatePromptMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `UpdatePromptMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `UpdatePromptMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = UpdatePromptMessagesSystemMessage$Outbound;
-}
-
 export function updatePromptMessagesSystemMessageToJSON(
   updatePromptMessagesSystemMessage: UpdatePromptMessagesSystemMessage,
 ): string {
@@ -5492,7 +4381,6 @@ export function updatePromptMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function updatePromptMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesSystemMessage, SDKValidationError> {
@@ -5514,7 +4402,6 @@ export const UpdatePromptPromptsMessages$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptMessagesUserMessage$inboundSchema),
   z.lazy(() => UpdatePromptMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptPromptsMessages$Outbound =
   | UpdatePromptMessagesToolMessage$Outbound
@@ -5534,19 +4421,6 @@ export const UpdatePromptPromptsMessages$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsMessages$ {
-  /** @deprecated use `UpdatePromptPromptsMessages$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsMessages$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsMessages$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsMessages$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsMessages$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsMessages$Outbound;
-}
-
 export function updatePromptPromptsMessagesToJSON(
   updatePromptPromptsMessages: UpdatePromptPromptsMessages,
 ): string {
@@ -5556,7 +4430,6 @@ export function updatePromptPromptsMessagesToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsMessages, SDKValidationError> {
@@ -5574,26 +4447,12 @@ export const UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inbo
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type,
   );
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type
   > =
     UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema:
@@ -5607,7 +4466,6 @@ export const UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema:
     schema: z.any().optional(),
     strict: z.boolean().optional(),
   });
-
 /** @internal */
 export type UpdatePromptResponseFormatPromptsJsonSchema$Outbound = {
   description?: string | undefined;
@@ -5629,21 +4487,6 @@ export const UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema:
     strict: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsJsonSchema$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsJsonSchema$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPromptsJsonSchema$Outbound;
-}
-
 export function updatePromptResponseFormatPromptsJsonSchemaToJSON(
   updatePromptResponseFormatPromptsJsonSchema:
     UpdatePromptResponseFormatPromptsJsonSchema,
@@ -5654,7 +4497,6 @@ export function updatePromptResponseFormatPromptsJsonSchemaToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPromptsJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5687,7 +4529,6 @@ export const UpdatePromptResponseFormatPrompts3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type UpdatePromptResponseFormatPrompts3$Outbound = {
   type: string;
@@ -5711,20 +4552,6 @@ export const UpdatePromptResponseFormatPrompts3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPrompts3$ {
-  /** @deprecated use `UpdatePromptResponseFormatPrompts3$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormatPrompts3$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts3$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPrompts3$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts3$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPrompts3$Outbound;
-}
-
 export function updatePromptResponseFormatPrompts3ToJSON(
   updatePromptResponseFormatPrompts3: UpdatePromptResponseFormatPrompts3,
 ): string {
@@ -5734,7 +4561,6 @@ export function updatePromptResponseFormatPrompts3ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPrompts3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormatPrompts3, SDKValidationError> {
@@ -5753,26 +4579,12 @@ export const UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$inbou
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType,
   );
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType
   > =
     UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPrompts2$inboundSchema: z.ZodType<
@@ -5783,7 +4595,6 @@ export const UpdatePromptResponseFormatPrompts2$inboundSchema: z.ZodType<
   type:
     UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema,
 });
-
 /** @internal */
 export type UpdatePromptResponseFormatPrompts2$Outbound = {
   type: string;
@@ -5799,20 +4610,6 @@ export const UpdatePromptResponseFormatPrompts2$outboundSchema: z.ZodType<
     UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPrompts2$ {
-  /** @deprecated use `UpdatePromptResponseFormatPrompts2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormatPrompts2$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPrompts2$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts2$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPrompts2$Outbound;
-}
-
 export function updatePromptResponseFormatPrompts2ToJSON(
   updatePromptResponseFormatPrompts2: UpdatePromptResponseFormatPrompts2,
 ): string {
@@ -5822,7 +4619,6 @@ export function updatePromptResponseFormatPrompts2ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPrompts2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormatPrompts2, SDKValidationError> {
@@ -5839,25 +4635,11 @@ export const UpdatePromptResponseFormatPromptsRequestRequestBodyType$inboundSche
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsRequestRequestBodyType
   > = z.nativeEnum(UpdatePromptResponseFormatPromptsRequestRequestBodyType);
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsRequestRequestBodyType
   > = UpdatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsRequestRequestBodyType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPrompts1$inboundSchema: z.ZodType<
@@ -5867,7 +4649,6 @@ export const UpdatePromptResponseFormatPrompts1$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema,
 });
-
 /** @internal */
 export type UpdatePromptResponseFormatPrompts1$Outbound = {
   type: string;
@@ -5882,20 +4663,6 @@ export const UpdatePromptResponseFormatPrompts1$outboundSchema: z.ZodType<
   type: UpdatePromptResponseFormatPromptsRequestRequestBodyType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPrompts1$ {
-  /** @deprecated use `UpdatePromptResponseFormatPrompts1$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormatPrompts1$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts1$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPrompts1$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts1$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPrompts1$Outbound;
-}
-
 export function updatePromptResponseFormatPrompts1ToJSON(
   updatePromptResponseFormatPrompts1: UpdatePromptResponseFormatPrompts1,
 ): string {
@@ -5905,7 +4672,6 @@ export function updatePromptResponseFormatPrompts1ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPrompts1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormatPrompts1, SDKValidationError> {
@@ -5927,7 +4693,6 @@ export const UpdatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptResponseFormatPrompts1$inboundSchema),
   z.lazy(() => UpdatePromptResponseFormatPrompts2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptPromptsResponseFormat$Outbound =
   | UpdatePromptResponseFormatPrompts3$Outbound
@@ -5945,20 +4710,6 @@ export const UpdatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptResponseFormatPrompts2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsResponseFormat$ {
-  /** @deprecated use `UpdatePromptPromptsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsResponseFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsResponseFormat$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseFormat$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsResponseFormat$Outbound;
-}
-
 export function updatePromptPromptsResponseFormatToJSON(
   updatePromptPromptsResponseFormat: UpdatePromptPromptsResponseFormat,
 ): string {
@@ -5968,7 +4719,6 @@ export function updatePromptPromptsResponseFormatToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsResponseFormat, SDKValidationError> {
@@ -6009,7 +4759,6 @@ export const UpdatePromptPromptInput$inboundSchema: z.ZodType<
     "response_format": "responseFormat",
   });
 });
-
 /** @internal */
 export type UpdatePromptPromptInput$Outbound = {
   messages?:
@@ -6062,19 +4811,6 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptInput$ {
-  /** @deprecated use `UpdatePromptPromptInput$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptInput$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptInput$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptInput$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptInput$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptInput$Outbound;
-}
-
 export function updatePromptPromptInputToJSON(
   updatePromptPromptInput: UpdatePromptPromptInput,
 ): string {
@@ -6082,7 +4818,6 @@ export function updatePromptPromptInputToJSON(
     UpdatePromptPromptInput$outboundSchema.parse(updatePromptPromptInput),
   );
 }
-
 export function updatePromptPromptInputFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptInput, SDKValidationError> {
@@ -6120,7 +4855,6 @@ export const UpdatePromptRequestBody$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-
 /** @internal */
 export type UpdatePromptRequestBody$Outbound = {
   owner?: string | undefined;
@@ -6165,19 +4899,6 @@ export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptRequestBody$ {
-  /** @deprecated use `UpdatePromptRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptRequestBody$inboundSchema;
-  /** @deprecated use `UpdatePromptRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptRequestBody$outboundSchema;
-  /** @deprecated use `UpdatePromptRequestBody$Outbound` instead. */
-  export type Outbound = UpdatePromptRequestBody$Outbound;
-}
-
 export function updatePromptRequestBodyToJSON(
   updatePromptRequestBody: UpdatePromptRequestBody,
 ): string {
@@ -6185,7 +4906,6 @@ export function updatePromptRequestBodyToJSON(
     UpdatePromptRequestBody$outboundSchema.parse(updatePromptRequestBody),
   );
 }
-
 export function updatePromptRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptRequestBody, SDKValidationError> {
@@ -6209,7 +4929,6 @@ export const UpdatePromptRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdatePromptRequest$Outbound = {
   id: string;
@@ -6230,19 +4949,6 @@ export const UpdatePromptRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptRequest$ {
-  /** @deprecated use `UpdatePromptRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptRequest$inboundSchema;
-  /** @deprecated use `UpdatePromptRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptRequest$outboundSchema;
-  /** @deprecated use `UpdatePromptRequest$Outbound` instead. */
-  export type Outbound = UpdatePromptRequest$Outbound;
-}
-
 export function updatePromptRequestToJSON(
   updatePromptRequest: UpdatePromptRequest,
 ): string {
@@ -6250,7 +4956,6 @@ export function updatePromptRequestToJSON(
     UpdatePromptRequest$outboundSchema.parse(updatePromptRequest),
   );
 }
-
 export function updatePromptRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptRequest, SDKValidationError> {
@@ -6265,128 +4970,55 @@ export function updatePromptRequestFromJSON(
 export const UpdatePromptPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsType
 > = z.nativeEnum(UpdatePromptPromptsType);
-
 /** @internal */
 export const UpdatePromptPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsType
 > = UpdatePromptPromptsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsType$ {
-  /** @deprecated use `UpdatePromptPromptsType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsType$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsType$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModelType
 > = z.nativeEnum(UpdatePromptModelType);
-
 /** @internal */
 export const UpdatePromptModelType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModelType
 > = UpdatePromptModelType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptModelType$ {
-  /** @deprecated use `UpdatePromptModelType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptModelType$inboundSchema;
-  /** @deprecated use `UpdatePromptModelType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptModelType$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsFormat
 > = z.nativeEnum(UpdatePromptPromptsFormat);
-
 /** @internal */
 export const UpdatePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsFormat
 > = UpdatePromptPromptsFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsFormat$ {
-  /** @deprecated use `UpdatePromptPromptsFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsFormat$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat6
 > = z.nativeEnum(UpdatePromptResponseFormat6);
-
 /** @internal */
 export const UpdatePromptResponseFormat6$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat6
 > = UpdatePromptResponseFormat6$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat6$ {
-  /** @deprecated use `UpdatePromptResponseFormat6$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat6$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat6$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat6$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat5
 > = z.nativeEnum(UpdatePromptResponseFormat5);
-
 /** @internal */
 export const UpdatePromptResponseFormat5$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat5
 > = UpdatePromptResponseFormat5$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormat5$ {
-  /** @deprecated use `UpdatePromptResponseFormat5$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormat5$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormat5$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptResponseFormat5$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptResponseFormatPrompts4$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormatPrompts4
 > = z.nativeEnum(UpdatePromptResponseFormatPrompts4);
-
 /** @internal */
 export const UpdatePromptResponseFormatPrompts4$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormatPrompts4
 > = UpdatePromptResponseFormatPrompts4$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPrompts4$ {
-  /** @deprecated use `UpdatePromptResponseFormatPrompts4$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptResponseFormatPrompts4$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPrompts4$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPrompts4$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
@@ -6395,26 +5027,12 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inb
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType
   > =
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse3$inboundSchema:
@@ -6423,7 +5041,6 @@ export const UpdatePromptResponseFormatPromptsResponse3$inboundSchema:
       type:
         UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
     });
-
 /** @internal */
 export type UpdatePromptResponseFormatPromptsResponse3$Outbound = {
   type: string;
@@ -6440,21 +5057,6 @@ export const UpdatePromptResponseFormatPromptsResponse3$outboundSchema:
       UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponse3$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse3$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponse3$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse3$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponse3$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse3$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPromptsResponse3$Outbound;
-}
-
 export function updatePromptResponseFormatPromptsResponse3ToJSON(
   updatePromptResponseFormatPromptsResponse3:
     UpdatePromptResponseFormatPromptsResponse3,
@@ -6465,7 +5067,6 @@ export function updatePromptResponseFormatPromptsResponse3ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPromptsResponse3FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6486,24 +5087,10 @@ export function updatePromptResponseFormatPromptsResponse3FromJSON(
 export const UpdatePromptResponseFormatPromptsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsResponse200Type> = z
     .nativeEnum(UpdatePromptResponseFormatPromptsResponse200Type);
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsResponse200Type> =
     UpdatePromptResponseFormatPromptsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponse200Type$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponse200Type$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse2$inboundSchema:
@@ -6511,7 +5098,6 @@ export const UpdatePromptResponseFormatPromptsResponse2$inboundSchema:
     z.object({
       type: UpdatePromptResponseFormatPromptsResponse200Type$inboundSchema,
     });
-
 /** @internal */
 export type UpdatePromptResponseFormatPromptsResponse2$Outbound = {
   type: string;
@@ -6527,21 +5113,6 @@ export const UpdatePromptResponseFormatPromptsResponse2$outboundSchema:
     type: UpdatePromptResponseFormatPromptsResponse200Type$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponse2$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponse2$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponse2$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse2$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPromptsResponse2$Outbound;
-}
-
 export function updatePromptResponseFormatPromptsResponse2ToJSON(
   updatePromptResponseFormatPromptsResponse2:
     UpdatePromptResponseFormatPromptsResponse2,
@@ -6552,7 +5123,6 @@ export function updatePromptResponseFormatPromptsResponse2ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6573,24 +5143,10 @@ export function updatePromptResponseFormatPromptsResponse2FromJSON(
 export const UpdatePromptResponseFormatPromptsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsResponseType> = z
     .nativeEnum(UpdatePromptResponseFormatPromptsResponseType);
-
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptResponseFormatPromptsResponseType> =
     UpdatePromptResponseFormatPromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponseType$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponseType$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
@@ -6604,7 +5160,6 @@ export const UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
-
 /** @internal */
 export type UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound = {
   name: string;
@@ -6626,22 +5181,6 @@ export const UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema:
     schema: z.record(z.any()),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponseJsonSchema$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound` instead. */
-  export type Outbound =
-    UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound;
-}
-
 export function updatePromptResponseFormatPromptsResponseJsonSchemaToJSON(
   updatePromptResponseFormatPromptsResponseJsonSchema:
     UpdatePromptResponseFormatPromptsResponseJsonSchema,
@@ -6652,7 +5191,6 @@ export function updatePromptResponseFormatPromptsResponseJsonSchemaToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6682,7 +5220,6 @@ export const UpdatePromptResponseFormatPromptsResponse1$inboundSchema:
         "json_schema": "jsonSchema",
       });
     });
-
 /** @internal */
 export type UpdatePromptResponseFormatPromptsResponse1$Outbound = {
   type: string;
@@ -6706,21 +5243,6 @@ export const UpdatePromptResponseFormatPromptsResponse1$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptResponseFormatPromptsResponse1$ {
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptResponseFormatPromptsResponse1$inboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptResponseFormatPromptsResponse1$outboundSchema;
-  /** @deprecated use `UpdatePromptResponseFormatPromptsResponse1$Outbound` instead. */
-  export type Outbound = UpdatePromptResponseFormatPromptsResponse1$Outbound;
-}
-
 export function updatePromptResponseFormatPromptsResponse1ToJSON(
   updatePromptResponseFormatPromptsResponse1:
     UpdatePromptResponseFormatPromptsResponse1,
@@ -6731,7 +5253,6 @@ export function updatePromptResponseFormatPromptsResponse1ToJSON(
     ),
   );
 }
-
 export function updatePromptResponseFormatPromptsResponse1FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6761,7 +5282,6 @@ export const UpdatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   UpdatePromptResponseFormat5$inboundSchema,
   UpdatePromptResponseFormat6$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdatePromptPromptsResponseResponseFormat$Outbound =
   | UpdatePromptResponseFormatPromptsResponse1$Outbound
@@ -6786,21 +5306,6 @@ export const UpdatePromptPromptsResponseResponseFormat$outboundSchema:
     UpdatePromptResponseFormat6$outboundSchema,
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsResponseResponseFormat$ {
-  /** @deprecated use `UpdatePromptPromptsResponseResponseFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptPromptsResponseResponseFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsResponseResponseFormat$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseResponseFormat$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsResponseResponseFormat$Outbound;
-}
-
 export function updatePromptPromptsResponseResponseFormatToJSON(
   updatePromptPromptsResponseResponseFormat:
     UpdatePromptPromptsResponseResponseFormat,
@@ -6811,7 +5316,6 @@ export function updatePromptPromptsResponseResponseFormatToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsResponseResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6832,89 +5336,37 @@ export function updatePromptPromptsResponseResponseFormatFromJSON(
 export const UpdatePromptPromptsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsPhotoRealVersion
 > = z.nativeEnum(UpdatePromptPromptsPhotoRealVersion);
-
 /** @internal */
 export const UpdatePromptPromptsPhotoRealVersion$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptPromptsPhotoRealVersion> =
     UpdatePromptPromptsPhotoRealVersion$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsPhotoRealVersion$ {
-  /** @deprecated use `UpdatePromptPromptsPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptPromptsPhotoRealVersion$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsPhotoRealVersion$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsEncodingFormat
 > = z.nativeEnum(UpdatePromptPromptsEncodingFormat);
-
 /** @internal */
 export const UpdatePromptPromptsEncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsEncodingFormat
 > = UpdatePromptPromptsEncodingFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsEncodingFormat$ {
-  /** @deprecated use `UpdatePromptPromptsEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsEncodingFormat$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsEncodingFormat$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsReasoningEffort
 > = z.nativeEnum(UpdatePromptPromptsReasoningEffort);
-
 /** @internal */
 export const UpdatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsReasoningEffort
 > = UpdatePromptPromptsReasoningEffort$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsReasoningEffort$ {
-  /** @deprecated use `UpdatePromptPromptsReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsReasoningEffort$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsReasoningEffort$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsVerbosity
 > = z.nativeEnum(UpdatePromptPromptsVerbosity);
-
 /** @internal */
 export const UpdatePromptPromptsVerbosity$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsVerbosity
 > = UpdatePromptPromptsVerbosity$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsVerbosity$ {
-  /** @deprecated use `UpdatePromptPromptsVerbosity$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsVerbosity$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsVerbosity$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsVerbosity$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
@@ -6955,7 +5407,6 @@ export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-
 /** @internal */
 export type UpdatePromptPromptsModelParameters$Outbound = {
   temperature?: number | undefined;
@@ -7026,20 +5477,6 @@ export const UpdatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsModelParameters$ {
-  /** @deprecated use `UpdatePromptPromptsModelParameters$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsModelParameters$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsModelParameters$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsModelParameters$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsModelParameters$Outbound;
-}
-
 export function updatePromptPromptsModelParametersToJSON(
   updatePromptPromptsModelParameters: UpdatePromptPromptsModelParameters,
 ): string {
@@ -7049,7 +5486,6 @@ export function updatePromptPromptsModelParametersToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsModelParameters, SDKValidationError> {
@@ -7065,66 +5501,28 @@ export function updatePromptPromptsModelParametersFromJSON(
 export const UpdatePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptProvider
 > = z.nativeEnum(UpdatePromptProvider);
-
 /** @internal */
 export const UpdatePromptProvider$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptProvider
 > = UpdatePromptProvider$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptProvider$ {
-  /** @deprecated use `UpdatePromptProvider$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptProvider$inboundSchema;
-  /** @deprecated use `UpdatePromptProvider$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptProvider$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsRole
 > = z.nativeEnum(UpdatePromptPromptsRole);
-
 /** @internal */
 export const UpdatePromptPromptsRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsRole
 > = UpdatePromptPromptsRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsRole$ {
-  /** @deprecated use `UpdatePromptPromptsRole$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsRole$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsRole$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsRole$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsResponse200ApplicationJSONType> = z
     .nativeEnum(UpdatePrompt2PromptsResponse200ApplicationJSONType);
-
 /** @internal */
 export const UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsResponse200ApplicationJSONType> =
     UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponse200ApplicationJSONType$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsResponseFile$inboundSchema: z.ZodType<
@@ -7141,7 +5539,6 @@ export const UpdatePrompt2PromptsResponseFile$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsResponseFile$Outbound = {
   file_data?: string | undefined;
@@ -7166,19 +5563,6 @@ export const UpdatePrompt2PromptsResponseFile$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponseFile$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponseFile$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsResponseFile$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponseFile$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsResponseFile$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponseFile$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsResponseFile$Outbound;
-}
-
 export function updatePrompt2PromptsResponseFileToJSON(
   updatePrompt2PromptsResponseFile: UpdatePrompt2PromptsResponseFile,
 ): string {
@@ -7188,7 +5572,6 @@ export function updatePrompt2PromptsResponseFileToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsResponseFileFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsResponseFile, SDKValidationError> {
@@ -7208,7 +5591,6 @@ export const UpdatePrompt2PromptsResponse3$inboundSchema: z.ZodType<
   type: UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
   file: z.lazy(() => UpdatePrompt2PromptsResponseFile$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsResponse3$Outbound = {
   type: string;
@@ -7225,19 +5607,6 @@ export const UpdatePrompt2PromptsResponse3$outboundSchema: z.ZodType<
   file: z.lazy(() => UpdatePrompt2PromptsResponseFile$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponse3$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponse3$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsResponse3$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse3$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsResponse3$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse3$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsResponse3$Outbound;
-}
-
 export function updatePrompt2PromptsResponse3ToJSON(
   updatePrompt2PromptsResponse3: UpdatePrompt2PromptsResponse3,
 ): string {
@@ -7247,7 +5616,6 @@ export function updatePrompt2PromptsResponse3ToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsResponse3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsResponse3, SDKValidationError> {
@@ -7262,24 +5630,10 @@ export function updatePrompt2PromptsResponse3FromJSON(
 export const UpdatePrompt2PromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsResponse200Type
 > = z.nativeEnum(UpdatePrompt2PromptsResponse200Type);
-
 /** @internal */
 export const UpdatePrompt2PromptsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdatePrompt2PromptsResponse200Type> =
     UpdatePrompt2PromptsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponse200Type$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsResponse200Type$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsResponseImageUrl$inboundSchema: z.ZodType<
@@ -7291,7 +5645,6 @@ export const UpdatePrompt2PromptsResponseImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsResponseImageUrl$Outbound = {
   id?: string | undefined;
@@ -7310,21 +5663,6 @@ export const UpdatePrompt2PromptsResponseImageUrl$outboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponseImageUrl$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponseImageUrl$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePrompt2PromptsResponseImageUrl$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponseImageUrl$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePrompt2PromptsResponseImageUrl$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponseImageUrl$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsResponseImageUrl$Outbound;
-}
-
 export function updatePrompt2PromptsResponseImageUrlToJSON(
   updatePrompt2PromptsResponseImageUrl: UpdatePrompt2PromptsResponseImageUrl,
 ): string {
@@ -7334,7 +5672,6 @@ export function updatePrompt2PromptsResponseImageUrlToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsResponseImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsResponseImageUrl, SDKValidationError> {
@@ -7359,7 +5696,6 @@ export const UpdatePrompt2PromptsResponse2$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsResponse2$Outbound = {
   type: string;
@@ -7380,19 +5716,6 @@ export const UpdatePrompt2PromptsResponse2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponse2$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponse2$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsResponse2$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse2$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsResponse2$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse2$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsResponse2$Outbound;
-}
-
 export function updatePrompt2PromptsResponse2ToJSON(
   updatePrompt2PromptsResponse2: UpdatePrompt2PromptsResponse2,
 ): string {
@@ -7402,7 +5725,6 @@ export function updatePrompt2PromptsResponse2ToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsResponse2, SDKValidationError> {
@@ -7417,22 +5739,10 @@ export function updatePrompt2PromptsResponse2FromJSON(
 export const UpdatePrompt2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsResponseType
 > = z.nativeEnum(UpdatePrompt2PromptsResponseType);
-
 /** @internal */
 export const UpdatePrompt2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsResponseType
 > = UpdatePrompt2PromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponseType$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsResponseType$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePrompt2PromptsResponse1$inboundSchema: z.ZodType<
@@ -7443,7 +5753,6 @@ export const UpdatePrompt2PromptsResponse1$inboundSchema: z.ZodType<
   type: UpdatePrompt2PromptsResponseType$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type UpdatePrompt2PromptsResponse1$Outbound = {
   type: string;
@@ -7460,19 +5769,6 @@ export const UpdatePrompt2PromptsResponse1$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePrompt2PromptsResponse1$ {
-  /** @deprecated use `UpdatePrompt2PromptsResponse1$inboundSchema` instead. */
-  export const inboundSchema = UpdatePrompt2PromptsResponse1$inboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse1$outboundSchema` instead. */
-  export const outboundSchema = UpdatePrompt2PromptsResponse1$outboundSchema;
-  /** @deprecated use `UpdatePrompt2PromptsResponse1$Outbound` instead. */
-  export type Outbound = UpdatePrompt2PromptsResponse1$Outbound;
-}
-
 export function updatePrompt2PromptsResponse1ToJSON(
   updatePrompt2PromptsResponse1: UpdatePrompt2PromptsResponse1,
 ): string {
@@ -7482,7 +5778,6 @@ export function updatePrompt2PromptsResponse1ToJSON(
     ),
   );
 }
-
 export function updatePrompt2PromptsResponse1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsResponse1, SDKValidationError> {
@@ -7503,7 +5798,6 @@ export const UpdatePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt2PromptsResponse2$inboundSchema),
   z.lazy(() => UpdatePrompt2PromptsResponse3$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdatePromptContentPromptsResponse2$Outbound =
   | UpdatePrompt2PromptsResponse1$Outbound
@@ -7521,21 +5815,6 @@ export const UpdatePromptContentPromptsResponse2$outboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt2PromptsResponse3$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptContentPromptsResponse2$ {
-  /** @deprecated use `UpdatePromptContentPromptsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptContentPromptsResponse2$inboundSchema;
-  /** @deprecated use `UpdatePromptContentPromptsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptContentPromptsResponse2$outboundSchema;
-  /** @deprecated use `UpdatePromptContentPromptsResponse2$Outbound` instead. */
-  export type Outbound = UpdatePromptContentPromptsResponse2$Outbound;
-}
-
 export function updatePromptContentPromptsResponse2ToJSON(
   updatePromptContentPromptsResponse2: UpdatePromptContentPromptsResponse2,
 ): string {
@@ -7545,7 +5824,6 @@ export function updatePromptContentPromptsResponse2ToJSON(
     ),
   );
 }
-
 export function updatePromptContentPromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContentPromptsResponse2, SDKValidationError> {
@@ -7570,7 +5848,6 @@ export const UpdatePromptPromptsContent$inboundSchema: z.ZodType<
     z.lazy(() => UpdatePrompt2PromptsResponse3$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type UpdatePromptPromptsContent$Outbound =
   | string
@@ -7594,19 +5871,6 @@ export const UpdatePromptPromptsContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsContent$ {
-  /** @deprecated use `UpdatePromptPromptsContent$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsContent$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsContent$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsContent$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsContent$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsContent$Outbound;
-}
-
 export function updatePromptPromptsContentToJSON(
   updatePromptPromptsContent: UpdatePromptPromptsContent,
 ): string {
@@ -7614,7 +5878,6 @@ export function updatePromptPromptsContentToJSON(
     UpdatePromptPromptsContent$outboundSchema.parse(updatePromptPromptsContent),
   );
 }
-
 export function updatePromptPromptsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsContent, SDKValidationError> {
@@ -7629,22 +5892,10 @@ export function updatePromptPromptsContentFromJSON(
 export const UpdatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsResponseType
 > = z.nativeEnum(UpdatePromptPromptsResponseType);
-
 /** @internal */
 export const UpdatePromptPromptsResponseType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsResponseType
 > = UpdatePromptPromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsResponseType$ {
-  /** @deprecated use `UpdatePromptPromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsResponseType$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptPromptsFunction$inboundSchema: z.ZodType<
@@ -7655,7 +5906,6 @@ export const UpdatePromptPromptsFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-
 /** @internal */
 export type UpdatePromptPromptsFunction$Outbound = {
   name: string;
@@ -7672,19 +5922,6 @@ export const UpdatePromptPromptsFunction$outboundSchema: z.ZodType<
   arguments: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsFunction$ {
-  /** @deprecated use `UpdatePromptPromptsFunction$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsFunction$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsFunction$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsFunction$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsFunction$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsFunction$Outbound;
-}
-
 export function updatePromptPromptsFunctionToJSON(
   updatePromptPromptsFunction: UpdatePromptPromptsFunction,
 ): string {
@@ -7694,7 +5931,6 @@ export function updatePromptPromptsFunctionToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsFunction, SDKValidationError> {
@@ -7716,7 +5952,6 @@ export const UpdatePromptPromptsToolCalls$inboundSchema: z.ZodType<
   type: UpdatePromptPromptsResponseType$inboundSchema,
   function: z.lazy(() => UpdatePromptPromptsFunction$inboundSchema),
 });
-
 /** @internal */
 export type UpdatePromptPromptsToolCalls$Outbound = {
   id?: string | undefined;
@@ -7737,19 +5972,6 @@ export const UpdatePromptPromptsToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => UpdatePromptPromptsFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsToolCalls$ {
-  /** @deprecated use `UpdatePromptPromptsToolCalls$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsToolCalls$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsToolCalls$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsToolCalls$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsToolCalls$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsToolCalls$Outbound;
-}
-
 export function updatePromptPromptsToolCallsToJSON(
   updatePromptPromptsToolCalls: UpdatePromptPromptsToolCalls,
 ): string {
@@ -7759,7 +5981,6 @@ export function updatePromptPromptsToolCallsToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsToolCalls, SDKValidationError> {
@@ -7798,7 +6019,6 @@ export const UpdatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type UpdatePromptPromptsResponseMessages$Outbound = {
   role: string;
@@ -7843,21 +6063,6 @@ export const UpdatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsResponseMessages$ {
-  /** @deprecated use `UpdatePromptPromptsResponseMessages$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdatePromptPromptsResponseMessages$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseMessages$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdatePromptPromptsResponseMessages$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsResponseMessages$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsResponseMessages$Outbound;
-}
-
 export function updatePromptPromptsResponseMessagesToJSON(
   updatePromptPromptsResponseMessages: UpdatePromptPromptsResponseMessages,
 ): string {
@@ -7867,7 +6072,6 @@ export function updatePromptPromptsResponseMessagesToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsResponseMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsResponseMessages, SDKValidationError> {
@@ -7906,7 +6110,6 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type UpdatePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
@@ -7948,19 +6151,6 @@ export const UpdatePromptPromptConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptConfig$ {
-  /** @deprecated use `UpdatePromptPromptConfig$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptConfig$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptConfig$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptConfig$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptConfig$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptConfig$Outbound;
-}
-
 export function updatePromptPromptConfigToJSON(
   updatePromptPromptConfig: UpdatePromptPromptConfig,
 ): string {
@@ -7968,7 +6158,6 @@ export function updatePromptPromptConfigToJSON(
     UpdatePromptPromptConfig$outboundSchema.parse(updatePromptPromptConfig),
   );
 }
-
 export function updatePromptPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptConfig, SDKValidationError> {
@@ -7983,43 +6172,19 @@ export function updatePromptPromptConfigFromJSON(
 export const UpdatePromptPromptsUseCases$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsUseCases
 > = z.nativeEnum(UpdatePromptPromptsUseCases);
-
 /** @internal */
 export const UpdatePromptPromptsUseCases$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsUseCases
 > = UpdatePromptPromptsUseCases$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsUseCases$ {
-  /** @deprecated use `UpdatePromptPromptsUseCases$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsUseCases$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsUseCases$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsUseCases$outboundSchema;
-}
-
 /** @internal */
 export const UpdatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsLanguage
 > = z.nativeEnum(UpdatePromptPromptsLanguage);
-
 /** @internal */
 export const UpdatePromptPromptsLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsLanguage
 > = UpdatePromptPromptsLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsLanguage$ {
-  /** @deprecated use `UpdatePromptPromptsLanguage$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsLanguage$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsLanguage$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsLanguage$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
@@ -8034,7 +6199,6 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-
 /** @internal */
 export type UpdatePromptPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
@@ -8055,19 +6219,6 @@ export const UpdatePromptPromptsMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsMetadata$ {
-  /** @deprecated use `UpdatePromptPromptsMetadata$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsMetadata$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsMetadata$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsMetadata$outboundSchema;
-  /** @deprecated use `UpdatePromptPromptsMetadata$Outbound` instead. */
-  export type Outbound = UpdatePromptPromptsMetadata$Outbound;
-}
-
 export function updatePromptPromptsMetadataToJSON(
   updatePromptPromptsMetadata: UpdatePromptPromptsMetadata,
 ): string {
@@ -8077,7 +6228,6 @@ export function updatePromptPromptsMetadataToJSON(
     ),
   );
 }
-
 export function updatePromptPromptsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsMetadata, SDKValidationError> {
@@ -8116,7 +6266,6 @@ export const UpdatePromptPrompt$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-
 /** @internal */
 export type UpdatePromptPrompt$Outbound = {
   _id: string;
@@ -8162,19 +6311,6 @@ export const UpdatePromptPrompt$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPrompt$ {
-  /** @deprecated use `UpdatePromptPrompt$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPrompt$inboundSchema;
-  /** @deprecated use `UpdatePromptPrompt$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPrompt$outboundSchema;
-  /** @deprecated use `UpdatePromptPrompt$Outbound` instead. */
-  export type Outbound = UpdatePromptPrompt$Outbound;
-}
-
 export function updatePromptPromptToJSON(
   updatePromptPrompt: UpdatePromptPrompt,
 ): string {
@@ -8182,7 +6318,6 @@ export function updatePromptPromptToJSON(
     UpdatePromptPrompt$outboundSchema.parse(updatePromptPrompt),
   );
 }
-
 export function updatePromptPromptFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPrompt, SDKValidationError> {

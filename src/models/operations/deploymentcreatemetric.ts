@@ -1156,7 +1156,6 @@ export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
       "total_tokens": "totalTokens",
     });
   });
-
 /** @internal */
 export type Usage$Outbound = {
   prompt_tokens: number;
@@ -1181,23 +1180,9 @@ export const Usage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Usage$ {
-  /** @deprecated use `Usage$inboundSchema` instead. */
-  export const inboundSchema = Usage$inboundSchema;
-  /** @deprecated use `Usage$outboundSchema` instead. */
-  export const outboundSchema = Usage$outboundSchema;
-  /** @deprecated use `Usage$Outbound` instead. */
-  export type Outbound = Usage$Outbound;
-}
-
 export function usageToJSON(usage: Usage): string {
   return JSON.stringify(Usage$outboundSchema.parse(usage));
 }
-
 export function usageFromJSON(
   jsonString: string,
 ): SafeParseResult<Usage, SDKValidationError> {
@@ -1221,7 +1206,6 @@ export const Performance$inboundSchema: z.ZodType<
     "time_to_first_token": "timeToFirstToken",
   });
 });
-
 /** @internal */
 export type Performance$Outbound = {
   latency: number;
@@ -1242,23 +1226,9 @@ export const Performance$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Performance$ {
-  /** @deprecated use `Performance$inboundSchema` instead. */
-  export const inboundSchema = Performance$inboundSchema;
-  /** @deprecated use `Performance$outboundSchema` instead. */
-  export const outboundSchema = Performance$outboundSchema;
-  /** @deprecated use `Performance$Outbound` instead. */
-  export type Outbound = Performance$Outbound;
-}
-
 export function performanceToJSON(performance: Performance): string {
   return JSON.stringify(Performance$outboundSchema.parse(performance));
 }
-
 export function performanceFromJSON(
   jsonString: string,
 ): SafeParseResult<Performance, SDKValidationError> {
@@ -1276,26 +1246,12 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5
   > = z.nativeEnum(
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role,
   );
-
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
   > =
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema:
@@ -1304,7 +1260,6 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inbo
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$Outbound =
   | string
@@ -1318,22 +1273,6 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$outb
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$Outbound;
-}
-
 export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentToJSON(
   deploymentCreateMetricMessagesDeploymentsMetricsRequestContent:
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent,
@@ -1343,7 +1282,6 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentTo
       .parse(deploymentCreateMetricMessagesDeploymentsMetricsRequestContent),
   );
 }
-
 export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1374,7 +1312,6 @@ export const DeploymentCreateMetricMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesToolMessage$Outbound = {
   role: string;
@@ -1399,21 +1336,6 @@ export const DeploymentCreateMetricMessagesToolMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesToolMessage$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesToolMessage$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesToolMessage$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesToolMessage$Outbound;
-}
-
 export function deploymentCreateMetricMessagesToolMessageToJSON(
   deploymentCreateMetricMessagesToolMessage:
     DeploymentCreateMetricMessagesToolMessage,
@@ -1424,7 +1346,6 @@ export function deploymentCreateMetricMessagesToolMessageToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1448,26 +1369,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2RefusalContentPart$inboundSchema: z.ZodType<
@@ -1479,7 +1386,6 @@ export const DeploymentCreateMetric2RefusalContentPart$inboundSchema: z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema,
   refusal: z.string(),
 });
-
 /** @internal */
 export type DeploymentCreateMetric2RefusalContentPart$Outbound = {
   type: string;
@@ -1498,21 +1404,6 @@ export const DeploymentCreateMetric2RefusalContentPart$outboundSchema:
     refusal: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2RefusalContentPart$ {
-  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2RefusalContentPart$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2RefusalContentPart$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2RefusalContentPart$Outbound;
-}
-
 export function deploymentCreateMetric2RefusalContentPartToJSON(
   deploymentCreateMetric2RefusalContentPart:
     DeploymentCreateMetric2RefusalContentPart,
@@ -1523,7 +1414,6 @@ export function deploymentCreateMetric2RefusalContentPartToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1547,7 +1437,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema:
   z.ZodNativeEnum<
@@ -1555,43 +1444,16 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsType
   > = z.nativeEnum(DeploymentCreateMetricAnnotationsDeploymentsMetricsType);
-
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsType
   > = DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsType$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricAnnotationsFilePath$inboundSchema: z.ZodType<
@@ -1605,7 +1467,6 @@ export const DeploymentCreateMetricAnnotationsFilePath$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsFilePath$Outbound = {
   file_id: string;
@@ -1625,21 +1486,6 @@ export const DeploymentCreateMetricAnnotationsFilePath$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsFilePath$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsFilePath$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsFilePath$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricAnnotationsFilePath$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsFilePathToJSON(
   deploymentCreateMetricAnnotationsFilePath:
     DeploymentCreateMetricAnnotationsFilePath,
@@ -1650,7 +1496,6 @@ export function deploymentCreateMetricAnnotationsFilePathToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotationsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1687,7 +1532,6 @@ export const DeploymentCreateMetricAnnotations2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotations2$Outbound = {
   type: string;
@@ -1718,20 +1562,6 @@ export const DeploymentCreateMetricAnnotations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotations2$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotations2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricAnnotations2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotations2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotations2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotations2$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricAnnotations2$Outbound;
-}
-
 export function deploymentCreateMetricAnnotations2ToJSON(
   deploymentCreateMetricAnnotations2: DeploymentCreateMetricAnnotations2,
 ): string {
@@ -1741,7 +1571,6 @@ export function deploymentCreateMetricAnnotations2ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotations2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricAnnotations2, SDKValidationError> {
@@ -1758,24 +1587,10 @@ export const DeploymentCreateMetricAnnotationsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricAnnotationsType> = z.nativeEnum(
     DeploymentCreateMetricAnnotationsType,
   );
-
 /** @internal */
 export const DeploymentCreateMetricAnnotationsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricAnnotationsType> =
     DeploymentCreateMetricAnnotationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsType$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricAnnotationsFileCitation$inboundSchema:
@@ -1791,7 +1606,6 @@ export const DeploymentCreateMetricAnnotationsFileCitation$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsFileCitation$Outbound = {
   file_id: string;
@@ -1813,21 +1627,6 @@ export const DeploymentCreateMetricAnnotationsFileCitation$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsFileCitation$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsFileCitation$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsFileCitation$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricAnnotationsFileCitation$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsFileCitationToJSON(
   deploymentCreateMetricAnnotationsFileCitation:
     DeploymentCreateMetricAnnotationsFileCitation,
@@ -1838,7 +1637,6 @@ export function deploymentCreateMetricAnnotationsFileCitationToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotationsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1875,7 +1673,6 @@ export const DeploymentCreateMetricAnnotations1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotations1$Outbound = {
   type: string;
@@ -1906,20 +1703,6 @@ export const DeploymentCreateMetricAnnotations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotations1$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotations1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricAnnotations1$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotations1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotations1$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotations1$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricAnnotations1$Outbound;
-}
-
 export function deploymentCreateMetricAnnotations1ToJSON(
   deploymentCreateMetricAnnotations1: DeploymentCreateMetricAnnotations1,
 ): string {
@@ -1929,7 +1712,6 @@ export function deploymentCreateMetricAnnotations1ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotations1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricAnnotations1, SDKValidationError> {
@@ -1950,7 +1732,6 @@ export const DeploymentCreateMetric2Annotations$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetricAnnotations1$inboundSchema),
   z.lazy(() => DeploymentCreateMetricAnnotations2$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentCreateMetric2Annotations$Outbound =
   | DeploymentCreateMetricAnnotations1$Outbound
@@ -1966,20 +1747,6 @@ export const DeploymentCreateMetric2Annotations$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetricAnnotations2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Annotations$ {
-  /** @deprecated use `DeploymentCreateMetric2Annotations$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Annotations$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Annotations$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2Annotations$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Annotations$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2Annotations$Outbound;
-}
-
 export function deploymentCreateMetric2AnnotationsToJSON(
   deploymentCreateMetric2Annotations: DeploymentCreateMetric2Annotations,
 ): string {
@@ -1989,7 +1756,6 @@ export function deploymentCreateMetric2AnnotationsToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2AnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric2Annotations, SDKValidationError> {
@@ -2017,7 +1783,6 @@ export const DeploymentCreateMetric2TextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type DeploymentCreateMetric2TextContentPart$Outbound = {
   type: string;
@@ -2047,21 +1812,6 @@ export const DeploymentCreateMetric2TextContentPart$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2TextContentPart$ {
-  /** @deprecated use `DeploymentCreateMetric2TextContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2TextContentPart$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2TextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2TextContentPart$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2TextContentPart$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2TextContentPart$Outbound;
-}
-
 export function deploymentCreateMetric2TextContentPartToJSON(
   deploymentCreateMetric2TextContentPart:
     DeploymentCreateMetric2TextContentPart,
@@ -2072,7 +1822,6 @@ export function deploymentCreateMetric2TextContentPartToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2TextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric2TextContentPart, SDKValidationError> {
@@ -2094,7 +1843,6 @@ export const DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema:
     z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
     z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
   ]);
-
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetrics2$Outbound =
   | DeploymentCreateMetric2TextContentPart$Outbound
@@ -2111,22 +1859,6 @@ export const DeploymentCreateMetricContentDeploymentsMetrics2$outboundSchema:
     z.lazy(() => DeploymentCreateMetric2RefusalContentPart$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricContentDeploymentsMetrics2$ {
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetrics2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetrics2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetrics2$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricContentDeploymentsMetrics2$Outbound;
-}
-
 export function deploymentCreateMetricContentDeploymentsMetrics2ToJSON(
   deploymentCreateMetricContentDeploymentsMetrics2:
     DeploymentCreateMetricContentDeploymentsMetrics2,
@@ -2137,7 +1869,6 @@ export function deploymentCreateMetricContentDeploymentsMetrics2ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricContentDeploymentsMetrics2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2167,7 +1898,6 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSche
       z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
     ])),
   ]);
-
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsContent$Outbound =
   | string
@@ -2190,22 +1920,6 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$outboundSch
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsContent$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsContent$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricMessagesDeploymentsMetricsContent$Outbound;
-}
-
 export function deploymentCreateMetricMessagesDeploymentsMetricsContentToJSON(
   deploymentCreateMetricMessagesDeploymentsMetricsContent:
     DeploymentCreateMetricMessagesDeploymentsMetricsContent,
@@ -2215,7 +1929,6 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsContentToJSON(
       .parse(deploymentCreateMetricMessagesDeploymentsMetricsContent),
   );
 }
-
 export function deploymentCreateMetricMessagesDeploymentsMetricsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2238,26 +1951,12 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyR
   > = z.nativeEnum(
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole,
   );
-
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
   > =
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricMessagesAudio$inboundSchema: z.ZodType<
@@ -2267,7 +1966,6 @@ export const DeploymentCreateMetricMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesAudio$Outbound = {
   id: string;
@@ -2282,21 +1980,6 @@ export const DeploymentCreateMetricMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesAudio$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesAudio$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesAudio$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesAudio$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesAudio$Outbound;
-}
-
 export function deploymentCreateMetricMessagesAudioToJSON(
   deploymentCreateMetricMessagesAudio: DeploymentCreateMetricMessagesAudio,
 ): string {
@@ -2306,7 +1989,6 @@ export function deploymentCreateMetricMessagesAudioToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricMessagesAudio, SDKValidationError> {
@@ -2322,23 +2004,10 @@ export function deploymentCreateMetricMessagesAudioFromJSON(
 export const DeploymentCreateMetricMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesType
 > = z.nativeEnum(DeploymentCreateMetricMessagesType);
-
 /** @internal */
 export const DeploymentCreateMetricMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesType
 > = DeploymentCreateMetricMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesType$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricMessagesFunction$inboundSchema: z.ZodType<
@@ -2349,7 +2018,6 @@ export const DeploymentCreateMetricMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2366,21 +2034,6 @@ export const DeploymentCreateMetricMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesFunction$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesFunction$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesFunction$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesFunction$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesFunction$Outbound;
-}
-
 export function deploymentCreateMetricMessagesFunctionToJSON(
   deploymentCreateMetricMessagesFunction:
     DeploymentCreateMetricMessagesFunction,
@@ -2391,7 +2044,6 @@ export function deploymentCreateMetricMessagesFunctionToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricMessagesFunction, SDKValidationError> {
@@ -2413,7 +2065,6 @@ export const DeploymentCreateMetricMessagesToolCalls$inboundSchema: z.ZodType<
   type: DeploymentCreateMetricMessagesType$inboundSchema,
   function: z.lazy(() => DeploymentCreateMetricMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesToolCalls$Outbound = {
   id: string;
@@ -2432,21 +2083,6 @@ export const DeploymentCreateMetricMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => DeploymentCreateMetricMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesToolCalls$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesToolCalls$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesToolCalls$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesToolCalls$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesToolCalls$Outbound;
-}
-
 export function deploymentCreateMetricMessagesToolCallsToJSON(
   deploymentCreateMetricMessagesToolCalls:
     DeploymentCreateMetricMessagesToolCalls,
@@ -2457,7 +2093,6 @@ export function deploymentCreateMetricMessagesToolCallsToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2514,7 +2149,6 @@ export const DeploymentCreateMetricMessagesAssistantMessage$inboundSchema:
       "redacted_reasoning": "redactedReasoning",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesAssistantMessage$Outbound = {
   content?:
@@ -2578,22 +2212,6 @@ export const DeploymentCreateMetricMessagesAssistantMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesAssistantMessage$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricMessagesAssistantMessage$Outbound;
-}
-
 export function deploymentCreateMetricMessagesAssistantMessageToJSON(
   deploymentCreateMetricMessagesAssistantMessage:
     DeploymentCreateMetricMessagesAssistantMessage,
@@ -2604,7 +2222,6 @@ export function deploymentCreateMetricMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2626,25 +2243,11 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inbound
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
   > = z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole);
-
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
   > = DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema:
@@ -2653,26 +2256,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inb
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
@@ -2689,7 +2278,6 @@ export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetric2File$Outbound = {
   file_data?: string | undefined;
@@ -2714,19 +2302,6 @@ export const DeploymentCreateMetric2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2File$ {
-  /** @deprecated use `DeploymentCreateMetric2File$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2File$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2File$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2File$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2File$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2File$Outbound;
-}
-
 export function deploymentCreateMetric2FileToJSON(
   deploymentCreateMetric2File: DeploymentCreateMetric2File,
 ): string {
@@ -2736,7 +2311,6 @@ export function deploymentCreateMetric2FileToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric2File, SDKValidationError> {
@@ -2757,7 +2331,6 @@ export const DeploymentCreateMetric24$inboundSchema: z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema,
   file: z.lazy(() => DeploymentCreateMetric2File$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentCreateMetric24$Outbound = {
   type: string;
@@ -2775,19 +2348,6 @@ export const DeploymentCreateMetric24$outboundSchema: z.ZodType<
   file: z.lazy(() => DeploymentCreateMetric2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric24$ {
-  /** @deprecated use `DeploymentCreateMetric24$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric24$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric24$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric24$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric24$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric24$Outbound;
-}
-
 export function deploymentCreateMetric24ToJSON(
   deploymentCreateMetric24: DeploymentCreateMetric24,
 ): string {
@@ -2795,7 +2355,6 @@ export function deploymentCreateMetric24ToJSON(
     DeploymentCreateMetric24$outboundSchema.parse(deploymentCreateMetric24),
   );
 }
-
 export function deploymentCreateMetric24FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric24, SDKValidationError> {
@@ -2810,45 +2369,19 @@ export function deploymentCreateMetric24FromJSON(
 export const DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
     z.nativeEnum(DeploymentCreateMetric2DeploymentsMetricsRequestType);
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
     DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentCreateMetric2Format$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Format
 > = z.nativeEnum(DeploymentCreateMetric2Format);
-
 /** @internal */
 export const DeploymentCreateMetric2Format$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Format
 > = DeploymentCreateMetric2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Format$ {
-  /** @deprecated use `DeploymentCreateMetric2Format$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Format$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Format$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Format$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2InputAudio$inboundSchema: z.ZodType<
@@ -2859,7 +2392,6 @@ export const DeploymentCreateMetric2InputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: DeploymentCreateMetric2Format$inboundSchema,
 });
-
 /** @internal */
 export type DeploymentCreateMetric2InputAudio$Outbound = {
   data: string;
@@ -2876,20 +2408,6 @@ export const DeploymentCreateMetric2InputAudio$outboundSchema: z.ZodType<
   format: DeploymentCreateMetric2Format$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2InputAudio$ {
-  /** @deprecated use `DeploymentCreateMetric2InputAudio$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2InputAudio$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2InputAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2InputAudio$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2InputAudio$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2InputAudio$Outbound;
-}
-
 export function deploymentCreateMetric2InputAudioToJSON(
   deploymentCreateMetric2InputAudio: DeploymentCreateMetric2InputAudio,
 ): string {
@@ -2899,7 +2417,6 @@ export function deploymentCreateMetric2InputAudioToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2InputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric2InputAudio, SDKValidationError> {
@@ -2923,7 +2440,6 @@ export const DeploymentCreateMetric23$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetric23$Outbound = {
   type: string;
@@ -2944,19 +2460,6 @@ export const DeploymentCreateMetric23$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric23$ {
-  /** @deprecated use `DeploymentCreateMetric23$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric23$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric23$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric23$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric23$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric23$Outbound;
-}
-
 export function deploymentCreateMetric23ToJSON(
   deploymentCreateMetric23: DeploymentCreateMetric23,
 ): string {
@@ -2964,7 +2467,6 @@ export function deploymentCreateMetric23ToJSON(
     DeploymentCreateMetric23$outboundSchema.parse(deploymentCreateMetric23),
   );
 }
-
 export function deploymentCreateMetric23FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric23, SDKValidationError> {
@@ -2979,45 +2481,19 @@ export function deploymentCreateMetric23FromJSON(
 export const DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> = z
     .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsType);
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> =
     DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentCreateMetric2Detail$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Detail
 > = z.nativeEnum(DeploymentCreateMetric2Detail);
-
 /** @internal */
 export const DeploymentCreateMetric2Detail$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Detail
 > = DeploymentCreateMetric2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Detail$ {
-  /** @deprecated use `DeploymentCreateMetric2Detail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Detail$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Detail$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Detail$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2ImageUrl$inboundSchema: z.ZodType<
@@ -3028,7 +2504,6 @@ export const DeploymentCreateMetric2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: DeploymentCreateMetric2Detail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type DeploymentCreateMetric2ImageUrl$Outbound = {
   url: string;
@@ -3045,19 +2520,6 @@ export const DeploymentCreateMetric2ImageUrl$outboundSchema: z.ZodType<
   detail: DeploymentCreateMetric2Detail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2ImageUrl$ {
-  /** @deprecated use `DeploymentCreateMetric2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2ImageUrl$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2ImageUrl$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2ImageUrl$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2ImageUrl$Outbound;
-}
-
 export function deploymentCreateMetric2ImageUrlToJSON(
   deploymentCreateMetric2ImageUrl: DeploymentCreateMetric2ImageUrl,
 ): string {
@@ -3067,7 +2529,6 @@ export function deploymentCreateMetric2ImageUrlToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric2ImageUrl, SDKValidationError> {
@@ -3091,7 +2552,6 @@ export const DeploymentCreateMetric22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetric22$Outbound = {
   type: string;
@@ -3112,19 +2572,6 @@ export const DeploymentCreateMetric22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric22$ {
-  /** @deprecated use `DeploymentCreateMetric22$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric22$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric22$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric22$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric22$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric22$Outbound;
-}
-
 export function deploymentCreateMetric22ToJSON(
   deploymentCreateMetric22: DeploymentCreateMetric22,
 ): string {
@@ -3132,7 +2579,6 @@ export function deploymentCreateMetric22ToJSON(
     DeploymentCreateMetric22$outboundSchema.parse(deploymentCreateMetric22),
   );
 }
-
 export function deploymentCreateMetric22FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric22, SDKValidationError> {
@@ -3147,22 +2593,10 @@ export function deploymentCreateMetric22FromJSON(
 export const DeploymentCreateMetric2Type$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Type
 > = z.nativeEnum(DeploymentCreateMetric2Type);
-
 /** @internal */
 export const DeploymentCreateMetric2Type$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Type
 > = DeploymentCreateMetric2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Type$ {
-  /** @deprecated use `DeploymentCreateMetric2Type$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Type$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric21$inboundSchema: z.ZodType<
@@ -3173,7 +2607,6 @@ export const DeploymentCreateMetric21$inboundSchema: z.ZodType<
   type: DeploymentCreateMetric2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type DeploymentCreateMetric21$Outbound = {
   type: string;
@@ -3190,19 +2623,6 @@ export const DeploymentCreateMetric21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric21$ {
-  /** @deprecated use `DeploymentCreateMetric21$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric21$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric21$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric21$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric21$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric21$Outbound;
-}
-
 export function deploymentCreateMetric21ToJSON(
   deploymentCreateMetric21: DeploymentCreateMetric21,
 ): string {
@@ -3210,7 +2630,6 @@ export function deploymentCreateMetric21ToJSON(
     DeploymentCreateMetric21$outboundSchema.parse(deploymentCreateMetric21),
   );
 }
-
 export function deploymentCreateMetric21FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetric21, SDKValidationError> {
@@ -3232,7 +2651,6 @@ export const DeploymentCreateMetricContent2$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetric23$inboundSchema),
   z.lazy(() => DeploymentCreateMetric24$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentCreateMetricContent2$Outbound =
   | DeploymentCreateMetric21$Outbound
@@ -3252,19 +2670,6 @@ export const DeploymentCreateMetricContent2$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetric24$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricContent2$ {
-  /** @deprecated use `DeploymentCreateMetricContent2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricContent2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContent2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricContent2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContent2$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricContent2$Outbound;
-}
-
 export function deploymentCreateMetricContent2ToJSON(
   deploymentCreateMetricContent2: DeploymentCreateMetricContent2,
 ): string {
@@ -3274,7 +2679,6 @@ export function deploymentCreateMetricContent2ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricContent2, SDKValidationError> {
@@ -3299,7 +2703,6 @@ export const DeploymentCreateMetricMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => DeploymentCreateMetric24$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentCreateMetricMessagesContent$Outbound =
   | string
@@ -3325,21 +2728,6 @@ export const DeploymentCreateMetricMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesContent$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesContent$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesContent$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesContent$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesContent$Outbound;
-}
-
 export function deploymentCreateMetricMessagesContentToJSON(
   deploymentCreateMetricMessagesContent: DeploymentCreateMetricMessagesContent,
 ): string {
@@ -3349,7 +2737,6 @@ export function deploymentCreateMetricMessagesContentToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricMessagesContent, SDKValidationError> {
@@ -3380,7 +2767,6 @@ export const DeploymentCreateMetricMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesUserMessage$Outbound = {
   role: string;
@@ -3416,21 +2802,6 @@ export const DeploymentCreateMetricMessagesUserMessage$outboundSchema:
     ]),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesUserMessage$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesUserMessage$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesUserMessage$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesUserMessage$Outbound;
-}
-
 export function deploymentCreateMetricMessagesUserMessageToJSON(
   deploymentCreateMetricMessagesUserMessage:
     DeploymentCreateMetricMessagesUserMessage,
@@ -3441,7 +2812,6 @@ export function deploymentCreateMetricMessagesUserMessageToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3462,24 +2832,10 @@ export function deploymentCreateMetricMessagesUserMessageFromJSON(
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
     z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRole);
-
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
     DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricMessagesSystemMessage$inboundSchema:
@@ -3492,7 +2848,6 @@ export const DeploymentCreateMetricMessagesSystemMessage$inboundSchema:
     content: z.string(),
     name: z.string().optional(),
   });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesSystemMessage$Outbound = {
   role: string;
@@ -3512,21 +2867,6 @@ export const DeploymentCreateMetricMessagesSystemMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesSystemMessage$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessagesSystemMessage$Outbound;
-}
-
 export function deploymentCreateMetricMessagesSystemMessageToJSON(
   deploymentCreateMetricMessagesSystemMessage:
     DeploymentCreateMetricMessagesSystemMessage,
@@ -3537,7 +2877,6 @@ export function deploymentCreateMetricMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3558,23 +2897,10 @@ export function deploymentCreateMetricMessagesSystemMessageFromJSON(
 export const DeploymentCreateMetricMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesRole
 > = z.nativeEnum(DeploymentCreateMetricMessagesRole);
-
 /** @internal */
 export const DeploymentCreateMetricMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesRole
 > = DeploymentCreateMetricMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema:
@@ -3587,7 +2913,6 @@ export const DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema:
     content: z.string(),
     name: z.string().optional(),
   });
-
 /** @internal */
 export type DeploymentCreateMetricMessagesDeveloperMessage$Outbound = {
   role: string;
@@ -3607,22 +2932,6 @@ export const DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeveloperMessage$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricMessagesDeveloperMessage$Outbound;
-}
-
 export function deploymentCreateMetricMessagesDeveloperMessageToJSON(
   deploymentCreateMetricMessagesDeveloperMessage:
     DeploymentCreateMetricMessagesDeveloperMessage,
@@ -3633,7 +2942,6 @@ export function deploymentCreateMetricMessagesDeveloperMessageToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3662,7 +2970,6 @@ export const DeploymentCreateMetricMessages$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentCreateMetricMessages$Outbound =
   | DeploymentCreateMetricMessagesToolMessage$Outbound
@@ -3684,19 +2991,6 @@ export const DeploymentCreateMetricMessages$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessages$ {
-  /** @deprecated use `DeploymentCreateMetricMessages$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages$Outbound;
-}
-
 export function deploymentCreateMetricMessagesToJSON(
   deploymentCreateMetricMessages: DeploymentCreateMetricMessages,
 ): string {
@@ -3706,7 +3000,6 @@ export function deploymentCreateMetricMessagesToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricMessages, SDKValidationError> {
@@ -3724,26 +3017,12 @@ export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRo
   > = z.nativeEnum(
     DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole,
   );
-
 /** @internal */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
   > =
     DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema:
@@ -3752,7 +3031,6 @@ export const DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchem
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsContent$Outbound =
   | string
@@ -3766,22 +3044,6 @@ export const DeploymentCreateMetricChoicesDeploymentsMetricsContent$outboundSche
     DeploymentCreateMetricChoicesDeploymentsMetricsContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsContent$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsContent$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricChoicesDeploymentsMetricsContent$Outbound;
-}
-
 export function deploymentCreateMetricChoicesDeploymentsMetricsContentToJSON(
   deploymentCreateMetricChoicesDeploymentsMetricsContent:
     DeploymentCreateMetricChoicesDeploymentsMetricsContent,
@@ -3792,7 +3054,6 @@ export function deploymentCreateMetricChoicesDeploymentsMetricsContentToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricChoicesDeploymentsMetricsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3823,7 +3084,6 @@ export const ChoicesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type ChoicesToolMessage$Outbound = {
   role: string;
@@ -3847,19 +3107,6 @@ export const ChoicesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesToolMessage$ {
-  /** @deprecated use `ChoicesToolMessage$inboundSchema` instead. */
-  export const inboundSchema = ChoicesToolMessage$inboundSchema;
-  /** @deprecated use `ChoicesToolMessage$outboundSchema` instead. */
-  export const outboundSchema = ChoicesToolMessage$outboundSchema;
-  /** @deprecated use `ChoicesToolMessage$Outbound` instead. */
-  export type Outbound = ChoicesToolMessage$Outbound;
-}
-
 export function choicesToolMessageToJSON(
   choicesToolMessage: ChoicesToolMessage,
 ): string {
@@ -3867,7 +3114,6 @@ export function choicesToolMessageToJSON(
     ChoicesToolMessage$outboundSchema.parse(choicesToolMessage),
   );
 }
-
 export function choicesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesToolMessage, SDKValidationError> {
@@ -3885,26 +3131,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema:
@@ -3917,7 +3149,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inbound
       DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema,
     refusal: z.string(),
   });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$Outbound =
   {
@@ -3937,22 +3168,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$outboun
     refusal: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsRefusalContentPartToJSON(
   deploymentCreateMetric2DeploymentsMetricsRefusalContentPart:
     DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart,
@@ -3962,7 +3177,6 @@ export function deploymentCreateMetric2DeploymentsMetricsRefusalContentPartToJSO
       .parse(deploymentCreateMetric2DeploymentsMetricsRefusalContentPart),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsRefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3985,26 +3199,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema:
@@ -4013,26 +3213,12 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBo
   > = z.nativeEnum(
     DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType,
   );
-
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType
   > =
     DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema:
@@ -4047,7 +3233,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inbound
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound =
   {
@@ -4068,22 +3253,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetricsFilePathToJSON(
   deploymentCreateMetricAnnotationsDeploymentsMetricsFilePath:
     DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath,
@@ -4093,7 +3262,6 @@ export function deploymentCreateMetricAnnotationsDeploymentsMetricsFilePathToJSO
       .parse(deploymentCreateMetricAnnotationsDeploymentsMetricsFilePath),
   );
 }
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetricsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4131,7 +3299,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema:
       "end_index": "endIndex",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound = {
   type: string;
@@ -4165,22 +3332,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetrics2$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetrics2ToJSON(
   deploymentCreateMetricAnnotationsDeploymentsMetrics2:
     DeploymentCreateMetricAnnotationsDeploymentsMetrics2,
@@ -4191,7 +3342,6 @@ export function deploymentCreateMetricAnnotationsDeploymentsMetrics2ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetrics2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4215,26 +3365,12 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inbo
   > = z.nativeEnum(
     DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType,
   );
-
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType
   > =
     DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema:
@@ -4250,7 +3386,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inb
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound =
   {
@@ -4273,22 +3408,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$out
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitationToJSON(
   deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation:
     DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation,
@@ -4298,7 +3417,6 @@ export function deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitationT
       .parse(deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation),
   );
 }
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4336,7 +3454,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema:
       "end_index": "endIndex",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound = {
   type: string;
@@ -4370,22 +3487,6 @@ export const DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricAnnotationsDeploymentsMetrics1$ {
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound;
-}
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetrics1ToJSON(
   deploymentCreateMetricAnnotationsDeploymentsMetrics1:
     DeploymentCreateMetricAnnotationsDeploymentsMetrics1,
@@ -4396,7 +3497,6 @@ export function deploymentCreateMetricAnnotationsDeploymentsMetrics1ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricAnnotationsDeploymentsMetrics1FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4427,7 +3527,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema:
       DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound =
   | DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound
@@ -4448,22 +3547,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsAnnotations$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsAnnotationsToJSON(
   deploymentCreateMetric2DeploymentsMetricsAnnotations:
     DeploymentCreateMetric2DeploymentsMetricsAnnotations,
@@ -4474,7 +3557,6 @@ export function deploymentCreateMetric2DeploymentsMetricsAnnotationsToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsAnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4512,7 +3594,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSch
       ]),
     ).optional(),
   });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound =
   {
@@ -4548,22 +3629,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSc
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsTextContentPart$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsTextContentPartToJSON(
   deploymentCreateMetric2DeploymentsMetricsTextContentPart:
     DeploymentCreateMetric2DeploymentsMetricsTextContentPart,
@@ -4573,7 +3638,6 @@ export function deploymentCreateMetric2DeploymentsMetricsTextContentPartToJSON(
       .parse(deploymentCreateMetric2DeploymentsMetricsTextContentPart),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsTextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4603,7 +3667,6 @@ export const DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$
       DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$Outbound =
   | DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound
@@ -4624,22 +3687,6 @@ export const DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$ {
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$Outbound;
-}
-
 export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2ToJSON(
   deploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2:
     DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2,
@@ -4651,7 +3698,6 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBod
       ),
   );
 }
-
 export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4683,7 +3729,6 @@ export const DeploymentCreateMetricChoicesContent$inboundSchema: z.ZodType<
     ),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentCreateMetricChoicesContent$Outbound =
   | string
@@ -4709,21 +3754,6 @@ export const DeploymentCreateMetricChoicesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesContent$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesContent$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesContent$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesContent$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricChoicesContent$Outbound;
-}
-
 export function deploymentCreateMetricChoicesContentToJSON(
   deploymentCreateMetricChoicesContent: DeploymentCreateMetricChoicesContent,
 ): string {
@@ -4733,7 +3763,6 @@ export function deploymentCreateMetricChoicesContentToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricChoicesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricChoicesContent, SDKValidationError> {
@@ -4750,25 +3779,11 @@ export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundS
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
   > = z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole);
-
 /** @internal */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
   > = DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema;
-}
 
 /** @internal */
 export const ChoicesAudio$inboundSchema: z.ZodType<
@@ -4778,7 +3793,6 @@ export const ChoicesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type ChoicesAudio$Outbound = {
   id: string;
@@ -4793,23 +3807,9 @@ export const ChoicesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesAudio$ {
-  /** @deprecated use `ChoicesAudio$inboundSchema` instead. */
-  export const inboundSchema = ChoicesAudio$inboundSchema;
-  /** @deprecated use `ChoicesAudio$outboundSchema` instead. */
-  export const outboundSchema = ChoicesAudio$outboundSchema;
-  /** @deprecated use `ChoicesAudio$Outbound` instead. */
-  export type Outbound = ChoicesAudio$Outbound;
-}
-
 export function choicesAudioToJSON(choicesAudio: ChoicesAudio): string {
   return JSON.stringify(ChoicesAudio$outboundSchema.parse(choicesAudio));
 }
-
 export function choicesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesAudio, SDKValidationError> {
@@ -4823,21 +3823,9 @@ export function choicesAudioFromJSON(
 /** @internal */
 export const ChoicesType$inboundSchema: z.ZodNativeEnum<typeof ChoicesType> = z
   .nativeEnum(ChoicesType);
-
 /** @internal */
 export const ChoicesType$outboundSchema: z.ZodNativeEnum<typeof ChoicesType> =
   ChoicesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesType$ {
-  /** @deprecated use `ChoicesType$inboundSchema` instead. */
-  export const inboundSchema = ChoicesType$inboundSchema;
-  /** @deprecated use `ChoicesType$outboundSchema` instead. */
-  export const outboundSchema = ChoicesType$outboundSchema;
-}
 
 /** @internal */
 export const ChoicesFunction$inboundSchema: z.ZodType<
@@ -4848,7 +3836,6 @@ export const ChoicesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type ChoicesFunction$Outbound = {
   name?: string | undefined;
@@ -4865,25 +3852,11 @@ export const ChoicesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesFunction$ {
-  /** @deprecated use `ChoicesFunction$inboundSchema` instead. */
-  export const inboundSchema = ChoicesFunction$inboundSchema;
-  /** @deprecated use `ChoicesFunction$outboundSchema` instead. */
-  export const outboundSchema = ChoicesFunction$outboundSchema;
-  /** @deprecated use `ChoicesFunction$Outbound` instead. */
-  export type Outbound = ChoicesFunction$Outbound;
-}
-
 export function choicesFunctionToJSON(
   choicesFunction: ChoicesFunction,
 ): string {
   return JSON.stringify(ChoicesFunction$outboundSchema.parse(choicesFunction));
 }
-
 export function choicesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesFunction, SDKValidationError> {
@@ -4904,7 +3877,6 @@ export const ChoicesToolCalls$inboundSchema: z.ZodType<
   type: ChoicesType$inboundSchema,
   function: z.lazy(() => ChoicesFunction$inboundSchema),
 });
-
 /** @internal */
 export type ChoicesToolCalls$Outbound = {
   id: string;
@@ -4923,19 +3895,6 @@ export const ChoicesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => ChoicesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesToolCalls$ {
-  /** @deprecated use `ChoicesToolCalls$inboundSchema` instead. */
-  export const inboundSchema = ChoicesToolCalls$inboundSchema;
-  /** @deprecated use `ChoicesToolCalls$outboundSchema` instead. */
-  export const outboundSchema = ChoicesToolCalls$outboundSchema;
-  /** @deprecated use `ChoicesToolCalls$Outbound` instead. */
-  export type Outbound = ChoicesToolCalls$Outbound;
-}
-
 export function choicesToolCallsToJSON(
   choicesToolCalls: ChoicesToolCalls,
 ): string {
@@ -4943,7 +3902,6 @@ export function choicesToolCallsToJSON(
     ChoicesToolCalls$outboundSchema.parse(choicesToolCalls),
   );
 }
-
 export function choicesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesToolCalls, SDKValidationError> {
@@ -4991,7 +3949,6 @@ export const ChoicesAssistantMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type ChoicesAssistantMessage$Outbound = {
   content?:
@@ -5050,19 +4007,6 @@ export const ChoicesAssistantMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesAssistantMessage$ {
-  /** @deprecated use `ChoicesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema = ChoicesAssistantMessage$inboundSchema;
-  /** @deprecated use `ChoicesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema = ChoicesAssistantMessage$outboundSchema;
-  /** @deprecated use `ChoicesAssistantMessage$Outbound` instead. */
-  export type Outbound = ChoicesAssistantMessage$Outbound;
-}
-
 export function choicesAssistantMessageToJSON(
   choicesAssistantMessage: ChoicesAssistantMessage,
 ): string {
@@ -5070,7 +4014,6 @@ export function choicesAssistantMessageToJSON(
     ChoicesAssistantMessage$outboundSchema.parse(choicesAssistantMessage),
   );
 }
-
 export function choicesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesAssistantMessage, SDKValidationError> {
@@ -5085,24 +4028,10 @@ export function choicesAssistantMessageFromJSON(
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
     z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRole);
-
 /** @internal */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
     DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema:
@@ -5111,26 +4040,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
@@ -5148,7 +4063,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
       "file_data": "fileData",
     });
   });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsFile$Outbound = {
   file_data?: string | undefined;
@@ -5174,21 +4088,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsFile$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFile$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFile$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFile$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetricsFile$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsFileToJSON(
   deploymentCreateMetric2DeploymentsMetricsFile:
     DeploymentCreateMetric2DeploymentsMetricsFile,
@@ -5199,7 +4098,6 @@ export function deploymentCreateMetric2DeploymentsMetricsFileToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsFileFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5226,7 +4124,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema:
         DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema
       ),
     });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetrics4$Outbound = {
   type: string;
@@ -5247,21 +4144,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics4$outboundSchema:
     ),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetrics4$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics4$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics4$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics4$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics4$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetrics4ToJSON(
   deploymentCreateMetric2DeploymentsMetrics4:
     DeploymentCreateMetric2DeploymentsMetrics4,
@@ -5272,7 +4154,6 @@ export function deploymentCreateMetric2DeploymentsMetrics4ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetrics4FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5296,7 +4177,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema:
   z.ZodNativeEnum<
@@ -5304,41 +4184,14 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> = z
     .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsFormat);
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> =
     DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsFormat$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsInputAudio$inboundSchema:
@@ -5350,7 +4203,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsInputAudio$inboundSchema:
     data: z.string(),
     format: DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema,
   });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsInputAudio$Outbound = {
   data: string;
@@ -5368,22 +4220,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsInputAudio$outboundSchema:
     format: DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsInputAudio$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsInputAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsInputAudio$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsInputAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsInputAudio$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsInputAudio$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetric2DeploymentsMetricsInputAudio$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsInputAudioToJSON(
   deploymentCreateMetric2DeploymentsMetricsInputAudio:
     DeploymentCreateMetric2DeploymentsMetricsInputAudio,
@@ -5394,7 +4230,6 @@ export function deploymentCreateMetric2DeploymentsMetricsInputAudioToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsInputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5425,7 +4260,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics3$inboundSchema:
         "input_audio": "inputAudio",
       });
     });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetrics3$Outbound = {
   type: string;
@@ -5450,21 +4284,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics3$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetrics3$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics3$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics3$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics3$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics3$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics3$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics3$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetrics3ToJSON(
   deploymentCreateMetric2DeploymentsMetrics3:
     DeploymentCreateMetric2DeploymentsMetrics3,
@@ -5475,7 +4294,6 @@ export function deploymentCreateMetric2DeploymentsMetrics3ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetrics3FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5499,7 +4317,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema:
   z.ZodNativeEnum<
@@ -5507,41 +4324,14 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> = z
     .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsDetail);
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> =
     DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsDetail$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsImageUrl$inboundSchema:
@@ -5554,7 +4344,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsImageUrl$inboundSchema:
     detail: DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema
       .optional(),
   });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsImageUrl$Outbound = {
   url: string;
@@ -5573,22 +4362,6 @@ export const DeploymentCreateMetric2DeploymentsMetricsImageUrl$outboundSchema:
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsImageUrl$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsImageUrl$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsImageUrl$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsImageUrl$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsImageUrl$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsImageUrl$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetric2DeploymentsMetricsImageUrl$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetricsImageUrlToJSON(
   deploymentCreateMetric2DeploymentsMetricsImageUrl:
     DeploymentCreateMetric2DeploymentsMetricsImageUrl,
@@ -5599,7 +4372,6 @@ export function deploymentCreateMetric2DeploymentsMetricsImageUrlToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetricsImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5630,7 +4402,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema:
         "image_url": "imageUrl",
       });
     });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetrics2$Outbound = {
   type: string;
@@ -5655,21 +4426,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetrics2$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics2$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetrics2ToJSON(
   deploymentCreateMetric2DeploymentsMetrics2:
     DeploymentCreateMetric2DeploymentsMetrics2,
@@ -5680,7 +4436,6 @@ export function deploymentCreateMetric2DeploymentsMetrics2ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetrics2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5704,26 +4459,12 @@ export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesT
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType,
   );
-
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
   > =
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema:
@@ -5733,7 +4474,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema:
         DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema,
       text: z.string(),
     });
-
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetrics1$Outbound = {
   type: string;
@@ -5752,21 +4492,6 @@ export const DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema:
     text: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetrics1$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics1$Outbound;
-}
-
 export function deploymentCreateMetric2DeploymentsMetrics1ToJSON(
   deploymentCreateMetric2DeploymentsMetrics1:
     DeploymentCreateMetric2DeploymentsMetrics1,
@@ -5777,7 +4502,6 @@ export function deploymentCreateMetric2DeploymentsMetrics1ToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetric2DeploymentsMetrics1FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5806,7 +4530,6 @@ export const DeploymentCreateMetricContentDeploymentsMetricsRequest2$inboundSche
     z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics3$inboundSchema),
     z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema),
   ]);
-
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequest2$Outbound =
   | DeploymentCreateMetric2DeploymentsMetrics1$Outbound
@@ -5827,22 +4550,6 @@ export const DeploymentCreateMetricContentDeploymentsMetricsRequest2$outboundSch
     z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricContentDeploymentsMetricsRequest2$ {
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequest2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetricsRequest2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequest2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricContentDeploymentsMetricsRequest2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricContentDeploymentsMetricsRequest2$Outbound` instead. */
-  export type Outbound =
-    DeploymentCreateMetricContentDeploymentsMetricsRequest2$Outbound;
-}
-
 export function deploymentCreateMetricContentDeploymentsMetricsRequest2ToJSON(
   deploymentCreateMetricContentDeploymentsMetricsRequest2:
     DeploymentCreateMetricContentDeploymentsMetricsRequest2,
@@ -5852,7 +4559,6 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequest2ToJSON(
       .parse(deploymentCreateMetricContentDeploymentsMetricsRequest2),
   );
 }
-
 export function deploymentCreateMetricContentDeploymentsMetricsRequest2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5882,7 +4588,6 @@ export const ChoicesContent$inboundSchema: z.ZodType<
     z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type ChoicesContent$Outbound =
   | string
@@ -5908,23 +4613,9 @@ export const ChoicesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesContent$ {
-  /** @deprecated use `ChoicesContent$inboundSchema` instead. */
-  export const inboundSchema = ChoicesContent$inboundSchema;
-  /** @deprecated use `ChoicesContent$outboundSchema` instead. */
-  export const outboundSchema = ChoicesContent$outboundSchema;
-  /** @deprecated use `ChoicesContent$Outbound` instead. */
-  export type Outbound = ChoicesContent$Outbound;
-}
-
 export function choicesContentToJSON(choicesContent: ChoicesContent): string {
   return JSON.stringify(ChoicesContent$outboundSchema.parse(choicesContent));
 }
-
 export function choicesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesContent, SDKValidationError> {
@@ -5953,7 +4644,6 @@ export const ChoicesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type ChoicesUserMessage$Outbound = {
   role: string;
@@ -5989,19 +4679,6 @@ export const ChoicesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesUserMessage$ {
-  /** @deprecated use `ChoicesUserMessage$inboundSchema` instead. */
-  export const inboundSchema = ChoicesUserMessage$inboundSchema;
-  /** @deprecated use `ChoicesUserMessage$outboundSchema` instead. */
-  export const outboundSchema = ChoicesUserMessage$outboundSchema;
-  /** @deprecated use `ChoicesUserMessage$Outbound` instead. */
-  export type Outbound = ChoicesUserMessage$Outbound;
-}
-
 export function choicesUserMessageToJSON(
   choicesUserMessage: ChoicesUserMessage,
 ): string {
@@ -6009,7 +4686,6 @@ export function choicesUserMessageToJSON(
     ChoicesUserMessage$outboundSchema.parse(choicesUserMessage),
   );
 }
-
 export function choicesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesUserMessage, SDKValidationError> {
@@ -6024,23 +4700,10 @@ export function choicesUserMessageFromJSON(
 export const DeploymentCreateMetricChoicesRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricChoicesRole
 > = z.nativeEnum(DeploymentCreateMetricChoicesRole);
-
 /** @internal */
 export const DeploymentCreateMetricChoicesRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricChoicesRole
 > = DeploymentCreateMetricChoicesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricChoicesRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesRole$outboundSchema;
-}
 
 /** @internal */
 export const ChoicesSystemMessage$inboundSchema: z.ZodType<
@@ -6052,7 +4715,6 @@ export const ChoicesSystemMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type ChoicesSystemMessage$Outbound = {
   role: string;
@@ -6071,19 +4733,6 @@ export const ChoicesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesSystemMessage$ {
-  /** @deprecated use `ChoicesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema = ChoicesSystemMessage$inboundSchema;
-  /** @deprecated use `ChoicesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema = ChoicesSystemMessage$outboundSchema;
-  /** @deprecated use `ChoicesSystemMessage$Outbound` instead. */
-  export type Outbound = ChoicesSystemMessage$Outbound;
-}
-
 export function choicesSystemMessageToJSON(
   choicesSystemMessage: ChoicesSystemMessage,
 ): string {
@@ -6091,7 +4740,6 @@ export function choicesSystemMessageToJSON(
     ChoicesSystemMessage$outboundSchema.parse(choicesSystemMessage),
   );
 }
-
 export function choicesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesSystemMessage, SDKValidationError> {
@@ -6105,21 +4753,9 @@ export function choicesSystemMessageFromJSON(
 /** @internal */
 export const ChoicesRole$inboundSchema: z.ZodNativeEnum<typeof ChoicesRole> = z
   .nativeEnum(ChoicesRole);
-
 /** @internal */
 export const ChoicesRole$outboundSchema: z.ZodNativeEnum<typeof ChoicesRole> =
   ChoicesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesRole$ {
-  /** @deprecated use `ChoicesRole$inboundSchema` instead. */
-  export const inboundSchema = ChoicesRole$inboundSchema;
-  /** @deprecated use `ChoicesRole$outboundSchema` instead. */
-  export const outboundSchema = ChoicesRole$outboundSchema;
-}
 
 /** @internal */
 export const ChoicesDeveloperMessage$inboundSchema: z.ZodType<
@@ -6131,7 +4767,6 @@ export const ChoicesDeveloperMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type ChoicesDeveloperMessage$Outbound = {
   role: string;
@@ -6150,19 +4785,6 @@ export const ChoicesDeveloperMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesDeveloperMessage$ {
-  /** @deprecated use `ChoicesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema = ChoicesDeveloperMessage$inboundSchema;
-  /** @deprecated use `ChoicesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema = ChoicesDeveloperMessage$outboundSchema;
-  /** @deprecated use `ChoicesDeveloperMessage$Outbound` instead. */
-  export type Outbound = ChoicesDeveloperMessage$Outbound;
-}
-
 export function choicesDeveloperMessageToJSON(
   choicesDeveloperMessage: ChoicesDeveloperMessage,
 ): string {
@@ -6170,7 +4792,6 @@ export function choicesDeveloperMessageToJSON(
     ChoicesDeveloperMessage$outboundSchema.parse(choicesDeveloperMessage),
   );
 }
-
 export function choicesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<ChoicesDeveloperMessage, SDKValidationError> {
@@ -6190,7 +4811,6 @@ export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
     z.lazy(() => ChoicesUserMessage$inboundSchema),
     z.lazy(() => ChoicesAssistantMessage$inboundSchema),
   ]);
-
 /** @internal */
 export type Choices$Outbound =
   | ChoicesToolMessage$Outbound
@@ -6212,23 +4832,9 @@ export const Choices$outboundSchema: z.ZodType<
   z.lazy(() => ChoicesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Choices$ {
-  /** @deprecated use `Choices$inboundSchema` instead. */
-  export const inboundSchema = Choices$inboundSchema;
-  /** @deprecated use `Choices$outboundSchema` instead. */
-  export const outboundSchema = Choices$outboundSchema;
-  /** @deprecated use `Choices$Outbound` instead. */
-  export type Outbound = Choices$Outbound;
-}
-
 export function choicesToJSON(choices: Choices): string {
   return JSON.stringify(Choices$outboundSchema.parse(choices));
 }
-
 export function choicesFromJSON(
   jsonString: string,
 ): SafeParseResult<Choices, SDKValidationError> {
@@ -6247,7 +4853,6 @@ export const Feedback$inboundSchema: z.ZodType<
 > = z.object({
   score: z.number().int(),
 });
-
 /** @internal */
 export type Feedback$Outbound = {
   score: number;
@@ -6262,23 +4867,9 @@ export const Feedback$outboundSchema: z.ZodType<
   score: z.number().int(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Feedback$ {
-  /** @deprecated use `Feedback$inboundSchema` instead. */
-  export const inboundSchema = Feedback$inboundSchema;
-  /** @deprecated use `Feedback$outboundSchema` instead. */
-  export const outboundSchema = Feedback$outboundSchema;
-  /** @deprecated use `Feedback$Outbound` instead. */
-  export type Outbound = Feedback$Outbound;
-}
-
 export function feedbackToJSON(feedback: Feedback): string {
   return JSON.stringify(Feedback$outboundSchema.parse(feedback));
 }
-
 export function feedbackFromJSON(
   jsonString: string,
 ): SafeParseResult<Feedback, SDKValidationError> {
@@ -6324,7 +4915,6 @@ export const DeploymentCreateMetricRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   feedback: z.lazy(() => Feedback$inboundSchema).optional(),
 });
-
 /** @internal */
 export type DeploymentCreateMetricRequestBody$Outbound = {
   metadata?: { [k: string]: any } | undefined;
@@ -6387,20 +4977,6 @@ export const DeploymentCreateMetricRequestBody$outboundSchema: z.ZodType<
   feedback: z.lazy(() => Feedback$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricRequestBody$ {
-  /** @deprecated use `DeploymentCreateMetricRequestBody$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricRequestBody$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricRequestBody$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricRequestBody$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricRequestBody$Outbound;
-}
-
 export function deploymentCreateMetricRequestBodyToJSON(
   deploymentCreateMetricRequestBody: DeploymentCreateMetricRequestBody,
 ): string {
@@ -6410,7 +4986,6 @@ export function deploymentCreateMetricRequestBodyToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricRequestBody, SDKValidationError> {
@@ -6434,7 +5009,6 @@ export const DeploymentCreateMetricRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type DeploymentCreateMetricRequest$Outbound = {
   id: string;
@@ -6455,19 +5029,6 @@ export const DeploymentCreateMetricRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricRequest$ {
-  /** @deprecated use `DeploymentCreateMetricRequest$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricRequest$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricRequest$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricRequest$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricRequest$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricRequest$Outbound;
-}
-
 export function deploymentCreateMetricRequestToJSON(
   deploymentCreateMetricRequest: DeploymentCreateMetricRequest,
 ): string {
@@ -6477,7 +5038,6 @@ export function deploymentCreateMetricRequestToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricRequest, SDKValidationError> {
@@ -6496,7 +5056,6 @@ export const DeploymentCreateMetricResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   success: z.boolean(),
 });
-
 /** @internal */
 export type DeploymentCreateMetricResponseBody$Outbound = {
   success: boolean;
@@ -6511,20 +5070,6 @@ export const DeploymentCreateMetricResponseBody$outboundSchema: z.ZodType<
   success: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricResponseBody$ {
-  /** @deprecated use `DeploymentCreateMetricResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricResponseBody$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricResponseBody$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricResponseBody$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricResponseBody$Outbound;
-}
-
 export function deploymentCreateMetricResponseBodyToJSON(
   deploymentCreateMetricResponseBody: DeploymentCreateMetricResponseBody,
 ): string {
@@ -6534,7 +5079,6 @@ export function deploymentCreateMetricResponseBodyToJSON(
     ),
   );
 }
-
 export function deploymentCreateMetricResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricResponseBody, SDKValidationError> {

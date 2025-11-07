@@ -1263,25 +1263,11 @@ export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSch
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
   > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBody5Role);
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
   > = CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema:
@@ -1290,7 +1276,6 @@ export const CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsRequestContent$Outbound =
   | string
@@ -1304,22 +1289,6 @@ export const CreateDatasetItemMessagesDatasetsRequestContent$outboundSchema:
     CreateDatasetItemMessagesDatasetsRequestContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestContent$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestContent$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestContent$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestContent$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsRequestContent$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsRequestContentToJSON(
   createDatasetItemMessagesDatasetsRequestContent:
     CreateDatasetItemMessagesDatasetsRequestContent,
@@ -1330,7 +1299,6 @@ export function createDatasetItemMessagesDatasetsRequestContentToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsRequestContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1361,7 +1329,6 @@ export const CreateDatasetItemMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesToolMessage$Outbound = {
   role: string;
@@ -1384,21 +1351,6 @@ export const CreateDatasetItemMessagesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesToolMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesToolMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesToolMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesToolMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesToolMessage$Outbound;
-}
-
 export function createDatasetItemMessagesToolMessageToJSON(
   createDatasetItemMessagesToolMessage: CreateDatasetItemMessagesToolMessage,
 ): string {
@@ -1408,7 +1360,6 @@ export function createDatasetItemMessagesToolMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesToolMessage, SDKValidationError> {
@@ -1425,25 +1376,11 @@ export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSc
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
   > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
   > = CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2RefusalContentPart$inboundSchema: z.ZodType<
@@ -1454,7 +1391,6 @@ export const CreateDatasetItem2RefusalContentPart$inboundSchema: z.ZodType<
   type: CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema,
   refusal: z.string(),
 });
-
 /** @internal */
 export type CreateDatasetItem2RefusalContentPart$Outbound = {
   type: string;
@@ -1472,21 +1408,6 @@ export const CreateDatasetItem2RefusalContentPart$outboundSchema: z.ZodType<
   refusal: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2RefusalContentPart$ {
-  /** @deprecated use `CreateDatasetItem2RefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2RefusalContentPart$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2RefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2RefusalContentPart$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2RefusalContentPart$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2RefusalContentPart$Outbound;
-}
-
 export function createDatasetItem2RefusalContentPartToJSON(
   createDatasetItem2RefusalContentPart: CreateDatasetItem2RefusalContentPart,
 ): string {
@@ -1496,7 +1417,6 @@ export function createDatasetItem2RefusalContentPartToJSON(
     ),
   );
 }
-
 export function createDatasetItem2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2RefusalContentPart, SDKValidationError> {
@@ -1513,48 +1433,20 @@ export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSch
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
   > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessagesType);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
   > = CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsType> = z
     .nativeEnum(CreateDatasetItemAnnotationsDatasetsType);
-
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsType> =
     CreateDatasetItemAnnotationsDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasetsType$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasetsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemAnnotationsFilePath$inboundSchema: z.ZodType<
@@ -1568,7 +1460,6 @@ export const CreateDatasetItemAnnotationsFilePath$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsFilePath$Outbound = {
   file_id: string;
@@ -1587,21 +1478,6 @@ export const CreateDatasetItemAnnotationsFilePath$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsFilePath$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsFilePath$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsFilePath$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotationsFilePath$Outbound;
-}
-
 export function createDatasetItemAnnotationsFilePathToJSON(
   createDatasetItemAnnotationsFilePath: CreateDatasetItemAnnotationsFilePath,
 ): string {
@@ -1611,7 +1487,6 @@ export function createDatasetItemAnnotationsFilePathToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemAnnotationsFilePath, SDKValidationError> {
@@ -1641,7 +1516,6 @@ export const CreateDatasetItemAnnotations2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotations2$Outbound = {
   type: string;
@@ -1670,19 +1544,6 @@ export const CreateDatasetItemAnnotations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotations2$ {
-  /** @deprecated use `CreateDatasetItemAnnotations2$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemAnnotations2$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotations2$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemAnnotations2$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotations2$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotations2$Outbound;
-}
-
 export function createDatasetItemAnnotations2ToJSON(
   createDatasetItemAnnotations2: CreateDatasetItemAnnotations2,
 ): string {
@@ -1692,7 +1553,6 @@ export function createDatasetItemAnnotations2ToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotations2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemAnnotations2, SDKValidationError> {
@@ -1707,22 +1567,10 @@ export function createDatasetItemAnnotations2FromJSON(
 export const CreateDatasetItemAnnotationsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemAnnotationsType
 > = z.nativeEnum(CreateDatasetItemAnnotationsType);
-
 /** @internal */
 export const CreateDatasetItemAnnotationsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemAnnotationsType
 > = CreateDatasetItemAnnotationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsType$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemAnnotationsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemAnnotationsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemAnnotationsFileCitation$inboundSchema: z.ZodType<
@@ -1737,7 +1585,6 @@ export const CreateDatasetItemAnnotationsFileCitation$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsFileCitation$Outbound = {
   file_id: string;
@@ -1758,21 +1605,6 @@ export const CreateDatasetItemAnnotationsFileCitation$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsFileCitation$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsFileCitation$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsFileCitation$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotationsFileCitation$Outbound;
-}
-
 export function createDatasetItemAnnotationsFileCitationToJSON(
   createDatasetItemAnnotationsFileCitation:
     CreateDatasetItemAnnotationsFileCitation,
@@ -1783,7 +1615,6 @@ export function createDatasetItemAnnotationsFileCitationToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1820,7 +1651,6 @@ export const CreateDatasetItemAnnotations1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotations1$Outbound = {
   type: string;
@@ -1851,19 +1681,6 @@ export const CreateDatasetItemAnnotations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotations1$ {
-  /** @deprecated use `CreateDatasetItemAnnotations1$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemAnnotations1$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotations1$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemAnnotations1$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotations1$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotations1$Outbound;
-}
-
 export function createDatasetItemAnnotations1ToJSON(
   createDatasetItemAnnotations1: CreateDatasetItemAnnotations1,
 ): string {
@@ -1873,7 +1690,6 @@ export function createDatasetItemAnnotations1ToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotations1FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemAnnotations1, SDKValidationError> {
@@ -1893,7 +1709,6 @@ export const CreateDatasetItem2Annotations$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemAnnotations1$inboundSchema),
   z.lazy(() => CreateDatasetItemAnnotations2$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItem2Annotations$Outbound =
   | CreateDatasetItemAnnotations1$Outbound
@@ -1909,19 +1724,6 @@ export const CreateDatasetItem2Annotations$outboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemAnnotations2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Annotations$ {
-  /** @deprecated use `CreateDatasetItem2Annotations$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Annotations$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Annotations$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Annotations$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2Annotations$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2Annotations$Outbound;
-}
-
 export function createDatasetItem2AnnotationsToJSON(
   createDatasetItem2Annotations: CreateDatasetItem2Annotations,
 ): string {
@@ -1931,7 +1733,6 @@ export function createDatasetItem2AnnotationsToJSON(
     ),
   );
 }
-
 export function createDatasetItem2AnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Annotations, SDKValidationError> {
@@ -1957,7 +1758,6 @@ export const CreateDatasetItem2TextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type CreateDatasetItem2TextContentPart$Outbound = {
   type: string;
@@ -1986,20 +1786,6 @@ export const CreateDatasetItem2TextContentPart$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2TextContentPart$ {
-  /** @deprecated use `CreateDatasetItem2TextContentPart$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2TextContentPart$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2TextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2TextContentPart$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2TextContentPart$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2TextContentPart$Outbound;
-}
-
 export function createDatasetItem2TextContentPartToJSON(
   createDatasetItem2TextContentPart: CreateDatasetItem2TextContentPart,
 ): string {
@@ -2009,7 +1795,6 @@ export function createDatasetItem2TextContentPartToJSON(
     ),
   );
 }
-
 export function createDatasetItem2TextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2TextContentPart, SDKValidationError> {
@@ -2029,7 +1814,6 @@ export const CreateDatasetItemContentDatasets2$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItem2TextContentPart$inboundSchema),
   z.lazy(() => CreateDatasetItem2RefusalContentPart$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItemContentDatasets2$Outbound =
   | CreateDatasetItem2TextContentPart$Outbound
@@ -2045,20 +1829,6 @@ export const CreateDatasetItemContentDatasets2$outboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItem2RefusalContentPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemContentDatasets2$ {
-  /** @deprecated use `CreateDatasetItemContentDatasets2$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemContentDatasets2$inboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasets2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemContentDatasets2$outboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasets2$Outbound` instead. */
-  export type Outbound = CreateDatasetItemContentDatasets2$Outbound;
-}
-
 export function createDatasetItemContentDatasets2ToJSON(
   createDatasetItemContentDatasets2: CreateDatasetItemContentDatasets2,
 ): string {
@@ -2068,7 +1838,6 @@ export function createDatasetItemContentDatasets2ToJSON(
     ),
   );
 }
-
 export function createDatasetItemContentDatasets2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemContentDatasets2, SDKValidationError> {
@@ -2091,7 +1860,6 @@ export const CreateDatasetItemMessagesDatasetsContent$inboundSchema: z.ZodType<
     z.lazy(() => CreateDatasetItem2RefusalContentPart$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsContent$Outbound =
   | string
@@ -2113,21 +1881,6 @@ export const CreateDatasetItemMessagesDatasetsContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsContent$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsContent$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsContent$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsContent$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsContent$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsContentToJSON(
   createDatasetItemMessagesDatasetsContent:
     CreateDatasetItemMessagesDatasetsContent,
@@ -2138,7 +1891,6 @@ export function createDatasetItemMessagesDatasetsContentToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2160,25 +1912,11 @@ export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSche
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
   > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBodyRole);
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
   > = CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesAudio$inboundSchema: z.ZodType<
@@ -2188,7 +1926,6 @@ export const CreateDatasetItemMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesAudio$Outbound = {
   id: string;
@@ -2203,19 +1940,6 @@ export const CreateDatasetItemMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesAudio$ {
-  /** @deprecated use `CreateDatasetItemMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesAudio$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesAudio$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesAudio$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesAudio$Outbound;
-}
-
 export function createDatasetItemMessagesAudioToJSON(
   createDatasetItemMessagesAudio: CreateDatasetItemMessagesAudio,
 ): string {
@@ -2225,7 +1949,6 @@ export function createDatasetItemMessagesAudioToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesAudio, SDKValidationError> {
@@ -2240,22 +1963,10 @@ export function createDatasetItemMessagesAudioFromJSON(
 export const CreateDatasetItemMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesType
 > = z.nativeEnum(CreateDatasetItemMessagesType);
-
 /** @internal */
 export const CreateDatasetItemMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesType
 > = CreateDatasetItemMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesType$ {
-  /** @deprecated use `CreateDatasetItemMessagesType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesFunction$inboundSchema: z.ZodType<
@@ -2266,7 +1977,6 @@ export const CreateDatasetItemMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2283,20 +1993,6 @@ export const CreateDatasetItemMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesFunction$ {
-  /** @deprecated use `CreateDatasetItemMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesFunction$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesFunction$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesFunction$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesFunction$Outbound;
-}
-
 export function createDatasetItemMessagesFunctionToJSON(
   createDatasetItemMessagesFunction: CreateDatasetItemMessagesFunction,
 ): string {
@@ -2306,7 +2002,6 @@ export function createDatasetItemMessagesFunctionToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesFunction, SDKValidationError> {
@@ -2327,7 +2022,6 @@ export const CreateDatasetItemMessagesToolCalls$inboundSchema: z.ZodType<
   type: CreateDatasetItemMessagesType$inboundSchema,
   function: z.lazy(() => CreateDatasetItemMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesToolCalls$Outbound = {
   id: string;
@@ -2346,20 +2040,6 @@ export const CreateDatasetItemMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => CreateDatasetItemMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesToolCalls$ {
-  /** @deprecated use `CreateDatasetItemMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesToolCalls$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesToolCalls$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesToolCalls$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesToolCalls$Outbound;
-}
-
 export function createDatasetItemMessagesToolCallsToJSON(
   createDatasetItemMessagesToolCalls: CreateDatasetItemMessagesToolCalls,
 ): string {
@@ -2369,7 +2049,6 @@ export function createDatasetItemMessagesToolCallsToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesToolCalls, SDKValidationError> {
@@ -2416,7 +2095,6 @@ export const CreateDatasetItemMessagesAssistantMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesAssistantMessage$Outbound = {
   content?:
@@ -2476,21 +2154,6 @@ export const CreateDatasetItemMessagesAssistantMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesAssistantMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesAssistantMessage$Outbound;
-}
-
 export function createDatasetItemMessagesAssistantMessageToJSON(
   createDatasetItemMessagesAssistantMessage:
     CreateDatasetItemMessagesAssistantMessage,
@@ -2501,7 +2164,6 @@ export function createDatasetItemMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2522,47 +2184,19 @@ export function createDatasetItemMessagesAssistantMessageFromJSON(
 export const CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> = z
     .nativeEnum(CreateDatasetItemMessagesDatasetsRequestRole);
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> =
     CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> = z
     .nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyType);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> =
     CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2File$inboundSchema: z.ZodType<
@@ -2579,7 +2213,6 @@ export const CreateDatasetItem2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem2File$Outbound = {
   file_data?: string | undefined;
@@ -2604,19 +2237,6 @@ export const CreateDatasetItem2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2File$ {
-  /** @deprecated use `CreateDatasetItem2File$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2File$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2File$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2File$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2File$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2File$Outbound;
-}
-
 export function createDatasetItem2FileToJSON(
   createDatasetItem2File: CreateDatasetItem2File,
 ): string {
@@ -2624,7 +2244,6 @@ export function createDatasetItem2FileToJSON(
     CreateDatasetItem2File$outboundSchema.parse(createDatasetItem2File),
   );
 }
-
 export function createDatasetItem2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2File, SDKValidationError> {
@@ -2644,7 +2263,6 @@ export const CreateDatasetItem24$inboundSchema: z.ZodType<
   type: CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema,
   file: z.lazy(() => CreateDatasetItem2File$inboundSchema),
 });
-
 /** @internal */
 export type CreateDatasetItem24$Outbound = {
   type: string;
@@ -2661,19 +2279,6 @@ export const CreateDatasetItem24$outboundSchema: z.ZodType<
   file: z.lazy(() => CreateDatasetItem2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem24$ {
-  /** @deprecated use `CreateDatasetItem24$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem24$inboundSchema;
-  /** @deprecated use `CreateDatasetItem24$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem24$outboundSchema;
-  /** @deprecated use `CreateDatasetItem24$Outbound` instead. */
-  export type Outbound = CreateDatasetItem24$Outbound;
-}
-
 export function createDatasetItem24ToJSON(
   createDatasetItem24: CreateDatasetItem24,
 ): string {
@@ -2681,7 +2286,6 @@ export function createDatasetItem24ToJSON(
     CreateDatasetItem24$outboundSchema.parse(createDatasetItem24),
   );
 }
-
 export function createDatasetItem24FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem24, SDKValidationError> {
@@ -2697,45 +2301,19 @@ export const CreateDatasetItem2DatasetsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> = z.nativeEnum(
     CreateDatasetItem2DatasetsRequestType,
   );
-
 /** @internal */
 export const CreateDatasetItem2DatasetsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> =
     CreateDatasetItem2DatasetsRequestType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItem2Format$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Format
 > = z.nativeEnum(CreateDatasetItem2Format);
-
 /** @internal */
 export const CreateDatasetItem2Format$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Format
 > = CreateDatasetItem2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Format$ {
-  /** @deprecated use `CreateDatasetItem2Format$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Format$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Format$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Format$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2InputAudio$inboundSchema: z.ZodType<
@@ -2746,7 +2324,6 @@ export const CreateDatasetItem2InputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: CreateDatasetItem2Format$inboundSchema,
 });
-
 /** @internal */
 export type CreateDatasetItem2InputAudio$Outbound = {
   data: string;
@@ -2763,19 +2340,6 @@ export const CreateDatasetItem2InputAudio$outboundSchema: z.ZodType<
   format: CreateDatasetItem2Format$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2InputAudio$ {
-  /** @deprecated use `CreateDatasetItem2InputAudio$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2InputAudio$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2InputAudio$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2InputAudio$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2InputAudio$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2InputAudio$Outbound;
-}
-
 export function createDatasetItem2InputAudioToJSON(
   createDatasetItem2InputAudio: CreateDatasetItem2InputAudio,
 ): string {
@@ -2785,7 +2349,6 @@ export function createDatasetItem2InputAudioToJSON(
     ),
   );
 }
-
 export function createDatasetItem2InputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2InputAudio, SDKValidationError> {
@@ -2809,7 +2372,6 @@ export const CreateDatasetItem23$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem23$Outbound = {
   type: string;
@@ -2830,19 +2392,6 @@ export const CreateDatasetItem23$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem23$ {
-  /** @deprecated use `CreateDatasetItem23$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem23$inboundSchema;
-  /** @deprecated use `CreateDatasetItem23$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem23$outboundSchema;
-  /** @deprecated use `CreateDatasetItem23$Outbound` instead. */
-  export type Outbound = CreateDatasetItem23$Outbound;
-}
-
 export function createDatasetItem23ToJSON(
   createDatasetItem23: CreateDatasetItem23,
 ): string {
@@ -2850,7 +2399,6 @@ export function createDatasetItem23ToJSON(
     CreateDatasetItem23$outboundSchema.parse(createDatasetItem23),
   );
 }
-
 export function createDatasetItem23FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem23, SDKValidationError> {
@@ -2865,43 +2413,19 @@ export function createDatasetItem23FromJSON(
 export const CreateDatasetItem2DatasetsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsType
 > = z.nativeEnum(CreateDatasetItem2DatasetsType);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsType
 > = CreateDatasetItem2DatasetsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItem2Detail$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Detail
 > = z.nativeEnum(CreateDatasetItem2Detail);
-
 /** @internal */
 export const CreateDatasetItem2Detail$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Detail
 > = CreateDatasetItem2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Detail$ {
-  /** @deprecated use `CreateDatasetItem2Detail$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Detail$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Detail$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Detail$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2ImageUrl$inboundSchema: z.ZodType<
@@ -2912,7 +2436,6 @@ export const CreateDatasetItem2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: CreateDatasetItem2Detail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type CreateDatasetItem2ImageUrl$Outbound = {
   url: string;
@@ -2929,19 +2452,6 @@ export const CreateDatasetItem2ImageUrl$outboundSchema: z.ZodType<
   detail: CreateDatasetItem2Detail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2ImageUrl$ {
-  /** @deprecated use `CreateDatasetItem2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2ImageUrl$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2ImageUrl$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2ImageUrl$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2ImageUrl$Outbound;
-}
-
 export function createDatasetItem2ImageUrlToJSON(
   createDatasetItem2ImageUrl: CreateDatasetItem2ImageUrl,
 ): string {
@@ -2949,7 +2459,6 @@ export function createDatasetItem2ImageUrlToJSON(
     CreateDatasetItem2ImageUrl$outboundSchema.parse(createDatasetItem2ImageUrl),
   );
 }
-
 export function createDatasetItem2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2ImageUrl, SDKValidationError> {
@@ -2973,7 +2482,6 @@ export const CreateDatasetItem22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem22$Outbound = {
   type: string;
@@ -2994,19 +2502,6 @@ export const CreateDatasetItem22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem22$ {
-  /** @deprecated use `CreateDatasetItem22$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem22$inboundSchema;
-  /** @deprecated use `CreateDatasetItem22$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem22$outboundSchema;
-  /** @deprecated use `CreateDatasetItem22$Outbound` instead. */
-  export type Outbound = CreateDatasetItem22$Outbound;
-}
-
 export function createDatasetItem22ToJSON(
   createDatasetItem22: CreateDatasetItem22,
 ): string {
@@ -3014,7 +2509,6 @@ export function createDatasetItem22ToJSON(
     CreateDatasetItem22$outboundSchema.parse(createDatasetItem22),
   );
 }
-
 export function createDatasetItem22FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem22, SDKValidationError> {
@@ -3029,22 +2523,10 @@ export function createDatasetItem22FromJSON(
 export const CreateDatasetItem2Type$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Type
 > = z.nativeEnum(CreateDatasetItem2Type);
-
 /** @internal */
 export const CreateDatasetItem2Type$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Type
 > = CreateDatasetItem2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Type$ {
-  /** @deprecated use `CreateDatasetItem2Type$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Type$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem21$inboundSchema: z.ZodType<
@@ -3055,7 +2537,6 @@ export const CreateDatasetItem21$inboundSchema: z.ZodType<
   type: CreateDatasetItem2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type CreateDatasetItem21$Outbound = {
   type: string;
@@ -3072,19 +2553,6 @@ export const CreateDatasetItem21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem21$ {
-  /** @deprecated use `CreateDatasetItem21$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem21$inboundSchema;
-  /** @deprecated use `CreateDatasetItem21$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem21$outboundSchema;
-  /** @deprecated use `CreateDatasetItem21$Outbound` instead. */
-  export type Outbound = CreateDatasetItem21$Outbound;
-}
-
 export function createDatasetItem21ToJSON(
   createDatasetItem21: CreateDatasetItem21,
 ): string {
@@ -3092,7 +2560,6 @@ export function createDatasetItem21ToJSON(
     CreateDatasetItem21$outboundSchema.parse(createDatasetItem21),
   );
 }
-
 export function createDatasetItem21FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem21, SDKValidationError> {
@@ -3114,7 +2581,6 @@ export const CreateDatasetItemContent2$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItem23$inboundSchema),
   z.lazy(() => CreateDatasetItem24$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItemContent2$Outbound =
   | CreateDatasetItem21$Outbound
@@ -3134,19 +2600,6 @@ export const CreateDatasetItemContent2$outboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItem24$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemContent2$ {
-  /** @deprecated use `CreateDatasetItemContent2$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemContent2$inboundSchema;
-  /** @deprecated use `CreateDatasetItemContent2$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemContent2$outboundSchema;
-  /** @deprecated use `CreateDatasetItemContent2$Outbound` instead. */
-  export type Outbound = CreateDatasetItemContent2$Outbound;
-}
-
 export function createDatasetItemContent2ToJSON(
   createDatasetItemContent2: CreateDatasetItemContent2,
 ): string {
@@ -3154,7 +2607,6 @@ export function createDatasetItemContent2ToJSON(
     CreateDatasetItemContent2$outboundSchema.parse(createDatasetItemContent2),
   );
 }
-
 export function createDatasetItemContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemContent2, SDKValidationError> {
@@ -3179,7 +2631,6 @@ export const CreateDatasetItemMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => CreateDatasetItem24$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type CreateDatasetItemMessagesContent$Outbound =
   | string
@@ -3205,19 +2656,6 @@ export const CreateDatasetItemMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesContent$ {
-  /** @deprecated use `CreateDatasetItemMessagesContent$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesContent$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesContent$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesContent$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesContent$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesContent$Outbound;
-}
-
 export function createDatasetItemMessagesContentToJSON(
   createDatasetItemMessagesContent: CreateDatasetItemMessagesContent,
 ): string {
@@ -3227,7 +2665,6 @@ export function createDatasetItemMessagesContentToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesContent, SDKValidationError> {
@@ -3256,7 +2693,6 @@ export const CreateDatasetItemMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesUserMessage$Outbound = {
   role: string;
@@ -3290,21 +2726,6 @@ export const CreateDatasetItemMessagesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesUserMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesUserMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesUserMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesUserMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesUserMessage$Outbound;
-}
-
 export function createDatasetItemMessagesUserMessageToJSON(
   createDatasetItemMessagesUserMessage: CreateDatasetItemMessagesUserMessage,
 ): string {
@@ -3314,7 +2735,6 @@ export function createDatasetItemMessagesUserMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesUserMessage, SDKValidationError> {
@@ -3331,24 +2751,10 @@ export const CreateDatasetItemMessagesDatasetsRole$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsRole,
   );
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRole$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> =
     CreateDatasetItemMessagesDatasetsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesSystemMessage$inboundSchema: z.ZodType<
@@ -3360,7 +2766,6 @@ export const CreateDatasetItemMessagesSystemMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesSystemMessage$Outbound = {
   role: string;
@@ -3379,21 +2784,6 @@ export const CreateDatasetItemMessagesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesSystemMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesSystemMessage$Outbound;
-}
-
 export function createDatasetItemMessagesSystemMessageToJSON(
   createDatasetItemMessagesSystemMessage:
     CreateDatasetItemMessagesSystemMessage,
@@ -3404,7 +2794,6 @@ export function createDatasetItemMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesSystemMessage, SDKValidationError> {
@@ -3420,22 +2809,10 @@ export function createDatasetItemMessagesSystemMessageFromJSON(
 export const CreateDatasetItemMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesRole
 > = z.nativeEnum(CreateDatasetItemMessagesRole);
-
 /** @internal */
 export const CreateDatasetItemMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesRole
 > = CreateDatasetItemMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDeveloperMessage$inboundSchema: z.ZodType<
@@ -3447,7 +2824,6 @@ export const CreateDatasetItemMessagesDeveloperMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesDeveloperMessage$Outbound = {
   role: string;
@@ -3467,21 +2843,6 @@ export const CreateDatasetItemMessagesDeveloperMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDeveloperMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDeveloperMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDeveloperMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDeveloperMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDeveloperMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDeveloperMessageToJSON(
   createDatasetItemMessagesDeveloperMessage:
     CreateDatasetItemMessagesDeveloperMessage,
@@ -3492,7 +2853,6 @@ export function createDatasetItemMessagesDeveloperMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3521,7 +2881,6 @@ export const CreateDatasetItemMessages$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemMessagesUserMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItemMessages$Outbound =
   | CreateDatasetItemMessagesToolMessage$Outbound
@@ -3543,19 +2902,6 @@ export const CreateDatasetItemMessages$outboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessages$ {
-  /** @deprecated use `CreateDatasetItemMessages$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessages$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessages$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessages$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessages$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessages$Outbound;
-}
-
 export function createDatasetItemMessagesToJSON(
   createDatasetItemMessages: CreateDatasetItemMessages,
 ): string {
@@ -3563,7 +2909,6 @@ export function createDatasetItemMessagesToJSON(
     CreateDatasetItemMessages$outboundSchema.parse(createDatasetItemMessages),
   );
 }
-
 export function createDatasetItemMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessages, SDKValidationError> {
@@ -3596,7 +2941,6 @@ export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
     "expected_output": "expectedOutput",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemRequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
@@ -3635,19 +2979,6 @@ export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemRequestBody$ {
-  /** @deprecated use `CreateDatasetItemRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemRequestBody$inboundSchema;
-  /** @deprecated use `CreateDatasetItemRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemRequestBody$outboundSchema;
-  /** @deprecated use `CreateDatasetItemRequestBody$Outbound` instead. */
-  export type Outbound = CreateDatasetItemRequestBody$Outbound;
-}
-
 export function createDatasetItemRequestBodyToJSON(
   createDatasetItemRequestBody: CreateDatasetItemRequestBody,
 ): string {
@@ -3657,7 +2988,6 @@ export function createDatasetItemRequestBodyToJSON(
     ),
   );
 }
-
 export function createDatasetItemRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemRequestBody, SDKValidationError> {
@@ -3683,7 +3013,6 @@ export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemRequest$Outbound = {
   dataset_id: string;
@@ -3707,19 +3036,6 @@ export const CreateDatasetItemRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemRequest$ {
-  /** @deprecated use `CreateDatasetItemRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemRequest$inboundSchema;
-  /** @deprecated use `CreateDatasetItemRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemRequest$outboundSchema;
-  /** @deprecated use `CreateDatasetItemRequest$Outbound` instead. */
-  export type Outbound = CreateDatasetItemRequest$Outbound;
-}
-
 export function createDatasetItemRequestToJSON(
   createDatasetItemRequest: CreateDatasetItemRequest,
 ): string {
@@ -3727,7 +3043,6 @@ export function createDatasetItemRequestToJSON(
     CreateDatasetItemRequest$outboundSchema.parse(createDatasetItemRequest),
   );
 }
-
 export function createDatasetItemRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemRequest, SDKValidationError> {
@@ -3745,26 +3060,12 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role,
   );
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
   > =
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$inboundSchema:
@@ -3773,7 +3074,6 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$Outbound =
   | string
@@ -3787,22 +3087,6 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONContentToJSON(
   createDatasetItemMessagesDatasetsResponse200ApplicationJSONContent:
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent,
@@ -3814,7 +3098,6 @@ export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONConte
       ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3846,7 +3129,6 @@ export const CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema:
       "tool_call_id": "toolCallId",
     });
   });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsToolMessage$Outbound = {
   role: string;
@@ -3871,21 +3153,6 @@ export const CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsToolMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsToolMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsToolMessageToJSON(
   createDatasetItemMessagesDatasetsToolMessage:
     CreateDatasetItemMessagesDatasetsToolMessage,
@@ -3896,7 +3163,6 @@ export function createDatasetItemMessagesDatasetsToolMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3920,26 +3186,12 @@ export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMes
   > = z.nativeEnum(
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type,
   );
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
   > =
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema:
@@ -3952,7 +3204,6 @@ export const CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema:
       CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema,
     refusal: z.string(),
   });
-
 /** @internal */
 export type CreateDatasetItem2DatasetsRefusalContentPart$Outbound = {
   type: string;
@@ -3971,21 +3222,6 @@ export const CreateDatasetItem2DatasetsRefusalContentPart$outboundSchema:
     refusal: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRefusalContentPart$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRefusalContentPart$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRefusalContentPart$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsRefusalContentPart$Outbound;
-}
-
 export function createDatasetItem2DatasetsRefusalContentPartToJSON(
   createDatasetItem2DatasetsRefusalContentPart:
     CreateDatasetItem2DatasetsRefusalContentPart,
@@ -3996,7 +3232,6 @@ export function createDatasetItem2DatasetsRefusalContentPartToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsRefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4020,7 +3255,6 @@ export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMes
   > = z.nativeEnum(
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType,
   );
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema:
   z.ZodNativeEnum<
@@ -4028,41 +3262,14 @@ export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMes
   > =
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponse200Type> =
     z.nativeEnum(CreateDatasetItemAnnotationsDatasetsResponse200Type);
-
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponse200Type> =
     CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasetsResponse200Type$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema:
@@ -4077,7 +3284,6 @@ export const CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsDatasetsFilePath$Outbound = {
   file_id: string;
@@ -4097,21 +3303,6 @@ export const CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasetsFilePath$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotationsDatasetsFilePath$Outbound;
-}
-
 export function createDatasetItemAnnotationsDatasetsFilePathToJSON(
   createDatasetItemAnnotationsDatasetsFilePath:
     CreateDatasetItemAnnotationsDatasetsFilePath,
@@ -4122,7 +3313,6 @@ export function createDatasetItemAnnotationsDatasetsFilePathToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsDatasetsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4159,7 +3349,6 @@ export const CreateDatasetItemAnnotationsDatasets2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsDatasets2$Outbound = {
   type: string;
@@ -4190,21 +3379,6 @@ export const CreateDatasetItemAnnotationsDatasets2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasets2$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasets2$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasets2$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotationsDatasets2$Outbound;
-}
-
 export function createDatasetItemAnnotationsDatasets2ToJSON(
   createDatasetItemAnnotationsDatasets2: CreateDatasetItemAnnotationsDatasets2,
 ): string {
@@ -4214,7 +3388,6 @@ export function createDatasetItemAnnotationsDatasets2ToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsDatasets2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemAnnotationsDatasets2, SDKValidationError> {
@@ -4230,24 +3403,10 @@ export function createDatasetItemAnnotationsDatasets2FromJSON(
 export const CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponseType> = z
     .nativeEnum(CreateDatasetItemAnnotationsDatasetsResponseType);
-
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponseType> =
     CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasetsResponseType$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema:
@@ -4263,7 +3422,6 @@ export const CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound = {
   file_id: string;
@@ -4285,22 +3443,6 @@ export const CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasetsFileCitation$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound;
-}
-
 export function createDatasetItemAnnotationsDatasetsFileCitationToJSON(
   createDatasetItemAnnotationsDatasetsFileCitation:
     CreateDatasetItemAnnotationsDatasetsFileCitation,
@@ -4311,7 +3453,6 @@ export function createDatasetItemAnnotationsDatasetsFileCitationToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsDatasetsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4348,7 +3489,6 @@ export const CreateDatasetItemAnnotationsDatasets1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemAnnotationsDatasets1$Outbound = {
   type: string;
@@ -4379,21 +3519,6 @@ export const CreateDatasetItemAnnotationsDatasets1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemAnnotationsDatasets1$ {
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemAnnotationsDatasets1$inboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemAnnotationsDatasets1$outboundSchema;
-  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$Outbound` instead. */
-  export type Outbound = CreateDatasetItemAnnotationsDatasets1$Outbound;
-}
-
 export function createDatasetItemAnnotationsDatasets1ToJSON(
   createDatasetItemAnnotationsDatasets1: CreateDatasetItemAnnotationsDatasets1,
 ): string {
@@ -4403,7 +3528,6 @@ export function createDatasetItemAnnotationsDatasets1ToJSON(
     ),
   );
 }
-
 export function createDatasetItemAnnotationsDatasets1FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemAnnotationsDatasets1, SDKValidationError> {
@@ -4424,7 +3548,6 @@ export const CreateDatasetItem2DatasetsAnnotations$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemAnnotationsDatasets1$inboundSchema),
   z.lazy(() => CreateDatasetItemAnnotationsDatasets2$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItem2DatasetsAnnotations$Outbound =
   | CreateDatasetItemAnnotationsDatasets1$Outbound
@@ -4440,21 +3563,6 @@ export const CreateDatasetItem2DatasetsAnnotations$outboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemAnnotationsDatasets2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsAnnotations$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsAnnotations$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsAnnotations$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsAnnotations$Outbound;
-}
-
 export function createDatasetItem2DatasetsAnnotationsToJSON(
   createDatasetItem2DatasetsAnnotations: CreateDatasetItem2DatasetsAnnotations,
 ): string {
@@ -4464,7 +3572,6 @@ export function createDatasetItem2DatasetsAnnotationsToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsAnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2DatasetsAnnotations, SDKValidationError> {
@@ -4492,7 +3599,6 @@ export const CreateDatasetItem2DatasetsTextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type CreateDatasetItem2DatasetsTextContentPart$Outbound = {
   type: string;
@@ -4523,21 +3629,6 @@ export const CreateDatasetItem2DatasetsTextContentPart$outboundSchema:
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsTextContentPart$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsTextContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsTextContentPart$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsTextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsTextContentPart$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsTextContentPart$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsTextContentPart$Outbound;
-}
-
 export function createDatasetItem2DatasetsTextContentPartToJSON(
   createDatasetItem2DatasetsTextContentPart:
     CreateDatasetItem2DatasetsTextContentPart,
@@ -4548,7 +3639,6 @@ export function createDatasetItem2DatasetsTextContentPartToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsTextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4575,7 +3665,6 @@ export const CreateDatasetItemContentDatasetsResponse2002$inboundSchema:
     z.lazy(() => CreateDatasetItem2DatasetsTextContentPart$inboundSchema),
     z.lazy(() => CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema),
   ]);
-
 /** @internal */
 export type CreateDatasetItemContentDatasetsResponse2002$Outbound =
   | CreateDatasetItem2DatasetsTextContentPart$Outbound
@@ -4592,21 +3681,6 @@ export const CreateDatasetItemContentDatasetsResponse2002$outboundSchema:
     z.lazy(() => CreateDatasetItem2DatasetsRefusalContentPart$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemContentDatasetsResponse2002$ {
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2002$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemContentDatasetsResponse2002$inboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2002$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemContentDatasetsResponse2002$outboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2002$Outbound` instead. */
-  export type Outbound = CreateDatasetItemContentDatasetsResponse2002$Outbound;
-}
-
 export function createDatasetItemContentDatasetsResponse2002ToJSON(
   createDatasetItemContentDatasetsResponse2002:
     CreateDatasetItemContentDatasetsResponse2002,
@@ -4617,7 +3691,6 @@ export function createDatasetItemContentDatasetsResponse2002ToJSON(
     ),
   );
 }
-
 export function createDatasetItemContentDatasetsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4649,7 +3722,6 @@ export const CreateDatasetItemMessagesDatasetsResponse200Content$inboundSchema:
       ),
     ])),
   ]);
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsResponse200Content$Outbound =
   | string
@@ -4674,22 +3746,6 @@ export const CreateDatasetItemMessagesDatasetsResponse200Content$outboundSchema:
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200Content$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Content$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Content$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Content$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Content$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Content$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsResponse200Content$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsResponse200ContentToJSON(
   createDatasetItemMessagesDatasetsResponse200Content:
     CreateDatasetItemMessagesDatasetsResponse200Content,
@@ -4700,7 +3756,6 @@ export function createDatasetItemMessagesDatasetsResponse200ContentToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsResponse200ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4724,26 +3779,12 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole,
   );
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
   > =
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsAudio$inboundSchema: z.ZodType<
@@ -4753,7 +3794,6 @@ export const CreateDatasetItemMessagesDatasetsAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsAudio$Outbound = {
   id: string;
@@ -4768,21 +3808,6 @@ export const CreateDatasetItemMessagesDatasetsAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsAudio$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsAudio$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsAudio$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAudio$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsAudio$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsAudioToJSON(
   createDatasetItemMessagesDatasetsAudio:
     CreateDatasetItemMessagesDatasetsAudio,
@@ -4793,7 +3818,6 @@ export function createDatasetItemMessagesDatasetsAudioToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesDatasetsAudio, SDKValidationError> {
@@ -4810,24 +3834,10 @@ export const CreateDatasetItemMessagesDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsType,
   );
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> =
     CreateDatasetItemMessagesDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsType$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsFunction$inboundSchema: z.ZodType<
@@ -4838,7 +3848,6 @@ export const CreateDatasetItemMessagesDatasetsFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsFunction$Outbound = {
   name?: string | undefined;
@@ -4856,21 +3865,6 @@ export const CreateDatasetItemMessagesDatasetsFunction$outboundSchema:
     arguments: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsFunction$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsFunction$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsFunction$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsFunction$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsFunction$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsFunctionToJSON(
   createDatasetItemMessagesDatasetsFunction:
     CreateDatasetItemMessagesDatasetsFunction,
@@ -4881,7 +3875,6 @@ export function createDatasetItemMessagesDatasetsFunctionToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4908,7 +3901,6 @@ export const CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema:
         CreateDatasetItemMessagesDatasetsFunction$inboundSchema
       ),
     });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsToolCalls$Outbound = {
   id: string;
@@ -4930,21 +3922,6 @@ export const CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema:
     ),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsToolCalls$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsToolCalls$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsToolCalls$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsToolCallsToJSON(
   createDatasetItemMessagesDatasetsToolCalls:
     CreateDatasetItemMessagesDatasetsToolCalls,
@@ -4955,7 +3932,6 @@ export function createDatasetItemMessagesDatasetsToolCallsToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5014,7 +3990,6 @@ export const CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema:
       "redacted_reasoning": "redactedReasoning",
     });
   });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound = {
   content?:
@@ -5080,22 +4055,6 @@ export const CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsAssistantMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsAssistantMessageToJSON(
   createDatasetItemMessagesDatasetsAssistantMessage:
     CreateDatasetItemMessagesDatasetsAssistantMessage,
@@ -5106,7 +4065,6 @@ export function createDatasetItemMessagesDatasetsAssistantMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5130,26 +4088,12 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inb
   > = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole,
   );
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
   > =
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
@@ -5158,26 +4102,12 @@ export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyTyp
   > = z.nativeEnum(
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
   > =
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
@@ -5194,7 +4124,6 @@ export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem2DatasetsFile$Outbound = {
   file_data?: string | undefined;
@@ -5219,19 +4148,6 @@ export const CreateDatasetItem2DatasetsFile$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsFile$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsFile$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsFile$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsFile$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsFile$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsFile$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsFile$Outbound;
-}
-
 export function createDatasetItem2DatasetsFileToJSON(
   createDatasetItem2DatasetsFile: CreateDatasetItem2DatasetsFile,
 ): string {
@@ -5241,7 +4157,6 @@ export function createDatasetItem2DatasetsFileToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsFileFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2DatasetsFile, SDKValidationError> {
@@ -5262,7 +4177,6 @@ export const CreateDatasetItem2Datasets4$inboundSchema: z.ZodType<
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema,
   file: z.lazy(() => CreateDatasetItem2DatasetsFile$inboundSchema),
 });
-
 /** @internal */
 export type CreateDatasetItem2Datasets4$Outbound = {
   type: string;
@@ -5280,19 +4194,6 @@ export const CreateDatasetItem2Datasets4$outboundSchema: z.ZodType<
   file: z.lazy(() => CreateDatasetItem2DatasetsFile$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Datasets4$ {
-  /** @deprecated use `CreateDatasetItem2Datasets4$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Datasets4$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets4$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Datasets4$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets4$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2Datasets4$Outbound;
-}
-
 export function createDatasetItem2Datasets4ToJSON(
   createDatasetItem2Datasets4: CreateDatasetItem2Datasets4,
 ): string {
@@ -5302,7 +4203,6 @@ export function createDatasetItem2Datasets4ToJSON(
     ),
   );
 }
-
 export function createDatasetItem2Datasets4FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Datasets4, SDKValidationError> {
@@ -5318,46 +4218,20 @@ export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSch
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
   > = z.nativeEnum(CreateDatasetItem2DatasetsResponse200ApplicationJSONType);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
   > = CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItem2DatasetsFormat$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsFormat
 > = z.nativeEnum(CreateDatasetItem2DatasetsFormat);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsFormat
 > = CreateDatasetItem2DatasetsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsFormat$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsFormat$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsFormat$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsFormat$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsFormat$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2DatasetsInputAudio$inboundSchema: z.ZodType<
@@ -5368,7 +4242,6 @@ export const CreateDatasetItem2DatasetsInputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: CreateDatasetItem2DatasetsFormat$inboundSchema,
 });
-
 /** @internal */
 export type CreateDatasetItem2DatasetsInputAudio$Outbound = {
   data: string;
@@ -5385,21 +4258,6 @@ export const CreateDatasetItem2DatasetsInputAudio$outboundSchema: z.ZodType<
   format: CreateDatasetItem2DatasetsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsInputAudio$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsInputAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsInputAudio$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsInputAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsInputAudio$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsInputAudio$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsInputAudio$Outbound;
-}
-
 export function createDatasetItem2DatasetsInputAudioToJSON(
   createDatasetItem2DatasetsInputAudio: CreateDatasetItem2DatasetsInputAudio,
 ): string {
@@ -5409,7 +4267,6 @@ export function createDatasetItem2DatasetsInputAudioToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsInputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2DatasetsInputAudio, SDKValidationError> {
@@ -5434,7 +4291,6 @@ export const CreateDatasetItem2Datasets3$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem2Datasets3$Outbound = {
   type: string;
@@ -5455,19 +4311,6 @@ export const CreateDatasetItem2Datasets3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Datasets3$ {
-  /** @deprecated use `CreateDatasetItem2Datasets3$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Datasets3$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets3$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Datasets3$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets3$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2Datasets3$Outbound;
-}
-
 export function createDatasetItem2Datasets3ToJSON(
   createDatasetItem2Datasets3: CreateDatasetItem2Datasets3,
 ): string {
@@ -5477,7 +4320,6 @@ export function createDatasetItem2Datasets3ToJSON(
     ),
   );
 }
-
 export function createDatasetItem2Datasets3FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Datasets3, SDKValidationError> {
@@ -5492,45 +4334,19 @@ export function createDatasetItem2Datasets3FromJSON(
 export const CreateDatasetItem2DatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> = z
     .nativeEnum(CreateDatasetItem2DatasetsResponse200Type);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> =
     CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200Type$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItem2DatasetsDetail$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsDetail
 > = z.nativeEnum(CreateDatasetItem2DatasetsDetail);
-
 /** @internal */
 export const CreateDatasetItem2DatasetsDetail$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsDetail
 > = CreateDatasetItem2DatasetsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsDetail$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsDetail$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsDetail$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsDetail$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsDetail$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2DatasetsImageUrl$inboundSchema: z.ZodType<
@@ -5541,7 +4357,6 @@ export const CreateDatasetItem2DatasetsImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: CreateDatasetItem2DatasetsDetail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type CreateDatasetItem2DatasetsImageUrl$Outbound = {
   url: string;
@@ -5558,20 +4373,6 @@ export const CreateDatasetItem2DatasetsImageUrl$outboundSchema: z.ZodType<
   detail: CreateDatasetItem2DatasetsDetail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsImageUrl$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsImageUrl$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsImageUrl$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsImageUrl$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsImageUrl$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsImageUrl$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2DatasetsImageUrl$Outbound;
-}
-
 export function createDatasetItem2DatasetsImageUrlToJSON(
   createDatasetItem2DatasetsImageUrl: CreateDatasetItem2DatasetsImageUrl,
 ): string {
@@ -5581,7 +4382,6 @@ export function createDatasetItem2DatasetsImageUrlToJSON(
     ),
   );
 }
-
 export function createDatasetItem2DatasetsImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2DatasetsImageUrl, SDKValidationError> {
@@ -5606,7 +4406,6 @@ export const CreateDatasetItem2Datasets2$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type CreateDatasetItem2Datasets2$Outbound = {
   type: string;
@@ -5627,19 +4426,6 @@ export const CreateDatasetItem2Datasets2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Datasets2$ {
-  /** @deprecated use `CreateDatasetItem2Datasets2$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Datasets2$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets2$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Datasets2$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets2$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2Datasets2$Outbound;
-}
-
 export function createDatasetItem2Datasets2ToJSON(
   createDatasetItem2Datasets2: CreateDatasetItem2Datasets2,
 ): string {
@@ -5649,7 +4435,6 @@ export function createDatasetItem2Datasets2ToJSON(
     ),
   );
 }
-
 export function createDatasetItem2Datasets2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Datasets2, SDKValidationError> {
@@ -5665,24 +4450,10 @@ export const CreateDatasetItem2DatasetsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> = z.nativeEnum(
     CreateDatasetItem2DatasetsResponseType,
   );
-
 /** @internal */
 export const CreateDatasetItem2DatasetsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> =
     CreateDatasetItem2DatasetsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponseType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponseType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItem2Datasets1$inboundSchema: z.ZodType<
@@ -5693,7 +4464,6 @@ export const CreateDatasetItem2Datasets1$inboundSchema: z.ZodType<
   type: CreateDatasetItem2DatasetsResponseType$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type CreateDatasetItem2Datasets1$Outbound = {
   type: string;
@@ -5710,19 +4480,6 @@ export const CreateDatasetItem2Datasets1$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Datasets1$ {
-  /** @deprecated use `CreateDatasetItem2Datasets1$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Datasets1$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets1$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Datasets1$outboundSchema;
-  /** @deprecated use `CreateDatasetItem2Datasets1$Outbound` instead. */
-  export type Outbound = CreateDatasetItem2Datasets1$Outbound;
-}
-
 export function createDatasetItem2Datasets1ToJSON(
   createDatasetItem2Datasets1: CreateDatasetItem2Datasets1,
 ): string {
@@ -5732,7 +4489,6 @@ export function createDatasetItem2Datasets1ToJSON(
     ),
   );
 }
-
 export function createDatasetItem2Datasets1FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Datasets1, SDKValidationError> {
@@ -5754,7 +4510,6 @@ export const CreateDatasetItemContentDatasetsResponse2$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItem2Datasets3$inboundSchema),
   z.lazy(() => CreateDatasetItem2Datasets4$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItemContentDatasetsResponse2$Outbound =
   | CreateDatasetItem2Datasets1$Outbound
@@ -5775,21 +4530,6 @@ export const CreateDatasetItemContentDatasetsResponse2$outboundSchema:
     z.lazy(() => CreateDatasetItem2Datasets4$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemContentDatasetsResponse2$ {
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemContentDatasetsResponse2$inboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemContentDatasetsResponse2$outboundSchema;
-  /** @deprecated use `CreateDatasetItemContentDatasetsResponse2$Outbound` instead. */
-  export type Outbound = CreateDatasetItemContentDatasetsResponse2$Outbound;
-}
-
 export function createDatasetItemContentDatasetsResponse2ToJSON(
   createDatasetItemContentDatasetsResponse2:
     CreateDatasetItemContentDatasetsResponse2,
@@ -5800,7 +4540,6 @@ export function createDatasetItemContentDatasetsResponse2ToJSON(
     ),
   );
 }
-
 export function createDatasetItemContentDatasetsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5832,7 +4571,6 @@ export const CreateDatasetItemMessagesDatasetsResponseContent$inboundSchema:
       z.lazy(() => CreateDatasetItem2Datasets4$inboundSchema),
     ])),
   ]);
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsResponseContent$Outbound =
   | string
@@ -5859,22 +4597,6 @@ export const CreateDatasetItemMessagesDatasetsResponseContent$outboundSchema:
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponseContent$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseContent$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseContent$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseContent$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseContent$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseContent$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsResponseContent$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsResponseContentToJSON(
   createDatasetItemMessagesDatasetsResponseContent:
     CreateDatasetItemMessagesDatasetsResponseContent,
@@ -5885,7 +4607,6 @@ export function createDatasetItemMessagesDatasetsResponseContentToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5922,7 +4643,6 @@ export const CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema:
       ])),
     ]),
   });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsUserMessage$Outbound = {
   role: string;
@@ -5958,21 +4678,6 @@ export const CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema:
     ]),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsUserMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsUserMessage$Outbound` instead. */
-  export type Outbound = CreateDatasetItemMessagesDatasetsUserMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsUserMessageToJSON(
   createDatasetItemMessagesDatasetsUserMessage:
     CreateDatasetItemMessagesDatasetsUserMessage,
@@ -5983,7 +4688,6 @@ export function createDatasetItemMessagesDatasetsUserMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6004,24 +4708,10 @@ export function createDatasetItemMessagesDatasetsUserMessageFromJSON(
 export const CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> = z
     .nativeEnum(CreateDatasetItemMessagesDatasetsResponse200Role);
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> =
     CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema:
@@ -6034,7 +4724,6 @@ export const CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema:
     content: z.string(),
     name: z.string().optional(),
   });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsSystemMessage$Outbound = {
   role: string;
@@ -6054,22 +4743,6 @@ export const CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsSystemMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsSystemMessage$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsSystemMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsSystemMessageToJSON(
   createDatasetItemMessagesDatasetsSystemMessage:
     CreateDatasetItemMessagesDatasetsSystemMessage,
@@ -6080,7 +4753,6 @@ export function createDatasetItemMessagesDatasetsSystemMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6101,24 +4773,10 @@ export function createDatasetItemMessagesDatasetsSystemMessageFromJSON(
 export const CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> = z
     .nativeEnum(CreateDatasetItemMessagesDatasetsResponseRole);
-
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> =
     CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponseRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema:
@@ -6131,7 +4789,6 @@ export const CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema:
     content: z.string(),
     name: z.string().optional(),
   });
-
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound = {
   role: string;
@@ -6151,22 +4808,6 @@ export const CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsDeveloperMessage$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound` instead. */
-  export type Outbound =
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound;
-}
-
 export function createDatasetItemMessagesDatasetsDeveloperMessageToJSON(
   createDatasetItemMessagesDatasetsDeveloperMessage:
     CreateDatasetItemMessagesDatasetsDeveloperMessage,
@@ -6177,7 +4818,6 @@ export function createDatasetItemMessagesDatasetsDeveloperMessageToJSON(
     ),
   );
 }
-
 export function createDatasetItemMessagesDatasetsDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6206,7 +4846,6 @@ export const CreateDatasetItemDatasetsMessages$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateDatasetItemDatasetsMessages$Outbound =
   | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
@@ -6232,20 +4871,6 @@ export const CreateDatasetItemDatasetsMessages$outboundSchema: z.ZodType<
   ),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemDatasetsMessages$ {
-  /** @deprecated use `CreateDatasetItemDatasetsMessages$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemDatasetsMessages$inboundSchema;
-  /** @deprecated use `CreateDatasetItemDatasetsMessages$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemDatasetsMessages$outboundSchema;
-  /** @deprecated use `CreateDatasetItemDatasetsMessages$Outbound` instead. */
-  export type Outbound = CreateDatasetItemDatasetsMessages$Outbound;
-}
-
 export function createDatasetItemDatasetsMessagesToJSON(
   createDatasetItemDatasetsMessages: CreateDatasetItemDatasetsMessages,
 ): string {
@@ -6255,7 +4880,6 @@ export function createDatasetItemDatasetsMessagesToJSON(
     ),
   );
 }
-
 export function createDatasetItemDatasetsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemDatasetsMessages, SDKValidationError> {
@@ -6270,69 +4894,28 @@ export function createDatasetItemDatasetsMessagesFromJSON(
 export const CreateDatasetItemEvaluationsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> = z
     .nativeEnum(CreateDatasetItemEvaluationsEvaluationType);
-
 /** @internal */
 export const CreateDatasetItemEvaluationsEvaluationType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> =
     CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemEvaluationsEvaluationType$ {
-  /** @deprecated use `CreateDatasetItemEvaluationsEvaluationType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemEvaluationsEvaluationType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemEvaluationsEvaluationType$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemEvaluationsSource
 > = z.nativeEnum(CreateDatasetItemEvaluationsSource);
-
 /** @internal */
 export const CreateDatasetItemEvaluationsSource$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemEvaluationsSource
 > = CreateDatasetItemEvaluationsSource$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemEvaluationsSource$ {
-  /** @deprecated use `CreateDatasetItemEvaluationsSource$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemEvaluationsSource$inboundSchema;
-  /** @deprecated use `CreateDatasetItemEvaluationsSource$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemEvaluationsSource$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItemEvaluationsDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsType> = z
     .nativeEnum(CreateDatasetItemEvaluationsDatasetsType);
-
 /** @internal */
 export const CreateDatasetItemEvaluationsDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsType> =
     CreateDatasetItemEvaluationsDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemEvaluationsDatasetsType$ {
-  /** @deprecated use `CreateDatasetItemEvaluationsDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemEvaluationsDatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemEvaluationsDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemEvaluationsDatasetsType$outboundSchema;
-}
 
 /** @internal */
 export const Evaluations3$inboundSchema: z.ZodType<
@@ -6346,7 +4929,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.407Z",
+    "2025-11-07T09:40:15.686Z",
   ).transform(v => new Date(v)),
   type: CreateDatasetItemEvaluationsDatasetsType$inboundSchema,
   values: z.array(z.string()),
@@ -6358,7 +4941,6 @@ export const Evaluations3$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type Evaluations3$Outbound = {
   id: string;
@@ -6382,7 +4964,7 @@ export const Evaluations3$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.407Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.686Z"))
     .transform(v => v.toISOString()),
   type: CreateDatasetItemEvaluationsDatasetsType$outboundSchema,
   values: z.array(z.string()),
@@ -6395,23 +4977,9 @@ export const Evaluations3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Evaluations3$ {
-  /** @deprecated use `Evaluations3$inboundSchema` instead. */
-  export const inboundSchema = Evaluations3$inboundSchema;
-  /** @deprecated use `Evaluations3$outboundSchema` instead. */
-  export const outboundSchema = Evaluations3$outboundSchema;
-  /** @deprecated use `Evaluations3$Outbound` instead. */
-  export type Outbound = Evaluations3$Outbound;
-}
-
 export function evaluations3ToJSON(evaluations3: Evaluations3): string {
   return JSON.stringify(Evaluations3$outboundSchema.parse(evaluations3));
 }
-
 export function evaluations3FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations3, SDKValidationError> {
@@ -6426,64 +4994,28 @@ export function evaluations3FromJSON(
 export const EvaluationsEvaluationType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationsEvaluationType
 > = z.nativeEnum(EvaluationsEvaluationType);
-
 /** @internal */
 export const EvaluationsEvaluationType$outboundSchema: z.ZodNativeEnum<
   typeof EvaluationsEvaluationType
 > = EvaluationsEvaluationType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvaluationsEvaluationType$ {
-  /** @deprecated use `EvaluationsEvaluationType$inboundSchema` instead. */
-  export const inboundSchema = EvaluationsEvaluationType$inboundSchema;
-  /** @deprecated use `EvaluationsEvaluationType$outboundSchema` instead. */
-  export const outboundSchema = EvaluationsEvaluationType$outboundSchema;
-}
-
 /** @internal */
 export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationsSource
 > = z.nativeEnum(EvaluationsSource);
-
 /** @internal */
 export const EvaluationsSource$outboundSchema: z.ZodNativeEnum<
   typeof EvaluationsSource
 > = EvaluationsSource$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvaluationsSource$ {
-  /** @deprecated use `EvaluationsSource$inboundSchema` instead. */
-  export const inboundSchema = EvaluationsSource$inboundSchema;
-  /** @deprecated use `EvaluationsSource$outboundSchema` instead. */
-  export const outboundSchema = EvaluationsSource$outboundSchema;
-}
-
 /** @internal */
 export const CreateDatasetItemEvaluationsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemEvaluationsType
 > = z.nativeEnum(CreateDatasetItemEvaluationsType);
-
 /** @internal */
 export const CreateDatasetItemEvaluationsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemEvaluationsType
 > = CreateDatasetItemEvaluationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemEvaluationsType$ {
-  /** @deprecated use `CreateDatasetItemEvaluationsType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemEvaluationsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemEvaluationsType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemEvaluationsType$outboundSchema;
-}
 
 /** @internal */
 export const Evaluations2$inboundSchema: z.ZodType<
@@ -6497,7 +5029,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.407Z",
+    "2025-11-07T09:40:15.686Z",
   ).transform(v => new Date(v)),
   type: CreateDatasetItemEvaluationsType$inboundSchema,
   value: z.number(),
@@ -6509,7 +5041,6 @@ export const Evaluations2$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type Evaluations2$Outbound = {
   id: string;
@@ -6533,7 +5064,7 @@ export const Evaluations2$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: EvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.407Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.686Z"))
     .transform(v => v.toISOString()),
   type: CreateDatasetItemEvaluationsType$outboundSchema,
   value: z.number(),
@@ -6546,23 +5077,9 @@ export const Evaluations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Evaluations2$ {
-  /** @deprecated use `Evaluations2$inboundSchema` instead. */
-  export const inboundSchema = Evaluations2$inboundSchema;
-  /** @deprecated use `Evaluations2$outboundSchema` instead. */
-  export const outboundSchema = Evaluations2$outboundSchema;
-  /** @deprecated use `Evaluations2$Outbound` instead. */
-  export type Outbound = Evaluations2$Outbound;
-}
-
 export function evaluations2ToJSON(evaluations2: Evaluations2): string {
   return JSON.stringify(Evaluations2$outboundSchema.parse(evaluations2));
 }
-
 export function evaluations2FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations2, SDKValidationError> {
@@ -6577,62 +5094,26 @@ export function evaluations2FromJSON(
 export const EvaluationType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationType
 > = z.nativeEnum(EvaluationType);
-
 /** @internal */
 export const EvaluationType$outboundSchema: z.ZodNativeEnum<
   typeof EvaluationType
 > = EvaluationType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvaluationType$ {
-  /** @deprecated use `EvaluationType$inboundSchema` instead. */
-  export const inboundSchema = EvaluationType$inboundSchema;
-  /** @deprecated use `EvaluationType$outboundSchema` instead. */
-  export const outboundSchema = EvaluationType$outboundSchema;
-}
-
 /** @internal */
 export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
   .nativeEnum(Source);
-
 /** @internal */
 export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
   Source$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Source$ {
-  /** @deprecated use `Source$inboundSchema` instead. */
-  export const inboundSchema = Source$inboundSchema;
-  /** @deprecated use `Source$outboundSchema` instead. */
-  export const outboundSchema = Source$outboundSchema;
-}
 
 /** @internal */
 export const EvaluationsType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationsType
 > = z.nativeEnum(EvaluationsType);
-
 /** @internal */
 export const EvaluationsType$outboundSchema: z.ZodNativeEnum<
   typeof EvaluationsType
 > = EvaluationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvaluationsType$ {
-  /** @deprecated use `EvaluationsType$inboundSchema` instead. */
-  export const inboundSchema = EvaluationsType$inboundSchema;
-  /** @deprecated use `EvaluationsType$outboundSchema` instead. */
-  export const outboundSchema = EvaluationsType$outboundSchema;
-}
 
 /** @internal */
 export const Evaluations1$inboundSchema: z.ZodType<
@@ -6646,7 +5127,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   source: Source$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:28.407Z",
+    "2025-11-07T09:40:15.685Z",
   ).transform(v => new Date(v)),
   type: EvaluationsType$inboundSchema,
   value: z.string(),
@@ -6658,7 +5139,6 @@ export const Evaluations1$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-
 /** @internal */
 export type Evaluations1$Outbound = {
   id: string;
@@ -6682,7 +5162,7 @@ export const Evaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: Source$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-11-06T12:40:28.407Z"))
+  reviewedAt: z.date().default(() => new Date("2025-11-07T09:40:15.685Z"))
     .transform(v => v.toISOString()),
   type: EvaluationsType$outboundSchema,
   value: z.string(),
@@ -6695,23 +5175,9 @@ export const Evaluations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Evaluations1$ {
-  /** @deprecated use `Evaluations1$inboundSchema` instead. */
-  export const inboundSchema = Evaluations1$inboundSchema;
-  /** @deprecated use `Evaluations1$outboundSchema` instead. */
-  export const outboundSchema = Evaluations1$outboundSchema;
-  /** @deprecated use `Evaluations1$Outbound` instead. */
-  export type Outbound = Evaluations1$Outbound;
-}
-
 export function evaluations1ToJSON(evaluations1: Evaluations1): string {
   return JSON.stringify(Evaluations1$outboundSchema.parse(evaluations1));
 }
-
 export function evaluations1FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations1, SDKValidationError> {
@@ -6732,7 +5198,6 @@ export const Evaluations$inboundSchema: z.ZodType<
   z.lazy(() => Evaluations2$inboundSchema),
   z.lazy(() => Evaluations3$inboundSchema),
 ]);
-
 /** @internal */
 export type Evaluations$Outbound =
   | Evaluations1$Outbound
@@ -6750,23 +5215,9 @@ export const Evaluations$outboundSchema: z.ZodType<
   z.lazy(() => Evaluations3$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Evaluations$ {
-  /** @deprecated use `Evaluations$inboundSchema` instead. */
-  export const inboundSchema = Evaluations$inboundSchema;
-  /** @deprecated use `Evaluations$outboundSchema` instead. */
-  export const outboundSchema = Evaluations$outboundSchema;
-  /** @deprecated use `Evaluations$Outbound` instead. */
-  export type Outbound = Evaluations$Outbound;
-}
-
 export function evaluationsToJSON(evaluations: Evaluations): string {
   return JSON.stringify(Evaluations$outboundSchema.parse(evaluations));
 }
-
 export function evaluationsFromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations, SDKValidationError> {
@@ -6816,7 +5267,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.304Z",
+    "2025-11-07T09:40:03.490Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6829,7 +5280,6 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-
 /** @internal */
 export type CreateDatasetItemResponseBody$Outbound = {
   _id: string;
@@ -6895,7 +5345,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -6909,19 +5359,6 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemResponseBody$ {
-  /** @deprecated use `CreateDatasetItemResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemResponseBody$inboundSchema;
-  /** @deprecated use `CreateDatasetItemResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemResponseBody$outboundSchema;
-  /** @deprecated use `CreateDatasetItemResponseBody$Outbound` instead. */
-  export type Outbound = CreateDatasetItemResponseBody$Outbound;
-}
-
 export function createDatasetItemResponseBodyToJSON(
   createDatasetItemResponseBody: CreateDatasetItemResponseBody,
 ): string {
@@ -6931,7 +5368,6 @@ export function createDatasetItemResponseBodyToJSON(
     ),
   );
 }
-
 export function createDatasetItemResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemResponseBody, SDKValidationError> {

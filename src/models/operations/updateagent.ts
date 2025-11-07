@@ -1959,42 +1959,18 @@ export type UpdateAgentResponseBody = {
 /** @internal */
 export const ModelVoice$inboundSchema: z.ZodNativeEnum<typeof ModelVoice> = z
   .nativeEnum(ModelVoice);
-
 /** @internal */
 export const ModelVoice$outboundSchema: z.ZodNativeEnum<typeof ModelVoice> =
   ModelVoice$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelVoice$ {
-  /** @deprecated use `ModelVoice$inboundSchema` instead. */
-  export const inboundSchema = ModelVoice$inboundSchema;
-  /** @deprecated use `ModelVoice$outboundSchema` instead. */
-  export const outboundSchema = ModelVoice$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentModelFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModelFormat
 > = z.nativeEnum(UpdateAgentModelFormat);
-
 /** @internal */
 export const UpdateAgentModelFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModelFormat
 > = UpdateAgentModelFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModelFormat$ {
-  /** @deprecated use `UpdateAgentModelFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModelFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentModelFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModelFormat$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentModelAudio$inboundSchema: z.ZodType<
@@ -2005,7 +1981,6 @@ export const UpdateAgentModelAudio$inboundSchema: z.ZodType<
   voice: ModelVoice$inboundSchema,
   format: UpdateAgentModelFormat$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentModelAudio$Outbound = {
   voice: string;
@@ -2022,19 +1997,6 @@ export const UpdateAgentModelAudio$outboundSchema: z.ZodType<
   format: UpdateAgentModelFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModelAudio$ {
-  /** @deprecated use `UpdateAgentModelAudio$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModelAudio$inboundSchema;
-  /** @deprecated use `UpdateAgentModelAudio$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModelAudio$outboundSchema;
-  /** @deprecated use `UpdateAgentModelAudio$Outbound` instead. */
-  export type Outbound = UpdateAgentModelAudio$Outbound;
-}
-
 export function updateAgentModelAudioToJSON(
   updateAgentModelAudio: UpdateAgentModelAudio,
 ): string {
@@ -2042,7 +2004,6 @@ export function updateAgentModelAudioToJSON(
     UpdateAgentModelAudio$outboundSchema.parse(updateAgentModelAudio),
   );
 }
-
 export function updateAgentModelAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentModelAudio, SDKValidationError> {
@@ -2057,24 +2018,10 @@ export function updateAgentModelAudioFromJSON(
 export const UpdateAgentResponseFormatAgentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsRequestType> = z
     .nativeEnum(UpdateAgentResponseFormatAgentsRequestType);
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsRequestType> =
     UpdateAgentResponseFormatAgentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsRequestType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsRequestType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -2087,7 +2034,6 @@ export const UpdateAgentResponseFormatJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
@@ -2108,21 +2054,6 @@ export const UpdateAgentResponseFormatJsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatJsonSchema$ {
-  /** @deprecated use `UpdateAgentResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatJsonSchema$Outbound;
-}
-
 export function updateAgentResponseFormatJsonSchemaToJSON(
   updateAgentResponseFormatJsonSchema: UpdateAgentResponseFormatJsonSchema,
 ): string {
@@ -2132,7 +2063,6 @@ export function updateAgentResponseFormatJsonSchemaToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormatJsonSchema, SDKValidationError> {
@@ -2157,7 +2087,6 @@ export const UpdateAgentResponseFormat3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type UpdateAgentResponseFormat3$Outbound = {
   type: string;
@@ -2178,19 +2107,6 @@ export const UpdateAgentResponseFormat3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormat3$ {
-  /** @deprecated use `UpdateAgentResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormat3$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormat3$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat3$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormat3$Outbound;
-}
-
 export function updateAgentResponseFormat3ToJSON(
   updateAgentResponseFormat3: UpdateAgentResponseFormat3,
 ): string {
@@ -2198,7 +2114,6 @@ export function updateAgentResponseFormat3ToJSON(
     UpdateAgentResponseFormat3$outboundSchema.parse(updateAgentResponseFormat3),
   );
 }
-
 export function updateAgentResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormat3, SDKValidationError> {
@@ -2213,24 +2128,10 @@ export function updateAgentResponseFormat3FromJSON(
 export const UpdateAgentResponseFormatAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentResponseFormatAgentsType
 > = z.nativeEnum(UpdateAgentResponseFormatAgentsType);
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsType> =
     UpdateAgentResponseFormatAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormat2$inboundSchema: z.ZodType<
@@ -2240,7 +2141,6 @@ export const UpdateAgentResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentResponseFormatAgentsType$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormat2$Outbound = {
   type: string;
@@ -2255,19 +2155,6 @@ export const UpdateAgentResponseFormat2$outboundSchema: z.ZodType<
   type: UpdateAgentResponseFormatAgentsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormat2$ {
-  /** @deprecated use `UpdateAgentResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormat2$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormat2$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat2$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormat2$Outbound;
-}
-
 export function updateAgentResponseFormat2ToJSON(
   updateAgentResponseFormat2: UpdateAgentResponseFormat2,
 ): string {
@@ -2275,7 +2162,6 @@ export function updateAgentResponseFormat2ToJSON(
     UpdateAgentResponseFormat2$outboundSchema.parse(updateAgentResponseFormat2),
   );
 }
-
 export function updateAgentResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormat2, SDKValidationError> {
@@ -2290,22 +2176,10 @@ export function updateAgentResponseFormat2FromJSON(
 export const UpdateAgentResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentResponseFormatType
 > = z.nativeEnum(UpdateAgentResponseFormatType);
-
 /** @internal */
 export const UpdateAgentResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentResponseFormatType
 > = UpdateAgentResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatType$ {
-  /** @deprecated use `UpdateAgentResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormatType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormatType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormat1$inboundSchema: z.ZodType<
@@ -2315,7 +2189,6 @@ export const UpdateAgentResponseFormat1$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentResponseFormatType$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormat1$Outbound = {
   type: string;
@@ -2330,19 +2203,6 @@ export const UpdateAgentResponseFormat1$outboundSchema: z.ZodType<
   type: UpdateAgentResponseFormatType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormat1$ {
-  /** @deprecated use `UpdateAgentResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormat1$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormat1$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat1$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormat1$Outbound;
-}
-
 export function updateAgentResponseFormat1ToJSON(
   updateAgentResponseFormat1: UpdateAgentResponseFormat1,
 ): string {
@@ -2350,7 +2210,6 @@ export function updateAgentResponseFormat1ToJSON(
     UpdateAgentResponseFormat1$outboundSchema.parse(updateAgentResponseFormat1),
   );
 }
-
 export function updateAgentResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormat1, SDKValidationError> {
@@ -2371,7 +2230,6 @@ export const ModelResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormat1$inboundSchema),
   z.lazy(() => UpdateAgentResponseFormat2$inboundSchema),
 ]);
-
 /** @internal */
 export type ModelResponseFormat$Outbound =
   | UpdateAgentResponseFormat3$Outbound
@@ -2389,19 +2247,6 @@ export const ModelResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormat2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelResponseFormat$ {
-  /** @deprecated use `ModelResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = ModelResponseFormat$inboundSchema;
-  /** @deprecated use `ModelResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = ModelResponseFormat$outboundSchema;
-  /** @deprecated use `ModelResponseFormat$Outbound` instead. */
-  export type Outbound = ModelResponseFormat$Outbound;
-}
-
 export function modelResponseFormatToJSON(
   modelResponseFormat: ModelResponseFormat,
 ): string {
@@ -2409,7 +2254,6 @@ export function modelResponseFormatToJSON(
     ModelResponseFormat$outboundSchema.parse(modelResponseFormat),
   );
 }
-
 export function modelResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelResponseFormat, SDKValidationError> {
@@ -2426,7 +2270,6 @@ export const ModelStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type ModelStop$Outbound = string | Array<string>;
 
@@ -2437,23 +2280,9 @@ export const ModelStop$outboundSchema: z.ZodType<
   ModelStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelStop$ {
-  /** @deprecated use `ModelStop$inboundSchema` instead. */
-  export const inboundSchema = ModelStop$inboundSchema;
-  /** @deprecated use `ModelStop$outboundSchema` instead. */
-  export const outboundSchema = ModelStop$outboundSchema;
-  /** @deprecated use `ModelStop$Outbound` instead. */
-  export type Outbound = ModelStop$Outbound;
-}
-
 export function modelStopToJSON(modelStop: ModelStop): string {
   return JSON.stringify(ModelStop$outboundSchema.parse(modelStop));
 }
-
 export function modelStopFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelStop, SDKValidationError> {
@@ -2476,7 +2305,6 @@ export const ModelStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type ModelStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -2495,19 +2323,6 @@ export const ModelStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelStreamOptions$ {
-  /** @deprecated use `ModelStreamOptions$inboundSchema` instead. */
-  export const inboundSchema = ModelStreamOptions$inboundSchema;
-  /** @deprecated use `ModelStreamOptions$outboundSchema` instead. */
-  export const outboundSchema = ModelStreamOptions$outboundSchema;
-  /** @deprecated use `ModelStreamOptions$Outbound` instead. */
-  export type Outbound = ModelStreamOptions$Outbound;
-}
-
 export function modelStreamOptionsToJSON(
   modelStreamOptions: ModelStreamOptions,
 ): string {
@@ -2515,7 +2330,6 @@ export function modelStreamOptionsToJSON(
     ModelStreamOptions$outboundSchema.parse(modelStreamOptions),
   );
 }
-
 export function modelStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelStreamOptions, SDKValidationError> {
@@ -2530,22 +2344,10 @@ export function modelStreamOptionsFromJSON(
 export const UpdateAgentModelType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModelType
 > = z.nativeEnum(UpdateAgentModelType);
-
 /** @internal */
 export const UpdateAgentModelType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModelType
 > = UpdateAgentModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModelType$ {
-  /** @deprecated use `UpdateAgentModelType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModelType$inboundSchema;
-  /** @deprecated use `UpdateAgentModelType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModelType$outboundSchema;
-}
 
 /** @internal */
 export const ModelThinking$inboundSchema: z.ZodType<
@@ -2560,7 +2362,6 @@ export const ModelThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type ModelThinking$Outbound = {
   type: string;
@@ -2581,23 +2382,9 @@ export const ModelThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelThinking$ {
-  /** @deprecated use `ModelThinking$inboundSchema` instead. */
-  export const inboundSchema = ModelThinking$inboundSchema;
-  /** @deprecated use `ModelThinking$outboundSchema` instead. */
-  export const outboundSchema = ModelThinking$outboundSchema;
-  /** @deprecated use `ModelThinking$Outbound` instead. */
-  export type Outbound = ModelThinking$Outbound;
-}
-
 export function modelThinkingToJSON(modelThinking: ModelThinking): string {
   return JSON.stringify(ModelThinking$outboundSchema.parse(modelThinking));
 }
-
 export function modelThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelThinking, SDKValidationError> {
@@ -2612,22 +2399,10 @@ export function modelThinkingFromJSON(
 export const UpdateAgentToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceType
 > = z.nativeEnum(UpdateAgentToolChoiceType);
-
 /** @internal */
 export const UpdateAgentToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceType
 > = UpdateAgentToolChoiceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceType$ {
-  /** @deprecated use `UpdateAgentToolChoiceType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoiceType$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoiceType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentToolChoiceFunction$inboundSchema: z.ZodType<
@@ -2637,7 +2412,6 @@ export const UpdateAgentToolChoiceFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type UpdateAgentToolChoiceFunction$Outbound = {
   name?: string | undefined;
@@ -2652,19 +2426,6 @@ export const UpdateAgentToolChoiceFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceFunction$ {
-  /** @deprecated use `UpdateAgentToolChoiceFunction$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoiceFunction$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceFunction$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoiceFunction$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceFunction$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceFunction$Outbound;
-}
-
 export function updateAgentToolChoiceFunctionToJSON(
   updateAgentToolChoiceFunction: UpdateAgentToolChoiceFunction,
 ): string {
@@ -2674,7 +2435,6 @@ export function updateAgentToolChoiceFunctionToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoiceFunction, SDKValidationError> {
@@ -2694,7 +2454,6 @@ export const UpdateAgentToolChoice2$inboundSchema: z.ZodType<
   type: UpdateAgentToolChoiceType$inboundSchema.optional(),
   function: z.lazy(() => UpdateAgentToolChoiceFunction$inboundSchema),
 });
-
 /** @internal */
 export type UpdateAgentToolChoice2$Outbound = {
   type?: string | undefined;
@@ -2711,19 +2470,6 @@ export const UpdateAgentToolChoice2$outboundSchema: z.ZodType<
   function: z.lazy(() => UpdateAgentToolChoiceFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoice2$ {
-  /** @deprecated use `UpdateAgentToolChoice2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoice2$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoice2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoice2$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoice2$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoice2$Outbound;
-}
-
 export function updateAgentToolChoice2ToJSON(
   updateAgentToolChoice2: UpdateAgentToolChoice2,
 ): string {
@@ -2731,7 +2477,6 @@ export function updateAgentToolChoice2ToJSON(
     UpdateAgentToolChoice2$outboundSchema.parse(updateAgentToolChoice2),
   );
 }
-
 export function updateAgentToolChoice2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoice2, SDKValidationError> {
@@ -2746,22 +2491,10 @@ export function updateAgentToolChoice2FromJSON(
 export const UpdateAgentToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoice1
 > = z.nativeEnum(UpdateAgentToolChoice1);
-
 /** @internal */
 export const UpdateAgentToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoice1
 > = UpdateAgentToolChoice1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoice1$ {
-  /** @deprecated use `UpdateAgentToolChoice1$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoice1$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoice1$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoice1$outboundSchema;
-}
 
 /** @internal */
 export const ModelToolChoice$inboundSchema: z.ZodType<
@@ -2772,7 +2505,6 @@ export const ModelToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentToolChoice2$inboundSchema),
   UpdateAgentToolChoice1$inboundSchema,
 ]);
-
 /** @internal */
 export type ModelToolChoice$Outbound = UpdateAgentToolChoice2$Outbound | string;
 
@@ -2786,25 +2518,11 @@ export const ModelToolChoice$outboundSchema: z.ZodType<
   UpdateAgentToolChoice1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelToolChoice$ {
-  /** @deprecated use `ModelToolChoice$inboundSchema` instead. */
-  export const inboundSchema = ModelToolChoice$inboundSchema;
-  /** @deprecated use `ModelToolChoice$outboundSchema` instead. */
-  export const outboundSchema = ModelToolChoice$outboundSchema;
-  /** @deprecated use `ModelToolChoice$Outbound` instead. */
-  export type Outbound = ModelToolChoice$Outbound;
-}
-
 export function modelToolChoiceToJSON(
   modelToolChoice: ModelToolChoice,
 ): string {
   return JSON.stringify(ModelToolChoice$outboundSchema.parse(modelToolChoice));
 }
-
 export function modelToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelToolChoice, SDKValidationError> {
@@ -2819,22 +2537,10 @@ export function modelToolChoiceFromJSON(
 export const ModelModalities$inboundSchema: z.ZodNativeEnum<
   typeof ModelModalities
 > = z.nativeEnum(ModelModalities);
-
 /** @internal */
 export const ModelModalities$outboundSchema: z.ZodNativeEnum<
   typeof ModelModalities
 > = ModelModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelModalities$ {
-  /** @deprecated use `ModelModalities$inboundSchema` instead. */
-  export const inboundSchema = ModelModalities$inboundSchema;
-  /** @deprecated use `ModelModalities$outboundSchema` instead. */
-  export const outboundSchema = ModelModalities$outboundSchema;
-}
 
 /** @internal */
 export const ModelWebSearchOptions$inboundSchema: z.ZodType<
@@ -2844,7 +2550,6 @@ export const ModelWebSearchOptions$inboundSchema: z.ZodType<
 > = z.object({
   enabled: z.boolean().optional(),
 });
-
 /** @internal */
 export type ModelWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -2859,19 +2564,6 @@ export const ModelWebSearchOptions$outboundSchema: z.ZodType<
   enabled: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelWebSearchOptions$ {
-  /** @deprecated use `ModelWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = ModelWebSearchOptions$inboundSchema;
-  /** @deprecated use `ModelWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = ModelWebSearchOptions$outboundSchema;
-  /** @deprecated use `ModelWebSearchOptions$Outbound` instead. */
-  export type Outbound = ModelWebSearchOptions$Outbound;
-}
-
 export function modelWebSearchOptionsToJSON(
   modelWebSearchOptions: ModelWebSearchOptions,
 ): string {
@@ -2879,7 +2571,6 @@ export function modelWebSearchOptionsToJSON(
     ModelWebSearchOptions$outboundSchema.parse(modelWebSearchOptions),
   );
 }
-
 export function modelWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ModelWebSearchOptions, SDKValidationError> {
@@ -2945,7 +2636,6 @@ export const UpdateAgentModelParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type UpdateAgentModelParameters$Outbound = {
   audio?: UpdateAgentModelAudio$Outbound | null | undefined;
@@ -3032,19 +2722,6 @@ export const UpdateAgentModelParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModelParameters$ {
-  /** @deprecated use `UpdateAgentModelParameters$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModelParameters$inboundSchema;
-  /** @deprecated use `UpdateAgentModelParameters$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModelParameters$outboundSchema;
-  /** @deprecated use `UpdateAgentModelParameters$Outbound` instead. */
-  export type Outbound = UpdateAgentModelParameters$Outbound;
-}
-
 export function updateAgentModelParametersToJSON(
   updateAgentModelParameters: UpdateAgentModelParameters,
 ): string {
@@ -3052,7 +2729,6 @@ export function updateAgentModelParametersToJSON(
     UpdateAgentModelParameters$outboundSchema.parse(updateAgentModelParameters),
   );
 }
-
 export function updateAgentModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentModelParameters, SDKValidationError> {
@@ -3077,7 +2753,6 @@ export const UpdateAgentModel2$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type UpdateAgentModel2$Outbound = {
   id: string;
@@ -3101,19 +2776,6 @@ export const UpdateAgentModel2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModel2$ {
-  /** @deprecated use `UpdateAgentModel2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModel2$inboundSchema;
-  /** @deprecated use `UpdateAgentModel2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModel2$outboundSchema;
-  /** @deprecated use `UpdateAgentModel2$Outbound` instead. */
-  export type Outbound = UpdateAgentModel2$Outbound;
-}
-
 export function updateAgentModel2ToJSON(
   updateAgentModel2: UpdateAgentModel2,
 ): string {
@@ -3121,7 +2783,6 @@ export function updateAgentModel2ToJSON(
     UpdateAgentModel2$outboundSchema.parse(updateAgentModel2),
   );
 }
-
 export function updateAgentModel2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentModel2, SDKValidationError> {
@@ -3138,7 +2799,6 @@ export const UpdateAgentModel$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => UpdateAgentModel2$inboundSchema), z.string()]);
-
 /** @internal */
 export type UpdateAgentModel$Outbound = UpdateAgentModel2$Outbound | string;
 
@@ -3149,19 +2809,6 @@ export const UpdateAgentModel$outboundSchema: z.ZodType<
   UpdateAgentModel
 > = z.union([z.lazy(() => UpdateAgentModel2$outboundSchema), z.string()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModel$ {
-  /** @deprecated use `UpdateAgentModel$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModel$inboundSchema;
-  /** @deprecated use `UpdateAgentModel$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModel$outboundSchema;
-  /** @deprecated use `UpdateAgentModel$Outbound` instead. */
-  export type Outbound = UpdateAgentModel$Outbound;
-}
-
 export function updateAgentModelToJSON(
   updateAgentModel: UpdateAgentModel,
 ): string {
@@ -3169,7 +2816,6 @@ export function updateAgentModelToJSON(
     UpdateAgentModel$outboundSchema.parse(updateAgentModel),
   );
 }
-
 export function updateAgentModelFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentModel, SDKValidationError> {
@@ -3184,43 +2830,19 @@ export function updateAgentModelFromJSON(
 export const UpdateAgentFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsVoice
 > = z.nativeEnum(UpdateAgentFallbackModelsVoice);
-
 /** @internal */
 export const UpdateAgentFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsVoice
 > = UpdateAgentFallbackModelsVoice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsVoice$ {
-  /** @deprecated use `UpdateAgentFallbackModelsVoice$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsVoice$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsVoice$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsVoice$outboundSchema;
-}
-
 /** @internal */
 export const UpdateAgentFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsFormat
 > = z.nativeEnum(UpdateAgentFallbackModelsFormat);
-
 /** @internal */
 export const UpdateAgentFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsFormat
 > = UpdateAgentFallbackModelsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsFormat$ {
-  /** @deprecated use `UpdateAgentFallbackModelsFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsFormat$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAudio$inboundSchema: z.ZodType<
@@ -3231,7 +2853,6 @@ export const UpdateAgentFallbackModelsAudio$inboundSchema: z.ZodType<
   voice: UpdateAgentFallbackModelsVoice$inboundSchema,
   format: UpdateAgentFallbackModelsFormat$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAudio$Outbound = {
   voice: string;
@@ -3248,19 +2869,6 @@ export const UpdateAgentFallbackModelsAudio$outboundSchema: z.ZodType<
   format: UpdateAgentFallbackModelsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAudio$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAudio$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsAudio$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAudio$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsAudio$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAudio$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAudio$Outbound;
-}
-
 export function updateAgentFallbackModelsAudioToJSON(
   updateAgentFallbackModelsAudio: UpdateAgentFallbackModelsAudio,
 ): string {
@@ -3270,7 +2878,6 @@ export function updateAgentFallbackModelsAudioToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsAudio, SDKValidationError> {
@@ -3288,26 +2895,12 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Typ
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type
   > =
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModels2Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
@@ -3320,7 +2913,6 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
@@ -3342,21 +2934,6 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$outboundSchema:
     strict: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsJsonSchema$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsJsonSchema$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsJsonSchema$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsJsonSchema$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsJsonSchemaToJSON(
   updateAgentResponseFormatAgentsJsonSchema:
     UpdateAgentResponseFormatAgentsJsonSchema,
@@ -3367,7 +2944,6 @@ export function updateAgentResponseFormatAgentsJsonSchemaToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3400,7 +2976,6 @@ export const UpdateAgentResponseFormatAgents3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgents3$Outbound = {
   type: string;
@@ -3424,19 +2999,6 @@ export const UpdateAgentResponseFormatAgents3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgents3$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgents3$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormatAgents3$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents3$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormatAgents3$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents3$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgents3$Outbound;
-}
-
 export function updateAgentResponseFormatAgents3ToJSON(
   updateAgentResponseFormatAgents3: UpdateAgentResponseFormatAgents3,
 ): string {
@@ -3446,7 +3008,6 @@ export function updateAgentResponseFormatAgents3ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgents3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormatAgents3, SDKValidationError> {
@@ -3464,26 +3025,12 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
   > =
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgents2$inboundSchema: z.ZodType<
@@ -3494,7 +3041,6 @@ export const UpdateAgentResponseFormatAgents2$inboundSchema: z.ZodType<
   type:
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgents2$Outbound = {
   type: string;
@@ -3510,19 +3056,6 @@ export const UpdateAgentResponseFormatAgents2$outboundSchema: z.ZodType<
     UpdateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgents2$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgents2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormatAgents2$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormatAgents2$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents2$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgents2$Outbound;
-}
-
 export function updateAgentResponseFormatAgents2ToJSON(
   updateAgentResponseFormatAgents2: UpdateAgentResponseFormatAgents2,
 ): string {
@@ -3532,7 +3065,6 @@ export function updateAgentResponseFormatAgents2ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormatAgents2, SDKValidationError> {
@@ -3548,25 +3080,11 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsRequestRequestBodyType
   > = z.nativeEnum(UpdateAgentResponseFormatAgentsRequestRequestBodyType);
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsRequestRequestBodyType
   > = UpdateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsRequestRequestBodyType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgents1$inboundSchema: z.ZodType<
@@ -3576,7 +3094,6 @@ export const UpdateAgentResponseFormatAgents1$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgents1$Outbound = {
   type: string;
@@ -3591,19 +3108,6 @@ export const UpdateAgentResponseFormatAgents1$outboundSchema: z.ZodType<
   type: UpdateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgents1$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgents1$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormatAgents1$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents1$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormatAgents1$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgents1$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgents1$Outbound;
-}
-
 export function updateAgentResponseFormatAgents1ToJSON(
   updateAgentResponseFormatAgents1: UpdateAgentResponseFormatAgents1,
 ): string {
@@ -3613,7 +3117,6 @@ export function updateAgentResponseFormatAgents1ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgents1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormatAgents1, SDKValidationError> {
@@ -3634,7 +3137,6 @@ export const UpdateAgentFallbackModelsResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormatAgents1$inboundSchema),
   z.lazy(() => UpdateAgentResponseFormatAgents2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsResponseFormat$Outbound =
   | UpdateAgentResponseFormatAgents3$Outbound
@@ -3652,21 +3154,6 @@ export const UpdateAgentFallbackModelsResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormatAgents2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsResponseFormat$ {
-  /** @deprecated use `UpdateAgentFallbackModelsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsResponseFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsResponseFormat$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsResponseFormat$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsResponseFormat$Outbound;
-}
-
 export function updateAgentFallbackModelsResponseFormatToJSON(
   updateAgentFallbackModelsResponseFormat:
     UpdateAgentFallbackModelsResponseFormat,
@@ -3677,7 +3164,6 @@ export function updateAgentFallbackModelsResponseFormatToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3700,7 +3186,6 @@ export const UpdateAgentFallbackModelsStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsStop$Outbound = string | Array<string>;
 
@@ -3711,19 +3196,6 @@ export const UpdateAgentFallbackModelsStop$outboundSchema: z.ZodType<
   UpdateAgentFallbackModelsStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsStop$ {
-  /** @deprecated use `UpdateAgentFallbackModelsStop$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsStop$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsStop$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsStop$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsStop$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsStop$Outbound;
-}
-
 export function updateAgentFallbackModelsStopToJSON(
   updateAgentFallbackModelsStop: UpdateAgentFallbackModelsStop,
 ): string {
@@ -3733,7 +3205,6 @@ export function updateAgentFallbackModelsStopToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsStop, SDKValidationError> {
@@ -3756,7 +3227,6 @@ export const UpdateAgentFallbackModelsStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -3775,21 +3245,6 @@ export const UpdateAgentFallbackModelsStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsStreamOptions$ {
-  /** @deprecated use `UpdateAgentFallbackModelsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsStreamOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsStreamOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsStreamOptions$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsStreamOptions$Outbound;
-}
-
 export function updateAgentFallbackModelsStreamOptionsToJSON(
   updateAgentFallbackModelsStreamOptions:
     UpdateAgentFallbackModelsStreamOptions,
@@ -3800,7 +3255,6 @@ export function updateAgentFallbackModelsStreamOptionsToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsStreamOptions, SDKValidationError> {
@@ -3816,22 +3270,10 @@ export function updateAgentFallbackModelsStreamOptionsFromJSON(
 export const UpdateAgentFallbackModelsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsType
 > = z.nativeEnum(UpdateAgentFallbackModelsType);
-
 /** @internal */
 export const UpdateAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsType
 > = UpdateAgentFallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsType$ {
-  /** @deprecated use `UpdateAgentFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsType$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsThinking$inboundSchema: z.ZodType<
@@ -3846,7 +3288,6 @@ export const UpdateAgentFallbackModelsThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsThinking$Outbound = {
   type: string;
@@ -3867,20 +3308,6 @@ export const UpdateAgentFallbackModelsThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsThinking$ {
-  /** @deprecated use `UpdateAgentFallbackModelsThinking$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsThinking$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsThinking$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsThinking$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsThinking$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsThinking$Outbound;
-}
-
 export function updateAgentFallbackModelsThinkingToJSON(
   updateAgentFallbackModelsThinking: UpdateAgentFallbackModelsThinking,
 ): string {
@@ -3890,7 +3317,6 @@ export function updateAgentFallbackModelsThinkingToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsThinking, SDKValidationError> {
@@ -3905,22 +3331,10 @@ export function updateAgentFallbackModelsThinkingFromJSON(
 export const UpdateAgentToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgentsType
 > = z.nativeEnum(UpdateAgentToolChoiceAgentsType);
-
 /** @internal */
 export const UpdateAgentToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgentsType
 > = UpdateAgentToolChoiceAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsType$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoiceAgentsType$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoiceAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
@@ -3930,7 +3344,6 @@ export const UpdateAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgentsFunction$Outbound = {
   name?: string | undefined;
@@ -3945,21 +3358,6 @@ export const UpdateAgentToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsFunction$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsFunction$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsFunction$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsFunction$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceAgentsFunction$Outbound;
-}
-
 export function updateAgentToolChoiceAgentsFunctionToJSON(
   updateAgentToolChoiceAgentsFunction: UpdateAgentToolChoiceAgentsFunction,
 ): string {
@@ -3969,7 +3367,6 @@ export function updateAgentToolChoiceAgentsFunctionToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoiceAgentsFunction, SDKValidationError> {
@@ -3990,7 +3387,6 @@ export const UpdateAgentToolChoiceAgents2$inboundSchema: z.ZodType<
   type: UpdateAgentToolChoiceAgentsType$inboundSchema.optional(),
   function: z.lazy(() => UpdateAgentToolChoiceAgentsFunction$inboundSchema),
 });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgents2$Outbound = {
   type?: string | undefined;
@@ -4007,19 +3403,6 @@ export const UpdateAgentToolChoiceAgents2$outboundSchema: z.ZodType<
   function: z.lazy(() => UpdateAgentToolChoiceAgentsFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgents2$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgents2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoiceAgents2$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgents2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoiceAgents2$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgents2$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceAgents2$Outbound;
-}
-
 export function updateAgentToolChoiceAgents2ToJSON(
   updateAgentToolChoiceAgents2: UpdateAgentToolChoiceAgents2,
 ): string {
@@ -4029,7 +3412,6 @@ export function updateAgentToolChoiceAgents2ToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoiceAgents2, SDKValidationError> {
@@ -4044,22 +3426,10 @@ export function updateAgentToolChoiceAgents2FromJSON(
 export const UpdateAgentToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgents1
 > = z.nativeEnum(UpdateAgentToolChoiceAgents1);
-
 /** @internal */
 export const UpdateAgentToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgents1
 > = UpdateAgentToolChoiceAgents1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgents1$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgents1$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoiceAgents1$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgents1$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoiceAgents1$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsToolChoice$inboundSchema: z.ZodType<
@@ -4070,7 +3440,6 @@ export const UpdateAgentFallbackModelsToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentToolChoiceAgents2$inboundSchema),
   UpdateAgentToolChoiceAgents1$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsToolChoice$Outbound =
   | UpdateAgentToolChoiceAgents2$Outbound
@@ -4086,21 +3455,6 @@ export const UpdateAgentFallbackModelsToolChoice$outboundSchema: z.ZodType<
   UpdateAgentToolChoiceAgents1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsToolChoice$ {
-  /** @deprecated use `UpdateAgentFallbackModelsToolChoice$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsToolChoice$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsToolChoice$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsToolChoice$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsToolChoice$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsToolChoice$Outbound;
-}
-
 export function updateAgentFallbackModelsToolChoiceToJSON(
   updateAgentFallbackModelsToolChoice: UpdateAgentFallbackModelsToolChoice,
 ): string {
@@ -4110,7 +3464,6 @@ export function updateAgentFallbackModelsToolChoiceToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsToolChoice, SDKValidationError> {
@@ -4126,24 +3479,10 @@ export function updateAgentFallbackModelsToolChoiceFromJSON(
 export const UpdateAgentFallbackModelsModalities$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsModalities
 > = z.nativeEnum(UpdateAgentFallbackModelsModalities);
-
 /** @internal */
 export const UpdateAgentFallbackModelsModalities$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsModalities> =
     UpdateAgentFallbackModelsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsModalities$ {
-  /** @deprecated use `UpdateAgentFallbackModelsModalities$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsModalities$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsModalities$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsModalities$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
@@ -4153,7 +3492,6 @@ export const UpdateAgentFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
 > = z.object({
   enabled: z.boolean().optional(),
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -4169,21 +3507,6 @@ export const UpdateAgentFallbackModelsWebSearchOptions$outboundSchema:
     enabled: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsWebSearchOptions$ {
-  /** @deprecated use `UpdateAgentFallbackModelsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsWebSearchOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsWebSearchOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsWebSearchOptions$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsWebSearchOptions$Outbound;
-}
-
 export function updateAgentFallbackModelsWebSearchOptionsToJSON(
   updateAgentFallbackModelsWebSearchOptions:
     UpdateAgentFallbackModelsWebSearchOptions,
@@ -4194,7 +3517,6 @@ export function updateAgentFallbackModelsWebSearchOptionsToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4271,7 +3593,6 @@ export const UpdateAgentFallbackModelsParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsParameters$Outbound = {
   audio?: UpdateAgentFallbackModelsAudio$Outbound | null | undefined;
@@ -4368,21 +3689,6 @@ export const UpdateAgentFallbackModelsParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsParameters$ {
-  /** @deprecated use `UpdateAgentFallbackModelsParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsParameters$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsParameters$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsParameters$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsParameters$Outbound;
-}
-
 export function updateAgentFallbackModelsParametersToJSON(
   updateAgentFallbackModelsParameters: UpdateAgentFallbackModelsParameters,
 ): string {
@@ -4392,7 +3698,6 @@ export function updateAgentFallbackModelsParametersToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsParameters, SDKValidationError> {
@@ -4419,7 +3724,6 @@ export const UpdateAgentFallbackModels2$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModels2$Outbound = {
   id: string;
@@ -4443,19 +3747,6 @@ export const UpdateAgentFallbackModels2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModels2$ {
-  /** @deprecated use `UpdateAgentFallbackModels2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModels2$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModels2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModels2$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModels2$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModels2$Outbound;
-}
-
 export function updateAgentFallbackModels2ToJSON(
   updateAgentFallbackModels2: UpdateAgentFallbackModels2,
 ): string {
@@ -4463,7 +3754,6 @@ export function updateAgentFallbackModels2ToJSON(
     UpdateAgentFallbackModels2$outboundSchema.parse(updateAgentFallbackModels2),
   );
 }
-
 export function updateAgentFallbackModels2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModels2, SDKValidationError> {
@@ -4483,7 +3773,6 @@ export const UpdateAgentFallbackModels$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentFallbackModels2$inboundSchema),
   z.string(),
 ]);
-
 /** @internal */
 export type UpdateAgentFallbackModels$Outbound =
   | UpdateAgentFallbackModels2$Outbound
@@ -4499,19 +3788,6 @@ export const UpdateAgentFallbackModels$outboundSchema: z.ZodType<
   z.string(),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModels$ {
-  /** @deprecated use `UpdateAgentFallbackModels$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModels$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModels$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModels$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModels$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModels$Outbound;
-}
-
 export function updateAgentFallbackModelsToJSON(
   updateAgentFallbackModels: UpdateAgentFallbackModels,
 ): string {
@@ -4519,7 +3795,6 @@ export function updateAgentFallbackModelsToJSON(
     UpdateAgentFallbackModels$outboundSchema.parse(updateAgentFallbackModels),
   );
 }
-
 export function updateAgentFallbackModelsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModels, SDKValidationError> {
@@ -4534,22 +3809,10 @@ export function updateAgentFallbackModelsFromJSON(
 export const UpdateAgentToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolApprovalRequired
 > = z.nativeEnum(UpdateAgentToolApprovalRequired);
-
 /** @internal */
 export const UpdateAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolApprovalRequired
 > = UpdateAgentToolApprovalRequired$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolApprovalRequired$ {
-  /** @deprecated use `UpdateAgentToolApprovalRequired$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolApprovalRequired$inboundSchema;
-  /** @deprecated use `UpdateAgentToolApprovalRequired$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolApprovalRequired$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
@@ -4558,26 +3821,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDFunctionTool$inboundSchema: z.ZodType<
@@ -4595,7 +3844,6 @@ export const AgentToolInputCRUDFunctionTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDFunctionTool$Outbound = {
   type: string;
@@ -4621,19 +3869,6 @@ export const AgentToolInputCRUDFunctionTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDFunctionTool$ {
-  /** @deprecated use `AgentToolInputCRUDFunctionTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDFunctionTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDFunctionTool$outboundSchema` instead. */
-  export const outboundSchema = AgentToolInputCRUDFunctionTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDFunctionTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDFunctionTool$Outbound;
-}
-
 export function agentToolInputCRUDFunctionToolToJSON(
   agentToolInputCRUDFunctionTool: AgentToolInputCRUDFunctionTool,
 ): string {
@@ -4643,7 +3878,6 @@ export function agentToolInputCRUDFunctionToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDFunctionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDFunctionTool, SDKValidationError> {
@@ -4661,26 +3895,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDCodeExecutionTool$inboundSchema: z.ZodType<
@@ -4698,7 +3918,6 @@ export const AgentToolInputCRUDCodeExecutionTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDCodeExecutionTool$Outbound = {
   type: string;
@@ -4724,21 +3943,6 @@ export const AgentToolInputCRUDCodeExecutionTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDCodeExecutionTool$ {
-  /** @deprecated use `AgentToolInputCRUDCodeExecutionTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDCodeExecutionTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCodeExecutionTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDCodeExecutionTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCodeExecutionTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDCodeExecutionTool$Outbound;
-}
-
 export function agentToolInputCRUDCodeExecutionToolToJSON(
   agentToolInputCRUDCodeExecutionTool: AgentToolInputCRUDCodeExecutionTool,
 ): string {
@@ -4748,7 +3952,6 @@ export function agentToolInputCRUDCodeExecutionToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDCodeExecutionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDCodeExecutionTool, SDKValidationError> {
@@ -4767,26 +3970,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDHTTPTool$inboundSchema: z.ZodType<
@@ -4804,7 +3993,6 @@ export const AgentToolInputCRUDHTTPTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDHTTPTool$Outbound = {
   type: string;
@@ -4830,19 +4018,6 @@ export const AgentToolInputCRUDHTTPTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDHTTPTool$ {
-  /** @deprecated use `AgentToolInputCRUDHTTPTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDHTTPTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDHTTPTool$outboundSchema` instead. */
-  export const outboundSchema = AgentToolInputCRUDHTTPTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDHTTPTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDHTTPTool$Outbound;
-}
-
 export function agentToolInputCRUDHTTPToolToJSON(
   agentToolInputCRUDHTTPTool: AgentToolInputCRUDHTTPTool,
 ): string {
@@ -4850,7 +4025,6 @@ export function agentToolInputCRUDHTTPToolToJSON(
     AgentToolInputCRUDHTTPTool$outboundSchema.parse(agentToolInputCRUDHTTPTool),
   );
 }
-
 export function agentToolInputCRUDHTTPToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDHTTPTool, SDKValidationError> {
@@ -4868,26 +4042,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDCurrentDateTool$inboundSchema: z.ZodType<
@@ -4903,7 +4063,6 @@ export const AgentToolInputCRUDCurrentDateTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDCurrentDateTool$Outbound = {
   type: string;
@@ -4925,20 +4084,6 @@ export const AgentToolInputCRUDCurrentDateTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDCurrentDateTool$ {
-  /** @deprecated use `AgentToolInputCRUDCurrentDateTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDCurrentDateTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCurrentDateTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDCurrentDateTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCurrentDateTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDCurrentDateTool$Outbound;
-}
-
 export function agentToolInputCRUDCurrentDateToolToJSON(
   agentToolInputCRUDCurrentDateTool: AgentToolInputCRUDCurrentDateTool,
 ): string {
@@ -4948,7 +4093,6 @@ export function agentToolInputCRUDCurrentDateToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDCurrentDateToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDCurrentDateTool, SDKValidationError> {
@@ -4966,26 +4110,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
@@ -5001,7 +4131,6 @@ export const AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound = {
   type: string;
@@ -5023,21 +4152,6 @@ export const AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDQueryKnowledgeBaseTool$ {
-  /** @deprecated use `AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound;
-}
-
 export function agentToolInputCRUDQueryKnowledgeBaseToolToJSON(
   agentToolInputCRUDQueryKnowledgeBaseTool:
     AgentToolInputCRUDQueryKnowledgeBaseTool,
@@ -5048,7 +4162,6 @@ export function agentToolInputCRUDQueryKnowledgeBaseToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDQueryKnowledgeBaseToolFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5072,26 +4185,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema:
@@ -5108,7 +4207,6 @@ export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema:
       "requires_approval": "requiresApproval",
     });
   });
-
 /** @internal */
 export type AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound = {
   type: string;
@@ -5131,21 +4229,6 @@ export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDRetrieveKnowledgeBasesTool$ {
-  /** @deprecated use `AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound;
-}
-
 export function agentToolInputCRUDRetrieveKnowledgeBasesToolToJSON(
   agentToolInputCRUDRetrieveKnowledgeBasesTool:
     AgentToolInputCRUDRetrieveKnowledgeBasesTool,
@@ -5156,7 +4239,6 @@ export function agentToolInputCRUDRetrieveKnowledgeBasesToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDRetrieveKnowledgeBasesToolFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5180,26 +4262,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema:
@@ -5213,7 +4281,6 @@ export const AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema:
         "requires_approval": "requiresApproval",
       });
     });
-
 /** @internal */
 export type AgentToolInputCRUDDeleteMemoryDocumentTool$Outbound = {
   type: string;
@@ -5236,21 +4303,6 @@ export const AgentToolInputCRUDDeleteMemoryDocumentTool$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDDeleteMemoryDocumentTool$ {
-  /** @deprecated use `AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDDeleteMemoryDocumentTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDDeleteMemoryDocumentTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDDeleteMemoryDocumentTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDDeleteMemoryDocumentTool$Outbound;
-}
-
 export function agentToolInputCRUDDeleteMemoryDocumentToolToJSON(
   agentToolInputCRUDDeleteMemoryDocumentTool:
     AgentToolInputCRUDDeleteMemoryDocumentTool,
@@ -5261,7 +4313,6 @@ export function agentToolInputCRUDDeleteMemoryDocumentToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDDeleteMemoryDocumentToolFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5285,26 +4336,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema:
@@ -5318,7 +4355,6 @@ export const AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema:
         "requires_approval": "requiresApproval",
       });
     });
-
 /** @internal */
 export type AgentToolInputCRUDRetrieveMemoryStoresTool$Outbound = {
   type: string;
@@ -5341,21 +4377,6 @@ export const AgentToolInputCRUDRetrieveMemoryStoresTool$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDRetrieveMemoryStoresTool$ {
-  /** @deprecated use `AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveMemoryStoresTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDRetrieveMemoryStoresTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveMemoryStoresTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDRetrieveMemoryStoresTool$Outbound;
-}
-
 export function agentToolInputCRUDRetrieveMemoryStoresToolToJSON(
   agentToolInputCRUDRetrieveMemoryStoresTool:
     AgentToolInputCRUDRetrieveMemoryStoresTool,
@@ -5366,7 +4387,6 @@ export function agentToolInputCRUDRetrieveMemoryStoresToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDRetrieveMemoryStoresToolFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5390,26 +4410,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsT
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema: z.ZodType<
@@ -5425,7 +4431,6 @@ export const AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDWriteMemoryStoreTool$Outbound = {
   type: string;
@@ -5447,21 +4452,6 @@ export const AgentToolInputCRUDWriteMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDWriteMemoryStoreTool$ {
-  /** @deprecated use `AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDWriteMemoryStoreTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDWriteMemoryStoreTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDWriteMemoryStoreTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDWriteMemoryStoreTool$Outbound;
-}
-
 export function agentToolInputCRUDWriteMemoryStoreToolToJSON(
   agentToolInputCRUDWriteMemoryStoreTool:
     AgentToolInputCRUDWriteMemoryStoreTool,
@@ -5472,7 +4462,6 @@ export function agentToolInputCRUDWriteMemoryStoreToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDWriteMemoryStoreToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDWriteMemoryStoreTool, SDKValidationError> {
@@ -5491,26 +4480,12 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$i
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
   );
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType
   > =
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema: z.ZodType<
@@ -5526,7 +4501,6 @@ export const AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDQueryMemoryStoreTool$Outbound = {
   type: string;
@@ -5548,21 +4522,6 @@ export const AgentToolInputCRUDQueryMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDQueryMemoryStoreTool$ {
-  /** @deprecated use `AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDQueryMemoryStoreTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDQueryMemoryStoreTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDQueryMemoryStoreTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDQueryMemoryStoreTool$Outbound;
-}
-
 export function agentToolInputCRUDQueryMemoryStoreToolToJSON(
   agentToolInputCRUDQueryMemoryStoreTool:
     AgentToolInputCRUDQueryMemoryStoreTool,
@@ -5573,7 +4532,6 @@ export function agentToolInputCRUDQueryMemoryStoreToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDQueryMemoryStoreToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDQueryMemoryStoreTool, SDKValidationError> {
@@ -5590,25 +4548,11 @@ export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSc
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
   > = z.nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType);
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
   > = UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDRetrieveAgentsTool$inboundSchema: z.ZodType<
@@ -5623,7 +4567,6 @@ export const AgentToolInputCRUDRetrieveAgentsTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDRetrieveAgentsTool$Outbound = {
   type: string;
@@ -5645,21 +4588,6 @@ export const AgentToolInputCRUDRetrieveAgentsTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDRetrieveAgentsTool$ {
-  /** @deprecated use `AgentToolInputCRUDRetrieveAgentsTool$inboundSchema` instead. */
-  export const inboundSchema =
-    AgentToolInputCRUDRetrieveAgentsTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveAgentsTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDRetrieveAgentsTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDRetrieveAgentsTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDRetrieveAgentsTool$Outbound;
-}
-
 export function agentToolInputCRUDRetrieveAgentsToolToJSON(
   agentToolInputCRUDRetrieveAgentsTool: AgentToolInputCRUDRetrieveAgentsTool,
 ): string {
@@ -5669,7 +4597,6 @@ export function agentToolInputCRUDRetrieveAgentsToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDRetrieveAgentsToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDRetrieveAgentsTool, SDKValidationError> {
@@ -5685,24 +4612,10 @@ export function agentToolInputCRUDRetrieveAgentsToolFromJSON(
 export const UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsRequestType> = z
     .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestType);
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsRequestType> =
     UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsRequestType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDCallSubAgentTool$inboundSchema: z.ZodType<
@@ -5717,7 +4630,6 @@ export const AgentToolInputCRUDCallSubAgentTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDCallSubAgentTool$Outbound = {
   type: string;
@@ -5738,20 +4650,6 @@ export const AgentToolInputCRUDCallSubAgentTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDCallSubAgentTool$ {
-  /** @deprecated use `AgentToolInputCRUDCallSubAgentTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDCallSubAgentTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCallSubAgentTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDCallSubAgentTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDCallSubAgentTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDCallSubAgentTool$Outbound;
-}
-
 export function agentToolInputCRUDCallSubAgentToolToJSON(
   agentToolInputCRUDCallSubAgentTool: AgentToolInputCRUDCallSubAgentTool,
 ): string {
@@ -5761,7 +4659,6 @@ export function agentToolInputCRUDCallSubAgentToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDCallSubAgentToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDCallSubAgentTool, SDKValidationError> {
@@ -5777,24 +4674,10 @@ export function agentToolInputCRUDCallSubAgentToolFromJSON(
 export const UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsType> = z
     .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsType);
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsType> =
     UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDAgentsType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDWebScraperTool$inboundSchema: z.ZodType<
@@ -5809,7 +4692,6 @@ export const AgentToolInputCRUDWebScraperTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDWebScraperTool$Outbound = {
   type: string;
@@ -5830,19 +4712,6 @@ export const AgentToolInputCRUDWebScraperTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDWebScraperTool$ {
-  /** @deprecated use `AgentToolInputCRUDWebScraperTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDWebScraperTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDWebScraperTool$outboundSchema` instead. */
-  export const outboundSchema = AgentToolInputCRUDWebScraperTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDWebScraperTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDWebScraperTool$Outbound;
-}
-
 export function agentToolInputCRUDWebScraperToolToJSON(
   agentToolInputCRUDWebScraperTool: AgentToolInputCRUDWebScraperTool,
 ): string {
@@ -5852,7 +4721,6 @@ export function agentToolInputCRUDWebScraperToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDWebScraperToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDWebScraperTool, SDKValidationError> {
@@ -5867,23 +4735,10 @@ export function agentToolInputCRUDWebScraperToolFromJSON(
 export const UpdateAgentAgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentAgentToolInputCRUDType
 > = z.nativeEnum(UpdateAgentAgentToolInputCRUDType);
-
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentAgentToolInputCRUDType
 > = UpdateAgentAgentToolInputCRUDType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUDType$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentToolInputCRUDType$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUDType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentToolInputCRUDType$outboundSchema;
-}
 
 /** @internal */
 export const AgentToolInputCRUDGoogleSearchTool$inboundSchema: z.ZodType<
@@ -5898,7 +4753,6 @@ export const AgentToolInputCRUDGoogleSearchTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type AgentToolInputCRUDGoogleSearchTool$Outbound = {
   type: string;
@@ -5919,20 +4773,6 @@ export const AgentToolInputCRUDGoogleSearchTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDGoogleSearchTool$ {
-  /** @deprecated use `AgentToolInputCRUDGoogleSearchTool$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDGoogleSearchTool$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDGoogleSearchTool$outboundSchema` instead. */
-  export const outboundSchema =
-    AgentToolInputCRUDGoogleSearchTool$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUDGoogleSearchTool$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUDGoogleSearchTool$Outbound;
-}
-
 export function agentToolInputCRUDGoogleSearchToolToJSON(
   agentToolInputCRUDGoogleSearchTool: AgentToolInputCRUDGoogleSearchTool,
 ): string {
@@ -5942,7 +4782,6 @@ export function agentToolInputCRUDGoogleSearchToolToJSON(
     ),
   );
 }
-
 export function agentToolInputCRUDGoogleSearchToolFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUDGoogleSearchTool, SDKValidationError> {
@@ -5975,7 +4814,6 @@ export const UpdateAgentAgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDCodeExecutionTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDFunctionTool$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdateAgentAgentToolInputCRUD$Outbound =
   | AgentToolInputCRUDGoogleSearchTool$Outbound
@@ -6015,19 +4853,6 @@ export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDFunctionTool$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentToolInputCRUD$ {
-  /** @deprecated use `UpdateAgentAgentToolInputCRUD$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentToolInputCRUD$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUD$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentToolInputCRUD$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentToolInputCRUD$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentToolInputCRUD$Outbound;
-}
-
 export function updateAgentAgentToolInputCRUDToJSON(
   updateAgentAgentToolInputCRUD: UpdateAgentAgentToolInputCRUD,
 ): string {
@@ -6037,7 +4862,6 @@ export function updateAgentAgentToolInputCRUDToJSON(
     ),
   );
 }
-
 export function updateAgentAgentToolInputCRUDFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentToolInputCRUD, SDKValidationError> {
@@ -6084,7 +4908,6 @@ export const UpdateAgentSettings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-
 /** @internal */
 export type UpdateAgentSettings$Outbound = {
   max_iterations: number;
@@ -6147,19 +4970,6 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentSettings$ {
-  /** @deprecated use `UpdateAgentSettings$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentSettings$inboundSchema;
-  /** @deprecated use `UpdateAgentSettings$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentSettings$outboundSchema;
-  /** @deprecated use `UpdateAgentSettings$Outbound` instead. */
-  export type Outbound = UpdateAgentSettings$Outbound;
-}
-
 export function updateAgentSettingsToJSON(
   updateAgentSettings: UpdateAgentSettings,
 ): string {
@@ -6167,7 +4977,6 @@ export function updateAgentSettingsToJSON(
     UpdateAgentSettings$outboundSchema.parse(updateAgentSettings),
   );
 }
-
 export function updateAgentSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentSettings, SDKValidationError> {
@@ -6190,7 +4999,6 @@ export const UpdateAgentKnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type UpdateAgentKnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -6209,19 +5017,6 @@ export const UpdateAgentKnowledgeBases$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentKnowledgeBases$ {
-  /** @deprecated use `UpdateAgentKnowledgeBases$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentKnowledgeBases$inboundSchema;
-  /** @deprecated use `UpdateAgentKnowledgeBases$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentKnowledgeBases$outboundSchema;
-  /** @deprecated use `UpdateAgentKnowledgeBases$Outbound` instead. */
-  export type Outbound = UpdateAgentKnowledgeBases$Outbound;
-}
-
 export function updateAgentKnowledgeBasesToJSON(
   updateAgentKnowledgeBases: UpdateAgentKnowledgeBases,
 ): string {
@@ -6229,7 +5024,6 @@ export function updateAgentKnowledgeBasesToJSON(
     UpdateAgentKnowledgeBases$outboundSchema.parse(updateAgentKnowledgeBases),
   );
 }
-
 export function updateAgentKnowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentKnowledgeBases, SDKValidationError> {
@@ -6249,7 +5043,6 @@ export const UpdateAgentTeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-
 /** @internal */
 export type UpdateAgentTeamOfAgents$Outbound = {
   key: string;
@@ -6266,19 +5059,6 @@ export const UpdateAgentTeamOfAgents$outboundSchema: z.ZodType<
   role: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentTeamOfAgents$ {
-  /** @deprecated use `UpdateAgentTeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentTeamOfAgents$inboundSchema;
-  /** @deprecated use `UpdateAgentTeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentTeamOfAgents$outboundSchema;
-  /** @deprecated use `UpdateAgentTeamOfAgents$Outbound` instead. */
-  export type Outbound = UpdateAgentTeamOfAgents$Outbound;
-}
-
 export function updateAgentTeamOfAgentsToJSON(
   updateAgentTeamOfAgents: UpdateAgentTeamOfAgents,
 ): string {
@@ -6286,7 +5066,6 @@ export function updateAgentTeamOfAgentsToJSON(
     UpdateAgentTeamOfAgents$outboundSchema.parse(updateAgentTeamOfAgents),
   );
 }
-
 export function updateAgentTeamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentTeamOfAgents, SDKValidationError> {
@@ -6335,7 +5114,6 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
     "team_of_agents": "teamOfAgents",
   });
 });
-
 /** @internal */
 export type UpdateAgentRequestBody$Outbound = {
   key?: string | undefined;
@@ -6394,19 +5172,6 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentRequestBody$ {
-  /** @deprecated use `UpdateAgentRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentRequestBody$inboundSchema;
-  /** @deprecated use `UpdateAgentRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentRequestBody$outboundSchema;
-  /** @deprecated use `UpdateAgentRequestBody$Outbound` instead. */
-  export type Outbound = UpdateAgentRequestBody$Outbound;
-}
-
 export function updateAgentRequestBodyToJSON(
   updateAgentRequestBody: UpdateAgentRequestBody,
 ): string {
@@ -6414,7 +5179,6 @@ export function updateAgentRequestBodyToJSON(
     UpdateAgentRequestBody$outboundSchema.parse(updateAgentRequestBody),
   );
 }
-
 export function updateAgentRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentRequestBody, SDKValidationError> {
@@ -6439,7 +5203,6 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
@@ -6461,19 +5224,6 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentRequest$ {
-  /** @deprecated use `UpdateAgentRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentRequest$inboundSchema;
-  /** @deprecated use `UpdateAgentRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentRequest$outboundSchema;
-  /** @deprecated use `UpdateAgentRequest$Outbound` instead. */
-  export type Outbound = UpdateAgentRequest$Outbound;
-}
-
 export function updateAgentRequestToJSON(
   updateAgentRequest: UpdateAgentRequest,
 ): string {
@@ -6481,7 +5231,6 @@ export function updateAgentRequestToJSON(
     UpdateAgentRequest$outboundSchema.parse(updateAgentRequest),
   );
 }
-
 export function updateAgentRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentRequest, SDKValidationError> {
@@ -6496,46 +5245,20 @@ export function updateAgentRequestFromJSON(
 export const UpdateAgentStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentStatus
 > = z.nativeEnum(UpdateAgentStatus);
-
 /** @internal */
 export const UpdateAgentStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentStatus
 > = UpdateAgentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentStatus$ {
-  /** @deprecated use `UpdateAgentStatus$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentStatus$inboundSchema;
-  /** @deprecated use `UpdateAgentStatus$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentStatus$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentAgentsToolApprovalRequired$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentsToolApprovalRequired> = z.nativeEnum(
     UpdateAgentAgentsToolApprovalRequired,
   );
-
 /** @internal */
 export const UpdateAgentAgentsToolApprovalRequired$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentsToolApprovalRequired> =
     UpdateAgentAgentsToolApprovalRequired$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsToolApprovalRequired$ {
-  /** @deprecated use `UpdateAgentAgentsToolApprovalRequired$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentAgentsToolApprovalRequired$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsToolApprovalRequired$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentAgentsToolApprovalRequired$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentConditions$inboundSchema: z.ZodType<
@@ -6547,7 +5270,6 @@ export const UpdateAgentConditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-
 /** @internal */
 export type UpdateAgentConditions$Outbound = {
   condition: string;
@@ -6566,19 +5288,6 @@ export const UpdateAgentConditions$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentConditions$ {
-  /** @deprecated use `UpdateAgentConditions$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentConditions$inboundSchema;
-  /** @deprecated use `UpdateAgentConditions$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentConditions$outboundSchema;
-  /** @deprecated use `UpdateAgentConditions$Outbound` instead. */
-  export type Outbound = UpdateAgentConditions$Outbound;
-}
-
 export function updateAgentConditionsToJSON(
   updateAgentConditions: UpdateAgentConditions,
 ): string {
@@ -6586,7 +5295,6 @@ export function updateAgentConditionsToJSON(
     UpdateAgentConditions$outboundSchema.parse(updateAgentConditions),
   );
 }
-
 export function updateAgentConditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentConditions, SDKValidationError> {
@@ -6619,7 +5327,6 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type UpdateAgentTools$Outbound = {
   id: string;
@@ -6655,19 +5362,6 @@ export const UpdateAgentTools$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentTools$ {
-  /** @deprecated use `UpdateAgentTools$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentTools$inboundSchema;
-  /** @deprecated use `UpdateAgentTools$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentTools$outboundSchema;
-  /** @deprecated use `UpdateAgentTools$Outbound` instead. */
-  export type Outbound = UpdateAgentTools$Outbound;
-}
-
 export function updateAgentToolsToJSON(
   updateAgentTools: UpdateAgentTools,
 ): string {
@@ -6675,7 +5369,6 @@ export function updateAgentToolsToJSON(
     UpdateAgentTools$outboundSchema.parse(updateAgentTools),
   );
 }
-
 export function updateAgentToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentTools, SDKValidationError> {
@@ -6704,7 +5397,6 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-
 /** @internal */
 export type UpdateAgentAgentsSettings$Outbound = {
   max_iterations: number;
@@ -6732,19 +5424,6 @@ export const UpdateAgentAgentsSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsSettings$ {
-  /** @deprecated use `UpdateAgentAgentsSettings$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentsSettings$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsSettings$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentsSettings$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentsSettings$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentsSettings$Outbound;
-}
-
 export function updateAgentAgentsSettingsToJSON(
   updateAgentAgentsSettings: UpdateAgentAgentsSettings,
 ): string {
@@ -6752,7 +5431,6 @@ export function updateAgentAgentsSettingsToJSON(
     UpdateAgentAgentsSettings$outboundSchema.parse(updateAgentAgentsSettings),
   );
 }
-
 export function updateAgentAgentsSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsSettings, SDKValidationError> {
@@ -6767,43 +5445,19 @@ export function updateAgentAgentsSettingsFromJSON(
 export const UpdateAgentVoice$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentVoice
 > = z.nativeEnum(UpdateAgentVoice);
-
 /** @internal */
 export const UpdateAgentVoice$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentVoice
 > = UpdateAgentVoice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentVoice$ {
-  /** @deprecated use `UpdateAgentVoice$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentVoice$inboundSchema;
-  /** @deprecated use `UpdateAgentVoice$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentVoice$outboundSchema;
-}
-
 /** @internal */
 export const UpdateAgentFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFormat
 > = z.nativeEnum(UpdateAgentFormat);
-
 /** @internal */
 export const UpdateAgentFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFormat
 > = UpdateAgentFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFormat$ {
-  /** @deprecated use `UpdateAgentFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFormat$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentAudio$inboundSchema: z.ZodType<
@@ -6814,7 +5468,6 @@ export const UpdateAgentAudio$inboundSchema: z.ZodType<
   voice: UpdateAgentVoice$inboundSchema,
   format: UpdateAgentFormat$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentAudio$Outbound = {
   voice: string;
@@ -6831,19 +5484,6 @@ export const UpdateAgentAudio$outboundSchema: z.ZodType<
   format: UpdateAgentFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAudio$ {
-  /** @deprecated use `UpdateAgentAudio$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAudio$inboundSchema;
-  /** @deprecated use `UpdateAgentAudio$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAudio$outboundSchema;
-  /** @deprecated use `UpdateAgentAudio$Outbound` instead. */
-  export type Outbound = UpdateAgentAudio$Outbound;
-}
-
 export function updateAgentAudioToJSON(
   updateAgentAudio: UpdateAgentAudio,
 ): string {
@@ -6851,7 +5491,6 @@ export function updateAgentAudioToJSON(
     UpdateAgentAudio$outboundSchema.parse(updateAgentAudio),
   );
 }
-
 export function updateAgentAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAudio, SDKValidationError> {
@@ -6869,26 +5508,12 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$inbou
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType
   > =
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
@@ -6902,7 +5527,6 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     schema: z.any().optional(),
     strict: z.boolean().optional(),
   });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
@@ -6924,22 +5548,6 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
     strict: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponseJsonSchema$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound` instead. */
-  export type Outbound =
-    UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
   updateAgentResponseFormatAgentsResponseJsonSchema:
     UpdateAgentResponseFormatAgentsResponseJsonSchema,
@@ -6950,7 +5558,6 @@ export function updateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6983,7 +5590,6 @@ export const UpdateAgentResponseFormatAgentsResponse3$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse3$Outbound = {
   type: string;
@@ -7007,21 +5613,6 @@ export const UpdateAgentResponseFormatAgentsResponse3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse3$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse3$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse3$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse3$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse3$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse3$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse3$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse3ToJSON(
   updateAgentResponseFormatAgentsResponse3:
     UpdateAgentResponseFormatAgentsResponse3,
@@ -7032,7 +5623,6 @@ export function updateAgentResponseFormatAgentsResponse3ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse3FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7053,24 +5643,10 @@ export function updateAgentResponseFormatAgentsResponse3FromJSON(
 export const UpdateAgentResponseFormatAgentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsResponse200Type> = z
     .nativeEnum(UpdateAgentResponseFormatAgentsResponse200Type);
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsResponse200Type> =
     UpdateAgentResponseFormatAgentsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200Type$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200Type$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse2$inboundSchema: z.ZodType<
@@ -7080,7 +5656,6 @@ export const UpdateAgentResponseFormatAgentsResponse2$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentResponseFormatAgentsResponse200Type$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse2$Outbound = {
   type: string;
@@ -7095,21 +5670,6 @@ export const UpdateAgentResponseFormatAgentsResponse2$outboundSchema: z.ZodType<
   type: UpdateAgentResponseFormatAgentsResponse200Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse2$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse2$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse2ToJSON(
   updateAgentResponseFormatAgentsResponse2:
     UpdateAgentResponseFormatAgentsResponse2,
@@ -7120,7 +5680,6 @@ export function updateAgentResponseFormatAgentsResponse2ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7141,24 +5700,10 @@ export function updateAgentResponseFormatAgentsResponse2FromJSON(
 export const UpdateAgentResponseFormatAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsResponseType> = z
     .nativeEnum(UpdateAgentResponseFormatAgentsResponseType);
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentResponseFormatAgentsResponseType> =
     UpdateAgentResponseFormatAgentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponseType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponseType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse1$inboundSchema: z.ZodType<
@@ -7168,7 +5713,6 @@ export const UpdateAgentResponseFormatAgentsResponse1$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentResponseFormatAgentsResponseType$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse1$Outbound = {
   type: string;
@@ -7183,21 +5727,6 @@ export const UpdateAgentResponseFormatAgentsResponse1$outboundSchema: z.ZodType<
   type: UpdateAgentResponseFormatAgentsResponseType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse1$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse1$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse1$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse1$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse1$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse1ToJSON(
   updateAgentResponseFormatAgentsResponse1:
     UpdateAgentResponseFormatAgentsResponse1,
@@ -7208,7 +5737,6 @@ export function updateAgentResponseFormatAgentsResponse1ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse1FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7235,7 +5763,6 @@ export const UpdateAgentResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormatAgentsResponse1$inboundSchema),
   z.lazy(() => UpdateAgentResponseFormatAgentsResponse2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdateAgentResponseFormat$Outbound =
   | UpdateAgentResponseFormatAgentsResponse3$Outbound
@@ -7253,19 +5780,6 @@ export const UpdateAgentResponseFormat$outboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentResponseFormatAgentsResponse2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormat$ {
-  /** @deprecated use `UpdateAgentResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseFormat$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormat$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormat$Outbound;
-}
-
 export function updateAgentResponseFormatToJSON(
   updateAgentResponseFormat: UpdateAgentResponseFormat,
 ): string {
@@ -7273,7 +5787,6 @@ export function updateAgentResponseFormatToJSON(
     UpdateAgentResponseFormat$outboundSchema.parse(updateAgentResponseFormat),
   );
 }
-
 export function updateAgentResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormat, SDKValidationError> {
@@ -7290,7 +5803,6 @@ export const UpdateAgentStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type UpdateAgentStop$Outbound = string | Array<string>;
 
@@ -7301,25 +5813,11 @@ export const UpdateAgentStop$outboundSchema: z.ZodType<
   UpdateAgentStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentStop$ {
-  /** @deprecated use `UpdateAgentStop$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentStop$inboundSchema;
-  /** @deprecated use `UpdateAgentStop$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentStop$outboundSchema;
-  /** @deprecated use `UpdateAgentStop$Outbound` instead. */
-  export type Outbound = UpdateAgentStop$Outbound;
-}
-
 export function updateAgentStopToJSON(
   updateAgentStop: UpdateAgentStop,
 ): string {
   return JSON.stringify(UpdateAgentStop$outboundSchema.parse(updateAgentStop));
 }
-
 export function updateAgentStopFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentStop, SDKValidationError> {
@@ -7342,7 +5840,6 @@ export const UpdateAgentStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type UpdateAgentStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -7361,19 +5858,6 @@ export const UpdateAgentStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentStreamOptions$ {
-  /** @deprecated use `UpdateAgentStreamOptions$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentStreamOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentStreamOptions$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentStreamOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentStreamOptions$Outbound` instead. */
-  export type Outbound = UpdateAgentStreamOptions$Outbound;
-}
-
 export function updateAgentStreamOptionsToJSON(
   updateAgentStreamOptions: UpdateAgentStreamOptions,
 ): string {
@@ -7381,7 +5865,6 @@ export function updateAgentStreamOptionsToJSON(
     UpdateAgentStreamOptions$outboundSchema.parse(updateAgentStreamOptions),
   );
 }
-
 export function updateAgentStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentStreamOptions, SDKValidationError> {
@@ -7396,22 +5879,10 @@ export function updateAgentStreamOptionsFromJSON(
 export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentType
 > = z.nativeEnum(UpdateAgentType);
-
 /** @internal */
 export const UpdateAgentType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentType
 > = UpdateAgentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentType$ {
-  /** @deprecated use `UpdateAgentType$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentType$inboundSchema;
-  /** @deprecated use `UpdateAgentType$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentThinking$inboundSchema: z.ZodType<
@@ -7426,7 +5897,6 @@ export const UpdateAgentThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type UpdateAgentThinking$Outbound = {
   type: string;
@@ -7447,19 +5917,6 @@ export const UpdateAgentThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentThinking$ {
-  /** @deprecated use `UpdateAgentThinking$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentThinking$inboundSchema;
-  /** @deprecated use `UpdateAgentThinking$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentThinking$outboundSchema;
-  /** @deprecated use `UpdateAgentThinking$Outbound` instead. */
-  export type Outbound = UpdateAgentThinking$Outbound;
-}
-
 export function updateAgentThinkingToJSON(
   updateAgentThinking: UpdateAgentThinking,
 ): string {
@@ -7467,7 +5924,6 @@ export function updateAgentThinkingToJSON(
     UpdateAgentThinking$outboundSchema.parse(updateAgentThinking),
   );
 }
-
 export function updateAgentThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentThinking, SDKValidationError> {
@@ -7482,24 +5938,10 @@ export function updateAgentThinkingFromJSON(
 export const UpdateAgentToolChoiceAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponseType> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponseType);
-
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponseType> =
     UpdateAgentToolChoiceAgentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponseType$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponseType$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema:
@@ -7510,7 +5952,6 @@ export const UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema:
   > = z.object({
     name: z.string().optional(),
   });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgentsResponseFunction$Outbound = {
   name?: string | undefined;
@@ -7526,21 +5967,6 @@ export const UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponseFunction$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponseFunction$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceAgentsResponseFunction$Outbound;
-}
-
 export function updateAgentToolChoiceAgentsResponseFunctionToJSON(
   updateAgentToolChoiceAgentsResponseFunction:
     UpdateAgentToolChoiceAgentsResponseFunction,
@@ -7551,7 +5977,6 @@ export function updateAgentToolChoiceAgentsResponseFunctionToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgentsResponseFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7579,7 +6004,6 @@ export const UpdateAgentToolChoiceAgentsResponse2$inboundSchema: z.ZodType<
     UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema
   ),
 });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgentsResponse2$Outbound = {
   type?: string | undefined;
@@ -7598,21 +6022,6 @@ export const UpdateAgentToolChoiceAgentsResponse2$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse2$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceAgentsResponse2$Outbound;
-}
-
 export function updateAgentToolChoiceAgentsResponse2ToJSON(
   updateAgentToolChoiceAgentsResponse2: UpdateAgentToolChoiceAgentsResponse2,
 ): string {
@@ -7622,7 +6031,6 @@ export function updateAgentToolChoiceAgentsResponse2ToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgentsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoiceAgentsResponse2, SDKValidationError> {
@@ -7639,24 +6047,10 @@ export const UpdateAgentToolChoiceAgentsResponse1$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse1> = z.nativeEnum(
     UpdateAgentToolChoiceAgentsResponse1,
   );
-
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponse1$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse1> =
     UpdateAgentToolChoiceAgentsResponse1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse1$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse1$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse1$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
@@ -7667,7 +6061,6 @@ export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentToolChoiceAgentsResponse2$inboundSchema),
   UpdateAgentToolChoiceAgentsResponse1$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdateAgentToolChoice$Outbound =
   | UpdateAgentToolChoiceAgentsResponse2$Outbound
@@ -7683,19 +6076,6 @@ export const UpdateAgentToolChoice$outboundSchema: z.ZodType<
   UpdateAgentToolChoiceAgentsResponse1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoice$ {
-  /** @deprecated use `UpdateAgentToolChoice$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentToolChoice$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoice$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentToolChoice$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoice$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoice$Outbound;
-}
-
 export function updateAgentToolChoiceToJSON(
   updateAgentToolChoice: UpdateAgentToolChoice,
 ): string {
@@ -7703,7 +6083,6 @@ export function updateAgentToolChoiceToJSON(
     UpdateAgentToolChoice$outboundSchema.parse(updateAgentToolChoice),
   );
 }
-
 export function updateAgentToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoice, SDKValidationError> {
@@ -7718,22 +6097,10 @@ export function updateAgentToolChoiceFromJSON(
 export const UpdateAgentModalities$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModalities
 > = z.nativeEnum(UpdateAgentModalities);
-
 /** @internal */
 export const UpdateAgentModalities$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModalities
 > = UpdateAgentModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentModalities$ {
-  /** @deprecated use `UpdateAgentModalities$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentModalities$inboundSchema;
-  /** @deprecated use `UpdateAgentModalities$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentModalities$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentWebSearchOptions$inboundSchema: z.ZodType<
@@ -7743,7 +6110,6 @@ export const UpdateAgentWebSearchOptions$inboundSchema: z.ZodType<
 > = z.object({
   enabled: z.boolean().optional(),
 });
-
 /** @internal */
 export type UpdateAgentWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -7758,19 +6124,6 @@ export const UpdateAgentWebSearchOptions$outboundSchema: z.ZodType<
   enabled: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentWebSearchOptions$ {
-  /** @deprecated use `UpdateAgentWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentWebSearchOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentWebSearchOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentWebSearchOptions$Outbound` instead. */
-  export type Outbound = UpdateAgentWebSearchOptions$Outbound;
-}
-
 export function updateAgentWebSearchOptionsToJSON(
   updateAgentWebSearchOptions: UpdateAgentWebSearchOptions,
 ): string {
@@ -7780,7 +6133,6 @@ export function updateAgentWebSearchOptionsToJSON(
     ),
   );
 }
-
 export function updateAgentWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentWebSearchOptions, SDKValidationError> {
@@ -7847,7 +6199,6 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type UpdateAgentParameters$Outbound = {
   audio?: UpdateAgentAudio$Outbound | null | undefined;
@@ -7938,19 +6289,6 @@ export const UpdateAgentParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentParameters$ {
-  /** @deprecated use `UpdateAgentParameters$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentParameters$inboundSchema;
-  /** @deprecated use `UpdateAgentParameters$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentParameters$outboundSchema;
-  /** @deprecated use `UpdateAgentParameters$Outbound` instead. */
-  export type Outbound = UpdateAgentParameters$Outbound;
-}
-
 export function updateAgentParametersToJSON(
   updateAgentParameters: UpdateAgentParameters,
 ): string {
@@ -7958,7 +6296,6 @@ export function updateAgentParametersToJSON(
     UpdateAgentParameters$outboundSchema.parse(updateAgentParameters),
   );
 }
-
 export function updateAgentParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentParameters, SDKValidationError> {
@@ -7974,48 +6311,20 @@ export const UpdateAgentFallbackModelsAgentsVoice$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsVoice> = z.nativeEnum(
     UpdateAgentFallbackModelsAgentsVoice,
   );
-
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsVoice$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsVoice> =
     UpdateAgentFallbackModelsAgentsVoice$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsVoice$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsVoice$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsVoice$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsVoice$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsVoice$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsFormat$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsFormat> = z.nativeEnum(
     UpdateAgentFallbackModelsAgentsFormat,
   );
-
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsFormat$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsFormat> =
     UpdateAgentFallbackModelsAgentsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsFormat$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsFormat$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsAudio$inboundSchema: z.ZodType<
@@ -8026,7 +6335,6 @@ export const UpdateAgentFallbackModelsAgentsAudio$inboundSchema: z.ZodType<
   voice: UpdateAgentFallbackModelsAgentsVoice$inboundSchema,
   format: UpdateAgentFallbackModelsAgentsFormat$inboundSchema,
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsAudio$Outbound = {
   voice: string;
@@ -8043,21 +6351,6 @@ export const UpdateAgentFallbackModelsAgentsAudio$outboundSchema: z.ZodType<
   format: UpdateAgentFallbackModelsAgentsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsAudio$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsAudio$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsAudio$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsAudio$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsAudio$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsAudioToJSON(
   updateAgentFallbackModelsAgentsAudio: UpdateAgentFallbackModelsAgentsAudio,
 ): string {
@@ -8067,7 +6360,6 @@ export function updateAgentFallbackModelsAgentsAudioToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsAgentsAudio, SDKValidationError> {
@@ -8086,26 +6378,12 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBo
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType
   > =
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200JsonSchema$inboundSchema:
@@ -8119,7 +6397,6 @@ export const UpdateAgentResponseFormatAgentsResponse200JsonSchema$inboundSchema:
     schema: z.any().optional(),
     strict: z.boolean().optional(),
   });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse200JsonSchema$Outbound = {
   description?: string | undefined;
@@ -8141,22 +6418,6 @@ export const UpdateAgentResponseFormatAgentsResponse200JsonSchema$outboundSchema
     strict: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200JsonSchema$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200JsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200JsonSchema$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200JsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200JsonSchema$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200JsonSchema$Outbound` instead. */
-  export type Outbound =
-    UpdateAgentResponseFormatAgentsResponse200JsonSchema$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse200JsonSchemaToJSON(
   updateAgentResponseFormatAgentsResponse200JsonSchema:
     UpdateAgentResponseFormatAgentsResponse200JsonSchema,
@@ -8167,7 +6428,6 @@ export function updateAgentResponseFormatAgentsResponse200JsonSchemaToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse200JsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8201,7 +6461,6 @@ export const UpdateAgentResponseFormatAgentsResponse2003$inboundSchema:
       "json_schema": "jsonSchema",
     });
   });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse2003$Outbound = {
   type: string;
@@ -8226,21 +6485,6 @@ export const UpdateAgentResponseFormatAgentsResponse2003$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse2003$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2003$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2003$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2003$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2003$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2003$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse2003$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse2003ToJSON(
   updateAgentResponseFormatAgentsResponse2003:
     UpdateAgentResponseFormatAgentsResponse2003,
@@ -8251,7 +6495,6 @@ export function updateAgentResponseFormatAgentsResponse2003ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse2003FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8275,26 +6518,12 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBo
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType
   > =
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse2002$inboundSchema:
@@ -8306,7 +6535,6 @@ export const UpdateAgentResponseFormatAgentsResponse2002$inboundSchema:
     type:
       UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$inboundSchema,
   });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse2002$Outbound = {
   type: string;
@@ -8323,21 +6551,6 @@ export const UpdateAgentResponseFormatAgentsResponse2002$outboundSchema:
       UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyModelType$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse2002$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2002$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2002$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2002$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2002$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2002$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse2002$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse2002ToJSON(
   updateAgentResponseFormatAgentsResponse2002:
     UpdateAgentResponseFormatAgentsResponse2002,
@@ -8348,7 +6561,6 @@ export function updateAgentResponseFormatAgentsResponse2002ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8372,26 +6584,12 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBo
   > = z.nativeEnum(
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
   > =
     UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseFormatAgentsResponse2001$inboundSchema:
@@ -8403,7 +6601,6 @@ export const UpdateAgentResponseFormatAgentsResponse2001$inboundSchema:
     type:
       UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
   });
-
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse2001$Outbound = {
   type: string;
@@ -8420,21 +6617,6 @@ export const UpdateAgentResponseFormatAgentsResponse2001$outboundSchema:
       UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseFormatAgentsResponse2001$ {
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2001$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2001$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2001$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentResponseFormatAgentsResponse2001$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseFormatAgentsResponse2001$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseFormatAgentsResponse2001$Outbound;
-}
-
 export function updateAgentResponseFormatAgentsResponse2001ToJSON(
   updateAgentResponseFormatAgentsResponse2001:
     UpdateAgentResponseFormatAgentsResponse2001,
@@ -8445,7 +6627,6 @@ export function updateAgentResponseFormatAgentsResponse2001ToJSON(
     ),
   );
 }
-
 export function updateAgentResponseFormatAgentsResponse2001FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8473,7 +6654,6 @@ export const UpdateAgentFallbackModelsAgentsResponseFormat$inboundSchema:
     z.lazy(() => UpdateAgentResponseFormatAgentsResponse2001$inboundSchema),
     z.lazy(() => UpdateAgentResponseFormatAgentsResponse2002$inboundSchema),
   ]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsResponseFormat$Outbound =
   | UpdateAgentResponseFormatAgentsResponse2003$Outbound
@@ -8492,21 +6672,6 @@ export const UpdateAgentFallbackModelsAgentsResponseFormat$outboundSchema:
     z.lazy(() => UpdateAgentResponseFormatAgentsResponse2002$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsResponseFormat$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsResponseFormat$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsResponseFormat$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsResponseFormat$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsResponseFormat$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsResponseFormatToJSON(
   updateAgentFallbackModelsAgentsResponseFormat:
     UpdateAgentFallbackModelsAgentsResponseFormat,
@@ -8517,7 +6682,6 @@ export function updateAgentFallbackModelsAgentsResponseFormatToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8540,7 +6704,6 @@ export const UpdateAgentFallbackModelsAgentsStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsStop$Outbound =
   | string
@@ -8553,21 +6716,6 @@ export const UpdateAgentFallbackModelsAgentsStop$outboundSchema: z.ZodType<
   UpdateAgentFallbackModelsAgentsStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsStop$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStop$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsStop$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStop$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsStop$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStop$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsStop$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsStopToJSON(
   updateAgentFallbackModelsAgentsStop: UpdateAgentFallbackModelsAgentsStop,
 ): string {
@@ -8577,7 +6725,6 @@ export function updateAgentFallbackModelsAgentsStopToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsAgentsStop, SDKValidationError> {
@@ -8602,7 +6749,6 @@ export const UpdateAgentFallbackModelsAgentsStreamOptions$inboundSchema:
       "include_usage": "includeUsage",
     });
   });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -8622,21 +6768,6 @@ export const UpdateAgentFallbackModelsAgentsStreamOptions$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsStreamOptions$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsStreamOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsStreamOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsStreamOptions$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsStreamOptions$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsStreamOptionsToJSON(
   updateAgentFallbackModelsAgentsStreamOptions:
     UpdateAgentFallbackModelsAgentsStreamOptions,
@@ -8647,7 +6778,6 @@ export function updateAgentFallbackModelsAgentsStreamOptionsToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8668,24 +6798,10 @@ export function updateAgentFallbackModelsAgentsStreamOptionsFromJSON(
 export const UpdateAgentFallbackModelsAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFallbackModelsAgentsType
 > = z.nativeEnum(UpdateAgentFallbackModelsAgentsType);
-
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsType> =
     UpdateAgentFallbackModelsAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsType$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsType$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsThinking$inboundSchema: z.ZodType<
@@ -8700,7 +6816,6 @@ export const UpdateAgentFallbackModelsAgentsThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsThinking$Outbound = {
   type: string;
@@ -8721,21 +6836,6 @@ export const UpdateAgentFallbackModelsAgentsThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsThinking$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsThinking$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsThinking$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsThinking$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsThinking$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsThinking$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsThinking$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsThinkingToJSON(
   updateAgentFallbackModelsAgentsThinking:
     UpdateAgentFallbackModelsAgentsThinking,
@@ -8746,7 +6846,6 @@ export function updateAgentFallbackModelsAgentsThinkingToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8767,24 +6866,10 @@ export function updateAgentFallbackModelsAgentsThinkingFromJSON(
 export const UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse200Type> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponse200Type);
-
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse200Type> =
     UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse200Type$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema:
@@ -8795,7 +6880,6 @@ export const UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema:
   > = z.object({
     name: z.string().optional(),
   });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgentsResponse200Function$Outbound = {
   name?: string | undefined;
@@ -8811,22 +6895,6 @@ export const UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse200Function$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse200Function$Outbound` instead. */
-  export type Outbound =
-    UpdateAgentToolChoiceAgentsResponse200Function$Outbound;
-}
-
 export function updateAgentToolChoiceAgentsResponse200FunctionToJSON(
   updateAgentToolChoiceAgentsResponse200Function:
     UpdateAgentToolChoiceAgentsResponse200Function,
@@ -8837,7 +6905,6 @@ export function updateAgentToolChoiceAgentsResponse200FunctionToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgentsResponse200FunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8865,7 +6932,6 @@ export const UpdateAgentToolChoiceAgentsResponse2002$inboundSchema: z.ZodType<
     UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema
   ),
 });
-
 /** @internal */
 export type UpdateAgentToolChoiceAgentsResponse2002$Outbound = {
   type?: string | undefined;
@@ -8884,21 +6950,6 @@ export const UpdateAgentToolChoiceAgentsResponse2002$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse2002$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2002$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2002$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2002$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2002$outboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2002$Outbound` instead. */
-  export type Outbound = UpdateAgentToolChoiceAgentsResponse2002$Outbound;
-}
-
 export function updateAgentToolChoiceAgentsResponse2002ToJSON(
   updateAgentToolChoiceAgentsResponse2002:
     UpdateAgentToolChoiceAgentsResponse2002,
@@ -8909,7 +6960,6 @@ export function updateAgentToolChoiceAgentsResponse2002ToJSON(
     ),
   );
 }
-
 export function updateAgentToolChoiceAgentsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8930,24 +6980,10 @@ export function updateAgentToolChoiceAgentsResponse2002FromJSON(
 export const UpdateAgentToolChoiceAgentsResponse2001$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse2001> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponse2001);
-
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponse2001$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse2001> =
     UpdateAgentToolChoiceAgentsResponse2001$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentToolChoiceAgentsResponse2001$ {
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2001$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2001$inboundSchema;
-  /** @deprecated use `UpdateAgentToolChoiceAgentsResponse2001$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentToolChoiceAgentsResponse2001$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsToolChoice$inboundSchema: z.ZodType<
@@ -8958,7 +6994,6 @@ export const UpdateAgentFallbackModelsAgentsToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentToolChoiceAgentsResponse2002$inboundSchema),
   UpdateAgentToolChoiceAgentsResponse2001$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsToolChoice$Outbound =
   | UpdateAgentToolChoiceAgentsResponse2002$Outbound
@@ -8975,21 +7010,6 @@ export const UpdateAgentFallbackModelsAgentsToolChoice$outboundSchema:
     UpdateAgentToolChoiceAgentsResponse2001$outboundSchema,
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsToolChoice$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsToolChoice$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsToolChoice$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsToolChoice$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsToolChoice$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsToolChoice$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsToolChoice$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsToolChoiceToJSON(
   updateAgentFallbackModelsAgentsToolChoice:
     UpdateAgentFallbackModelsAgentsToolChoice,
@@ -9000,7 +7020,6 @@ export function updateAgentFallbackModelsAgentsToolChoiceToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9021,24 +7040,10 @@ export function updateAgentFallbackModelsAgentsToolChoiceFromJSON(
 export const UpdateAgentFallbackModelsAgentsModalities$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsModalities> = z
     .nativeEnum(UpdateAgentFallbackModelsAgentsModalities);
-
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsModalities$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsModalities> =
     UpdateAgentFallbackModelsAgentsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsModalities$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsModalities$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsModalities$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsModalities$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsModalities$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentFallbackModelsAgentsWebSearchOptions$inboundSchema:
@@ -9049,7 +7054,6 @@ export const UpdateAgentFallbackModelsAgentsWebSearchOptions$inboundSchema:
   > = z.object({
     enabled: z.boolean().optional(),
   });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsWebSearchOptions$Outbound = {
   enabled?: boolean | undefined;
@@ -9065,22 +7069,6 @@ export const UpdateAgentFallbackModelsAgentsWebSearchOptions$outboundSchema:
     enabled: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsWebSearchOptions$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsWebSearchOptions$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsWebSearchOptions$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsWebSearchOptions$Outbound` instead. */
-  export type Outbound =
-    UpdateAgentFallbackModelsAgentsWebSearchOptions$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsWebSearchOptionsToJSON(
   updateAgentFallbackModelsAgentsWebSearchOptions:
     UpdateAgentFallbackModelsAgentsWebSearchOptions,
@@ -9091,7 +7079,6 @@ export function updateAgentFallbackModelsAgentsWebSearchOptionsToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsWebSearchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9169,7 +7156,6 @@ export const UpdateAgentFallbackModelsAgentsParameters$inboundSchema: z.ZodType<
     "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsParameters$Outbound = {
   audio?: UpdateAgentFallbackModelsAgentsAudio$Outbound | null | undefined;
@@ -9272,21 +7258,6 @@ export const UpdateAgentFallbackModelsAgentsParameters$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgentsParameters$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateAgentFallbackModelsAgentsParameters$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateAgentFallbackModelsAgentsParameters$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgentsParameters$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgentsParameters$Outbound;
-}
-
 export function updateAgentFallbackModelsAgentsParametersToJSON(
   updateAgentFallbackModelsAgentsParameters:
     UpdateAgentFallbackModelsAgentsParameters,
@@ -9297,7 +7268,6 @@ export function updateAgentFallbackModelsAgentsParametersToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgentsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9330,7 +7300,6 @@ export const UpdateAgentFallbackModelsAgents2$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type UpdateAgentFallbackModelsAgents2$Outbound = {
   id: string;
@@ -9355,19 +7324,6 @@ export const UpdateAgentFallbackModelsAgents2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentFallbackModelsAgents2$ {
-  /** @deprecated use `UpdateAgentFallbackModelsAgents2$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentFallbackModelsAgents2$inboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgents2$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentFallbackModelsAgents2$outboundSchema;
-  /** @deprecated use `UpdateAgentFallbackModelsAgents2$Outbound` instead. */
-  export type Outbound = UpdateAgentFallbackModelsAgents2$Outbound;
-}
-
 export function updateAgentFallbackModelsAgents2ToJSON(
   updateAgentFallbackModelsAgents2: UpdateAgentFallbackModelsAgents2,
 ): string {
@@ -9377,7 +7333,6 @@ export function updateAgentFallbackModelsAgents2ToJSON(
     ),
   );
 }
-
 export function updateAgentFallbackModelsAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentFallbackModelsAgents2, SDKValidationError> {
@@ -9397,7 +7352,6 @@ export const UpdateAgentAgentsFallbackModels$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentFallbackModelsAgents2$inboundSchema),
   z.string(),
 ]);
-
 /** @internal */
 export type UpdateAgentAgentsFallbackModels$Outbound =
   | UpdateAgentFallbackModelsAgents2$Outbound
@@ -9413,19 +7367,6 @@ export const UpdateAgentAgentsFallbackModels$outboundSchema: z.ZodType<
   z.string(),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsFallbackModels$ {
-  /** @deprecated use `UpdateAgentAgentsFallbackModels$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentsFallbackModels$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsFallbackModels$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentsFallbackModels$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentsFallbackModels$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentsFallbackModels$Outbound;
-}
-
 export function updateAgentAgentsFallbackModelsToJSON(
   updateAgentAgentsFallbackModels: UpdateAgentAgentsFallbackModels,
 ): string {
@@ -9435,7 +7376,6 @@ export function updateAgentAgentsFallbackModelsToJSON(
     ),
   );
 }
-
 export function updateAgentAgentsFallbackModelsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsFallbackModels, SDKValidationError> {
@@ -9467,7 +7407,6 @@ export const UpdateAgentAgentsModel$inboundSchema: z.ZodType<
     "fallback_models": "fallbackModels",
   });
 });
-
 /** @internal */
 export type UpdateAgentAgentsModel$Outbound = {
   id: string;
@@ -9501,19 +7440,6 @@ export const UpdateAgentAgentsModel$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsModel$ {
-  /** @deprecated use `UpdateAgentAgentsModel$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentsModel$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsModel$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentsModel$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentsModel$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentsModel$Outbound;
-}
-
 export function updateAgentAgentsModelToJSON(
   updateAgentAgentsModel: UpdateAgentAgentsModel,
 ): string {
@@ -9521,7 +7447,6 @@ export function updateAgentAgentsModelToJSON(
     UpdateAgentAgentsModel$outboundSchema.parse(updateAgentAgentsModel),
   );
 }
-
 export function updateAgentAgentsModelFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsModel, SDKValidationError> {
@@ -9541,7 +7466,6 @@ export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-
 /** @internal */
 export type UpdateAgentAgentsTeamOfAgents$Outbound = {
   key: string;
@@ -9558,19 +7482,6 @@ export const UpdateAgentAgentsTeamOfAgents$outboundSchema: z.ZodType<
   role: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsTeamOfAgents$ {
-  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentsTeamOfAgents$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentsTeamOfAgents$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentsTeamOfAgents$Outbound;
-}
-
 export function updateAgentAgentsTeamOfAgentsToJSON(
   updateAgentAgentsTeamOfAgents: UpdateAgentAgentsTeamOfAgents,
 ): string {
@@ -9580,7 +7491,6 @@ export function updateAgentAgentsTeamOfAgentsToJSON(
     ),
   );
 }
-
 export function updateAgentAgentsTeamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
@@ -9603,7 +7513,6 @@ export const UpdateAgentMetrics$inboundSchema: z.ZodType<
     "total_cost": "totalCost",
   });
 });
-
 /** @internal */
 export type UpdateAgentMetrics$Outbound = {
   total_cost: number;
@@ -9622,19 +7531,6 @@ export const UpdateAgentMetrics$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentMetrics$ {
-  /** @deprecated use `UpdateAgentMetrics$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentMetrics$inboundSchema;
-  /** @deprecated use `UpdateAgentMetrics$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentMetrics$outboundSchema;
-  /** @deprecated use `UpdateAgentMetrics$Outbound` instead. */
-  export type Outbound = UpdateAgentMetrics$Outbound;
-}
-
 export function updateAgentMetricsToJSON(
   updateAgentMetrics: UpdateAgentMetrics,
 ): string {
@@ -9642,7 +7538,6 @@ export function updateAgentMetricsToJSON(
     UpdateAgentMetrics$outboundSchema.parse(updateAgentMetrics),
   );
 }
-
 export function updateAgentMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentMetrics, SDKValidationError> {
@@ -9665,7 +7560,6 @@ export const UpdateAgentAgentsKnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type UpdateAgentAgentsKnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -9684,19 +7578,6 @@ export const UpdateAgentAgentsKnowledgeBases$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentAgentsKnowledgeBases$ {
-  /** @deprecated use `UpdateAgentAgentsKnowledgeBases$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentAgentsKnowledgeBases$inboundSchema;
-  /** @deprecated use `UpdateAgentAgentsKnowledgeBases$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentAgentsKnowledgeBases$outboundSchema;
-  /** @deprecated use `UpdateAgentAgentsKnowledgeBases$Outbound` instead. */
-  export type Outbound = UpdateAgentAgentsKnowledgeBases$Outbound;
-}
-
 export function updateAgentAgentsKnowledgeBasesToJSON(
   updateAgentAgentsKnowledgeBases: UpdateAgentAgentsKnowledgeBases,
 ): string {
@@ -9706,7 +7587,6 @@ export function updateAgentAgentsKnowledgeBasesToJSON(
     ),
   );
 }
-
 export function updateAgentAgentsKnowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsKnowledgeBases, SDKValidationError> {
@@ -9721,22 +7601,10 @@ export function updateAgentAgentsKnowledgeBasesFromJSON(
 export const UpdateAgentHiddenPanels$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentHiddenPanels
 > = z.nativeEnum(UpdateAgentHiddenPanels);
-
 /** @internal */
 export const UpdateAgentHiddenPanels$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentHiddenPanels
 > = UpdateAgentHiddenPanels$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentHiddenPanels$ {
-  /** @deprecated use `UpdateAgentHiddenPanels$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentHiddenPanels$inboundSchema;
-  /** @deprecated use `UpdateAgentHiddenPanels$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentHiddenPanels$outboundSchema;
-}
 
 /** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
@@ -9786,7 +7654,6 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     "hidden_panels": "hiddenPanels",
   });
 });
-
 /** @internal */
 export type UpdateAgentResponseBody$Outbound = {
   _id: string;
@@ -9863,19 +7730,6 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAgentResponseBody$ {
-  /** @deprecated use `UpdateAgentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentResponseBody$inboundSchema;
-  /** @deprecated use `UpdateAgentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentResponseBody$outboundSchema;
-  /** @deprecated use `UpdateAgentResponseBody$Outbound` instead. */
-  export type Outbound = UpdateAgentResponseBody$Outbound;
-}
-
 export function updateAgentResponseBodyToJSON(
   updateAgentResponseBody: UpdateAgentResponseBody,
 ): string {
@@ -9883,7 +7737,6 @@ export function updateAgentResponseBodyToJSON(
     UpdateAgentResponseBody$outboundSchema.parse(updateAgentResponseBody),
   );
 }
-
 export function updateAgentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseBody, SDKValidationError> {

@@ -80,62 +80,26 @@ export type ListModelsResponseBody = {
 export const ListModelsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsObject
 > = z.nativeEnum(ListModelsObject);
-
 /** @internal */
 export const ListModelsObject$outboundSchema: z.ZodNativeEnum<
   typeof ListModelsObject
 > = ListModelsObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListModelsObject$ {
-  /** @deprecated use `ListModelsObject$inboundSchema` instead. */
-  export const inboundSchema = ListModelsObject$inboundSchema;
-  /** @deprecated use `ListModelsObject$outboundSchema` instead. */
-  export const outboundSchema = ListModelsObject$outboundSchema;
-}
-
 /** @internal */
 export const ListModelsType$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsType
 > = z.nativeEnum(ListModelsType);
-
 /** @internal */
 export const ListModelsType$outboundSchema: z.ZodNativeEnum<
   typeof ListModelsType
 > = ListModelsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListModelsType$ {
-  /** @deprecated use `ListModelsType$inboundSchema` instead. */
-  export const inboundSchema = ListModelsType$inboundSchema;
-  /** @deprecated use `ListModelsType$outboundSchema` instead. */
-  export const outboundSchema = ListModelsType$outboundSchema;
-}
-
 /** @internal */
 export const OwnedBy$inboundSchema: z.ZodNativeEnum<typeof OwnedBy> = z
   .nativeEnum(OwnedBy);
-
 /** @internal */
 export const OwnedBy$outboundSchema: z.ZodNativeEnum<typeof OwnedBy> =
   OwnedBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OwnedBy$ {
-  /** @deprecated use `OwnedBy$inboundSchema` instead. */
-  export const inboundSchema = OwnedBy$inboundSchema;
-  /** @deprecated use `OwnedBy$outboundSchema` instead. */
-  export const outboundSchema = OwnedBy$outboundSchema;
-}
 
 /** @internal */
 export const ListModelsData$inboundSchema: z.ZodType<
@@ -152,7 +116,6 @@ export const ListModelsData$inboundSchema: z.ZodType<
     "owned_by": "ownedBy",
   });
 });
-
 /** @internal */
 export type ListModelsData$Outbound = {
   id: string;
@@ -177,23 +140,9 @@ export const ListModelsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListModelsData$ {
-  /** @deprecated use `ListModelsData$inboundSchema` instead. */
-  export const inboundSchema = ListModelsData$inboundSchema;
-  /** @deprecated use `ListModelsData$outboundSchema` instead. */
-  export const outboundSchema = ListModelsData$outboundSchema;
-  /** @deprecated use `ListModelsData$Outbound` instead. */
-  export type Outbound = ListModelsData$Outbound;
-}
-
 export function listModelsDataToJSON(listModelsData: ListModelsData): string {
   return JSON.stringify(ListModelsData$outboundSchema.parse(listModelsData));
 }
-
 export function listModelsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListModelsData, SDKValidationError> {
@@ -218,7 +167,6 @@ export const ListModelsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListModelsResponseBody$Outbound = {
   object: string;
@@ -241,19 +189,6 @@ export const ListModelsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListModelsResponseBody$ {
-  /** @deprecated use `ListModelsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListModelsResponseBody$inboundSchema;
-  /** @deprecated use `ListModelsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListModelsResponseBody$outboundSchema;
-  /** @deprecated use `ListModelsResponseBody$Outbound` instead. */
-  export type Outbound = ListModelsResponseBody$Outbound;
-}
-
 export function listModelsResponseBodyToJSON(
   listModelsResponseBody: ListModelsResponseBody,
 ): string {
@@ -261,7 +196,6 @@ export function listModelsResponseBodyToJSON(
     ListModelsResponseBody$outboundSchema.parse(listModelsResponseBody),
   );
 }
-
 export function listModelsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListModelsResponseBody, SDKValidationError> {

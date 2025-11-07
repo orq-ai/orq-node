@@ -65,16 +65,3 @@ export const StreamRunAgentResponseBody$outboundSchema: z.ZodType<
   .pipe(z.object({
     message: z.string(),
   }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamRunAgentResponseBody$ {
-  /** @deprecated use `StreamRunAgentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = StreamRunAgentResponseBody$inboundSchema;
-  /** @deprecated use `StreamRunAgentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = StreamRunAgentResponseBody$outboundSchema;
-  /** @deprecated use `StreamRunAgentResponseBody$Outbound` instead. */
-  export type Outbound = StreamRunAgentResponseBody$Outbound;
-}

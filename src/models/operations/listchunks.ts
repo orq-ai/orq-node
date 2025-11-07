@@ -121,7 +121,6 @@ export const ListChunksQueryParamStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), z.string()]);
-
 /** @internal */
 export type ListChunksQueryParamStatus$Outbound = Array<string> | string;
 
@@ -132,19 +131,6 @@ export const ListChunksQueryParamStatus$outboundSchema: z.ZodType<
   ListChunksQueryParamStatus
 > = z.union([z.array(z.string()), z.string()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksQueryParamStatus$ {
-  /** @deprecated use `ListChunksQueryParamStatus$inboundSchema` instead. */
-  export const inboundSchema = ListChunksQueryParamStatus$inboundSchema;
-  /** @deprecated use `ListChunksQueryParamStatus$outboundSchema` instead. */
-  export const outboundSchema = ListChunksQueryParamStatus$outboundSchema;
-  /** @deprecated use `ListChunksQueryParamStatus$Outbound` instead. */
-  export type Outbound = ListChunksQueryParamStatus$Outbound;
-}
-
 export function listChunksQueryParamStatusToJSON(
   listChunksQueryParamStatus: ListChunksQueryParamStatus,
 ): string {
@@ -152,7 +138,6 @@ export function listChunksQueryParamStatusToJSON(
     ListChunksQueryParamStatus$outboundSchema.parse(listChunksQueryParamStatus),
   );
 }
-
 export function listChunksQueryParamStatusFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksQueryParamStatus, SDKValidationError> {
@@ -184,7 +169,6 @@ export const ListChunksRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListChunksRequest$Outbound = {
   knowledge_id: string;
@@ -218,19 +202,6 @@ export const ListChunksRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksRequest$ {
-  /** @deprecated use `ListChunksRequest$inboundSchema` instead. */
-  export const inboundSchema = ListChunksRequest$inboundSchema;
-  /** @deprecated use `ListChunksRequest$outboundSchema` instead. */
-  export const outboundSchema = ListChunksRequest$outboundSchema;
-  /** @deprecated use `ListChunksRequest$Outbound` instead. */
-  export type Outbound = ListChunksRequest$Outbound;
-}
-
 export function listChunksRequestToJSON(
   listChunksRequest: ListChunksRequest,
 ): string {
@@ -238,7 +209,6 @@ export function listChunksRequestToJSON(
     ListChunksRequest$outboundSchema.parse(listChunksRequest),
   );
 }
-
 export function listChunksRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksRequest, SDKValidationError> {
@@ -253,22 +223,10 @@ export function listChunksRequestFromJSON(
 export const ListChunksObject$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksObject
 > = z.nativeEnum(ListChunksObject);
-
 /** @internal */
 export const ListChunksObject$outboundSchema: z.ZodNativeEnum<
   typeof ListChunksObject
 > = ListChunksObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksObject$ {
-  /** @deprecated use `ListChunksObject$inboundSchema` instead. */
-  export const inboundSchema = ListChunksObject$inboundSchema;
-  /** @deprecated use `ListChunksObject$outboundSchema` instead. */
-  export const outboundSchema = ListChunksObject$outboundSchema;
-}
 
 /** @internal */
 export const ListChunksMetadata$inboundSchema: z.ZodType<
@@ -276,7 +234,6 @@ export const ListChunksMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type ListChunksMetadata$Outbound = string | number | boolean;
 
@@ -287,19 +244,6 @@ export const ListChunksMetadata$outboundSchema: z.ZodType<
   ListChunksMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksMetadata$ {
-  /** @deprecated use `ListChunksMetadata$inboundSchema` instead. */
-  export const inboundSchema = ListChunksMetadata$inboundSchema;
-  /** @deprecated use `ListChunksMetadata$outboundSchema` instead. */
-  export const outboundSchema = ListChunksMetadata$outboundSchema;
-  /** @deprecated use `ListChunksMetadata$Outbound` instead. */
-  export type Outbound = ListChunksMetadata$Outbound;
-}
-
 export function listChunksMetadataToJSON(
   listChunksMetadata: ListChunksMetadata,
 ): string {
@@ -307,7 +251,6 @@ export function listChunksMetadataToJSON(
     ListChunksMetadata$outboundSchema.parse(listChunksMetadata),
   );
 }
-
 export function listChunksMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksMetadata, SDKValidationError> {
@@ -322,22 +265,10 @@ export function listChunksMetadataFromJSON(
 export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksStatus
 > = z.nativeEnum(ListChunksStatus);
-
 /** @internal */
 export const ListChunksStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListChunksStatus
 > = ListChunksStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksStatus$ {
-  /** @deprecated use `ListChunksStatus$inboundSchema` instead. */
-  export const inboundSchema = ListChunksStatus$inboundSchema;
-  /** @deprecated use `ListChunksStatus$outboundSchema` instead. */
-  export const outboundSchema = ListChunksStatus$outboundSchema;
-}
 
 /** @internal */
 export const ListChunksData$inboundSchema: z.ZodType<
@@ -361,7 +292,6 @@ export const ListChunksData$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-
 /** @internal */
 export type ListChunksData$Outbound = {
   _id: string;
@@ -398,23 +328,9 @@ export const ListChunksData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksData$ {
-  /** @deprecated use `ListChunksData$inboundSchema` instead. */
-  export const inboundSchema = ListChunksData$inboundSchema;
-  /** @deprecated use `ListChunksData$outboundSchema` instead. */
-  export const outboundSchema = ListChunksData$outboundSchema;
-  /** @deprecated use `ListChunksData$Outbound` instead. */
-  export type Outbound = ListChunksData$Outbound;
-}
-
 export function listChunksDataToJSON(listChunksData: ListChunksData): string {
   return JSON.stringify(ListChunksData$outboundSchema.parse(listChunksData));
 }
-
 export function listChunksDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksData, SDKValidationError> {
@@ -439,7 +355,6 @@ export const ListChunksResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListChunksResponseBody$Outbound = {
   object: string;
@@ -462,19 +377,6 @@ export const ListChunksResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksResponseBody$ {
-  /** @deprecated use `ListChunksResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListChunksResponseBody$inboundSchema;
-  /** @deprecated use `ListChunksResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListChunksResponseBody$outboundSchema;
-  /** @deprecated use `ListChunksResponseBody$Outbound` instead. */
-  export type Outbound = ListChunksResponseBody$Outbound;
-}
-
 export function listChunksResponseBodyToJSON(
   listChunksResponseBody: ListChunksResponseBody,
 ): string {
@@ -482,7 +384,6 @@ export function listChunksResponseBodyToJSON(
     ListChunksResponseBody$outboundSchema.parse(listChunksResponseBody),
   );
 }
-
 export function listChunksResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksResponseBody, SDKValidationError> {

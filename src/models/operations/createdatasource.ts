@@ -190,24 +190,10 @@ export type CreateDatasourceResponseBody = {
 export const CreateDatasourceChunkingConfigurationType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> = z
     .nativeEnum(CreateDatasourceChunkingConfigurationType);
-
 /** @internal */
 export const CreateDatasourceChunkingConfigurationType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> =
     CreateDatasourceChunkingConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceChunkingConfigurationType$ {
-  /** @deprecated use `CreateDatasourceChunkingConfigurationType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasourceChunkingConfigurationType$inboundSchema;
-  /** @deprecated use `CreateDatasourceChunkingConfigurationType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasourceChunkingConfigurationType$outboundSchema;
-}
 
 /** @internal */
 export const ChunkingConfiguration2$inboundSchema: z.ZodType<
@@ -224,7 +210,6 @@ export const ChunkingConfiguration2$inboundSchema: z.ZodType<
     "chunk_overlap": "chunkOverlap",
   });
 });
-
 /** @internal */
 export type ChunkingConfiguration2$Outbound = {
   type: string;
@@ -248,19 +233,6 @@ export const ChunkingConfiguration2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingConfiguration2$ {
-  /** @deprecated use `ChunkingConfiguration2$inboundSchema` instead. */
-  export const inboundSchema = ChunkingConfiguration2$inboundSchema;
-  /** @deprecated use `ChunkingConfiguration2$outboundSchema` instead. */
-  export const outboundSchema = ChunkingConfiguration2$outboundSchema;
-  /** @deprecated use `ChunkingConfiguration2$Outbound` instead. */
-  export type Outbound = ChunkingConfiguration2$Outbound;
-}
-
 export function chunkingConfiguration2ToJSON(
   chunkingConfiguration2: ChunkingConfiguration2,
 ): string {
@@ -268,7 +240,6 @@ export function chunkingConfiguration2ToJSON(
     ChunkingConfiguration2$outboundSchema.parse(chunkingConfiguration2),
   );
 }
-
 export function chunkingConfiguration2FromJSON(
   jsonString: string,
 ): SafeParseResult<ChunkingConfiguration2, SDKValidationError> {
@@ -283,22 +254,10 @@ export function chunkingConfiguration2FromJSON(
 export const ChunkingConfigurationType$inboundSchema: z.ZodNativeEnum<
   typeof ChunkingConfigurationType
 > = z.nativeEnum(ChunkingConfigurationType);
-
 /** @internal */
 export const ChunkingConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof ChunkingConfigurationType
 > = ChunkingConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingConfigurationType$ {
-  /** @deprecated use `ChunkingConfigurationType$inboundSchema` instead. */
-  export const inboundSchema = ChunkingConfigurationType$inboundSchema;
-  /** @deprecated use `ChunkingConfigurationType$outboundSchema` instead. */
-  export const outboundSchema = ChunkingConfigurationType$outboundSchema;
-}
 
 /** @internal */
 export const ChunkingConfiguration1$inboundSchema: z.ZodType<
@@ -308,7 +267,6 @@ export const ChunkingConfiguration1$inboundSchema: z.ZodType<
 > = z.object({
   type: ChunkingConfigurationType$inboundSchema,
 });
-
 /** @internal */
 export type ChunkingConfiguration1$Outbound = {
   type: string;
@@ -323,19 +281,6 @@ export const ChunkingConfiguration1$outboundSchema: z.ZodType<
   type: ChunkingConfigurationType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingConfiguration1$ {
-  /** @deprecated use `ChunkingConfiguration1$inboundSchema` instead. */
-  export const inboundSchema = ChunkingConfiguration1$inboundSchema;
-  /** @deprecated use `ChunkingConfiguration1$outboundSchema` instead. */
-  export const outboundSchema = ChunkingConfiguration1$outboundSchema;
-  /** @deprecated use `ChunkingConfiguration1$Outbound` instead. */
-  export type Outbound = ChunkingConfiguration1$Outbound;
-}
-
 export function chunkingConfiguration1ToJSON(
   chunkingConfiguration1: ChunkingConfiguration1,
 ): string {
@@ -343,7 +288,6 @@ export function chunkingConfiguration1ToJSON(
     ChunkingConfiguration1$outboundSchema.parse(chunkingConfiguration1),
   );
 }
-
 export function chunkingConfiguration1FromJSON(
   jsonString: string,
 ): SafeParseResult<ChunkingConfiguration1, SDKValidationError> {
@@ -363,7 +307,6 @@ export const ChunkingConfiguration$inboundSchema: z.ZodType<
   z.lazy(() => ChunkingConfiguration1$inboundSchema),
   z.lazy(() => ChunkingConfiguration2$inboundSchema),
 ]);
-
 /** @internal */
 export type ChunkingConfiguration$Outbound =
   | ChunkingConfiguration1$Outbound
@@ -379,19 +322,6 @@ export const ChunkingConfiguration$outboundSchema: z.ZodType<
   z.lazy(() => ChunkingConfiguration2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingConfiguration$ {
-  /** @deprecated use `ChunkingConfiguration$inboundSchema` instead. */
-  export const inboundSchema = ChunkingConfiguration$inboundSchema;
-  /** @deprecated use `ChunkingConfiguration$outboundSchema` instead. */
-  export const outboundSchema = ChunkingConfiguration$outboundSchema;
-  /** @deprecated use `ChunkingConfiguration$Outbound` instead. */
-  export type Outbound = ChunkingConfiguration$Outbound;
-}
-
 export function chunkingConfigurationToJSON(
   chunkingConfiguration: ChunkingConfiguration,
 ): string {
@@ -399,7 +329,6 @@ export function chunkingConfigurationToJSON(
     ChunkingConfiguration$outboundSchema.parse(chunkingConfiguration),
   );
 }
-
 export function chunkingConfigurationFromJSON(
   jsonString: string,
 ): SafeParseResult<ChunkingConfiguration, SDKValidationError> {
@@ -436,7 +365,6 @@ export const ChunkingCleanupOptions$inboundSchema: z.ZodType<
     "clean_whitespaces": "cleanWhitespaces",
   });
 });
-
 /** @internal */
 export type ChunkingCleanupOptions$Outbound = {
   delete_emails?: boolean | undefined;
@@ -476,19 +404,6 @@ export const ChunkingCleanupOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingCleanupOptions$ {
-  /** @deprecated use `ChunkingCleanupOptions$inboundSchema` instead. */
-  export const inboundSchema = ChunkingCleanupOptions$inboundSchema;
-  /** @deprecated use `ChunkingCleanupOptions$outboundSchema` instead. */
-  export const outboundSchema = ChunkingCleanupOptions$outboundSchema;
-  /** @deprecated use `ChunkingCleanupOptions$Outbound` instead. */
-  export type Outbound = ChunkingCleanupOptions$Outbound;
-}
-
 export function chunkingCleanupOptionsToJSON(
   chunkingCleanupOptions: ChunkingCleanupOptions,
 ): string {
@@ -496,7 +411,6 @@ export function chunkingCleanupOptionsToJSON(
     ChunkingCleanupOptions$outboundSchema.parse(chunkingCleanupOptions),
   );
 }
-
 export function chunkingCleanupOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ChunkingCleanupOptions, SDKValidationError> {
@@ -525,7 +439,6 @@ export const ChunkingOptions$inboundSchema: z.ZodType<
     "chunking_cleanup_options": "chunkingCleanupOptions",
   });
 });
-
 /** @internal */
 export type ChunkingOptions$Outbound = {
   chunking_configuration?:
@@ -554,25 +467,11 @@ export const ChunkingOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingOptions$ {
-  /** @deprecated use `ChunkingOptions$inboundSchema` instead. */
-  export const inboundSchema = ChunkingOptions$inboundSchema;
-  /** @deprecated use `ChunkingOptions$outboundSchema` instead. */
-  export const outboundSchema = ChunkingOptions$outboundSchema;
-  /** @deprecated use `ChunkingOptions$Outbound` instead. */
-  export type Outbound = ChunkingOptions$Outbound;
-}
-
 export function chunkingOptionsToJSON(
   chunkingOptions: ChunkingOptions,
 ): string {
   return JSON.stringify(ChunkingOptions$outboundSchema.parse(chunkingOptions));
 }
-
 export function chunkingOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<ChunkingOptions, SDKValidationError> {
@@ -599,7 +498,6 @@ export const CreateDatasourceRequestBody$inboundSchema: z.ZodType<
     "chunking_options": "chunkingOptions",
   });
 });
-
 /** @internal */
 export type CreateDatasourceRequestBody$Outbound = {
   display_name?: string | undefined;
@@ -624,19 +522,6 @@ export const CreateDatasourceRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceRequestBody$ {
-  /** @deprecated use `CreateDatasourceRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasourceRequestBody$inboundSchema;
-  /** @deprecated use `CreateDatasourceRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasourceRequestBody$outboundSchema;
-  /** @deprecated use `CreateDatasourceRequestBody$Outbound` instead. */
-  export type Outbound = CreateDatasourceRequestBody$Outbound;
-}
-
 export function createDatasourceRequestBodyToJSON(
   createDatasourceRequestBody: CreateDatasourceRequestBody,
 ): string {
@@ -646,7 +531,6 @@ export function createDatasourceRequestBodyToJSON(
     ),
   );
 }
-
 export function createDatasourceRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasourceRequestBody, SDKValidationError> {
@@ -671,7 +555,6 @@ export const CreateDatasourceRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type CreateDatasourceRequest$Outbound = {
   knowledge_id: string;
@@ -693,19 +576,6 @@ export const CreateDatasourceRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceRequest$ {
-  /** @deprecated use `CreateDatasourceRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasourceRequest$inboundSchema;
-  /** @deprecated use `CreateDatasourceRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasourceRequest$outboundSchema;
-  /** @deprecated use `CreateDatasourceRequest$Outbound` instead. */
-  export type Outbound = CreateDatasourceRequest$Outbound;
-}
-
 export function createDatasourceRequestToJSON(
   createDatasourceRequest: CreateDatasourceRequest,
 ): string {
@@ -713,7 +583,6 @@ export function createDatasourceRequestToJSON(
     CreateDatasourceRequest$outboundSchema.parse(createDatasourceRequest),
   );
 }
-
 export function createDatasourceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasourceRequest, SDKValidationError> {
@@ -728,22 +597,10 @@ export function createDatasourceRequestFromJSON(
 export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasourceStatus
 > = z.nativeEnum(CreateDatasourceStatus);
-
 /** @internal */
 export const CreateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasourceStatus
 > = CreateDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceStatus$ {
-  /** @deprecated use `CreateDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasourceStatus$inboundSchema;
-  /** @deprecated use `CreateDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasourceStatus$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -751,7 +608,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGW2KXVGJVC5Z4Z489XD"),
+  _id: z.string().default("01K9EV08JC7QZA8MS7YR6RMTZ5"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -773,7 +630,6 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-
 /** @internal */
 export type CreateDatasourceResponseBody$Outbound = {
   _id: string;
@@ -795,7 +651,7 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K9CJXGW2KXVGJVC5Z4Z489XD"),
+  id: z.string().default("01K9EV08JC7QZA8MS7YR6RMTZ5"),
   displayName: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$outboundSchema,
@@ -818,19 +674,6 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceResponseBody$ {
-  /** @deprecated use `CreateDatasourceResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasourceResponseBody$inboundSchema;
-  /** @deprecated use `CreateDatasourceResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasourceResponseBody$outboundSchema;
-  /** @deprecated use `CreateDatasourceResponseBody$Outbound` instead. */
-  export type Outbound = CreateDatasourceResponseBody$Outbound;
-}
-
 export function createDatasourceResponseBodyToJSON(
   createDatasourceResponseBody: CreateDatasourceResponseBody,
 ): string {
@@ -840,7 +683,6 @@ export function createDatasourceResponseBodyToJSON(
     ),
   );
 }
-
 export function createDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasourceResponseBody, SDKValidationError> {

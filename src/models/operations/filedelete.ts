@@ -27,7 +27,6 @@ export const FileDeleteRequest$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type FileDeleteRequest$Outbound = {
   file_id: string;
@@ -46,19 +45,6 @@ export const FileDeleteRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileDeleteRequest$ {
-  /** @deprecated use `FileDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = FileDeleteRequest$inboundSchema;
-  /** @deprecated use `FileDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = FileDeleteRequest$outboundSchema;
-  /** @deprecated use `FileDeleteRequest$Outbound` instead. */
-  export type Outbound = FileDeleteRequest$Outbound;
-}
-
 export function fileDeleteRequestToJSON(
   fileDeleteRequest: FileDeleteRequest,
 ): string {
@@ -66,7 +52,6 @@ export function fileDeleteRequestToJSON(
     FileDeleteRequest$outboundSchema.parse(fileDeleteRequest),
   );
 }
-
 export function fileDeleteRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<FileDeleteRequest, SDKValidationError> {

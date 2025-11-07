@@ -66,7 +66,6 @@ export const FileGetRequest$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type FileGetRequest$Outbound = {
   file_id: string;
@@ -85,23 +84,9 @@ export const FileGetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileGetRequest$ {
-  /** @deprecated use `FileGetRequest$inboundSchema` instead. */
-  export const inboundSchema = FileGetRequest$inboundSchema;
-  /** @deprecated use `FileGetRequest$outboundSchema` instead. */
-  export const outboundSchema = FileGetRequest$outboundSchema;
-  /** @deprecated use `FileGetRequest$Outbound` instead. */
-  export type Outbound = FileGetRequest$Outbound;
-}
-
 export function fileGetRequestToJSON(fileGetRequest: FileGetRequest): string {
   return JSON.stringify(FileGetRequest$outboundSchema.parse(fileGetRequest));
 }
-
 export function fileGetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<FileGetRequest, SDKValidationError> {
@@ -116,22 +101,10 @@ export function fileGetRequestFromJSON(
 export const FileGetPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileGetPurpose
 > = z.nativeEnum(FileGetPurpose);
-
 /** @internal */
 export const FileGetPurpose$outboundSchema: z.ZodNativeEnum<
   typeof FileGetPurpose
 > = FileGetPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileGetPurpose$ {
-  /** @deprecated use `FileGetPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileGetPurpose$inboundSchema;
-  /** @deprecated use `FileGetPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileGetPurpose$outboundSchema;
-}
 
 /** @internal */
 export const FileGetResponseBody$inboundSchema: z.ZodType<
@@ -146,7 +119,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:20.810Z",
+    "2025-11-07T09:40:07.241Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -156,7 +129,6 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type FileGetResponseBody$Outbound = {
   _id: string;
@@ -180,7 +152,7 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-11-06T12:40:20.810Z"))
+  created: z.date().default(() => new Date("2025-11-07T09:40:07.241Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -191,19 +163,6 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileGetResponseBody$ {
-  /** @deprecated use `FileGetResponseBody$inboundSchema` instead. */
-  export const inboundSchema = FileGetResponseBody$inboundSchema;
-  /** @deprecated use `FileGetResponseBody$outboundSchema` instead. */
-  export const outboundSchema = FileGetResponseBody$outboundSchema;
-  /** @deprecated use `FileGetResponseBody$Outbound` instead. */
-  export type Outbound = FileGetResponseBody$Outbound;
-}
-
 export function fileGetResponseBodyToJSON(
   fileGetResponseBody: FileGetResponseBody,
 ): string {
@@ -211,7 +170,6 @@ export function fileGetResponseBodyToJSON(
     FileGetResponseBody$outboundSchema.parse(fileGetResponseBody),
   );
 }
-
 export function fileGetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileGetResponseBody, SDKValidationError> {

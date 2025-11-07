@@ -103,7 +103,6 @@ export const CreateContactRequestBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-
 /** @internal */
 export type CreateContactRequestBody$Outbound = {
   external_id: string;
@@ -134,19 +133,6 @@ export const CreateContactRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateContactRequestBody$ {
-  /** @deprecated use `CreateContactRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateContactRequestBody$inboundSchema;
-  /** @deprecated use `CreateContactRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateContactRequestBody$outboundSchema;
-  /** @deprecated use `CreateContactRequestBody$Outbound` instead. */
-  export type Outbound = CreateContactRequestBody$Outbound;
-}
-
 export function createContactRequestBodyToJSON(
   createContactRequestBody: CreateContactRequestBody,
 ): string {
@@ -154,7 +140,6 @@ export function createContactRequestBodyToJSON(
     CreateContactRequestBody$outboundSchema.parse(createContactRequestBody),
   );
 }
-
 export function createContactRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateContactRequestBody, SDKValidationError> {
@@ -182,7 +167,7 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.304Z",
+    "2025-11-07T09:40:03.490Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -193,7 +178,6 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-
 /** @internal */
 export type CreateContactResponseBody$Outbound = {
   _id: string;
@@ -223,7 +207,7 @@ export const CreateContactResponseBody$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -235,19 +219,6 @@ export const CreateContactResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateContactResponseBody$ {
-  /** @deprecated use `CreateContactResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateContactResponseBody$inboundSchema;
-  /** @deprecated use `CreateContactResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateContactResponseBody$outboundSchema;
-  /** @deprecated use `CreateContactResponseBody$Outbound` instead. */
-  export type Outbound = CreateContactResponseBody$Outbound;
-}
-
 export function createContactResponseBodyToJSON(
   createContactResponseBody: CreateContactResponseBody,
 ): string {
@@ -255,7 +226,6 @@ export function createContactResponseBodyToJSON(
     CreateContactResponseBody$outboundSchema.parse(createContactResponseBody),
   );
 }
-
 export function createContactResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateContactResponseBody, SDKValidationError> {

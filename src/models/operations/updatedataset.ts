@@ -96,7 +96,6 @@ export const UpdateDatasetRequestBody$inboundSchema: z.ZodType<
     "project_id": "projectId",
   });
 });
-
 /** @internal */
 export type UpdateDatasetRequestBody$Outbound = {
   display_name?: string | undefined;
@@ -120,19 +119,6 @@ export const UpdateDatasetRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasetRequestBody$ {
-  /** @deprecated use `UpdateDatasetRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasetRequestBody$inboundSchema;
-  /** @deprecated use `UpdateDatasetRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasetRequestBody$outboundSchema;
-  /** @deprecated use `UpdateDatasetRequestBody$Outbound` instead. */
-  export type Outbound = UpdateDatasetRequestBody$Outbound;
-}
-
 export function updateDatasetRequestBodyToJSON(
   updateDatasetRequestBody: UpdateDatasetRequestBody,
 ): string {
@@ -140,7 +126,6 @@ export function updateDatasetRequestBodyToJSON(
     UpdateDatasetRequestBody$outboundSchema.parse(updateDatasetRequestBody),
   );
 }
-
 export function updateDatasetRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetRequestBody, SDKValidationError> {
@@ -165,7 +150,6 @@ export const UpdateDatasetRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateDatasetRequest$Outbound = {
   dataset_id: string;
@@ -187,19 +171,6 @@ export const UpdateDatasetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasetRequest$ {
-  /** @deprecated use `UpdateDatasetRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasetRequest$inboundSchema;
-  /** @deprecated use `UpdateDatasetRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasetRequest$outboundSchema;
-  /** @deprecated use `UpdateDatasetRequest$Outbound` instead. */
-  export type Outbound = UpdateDatasetRequest$Outbound;
-}
-
 export function updateDatasetRequestToJSON(
   updateDatasetRequest: UpdateDatasetRequest,
 ): string {
@@ -207,7 +178,6 @@ export function updateDatasetRequestToJSON(
     UpdateDatasetRequest$outboundSchema.parse(updateDatasetRequest),
   );
 }
-
 export function updateDatasetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetRequest, SDKValidationError> {
@@ -232,7 +202,6 @@ export const UpdateDatasetMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-
 /** @internal */
 export type UpdateDatasetMetadata$Outbound = {
   total_versions: number;
@@ -254,19 +223,6 @@ export const UpdateDatasetMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasetMetadata$ {
-  /** @deprecated use `UpdateDatasetMetadata$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasetMetadata$inboundSchema;
-  /** @deprecated use `UpdateDatasetMetadata$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasetMetadata$outboundSchema;
-  /** @deprecated use `UpdateDatasetMetadata$Outbound` instead. */
-  export type Outbound = UpdateDatasetMetadata$Outbound;
-}
-
 export function updateDatasetMetadataToJSON(
   updateDatasetMetadata: UpdateDatasetMetadata,
 ): string {
@@ -274,7 +230,6 @@ export function updateDatasetMetadataToJSON(
     UpdateDatasetMetadata$outboundSchema.parse(updateDatasetMetadata),
   );
 }
-
 export function updateDatasetMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetMetadata, SDKValidationError> {
@@ -301,7 +256,7 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T12:40:17.304Z",
+    "2025-11-07T09:40:03.490Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -313,7 +268,6 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-
 /** @internal */
 export type UpdateDatasetResponseBody$Outbound = {
   _id: string;
@@ -341,7 +295,7 @@ export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+  updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -354,19 +308,6 @@ export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasetResponseBody$ {
-  /** @deprecated use `UpdateDatasetResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasetResponseBody$inboundSchema;
-  /** @deprecated use `UpdateDatasetResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasetResponseBody$outboundSchema;
-  /** @deprecated use `UpdateDatasetResponseBody$Outbound` instead. */
-  export type Outbound = UpdateDatasetResponseBody$Outbound;
-}
-
 export function updateDatasetResponseBodyToJSON(
   updateDatasetResponseBody: UpdateDatasetResponseBody,
 ): string {
@@ -374,7 +315,6 @@ export function updateDatasetResponseBodyToJSON(
     UpdateDatasetResponseBody$outboundSchema.parse(updateDatasetResponseBody),
   );
 }
-
 export function updateDatasetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetResponseBody, SDKValidationError> {

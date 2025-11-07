@@ -1770,7 +1770,6 @@ export const DeploymentStreamGlobals$inboundSchema: z.ZodType<
   environment: z.string().optional(),
   contactId: z.string().optional(),
 });
-
 /** @internal */
 export type DeploymentStreamGlobals$Outbound = {
   environment?: string | undefined;
@@ -1787,19 +1786,6 @@ export const DeploymentStreamGlobals$outboundSchema: z.ZodType<
   contactId: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamGlobals$ {
-  /** @deprecated use `DeploymentStreamGlobals$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamGlobals$inboundSchema;
-  /** @deprecated use `DeploymentStreamGlobals$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamGlobals$outboundSchema;
-  /** @deprecated use `DeploymentStreamGlobals$Outbound` instead. */
-  export type Outbound = DeploymentStreamGlobals$Outbound;
-}
-
 export function deploymentStreamGlobalsToJSON(
   deploymentStreamGlobals: DeploymentStreamGlobals,
 ): string {
@@ -1807,7 +1793,6 @@ export function deploymentStreamGlobalsToJSON(
     DeploymentStreamGlobals$outboundSchema.parse(deploymentStreamGlobals),
   );
 }
-
 export function deploymentStreamGlobalsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamGlobals, SDKValidationError> {
@@ -1825,26 +1810,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$in
   > = z.nativeEnum(
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role,
   );
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
   > =
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSchema:
@@ -1853,7 +1824,6 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSche
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestContent$Outbound =
   | string
@@ -1867,22 +1837,6 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$outboundSch
     DeploymentStreamPrefixMessagesDeploymentsRequestContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestContent$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamPrefixMessagesDeploymentsRequestContent$Outbound;
-}
-
 export function deploymentStreamPrefixMessagesDeploymentsRequestContentToJSON(
   deploymentStreamPrefixMessagesDeploymentsRequestContent:
     DeploymentStreamPrefixMessagesDeploymentsRequestContent,
@@ -1892,7 +1846,6 @@ export function deploymentStreamPrefixMessagesDeploymentsRequestContentToJSON(
       .parse(deploymentStreamPrefixMessagesDeploymentsRequestContent),
   );
 }
-
 export function deploymentStreamPrefixMessagesDeploymentsRequestContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1923,7 +1876,6 @@ export const PrefixMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type PrefixMessagesToolMessage$Outbound = {
   role: string;
@@ -1947,19 +1899,6 @@ export const PrefixMessagesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesToolMessage$ {
-  /** @deprecated use `PrefixMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesToolMessage$inboundSchema;
-  /** @deprecated use `PrefixMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesToolMessage$outboundSchema;
-  /** @deprecated use `PrefixMessagesToolMessage$Outbound` instead. */
-  export type Outbound = PrefixMessagesToolMessage$Outbound;
-}
-
 export function prefixMessagesToolMessageToJSON(
   prefixMessagesToolMessage: PrefixMessagesToolMessage,
 ): string {
@@ -1967,7 +1906,6 @@ export function prefixMessagesToolMessageToJSON(
     PrefixMessagesToolMessage$outboundSchema.parse(prefixMessagesToolMessage),
   );
 }
-
 export function prefixMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesToolMessage, SDKValidationError> {
@@ -1985,26 +1923,12 @@ export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$i
   > = z.nativeEnum(
     DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type,
   );
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
   > =
     DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2RefusalContentPart$inboundSchema: z.ZodType<
@@ -2016,7 +1940,6 @@ export const DeploymentStream2RefusalContentPart$inboundSchema: z.ZodType<
     DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema,
   refusal: z.string(),
 });
-
 /** @internal */
 export type DeploymentStream2RefusalContentPart$Outbound = {
   type: string;
@@ -2034,21 +1957,6 @@ export const DeploymentStream2RefusalContentPart$outboundSchema: z.ZodType<
   refusal: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2RefusalContentPart$ {
-  /** @deprecated use `DeploymentStream2RefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2RefusalContentPart$inboundSchema;
-  /** @deprecated use `DeploymentStream2RefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2RefusalContentPart$outboundSchema;
-  /** @deprecated use `DeploymentStream2RefusalContentPart$Outbound` instead. */
-  export type Outbound = DeploymentStream2RefusalContentPart$Outbound;
-}
-
 export function deploymentStream2RefusalContentPartToJSON(
   deploymentStream2RefusalContentPart: DeploymentStream2RefusalContentPart,
 ): string {
@@ -2058,7 +1966,6 @@ export function deploymentStream2RefusalContentPartToJSON(
     ),
   );
 }
-
 export function deploymentStream2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2RefusalContentPart, SDKValidationError> {
@@ -2077,7 +1984,6 @@ export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$in
   > = z.nativeEnum(
     DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType,
   );
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema:
   z.ZodNativeEnum<
@@ -2085,41 +1991,14 @@ export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$ou
   > =
     DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamAnnotationsDeploymentsType> = z
     .nativeEnum(DeploymentStreamAnnotationsDeploymentsType);
-
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamAnnotationsDeploymentsType> =
     DeploymentStreamAnnotationsDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeploymentsType$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeploymentsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamAnnotationsFilePath$inboundSchema: z.ZodType<
@@ -2133,7 +2012,6 @@ export const DeploymentStreamAnnotationsFilePath$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotationsFilePath$Outbound = {
   file_id: string;
@@ -2152,21 +2030,6 @@ export const DeploymentStreamAnnotationsFilePath$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsFilePath$ {
-  /** @deprecated use `DeploymentStreamAnnotationsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsFilePath$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsFilePath$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsFilePath$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotationsFilePath$Outbound;
-}
-
 export function deploymentStreamAnnotationsFilePathToJSON(
   deploymentStreamAnnotationsFilePath: DeploymentStreamAnnotationsFilePath,
 ): string {
@@ -2176,7 +2039,6 @@ export function deploymentStreamAnnotationsFilePathToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAnnotationsFilePath, SDKValidationError> {
@@ -2206,7 +2068,6 @@ export const DeploymentStreamAnnotations2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotations2$Outbound = {
   type: string;
@@ -2235,19 +2096,6 @@ export const DeploymentStreamAnnotations2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotations2$ {
-  /** @deprecated use `DeploymentStreamAnnotations2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAnnotations2$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotations2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAnnotations2$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotations2$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotations2$Outbound;
-}
-
 export function deploymentStreamAnnotations2ToJSON(
   deploymentStreamAnnotations2: DeploymentStreamAnnotations2,
 ): string {
@@ -2257,7 +2105,6 @@ export function deploymentStreamAnnotations2ToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotations2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAnnotations2, SDKValidationError> {
@@ -2272,22 +2119,10 @@ export function deploymentStreamAnnotations2FromJSON(
 export const DeploymentStreamAnnotationsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamAnnotationsType
 > = z.nativeEnum(DeploymentStreamAnnotationsType);
-
 /** @internal */
 export const DeploymentStreamAnnotationsType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamAnnotationsType
 > = DeploymentStreamAnnotationsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsType$ {
-  /** @deprecated use `DeploymentStreamAnnotationsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAnnotationsType$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAnnotationsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamAnnotationsFileCitation$inboundSchema: z.ZodType<
@@ -2302,7 +2137,6 @@ export const DeploymentStreamAnnotationsFileCitation$inboundSchema: z.ZodType<
     "file_id": "fileId",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotationsFileCitation$Outbound = {
   file_id: string;
@@ -2323,21 +2157,6 @@ export const DeploymentStreamAnnotationsFileCitation$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsFileCitation$ {
-  /** @deprecated use `DeploymentStreamAnnotationsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsFileCitation$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsFileCitation$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsFileCitation$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotationsFileCitation$Outbound;
-}
-
 export function deploymentStreamAnnotationsFileCitationToJSON(
   deploymentStreamAnnotationsFileCitation:
     DeploymentStreamAnnotationsFileCitation,
@@ -2348,7 +2167,6 @@ export function deploymentStreamAnnotationsFileCitationToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2385,7 +2203,6 @@ export const DeploymentStreamAnnotations1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotations1$Outbound = {
   type: string;
@@ -2416,19 +2233,6 @@ export const DeploymentStreamAnnotations1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotations1$ {
-  /** @deprecated use `DeploymentStreamAnnotations1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAnnotations1$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotations1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAnnotations1$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotations1$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotations1$Outbound;
-}
-
 export function deploymentStreamAnnotations1ToJSON(
   deploymentStreamAnnotations1: DeploymentStreamAnnotations1,
 ): string {
@@ -2438,7 +2242,6 @@ export function deploymentStreamAnnotations1ToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotations1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAnnotations1, SDKValidationError> {
@@ -2458,7 +2261,6 @@ export const DeploymentStream2Annotations$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamAnnotations1$inboundSchema),
   z.lazy(() => DeploymentStreamAnnotations2$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStream2Annotations$Outbound =
   | DeploymentStreamAnnotations1$Outbound
@@ -2474,19 +2276,6 @@ export const DeploymentStream2Annotations$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamAnnotations2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Annotations$ {
-  /** @deprecated use `DeploymentStream2Annotations$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Annotations$inboundSchema;
-  /** @deprecated use `DeploymentStream2Annotations$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Annotations$outboundSchema;
-  /** @deprecated use `DeploymentStream2Annotations$Outbound` instead. */
-  export type Outbound = DeploymentStream2Annotations$Outbound;
-}
-
 export function deploymentStream2AnnotationsToJSON(
   deploymentStream2Annotations: DeploymentStream2Annotations,
 ): string {
@@ -2496,7 +2285,6 @@ export function deploymentStream2AnnotationsToJSON(
     ),
   );
 }
-
 export function deploymentStream2AnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2Annotations, SDKValidationError> {
@@ -2523,7 +2311,6 @@ export const DeploymentStream2TextContentPart$inboundSchema: z.ZodType<
     ]),
   ).optional(),
 });
-
 /** @internal */
 export type DeploymentStream2TextContentPart$Outbound = {
   type: string;
@@ -2553,19 +2340,6 @@ export const DeploymentStream2TextContentPart$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2TextContentPart$ {
-  /** @deprecated use `DeploymentStream2TextContentPart$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2TextContentPart$inboundSchema;
-  /** @deprecated use `DeploymentStream2TextContentPart$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2TextContentPart$outboundSchema;
-  /** @deprecated use `DeploymentStream2TextContentPart$Outbound` instead. */
-  export type Outbound = DeploymentStream2TextContentPart$Outbound;
-}
-
 export function deploymentStream2TextContentPartToJSON(
   deploymentStream2TextContentPart: DeploymentStream2TextContentPart,
 ): string {
@@ -2575,7 +2349,6 @@ export function deploymentStream2TextContentPartToJSON(
     ),
   );
 }
-
 export function deploymentStream2TextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2TextContentPart, SDKValidationError> {
@@ -2595,7 +2368,6 @@ export const DeploymentStreamContentDeployments2$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStream2TextContentPart$inboundSchema),
   z.lazy(() => DeploymentStream2RefusalContentPart$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamContentDeployments2$Outbound =
   | DeploymentStream2TextContentPart$Outbound
@@ -2611,21 +2383,6 @@ export const DeploymentStreamContentDeployments2$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStream2RefusalContentPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamContentDeployments2$ {
-  /** @deprecated use `DeploymentStreamContentDeployments2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamContentDeployments2$inboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeployments2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamContentDeployments2$outboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeployments2$Outbound` instead. */
-  export type Outbound = DeploymentStreamContentDeployments2$Outbound;
-}
-
 export function deploymentStreamContentDeployments2ToJSON(
   deploymentStreamContentDeployments2: DeploymentStreamContentDeployments2,
 ): string {
@@ -2635,7 +2392,6 @@ export function deploymentStreamContentDeployments2ToJSON(
     ),
   );
 }
-
 export function deploymentStreamContentDeployments2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamContentDeployments2, SDKValidationError> {
@@ -2660,7 +2416,6 @@ export const DeploymentStreamPrefixMessagesDeploymentsContent$inboundSchema:
       z.lazy(() => DeploymentStream2RefusalContentPart$inboundSchema),
     ])),
   ]);
-
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsContent$Outbound =
   | string
@@ -2683,22 +2438,6 @@ export const DeploymentStreamPrefixMessagesDeploymentsContent$outboundSchema:
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsContent$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamPrefixMessagesDeploymentsContent$Outbound;
-}
-
 export function deploymentStreamPrefixMessagesDeploymentsContentToJSON(
   deploymentStreamPrefixMessagesDeploymentsContent:
     DeploymentStreamPrefixMessagesDeploymentsContent,
@@ -2709,7 +2448,6 @@ export function deploymentStreamPrefixMessagesDeploymentsContentToJSON(
     ),
   );
 }
-
 export function deploymentStreamPrefixMessagesDeploymentsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2733,26 +2471,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inb
   > = z.nativeEnum(
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole,
   );
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
   > =
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const PrefixMessagesAudio$inboundSchema: z.ZodType<
@@ -2762,7 +2486,6 @@ export const PrefixMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type PrefixMessagesAudio$Outbound = {
   id: string;
@@ -2777,19 +2500,6 @@ export const PrefixMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesAudio$ {
-  /** @deprecated use `PrefixMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesAudio$inboundSchema;
-  /** @deprecated use `PrefixMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesAudio$outboundSchema;
-  /** @deprecated use `PrefixMessagesAudio$Outbound` instead. */
-  export type Outbound = PrefixMessagesAudio$Outbound;
-}
-
 export function prefixMessagesAudioToJSON(
   prefixMessagesAudio: PrefixMessagesAudio,
 ): string {
@@ -2797,7 +2507,6 @@ export function prefixMessagesAudioToJSON(
     PrefixMessagesAudio$outboundSchema.parse(prefixMessagesAudio),
   );
 }
-
 export function prefixMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesAudio, SDKValidationError> {
@@ -2812,23 +2521,10 @@ export function prefixMessagesAudioFromJSON(
 export const DeploymentStreamPrefixMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamPrefixMessagesType
 > = z.nativeEnum(DeploymentStreamPrefixMessagesType);
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamPrefixMessagesType
 > = DeploymentStreamPrefixMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesType$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamPrefixMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const PrefixMessagesFunction$inboundSchema: z.ZodType<
@@ -2839,7 +2535,6 @@ export const PrefixMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type PrefixMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2856,19 +2551,6 @@ export const PrefixMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesFunction$ {
-  /** @deprecated use `PrefixMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesFunction$inboundSchema;
-  /** @deprecated use `PrefixMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesFunction$outboundSchema;
-  /** @deprecated use `PrefixMessagesFunction$Outbound` instead. */
-  export type Outbound = PrefixMessagesFunction$Outbound;
-}
-
 export function prefixMessagesFunctionToJSON(
   prefixMessagesFunction: PrefixMessagesFunction,
 ): string {
@@ -2876,7 +2558,6 @@ export function prefixMessagesFunctionToJSON(
     PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
   );
 }
-
 export function prefixMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesFunction, SDKValidationError> {
@@ -2897,7 +2578,6 @@ export const PrefixMessagesToolCalls$inboundSchema: z.ZodType<
   type: DeploymentStreamPrefixMessagesType$inboundSchema,
   function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type PrefixMessagesToolCalls$Outbound = {
   id: string;
@@ -2916,19 +2596,6 @@ export const PrefixMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesToolCalls$ {
-  /** @deprecated use `PrefixMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesToolCalls$inboundSchema;
-  /** @deprecated use `PrefixMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesToolCalls$outboundSchema;
-  /** @deprecated use `PrefixMessagesToolCalls$Outbound` instead. */
-  export type Outbound = PrefixMessagesToolCalls$Outbound;
-}
-
 export function prefixMessagesToolCallsToJSON(
   prefixMessagesToolCalls: PrefixMessagesToolCalls,
 ): string {
@@ -2936,7 +2603,6 @@ export function prefixMessagesToolCallsToJSON(
     PrefixMessagesToolCalls$outboundSchema.parse(prefixMessagesToolCalls),
   );
 }
-
 export function prefixMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesToolCalls, SDKValidationError> {
@@ -2981,7 +2647,6 @@ export const PrefixMessagesAssistantMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type PrefixMessagesAssistantMessage$Outbound = {
   content?:
@@ -3038,19 +2703,6 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesAssistantMessage$ {
-  /** @deprecated use `PrefixMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `PrefixMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `PrefixMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound = PrefixMessagesAssistantMessage$Outbound;
-}
-
 export function prefixMessagesAssistantMessageToJSON(
   prefixMessagesAssistantMessage: PrefixMessagesAssistantMessage,
 ): string {
@@ -3060,7 +2712,6 @@ export function prefixMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function prefixMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesAssistantMessage, SDKValidationError> {
@@ -3075,47 +2726,19 @@ export function prefixMessagesAssistantMessageFromJSON(
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
     z.nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRequestRole);
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
     DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> = z
     .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyType);
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> =
     DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2File$inboundSchema: z.ZodType<
@@ -3132,7 +2755,6 @@ export const DeploymentStream2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type DeploymentStream2File$Outbound = {
   file_data?: string | undefined;
@@ -3157,19 +2779,6 @@ export const DeploymentStream2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2File$ {
-  /** @deprecated use `DeploymentStream2File$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2File$inboundSchema;
-  /** @deprecated use `DeploymentStream2File$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2File$outboundSchema;
-  /** @deprecated use `DeploymentStream2File$Outbound` instead. */
-  export type Outbound = DeploymentStream2File$Outbound;
-}
-
 export function deploymentStream2FileToJSON(
   deploymentStream2File: DeploymentStream2File,
 ): string {
@@ -3177,7 +2786,6 @@ export function deploymentStream2FileToJSON(
     DeploymentStream2File$outboundSchema.parse(deploymentStream2File),
   );
 }
-
 export function deploymentStream2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2File, SDKValidationError> {
@@ -3197,7 +2805,6 @@ export const DeploymentStream24$inboundSchema: z.ZodType<
   type: DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema,
   file: z.lazy(() => DeploymentStream2File$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentStream24$Outbound = {
   type: string;
@@ -3214,19 +2821,6 @@ export const DeploymentStream24$outboundSchema: z.ZodType<
   file: z.lazy(() => DeploymentStream2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream24$ {
-  /** @deprecated use `DeploymentStream24$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream24$inboundSchema;
-  /** @deprecated use `DeploymentStream24$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream24$outboundSchema;
-  /** @deprecated use `DeploymentStream24$Outbound` instead. */
-  export type Outbound = DeploymentStream24$Outbound;
-}
-
 export function deploymentStream24ToJSON(
   deploymentStream24: DeploymentStream24,
 ): string {
@@ -3234,7 +2828,6 @@ export function deploymentStream24ToJSON(
     DeploymentStream24$outboundSchema.parse(deploymentStream24),
   );
 }
-
 export function deploymentStream24FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream24, SDKValidationError> {
@@ -3249,45 +2842,19 @@ export function deploymentStream24FromJSON(
 export const DeploymentStream2DeploymentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> = z
     .nativeEnum(DeploymentStream2DeploymentsRequestType);
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> =
     DeploymentStream2DeploymentsRequestType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStream2Format$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Format
 > = z.nativeEnum(DeploymentStream2Format);
-
 /** @internal */
 export const DeploymentStream2Format$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Format
 > = DeploymentStream2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Format$ {
-  /** @deprecated use `DeploymentStream2Format$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Format$inboundSchema;
-  /** @deprecated use `DeploymentStream2Format$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Format$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2InputAudio$inboundSchema: z.ZodType<
@@ -3298,7 +2865,6 @@ export const DeploymentStream2InputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: DeploymentStream2Format$inboundSchema,
 });
-
 /** @internal */
 export type DeploymentStream2InputAudio$Outbound = {
   data: string;
@@ -3315,19 +2881,6 @@ export const DeploymentStream2InputAudio$outboundSchema: z.ZodType<
   format: DeploymentStream2Format$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2InputAudio$ {
-  /** @deprecated use `DeploymentStream2InputAudio$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2InputAudio$inboundSchema;
-  /** @deprecated use `DeploymentStream2InputAudio$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2InputAudio$outboundSchema;
-  /** @deprecated use `DeploymentStream2InputAudio$Outbound` instead. */
-  export type Outbound = DeploymentStream2InputAudio$Outbound;
-}
-
 export function deploymentStream2InputAudioToJSON(
   deploymentStream2InputAudio: DeploymentStream2InputAudio,
 ): string {
@@ -3337,7 +2890,6 @@ export function deploymentStream2InputAudioToJSON(
     ),
   );
 }
-
 export function deploymentStream2InputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2InputAudio, SDKValidationError> {
@@ -3361,7 +2913,6 @@ export const DeploymentStream23$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type DeploymentStream23$Outbound = {
   type: string;
@@ -3382,19 +2933,6 @@ export const DeploymentStream23$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream23$ {
-  /** @deprecated use `DeploymentStream23$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream23$inboundSchema;
-  /** @deprecated use `DeploymentStream23$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream23$outboundSchema;
-  /** @deprecated use `DeploymentStream23$Outbound` instead. */
-  export type Outbound = DeploymentStream23$Outbound;
-}
-
 export function deploymentStream23ToJSON(
   deploymentStream23: DeploymentStream23,
 ): string {
@@ -3402,7 +2940,6 @@ export function deploymentStream23ToJSON(
     DeploymentStream23$outboundSchema.parse(deploymentStream23),
   );
 }
-
 export function deploymentStream23FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream23, SDKValidationError> {
@@ -3417,43 +2954,19 @@ export function deploymentStream23FromJSON(
 export const DeploymentStream2DeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsType
 > = z.nativeEnum(DeploymentStream2DeploymentsType);
-
 /** @internal */
 export const DeploymentStream2DeploymentsType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsType
 > = DeploymentStream2DeploymentsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2DeploymentsType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStream2Detail$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Detail
 > = z.nativeEnum(DeploymentStream2Detail);
-
 /** @internal */
 export const DeploymentStream2Detail$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Detail
 > = DeploymentStream2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Detail$ {
-  /** @deprecated use `DeploymentStream2Detail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Detail$inboundSchema;
-  /** @deprecated use `DeploymentStream2Detail$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Detail$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2ImageUrl$inboundSchema: z.ZodType<
@@ -3464,7 +2977,6 @@ export const DeploymentStream2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: DeploymentStream2Detail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type DeploymentStream2ImageUrl$Outbound = {
   url: string;
@@ -3481,19 +2993,6 @@ export const DeploymentStream2ImageUrl$outboundSchema: z.ZodType<
   detail: DeploymentStream2Detail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2ImageUrl$ {
-  /** @deprecated use `DeploymentStream2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2ImageUrl$inboundSchema;
-  /** @deprecated use `DeploymentStream2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2ImageUrl$outboundSchema;
-  /** @deprecated use `DeploymentStream2ImageUrl$Outbound` instead. */
-  export type Outbound = DeploymentStream2ImageUrl$Outbound;
-}
-
 export function deploymentStream2ImageUrlToJSON(
   deploymentStream2ImageUrl: DeploymentStream2ImageUrl,
 ): string {
@@ -3501,7 +3000,6 @@ export function deploymentStream2ImageUrlToJSON(
     DeploymentStream2ImageUrl$outboundSchema.parse(deploymentStream2ImageUrl),
   );
 }
-
 export function deploymentStream2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2ImageUrl, SDKValidationError> {
@@ -3525,7 +3023,6 @@ export const DeploymentStream22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type DeploymentStream22$Outbound = {
   type: string;
@@ -3546,19 +3043,6 @@ export const DeploymentStream22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream22$ {
-  /** @deprecated use `DeploymentStream22$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream22$inboundSchema;
-  /** @deprecated use `DeploymentStream22$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream22$outboundSchema;
-  /** @deprecated use `DeploymentStream22$Outbound` instead. */
-  export type Outbound = DeploymentStream22$Outbound;
-}
-
 export function deploymentStream22ToJSON(
   deploymentStream22: DeploymentStream22,
 ): string {
@@ -3566,7 +3050,6 @@ export function deploymentStream22ToJSON(
     DeploymentStream22$outboundSchema.parse(deploymentStream22),
   );
 }
-
 export function deploymentStream22FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream22, SDKValidationError> {
@@ -3581,22 +3064,10 @@ export function deploymentStream22FromJSON(
 export const DeploymentStream2Type$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Type
 > = z.nativeEnum(DeploymentStream2Type);
-
 /** @internal */
 export const DeploymentStream2Type$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2Type
 > = DeploymentStream2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Type$ {
-  /** @deprecated use `DeploymentStream2Type$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2Type$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream21$inboundSchema: z.ZodType<
@@ -3607,7 +3078,6 @@ export const DeploymentStream21$inboundSchema: z.ZodType<
   type: DeploymentStream2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type DeploymentStream21$Outbound = {
   type: string;
@@ -3624,19 +3094,6 @@ export const DeploymentStream21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream21$ {
-  /** @deprecated use `DeploymentStream21$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream21$inboundSchema;
-  /** @deprecated use `DeploymentStream21$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream21$outboundSchema;
-  /** @deprecated use `DeploymentStream21$Outbound` instead. */
-  export type Outbound = DeploymentStream21$Outbound;
-}
-
 export function deploymentStream21ToJSON(
   deploymentStream21: DeploymentStream21,
 ): string {
@@ -3644,7 +3101,6 @@ export function deploymentStream21ToJSON(
     DeploymentStream21$outboundSchema.parse(deploymentStream21),
   );
 }
-
 export function deploymentStream21FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream21, SDKValidationError> {
@@ -3666,7 +3122,6 @@ export const DeploymentStreamContent2$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStream23$inboundSchema),
   z.lazy(() => DeploymentStream24$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamContent2$Outbound =
   | DeploymentStream21$Outbound
@@ -3686,19 +3141,6 @@ export const DeploymentStreamContent2$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStream24$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamContent2$ {
-  /** @deprecated use `DeploymentStreamContent2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamContent2$inboundSchema;
-  /** @deprecated use `DeploymentStreamContent2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamContent2$outboundSchema;
-  /** @deprecated use `DeploymentStreamContent2$Outbound` instead. */
-  export type Outbound = DeploymentStreamContent2$Outbound;
-}
-
 export function deploymentStreamContent2ToJSON(
   deploymentStreamContent2: DeploymentStreamContent2,
 ): string {
@@ -3706,7 +3148,6 @@ export function deploymentStreamContent2ToJSON(
     DeploymentStreamContent2$outboundSchema.parse(deploymentStreamContent2),
   );
 }
-
 export function deploymentStreamContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamContent2, SDKValidationError> {
@@ -3731,7 +3172,6 @@ export const DeploymentStreamPrefixMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => DeploymentStream24$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentStreamPrefixMessagesContent$Outbound =
   | string
@@ -3757,21 +3197,6 @@ export const DeploymentStreamPrefixMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesContent$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesContent$Outbound` instead. */
-  export type Outbound = DeploymentStreamPrefixMessagesContent$Outbound;
-}
-
 export function deploymentStreamPrefixMessagesContentToJSON(
   deploymentStreamPrefixMessagesContent: DeploymentStreamPrefixMessagesContent,
 ): string {
@@ -3781,7 +3206,6 @@ export function deploymentStreamPrefixMessagesContentToJSON(
     ),
   );
 }
-
 export function deploymentStreamPrefixMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamPrefixMessagesContent, SDKValidationError> {
@@ -3811,7 +3235,6 @@ export const PrefixMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type PrefixMessagesUserMessage$Outbound = {
   role: string;
@@ -3845,19 +3268,6 @@ export const PrefixMessagesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesUserMessage$ {
-  /** @deprecated use `PrefixMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesUserMessage$inboundSchema;
-  /** @deprecated use `PrefixMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesUserMessage$outboundSchema;
-  /** @deprecated use `PrefixMessagesUserMessage$Outbound` instead. */
-  export type Outbound = PrefixMessagesUserMessage$Outbound;
-}
-
 export function prefixMessagesUserMessageToJSON(
   prefixMessagesUserMessage: PrefixMessagesUserMessage,
 ): string {
@@ -3865,7 +3275,6 @@ export function prefixMessagesUserMessageToJSON(
     PrefixMessagesUserMessage$outboundSchema.parse(prefixMessagesUserMessage),
   );
 }
-
 export function prefixMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesUserMessage, SDKValidationError> {
@@ -3880,24 +3289,10 @@ export function prefixMessagesUserMessageFromJSON(
 export const DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> = z
     .nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRole);
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> =
     DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema;
-}
 
 /** @internal */
 export const PrefixMessagesSystemMessage$inboundSchema: z.ZodType<
@@ -3909,7 +3304,6 @@ export const PrefixMessagesSystemMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type PrefixMessagesSystemMessage$Outbound = {
   role: string;
@@ -3928,19 +3322,6 @@ export const PrefixMessagesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesSystemMessage$ {
-  /** @deprecated use `PrefixMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `PrefixMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `PrefixMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = PrefixMessagesSystemMessage$Outbound;
-}
-
 export function prefixMessagesSystemMessageToJSON(
   prefixMessagesSystemMessage: PrefixMessagesSystemMessage,
 ): string {
@@ -3950,7 +3331,6 @@ export function prefixMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function prefixMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesSystemMessage, SDKValidationError> {
@@ -3965,23 +3345,10 @@ export function prefixMessagesSystemMessageFromJSON(
 export const DeploymentStreamPrefixMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamPrefixMessagesRole
 > = z.nativeEnum(DeploymentStreamPrefixMessagesRole);
-
 /** @internal */
 export const DeploymentStreamPrefixMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamPrefixMessagesRole
 > = DeploymentStreamPrefixMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamPrefixMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const PrefixMessagesDeveloperMessage$inboundSchema: z.ZodType<
@@ -3993,7 +3360,6 @@ export const PrefixMessagesDeveloperMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type PrefixMessagesDeveloperMessage$Outbound = {
   role: string;
@@ -4012,19 +3378,6 @@ export const PrefixMessagesDeveloperMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesDeveloperMessage$ {
-  /** @deprecated use `PrefixMessagesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesDeveloperMessage$inboundSchema;
-  /** @deprecated use `PrefixMessagesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesDeveloperMessage$outboundSchema;
-  /** @deprecated use `PrefixMessagesDeveloperMessage$Outbound` instead. */
-  export type Outbound = PrefixMessagesDeveloperMessage$Outbound;
-}
-
 export function prefixMessagesDeveloperMessageToJSON(
   prefixMessagesDeveloperMessage: PrefixMessagesDeveloperMessage,
 ): string {
@@ -4034,7 +3387,6 @@ export function prefixMessagesDeveloperMessageToJSON(
     ),
   );
 }
-
 export function prefixMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<PrefixMessagesDeveloperMessage, SDKValidationError> {
@@ -4057,7 +3409,6 @@ export const DeploymentStreamPrefixMessages$inboundSchema: z.ZodType<
   z.lazy(() => PrefixMessagesUserMessage$inboundSchema),
   z.lazy(() => PrefixMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamPrefixMessages$Outbound =
   | PrefixMessagesToolMessage$Outbound
@@ -4079,19 +3430,6 @@ export const DeploymentStreamPrefixMessages$outboundSchema: z.ZodType<
   z.lazy(() => PrefixMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessages$ {
-  /** @deprecated use `DeploymentStreamPrefixMessages$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamPrefixMessages$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessages$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamPrefixMessages$outboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessages$Outbound` instead. */
-  export type Outbound = DeploymentStreamPrefixMessages$Outbound;
-}
-
 export function deploymentStreamPrefixMessagesToJSON(
   deploymentStreamPrefixMessages: DeploymentStreamPrefixMessages,
 ): string {
@@ -4101,7 +3439,6 @@ export function deploymentStreamPrefixMessagesToJSON(
     ),
   );
 }
-
 export function deploymentStreamPrefixMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamPrefixMessages, SDKValidationError> {
@@ -4117,25 +3454,11 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundS
   z.ZodNativeEnum<
     typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
   > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBody5Role);
-
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
   > = DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRequestContent$inboundSchema:
@@ -4144,7 +3467,6 @@ export const DeploymentStreamMessagesDeploymentsRequestContent$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsRequestContent$Outbound =
   | string
@@ -4158,22 +3480,6 @@ export const DeploymentStreamMessagesDeploymentsRequestContent$outboundSchema:
     DeploymentStreamMessagesDeploymentsRequestContent
   > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestContent$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestContent$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamMessagesDeploymentsRequestContent$Outbound;
-}
-
 export function deploymentStreamMessagesDeploymentsRequestContentToJSON(
   deploymentStreamMessagesDeploymentsRequestContent:
     DeploymentStreamMessagesDeploymentsRequestContent,
@@ -4184,7 +3490,6 @@ export function deploymentStreamMessagesDeploymentsRequestContentToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesDeploymentsRequestContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4216,7 +3521,6 @@ export const DeploymentStreamMessagesToolMessage$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type DeploymentStreamMessagesToolMessage$Outbound = {
   role: string;
@@ -4240,21 +3544,6 @@ export const DeploymentStreamMessagesToolMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesToolMessage$ {
-  /** @deprecated use `DeploymentStreamMessagesToolMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesToolMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesToolMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesToolMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesToolMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesToolMessage$Outbound;
-}
-
 export function deploymentStreamMessagesToolMessageToJSON(
   deploymentStreamMessagesToolMessage: DeploymentStreamMessagesToolMessage,
 ): string {
@@ -4264,7 +3553,6 @@ export function deploymentStreamMessagesToolMessageToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesToolMessage, SDKValidationError> {
@@ -4283,26 +3571,12 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$
   > = z.nativeEnum(
     DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType,
   );
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
   > =
     DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2DeploymentsRefusalContentPart$inboundSchema:
@@ -4315,7 +3589,6 @@ export const DeploymentStream2DeploymentsRefusalContentPart$inboundSchema:
       DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema,
     refusal: z.string(),
   });
-
 /** @internal */
 export type DeploymentStream2DeploymentsRefusalContentPart$Outbound = {
   type: string;
@@ -4334,22 +3607,6 @@ export const DeploymentStream2DeploymentsRefusalContentPart$outboundSchema:
     refusal: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRefusalContentPart$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRefusalContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRefusalContentPart$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRefusalContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRefusalContentPart$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRefusalContentPart$Outbound` instead. */
-  export type Outbound =
-    DeploymentStream2DeploymentsRefusalContentPart$Outbound;
-}
-
 export function deploymentStream2DeploymentsRefusalContentPartToJSON(
   deploymentStream2DeploymentsRefusalContentPart:
     DeploymentStream2DeploymentsRefusalContentPart,
@@ -4360,7 +3617,6 @@ export function deploymentStream2DeploymentsRefusalContentPartToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsRefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4382,25 +3638,11 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inbound
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
   > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages4Type);
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
   > = DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$inboundSchema:
@@ -4409,26 +3651,12 @@ export const DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$inboun
   > = z.nativeEnum(
     DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType,
   );
-
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType
   > =
     DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeploymentsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsFilePath$inboundSchema:
@@ -4443,7 +3671,6 @@ export const DeploymentStreamAnnotationsDeploymentsFilePath$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type DeploymentStreamAnnotationsDeploymentsFilePath$Outbound = {
   file_id: string;
@@ -4463,22 +3690,6 @@ export const DeploymentStreamAnnotationsDeploymentsFilePath$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeploymentsFilePath$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFilePath$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeploymentsFilePath$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFilePath$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeploymentsFilePath$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFilePath$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamAnnotationsDeploymentsFilePath$Outbound;
-}
-
 export function deploymentStreamAnnotationsDeploymentsFilePathToJSON(
   deploymentStreamAnnotationsDeploymentsFilePath:
     DeploymentStreamAnnotationsDeploymentsFilePath,
@@ -4489,7 +3700,6 @@ export function deploymentStreamAnnotationsDeploymentsFilePathToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsDeploymentsFilePathFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4527,7 +3737,6 @@ export const DeploymentStreamAnnotationsDeployments2$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotationsDeployments2$Outbound = {
   type: string;
@@ -4559,21 +3768,6 @@ export const DeploymentStreamAnnotationsDeployments2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeployments2$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeployments2$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeployments2$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments2$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotationsDeployments2$Outbound;
-}
-
 export function deploymentStreamAnnotationsDeployments2ToJSON(
   deploymentStreamAnnotationsDeployments2:
     DeploymentStreamAnnotationsDeployments2,
@@ -4584,7 +3778,6 @@ export function deploymentStreamAnnotationsDeployments2ToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsDeployments2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4605,24 +3798,10 @@ export function deploymentStreamAnnotationsDeployments2FromJSON(
 export const DeploymentStreamAnnotationsDeploymentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamAnnotationsDeploymentsRequestType> = z
     .nativeEnum(DeploymentStreamAnnotationsDeploymentsRequestType);
-
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamAnnotationsDeploymentsRequestType> =
     DeploymentStreamAnnotationsDeploymentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeploymentsRequestType$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeploymentsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeploymentsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamAnnotationsDeploymentsFileCitation$inboundSchema:
@@ -4638,7 +3817,6 @@ export const DeploymentStreamAnnotationsDeploymentsFileCitation$inboundSchema:
       "file_id": "fileId",
     });
   });
-
 /** @internal */
 export type DeploymentStreamAnnotationsDeploymentsFileCitation$Outbound = {
   file_id: string;
@@ -4660,22 +3838,6 @@ export const DeploymentStreamAnnotationsDeploymentsFileCitation$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeploymentsFileCitation$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFileCitation$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeploymentsFileCitation$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFileCitation$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeploymentsFileCitation$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeploymentsFileCitation$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamAnnotationsDeploymentsFileCitation$Outbound;
-}
-
 export function deploymentStreamAnnotationsDeploymentsFileCitationToJSON(
   deploymentStreamAnnotationsDeploymentsFileCitation:
     DeploymentStreamAnnotationsDeploymentsFileCitation,
@@ -4686,7 +3848,6 @@ export function deploymentStreamAnnotationsDeploymentsFileCitationToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsDeploymentsFileCitationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4723,7 +3884,6 @@ export const DeploymentStreamAnnotationsDeployments1$inboundSchema: z.ZodType<
     "end_index": "endIndex",
   });
 });
-
 /** @internal */
 export type DeploymentStreamAnnotationsDeployments1$Outbound = {
   type: string;
@@ -4754,21 +3914,6 @@ export const DeploymentStreamAnnotationsDeployments1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnnotationsDeployments1$ {
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments1$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamAnnotationsDeployments1$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAnnotationsDeployments1$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnnotationsDeployments1$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnnotationsDeployments1$Outbound;
-}
-
 export function deploymentStreamAnnotationsDeployments1ToJSON(
   deploymentStreamAnnotationsDeployments1:
     DeploymentStreamAnnotationsDeployments1,
@@ -4779,7 +3924,6 @@ export function deploymentStreamAnnotationsDeployments1ToJSON(
     ),
   );
 }
-
 export function deploymentStreamAnnotationsDeployments1FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4805,7 +3949,6 @@ export const DeploymentStream2DeploymentsAnnotations$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamAnnotationsDeployments1$inboundSchema),
   z.lazy(() => DeploymentStreamAnnotationsDeployments2$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStream2DeploymentsAnnotations$Outbound =
   | DeploymentStreamAnnotationsDeployments1$Outbound
@@ -4821,21 +3964,6 @@ export const DeploymentStream2DeploymentsAnnotations$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamAnnotationsDeployments2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsAnnotations$ {
-  /** @deprecated use `DeploymentStream2DeploymentsAnnotations$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsAnnotations$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsAnnotations$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsAnnotations$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsAnnotations$Outbound` instead. */
-  export type Outbound = DeploymentStream2DeploymentsAnnotations$Outbound;
-}
-
 export function deploymentStream2DeploymentsAnnotationsToJSON(
   deploymentStream2DeploymentsAnnotations:
     DeploymentStream2DeploymentsAnnotations,
@@ -4846,7 +3974,6 @@ export function deploymentStream2DeploymentsAnnotationsToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsAnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4880,7 +4007,6 @@ export const DeploymentStream2DeploymentsTextContentPart$inboundSchema:
       ]),
     ).optional(),
   });
-
 /** @internal */
 export type DeploymentStream2DeploymentsTextContentPart$Outbound = {
   type: string;
@@ -4911,21 +4037,6 @@ export const DeploymentStream2DeploymentsTextContentPart$outboundSchema:
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsTextContentPart$ {
-  /** @deprecated use `DeploymentStream2DeploymentsTextContentPart$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsTextContentPart$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsTextContentPart$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsTextContentPart$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsTextContentPart$Outbound` instead. */
-  export type Outbound = DeploymentStream2DeploymentsTextContentPart$Outbound;
-}
-
 export function deploymentStream2DeploymentsTextContentPartToJSON(
   deploymentStream2DeploymentsTextContentPart:
     DeploymentStream2DeploymentsTextContentPart,
@@ -4936,7 +4047,6 @@ export function deploymentStream2DeploymentsTextContentPartToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsTextContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4963,7 +4073,6 @@ export const DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema
     z.lazy(() => DeploymentStream2DeploymentsTextContentPart$inboundSchema),
     z.lazy(() => DeploymentStream2DeploymentsRefusalContentPart$inboundSchema),
   ]);
-
 /** @internal */
 export type DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound =
   | DeploymentStream2DeploymentsTextContentPart$Outbound
@@ -4980,22 +4089,6 @@ export const DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchem
     z.lazy(() => DeploymentStream2DeploymentsRefusalContentPart$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamContentDeploymentsRequestRequestBody2$ {
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound` instead. */
-  export type Outbound =
-    DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound;
-}
-
 export function deploymentStreamContentDeploymentsRequestRequestBody2ToJSON(
   deploymentStreamContentDeploymentsRequestRequestBody2:
     DeploymentStreamContentDeploymentsRequestRequestBody2,
@@ -5006,7 +4099,6 @@ export function deploymentStreamContentDeploymentsRequestRequestBody2ToJSON(
     ),
   );
 }
-
 export function deploymentStreamContentDeploymentsRequestRequestBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5035,7 +4127,6 @@ export const DeploymentStreamMessagesDeploymentsContent$inboundSchema:
         ),
       ])),
     ]);
-
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsContent$Outbound =
   | string
@@ -5060,21 +4151,6 @@ export const DeploymentStreamMessagesDeploymentsContent$outboundSchema:
     ])),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsContent$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsContent$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsContent$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsContent$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesDeploymentsContent$Outbound;
-}
-
 export function deploymentStreamMessagesDeploymentsContentToJSON(
   deploymentStreamMessagesDeploymentsContent:
     DeploymentStreamMessagesDeploymentsContent,
@@ -5085,7 +4161,6 @@ export function deploymentStreamMessagesDeploymentsContentToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesDeploymentsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5107,25 +4182,11 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSc
   z.ZodNativeEnum<
     typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
   > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBodyRole);
-
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
   > = DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessagesAudio$inboundSchema: z.ZodType<
@@ -5135,7 +4196,6 @@ export const DeploymentStreamMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesAudio$Outbound = {
   id: string;
@@ -5150,19 +4210,6 @@ export const DeploymentStreamMessagesAudio$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesAudio$ {
-  /** @deprecated use `DeploymentStreamMessagesAudio$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesAudio$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesAudio$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesAudio$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesAudio$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesAudio$Outbound;
-}
-
 export function deploymentStreamMessagesAudioToJSON(
   deploymentStreamMessagesAudio: DeploymentStreamMessagesAudio,
 ): string {
@@ -5172,7 +4219,6 @@ export function deploymentStreamMessagesAudioToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesAudio, SDKValidationError> {
@@ -5187,22 +4233,10 @@ export function deploymentStreamMessagesAudioFromJSON(
 export const DeploymentStreamMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessagesType
 > = z.nativeEnum(DeploymentStreamMessagesType);
-
 /** @internal */
 export const DeploymentStreamMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessagesType
 > = DeploymentStreamMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesType$ {
-  /** @deprecated use `DeploymentStreamMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessagesFunction$inboundSchema: z.ZodType<
@@ -5213,7 +4247,6 @@ export const DeploymentStreamMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -5230,19 +4263,6 @@ export const DeploymentStreamMessagesFunction$outboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesFunction$ {
-  /** @deprecated use `DeploymentStreamMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesFunction$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesFunction$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesFunction$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesFunction$Outbound;
-}
-
 export function deploymentStreamMessagesFunctionToJSON(
   deploymentStreamMessagesFunction: DeploymentStreamMessagesFunction,
 ): string {
@@ -5252,7 +4272,6 @@ export function deploymentStreamMessagesFunctionToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesFunction, SDKValidationError> {
@@ -5273,7 +4292,6 @@ export const DeploymentStreamMessagesToolCalls$inboundSchema: z.ZodType<
   type: DeploymentStreamMessagesType$inboundSchema,
   function: z.lazy(() => DeploymentStreamMessagesFunction$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesToolCalls$Outbound = {
   id: string;
@@ -5292,20 +4310,6 @@ export const DeploymentStreamMessagesToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => DeploymentStreamMessagesFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesToolCalls$ {
-  /** @deprecated use `DeploymentStreamMessagesToolCalls$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesToolCalls$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesToolCalls$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesToolCalls$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesToolCalls$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesToolCalls$Outbound;
-}
-
 export function deploymentStreamMessagesToolCallsToJSON(
   deploymentStreamMessagesToolCalls: DeploymentStreamMessagesToolCalls,
 ): string {
@@ -5315,7 +4319,6 @@ export function deploymentStreamMessagesToolCallsToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesToolCalls, SDKValidationError> {
@@ -5365,7 +4368,6 @@ export const DeploymentStreamMessagesAssistantMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type DeploymentStreamMessagesAssistantMessage$Outbound = {
   content?:
@@ -5427,21 +4429,6 @@ export const DeploymentStreamMessagesAssistantMessage$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesAssistantMessage$ {
-  /** @deprecated use `DeploymentStreamMessagesAssistantMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesAssistantMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesAssistantMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesAssistantMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesAssistantMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesAssistantMessage$Outbound;
-}
-
 export function deploymentStreamMessagesAssistantMessageToJSON(
   deploymentStreamMessagesAssistantMessage:
     DeploymentStreamMessagesAssistantMessage,
@@ -5452,7 +4439,6 @@ export function deploymentStreamMessagesAssistantMessageToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5473,24 +4459,10 @@ export function deploymentStreamMessagesAssistantMessageFromJSON(
 export const DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> = z
     .nativeEnum(DeploymentStreamMessagesDeploymentsRequestRole);
-
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> =
     DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
@@ -5499,26 +4471,12 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
   > = z.nativeEnum(
     DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type,
   );
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
   > =
     DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2DeploymentsFile$inboundSchema: z.ZodType<
@@ -5535,7 +4493,6 @@ export const DeploymentStream2DeploymentsFile$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type DeploymentStream2DeploymentsFile$Outbound = {
   file_data?: string | undefined;
@@ -5560,19 +4517,6 @@ export const DeploymentStream2DeploymentsFile$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsFile$ {
-  /** @deprecated use `DeploymentStream2DeploymentsFile$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsFile$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsFile$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2DeploymentsFile$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsFile$Outbound` instead. */
-  export type Outbound = DeploymentStream2DeploymentsFile$Outbound;
-}
-
 export function deploymentStream2DeploymentsFileToJSON(
   deploymentStream2DeploymentsFile: DeploymentStream2DeploymentsFile,
 ): string {
@@ -5582,7 +4526,6 @@ export function deploymentStream2DeploymentsFileToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsFileFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2DeploymentsFile, SDKValidationError> {
@@ -5603,7 +4546,6 @@ export const DeploymentStream2Deployments4$inboundSchema: z.ZodType<
     DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema,
   file: z.lazy(() => DeploymentStream2DeploymentsFile$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentStream2Deployments4$Outbound = {
   type: string;
@@ -5621,19 +4563,6 @@ export const DeploymentStream2Deployments4$outboundSchema: z.ZodType<
   file: z.lazy(() => DeploymentStream2DeploymentsFile$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Deployments4$ {
-  /** @deprecated use `DeploymentStream2Deployments4$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Deployments4$inboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments4$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Deployments4$outboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments4$Outbound` instead. */
-  export type Outbound = DeploymentStream2Deployments4$Outbound;
-}
-
 export function deploymentStream2Deployments4ToJSON(
   deploymentStream2Deployments4: DeploymentStream2Deployments4,
 ): string {
@@ -5643,7 +4572,6 @@ export function deploymentStream2Deployments4ToJSON(
     ),
   );
 }
-
 export function deploymentStream2Deployments4FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2Deployments4, SDKValidationError> {
@@ -5661,7 +4589,6 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$
   > = z.nativeEnum(
     DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType,
   );
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema:
   z.ZodNativeEnum<
@@ -5669,40 +4596,14 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$
   > =
     DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStream2DeploymentsFormat$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsFormat
 > = z.nativeEnum(DeploymentStream2DeploymentsFormat);
-
 /** @internal */
 export const DeploymentStream2DeploymentsFormat$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsFormat
 > = DeploymentStream2DeploymentsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsFormat$ {
-  /** @deprecated use `DeploymentStream2DeploymentsFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsFormat$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsFormat$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2DeploymentsInputAudio$inboundSchema: z.ZodType<
@@ -5713,7 +4614,6 @@ export const DeploymentStream2DeploymentsInputAudio$inboundSchema: z.ZodType<
   data: z.string(),
   format: DeploymentStream2DeploymentsFormat$inboundSchema,
 });
-
 /** @internal */
 export type DeploymentStream2DeploymentsInputAudio$Outbound = {
   data: string;
@@ -5730,21 +4630,6 @@ export const DeploymentStream2DeploymentsInputAudio$outboundSchema: z.ZodType<
   format: DeploymentStream2DeploymentsFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsInputAudio$ {
-  /** @deprecated use `DeploymentStream2DeploymentsInputAudio$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsInputAudio$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsInputAudio$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsInputAudio$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsInputAudio$Outbound` instead. */
-  export type Outbound = DeploymentStream2DeploymentsInputAudio$Outbound;
-}
-
 export function deploymentStream2DeploymentsInputAudioToJSON(
   deploymentStream2DeploymentsInputAudio:
     DeploymentStream2DeploymentsInputAudio,
@@ -5755,7 +4640,6 @@ export function deploymentStream2DeploymentsInputAudioToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsInputAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2DeploymentsInputAudio, SDKValidationError> {
@@ -5783,7 +4667,6 @@ export const DeploymentStream2Deployments3$inboundSchema: z.ZodType<
     "input_audio": "inputAudio",
   });
 });
-
 /** @internal */
 export type DeploymentStream2Deployments3$Outbound = {
   type: string;
@@ -5807,19 +4690,6 @@ export const DeploymentStream2Deployments3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Deployments3$ {
-  /** @deprecated use `DeploymentStream2Deployments3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Deployments3$inboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Deployments3$outboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments3$Outbound` instead. */
-  export type Outbound = DeploymentStream2Deployments3$Outbound;
-}
-
 export function deploymentStream2Deployments3ToJSON(
   deploymentStream2Deployments3: DeploymentStream2Deployments3,
 ): string {
@@ -5829,7 +4699,6 @@ export function deploymentStream2Deployments3ToJSON(
     ),
   );
 }
-
 export function deploymentStream2Deployments3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2Deployments3, SDKValidationError> {
@@ -5845,47 +4714,20 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inbound
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
   > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages3Type);
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
   > = DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStream2DeploymentsDetail$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsDetail
 > = z.nativeEnum(DeploymentStream2DeploymentsDetail);
-
 /** @internal */
 export const DeploymentStream2DeploymentsDetail$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStream2DeploymentsDetail
 > = DeploymentStream2DeploymentsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsDetail$ {
-  /** @deprecated use `DeploymentStream2DeploymentsDetail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsDetail$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsDetail$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsDetail$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2DeploymentsImageUrl$inboundSchema: z.ZodType<
@@ -5896,7 +4738,6 @@ export const DeploymentStream2DeploymentsImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: DeploymentStream2DeploymentsDetail$inboundSchema.optional(),
 });
-
 /** @internal */
 export type DeploymentStream2DeploymentsImageUrl$Outbound = {
   url: string;
@@ -5913,21 +4754,6 @@ export const DeploymentStream2DeploymentsImageUrl$outboundSchema: z.ZodType<
   detail: DeploymentStream2DeploymentsDetail$outboundSchema.optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsImageUrl$ {
-  /** @deprecated use `DeploymentStream2DeploymentsImageUrl$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsImageUrl$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsImageUrl$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsImageUrl$outboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsImageUrl$Outbound` instead. */
-  export type Outbound = DeploymentStream2DeploymentsImageUrl$Outbound;
-}
-
 export function deploymentStream2DeploymentsImageUrlToJSON(
   deploymentStream2DeploymentsImageUrl: DeploymentStream2DeploymentsImageUrl,
 ): string {
@@ -5937,7 +4763,6 @@ export function deploymentStream2DeploymentsImageUrlToJSON(
     ),
   );
 }
-
 export function deploymentStream2DeploymentsImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2DeploymentsImageUrl, SDKValidationError> {
@@ -5963,7 +4788,6 @@ export const DeploymentStream2Deployments2$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type DeploymentStream2Deployments2$Outbound = {
   type: string;
@@ -5985,19 +4809,6 @@ export const DeploymentStream2Deployments2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Deployments2$ {
-  /** @deprecated use `DeploymentStream2Deployments2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Deployments2$inboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Deployments2$outboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments2$Outbound` instead. */
-  export type Outbound = DeploymentStream2Deployments2$Outbound;
-}
-
 export function deploymentStream2Deployments2ToJSON(
   deploymentStream2Deployments2: DeploymentStream2Deployments2,
 ): string {
@@ -6007,7 +4818,6 @@ export function deploymentStream2Deployments2ToJSON(
     ),
   );
 }
-
 export function deploymentStream2Deployments2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2Deployments2, SDKValidationError> {
@@ -6023,25 +4833,11 @@ export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundS
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
   > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessagesType);
-
 /** @internal */
 export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
   > = DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStream2Deployments1$inboundSchema: z.ZodType<
@@ -6053,7 +4849,6 @@ export const DeploymentStream2Deployments1$inboundSchema: z.ZodType<
     DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type DeploymentStream2Deployments1$Outbound = {
   type: string;
@@ -6071,19 +4866,6 @@ export const DeploymentStream2Deployments1$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Deployments1$ {
-  /** @deprecated use `DeploymentStream2Deployments1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Deployments1$inboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Deployments1$outboundSchema;
-  /** @deprecated use `DeploymentStream2Deployments1$Outbound` instead. */
-  export type Outbound = DeploymentStream2Deployments1$Outbound;
-}
-
 export function deploymentStream2Deployments1ToJSON(
   deploymentStream2Deployments1: DeploymentStream2Deployments1,
 ): string {
@@ -6093,7 +4875,6 @@ export function deploymentStream2Deployments1ToJSON(
     ),
   );
 }
-
 export function deploymentStream2Deployments1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream2Deployments1, SDKValidationError> {
@@ -6113,7 +4894,6 @@ export const DeploymentStreamContentDeploymentsRequest2$inboundSchema:
       z.lazy(() => DeploymentStream2Deployments3$inboundSchema),
       z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
     ]);
-
 /** @internal */
 export type DeploymentStreamContentDeploymentsRequest2$Outbound =
   | DeploymentStream2Deployments1$Outbound
@@ -6134,21 +4914,6 @@ export const DeploymentStreamContentDeploymentsRequest2$outboundSchema:
     z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamContentDeploymentsRequest2$ {
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequest2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamContentDeploymentsRequest2$inboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequest2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamContentDeploymentsRequest2$outboundSchema;
-  /** @deprecated use `DeploymentStreamContentDeploymentsRequest2$Outbound` instead. */
-  export type Outbound = DeploymentStreamContentDeploymentsRequest2$Outbound;
-}
-
 export function deploymentStreamContentDeploymentsRequest2ToJSON(
   deploymentStreamContentDeploymentsRequest2:
     DeploymentStreamContentDeploymentsRequest2,
@@ -6159,7 +4924,6 @@ export function deploymentStreamContentDeploymentsRequest2ToJSON(
     ),
   );
 }
-
 export function deploymentStreamContentDeploymentsRequest2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6190,7 +4954,6 @@ export const DeploymentStreamMessagesContent$inboundSchema: z.ZodType<
     z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentStreamMessagesContent$Outbound =
   | string
@@ -6216,19 +4979,6 @@ export const DeploymentStreamMessagesContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesContent$ {
-  /** @deprecated use `DeploymentStreamMessagesContent$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesContent$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesContent$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesContent$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesContent$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesContent$Outbound;
-}
-
 export function deploymentStreamMessagesContentToJSON(
   deploymentStreamMessagesContent: DeploymentStreamMessagesContent,
 ): string {
@@ -6238,7 +4988,6 @@ export function deploymentStreamMessagesContentToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesContent, SDKValidationError> {
@@ -6267,7 +5016,6 @@ export const DeploymentStreamMessagesUserMessage$inboundSchema: z.ZodType<
     ])),
   ]),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesUserMessage$Outbound = {
   role: string;
@@ -6301,21 +5049,6 @@ export const DeploymentStreamMessagesUserMessage$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesUserMessage$ {
-  /** @deprecated use `DeploymentStreamMessagesUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesUserMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesUserMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesUserMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesUserMessage$Outbound;
-}
-
 export function deploymentStreamMessagesUserMessageToJSON(
   deploymentStreamMessagesUserMessage: DeploymentStreamMessagesUserMessage,
 ): string {
@@ -6325,7 +5058,6 @@ export function deploymentStreamMessagesUserMessageToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesUserMessage, SDKValidationError> {
@@ -6341,24 +5073,10 @@ export function deploymentStreamMessagesUserMessageFromJSON(
 export const DeploymentStreamMessagesDeploymentsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> = z
     .nativeEnum(DeploymentStreamMessagesDeploymentsRole);
-
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> =
     DeploymentStreamMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessagesSystemMessage$inboundSchema: z.ZodType<
@@ -6370,7 +5088,6 @@ export const DeploymentStreamMessagesSystemMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesSystemMessage$Outbound = {
   role: string;
@@ -6389,21 +5106,6 @@ export const DeploymentStreamMessagesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesSystemMessage$ {
-  /** @deprecated use `DeploymentStreamMessagesSystemMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesSystemMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesSystemMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesSystemMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesSystemMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesSystemMessage$Outbound;
-}
-
 export function deploymentStreamMessagesSystemMessageToJSON(
   deploymentStreamMessagesSystemMessage: DeploymentStreamMessagesSystemMessage,
 ): string {
@@ -6413,7 +5115,6 @@ export function deploymentStreamMessagesSystemMessageToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessagesSystemMessage, SDKValidationError> {
@@ -6429,22 +5130,10 @@ export function deploymentStreamMessagesSystemMessageFromJSON(
 export const DeploymentStreamMessagesRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessagesRole
 > = z.nativeEnum(DeploymentStreamMessagesRole);
-
 /** @internal */
 export const DeploymentStreamMessagesRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessagesRole
 > = DeploymentStreamMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesRole$ {
-  /** @deprecated use `DeploymentStreamMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessagesDeveloperMessage$inboundSchema: z.ZodType<
@@ -6456,7 +5145,6 @@ export const DeploymentStreamMessagesDeveloperMessage$inboundSchema: z.ZodType<
   content: z.string(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type DeploymentStreamMessagesDeveloperMessage$Outbound = {
   role: string;
@@ -6475,21 +5163,6 @@ export const DeploymentStreamMessagesDeveloperMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeveloperMessage$ {
-  /** @deprecated use `DeploymentStreamMessagesDeveloperMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeveloperMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeveloperMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeveloperMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeveloperMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessagesDeveloperMessage$Outbound;
-}
-
 export function deploymentStreamMessagesDeveloperMessageToJSON(
   deploymentStreamMessagesDeveloperMessage:
     DeploymentStreamMessagesDeveloperMessage,
@@ -6500,7 +5173,6 @@ export function deploymentStreamMessagesDeveloperMessageToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6529,7 +5201,6 @@ export const DeploymentStreamMessages$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamMessagesUserMessage$inboundSchema),
   z.lazy(() => DeploymentStreamMessagesAssistantMessage$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamMessages$Outbound =
   | DeploymentStreamMessagesToolMessage$Outbound
@@ -6551,19 +5222,6 @@ export const DeploymentStreamMessages$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamMessagesAssistantMessage$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessages$ {
-  /** @deprecated use `DeploymentStreamMessages$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessages$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessages$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessages$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessages$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessages$Outbound;
-}
-
 export function deploymentStreamMessagesToJSON(
   deploymentStreamMessages: DeploymentStreamMessages,
 ): string {
@@ -6571,7 +5229,6 @@ export function deploymentStreamMessagesToJSON(
     DeploymentStreamMessages$outboundSchema.parse(deploymentStreamMessages),
   );
 }
-
 export function deploymentStreamMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessages, SDKValidationError> {
@@ -6598,7 +5255,6 @@ export const DeploymentStreamMetadata$inboundSchema: z.ZodType<
     "page_number": "pageNumber",
   });
 });
-
 /** @internal */
 export type DeploymentStreamMetadata$Outbound = {
   file_name?: string | undefined;
@@ -6623,19 +5279,6 @@ export const DeploymentStreamMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMetadata$ {
-  /** @deprecated use `DeploymentStreamMetadata$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMetadata$inboundSchema;
-  /** @deprecated use `DeploymentStreamMetadata$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMetadata$outboundSchema;
-  /** @deprecated use `DeploymentStreamMetadata$Outbound` instead. */
-  export type Outbound = DeploymentStreamMetadata$Outbound;
-}
-
 export function deploymentStreamMetadataToJSON(
   deploymentStreamMetadata: DeploymentStreamMetadata,
 ): string {
@@ -6643,7 +5286,6 @@ export function deploymentStreamMetadataToJSON(
     DeploymentStreamMetadata$outboundSchema.parse(deploymentStreamMetadata),
   );
 }
-
 export function deploymentStreamMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMetadata, SDKValidationError> {
@@ -6663,7 +5305,6 @@ export const DeploymentStreamDocuments$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.lazy(() => DeploymentStreamMetadata$inboundSchema).optional(),
 });
-
 /** @internal */
 export type DeploymentStreamDocuments$Outbound = {
   text: string;
@@ -6680,19 +5321,6 @@ export const DeploymentStreamDocuments$outboundSchema: z.ZodType<
   metadata: z.lazy(() => DeploymentStreamMetadata$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamDocuments$ {
-  /** @deprecated use `DeploymentStreamDocuments$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamDocuments$inboundSchema;
-  /** @deprecated use `DeploymentStreamDocuments$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamDocuments$outboundSchema;
-  /** @deprecated use `DeploymentStreamDocuments$Outbound` instead. */
-  export type Outbound = DeploymentStreamDocuments$Outbound;
-}
-
 export function deploymentStreamDocumentsToJSON(
   deploymentStreamDocuments: DeploymentStreamDocuments,
 ): string {
@@ -6700,7 +5328,6 @@ export function deploymentStreamDocumentsToJSON(
     DeploymentStreamDocuments$outboundSchema.parse(deploymentStreamDocuments),
   );
 }
-
 export function deploymentStreamDocumentsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamDocuments, SDKValidationError> {
@@ -6725,7 +5352,6 @@ export const DeploymentStreamInvokeOptions$inboundSchema: z.ZodType<
     "mock_response": "mockResponse",
   });
 });
-
 /** @internal */
 export type DeploymentStreamInvokeOptions$Outbound = {
   include_retrievals: boolean;
@@ -6747,19 +5373,6 @@ export const DeploymentStreamInvokeOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamInvokeOptions$ {
-  /** @deprecated use `DeploymentStreamInvokeOptions$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamInvokeOptions$inboundSchema;
-  /** @deprecated use `DeploymentStreamInvokeOptions$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamInvokeOptions$outboundSchema;
-  /** @deprecated use `DeploymentStreamInvokeOptions$Outbound` instead. */
-  export type Outbound = DeploymentStreamInvokeOptions$Outbound;
-}
-
 export function deploymentStreamInvokeOptionsToJSON(
   deploymentStreamInvokeOptions: DeploymentStreamInvokeOptions,
 ): string {
@@ -6769,7 +5382,6 @@ export function deploymentStreamInvokeOptionsToJSON(
     ),
   );
 }
-
 export function deploymentStreamInvokeOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamInvokeOptions, SDKValidationError> {
@@ -6789,7 +5401,6 @@ export const DeploymentStreamThread$inboundSchema: z.ZodType<
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type DeploymentStreamThread$Outbound = {
   id: string;
@@ -6806,19 +5417,6 @@ export const DeploymentStreamThread$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamThread$ {
-  /** @deprecated use `DeploymentStreamThread$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamThread$inboundSchema;
-  /** @deprecated use `DeploymentStreamThread$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamThread$outboundSchema;
-  /** @deprecated use `DeploymentStreamThread$Outbound` instead. */
-  export type Outbound = DeploymentStreamThread$Outbound;
-}
-
 export function deploymentStreamThreadToJSON(
   deploymentStreamThread: DeploymentStreamThread,
 ): string {
@@ -6826,7 +5424,6 @@ export function deploymentStreamThreadToJSON(
     DeploymentStreamThread$outboundSchema.parse(deploymentStreamThread),
   );
 }
-
 export function deploymentStreamThreadFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamThread, SDKValidationError> {
@@ -6845,7 +5442,6 @@ export const DeploymentStreamOrExists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type DeploymentStreamOrExists$Outbound = {
   exists: boolean;
@@ -6860,19 +5456,6 @@ export const DeploymentStreamOrExists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrExists$ {
-  /** @deprecated use `DeploymentStreamOrExists$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrExists$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrExists$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrExists$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrExists$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrExists$Outbound;
-}
-
 export function deploymentStreamOrExistsToJSON(
   deploymentStreamOrExists: DeploymentStreamOrExists,
 ): string {
@@ -6880,7 +5463,6 @@ export function deploymentStreamOrExistsToJSON(
     DeploymentStreamOrExists$outboundSchema.parse(deploymentStreamOrExists),
   );
 }
-
 export function deploymentStreamOrExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrExists, SDKValidationError> {
@@ -6897,7 +5479,6 @@ export const DeploymentStreamOrDeploymentsNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamOrDeploymentsNin$Outbound =
   | string
@@ -6911,19 +5492,6 @@ export const DeploymentStreamOrDeploymentsNin$outboundSchema: z.ZodType<
   DeploymentStreamOrDeploymentsNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrDeploymentsNin$ {
-  /** @deprecated use `DeploymentStreamOrDeploymentsNin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrDeploymentsNin$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsNin$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrDeploymentsNin$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsNin$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrDeploymentsNin$Outbound;
-}
-
 export function deploymentStreamOrDeploymentsNinToJSON(
   deploymentStreamOrDeploymentsNin: DeploymentStreamOrDeploymentsNin,
 ): string {
@@ -6933,7 +5501,6 @@ export function deploymentStreamOrDeploymentsNinToJSON(
     ),
   );
 }
-
 export function deploymentStreamOrDeploymentsNinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrDeploymentsNin, SDKValidationError> {
@@ -6952,7 +5519,6 @@ export const DeploymentStreamOrNin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStreamOrNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -6967,19 +5533,6 @@ export const DeploymentStreamOrNin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrNin$ {
-  /** @deprecated use `DeploymentStreamOrNin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrNin$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrNin$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrNin$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrNin$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrNin$Outbound;
-}
-
 export function deploymentStreamOrNinToJSON(
   deploymentStreamOrNin: DeploymentStreamOrNin,
 ): string {
@@ -6987,7 +5540,6 @@ export function deploymentStreamOrNinToJSON(
     DeploymentStreamOrNin$outboundSchema.parse(deploymentStreamOrNin),
   );
 }
-
 export function deploymentStreamOrNinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrNin, SDKValidationError> {
@@ -7004,7 +5556,6 @@ export const DeploymentStreamOrDeploymentsIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamOrDeploymentsIn$Outbound =
   | string
@@ -7018,19 +5569,6 @@ export const DeploymentStreamOrDeploymentsIn$outboundSchema: z.ZodType<
   DeploymentStreamOrDeploymentsIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrDeploymentsIn$ {
-  /** @deprecated use `DeploymentStreamOrDeploymentsIn$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrDeploymentsIn$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsIn$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrDeploymentsIn$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsIn$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrDeploymentsIn$Outbound;
-}
-
 export function deploymentStreamOrDeploymentsInToJSON(
   deploymentStreamOrDeploymentsIn: DeploymentStreamOrDeploymentsIn,
 ): string {
@@ -7040,7 +5578,6 @@ export function deploymentStreamOrDeploymentsInToJSON(
     ),
   );
 }
-
 export function deploymentStreamOrDeploymentsInFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrDeploymentsIn, SDKValidationError> {
@@ -7059,7 +5596,6 @@ export const DeploymentStreamOrIn$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStreamOrIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -7074,19 +5610,6 @@ export const DeploymentStreamOrIn$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrIn$ {
-  /** @deprecated use `DeploymentStreamOrIn$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrIn$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrIn$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrIn$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrIn$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrIn$Outbound;
-}
-
 export function deploymentStreamOrInToJSON(
   deploymentStreamOrIn: DeploymentStreamOrIn,
 ): string {
@@ -7094,7 +5617,6 @@ export function deploymentStreamOrInToJSON(
     DeploymentStreamOrIn$outboundSchema.parse(deploymentStreamOrIn),
   );
 }
-
 export function deploymentStreamOrInFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrIn, SDKValidationError> {
@@ -7113,7 +5635,6 @@ export const DeploymentStreamOrLte$inboundSchema: z.ZodType<
 > = z.object({
   lte: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamOrLte$Outbound = {
   lte: number;
@@ -7128,19 +5649,6 @@ export const DeploymentStreamOrLte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrLte$ {
-  /** @deprecated use `DeploymentStreamOrLte$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrLte$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrLte$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrLte$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrLte$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrLte$Outbound;
-}
-
 export function deploymentStreamOrLteToJSON(
   deploymentStreamOrLte: DeploymentStreamOrLte,
 ): string {
@@ -7148,7 +5656,6 @@ export function deploymentStreamOrLteToJSON(
     DeploymentStreamOrLte$outboundSchema.parse(deploymentStreamOrLte),
   );
 }
-
 export function deploymentStreamOrLteFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrLte, SDKValidationError> {
@@ -7167,7 +5674,6 @@ export const DeploymentStreamOrLt$inboundSchema: z.ZodType<
 > = z.object({
   lt: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamOrLt$Outbound = {
   lt: number;
@@ -7182,19 +5688,6 @@ export const DeploymentStreamOrLt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrLt$ {
-  /** @deprecated use `DeploymentStreamOrLt$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrLt$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrLt$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrLt$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrLt$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrLt$Outbound;
-}
-
 export function deploymentStreamOrLtToJSON(
   deploymentStreamOrLt: DeploymentStreamOrLt,
 ): string {
@@ -7202,7 +5695,6 @@ export function deploymentStreamOrLtToJSON(
     DeploymentStreamOrLt$outboundSchema.parse(deploymentStreamOrLt),
   );
 }
-
 export function deploymentStreamOrLtFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrLt, SDKValidationError> {
@@ -7221,7 +5713,6 @@ export const DeploymentStreamOrGte$inboundSchema: z.ZodType<
 > = z.object({
   gte: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamOrGte$Outbound = {
   gte: number;
@@ -7236,19 +5727,6 @@ export const DeploymentStreamOrGte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrGte$ {
-  /** @deprecated use `DeploymentStreamOrGte$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrGte$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrGte$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrGte$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrGte$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrGte$Outbound;
-}
-
 export function deploymentStreamOrGteToJSON(
   deploymentStreamOrGte: DeploymentStreamOrGte,
 ): string {
@@ -7256,7 +5734,6 @@ export function deploymentStreamOrGteToJSON(
     DeploymentStreamOrGte$outboundSchema.parse(deploymentStreamOrGte),
   );
 }
-
 export function deploymentStreamOrGteFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrGte, SDKValidationError> {
@@ -7275,7 +5752,6 @@ export const DeploymentStreamOr3$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamOr3$Outbound = {
   gt: number;
@@ -7290,19 +5766,6 @@ export const DeploymentStreamOr3$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOr3$ {
-  /** @deprecated use `DeploymentStreamOr3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOr3$inboundSchema;
-  /** @deprecated use `DeploymentStreamOr3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOr3$outboundSchema;
-  /** @deprecated use `DeploymentStreamOr3$Outbound` instead. */
-  export type Outbound = DeploymentStreamOr3$Outbound;
-}
-
 export function deploymentStreamOr3ToJSON(
   deploymentStreamOr3: DeploymentStreamOr3,
 ): string {
@@ -7310,7 +5773,6 @@ export function deploymentStreamOr3ToJSON(
     DeploymentStreamOr3$outboundSchema.parse(deploymentStreamOr3),
   );
 }
-
 export function deploymentStreamOr3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOr3, SDKValidationError> {
@@ -7327,7 +5789,6 @@ export const DeploymentStreamOrDeploymentsNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamOrDeploymentsNe$Outbound =
   | string
@@ -7341,19 +5802,6 @@ export const DeploymentStreamOrDeploymentsNe$outboundSchema: z.ZodType<
   DeploymentStreamOrDeploymentsNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrDeploymentsNe$ {
-  /** @deprecated use `DeploymentStreamOrDeploymentsNe$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrDeploymentsNe$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsNe$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrDeploymentsNe$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsNe$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrDeploymentsNe$Outbound;
-}
-
 export function deploymentStreamOrDeploymentsNeToJSON(
   deploymentStreamOrDeploymentsNe: DeploymentStreamOrDeploymentsNe,
 ): string {
@@ -7363,7 +5811,6 @@ export function deploymentStreamOrDeploymentsNeToJSON(
     ),
   );
 }
-
 export function deploymentStreamOrDeploymentsNeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrDeploymentsNe, SDKValidationError> {
@@ -7382,7 +5829,6 @@ export const DeploymentStreamOrNe$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStreamOrNe$Outbound = {
   ne: string | number | boolean;
@@ -7397,19 +5843,6 @@ export const DeploymentStreamOrNe$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrNe$ {
-  /** @deprecated use `DeploymentStreamOrNe$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrNe$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrNe$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrNe$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrNe$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrNe$Outbound;
-}
-
 export function deploymentStreamOrNeToJSON(
   deploymentStreamOrNe: DeploymentStreamOrNe,
 ): string {
@@ -7417,7 +5850,6 @@ export function deploymentStreamOrNeToJSON(
     DeploymentStreamOrNe$outboundSchema.parse(deploymentStreamOrNe),
   );
 }
-
 export function deploymentStreamOrNeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrNe, SDKValidationError> {
@@ -7434,7 +5866,6 @@ export const DeploymentStreamOrDeploymentsEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamOrDeploymentsEq$Outbound =
   | string
@@ -7448,19 +5879,6 @@ export const DeploymentStreamOrDeploymentsEq$outboundSchema: z.ZodType<
   DeploymentStreamOrDeploymentsEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrDeploymentsEq$ {
-  /** @deprecated use `DeploymentStreamOrDeploymentsEq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrDeploymentsEq$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsEq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrDeploymentsEq$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrDeploymentsEq$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrDeploymentsEq$Outbound;
-}
-
 export function deploymentStreamOrDeploymentsEqToJSON(
   deploymentStreamOrDeploymentsEq: DeploymentStreamOrDeploymentsEq,
 ): string {
@@ -7470,7 +5888,6 @@ export function deploymentStreamOrDeploymentsEqToJSON(
     ),
   );
 }
-
 export function deploymentStreamOrDeploymentsEqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrDeploymentsEq, SDKValidationError> {
@@ -7489,7 +5906,6 @@ export const DeploymentStreamOrEq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStreamOrEq$Outbound = {
   eq: string | number | boolean;
@@ -7504,19 +5920,6 @@ export const DeploymentStreamOrEq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamOrEq$ {
-  /** @deprecated use `DeploymentStreamOrEq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamOrEq$inboundSchema;
-  /** @deprecated use `DeploymentStreamOrEq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamOrEq$outboundSchema;
-  /** @deprecated use `DeploymentStreamOrEq$Outbound` instead. */
-  export type Outbound = DeploymentStreamOrEq$Outbound;
-}
-
 export function deploymentStreamOrEqToJSON(
   deploymentStreamOrEq: DeploymentStreamOrEq,
 ): string {
@@ -7524,7 +5927,6 @@ export function deploymentStreamOrEqToJSON(
     DeploymentStreamOrEq$outboundSchema.parse(deploymentStreamOrEq),
   );
 }
-
 export function deploymentStreamOrEqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamOrEq, SDKValidationError> {
@@ -7552,7 +5954,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$inboundSchema:
     z.lazy(() => DeploymentStreamOrNin$inboundSchema),
     z.lazy(() => DeploymentStreamOrExists$inboundSchema),
   ]);
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilterDeploymentsOr$Outbound =
   | DeploymentStreamOrEq$Outbound
@@ -7583,21 +5984,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema:
     z.lazy(() => DeploymentStreamOrExists$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilterDeploymentsOr$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsOr$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamKnowledgeFilterDeploymentsOr$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsOr$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilterDeploymentsOr$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilterDeploymentsOrToJSON(
   deploymentStreamKnowledgeFilterDeploymentsOr:
     DeploymentStreamKnowledgeFilterDeploymentsOr,
@@ -7608,7 +5994,6 @@ export function deploymentStreamKnowledgeFilterDeploymentsOrToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilterDeploymentsOrFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7647,7 +6032,6 @@ export const DeploymentStreamKnowledgeFilterOr$inboundSchema: z.ZodType<
     ])),
   ),
 });
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilterOr$Outbound = {
   or: Array<
@@ -7689,20 +6073,6 @@ export const DeploymentStreamKnowledgeFilterOr$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilterOr$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilterOr$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamKnowledgeFilterOr$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterOr$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamKnowledgeFilterOr$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterOr$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilterOr$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilterOrToJSON(
   deploymentStreamKnowledgeFilterOr: DeploymentStreamKnowledgeFilterOr,
 ): string {
@@ -7712,7 +6082,6 @@ export function deploymentStreamKnowledgeFilterOrToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilterOrFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamKnowledgeFilterOr, SDKValidationError> {
@@ -7731,7 +6100,6 @@ export const DeploymentStreamAndExists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type DeploymentStreamAndExists$Outbound = {
   exists: boolean;
@@ -7746,19 +6114,6 @@ export const DeploymentStreamAndExists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndExists$ {
-  /** @deprecated use `DeploymentStreamAndExists$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndExists$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndExists$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndExists$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndExists$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndExists$Outbound;
-}
-
 export function deploymentStreamAndExistsToJSON(
   deploymentStreamAndExists: DeploymentStreamAndExists,
 ): string {
@@ -7766,7 +6121,6 @@ export function deploymentStreamAndExistsToJSON(
     DeploymentStreamAndExists$outboundSchema.parse(deploymentStreamAndExists),
   );
 }
-
 export function deploymentStreamAndExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndExists, SDKValidationError> {
@@ -7783,7 +6137,6 @@ export const DeploymentStreamAndDeploymentsNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamAndDeploymentsNin$Outbound =
   | string
@@ -7797,20 +6150,6 @@ export const DeploymentStreamAndDeploymentsNin$outboundSchema: z.ZodType<
   DeploymentStreamAndDeploymentsNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndDeploymentsNin$ {
-  /** @deprecated use `DeploymentStreamAndDeploymentsNin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndDeploymentsNin$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsNin$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamAndDeploymentsNin$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsNin$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndDeploymentsNin$Outbound;
-}
-
 export function deploymentStreamAndDeploymentsNinToJSON(
   deploymentStreamAndDeploymentsNin: DeploymentStreamAndDeploymentsNin,
 ): string {
@@ -7820,7 +6159,6 @@ export function deploymentStreamAndDeploymentsNinToJSON(
     ),
   );
 }
-
 export function deploymentStreamAndDeploymentsNinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndDeploymentsNin, SDKValidationError> {
@@ -7839,7 +6177,6 @@ export const DeploymentStreamAndNin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStreamAndNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -7854,19 +6191,6 @@ export const DeploymentStreamAndNin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndNin$ {
-  /** @deprecated use `DeploymentStreamAndNin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndNin$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndNin$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndNin$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndNin$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndNin$Outbound;
-}
-
 export function deploymentStreamAndNinToJSON(
   deploymentStreamAndNin: DeploymentStreamAndNin,
 ): string {
@@ -7874,7 +6198,6 @@ export function deploymentStreamAndNinToJSON(
     DeploymentStreamAndNin$outboundSchema.parse(deploymentStreamAndNin),
   );
 }
-
 export function deploymentStreamAndNinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndNin, SDKValidationError> {
@@ -7891,7 +6214,6 @@ export const DeploymentStreamAndDeploymentsIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamAndDeploymentsIn$Outbound =
   | string
@@ -7905,19 +6227,6 @@ export const DeploymentStreamAndDeploymentsIn$outboundSchema: z.ZodType<
   DeploymentStreamAndDeploymentsIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndDeploymentsIn$ {
-  /** @deprecated use `DeploymentStreamAndDeploymentsIn$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndDeploymentsIn$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsIn$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndDeploymentsIn$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsIn$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndDeploymentsIn$Outbound;
-}
-
 export function deploymentStreamAndDeploymentsInToJSON(
   deploymentStreamAndDeploymentsIn: DeploymentStreamAndDeploymentsIn,
 ): string {
@@ -7927,7 +6236,6 @@ export function deploymentStreamAndDeploymentsInToJSON(
     ),
   );
 }
-
 export function deploymentStreamAndDeploymentsInFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndDeploymentsIn, SDKValidationError> {
@@ -7946,7 +6254,6 @@ export const DeploymentStreamAndIn$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStreamAndIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -7961,19 +6268,6 @@ export const DeploymentStreamAndIn$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndIn$ {
-  /** @deprecated use `DeploymentStreamAndIn$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndIn$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndIn$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndIn$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndIn$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndIn$Outbound;
-}
-
 export function deploymentStreamAndInToJSON(
   deploymentStreamAndIn: DeploymentStreamAndIn,
 ): string {
@@ -7981,7 +6275,6 @@ export function deploymentStreamAndInToJSON(
     DeploymentStreamAndIn$outboundSchema.parse(deploymentStreamAndIn),
   );
 }
-
 export function deploymentStreamAndInFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndIn, SDKValidationError> {
@@ -8000,7 +6293,6 @@ export const DeploymentStreamAndLte$inboundSchema: z.ZodType<
 > = z.object({
   lte: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamAndLte$Outbound = {
   lte: number;
@@ -8015,19 +6307,6 @@ export const DeploymentStreamAndLte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndLte$ {
-  /** @deprecated use `DeploymentStreamAndLte$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndLte$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndLte$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndLte$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndLte$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndLte$Outbound;
-}
-
 export function deploymentStreamAndLteToJSON(
   deploymentStreamAndLte: DeploymentStreamAndLte,
 ): string {
@@ -8035,7 +6314,6 @@ export function deploymentStreamAndLteToJSON(
     DeploymentStreamAndLte$outboundSchema.parse(deploymentStreamAndLte),
   );
 }
-
 export function deploymentStreamAndLteFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndLte, SDKValidationError> {
@@ -8054,7 +6332,6 @@ export const DeploymentStreamAndLt$inboundSchema: z.ZodType<
 > = z.object({
   lt: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamAndLt$Outbound = {
   lt: number;
@@ -8069,19 +6346,6 @@ export const DeploymentStreamAndLt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndLt$ {
-  /** @deprecated use `DeploymentStreamAndLt$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndLt$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndLt$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndLt$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndLt$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndLt$Outbound;
-}
-
 export function deploymentStreamAndLtToJSON(
   deploymentStreamAndLt: DeploymentStreamAndLt,
 ): string {
@@ -8089,7 +6353,6 @@ export function deploymentStreamAndLtToJSON(
     DeploymentStreamAndLt$outboundSchema.parse(deploymentStreamAndLt),
   );
 }
-
 export function deploymentStreamAndLtFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndLt, SDKValidationError> {
@@ -8108,7 +6371,6 @@ export const DeploymentStreamAndGte$inboundSchema: z.ZodType<
 > = z.object({
   gte: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamAndGte$Outbound = {
   gte: number;
@@ -8123,19 +6385,6 @@ export const DeploymentStreamAndGte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndGte$ {
-  /** @deprecated use `DeploymentStreamAndGte$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndGte$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndGte$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndGte$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndGte$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndGte$Outbound;
-}
-
 export function deploymentStreamAndGteToJSON(
   deploymentStreamAndGte: DeploymentStreamAndGte,
 ): string {
@@ -8143,7 +6392,6 @@ export function deploymentStreamAndGteToJSON(
     DeploymentStreamAndGte$outboundSchema.parse(deploymentStreamAndGte),
   );
 }
-
 export function deploymentStreamAndGteFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndGte, SDKValidationError> {
@@ -8162,7 +6410,6 @@ export const DeploymentStreamAnd3$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type DeploymentStreamAnd3$Outbound = {
   gt: number;
@@ -8177,19 +6424,6 @@ export const DeploymentStreamAnd3$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAnd3$ {
-  /** @deprecated use `DeploymentStreamAnd3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAnd3$inboundSchema;
-  /** @deprecated use `DeploymentStreamAnd3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAnd3$outboundSchema;
-  /** @deprecated use `DeploymentStreamAnd3$Outbound` instead. */
-  export type Outbound = DeploymentStreamAnd3$Outbound;
-}
-
 export function deploymentStreamAnd3ToJSON(
   deploymentStreamAnd3: DeploymentStreamAnd3,
 ): string {
@@ -8197,7 +6431,6 @@ export function deploymentStreamAnd3ToJSON(
     DeploymentStreamAnd3$outboundSchema.parse(deploymentStreamAnd3),
   );
 }
-
 export function deploymentStreamAnd3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAnd3, SDKValidationError> {
@@ -8214,7 +6447,6 @@ export const DeploymentStreamAndDeploymentsNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamAndDeploymentsNe$Outbound =
   | string
@@ -8228,19 +6460,6 @@ export const DeploymentStreamAndDeploymentsNe$outboundSchema: z.ZodType<
   DeploymentStreamAndDeploymentsNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndDeploymentsNe$ {
-  /** @deprecated use `DeploymentStreamAndDeploymentsNe$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndDeploymentsNe$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsNe$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndDeploymentsNe$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsNe$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndDeploymentsNe$Outbound;
-}
-
 export function deploymentStreamAndDeploymentsNeToJSON(
   deploymentStreamAndDeploymentsNe: DeploymentStreamAndDeploymentsNe,
 ): string {
@@ -8250,7 +6469,6 @@ export function deploymentStreamAndDeploymentsNeToJSON(
     ),
   );
 }
-
 export function deploymentStreamAndDeploymentsNeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndDeploymentsNe, SDKValidationError> {
@@ -8269,7 +6487,6 @@ export const DeploymentStreamAndNe$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStreamAndNe$Outbound = {
   ne: string | number | boolean;
@@ -8284,19 +6501,6 @@ export const DeploymentStreamAndNe$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndNe$ {
-  /** @deprecated use `DeploymentStreamAndNe$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndNe$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndNe$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndNe$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndNe$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndNe$Outbound;
-}
-
 export function deploymentStreamAndNeToJSON(
   deploymentStreamAndNe: DeploymentStreamAndNe,
 ): string {
@@ -8304,7 +6508,6 @@ export function deploymentStreamAndNeToJSON(
     DeploymentStreamAndNe$outboundSchema.parse(deploymentStreamAndNe),
   );
 }
-
 export function deploymentStreamAndNeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndNe, SDKValidationError> {
@@ -8321,7 +6524,6 @@ export const DeploymentStreamAndDeploymentsEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStreamAndDeploymentsEq$Outbound =
   | string
@@ -8335,19 +6537,6 @@ export const DeploymentStreamAndDeploymentsEq$outboundSchema: z.ZodType<
   DeploymentStreamAndDeploymentsEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndDeploymentsEq$ {
-  /** @deprecated use `DeploymentStreamAndDeploymentsEq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndDeploymentsEq$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsEq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndDeploymentsEq$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndDeploymentsEq$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndDeploymentsEq$Outbound;
-}
-
 export function deploymentStreamAndDeploymentsEqToJSON(
   deploymentStreamAndDeploymentsEq: DeploymentStreamAndDeploymentsEq,
 ): string {
@@ -8357,7 +6546,6 @@ export function deploymentStreamAndDeploymentsEqToJSON(
     ),
   );
 }
-
 export function deploymentStreamAndDeploymentsEqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndDeploymentsEq, SDKValidationError> {
@@ -8376,7 +6564,6 @@ export const DeploymentStreamAndEq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStreamAndEq$Outbound = {
   eq: string | number | boolean;
@@ -8391,19 +6578,6 @@ export const DeploymentStreamAndEq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamAndEq$ {
-  /** @deprecated use `DeploymentStreamAndEq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamAndEq$inboundSchema;
-  /** @deprecated use `DeploymentStreamAndEq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamAndEq$outboundSchema;
-  /** @deprecated use `DeploymentStreamAndEq$Outbound` instead. */
-  export type Outbound = DeploymentStreamAndEq$Outbound;
-}
-
 export function deploymentStreamAndEqToJSON(
   deploymentStreamAndEq: DeploymentStreamAndEq,
 ): string {
@@ -8411,7 +6585,6 @@ export function deploymentStreamAndEqToJSON(
     DeploymentStreamAndEq$outboundSchema.parse(deploymentStreamAndEq),
   );
 }
-
 export function deploymentStreamAndEqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamAndEq, SDKValidationError> {
@@ -8439,7 +6612,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$inboundSchema:
     z.lazy(() => DeploymentStreamAndNin$inboundSchema),
     z.lazy(() => DeploymentStreamAndExists$inboundSchema),
   ]);
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilterDeploymentsAnd$Outbound =
   | DeploymentStreamAndEq$Outbound
@@ -8470,21 +6642,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema:
     z.lazy(() => DeploymentStreamAndExists$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilterDeploymentsAnd$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsAnd$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamKnowledgeFilterDeploymentsAnd$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsAnd$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilterDeploymentsAnd$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilterDeploymentsAndToJSON(
   deploymentStreamKnowledgeFilterDeploymentsAnd:
     DeploymentStreamKnowledgeFilterDeploymentsAnd,
@@ -8495,7 +6652,6 @@ export function deploymentStreamKnowledgeFilterDeploymentsAndToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilterDeploymentsAndFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8534,7 +6690,6 @@ export const DeploymentStreamKnowledgeFilterAnd$inboundSchema: z.ZodType<
     ])),
   ),
 });
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilterAnd$Outbound = {
   and: Array<
@@ -8576,20 +6731,6 @@ export const DeploymentStreamKnowledgeFilterAnd$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilterAnd$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilterAnd$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamKnowledgeFilterAnd$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterAnd$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamKnowledgeFilterAnd$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilterAnd$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilterAnd$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilterAndToJSON(
   deploymentStreamKnowledgeFilterAnd: DeploymentStreamKnowledgeFilterAnd,
 ): string {
@@ -8599,7 +6740,6 @@ export function deploymentStreamKnowledgeFilterAndToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilterAndFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamKnowledgeFilterAnd, SDKValidationError> {
@@ -8619,7 +6759,6 @@ export const OneExists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type OneExists$Outbound = {
   exists: boolean;
@@ -8634,23 +6773,9 @@ export const OneExists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OneExists$ {
-  /** @deprecated use `OneExists$inboundSchema` instead. */
-  export const inboundSchema = OneExists$inboundSchema;
-  /** @deprecated use `OneExists$outboundSchema` instead. */
-  export const outboundSchema = OneExists$outboundSchema;
-  /** @deprecated use `OneExists$Outbound` instead. */
-  export type Outbound = OneExists$Outbound;
-}
-
 export function oneExistsToJSON(oneExists: OneExists): string {
   return JSON.stringify(OneExists$outboundSchema.parse(oneExists));
 }
-
 export function oneExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<OneExists, SDKValidationError> {
@@ -8667,7 +6792,6 @@ export const DeploymentStream1DeploymentsNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStream1DeploymentsNin$Outbound =
   | string
@@ -8681,19 +6805,6 @@ export const DeploymentStream1DeploymentsNin$outboundSchema: z.ZodType<
   DeploymentStream1DeploymentsNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1DeploymentsNin$ {
-  /** @deprecated use `DeploymentStream1DeploymentsNin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1DeploymentsNin$inboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsNin$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1DeploymentsNin$outboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsNin$Outbound` instead. */
-  export type Outbound = DeploymentStream1DeploymentsNin$Outbound;
-}
-
 export function deploymentStream1DeploymentsNinToJSON(
   deploymentStream1DeploymentsNin: DeploymentStream1DeploymentsNin,
 ): string {
@@ -8703,7 +6814,6 @@ export function deploymentStream1DeploymentsNinToJSON(
     ),
   );
 }
-
 export function deploymentStream1DeploymentsNinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1DeploymentsNin, SDKValidationError> {
@@ -8722,7 +6832,6 @@ export const DeploymentStream1Nin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStream1Nin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -8737,19 +6846,6 @@ export const DeploymentStream1Nin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1Nin$ {
-  /** @deprecated use `DeploymentStream1Nin$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1Nin$inboundSchema;
-  /** @deprecated use `DeploymentStream1Nin$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1Nin$outboundSchema;
-  /** @deprecated use `DeploymentStream1Nin$Outbound` instead. */
-  export type Outbound = DeploymentStream1Nin$Outbound;
-}
-
 export function deploymentStream1NinToJSON(
   deploymentStream1Nin: DeploymentStream1Nin,
 ): string {
@@ -8757,7 +6853,6 @@ export function deploymentStream1NinToJSON(
     DeploymentStream1Nin$outboundSchema.parse(deploymentStream1Nin),
   );
 }
-
 export function deploymentStream1NinFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1Nin, SDKValidationError> {
@@ -8774,7 +6869,6 @@ export const DeploymentStream1DeploymentsIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStream1DeploymentsIn$Outbound = string | number | boolean;
 
@@ -8785,19 +6879,6 @@ export const DeploymentStream1DeploymentsIn$outboundSchema: z.ZodType<
   DeploymentStream1DeploymentsIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1DeploymentsIn$ {
-  /** @deprecated use `DeploymentStream1DeploymentsIn$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1DeploymentsIn$inboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsIn$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1DeploymentsIn$outboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsIn$Outbound` instead. */
-  export type Outbound = DeploymentStream1DeploymentsIn$Outbound;
-}
-
 export function deploymentStream1DeploymentsInToJSON(
   deploymentStream1DeploymentsIn: DeploymentStream1DeploymentsIn,
 ): string {
@@ -8807,7 +6888,6 @@ export function deploymentStream1DeploymentsInToJSON(
     ),
   );
 }
-
 export function deploymentStream1DeploymentsInFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1DeploymentsIn, SDKValidationError> {
@@ -8826,7 +6906,6 @@ export const DeploymentStream1In$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type DeploymentStream1In$Outbound = {
   in: Array<string | number | boolean>;
@@ -8841,19 +6920,6 @@ export const DeploymentStream1In$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1In$ {
-  /** @deprecated use `DeploymentStream1In$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1In$inboundSchema;
-  /** @deprecated use `DeploymentStream1In$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1In$outboundSchema;
-  /** @deprecated use `DeploymentStream1In$Outbound` instead. */
-  export type Outbound = DeploymentStream1In$Outbound;
-}
-
 export function deploymentStream1InToJSON(
   deploymentStream1In: DeploymentStream1In,
 ): string {
@@ -8861,7 +6927,6 @@ export function deploymentStream1InToJSON(
     DeploymentStream1In$outboundSchema.parse(deploymentStream1In),
   );
 }
-
 export function deploymentStream1InFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1In, SDKValidationError> {
@@ -8877,7 +6942,6 @@ export const OneLte$inboundSchema: z.ZodType<OneLte, z.ZodTypeDef, unknown> = z
   .object({
     lte: z.number(),
   });
-
 /** @internal */
 export type OneLte$Outbound = {
   lte: number;
@@ -8892,23 +6956,9 @@ export const OneLte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OneLte$ {
-  /** @deprecated use `OneLte$inboundSchema` instead. */
-  export const inboundSchema = OneLte$inboundSchema;
-  /** @deprecated use `OneLte$outboundSchema` instead. */
-  export const outboundSchema = OneLte$outboundSchema;
-  /** @deprecated use `OneLte$Outbound` instead. */
-  export type Outbound = OneLte$Outbound;
-}
-
 export function oneLteToJSON(oneLte: OneLte): string {
   return JSON.stringify(OneLte$outboundSchema.parse(oneLte));
 }
-
 export function oneLteFromJSON(
   jsonString: string,
 ): SafeParseResult<OneLte, SDKValidationError> {
@@ -8924,7 +6974,6 @@ export const OneLt$inboundSchema: z.ZodType<OneLt, z.ZodTypeDef, unknown> = z
   .object({
     lt: z.number(),
   });
-
 /** @internal */
 export type OneLt$Outbound = {
   lt: number;
@@ -8939,23 +6988,9 @@ export const OneLt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OneLt$ {
-  /** @deprecated use `OneLt$inboundSchema` instead. */
-  export const inboundSchema = OneLt$inboundSchema;
-  /** @deprecated use `OneLt$outboundSchema` instead. */
-  export const outboundSchema = OneLt$outboundSchema;
-  /** @deprecated use `OneLt$Outbound` instead. */
-  export type Outbound = OneLt$Outbound;
-}
-
 export function oneLtToJSON(oneLt: OneLt): string {
   return JSON.stringify(OneLt$outboundSchema.parse(oneLt));
 }
-
 export function oneLtFromJSON(
   jsonString: string,
 ): SafeParseResult<OneLt, SDKValidationError> {
@@ -8971,7 +7006,6 @@ export const OneGte$inboundSchema: z.ZodType<OneGte, z.ZodTypeDef, unknown> = z
   .object({
     gte: z.number(),
   });
-
 /** @internal */
 export type OneGte$Outbound = {
   gte: number;
@@ -8986,23 +7020,9 @@ export const OneGte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OneGte$ {
-  /** @deprecated use `OneGte$inboundSchema` instead. */
-  export const inboundSchema = OneGte$inboundSchema;
-  /** @deprecated use `OneGte$outboundSchema` instead. */
-  export const outboundSchema = OneGte$outboundSchema;
-  /** @deprecated use `OneGte$Outbound` instead. */
-  export type Outbound = OneGte$Outbound;
-}
-
 export function oneGteToJSON(oneGte: OneGte): string {
   return JSON.stringify(OneGte$outboundSchema.parse(oneGte));
 }
-
 export function oneGteFromJSON(
   jsonString: string,
 ): SafeParseResult<OneGte, SDKValidationError> {
@@ -9021,7 +7041,6 @@ export const DeploymentStream13$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type DeploymentStream13$Outbound = {
   gt: number;
@@ -9036,19 +7055,6 @@ export const DeploymentStream13$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream13$ {
-  /** @deprecated use `DeploymentStream13$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream13$inboundSchema;
-  /** @deprecated use `DeploymentStream13$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream13$outboundSchema;
-  /** @deprecated use `DeploymentStream13$Outbound` instead. */
-  export type Outbound = DeploymentStream13$Outbound;
-}
-
 export function deploymentStream13ToJSON(
   deploymentStream13: DeploymentStream13,
 ): string {
@@ -9056,7 +7062,6 @@ export function deploymentStream13ToJSON(
     DeploymentStream13$outboundSchema.parse(deploymentStream13),
   );
 }
-
 export function deploymentStream13FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream13, SDKValidationError> {
@@ -9073,7 +7078,6 @@ export const DeploymentStream1DeploymentsNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStream1DeploymentsNe$Outbound = string | number | boolean;
 
@@ -9084,19 +7088,6 @@ export const DeploymentStream1DeploymentsNe$outboundSchema: z.ZodType<
   DeploymentStream1DeploymentsNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1DeploymentsNe$ {
-  /** @deprecated use `DeploymentStream1DeploymentsNe$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1DeploymentsNe$inboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsNe$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1DeploymentsNe$outboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsNe$Outbound` instead. */
-  export type Outbound = DeploymentStream1DeploymentsNe$Outbound;
-}
-
 export function deploymentStream1DeploymentsNeToJSON(
   deploymentStream1DeploymentsNe: DeploymentStream1DeploymentsNe,
 ): string {
@@ -9106,7 +7097,6 @@ export function deploymentStream1DeploymentsNeToJSON(
     ),
   );
 }
-
 export function deploymentStream1DeploymentsNeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1DeploymentsNe, SDKValidationError> {
@@ -9125,7 +7115,6 @@ export const DeploymentStream1Ne$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStream1Ne$Outbound = {
   ne: string | number | boolean;
@@ -9140,19 +7129,6 @@ export const DeploymentStream1Ne$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1Ne$ {
-  /** @deprecated use `DeploymentStream1Ne$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1Ne$inboundSchema;
-  /** @deprecated use `DeploymentStream1Ne$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1Ne$outboundSchema;
-  /** @deprecated use `DeploymentStream1Ne$Outbound` instead. */
-  export type Outbound = DeploymentStream1Ne$Outbound;
-}
-
 export function deploymentStream1NeToJSON(
   deploymentStream1Ne: DeploymentStream1Ne,
 ): string {
@@ -9160,7 +7136,6 @@ export function deploymentStream1NeToJSON(
     DeploymentStream1Ne$outboundSchema.parse(deploymentStream1Ne),
   );
 }
-
 export function deploymentStream1NeFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1Ne, SDKValidationError> {
@@ -9177,7 +7152,6 @@ export const DeploymentStream1DeploymentsEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DeploymentStream1DeploymentsEq$Outbound = string | number | boolean;
 
@@ -9188,19 +7162,6 @@ export const DeploymentStream1DeploymentsEq$outboundSchema: z.ZodType<
   DeploymentStream1DeploymentsEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1DeploymentsEq$ {
-  /** @deprecated use `DeploymentStream1DeploymentsEq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1DeploymentsEq$inboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsEq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1DeploymentsEq$outboundSchema;
-  /** @deprecated use `DeploymentStream1DeploymentsEq$Outbound` instead. */
-  export type Outbound = DeploymentStream1DeploymentsEq$Outbound;
-}
-
 export function deploymentStream1DeploymentsEqToJSON(
   deploymentStream1DeploymentsEq: DeploymentStream1DeploymentsEq,
 ): string {
@@ -9210,7 +7171,6 @@ export function deploymentStream1DeploymentsEqToJSON(
     ),
   );
 }
-
 export function deploymentStream1DeploymentsEqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1DeploymentsEq, SDKValidationError> {
@@ -9229,7 +7189,6 @@ export const DeploymentStream1Eq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type DeploymentStream1Eq$Outbound = {
   eq: string | number | boolean;
@@ -9244,19 +7203,6 @@ export const DeploymentStream1Eq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream1Eq$ {
-  /** @deprecated use `DeploymentStream1Eq$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream1Eq$inboundSchema;
-  /** @deprecated use `DeploymentStream1Eq$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream1Eq$outboundSchema;
-  /** @deprecated use `DeploymentStream1Eq$Outbound` instead. */
-  export type Outbound = DeploymentStream1Eq$Outbound;
-}
-
 export function deploymentStream1EqToJSON(
   deploymentStream1Eq: DeploymentStream1Eq,
 ): string {
@@ -9264,7 +7210,6 @@ export function deploymentStream1EqToJSON(
     DeploymentStream1Eq$outboundSchema.parse(deploymentStream1Eq),
   );
 }
-
 export function deploymentStream1EqFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStream1Eq, SDKValidationError> {
@@ -9291,7 +7236,6 @@ export const DeploymentStreamKnowledgeFilter1$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStream1Nin$inboundSchema),
   z.lazy(() => OneExists$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilter1$Outbound =
   | DeploymentStream1Eq$Outbound
@@ -9321,19 +7265,6 @@ export const DeploymentStreamKnowledgeFilter1$outboundSchema: z.ZodType<
   z.lazy(() => OneExists$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilter1$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilter1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamKnowledgeFilter1$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilter1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamKnowledgeFilter1$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilter1$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilter1$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilter1ToJSON(
   deploymentStreamKnowledgeFilter1: DeploymentStreamKnowledgeFilter1,
 ): string {
@@ -9343,7 +7274,6 @@ export function deploymentStreamKnowledgeFilter1ToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilter1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamKnowledgeFilter1, SDKValidationError> {
@@ -9374,7 +7304,6 @@ export const DeploymentStreamKnowledgeFilter$inboundSchema: z.ZodType<
     z.lazy(() => OneExists$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type DeploymentStreamKnowledgeFilter$Outbound =
   | DeploymentStreamKnowledgeFilterAnd$Outbound
@@ -9413,19 +7342,6 @@ export const DeploymentStreamKnowledgeFilter$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamKnowledgeFilter$ {
-  /** @deprecated use `DeploymentStreamKnowledgeFilter$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamKnowledgeFilter$inboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilter$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamKnowledgeFilter$outboundSchema;
-  /** @deprecated use `DeploymentStreamKnowledgeFilter$Outbound` instead. */
-  export type Outbound = DeploymentStreamKnowledgeFilter$Outbound;
-}
-
 export function deploymentStreamKnowledgeFilterToJSON(
   deploymentStreamKnowledgeFilter: DeploymentStreamKnowledgeFilter,
 ): string {
@@ -9435,7 +7351,6 @@ export function deploymentStreamKnowledgeFilterToJSON(
     ),
   );
 }
-
 export function deploymentStreamKnowledgeFilterFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamKnowledgeFilter, SDKValidationError> {
@@ -9507,7 +7422,6 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
     "knowledge_filter": "knowledgeFilter",
   });
 });
-
 /** @internal */
 export type DeploymentStreamRequestBody$Outbound = {
   key: string;
@@ -9617,19 +7531,6 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamRequestBody$ {
-  /** @deprecated use `DeploymentStreamRequestBody$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamRequestBody$inboundSchema;
-  /** @deprecated use `DeploymentStreamRequestBody$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamRequestBody$outboundSchema;
-  /** @deprecated use `DeploymentStreamRequestBody$Outbound` instead. */
-  export type Outbound = DeploymentStreamRequestBody$Outbound;
-}
-
 export function deploymentStreamRequestBodyToJSON(
   deploymentStreamRequestBody: DeploymentStreamRequestBody,
 ): string {
@@ -9639,7 +7540,6 @@ export function deploymentStreamRequestBodyToJSON(
     ),
   );
 }
-
 export function deploymentStreamRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamRequestBody, SDKValidationError> {
@@ -9654,43 +7554,19 @@ export function deploymentStreamRequestBodyFromJSON(
 export const DeploymentStreamObject$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamObject
 > = z.nativeEnum(DeploymentStreamObject);
-
 /** @internal */
 export const DeploymentStreamObject$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamObject
 > = DeploymentStreamObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamObject$ {
-  /** @deprecated use `DeploymentStreamObject$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamObject$inboundSchema;
-  /** @deprecated use `DeploymentStreamObject$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamObject$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStreamProvider$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamProvider
 > = z.nativeEnum(DeploymentStreamProvider);
-
 /** @internal */
 export const DeploymentStreamProvider$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamProvider
 > = DeploymentStreamProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamProvider$ {
-  /** @deprecated use `DeploymentStreamProvider$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamProvider$inboundSchema;
-  /** @deprecated use `DeploymentStreamProvider$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamProvider$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamDeploymentsMetadata$inboundSchema: z.ZodType<
@@ -9712,7 +7588,6 @@ export const DeploymentStreamDeploymentsMetadata$inboundSchema: z.ZodType<
     "search_score": "searchScore",
   });
 });
-
 /** @internal */
 export type DeploymentStreamDeploymentsMetadata$Outbound = {
   file_name: string;
@@ -9743,21 +7618,6 @@ export const DeploymentStreamDeploymentsMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamDeploymentsMetadata$ {
-  /** @deprecated use `DeploymentStreamDeploymentsMetadata$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamDeploymentsMetadata$inboundSchema;
-  /** @deprecated use `DeploymentStreamDeploymentsMetadata$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamDeploymentsMetadata$outboundSchema;
-  /** @deprecated use `DeploymentStreamDeploymentsMetadata$Outbound` instead. */
-  export type Outbound = DeploymentStreamDeploymentsMetadata$Outbound;
-}
-
 export function deploymentStreamDeploymentsMetadataToJSON(
   deploymentStreamDeploymentsMetadata: DeploymentStreamDeploymentsMetadata,
 ): string {
@@ -9767,7 +7627,6 @@ export function deploymentStreamDeploymentsMetadataToJSON(
     ),
   );
 }
-
 export function deploymentStreamDeploymentsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamDeploymentsMetadata, SDKValidationError> {
@@ -9788,7 +7647,6 @@ export const DeploymentStreamRetrievals$inboundSchema: z.ZodType<
   document: z.string(),
   metadata: z.lazy(() => DeploymentStreamDeploymentsMetadata$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentStreamRetrievals$Outbound = {
   document: string;
@@ -9805,19 +7663,6 @@ export const DeploymentStreamRetrievals$outboundSchema: z.ZodType<
   metadata: z.lazy(() => DeploymentStreamDeploymentsMetadata$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamRetrievals$ {
-  /** @deprecated use `DeploymentStreamRetrievals$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamRetrievals$inboundSchema;
-  /** @deprecated use `DeploymentStreamRetrievals$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamRetrievals$outboundSchema;
-  /** @deprecated use `DeploymentStreamRetrievals$Outbound` instead. */
-  export type Outbound = DeploymentStreamRetrievals$Outbound;
-}
-
 export function deploymentStreamRetrievalsToJSON(
   deploymentStreamRetrievals: DeploymentStreamRetrievals,
 ): string {
@@ -9825,7 +7670,6 @@ export function deploymentStreamRetrievalsToJSON(
     DeploymentStreamRetrievals$outboundSchema.parse(deploymentStreamRetrievals),
   );
 }
-
 export function deploymentStreamRetrievalsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamRetrievals, SDKValidationError> {
@@ -9840,47 +7684,19 @@ export function deploymentStreamRetrievalsFromJSON(
 export const DeploymentStreamMessageDeploymentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseType> = z
     .nativeEnum(DeploymentStreamMessageDeploymentsResponseType);
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseType> =
     DeploymentStreamMessageDeploymentsResponseType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsResponseType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsResponseRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> = z
     .nativeEnum(DeploymentStreamMessageDeploymentsResponseRole);
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsResponseRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> =
     DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsResponseRole$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsResponseRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessage3$inboundSchema: z.ZodType<
@@ -9892,7 +7708,6 @@ export const DeploymentStreamMessage3$inboundSchema: z.ZodType<
   role: DeploymentStreamMessageDeploymentsResponseRole$inboundSchema,
   url: z.string(),
 });
-
 /** @internal */
 export type DeploymentStreamMessage3$Outbound = {
   type: string;
@@ -9911,19 +7726,6 @@ export const DeploymentStreamMessage3$outboundSchema: z.ZodType<
   url: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessage3$ {
-  /** @deprecated use `DeploymentStreamMessage3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessage3$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessage3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessage3$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessage3$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessage3$Outbound;
-}
-
 export function deploymentStreamMessage3ToJSON(
   deploymentStreamMessage3: DeploymentStreamMessage3,
 ): string {
@@ -9931,7 +7733,6 @@ export function deploymentStreamMessage3ToJSON(
     DeploymentStreamMessage3$outboundSchema.parse(deploymentStreamMessage3),
   );
 }
-
 export function deploymentStreamMessage3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessage3, SDKValidationError> {
@@ -9947,48 +7748,20 @@ export const DeploymentStreamMessageDeploymentsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsType> = z.nativeEnum(
     DeploymentStreamMessageDeploymentsType,
   );
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsType> =
     DeploymentStreamMessageDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsType$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsType$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessageDeploymentsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> = z.nativeEnum(
     DeploymentStreamMessageDeploymentsRole,
   );
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsRole$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> =
     DeploymentStreamMessageDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsRole$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessage2$inboundSchema: z.ZodType<
@@ -10008,7 +7781,6 @@ export const DeploymentStreamMessage2$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type DeploymentStreamMessage2$Outbound = {
   type: string;
@@ -10038,19 +7810,6 @@ export const DeploymentStreamMessage2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessage2$ {
-  /** @deprecated use `DeploymentStreamMessage2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessage2$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessage2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessage2$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessage2$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessage2$Outbound;
-}
-
 export function deploymentStreamMessage2ToJSON(
   deploymentStreamMessage2: DeploymentStreamMessage2,
 ): string {
@@ -10058,7 +7817,6 @@ export function deploymentStreamMessage2ToJSON(
     DeploymentStreamMessage2$outboundSchema.parse(deploymentStreamMessage2),
   );
 }
-
 export function deploymentStreamMessage2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessage2, SDKValidationError> {
@@ -10073,66 +7831,28 @@ export function deploymentStreamMessage2FromJSON(
 export const DeploymentStreamMessageType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessageType
 > = z.nativeEnum(DeploymentStreamMessageType);
-
 /** @internal */
 export const DeploymentStreamMessageType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessageType
 > = DeploymentStreamMessageType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageType$ {
-  /** @deprecated use `DeploymentStreamMessageType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageType$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStreamMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessageRole
 > = z.nativeEnum(DeploymentStreamMessageRole);
-
 /** @internal */
 export const DeploymentStreamMessageRole$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStreamMessageRole
 > = DeploymentStreamMessageRole$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageRole$ {
-  /** @deprecated use `DeploymentStreamMessageRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageRole$outboundSchema;
-}
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponse200Type> = z
     .nativeEnum(DeploymentStreamMessageDeploymentsResponse200Type);
-
 /** @internal */
 export const DeploymentStreamMessageDeploymentsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponse200Type> =
     DeploymentStreamMessageDeploymentsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsResponse200Type$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsResponse200Type$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const DeploymentStreamMessageFunction$inboundSchema: z.ZodType<
@@ -10143,7 +7863,6 @@ export const DeploymentStreamMessageFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-
 /** @internal */
 export type DeploymentStreamMessageFunction$Outbound = {
   name: string;
@@ -10160,19 +7879,6 @@ export const DeploymentStreamMessageFunction$outboundSchema: z.ZodType<
   arguments: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageFunction$ {
-  /** @deprecated use `DeploymentStreamMessageFunction$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageFunction$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageFunction$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageFunction$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessageFunction$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessageFunction$Outbound;
-}
-
 export function deploymentStreamMessageFunctionToJSON(
   deploymentStreamMessageFunction: DeploymentStreamMessageFunction,
 ): string {
@@ -10182,7 +7888,6 @@ export function deploymentStreamMessageFunctionToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessageFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessageFunction, SDKValidationError> {
@@ -10204,7 +7909,6 @@ export const DeploymentStreamMessageToolCalls$inboundSchema: z.ZodType<
   type: DeploymentStreamMessageDeploymentsResponse200Type$inboundSchema,
   function: z.lazy(() => DeploymentStreamMessageFunction$inboundSchema),
 });
-
 /** @internal */
 export type DeploymentStreamMessageToolCalls$Outbound = {
   id?: string | undefined;
@@ -10225,19 +7929,6 @@ export const DeploymentStreamMessageToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => DeploymentStreamMessageFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageToolCalls$ {
-  /** @deprecated use `DeploymentStreamMessageToolCalls$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageToolCalls$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageToolCalls$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageToolCalls$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessageToolCalls$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessageToolCalls$Outbound;
-}
-
 export function deploymentStreamMessageToolCallsToJSON(
   deploymentStreamMessageToolCalls: DeploymentStreamMessageToolCalls,
 ): string {
@@ -10247,7 +7938,6 @@ export function deploymentStreamMessageToolCallsToJSON(
     ),
   );
 }
-
 export function deploymentStreamMessageToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessageToolCalls, SDKValidationError> {
@@ -10280,7 +7970,6 @@ export const DeploymentStreamMessage1$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-
 /** @internal */
 export type DeploymentStreamMessage1$Outbound = {
   type: string;
@@ -10315,19 +8004,6 @@ export const DeploymentStreamMessage1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessage1$ {
-  /** @deprecated use `DeploymentStreamMessage1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessage1$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessage1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessage1$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessage1$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessage1$Outbound;
-}
-
 export function deploymentStreamMessage1ToJSON(
   deploymentStreamMessage1: DeploymentStreamMessage1,
 ): string {
@@ -10335,7 +8011,6 @@ export function deploymentStreamMessage1ToJSON(
     DeploymentStreamMessage1$outboundSchema.parse(deploymentStreamMessage1),
   );
 }
-
 export function deploymentStreamMessage1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessage1, SDKValidationError> {
@@ -10356,7 +8031,6 @@ export const DeploymentStreamMessage$inboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamMessage2$inboundSchema),
   z.lazy(() => DeploymentStreamMessage3$inboundSchema),
 ]);
-
 /** @internal */
 export type DeploymentStreamMessage$Outbound =
   | DeploymentStreamMessage1$Outbound
@@ -10374,19 +8048,6 @@ export const DeploymentStreamMessage$outboundSchema: z.ZodType<
   z.lazy(() => DeploymentStreamMessage3$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessage$ {
-  /** @deprecated use `DeploymentStreamMessage$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessage$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessage$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessage$outboundSchema;
-  /** @deprecated use `DeploymentStreamMessage$Outbound` instead. */
-  export type Outbound = DeploymentStreamMessage$Outbound;
-}
-
 export function deploymentStreamMessageToJSON(
   deploymentStreamMessage: DeploymentStreamMessage,
 ): string {
@@ -10394,7 +8055,6 @@ export function deploymentStreamMessageToJSON(
     DeploymentStreamMessage$outboundSchema.parse(deploymentStreamMessage),
   );
 }
-
 export function deploymentStreamMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamMessage, SDKValidationError> {
@@ -10423,7 +8083,6 @@ export const DeploymentStreamChoices$inboundSchema: z.ZodType<
     "finish_reason": "finishReason",
   });
 });
-
 /** @internal */
 export type DeploymentStreamChoices$Outbound = {
   index: number;
@@ -10453,19 +8112,6 @@ export const DeploymentStreamChoices$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamChoices$ {
-  /** @deprecated use `DeploymentStreamChoices$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamChoices$inboundSchema;
-  /** @deprecated use `DeploymentStreamChoices$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamChoices$outboundSchema;
-  /** @deprecated use `DeploymentStreamChoices$Outbound` instead. */
-  export type Outbound = DeploymentStreamChoices$Outbound;
-}
-
 export function deploymentStreamChoicesToJSON(
   deploymentStreamChoices: DeploymentStreamChoices,
 ): string {
@@ -10473,7 +8119,6 @@ export function deploymentStreamChoicesToJSON(
     DeploymentStreamChoices$outboundSchema.parse(deploymentStreamChoices),
   );
 }
-
 export function deploymentStreamChoicesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamChoices, SDKValidationError> {
@@ -10512,7 +8157,6 @@ export const DeploymentStreamData$inboundSchema: z.ZodType<
     "provider_response": "providerResponse",
   });
 });
-
 /** @internal */
 export type DeploymentStreamData$Outbound = {
   id: string;
@@ -10557,19 +8201,6 @@ export const DeploymentStreamData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamData$ {
-  /** @deprecated use `DeploymentStreamData$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamData$inboundSchema;
-  /** @deprecated use `DeploymentStreamData$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamData$outboundSchema;
-  /** @deprecated use `DeploymentStreamData$Outbound` instead. */
-  export type Outbound = DeploymentStreamData$Outbound;
-}
-
 export function deploymentStreamDataToJSON(
   deploymentStreamData: DeploymentStreamData,
 ): string {
@@ -10577,7 +8208,6 @@ export function deploymentStreamDataToJSON(
     DeploymentStreamData$outboundSchema.parse(deploymentStreamData),
   );
 }
-
 export function deploymentStreamDataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamData, SDKValidationError> {
@@ -10606,7 +8236,6 @@ export const DeploymentStreamResponseBody$inboundSchema: z.ZodType<
     }
   }).pipe(z.lazy(() => DeploymentStreamData$inboundSchema).optional()),
 });
-
 /** @internal */
 export type DeploymentStreamResponseBody$Outbound = {
   data?: DeploymentStreamData$Outbound | undefined;
@@ -10621,19 +8250,6 @@ export const DeploymentStreamResponseBody$outboundSchema: z.ZodType<
   data: z.lazy(() => DeploymentStreamData$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamResponseBody$ {
-  /** @deprecated use `DeploymentStreamResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamResponseBody$inboundSchema;
-  /** @deprecated use `DeploymentStreamResponseBody$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamResponseBody$outboundSchema;
-  /** @deprecated use `DeploymentStreamResponseBody$Outbound` instead. */
-  export type Outbound = DeploymentStreamResponseBody$Outbound;
-}
-
 export function deploymentStreamResponseBodyToJSON(
   deploymentStreamResponseBody: DeploymentStreamResponseBody,
 ): string {
@@ -10643,7 +8259,6 @@ export function deploymentStreamResponseBodyToJSON(
     ),
   );
 }
-
 export function deploymentStreamResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentStreamResponseBody, SDKValidationError> {

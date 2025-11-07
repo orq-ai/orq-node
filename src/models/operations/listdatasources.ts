@@ -114,7 +114,6 @@ export const QueryParamStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), z.string()]);
-
 /** @internal */
 export type QueryParamStatus$Outbound = Array<string> | string;
 
@@ -125,19 +124,6 @@ export const QueryParamStatus$outboundSchema: z.ZodType<
   QueryParamStatus
 > = z.union([z.array(z.string()), z.string()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace QueryParamStatus$ {
-  /** @deprecated use `QueryParamStatus$inboundSchema` instead. */
-  export const inboundSchema = QueryParamStatus$inboundSchema;
-  /** @deprecated use `QueryParamStatus$outboundSchema` instead. */
-  export const outboundSchema = QueryParamStatus$outboundSchema;
-  /** @deprecated use `QueryParamStatus$Outbound` instead. */
-  export type Outbound = QueryParamStatus$Outbound;
-}
-
 export function queryParamStatusToJSON(
   queryParamStatus: QueryParamStatus,
 ): string {
@@ -145,7 +131,6 @@ export function queryParamStatusToJSON(
     QueryParamStatus$outboundSchema.parse(queryParamStatus),
   );
 }
-
 export function queryParamStatusFromJSON(
   jsonString: string,
 ): SafeParseResult<QueryParamStatus, SDKValidationError> {
@@ -175,7 +160,6 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
@@ -206,19 +190,6 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesRequest$ {
-  /** @deprecated use `ListDatasourcesRequest$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesRequest$inboundSchema;
-  /** @deprecated use `ListDatasourcesRequest$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesRequest$outboundSchema;
-  /** @deprecated use `ListDatasourcesRequest$Outbound` instead. */
-  export type Outbound = ListDatasourcesRequest$Outbound;
-}
-
 export function listDatasourcesRequestToJSON(
   listDatasourcesRequest: ListDatasourcesRequest,
 ): string {
@@ -226,7 +197,6 @@ export function listDatasourcesRequestToJSON(
     ListDatasourcesRequest$outboundSchema.parse(listDatasourcesRequest),
   );
 }
-
 export function listDatasourcesRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasourcesRequest, SDKValidationError> {
@@ -241,43 +211,19 @@ export function listDatasourcesRequestFromJSON(
 export const ListDatasourcesObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesObject
 > = z.nativeEnum(ListDatasourcesObject);
-
 /** @internal */
 export const ListDatasourcesObject$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesObject
 > = ListDatasourcesObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesObject$ {
-  /** @deprecated use `ListDatasourcesObject$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesObject$inboundSchema;
-  /** @deprecated use `ListDatasourcesObject$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesObject$outboundSchema;
-}
-
 /** @internal */
 export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesStatus
 > = z.nativeEnum(ListDatasourcesStatus);
-
 /** @internal */
 export const ListDatasourcesStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesStatus
 > = ListDatasourcesStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesStatus$ {
-  /** @deprecated use `ListDatasourcesStatus$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesStatus$inboundSchema;
-  /** @deprecated use `ListDatasourcesStatus$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesStatus$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasourcesData$inboundSchema: z.ZodType<
@@ -285,7 +231,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9CJXGVZAD6G88NSXFAXP49Y"),
+  _id: z.string().default("01K9EV08JA4NVAYR5PFAW4T5DD"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -307,7 +253,6 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-
 /** @internal */
 export type ListDatasourcesData$Outbound = {
   _id: string;
@@ -329,7 +274,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K9CJXGVZAD6G88NSXFAXP49Y"),
+  id: z.string().default("01K9EV08JA4NVAYR5PFAW4T5DD"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,
@@ -352,19 +297,6 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesData$ {
-  /** @deprecated use `ListDatasourcesData$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesData$inboundSchema;
-  /** @deprecated use `ListDatasourcesData$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesData$outboundSchema;
-  /** @deprecated use `ListDatasourcesData$Outbound` instead. */
-  export type Outbound = ListDatasourcesData$Outbound;
-}
-
 export function listDatasourcesDataToJSON(
   listDatasourcesData: ListDatasourcesData,
 ): string {
@@ -372,7 +304,6 @@ export function listDatasourcesDataToJSON(
     ListDatasourcesData$outboundSchema.parse(listDatasourcesData),
   );
 }
-
 export function listDatasourcesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasourcesData, SDKValidationError> {
@@ -397,7 +328,6 @@ export const ListDatasourcesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListDatasourcesResponseBody$Outbound = {
   object: string;
@@ -420,19 +350,6 @@ export const ListDatasourcesResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesResponseBody$ {
-  /** @deprecated use `ListDatasourcesResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesResponseBody$inboundSchema;
-  /** @deprecated use `ListDatasourcesResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesResponseBody$outboundSchema;
-  /** @deprecated use `ListDatasourcesResponseBody$Outbound` instead. */
-  export type Outbound = ListDatasourcesResponseBody$Outbound;
-}
-
 export function listDatasourcesResponseBodyToJSON(
   listDatasourcesResponseBody: ListDatasourcesResponseBody,
 ): string {
@@ -442,7 +359,6 @@ export function listDatasourcesResponseBodyToJSON(
     ),
   );
 }
-
 export function listDatasourcesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasourcesResponseBody, SDKValidationError> {

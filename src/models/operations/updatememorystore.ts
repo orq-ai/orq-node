@@ -312,451 +312,175 @@ export type UpdateMemoryStoreResponseBody = {
 /** @internal */
 export const Model23$inboundSchema: z.ZodNativeEnum<typeof Model23> = z
   .nativeEnum(Model23);
-
 /** @internal */
 export const Model23$outboundSchema: z.ZodNativeEnum<typeof Model23> =
   Model23$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model23$ {
-  /** @deprecated use `Model23$inboundSchema` instead. */
-  export const inboundSchema = Model23$inboundSchema;
-  /** @deprecated use `Model23$outboundSchema` instead. */
-  export const outboundSchema = Model23$outboundSchema;
-}
-
 /** @internal */
 export const Model22$inboundSchema: z.ZodNativeEnum<typeof Model22> = z
   .nativeEnum(Model22);
-
 /** @internal */
 export const Model22$outboundSchema: z.ZodNativeEnum<typeof Model22> =
   Model22$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model22$ {
-  /** @deprecated use `Model22$inboundSchema` instead. */
-  export const inboundSchema = Model22$inboundSchema;
-  /** @deprecated use `Model22$outboundSchema` instead. */
-  export const outboundSchema = Model22$outboundSchema;
-}
-
 /** @internal */
 export const Model21$inboundSchema: z.ZodNativeEnum<typeof Model21> = z
   .nativeEnum(Model21);
-
 /** @internal */
 export const Model21$outboundSchema: z.ZodNativeEnum<typeof Model21> =
   Model21$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model21$ {
-  /** @deprecated use `Model21$inboundSchema` instead. */
-  export const inboundSchema = Model21$inboundSchema;
-  /** @deprecated use `Model21$outboundSchema` instead. */
-  export const outboundSchema = Model21$outboundSchema;
-}
-
 /** @internal */
 export const Model20$inboundSchema: z.ZodNativeEnum<typeof Model20> = z
   .nativeEnum(Model20);
-
 /** @internal */
 export const Model20$outboundSchema: z.ZodNativeEnum<typeof Model20> =
   Model20$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model20$ {
-  /** @deprecated use `Model20$inboundSchema` instead. */
-  export const inboundSchema = Model20$inboundSchema;
-  /** @deprecated use `Model20$outboundSchema` instead. */
-  export const outboundSchema = Model20$outboundSchema;
-}
-
 /** @internal */
 export const Model19$inboundSchema: z.ZodNativeEnum<typeof Model19> = z
   .nativeEnum(Model19);
-
 /** @internal */
 export const Model19$outboundSchema: z.ZodNativeEnum<typeof Model19> =
   Model19$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model19$ {
-  /** @deprecated use `Model19$inboundSchema` instead. */
-  export const inboundSchema = Model19$inboundSchema;
-  /** @deprecated use `Model19$outboundSchema` instead. */
-  export const outboundSchema = Model19$outboundSchema;
-}
-
 /** @internal */
 export const Model18$inboundSchema: z.ZodNativeEnum<typeof Model18> = z
   .nativeEnum(Model18);
-
 /** @internal */
 export const Model18$outboundSchema: z.ZodNativeEnum<typeof Model18> =
   Model18$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model18$ {
-  /** @deprecated use `Model18$inboundSchema` instead. */
-  export const inboundSchema = Model18$inboundSchema;
-  /** @deprecated use `Model18$outboundSchema` instead. */
-  export const outboundSchema = Model18$outboundSchema;
-}
-
 /** @internal */
 export const Model17$inboundSchema: z.ZodNativeEnum<typeof Model17> = z
   .nativeEnum(Model17);
-
 /** @internal */
 export const Model17$outboundSchema: z.ZodNativeEnum<typeof Model17> =
   Model17$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model17$ {
-  /** @deprecated use `Model17$inboundSchema` instead. */
-  export const inboundSchema = Model17$inboundSchema;
-  /** @deprecated use `Model17$outboundSchema` instead. */
-  export const outboundSchema = Model17$outboundSchema;
-}
-
 /** @internal */
 export const Model16$inboundSchema: z.ZodNativeEnum<typeof Model16> = z
   .nativeEnum(Model16);
-
 /** @internal */
 export const Model16$outboundSchema: z.ZodNativeEnum<typeof Model16> =
   Model16$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model16$ {
-  /** @deprecated use `Model16$inboundSchema` instead. */
-  export const inboundSchema = Model16$inboundSchema;
-  /** @deprecated use `Model16$outboundSchema` instead. */
-  export const outboundSchema = Model16$outboundSchema;
-}
-
 /** @internal */
 export const Model15$inboundSchema: z.ZodNativeEnum<typeof Model15> = z
   .nativeEnum(Model15);
-
 /** @internal */
 export const Model15$outboundSchema: z.ZodNativeEnum<typeof Model15> =
   Model15$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model15$ {
-  /** @deprecated use `Model15$inboundSchema` instead. */
-  export const inboundSchema = Model15$inboundSchema;
-  /** @deprecated use `Model15$outboundSchema` instead. */
-  export const outboundSchema = Model15$outboundSchema;
-}
-
 /** @internal */
 export const Model14$inboundSchema: z.ZodNativeEnum<typeof Model14> = z
   .nativeEnum(Model14);
-
 /** @internal */
 export const Model14$outboundSchema: z.ZodNativeEnum<typeof Model14> =
   Model14$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model14$ {
-  /** @deprecated use `Model14$inboundSchema` instead. */
-  export const inboundSchema = Model14$inboundSchema;
-  /** @deprecated use `Model14$outboundSchema` instead. */
-  export const outboundSchema = Model14$outboundSchema;
-}
-
 /** @internal */
 export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
   .nativeEnum(Model13);
-
 /** @internal */
 export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
   Model13$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model13$ {
-  /** @deprecated use `Model13$inboundSchema` instead. */
-  export const inboundSchema = Model13$inboundSchema;
-  /** @deprecated use `Model13$outboundSchema` instead. */
-  export const outboundSchema = Model13$outboundSchema;
-}
-
 /** @internal */
 export const Model12$inboundSchema: z.ZodNativeEnum<typeof Model12> = z
   .nativeEnum(Model12);
-
 /** @internal */
 export const Model12$outboundSchema: z.ZodNativeEnum<typeof Model12> =
   Model12$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model12$ {
-  /** @deprecated use `Model12$inboundSchema` instead. */
-  export const inboundSchema = Model12$inboundSchema;
-  /** @deprecated use `Model12$outboundSchema` instead. */
-  export const outboundSchema = Model12$outboundSchema;
-}
-
 /** @internal */
 export const Model11$inboundSchema: z.ZodNativeEnum<typeof Model11> = z
   .nativeEnum(Model11);
-
 /** @internal */
 export const Model11$outboundSchema: z.ZodNativeEnum<typeof Model11> =
   Model11$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model11$ {
-  /** @deprecated use `Model11$inboundSchema` instead. */
-  export const inboundSchema = Model11$inboundSchema;
-  /** @deprecated use `Model11$outboundSchema` instead. */
-  export const outboundSchema = Model11$outboundSchema;
-}
-
 /** @internal */
 export const Model10$inboundSchema: z.ZodNativeEnum<typeof Model10> = z
   .nativeEnum(Model10);
-
 /** @internal */
 export const Model10$outboundSchema: z.ZodNativeEnum<typeof Model10> =
   Model10$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model10$ {
-  /** @deprecated use `Model10$inboundSchema` instead. */
-  export const inboundSchema = Model10$inboundSchema;
-  /** @deprecated use `Model10$outboundSchema` instead. */
-  export const outboundSchema = Model10$outboundSchema;
-}
-
 /** @internal */
 export const Model9$inboundSchema: z.ZodNativeEnum<typeof Model9> = z
   .nativeEnum(Model9);
-
 /** @internal */
 export const Model9$outboundSchema: z.ZodNativeEnum<typeof Model9> =
   Model9$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model9$ {
-  /** @deprecated use `Model9$inboundSchema` instead. */
-  export const inboundSchema = Model9$inboundSchema;
-  /** @deprecated use `Model9$outboundSchema` instead. */
-  export const outboundSchema = Model9$outboundSchema;
-}
-
 /** @internal */
 export const Model8$inboundSchema: z.ZodNativeEnum<typeof Model8> = z
   .nativeEnum(Model8);
-
 /** @internal */
 export const Model8$outboundSchema: z.ZodNativeEnum<typeof Model8> =
   Model8$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model8$ {
-  /** @deprecated use `Model8$inboundSchema` instead. */
-  export const inboundSchema = Model8$inboundSchema;
-  /** @deprecated use `Model8$outboundSchema` instead. */
-  export const outboundSchema = Model8$outboundSchema;
-}
-
 /** @internal */
 export const Model7$inboundSchema: z.ZodNativeEnum<typeof Model7> = z
   .nativeEnum(Model7);
-
 /** @internal */
 export const Model7$outboundSchema: z.ZodNativeEnum<typeof Model7> =
   Model7$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model7$ {
-  /** @deprecated use `Model7$inboundSchema` instead. */
-  export const inboundSchema = Model7$inboundSchema;
-  /** @deprecated use `Model7$outboundSchema` instead. */
-  export const outboundSchema = Model7$outboundSchema;
-}
 
 /** @internal */
 export const UpdateMemoryStoreModel6$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel6
 > = z.nativeEnum(UpdateMemoryStoreModel6);
-
 /** @internal */
 export const UpdateMemoryStoreModel6$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel6
 > = UpdateMemoryStoreModel6$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel6$ {
-  /** @deprecated use `UpdateMemoryStoreModel6$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel6$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel6$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel6$outboundSchema;
-}
-
 /** @internal */
 export const UpdateMemoryStoreModel5$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel5
 > = z.nativeEnum(UpdateMemoryStoreModel5);
-
 /** @internal */
 export const UpdateMemoryStoreModel5$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel5
 > = UpdateMemoryStoreModel5$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel5$ {
-  /** @deprecated use `UpdateMemoryStoreModel5$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel5$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel5$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel5$outboundSchema;
-}
-
 /** @internal */
 export const UpdateMemoryStoreModel4$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel4
 > = z.nativeEnum(UpdateMemoryStoreModel4);
-
 /** @internal */
 export const UpdateMemoryStoreModel4$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel4
 > = UpdateMemoryStoreModel4$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel4$ {
-  /** @deprecated use `UpdateMemoryStoreModel4$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel4$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel4$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel4$outboundSchema;
-}
-
 /** @internal */
 export const UpdateMemoryStoreModel3$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel3
 > = z.nativeEnum(UpdateMemoryStoreModel3);
-
 /** @internal */
 export const UpdateMemoryStoreModel3$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel3
 > = UpdateMemoryStoreModel3$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel3$ {
-  /** @deprecated use `UpdateMemoryStoreModel3$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel3$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel3$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel3$outboundSchema;
-}
-
 /** @internal */
 export const UpdateMemoryStoreModel2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel2
 > = z.nativeEnum(UpdateMemoryStoreModel2);
-
 /** @internal */
 export const UpdateMemoryStoreModel2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel2
 > = UpdateMemoryStoreModel2$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel2$ {
-  /** @deprecated use `UpdateMemoryStoreModel2$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel2$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel2$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel2$outboundSchema;
-}
-
 /** @internal */
 export const UpdateMemoryStoreModel1$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel1
 > = z.nativeEnum(UpdateMemoryStoreModel1);
-
 /** @internal */
 export const UpdateMemoryStoreModel1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreModel1
 > = UpdateMemoryStoreModel1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel1$ {
-  /** @deprecated use `UpdateMemoryStoreModel1$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel1$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel1$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel1$outboundSchema;
-}
 
 /** @internal */
 export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
@@ -788,7 +512,6 @@ export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
   Model22$inboundSchema,
   Model23$inboundSchema,
 ]);
-
 /** @internal */
 export type UpdateMemoryStoreModel$Outbound =
   | string
@@ -846,19 +569,6 @@ export const UpdateMemoryStoreModel$outboundSchema: z.ZodType<
   Model23$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreModel$ {
-  /** @deprecated use `UpdateMemoryStoreModel$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreModel$Outbound;
-}
-
 export function updateMemoryStoreModelToJSON(
   updateMemoryStoreModel: UpdateMemoryStoreModel,
 ): string {
@@ -866,7 +576,6 @@ export function updateMemoryStoreModelToJSON(
     UpdateMemoryStoreModel$outboundSchema.parse(updateMemoryStoreModel),
   );
 }
-
 export function updateMemoryStoreModelFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreModel, SDKValidationError> {
@@ -909,7 +618,6 @@ export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     Model23$inboundSchema,
   ]),
 });
-
 /** @internal */
 export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
   model:
@@ -971,19 +679,6 @@ export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreEmbeddingConfig$ {
-  /** @deprecated use `UpdateMemoryStoreEmbeddingConfig$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreEmbeddingConfig$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreEmbeddingConfig$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreEmbeddingConfig$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreEmbeddingConfig$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreEmbeddingConfig$Outbound;
-}
-
 export function updateMemoryStoreEmbeddingConfigToJSON(
   updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
 ): string {
@@ -993,7 +688,6 @@ export function updateMemoryStoreEmbeddingConfigToJSON(
     ),
   );
 }
-
 export function updateMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
@@ -1021,7 +715,6 @@ export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-
 /** @internal */
 export type UpdateMemoryStoreRequestBody$Outbound = {
   embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
@@ -1048,19 +741,6 @@ export const UpdateMemoryStoreRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreRequestBody$ {
-  /** @deprecated use `UpdateMemoryStoreRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreRequestBody$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreRequestBody$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreRequestBody$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreRequestBody$Outbound;
-}
-
 export function updateMemoryStoreRequestBodyToJSON(
   updateMemoryStoreRequestBody: UpdateMemoryStoreRequestBody,
 ): string {
@@ -1070,7 +750,6 @@ export function updateMemoryStoreRequestBodyToJSON(
     ),
   );
 }
-
 export function updateMemoryStoreRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreRequestBody, SDKValidationError> {
@@ -1096,7 +775,6 @@ export const UpdateMemoryStoreRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateMemoryStoreRequest$Outbound = {
   memory_store_key: string;
@@ -1119,19 +797,6 @@ export const UpdateMemoryStoreRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreRequest$ {
-  /** @deprecated use `UpdateMemoryStoreRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreRequest$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreRequest$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreRequest$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreRequest$Outbound;
-}
-
 export function updateMemoryStoreRequestToJSON(
   updateMemoryStoreRequest: UpdateMemoryStoreRequest,
 ): string {
@@ -1139,7 +804,6 @@ export function updateMemoryStoreRequestToJSON(
     UpdateMemoryStoreRequest$outboundSchema.parse(updateMemoryStoreRequest),
   );
 }
-
 export function updateMemoryStoreRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreRequest, SDKValidationError> {
@@ -1154,22 +818,10 @@ export function updateMemoryStoreRequestFromJSON(
 export const UpdateMemoryStoreProvider$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreProvider
 > = z.nativeEnum(UpdateMemoryStoreProvider);
-
 /** @internal */
 export const UpdateMemoryStoreProvider$outboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreProvider
 > = UpdateMemoryStoreProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreProvider$ {
-  /** @deprecated use `UpdateMemoryStoreProvider$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreProvider$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreProvider$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreProvider$outboundSchema;
-}
 
 /** @internal */
 export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema:
@@ -1189,7 +841,6 @@ export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema:
       "top_k": "topK",
     });
   });
-
 /** @internal */
 export type UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound = {
   model_id: string;
@@ -1217,21 +868,6 @@ export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreMemoryStoresEmbeddingConfig$ {
-  /** @deprecated use `UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound;
-}
-
 export function updateMemoryStoreMemoryStoresEmbeddingConfigToJSON(
   updateMemoryStoreMemoryStoresEmbeddingConfig:
     UpdateMemoryStoreMemoryStoresEmbeddingConfig,
@@ -1242,7 +878,6 @@ export function updateMemoryStoreMemoryStoresEmbeddingConfigToJSON(
     ),
   );
 }
-
 export function updateMemoryStoreMemoryStoresEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1286,7 +921,6 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-
 /** @internal */
 export type UpdateMemoryStoreResponseBody$Outbound = {
   _id: string;
@@ -1329,19 +963,6 @@ export const UpdateMemoryStoreResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateMemoryStoreResponseBody$ {
-  /** @deprecated use `UpdateMemoryStoreResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreResponseBody$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreResponseBody$outboundSchema;
-  /** @deprecated use `UpdateMemoryStoreResponseBody$Outbound` instead. */
-  export type Outbound = UpdateMemoryStoreResponseBody$Outbound;
-}
-
 export function updateMemoryStoreResponseBodyToJSON(
   updateMemoryStoreResponseBody: UpdateMemoryStoreResponseBody,
 ): string {
@@ -1351,7 +972,6 @@ export function updateMemoryStoreResponseBodyToJSON(
     ),
   );
 }
-
 export function updateMemoryStoreResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreResponseBody, SDKValidationError> {

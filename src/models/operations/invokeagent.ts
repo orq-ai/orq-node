@@ -338,43 +338,19 @@ export type InvokeAgentResponseBody = {
 export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
   typeof RoleToolMessage
 > = z.nativeEnum(RoleToolMessage);
-
 /** @internal */
 export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleToolMessage
 > = RoleToolMessage$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RoleToolMessage$ {
-  /** @deprecated use `RoleToolMessage$inboundSchema` instead. */
-  export const inboundSchema = RoleToolMessage$inboundSchema;
-  /** @deprecated use `RoleToolMessage$outboundSchema` instead. */
-  export const outboundSchema = RoleToolMessage$outboundSchema;
-}
-
 /** @internal */
 export const RoleUserMessage$inboundSchema: z.ZodNativeEnum<
   typeof RoleUserMessage
 > = z.nativeEnum(RoleUserMessage);
-
 /** @internal */
 export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleUserMessage
 > = RoleUserMessage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RoleUserMessage$ {
-  /** @deprecated use `RoleUserMessage$inboundSchema` instead. */
-  export const inboundSchema = RoleUserMessage$inboundSchema;
-  /** @deprecated use `RoleUserMessage$outboundSchema` instead. */
-  export const outboundSchema = RoleUserMessage$outboundSchema;
-}
 
 /** @internal */
 export const InvokeAgentRole$inboundSchema: z.ZodType<
@@ -382,7 +358,6 @@ export const InvokeAgentRole$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]);
-
 /** @internal */
 export type InvokeAgentRole$Outbound = string | string;
 
@@ -393,25 +368,11 @@ export const InvokeAgentRole$outboundSchema: z.ZodType<
   InvokeAgentRole
 > = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentRole$ {
-  /** @deprecated use `InvokeAgentRole$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentRole$inboundSchema;
-  /** @deprecated use `InvokeAgentRole$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentRole$outboundSchema;
-  /** @deprecated use `InvokeAgentRole$Outbound` instead. */
-  export type Outbound = InvokeAgentRole$Outbound;
-}
-
 export function invokeAgentRoleToJSON(
   invokeAgentRole: InvokeAgentRole,
 ): string {
   return JSON.stringify(InvokeAgentRole$outboundSchema.parse(invokeAgentRole));
 }
-
 export function invokeAgentRoleFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentRole, SDKValidationError> {
@@ -426,22 +387,10 @@ export function invokeAgentRoleFromJSON(
 export const InvokeAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentPublicMessagePartKind
 > = z.nativeEnum(InvokeAgentPublicMessagePartKind);
-
 /** @internal */
 export const InvokeAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentPublicMessagePartKind
 > = InvokeAgentPublicMessagePartKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentPublicMessagePartKind$ {
-  /** @deprecated use `InvokeAgentPublicMessagePartKind$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentPublicMessagePartKind$inboundSchema;
-  /** @deprecated use `InvokeAgentPublicMessagePartKind$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentPublicMessagePartKind$outboundSchema;
-}
 
 /** @internal */
 export const ToolResultPart$inboundSchema: z.ZodType<
@@ -458,7 +407,6 @@ export const ToolResultPart$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type ToolResultPart$Outbound = {
   kind: string;
@@ -483,23 +431,9 @@ export const ToolResultPart$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolResultPart$ {
-  /** @deprecated use `ToolResultPart$inboundSchema` instead. */
-  export const inboundSchema = ToolResultPart$inboundSchema;
-  /** @deprecated use `ToolResultPart$outboundSchema` instead. */
-  export const outboundSchema = ToolResultPart$outboundSchema;
-  /** @deprecated use `ToolResultPart$Outbound` instead. */
-  export type Outbound = ToolResultPart$Outbound;
-}
-
 export function toolResultPartToJSON(toolResultPart: ToolResultPart): string {
   return JSON.stringify(ToolResultPart$outboundSchema.parse(toolResultPart));
 }
-
 export function toolResultPartFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolResultPart, SDKValidationError> {
@@ -514,22 +448,10 @@ export function toolResultPartFromJSON(
 export const PublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
   typeof PublicMessagePartKind
 > = z.nativeEnum(PublicMessagePartKind);
-
 /** @internal */
 export const PublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
   typeof PublicMessagePartKind
 > = PublicMessagePartKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PublicMessagePartKind$ {
-  /** @deprecated use `PublicMessagePartKind$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartKind$inboundSchema;
-  /** @deprecated use `PublicMessagePartKind$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartKind$outboundSchema;
-}
 
 /** @internal */
 export const FileInURIFormat$inboundSchema: z.ZodType<
@@ -541,7 +463,6 @@ export const FileInURIFormat$inboundSchema: z.ZodType<
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type FileInURIFormat$Outbound = {
   uri: string;
@@ -560,25 +481,11 @@ export const FileInURIFormat$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileInURIFormat$ {
-  /** @deprecated use `FileInURIFormat$inboundSchema` instead. */
-  export const inboundSchema = FileInURIFormat$inboundSchema;
-  /** @deprecated use `FileInURIFormat$outboundSchema` instead. */
-  export const outboundSchema = FileInURIFormat$outboundSchema;
-  /** @deprecated use `FileInURIFormat$Outbound` instead. */
-  export type Outbound = FileInURIFormat$Outbound;
-}
-
 export function fileInURIFormatToJSON(
   fileInURIFormat: FileInURIFormat,
 ): string {
   return JSON.stringify(FileInURIFormat$outboundSchema.parse(fileInURIFormat));
 }
-
 export function fileInURIFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<FileInURIFormat, SDKValidationError> {
@@ -599,7 +506,6 @@ export const BinaryFormat$inboundSchema: z.ZodType<
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type BinaryFormat$Outbound = {
   bytes: string;
@@ -618,23 +524,9 @@ export const BinaryFormat$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BinaryFormat$ {
-  /** @deprecated use `BinaryFormat$inboundSchema` instead. */
-  export const inboundSchema = BinaryFormat$inboundSchema;
-  /** @deprecated use `BinaryFormat$outboundSchema` instead. */
-  export const outboundSchema = BinaryFormat$outboundSchema;
-  /** @deprecated use `BinaryFormat$Outbound` instead. */
-  export type Outbound = BinaryFormat$Outbound;
-}
-
 export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
   return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
 }
-
 export function binaryFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<BinaryFormat, SDKValidationError> {
@@ -654,7 +546,6 @@ export const PublicMessagePartFile$inboundSchema: z.ZodType<
   z.lazy(() => BinaryFormat$inboundSchema),
   z.lazy(() => FileInURIFormat$inboundSchema),
 ]);
-
 /** @internal */
 export type PublicMessagePartFile$Outbound =
   | BinaryFormat$Outbound
@@ -670,19 +561,6 @@ export const PublicMessagePartFile$outboundSchema: z.ZodType<
   z.lazy(() => FileInURIFormat$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PublicMessagePartFile$ {
-  /** @deprecated use `PublicMessagePartFile$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartFile$inboundSchema;
-  /** @deprecated use `PublicMessagePartFile$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartFile$outboundSchema;
-  /** @deprecated use `PublicMessagePartFile$Outbound` instead. */
-  export type Outbound = PublicMessagePartFile$Outbound;
-}
-
 export function publicMessagePartFileToJSON(
   publicMessagePartFile: PublicMessagePartFile,
 ): string {
@@ -690,7 +568,6 @@ export function publicMessagePartFileToJSON(
     PublicMessagePartFile$outboundSchema.parse(publicMessagePartFile),
   );
 }
-
 export function publicMessagePartFileFromJSON(
   jsonString: string,
 ): SafeParseResult<PublicMessagePartFile, SDKValidationError> {
@@ -714,7 +591,6 @@ export const FilePart$inboundSchema: z.ZodType<
   ]),
   metadata: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type FilePart$Outbound = {
   kind: string;
@@ -736,23 +612,9 @@ export const FilePart$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilePart$ {
-  /** @deprecated use `FilePart$inboundSchema` instead. */
-  export const inboundSchema = FilePart$inboundSchema;
-  /** @deprecated use `FilePart$outboundSchema` instead. */
-  export const outboundSchema = FilePart$outboundSchema;
-  /** @deprecated use `FilePart$Outbound` instead. */
-  export type Outbound = FilePart$Outbound;
-}
-
 export function filePartToJSON(filePart: FilePart): string {
   return JSON.stringify(FilePart$outboundSchema.parse(filePart));
 }
-
 export function filePartFromJSON(
   jsonString: string,
 ): SafeParseResult<FilePart, SDKValidationError> {
@@ -767,21 +629,9 @@ export function filePartFromJSON(
 export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
   Kind,
 );
-
 /** @internal */
 export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
   Kind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Kind$ {
-  /** @deprecated use `Kind$inboundSchema` instead. */
-  export const inboundSchema = Kind$inboundSchema;
-  /** @deprecated use `Kind$outboundSchema` instead. */
-  export const outboundSchema = Kind$outboundSchema;
-}
 
 /** @internal */
 export const TextPart$inboundSchema: z.ZodType<
@@ -792,7 +642,6 @@ export const TextPart$inboundSchema: z.ZodType<
   kind: Kind$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type TextPart$Outbound = {
   kind: string;
@@ -809,23 +658,9 @@ export const TextPart$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TextPart$ {
-  /** @deprecated use `TextPart$inboundSchema` instead. */
-  export const inboundSchema = TextPart$inboundSchema;
-  /** @deprecated use `TextPart$outboundSchema` instead. */
-  export const outboundSchema = TextPart$outboundSchema;
-  /** @deprecated use `TextPart$Outbound` instead. */
-  export type Outbound = TextPart$Outbound;
-}
-
 export function textPartToJSON(textPart: TextPart): string {
   return JSON.stringify(TextPart$outboundSchema.parse(textPart));
 }
-
 export function textPartFromJSON(
   jsonString: string,
 ): SafeParseResult<TextPart, SDKValidationError> {
@@ -846,7 +681,6 @@ export const PublicMessagePart$inboundSchema: z.ZodType<
   z.lazy(() => FilePart$inboundSchema),
   z.lazy(() => ToolResultPart$inboundSchema),
 ]);
-
 /** @internal */
 export type PublicMessagePart$Outbound =
   | TextPart$Outbound
@@ -864,19 +698,6 @@ export const PublicMessagePart$outboundSchema: z.ZodType<
   z.lazy(() => ToolResultPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PublicMessagePart$ {
-  /** @deprecated use `PublicMessagePart$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePart$inboundSchema;
-  /** @deprecated use `PublicMessagePart$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePart$outboundSchema;
-  /** @deprecated use `PublicMessagePart$Outbound` instead. */
-  export type Outbound = PublicMessagePart$Outbound;
-}
-
 export function publicMessagePartToJSON(
   publicMessagePart: PublicMessagePart,
 ): string {
@@ -884,7 +705,6 @@ export function publicMessagePartToJSON(
     PublicMessagePart$outboundSchema.parse(publicMessagePart),
   );
 }
-
 export function publicMessagePartFromJSON(
   jsonString: string,
 ): SafeParseResult<PublicMessagePart, SDKValidationError> {
@@ -911,7 +731,6 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
       ]),
     ),
   });
-
 /** @internal */
 export type Message$Outbound = {
   messageId?: string | undefined;
@@ -939,23 +758,9 @@ export const Message$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Message$ {
-  /** @deprecated use `Message$inboundSchema` instead. */
-  export const inboundSchema = Message$inboundSchema;
-  /** @deprecated use `Message$outboundSchema` instead. */
-  export const outboundSchema = Message$outboundSchema;
-  /** @deprecated use `Message$Outbound` instead. */
-  export type Outbound = Message$Outbound;
-}
-
 export function messageToJSON(message: Message): string {
   return JSON.stringify(Message$outboundSchema.parse(message));
 }
-
 export function messageFromJSON(
   jsonString: string,
 ): SafeParseResult<Message, SDKValidationError> {
@@ -981,7 +786,6 @@ export const Contact$inboundSchema: z.ZodType<Contact, z.ZodTypeDef, unknown> =
       "logo_url": "logoUrl",
     });
   });
-
 /** @internal */
 export type Contact$Outbound = {
   id: string;
@@ -1011,23 +815,9 @@ export const Contact$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contact$ {
-  /** @deprecated use `Contact$inboundSchema` instead. */
-  export const inboundSchema = Contact$inboundSchema;
-  /** @deprecated use `Contact$outboundSchema` instead. */
-  export const outboundSchema = Contact$outboundSchema;
-  /** @deprecated use `Contact$Outbound` instead. */
-  export type Outbound = Contact$Outbound;
-}
-
 export function contactToJSON(contact: Contact): string {
   return JSON.stringify(Contact$outboundSchema.parse(contact));
 }
-
 export function contactFromJSON(
   jsonString: string,
 ): SafeParseResult<Contact, SDKValidationError> {
@@ -1047,7 +837,6 @@ export const InvokeAgentThread$inboundSchema: z.ZodType<
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type InvokeAgentThread$Outbound = {
   id: string;
@@ -1064,19 +853,6 @@ export const InvokeAgentThread$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentThread$ {
-  /** @deprecated use `InvokeAgentThread$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentThread$inboundSchema;
-  /** @deprecated use `InvokeAgentThread$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentThread$outboundSchema;
-  /** @deprecated use `InvokeAgentThread$Outbound` instead. */
-  export type Outbound = InvokeAgentThread$Outbound;
-}
-
 export function invokeAgentThreadToJSON(
   invokeAgentThread: InvokeAgentThread,
 ): string {
@@ -1084,7 +860,6 @@ export function invokeAgentThreadToJSON(
     InvokeAgentThread$outboundSchema.parse(invokeAgentThread),
   );
 }
-
 export function invokeAgentThreadFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentThread, SDKValidationError> {
@@ -1104,7 +879,6 @@ export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
       "entity_id": "entityId",
     });
   });
-
 /** @internal */
 export type Memory$Outbound = {
   entity_id: string;
@@ -1123,23 +897,9 @@ export const Memory$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Memory$ {
-  /** @deprecated use `Memory$inboundSchema` instead. */
-  export const inboundSchema = Memory$inboundSchema;
-  /** @deprecated use `Memory$outboundSchema` instead. */
-  export const outboundSchema = Memory$outboundSchema;
-  /** @deprecated use `Memory$Outbound` instead. */
-  export type Outbound = Memory$Outbound;
-}
-
 export function memoryToJSON(memory: Memory): string {
   return JSON.stringify(Memory$outboundSchema.parse(memory));
 }
-
 export function memoryFromJSON(
   jsonString: string,
 ): SafeParseResult<Memory, SDKValidationError> {
@@ -1168,7 +928,6 @@ export const InvokeAgentRequestBody$inboundSchema: z.ZodType<
     "task_id": "taskId",
   });
 });
-
 /** @internal */
 export type InvokeAgentRequestBody$Outbound = {
   task_id?: string | undefined;
@@ -1199,19 +958,6 @@ export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentRequestBody$ {
-  /** @deprecated use `InvokeAgentRequestBody$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentRequestBody$inboundSchema;
-  /** @deprecated use `InvokeAgentRequestBody$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentRequestBody$outboundSchema;
-  /** @deprecated use `InvokeAgentRequestBody$Outbound` instead. */
-  export type Outbound = InvokeAgentRequestBody$Outbound;
-}
-
 export function invokeAgentRequestBodyToJSON(
   invokeAgentRequestBody: InvokeAgentRequestBody,
 ): string {
@@ -1219,7 +965,6 @@ export function invokeAgentRequestBodyToJSON(
     InvokeAgentRequestBody$outboundSchema.parse(invokeAgentRequestBody),
   );
 }
-
 export function invokeAgentRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentRequestBody, SDKValidationError> {
@@ -1243,7 +988,6 @@ export const InvokeAgentRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type InvokeAgentRequest$Outbound = {
   key: string;
@@ -1264,19 +1008,6 @@ export const InvokeAgentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentRequest$ {
-  /** @deprecated use `InvokeAgentRequest$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentRequest$inboundSchema;
-  /** @deprecated use `InvokeAgentRequest$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentRequest$outboundSchema;
-  /** @deprecated use `InvokeAgentRequest$Outbound` instead. */
-  export type Outbound = InvokeAgentRequest$Outbound;
-}
-
 export function invokeAgentRequestToJSON(
   invokeAgentRequest: InvokeAgentRequest,
 ): string {
@@ -1284,7 +1015,6 @@ export function invokeAgentRequestToJSON(
     InvokeAgentRequest$outboundSchema.parse(invokeAgentRequest),
   );
 }
-
 export function invokeAgentRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentRequest, SDKValidationError> {
@@ -1299,85 +1029,37 @@ export function invokeAgentRequestFromJSON(
 export const InvokeAgentKind$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentKind
 > = z.nativeEnum(InvokeAgentKind);
-
 /** @internal */
 export const InvokeAgentKind$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentKind
 > = InvokeAgentKind$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentKind$ {
-  /** @deprecated use `InvokeAgentKind$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentKind$inboundSchema;
-  /** @deprecated use `InvokeAgentKind$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentKind$outboundSchema;
-}
-
 /** @internal */
 export const InvokeAgentState$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentState
 > = z.nativeEnum(InvokeAgentState);
-
 /** @internal */
 export const InvokeAgentState$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentState
 > = InvokeAgentState$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentState$ {
-  /** @deprecated use `InvokeAgentState$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentState$inboundSchema;
-  /** @deprecated use `InvokeAgentState$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentState$outboundSchema;
-}
-
 /** @internal */
 export const InvokeAgentAgentsKind$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentAgentsKind
 > = z.nativeEnum(InvokeAgentAgentsKind);
-
 /** @internal */
 export const InvokeAgentAgentsKind$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentAgentsKind
 > = InvokeAgentAgentsKind$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentAgentsKind$ {
-  /** @deprecated use `InvokeAgentAgentsKind$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentAgentsKind$inboundSchema;
-  /** @deprecated use `InvokeAgentAgentsKind$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentAgentsKind$outboundSchema;
-}
-
 /** @internal */
 export const InvokeAgentAgentsRole$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentAgentsRole
 > = z.nativeEnum(InvokeAgentAgentsRole);
-
 /** @internal */
 export const InvokeAgentAgentsRole$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentAgentsRole
 > = InvokeAgentAgentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentAgentsRole$ {
-  /** @deprecated use `InvokeAgentAgentsRole$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentAgentsRole$inboundSchema;
-  /** @deprecated use `InvokeAgentAgentsRole$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentAgentsRole$outboundSchema;
-}
 
 /** @internal */
 export const InvokeAgentMessage$inboundSchema: z.ZodType<
@@ -1390,7 +1072,6 @@ export const InvokeAgentMessage$inboundSchema: z.ZodType<
   role: InvokeAgentAgentsRole$inboundSchema,
   parts: z.array(z.any()),
 });
-
 /** @internal */
 export type InvokeAgentMessage$Outbound = {
   kind: string;
@@ -1411,19 +1092,6 @@ export const InvokeAgentMessage$outboundSchema: z.ZodType<
   parts: z.array(z.any()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentMessage$ {
-  /** @deprecated use `InvokeAgentMessage$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentMessage$inboundSchema;
-  /** @deprecated use `InvokeAgentMessage$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentMessage$outboundSchema;
-  /** @deprecated use `InvokeAgentMessage$Outbound` instead. */
-  export type Outbound = InvokeAgentMessage$Outbound;
-}
-
 export function invokeAgentMessageToJSON(
   invokeAgentMessage: InvokeAgentMessage,
 ): string {
@@ -1431,7 +1099,6 @@ export function invokeAgentMessageToJSON(
     InvokeAgentMessage$outboundSchema.parse(invokeAgentMessage),
   );
 }
-
 export function invokeAgentMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentMessage, SDKValidationError> {
@@ -1452,7 +1119,6 @@ export const InvokeAgentStatus$inboundSchema: z.ZodType<
   timestamp: z.string().optional(),
   message: z.lazy(() => InvokeAgentMessage$inboundSchema).optional(),
 });
-
 /** @internal */
 export type InvokeAgentStatus$Outbound = {
   state: string;
@@ -1471,19 +1137,6 @@ export const InvokeAgentStatus$outboundSchema: z.ZodType<
   message: z.lazy(() => InvokeAgentMessage$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentStatus$ {
-  /** @deprecated use `InvokeAgentStatus$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentStatus$inboundSchema;
-  /** @deprecated use `InvokeAgentStatus$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentStatus$outboundSchema;
-  /** @deprecated use `InvokeAgentStatus$Outbound` instead. */
-  export type Outbound = InvokeAgentStatus$Outbound;
-}
-
 export function invokeAgentStatusToJSON(
   invokeAgentStatus: InvokeAgentStatus,
 ): string {
@@ -1491,7 +1144,6 @@ export function invokeAgentStatusToJSON(
     InvokeAgentStatus$outboundSchema.parse(invokeAgentStatus),
   );
 }
-
 export function invokeAgentStatusFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentStatus, SDKValidationError> {
@@ -1514,7 +1166,6 @@ export const InvokeAgentResponseBody$inboundSchema: z.ZodType<
   status: z.lazy(() => InvokeAgentStatus$inboundSchema),
   metadata: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type InvokeAgentResponseBody$Outbound = {
   id: string;
@@ -1537,19 +1188,6 @@ export const InvokeAgentResponseBody$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeAgentResponseBody$ {
-  /** @deprecated use `InvokeAgentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = InvokeAgentResponseBody$inboundSchema;
-  /** @deprecated use `InvokeAgentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = InvokeAgentResponseBody$outboundSchema;
-  /** @deprecated use `InvokeAgentResponseBody$Outbound` instead. */
-  export type Outbound = InvokeAgentResponseBody$Outbound;
-}
-
 export function invokeAgentResponseBodyToJSON(
   invokeAgentResponseBody: InvokeAgentResponseBody,
 ): string {
@@ -1557,7 +1195,6 @@ export function invokeAgentResponseBodyToJSON(
     InvokeAgentResponseBody$outboundSchema.parse(invokeAgentResponseBody),
   );
 }
-
 export function invokeAgentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<InvokeAgentResponseBody, SDKValidationError> {

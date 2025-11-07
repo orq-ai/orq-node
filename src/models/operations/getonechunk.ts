@@ -99,7 +99,6 @@ export const GetOneChunkRequest$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type GetOneChunkRequest$Outbound = {
   chunk_id: string;
@@ -124,19 +123,6 @@ export const GetOneChunkRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneChunkRequest$ {
-  /** @deprecated use `GetOneChunkRequest$inboundSchema` instead. */
-  export const inboundSchema = GetOneChunkRequest$inboundSchema;
-  /** @deprecated use `GetOneChunkRequest$outboundSchema` instead. */
-  export const outboundSchema = GetOneChunkRequest$outboundSchema;
-  /** @deprecated use `GetOneChunkRequest$Outbound` instead. */
-  export type Outbound = GetOneChunkRequest$Outbound;
-}
-
 export function getOneChunkRequestToJSON(
   getOneChunkRequest: GetOneChunkRequest,
 ): string {
@@ -144,7 +130,6 @@ export function getOneChunkRequestToJSON(
     GetOneChunkRequest$outboundSchema.parse(getOneChunkRequest),
   );
 }
-
 export function getOneChunkRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneChunkRequest, SDKValidationError> {
@@ -161,7 +146,6 @@ export const GetOneChunkMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type GetOneChunkMetadata$Outbound = string | number | boolean;
 
@@ -172,19 +156,6 @@ export const GetOneChunkMetadata$outboundSchema: z.ZodType<
   GetOneChunkMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneChunkMetadata$ {
-  /** @deprecated use `GetOneChunkMetadata$inboundSchema` instead. */
-  export const inboundSchema = GetOneChunkMetadata$inboundSchema;
-  /** @deprecated use `GetOneChunkMetadata$outboundSchema` instead. */
-  export const outboundSchema = GetOneChunkMetadata$outboundSchema;
-  /** @deprecated use `GetOneChunkMetadata$Outbound` instead. */
-  export type Outbound = GetOneChunkMetadata$Outbound;
-}
-
 export function getOneChunkMetadataToJSON(
   getOneChunkMetadata: GetOneChunkMetadata,
 ): string {
@@ -192,7 +163,6 @@ export function getOneChunkMetadataToJSON(
     GetOneChunkMetadata$outboundSchema.parse(getOneChunkMetadata),
   );
 }
-
 export function getOneChunkMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneChunkMetadata, SDKValidationError> {
@@ -207,22 +177,10 @@ export function getOneChunkMetadataFromJSON(
 export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetOneChunkStatus
 > = z.nativeEnum(GetOneChunkStatus);
-
 /** @internal */
 export const GetOneChunkStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetOneChunkStatus
 > = GetOneChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneChunkStatus$ {
-  /** @deprecated use `GetOneChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = GetOneChunkStatus$inboundSchema;
-  /** @deprecated use `GetOneChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = GetOneChunkStatus$outboundSchema;
-}
 
 /** @internal */
 export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
@@ -246,7 +204,6 @@ export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-
 /** @internal */
 export type GetOneChunkResponseBody$Outbound = {
   _id: string;
@@ -283,19 +240,6 @@ export const GetOneChunkResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneChunkResponseBody$ {
-  /** @deprecated use `GetOneChunkResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetOneChunkResponseBody$inboundSchema;
-  /** @deprecated use `GetOneChunkResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetOneChunkResponseBody$outboundSchema;
-  /** @deprecated use `GetOneChunkResponseBody$Outbound` instead. */
-  export type Outbound = GetOneChunkResponseBody$Outbound;
-}
-
 export function getOneChunkResponseBodyToJSON(
   getOneChunkResponseBody: GetOneChunkResponseBody,
 ): string {
@@ -303,7 +247,6 @@ export function getOneChunkResponseBodyToJSON(
     GetOneChunkResponseBody$outboundSchema.parse(getOneChunkResponseBody),
   );
 }
-
 export function getOneChunkResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneChunkResponseBody, SDKValidationError> {

@@ -120,7 +120,6 @@ export const QueryParamFilterBy$inboundSchema: z.ZodType<
 > = z.object({
   tags: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type QueryParamFilterBy$Outbound = {
   tags?: Array<string> | undefined;
@@ -135,19 +134,6 @@ export const QueryParamFilterBy$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace QueryParamFilterBy$ {
-  /** @deprecated use `QueryParamFilterBy$inboundSchema` instead. */
-  export const inboundSchema = QueryParamFilterBy$inboundSchema;
-  /** @deprecated use `QueryParamFilterBy$outboundSchema` instead. */
-  export const outboundSchema = QueryParamFilterBy$outboundSchema;
-  /** @deprecated use `QueryParamFilterBy$Outbound` instead. */
-  export type Outbound = QueryParamFilterBy$Outbound;
-}
-
 export function queryParamFilterByToJSON(
   queryParamFilterBy: QueryParamFilterBy,
 ): string {
@@ -155,7 +141,6 @@ export function queryParamFilterByToJSON(
     QueryParamFilterBy$outboundSchema.parse(queryParamFilterBy),
   );
 }
-
 export function queryParamFilterByFromJSON(
   jsonString: string,
 ): SafeParseResult<QueryParamFilterBy, SDKValidationError> {
@@ -185,7 +170,6 @@ export const ListContactsRequest$inboundSchema: z.ZodType<
     "include_metrics": "includeMetrics",
   });
 });
-
 /** @internal */
 export type ListContactsRequest$Outbound = {
   limit: number;
@@ -215,19 +199,6 @@ export const ListContactsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListContactsRequest$ {
-  /** @deprecated use `ListContactsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListContactsRequest$inboundSchema;
-  /** @deprecated use `ListContactsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListContactsRequest$outboundSchema;
-  /** @deprecated use `ListContactsRequest$Outbound` instead. */
-  export type Outbound = ListContactsRequest$Outbound;
-}
-
 export function listContactsRequestToJSON(
   listContactsRequest: ListContactsRequest,
 ): string {
@@ -235,7 +206,6 @@ export function listContactsRequestToJSON(
     ListContactsRequest$outboundSchema.parse(listContactsRequest),
   );
 }
-
 export function listContactsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListContactsRequest, SDKValidationError> {
@@ -249,21 +219,9 @@ export function listContactsRequestFromJSON(
 /** @internal */
 export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
   .nativeEnum(ObjectT);
-
 /** @internal */
 export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
   ObjectT$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ObjectT$ {
-  /** @deprecated use `ObjectT$inboundSchema` instead. */
-  export const inboundSchema = ObjectT$inboundSchema;
-  /** @deprecated use `ObjectT$outboundSchema` instead. */
-  export const outboundSchema = ObjectT$outboundSchema;
-}
 
 /** @internal */
 export const ListContactsMetrics$inboundSchema: z.ZodType<
@@ -283,7 +241,6 @@ export const ListContactsMetrics$inboundSchema: z.ZodType<
     "error_rate": "errorRate",
   });
 });
-
 /** @internal */
 export type ListContactsMetrics$Outbound = {
   total_cost: number;
@@ -311,19 +268,6 @@ export const ListContactsMetrics$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListContactsMetrics$ {
-  /** @deprecated use `ListContactsMetrics$inboundSchema` instead. */
-  export const inboundSchema = ListContactsMetrics$inboundSchema;
-  /** @deprecated use `ListContactsMetrics$outboundSchema` instead. */
-  export const outboundSchema = ListContactsMetrics$outboundSchema;
-  /** @deprecated use `ListContactsMetrics$Outbound` instead. */
-  export type Outbound = ListContactsMetrics$Outbound;
-}
-
 export function listContactsMetricsToJSON(
   listContactsMetrics: ListContactsMetrics,
 ): string {
@@ -331,7 +275,6 @@ export function listContactsMetricsToJSON(
     ListContactsMetrics$outboundSchema.parse(listContactsMetrics),
   );
 }
-
 export function listContactsMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListContactsMetrics, SDKValidationError> {
@@ -355,7 +298,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-11-06T12:40:17.304Z",
+      "2025-11-07T09:40:03.490Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
@@ -366,7 +309,6 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
       "avatar_url": "avatarUrl",
     });
   });
-
 /** @internal */
 export type Data$Outbound = {
   _id: string;
@@ -392,7 +334,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-11-06T12:40:17.304Z"))
+    updated: z.date().default(() => new Date("2025-11-07T09:40:03.490Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
   }).transform((v) => {
@@ -404,23 +346,9 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data$ {
-  /** @deprecated use `Data$inboundSchema` instead. */
-  export const inboundSchema = Data$inboundSchema;
-  /** @deprecated use `Data$outboundSchema` instead. */
-  export const outboundSchema = Data$outboundSchema;
-  /** @deprecated use `Data$Outbound` instead. */
-  export type Outbound = Data$Outbound;
-}
-
 export function dataToJSON(data: Data): string {
   return JSON.stringify(Data$outboundSchema.parse(data));
 }
-
 export function dataFromJSON(
   jsonString: string,
 ): SafeParseResult<Data, SDKValidationError> {
@@ -445,7 +373,6 @@ export const ListContactsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListContactsResponseBody$Outbound = {
   object: string;
@@ -468,19 +395,6 @@ export const ListContactsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListContactsResponseBody$ {
-  /** @deprecated use `ListContactsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListContactsResponseBody$inboundSchema;
-  /** @deprecated use `ListContactsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListContactsResponseBody$outboundSchema;
-  /** @deprecated use `ListContactsResponseBody$Outbound` instead. */
-  export type Outbound = ListContactsResponseBody$Outbound;
-}
-
 export function listContactsResponseBodyToJSON(
   listContactsResponseBody: ListContactsResponseBody,
 ): string {
@@ -488,7 +402,6 @@ export function listContactsResponseBodyToJSON(
     ListContactsResponseBody$outboundSchema.parse(listContactsResponseBody),
   );
 }
-
 export function listContactsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListContactsResponseBody, SDKValidationError> {

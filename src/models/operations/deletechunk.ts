@@ -39,7 +39,6 @@ export const DeleteChunkRequest$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type DeleteChunkRequest$Outbound = {
   chunk_id: string;
@@ -64,19 +63,6 @@ export const DeleteChunkRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteChunkRequest$ {
-  /** @deprecated use `DeleteChunkRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteChunkRequest$inboundSchema;
-  /** @deprecated use `DeleteChunkRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteChunkRequest$outboundSchema;
-  /** @deprecated use `DeleteChunkRequest$Outbound` instead. */
-  export type Outbound = DeleteChunkRequest$Outbound;
-}
-
 export function deleteChunkRequestToJSON(
   deleteChunkRequest: DeleteChunkRequest,
 ): string {
@@ -84,7 +70,6 @@ export function deleteChunkRequestToJSON(
     DeleteChunkRequest$outboundSchema.parse(deleteChunkRequest),
   );
 }
-
 export function deleteChunkRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteChunkRequest, SDKValidationError> {
