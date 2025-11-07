@@ -104,7 +104,6 @@ export const UpdateContactRequestBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-
 /** @internal */
 export type UpdateContactRequestBody$Outbound = {
   display_name?: string | null | undefined;
@@ -132,19 +131,6 @@ export const UpdateContactRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateContactRequestBody$ {
-  /** @deprecated use `UpdateContactRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateContactRequestBody$inboundSchema;
-  /** @deprecated use `UpdateContactRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateContactRequestBody$outboundSchema;
-  /** @deprecated use `UpdateContactRequestBody$Outbound` instead. */
-  export type Outbound = UpdateContactRequestBody$Outbound;
-}
-
 export function updateContactRequestBodyToJSON(
   updateContactRequestBody: UpdateContactRequestBody,
 ): string {
@@ -152,7 +138,6 @@ export function updateContactRequestBodyToJSON(
     UpdateContactRequestBody$outboundSchema.parse(updateContactRequestBody),
   );
 }
-
 export function updateContactRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateContactRequestBody, SDKValidationError> {
@@ -176,7 +161,6 @@ export const UpdateContactRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateContactRequest$Outbound = {
   id: string;
@@ -197,19 +181,6 @@ export const UpdateContactRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateContactRequest$ {
-  /** @deprecated use `UpdateContactRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateContactRequest$inboundSchema;
-  /** @deprecated use `UpdateContactRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateContactRequest$outboundSchema;
-  /** @deprecated use `UpdateContactRequest$Outbound` instead. */
-  export type Outbound = UpdateContactRequest$Outbound;
-}
-
 export function updateContactRequestToJSON(
   updateContactRequest: UpdateContactRequest,
 ): string {
@@ -217,7 +188,6 @@ export function updateContactRequestToJSON(
     UpdateContactRequest$outboundSchema.parse(updateContactRequest),
   );
 }
-
 export function updateContactRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateContactRequest, SDKValidationError> {
@@ -244,7 +214,7 @@ export const UpdateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T08:42:44.236Z",
+    "2025-11-07T06:52:38.992Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -254,7 +224,6 @@ export const UpdateContactResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-
 /** @internal */
 export type UpdateContactResponseBody$Outbound = {
   _id: string;
@@ -282,7 +251,7 @@ export const UpdateContactResponseBody$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T08:42:44.236Z"))
+  updated: z.date().default(() => new Date("2025-11-07T06:52:38.992Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -293,19 +262,6 @@ export const UpdateContactResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateContactResponseBody$ {
-  /** @deprecated use `UpdateContactResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateContactResponseBody$inboundSchema;
-  /** @deprecated use `UpdateContactResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateContactResponseBody$outboundSchema;
-  /** @deprecated use `UpdateContactResponseBody$Outbound` instead. */
-  export type Outbound = UpdateContactResponseBody$Outbound;
-}
-
 export function updateContactResponseBodyToJSON(
   updateContactResponseBody: UpdateContactResponseBody,
 ): string {
@@ -313,7 +269,6 @@ export function updateContactResponseBodyToJSON(
     UpdateContactResponseBody$outboundSchema.parse(updateContactResponseBody),
   );
 }
-
 export function updateContactResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateContactResponseBody, SDKValidationError> {

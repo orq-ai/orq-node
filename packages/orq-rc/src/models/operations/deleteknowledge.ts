@@ -27,7 +27,6 @@ export const DeleteKnowledgeRequest$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type DeleteKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -46,19 +45,6 @@ export const DeleteKnowledgeRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteKnowledgeRequest$ {
-  /** @deprecated use `DeleteKnowledgeRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteKnowledgeRequest$inboundSchema;
-  /** @deprecated use `DeleteKnowledgeRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteKnowledgeRequest$outboundSchema;
-  /** @deprecated use `DeleteKnowledgeRequest$Outbound` instead. */
-  export type Outbound = DeleteKnowledgeRequest$Outbound;
-}
-
 export function deleteKnowledgeRequestToJSON(
   deleteKnowledgeRequest: DeleteKnowledgeRequest,
 ): string {
@@ -66,7 +52,6 @@ export function deleteKnowledgeRequestToJSON(
     DeleteKnowledgeRequest$outboundSchema.parse(deleteKnowledgeRequest),
   );
 }
-
 export function deleteKnowledgeRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteKnowledgeRequest, SDKValidationError> {

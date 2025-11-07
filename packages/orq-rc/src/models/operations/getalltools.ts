@@ -592,7 +592,6 @@ export const GetAllToolsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type GetAllToolsRequest$Outbound = {
   limit?: number | undefined;
@@ -616,19 +615,6 @@ export const GetAllToolsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsRequest$ {
-  /** @deprecated use `GetAllToolsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsRequest$inboundSchema;
-  /** @deprecated use `GetAllToolsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsRequest$outboundSchema;
-  /** @deprecated use `GetAllToolsRequest$Outbound` instead. */
-  export type Outbound = GetAllToolsRequest$Outbound;
-}
-
 export function getAllToolsRequestToJSON(
   getAllToolsRequest: GetAllToolsRequest,
 ): string {
@@ -636,7 +622,6 @@ export function getAllToolsRequestToJSON(
     GetAllToolsRequest$outboundSchema.parse(getAllToolsRequest),
   );
 }
-
 export function getAllToolsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsRequest, SDKValidationError> {
@@ -651,88 +636,36 @@ export function getAllToolsRequestFromJSON(
 export const GetAllToolsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsObject
 > = z.nativeEnum(GetAllToolsObject);
-
 /** @internal */
 export const GetAllToolsObject$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsObject
 > = GetAllToolsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsObject$ {
-  /** @deprecated use `GetAllToolsObject$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsObject$inboundSchema;
-  /** @deprecated use `GetAllToolsObject$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsObject$outboundSchema;
-}
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200Status$inboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> = z.nativeEnum(
     GetAllToolsDataToolsResponse200Status,
   );
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200Status$outboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> =
     GetAllToolsDataToolsResponse200Status$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponse200Status$ {
-  /** @deprecated use `GetAllToolsDataToolsResponse200Status$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllToolsDataToolsResponse200Status$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponse200Status$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponse200Status$outboundSchema;
-}
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> = z
     .nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONType);
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> =
     GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponse200ApplicationJSONType$ {
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
 export const DataLanguage$inboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
   z.nativeEnum(DataLanguage);
-
 /** @internal */
 export const DataLanguage$outboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
   DataLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataLanguage$ {
-  /** @deprecated use `DataLanguage$inboundSchema` instead. */
-  export const inboundSchema = DataLanguage$inboundSchema;
-  /** @deprecated use `DataLanguage$outboundSchema` instead. */
-  export const outboundSchema = DataLanguage$outboundSchema;
-}
 
 /** @internal */
 export const DataCodeTool$inboundSchema: z.ZodType<
@@ -744,7 +677,6 @@ export const DataCodeTool$inboundSchema: z.ZodType<
   language: DataLanguage$inboundSchema,
   code: z.string(),
 });
-
 /** @internal */
 export type DataCodeTool$Outbound = {
   parameters?: { [k: string]: any } | undefined;
@@ -763,23 +695,9 @@ export const DataCodeTool$outboundSchema: z.ZodType<
   code: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataCodeTool$ {
-  /** @deprecated use `DataCodeTool$inboundSchema` instead. */
-  export const inboundSchema = DataCodeTool$inboundSchema;
-  /** @deprecated use `DataCodeTool$outboundSchema` instead. */
-  export const outboundSchema = DataCodeTool$outboundSchema;
-  /** @deprecated use `DataCodeTool$Outbound` instead. */
-  export type Outbound = DataCodeTool$Outbound;
-}
-
 export function dataCodeToolToJSON(dataCodeTool: DataCodeTool): string {
   return JSON.stringify(DataCodeTool$outboundSchema.parse(dataCodeTool));
 }
-
 export function dataCodeToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataCodeTool, SDKValidationError> {
@@ -793,7 +711,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9C5AJ3YQFK8AE09WPGAN4WV"),
+    _id: z.string().default("01K9EHDPKVG9QHF24P5A1JE0Z5"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -820,7 +738,6 @@ export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
       "code_tool": "codeTool",
     });
   });
-
 /** @internal */
 export type Data5$Outbound = {
   _id: string;
@@ -846,7 +763,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K9C5AJ3YQFK8AE09WPGAN4WV"),
+  id: z.string().default("01K9EHDPKVG9QHF24P5A1JE0Z5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -874,23 +791,9 @@ export const Data5$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data5$ {
-  /** @deprecated use `Data5$inboundSchema` instead. */
-  export const inboundSchema = Data5$inboundSchema;
-  /** @deprecated use `Data5$outboundSchema` instead. */
-  export const outboundSchema = Data5$outboundSchema;
-  /** @deprecated use `Data5$Outbound` instead. */
-  export type Outbound = Data5$Outbound;
-}
-
 export function data5ToJSON(data5: Data5): string {
   return JSON.stringify(Data5$outboundSchema.parse(data5));
 }
-
 export function data5FromJSON(
   jsonString: string,
 ): SafeParseResult<Data5, SDKValidationError> {
@@ -905,46 +808,19 @@ export function data5FromJSON(
 export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseStatus
 > = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
-
 /** @internal */
 export const GetAllToolsDataToolsResponseStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseStatus
 > = GetAllToolsDataToolsResponseStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponseStatus$ {
-  /** @deprecated use `GetAllToolsDataToolsResponseStatus$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataToolsResponseStatus$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponseStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponseStatus$outboundSchema;
-}
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponse200Type
 > = z.nativeEnum(GetAllToolsDataToolsResponse200Type);
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Type> =
     GetAllToolsDataToolsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponse200Type$ {
-  /** @deprecated use `GetAllToolsDataToolsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllToolsDataToolsResponse200Type$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const DataHeaders$inboundSchema: z.ZodType<
@@ -955,7 +831,6 @@ export const DataHeaders$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-
 /** @internal */
 export type DataHeaders$Outbound = {
   value: string;
@@ -972,23 +847,9 @@ export const DataHeaders$outboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataHeaders$ {
-  /** @deprecated use `DataHeaders$inboundSchema` instead. */
-  export const inboundSchema = DataHeaders$inboundSchema;
-  /** @deprecated use `DataHeaders$outboundSchema` instead. */
-  export const outboundSchema = DataHeaders$outboundSchema;
-  /** @deprecated use `DataHeaders$Outbound` instead. */
-  export type Outbound = DataHeaders$Outbound;
-}
-
 export function dataHeadersToJSON(dataHeaders: DataHeaders): string {
   return JSON.stringify(DataHeaders$outboundSchema.parse(dataHeaders));
 }
-
 export function dataHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<DataHeaders, SDKValidationError> {
@@ -1006,26 +867,12 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inbo
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
   > =
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const DataInputSchema$inboundSchema: z.ZodType<
@@ -1038,7 +885,6 @@ export const DataInputSchema$inboundSchema: z.ZodType<
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type DataInputSchema$Outbound = {
   type: string;
@@ -1058,25 +904,11 @@ export const DataInputSchema$outboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataInputSchema$ {
-  /** @deprecated use `DataInputSchema$inboundSchema` instead. */
-  export const inboundSchema = DataInputSchema$inboundSchema;
-  /** @deprecated use `DataInputSchema$outboundSchema` instead. */
-  export const outboundSchema = DataInputSchema$outboundSchema;
-  /** @deprecated use `DataInputSchema$Outbound` instead. */
-  export type Outbound = DataInputSchema$Outbound;
-}
-
 export function dataInputSchemaToJSON(
   dataInputSchema: DataInputSchema,
 ): string {
   return JSON.stringify(DataInputSchema$outboundSchema.parse(dataInputSchema));
 }
-
 export function dataInputSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DataInputSchema, SDKValidationError> {
@@ -1091,22 +923,10 @@ export function dataInputSchemaFromJSON(
 export const DataConnectionType$inboundSchema: z.ZodNativeEnum<
   typeof DataConnectionType
 > = z.nativeEnum(DataConnectionType);
-
 /** @internal */
 export const DataConnectionType$outboundSchema: z.ZodNativeEnum<
   typeof DataConnectionType
 > = DataConnectionType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataConnectionType$ {
-  /** @deprecated use `DataConnectionType$inboundSchema` instead. */
-  export const inboundSchema = DataConnectionType$inboundSchema;
-  /** @deprecated use `DataConnectionType$outboundSchema` instead. */
-  export const outboundSchema = DataConnectionType$outboundSchema;
-}
 
 /** @internal */
 export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
@@ -1126,7 +946,6 @@ export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
       "connection_type": "connectionType",
     });
   });
-
 /** @internal */
 export type DataMcp$Outbound = {
   server_id: string;
@@ -1159,23 +978,9 @@ export const DataMcp$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataMcp$ {
-  /** @deprecated use `DataMcp$inboundSchema` instead. */
-  export const inboundSchema = DataMcp$inboundSchema;
-  /** @deprecated use `DataMcp$outboundSchema` instead. */
-  export const outboundSchema = DataMcp$outboundSchema;
-  /** @deprecated use `DataMcp$Outbound` instead. */
-  export type Outbound = DataMcp$Outbound;
-}
-
 export function dataMcpToJSON(dataMcp: DataMcp): string {
   return JSON.stringify(DataMcp$outboundSchema.parse(dataMcp));
 }
-
 export function dataMcpFromJSON(
   jsonString: string,
 ): SafeParseResult<DataMcp, SDKValidationError> {
@@ -1189,7 +994,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9C5AJ3VEQAKF2VP80D8NFH1"),
+    _id: z.string().default("01K9EHDPKRA2T57XKAJ99XBSKJ"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1215,7 +1020,6 @@ export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
       "version_hash": "versionHash",
     });
   });
-
 /** @internal */
 export type Data4$Outbound = {
   _id: string;
@@ -1241,7 +1045,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K9C5AJ3VEQAKF2VP80D8NFH1"),
+  id: z.string().default("01K9EHDPKRA2T57XKAJ99XBSKJ"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1268,23 +1072,9 @@ export const Data4$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data4$ {
-  /** @deprecated use `Data4$inboundSchema` instead. */
-  export const inboundSchema = Data4$inboundSchema;
-  /** @deprecated use `Data4$outboundSchema` instead. */
-  export const outboundSchema = Data4$outboundSchema;
-  /** @deprecated use `Data4$Outbound` instead. */
-  export type Outbound = Data4$Outbound;
-}
-
 export function data4ToJSON(data4: Data4): string {
   return JSON.stringify(Data4$outboundSchema.parse(data4));
 }
-
 export function data4FromJSON(
   jsonString: string,
 ): SafeParseResult<Data4, SDKValidationError> {
@@ -1299,64 +1089,28 @@ export function data4FromJSON(
 export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsStatus
 > = z.nativeEnum(GetAllToolsDataToolsStatus);
-
 /** @internal */
 export const GetAllToolsDataToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsStatus
 > = GetAllToolsDataToolsStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsStatus$ {
-  /** @deprecated use `GetAllToolsDataToolsStatus$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataToolsStatus$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsStatus$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataToolsStatus$outboundSchema;
-}
-
 /** @internal */
 export const GetAllToolsDataToolsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseType
 > = z.nativeEnum(GetAllToolsDataToolsResponseType);
-
 /** @internal */
 export const GetAllToolsDataToolsResponseType$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseType
 > = GetAllToolsDataToolsResponseType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponseType$ {
-  /** @deprecated use `GetAllToolsDataToolsResponseType$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataToolsResponseType$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponseType$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataToolsResponseType$outboundSchema;
-}
-
 /** @internal */
 export const GetAllToolsDataMethod$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataMethod
 > = z.nativeEnum(GetAllToolsDataMethod);
-
 /** @internal */
 export const GetAllToolsDataMethod$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataMethod
 > = GetAllToolsDataMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataMethod$ {
-  /** @deprecated use `GetAllToolsDataMethod$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataMethod$inboundSchema;
-  /** @deprecated use `GetAllToolsDataMethod$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataMethod$outboundSchema;
-}
 
 /** @internal */
 export const DataBlueprint$inboundSchema: z.ZodType<
@@ -1369,7 +1123,6 @@ export const DataBlueprint$inboundSchema: z.ZodType<
   headers: z.record(z.string()).optional(),
   body: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type DataBlueprint$Outbound = {
   url: string;
@@ -1390,23 +1143,9 @@ export const DataBlueprint$outboundSchema: z.ZodType<
   body: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataBlueprint$ {
-  /** @deprecated use `DataBlueprint$inboundSchema` instead. */
-  export const inboundSchema = DataBlueprint$inboundSchema;
-  /** @deprecated use `DataBlueprint$outboundSchema` instead. */
-  export const outboundSchema = DataBlueprint$outboundSchema;
-  /** @deprecated use `DataBlueprint$Outbound` instead. */
-  export type Outbound = DataBlueprint$Outbound;
-}
-
 export function dataBlueprintToJSON(dataBlueprint: DataBlueprint): string {
   return JSON.stringify(DataBlueprint$outboundSchema.parse(dataBlueprint));
 }
-
 export function dataBlueprintFromJSON(
   jsonString: string,
 ): SafeParseResult<DataBlueprint, SDKValidationError> {
@@ -1424,7 +1163,6 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inb
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type,
   );
-
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$outboundSchema:
   z.ZodNativeEnum<
@@ -1432,26 +1170,12 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$out
   > =
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$ {
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$outboundSchema;
-}
-
 /** @internal */
 export const DataDefaultValue$inboundSchema: z.ZodType<
   DataDefaultValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type DataDefaultValue$Outbound = string | number | boolean;
 
@@ -1462,19 +1186,6 @@ export const DataDefaultValue$outboundSchema: z.ZodType<
   DataDefaultValue
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataDefaultValue$ {
-  /** @deprecated use `DataDefaultValue$inboundSchema` instead. */
-  export const inboundSchema = DataDefaultValue$inboundSchema;
-  /** @deprecated use `DataDefaultValue$outboundSchema` instead. */
-  export const outboundSchema = DataDefaultValue$outboundSchema;
-  /** @deprecated use `DataDefaultValue$Outbound` instead. */
-  export type Outbound = DataDefaultValue$Outbound;
-}
-
 export function dataDefaultValueToJSON(
   dataDefaultValue: DataDefaultValue,
 ): string {
@@ -1482,7 +1193,6 @@ export function dataDefaultValueToJSON(
     DataDefaultValue$outboundSchema.parse(dataDefaultValue),
   );
 }
-
 export function dataDefaultValueFromJSON(
   jsonString: string,
 ): SafeParseResult<DataDefaultValue, SDKValidationError> {
@@ -1510,7 +1220,6 @@ export const DataArguments$inboundSchema: z.ZodType<
     "default_value": "defaultValue",
   });
 });
-
 /** @internal */
 export type DataArguments$Outbound = {
   type: string;
@@ -1537,23 +1246,9 @@ export const DataArguments$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataArguments$ {
-  /** @deprecated use `DataArguments$inboundSchema` instead. */
-  export const inboundSchema = DataArguments$inboundSchema;
-  /** @deprecated use `DataArguments$outboundSchema` instead. */
-  export const outboundSchema = DataArguments$outboundSchema;
-  /** @deprecated use `DataArguments$Outbound` instead. */
-  export type Outbound = DataArguments$Outbound;
-}
-
 export function dataArgumentsToJSON(dataArguments: DataArguments): string {
   return JSON.stringify(DataArguments$outboundSchema.parse(dataArguments));
 }
-
 export function dataArgumentsFromJSON(
   jsonString: string,
 ): SafeParseResult<DataArguments, SDKValidationError> {
@@ -1573,7 +1268,6 @@ export const GetAllToolsDataHttp$inboundSchema: z.ZodType<
   blueprint: z.lazy(() => DataBlueprint$inboundSchema),
   arguments: z.record(z.lazy(() => DataArguments$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type GetAllToolsDataHttp$Outbound = {
   blueprint: DataBlueprint$Outbound;
@@ -1590,19 +1284,6 @@ export const GetAllToolsDataHttp$outboundSchema: z.ZodType<
   arguments: z.record(z.lazy(() => DataArguments$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataHttp$ {
-  /** @deprecated use `GetAllToolsDataHttp$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataHttp$inboundSchema;
-  /** @deprecated use `GetAllToolsDataHttp$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataHttp$outboundSchema;
-  /** @deprecated use `GetAllToolsDataHttp$Outbound` instead. */
-  export type Outbound = GetAllToolsDataHttp$Outbound;
-}
-
 export function getAllToolsDataHttpToJSON(
   getAllToolsDataHttp: GetAllToolsDataHttp,
 ): string {
@@ -1610,7 +1291,6 @@ export function getAllToolsDataHttpToJSON(
     GetAllToolsDataHttp$outboundSchema.parse(getAllToolsDataHttp),
   );
 }
-
 export function getAllToolsDataHttpFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataHttp, SDKValidationError> {
@@ -1624,7 +1304,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9C5AJ3R0EZ5690RYA2DYF8S"),
+    _id: z.string().default("01K9EHDPKPXRB98TACGQ0SZQ4K"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1650,7 +1330,6 @@ export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
       "version_hash": "versionHash",
     });
   });
-
 /** @internal */
 export type Data3$Outbound = {
   _id: string;
@@ -1676,7 +1355,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K9C5AJ3R0EZ5690RYA2DYF8S"),
+  id: z.string().default("01K9EHDPKPXRB98TACGQ0SZQ4K"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1703,23 +1382,9 @@ export const Data3$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data3$ {
-  /** @deprecated use `Data3$inboundSchema` instead. */
-  export const inboundSchema = Data3$inboundSchema;
-  /** @deprecated use `Data3$outboundSchema` instead. */
-  export const outboundSchema = Data3$outboundSchema;
-  /** @deprecated use `Data3$Outbound` instead. */
-  export type Outbound = Data3$Outbound;
-}
-
 export function data3ToJSON(data3: Data3): string {
   return JSON.stringify(Data3$outboundSchema.parse(data3));
 }
-
 export function data3FromJSON(
   jsonString: string,
 ): SafeParseResult<Data3, SDKValidationError> {
@@ -1734,43 +1399,19 @@ export function data3FromJSON(
 export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataStatus
 > = z.nativeEnum(GetAllToolsDataStatus);
-
 /** @internal */
 export const GetAllToolsDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataStatus
 > = GetAllToolsDataStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataStatus$ {
-  /** @deprecated use `GetAllToolsDataStatus$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataStatus$inboundSchema;
-  /** @deprecated use `GetAllToolsDataStatus$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataStatus$outboundSchema;
-}
-
 /** @internal */
 export const GetAllToolsDataToolsType$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsType
 > = z.nativeEnum(GetAllToolsDataToolsType);
-
 /** @internal */
 export const GetAllToolsDataToolsType$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsType
 > = GetAllToolsDataToolsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataToolsType$ {
-  /** @deprecated use `GetAllToolsDataToolsType$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataToolsType$inboundSchema;
-  /** @deprecated use `GetAllToolsDataToolsType$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataToolsType$outboundSchema;
-}
 
 /** @internal */
 export const DataJsonSchema$inboundSchema: z.ZodType<
@@ -1783,7 +1424,6 @@ export const DataJsonSchema$inboundSchema: z.ZodType<
   schema: z.record(z.any()),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
 export type DataJsonSchema$Outbound = {
   name: string;
@@ -1804,23 +1444,9 @@ export const DataJsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataJsonSchema$ {
-  /** @deprecated use `DataJsonSchema$inboundSchema` instead. */
-  export const inboundSchema = DataJsonSchema$inboundSchema;
-  /** @deprecated use `DataJsonSchema$outboundSchema` instead. */
-  export const outboundSchema = DataJsonSchema$outboundSchema;
-  /** @deprecated use `DataJsonSchema$Outbound` instead. */
-  export type Outbound = DataJsonSchema$Outbound;
-}
-
 export function dataJsonSchemaToJSON(dataJsonSchema: DataJsonSchema): string {
   return JSON.stringify(DataJsonSchema$outboundSchema.parse(dataJsonSchema));
 }
-
 export function dataJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DataJsonSchema, SDKValidationError> {
@@ -1834,7 +1460,7 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9C5AJ3QSFCMXS5RRR24EH02"),
+    _id: z.string().default("01K9EHDPKMR2CEPSP3XMTZT4BM"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1861,7 +1487,6 @@ export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
       "json_schema": "jsonSchema",
     });
   });
-
 /** @internal */
 export type Data2$Outbound = {
   _id: string;
@@ -1887,7 +1512,7 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K9C5AJ3QSFCMXS5RRR24EH02"),
+  id: z.string().default("01K9EHDPKMR2CEPSP3XMTZT4BM"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1915,23 +1540,9 @@ export const Data2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data2$ {
-  /** @deprecated use `Data2$inboundSchema` instead. */
-  export const inboundSchema = Data2$inboundSchema;
-  /** @deprecated use `Data2$outboundSchema` instead. */
-  export const outboundSchema = Data2$outboundSchema;
-  /** @deprecated use `Data2$Outbound` instead. */
-  export type Outbound = Data2$Outbound;
-}
-
 export function data2ToJSON(data2: Data2): string {
   return JSON.stringify(Data2$outboundSchema.parse(data2));
 }
-
 export function data2FromJSON(
   jsonString: string,
 ): SafeParseResult<Data2, SDKValidationError> {
@@ -1945,42 +1556,18 @@ export function data2FromJSON(
 /** @internal */
 export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
   .nativeEnum(DataStatus);
-
 /** @internal */
 export const DataStatus$outboundSchema: z.ZodNativeEnum<typeof DataStatus> =
   DataStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataStatus$ {
-  /** @deprecated use `DataStatus$inboundSchema` instead. */
-  export const inboundSchema = DataStatus$inboundSchema;
-  /** @deprecated use `DataStatus$outboundSchema` instead. */
-  export const outboundSchema = DataStatus$outboundSchema;
-}
 
 /** @internal */
 export const GetAllToolsDataType$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataType
 > = z.nativeEnum(GetAllToolsDataType);
-
 /** @internal */
 export const GetAllToolsDataType$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataType
 > = GetAllToolsDataType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataType$ {
-  /** @deprecated use `GetAllToolsDataType$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataType$inboundSchema;
-  /** @deprecated use `GetAllToolsDataType$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataType$outboundSchema;
-}
 
 /** @internal */
 export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
@@ -1993,7 +1580,6 @@ export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   parameters: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type GetAllToolsDataFunction$Outbound = {
   name: string;
@@ -2014,19 +1600,6 @@ export const GetAllToolsDataFunction$outboundSchema: z.ZodType<
   parameters: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsDataFunction$ {
-  /** @deprecated use `GetAllToolsDataFunction$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsDataFunction$inboundSchema;
-  /** @deprecated use `GetAllToolsDataFunction$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsDataFunction$outboundSchema;
-  /** @deprecated use `GetAllToolsDataFunction$Outbound` instead. */
-  export type Outbound = GetAllToolsDataFunction$Outbound;
-}
-
 export function getAllToolsDataFunctionToJSON(
   getAllToolsDataFunction: GetAllToolsDataFunction,
 ): string {
@@ -2034,7 +1607,6 @@ export function getAllToolsDataFunctionToJSON(
     GetAllToolsDataFunction$outboundSchema.parse(getAllToolsDataFunction),
   );
 }
-
 export function getAllToolsDataFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataFunction, SDKValidationError> {
@@ -2048,7 +1620,7 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9C5AJ3P5XXQA0N6QXDYX8FW"),
+    _id: z.string().default("01K9EHDPKKT93CEJ09XTC6XDB5"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -2074,7 +1646,6 @@ export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
       "version_hash": "versionHash",
     });
   });
-
 /** @internal */
 export type Data1$Outbound = {
   _id: string;
@@ -2100,7 +1671,7 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K9C5AJ3P5XXQA0N6QXDYX8FW"),
+  id: z.string().default("01K9EHDPKKT93CEJ09XTC6XDB5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2127,23 +1698,9 @@ export const Data1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Data1$ {
-  /** @deprecated use `Data1$inboundSchema` instead. */
-  export const inboundSchema = Data1$inboundSchema;
-  /** @deprecated use `Data1$outboundSchema` instead. */
-  export const outboundSchema = Data1$outboundSchema;
-  /** @deprecated use `Data1$Outbound` instead. */
-  export type Outbound = Data1$Outbound;
-}
-
 export function data1ToJSON(data1: Data1): string {
   return JSON.stringify(Data1$outboundSchema.parse(data1));
 }
-
 export function data1FromJSON(
   jsonString: string,
 ): SafeParseResult<Data1, SDKValidationError> {
@@ -2166,7 +1723,6 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
   z.lazy(() => Data4$inboundSchema),
   z.lazy(() => Data5$inboundSchema),
 ]);
-
 /** @internal */
 export type GetAllToolsData$Outbound =
   | Data1$Outbound
@@ -2188,25 +1744,11 @@ export const GetAllToolsData$outboundSchema: z.ZodType<
   z.lazy(() => Data5$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsData$ {
-  /** @deprecated use `GetAllToolsData$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsData$inboundSchema;
-  /** @deprecated use `GetAllToolsData$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsData$outboundSchema;
-  /** @deprecated use `GetAllToolsData$Outbound` instead. */
-  export type Outbound = GetAllToolsData$Outbound;
-}
-
 export function getAllToolsDataToJSON(
   getAllToolsData: GetAllToolsData,
 ): string {
   return JSON.stringify(GetAllToolsData$outboundSchema.parse(getAllToolsData));
 }
-
 export function getAllToolsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsData, SDKValidationError> {
@@ -2239,7 +1781,6 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type GetAllToolsResponseBody$Outbound = {
   object: string;
@@ -2276,19 +1817,6 @@ export const GetAllToolsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllToolsResponseBody$ {
-  /** @deprecated use `GetAllToolsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsResponseBody$inboundSchema;
-  /** @deprecated use `GetAllToolsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsResponseBody$outboundSchema;
-  /** @deprecated use `GetAllToolsResponseBody$Outbound` instead. */
-  export type Outbound = GetAllToolsResponseBody$Outbound;
-}
-
 export function getAllToolsResponseBodyToJSON(
   getAllToolsResponseBody: GetAllToolsResponseBody,
 ): string {
@@ -2296,7 +1824,6 @@ export function getAllToolsResponseBodyToJSON(
     GetAllToolsResponseBody$outboundSchema.parse(getAllToolsResponseBody),
   );
 }
-
 export function getAllToolsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsResponseBody, SDKValidationError> {

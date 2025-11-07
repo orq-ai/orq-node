@@ -294,7 +294,6 @@ export const ListKnowledgeBasesRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesRequest$Outbound = {
   limit: number;
@@ -318,19 +317,6 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesRequest$ {
-  /** @deprecated use `ListKnowledgeBasesRequest$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesRequest$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesRequest$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesRequest$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesRequest$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesRequest$Outbound;
-}
-
 export function listKnowledgeBasesRequestToJSON(
   listKnowledgeBasesRequest: ListKnowledgeBasesRequest,
 ): string {
@@ -338,7 +324,6 @@ export function listKnowledgeBasesRequestToJSON(
     ListKnowledgeBasesRequest$outboundSchema.parse(listKnowledgeBasesRequest),
   );
 }
-
 export function listKnowledgeBasesRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesRequest, SDKValidationError> {
@@ -353,45 +338,19 @@ export function listKnowledgeBasesRequestFromJSON(
 export const ListKnowledgeBasesObject$inboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesObject
 > = z.nativeEnum(ListKnowledgeBasesObject);
-
 /** @internal */
 export const ListKnowledgeBasesObject$outboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesObject
 > = ListKnowledgeBasesObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesObject$ {
-  /** @deprecated use `ListKnowledgeBasesObject$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesObject$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesObject$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesObject$outboundSchema;
-}
-
 /** @internal */
 export const ListKnowledgeBasesDataKnowledgeType$inboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesDataKnowledgeType
 > = z.nativeEnum(ListKnowledgeBasesDataKnowledgeType);
-
 /** @internal */
 export const ListKnowledgeBasesDataKnowledgeType$outboundSchema:
   z.ZodNativeEnum<typeof ListKnowledgeBasesDataKnowledgeType> =
     ListKnowledgeBasesDataKnowledgeType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesDataKnowledgeType$ {
-  /** @deprecated use `ListKnowledgeBasesDataKnowledgeType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListKnowledgeBasesDataKnowledgeType$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataKnowledgeType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListKnowledgeBasesDataKnowledgeType$outboundSchema;
-}
 
 /** @internal */
 export const DataRerankConfig$inboundSchema: z.ZodType<
@@ -409,7 +368,6 @@ export const DataRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-
 /** @internal */
 export type DataRerankConfig$Outbound = {
   top_k: number;
@@ -434,19 +392,6 @@ export const DataRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataRerankConfig$ {
-  /** @deprecated use `DataRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = DataRerankConfig$inboundSchema;
-  /** @deprecated use `DataRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = DataRerankConfig$outboundSchema;
-  /** @deprecated use `DataRerankConfig$Outbound` instead. */
-  export type Outbound = DataRerankConfig$Outbound;
-}
-
 export function dataRerankConfigToJSON(
   dataRerankConfig: DataRerankConfig,
 ): string {
@@ -454,7 +399,6 @@ export function dataRerankConfigToJSON(
     DataRerankConfig$outboundSchema.parse(dataRerankConfig),
   );
 }
-
 export function dataRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<DataRerankConfig, SDKValidationError> {
@@ -473,7 +417,6 @@ export const DataAgenticRagConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-
 /** @internal */
 export type DataAgenticRagConfig$Outbound = {
   model: string;
@@ -488,19 +431,6 @@ export const DataAgenticRagConfig$outboundSchema: z.ZodType<
   model: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataAgenticRagConfig$ {
-  /** @deprecated use `DataAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = DataAgenticRagConfig$inboundSchema;
-  /** @deprecated use `DataAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = DataAgenticRagConfig$outboundSchema;
-  /** @deprecated use `DataAgenticRagConfig$Outbound` instead. */
-  export type Outbound = DataAgenticRagConfig$Outbound;
-}
-
 export function dataAgenticRagConfigToJSON(
   dataAgenticRagConfig: DataAgenticRagConfig,
 ): string {
@@ -508,7 +438,6 @@ export function dataAgenticRagConfigToJSON(
     DataAgenticRagConfig$outboundSchema.parse(dataAgenticRagConfig),
   );
 }
-
 export function dataAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<DataAgenticRagConfig, SDKValidationError> {
@@ -539,7 +468,6 @@ export const DataRetrievalSettings$inboundSchema: z.ZodType<
     "agentic_rag_config": "agenticRagConfig",
   });
 });
-
 /** @internal */
 export type DataRetrievalSettings$Outbound = {
   top_k: number;
@@ -569,19 +497,6 @@ export const DataRetrievalSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataRetrievalSettings$ {
-  /** @deprecated use `DataRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema = DataRetrievalSettings$inboundSchema;
-  /** @deprecated use `DataRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema = DataRetrievalSettings$outboundSchema;
-  /** @deprecated use `DataRetrievalSettings$Outbound` instead. */
-  export type Outbound = DataRetrievalSettings$Outbound;
-}
-
 export function dataRetrievalSettingsToJSON(
   dataRetrievalSettings: DataRetrievalSettings,
 ): string {
@@ -589,7 +504,6 @@ export function dataRetrievalSettingsToJSON(
     DataRetrievalSettings$outboundSchema.parse(dataRetrievalSettings),
   );
 }
-
 export function dataRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<DataRetrievalSettings, SDKValidationError> {
@@ -613,7 +527,6 @@ export const DataExternalConfig$inboundSchema: z.ZodType<
     "api_url": "apiUrl",
   });
 });
-
 /** @internal */
 export type DataExternalConfig$Outbound = {
   name: string;
@@ -634,19 +547,6 @@ export const DataExternalConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataExternalConfig$ {
-  /** @deprecated use `DataExternalConfig$inboundSchema` instead. */
-  export const inboundSchema = DataExternalConfig$inboundSchema;
-  /** @deprecated use `DataExternalConfig$outboundSchema` instead. */
-  export const outboundSchema = DataExternalConfig$outboundSchema;
-  /** @deprecated use `DataExternalConfig$Outbound` instead. */
-  export type Outbound = DataExternalConfig$Outbound;
-}
-
 export function dataExternalConfigToJSON(
   dataExternalConfig: DataExternalConfig,
 ): string {
@@ -654,7 +554,6 @@ export function dataExternalConfigToJSON(
     DataExternalConfig$outboundSchema.parse(dataExternalConfig),
   );
 }
-
 export function dataExternalConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<DataExternalConfig, SDKValidationError> {
@@ -694,7 +593,6 @@ export const ListKnowledgeBasesData2$inboundSchema: z.ZodType<
     "external_config": "externalConfig",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesData2$Outbound = {
   _id: string;
@@ -741,19 +639,6 @@ export const ListKnowledgeBasesData2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesData2$ {
-  /** @deprecated use `ListKnowledgeBasesData2$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesData2$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData2$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesData2$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData2$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesData2$Outbound;
-}
-
 export function listKnowledgeBasesData2ToJSON(
   listKnowledgeBasesData2: ListKnowledgeBasesData2,
 ): string {
@@ -761,7 +646,6 @@ export function listKnowledgeBasesData2ToJSON(
     ListKnowledgeBasesData2$outboundSchema.parse(listKnowledgeBasesData2),
   );
 }
-
 export function listKnowledgeBasesData2FromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesData2, SDKValidationError> {
@@ -776,43 +660,19 @@ export function listKnowledgeBasesData2FromJSON(
 export const ListKnowledgeBasesDataType$inboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesDataType
 > = z.nativeEnum(ListKnowledgeBasesDataType);
-
 /** @internal */
 export const ListKnowledgeBasesDataType$outboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesDataType
 > = ListKnowledgeBasesDataType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesDataType$ {
-  /** @deprecated use `ListKnowledgeBasesDataType$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesDataType$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataType$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesDataType$outboundSchema;
-}
-
 /** @internal */
 export const DataRetrievalType$inboundSchema: z.ZodNativeEnum<
   typeof DataRetrievalType
 > = z.nativeEnum(DataRetrievalType);
-
 /** @internal */
 export const DataRetrievalType$outboundSchema: z.ZodNativeEnum<
   typeof DataRetrievalType
 > = DataRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DataRetrievalType$ {
-  /** @deprecated use `DataRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = DataRetrievalType$inboundSchema;
-  /** @deprecated use `DataRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = DataRetrievalType$outboundSchema;
-}
 
 /** @internal */
 export const ListKnowledgeBasesDataRerankConfig$inboundSchema: z.ZodType<
@@ -830,7 +690,6 @@ export const ListKnowledgeBasesDataRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesDataRerankConfig$Outbound = {
   top_k: number;
@@ -855,20 +714,6 @@ export const ListKnowledgeBasesDataRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesDataRerankConfig$ {
-  /** @deprecated use `ListKnowledgeBasesDataRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesDataRerankConfig$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    ListKnowledgeBasesDataRerankConfig$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataRerankConfig$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesDataRerankConfig$Outbound;
-}
-
 export function listKnowledgeBasesDataRerankConfigToJSON(
   listKnowledgeBasesDataRerankConfig: ListKnowledgeBasesDataRerankConfig,
 ): string {
@@ -878,7 +723,6 @@ export function listKnowledgeBasesDataRerankConfigToJSON(
     ),
   );
 }
-
 export function listKnowledgeBasesDataRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesDataRerankConfig, SDKValidationError> {
@@ -898,7 +742,6 @@ export const ListKnowledgeBasesDataAgenticRagConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-
 /** @internal */
 export type ListKnowledgeBasesDataAgenticRagConfig$Outbound = {
   model: string;
@@ -913,21 +756,6 @@ export const ListKnowledgeBasesDataAgenticRagConfig$outboundSchema: z.ZodType<
   model: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesDataAgenticRagConfig$ {
-  /** @deprecated use `ListKnowledgeBasesDataAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    ListKnowledgeBasesDataAgenticRagConfig$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    ListKnowledgeBasesDataAgenticRagConfig$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataAgenticRagConfig$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesDataAgenticRagConfig$Outbound;
-}
-
 export function listKnowledgeBasesDataAgenticRagConfigToJSON(
   listKnowledgeBasesDataAgenticRagConfig:
     ListKnowledgeBasesDataAgenticRagConfig,
@@ -938,7 +766,6 @@ export function listKnowledgeBasesDataAgenticRagConfigToJSON(
     ),
   );
 }
-
 export function listKnowledgeBasesDataAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesDataAgenticRagConfig, SDKValidationError> {
@@ -973,7 +800,6 @@ export const ListKnowledgeBasesDataRetrievalSettings$inboundSchema: z.ZodType<
     "agentic_rag_config": "agenticRagConfig",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesDataRetrievalSettings$Outbound = {
   retrieval_type: string;
@@ -1013,21 +839,6 @@ export const ListKnowledgeBasesDataRetrievalSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesDataRetrievalSettings$ {
-  /** @deprecated use `ListKnowledgeBasesDataRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema =
-    ListKnowledgeBasesDataRetrievalSettings$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema =
-    ListKnowledgeBasesDataRetrievalSettings$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataRetrievalSettings$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesDataRetrievalSettings$Outbound;
-}
-
 export function listKnowledgeBasesDataRetrievalSettingsToJSON(
   listKnowledgeBasesDataRetrievalSettings:
     ListKnowledgeBasesDataRetrievalSettings,
@@ -1038,7 +849,6 @@ export function listKnowledgeBasesDataRetrievalSettingsToJSON(
     ),
   );
 }
-
 export function listKnowledgeBasesDataRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1084,7 +894,6 @@ export const ListKnowledgeBasesData1$inboundSchema: z.ZodType<
     "retrieval_settings": "retrievalSettings",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesData1$Outbound = {
   _id: string;
@@ -1133,19 +942,6 @@ export const ListKnowledgeBasesData1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesData1$ {
-  /** @deprecated use `ListKnowledgeBasesData1$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesData1$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData1$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesData1$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData1$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesData1$Outbound;
-}
-
 export function listKnowledgeBasesData1ToJSON(
   listKnowledgeBasesData1: ListKnowledgeBasesData1,
 ): string {
@@ -1153,7 +949,6 @@ export function listKnowledgeBasesData1ToJSON(
     ListKnowledgeBasesData1$outboundSchema.parse(listKnowledgeBasesData1),
   );
 }
-
 export function listKnowledgeBasesData1FromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesData1, SDKValidationError> {
@@ -1173,7 +968,6 @@ export const ListKnowledgeBasesData$inboundSchema: z.ZodType<
   z.lazy(() => ListKnowledgeBasesData1$inboundSchema),
   z.lazy(() => ListKnowledgeBasesData2$inboundSchema),
 ]);
-
 /** @internal */
 export type ListKnowledgeBasesData$Outbound =
   | ListKnowledgeBasesData1$Outbound
@@ -1189,19 +983,6 @@ export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
   z.lazy(() => ListKnowledgeBasesData2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesData$ {
-  /** @deprecated use `ListKnowledgeBasesData$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesData$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesData$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesData$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesData$Outbound;
-}
-
 export function listKnowledgeBasesDataToJSON(
   listKnowledgeBasesData: ListKnowledgeBasesData,
 ): string {
@@ -1209,7 +990,6 @@ export function listKnowledgeBasesDataToJSON(
     ListKnowledgeBasesData$outboundSchema.parse(listKnowledgeBasesData),
   );
 }
-
 export function listKnowledgeBasesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesData, SDKValidationError> {
@@ -1239,7 +1019,6 @@ export const ListKnowledgeBasesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListKnowledgeBasesResponseBody$Outbound = {
   object: string;
@@ -1269,19 +1048,6 @@ export const ListKnowledgeBasesResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesResponseBody$ {
-  /** @deprecated use `ListKnowledgeBasesResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesResponseBody$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesResponseBody$outboundSchema;
-  /** @deprecated use `ListKnowledgeBasesResponseBody$Outbound` instead. */
-  export type Outbound = ListKnowledgeBasesResponseBody$Outbound;
-}
-
 export function listKnowledgeBasesResponseBodyToJSON(
   listKnowledgeBasesResponseBody: ListKnowledgeBasesResponseBody,
 ): string {
@@ -1291,7 +1057,6 @@ export function listKnowledgeBasesResponseBodyToJSON(
     ),
   );
 }
-
 export function listKnowledgeBasesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListKnowledgeBasesResponseBody, SDKValidationError> {

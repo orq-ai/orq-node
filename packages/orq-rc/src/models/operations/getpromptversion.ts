@@ -124,6 +124,7 @@ export type GetPromptVersionResponseFormatJsonSchema = {
 
 export type GetPromptVersionResponseFormat1 = {
   type: GetPromptVersionResponseFormatType;
+  displayName?: string | undefined;
   jsonSchema: GetPromptVersionResponseFormatJsonSchema;
 };
 
@@ -594,7 +595,6 @@ export const GetPromptVersionRequest$inboundSchema: z.ZodType<
     "version_id": "versionId",
   });
 });
-
 /** @internal */
 export type GetPromptVersionRequest$Outbound = {
   prompt_id: string;
@@ -616,19 +616,6 @@ export const GetPromptVersionRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionRequest$ {
-  /** @deprecated use `GetPromptVersionRequest$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionRequest$inboundSchema;
-  /** @deprecated use `GetPromptVersionRequest$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionRequest$outboundSchema;
-  /** @deprecated use `GetPromptVersionRequest$Outbound` instead. */
-  export type Outbound = GetPromptVersionRequest$Outbound;
-}
-
 export function getPromptVersionRequestToJSON(
   getPromptVersionRequest: GetPromptVersionRequest,
 ): string {
@@ -636,7 +623,6 @@ export function getPromptVersionRequestToJSON(
     GetPromptVersionRequest$outboundSchema.parse(getPromptVersionRequest),
   );
 }
-
 export function getPromptVersionRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionRequest, SDKValidationError> {
@@ -651,129 +637,55 @@ export function getPromptVersionRequestFromJSON(
 export const GetPromptVersionModelType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionModelType
 > = z.nativeEnum(GetPromptVersionModelType);
-
 /** @internal */
 export const GetPromptVersionModelType$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionModelType
 > = GetPromptVersionModelType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionModelType$ {
-  /** @deprecated use `GetPromptVersionModelType$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionModelType$inboundSchema;
-  /** @deprecated use `GetPromptVersionModelType$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionModelType$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionFormat
 > = z.nativeEnum(GetPromptVersionFormat);
-
 /** @internal */
 export const GetPromptVersionFormat$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionFormat
 > = GetPromptVersionFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionFormat$ {
-  /** @deprecated use `GetPromptVersionFormat$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionFormat$inboundSchema;
-  /** @deprecated use `GetPromptVersionFormat$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionFormat$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat6
 > = z.nativeEnum(GetPromptVersionResponseFormat6);
-
 /** @internal */
 export const GetPromptVersionResponseFormat6$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat6
 > = GetPromptVersionResponseFormat6$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat6$ {
-  /** @deprecated use `GetPromptVersionResponseFormat6$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat6$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat6$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat6$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat5
 > = z.nativeEnum(GetPromptVersionResponseFormat5);
-
 /** @internal */
 export const GetPromptVersionResponseFormat5$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat5
 > = GetPromptVersionResponseFormat5$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat5$ {
-  /** @deprecated use `GetPromptVersionResponseFormat5$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat5$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat5$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat5$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat4
 > = z.nativeEnum(GetPromptVersionResponseFormat4);
-
 /** @internal */
 export const GetPromptVersionResponseFormat4$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat4
 > = GetPromptVersionResponseFormat4$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat4$ {
-  /** @deprecated use `GetPromptVersionResponseFormat4$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat4$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat4$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat4$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionResponseFormatPromptsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsResponseType> = z
     .nativeEnum(GetPromptVersionResponseFormatPromptsResponseType);
-
 /** @internal */
 export const GetPromptVersionResponseFormatPromptsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsResponseType> =
     GetPromptVersionResponseFormatPromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormatPromptsResponseType$ {
-  /** @deprecated use `GetPromptVersionResponseFormatPromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPromptVersionResponseFormatPromptsResponseType$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormatPromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPromptVersionResponseFormatPromptsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionResponseFormat3$inboundSchema: z.ZodType<
@@ -783,7 +695,6 @@ export const GetPromptVersionResponseFormat3$inboundSchema: z.ZodType<
 > = z.object({
   type: GetPromptVersionResponseFormatPromptsResponseType$inboundSchema,
 });
-
 /** @internal */
 export type GetPromptVersionResponseFormat3$Outbound = {
   type: string;
@@ -798,19 +709,6 @@ export const GetPromptVersionResponseFormat3$outboundSchema: z.ZodType<
   type: GetPromptVersionResponseFormatPromptsResponseType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat3$ {
-  /** @deprecated use `GetPromptVersionResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat3$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat3$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat3$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseFormat3$Outbound;
-}
-
 export function getPromptVersionResponseFormat3ToJSON(
   getPromptVersionResponseFormat3: GetPromptVersionResponseFormat3,
 ): string {
@@ -820,7 +718,6 @@ export function getPromptVersionResponseFormat3ToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat3, SDKValidationError> {
@@ -835,24 +732,10 @@ export function getPromptVersionResponseFormat3FromJSON(
 export const GetPromptVersionResponseFormatPromptsType$inboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsType> = z
     .nativeEnum(GetPromptVersionResponseFormatPromptsType);
-
 /** @internal */
 export const GetPromptVersionResponseFormatPromptsType$outboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsType> =
     GetPromptVersionResponseFormatPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormatPromptsType$ {
-  /** @deprecated use `GetPromptVersionResponseFormatPromptsType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPromptVersionResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormatPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPromptVersionResponseFormatPromptsType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionResponseFormat2$inboundSchema: z.ZodType<
@@ -862,7 +745,6 @@ export const GetPromptVersionResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: GetPromptVersionResponseFormatPromptsType$inboundSchema,
 });
-
 /** @internal */
 export type GetPromptVersionResponseFormat2$Outbound = {
   type: string;
@@ -877,19 +759,6 @@ export const GetPromptVersionResponseFormat2$outboundSchema: z.ZodType<
   type: GetPromptVersionResponseFormatPromptsType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat2$ {
-  /** @deprecated use `GetPromptVersionResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat2$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat2$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat2$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseFormat2$Outbound;
-}
-
 export function getPromptVersionResponseFormat2ToJSON(
   getPromptVersionResponseFormat2: GetPromptVersionResponseFormat2,
 ): string {
@@ -899,7 +768,6 @@ export function getPromptVersionResponseFormat2ToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat2, SDKValidationError> {
@@ -914,23 +782,10 @@ export function getPromptVersionResponseFormat2FromJSON(
 export const GetPromptVersionResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormatType
 > = z.nativeEnum(GetPromptVersionResponseFormatType);
-
 /** @internal */
 export const GetPromptVersionResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormatType
 > = GetPromptVersionResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormatType$ {
-  /** @deprecated use `GetPromptVersionResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormatType$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPromptVersionResponseFormatType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -943,7 +798,6 @@ export const GetPromptVersionResponseFormatJsonSchema$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
-
 /** @internal */
 export type GetPromptVersionResponseFormatJsonSchema$Outbound = {
   name: string;
@@ -964,21 +818,6 @@ export const GetPromptVersionResponseFormatJsonSchema$outboundSchema: z.ZodType<
   schema: z.record(z.any()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormatJsonSchema$ {
-  /** @deprecated use `GetPromptVersionResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPromptVersionResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPromptVersionResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseFormatJsonSchema$Outbound;
-}
-
 export function getPromptVersionResponseFormatJsonSchemaToJSON(
   getPromptVersionResponseFormatJsonSchema:
     GetPromptVersionResponseFormatJsonSchema,
@@ -989,7 +828,6 @@ export function getPromptVersionResponseFormatJsonSchemaToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1013,18 +851,20 @@ export const GetPromptVersionResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: GetPromptVersionResponseFormatType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() =>
     GetPromptVersionResponseFormatJsonSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
 export type GetPromptVersionResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: GetPromptVersionResponseFormatJsonSchema$Outbound;
 };
 
@@ -1035,27 +875,16 @@ export const GetPromptVersionResponseFormat1$outboundSchema: z.ZodType<
   GetPromptVersionResponseFormat1
 > = z.object({
   type: GetPromptVersionResponseFormatType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() =>
     GetPromptVersionResponseFormatJsonSchema$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat1$ {
-  /** @deprecated use `GetPromptVersionResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat1$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat1$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat1$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseFormat1$Outbound;
-}
 
 export function getPromptVersionResponseFormat1ToJSON(
   getPromptVersionResponseFormat1: GetPromptVersionResponseFormat1,
@@ -1066,7 +895,6 @@ export function getPromptVersionResponseFormat1ToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat1, SDKValidationError> {
@@ -1090,7 +918,6 @@ export const GetPromptVersionResponseFormat$inboundSchema: z.ZodType<
   GetPromptVersionResponseFormat5$inboundSchema,
   GetPromptVersionResponseFormat6$inboundSchema,
 ]);
-
 /** @internal */
 export type GetPromptVersionResponseFormat$Outbound =
   | GetPromptVersionResponseFormat1$Outbound
@@ -1114,19 +941,6 @@ export const GetPromptVersionResponseFormat$outboundSchema: z.ZodType<
   GetPromptVersionResponseFormat6$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseFormat$ {
-  /** @deprecated use `GetPromptVersionResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseFormat$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseFormat$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseFormat$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseFormat$Outbound;
-}
-
 export function getPromptVersionResponseFormatToJSON(
   getPromptVersionResponseFormat: GetPromptVersionResponseFormat,
 ): string {
@@ -1136,7 +950,6 @@ export function getPromptVersionResponseFormatToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat, SDKValidationError> {
@@ -1151,85 +964,37 @@ export function getPromptVersionResponseFormatFromJSON(
 export const GetPromptVersionPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionPhotoRealVersion
 > = z.nativeEnum(GetPromptVersionPhotoRealVersion);
-
 /** @internal */
 export const GetPromptVersionPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionPhotoRealVersion
 > = GetPromptVersionPhotoRealVersion$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionPhotoRealVersion$ {
-  /** @deprecated use `GetPromptVersionPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionPhotoRealVersion$inboundSchema;
-  /** @deprecated use `GetPromptVersionPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionPhotoRealVersion$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionEncodingFormat
 > = z.nativeEnum(GetPromptVersionEncodingFormat);
-
 /** @internal */
 export const GetPromptVersionEncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionEncodingFormat
 > = GetPromptVersionEncodingFormat$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionEncodingFormat$ {
-  /** @deprecated use `GetPromptVersionEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionEncodingFormat$inboundSchema;
-  /** @deprecated use `GetPromptVersionEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionEncodingFormat$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionReasoningEffort
 > = z.nativeEnum(GetPromptVersionReasoningEffort);
-
 /** @internal */
 export const GetPromptVersionReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionReasoningEffort
 > = GetPromptVersionReasoningEffort$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionReasoningEffort$ {
-  /** @deprecated use `GetPromptVersionReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionReasoningEffort$inboundSchema;
-  /** @deprecated use `GetPromptVersionReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionReasoningEffort$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionVerbosity
 > = z.nativeEnum(GetPromptVersionVerbosity);
-
 /** @internal */
 export const GetPromptVersionVerbosity$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionVerbosity
 > = GetPromptVersionVerbosity$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionVerbosity$ {
-  /** @deprecated use `GetPromptVersionVerbosity$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionVerbosity$inboundSchema;
-  /** @deprecated use `GetPromptVersionVerbosity$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionVerbosity$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
@@ -1269,7 +1034,6 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-
 /** @internal */
 export type GetPromptVersionModelParameters$Outbound = {
   temperature?: number | undefined;
@@ -1339,19 +1103,6 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionModelParameters$ {
-  /** @deprecated use `GetPromptVersionModelParameters$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionModelParameters$inboundSchema;
-  /** @deprecated use `GetPromptVersionModelParameters$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionModelParameters$outboundSchema;
-  /** @deprecated use `GetPromptVersionModelParameters$Outbound` instead. */
-  export type Outbound = GetPromptVersionModelParameters$Outbound;
-}
-
 export function getPromptVersionModelParametersToJSON(
   getPromptVersionModelParameters: GetPromptVersionModelParameters,
 ): string {
@@ -1361,7 +1112,6 @@ export function getPromptVersionModelParametersToJSON(
     ),
   );
 }
-
 export function getPromptVersionModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionModelParameters, SDKValidationError> {
@@ -1376,67 +1126,29 @@ export function getPromptVersionModelParametersFromJSON(
 export const GetPromptVersionProvider$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionProvider
 > = z.nativeEnum(GetPromptVersionProvider);
-
 /** @internal */
 export const GetPromptVersionProvider$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionProvider
 > = GetPromptVersionProvider$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionProvider$ {
-  /** @deprecated use `GetPromptVersionProvider$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionProvider$inboundSchema;
-  /** @deprecated use `GetPromptVersionProvider$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionProvider$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionRole$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionRole
 > = z.nativeEnum(GetPromptVersionRole);
-
 /** @internal */
 export const GetPromptVersionRole$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionRole
 > = GetPromptVersionRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionRole$ {
-  /** @deprecated use `GetPromptVersionRole$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionRole$inboundSchema;
-  /** @deprecated use `GetPromptVersionRole$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionRole$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersion2PromptsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> = z.nativeEnum(
     GetPromptVersion2PromptsResponseType,
   );
-
 /** @internal */
 export const GetPromptVersion2PromptsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> =
     GetPromptVersion2PromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion2PromptsResponseType$ {
-  /** @deprecated use `GetPromptVersion2PromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPromptVersion2PromptsResponseType$inboundSchema;
-  /** @deprecated use `GetPromptVersion2PromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPromptVersion2PromptsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersion2File$inboundSchema: z.ZodType<
@@ -1453,7 +1165,6 @@ export const GetPromptVersion2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-
 /** @internal */
 export type GetPromptVersion2File$Outbound = {
   file_data?: string | undefined;
@@ -1478,19 +1189,6 @@ export const GetPromptVersion2File$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion2File$ {
-  /** @deprecated use `GetPromptVersion2File$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion2File$inboundSchema;
-  /** @deprecated use `GetPromptVersion2File$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion2File$outboundSchema;
-  /** @deprecated use `GetPromptVersion2File$Outbound` instead. */
-  export type Outbound = GetPromptVersion2File$Outbound;
-}
-
 export function getPromptVersion2FileToJSON(
   getPromptVersion2File: GetPromptVersion2File,
 ): string {
@@ -1498,7 +1196,6 @@ export function getPromptVersion2FileToJSON(
     GetPromptVersion2File$outboundSchema.parse(getPromptVersion2File),
   );
 }
-
 export function getPromptVersion2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion2File, SDKValidationError> {
@@ -1518,7 +1215,6 @@ export const GetPromptVersion23$inboundSchema: z.ZodType<
   type: GetPromptVersion2PromptsResponseType$inboundSchema,
   file: z.lazy(() => GetPromptVersion2File$inboundSchema),
 });
-
 /** @internal */
 export type GetPromptVersion23$Outbound = {
   type: string;
@@ -1535,19 +1231,6 @@ export const GetPromptVersion23$outboundSchema: z.ZodType<
   file: z.lazy(() => GetPromptVersion2File$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion23$ {
-  /** @deprecated use `GetPromptVersion23$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion23$inboundSchema;
-  /** @deprecated use `GetPromptVersion23$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion23$outboundSchema;
-  /** @deprecated use `GetPromptVersion23$Outbound` instead. */
-  export type Outbound = GetPromptVersion23$Outbound;
-}
-
 export function getPromptVersion23ToJSON(
   getPromptVersion23: GetPromptVersion23,
 ): string {
@@ -1555,7 +1238,6 @@ export function getPromptVersion23ToJSON(
     GetPromptVersion23$outboundSchema.parse(getPromptVersion23),
   );
 }
-
 export function getPromptVersion23FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion23, SDKValidationError> {
@@ -1570,22 +1252,10 @@ export function getPromptVersion23FromJSON(
 export const GetPromptVersion2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersion2PromptsType
 > = z.nativeEnum(GetPromptVersion2PromptsType);
-
 /** @internal */
 export const GetPromptVersion2PromptsType$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersion2PromptsType
 > = GetPromptVersion2PromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion2PromptsType$ {
-  /** @deprecated use `GetPromptVersion2PromptsType$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion2PromptsType$inboundSchema;
-  /** @deprecated use `GetPromptVersion2PromptsType$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion2PromptsType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersion2ImageUrl$inboundSchema: z.ZodType<
@@ -1597,7 +1267,6 @@ export const GetPromptVersion2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-
 /** @internal */
 export type GetPromptVersion2ImageUrl$Outbound = {
   id?: string | undefined;
@@ -1616,19 +1285,6 @@ export const GetPromptVersion2ImageUrl$outboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion2ImageUrl$ {
-  /** @deprecated use `GetPromptVersion2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion2ImageUrl$inboundSchema;
-  /** @deprecated use `GetPromptVersion2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion2ImageUrl$outboundSchema;
-  /** @deprecated use `GetPromptVersion2ImageUrl$Outbound` instead. */
-  export type Outbound = GetPromptVersion2ImageUrl$Outbound;
-}
-
 export function getPromptVersion2ImageUrlToJSON(
   getPromptVersion2ImageUrl: GetPromptVersion2ImageUrl,
 ): string {
@@ -1636,7 +1292,6 @@ export function getPromptVersion2ImageUrlToJSON(
     GetPromptVersion2ImageUrl$outboundSchema.parse(getPromptVersion2ImageUrl),
   );
 }
-
 export function getPromptVersion2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion2ImageUrl, SDKValidationError> {
@@ -1660,7 +1315,6 @@ export const GetPromptVersion22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-
 /** @internal */
 export type GetPromptVersion22$Outbound = {
   type: string;
@@ -1681,19 +1335,6 @@ export const GetPromptVersion22$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion22$ {
-  /** @deprecated use `GetPromptVersion22$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion22$inboundSchema;
-  /** @deprecated use `GetPromptVersion22$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion22$outboundSchema;
-  /** @deprecated use `GetPromptVersion22$Outbound` instead. */
-  export type Outbound = GetPromptVersion22$Outbound;
-}
-
 export function getPromptVersion22ToJSON(
   getPromptVersion22: GetPromptVersion22,
 ): string {
@@ -1701,7 +1342,6 @@ export function getPromptVersion22ToJSON(
     GetPromptVersion22$outboundSchema.parse(getPromptVersion22),
   );
 }
-
 export function getPromptVersion22FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion22, SDKValidationError> {
@@ -1716,22 +1356,10 @@ export function getPromptVersion22FromJSON(
 export const GetPromptVersion2Type$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersion2Type
 > = z.nativeEnum(GetPromptVersion2Type);
-
 /** @internal */
 export const GetPromptVersion2Type$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersion2Type
 > = GetPromptVersion2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion2Type$ {
-  /** @deprecated use `GetPromptVersion2Type$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion2Type$inboundSchema;
-  /** @deprecated use `GetPromptVersion2Type$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion2Type$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersion21$inboundSchema: z.ZodType<
@@ -1742,7 +1370,6 @@ export const GetPromptVersion21$inboundSchema: z.ZodType<
   type: GetPromptVersion2Type$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type GetPromptVersion21$Outbound = {
   type: string;
@@ -1759,19 +1386,6 @@ export const GetPromptVersion21$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersion21$ {
-  /** @deprecated use `GetPromptVersion21$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersion21$inboundSchema;
-  /** @deprecated use `GetPromptVersion21$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersion21$outboundSchema;
-  /** @deprecated use `GetPromptVersion21$Outbound` instead. */
-  export type Outbound = GetPromptVersion21$Outbound;
-}
-
 export function getPromptVersion21ToJSON(
   getPromptVersion21: GetPromptVersion21,
 ): string {
@@ -1779,7 +1393,6 @@ export function getPromptVersion21ToJSON(
     GetPromptVersion21$outboundSchema.parse(getPromptVersion21),
   );
 }
-
 export function getPromptVersion21FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion21, SDKValidationError> {
@@ -1800,7 +1413,6 @@ export const GetPromptVersionContent2$inboundSchema: z.ZodType<
   z.lazy(() => GetPromptVersion22$inboundSchema),
   z.lazy(() => GetPromptVersion23$inboundSchema),
 ]);
-
 /** @internal */
 export type GetPromptVersionContent2$Outbound =
   | GetPromptVersion21$Outbound
@@ -1818,19 +1430,6 @@ export const GetPromptVersionContent2$outboundSchema: z.ZodType<
   z.lazy(() => GetPromptVersion23$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionContent2$ {
-  /** @deprecated use `GetPromptVersionContent2$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionContent2$inboundSchema;
-  /** @deprecated use `GetPromptVersionContent2$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionContent2$outboundSchema;
-  /** @deprecated use `GetPromptVersionContent2$Outbound` instead. */
-  export type Outbound = GetPromptVersionContent2$Outbound;
-}
-
 export function getPromptVersionContent2ToJSON(
   getPromptVersionContent2: GetPromptVersionContent2,
 ): string {
@@ -1838,7 +1437,6 @@ export function getPromptVersionContent2ToJSON(
     GetPromptVersionContent2$outboundSchema.parse(getPromptVersionContent2),
   );
 }
-
 export function getPromptVersionContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionContent2, SDKValidationError> {
@@ -1862,7 +1460,6 @@ export const GetPromptVersionContent$inboundSchema: z.ZodType<
     z.lazy(() => GetPromptVersion23$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type GetPromptVersionContent$Outbound =
   | string
@@ -1886,19 +1483,6 @@ export const GetPromptVersionContent$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionContent$ {
-  /** @deprecated use `GetPromptVersionContent$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionContent$inboundSchema;
-  /** @deprecated use `GetPromptVersionContent$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionContent$outboundSchema;
-  /** @deprecated use `GetPromptVersionContent$Outbound` instead. */
-  export type Outbound = GetPromptVersionContent$Outbound;
-}
-
 export function getPromptVersionContentToJSON(
   getPromptVersionContent: GetPromptVersionContent,
 ): string {
@@ -1906,7 +1490,6 @@ export function getPromptVersionContentToJSON(
     GetPromptVersionContent$outboundSchema.parse(getPromptVersionContent),
   );
 }
-
 export function getPromptVersionContentFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionContent, SDKValidationError> {
@@ -1921,22 +1504,10 @@ export function getPromptVersionContentFromJSON(
 export const GetPromptVersionType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionType
 > = z.nativeEnum(GetPromptVersionType);
-
 /** @internal */
 export const GetPromptVersionType$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionType
 > = GetPromptVersionType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionType$ {
-  /** @deprecated use `GetPromptVersionType$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionType$inboundSchema;
-  /** @deprecated use `GetPromptVersionType$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionType$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionFunction$inboundSchema: z.ZodType<
@@ -1947,7 +1518,6 @@ export const GetPromptVersionFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-
 /** @internal */
 export type GetPromptVersionFunction$Outbound = {
   name: string;
@@ -1964,19 +1534,6 @@ export const GetPromptVersionFunction$outboundSchema: z.ZodType<
   arguments: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionFunction$ {
-  /** @deprecated use `GetPromptVersionFunction$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionFunction$inboundSchema;
-  /** @deprecated use `GetPromptVersionFunction$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionFunction$outboundSchema;
-  /** @deprecated use `GetPromptVersionFunction$Outbound` instead. */
-  export type Outbound = GetPromptVersionFunction$Outbound;
-}
-
 export function getPromptVersionFunctionToJSON(
   getPromptVersionFunction: GetPromptVersionFunction,
 ): string {
@@ -1984,7 +1541,6 @@ export function getPromptVersionFunctionToJSON(
     GetPromptVersionFunction$outboundSchema.parse(getPromptVersionFunction),
   );
 }
-
 export function getPromptVersionFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionFunction, SDKValidationError> {
@@ -2006,7 +1562,6 @@ export const GetPromptVersionToolCalls$inboundSchema: z.ZodType<
   type: GetPromptVersionType$inboundSchema,
   function: z.lazy(() => GetPromptVersionFunction$inboundSchema),
 });
-
 /** @internal */
 export type GetPromptVersionToolCalls$Outbound = {
   id?: string | undefined;
@@ -2027,19 +1582,6 @@ export const GetPromptVersionToolCalls$outboundSchema: z.ZodType<
   function: z.lazy(() => GetPromptVersionFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionToolCalls$ {
-  /** @deprecated use `GetPromptVersionToolCalls$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionToolCalls$inboundSchema;
-  /** @deprecated use `GetPromptVersionToolCalls$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionToolCalls$outboundSchema;
-  /** @deprecated use `GetPromptVersionToolCalls$Outbound` instead. */
-  export type Outbound = GetPromptVersionToolCalls$Outbound;
-}
-
 export function getPromptVersionToolCallsToJSON(
   getPromptVersionToolCalls: GetPromptVersionToolCalls,
 ): string {
@@ -2047,7 +1589,6 @@ export function getPromptVersionToolCallsToJSON(
     GetPromptVersionToolCalls$outboundSchema.parse(getPromptVersionToolCalls),
   );
 }
-
 export function getPromptVersionToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionToolCalls, SDKValidationError> {
@@ -2086,7 +1627,6 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-
 /** @internal */
 export type GetPromptVersionMessages$Outbound = {
   role: string;
@@ -2131,19 +1671,6 @@ export const GetPromptVersionMessages$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionMessages$ {
-  /** @deprecated use `GetPromptVersionMessages$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionMessages$inboundSchema;
-  /** @deprecated use `GetPromptVersionMessages$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionMessages$outboundSchema;
-  /** @deprecated use `GetPromptVersionMessages$Outbound` instead. */
-  export type Outbound = GetPromptVersionMessages$Outbound;
-}
-
 export function getPromptVersionMessagesToJSON(
   getPromptVersionMessages: GetPromptVersionMessages,
 ): string {
@@ -2151,7 +1678,6 @@ export function getPromptVersionMessagesToJSON(
     GetPromptVersionMessages$outboundSchema.parse(getPromptVersionMessages),
   );
 }
-
 export function getPromptVersionMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionMessages, SDKValidationError> {
@@ -2186,7 +1712,6 @@ export const GetPromptVersionPromptConfig$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-
 /** @internal */
 export type GetPromptVersionPromptConfig$Outbound = {
   stream?: boolean | undefined;
@@ -2225,19 +1750,6 @@ export const GetPromptVersionPromptConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionPromptConfig$ {
-  /** @deprecated use `GetPromptVersionPromptConfig$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionPromptConfig$inboundSchema;
-  /** @deprecated use `GetPromptVersionPromptConfig$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionPromptConfig$outboundSchema;
-  /** @deprecated use `GetPromptVersionPromptConfig$Outbound` instead. */
-  export type Outbound = GetPromptVersionPromptConfig$Outbound;
-}
-
 export function getPromptVersionPromptConfigToJSON(
   getPromptVersionPromptConfig: GetPromptVersionPromptConfig,
 ): string {
@@ -2247,7 +1759,6 @@ export function getPromptVersionPromptConfigToJSON(
     ),
   );
 }
-
 export function getPromptVersionPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionPromptConfig, SDKValidationError> {
@@ -2262,43 +1773,19 @@ export function getPromptVersionPromptConfigFromJSON(
 export const GetPromptVersionUseCases$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionUseCases
 > = z.nativeEnum(GetPromptVersionUseCases);
-
 /** @internal */
 export const GetPromptVersionUseCases$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionUseCases
 > = GetPromptVersionUseCases$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionUseCases$ {
-  /** @deprecated use `GetPromptVersionUseCases$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionUseCases$inboundSchema;
-  /** @deprecated use `GetPromptVersionUseCases$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionUseCases$outboundSchema;
-}
-
 /** @internal */
 export const GetPromptVersionLanguage$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionLanguage
 > = z.nativeEnum(GetPromptVersionLanguage);
-
 /** @internal */
 export const GetPromptVersionLanguage$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionLanguage
 > = GetPromptVersionLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionLanguage$ {
-  /** @deprecated use `GetPromptVersionLanguage$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionLanguage$inboundSchema;
-  /** @deprecated use `GetPromptVersionLanguage$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionLanguage$outboundSchema;
-}
 
 /** @internal */
 export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
@@ -2313,7 +1800,6 @@ export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-
 /** @internal */
 export type GetPromptVersionMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
@@ -2334,19 +1820,6 @@ export const GetPromptVersionMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionMetadata$ {
-  /** @deprecated use `GetPromptVersionMetadata$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionMetadata$inboundSchema;
-  /** @deprecated use `GetPromptVersionMetadata$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionMetadata$outboundSchema;
-  /** @deprecated use `GetPromptVersionMetadata$Outbound` instead. */
-  export type Outbound = GetPromptVersionMetadata$Outbound;
-}
-
 export function getPromptVersionMetadataToJSON(
   getPromptVersionMetadata: GetPromptVersionMetadata,
 ): string {
@@ -2354,7 +1827,6 @@ export function getPromptVersionMetadataToJSON(
     GetPromptVersionMetadata$outboundSchema.parse(getPromptVersionMetadata),
   );
 }
-
 export function getPromptVersionMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionMetadata, SDKValidationError> {
@@ -2386,7 +1858,6 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-
 /** @internal */
 export type GetPromptVersionResponseBody$Outbound = {
   _id: string;
@@ -2420,19 +1891,6 @@ export const GetPromptVersionResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionResponseBody$ {
-  /** @deprecated use `GetPromptVersionResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionResponseBody$inboundSchema;
-  /** @deprecated use `GetPromptVersionResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionResponseBody$outboundSchema;
-  /** @deprecated use `GetPromptVersionResponseBody$Outbound` instead. */
-  export type Outbound = GetPromptVersionResponseBody$Outbound;
-}
-
 export function getPromptVersionResponseBodyToJSON(
   getPromptVersionResponseBody: GetPromptVersionResponseBody,
 ): string {
@@ -2442,7 +1900,6 @@ export function getPromptVersionResponseBodyToJSON(
     ),
   );
 }
-
 export function getPromptVersionResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseBody, SDKValidationError> {

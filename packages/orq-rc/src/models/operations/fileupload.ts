@@ -91,7 +91,6 @@ export const FileUploadFile$inboundSchema: z.ZodType<
     z.instanceof(Uint8Array),
   ]),
 });
-
 /** @internal */
 export type FileUploadFile$Outbound = {
   fileName: string;
@@ -113,23 +112,9 @@ export const FileUploadFile$outboundSchema: z.ZodType<
   ]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadFile$ {
-  /** @deprecated use `FileUploadFile$inboundSchema` instead. */
-  export const inboundSchema = FileUploadFile$inboundSchema;
-  /** @deprecated use `FileUploadFile$outboundSchema` instead. */
-  export const outboundSchema = FileUploadFile$outboundSchema;
-  /** @deprecated use `FileUploadFile$Outbound` instead. */
-  export type Outbound = FileUploadFile$Outbound;
-}
-
 export function fileUploadFileToJSON(fileUploadFile: FileUploadFile): string {
   return JSON.stringify(FileUploadFile$outboundSchema.parse(fileUploadFile));
 }
-
 export function fileUploadFileFromJSON(
   jsonString: string,
 ): SafeParseResult<FileUploadFile, SDKValidationError> {
@@ -143,21 +128,9 @@ export function fileUploadFileFromJSON(
 /** @internal */
 export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
   .nativeEnum(Purpose);
-
 /** @internal */
 export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
   Purpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Purpose$ {
-  /** @deprecated use `Purpose$inboundSchema` instead. */
-  export const inboundSchema = Purpose$inboundSchema;
-  /** @deprecated use `Purpose$outboundSchema` instead. */
-  export const outboundSchema = Purpose$outboundSchema;
-}
 
 /** @internal */
 export const FileUploadRequestBody$inboundSchema: z.ZodType<
@@ -168,7 +141,6 @@ export const FileUploadRequestBody$inboundSchema: z.ZodType<
   file: z.lazy(() => FileUploadFile$inboundSchema),
   purpose: Purpose$inboundSchema.default("retrieval"),
 });
-
 /** @internal */
 export type FileUploadRequestBody$Outbound = {
   file: FileUploadFile$Outbound | Blob;
@@ -185,19 +157,6 @@ export const FileUploadRequestBody$outboundSchema: z.ZodType<
   purpose: Purpose$outboundSchema.default("retrieval"),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadRequestBody$ {
-  /** @deprecated use `FileUploadRequestBody$inboundSchema` instead. */
-  export const inboundSchema = FileUploadRequestBody$inboundSchema;
-  /** @deprecated use `FileUploadRequestBody$outboundSchema` instead. */
-  export const outboundSchema = FileUploadRequestBody$outboundSchema;
-  /** @deprecated use `FileUploadRequestBody$Outbound` instead. */
-  export type Outbound = FileUploadRequestBody$Outbound;
-}
-
 export function fileUploadRequestBodyToJSON(
   fileUploadRequestBody: FileUploadRequestBody,
 ): string {
@@ -205,7 +164,6 @@ export function fileUploadRequestBodyToJSON(
     FileUploadRequestBody$outboundSchema.parse(fileUploadRequestBody),
   );
 }
-
 export function fileUploadRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileUploadRequestBody, SDKValidationError> {
@@ -220,22 +178,10 @@ export function fileUploadRequestBodyFromJSON(
 export const FileUploadPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileUploadPurpose
 > = z.nativeEnum(FileUploadPurpose);
-
 /** @internal */
 export const FileUploadPurpose$outboundSchema: z.ZodNativeEnum<
   typeof FileUploadPurpose
 > = FileUploadPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadPurpose$ {
-  /** @deprecated use `FileUploadPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileUploadPurpose$inboundSchema;
-  /** @deprecated use `FileUploadPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileUploadPurpose$outboundSchema;
-}
 
 /** @internal */
 export const FileUploadResponseBody$inboundSchema: z.ZodType<
@@ -250,7 +196,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-11-06T08:42:47.975Z",
+    "2025-11-07T06:52:42.726Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -260,7 +206,6 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type FileUploadResponseBody$Outbound = {
   _id: string;
@@ -284,7 +229,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-11-06T08:42:47.975Z"))
+  created: z.date().default(() => new Date("2025-11-07T06:52:42.726Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -295,19 +240,6 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadResponseBody$ {
-  /** @deprecated use `FileUploadResponseBody$inboundSchema` instead. */
-  export const inboundSchema = FileUploadResponseBody$inboundSchema;
-  /** @deprecated use `FileUploadResponseBody$outboundSchema` instead. */
-  export const outboundSchema = FileUploadResponseBody$outboundSchema;
-  /** @deprecated use `FileUploadResponseBody$Outbound` instead. */
-  export type Outbound = FileUploadResponseBody$Outbound;
-}
-
 export function fileUploadResponseBodyToJSON(
   fileUploadResponseBody: FileUploadResponseBody,
 ): string {
@@ -315,7 +247,6 @@ export function fileUploadResponseBodyToJSON(
     FileUploadResponseBody$outboundSchema.parse(fileUploadResponseBody),
   );
 }
-
 export function fileUploadResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileUploadResponseBody, SDKValidationError> {

@@ -1447,49 +1447,21 @@ export const CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchem
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody42Type
   > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody42Type);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody42Type
   > = CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsOperator$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsOperator> = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsOperator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsOperator$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsOperator> =
     CreateEvalGuardrailConfigEvalsOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsOperator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
@@ -1502,7 +1474,6 @@ export const CreateEvalGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
   value: z.number(),
   operator: CreateEvalGuardrailConfigEvalsOperator$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsNumber$Outbound = {
   enabled: boolean;
@@ -1523,21 +1494,6 @@ export const CreateEvalGuardrailConfigEvalsNumber$outboundSchema: z.ZodType<
   operator: CreateEvalGuardrailConfigEvalsOperator$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsNumber$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsNumber$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsNumber$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsNumber$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsNumber$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsNumber$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigEvalsNumber$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsNumberToJSON(
   createEvalGuardrailConfigEvalsNumber: CreateEvalGuardrailConfigEvalsNumber,
 ): string {
@@ -1547,7 +1503,6 @@ export function createEvalGuardrailConfigEvalsNumberToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalGuardrailConfigEvalsNumber, SDKValidationError> {
@@ -1564,25 +1519,11 @@ export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
   > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody4Type);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
   > = CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsBoolean$inboundSchema: z.ZodType<
@@ -1594,7 +1535,6 @@ export const CreateEvalGuardrailConfigEvalsBoolean$inboundSchema: z.ZodType<
   type: CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema,
   value: z.boolean(),
 });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsBoolean$Outbound = {
   enabled: boolean;
@@ -1613,21 +1553,6 @@ export const CreateEvalGuardrailConfigEvalsBoolean$outboundSchema: z.ZodType<
   value: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsBoolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsBoolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsBoolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsBoolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsBoolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsBoolean$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigEvalsBoolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsBooleanToJSON(
   createEvalGuardrailConfigEvalsBoolean: CreateEvalGuardrailConfigEvalsBoolean,
 ): string {
@@ -1637,7 +1562,6 @@ export function createEvalGuardrailConfigEvalsBooleanToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalGuardrailConfigEvalsBoolean, SDKValidationError> {
@@ -1658,7 +1582,6 @@ export const CreateEvalRequestBodyEvalsGuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$inboundSchema),
   z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateEvalRequestBodyEvalsGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsNumber$Outbound
@@ -1675,21 +1598,6 @@ export const CreateEvalRequestBodyEvalsGuardrailConfig$outboundSchema:
     z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsGuardrailConfig$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalRequestBodyEvalsGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalRequestBodyEvalsGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsGuardrailConfig$Outbound` instead. */
-  export type Outbound = CreateEvalRequestBodyEvalsGuardrailConfig$Outbound;
-}
-
 export function createEvalRequestBodyEvalsGuardrailConfigToJSON(
   createEvalRequestBodyEvalsGuardrailConfig:
     CreateEvalRequestBodyEvalsGuardrailConfig,
@@ -1700,7 +1608,6 @@ export function createEvalRequestBodyEvalsGuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalRequestBodyEvalsGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1722,45 +1629,19 @@ export const CreateEvalRequestBodyEvalsOutputType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsOutputType> = z.nativeEnum(
     CreateEvalRequestBodyEvalsOutputType,
   );
-
 /** @internal */
 export const CreateEvalRequestBodyEvalsOutputType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsOutputType> =
     CreateEvalRequestBodyEvalsOutputType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsOutputType$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsOutputType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalRequestBodyEvalsOutputType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsOutputType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalRequestBodyEvalsOutputType$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalRequestBodyEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyEvalsType
 > = z.nativeEnum(CreateEvalRequestBodyEvalsType);
-
 /** @internal */
 export const CreateEvalRequestBodyEvalsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyEvalsType
 > = CreateEvalRequestBodyEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsType$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyEvalsType$outboundSchema;
-}
 
 /** @internal */
 export const Python$inboundSchema: z.ZodType<Python, z.ZodTypeDef, unknown> = z
@@ -1781,7 +1662,6 @@ export const Python$inboundSchema: z.ZodType<Python, z.ZodTypeDef, unknown> = z
       "output_type": "outputType",
     });
   });
-
 /** @internal */
 export type Python$Outbound = {
   guardrail_config?:
@@ -1819,23 +1699,9 @@ export const Python$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Python$ {
-  /** @deprecated use `Python$inboundSchema` instead. */
-  export const inboundSchema = Python$inboundSchema;
-  /** @deprecated use `Python$outboundSchema` instead. */
-  export const outboundSchema = Python$outboundSchema;
-  /** @deprecated use `Python$Outbound` instead. */
-  export type Outbound = Python$Outbound;
-}
-
 export function pythonToJSON(python: Python): string {
   return JSON.stringify(Python$outboundSchema.parse(python));
 }
-
 export function pythonFromJSON(
   jsonString: string,
 ): SafeParseResult<Python, SDKValidationError> {
@@ -1851,47 +1717,20 @@ export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
   > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody3Type);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
   > = CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalGuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigOperator
 > = z.nativeEnum(CreateEvalGuardrailConfigOperator);
-
 /** @internal */
 export const CreateEvalGuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigOperator
 > = CreateEvalGuardrailConfigOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigOperator$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigOperator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigNumber$inboundSchema: z.ZodType<
@@ -1904,7 +1743,6 @@ export const CreateEvalGuardrailConfigNumber$inboundSchema: z.ZodType<
   value: z.number(),
   operator: CreateEvalGuardrailConfigOperator$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalGuardrailConfigNumber$Outbound = {
   enabled: boolean;
@@ -1925,19 +1763,6 @@ export const CreateEvalGuardrailConfigNumber$outboundSchema: z.ZodType<
   operator: CreateEvalGuardrailConfigOperator$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigNumber$ {
-  /** @deprecated use `CreateEvalGuardrailConfigNumber$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigNumber$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigNumber$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalGuardrailConfigNumber$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigNumber$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigNumber$Outbound;
-}
-
 export function createEvalGuardrailConfigNumberToJSON(
   createEvalGuardrailConfigNumber: CreateEvalGuardrailConfigNumber,
 ): string {
@@ -1947,7 +1772,6 @@ export function createEvalGuardrailConfigNumberToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalGuardrailConfigNumber, SDKValidationError> {
@@ -1962,24 +1786,10 @@ export function createEvalGuardrailConfigNumberFromJSON(
 export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
     z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBodyType);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
     CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBodyType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigBoolean$inboundSchema: z.ZodType<
@@ -1991,7 +1801,6 @@ export const CreateEvalGuardrailConfigBoolean$inboundSchema: z.ZodType<
   type: CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema,
   value: z.boolean(),
 });
-
 /** @internal */
 export type CreateEvalGuardrailConfigBoolean$Outbound = {
   enabled: boolean;
@@ -2010,19 +1819,6 @@ export const CreateEvalGuardrailConfigBoolean$outboundSchema: z.ZodType<
   value: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigBoolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigBoolean$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigBoolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigBoolean$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalGuardrailConfigBoolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigBoolean$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigBoolean$Outbound;
-}
-
 export function createEvalGuardrailConfigBooleanToJSON(
   createEvalGuardrailConfigBoolean: CreateEvalGuardrailConfigBoolean,
 ): string {
@@ -2032,7 +1828,6 @@ export function createEvalGuardrailConfigBooleanToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalGuardrailConfigBoolean, SDKValidationError> {
@@ -2052,7 +1847,6 @@ export const CreateEvalRequestBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigNumber$inboundSchema),
   z.lazy(() => CreateEvalGuardrailConfigBoolean$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateEvalRequestBodyGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigNumber$Outbound
@@ -2068,21 +1862,6 @@ export const CreateEvalRequestBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigBoolean$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyGuardrailConfig$ {
-  /** @deprecated use `CreateEvalRequestBodyGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalRequestBodyGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalRequestBodyGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyGuardrailConfig$Outbound` instead. */
-  export type Outbound = CreateEvalRequestBodyGuardrailConfig$Outbound;
-}
-
 export function createEvalRequestBodyGuardrailConfigToJSON(
   createEvalRequestBodyGuardrailConfig: CreateEvalRequestBodyGuardrailConfig,
 ): string {
@@ -2092,7 +1871,6 @@ export function createEvalRequestBodyGuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalRequestBodyGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalRequestBodyGuardrailConfig, SDKValidationError> {
@@ -2108,64 +1886,28 @@ export function createEvalRequestBodyGuardrailConfigFromJSON(
 export const CreateEvalRequestBodyOutputType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyOutputType
 > = z.nativeEnum(CreateEvalRequestBodyOutputType);
-
 /** @internal */
 export const CreateEvalRequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyOutputType
 > = CreateEvalRequestBodyOutputType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyOutputType$ {
-  /** @deprecated use `CreateEvalRequestBodyOutputType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyOutputType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyOutputType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyOutputType$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalRequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyType
 > = z.nativeEnum(CreateEvalRequestBodyType);
-
 /** @internal */
 export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyType
 > = CreateEvalRequestBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyType$ {
-  /** @deprecated use `CreateEvalRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyType$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalRequestBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyMethod
 > = z.nativeEnum(CreateEvalRequestBodyMethod);
-
 /** @internal */
 export const CreateEvalRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyMethod
 > = CreateEvalRequestBodyMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyMethod$ {
-  /** @deprecated use `CreateEvalRequestBodyMethod$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyMethod$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyMethod$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyMethod$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalRequestBodyHTTP$inboundSchema: z.ZodType<
@@ -2192,7 +1934,6 @@ export const CreateEvalRequestBodyHTTP$inboundSchema: z.ZodType<
     "output_type": "outputType",
   });
 });
-
 /** @internal */
 export type CreateEvalRequestBodyHTTP$Outbound = {
   guardrail_config?:
@@ -2236,19 +1977,6 @@ export const CreateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyHTTP$ {
-  /** @deprecated use `CreateEvalRequestBodyHTTP$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyHTTP$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyHTTP$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyHTTP$outboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyHTTP$Outbound` instead. */
-  export type Outbound = CreateEvalRequestBodyHTTP$Outbound;
-}
-
 export function createEvalRequestBodyHTTPToJSON(
   createEvalRequestBodyHTTP: CreateEvalRequestBodyHTTP,
 ): string {
@@ -2256,7 +1984,6 @@ export function createEvalRequestBodyHTTPToJSON(
     CreateEvalRequestBodyHTTP$outboundSchema.parse(createEvalRequestBodyHTTP),
   );
 }
-
 export function createEvalRequestBodyHTTPFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalRequestBodyHTTP, SDKValidationError> {
@@ -2271,45 +1998,19 @@ export function createEvalRequestBodyHTTPFromJSON(
 export const CreateEvalGuardrailConfigEvalsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> = z
     .nativeEnum(CreateEvalGuardrailConfigEvalsRequestType);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> =
     CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestType$outboundSchema;
-}
-
 /** @internal */
 export const GuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
   typeof GuardrailConfigOperator
 > = z.nativeEnum(GuardrailConfigOperator);
-
 /** @internal */
 export const GuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
   typeof GuardrailConfigOperator
 > = GuardrailConfigOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigOperator$ {
-  /** @deprecated use `GuardrailConfigOperator$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigOperator$inboundSchema;
-  /** @deprecated use `GuardrailConfigOperator$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigOperator$outboundSchema;
-}
 
 /** @internal */
 export const GuardrailConfigNumber$inboundSchema: z.ZodType<
@@ -2322,7 +2023,6 @@ export const GuardrailConfigNumber$inboundSchema: z.ZodType<
   value: z.number(),
   operator: GuardrailConfigOperator$inboundSchema,
 });
-
 /** @internal */
 export type GuardrailConfigNumber$Outbound = {
   enabled: boolean;
@@ -2343,19 +2043,6 @@ export const GuardrailConfigNumber$outboundSchema: z.ZodType<
   operator: GuardrailConfigOperator$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigNumber$ {
-  /** @deprecated use `GuardrailConfigNumber$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigNumber$inboundSchema;
-  /** @deprecated use `GuardrailConfigNumber$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigNumber$outboundSchema;
-  /** @deprecated use `GuardrailConfigNumber$Outbound` instead. */
-  export type Outbound = GuardrailConfigNumber$Outbound;
-}
-
 export function guardrailConfigNumberToJSON(
   guardrailConfigNumber: GuardrailConfigNumber,
 ): string {
@@ -2363,7 +2050,6 @@ export function guardrailConfigNumberToJSON(
     GuardrailConfigNumber$outboundSchema.parse(guardrailConfigNumber),
   );
 }
-
 export function guardrailConfigNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<GuardrailConfigNumber, SDKValidationError> {
@@ -2378,23 +2064,10 @@ export function guardrailConfigNumberFromJSON(
 export const CreateEvalGuardrailConfigEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigEvalsType
 > = z.nativeEnum(CreateEvalGuardrailConfigEvalsType);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigEvalsType
 > = CreateEvalGuardrailConfigEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsType$outboundSchema;
-}
 
 /** @internal */
 export const GuardrailConfigBoolean$inboundSchema: z.ZodType<
@@ -2406,7 +2079,6 @@ export const GuardrailConfigBoolean$inboundSchema: z.ZodType<
   type: CreateEvalGuardrailConfigEvalsType$inboundSchema,
   value: z.boolean(),
 });
-
 /** @internal */
 export type GuardrailConfigBoolean$Outbound = {
   enabled: boolean;
@@ -2425,19 +2097,6 @@ export const GuardrailConfigBoolean$outboundSchema: z.ZodType<
   value: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigBoolean$ {
-  /** @deprecated use `GuardrailConfigBoolean$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigBoolean$inboundSchema;
-  /** @deprecated use `GuardrailConfigBoolean$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigBoolean$outboundSchema;
-  /** @deprecated use `GuardrailConfigBoolean$Outbound` instead. */
-  export type Outbound = GuardrailConfigBoolean$Outbound;
-}
-
 export function guardrailConfigBooleanToJSON(
   guardrailConfigBoolean: GuardrailConfigBoolean,
 ): string {
@@ -2445,7 +2104,6 @@ export function guardrailConfigBooleanToJSON(
     GuardrailConfigBoolean$outboundSchema.parse(guardrailConfigBoolean),
   );
 }
-
 export function guardrailConfigBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<GuardrailConfigBoolean, SDKValidationError> {
@@ -2465,7 +2123,6 @@ export const RequestBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => GuardrailConfigNumber$inboundSchema),
   z.lazy(() => GuardrailConfigBoolean$inboundSchema),
 ]);
-
 /** @internal */
 export type RequestBodyGuardrailConfig$Outbound =
   | GuardrailConfigNumber$Outbound
@@ -2481,19 +2138,6 @@ export const RequestBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.lazy(() => GuardrailConfigBoolean$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyGuardrailConfig$ {
-  /** @deprecated use `RequestBodyGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyGuardrailConfig$inboundSchema;
-  /** @deprecated use `RequestBodyGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyGuardrailConfig$outboundSchema;
-  /** @deprecated use `RequestBodyGuardrailConfig$Outbound` instead. */
-  export type Outbound = RequestBodyGuardrailConfig$Outbound;
-}
-
 export function requestBodyGuardrailConfigToJSON(
   requestBodyGuardrailConfig: RequestBodyGuardrailConfig,
 ): string {
@@ -2501,7 +2145,6 @@ export function requestBodyGuardrailConfigToJSON(
     RequestBodyGuardrailConfig$outboundSchema.parse(requestBodyGuardrailConfig),
   );
 }
-
 export function requestBodyGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBodyGuardrailConfig, SDKValidationError> {
@@ -2516,43 +2159,19 @@ export function requestBodyGuardrailConfigFromJSON(
 export const RequestBodyOutputType$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyOutputType
 > = z.nativeEnum(RequestBodyOutputType);
-
 /** @internal */
 export const RequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyOutputType
 > = RequestBodyOutputType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyOutputType$ {
-  /** @deprecated use `RequestBodyOutputType$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyOutputType$inboundSchema;
-  /** @deprecated use `RequestBodyOutputType$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyOutputType$outboundSchema;
-}
-
 /** @internal */
 export const RequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyType
 > = z.nativeEnum(RequestBodyType);
-
 /** @internal */
 export const RequestBodyType$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyType
 > = RequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyType$ {
-  /** @deprecated use `RequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyType$inboundSchema;
-  /** @deprecated use `RequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
@@ -2573,7 +2192,6 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
       "output_type": "outputType",
     });
   });
-
 /** @internal */
 export type Json$Outbound = {
   guardrail_config?:
@@ -2608,23 +2226,9 @@ export const Json$outboundSchema: z.ZodType<Json$Outbound, z.ZodTypeDef, Json> =
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Json$ {
-  /** @deprecated use `Json$inboundSchema` instead. */
-  export const inboundSchema = Json$inboundSchema;
-  /** @deprecated use `Json$outboundSchema` instead. */
-  export const outboundSchema = Json$outboundSchema;
-  /** @deprecated use `Json$Outbound` instead. */
-  export type Outbound = Json$Outbound;
-}
-
 export function jsonToJSON(json: Json): string {
   return JSON.stringify(Json$outboundSchema.parse(json));
 }
-
 export function jsonFromJSON(
   jsonString: string,
 ): SafeParseResult<Json, SDKValidationError> {
@@ -2639,41 +2243,17 @@ export function jsonFromJSON(
 export const GuardrailConfigType$inboundSchema: z.ZodNativeEnum<
   typeof GuardrailConfigType
 > = z.nativeEnum(GuardrailConfigType);
-
 /** @internal */
 export const GuardrailConfigType$outboundSchema: z.ZodNativeEnum<
   typeof GuardrailConfigType
 > = GuardrailConfigType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigType$ {
-  /** @deprecated use `GuardrailConfigType$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigType$inboundSchema;
-  /** @deprecated use `GuardrailConfigType$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigType$outboundSchema;
-}
-
 /** @internal */
 export const Operator$inboundSchema: z.ZodNativeEnum<typeof Operator> = z
   .nativeEnum(Operator);
-
 /** @internal */
 export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> =
   Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Operator$ {
-  /** @deprecated use `Operator$inboundSchema` instead. */
-  export const inboundSchema = Operator$inboundSchema;
-  /** @deprecated use `Operator$outboundSchema` instead. */
-  export const outboundSchema = Operator$outboundSchema;
-}
 
 /** @internal */
 export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
@@ -2683,7 +2263,6 @@ export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
     value: z.number(),
     operator: Operator$inboundSchema,
   });
-
 /** @internal */
 export type NumberT$Outbound = {
   enabled: boolean;
@@ -2704,23 +2283,9 @@ export const NumberT$outboundSchema: z.ZodType<
   operator: Operator$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NumberT$ {
-  /** @deprecated use `NumberT$inboundSchema` instead. */
-  export const inboundSchema = NumberT$inboundSchema;
-  /** @deprecated use `NumberT$outboundSchema` instead. */
-  export const outboundSchema = NumberT$outboundSchema;
-  /** @deprecated use `NumberT$Outbound` instead. */
-  export type Outbound = NumberT$Outbound;
-}
-
 export function numberToJSON(numberT: NumberT): string {
   return JSON.stringify(NumberT$outboundSchema.parse(numberT));
 }
-
 export function numberFromJSON(
   jsonString: string,
 ): SafeParseResult<NumberT, SDKValidationError> {
@@ -2735,22 +2300,10 @@ export function numberFromJSON(
 export const CreateEvalGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigType
 > = z.nativeEnum(CreateEvalGuardrailConfigType);
-
 /** @internal */
 export const CreateEvalGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalGuardrailConfigType
 > = CreateEvalGuardrailConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalGuardrailConfigType$outboundSchema;
-}
 
 /** @internal */
 export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
@@ -2759,7 +2312,6 @@ export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
     type: CreateEvalGuardrailConfigType$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type Boolean$Outbound = {
   enabled: boolean;
@@ -2778,23 +2330,9 @@ export const Boolean$outboundSchema: z.ZodType<
   value: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Boolean$ {
-  /** @deprecated use `Boolean$inboundSchema` instead. */
-  export const inboundSchema = Boolean$inboundSchema;
-  /** @deprecated use `Boolean$outboundSchema` instead. */
-  export const outboundSchema = Boolean$outboundSchema;
-  /** @deprecated use `Boolean$Outbound` instead. */
-  export type Outbound = Boolean$Outbound;
-}
-
 export function booleanToJSON(value: Boolean): string {
   return JSON.stringify(Boolean$outboundSchema.parse(value));
 }
-
 export function booleanFromJSON(
   jsonString: string,
 ): SafeParseResult<Boolean, SDKValidationError> {
@@ -2814,7 +2352,6 @@ export const GuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => NumberT$inboundSchema),
   z.lazy(() => Boolean$inboundSchema),
 ]);
-
 /** @internal */
 export type GuardrailConfig$Outbound = NumberT$Outbound | Boolean$Outbound;
 
@@ -2828,25 +2365,11 @@ export const GuardrailConfig$outboundSchema: z.ZodType<
   z.lazy(() => Boolean$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfig$ {
-  /** @deprecated use `GuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfig$inboundSchema;
-  /** @deprecated use `GuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfig$outboundSchema;
-  /** @deprecated use `GuardrailConfig$Outbound` instead. */
-  export type Outbound = GuardrailConfig$Outbound;
-}
-
 export function guardrailConfigToJSON(
   guardrailConfig: GuardrailConfig,
 ): string {
   return JSON.stringify(GuardrailConfig$outboundSchema.parse(guardrailConfig));
 }
-
 export function guardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<GuardrailConfig, SDKValidationError> {
@@ -2860,45 +2383,19 @@ export function guardrailConfigFromJSON(
 /** @internal */
 export const OutputType$inboundSchema: z.ZodNativeEnum<typeof OutputType> = z
   .nativeEnum(OutputType);
-
 /** @internal */
 export const OutputType$outboundSchema: z.ZodNativeEnum<typeof OutputType> =
   OutputType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OutputType$ {
-  /** @deprecated use `OutputType$inboundSchema` instead. */
-  export const inboundSchema = OutputType$inboundSchema;
-  /** @deprecated use `OutputType$outboundSchema` instead. */
-  export const outboundSchema = OutputType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalRequestBodyEvalsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> = z.nativeEnum(
     CreateEvalRequestBodyEvalsRequestType,
   );
-
 /** @internal */
 export const CreateEvalRequestBodyEvalsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> =
     CreateEvalRequestBodyEvalsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsRequestType$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalRequestBodyEvalsRequestType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalRequestBodyEvalsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
@@ -2920,7 +2417,6 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
       "output_type": "outputType",
     });
   });
-
 /** @internal */
 export type Llm$Outbound = {
   guardrail_config?: NumberT$Outbound | Boolean$Outbound | undefined;
@@ -2954,23 +2450,9 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Llm$ {
-  /** @deprecated use `Llm$inboundSchema` instead. */
-  export const inboundSchema = Llm$inboundSchema;
-  /** @deprecated use `Llm$outboundSchema` instead. */
-  export const outboundSchema = Llm$outboundSchema;
-  /** @deprecated use `Llm$Outbound` instead. */
-  export type Outbound = Llm$Outbound;
-}
-
 export function llmToJSON(llm: Llm): string {
   return JSON.stringify(Llm$outboundSchema.parse(llm));
 }
-
 export function llmFromJSON(
   jsonString: string,
 ): SafeParseResult<Llm, SDKValidationError> {
@@ -2992,7 +2474,6 @@ export const CreateEvalRequestBody$inboundSchema: z.ZodType<
   z.lazy(() => Json$inboundSchema),
   z.lazy(() => Python$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateEvalRequestBody$Outbound =
   | CreateEvalRequestBodyHTTP$Outbound
@@ -3012,19 +2493,6 @@ export const CreateEvalRequestBody$outboundSchema: z.ZodType<
   z.lazy(() => Python$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBody$ {
-  /** @deprecated use `CreateEvalRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBody$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBody$outboundSchema;
-  /** @deprecated use `CreateEvalRequestBody$Outbound` instead. */
-  export type Outbound = CreateEvalRequestBody$Outbound;
-}
-
 export function createEvalRequestBodyToJSON(
   createEvalRequestBody: CreateEvalRequestBody,
 ): string {
@@ -3032,7 +2500,6 @@ export function createEvalRequestBodyToJSON(
     CreateEvalRequestBody$outboundSchema.parse(createEvalRequestBody),
   );
 }
-
 export function createEvalRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalRequestBody, SDKValidationError> {
@@ -3050,26 +2517,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody72Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$inboundSchema:
@@ -3078,26 +2531,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema:
@@ -3113,7 +2552,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     operator:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$Outbound =
   {
@@ -3138,22 +2576,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7NumberToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number,
@@ -3165,7 +2587,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7NumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3188,26 +2609,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema:
@@ -3221,7 +2628,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$Outbound =
   {
@@ -3243,22 +2649,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7BooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean,
@@ -3270,7 +2660,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7BooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3300,7 +2689,6 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConf
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$Outbound
@@ -3321,22 +2709,6 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConf
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$Outbound` instead. */
-  export type Outbound =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyEvalsResponse200ApplicationJSON7GuardrailConfigToJSON(
   createEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig:
     CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig,
@@ -3348,7 +2720,6 @@ export function createEvalResponseBodyEvalsResponse200ApplicationJSON7GuardrailC
       ),
   );
 }
-
 export function createEvalResponseBodyEvalsResponse200ApplicationJSON7GuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3369,25 +2740,11 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundS
   z.ZodNativeEnum<
     typeof CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type
   > = z.nativeEnum(CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type);
-
 /** @internal */
 export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type
   > = CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema;
-}
 
 /** @internal */
 export const Typescript$inboundSchema: z.ZodType<
@@ -3397,8 +2754,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -3417,7 +2774,6 @@ export const Typescript$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
-
 /** @internal */
 export type Typescript$Outbound = {
   _id: string;
@@ -3441,8 +2797,8 @@ export const Typescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -3462,23 +2818,9 @@ export const Typescript$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Typescript$ {
-  /** @deprecated use `Typescript$inboundSchema` instead. */
-  export const inboundSchema = Typescript$inboundSchema;
-  /** @deprecated use `Typescript$outboundSchema` instead. */
-  export const outboundSchema = Typescript$outboundSchema;
-  /** @deprecated use `Typescript$Outbound` instead. */
-  export type Outbound = Typescript$Outbound;
-}
-
 export function typescriptToJSON(typescript: Typescript): string {
   return JSON.stringify(Typescript$outboundSchema.parse(typescript));
 }
-
 export function typescriptFromJSON(
   jsonString: string,
 ): SafeParseResult<Typescript, SDKValidationError> {
@@ -3496,26 +2838,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody62Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$inboundSchema:
@@ -3524,26 +2852,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema:
@@ -3559,7 +2873,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     operator:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$Outbound =
   {
@@ -3584,22 +2897,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Operator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6NumberToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number,
@@ -3611,7 +2908,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6NumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3634,26 +2930,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema:
@@ -3667,7 +2949,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Type$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$Outbound =
   {
@@ -3689,22 +2970,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6BooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean,
@@ -3716,7 +2981,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6BooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3746,7 +3010,6 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfi
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$Outbound
@@ -3767,22 +3030,6 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfi
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$Outbound` instead. */
-  export type Outbound =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfigToJSON(
   createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig:
     CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig,
@@ -3794,7 +3041,6 @@ export function createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailCo
       ),
   );
 }
-
 export function createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3815,52 +3061,26 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSc
   z.ZodNativeEnum<
     typeof CreateEvalResponseBodyEvalsResponse200ApplicationJSONType
   > = z.nativeEnum(CreateEvalResponseBodyEvalsResponse200ApplicationJSONType);
-
 /** @internal */
 export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalResponseBodyEvalsResponse200ApplicationJSONType
   > = CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
 export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
   .nativeEnum(RagasMetric);
-
 /** @internal */
 export const RagasMetric$outboundSchema: z.ZodNativeEnum<typeof RagasMetric> =
   RagasMetric$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RagasMetric$ {
-  /** @deprecated use `RagasMetric$inboundSchema` instead. */
-  export const inboundSchema = RagasMetric$inboundSchema;
-  /** @deprecated use `RagasMetric$outboundSchema` instead. */
-  export const outboundSchema = RagasMetric$outboundSchema;
-}
 
 /** @internal */
 export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-11-06T08:42:46.897Z"),
-    updated: z.string().default("2025-11-06T08:42:46.897Z"),
+    created: z.string().default("2025-11-07T06:52:41.558Z"),
+    updated: z.string().default("2025-11-07T06:52:41.558Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -3881,7 +3101,6 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
       "ragas_metric": "ragasMetric",
     });
   });
-
 /** @internal */
 export type Ragas$Outbound = {
   _id: string;
@@ -3906,8 +3125,8 @@ export const Ragas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -3929,23 +3148,9 @@ export const Ragas$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Ragas$ {
-  /** @deprecated use `Ragas$inboundSchema` instead. */
-  export const inboundSchema = Ragas$inboundSchema;
-  /** @deprecated use `Ragas$outboundSchema` instead. */
-  export const outboundSchema = Ragas$outboundSchema;
-  /** @deprecated use `Ragas$Outbound` instead. */
-  export type Outbound = Ragas$Outbound;
-}
-
 export function ragasToJSON(ragas: Ragas): string {
   return JSON.stringify(Ragas$outboundSchema.parse(ragas));
 }
-
 export function ragasFromJSON(
   jsonString: string,
 ): SafeParseResult<Ragas, SDKValidationError> {
@@ -3963,26 +3168,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody52Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema:
@@ -3991,26 +3182,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema:
@@ -4026,7 +3203,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     operator:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$Outbound =
   {
@@ -4051,22 +3227,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5NumberToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number,
@@ -4078,7 +3238,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5NumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4101,26 +3260,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema:
@@ -4134,7 +3279,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$Outbound =
   {
@@ -4156,22 +3300,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5BooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean,
@@ -4183,7 +3311,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5BooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4213,7 +3340,6 @@ export const CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type CreateEvalResponseBodyEvalsResponse200GuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$Outbound
@@ -4234,22 +3360,6 @@ export const CreateEvalResponseBodyEvalsResponse200GuardrailConfig$outboundSchem
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200GuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200GuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200GuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200GuardrailConfig$Outbound` instead. */
-  export type Outbound =
-    CreateEvalResponseBodyEvalsResponse200GuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyEvalsResponse200GuardrailConfigToJSON(
   createEvalResponseBodyEvalsResponse200GuardrailConfig:
     CreateEvalResponseBodyEvalsResponse200GuardrailConfig,
@@ -4260,7 +3370,6 @@ export function createEvalResponseBodyEvalsResponse200GuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalResponseBodyEvalsResponse200GuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4281,24 +3390,10 @@ export function createEvalResponseBodyEvalsResponse200GuardrailConfigFromJSON(
 export const CreateEvalResponseBodyEvalsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponse200Type> = z
     .nativeEnum(CreateEvalResponseBodyEvalsResponse200Type);
-
 /** @internal */
 export const CreateEvalResponseBodyEvalsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponse200Type> =
     CreateEvalResponseBodyEvalsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponse200Type$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema:
@@ -4307,26 +3402,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema;
-}
 
 /** @internal */
 export const ThirtyFive$inboundSchema: z.ZodType<
@@ -4337,7 +3418,6 @@ export const ThirtyFive$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema,
 });
-
 /** @internal */
 export type ThirtyFive$Outbound = {
   type: string;
@@ -4353,23 +3433,9 @@ export const ThirtyFive$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ThirtyFive$ {
-  /** @deprecated use `ThirtyFive$inboundSchema` instead. */
-  export const inboundSchema = ThirtyFive$inboundSchema;
-  /** @deprecated use `ThirtyFive$outboundSchema` instead. */
-  export const outboundSchema = ThirtyFive$outboundSchema;
-  /** @deprecated use `ThirtyFive$Outbound` instead. */
-  export type Outbound = ThirtyFive$Outbound;
-}
-
 export function thirtyFiveToJSON(thirtyFive: ThirtyFive): string {
   return JSON.stringify(ThirtyFive$outboundSchema.parse(thirtyFive));
 }
-
 export function thirtyFiveFromJSON(
   jsonString: string,
 ): SafeParseResult<ThirtyFive, SDKValidationError> {
@@ -4387,26 +3453,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema;
-}
 
 /** @internal */
 export const ThirtyFour$inboundSchema: z.ZodType<
@@ -4417,7 +3469,6 @@ export const ThirtyFour$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema,
 });
-
 /** @internal */
 export type ThirtyFour$Outbound = {
   type: string;
@@ -4433,23 +3484,9 @@ export const ThirtyFour$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ThirtyFour$ {
-  /** @deprecated use `ThirtyFour$inboundSchema` instead. */
-  export const inboundSchema = ThirtyFour$inboundSchema;
-  /** @deprecated use `ThirtyFour$outboundSchema` instead. */
-  export const outboundSchema = ThirtyFour$outboundSchema;
-  /** @deprecated use `ThirtyFour$Outbound` instead. */
-  export type Outbound = ThirtyFour$Outbound;
-}
-
 export function thirtyFourToJSON(thirtyFour: ThirtyFour): string {
   return JSON.stringify(ThirtyFour$outboundSchema.parse(thirtyFour));
 }
-
 export function thirtyFourFromJSON(
   jsonString: string,
 ): SafeParseResult<ThirtyFour, SDKValidationError> {
@@ -4467,26 +3504,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema;
-}
 
 /** @internal */
 export const ThirtyThree$inboundSchema: z.ZodType<
@@ -4497,7 +3520,6 @@ export const ThirtyThree$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema,
 });
-
 /** @internal */
 export type ThirtyThree$Outbound = {
   type: string;
@@ -4513,23 +3535,9 @@ export const ThirtyThree$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ThirtyThree$ {
-  /** @deprecated use `ThirtyThree$inboundSchema` instead. */
-  export const inboundSchema = ThirtyThree$inboundSchema;
-  /** @deprecated use `ThirtyThree$outboundSchema` instead. */
-  export const outboundSchema = ThirtyThree$outboundSchema;
-  /** @deprecated use `ThirtyThree$Outbound` instead. */
-  export type Outbound = ThirtyThree$Outbound;
-}
-
 export function thirtyThreeToJSON(thirtyThree: ThirtyThree): string {
   return JSON.stringify(ThirtyThree$outboundSchema.parse(thirtyThree));
 }
-
 export function thirtyThreeFromJSON(
   jsonString: string,
 ): SafeParseResult<ThirtyThree, SDKValidationError> {
@@ -4547,26 +3555,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$outboundSchema;
-}
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
@@ -4577,7 +3571,6 @@ export const ThirtyTwo$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$inboundSchema,
 });
-
 /** @internal */
 export type ThirtyTwo$Outbound = {
   type: string;
@@ -4593,23 +3586,9 @@ export const ThirtyTwo$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ThirtyTwo$ {
-  /** @deprecated use `ThirtyTwo$inboundSchema` instead. */
-  export const inboundSchema = ThirtyTwo$inboundSchema;
-  /** @deprecated use `ThirtyTwo$outboundSchema` instead. */
-  export const outboundSchema = ThirtyTwo$outboundSchema;
-  /** @deprecated use `ThirtyTwo$Outbound` instead. */
-  export type Outbound = ThirtyTwo$Outbound;
-}
-
 export function thirtyTwoToJSON(thirtyTwo: ThirtyTwo): string {
   return JSON.stringify(ThirtyTwo$outboundSchema.parse(thirtyTwo));
 }
-
 export function thirtyTwoFromJSON(
   jsonString: string,
 ): SafeParseResult<ThirtyTwo, SDKValidationError> {
@@ -4627,26 +3606,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$outboundSchema;
-}
 
 /** @internal */
 export const ThirtyOne$inboundSchema: z.ZodType<
@@ -4657,7 +3622,6 @@ export const ThirtyOne$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$inboundSchema,
 });
-
 /** @internal */
 export type ThirtyOne$Outbound = {
   type: string;
@@ -4673,23 +3637,9 @@ export const ThirtyOne$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ThirtyOne$ {
-  /** @deprecated use `ThirtyOne$inboundSchema` instead. */
-  export const inboundSchema = ThirtyOne$inboundSchema;
-  /** @deprecated use `ThirtyOne$outboundSchema` instead. */
-  export const outboundSchema = ThirtyOne$outboundSchema;
-  /** @deprecated use `ThirtyOne$Outbound` instead. */
-  export type Outbound = ThirtyOne$Outbound;
-}
-
 export function thirtyOneToJSON(thirtyOne: ThirtyOne): string {
   return JSON.stringify(ThirtyOne$outboundSchema.parse(thirtyOne));
 }
-
 export function thirtyOneFromJSON(
   jsonString: string,
 ): SafeParseResult<ThirtyOne, SDKValidationError> {
@@ -4707,7 +3657,6 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$outboundSchema:
   z.ZodNativeEnum<
@@ -4715,26 +3664,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$outboundSchema;
-}
-
 /** @internal */
 export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> = z
   .object({
     type:
       CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$inboundSchema,
   });
-
 /** @internal */
 export type Thirty$Outbound = {
   type: string;
@@ -4750,23 +3685,9 @@ export const Thirty$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Thirty$ {
-  /** @deprecated use `Thirty$inboundSchema` instead. */
-  export const inboundSchema = Thirty$inboundSchema;
-  /** @deprecated use `Thirty$outboundSchema` instead. */
-  export const outboundSchema = Thirty$outboundSchema;
-  /** @deprecated use `Thirty$Outbound` instead. */
-  export type Outbound = Thirty$Outbound;
-}
-
 export function thirtyToJSON(thirty: Thirty): string {
   return JSON.stringify(Thirty$outboundSchema.parse(thirty));
 }
-
 export function thirtyFromJSON(
   jsonString: string,
 ): SafeParseResult<Thirty, SDKValidationError> {
@@ -4784,26 +3705,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentyNine$inboundSchema: z.ZodType<
@@ -4814,7 +3721,6 @@ export const TwentyNine$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$inboundSchema,
 });
-
 /** @internal */
 export type TwentyNine$Outbound = {
   type: string;
@@ -4830,23 +3736,9 @@ export const TwentyNine$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentyNine$ {
-  /** @deprecated use `TwentyNine$inboundSchema` instead. */
-  export const inboundSchema = TwentyNine$inboundSchema;
-  /** @deprecated use `TwentyNine$outboundSchema` instead. */
-  export const outboundSchema = TwentyNine$outboundSchema;
-  /** @deprecated use `TwentyNine$Outbound` instead. */
-  export type Outbound = TwentyNine$Outbound;
-}
-
 export function twentyNineToJSON(twentyNine: TwentyNine): string {
   return JSON.stringify(TwentyNine$outboundSchema.parse(twentyNine));
 }
-
 export function twentyNineFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentyNine, SDKValidationError> {
@@ -4864,26 +3756,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentyEight$inboundSchema: z.ZodType<
@@ -4894,7 +3772,6 @@ export const TwentyEight$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$inboundSchema,
 });
-
 /** @internal */
 export type TwentyEight$Outbound = {
   type: string;
@@ -4910,23 +3787,9 @@ export const TwentyEight$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentyEight$ {
-  /** @deprecated use `TwentyEight$inboundSchema` instead. */
-  export const inboundSchema = TwentyEight$inboundSchema;
-  /** @deprecated use `TwentyEight$outboundSchema` instead. */
-  export const outboundSchema = TwentyEight$outboundSchema;
-  /** @deprecated use `TwentyEight$Outbound` instead. */
-  export type Outbound = TwentyEight$Outbound;
-}
-
 export function twentyEightToJSON(twentyEight: TwentyEight): string {
   return JSON.stringify(TwentyEight$outboundSchema.parse(twentyEight));
 }
-
 export function twentyEightFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentyEight, SDKValidationError> {
@@ -4944,26 +3807,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentySeven$inboundSchema: z.ZodType<
@@ -4974,7 +3823,6 @@ export const TwentySeven$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$inboundSchema,
 });
-
 /** @internal */
 export type TwentySeven$Outbound = {
   type: string;
@@ -4990,23 +3838,9 @@ export const TwentySeven$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentySeven$ {
-  /** @deprecated use `TwentySeven$inboundSchema` instead. */
-  export const inboundSchema = TwentySeven$inboundSchema;
-  /** @deprecated use `TwentySeven$outboundSchema` instead. */
-  export const outboundSchema = TwentySeven$outboundSchema;
-  /** @deprecated use `TwentySeven$Outbound` instead. */
-  export type Outbound = TwentySeven$Outbound;
-}
-
 export function twentySevenToJSON(twentySeven: TwentySeven): string {
   return JSON.stringify(TwentySeven$outboundSchema.parse(twentySeven));
 }
-
 export function twentySevenFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentySeven, SDKValidationError> {
@@ -5024,26 +3858,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentySix$inboundSchema: z.ZodType<
@@ -5055,7 +3875,6 @@ export const TwentySix$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$inboundSchema,
   keywords: z.array(z.string()),
 });
-
 /** @internal */
 export type TwentySix$Outbound = {
   type: string;
@@ -5073,23 +3892,9 @@ export const TwentySix$outboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentySix$ {
-  /** @deprecated use `TwentySix$inboundSchema` instead. */
-  export const inboundSchema = TwentySix$inboundSchema;
-  /** @deprecated use `TwentySix$outboundSchema` instead. */
-  export const outboundSchema = TwentySix$outboundSchema;
-  /** @deprecated use `TwentySix$Outbound` instead. */
-  export type Outbound = TwentySix$Outbound;
-}
-
 export function twentySixToJSON(twentySix: TwentySix): string {
   return JSON.stringify(TwentySix$outboundSchema.parse(twentySix));
 }
-
 export function twentySixFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentySix, SDKValidationError> {
@@ -5107,26 +3912,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentyFive$inboundSchema: z.ZodType<
@@ -5138,7 +3929,6 @@ export const TwentyFive$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$inboundSchema,
   topic: z.string(),
 });
-
 /** @internal */
 export type TwentyFive$Outbound = {
   type: string;
@@ -5156,23 +3946,9 @@ export const TwentyFive$outboundSchema: z.ZodType<
   topic: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentyFive$ {
-  /** @deprecated use `TwentyFive$inboundSchema` instead. */
-  export const inboundSchema = TwentyFive$inboundSchema;
-  /** @deprecated use `TwentyFive$outboundSchema` instead. */
-  export const outboundSchema = TwentyFive$outboundSchema;
-  /** @deprecated use `TwentyFive$Outbound` instead. */
-  export type Outbound = TwentyFive$Outbound;
-}
-
 export function twentyFiveToJSON(twentyFive: TwentyFive): string {
   return JSON.stringify(TwentyFive$outboundSchema.parse(twentyFive));
 }
-
 export function twentyFiveFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentyFive, SDKValidationError> {
@@ -5190,26 +3966,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$outboundSchema;
-}
 
 /** @internal */
 export const TwentyFour$inboundSchema: z.ZodType<
@@ -5220,7 +3982,6 @@ export const TwentyFour$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$inboundSchema,
 });
-
 /** @internal */
 export type TwentyFour$Outbound = {
   type: string;
@@ -5236,23 +3997,9 @@ export const TwentyFour$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwentyFour$ {
-  /** @deprecated use `TwentyFour$inboundSchema` instead. */
-  export const inboundSchema = TwentyFour$inboundSchema;
-  /** @deprecated use `TwentyFour$outboundSchema` instead. */
-  export const outboundSchema = TwentyFour$outboundSchema;
-  /** @deprecated use `TwentyFour$Outbound` instead. */
-  export type Outbound = TwentyFour$Outbound;
-}
-
 export function twentyFourToJSON(twentyFour: TwentyFour): string {
   return JSON.stringify(TwentyFour$outboundSchema.parse(twentyFour));
 }
-
 export function twentyFourFromJSON(
   jsonString: string,
 ): SafeParseResult<TwentyFour, SDKValidationError> {
@@ -5270,26 +4017,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams23$inboundSchema: z.ZodType<
@@ -5300,7 +4033,6 @@ export const CreateEvalFunctionParams23$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams23$Outbound = {
   type: string;
@@ -5316,19 +4048,6 @@ export const CreateEvalFunctionParams23$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams23$ {
-  /** @deprecated use `CreateEvalFunctionParams23$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams23$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams23$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams23$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams23$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams23$Outbound;
-}
-
 export function createEvalFunctionParams23ToJSON(
   createEvalFunctionParams23: CreateEvalFunctionParams23,
 ): string {
@@ -5336,7 +4055,6 @@ export function createEvalFunctionParams23ToJSON(
     CreateEvalFunctionParams23$outboundSchema.parse(createEvalFunctionParams23),
   );
 }
-
 export function createEvalFunctionParams23FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams23, SDKValidationError> {
@@ -5354,26 +4072,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams22$inboundSchema: z.ZodType<
@@ -5384,7 +4088,6 @@ export const CreateEvalFunctionParams22$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams22$Outbound = {
   type: string;
@@ -5400,19 +4103,6 @@ export const CreateEvalFunctionParams22$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams22$ {
-  /** @deprecated use `CreateEvalFunctionParams22$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams22$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams22$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams22$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams22$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams22$Outbound;
-}
-
 export function createEvalFunctionParams22ToJSON(
   createEvalFunctionParams22: CreateEvalFunctionParams22,
 ): string {
@@ -5420,7 +4110,6 @@ export function createEvalFunctionParams22ToJSON(
     CreateEvalFunctionParams22$outboundSchema.parse(createEvalFunctionParams22),
   );
 }
-
 export function createEvalFunctionParams22FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams22, SDKValidationError> {
@@ -5438,26 +4127,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams21$inboundSchema: z.ZodType<
@@ -5468,7 +4143,6 @@ export const CreateEvalFunctionParams21$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams21$Outbound = {
   type: string;
@@ -5484,19 +4158,6 @@ export const CreateEvalFunctionParams21$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams21$ {
-  /** @deprecated use `CreateEvalFunctionParams21$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams21$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams21$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams21$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams21$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams21$Outbound;
-}
-
 export function createEvalFunctionParams21ToJSON(
   createEvalFunctionParams21: CreateEvalFunctionParams21,
 ): string {
@@ -5504,7 +4165,6 @@ export function createEvalFunctionParams21ToJSON(
     CreateEvalFunctionParams21$outboundSchema.parse(createEvalFunctionParams21),
   );
 }
-
 export function createEvalFunctionParams21FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams21, SDKValidationError> {
@@ -5522,26 +4182,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams20$inboundSchema: z.ZodType<
@@ -5552,7 +4198,6 @@ export const CreateEvalFunctionParams20$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams20$Outbound = {
   type: string;
@@ -5568,19 +4213,6 @@ export const CreateEvalFunctionParams20$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams20$ {
-  /** @deprecated use `CreateEvalFunctionParams20$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams20$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams20$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams20$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams20$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams20$Outbound;
-}
-
 export function createEvalFunctionParams20ToJSON(
   createEvalFunctionParams20: CreateEvalFunctionParams20,
 ): string {
@@ -5588,7 +4220,6 @@ export function createEvalFunctionParams20ToJSON(
     CreateEvalFunctionParams20$outboundSchema.parse(createEvalFunctionParams20),
   );
 }
-
 export function createEvalFunctionParams20FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams20, SDKValidationError> {
@@ -5606,26 +4237,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams19$inboundSchema: z.ZodType<
@@ -5636,7 +4253,6 @@ export const CreateEvalFunctionParams19$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams19$Outbound = {
   type: string;
@@ -5652,19 +4268,6 @@ export const CreateEvalFunctionParams19$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams19$ {
-  /** @deprecated use `CreateEvalFunctionParams19$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams19$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams19$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams19$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams19$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams19$Outbound;
-}
-
 export function createEvalFunctionParams19ToJSON(
   createEvalFunctionParams19: CreateEvalFunctionParams19,
 ): string {
@@ -5672,7 +4275,6 @@ export function createEvalFunctionParams19ToJSON(
     CreateEvalFunctionParams19$outboundSchema.parse(createEvalFunctionParams19),
   );
 }
-
 export function createEvalFunctionParams19FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams19, SDKValidationError> {
@@ -5690,26 +4292,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams18$inboundSchema: z.ZodType<
@@ -5720,7 +4308,6 @@ export const CreateEvalFunctionParams18$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams18$Outbound = {
   type: string;
@@ -5736,19 +4323,6 @@ export const CreateEvalFunctionParams18$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams18$ {
-  /** @deprecated use `CreateEvalFunctionParams18$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams18$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams18$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams18$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams18$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams18$Outbound;
-}
-
 export function createEvalFunctionParams18ToJSON(
   createEvalFunctionParams18: CreateEvalFunctionParams18,
 ): string {
@@ -5756,7 +4330,6 @@ export function createEvalFunctionParams18ToJSON(
     CreateEvalFunctionParams18$outboundSchema.parse(createEvalFunctionParams18),
   );
 }
-
 export function createEvalFunctionParams18FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams18, SDKValidationError> {
@@ -5774,26 +4347,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams17$inboundSchema: z.ZodType<
@@ -5804,7 +4363,6 @@ export const CreateEvalFunctionParams17$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams17$Outbound = {
   type: string;
@@ -5820,19 +4378,6 @@ export const CreateEvalFunctionParams17$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams17$ {
-  /** @deprecated use `CreateEvalFunctionParams17$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams17$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams17$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams17$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams17$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams17$Outbound;
-}
-
 export function createEvalFunctionParams17ToJSON(
   createEvalFunctionParams17: CreateEvalFunctionParams17,
 ): string {
@@ -5840,7 +4385,6 @@ export function createEvalFunctionParams17ToJSON(
     CreateEvalFunctionParams17$outboundSchema.parse(createEvalFunctionParams17),
   );
 }
-
 export function createEvalFunctionParams17FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams17, SDKValidationError> {
@@ -5858,26 +4402,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams16$inboundSchema: z.ZodType<
@@ -5888,7 +4418,6 @@ export const CreateEvalFunctionParams16$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams16$Outbound = {
   type: string;
@@ -5904,19 +4433,6 @@ export const CreateEvalFunctionParams16$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams16$ {
-  /** @deprecated use `CreateEvalFunctionParams16$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams16$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams16$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams16$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams16$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams16$Outbound;
-}
-
 export function createEvalFunctionParams16ToJSON(
   createEvalFunctionParams16: CreateEvalFunctionParams16,
 ): string {
@@ -5924,7 +4440,6 @@ export function createEvalFunctionParams16ToJSON(
     CreateEvalFunctionParams16$outboundSchema.parse(createEvalFunctionParams16),
   );
 }
-
 export function createEvalFunctionParams16FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams16, SDKValidationError> {
@@ -5942,26 +4457,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams15$inboundSchema: z.ZodType<
@@ -5973,7 +4474,6 @@ export const CreateEvalFunctionParams15$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema,
   pattern: z.string(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams15$Outbound = {
   type: string;
@@ -5991,19 +4491,6 @@ export const CreateEvalFunctionParams15$outboundSchema: z.ZodType<
   pattern: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams15$ {
-  /** @deprecated use `CreateEvalFunctionParams15$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams15$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams15$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams15$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams15$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams15$Outbound;
-}
-
 export function createEvalFunctionParams15ToJSON(
   createEvalFunctionParams15: CreateEvalFunctionParams15,
 ): string {
@@ -6011,7 +4498,6 @@ export function createEvalFunctionParams15ToJSON(
     CreateEvalFunctionParams15$outboundSchema.parse(createEvalFunctionParams15),
   );
 }
-
 export function createEvalFunctionParams15FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams15, SDKValidationError> {
@@ -6029,26 +4515,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams14$inboundSchema: z.ZodType<
@@ -6059,7 +4531,6 @@ export const CreateEvalFunctionParams14$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams14$Outbound = {
   type: string;
@@ -6075,19 +4546,6 @@ export const CreateEvalFunctionParams14$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams14$ {
-  /** @deprecated use `CreateEvalFunctionParams14$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams14$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams14$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams14$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams14$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams14$Outbound;
-}
-
 export function createEvalFunctionParams14ToJSON(
   createEvalFunctionParams14: CreateEvalFunctionParams14,
 ): string {
@@ -6095,7 +4553,6 @@ export function createEvalFunctionParams14ToJSON(
     CreateEvalFunctionParams14$outboundSchema.parse(createEvalFunctionParams14),
   );
 }
-
 export function createEvalFunctionParams14FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams14, SDKValidationError> {
@@ -6113,26 +4570,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams13$inboundSchema: z.ZodType<
@@ -6144,7 +4587,6 @@ export const CreateEvalFunctionParams13$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$inboundSchema,
   value: z.number(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams13$Outbound = {
   type: string;
@@ -6162,19 +4604,6 @@ export const CreateEvalFunctionParams13$outboundSchema: z.ZodType<
   value: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams13$ {
-  /** @deprecated use `CreateEvalFunctionParams13$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams13$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams13$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams13$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams13$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams13$Outbound;
-}
-
 export function createEvalFunctionParams13ToJSON(
   createEvalFunctionParams13: CreateEvalFunctionParams13,
 ): string {
@@ -6182,7 +4611,6 @@ export function createEvalFunctionParams13ToJSON(
     CreateEvalFunctionParams13$outboundSchema.parse(createEvalFunctionParams13),
   );
 }
-
 export function createEvalFunctionParams13FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams13, SDKValidationError> {
@@ -6200,26 +4628,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams12$inboundSchema: z.ZodType<
@@ -6232,7 +4646,6 @@ export const CreateEvalFunctionParams12$inboundSchema: z.ZodType<
   min: z.number(),
   max: z.number(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams12$Outbound = {
   type: string;
@@ -6252,19 +4665,6 @@ export const CreateEvalFunctionParams12$outboundSchema: z.ZodType<
   max: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams12$ {
-  /** @deprecated use `CreateEvalFunctionParams12$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams12$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams12$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams12$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams12$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams12$Outbound;
-}
-
 export function createEvalFunctionParams12ToJSON(
   createEvalFunctionParams12: CreateEvalFunctionParams12,
 ): string {
@@ -6272,7 +4672,6 @@ export function createEvalFunctionParams12ToJSON(
     CreateEvalFunctionParams12$outboundSchema.parse(createEvalFunctionParams12),
   );
 }
-
 export function createEvalFunctionParams12FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams12, SDKValidationError> {
@@ -6290,26 +4689,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams11$inboundSchema: z.ZodType<
@@ -6321,7 +4706,6 @@ export const CreateEvalFunctionParams11$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema,
   value: z.number(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams11$Outbound = {
   type: string;
@@ -6339,19 +4723,6 @@ export const CreateEvalFunctionParams11$outboundSchema: z.ZodType<
   value: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams11$ {
-  /** @deprecated use `CreateEvalFunctionParams11$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams11$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams11$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams11$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams11$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams11$Outbound;
-}
-
 export function createEvalFunctionParams11ToJSON(
   createEvalFunctionParams11: CreateEvalFunctionParams11,
 ): string {
@@ -6359,7 +4730,6 @@ export function createEvalFunctionParams11ToJSON(
     CreateEvalFunctionParams11$outboundSchema.parse(createEvalFunctionParams11),
   );
 }
-
 export function createEvalFunctionParams11FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams11, SDKValidationError> {
@@ -6377,26 +4747,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams10$inboundSchema: z.ZodType<
@@ -6407,7 +4763,6 @@ export const CreateEvalFunctionParams10$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams10$Outbound = {
   type: string;
@@ -6423,19 +4778,6 @@ export const CreateEvalFunctionParams10$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams10$ {
-  /** @deprecated use `CreateEvalFunctionParams10$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams10$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams10$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams10$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams10$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams10$Outbound;
-}
-
 export function createEvalFunctionParams10ToJSON(
   createEvalFunctionParams10: CreateEvalFunctionParams10,
 ): string {
@@ -6443,7 +4785,6 @@ export function createEvalFunctionParams10ToJSON(
     CreateEvalFunctionParams10$outboundSchema.parse(createEvalFunctionParams10),
   );
 }
-
 export function createEvalFunctionParams10FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams10, SDKValidationError> {
@@ -6461,26 +4802,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams9$inboundSchema: z.ZodType<
@@ -6492,7 +4819,6 @@ export const CreateEvalFunctionParams9$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema,
   value: z.string(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams9$Outbound = {
   type: string;
@@ -6510,19 +4836,6 @@ export const CreateEvalFunctionParams9$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams9$ {
-  /** @deprecated use `CreateEvalFunctionParams9$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams9$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams9$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams9$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams9$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams9$Outbound;
-}
-
 export function createEvalFunctionParams9ToJSON(
   createEvalFunctionParams9: CreateEvalFunctionParams9,
 ): string {
@@ -6530,7 +4843,6 @@ export function createEvalFunctionParams9ToJSON(
     CreateEvalFunctionParams9$outboundSchema.parse(createEvalFunctionParams9),
   );
 }
-
 export function createEvalFunctionParams9FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams9, SDKValidationError> {
@@ -6548,26 +4860,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams8$inboundSchema: z.ZodType<
@@ -6579,7 +4877,6 @@ export const CreateEvalFunctionParams8$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
   value: z.string(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams8$Outbound = {
   type: string;
@@ -6597,19 +4894,6 @@ export const CreateEvalFunctionParams8$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams8$ {
-  /** @deprecated use `CreateEvalFunctionParams8$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams8$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams8$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams8$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams8$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams8$Outbound;
-}
-
 export function createEvalFunctionParams8ToJSON(
   createEvalFunctionParams8: CreateEvalFunctionParams8,
 ): string {
@@ -6617,7 +4901,6 @@ export function createEvalFunctionParams8ToJSON(
     CreateEvalFunctionParams8$outboundSchema.parse(createEvalFunctionParams8),
   );
 }
-
 export function createEvalFunctionParams8FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams8, SDKValidationError> {
@@ -6635,26 +4918,12 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
   > = z.nativeEnum(
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
   > =
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams7$inboundSchema: z.ZodType<
@@ -6665,7 +4934,6 @@ export const CreateEvalFunctionParams7$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams7$Outbound = {
   type: string;
@@ -6681,19 +4949,6 @@ export const CreateEvalFunctionParams7$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams7$ {
-  /** @deprecated use `CreateEvalFunctionParams7$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams7$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams7$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams7$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams7$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams7$Outbound;
-}
-
 export function createEvalFunctionParams7ToJSON(
   createEvalFunctionParams7: CreateEvalFunctionParams7,
 ): string {
@@ -6701,7 +4956,6 @@ export function createEvalFunctionParams7ToJSON(
     CreateEvalFunctionParams7$outboundSchema.parse(createEvalFunctionParams7),
   );
 }
-
 export function createEvalFunctionParams7FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams7, SDKValidationError> {
@@ -6717,25 +4971,11 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$inbound
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType
   > = z.nativeEnum(CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType);
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType
   > = CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams6$inboundSchema: z.ZodType<
@@ -6746,7 +4986,6 @@ export const CreateEvalFunctionParams6$inboundSchema: z.ZodType<
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams6$Outbound = {
   type: string;
@@ -6762,19 +5001,6 @@ export const CreateEvalFunctionParams6$outboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams6$ {
-  /** @deprecated use `CreateEvalFunctionParams6$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams6$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams6$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams6$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams6$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams6$Outbound;
-}
-
 export function createEvalFunctionParams6ToJSON(
   createEvalFunctionParams6: CreateEvalFunctionParams6,
 ): string {
@@ -6782,7 +5008,6 @@ export function createEvalFunctionParams6ToJSON(
     CreateEvalFunctionParams6$outboundSchema.parse(createEvalFunctionParams6),
   );
 }
-
 export function createEvalFunctionParams6FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams6, SDKValidationError> {
@@ -6797,24 +5022,10 @@ export function createEvalFunctionParams6FromJSON(
 export const CreateEvalFunctionParamsEvalsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalFunctionParamsEvalsResponse200Type> = z
     .nativeEnum(CreateEvalFunctionParamsEvalsResponse200Type);
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalFunctionParamsEvalsResponse200Type> =
     CreateEvalFunctionParamsEvalsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponse200Type$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponse200Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams5$inboundSchema: z.ZodType<
@@ -6824,7 +5035,6 @@ export const CreateEvalFunctionParams5$inboundSchema: z.ZodType<
 > = z.object({
   type: CreateEvalFunctionParamsEvalsResponse200Type$inboundSchema,
 });
-
 /** @internal */
 export type CreateEvalFunctionParams5$Outbound = {
   type: string;
@@ -6839,19 +5049,6 @@ export const CreateEvalFunctionParams5$outboundSchema: z.ZodType<
   type: CreateEvalFunctionParamsEvalsResponse200Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams5$ {
-  /** @deprecated use `CreateEvalFunctionParams5$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams5$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams5$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams5$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams5$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams5$Outbound;
-}
-
 export function createEvalFunctionParams5ToJSON(
   createEvalFunctionParams5: CreateEvalFunctionParams5,
 ): string {
@@ -6859,7 +5056,6 @@ export function createEvalFunctionParams5ToJSON(
     CreateEvalFunctionParams5$outboundSchema.parse(createEvalFunctionParams5),
   );
 }
-
 export function createEvalFunctionParams5FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams5, SDKValidationError> {
@@ -6874,24 +5070,10 @@ export function createEvalFunctionParams5FromJSON(
 export const CreateEvalFunctionParamsEvalsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalFunctionParamsEvalsResponseType> = z
     .nativeEnum(CreateEvalFunctionParamsEvalsResponseType);
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalFunctionParamsEvalsResponseType> =
     CreateEvalFunctionParamsEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsResponseType$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalFunctionParamsEvalsResponseType$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams4$inboundSchema: z.ZodType<
@@ -6902,7 +5084,6 @@ export const CreateEvalFunctionParams4$inboundSchema: z.ZodType<
   type: CreateEvalFunctionParamsEvalsResponseType$inboundSchema,
   keywords: z.array(z.string()),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams4$Outbound = {
   type: string;
@@ -6919,19 +5100,6 @@ export const CreateEvalFunctionParams4$outboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams4$ {
-  /** @deprecated use `CreateEvalFunctionParams4$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams4$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams4$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams4$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams4$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams4$Outbound;
-}
-
 export function createEvalFunctionParams4ToJSON(
   createEvalFunctionParams4: CreateEvalFunctionParams4,
 ): string {
@@ -6939,7 +5107,6 @@ export function createEvalFunctionParams4ToJSON(
     CreateEvalFunctionParams4$outboundSchema.parse(createEvalFunctionParams4),
   );
 }
-
 export function createEvalFunctionParams4FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams4, SDKValidationError> {
@@ -6954,23 +5121,10 @@ export function createEvalFunctionParams4FromJSON(
 export const CreateEvalFunctionParamsEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalFunctionParamsEvalsType
 > = z.nativeEnum(CreateEvalFunctionParamsEvalsType);
-
 /** @internal */
 export const CreateEvalFunctionParamsEvalsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalFunctionParamsEvalsType
 > = CreateEvalFunctionParamsEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsEvalsType$ {
-  /** @deprecated use `CreateEvalFunctionParamsEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParamsEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsEvalsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalFunctionParamsEvalsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams3$inboundSchema: z.ZodType<
@@ -6981,7 +5135,6 @@ export const CreateEvalFunctionParams3$inboundSchema: z.ZodType<
   type: CreateEvalFunctionParamsEvalsType$inboundSchema,
   keywords: z.array(z.string()),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams3$Outbound = {
   type: string;
@@ -6998,19 +5151,6 @@ export const CreateEvalFunctionParams3$outboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams3$ {
-  /** @deprecated use `CreateEvalFunctionParams3$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams3$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams3$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams3$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams3$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams3$Outbound;
-}
-
 export function createEvalFunctionParams3ToJSON(
   createEvalFunctionParams3: CreateEvalFunctionParams3,
 ): string {
@@ -7018,7 +5158,6 @@ export function createEvalFunctionParams3ToJSON(
     CreateEvalFunctionParams3$outboundSchema.parse(createEvalFunctionParams3),
   );
 }
-
 export function createEvalFunctionParams3FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams3, SDKValidationError> {
@@ -7033,22 +5172,10 @@ export function createEvalFunctionParams3FromJSON(
 export const CreateEvalFunctionParamsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalFunctionParamsType
 > = z.nativeEnum(CreateEvalFunctionParamsType);
-
 /** @internal */
 export const CreateEvalFunctionParamsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalFunctionParamsType
 > = CreateEvalFunctionParamsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParamsType$ {
-  /** @deprecated use `CreateEvalFunctionParamsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParamsType$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParamsType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParamsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams2$inboundSchema: z.ZodType<
@@ -7059,7 +5186,6 @@ export const CreateEvalFunctionParams2$inboundSchema: z.ZodType<
   type: CreateEvalFunctionParamsType$inboundSchema,
   keywords: z.array(z.string()),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams2$Outbound = {
   type: string;
@@ -7076,19 +5202,6 @@ export const CreateEvalFunctionParams2$outboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams2$ {
-  /** @deprecated use `CreateEvalFunctionParams2$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams2$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams2$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams2$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams2$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams2$Outbound;
-}
-
 export function createEvalFunctionParams2ToJSON(
   createEvalFunctionParams2: CreateEvalFunctionParams2,
 ): string {
@@ -7096,7 +5209,6 @@ export function createEvalFunctionParams2ToJSON(
     CreateEvalFunctionParams2$outboundSchema.parse(createEvalFunctionParams2),
   );
 }
-
 export function createEvalFunctionParams2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams2, SDKValidationError> {
@@ -7111,22 +5223,10 @@ export function createEvalFunctionParams2FromJSON(
 export const FunctionParamsType$inboundSchema: z.ZodNativeEnum<
   typeof FunctionParamsType
 > = z.nativeEnum(FunctionParamsType);
-
 /** @internal */
 export const FunctionParamsType$outboundSchema: z.ZodNativeEnum<
   typeof FunctionParamsType
 > = FunctionParamsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionParamsType$ {
-  /** @deprecated use `FunctionParamsType$inboundSchema` instead. */
-  export const inboundSchema = FunctionParamsType$inboundSchema;
-  /** @deprecated use `FunctionParamsType$outboundSchema` instead. */
-  export const outboundSchema = FunctionParamsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalFunctionParams1$inboundSchema: z.ZodType<
@@ -7137,7 +5237,6 @@ export const CreateEvalFunctionParams1$inboundSchema: z.ZodType<
   type: FunctionParamsType$inboundSchema,
   value: z.string(),
 });
-
 /** @internal */
 export type CreateEvalFunctionParams1$Outbound = {
   type: string;
@@ -7154,19 +5253,6 @@ export const CreateEvalFunctionParams1$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalFunctionParams1$ {
-  /** @deprecated use `CreateEvalFunctionParams1$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalFunctionParams1$inboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams1$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalFunctionParams1$outboundSchema;
-  /** @deprecated use `CreateEvalFunctionParams1$Outbound` instead. */
-  export type Outbound = CreateEvalFunctionParams1$Outbound;
-}
-
 export function createEvalFunctionParams1ToJSON(
   createEvalFunctionParams1: CreateEvalFunctionParams1,
 ): string {
@@ -7174,7 +5260,6 @@ export function createEvalFunctionParams1ToJSON(
     CreateEvalFunctionParams1$outboundSchema.parse(createEvalFunctionParams1),
   );
 }
-
 export function createEvalFunctionParams1FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalFunctionParams1, SDKValidationError> {
@@ -7227,7 +5312,6 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => ThirtyFour$inboundSchema),
   z.lazy(() => ThirtyFive$inboundSchema),
 ]);
-
 /** @internal */
 export type FunctionParams$Outbound =
   | CreateEvalFunctionParams12$Outbound
@@ -7309,23 +5393,9 @@ export const FunctionParams$outboundSchema: z.ZodType<
   z.lazy(() => ThirtyFive$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionParams$ {
-  /** @deprecated use `FunctionParams$inboundSchema` instead. */
-  export const inboundSchema = FunctionParams$inboundSchema;
-  /** @deprecated use `FunctionParams$outboundSchema` instead. */
-  export const outboundSchema = FunctionParams$outboundSchema;
-  /** @deprecated use `FunctionParams$Outbound` instead. */
-  export type Outbound = FunctionParams$Outbound;
-}
-
 export function functionParamsToJSON(functionParams: FunctionParams): string {
   return JSON.stringify(FunctionParams$outboundSchema.parse(functionParams));
 }
-
 export function functionParamsFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionParams, SDKValidationError> {
@@ -7344,8 +5414,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -7400,7 +5470,6 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
     "function_params": "functionParams",
   });
 });
-
 /** @internal */
 export type CreateEvalResponseBodyFunction$Outbound = {
   _id: string;
@@ -7459,8 +5528,8 @@ export const CreateEvalResponseBodyFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -7516,19 +5585,6 @@ export const CreateEvalResponseBodyFunction$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyFunction$ {
-  /** @deprecated use `CreateEvalResponseBodyFunction$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBodyFunction$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyFunction$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBodyFunction$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyFunction$Outbound` instead. */
-  export type Outbound = CreateEvalResponseBodyFunction$Outbound;
-}
-
 export function createEvalResponseBodyFunctionToJSON(
   createEvalResponseBodyFunction: CreateEvalResponseBodyFunction,
 ): string {
@@ -7538,7 +5594,6 @@ export function createEvalResponseBodyFunctionToJSON(
     ),
   );
 }
-
 export function createEvalResponseBodyFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalResponseBodyFunction, SDKValidationError> {
@@ -7556,26 +5611,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
@@ -7584,26 +5625,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema:
@@ -7619,7 +5646,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     operator:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound =
   {
@@ -7644,22 +5670,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumberToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
@@ -7671,7 +5681,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7694,26 +5703,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema:
@@ -7727,7 +5722,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound =
   {
@@ -7749,22 +5743,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
@@ -7776,7 +5754,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
       ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7806,7 +5783,6 @@ export const CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
   ]);
-
 /** @internal */
 export type CreateEvalResponseBodyEvalsResponseGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
@@ -7827,22 +5803,6 @@ export const CreateEvalResponseBodyEvalsResponseGuardrailConfig$outboundSchema:
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponseGuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponseGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseGuardrailConfig$Outbound` instead. */
-  export type Outbound =
-    CreateEvalResponseBodyEvalsResponseGuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyEvalsResponseGuardrailConfigToJSON(
   createEvalResponseBodyEvalsResponseGuardrailConfig:
     CreateEvalResponseBodyEvalsResponseGuardrailConfig,
@@ -7853,7 +5813,6 @@ export function createEvalResponseBodyEvalsResponseGuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalResponseBodyEvalsResponseGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7874,24 +5833,10 @@ export function createEvalResponseBodyEvalsResponseGuardrailConfigFromJSON(
 export const CreateEvalResponseBodyEvalsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> = z
     .nativeEnum(CreateEvalResponseBodyEvalsResponseType);
-
 /** @internal */
 export const CreateEvalResponseBodyEvalsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> =
     CreateEvalResponseBodyEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponseType$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponseType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const ResponseBodyPython$inboundSchema: z.ZodType<
@@ -7901,8 +5846,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -7920,7 +5865,6 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
-
 /** @internal */
 export type ResponseBodyPython$Outbound = {
   _id: string;
@@ -7944,8 +5888,8 @@ export const ResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -7964,19 +5908,6 @@ export const ResponseBodyPython$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyPython$ {
-  /** @deprecated use `ResponseBodyPython$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyPython$inboundSchema;
-  /** @deprecated use `ResponseBodyPython$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyPython$outboundSchema;
-  /** @deprecated use `ResponseBodyPython$Outbound` instead. */
-  export type Outbound = ResponseBodyPython$Outbound;
-}
-
 export function responseBodyPythonToJSON(
   responseBodyPython: ResponseBodyPython,
 ): string {
@@ -7984,7 +5915,6 @@ export function responseBodyPythonToJSON(
     ResponseBodyPython$outboundSchema.parse(responseBodyPython),
   );
 }
-
 export function responseBodyPythonFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBodyPython, SDKValidationError> {
@@ -8002,26 +5932,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema:
@@ -8030,26 +5946,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$in
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema:
@@ -8065,7 +5967,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inbo
     operator:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound =
   {
@@ -8090,22 +5991,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outb
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumberToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber,
@@ -8115,7 +6000,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumberTo
       .parse(createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8138,26 +6022,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema:
@@ -8171,7 +6041,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inb
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound =
   {
@@ -8193,22 +6062,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$out
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONBooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean:
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean,
@@ -8218,7 +6071,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONBooleanT
       .parse(createEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8245,7 +6097,6 @@ export const CreateEvalResponseBodyEvalsGuardrailConfig$inboundSchema:
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
       ),
     ]);
-
 /** @internal */
 export type CreateEvalResponseBodyEvalsGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
@@ -8266,21 +6117,6 @@ export const CreateEvalResponseBodyEvalsGuardrailConfig$outboundSchema:
     ),
   ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsGuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsGuardrailConfig$Outbound` instead. */
-  export type Outbound = CreateEvalResponseBodyEvalsGuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyEvalsGuardrailConfigToJSON(
   createEvalResponseBodyEvalsGuardrailConfig:
     CreateEvalResponseBodyEvalsGuardrailConfig,
@@ -8291,7 +6127,6 @@ export function createEvalResponseBodyEvalsGuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalResponseBodyEvalsGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8312,43 +6147,19 @@ export function createEvalResponseBodyEvalsGuardrailConfigFromJSON(
 export const CreateEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalResponseBodyEvalsType
 > = z.nativeEnum(CreateEvalResponseBodyEvalsType);
-
 /** @internal */
 export const CreateEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalResponseBodyEvalsType
 > = CreateEvalResponseBodyEvalsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsType$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBodyEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBodyEvalsType$outboundSchema;
-}
-
 /** @internal */
 export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyMethod
 > = z.nativeEnum(ResponseBodyMethod);
-
 /** @internal */
 export const ResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyMethod
 > = ResponseBodyMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyMethod$ {
-  /** @deprecated use `ResponseBodyMethod$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyMethod$inboundSchema;
-  /** @deprecated use `ResponseBodyMethod$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyMethod$outboundSchema;
-}
 
 /** @internal */
 export const ResponseBodyHTTP$inboundSchema: z.ZodType<
@@ -8358,8 +6169,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -8380,7 +6191,6 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
-
 /** @internal */
 export type ResponseBodyHTTP$Outbound = {
   _id: string;
@@ -8407,8 +6217,8 @@ export const ResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -8430,19 +6240,6 @@ export const ResponseBodyHTTP$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyHTTP$ {
-  /** @deprecated use `ResponseBodyHTTP$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyHTTP$inboundSchema;
-  /** @deprecated use `ResponseBodyHTTP$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyHTTP$outboundSchema;
-  /** @deprecated use `ResponseBodyHTTP$Outbound` instead. */
-  export type Outbound = ResponseBodyHTTP$Outbound;
-}
-
 export function responseBodyHTTPToJSON(
   responseBodyHTTP: ResponseBodyHTTP,
 ): string {
@@ -8450,7 +6247,6 @@ export function responseBodyHTTPToJSON(
     ResponseBodyHTTP$outboundSchema.parse(responseBodyHTTP),
   );
 }
-
 export function responseBodyHTTPFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBodyHTTP, SDKValidationError> {
@@ -8468,7 +6264,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
@@ -8476,41 +6271,14 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> = z
     .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Operator);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> =
     CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Operator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema:
@@ -8525,7 +6293,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema:
     value: z.number(),
     operator: CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200Number$Outbound = {
   enabled: boolean;
@@ -8548,22 +6315,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema:
     operator: CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Number$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Number$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200Number$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200NumberToJSON(
   createEvalGuardrailConfigEvalsResponse200Number:
     CreateEvalGuardrailConfigEvalsResponse200Number,
@@ -8574,7 +6325,6 @@ export function createEvalGuardrailConfigEvalsResponse200NumberToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200NumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8598,26 +6348,12 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboun
   > = z.nativeEnum(
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType,
   );
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
   > =
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema:
@@ -8631,7 +6367,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema:
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponse200Boolean$Outbound = {
   enabled: boolean;
@@ -8652,22 +6387,6 @@ export const CreateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema:
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Boolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Boolean$Outbound` instead. */
-  export type Outbound =
-    CreateEvalGuardrailConfigEvalsResponse200Boolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponse200BooleanToJSON(
   createEvalGuardrailConfigEvalsResponse200Boolean:
     CreateEvalGuardrailConfigEvalsResponse200Boolean,
@@ -8678,7 +6397,6 @@ export function createEvalGuardrailConfigEvalsResponse200BooleanToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponse200BooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8704,7 +6422,6 @@ export const CreateEvalResponseBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateEvalResponseBodyGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponse200Number$Outbound
@@ -8720,21 +6437,6 @@ export const CreateEvalResponseBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyGuardrailConfig$ {
-  /** @deprecated use `CreateEvalResponseBodyGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyGuardrailConfig$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyGuardrailConfig$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyGuardrailConfig$Outbound` instead. */
-  export type Outbound = CreateEvalResponseBodyGuardrailConfig$Outbound;
-}
-
 export function createEvalResponseBodyGuardrailConfigToJSON(
   createEvalResponseBodyGuardrailConfig: CreateEvalResponseBodyGuardrailConfig,
 ): string {
@@ -8744,7 +6446,6 @@ export function createEvalResponseBodyGuardrailConfigToJSON(
     ),
   );
 }
-
 export function createEvalResponseBodyGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalResponseBodyGuardrailConfig, SDKValidationError> {
@@ -8760,22 +6461,10 @@ export function createEvalResponseBodyGuardrailConfigFromJSON(
 export const CreateEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalResponseBodyType
 > = z.nativeEnum(CreateEvalResponseBodyType);
-
 /** @internal */
 export const CreateEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
   typeof CreateEvalResponseBodyType
 > = CreateEvalResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyType$ {
-  /** @deprecated use `CreateEvalResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const ResponseBodyJSON$inboundSchema: z.ZodType<
@@ -8785,8 +6474,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -8802,7 +6491,6 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
-
 /** @internal */
 export type ResponseBodyJSON$Outbound = {
   _id: string;
@@ -8826,8 +6514,8 @@ export const ResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -8846,19 +6534,6 @@ export const ResponseBodyJSON$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyJSON$ {
-  /** @deprecated use `ResponseBodyJSON$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyJSON$inboundSchema;
-  /** @deprecated use `ResponseBodyJSON$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyJSON$outboundSchema;
-  /** @deprecated use `ResponseBodyJSON$Outbound` instead. */
-  export type Outbound = ResponseBodyJSON$Outbound;
-}
-
 export function responseBodyJSONToJSON(
   responseBodyJSON: ResponseBodyJSON,
 ): string {
@@ -8866,7 +6541,6 @@ export function responseBodyJSONToJSON(
     ResponseBodyJSON$outboundSchema.parse(responseBodyJSON),
   );
 }
-
 export function responseBodyJSONFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBodyJSON, SDKValidationError> {
@@ -8881,47 +6555,19 @@ export function responseBodyJSONFromJSON(
 export const CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> = z
     .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Type);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> =
     CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema;
-}
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> = z
     .nativeEnum(CreateEvalGuardrailConfigEvalsResponseOperator);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> =
     CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema:
@@ -8935,7 +6581,6 @@ export const CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema:
     value: z.number(),
     operator: CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema,
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponseNumber$Outbound = {
   enabled: boolean;
@@ -8957,21 +6602,6 @@ export const CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema:
     operator: CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseNumber$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseNumber$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigEvalsResponseNumber$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponseNumberToJSON(
   createEvalGuardrailConfigEvalsResponseNumber:
     CreateEvalGuardrailConfigEvalsResponseNumber,
@@ -8982,7 +6612,6 @@ export function createEvalGuardrailConfigEvalsResponseNumberToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponseNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9003,24 +6632,10 @@ export function createEvalGuardrailConfigEvalsResponseNumberFromJSON(
 export const CreateEvalGuardrailConfigEvalsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> = z
     .nativeEnum(CreateEvalGuardrailConfigEvalsResponseType);
-
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> =
     CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema:
@@ -9033,7 +6648,6 @@ export const CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema:
     type: CreateEvalGuardrailConfigEvalsResponseType$inboundSchema,
     value: z.boolean(),
   });
-
 /** @internal */
 export type CreateEvalGuardrailConfigEvalsResponseBoolean$Outbound = {
   enabled: boolean;
@@ -9053,21 +6667,6 @@ export const CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema:
     value: z.boolean(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseBoolean$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseBoolean$Outbound` instead. */
-  export type Outbound = CreateEvalGuardrailConfigEvalsResponseBoolean$Outbound;
-}
-
 export function createEvalGuardrailConfigEvalsResponseBooleanToJSON(
   createEvalGuardrailConfigEvalsResponseBoolean:
     CreateEvalGuardrailConfigEvalsResponseBoolean,
@@ -9078,7 +6677,6 @@ export function createEvalGuardrailConfigEvalsResponseBooleanToJSON(
     ),
   );
 }
-
 export function createEvalGuardrailConfigEvalsResponseBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9104,7 +6702,6 @@ export const ResponseBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
 ]);
-
 /** @internal */
 export type ResponseBodyGuardrailConfig$Outbound =
   | CreateEvalGuardrailConfigEvalsResponseNumber$Outbound
@@ -9120,19 +6717,6 @@ export const ResponseBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyGuardrailConfig$ {
-  /** @deprecated use `ResponseBodyGuardrailConfig$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyGuardrailConfig$inboundSchema;
-  /** @deprecated use `ResponseBodyGuardrailConfig$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyGuardrailConfig$outboundSchema;
-  /** @deprecated use `ResponseBodyGuardrailConfig$Outbound` instead. */
-  export type Outbound = ResponseBodyGuardrailConfig$Outbound;
-}
-
 export function responseBodyGuardrailConfigToJSON(
   responseBodyGuardrailConfig: ResponseBodyGuardrailConfig,
 ): string {
@@ -9142,7 +6726,6 @@ export function responseBodyGuardrailConfigToJSON(
     ),
   );
 }
-
 export function responseBodyGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBodyGuardrailConfig, SDKValidationError> {
@@ -9157,22 +6740,10 @@ export function responseBodyGuardrailConfigFromJSON(
 export const ResponseBodyType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyType
 > = z.nativeEnum(ResponseBodyType);
-
 /** @internal */
 export const ResponseBodyType$outboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyType
 > = ResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyType$ {
-  /** @deprecated use `ResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyType$inboundSchema;
-  /** @deprecated use `ResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyType$outboundSchema;
-}
 
 /** @internal */
 export const ResponseBodyLLM$inboundSchema: z.ZodType<
@@ -9182,8 +6753,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -9198,7 +6769,6 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
-
 /** @internal */
 export type ResponseBodyLLM$Outbound = {
   _id: string;
@@ -9223,8 +6793,8 @@ export const ResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-06T08:42:46.897Z"),
-  updated: z.string().default("2025-11-06T08:42:46.897Z"),
+  created: z.string().default("2025-11-07T06:52:41.558Z"),
+  updated: z.string().default("2025-11-07T06:52:41.558Z"),
   guardrailConfig: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
@@ -9240,25 +6810,11 @@ export const ResponseBodyLLM$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyLLM$ {
-  /** @deprecated use `ResponseBodyLLM$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyLLM$inboundSchema;
-  /** @deprecated use `ResponseBodyLLM$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyLLM$outboundSchema;
-  /** @deprecated use `ResponseBodyLLM$Outbound` instead. */
-  export type Outbound = ResponseBodyLLM$Outbound;
-}
-
 export function responseBodyLLMToJSON(
   responseBodyLLM: ResponseBodyLLM,
 ): string {
   return JSON.stringify(ResponseBodyLLM$outboundSchema.parse(responseBodyLLM));
 }
-
 export function responseBodyLLMFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBodyLLM, SDKValidationError> {
@@ -9283,7 +6839,6 @@ export const CreateEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => CreateEvalResponseBodyFunction$inboundSchema),
   z.lazy(() => Typescript$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateEvalResponseBody$Outbound =
   | ResponseBodyHTTP$Outbound
@@ -9309,19 +6864,6 @@ export const CreateEvalResponseBody$outboundSchema: z.ZodType<
   z.lazy(() => Typescript$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBody$ {
-  /** @deprecated use `CreateEvalResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBody$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBody$outboundSchema;
-  /** @deprecated use `CreateEvalResponseBody$Outbound` instead. */
-  export type Outbound = CreateEvalResponseBody$Outbound;
-}
-
 export function createEvalResponseBodyToJSON(
   createEvalResponseBody: CreateEvalResponseBody,
 ): string {
@@ -9329,7 +6871,6 @@ export function createEvalResponseBodyToJSON(
     CreateEvalResponseBody$outboundSchema.parse(createEvalResponseBody),
   );
 }
-
 export function createEvalResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateEvalResponseBody, SDKValidationError> {

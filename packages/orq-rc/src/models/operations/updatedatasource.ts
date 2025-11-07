@@ -93,7 +93,6 @@ export const UpdateDatasourceRequestBody$inboundSchema: z.ZodType<
     "display_name": "displayName",
   });
 });
-
 /** @internal */
 export type UpdateDatasourceRequestBody$Outbound = {
   display_name: string;
@@ -112,19 +111,6 @@ export const UpdateDatasourceRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasourceRequestBody$ {
-  /** @deprecated use `UpdateDatasourceRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasourceRequestBody$inboundSchema;
-  /** @deprecated use `UpdateDatasourceRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasourceRequestBody$outboundSchema;
-  /** @deprecated use `UpdateDatasourceRequestBody$Outbound` instead. */
-  export type Outbound = UpdateDatasourceRequestBody$Outbound;
-}
-
 export function updateDatasourceRequestBodyToJSON(
   updateDatasourceRequestBody: UpdateDatasourceRequestBody,
 ): string {
@@ -134,7 +120,6 @@ export function updateDatasourceRequestBodyToJSON(
     ),
   );
 }
-
 export function updateDatasourceRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasourceRequestBody, SDKValidationError> {
@@ -161,7 +146,6 @@ export const UpdateDatasourceRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateDatasourceRequest$Outbound = {
   knowledge_id: string;
@@ -186,19 +170,6 @@ export const UpdateDatasourceRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasourceRequest$ {
-  /** @deprecated use `UpdateDatasourceRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasourceRequest$inboundSchema;
-  /** @deprecated use `UpdateDatasourceRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasourceRequest$outboundSchema;
-  /** @deprecated use `UpdateDatasourceRequest$Outbound` instead. */
-  export type Outbound = UpdateDatasourceRequest$Outbound;
-}
-
 export function updateDatasourceRequestToJSON(
   updateDatasourceRequest: UpdateDatasourceRequest,
 ): string {
@@ -206,7 +177,6 @@ export function updateDatasourceRequestToJSON(
     UpdateDatasourceRequest$outboundSchema.parse(updateDatasourceRequest),
   );
 }
-
 export function updateDatasourceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasourceRequest, SDKValidationError> {
@@ -221,22 +191,10 @@ export function updateDatasourceRequestFromJSON(
 export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateDatasourceStatus
 > = z.nativeEnum(UpdateDatasourceStatus);
-
 /** @internal */
 export const UpdateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateDatasourceStatus
 > = UpdateDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasourceStatus$ {
-  /** @deprecated use `UpdateDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasourceStatus$inboundSchema;
-  /** @deprecated use `UpdateDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasourceStatus$outboundSchema;
-}
 
 /** @internal */
 export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -244,7 +202,7 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9C5AJ8GYFG6ZFZCVQE96XFN"),
+  _id: z.string().default("01K9EHDPREZFRTKKB9QY3HTEAP"),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$inboundSchema,
@@ -266,7 +224,6 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-
 /** @internal */
 export type UpdateDatasourceResponseBody$Outbound = {
   _id: string;
@@ -288,7 +245,7 @@ export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K9C5AJ8GYFG6ZFZCVQE96XFN"),
+  id: z.string().default("01K9EHDPREZFRTKKB9QY3HTEAP"),
   displayName: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$outboundSchema,
@@ -311,19 +268,6 @@ export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasourceResponseBody$ {
-  /** @deprecated use `UpdateDatasourceResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasourceResponseBody$inboundSchema;
-  /** @deprecated use `UpdateDatasourceResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasourceResponseBody$outboundSchema;
-  /** @deprecated use `UpdateDatasourceResponseBody$Outbound` instead. */
-  export type Outbound = UpdateDatasourceResponseBody$Outbound;
-}
-
 export function updateDatasourceResponseBodyToJSON(
   updateDatasourceResponseBody: UpdateDatasourceResponseBody,
 ): string {
@@ -333,7 +277,6 @@ export function updateDatasourceResponseBodyToJSON(
     ),
   );
 }
-
 export function updateDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasourceResponseBody, SDKValidationError> {

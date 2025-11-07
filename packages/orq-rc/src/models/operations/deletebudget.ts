@@ -22,7 +22,6 @@ export const DeleteBudgetRequest$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeleteBudgetRequest$Outbound = {
   id: string;
@@ -37,19 +36,6 @@ export const DeleteBudgetRequest$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteBudgetRequest$ {
-  /** @deprecated use `DeleteBudgetRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteBudgetRequest$inboundSchema;
-  /** @deprecated use `DeleteBudgetRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteBudgetRequest$outboundSchema;
-  /** @deprecated use `DeleteBudgetRequest$Outbound` instead. */
-  export type Outbound = DeleteBudgetRequest$Outbound;
-}
-
 export function deleteBudgetRequestToJSON(
   deleteBudgetRequest: DeleteBudgetRequest,
 ): string {
@@ -57,7 +43,6 @@ export function deleteBudgetRequestToJSON(
     DeleteBudgetRequest$outboundSchema.parse(deleteBudgetRequest),
   );
 }
-
 export function deleteBudgetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteBudgetRequest, SDKValidationError> {

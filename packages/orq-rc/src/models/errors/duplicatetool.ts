@@ -76,16 +76,3 @@ export const DuplicateToolResponseBody$outboundSchema: z.ZodType<
   .pipe(z.object({
     error: z.string(),
   }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DuplicateToolResponseBody$ {
-  /** @deprecated use `DuplicateToolResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DuplicateToolResponseBody$inboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody$outboundSchema` instead. */
-  export const outboundSchema = DuplicateToolResponseBody$outboundSchema;
-  /** @deprecated use `DuplicateToolResponseBody$Outbound` instead. */
-  export type Outbound = DuplicateToolResponseBody$Outbound;
-}

@@ -110,7 +110,6 @@ export const RetrieveActionRequest$inboundSchema: z.ZodType<
     "action_id": "actionId",
   });
 });
-
 /** @internal */
 export type RetrieveActionRequest$Outbound = {
   agent_key: string;
@@ -135,19 +134,6 @@ export const RetrieveActionRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveActionRequest$ {
-  /** @deprecated use `RetrieveActionRequest$inboundSchema` instead. */
-  export const inboundSchema = RetrieveActionRequest$inboundSchema;
-  /** @deprecated use `RetrieveActionRequest$outboundSchema` instead. */
-  export const outboundSchema = RetrieveActionRequest$outboundSchema;
-  /** @deprecated use `RetrieveActionRequest$Outbound` instead. */
-  export type Outbound = RetrieveActionRequest$Outbound;
-}
-
 export function retrieveActionRequestToJSON(
   retrieveActionRequest: RetrieveActionRequest,
 ): string {
@@ -155,7 +141,6 @@ export function retrieveActionRequestToJSON(
     RetrieveActionRequest$outboundSchema.parse(retrieveActionRequest),
   );
 }
-
 export function retrieveActionRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveActionRequest, SDKValidationError> {
@@ -178,7 +163,6 @@ export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> = z
       "requires_approval": "requiresApproval",
     });
   });
-
 /** @internal */
 export type Tool$Outbound = {
   id: string;
@@ -199,23 +183,9 @@ export const Tool$outboundSchema: z.ZodType<Tool$Outbound, z.ZodTypeDef, Tool> =
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Tool$ {
-  /** @deprecated use `Tool$inboundSchema` instead. */
-  export const inboundSchema = Tool$inboundSchema;
-  /** @deprecated use `Tool$outboundSchema` instead. */
-  export const outboundSchema = Tool$outboundSchema;
-  /** @deprecated use `Tool$Outbound` instead. */
-  export type Outbound = Tool$Outbound;
-}
-
 export function toolToJSON(tool: Tool): string {
   return JSON.stringify(Tool$outboundSchema.parse(tool));
 }
-
 export function toolFromJSON(
   jsonString: string,
 ): SafeParseResult<Tool, SDKValidationError> {
@@ -229,21 +199,9 @@ export function toolFromJSON(
 /** @internal */
 export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
   .nativeEnum(Review);
-
 /** @internal */
 export const Review$outboundSchema: z.ZodNativeEnum<typeof Review> =
   Review$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Review$ {
-  /** @deprecated use `Review$inboundSchema` instead. */
-  export const inboundSchema = Review$inboundSchema;
-  /** @deprecated use `Review$outboundSchema` instead. */
-  export const outboundSchema = Review$outboundSchema;
-}
 
 /** @internal */
 export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
@@ -261,7 +219,6 @@ export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
       "reviewed_by_id": "reviewedById",
     });
   });
-
 /** @internal */
 export type State$Outbound = {
   review: string | null;
@@ -293,23 +250,9 @@ export const State$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace State$ {
-  /** @deprecated use `State$inboundSchema` instead. */
-  export const inboundSchema = State$inboundSchema;
-  /** @deprecated use `State$outboundSchema` instead. */
-  export const outboundSchema = State$outboundSchema;
-  /** @deprecated use `State$Outbound` instead. */
-  export type Outbound = State$Outbound;
-}
-
 export function stateToJSON(state: State): string {
   return JSON.stringify(State$outboundSchema.parse(state));
 }
-
 export function stateFromJSON(
   jsonString: string,
 ): SafeParseResult<State, SDKValidationError> {
@@ -348,7 +291,6 @@ export const RetrieveActionResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type RetrieveActionResponseBody$Outbound = {
   _id: string;
@@ -394,19 +336,6 @@ export const RetrieveActionResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveActionResponseBody$ {
-  /** @deprecated use `RetrieveActionResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RetrieveActionResponseBody$inboundSchema;
-  /** @deprecated use `RetrieveActionResponseBody$outboundSchema` instead. */
-  export const outboundSchema = RetrieveActionResponseBody$outboundSchema;
-  /** @deprecated use `RetrieveActionResponseBody$Outbound` instead. */
-  export type Outbound = RetrieveActionResponseBody$Outbound;
-}
-
 export function retrieveActionResponseBodyToJSON(
   retrieveActionResponseBody: RetrieveActionResponseBody,
 ): string {
@@ -414,7 +343,6 @@ export function retrieveActionResponseBodyToJSON(
     RetrieveActionResponseBody$outboundSchema.parse(retrieveActionResponseBody),
   );
 }
-
 export function retrieveActionResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveActionResponseBody, SDKValidationError> {

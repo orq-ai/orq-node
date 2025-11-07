@@ -94,7 +94,6 @@ export const ListDatasetsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type ListDatasetsRequest$Outbound = {
   limit: number;
@@ -118,19 +117,6 @@ export const ListDatasetsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsRequest$ {
-  /** @deprecated use `ListDatasetsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsRequest$inboundSchema;
-  /** @deprecated use `ListDatasetsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsRequest$outboundSchema;
-  /** @deprecated use `ListDatasetsRequest$Outbound` instead. */
-  export type Outbound = ListDatasetsRequest$Outbound;
-}
-
 export function listDatasetsRequestToJSON(
   listDatasetsRequest: ListDatasetsRequest,
 ): string {
@@ -138,7 +124,6 @@ export function listDatasetsRequestToJSON(
     ListDatasetsRequest$outboundSchema.parse(listDatasetsRequest),
   );
 }
-
 export function listDatasetsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsRequest, SDKValidationError> {
@@ -153,22 +138,10 @@ export function listDatasetsRequestFromJSON(
 export const ListDatasetsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetsObject
 > = z.nativeEnum(ListDatasetsObject);
-
 /** @internal */
 export const ListDatasetsObject$outboundSchema: z.ZodNativeEnum<
   typeof ListDatasetsObject
 > = ListDatasetsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsObject$ {
-  /** @deprecated use `ListDatasetsObject$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsObject$inboundSchema;
-  /** @deprecated use `ListDatasetsObject$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsObject$outboundSchema;
-}
 
 /** @internal */
 export const ListDatasetsMetadata$inboundSchema: z.ZodType<
@@ -184,7 +157,6 @@ export const ListDatasetsMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-
 /** @internal */
 export type ListDatasetsMetadata$Outbound = {
   total_versions: number;
@@ -206,19 +178,6 @@ export const ListDatasetsMetadata$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsMetadata$ {
-  /** @deprecated use `ListDatasetsMetadata$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsMetadata$inboundSchema;
-  /** @deprecated use `ListDatasetsMetadata$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsMetadata$outboundSchema;
-  /** @deprecated use `ListDatasetsMetadata$Outbound` instead. */
-  export type Outbound = ListDatasetsMetadata$Outbound;
-}
-
 export function listDatasetsMetadataToJSON(
   listDatasetsMetadata: ListDatasetsMetadata,
 ): string {
@@ -226,7 +185,6 @@ export function listDatasetsMetadataToJSON(
     ListDatasetsMetadata$outboundSchema.parse(listDatasetsMetadata),
   );
 }
-
 export function listDatasetsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsMetadata, SDKValidationError> {
@@ -253,7 +211,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-06T08:42:44.236Z",
+    "2025-11-07T06:52:38.992Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -265,7 +223,6 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-
 /** @internal */
 export type ListDatasetsData$Outbound = {
   _id: string;
@@ -293,7 +250,7 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-06T08:42:44.236Z"))
+  updated: z.date().default(() => new Date("2025-11-07T06:52:38.992Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -306,19 +263,6 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsData$ {
-  /** @deprecated use `ListDatasetsData$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsData$inboundSchema;
-  /** @deprecated use `ListDatasetsData$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsData$outboundSchema;
-  /** @deprecated use `ListDatasetsData$Outbound` instead. */
-  export type Outbound = ListDatasetsData$Outbound;
-}
-
 export function listDatasetsDataToJSON(
   listDatasetsData: ListDatasetsData,
 ): string {
@@ -326,7 +270,6 @@ export function listDatasetsDataToJSON(
     ListDatasetsData$outboundSchema.parse(listDatasetsData),
   );
 }
-
 export function listDatasetsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsData, SDKValidationError> {
@@ -351,7 +294,6 @@ export const ListDatasetsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListDatasetsResponseBody$Outbound = {
   object: string;
@@ -374,19 +316,6 @@ export const ListDatasetsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsResponseBody$ {
-  /** @deprecated use `ListDatasetsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsResponseBody$inboundSchema;
-  /** @deprecated use `ListDatasetsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsResponseBody$outboundSchema;
-  /** @deprecated use `ListDatasetsResponseBody$Outbound` instead. */
-  export type Outbound = ListDatasetsResponseBody$Outbound;
-}
-
 export function listDatasetsResponseBodyToJSON(
   listDatasetsResponseBody: ListDatasetsResponseBody,
 ): string {
@@ -394,7 +323,6 @@ export function listDatasetsResponseBodyToJSON(
     ListDatasetsResponseBody$outboundSchema.parse(listDatasetsResponseBody),
   );
 }
-
 export function listDatasetsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsResponseBody, SDKValidationError> {

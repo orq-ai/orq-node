@@ -124,7 +124,6 @@ export const ListChunksPaginatedRequestBody$inboundSchema: z.ZodType<
   limit: z.number().int().default(100),
   page: z.number().int().default(1),
 });
-
 /** @internal */
 export type ListChunksPaginatedRequestBody$Outbound = {
   q: string;
@@ -147,19 +146,6 @@ export const ListChunksPaginatedRequestBody$outboundSchema: z.ZodType<
   page: z.number().int().default(1),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedRequestBody$ {
-  /** @deprecated use `ListChunksPaginatedRequestBody$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedRequestBody$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedRequestBody$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedRequestBody$outboundSchema;
-  /** @deprecated use `ListChunksPaginatedRequestBody$Outbound` instead. */
-  export type Outbound = ListChunksPaginatedRequestBody$Outbound;
-}
-
 export function listChunksPaginatedRequestBodyToJSON(
   listChunksPaginatedRequestBody: ListChunksPaginatedRequestBody,
 ): string {
@@ -169,7 +155,6 @@ export function listChunksPaginatedRequestBodyToJSON(
     ),
   );
 }
-
 export function listChunksPaginatedRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedRequestBody, SDKValidationError> {
@@ -197,7 +182,6 @@ export const ListChunksPaginatedRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type ListChunksPaginatedRequest$Outbound = {
   knowledge_id: string;
@@ -223,19 +207,6 @@ export const ListChunksPaginatedRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedRequest$ {
-  /** @deprecated use `ListChunksPaginatedRequest$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedRequest$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedRequest$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedRequest$outboundSchema;
-  /** @deprecated use `ListChunksPaginatedRequest$Outbound` instead. */
-  export type Outbound = ListChunksPaginatedRequest$Outbound;
-}
-
 export function listChunksPaginatedRequestToJSON(
   listChunksPaginatedRequest: ListChunksPaginatedRequest,
 ): string {
@@ -243,7 +214,6 @@ export function listChunksPaginatedRequestToJSON(
     ListChunksPaginatedRequest$outboundSchema.parse(listChunksPaginatedRequest),
   );
 }
-
 export function listChunksPaginatedRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedRequest, SDKValidationError> {
@@ -258,22 +228,10 @@ export function listChunksPaginatedRequestFromJSON(
 export const ListChunksPaginatedObject$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedObject
 > = z.nativeEnum(ListChunksPaginatedObject);
-
 /** @internal */
 export const ListChunksPaginatedObject$outboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedObject
 > = ListChunksPaginatedObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedObject$ {
-  /** @deprecated use `ListChunksPaginatedObject$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedObject$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedObject$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedObject$outboundSchema;
-}
 
 /** @internal */
 export const ListChunksPaginatedMetadata$inboundSchema: z.ZodType<
@@ -281,7 +239,6 @@ export const ListChunksPaginatedMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type ListChunksPaginatedMetadata$Outbound = string | number | boolean;
 
@@ -292,19 +249,6 @@ export const ListChunksPaginatedMetadata$outboundSchema: z.ZodType<
   ListChunksPaginatedMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedMetadata$ {
-  /** @deprecated use `ListChunksPaginatedMetadata$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedMetadata$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedMetadata$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedMetadata$outboundSchema;
-  /** @deprecated use `ListChunksPaginatedMetadata$Outbound` instead. */
-  export type Outbound = ListChunksPaginatedMetadata$Outbound;
-}
-
 export function listChunksPaginatedMetadataToJSON(
   listChunksPaginatedMetadata: ListChunksPaginatedMetadata,
 ): string {
@@ -314,7 +258,6 @@ export function listChunksPaginatedMetadataToJSON(
     ),
   );
 }
-
 export function listChunksPaginatedMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedMetadata, SDKValidationError> {
@@ -329,22 +272,10 @@ export function listChunksPaginatedMetadataFromJSON(
 export const ListChunksPaginatedStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedStatus
 > = z.nativeEnum(ListChunksPaginatedStatus);
-
 /** @internal */
 export const ListChunksPaginatedStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedStatus
 > = ListChunksPaginatedStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedStatus$ {
-  /** @deprecated use `ListChunksPaginatedStatus$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedStatus$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedStatus$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedStatus$outboundSchema;
-}
 
 /** @internal */
 export const ListChunksPaginatedData$inboundSchema: z.ZodType<
@@ -368,7 +299,6 @@ export const ListChunksPaginatedData$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-
 /** @internal */
 export type ListChunksPaginatedData$Outbound = {
   _id: string;
@@ -405,19 +335,6 @@ export const ListChunksPaginatedData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedData$ {
-  /** @deprecated use `ListChunksPaginatedData$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedData$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedData$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedData$outboundSchema;
-  /** @deprecated use `ListChunksPaginatedData$Outbound` instead. */
-  export type Outbound = ListChunksPaginatedData$Outbound;
-}
-
 export function listChunksPaginatedDataToJSON(
   listChunksPaginatedData: ListChunksPaginatedData,
 ): string {
@@ -425,7 +342,6 @@ export function listChunksPaginatedDataToJSON(
     ListChunksPaginatedData$outboundSchema.parse(listChunksPaginatedData),
   );
 }
-
 export function listChunksPaginatedDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedData, SDKValidationError> {
@@ -450,7 +366,6 @@ export const ListChunksPaginatedResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListChunksPaginatedResponseBody$Outbound = {
   object: string;
@@ -473,19 +388,6 @@ export const ListChunksPaginatedResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksPaginatedResponseBody$ {
-  /** @deprecated use `ListChunksPaginatedResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListChunksPaginatedResponseBody$inboundSchema;
-  /** @deprecated use `ListChunksPaginatedResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListChunksPaginatedResponseBody$outboundSchema;
-  /** @deprecated use `ListChunksPaginatedResponseBody$Outbound` instead. */
-  export type Outbound = ListChunksPaginatedResponseBody$Outbound;
-}
-
 export function listChunksPaginatedResponseBodyToJSON(
   listChunksPaginatedResponseBody: ListChunksPaginatedResponseBody,
 ): string {
@@ -495,7 +397,6 @@ export function listChunksPaginatedResponseBodyToJSON(
     ),
   );
 }
-
 export function listChunksPaginatedResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedResponseBody, SDKValidationError> {

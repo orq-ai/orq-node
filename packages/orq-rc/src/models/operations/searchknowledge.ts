@@ -444,21 +444,9 @@ export type SearchKnowledgeResponseBody = {
 /** @internal */
 export const SearchType$inboundSchema: z.ZodNativeEnum<typeof SearchType> = z
   .nativeEnum(SearchType);
-
 /** @internal */
 export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> =
   SearchType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchType$ {
-  /** @deprecated use `SearchType$inboundSchema` instead. */
-  export const inboundSchema = SearchType$inboundSchema;
-  /** @deprecated use `SearchType$outboundSchema` instead. */
-  export const outboundSchema = SearchType$outboundSchema;
-}
 
 /** @internal */
 export const SearchKnowledgeOrExists$inboundSchema: z.ZodType<
@@ -468,7 +456,6 @@ export const SearchKnowledgeOrExists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type SearchKnowledgeOrExists$Outbound = {
   exists: boolean;
@@ -483,19 +470,6 @@ export const SearchKnowledgeOrExists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrExists$ {
-  /** @deprecated use `SearchKnowledgeOrExists$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrExists$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrExists$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrExists$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrExists$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrExists$Outbound;
-}
-
 export function searchKnowledgeOrExistsToJSON(
   searchKnowledgeOrExists: SearchKnowledgeOrExists,
 ): string {
@@ -503,7 +477,6 @@ export function searchKnowledgeOrExistsToJSON(
     SearchKnowledgeOrExists$outboundSchema.parse(searchKnowledgeOrExists),
   );
 }
-
 export function searchKnowledgeOrExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrExists, SDKValidationError> {
@@ -520,7 +493,6 @@ export const SearchKnowledgeOrKnowledgeNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeOrKnowledgeNin$Outbound = string | number | boolean;
 
@@ -531,19 +503,6 @@ export const SearchKnowledgeOrKnowledgeNin$outboundSchema: z.ZodType<
   SearchKnowledgeOrKnowledgeNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrKnowledgeNin$ {
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrKnowledgeNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrKnowledgeNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrKnowledgeNin$Outbound;
-}
-
 export function searchKnowledgeOrKnowledgeNinToJSON(
   searchKnowledgeOrKnowledgeNin: SearchKnowledgeOrKnowledgeNin,
 ): string {
@@ -553,7 +512,6 @@ export function searchKnowledgeOrKnowledgeNinToJSON(
     ),
   );
 }
-
 export function searchKnowledgeOrKnowledgeNinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrKnowledgeNin, SDKValidationError> {
@@ -572,7 +530,6 @@ export const SearchKnowledgeOrNin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledgeOrNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -587,19 +544,6 @@ export const SearchKnowledgeOrNin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrNin$ {
-  /** @deprecated use `SearchKnowledgeOrNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrNin$Outbound;
-}
-
 export function searchKnowledgeOrNinToJSON(
   searchKnowledgeOrNin: SearchKnowledgeOrNin,
 ): string {
@@ -607,7 +551,6 @@ export function searchKnowledgeOrNinToJSON(
     SearchKnowledgeOrNin$outboundSchema.parse(searchKnowledgeOrNin),
   );
 }
-
 export function searchKnowledgeOrNinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrNin, SDKValidationError> {
@@ -624,7 +567,6 @@ export const SearchKnowledgeOrKnowledgeIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeOrKnowledgeIn$Outbound = string | number | boolean;
 
@@ -635,19 +577,6 @@ export const SearchKnowledgeOrKnowledgeIn$outboundSchema: z.ZodType<
   SearchKnowledgeOrKnowledgeIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrKnowledgeIn$ {
-  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrKnowledgeIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrKnowledgeIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrKnowledgeIn$Outbound;
-}
-
 export function searchKnowledgeOrKnowledgeInToJSON(
   searchKnowledgeOrKnowledgeIn: SearchKnowledgeOrKnowledgeIn,
 ): string {
@@ -657,7 +586,6 @@ export function searchKnowledgeOrKnowledgeInToJSON(
     ),
   );
 }
-
 export function searchKnowledgeOrKnowledgeInFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrKnowledgeIn, SDKValidationError> {
@@ -676,7 +604,6 @@ export const SearchKnowledgeOrIn$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledgeOrIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -691,19 +618,6 @@ export const SearchKnowledgeOrIn$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrIn$ {
-  /** @deprecated use `SearchKnowledgeOrIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrIn$Outbound;
-}
-
 export function searchKnowledgeOrInToJSON(
   searchKnowledgeOrIn: SearchKnowledgeOrIn,
 ): string {
@@ -711,7 +625,6 @@ export function searchKnowledgeOrInToJSON(
     SearchKnowledgeOrIn$outboundSchema.parse(searchKnowledgeOrIn),
   );
 }
-
 export function searchKnowledgeOrInFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrIn, SDKValidationError> {
@@ -730,7 +643,6 @@ export const SearchKnowledgeOrLte$inboundSchema: z.ZodType<
 > = z.object({
   lte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeOrLte$Outbound = {
   lte: number;
@@ -745,19 +657,6 @@ export const SearchKnowledgeOrLte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrLte$ {
-  /** @deprecated use `SearchKnowledgeOrLte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrLte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrLte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrLte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrLte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrLte$Outbound;
-}
-
 export function searchKnowledgeOrLteToJSON(
   searchKnowledgeOrLte: SearchKnowledgeOrLte,
 ): string {
@@ -765,7 +664,6 @@ export function searchKnowledgeOrLteToJSON(
     SearchKnowledgeOrLte$outboundSchema.parse(searchKnowledgeOrLte),
   );
 }
-
 export function searchKnowledgeOrLteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrLte, SDKValidationError> {
@@ -784,7 +682,6 @@ export const SearchKnowledgeOrLt$inboundSchema: z.ZodType<
 > = z.object({
   lt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeOrLt$Outbound = {
   lt: number;
@@ -799,19 +696,6 @@ export const SearchKnowledgeOrLt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrLt$ {
-  /** @deprecated use `SearchKnowledgeOrLt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrLt$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrLt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrLt$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrLt$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrLt$Outbound;
-}
-
 export function searchKnowledgeOrLtToJSON(
   searchKnowledgeOrLt: SearchKnowledgeOrLt,
 ): string {
@@ -819,7 +703,6 @@ export function searchKnowledgeOrLtToJSON(
     SearchKnowledgeOrLt$outboundSchema.parse(searchKnowledgeOrLt),
   );
 }
-
 export function searchKnowledgeOrLtFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrLt, SDKValidationError> {
@@ -838,7 +721,6 @@ export const SearchKnowledgeOrGte$inboundSchema: z.ZodType<
 > = z.object({
   gte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeOrGte$Outbound = {
   gte: number;
@@ -853,19 +735,6 @@ export const SearchKnowledgeOrGte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrGte$ {
-  /** @deprecated use `SearchKnowledgeOrGte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrGte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrGte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrGte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrGte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrGte$Outbound;
-}
-
 export function searchKnowledgeOrGteToJSON(
   searchKnowledgeOrGte: SearchKnowledgeOrGte,
 ): string {
@@ -873,7 +742,6 @@ export function searchKnowledgeOrGteToJSON(
     SearchKnowledgeOrGte$outboundSchema.parse(searchKnowledgeOrGte),
   );
 }
-
 export function searchKnowledgeOrGteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrGte, SDKValidationError> {
@@ -892,7 +760,6 @@ export const SearchKnowledgeOr3$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeOr3$Outbound = {
   gt: number;
@@ -907,19 +774,6 @@ export const SearchKnowledgeOr3$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOr3$ {
-  /** @deprecated use `SearchKnowledgeOr3$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOr3$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOr3$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOr3$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOr3$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOr3$Outbound;
-}
-
 export function searchKnowledgeOr3ToJSON(
   searchKnowledgeOr3: SearchKnowledgeOr3,
 ): string {
@@ -927,7 +781,6 @@ export function searchKnowledgeOr3ToJSON(
     SearchKnowledgeOr3$outboundSchema.parse(searchKnowledgeOr3),
   );
 }
-
 export function searchKnowledgeOr3FromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOr3, SDKValidationError> {
@@ -944,7 +797,6 @@ export const SearchKnowledgeOrKnowledgeNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeOrKnowledgeNe$Outbound = string | number | boolean;
 
@@ -955,19 +807,6 @@ export const SearchKnowledgeOrKnowledgeNe$outboundSchema: z.ZodType<
   SearchKnowledgeOrKnowledgeNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrKnowledgeNe$ {
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrKnowledgeNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrKnowledgeNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrKnowledgeNe$Outbound;
-}
-
 export function searchKnowledgeOrKnowledgeNeToJSON(
   searchKnowledgeOrKnowledgeNe: SearchKnowledgeOrKnowledgeNe,
 ): string {
@@ -977,7 +816,6 @@ export function searchKnowledgeOrKnowledgeNeToJSON(
     ),
   );
 }
-
 export function searchKnowledgeOrKnowledgeNeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrKnowledgeNe, SDKValidationError> {
@@ -996,7 +834,6 @@ export const SearchKnowledgeOrNe$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledgeOrNe$Outbound = {
   ne: string | number | boolean;
@@ -1011,19 +848,6 @@ export const SearchKnowledgeOrNe$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrNe$ {
-  /** @deprecated use `SearchKnowledgeOrNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrNe$Outbound;
-}
-
 export function searchKnowledgeOrNeToJSON(
   searchKnowledgeOrNe: SearchKnowledgeOrNe,
 ): string {
@@ -1031,7 +855,6 @@ export function searchKnowledgeOrNeToJSON(
     SearchKnowledgeOrNe$outboundSchema.parse(searchKnowledgeOrNe),
   );
 }
-
 export function searchKnowledgeOrNeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrNe, SDKValidationError> {
@@ -1048,7 +871,6 @@ export const SearchKnowledgeOrKnowledgeEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeOrKnowledgeEq$Outbound = string | number | boolean;
 
@@ -1059,19 +881,6 @@ export const SearchKnowledgeOrKnowledgeEq$outboundSchema: z.ZodType<
   SearchKnowledgeOrKnowledgeEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrKnowledgeEq$ {
-  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrKnowledgeEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrKnowledgeEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrKnowledgeEq$Outbound;
-}
-
 export function searchKnowledgeOrKnowledgeEqToJSON(
   searchKnowledgeOrKnowledgeEq: SearchKnowledgeOrKnowledgeEq,
 ): string {
@@ -1081,7 +890,6 @@ export function searchKnowledgeOrKnowledgeEqToJSON(
     ),
   );
 }
-
 export function searchKnowledgeOrKnowledgeEqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrKnowledgeEq, SDKValidationError> {
@@ -1100,7 +908,6 @@ export const SearchKnowledgeOrEq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledgeOrEq$Outbound = {
   eq: string | number | boolean;
@@ -1115,19 +922,6 @@ export const SearchKnowledgeOrEq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeOrEq$ {
-  /** @deprecated use `SearchKnowledgeOrEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeOrEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeOrEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeOrEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeOrEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeOrEq$Outbound;
-}
-
 export function searchKnowledgeOrEqToJSON(
   searchKnowledgeOrEq: SearchKnowledgeOrEq,
 ): string {
@@ -1135,7 +929,6 @@ export function searchKnowledgeOrEqToJSON(
     SearchKnowledgeOrEq$outboundSchema.parse(searchKnowledgeOrEq),
   );
 }
-
 export function searchKnowledgeOrEqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeOrEq, SDKValidationError> {
@@ -1162,7 +955,6 @@ export const SearchKnowledgeFilterByOr$inboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeOrNin$inboundSchema),
   z.lazy(() => SearchKnowledgeOrExists$inboundSchema),
 ]);
-
 /** @internal */
 export type SearchKnowledgeFilterByOr$Outbound =
   | SearchKnowledgeOrEq$Outbound
@@ -1192,19 +984,6 @@ export const SearchKnowledgeFilterByOr$outboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeOrExists$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeFilterByOr$ {
-  /** @deprecated use `SearchKnowledgeFilterByOr$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeFilterByOr$inboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterByOr$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeFilterByOr$outboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterByOr$Outbound` instead. */
-  export type Outbound = SearchKnowledgeFilterByOr$Outbound;
-}
-
 export function searchKnowledgeFilterByOrToJSON(
   searchKnowledgeFilterByOr: SearchKnowledgeFilterByOr,
 ): string {
@@ -1212,7 +991,6 @@ export function searchKnowledgeFilterByOrToJSON(
     SearchKnowledgeFilterByOr$outboundSchema.parse(searchKnowledgeFilterByOr),
   );
 }
-
 export function searchKnowledgeFilterByOrFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeFilterByOr, SDKValidationError> {
@@ -1245,7 +1023,6 @@ export const FilterByOr$inboundSchema: z.ZodType<
     ])),
   ),
 });
-
 /** @internal */
 export type FilterByOr$Outbound = {
   or: Array<
@@ -1287,23 +1064,9 @@ export const FilterByOr$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilterByOr$ {
-  /** @deprecated use `FilterByOr$inboundSchema` instead. */
-  export const inboundSchema = FilterByOr$inboundSchema;
-  /** @deprecated use `FilterByOr$outboundSchema` instead. */
-  export const outboundSchema = FilterByOr$outboundSchema;
-  /** @deprecated use `FilterByOr$Outbound` instead. */
-  export type Outbound = FilterByOr$Outbound;
-}
-
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
   return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
 }
-
 export function filterByOrFromJSON(
   jsonString: string,
 ): SafeParseResult<FilterByOr, SDKValidationError> {
@@ -1322,7 +1085,6 @@ export const SearchKnowledgeAndExists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type SearchKnowledgeAndExists$Outbound = {
   exists: boolean;
@@ -1337,19 +1099,6 @@ export const SearchKnowledgeAndExists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndExists$ {
-  /** @deprecated use `SearchKnowledgeAndExists$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndExists$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndExists$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndExists$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndExists$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndExists$Outbound;
-}
-
 export function searchKnowledgeAndExistsToJSON(
   searchKnowledgeAndExists: SearchKnowledgeAndExists,
 ): string {
@@ -1357,7 +1106,6 @@ export function searchKnowledgeAndExistsToJSON(
     SearchKnowledgeAndExists$outboundSchema.parse(searchKnowledgeAndExists),
   );
 }
-
 export function searchKnowledgeAndExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndExists, SDKValidationError> {
@@ -1374,7 +1122,6 @@ export const SearchKnowledgeAndKnowledgeNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeAndKnowledgeNin$Outbound = string | number | boolean;
 
@@ -1385,19 +1132,6 @@ export const SearchKnowledgeAndKnowledgeNin$outboundSchema: z.ZodType<
   SearchKnowledgeAndKnowledgeNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndKnowledgeNin$ {
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndKnowledgeNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndKnowledgeNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndKnowledgeNin$Outbound;
-}
-
 export function searchKnowledgeAndKnowledgeNinToJSON(
   searchKnowledgeAndKnowledgeNin: SearchKnowledgeAndKnowledgeNin,
 ): string {
@@ -1407,7 +1141,6 @@ export function searchKnowledgeAndKnowledgeNinToJSON(
     ),
   );
 }
-
 export function searchKnowledgeAndKnowledgeNinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndKnowledgeNin, SDKValidationError> {
@@ -1426,7 +1159,6 @@ export const SearchKnowledgeAndNin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledgeAndNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -1441,19 +1173,6 @@ export const SearchKnowledgeAndNin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndNin$ {
-  /** @deprecated use `SearchKnowledgeAndNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndNin$Outbound;
-}
-
 export function searchKnowledgeAndNinToJSON(
   searchKnowledgeAndNin: SearchKnowledgeAndNin,
 ): string {
@@ -1461,7 +1180,6 @@ export function searchKnowledgeAndNinToJSON(
     SearchKnowledgeAndNin$outboundSchema.parse(searchKnowledgeAndNin),
   );
 }
-
 export function searchKnowledgeAndNinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndNin, SDKValidationError> {
@@ -1478,7 +1196,6 @@ export const SearchKnowledgeAndKnowledgeIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeAndKnowledgeIn$Outbound = string | number | boolean;
 
@@ -1489,19 +1206,6 @@ export const SearchKnowledgeAndKnowledgeIn$outboundSchema: z.ZodType<
   SearchKnowledgeAndKnowledgeIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndKnowledgeIn$ {
-  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndKnowledgeIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndKnowledgeIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndKnowledgeIn$Outbound;
-}
-
 export function searchKnowledgeAndKnowledgeInToJSON(
   searchKnowledgeAndKnowledgeIn: SearchKnowledgeAndKnowledgeIn,
 ): string {
@@ -1511,7 +1215,6 @@ export function searchKnowledgeAndKnowledgeInToJSON(
     ),
   );
 }
-
 export function searchKnowledgeAndKnowledgeInFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndKnowledgeIn, SDKValidationError> {
@@ -1530,7 +1233,6 @@ export const SearchKnowledgeAndIn$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledgeAndIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -1545,19 +1247,6 @@ export const SearchKnowledgeAndIn$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndIn$ {
-  /** @deprecated use `SearchKnowledgeAndIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndIn$Outbound;
-}
-
 export function searchKnowledgeAndInToJSON(
   searchKnowledgeAndIn: SearchKnowledgeAndIn,
 ): string {
@@ -1565,7 +1254,6 @@ export function searchKnowledgeAndInToJSON(
     SearchKnowledgeAndIn$outboundSchema.parse(searchKnowledgeAndIn),
   );
 }
-
 export function searchKnowledgeAndInFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndIn, SDKValidationError> {
@@ -1584,7 +1272,6 @@ export const SearchKnowledgeAndLte$inboundSchema: z.ZodType<
 > = z.object({
   lte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeAndLte$Outbound = {
   lte: number;
@@ -1599,19 +1286,6 @@ export const SearchKnowledgeAndLte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndLte$ {
-  /** @deprecated use `SearchKnowledgeAndLte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndLte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndLte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndLte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndLte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndLte$Outbound;
-}
-
 export function searchKnowledgeAndLteToJSON(
   searchKnowledgeAndLte: SearchKnowledgeAndLte,
 ): string {
@@ -1619,7 +1293,6 @@ export function searchKnowledgeAndLteToJSON(
     SearchKnowledgeAndLte$outboundSchema.parse(searchKnowledgeAndLte),
   );
 }
-
 export function searchKnowledgeAndLteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndLte, SDKValidationError> {
@@ -1638,7 +1311,6 @@ export const SearchKnowledgeAndLt$inboundSchema: z.ZodType<
 > = z.object({
   lt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeAndLt$Outbound = {
   lt: number;
@@ -1653,19 +1325,6 @@ export const SearchKnowledgeAndLt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndLt$ {
-  /** @deprecated use `SearchKnowledgeAndLt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndLt$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndLt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndLt$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndLt$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndLt$Outbound;
-}
-
 export function searchKnowledgeAndLtToJSON(
   searchKnowledgeAndLt: SearchKnowledgeAndLt,
 ): string {
@@ -1673,7 +1332,6 @@ export function searchKnowledgeAndLtToJSON(
     SearchKnowledgeAndLt$outboundSchema.parse(searchKnowledgeAndLt),
   );
 }
-
 export function searchKnowledgeAndLtFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndLt, SDKValidationError> {
@@ -1692,7 +1350,6 @@ export const SearchKnowledgeAndGte$inboundSchema: z.ZodType<
 > = z.object({
   gte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeAndGte$Outbound = {
   gte: number;
@@ -1707,19 +1364,6 @@ export const SearchKnowledgeAndGte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndGte$ {
-  /** @deprecated use `SearchKnowledgeAndGte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndGte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndGte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndGte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndGte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndGte$Outbound;
-}
-
 export function searchKnowledgeAndGteToJSON(
   searchKnowledgeAndGte: SearchKnowledgeAndGte,
 ): string {
@@ -1727,7 +1371,6 @@ export function searchKnowledgeAndGteToJSON(
     SearchKnowledgeAndGte$outboundSchema.parse(searchKnowledgeAndGte),
   );
 }
-
 export function searchKnowledgeAndGteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndGte, SDKValidationError> {
@@ -1746,7 +1389,6 @@ export const SearchKnowledgeAnd3$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledgeAnd3$Outbound = {
   gt: number;
@@ -1761,19 +1403,6 @@ export const SearchKnowledgeAnd3$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAnd3$ {
-  /** @deprecated use `SearchKnowledgeAnd3$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAnd3$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAnd3$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAnd3$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAnd3$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAnd3$Outbound;
-}
-
 export function searchKnowledgeAnd3ToJSON(
   searchKnowledgeAnd3: SearchKnowledgeAnd3,
 ): string {
@@ -1781,7 +1410,6 @@ export function searchKnowledgeAnd3ToJSON(
     SearchKnowledgeAnd3$outboundSchema.parse(searchKnowledgeAnd3),
   );
 }
-
 export function searchKnowledgeAnd3FromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAnd3, SDKValidationError> {
@@ -1798,7 +1426,6 @@ export const SearchKnowledgeAndKnowledgeNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeAndKnowledgeNe$Outbound = string | number | boolean;
 
@@ -1809,19 +1436,6 @@ export const SearchKnowledgeAndKnowledgeNe$outboundSchema: z.ZodType<
   SearchKnowledgeAndKnowledgeNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndKnowledgeNe$ {
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndKnowledgeNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndKnowledgeNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndKnowledgeNe$Outbound;
-}
-
 export function searchKnowledgeAndKnowledgeNeToJSON(
   searchKnowledgeAndKnowledgeNe: SearchKnowledgeAndKnowledgeNe,
 ): string {
@@ -1831,7 +1445,6 @@ export function searchKnowledgeAndKnowledgeNeToJSON(
     ),
   );
 }
-
 export function searchKnowledgeAndKnowledgeNeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndKnowledgeNe, SDKValidationError> {
@@ -1850,7 +1463,6 @@ export const SearchKnowledgeAndNe$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledgeAndNe$Outbound = {
   ne: string | number | boolean;
@@ -1865,19 +1477,6 @@ export const SearchKnowledgeAndNe$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndNe$ {
-  /** @deprecated use `SearchKnowledgeAndNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndNe$Outbound;
-}
-
 export function searchKnowledgeAndNeToJSON(
   searchKnowledgeAndNe: SearchKnowledgeAndNe,
 ): string {
@@ -1885,7 +1484,6 @@ export function searchKnowledgeAndNeToJSON(
     SearchKnowledgeAndNe$outboundSchema.parse(searchKnowledgeAndNe),
   );
 }
-
 export function searchKnowledgeAndNeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndNe, SDKValidationError> {
@@ -1902,7 +1500,6 @@ export const SearchKnowledgeAndKnowledgeEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledgeAndKnowledgeEq$Outbound = string | number | boolean;
 
@@ -1913,19 +1510,6 @@ export const SearchKnowledgeAndKnowledgeEq$outboundSchema: z.ZodType<
   SearchKnowledgeAndKnowledgeEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndKnowledgeEq$ {
-  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndKnowledgeEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndKnowledgeEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndKnowledgeEq$Outbound;
-}
-
 export function searchKnowledgeAndKnowledgeEqToJSON(
   searchKnowledgeAndKnowledgeEq: SearchKnowledgeAndKnowledgeEq,
 ): string {
@@ -1935,7 +1519,6 @@ export function searchKnowledgeAndKnowledgeEqToJSON(
     ),
   );
 }
-
 export function searchKnowledgeAndKnowledgeEqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndKnowledgeEq, SDKValidationError> {
@@ -1954,7 +1537,6 @@ export const SearchKnowledgeAndEq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledgeAndEq$Outbound = {
   eq: string | number | boolean;
@@ -1969,19 +1551,6 @@ export const SearchKnowledgeAndEq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeAndEq$ {
-  /** @deprecated use `SearchKnowledgeAndEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAndEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAndEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAndEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAndEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAndEq$Outbound;
-}
-
 export function searchKnowledgeAndEqToJSON(
   searchKnowledgeAndEq: SearchKnowledgeAndEq,
 ): string {
@@ -1989,7 +1558,6 @@ export function searchKnowledgeAndEqToJSON(
     SearchKnowledgeAndEq$outboundSchema.parse(searchKnowledgeAndEq),
   );
 }
-
 export function searchKnowledgeAndEqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeAndEq, SDKValidationError> {
@@ -2016,7 +1584,6 @@ export const SearchKnowledgeFilterByAnd$inboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeAndNin$inboundSchema),
   z.lazy(() => SearchKnowledgeAndExists$inboundSchema),
 ]);
-
 /** @internal */
 export type SearchKnowledgeFilterByAnd$Outbound =
   | SearchKnowledgeAndEq$Outbound
@@ -2046,19 +1613,6 @@ export const SearchKnowledgeFilterByAnd$outboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeAndExists$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeFilterByAnd$ {
-  /** @deprecated use `SearchKnowledgeFilterByAnd$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeFilterByAnd$inboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterByAnd$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeFilterByAnd$outboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterByAnd$Outbound` instead. */
-  export type Outbound = SearchKnowledgeFilterByAnd$Outbound;
-}
-
 export function searchKnowledgeFilterByAndToJSON(
   searchKnowledgeFilterByAnd: SearchKnowledgeFilterByAnd,
 ): string {
@@ -2066,7 +1620,6 @@ export function searchKnowledgeFilterByAndToJSON(
     SearchKnowledgeFilterByAnd$outboundSchema.parse(searchKnowledgeFilterByAnd),
   );
 }
-
 export function searchKnowledgeFilterByAndFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeFilterByAnd, SDKValidationError> {
@@ -2099,7 +1652,6 @@ export const FilterByAnd$inboundSchema: z.ZodType<
     ])),
   ),
 });
-
 /** @internal */
 export type FilterByAnd$Outbound = {
   and: Array<
@@ -2141,23 +1693,9 @@ export const FilterByAnd$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilterByAnd$ {
-  /** @deprecated use `FilterByAnd$inboundSchema` instead. */
-  export const inboundSchema = FilterByAnd$inboundSchema;
-  /** @deprecated use `FilterByAnd$outboundSchema` instead. */
-  export const outboundSchema = FilterByAnd$outboundSchema;
-  /** @deprecated use `FilterByAnd$Outbound` instead. */
-  export type Outbound = FilterByAnd$Outbound;
-}
-
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
   return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
 }
-
 export function filterByAndFromJSON(
   jsonString: string,
 ): SafeParseResult<FilterByAnd, SDKValidationError> {
@@ -2176,7 +1714,6 @@ export const SearchKnowledge1Exists$inboundSchema: z.ZodType<
 > = z.object({
   exists: z.boolean(),
 });
-
 /** @internal */
 export type SearchKnowledge1Exists$Outbound = {
   exists: boolean;
@@ -2191,19 +1728,6 @@ export const SearchKnowledge1Exists$outboundSchema: z.ZodType<
   exists: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Exists$ {
-  /** @deprecated use `SearchKnowledge1Exists$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Exists$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Exists$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Exists$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Exists$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Exists$Outbound;
-}
-
 export function searchKnowledge1ExistsToJSON(
   searchKnowledge1Exists: SearchKnowledge1Exists,
 ): string {
@@ -2211,7 +1735,6 @@ export function searchKnowledge1ExistsToJSON(
     SearchKnowledge1Exists$outboundSchema.parse(searchKnowledge1Exists),
   );
 }
-
 export function searchKnowledge1ExistsFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Exists, SDKValidationError> {
@@ -2228,7 +1751,6 @@ export const SearchKnowledge1KnowledgeNin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledge1KnowledgeNin$Outbound = string | number | boolean;
 
@@ -2239,19 +1761,6 @@ export const SearchKnowledge1KnowledgeNin$outboundSchema: z.ZodType<
   SearchKnowledge1KnowledgeNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1KnowledgeNin$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeNin$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1KnowledgeNin$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeNin$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeNin$Outbound;
-}
-
 export function searchKnowledge1KnowledgeNinToJSON(
   searchKnowledge1KnowledgeNin: SearchKnowledge1KnowledgeNin,
 ): string {
@@ -2261,7 +1770,6 @@ export function searchKnowledge1KnowledgeNinToJSON(
     ),
   );
 }
-
 export function searchKnowledge1KnowledgeNinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1KnowledgeNin, SDKValidationError> {
@@ -2280,7 +1788,6 @@ export const SearchKnowledge1Nin$inboundSchema: z.ZodType<
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledge1Nin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -2295,19 +1802,6 @@ export const SearchKnowledge1Nin$outboundSchema: z.ZodType<
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Nin$ {
-  /** @deprecated use `SearchKnowledge1Nin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Nin$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Nin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Nin$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Nin$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Nin$Outbound;
-}
-
 export function searchKnowledge1NinToJSON(
   searchKnowledge1Nin: SearchKnowledge1Nin,
 ): string {
@@ -2315,7 +1809,6 @@ export function searchKnowledge1NinToJSON(
     SearchKnowledge1Nin$outboundSchema.parse(searchKnowledge1Nin),
   );
 }
-
 export function searchKnowledge1NinFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Nin, SDKValidationError> {
@@ -2332,7 +1825,6 @@ export const SearchKnowledge1KnowledgeIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledge1KnowledgeIn$Outbound = string | number | boolean;
 
@@ -2343,19 +1835,6 @@ export const SearchKnowledge1KnowledgeIn$outboundSchema: z.ZodType<
   SearchKnowledge1KnowledgeIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1KnowledgeIn$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeIn$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1KnowledgeIn$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeIn$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeIn$Outbound;
-}
-
 export function searchKnowledge1KnowledgeInToJSON(
   searchKnowledge1KnowledgeIn: SearchKnowledge1KnowledgeIn,
 ): string {
@@ -2365,7 +1844,6 @@ export function searchKnowledge1KnowledgeInToJSON(
     ),
   );
 }
-
 export function searchKnowledge1KnowledgeInFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1KnowledgeIn, SDKValidationError> {
@@ -2384,7 +1862,6 @@ export const SearchKnowledge1In$inboundSchema: z.ZodType<
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
-
 /** @internal */
 export type SearchKnowledge1In$Outbound = {
   in: Array<string | number | boolean>;
@@ -2399,19 +1876,6 @@ export const SearchKnowledge1In$outboundSchema: z.ZodType<
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1In$ {
-  /** @deprecated use `SearchKnowledge1In$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1In$inboundSchema;
-  /** @deprecated use `SearchKnowledge1In$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1In$outboundSchema;
-  /** @deprecated use `SearchKnowledge1In$Outbound` instead. */
-  export type Outbound = SearchKnowledge1In$Outbound;
-}
-
 export function searchKnowledge1InToJSON(
   searchKnowledge1In: SearchKnowledge1In,
 ): string {
@@ -2419,7 +1883,6 @@ export function searchKnowledge1InToJSON(
     SearchKnowledge1In$outboundSchema.parse(searchKnowledge1In),
   );
 }
-
 export function searchKnowledge1InFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1In, SDKValidationError> {
@@ -2438,7 +1901,6 @@ export const SearchKnowledge1Lte$inboundSchema: z.ZodType<
 > = z.object({
   lte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledge1Lte$Outbound = {
   lte: number;
@@ -2453,19 +1915,6 @@ export const SearchKnowledge1Lte$outboundSchema: z.ZodType<
   lte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Lte$ {
-  /** @deprecated use `SearchKnowledge1Lte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Lte$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Lte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Lte$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Lte$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Lte$Outbound;
-}
-
 export function searchKnowledge1LteToJSON(
   searchKnowledge1Lte: SearchKnowledge1Lte,
 ): string {
@@ -2473,7 +1922,6 @@ export function searchKnowledge1LteToJSON(
     SearchKnowledge1Lte$outboundSchema.parse(searchKnowledge1Lte),
   );
 }
-
 export function searchKnowledge1LteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Lte, SDKValidationError> {
@@ -2492,7 +1940,6 @@ export const SearchKnowledge1Lt$inboundSchema: z.ZodType<
 > = z.object({
   lt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledge1Lt$Outbound = {
   lt: number;
@@ -2507,19 +1954,6 @@ export const SearchKnowledge1Lt$outboundSchema: z.ZodType<
   lt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Lt$ {
-  /** @deprecated use `SearchKnowledge1Lt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Lt$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Lt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Lt$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Lt$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Lt$Outbound;
-}
-
 export function searchKnowledge1LtToJSON(
   searchKnowledge1Lt: SearchKnowledge1Lt,
 ): string {
@@ -2527,7 +1961,6 @@ export function searchKnowledge1LtToJSON(
     SearchKnowledge1Lt$outboundSchema.parse(searchKnowledge1Lt),
   );
 }
-
 export function searchKnowledge1LtFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Lt, SDKValidationError> {
@@ -2546,7 +1979,6 @@ export const SearchKnowledge1Gte$inboundSchema: z.ZodType<
 > = z.object({
   gte: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledge1Gte$Outbound = {
   gte: number;
@@ -2561,19 +1993,6 @@ export const SearchKnowledge1Gte$outboundSchema: z.ZodType<
   gte: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Gte$ {
-  /** @deprecated use `SearchKnowledge1Gte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Gte$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Gte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Gte$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Gte$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Gte$Outbound;
-}
-
 export function searchKnowledge1GteToJSON(
   searchKnowledge1Gte: SearchKnowledge1Gte,
 ): string {
@@ -2581,7 +2000,6 @@ export function searchKnowledge1GteToJSON(
     SearchKnowledge1Gte$outboundSchema.parse(searchKnowledge1Gte),
   );
 }
-
 export function searchKnowledge1GteFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Gte, SDKValidationError> {
@@ -2600,7 +2018,6 @@ export const SearchKnowledge13$inboundSchema: z.ZodType<
 > = z.object({
   gt: z.number(),
 });
-
 /** @internal */
 export type SearchKnowledge13$Outbound = {
   gt: number;
@@ -2615,19 +2032,6 @@ export const SearchKnowledge13$outboundSchema: z.ZodType<
   gt: z.number(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge13$ {
-  /** @deprecated use `SearchKnowledge13$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge13$inboundSchema;
-  /** @deprecated use `SearchKnowledge13$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge13$outboundSchema;
-  /** @deprecated use `SearchKnowledge13$Outbound` instead. */
-  export type Outbound = SearchKnowledge13$Outbound;
-}
-
 export function searchKnowledge13ToJSON(
   searchKnowledge13: SearchKnowledge13,
 ): string {
@@ -2635,7 +2039,6 @@ export function searchKnowledge13ToJSON(
     SearchKnowledge13$outboundSchema.parse(searchKnowledge13),
   );
 }
-
 export function searchKnowledge13FromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge13, SDKValidationError> {
@@ -2652,7 +2055,6 @@ export const SearchKnowledge1KnowledgeNe$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledge1KnowledgeNe$Outbound = string | number | boolean;
 
@@ -2663,19 +2065,6 @@ export const SearchKnowledge1KnowledgeNe$outboundSchema: z.ZodType<
   SearchKnowledge1KnowledgeNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1KnowledgeNe$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeNe$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1KnowledgeNe$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeNe$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeNe$Outbound;
-}
-
 export function searchKnowledge1KnowledgeNeToJSON(
   searchKnowledge1KnowledgeNe: SearchKnowledge1KnowledgeNe,
 ): string {
@@ -2685,7 +2074,6 @@ export function searchKnowledge1KnowledgeNeToJSON(
     ),
   );
 }
-
 export function searchKnowledge1KnowledgeNeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1KnowledgeNe, SDKValidationError> {
@@ -2704,7 +2092,6 @@ export const SearchKnowledge1Ne$inboundSchema: z.ZodType<
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledge1Ne$Outbound = {
   ne: string | number | boolean;
@@ -2719,19 +2106,6 @@ export const SearchKnowledge1Ne$outboundSchema: z.ZodType<
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Ne$ {
-  /** @deprecated use `SearchKnowledge1Ne$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Ne$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Ne$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Ne$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Ne$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Ne$Outbound;
-}
-
 export function searchKnowledge1NeToJSON(
   searchKnowledge1Ne: SearchKnowledge1Ne,
 ): string {
@@ -2739,7 +2113,6 @@ export function searchKnowledge1NeToJSON(
     SearchKnowledge1Ne$outboundSchema.parse(searchKnowledge1Ne),
   );
 }
-
 export function searchKnowledge1NeFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Ne, SDKValidationError> {
@@ -2756,7 +2129,6 @@ export const SearchKnowledge1KnowledgeEq$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type SearchKnowledge1KnowledgeEq$Outbound = string | number | boolean;
 
@@ -2767,19 +2139,6 @@ export const SearchKnowledge1KnowledgeEq$outboundSchema: z.ZodType<
   SearchKnowledge1KnowledgeEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1KnowledgeEq$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeEq$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1KnowledgeEq$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeEq$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeEq$Outbound;
-}
-
 export function searchKnowledge1KnowledgeEqToJSON(
   searchKnowledge1KnowledgeEq: SearchKnowledge1KnowledgeEq,
 ): string {
@@ -2789,7 +2148,6 @@ export function searchKnowledge1KnowledgeEqToJSON(
     ),
   );
 }
-
 export function searchKnowledge1KnowledgeEqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1KnowledgeEq, SDKValidationError> {
@@ -2808,7 +2166,6 @@ export const SearchKnowledge1Eq$inboundSchema: z.ZodType<
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
-
 /** @internal */
 export type SearchKnowledge1Eq$Outbound = {
   eq: string | number | boolean;
@@ -2823,19 +2180,6 @@ export const SearchKnowledge1Eq$outboundSchema: z.ZodType<
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1Eq$ {
-  /** @deprecated use `SearchKnowledge1Eq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1Eq$inboundSchema;
-  /** @deprecated use `SearchKnowledge1Eq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1Eq$outboundSchema;
-  /** @deprecated use `SearchKnowledge1Eq$Outbound` instead. */
-  export type Outbound = SearchKnowledge1Eq$Outbound;
-}
-
 export function searchKnowledge1EqToJSON(
   searchKnowledge1Eq: SearchKnowledge1Eq,
 ): string {
@@ -2843,7 +2187,6 @@ export function searchKnowledge1EqToJSON(
     SearchKnowledge1Eq$outboundSchema.parse(searchKnowledge1Eq),
   );
 }
-
 export function searchKnowledge1EqFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledge1Eq, SDKValidationError> {
@@ -2870,7 +2213,6 @@ export const FilterBy1$inboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledge1Nin$inboundSchema),
   z.lazy(() => SearchKnowledge1Exists$inboundSchema),
 ]);
-
 /** @internal */
 export type FilterBy1$Outbound =
   | SearchKnowledge1Eq$Outbound
@@ -2900,23 +2242,9 @@ export const FilterBy1$outboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledge1Exists$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilterBy1$ {
-  /** @deprecated use `FilterBy1$inboundSchema` instead. */
-  export const inboundSchema = FilterBy1$inboundSchema;
-  /** @deprecated use `FilterBy1$outboundSchema` instead. */
-  export const outboundSchema = FilterBy1$outboundSchema;
-  /** @deprecated use `FilterBy1$Outbound` instead. */
-  export type Outbound = FilterBy1$Outbound;
-}
-
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
   return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
 }
-
 export function filterBy1FromJSON(
   jsonString: string,
 ): SafeParseResult<FilterBy1, SDKValidationError> {
@@ -2947,7 +2275,6 @@ export const FilterBy$inboundSchema: z.ZodType<
     z.lazy(() => SearchKnowledge1Exists$inboundSchema),
   ])),
 ]);
-
 /** @internal */
 export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
   [k: string]:
@@ -2983,23 +2310,9 @@ export const FilterBy$outboundSchema: z.ZodType<
   ])),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilterBy$ {
-  /** @deprecated use `FilterBy$inboundSchema` instead. */
-  export const inboundSchema = FilterBy$inboundSchema;
-  /** @deprecated use `FilterBy$outboundSchema` instead. */
-  export const outboundSchema = FilterBy$outboundSchema;
-  /** @deprecated use `FilterBy$Outbound` instead. */
-  export type Outbound = FilterBy$Outbound;
-}
-
 export function filterByToJSON(filterBy: FilterBy): string {
   return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
 }
-
 export function filterByFromJSON(
   jsonString: string,
 ): SafeParseResult<FilterBy, SDKValidationError> {
@@ -3026,7 +2339,6 @@ export const SearchOptions$inboundSchema: z.ZodType<
     "include_scores": "includeScores",
   });
 });
-
 /** @internal */
 export type SearchOptions$Outbound = {
   include_vectors?: boolean | undefined;
@@ -3051,23 +2363,9 @@ export const SearchOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchOptions$ {
-  /** @deprecated use `SearchOptions$inboundSchema` instead. */
-  export const inboundSchema = SearchOptions$inboundSchema;
-  /** @deprecated use `SearchOptions$outboundSchema` instead. */
-  export const outboundSchema = SearchOptions$outboundSchema;
-  /** @deprecated use `SearchOptions$Outbound` instead. */
-  export type Outbound = SearchOptions$Outbound;
-}
-
 export function searchOptionsToJSON(searchOptions: SearchOptions): string {
   return JSON.stringify(SearchOptions$outboundSchema.parse(searchOptions));
 }
-
 export function searchOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchOptions, SDKValidationError> {
@@ -3092,7 +2390,6 @@ export const RerankConfig$inboundSchema: z.ZodType<
     "top_k": "topK",
   });
 });
-
 /** @internal */
 export type RerankConfig$Outbound = {
   model: string;
@@ -3115,23 +2412,9 @@ export const RerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RerankConfig$ {
-  /** @deprecated use `RerankConfig$inboundSchema` instead. */
-  export const inboundSchema = RerankConfig$inboundSchema;
-  /** @deprecated use `RerankConfig$outboundSchema` instead. */
-  export const outboundSchema = RerankConfig$outboundSchema;
-  /** @deprecated use `RerankConfig$Outbound` instead. */
-  export type Outbound = RerankConfig$Outbound;
-}
-
 export function rerankConfigToJSON(rerankConfig: RerankConfig): string {
   return JSON.stringify(RerankConfig$outboundSchema.parse(rerankConfig));
 }
-
 export function rerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RerankConfig, SDKValidationError> {
@@ -3150,7 +2433,6 @@ export const AgenticRagConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-
 /** @internal */
 export type AgenticRagConfig$Outbound = {
   model: string;
@@ -3165,19 +2447,6 @@ export const AgenticRagConfig$outboundSchema: z.ZodType<
   model: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgenticRagConfig$ {
-  /** @deprecated use `AgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = AgenticRagConfig$inboundSchema;
-  /** @deprecated use `AgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = AgenticRagConfig$outboundSchema;
-  /** @deprecated use `AgenticRagConfig$Outbound` instead. */
-  export type Outbound = AgenticRagConfig$Outbound;
-}
-
 export function agenticRagConfigToJSON(
   agenticRagConfig: AgenticRagConfig,
 ): string {
@@ -3185,7 +2454,6 @@ export function agenticRagConfigToJSON(
     AgenticRagConfig$outboundSchema.parse(agenticRagConfig),
   );
 }
-
 export function agenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<AgenticRagConfig, SDKValidationError> {
@@ -3234,7 +2502,6 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
     "agentic_rag_config": "agenticRagConfig",
   });
 });
-
 /** @internal */
 export type SearchKnowledgeRequestBody$Outbound = {
   query: string;
@@ -3297,19 +2564,6 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeRequestBody$ {
-  /** @deprecated use `SearchKnowledgeRequestBody$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeRequestBody$inboundSchema;
-  /** @deprecated use `SearchKnowledgeRequestBody$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeRequestBody$outboundSchema;
-  /** @deprecated use `SearchKnowledgeRequestBody$Outbound` instead. */
-  export type Outbound = SearchKnowledgeRequestBody$Outbound;
-}
-
 export function searchKnowledgeRequestBodyToJSON(
   searchKnowledgeRequestBody: SearchKnowledgeRequestBody,
 ): string {
@@ -3317,7 +2571,6 @@ export function searchKnowledgeRequestBodyToJSON(
     SearchKnowledgeRequestBody$outboundSchema.parse(searchKnowledgeRequestBody),
   );
 }
-
 export function searchKnowledgeRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeRequestBody, SDKValidationError> {
@@ -3343,7 +2596,6 @@ export const SearchKnowledgeRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type SearchKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -3366,19 +2618,6 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeRequest$ {
-  /** @deprecated use `SearchKnowledgeRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeRequest$inboundSchema;
-  /** @deprecated use `SearchKnowledgeRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeRequest$outboundSchema;
-  /** @deprecated use `SearchKnowledgeRequest$Outbound` instead. */
-  export type Outbound = SearchKnowledgeRequest$Outbound;
-}
-
 export function searchKnowledgeRequestToJSON(
   searchKnowledgeRequest: SearchKnowledgeRequest,
 ): string {
@@ -3386,7 +2625,6 @@ export function searchKnowledgeRequestToJSON(
     SearchKnowledgeRequest$outboundSchema.parse(searchKnowledgeRequest),
   );
 }
-
 export function searchKnowledgeRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeRequest, SDKValidationError> {
@@ -3408,7 +2646,6 @@ export const Scores$inboundSchema: z.ZodType<Scores, z.ZodTypeDef, unknown> = z
       "search_score": "searchScore",
     });
   });
-
 /** @internal */
 export type Scores$Outbound = {
   rerank_score?: number | undefined;
@@ -3430,23 +2667,9 @@ export const Scores$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Scores$ {
-  /** @deprecated use `Scores$inboundSchema` instead. */
-  export const inboundSchema = Scores$inboundSchema;
-  /** @deprecated use `Scores$outboundSchema` instead. */
-  export const outboundSchema = Scores$outboundSchema;
-  /** @deprecated use `Scores$Outbound` instead. */
-  export type Outbound = Scores$Outbound;
-}
-
 export function scoresToJSON(scores: Scores): string {
   return JSON.stringify(Scores$outboundSchema.parse(scores));
 }
-
 export function scoresFromJSON(
   jsonString: string,
 ): SafeParseResult<Scores, SDKValidationError> {
@@ -3466,7 +2689,6 @@ export const Matches$inboundSchema: z.ZodType<Matches, z.ZodTypeDef, unknown> =
     metadata: z.record(z.any()).optional(),
     scores: z.lazy(() => Scores$inboundSchema).optional(),
   });
-
 /** @internal */
 export type Matches$Outbound = {
   id: string;
@@ -3489,23 +2711,9 @@ export const Matches$outboundSchema: z.ZodType<
   scores: z.lazy(() => Scores$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Matches$ {
-  /** @deprecated use `Matches$inboundSchema` instead. */
-  export const inboundSchema = Matches$inboundSchema;
-  /** @deprecated use `Matches$outboundSchema` instead. */
-  export const outboundSchema = Matches$outboundSchema;
-  /** @deprecated use `Matches$Outbound` instead. */
-  export type Outbound = Matches$Outbound;
-}
-
 export function matchesToJSON(matches: Matches): string {
   return JSON.stringify(Matches$outboundSchema.parse(matches));
 }
-
 export function matchesFromJSON(
   jsonString: string,
 ): SafeParseResult<Matches, SDKValidationError> {
@@ -3524,7 +2732,6 @@ export const SearchKnowledgeResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   matches: z.array(z.lazy(() => Matches$inboundSchema)),
 });
-
 /** @internal */
 export type SearchKnowledgeResponseBody$Outbound = {
   matches: Array<Matches$Outbound>;
@@ -3539,19 +2746,6 @@ export const SearchKnowledgeResponseBody$outboundSchema: z.ZodType<
   matches: z.array(z.lazy(() => Matches$outboundSchema)),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeResponseBody$ {
-  /** @deprecated use `SearchKnowledgeResponseBody$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeResponseBody$inboundSchema;
-  /** @deprecated use `SearchKnowledgeResponseBody$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeResponseBody$outboundSchema;
-  /** @deprecated use `SearchKnowledgeResponseBody$Outbound` instead. */
-  export type Outbound = SearchKnowledgeResponseBody$Outbound;
-}
-
 export function searchKnowledgeResponseBodyToJSON(
   searchKnowledgeResponseBody: SearchKnowledgeResponseBody,
 ): string {
@@ -3561,7 +2755,6 @@ export function searchKnowledgeResponseBodyToJSON(
     ),
   );
 }
-
 export function searchKnowledgeResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeResponseBody, SDKValidationError> {

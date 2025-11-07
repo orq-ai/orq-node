@@ -74,7 +74,6 @@ export const GetAllMemoriesRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type GetAllMemoriesRequest$Outbound = {
   memory_store_key: string;
@@ -101,19 +100,6 @@ export const GetAllMemoriesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoriesRequest$ {
-  /** @deprecated use `GetAllMemoriesRequest$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoriesRequest$inboundSchema;
-  /** @deprecated use `GetAllMemoriesRequest$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoriesRequest$outboundSchema;
-  /** @deprecated use `GetAllMemoriesRequest$Outbound` instead. */
-  export type Outbound = GetAllMemoriesRequest$Outbound;
-}
-
 export function getAllMemoriesRequestToJSON(
   getAllMemoriesRequest: GetAllMemoriesRequest,
 ): string {
@@ -121,7 +107,6 @@ export function getAllMemoriesRequestToJSON(
     GetAllMemoriesRequest$outboundSchema.parse(getAllMemoriesRequest),
   );
 }
-
 export function getAllMemoriesRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoriesRequest, SDKValidationError> {
@@ -136,22 +121,10 @@ export function getAllMemoriesRequestFromJSON(
 export const GetAllMemoriesObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoriesObject
 > = z.nativeEnum(GetAllMemoriesObject);
-
 /** @internal */
 export const GetAllMemoriesObject$outboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoriesObject
 > = GetAllMemoriesObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoriesObject$ {
-  /** @deprecated use `GetAllMemoriesObject$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoriesObject$inboundSchema;
-  /** @deprecated use `GetAllMemoriesObject$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoriesObject$outboundSchema;
-}
 
 /** @internal */
 export const GetAllMemoriesData$inboundSchema: z.ZodType<
@@ -178,7 +151,6 @@ export const GetAllMemoriesData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type GetAllMemoriesData$Outbound = {
   _id: string;
@@ -218,19 +190,6 @@ export const GetAllMemoriesData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoriesData$ {
-  /** @deprecated use `GetAllMemoriesData$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoriesData$inboundSchema;
-  /** @deprecated use `GetAllMemoriesData$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoriesData$outboundSchema;
-  /** @deprecated use `GetAllMemoriesData$Outbound` instead. */
-  export type Outbound = GetAllMemoriesData$Outbound;
-}
-
 export function getAllMemoriesDataToJSON(
   getAllMemoriesData: GetAllMemoriesData,
 ): string {
@@ -238,7 +197,6 @@ export function getAllMemoriesDataToJSON(
     GetAllMemoriesData$outboundSchema.parse(getAllMemoriesData),
   );
 }
-
 export function getAllMemoriesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoriesData, SDKValidationError> {
@@ -263,7 +221,6 @@ export const GetAllMemoriesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type GetAllMemoriesResponseBody$Outbound = {
   object: string;
@@ -286,19 +243,6 @@ export const GetAllMemoriesResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoriesResponseBody$ {
-  /** @deprecated use `GetAllMemoriesResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoriesResponseBody$inboundSchema;
-  /** @deprecated use `GetAllMemoriesResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoriesResponseBody$outboundSchema;
-  /** @deprecated use `GetAllMemoriesResponseBody$Outbound` instead. */
-  export type Outbound = GetAllMemoriesResponseBody$Outbound;
-}
-
 export function getAllMemoriesResponseBodyToJSON(
   getAllMemoriesResponseBody: GetAllMemoriesResponseBody,
 ): string {
@@ -306,7 +250,6 @@ export function getAllMemoriesResponseBodyToJSON(
     GetAllMemoriesResponseBody$outboundSchema.parse(getAllMemoriesResponseBody),
   );
 }
-
 export function getAllMemoriesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoriesResponseBody, SDKValidationError> {

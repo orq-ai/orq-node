@@ -100,7 +100,6 @@ export const CreateChunkMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type CreateChunkMetadata$Outbound = string | number | boolean;
 
@@ -111,19 +110,6 @@ export const CreateChunkMetadata$outboundSchema: z.ZodType<
   CreateChunkMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateChunkMetadata$ {
-  /** @deprecated use `CreateChunkMetadata$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkMetadata$inboundSchema;
-  /** @deprecated use `CreateChunkMetadata$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkMetadata$outboundSchema;
-  /** @deprecated use `CreateChunkMetadata$Outbound` instead. */
-  export type Outbound = CreateChunkMetadata$Outbound;
-}
-
 export function createChunkMetadataToJSON(
   createChunkMetadata: CreateChunkMetadata,
 ): string {
@@ -131,7 +117,6 @@ export function createChunkMetadataToJSON(
     CreateChunkMetadata$outboundSchema.parse(createChunkMetadata),
   );
 }
-
 export function createChunkMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChunkMetadata, SDKValidationError> {
@@ -152,7 +137,6 @@ export const RequestBody$inboundSchema: z.ZodType<
   embedding: z.array(z.number()).optional(),
   metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
-
 /** @internal */
 export type RequestBody$Outbound = {
   text: string;
@@ -171,23 +155,9 @@ export const RequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBody$ {
-  /** @deprecated use `RequestBody$inboundSchema` instead. */
-  export const inboundSchema = RequestBody$inboundSchema;
-  /** @deprecated use `RequestBody$outboundSchema` instead. */
-  export const outboundSchema = RequestBody$outboundSchema;
-  /** @deprecated use `RequestBody$Outbound` instead. */
-  export type Outbound = RequestBody$Outbound;
-}
-
 export function requestBodyToJSON(requestBody: RequestBody): string {
   return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
 }
-
 export function requestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBody, SDKValidationError> {
@@ -214,7 +184,6 @@ export const CreateChunkRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type CreateChunkRequest$Outbound = {
   knowledge_id: string;
@@ -239,19 +208,6 @@ export const CreateChunkRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateChunkRequest$ {
-  /** @deprecated use `CreateChunkRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkRequest$inboundSchema;
-  /** @deprecated use `CreateChunkRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkRequest$outboundSchema;
-  /** @deprecated use `CreateChunkRequest$Outbound` instead. */
-  export type Outbound = CreateChunkRequest$Outbound;
-}
-
 export function createChunkRequestToJSON(
   createChunkRequest: CreateChunkRequest,
 ): string {
@@ -259,7 +215,6 @@ export function createChunkRequestToJSON(
     CreateChunkRequest$outboundSchema.parse(createChunkRequest),
   );
 }
-
 export function createChunkRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChunkRequest, SDKValidationError> {
@@ -276,7 +231,6 @@ export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type CreateChunkKnowledgeMetadata$Outbound = string | number | boolean;
 
@@ -287,19 +241,6 @@ export const CreateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
   CreateChunkKnowledgeMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateChunkKnowledgeMetadata$ {
-  /** @deprecated use `CreateChunkKnowledgeMetadata$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkKnowledgeMetadata$inboundSchema;
-  /** @deprecated use `CreateChunkKnowledgeMetadata$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkKnowledgeMetadata$outboundSchema;
-  /** @deprecated use `CreateChunkKnowledgeMetadata$Outbound` instead. */
-  export type Outbound = CreateChunkKnowledgeMetadata$Outbound;
-}
-
 export function createChunkKnowledgeMetadataToJSON(
   createChunkKnowledgeMetadata: CreateChunkKnowledgeMetadata,
 ): string {
@@ -309,7 +250,6 @@ export function createChunkKnowledgeMetadataToJSON(
     ),
   );
 }
-
 export function createChunkKnowledgeMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChunkKnowledgeMetadata, SDKValidationError> {
@@ -324,22 +264,10 @@ export function createChunkKnowledgeMetadataFromJSON(
 export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateChunkStatus
 > = z.nativeEnum(CreateChunkStatus);
-
 /** @internal */
 export const CreateChunkStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateChunkStatus
 > = CreateChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateChunkStatus$ {
-  /** @deprecated use `CreateChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkStatus$inboundSchema;
-  /** @deprecated use `CreateChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkStatus$outboundSchema;
-}
 
 /** @internal */
 export const ResponseBody$inboundSchema: z.ZodType<
@@ -363,7 +291,6 @@ export const ResponseBody$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-
 /** @internal */
 export type ResponseBody$Outbound = {
   _id: string;
@@ -400,23 +327,9 @@ export const ResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBody$ {
-  /** @deprecated use `ResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody$inboundSchema;
-  /** @deprecated use `ResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody$outboundSchema;
-  /** @deprecated use `ResponseBody$Outbound` instead. */
-  export type Outbound = ResponseBody$Outbound;
-}
-
 export function responseBodyToJSON(responseBody: ResponseBody): string {
   return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
 }
-
 export function responseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBody, SDKValidationError> {

@@ -27,7 +27,6 @@ export const DeleteDatasetRequest$inboundSchema: z.ZodType<
     "dataset_id": "datasetId",
   });
 });
-
 /** @internal */
 export type DeleteDatasetRequest$Outbound = {
   dataset_id: string;
@@ -46,19 +45,6 @@ export const DeleteDatasetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteDatasetRequest$ {
-  /** @deprecated use `DeleteDatasetRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteDatasetRequest$inboundSchema;
-  /** @deprecated use `DeleteDatasetRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteDatasetRequest$outboundSchema;
-  /** @deprecated use `DeleteDatasetRequest$Outbound` instead. */
-  export type Outbound = DeleteDatasetRequest$Outbound;
-}
-
 export function deleteDatasetRequestToJSON(
   deleteDatasetRequest: DeleteDatasetRequest,
 ): string {
@@ -66,7 +52,6 @@ export function deleteDatasetRequestToJSON(
     DeleteDatasetRequest$outboundSchema.parse(deleteDatasetRequest),
   );
 }
-
 export function deleteDatasetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteDatasetRequest, SDKValidationError> {

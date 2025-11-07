@@ -51,7 +51,6 @@ export const RetrieveMemoryRequest$inboundSchema: z.ZodType<
     "memory_id": "memoryId",
   });
 });
-
 /** @internal */
 export type RetrieveMemoryRequest$Outbound = {
   memory_store_key: string;
@@ -73,19 +72,6 @@ export const RetrieveMemoryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveMemoryRequest$ {
-  /** @deprecated use `RetrieveMemoryRequest$inboundSchema` instead. */
-  export const inboundSchema = RetrieveMemoryRequest$inboundSchema;
-  /** @deprecated use `RetrieveMemoryRequest$outboundSchema` instead. */
-  export const outboundSchema = RetrieveMemoryRequest$outboundSchema;
-  /** @deprecated use `RetrieveMemoryRequest$Outbound` instead. */
-  export type Outbound = RetrieveMemoryRequest$Outbound;
-}
-
 export function retrieveMemoryRequestToJSON(
   retrieveMemoryRequest: RetrieveMemoryRequest,
 ): string {
@@ -93,7 +79,6 @@ export function retrieveMemoryRequestToJSON(
     RetrieveMemoryRequest$outboundSchema.parse(retrieveMemoryRequest),
   );
 }
-
 export function retrieveMemoryRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryRequest, SDKValidationError> {
@@ -129,7 +114,6 @@ export const RetrieveMemoryResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type RetrieveMemoryResponseBody$Outbound = {
   _id: string;
@@ -169,19 +153,6 @@ export const RetrieveMemoryResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveMemoryResponseBody$ {
-  /** @deprecated use `RetrieveMemoryResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RetrieveMemoryResponseBody$inboundSchema;
-  /** @deprecated use `RetrieveMemoryResponseBody$outboundSchema` instead. */
-  export const outboundSchema = RetrieveMemoryResponseBody$outboundSchema;
-  /** @deprecated use `RetrieveMemoryResponseBody$Outbound` instead. */
-  export type Outbound = RetrieveMemoryResponseBody$Outbound;
-}
-
 export function retrieveMemoryResponseBodyToJSON(
   retrieveMemoryResponseBody: RetrieveMemoryResponseBody,
 ): string {
@@ -189,7 +160,6 @@ export function retrieveMemoryResponseBodyToJSON(
     RetrieveMemoryResponseBody$outboundSchema.parse(retrieveMemoryResponseBody),
   );
 }
-
 export function retrieveMemoryResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryResponseBody, SDKValidationError> {

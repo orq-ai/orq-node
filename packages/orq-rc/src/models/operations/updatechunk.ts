@@ -107,7 +107,6 @@ export const UpdateChunkMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type UpdateChunkMetadata$Outbound = string | number | boolean;
 
@@ -118,19 +117,6 @@ export const UpdateChunkMetadata$outboundSchema: z.ZodType<
   UpdateChunkMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkMetadata$ {
-  /** @deprecated use `UpdateChunkMetadata$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkMetadata$inboundSchema;
-  /** @deprecated use `UpdateChunkMetadata$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkMetadata$outboundSchema;
-  /** @deprecated use `UpdateChunkMetadata$Outbound` instead. */
-  export type Outbound = UpdateChunkMetadata$Outbound;
-}
-
 export function updateChunkMetadataToJSON(
   updateChunkMetadata: UpdateChunkMetadata,
 ): string {
@@ -138,7 +124,6 @@ export function updateChunkMetadataToJSON(
     UpdateChunkMetadata$outboundSchema.parse(updateChunkMetadata),
   );
 }
-
 export function updateChunkMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateChunkMetadata, SDKValidationError> {
@@ -159,7 +144,6 @@ export const UpdateChunkRequestBody$inboundSchema: z.ZodType<
   embedding: z.array(z.number()).optional(),
   metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
-
 /** @internal */
 export type UpdateChunkRequestBody$Outbound = {
   text?: string | undefined;
@@ -178,19 +162,6 @@ export const UpdateChunkRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkRequestBody$ {
-  /** @deprecated use `UpdateChunkRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkRequestBody$inboundSchema;
-  /** @deprecated use `UpdateChunkRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkRequestBody$outboundSchema;
-  /** @deprecated use `UpdateChunkRequestBody$Outbound` instead. */
-  export type Outbound = UpdateChunkRequestBody$Outbound;
-}
-
 export function updateChunkRequestBodyToJSON(
   updateChunkRequestBody: UpdateChunkRequestBody,
 ): string {
@@ -198,7 +169,6 @@ export function updateChunkRequestBodyToJSON(
     UpdateChunkRequestBody$outboundSchema.parse(updateChunkRequestBody),
   );
 }
-
 export function updateChunkRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateChunkRequestBody, SDKValidationError> {
@@ -227,7 +197,6 @@ export const UpdateChunkRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateChunkRequest$Outbound = {
   chunk_id: string;
@@ -255,19 +224,6 @@ export const UpdateChunkRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkRequest$ {
-  /** @deprecated use `UpdateChunkRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkRequest$inboundSchema;
-  /** @deprecated use `UpdateChunkRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkRequest$outboundSchema;
-  /** @deprecated use `UpdateChunkRequest$Outbound` instead. */
-  export type Outbound = UpdateChunkRequest$Outbound;
-}
-
 export function updateChunkRequestToJSON(
   updateChunkRequest: UpdateChunkRequest,
 ): string {
@@ -275,7 +231,6 @@ export function updateChunkRequestToJSON(
     UpdateChunkRequest$outboundSchema.parse(updateChunkRequest),
   );
 }
-
 export function updateChunkRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateChunkRequest, SDKValidationError> {
@@ -292,7 +247,6 @@ export const UpdateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-
 /** @internal */
 export type UpdateChunkKnowledgeMetadata$Outbound = string | number | boolean;
 
@@ -303,19 +257,6 @@ export const UpdateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
   UpdateChunkKnowledgeMetadata
 > = z.union([z.string(), z.number(), z.boolean()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkKnowledgeMetadata$ {
-  /** @deprecated use `UpdateChunkKnowledgeMetadata$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkKnowledgeMetadata$inboundSchema;
-  /** @deprecated use `UpdateChunkKnowledgeMetadata$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkKnowledgeMetadata$outboundSchema;
-  /** @deprecated use `UpdateChunkKnowledgeMetadata$Outbound` instead. */
-  export type Outbound = UpdateChunkKnowledgeMetadata$Outbound;
-}
-
 export function updateChunkKnowledgeMetadataToJSON(
   updateChunkKnowledgeMetadata: UpdateChunkKnowledgeMetadata,
 ): string {
@@ -325,7 +266,6 @@ export function updateChunkKnowledgeMetadataToJSON(
     ),
   );
 }
-
 export function updateChunkKnowledgeMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateChunkKnowledgeMetadata, SDKValidationError> {
@@ -340,22 +280,10 @@ export function updateChunkKnowledgeMetadataFromJSON(
 export const UpdateChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateChunkStatus
 > = z.nativeEnum(UpdateChunkStatus);
-
 /** @internal */
 export const UpdateChunkStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateChunkStatus
 > = UpdateChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkStatus$ {
-  /** @deprecated use `UpdateChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkStatus$inboundSchema;
-  /** @deprecated use `UpdateChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkStatus$outboundSchema;
-}
 
 /** @internal */
 export const UpdateChunkResponseBody$inboundSchema: z.ZodType<
@@ -379,7 +307,6 @@ export const UpdateChunkResponseBody$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-
 /** @internal */
 export type UpdateChunkResponseBody$Outbound = {
   _id: string;
@@ -416,19 +343,6 @@ export const UpdateChunkResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkResponseBody$ {
-  /** @deprecated use `UpdateChunkResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkResponseBody$inboundSchema;
-  /** @deprecated use `UpdateChunkResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkResponseBody$outboundSchema;
-  /** @deprecated use `UpdateChunkResponseBody$Outbound` instead. */
-  export type Outbound = UpdateChunkResponseBody$Outbound;
-}
-
 export function updateChunkResponseBodyToJSON(
   updateChunkResponseBody: UpdateChunkResponseBody,
 ): string {
@@ -436,7 +350,6 @@ export function updateChunkResponseBodyToJSON(
     UpdateChunkResponseBody$outboundSchema.parse(updateChunkResponseBody),
   );
 }
-
 export function updateChunkResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateChunkResponseBody, SDKValidationError> {

@@ -83,7 +83,6 @@ export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type GetAllMemoryDocumentsRequest$Outbound = {
   memory_store_key: string;
@@ -113,19 +112,6 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoryDocumentsRequest$ {
-  /** @deprecated use `GetAllMemoryDocumentsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoryDocumentsRequest$inboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoryDocumentsRequest$outboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsRequest$Outbound` instead. */
-  export type Outbound = GetAllMemoryDocumentsRequest$Outbound;
-}
-
 export function getAllMemoryDocumentsRequestToJSON(
   getAllMemoryDocumentsRequest: GetAllMemoryDocumentsRequest,
 ): string {
@@ -135,7 +121,6 @@ export function getAllMemoryDocumentsRequestToJSON(
     ),
   );
 }
-
 export function getAllMemoryDocumentsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryDocumentsRequest, SDKValidationError> {
@@ -150,22 +135,10 @@ export function getAllMemoryDocumentsRequestFromJSON(
 export const GetAllMemoryDocumentsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoryDocumentsObject
 > = z.nativeEnum(GetAllMemoryDocumentsObject);
-
 /** @internal */
 export const GetAllMemoryDocumentsObject$outboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoryDocumentsObject
 > = GetAllMemoryDocumentsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoryDocumentsObject$ {
-  /** @deprecated use `GetAllMemoryDocumentsObject$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoryDocumentsObject$inboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsObject$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoryDocumentsObject$outboundSchema;
-}
 
 /** @internal */
 export const GetAllMemoryDocumentsData$inboundSchema: z.ZodType<
@@ -193,7 +166,6 @@ export const GetAllMemoryDocumentsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type GetAllMemoryDocumentsData$Outbound = {
   _id: string;
@@ -235,19 +207,6 @@ export const GetAllMemoryDocumentsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoryDocumentsData$ {
-  /** @deprecated use `GetAllMemoryDocumentsData$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoryDocumentsData$inboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsData$outboundSchema` instead. */
-  export const outboundSchema = GetAllMemoryDocumentsData$outboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsData$Outbound` instead. */
-  export type Outbound = GetAllMemoryDocumentsData$Outbound;
-}
-
 export function getAllMemoryDocumentsDataToJSON(
   getAllMemoryDocumentsData: GetAllMemoryDocumentsData,
 ): string {
@@ -255,7 +214,6 @@ export function getAllMemoryDocumentsDataToJSON(
     GetAllMemoryDocumentsData$outboundSchema.parse(getAllMemoryDocumentsData),
   );
 }
-
 export function getAllMemoryDocumentsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryDocumentsData, SDKValidationError> {
@@ -280,7 +238,6 @@ export const GetAllMemoryDocumentsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type GetAllMemoryDocumentsResponseBody$Outbound = {
   object: string;
@@ -303,20 +260,6 @@ export const GetAllMemoryDocumentsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllMemoryDocumentsResponseBody$ {
-  /** @deprecated use `GetAllMemoryDocumentsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetAllMemoryDocumentsResponseBody$inboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllMemoryDocumentsResponseBody$outboundSchema;
-  /** @deprecated use `GetAllMemoryDocumentsResponseBody$Outbound` instead. */
-  export type Outbound = GetAllMemoryDocumentsResponseBody$Outbound;
-}
-
 export function getAllMemoryDocumentsResponseBodyToJSON(
   getAllMemoryDocumentsResponseBody: GetAllMemoryDocumentsResponseBody,
 ): string {
@@ -326,7 +269,6 @@ export function getAllMemoryDocumentsResponseBodyToJSON(
     ),
   );
 }
-
 export function getAllMemoryDocumentsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryDocumentsResponseBody, SDKValidationError> {

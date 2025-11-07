@@ -58,7 +58,6 @@ export const RetrieveMemoryDocumentRequest$inboundSchema: z.ZodType<
     "document_id": "documentId",
   });
 });
-
 /** @internal */
 export type RetrieveMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
@@ -83,19 +82,6 @@ export const RetrieveMemoryDocumentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveMemoryDocumentRequest$ {
-  /** @deprecated use `RetrieveMemoryDocumentRequest$inboundSchema` instead. */
-  export const inboundSchema = RetrieveMemoryDocumentRequest$inboundSchema;
-  /** @deprecated use `RetrieveMemoryDocumentRequest$outboundSchema` instead. */
-  export const outboundSchema = RetrieveMemoryDocumentRequest$outboundSchema;
-  /** @deprecated use `RetrieveMemoryDocumentRequest$Outbound` instead. */
-  export type Outbound = RetrieveMemoryDocumentRequest$Outbound;
-}
-
 export function retrieveMemoryDocumentRequestToJSON(
   retrieveMemoryDocumentRequest: RetrieveMemoryDocumentRequest,
 ): string {
@@ -105,7 +91,6 @@ export function retrieveMemoryDocumentRequestToJSON(
     ),
   );
 }
-
 export function retrieveMemoryDocumentRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryDocumentRequest, SDKValidationError> {
@@ -142,7 +127,6 @@ export const RetrieveMemoryDocumentResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type RetrieveMemoryDocumentResponseBody$Outbound = {
   _id: string;
@@ -184,20 +168,6 @@ export const RetrieveMemoryDocumentResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveMemoryDocumentResponseBody$ {
-  /** @deprecated use `RetrieveMemoryDocumentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RetrieveMemoryDocumentResponseBody$inboundSchema;
-  /** @deprecated use `RetrieveMemoryDocumentResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveMemoryDocumentResponseBody$outboundSchema;
-  /** @deprecated use `RetrieveMemoryDocumentResponseBody$Outbound` instead. */
-  export type Outbound = RetrieveMemoryDocumentResponseBody$Outbound;
-}
-
 export function retrieveMemoryDocumentResponseBodyToJSON(
   retrieveMemoryDocumentResponseBody: RetrieveMemoryDocumentResponseBody,
 ): string {
@@ -207,7 +177,6 @@ export function retrieveMemoryDocumentResponseBodyToJSON(
     ),
   );
 }
-
 export function retrieveMemoryDocumentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryDocumentResponseBody, SDKValidationError> {

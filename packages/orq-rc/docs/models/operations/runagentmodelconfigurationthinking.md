@@ -1,0 +1,19 @@
+# RunAgentModelConfigurationThinking
+
+## Example Usage
+
+```typescript
+import { RunAgentModelConfigurationThinking } from "@orq-ai/node/models/operations";
+
+let value: RunAgentModelConfigurationThinking = {
+  type: "disabled",
+  budgetTokens: 9224.85,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                        | [operations.RunAgentModelConfigurationType](../../models/operations/runagentmodelconfigurationtype.md)                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                            | Enables or disables the thinking mode capability                                                                                                                                                                              |
+| `budgetTokens`                                                                                                                                                                                                                | *number*                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`. |

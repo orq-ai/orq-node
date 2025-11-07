@@ -52,7 +52,6 @@ export const GetAgentTaskRequest$inboundSchema: z.ZodType<
     "task_id": "taskId",
   });
 });
-
 /** @internal */
 export type GetAgentTaskRequest$Outbound = {
   agent_key: string;
@@ -74,19 +73,6 @@ export const GetAgentTaskRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentTaskRequest$ {
-  /** @deprecated use `GetAgentTaskRequest$inboundSchema` instead. */
-  export const inboundSchema = GetAgentTaskRequest$inboundSchema;
-  /** @deprecated use `GetAgentTaskRequest$outboundSchema` instead. */
-  export const outboundSchema = GetAgentTaskRequest$outboundSchema;
-  /** @deprecated use `GetAgentTaskRequest$Outbound` instead. */
-  export type Outbound = GetAgentTaskRequest$Outbound;
-}
-
 export function getAgentTaskRequestToJSON(
   getAgentTaskRequest: GetAgentTaskRequest,
 ): string {
@@ -94,7 +80,6 @@ export function getAgentTaskRequestToJSON(
     GetAgentTaskRequest$outboundSchema.parse(getAgentTaskRequest),
   );
 }
-
 export function getAgentTaskRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAgentTaskRequest, SDKValidationError> {
@@ -109,22 +94,10 @@ export function getAgentTaskRequestFromJSON(
 export const GetAgentTaskKind$inboundSchema: z.ZodNativeEnum<
   typeof GetAgentTaskKind
 > = z.nativeEnum(GetAgentTaskKind);
-
 /** @internal */
 export const GetAgentTaskKind$outboundSchema: z.ZodNativeEnum<
   typeof GetAgentTaskKind
 > = GetAgentTaskKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentTaskKind$ {
-  /** @deprecated use `GetAgentTaskKind$inboundSchema` instead. */
-  export const inboundSchema = GetAgentTaskKind$inboundSchema;
-  /** @deprecated use `GetAgentTaskKind$outboundSchema` instead. */
-  export const outboundSchema = GetAgentTaskKind$outboundSchema;
-}
 
 /** @internal */
 export const GetAgentTaskStatus$inboundSchema: z.ZodType<
@@ -136,7 +109,6 @@ export const GetAgentTaskStatus$inboundSchema: z.ZodType<
   timestamp: z.string().optional(),
   message: z.any().optional(),
 });
-
 /** @internal */
 export type GetAgentTaskStatus$Outbound = {
   state: string;
@@ -155,19 +127,6 @@ export const GetAgentTaskStatus$outboundSchema: z.ZodType<
   message: z.any().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentTaskStatus$ {
-  /** @deprecated use `GetAgentTaskStatus$inboundSchema` instead. */
-  export const inboundSchema = GetAgentTaskStatus$inboundSchema;
-  /** @deprecated use `GetAgentTaskStatus$outboundSchema` instead. */
-  export const outboundSchema = GetAgentTaskStatus$outboundSchema;
-  /** @deprecated use `GetAgentTaskStatus$Outbound` instead. */
-  export type Outbound = GetAgentTaskStatus$Outbound;
-}
-
 export function getAgentTaskStatusToJSON(
   getAgentTaskStatus: GetAgentTaskStatus,
 ): string {
@@ -175,7 +134,6 @@ export function getAgentTaskStatusToJSON(
     GetAgentTaskStatus$outboundSchema.parse(getAgentTaskStatus),
   );
 }
-
 export function getAgentTaskStatusFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAgentTaskStatus, SDKValidationError> {
@@ -200,7 +158,6 @@ export const GetAgentTaskResponseBody$inboundSchema: z.ZodType<
   artifacts: z.array(z.any()).optional(),
   metadata: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type GetAgentTaskResponseBody$Outbound = {
   id: string;
@@ -227,19 +184,6 @@ export const GetAgentTaskResponseBody$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentTaskResponseBody$ {
-  /** @deprecated use `GetAgentTaskResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetAgentTaskResponseBody$inboundSchema;
-  /** @deprecated use `GetAgentTaskResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetAgentTaskResponseBody$outboundSchema;
-  /** @deprecated use `GetAgentTaskResponseBody$Outbound` instead. */
-  export type Outbound = GetAgentTaskResponseBody$Outbound;
-}
-
 export function getAgentTaskResponseBodyToJSON(
   getAgentTaskResponseBody: GetAgentTaskResponseBody,
 ): string {
@@ -247,7 +191,6 @@ export function getAgentTaskResponseBodyToJSON(
     GetAgentTaskResponseBody$outboundSchema.parse(getAgentTaskResponseBody),
   );
 }
-
 export function getAgentTaskResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAgentTaskResponseBody, SDKValidationError> {

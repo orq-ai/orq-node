@@ -22,7 +22,6 @@ export const DeleteContactRequest$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeleteContactRequest$Outbound = {
   id: string;
@@ -37,19 +36,6 @@ export const DeleteContactRequest$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteContactRequest$ {
-  /** @deprecated use `DeleteContactRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteContactRequest$inboundSchema;
-  /** @deprecated use `DeleteContactRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteContactRequest$outboundSchema;
-  /** @deprecated use `DeleteContactRequest$Outbound` instead. */
-  export type Outbound = DeleteContactRequest$Outbound;
-}
-
 export function deleteContactRequestToJSON(
   deleteContactRequest: DeleteContactRequest,
 ): string {
@@ -57,7 +43,6 @@ export function deleteContactRequestToJSON(
     DeleteContactRequest$outboundSchema.parse(deleteContactRequest),
   );
 }
-
 export function deleteContactRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteContactRequest, SDKValidationError> {

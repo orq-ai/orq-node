@@ -486,22 +486,10 @@ export type UpdateKnowledgeResponseBody =
 export const RequestBodyRetrievalType$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyRetrievalType
 > = z.nativeEnum(RequestBodyRetrievalType);
-
 /** @internal */
 export const RequestBodyRetrievalType$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyRetrievalType
 > = RequestBodyRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyRetrievalType$ {
-  /** @deprecated use `RequestBodyRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyRetrievalType$inboundSchema;
-  /** @deprecated use `RequestBodyRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyRetrievalType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateKnowledgeRequestBodyRerankConfig$inboundSchema: z.ZodType<
@@ -519,7 +507,6 @@ export const UpdateKnowledgeRequestBodyRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeRequestBodyRerankConfig$Outbound = {
   top_k: number;
@@ -544,21 +531,6 @@ export const UpdateKnowledgeRequestBodyRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBodyRerankConfig$ {
-  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeRequestBodyRerankConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeRequestBodyRerankConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBodyRerankConfig$Outbound;
-}
-
 export function updateKnowledgeRequestBodyRerankConfigToJSON(
   updateKnowledgeRequestBodyRerankConfig:
     UpdateKnowledgeRequestBodyRerankConfig,
@@ -569,7 +541,6 @@ export function updateKnowledgeRequestBodyRerankConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeRequestBodyRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeRequestBodyRerankConfig, SDKValidationError> {
@@ -587,7 +558,6 @@ export const UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema:
     z.object({
       model: z.string(),
     });
-
 /** @internal */
 export type UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound = {
   model: string;
@@ -603,21 +573,6 @@ export const UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema:
     model: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBodyAgenticRagConfig$ {
-  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound;
-}
-
 export function updateKnowledgeRequestBodyAgenticRagConfigToJSON(
   updateKnowledgeRequestBodyAgenticRagConfig:
     UpdateKnowledgeRequestBodyAgenticRagConfig,
@@ -628,7 +583,6 @@ export function updateKnowledgeRequestBodyAgenticRagConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeRequestBodyAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -671,7 +625,6 @@ export const UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema:
       "agentic_rag_config": "agenticRagConfig",
     });
   });
-
 /** @internal */
 export type UpdateKnowledgeRequestBodyRetrievalSettings$Outbound = {
   retrieval_type: string;
@@ -714,21 +667,6 @@ export const UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBodyRetrievalSettings$ {
-  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBodyRetrievalSettings$Outbound;
-}
-
 export function updateKnowledgeRequestBodyRetrievalSettingsToJSON(
   updateKnowledgeRequestBodyRetrievalSettings:
     UpdateKnowledgeRequestBodyRetrievalSettings,
@@ -739,7 +677,6 @@ export function updateKnowledgeRequestBodyRetrievalSettingsToJSON(
     ),
   );
 }
-
 export function updateKnowledgeRequestBodyRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -760,24 +697,10 @@ export function updateKnowledgeRequestBodyRetrievalSettingsFromJSON(
 export const UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> = z
     .nativeEnum(UpdateKnowledgeRequestBodyKnowledgeType);
-
 /** @internal */
 export const UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> =
     UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBodyKnowledgeType$ {
-  /** @deprecated use `UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateKnowledgeRequestBody2$inboundSchema: z.ZodType<
@@ -800,7 +723,6 @@ export const UpdateKnowledgeRequestBody2$inboundSchema: z.ZodType<
     "retrieval_settings": "retrievalSettings",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeRequestBody2$Outbound = {
   description?: string | null | undefined;
@@ -834,19 +756,6 @@ export const UpdateKnowledgeRequestBody2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBody2$ {
-  /** @deprecated use `UpdateKnowledgeRequestBody2$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRequestBody2$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody2$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRequestBody2$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody2$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBody2$Outbound;
-}
-
 export function updateKnowledgeRequestBody2ToJSON(
   updateKnowledgeRequestBody2: UpdateKnowledgeRequestBody2,
 ): string {
@@ -856,7 +765,6 @@ export function updateKnowledgeRequestBody2ToJSON(
     ),
   );
 }
-
 export function updateKnowledgeRequestBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeRequestBody2, SDKValidationError> {
@@ -883,7 +791,6 @@ export const RequestBodyRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-
 /** @internal */
 export type RequestBodyRerankConfig$Outbound = {
   top_k: number;
@@ -908,19 +815,6 @@ export const RequestBodyRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyRerankConfig$ {
-  /** @deprecated use `RequestBodyRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyRerankConfig$inboundSchema;
-  /** @deprecated use `RequestBodyRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyRerankConfig$outboundSchema;
-  /** @deprecated use `RequestBodyRerankConfig$Outbound` instead. */
-  export type Outbound = RequestBodyRerankConfig$Outbound;
-}
-
 export function requestBodyRerankConfigToJSON(
   requestBodyRerankConfig: RequestBodyRerankConfig,
 ): string {
@@ -928,7 +822,6 @@ export function requestBodyRerankConfigToJSON(
     RequestBodyRerankConfig$outboundSchema.parse(requestBodyRerankConfig),
   );
 }
-
 export function requestBodyRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBodyRerankConfig, SDKValidationError> {
@@ -947,7 +840,6 @@ export const RequestBodyAgenticRagConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-
 /** @internal */
 export type RequestBodyAgenticRagConfig$Outbound = {
   model: string;
@@ -962,19 +854,6 @@ export const RequestBodyAgenticRagConfig$outboundSchema: z.ZodType<
   model: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyAgenticRagConfig$ {
-  /** @deprecated use `RequestBodyAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyAgenticRagConfig$inboundSchema;
-  /** @deprecated use `RequestBodyAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyAgenticRagConfig$outboundSchema;
-  /** @deprecated use `RequestBodyAgenticRagConfig$Outbound` instead. */
-  export type Outbound = RequestBodyAgenticRagConfig$Outbound;
-}
-
 export function requestBodyAgenticRagConfigToJSON(
   requestBodyAgenticRagConfig: RequestBodyAgenticRagConfig,
 ): string {
@@ -984,7 +863,6 @@ export function requestBodyAgenticRagConfigToJSON(
     ),
   );
 }
-
 export function requestBodyAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBodyAgenticRagConfig, SDKValidationError> {
@@ -1015,7 +893,6 @@ export const RequestBodyRetrievalSettings$inboundSchema: z.ZodType<
     "agentic_rag_config": "agenticRagConfig",
   });
 });
-
 /** @internal */
 export type RequestBodyRetrievalSettings$Outbound = {
   top_k: number;
@@ -1045,19 +922,6 @@ export const RequestBodyRetrievalSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyRetrievalSettings$ {
-  /** @deprecated use `RequestBodyRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyRetrievalSettings$inboundSchema;
-  /** @deprecated use `RequestBodyRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyRetrievalSettings$outboundSchema;
-  /** @deprecated use `RequestBodyRetrievalSettings$Outbound` instead. */
-  export type Outbound = RequestBodyRetrievalSettings$Outbound;
-}
-
 export function requestBodyRetrievalSettingsToJSON(
   requestBodyRetrievalSettings: RequestBodyRetrievalSettings,
 ): string {
@@ -1067,7 +931,6 @@ export function requestBodyRetrievalSettingsToJSON(
     ),
   );
 }
-
 export function requestBodyRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBodyRetrievalSettings, SDKValidationError> {
@@ -1093,7 +956,6 @@ export const RequestBodyExternalConfig$inboundSchema: z.ZodType<
     "api_key": "apiKey",
   });
 });
-
 /** @internal */
 export type RequestBodyExternalConfig$Outbound = {
   name?: string | undefined;
@@ -1117,19 +979,6 @@ export const RequestBodyExternalConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyExternalConfig$ {
-  /** @deprecated use `RequestBodyExternalConfig$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyExternalConfig$inboundSchema;
-  /** @deprecated use `RequestBodyExternalConfig$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyExternalConfig$outboundSchema;
-  /** @deprecated use `RequestBodyExternalConfig$Outbound` instead. */
-  export type Outbound = RequestBodyExternalConfig$Outbound;
-}
-
 export function requestBodyExternalConfigToJSON(
   requestBodyExternalConfig: RequestBodyExternalConfig,
 ): string {
@@ -1137,7 +986,6 @@ export function requestBodyExternalConfigToJSON(
     RequestBodyExternalConfig$outboundSchema.parse(requestBodyExternalConfig),
   );
 }
-
 export function requestBodyExternalConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestBodyExternalConfig, SDKValidationError> {
@@ -1152,22 +1000,10 @@ export function requestBodyExternalConfigFromJSON(
 export const UpdateKnowledgeRequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateKnowledgeRequestBodyType
 > = z.nativeEnum(UpdateKnowledgeRequestBodyType);
-
 /** @internal */
 export const UpdateKnowledgeRequestBodyType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateKnowledgeRequestBodyType
 > = UpdateKnowledgeRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBodyType$ {
-  /** @deprecated use `UpdateKnowledgeRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRequestBodyType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateKnowledgeRequestBody1$inboundSchema: z.ZodType<
@@ -1188,7 +1024,6 @@ export const UpdateKnowledgeRequestBody1$inboundSchema: z.ZodType<
     "external_config": "externalConfig",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeRequestBody1$Outbound = {
   description?: string | null | undefined;
@@ -1218,19 +1053,6 @@ export const UpdateKnowledgeRequestBody1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBody1$ {
-  /** @deprecated use `UpdateKnowledgeRequestBody1$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRequestBody1$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody1$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRequestBody1$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody1$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBody1$Outbound;
-}
-
 export function updateKnowledgeRequestBody1ToJSON(
   updateKnowledgeRequestBody1: UpdateKnowledgeRequestBody1,
 ): string {
@@ -1240,7 +1062,6 @@ export function updateKnowledgeRequestBody1ToJSON(
     ),
   );
 }
-
 export function updateKnowledgeRequestBody1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeRequestBody1, SDKValidationError> {
@@ -1260,7 +1081,6 @@ export const UpdateKnowledgeRequestBody$inboundSchema: z.ZodType<
   z.lazy(() => UpdateKnowledgeRequestBody1$inboundSchema),
   z.lazy(() => UpdateKnowledgeRequestBody2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdateKnowledgeRequestBody$Outbound =
   | UpdateKnowledgeRequestBody1$Outbound
@@ -1276,19 +1096,6 @@ export const UpdateKnowledgeRequestBody$outboundSchema: z.ZodType<
   z.lazy(() => UpdateKnowledgeRequestBody2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequestBody$ {
-  /** @deprecated use `UpdateKnowledgeRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRequestBody$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRequestBody$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequestBody$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequestBody$Outbound;
-}
-
 export function updateKnowledgeRequestBodyToJSON(
   updateKnowledgeRequestBody: UpdateKnowledgeRequestBody,
 ): string {
@@ -1296,7 +1103,6 @@ export function updateKnowledgeRequestBodyToJSON(
     UpdateKnowledgeRequestBody$outboundSchema.parse(updateKnowledgeRequestBody),
   );
 }
-
 export function updateKnowledgeRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeRequestBody, SDKValidationError> {
@@ -1324,7 +1130,6 @@ export const UpdateKnowledgeRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -1351,19 +1156,6 @@ export const UpdateKnowledgeRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeRequest$ {
-  /** @deprecated use `UpdateKnowledgeRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRequest$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRequest$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRequest$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRequest$Outbound;
-}
-
 export function updateKnowledgeRequestToJSON(
   updateKnowledgeRequest: UpdateKnowledgeRequest,
 ): string {
@@ -1371,7 +1163,6 @@ export function updateKnowledgeRequestToJSON(
     UpdateKnowledgeRequest$outboundSchema.parse(updateKnowledgeRequest),
   );
 }
-
 export function updateKnowledgeRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeRequest, SDKValidationError> {
@@ -1386,24 +1177,10 @@ export function updateKnowledgeRequestFromJSON(
 export const UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyKnowledgeType> = z
     .nativeEnum(UpdateKnowledgeResponseBodyKnowledgeType);
-
 /** @internal */
 export const UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyKnowledgeType> =
     UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyKnowledgeType$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
@@ -1422,7 +1199,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
       "rerank_model": "rerankModel",
     });
   });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound = {
   top_k: number;
@@ -1448,22 +1224,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyKnowledgeRerankConfig$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound =
-    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound;
-}
-
 export function updateKnowledgeResponseBodyKnowledgeRerankConfigToJSON(
   updateKnowledgeResponseBodyKnowledgeRerankConfig:
     UpdateKnowledgeResponseBodyKnowledgeRerankConfig,
@@ -1474,7 +1234,6 @@ export function updateKnowledgeResponseBodyKnowledgeRerankConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyKnowledgeRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1500,7 +1259,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema:
   > = z.object({
     model: z.string(),
   });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound = {
   model: string;
@@ -1516,22 +1274,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema
     model: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound` instead. */
-  export type Outbound =
-    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound;
-}
-
 export function updateKnowledgeResponseBodyKnowledgeAgenticRagConfigToJSON(
   updateKnowledgeResponseBodyKnowledgeAgenticRagConfig:
     UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig,
@@ -1542,7 +1284,6 @@ export function updateKnowledgeResponseBodyKnowledgeAgenticRagConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyKnowledgeAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1585,7 +1326,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema
       "agentic_rag_config": "agenticRagConfig",
     });
   });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound = {
   top_k: number;
@@ -1627,22 +1367,6 @@ export const UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound` instead. */
-  export type Outbound =
-    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound;
-}
-
 export function updateKnowledgeResponseBodyKnowledgeRetrievalSettingsToJSON(
   updateKnowledgeResponseBodyKnowledgeRetrievalSettings:
     UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings,
@@ -1653,7 +1377,6 @@ export function updateKnowledgeResponseBodyKnowledgeRetrievalSettingsToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyKnowledgeRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1683,7 +1406,6 @@ export const UpdateKnowledgeResponseBodyExternalConfig$inboundSchema: z.ZodType<
     "api_url": "apiUrl",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyExternalConfig$Outbound = {
   name: string;
@@ -1705,21 +1427,6 @@ export const UpdateKnowledgeResponseBodyExternalConfig$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyExternalConfig$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyExternalConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyExternalConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBodyExternalConfig$Outbound;
-}
-
 export function updateKnowledgeResponseBodyExternalConfigToJSON(
   updateKnowledgeResponseBodyExternalConfig:
     UpdateKnowledgeResponseBodyExternalConfig,
@@ -1730,7 +1437,6 @@ export function updateKnowledgeResponseBodyExternalConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyExternalConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1781,7 +1487,6 @@ export const UpdateKnowledgeResponseBody2$inboundSchema: z.ZodType<
     "external_config": "externalConfig",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeResponseBody2$Outbound = {
   _id: string;
@@ -1835,19 +1540,6 @@ export const UpdateKnowledgeResponseBody2$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBody2$ {
-  /** @deprecated use `UpdateKnowledgeResponseBody2$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeResponseBody2$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody2$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeResponseBody2$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody2$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBody2$Outbound;
-}
-
 export function updateKnowledgeResponseBody2ToJSON(
   updateKnowledgeResponseBody2: UpdateKnowledgeResponseBody2,
 ): string {
@@ -1857,7 +1549,6 @@ export function updateKnowledgeResponseBody2ToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeResponseBody2, SDKValidationError> {
@@ -1872,45 +1563,19 @@ export function updateKnowledgeResponseBody2FromJSON(
 export const UpdateKnowledgeResponseBodyType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateKnowledgeResponseBodyType
 > = z.nativeEnum(UpdateKnowledgeResponseBodyType);
-
 /** @internal */
 export const UpdateKnowledgeResponseBodyType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateKnowledgeResponseBodyType
 > = UpdateKnowledgeResponseBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyType$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeResponseBodyType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeResponseBodyType$outboundSchema;
-}
-
 /** @internal */
 export const UpdateKnowledgeResponseBodyRetrievalType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyRetrievalType> = z
     .nativeEnum(UpdateKnowledgeResponseBodyRetrievalType);
-
 /** @internal */
 export const UpdateKnowledgeResponseBodyRetrievalType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyRetrievalType> =
     UpdateKnowledgeResponseBodyRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyRetrievalType$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalType$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyRetrievalType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalType$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyRetrievalType$outboundSchema;
-}
 
 /** @internal */
 export const UpdateKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
@@ -1928,7 +1593,6 @@ export const UpdateKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyRerankConfig$Outbound = {
   top_k: number;
@@ -1953,21 +1617,6 @@ export const UpdateKnowledgeResponseBodyRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyRerankConfig$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyRerankConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyRerankConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBodyRerankConfig$Outbound;
-}
-
 export function updateKnowledgeResponseBodyRerankConfigToJSON(
   updateKnowledgeResponseBodyRerankConfig:
     UpdateKnowledgeResponseBodyRerankConfig,
@@ -1978,7 +1627,6 @@ export function updateKnowledgeResponseBodyRerankConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2004,7 +1652,6 @@ export const UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema:
   > = z.object({
     model: z.string(),
   });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound = {
   model: string;
@@ -2020,21 +1667,6 @@ export const UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema:
     model: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyAgenticRagConfig$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound;
-}
-
 export function updateKnowledgeResponseBodyAgenticRagConfigToJSON(
   updateKnowledgeResponseBodyAgenticRagConfig:
     UpdateKnowledgeResponseBodyAgenticRagConfig,
@@ -2045,7 +1677,6 @@ export function updateKnowledgeResponseBodyAgenticRagConfigToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2087,7 +1718,6 @@ export const UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema:
       "agentic_rag_config": "agenticRagConfig",
     });
   });
-
 /** @internal */
 export type UpdateKnowledgeResponseBodyRetrievalSettings$Outbound = {
   retrieval_type: string;
@@ -2129,21 +1759,6 @@ export const UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBodyRetrievalSettings$ {
-  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBodyRetrievalSettings$Outbound;
-}
-
 export function updateKnowledgeResponseBodyRetrievalSettingsToJSON(
   updateKnowledgeResponseBodyRetrievalSettings:
     UpdateKnowledgeResponseBodyRetrievalSettings,
@@ -2154,7 +1769,6 @@ export function updateKnowledgeResponseBodyRetrievalSettingsToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2200,7 +1814,6 @@ export const UpdateKnowledgeResponseBody1$inboundSchema: z.ZodType<
     "retrieval_settings": "retrievalSettings",
   });
 });
-
 /** @internal */
 export type UpdateKnowledgeResponseBody1$Outbound = {
   _id: string;
@@ -2249,19 +1862,6 @@ export const UpdateKnowledgeResponseBody1$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBody1$ {
-  /** @deprecated use `UpdateKnowledgeResponseBody1$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeResponseBody1$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody1$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeResponseBody1$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody1$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBody1$Outbound;
-}
-
 export function updateKnowledgeResponseBody1ToJSON(
   updateKnowledgeResponseBody1: UpdateKnowledgeResponseBody1,
 ): string {
@@ -2271,7 +1871,6 @@ export function updateKnowledgeResponseBody1ToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBody1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeResponseBody1, SDKValidationError> {
@@ -2291,7 +1890,6 @@ export const UpdateKnowledgeResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => UpdateKnowledgeResponseBody1$inboundSchema),
   z.lazy(() => UpdateKnowledgeResponseBody2$inboundSchema),
 ]);
-
 /** @internal */
 export type UpdateKnowledgeResponseBody$Outbound =
   | UpdateKnowledgeResponseBody1$Outbound
@@ -2307,19 +1905,6 @@ export const UpdateKnowledgeResponseBody$outboundSchema: z.ZodType<
   z.lazy(() => UpdateKnowledgeResponseBody2$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeResponseBody$ {
-  /** @deprecated use `UpdateKnowledgeResponseBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeResponseBody$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeResponseBody$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeResponseBody$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeResponseBody$Outbound;
-}
-
 export function updateKnowledgeResponseBodyToJSON(
   updateKnowledgeResponseBody: UpdateKnowledgeResponseBody,
 ): string {
@@ -2329,7 +1914,6 @@ export function updateKnowledgeResponseBodyToJSON(
     ),
   );
 }
-
 export function updateKnowledgeResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateKnowledgeResponseBody, SDKValidationError> {

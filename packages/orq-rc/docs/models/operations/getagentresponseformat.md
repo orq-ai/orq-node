@@ -5,26 +5,26 @@ An object specifying the format that the model must output
 
 ## Supported Types
 
-### `operations.GetAgentResponseFormat1`
+### `operations.GetAgentResponseFormatText`
 
 ```typescript
-const value: operations.GetAgentResponseFormat1 = {
+const value: operations.GetAgentResponseFormatText = {
   type: "text",
 };
 ```
 
-### `operations.GetAgentResponseFormat2`
+### `operations.GetAgentResponseFormatJSONObject`
 
 ```typescript
-const value: operations.GetAgentResponseFormat2 = {
+const value: operations.GetAgentResponseFormatJSONObject = {
   type: "json_object",
 };
 ```
 
-### `operations.GetAgentResponseFormat3`
+### `operations.GetAgentResponseFormatAgentsJSONSchema`
 
 ```typescript
-const value: operations.GetAgentResponseFormat3 = {
+const value: operations.GetAgentResponseFormatAgentsJSONSchema = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",

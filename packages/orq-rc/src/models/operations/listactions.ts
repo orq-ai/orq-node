@@ -109,7 +109,6 @@ export const ListActionsRequest$inboundSchema: z.ZodType<
     "task_id": "taskId",
   });
 });
-
 /** @internal */
 export type ListActionsRequest$Outbound = {
   agent_key: string;
@@ -131,19 +130,6 @@ export const ListActionsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsRequest$ {
-  /** @deprecated use `ListActionsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListActionsRequest$inboundSchema;
-  /** @deprecated use `ListActionsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListActionsRequest$outboundSchema;
-  /** @deprecated use `ListActionsRequest$Outbound` instead. */
-  export type Outbound = ListActionsRequest$Outbound;
-}
-
 export function listActionsRequestToJSON(
   listActionsRequest: ListActionsRequest,
 ): string {
@@ -151,7 +137,6 @@ export function listActionsRequestToJSON(
     ListActionsRequest$outboundSchema.parse(listActionsRequest),
   );
 }
-
 export function listActionsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListActionsRequest, SDKValidationError> {
@@ -166,22 +151,10 @@ export function listActionsRequestFromJSON(
 export const ListActionsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListActionsObject
 > = z.nativeEnum(ListActionsObject);
-
 /** @internal */
 export const ListActionsObject$outboundSchema: z.ZodNativeEnum<
   typeof ListActionsObject
 > = ListActionsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsObject$ {
-  /** @deprecated use `ListActionsObject$inboundSchema` instead. */
-  export const inboundSchema = ListActionsObject$inboundSchema;
-  /** @deprecated use `ListActionsObject$outboundSchema` instead. */
-  export const outboundSchema = ListActionsObject$outboundSchema;
-}
 
 /** @internal */
 export const ListActionsTool$inboundSchema: z.ZodType<
@@ -198,7 +171,6 @@ export const ListActionsTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type ListActionsTool$Outbound = {
   id: string;
@@ -222,25 +194,11 @@ export const ListActionsTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsTool$ {
-  /** @deprecated use `ListActionsTool$inboundSchema` instead. */
-  export const inboundSchema = ListActionsTool$inboundSchema;
-  /** @deprecated use `ListActionsTool$outboundSchema` instead. */
-  export const outboundSchema = ListActionsTool$outboundSchema;
-  /** @deprecated use `ListActionsTool$Outbound` instead. */
-  export type Outbound = ListActionsTool$Outbound;
-}
-
 export function listActionsToolToJSON(
   listActionsTool: ListActionsTool,
 ): string {
   return JSON.stringify(ListActionsTool$outboundSchema.parse(listActionsTool));
 }
-
 export function listActionsToolFromJSON(
   jsonString: string,
 ): SafeParseResult<ListActionsTool, SDKValidationError> {
@@ -255,22 +213,10 @@ export function listActionsToolFromJSON(
 export const ListActionsReview$inboundSchema: z.ZodNativeEnum<
   typeof ListActionsReview
 > = z.nativeEnum(ListActionsReview);
-
 /** @internal */
 export const ListActionsReview$outboundSchema: z.ZodNativeEnum<
   typeof ListActionsReview
 > = ListActionsReview$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsReview$ {
-  /** @deprecated use `ListActionsReview$inboundSchema` instead. */
-  export const inboundSchema = ListActionsReview$inboundSchema;
-  /** @deprecated use `ListActionsReview$outboundSchema` instead. */
-  export const outboundSchema = ListActionsReview$outboundSchema;
-}
 
 /** @internal */
 export const ListActionsState$inboundSchema: z.ZodType<
@@ -291,7 +237,6 @@ export const ListActionsState$inboundSchema: z.ZodType<
     "reviewed_by_id": "reviewedById",
   });
 });
-
 /** @internal */
 export type ListActionsState$Outbound = {
   review: string | null;
@@ -323,19 +268,6 @@ export const ListActionsState$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsState$ {
-  /** @deprecated use `ListActionsState$inboundSchema` instead. */
-  export const inboundSchema = ListActionsState$inboundSchema;
-  /** @deprecated use `ListActionsState$outboundSchema` instead. */
-  export const outboundSchema = ListActionsState$outboundSchema;
-  /** @deprecated use `ListActionsState$Outbound` instead. */
-  export type Outbound = ListActionsState$Outbound;
-}
-
 export function listActionsStateToJSON(
   listActionsState: ListActionsState,
 ): string {
@@ -343,7 +275,6 @@ export function listActionsStateToJSON(
     ListActionsState$outboundSchema.parse(listActionsState),
   );
 }
-
 export function listActionsStateFromJSON(
   jsonString: string,
 ): SafeParseResult<ListActionsState, SDKValidationError> {
@@ -382,7 +313,6 @@ export const ListActionsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type ListActionsData$Outbound = {
   _id: string;
@@ -428,25 +358,11 @@ export const ListActionsData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsData$ {
-  /** @deprecated use `ListActionsData$inboundSchema` instead. */
-  export const inboundSchema = ListActionsData$inboundSchema;
-  /** @deprecated use `ListActionsData$outboundSchema` instead. */
-  export const outboundSchema = ListActionsData$outboundSchema;
-  /** @deprecated use `ListActionsData$Outbound` instead. */
-  export type Outbound = ListActionsData$Outbound;
-}
-
 export function listActionsDataToJSON(
   listActionsData: ListActionsData,
 ): string {
   return JSON.stringify(ListActionsData$outboundSchema.parse(listActionsData));
 }
-
 export function listActionsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListActionsData, SDKValidationError> {
@@ -471,7 +387,6 @@ export const ListActionsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type ListActionsResponseBody$Outbound = {
   object: string;
@@ -494,19 +409,6 @@ export const ListActionsResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListActionsResponseBody$ {
-  /** @deprecated use `ListActionsResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListActionsResponseBody$inboundSchema;
-  /** @deprecated use `ListActionsResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListActionsResponseBody$outboundSchema;
-  /** @deprecated use `ListActionsResponseBody$Outbound` instead. */
-  export type Outbound = ListActionsResponseBody$Outbound;
-}
-
 export function listActionsResponseBodyToJSON(
   listActionsResponseBody: ListActionsResponseBody,
 ): string {
@@ -514,7 +416,6 @@ export function listActionsResponseBodyToJSON(
     ListActionsResponseBody$outboundSchema.parse(listActionsResponseBody),
   );
 }
-
 export function listActionsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListActionsResponseBody, SDKValidationError> {

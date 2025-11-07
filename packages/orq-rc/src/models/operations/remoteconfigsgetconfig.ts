@@ -54,7 +54,6 @@ export const RemoteConfigsGetConfigRequestBody$inboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   metadata: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type RemoteConfigsGetConfigRequestBody$Outbound = {
   key: string;
@@ -73,20 +72,6 @@ export const RemoteConfigsGetConfigRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoteConfigsGetConfigRequestBody$ {
-  /** @deprecated use `RemoteConfigsGetConfigRequestBody$inboundSchema` instead. */
-  export const inboundSchema = RemoteConfigsGetConfigRequestBody$inboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    RemoteConfigsGetConfigRequestBody$outboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigRequestBody$Outbound` instead. */
-  export type Outbound = RemoteConfigsGetConfigRequestBody$Outbound;
-}
-
 export function remoteConfigsGetConfigRequestBodyToJSON(
   remoteConfigsGetConfigRequestBody: RemoteConfigsGetConfigRequestBody,
 ): string {
@@ -96,7 +81,6 @@ export function remoteConfigsGetConfigRequestBodyToJSON(
     ),
   );
 }
-
 export function remoteConfigsGetConfigRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RemoteConfigsGetConfigRequestBody, SDKValidationError> {
@@ -111,22 +95,10 @@ export function remoteConfigsGetConfigRequestBodyFromJSON(
 export const RemoteConfigsGetConfigType$inboundSchema: z.ZodNativeEnum<
   typeof RemoteConfigsGetConfigType
 > = z.nativeEnum(RemoteConfigsGetConfigType);
-
 /** @internal */
 export const RemoteConfigsGetConfigType$outboundSchema: z.ZodNativeEnum<
   typeof RemoteConfigsGetConfigType
 > = RemoteConfigsGetConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoteConfigsGetConfigType$ {
-  /** @deprecated use `RemoteConfigsGetConfigType$inboundSchema` instead. */
-  export const inboundSchema = RemoteConfigsGetConfigType$inboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigType$outboundSchema` instead. */
-  export const outboundSchema = RemoteConfigsGetConfigType$outboundSchema;
-}
 
 /** @internal */
 export const RemoteConfigsGetConfigResponseBody$inboundSchema: z.ZodType<
@@ -137,7 +109,6 @@ export const RemoteConfigsGetConfigResponseBody$inboundSchema: z.ZodType<
   type: RemoteConfigsGetConfigType$inboundSchema,
   value: z.any().optional(),
 });
-
 /** @internal */
 export type RemoteConfigsGetConfigResponseBody$Outbound = {
   type: string;
@@ -154,20 +125,6 @@ export const RemoteConfigsGetConfigResponseBody$outboundSchema: z.ZodType<
   value: z.any().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoteConfigsGetConfigResponseBody$ {
-  /** @deprecated use `RemoteConfigsGetConfigResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RemoteConfigsGetConfigResponseBody$inboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    RemoteConfigsGetConfigResponseBody$outboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigResponseBody$Outbound` instead. */
-  export type Outbound = RemoteConfigsGetConfigResponseBody$Outbound;
-}
-
 export function remoteConfigsGetConfigResponseBodyToJSON(
   remoteConfigsGetConfigResponseBody: RemoteConfigsGetConfigResponseBody,
 ): string {
@@ -177,7 +134,6 @@ export function remoteConfigsGetConfigResponseBodyToJSON(
     ),
   );
 }
-
 export function remoteConfigsGetConfigResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RemoteConfigsGetConfigResponseBody, SDKValidationError> {

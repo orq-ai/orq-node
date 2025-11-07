@@ -88,7 +88,6 @@ export const FileListRequest$inboundSchema: z.ZodType<
     "ending_before": "endingBefore",
   });
 });
-
 /** @internal */
 export type FileListRequest$Outbound = {
   limit: number;
@@ -112,25 +111,11 @@ export const FileListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListRequest$ {
-  /** @deprecated use `FileListRequest$inboundSchema` instead. */
-  export const inboundSchema = FileListRequest$inboundSchema;
-  /** @deprecated use `FileListRequest$outboundSchema` instead. */
-  export const outboundSchema = FileListRequest$outboundSchema;
-  /** @deprecated use `FileListRequest$Outbound` instead. */
-  export type Outbound = FileListRequest$Outbound;
-}
-
 export function fileListRequestToJSON(
   fileListRequest: FileListRequest,
 ): string {
   return JSON.stringify(FileListRequest$outboundSchema.parse(fileListRequest));
 }
-
 export function fileListRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<FileListRequest, SDKValidationError> {
@@ -145,43 +130,19 @@ export function fileListRequestFromJSON(
 export const FileListObject$inboundSchema: z.ZodNativeEnum<
   typeof FileListObject
 > = z.nativeEnum(FileListObject);
-
 /** @internal */
 export const FileListObject$outboundSchema: z.ZodNativeEnum<
   typeof FileListObject
 > = FileListObject$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListObject$ {
-  /** @deprecated use `FileListObject$inboundSchema` instead. */
-  export const inboundSchema = FileListObject$inboundSchema;
-  /** @deprecated use `FileListObject$outboundSchema` instead. */
-  export const outboundSchema = FileListObject$outboundSchema;
-}
-
 /** @internal */
 export const FileListPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileListPurpose
 > = z.nativeEnum(FileListPurpose);
-
 /** @internal */
 export const FileListPurpose$outboundSchema: z.ZodNativeEnum<
   typeof FileListPurpose
 > = FileListPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListPurpose$ {
-  /** @deprecated use `FileListPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileListPurpose$inboundSchema;
-  /** @deprecated use `FileListPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileListPurpose$outboundSchema;
-}
 
 /** @internal */
 export const FileListData$inboundSchema: z.ZodType<
@@ -196,7 +157,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-11-06T08:42:47.975Z",
+    "2025-11-07T06:52:42.726Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -206,7 +167,6 @@ export const FileListData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-
 /** @internal */
 export type FileListData$Outbound = {
   _id: string;
@@ -230,7 +190,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-11-06T08:42:47.975Z"))
+  created: z.date().default(() => new Date("2025-11-07T06:52:42.726Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -241,23 +201,9 @@ export const FileListData$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListData$ {
-  /** @deprecated use `FileListData$inboundSchema` instead. */
-  export const inboundSchema = FileListData$inboundSchema;
-  /** @deprecated use `FileListData$outboundSchema` instead. */
-  export const outboundSchema = FileListData$outboundSchema;
-  /** @deprecated use `FileListData$Outbound` instead. */
-  export type Outbound = FileListData$Outbound;
-}
-
 export function fileListDataToJSON(fileListData: FileListData): string {
   return JSON.stringify(FileListData$outboundSchema.parse(fileListData));
 }
-
 export function fileListDataFromJSON(
   jsonString: string,
 ): SafeParseResult<FileListData, SDKValidationError> {
@@ -282,7 +228,6 @@ export const FileListResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-
 /** @internal */
 export type FileListResponseBody$Outbound = {
   object: string;
@@ -305,19 +250,6 @@ export const FileListResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListResponseBody$ {
-  /** @deprecated use `FileListResponseBody$inboundSchema` instead. */
-  export const inboundSchema = FileListResponseBody$inboundSchema;
-  /** @deprecated use `FileListResponseBody$outboundSchema` instead. */
-  export const outboundSchema = FileListResponseBody$outboundSchema;
-  /** @deprecated use `FileListResponseBody$Outbound` instead. */
-  export type Outbound = FileListResponseBody$Outbound;
-}
-
 export function fileListResponseBodyToJSON(
   fileListResponseBody: FileListResponseBody,
 ): string {
@@ -325,7 +257,6 @@ export function fileListResponseBodyToJSON(
     FileListResponseBody$outboundSchema.parse(fileListResponseBody),
   );
 }
-
 export function fileListResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileListResponseBody, SDKValidationError> {

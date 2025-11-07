@@ -92,7 +92,6 @@ export const RetrieveDatasourceRequest$inboundSchema: z.ZodType<
     "datasource_id": "datasourceId",
   });
 });
-
 /** @internal */
 export type RetrieveDatasourceRequest$Outbound = {
   knowledge_id: string;
@@ -114,19 +113,6 @@ export const RetrieveDatasourceRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasourceRequest$ {
-  /** @deprecated use `RetrieveDatasourceRequest$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasourceRequest$inboundSchema;
-  /** @deprecated use `RetrieveDatasourceRequest$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasourceRequest$outboundSchema;
-  /** @deprecated use `RetrieveDatasourceRequest$Outbound` instead. */
-  export type Outbound = RetrieveDatasourceRequest$Outbound;
-}
-
 export function retrieveDatasourceRequestToJSON(
   retrieveDatasourceRequest: RetrieveDatasourceRequest,
 ): string {
@@ -134,7 +120,6 @@ export function retrieveDatasourceRequestToJSON(
     RetrieveDatasourceRequest$outboundSchema.parse(retrieveDatasourceRequest),
   );
 }
-
 export function retrieveDatasourceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasourceRequest, SDKValidationError> {
@@ -149,22 +134,10 @@ export function retrieveDatasourceRequestFromJSON(
 export const RetrieveDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatasourceStatus
 > = z.nativeEnum(RetrieveDatasourceStatus);
-
 /** @internal */
 export const RetrieveDatasourceStatus$outboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatasourceStatus
 > = RetrieveDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasourceStatus$ {
-  /** @deprecated use `RetrieveDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasourceStatus$inboundSchema;
-  /** @deprecated use `RetrieveDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasourceStatus$outboundSchema;
-}
 
 /** @internal */
 export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -172,7 +145,7 @@ export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9C5AJ8B7FDAV3S6EVE7K3MP"),
+  _id: z.string().default("01K9EHDPRAXN8AWB0NH6KR6CC6"),
   display_name: z.string(),
   description: z.string().optional(),
   status: RetrieveDatasourceStatus$inboundSchema,
@@ -194,7 +167,6 @@ export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-
 /** @internal */
 export type RetrieveDatasourceResponseBody$Outbound = {
   _id: string;
@@ -216,7 +188,7 @@ export const RetrieveDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K9C5AJ8B7FDAV3S6EVE7K3MP"),
+  id: z.string().default("01K9EHDPRAXN8AWB0NH6KR6CC6"),
   displayName: z.string(),
   description: z.string().optional(),
   status: RetrieveDatasourceStatus$outboundSchema,
@@ -239,19 +211,6 @@ export const RetrieveDatasourceResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasourceResponseBody$ {
-  /** @deprecated use `RetrieveDatasourceResponseBody$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasourceResponseBody$inboundSchema;
-  /** @deprecated use `RetrieveDatasourceResponseBody$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasourceResponseBody$outboundSchema;
-  /** @deprecated use `RetrieveDatasourceResponseBody$Outbound` instead. */
-  export type Outbound = RetrieveDatasourceResponseBody$Outbound;
-}
-
 export function retrieveDatasourceResponseBodyToJSON(
   retrieveDatasourceResponseBody: RetrieveDatasourceResponseBody,
 ): string {
@@ -261,7 +220,6 @@ export function retrieveDatasourceResponseBodyToJSON(
     ),
   );
 }
-
 export function retrieveDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasourceResponseBody, SDKValidationError> {

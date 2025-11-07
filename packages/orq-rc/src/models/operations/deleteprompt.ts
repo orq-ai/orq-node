@@ -22,7 +22,6 @@ export const DeletePromptRequest$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
 /** @internal */
 export type DeletePromptRequest$Outbound = {
   id: string;
@@ -37,19 +36,6 @@ export const DeletePromptRequest$outboundSchema: z.ZodType<
   id: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeletePromptRequest$ {
-  /** @deprecated use `DeletePromptRequest$inboundSchema` instead. */
-  export const inboundSchema = DeletePromptRequest$inboundSchema;
-  /** @deprecated use `DeletePromptRequest$outboundSchema` instead. */
-  export const outboundSchema = DeletePromptRequest$outboundSchema;
-  /** @deprecated use `DeletePromptRequest$Outbound` instead. */
-  export type Outbound = DeletePromptRequest$Outbound;
-}
-
 export function deletePromptRequestToJSON(
   deletePromptRequest: DeletePromptRequest,
 ): string {
@@ -57,7 +43,6 @@ export function deletePromptRequestToJSON(
     DeletePromptRequest$outboundSchema.parse(deletePromptRequest),
   );
 }
-
 export function deletePromptRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeletePromptRequest, SDKValidationError> {

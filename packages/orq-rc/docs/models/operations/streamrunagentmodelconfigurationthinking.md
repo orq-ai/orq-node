@@ -1,0 +1,19 @@
+# StreamRunAgentModelConfigurationThinking
+
+## Example Usage
+
+```typescript
+import { StreamRunAgentModelConfigurationThinking } from "@orq-ai/node/models/operations";
+
+let value: StreamRunAgentModelConfigurationThinking = {
+  type: "disabled",
+  budgetTokens: 1538.5,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                        | [operations.StreamRunAgentModelConfigurationType](../../models/operations/streamrunagentmodelconfigurationtype.md)                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                            | Enables or disables the thinking mode capability                                                                                                                                                                              |
+| `budgetTokens`                                                                                                                                                                                                                | *number*                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`. |

@@ -28,7 +28,7 @@ export type Voice = ClosedEnum<typeof Voice>;
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const ModelFormat = {
+export const ModelConfigurationFormat = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -38,12 +38,14 @@ export const ModelFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type ModelFormat = ClosedEnum<typeof ModelFormat>;
+export type ModelConfigurationFormat = ClosedEnum<
+  typeof ModelConfigurationFormat
+>;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
  */
-export type ModelAudio = {
+export type ModelConfigurationAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
@@ -51,7 +53,7 @@ export type ModelAudio = {
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: ModelFormat;
+  format: ModelConfigurationFormat;
 };
 
 export const CreateAgentResponseFormatAgentsType = {
@@ -61,7 +63,7 @@ export type CreateAgentResponseFormatAgentsType = ClosedEnum<
   typeof CreateAgentResponseFormatAgentsType
 >;
 
-export type JsonSchema = {
+export type ResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -80,9 +82,14 @@ export type JsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type ResponseFormat3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type JSONSchema = {
   type: CreateAgentResponseFormatAgentsType;
-  jsonSchema: JsonSchema;
+  jsonSchema: ResponseFormatJsonSchema;
 };
 
 export const CreateAgentResponseFormatType = {
@@ -92,7 +99,12 @@ export type CreateAgentResponseFormatType = ClosedEnum<
   typeof CreateAgentResponseFormatType
 >;
 
-export type ResponseFormat2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type JSONObject = {
   type: CreateAgentResponseFormatType;
 };
 
@@ -101,17 +113,19 @@ export const ResponseFormatType = {
 } as const;
 export type ResponseFormatType = ClosedEnum<typeof ResponseFormatType>;
 
-export type ResponseFormat1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type Text = {
   type: ResponseFormatType;
 };
 
 /**
  * An object specifying the format that the model must output
  */
-export type ResponseFormat =
-  | ResponseFormat3
-  | ResponseFormat1
-  | ResponseFormat2;
+export type ResponseFormat = JSONSchema | Text | JSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -131,20 +145,20 @@ export type StreamOptions = {
 /**
  * Enables or disables the thinking mode capability
  */
-export const CreateAgentModelType = {
+export const ModelConfigurationType = {
   Enabled: "enabled",
   Disabled: "disabled",
 } as const;
 /**
  * Enables or disables the thinking mode capability
  */
-export type CreateAgentModelType = ClosedEnum<typeof CreateAgentModelType>;
+export type ModelConfigurationType = ClosedEnum<typeof ModelConfigurationType>;
 
 export type Thinking = {
   /**
    * Enables or disables the thinking mode capability
    */
-  type: CreateAgentModelType;
+  type: ModelConfigurationType;
   /**
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
@@ -196,23 +210,13 @@ export const Modalities = {
 export type Modalities = ClosedEnum<typeof Modalities>;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
- */
-export type WebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-/**
- * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models.
+ * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type ParametersT = {
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
-  audio?: ModelAudio | null | undefined;
+  audio?: ModelConfigurationAudio | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
@@ -248,11 +252,7 @@ export type ParametersT = {
   /**
    * An object specifying the format that the model must output
    */
-  responseFormat?:
-    | ResponseFormat3
-    | ResponseFormat1
-    | ResponseFormat2
-    | undefined;
+  responseFormat?: JSONSchema | Text | JSONObject | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
@@ -298,39 +298,33 @@ export type ParametersT = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<Modalities> | null | undefined;
-  /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
-   */
-  webSearchOptions?: WebSearchOptions | undefined;
 };
 
 /**
- * Model configuration with parameters
+ * @remarks
+ *
+ * Model configuration with parameters.
  */
-export type Model2 = {
+export type ModelConfiguration2 = {
   /**
-   * Model ID or provider/model string
+   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**
-   * Optional integration ID for custom configurations
-   */
-  integrationId?: string | null | undefined;
-  /**
-   * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models.
+   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: ParametersT | undefined;
 };
 
 /**
- * The primary language model that powers the agent. Can be a simple string (e.g., "anthropic/claude-3-sonnet-20240229") or an object with model ID and parameters.
+ * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters.
  */
-export type Model = Model2 | string;
+export type ModelConfiguration = ModelConfiguration2 | string;
 
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export const FallbackModelsVoice = {
+export const FallbackModelConfigurationVoice = {
   Alloy: "alloy",
   Echo: "echo",
   Fable: "fable",
@@ -341,12 +335,14 @@ export const FallbackModelsVoice = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export type FallbackModelsVoice = ClosedEnum<typeof FallbackModelsVoice>;
+export type FallbackModelConfigurationVoice = ClosedEnum<
+  typeof FallbackModelConfigurationVoice
+>;
 
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const FallbackModelsFormat = {
+export const FallbackModelConfigurationFormat = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -356,20 +352,22 @@ export const FallbackModelsFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type FallbackModelsFormat = ClosedEnum<typeof FallbackModelsFormat>;
+export type FallbackModelConfigurationFormat = ClosedEnum<
+  typeof FallbackModelConfigurationFormat
+>;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
  */
-export type FallbackModelsAudio = {
+export type FallbackModelConfigurationAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
-  voice: FallbackModelsVoice;
+  voice: FallbackModelConfigurationVoice;
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: FallbackModelsFormat;
+  format: FallbackModelConfigurationFormat;
 };
 
 export const CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
@@ -381,7 +379,7 @@ export type CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType 
     typeof CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
   >;
 
-export type ResponseFormatJsonSchema = {
+export type CreateAgentResponseFormatAgentsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -400,9 +398,14 @@ export type ResponseFormatJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type CreateAgentResponseFormat3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type CreateAgentResponseFormatJSONSchema = {
   type: CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType;
-  jsonSchema: ResponseFormatJsonSchema;
+  jsonSchema: CreateAgentResponseFormatAgentsJsonSchema;
 };
 
 export const CreateAgentResponseFormatAgentsRequestRequestBodyType = {
@@ -412,7 +415,12 @@ export type CreateAgentResponseFormatAgentsRequestRequestBodyType = ClosedEnum<
   typeof CreateAgentResponseFormatAgentsRequestRequestBodyType
 >;
 
-export type CreateAgentResponseFormat2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type ResponseFormatJSONObject = {
   type: CreateAgentResponseFormatAgentsRequestRequestBodyType;
 };
 
@@ -423,27 +431,32 @@ export type CreateAgentResponseFormatAgentsRequestType = ClosedEnum<
   typeof CreateAgentResponseFormatAgentsRequestType
 >;
 
-export type CreateAgentResponseFormat1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type ResponseFormatText = {
   type: CreateAgentResponseFormatAgentsRequestType;
 };
 
 /**
  * An object specifying the format that the model must output
  */
-export type FallbackModelsResponseFormat =
-  | CreateAgentResponseFormat3
-  | CreateAgentResponseFormat1
-  | CreateAgentResponseFormat2;
+export type FallbackModelConfigurationResponseFormat =
+  | CreateAgentResponseFormatJSONSchema
+  | ResponseFormatText
+  | ResponseFormatJSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type FallbackModelsStop = string | Array<string>;
+export type FallbackModelConfigurationStop = string | Array<string>;
 
 /**
  * Options for streaming response. Only set this when you set stream: true.
  */
-export type FallbackModelsStreamOptions = {
+export type FallbackModelConfigurationStreamOptions = {
   /**
    * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
    */
@@ -453,20 +466,22 @@ export type FallbackModelsStreamOptions = {
 /**
  * Enables or disables the thinking mode capability
  */
-export const FallbackModelsType = {
+export const FallbackModelConfigurationType = {
   Enabled: "enabled",
   Disabled: "disabled",
 } as const;
 /**
  * Enables or disables the thinking mode capability
  */
-export type FallbackModelsType = ClosedEnum<typeof FallbackModelsType>;
+export type FallbackModelConfigurationType = ClosedEnum<
+  typeof FallbackModelConfigurationType
+>;
 
-export type FallbackModelsThinking = {
+export type FallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
    */
-  type: FallbackModelsType;
+  type: FallbackModelConfigurationType;
   /**
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
@@ -511,33 +526,26 @@ export type CreateAgentToolChoice1 = ClosedEnum<typeof CreateAgentToolChoice1>;
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type FallbackModelsToolChoice =
+export type FallbackModelConfigurationToolChoice =
   | CreateAgentToolChoice2
   | CreateAgentToolChoice1;
 
-export const FallbackModelsModalities = {
+export const FallbackModelConfigurationModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type FallbackModelsModalities = ClosedEnum<
-  typeof FallbackModelsModalities
+export type FallbackModelConfigurationModalities = ClosedEnum<
+  typeof FallbackModelConfigurationModalities
 >;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
-export type FallbackModelsWebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-export type FallbackModelsParameters = {
+export type FallbackModelConfigurationParameters = {
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
-  audio?: FallbackModelsAudio | null | undefined;
+  audio?: FallbackModelConfigurationAudio | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
@@ -574,9 +582,9 @@ export type FallbackModelsParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentResponseFormat3
-    | CreateAgentResponseFormat1
-    | CreateAgentResponseFormat2
+    | CreateAgentResponseFormatJSONSchema
+    | ResponseFormatText
+    | ResponseFormatJSONObject
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -597,8 +605,8 @@ export type FallbackModelsParameters = {
   /**
    * Options for streaming response. Only set this when you set stream: true.
    */
-  streamOptions?: FallbackModelsStreamOptions | null | undefined;
-  thinking?: FallbackModelsThinking | undefined;
+  streamOptions?: FallbackModelConfigurationStreamOptions | null | undefined;
+  thinking?: FallbackModelConfigurationThinking | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -622,23 +630,27 @@ export type FallbackModelsParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<FallbackModelsModalities> | null | undefined;
-  /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
-   */
-  webSearchOptions?: FallbackModelsWebSearchOptions | undefined;
+  modalities?: Array<FallbackModelConfigurationModalities> | null | undefined;
 };
 
-export type FallbackModels2 = {
+/**
+ * Fallback model configuration with optional parameters.
+ */
+export type FallbackModelConfiguration2 = {
   /**
-   * Fallback model ID
+   * A fallback model ID string. Must support tool calling.
    */
   id: string;
-  integrationId?: string | null | undefined;
-  parameters?: FallbackModelsParameters | undefined;
+  /**
+   * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
+   */
+  parameters?: FallbackModelConfigurationParameters | undefined;
 };
 
-export type FallbackModels = FallbackModels2 | string;
+/**
+ * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
+ */
+export type FallbackModelConfiguration = FallbackModelConfiguration2 | string;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -1054,7 +1066,11 @@ export type TeamOfAgents = {
 
 export type CreateAgentRequestBody = {
   /**
-   * The path where the agent will be stored in the project structure
+   * The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * @remarks
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -1078,13 +1094,13 @@ export type CreateAgentRequestBody = {
    */
   systemPrompt?: string | undefined;
   /**
-   * The primary language model that powers the agent. Can be a simple string (e.g., "anthropic/claude-3-sonnet-20240229") or an object with model ID and parameters.
+   * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters.
    */
-  model: Model2 | string;
+  model: ModelConfiguration2 | string;
   /**
-   * Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities.
+   * Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling.
    */
-  fallbackModels?: Array<FallbackModels2 | string> | undefined;
+  fallbackModels?: Array<FallbackModelConfiguration2 | string> | undefined;
   /**
    * Configuration settings for the agent's behavior
    */
@@ -1239,7 +1255,7 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONType =
     typeof CreateAgentResponseFormatAgentsResponse201ApplicationJSONType
   >;
 
-export type CreateAgentResponseFormatJsonSchema = {
+export type CreateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -1258,9 +1274,14 @@ export type CreateAgentResponseFormatJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type CreateAgentResponseFormatAgents3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type CreateAgentResponseFormatAgentsResponse201JSONSchema = {
   type: CreateAgentResponseFormatAgentsResponse201ApplicationJSONType;
-  jsonSchema: CreateAgentResponseFormatJsonSchema;
+  jsonSchema: CreateAgentResponseFormatAgentsResponseJsonSchema;
 };
 
 export const CreateAgentResponseFormatAgentsResponse201Type = {
@@ -1270,7 +1291,12 @@ export type CreateAgentResponseFormatAgentsResponse201Type = ClosedEnum<
   typeof CreateAgentResponseFormatAgentsResponse201Type
 >;
 
-export type CreateAgentResponseFormatAgents2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type CreateAgentResponseFormatJSONObject = {
   type: CreateAgentResponseFormatAgentsResponse201Type;
 };
 
@@ -1281,7 +1307,12 @@ export type CreateAgentResponseFormatAgentsResponseType = ClosedEnum<
   typeof CreateAgentResponseFormatAgentsResponseType
 >;
 
-export type CreateAgentResponseFormatAgents1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type CreateAgentResponseFormatText = {
   type: CreateAgentResponseFormatAgentsResponseType;
 };
 
@@ -1289,9 +1320,9 @@ export type CreateAgentResponseFormatAgents1 = {
  * An object specifying the format that the model must output
  */
 export type CreateAgentResponseFormat =
-  | CreateAgentResponseFormatAgents3
-  | CreateAgentResponseFormatAgents1
-  | CreateAgentResponseFormatAgents2;
+  | CreateAgentResponseFormatAgentsResponse201JSONSchema
+  | CreateAgentResponseFormatText
+  | CreateAgentResponseFormatJSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -1382,17 +1413,7 @@ export const CreateAgentModalities = {
 export type CreateAgentModalities = ClosedEnum<typeof CreateAgentModalities>;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
- */
-export type CreateAgentWebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-/**
- * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type CreateAgentParameters = {
   /**
@@ -1435,9 +1456,9 @@ export type CreateAgentParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentResponseFormatAgents3
-    | CreateAgentResponseFormatAgents1
-    | CreateAgentResponseFormatAgents2
+    | CreateAgentResponseFormatAgentsResponse201JSONSchema
+    | CreateAgentResponseFormatText
+    | CreateAgentResponseFormatJSONObject
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1487,16 +1508,12 @@ export type CreateAgentParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<CreateAgentModalities> | null | undefined;
-  /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
-   */
-  webSearchOptions?: CreateAgentWebSearchOptions | undefined;
 };
 
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export const CreateAgentFallbackModelsVoice = {
+export const CreateAgentFallbackModelConfigurationVoice = {
   Alloy: "alloy",
   Echo: "echo",
   Fable: "fable",
@@ -1507,14 +1524,14 @@ export const CreateAgentFallbackModelsVoice = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export type CreateAgentFallbackModelsVoice = ClosedEnum<
-  typeof CreateAgentFallbackModelsVoice
+export type CreateAgentFallbackModelConfigurationVoice = ClosedEnum<
+  typeof CreateAgentFallbackModelConfigurationVoice
 >;
 
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const CreateAgentFallbackModelsFormat = {
+export const CreateAgentFallbackModelConfigurationFormat = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -1524,22 +1541,22 @@ export const CreateAgentFallbackModelsFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type CreateAgentFallbackModelsFormat = ClosedEnum<
-  typeof CreateAgentFallbackModelsFormat
+export type CreateAgentFallbackModelConfigurationFormat = ClosedEnum<
+  typeof CreateAgentFallbackModelConfigurationFormat
 >;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
  */
-export type CreateAgentFallbackModelsAudio = {
+export type CreateAgentFallbackModelConfigurationAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
-  voice: CreateAgentFallbackModelsVoice;
+  voice: CreateAgentFallbackModelConfigurationVoice;
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: CreateAgentFallbackModelsFormat;
+  format: CreateAgentFallbackModelConfigurationFormat;
 };
 
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType =
@@ -1551,30 +1568,38 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBod
     typeof CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType
   >;
 
-export type CreateAgentResponseFormatAgentsJsonSchema = {
-  /**
-   * A description of what the response format is for, used by the model to determine how to respond in the format.
-   */
-  description?: string | undefined;
-  /**
-   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-   */
-  name: string;
-  /**
-   * The schema for the response format, described as a JSON Schema object.
-   */
-  schema?: any | undefined;
-  /**
-   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
-   */
-  strict?: boolean | undefined;
-};
+export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema =
+  {
+    /**
+     * A description of what the response format is for, used by the model to determine how to respond in the format.
+     */
+    description?: string | undefined;
+    /**
+     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+     */
+    name: string;
+    /**
+     * The schema for the response format, described as a JSON Schema object.
+     */
+    schema?: any | undefined;
+    /**
+     * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+     */
+    strict?: boolean | undefined;
+  };
 
-export type CreateAgentResponseFormatAgentsResponse3 = {
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType;
-  jsonSchema: CreateAgentResponseFormatAgentsJsonSchema;
-};
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema =
+  {
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType;
+    jsonSchema:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema;
+  };
 
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType =
   {
@@ -1585,7 +1610,12 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBod
     typeof CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType
   >;
 
-export type CreateAgentResponseFormatAgentsResponse2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type CreateAgentResponseFormatAgentsJSONObject = {
   type:
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType;
 };
@@ -1599,7 +1629,12 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBod
     typeof CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType
   >;
 
-export type CreateAgentResponseFormatAgentsResponse1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type CreateAgentResponseFormatAgentsText = {
   type:
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType;
 };
@@ -1607,20 +1642,20 @@ export type CreateAgentResponseFormatAgentsResponse1 = {
 /**
  * An object specifying the format that the model must output
  */
-export type CreateAgentFallbackModelsResponseFormat =
-  | CreateAgentResponseFormatAgentsResponse3
-  | CreateAgentResponseFormatAgentsResponse1
-  | CreateAgentResponseFormatAgentsResponse2;
+export type CreateAgentFallbackModelConfigurationResponseFormat =
+  | CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
+  | CreateAgentResponseFormatAgentsText
+  | CreateAgentResponseFormatAgentsJSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type CreateAgentFallbackModelsStop = string | Array<string>;
+export type CreateAgentFallbackModelConfigurationStop = string | Array<string>;
 
 /**
  * Options for streaming response. Only set this when you set stream: true.
  */
-export type CreateAgentFallbackModelsStreamOptions = {
+export type CreateAgentFallbackModelConfigurationStreamOptions = {
   /**
    * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
    */
@@ -1630,22 +1665,22 @@ export type CreateAgentFallbackModelsStreamOptions = {
 /**
  * Enables or disables the thinking mode capability
  */
-export const CreateAgentFallbackModelsType = {
+export const CreateAgentFallbackModelConfigurationType = {
   Enabled: "enabled",
   Disabled: "disabled",
 } as const;
 /**
  * Enables or disables the thinking mode capability
  */
-export type CreateAgentFallbackModelsType = ClosedEnum<
-  typeof CreateAgentFallbackModelsType
+export type CreateAgentFallbackModelConfigurationType = ClosedEnum<
+  typeof CreateAgentFallbackModelConfigurationType
 >;
 
-export type CreateAgentFallbackModelsThinking = {
+export type CreateAgentFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
    */
-  type: CreateAgentFallbackModelsType;
+  type: CreateAgentFallbackModelConfigurationType;
   /**
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
@@ -1692,33 +1727,26 @@ export type CreateAgentToolChoiceAgentsResponse1 = ClosedEnum<
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type CreateAgentFallbackModelsToolChoice =
+export type CreateAgentFallbackModelConfigurationToolChoice =
   | CreateAgentToolChoiceAgentsResponse2
   | CreateAgentToolChoiceAgentsResponse1;
 
-export const CreateAgentFallbackModelsModalities = {
+export const CreateAgentFallbackModelConfigurationModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type CreateAgentFallbackModelsModalities = ClosedEnum<
-  typeof CreateAgentFallbackModelsModalities
+export type CreateAgentFallbackModelConfigurationModalities = ClosedEnum<
+  typeof CreateAgentFallbackModelConfigurationModalities
 >;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
-export type CreateAgentFallbackModelsWebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-export type CreateAgentFallbackModelsParameters = {
+export type CreateAgentFallbackModelConfigurationParameters = {
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
-  audio?: CreateAgentFallbackModelsAudio | null | undefined;
+  audio?: CreateAgentFallbackModelConfigurationAudio | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
@@ -1755,9 +1783,9 @@ export type CreateAgentFallbackModelsParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentResponseFormatAgentsResponse3
-    | CreateAgentResponseFormatAgentsResponse1
-    | CreateAgentResponseFormatAgentsResponse2
+    | CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
+    | CreateAgentResponseFormatAgentsText
+    | CreateAgentResponseFormatAgentsJSONObject
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1778,8 +1806,11 @@ export type CreateAgentFallbackModelsParameters = {
   /**
    * Options for streaming response. Only set this when you set stream: true.
    */
-  streamOptions?: CreateAgentFallbackModelsStreamOptions | null | undefined;
-  thinking?: CreateAgentFallbackModelsThinking | undefined;
+  streamOptions?:
+    | CreateAgentFallbackModelConfigurationStreamOptions
+    | null
+    | undefined;
+  thinking?: CreateAgentFallbackModelConfigurationThinking | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -1806,23 +1837,32 @@ export type CreateAgentFallbackModelsParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<CreateAgentFallbackModelsModalities> | null | undefined;
-  /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
-   */
-  webSearchOptions?: CreateAgentFallbackModelsWebSearchOptions | undefined;
+  modalities?:
+    | Array<CreateAgentFallbackModelConfigurationModalities>
+    | null
+    | undefined;
 };
 
-export type CreateAgentFallbackModels2 = {
+/**
+ * Fallback model configuration with optional parameters.
+ */
+export type CreateAgentFallbackModelConfiguration2 = {
   /**
-   * Fallback model ID
+   * A fallback model ID string. Must support tool calling.
    */
   id: string;
-  integrationId?: string | null | undefined;
-  parameters?: CreateAgentFallbackModelsParameters | undefined;
+  /**
+   * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
+   */
+  parameters?: CreateAgentFallbackModelConfigurationParameters | undefined;
 };
 
-export type CreateAgentFallbackModels = CreateAgentFallbackModels2 | string;
+/**
+ * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
+ */
+export type CreateAgentFallbackModelConfiguration =
+  | CreateAgentFallbackModelConfiguration2
+  | string;
 
 export type CreateAgentModel = {
   /**
@@ -1834,14 +1874,14 @@ export type CreateAgentModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: CreateAgentParameters | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
   fallbackModels?:
-    | Array<CreateAgentFallbackModels2 | string>
+    | Array<CreateAgentFallbackModelConfiguration2 | string>
     | null
     | undefined;
 };
@@ -1934,91 +1974,58 @@ export type CreateAgentResponseBody = {
 export const Voice$inboundSchema: z.ZodNativeEnum<typeof Voice> = z.nativeEnum(
   Voice,
 );
-
 /** @internal */
 export const Voice$outboundSchema: z.ZodNativeEnum<typeof Voice> =
   Voice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Voice$ {
-  /** @deprecated use `Voice$inboundSchema` instead. */
-  export const inboundSchema = Voice$inboundSchema;
-  /** @deprecated use `Voice$outboundSchema` instead. */
-  export const outboundSchema = Voice$outboundSchema;
-}
+/** @internal */
+export const ModelConfigurationFormat$inboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationFormat
+> = z.nativeEnum(ModelConfigurationFormat);
+/** @internal */
+export const ModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationFormat
+> = ModelConfigurationFormat$inboundSchema;
 
 /** @internal */
-export const ModelFormat$inboundSchema: z.ZodNativeEnum<typeof ModelFormat> = z
-  .nativeEnum(ModelFormat);
-
-/** @internal */
-export const ModelFormat$outboundSchema: z.ZodNativeEnum<typeof ModelFormat> =
-  ModelFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelFormat$ {
-  /** @deprecated use `ModelFormat$inboundSchema` instead. */
-  export const inboundSchema = ModelFormat$inboundSchema;
-  /** @deprecated use `ModelFormat$outboundSchema` instead. */
-  export const outboundSchema = ModelFormat$outboundSchema;
-}
-
-/** @internal */
-export const ModelAudio$inboundSchema: z.ZodType<
-  ModelAudio,
+export const ModelConfigurationAudio$inboundSchema: z.ZodType<
+  ModelConfigurationAudio,
   z.ZodTypeDef,
   unknown
 > = z.object({
   voice: Voice$inboundSchema,
-  format: ModelFormat$inboundSchema,
+  format: ModelConfigurationFormat$inboundSchema,
 });
-
 /** @internal */
-export type ModelAudio$Outbound = {
+export type ModelConfigurationAudio$Outbound = {
   voice: string;
   format: string;
 };
 
 /** @internal */
-export const ModelAudio$outboundSchema: z.ZodType<
-  ModelAudio$Outbound,
+export const ModelConfigurationAudio$outboundSchema: z.ZodType<
+  ModelConfigurationAudio$Outbound,
   z.ZodTypeDef,
-  ModelAudio
+  ModelConfigurationAudio
 > = z.object({
   voice: Voice$outboundSchema,
-  format: ModelFormat$outboundSchema,
+  format: ModelConfigurationFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ModelAudio$ {
-  /** @deprecated use `ModelAudio$inboundSchema` instead. */
-  export const inboundSchema = ModelAudio$inboundSchema;
-  /** @deprecated use `ModelAudio$outboundSchema` instead. */
-  export const outboundSchema = ModelAudio$outboundSchema;
-  /** @deprecated use `ModelAudio$Outbound` instead. */
-  export type Outbound = ModelAudio$Outbound;
+export function modelConfigurationAudioToJSON(
+  modelConfigurationAudio: ModelConfigurationAudio,
+): string {
+  return JSON.stringify(
+    ModelConfigurationAudio$outboundSchema.parse(modelConfigurationAudio),
+  );
 }
-
-export function modelAudioToJSON(modelAudio: ModelAudio): string {
-  return JSON.stringify(ModelAudio$outboundSchema.parse(modelAudio));
-}
-
-export function modelAudioFromJSON(
+export function modelConfigurationAudioFromJSON(
   jsonString: string,
-): SafeParseResult<ModelAudio, SDKValidationError> {
+): SafeParseResult<ModelConfigurationAudio, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ModelAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelAudio' from JSON`,
+    (x) => ModelConfigurationAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -2026,28 +2033,14 @@ export function modelAudioFromJSON(
 export const CreateAgentResponseFormatAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentResponseFormatAgentsType
 > = z.nativeEnum(CreateAgentResponseFormatAgentsType);
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsType> =
     CreateAgentResponseFormatAgentsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsType$outboundSchema;
-}
-
 /** @internal */
-export const JsonSchema$inboundSchema: z.ZodType<
-  JsonSchema,
+export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  ResponseFormatJsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2056,9 +2049,8 @@ export const JsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
-export type JsonSchema$Outbound = {
+export type ResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
@@ -2066,10 +2058,10 @@ export type JsonSchema$Outbound = {
 };
 
 /** @internal */
-export const JsonSchema$outboundSchema: z.ZodType<
-  JsonSchema$Outbound,
+export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  ResponseFormatJsonSchema$Outbound,
   z.ZodTypeDef,
-  JsonSchema
+  ResponseFormatJsonSchema
 > = z.object({
   description: z.string().optional(),
   name: z.string(),
@@ -2077,93 +2069,66 @@ export const JsonSchema$outboundSchema: z.ZodType<
   strict: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace JsonSchema$ {
-  /** @deprecated use `JsonSchema$inboundSchema` instead. */
-  export const inboundSchema = JsonSchema$inboundSchema;
-  /** @deprecated use `JsonSchema$outboundSchema` instead. */
-  export const outboundSchema = JsonSchema$outboundSchema;
-  /** @deprecated use `JsonSchema$Outbound` instead. */
-  export type Outbound = JsonSchema$Outbound;
+export function responseFormatJsonSchemaToJSON(
+  responseFormatJsonSchema: ResponseFormatJsonSchema,
+): string {
+  return JSON.stringify(
+    ResponseFormatJsonSchema$outboundSchema.parse(responseFormatJsonSchema),
+  );
 }
-
-export function jsonSchemaToJSON(jsonSchema: JsonSchema): string {
-  return JSON.stringify(JsonSchema$outboundSchema.parse(jsonSchema));
-}
-
-export function jsonSchemaFromJSON(
+export function responseFormatJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<JsonSchema, SDKValidationError> {
+): SafeParseResult<ResponseFormatJsonSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => JsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'JsonSchema' from JSON`,
+    (x) => ResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormatJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const ResponseFormat3$inboundSchema: z.ZodType<
-  ResponseFormat3,
+export const JSONSchema$inboundSchema: z.ZodType<
+  JSONSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatAgentsType$inboundSchema,
-  json_schema: z.lazy(() => JsonSchema$inboundSchema),
+  json_schema: z.lazy(() => ResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
-export type ResponseFormat3$Outbound = {
+export type JSONSchema$Outbound = {
   type: string;
-  json_schema: JsonSchema$Outbound;
+  json_schema: ResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
-export const ResponseFormat3$outboundSchema: z.ZodType<
-  ResponseFormat3$Outbound,
+export const JSONSchema$outboundSchema: z.ZodType<
+  JSONSchema$Outbound,
   z.ZodTypeDef,
-  ResponseFormat3
+  JSONSchema
 > = z.object({
   type: CreateAgentResponseFormatAgentsType$outboundSchema,
-  jsonSchema: z.lazy(() => JsonSchema$outboundSchema),
+  jsonSchema: z.lazy(() => ResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     jsonSchema: "json_schema",
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat3$ {
-  /** @deprecated use `ResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat3$inboundSchema;
-  /** @deprecated use `ResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat3$outboundSchema;
-  /** @deprecated use `ResponseFormat3$Outbound` instead. */
-  export type Outbound = ResponseFormat3$Outbound;
+export function jsonSchemaToJSON(jsonSchema: JSONSchema): string {
+  return JSON.stringify(JSONSchema$outboundSchema.parse(jsonSchema));
 }
-
-export function responseFormat3ToJSON(
-  responseFormat3: ResponseFormat3,
-): string {
-  return JSON.stringify(ResponseFormat3$outboundSchema.parse(responseFormat3));
-}
-
-export function responseFormat3FromJSON(
+export function jsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseFormat3, SDKValidationError> {
+): SafeParseResult<JSONSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat3' from JSON`,
+    (x) => JSONSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JSONSchema' from JSON`,
   );
 }
 
@@ -2171,72 +2136,43 @@ export function responseFormat3FromJSON(
 export const CreateAgentResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentResponseFormatType
 > = z.nativeEnum(CreateAgentResponseFormatType);
-
 /** @internal */
 export const CreateAgentResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentResponseFormatType
 > = CreateAgentResponseFormatType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatType$ {
-  /** @deprecated use `CreateAgentResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormatType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormatType$outboundSchema;
-}
-
 /** @internal */
-export const ResponseFormat2$inboundSchema: z.ZodType<
-  ResponseFormat2,
+export const JSONObject$inboundSchema: z.ZodType<
+  JSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatType$inboundSchema,
 });
-
 /** @internal */
-export type ResponseFormat2$Outbound = {
+export type JSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ResponseFormat2$outboundSchema: z.ZodType<
-  ResponseFormat2$Outbound,
+export const JSONObject$outboundSchema: z.ZodType<
+  JSONObject$Outbound,
   z.ZodTypeDef,
-  ResponseFormat2
+  JSONObject
 > = z.object({
   type: CreateAgentResponseFormatType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat2$ {
-  /** @deprecated use `ResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat2$inboundSchema;
-  /** @deprecated use `ResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat2$outboundSchema;
-  /** @deprecated use `ResponseFormat2$Outbound` instead. */
-  export type Outbound = ResponseFormat2$Outbound;
+export function jsonObjectToJSON(jsonObject: JSONObject): string {
+  return JSON.stringify(JSONObject$outboundSchema.parse(jsonObject));
 }
-
-export function responseFormat2ToJSON(
-  responseFormat2: ResponseFormat2,
-): string {
-  return JSON.stringify(ResponseFormat2$outboundSchema.parse(responseFormat2));
-}
-
-export function responseFormat2FromJSON(
+export function jsonObjectFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseFormat2, SDKValidationError> {
+): SafeParseResult<JSONObject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat2' from JSON`,
+    (x) => JSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JSONObject' from JSON`,
   );
 }
 
@@ -2244,72 +2180,37 @@ export function responseFormat2FromJSON(
 export const ResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseFormatType
 > = z.nativeEnum(ResponseFormatType);
-
 /** @internal */
 export const ResponseFormatType$outboundSchema: z.ZodNativeEnum<
   typeof ResponseFormatType
 > = ResponseFormatType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormatType$ {
-  /** @deprecated use `ResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormatType$inboundSchema;
-  /** @deprecated use `ResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormatType$outboundSchema;
-}
-
 /** @internal */
-export const ResponseFormat1$inboundSchema: z.ZodType<
-  ResponseFormat1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ResponseFormatType$inboundSchema,
-});
-
+export const Text$inboundSchema: z.ZodType<Text, z.ZodTypeDef, unknown> = z
+  .object({
+    type: ResponseFormatType$inboundSchema,
+  });
 /** @internal */
-export type ResponseFormat1$Outbound = {
+export type Text$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ResponseFormat1$outboundSchema: z.ZodType<
-  ResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  ResponseFormat1
-> = z.object({
-  type: ResponseFormatType$outboundSchema,
-});
+export const Text$outboundSchema: z.ZodType<Text$Outbound, z.ZodTypeDef, Text> =
+  z.object({
+    type: ResponseFormatType$outboundSchema,
+  });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat1$ {
-  /** @deprecated use `ResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat1$inboundSchema;
-  /** @deprecated use `ResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat1$outboundSchema;
-  /** @deprecated use `ResponseFormat1$Outbound` instead. */
-  export type Outbound = ResponseFormat1$Outbound;
+export function textToJSON(text: Text): string {
+  return JSON.stringify(Text$outboundSchema.parse(text));
 }
-
-export function responseFormat1ToJSON(
-  responseFormat1: ResponseFormat1,
-): string {
-  return JSON.stringify(ResponseFormat1$outboundSchema.parse(responseFormat1));
-}
-
-export function responseFormat1FromJSON(
+export function textFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseFormat1, SDKValidationError> {
+): SafeParseResult<Text, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat1' from JSON`,
+    (x) => Text$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Text' from JSON`,
   );
 }
 
@@ -2319,16 +2220,15 @@ export const ResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ResponseFormat3$inboundSchema),
-  z.lazy(() => ResponseFormat1$inboundSchema),
-  z.lazy(() => ResponseFormat2$inboundSchema),
+  z.lazy(() => JSONSchema$inboundSchema),
+  z.lazy(() => Text$inboundSchema),
+  z.lazy(() => JSONObject$inboundSchema),
 ]);
-
 /** @internal */
 export type ResponseFormat$Outbound =
-  | ResponseFormat3$Outbound
-  | ResponseFormat1$Outbound
-  | ResponseFormat2$Outbound;
+  | JSONSchema$Outbound
+  | Text$Outbound
+  | JSONObject$Outbound;
 
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
@@ -2336,28 +2236,14 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseFormat
 > = z.union([
-  z.lazy(() => ResponseFormat3$outboundSchema),
-  z.lazy(() => ResponseFormat1$outboundSchema),
-  z.lazy(() => ResponseFormat2$outboundSchema),
+  z.lazy(() => JSONSchema$outboundSchema),
+  z.lazy(() => Text$outboundSchema),
+  z.lazy(() => JSONObject$outboundSchema),
 ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormat$ {
-  /** @deprecated use `ResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormat$inboundSchema;
-  /** @deprecated use `ResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormat$outboundSchema;
-  /** @deprecated use `ResponseFormat$Outbound` instead. */
-  export type Outbound = ResponseFormat$Outbound;
-}
 
 export function responseFormatToJSON(responseFormat: ResponseFormat): string {
   return JSON.stringify(ResponseFormat$outboundSchema.parse(responseFormat));
 }
-
 export function responseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseFormat, SDKValidationError> {
@@ -2371,7 +2257,6 @@ export function responseFormatFromJSON(
 /** @internal */
 export const Stop$inboundSchema: z.ZodType<Stop, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type Stop$Outbound = string | Array<string>;
 
@@ -2379,23 +2264,9 @@ export type Stop$Outbound = string | Array<string>;
 export const Stop$outboundSchema: z.ZodType<Stop$Outbound, z.ZodTypeDef, Stop> =
   z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Stop$ {
-  /** @deprecated use `Stop$inboundSchema` instead. */
-  export const inboundSchema = Stop$inboundSchema;
-  /** @deprecated use `Stop$outboundSchema` instead. */
-  export const outboundSchema = Stop$outboundSchema;
-  /** @deprecated use `Stop$Outbound` instead. */
-  export type Outbound = Stop$Outbound;
-}
-
 export function stopToJSON(stop: Stop): string {
   return JSON.stringify(Stop$outboundSchema.parse(stop));
 }
-
 export function stopFromJSON(
   jsonString: string,
 ): SafeParseResult<Stop, SDKValidationError> {
@@ -2418,7 +2289,6 @@ export const StreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type StreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -2437,23 +2307,9 @@ export const StreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamOptions$ {
-  /** @deprecated use `StreamOptions$inboundSchema` instead. */
-  export const inboundSchema = StreamOptions$inboundSchema;
-  /** @deprecated use `StreamOptions$outboundSchema` instead. */
-  export const outboundSchema = StreamOptions$outboundSchema;
-  /** @deprecated use `StreamOptions$Outbound` instead. */
-  export type Outbound = StreamOptions$Outbound;
-}
-
 export function streamOptionsToJSON(streamOptions: StreamOptions): string {
   return JSON.stringify(StreamOptions$outboundSchema.parse(streamOptions));
 }
-
 export function streamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamOptions, SDKValidationError> {
@@ -2465,25 +2321,13 @@ export function streamOptionsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentModelType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentModelType
-> = z.nativeEnum(CreateAgentModelType);
-
+export const ModelConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationType
+> = z.nativeEnum(ModelConfigurationType);
 /** @internal */
-export const CreateAgentModelType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentModelType
-> = CreateAgentModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentModelType$ {
-  /** @deprecated use `CreateAgentModelType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentModelType$inboundSchema;
-  /** @deprecated use `CreateAgentModelType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentModelType$outboundSchema;
-}
+export const ModelConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationType
+> = ModelConfigurationType$inboundSchema;
 
 /** @internal */
 export const Thinking$inboundSchema: z.ZodType<
@@ -2491,14 +2335,13 @@ export const Thinking$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentModelType$inboundSchema,
+  type: ModelConfigurationType$inboundSchema,
   budget_tokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type Thinking$Outbound = {
   type: string;
@@ -2511,7 +2354,7 @@ export const Thinking$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Thinking
 > = z.object({
-  type: CreateAgentModelType$outboundSchema,
+  type: ModelConfigurationType$outboundSchema,
   budgetTokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -2519,23 +2362,9 @@ export const Thinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Thinking$ {
-  /** @deprecated use `Thinking$inboundSchema` instead. */
-  export const inboundSchema = Thinking$inboundSchema;
-  /** @deprecated use `Thinking$outboundSchema` instead. */
-  export const outboundSchema = Thinking$outboundSchema;
-  /** @deprecated use `Thinking$Outbound` instead. */
-  export type Outbound = Thinking$Outbound;
-}
-
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
 }
-
 export function thinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<Thinking, SDKValidationError> {
@@ -2550,22 +2379,10 @@ export function thinkingFromJSON(
 export const ToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof ToolChoiceType
 > = z.nativeEnum(ToolChoiceType);
-
 /** @internal */
 export const ToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof ToolChoiceType
 > = ToolChoiceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolChoiceType$ {
-  /** @deprecated use `ToolChoiceType$inboundSchema` instead. */
-  export const inboundSchema = ToolChoiceType$inboundSchema;
-  /** @deprecated use `ToolChoiceType$outboundSchema` instead. */
-  export const outboundSchema = ToolChoiceType$outboundSchema;
-}
 
 /** @internal */
 export const ToolChoiceFunction$inboundSchema: z.ZodType<
@@ -2575,7 +2392,6 @@ export const ToolChoiceFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type ToolChoiceFunction$Outbound = {
   name?: string | undefined;
@@ -2590,19 +2406,6 @@ export const ToolChoiceFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolChoiceFunction$ {
-  /** @deprecated use `ToolChoiceFunction$inboundSchema` instead. */
-  export const inboundSchema = ToolChoiceFunction$inboundSchema;
-  /** @deprecated use `ToolChoiceFunction$outboundSchema` instead. */
-  export const outboundSchema = ToolChoiceFunction$outboundSchema;
-  /** @deprecated use `ToolChoiceFunction$Outbound` instead. */
-  export type Outbound = ToolChoiceFunction$Outbound;
-}
-
 export function toolChoiceFunctionToJSON(
   toolChoiceFunction: ToolChoiceFunction,
 ): string {
@@ -2610,7 +2413,6 @@ export function toolChoiceFunctionToJSON(
     ToolChoiceFunction$outboundSchema.parse(toolChoiceFunction),
   );
 }
-
 export function toolChoiceFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolChoiceFunction, SDKValidationError> {
@@ -2630,7 +2432,6 @@ export const ToolChoice2$inboundSchema: z.ZodType<
   type: ToolChoiceType$inboundSchema.optional(),
   function: z.lazy(() => ToolChoiceFunction$inboundSchema),
 });
-
 /** @internal */
 export type ToolChoice2$Outbound = {
   type?: string | undefined;
@@ -2647,23 +2448,9 @@ export const ToolChoice2$outboundSchema: z.ZodType<
   function: z.lazy(() => ToolChoiceFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolChoice2$ {
-  /** @deprecated use `ToolChoice2$inboundSchema` instead. */
-  export const inboundSchema = ToolChoice2$inboundSchema;
-  /** @deprecated use `ToolChoice2$outboundSchema` instead. */
-  export const outboundSchema = ToolChoice2$outboundSchema;
-  /** @deprecated use `ToolChoice2$Outbound` instead. */
-  export type Outbound = ToolChoice2$Outbound;
-}
-
 export function toolChoice2ToJSON(toolChoice2: ToolChoice2): string {
   return JSON.stringify(ToolChoice2$outboundSchema.parse(toolChoice2));
 }
-
 export function toolChoice2FromJSON(
   jsonString: string,
 ): SafeParseResult<ToolChoice2, SDKValidationError> {
@@ -2677,21 +2464,9 @@ export function toolChoice2FromJSON(
 /** @internal */
 export const ToolChoice1$inboundSchema: z.ZodNativeEnum<typeof ToolChoice1> = z
   .nativeEnum(ToolChoice1);
-
 /** @internal */
 export const ToolChoice1$outboundSchema: z.ZodNativeEnum<typeof ToolChoice1> =
   ToolChoice1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolChoice1$ {
-  /** @deprecated use `ToolChoice1$inboundSchema` instead. */
-  export const inboundSchema = ToolChoice1$inboundSchema;
-  /** @deprecated use `ToolChoice1$outboundSchema` instead. */
-  export const outboundSchema = ToolChoice1$outboundSchema;
-}
 
 /** @internal */
 export const ToolChoice$inboundSchema: z.ZodType<
@@ -2702,7 +2477,6 @@ export const ToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => ToolChoice2$inboundSchema),
   ToolChoice1$inboundSchema,
 ]);
-
 /** @internal */
 export type ToolChoice$Outbound = ToolChoice2$Outbound | string;
 
@@ -2716,23 +2490,9 @@ export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolChoice$ {
-  /** @deprecated use `ToolChoice$inboundSchema` instead. */
-  export const inboundSchema = ToolChoice$inboundSchema;
-  /** @deprecated use `ToolChoice$outboundSchema` instead. */
-  export const outboundSchema = ToolChoice$outboundSchema;
-  /** @deprecated use `ToolChoice$Outbound` instead. */
-  export type Outbound = ToolChoice$Outbound;
-}
-
 export function toolChoiceToJSON(toolChoice: ToolChoice): string {
   return JSON.stringify(ToolChoice$outboundSchema.parse(toolChoice));
 }
-
 export function toolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolChoice, SDKValidationError> {
@@ -2746,75 +2506,9 @@ export function toolChoiceFromJSON(
 /** @internal */
 export const Modalities$inboundSchema: z.ZodNativeEnum<typeof Modalities> = z
   .nativeEnum(Modalities);
-
 /** @internal */
 export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> =
   Modalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Modalities$ {
-  /** @deprecated use `Modalities$inboundSchema` instead. */
-  export const inboundSchema = Modalities$inboundSchema;
-  /** @deprecated use `Modalities$outboundSchema` instead. */
-  export const outboundSchema = Modalities$outboundSchema;
-}
-
-/** @internal */
-export const WebSearchOptions$inboundSchema: z.ZodType<
-  WebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/** @internal */
-export type WebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const WebSearchOptions$outboundSchema: z.ZodType<
-  WebSearchOptions$Outbound,
-  z.ZodTypeDef,
-  WebSearchOptions
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebSearchOptions$ {
-  /** @deprecated use `WebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = WebSearchOptions$inboundSchema;
-  /** @deprecated use `WebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = WebSearchOptions$outboundSchema;
-  /** @deprecated use `WebSearchOptions$Outbound` instead. */
-  export type Outbound = WebSearchOptions$Outbound;
-}
-
-export function webSearchOptionsToJSON(
-  webSearchOptions: WebSearchOptions,
-): string {
-  return JSON.stringify(
-    WebSearchOptions$outboundSchema.parse(webSearchOptions),
-  );
-}
-
-export function webSearchOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<WebSearchOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebSearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebSearchOptions' from JSON`,
-  );
-}
 
 /** @internal */
 export const ParametersT$inboundSchema: z.ZodType<
@@ -2822,7 +2516,8 @@ export const ParametersT$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  audio: z.nullable(z.lazy(() => ModelAudio$inboundSchema)).optional(),
+  audio: z.nullable(z.lazy(() => ModelConfigurationAudio$inboundSchema))
+    .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
@@ -2831,9 +2526,9 @@ export const ParametersT$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => ResponseFormat3$inboundSchema),
-    z.lazy(() => ResponseFormat1$inboundSchema),
-    z.lazy(() => ResponseFormat2$inboundSchema),
+    z.lazy(() => JSONSchema$inboundSchema),
+    z.lazy(() => Text$inboundSchema),
+    z.lazy(() => JSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2851,7 +2546,6 @@ export const ParametersT$inboundSchema: z.ZodType<
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(Modalities$inboundSchema)).optional(),
-  web_search_options: z.lazy(() => WebSearchOptions$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -2866,13 +2560,11 @@ export const ParametersT$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type ParametersT$Outbound = {
-  audio?: ModelAudio$Outbound | null | undefined;
+  audio?: ModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
@@ -2881,9 +2573,9 @@ export type ParametersT$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | ResponseFormat3$Outbound
-    | ResponseFormat1$Outbound
-    | ResponseFormat2$Outbound
+    | JSONSchema$Outbound
+    | Text$Outbound
+    | JSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2897,7 +2589,6 @@ export type ParametersT$Outbound = {
   tool_choice?: ToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?: WebSearchOptions$Outbound | undefined;
 };
 
 /** @internal */
@@ -2906,7 +2597,8 @@ export const ParametersT$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ParametersT
 > = z.object({
-  audio: z.nullable(z.lazy(() => ModelAudio$outboundSchema)).optional(),
+  audio: z.nullable(z.lazy(() => ModelConfigurationAudio$outboundSchema))
+    .optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
@@ -2915,9 +2607,9 @@ export const ParametersT$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => ResponseFormat3$outboundSchema),
-    z.lazy(() => ResponseFormat1$outboundSchema),
-    z.lazy(() => ResponseFormat2$outboundSchema),
+    z.lazy(() => JSONSchema$outboundSchema),
+    z.lazy(() => Text$outboundSchema),
+    z.lazy(() => JSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2935,7 +2627,6 @@ export const ParametersT$outboundSchema: z.ZodType<
   ]).optional(),
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
-  webSearchOptions: z.lazy(() => WebSearchOptions$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -2950,27 +2641,12 @@ export const ParametersT$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
   });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParametersT$ {
-  /** @deprecated use `ParametersT$inboundSchema` instead. */
-  export const inboundSchema = ParametersT$inboundSchema;
-  /** @deprecated use `ParametersT$outboundSchema` instead. */
-  export const outboundSchema = ParametersT$outboundSchema;
-  /** @deprecated use `ParametersT$Outbound` instead. */
-  export type Outbound = ParametersT$Outbound;
-}
 
 export function parametersToJSON(parametersT: ParametersT): string {
   return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
 }
-
 export function parametersFromJSON(
   jsonString: string,
 ): SafeParseResult<ParametersT, SDKValidationError> {
@@ -2982,203 +2658,139 @@ export function parametersFromJSON(
 }
 
 /** @internal */
-export const Model2$inboundSchema: z.ZodType<Model2, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    integration_id: z.nullable(z.string()).optional(),
-    parameters: z.lazy(() => ParametersT$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "integration_id": "integrationId",
-    });
-  });
-
+export const ModelConfiguration2$inboundSchema: z.ZodType<
+  ModelConfiguration2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  parameters: z.lazy(() => ParametersT$inboundSchema).optional(),
+});
 /** @internal */
-export type Model2$Outbound = {
+export type ModelConfiguration2$Outbound = {
   id: string;
-  integration_id?: string | null | undefined;
   parameters?: ParametersT$Outbound | undefined;
 };
 
 /** @internal */
-export const Model2$outboundSchema: z.ZodType<
-  Model2$Outbound,
+export const ModelConfiguration2$outboundSchema: z.ZodType<
+  ModelConfiguration2$Outbound,
   z.ZodTypeDef,
-  Model2
+  ModelConfiguration2
 > = z.object({
   id: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-  });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model2$ {
-  /** @deprecated use `Model2$inboundSchema` instead. */
-  export const inboundSchema = Model2$inboundSchema;
-  /** @deprecated use `Model2$outboundSchema` instead. */
-  export const outboundSchema = Model2$outboundSchema;
-  /** @deprecated use `Model2$Outbound` instead. */
-  export type Outbound = Model2$Outbound;
+export function modelConfiguration2ToJSON(
+  modelConfiguration2: ModelConfiguration2,
+): string {
+  return JSON.stringify(
+    ModelConfiguration2$outboundSchema.parse(modelConfiguration2),
+  );
 }
-
-export function model2ToJSON(model2: Model2): string {
-  return JSON.stringify(Model2$outboundSchema.parse(model2));
-}
-
-export function model2FromJSON(
+export function modelConfiguration2FromJSON(
   jsonString: string,
-): SafeParseResult<Model2, SDKValidationError> {
+): SafeParseResult<ModelConfiguration2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Model2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Model2' from JSON`,
+    (x) => ModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConfiguration2' from JSON`,
   );
 }
 
 /** @internal */
-export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
-  .union([z.lazy(() => Model2$inboundSchema), z.string()]);
-
-/** @internal */
-export type Model$Outbound = Model2$Outbound | string;
-
-/** @internal */
-export const Model$outboundSchema: z.ZodType<
-  Model$Outbound,
+export const ModelConfiguration$inboundSchema: z.ZodType<
+  ModelConfiguration,
   z.ZodTypeDef,
-  Model
-> = z.union([z.lazy(() => Model2$outboundSchema), z.string()]);
+  unknown
+> = z.union([z.lazy(() => ModelConfiguration2$inboundSchema), z.string()]);
+/** @internal */
+export type ModelConfiguration$Outbound = ModelConfiguration2$Outbound | string;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Model$ {
-  /** @deprecated use `Model$inboundSchema` instead. */
-  export const inboundSchema = Model$inboundSchema;
-  /** @deprecated use `Model$outboundSchema` instead. */
-  export const outboundSchema = Model$outboundSchema;
-  /** @deprecated use `Model$Outbound` instead. */
-  export type Outbound = Model$Outbound;
+/** @internal */
+export const ModelConfiguration$outboundSchema: z.ZodType<
+  ModelConfiguration$Outbound,
+  z.ZodTypeDef,
+  ModelConfiguration
+> = z.union([z.lazy(() => ModelConfiguration2$outboundSchema), z.string()]);
+
+export function modelConfigurationToJSON(
+  modelConfiguration: ModelConfiguration,
+): string {
+  return JSON.stringify(
+    ModelConfiguration$outboundSchema.parse(modelConfiguration),
+  );
 }
-
-export function modelToJSON(model: Model): string {
-  return JSON.stringify(Model$outboundSchema.parse(model));
-}
-
-export function modelFromJSON(
+export function modelConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<Model, SDKValidationError> {
+): SafeParseResult<ModelConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Model$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Model' from JSON`,
+    (x) => ModelConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConfiguration' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsVoice
-> = z.nativeEnum(FallbackModelsVoice);
+export const FallbackModelConfigurationVoice$inboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationVoice
+> = z.nativeEnum(FallbackModelConfigurationVoice);
+/** @internal */
+export const FallbackModelConfigurationVoice$outboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationVoice
+> = FallbackModelConfigurationVoice$inboundSchema;
 
 /** @internal */
-export const FallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsVoice
-> = FallbackModelsVoice$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsVoice$ {
-  /** @deprecated use `FallbackModelsVoice$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsVoice$inboundSchema;
-  /** @deprecated use `FallbackModelsVoice$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsVoice$outboundSchema;
-}
+export const FallbackModelConfigurationFormat$inboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationFormat
+> = z.nativeEnum(FallbackModelConfigurationFormat);
+/** @internal */
+export const FallbackModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationFormat
+> = FallbackModelConfigurationFormat$inboundSchema;
 
 /** @internal */
-export const FallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsFormat
-> = z.nativeEnum(FallbackModelsFormat);
-
-/** @internal */
-export const FallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsFormat
-> = FallbackModelsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsFormat$ {
-  /** @deprecated use `FallbackModelsFormat$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsFormat$inboundSchema;
-  /** @deprecated use `FallbackModelsFormat$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsFormat$outboundSchema;
-}
-
-/** @internal */
-export const FallbackModelsAudio$inboundSchema: z.ZodType<
-  FallbackModelsAudio,
+export const FallbackModelConfigurationAudio$inboundSchema: z.ZodType<
+  FallbackModelConfigurationAudio,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  voice: FallbackModelsVoice$inboundSchema,
-  format: FallbackModelsFormat$inboundSchema,
+  voice: FallbackModelConfigurationVoice$inboundSchema,
+  format: FallbackModelConfigurationFormat$inboundSchema,
 });
-
 /** @internal */
-export type FallbackModelsAudio$Outbound = {
+export type FallbackModelConfigurationAudio$Outbound = {
   voice: string;
   format: string;
 };
 
 /** @internal */
-export const FallbackModelsAudio$outboundSchema: z.ZodType<
-  FallbackModelsAudio$Outbound,
+export const FallbackModelConfigurationAudio$outboundSchema: z.ZodType<
+  FallbackModelConfigurationAudio$Outbound,
   z.ZodTypeDef,
-  FallbackModelsAudio
+  FallbackModelConfigurationAudio
 > = z.object({
-  voice: FallbackModelsVoice$outboundSchema,
-  format: FallbackModelsFormat$outboundSchema,
+  voice: FallbackModelConfigurationVoice$outboundSchema,
+  format: FallbackModelConfigurationFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsAudio$ {
-  /** @deprecated use `FallbackModelsAudio$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsAudio$inboundSchema;
-  /** @deprecated use `FallbackModelsAudio$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsAudio$outboundSchema;
-  /** @deprecated use `FallbackModelsAudio$Outbound` instead. */
-  export type Outbound = FallbackModelsAudio$Outbound;
-}
-
-export function fallbackModelsAudioToJSON(
-  fallbackModelsAudio: FallbackModelsAudio,
+export function fallbackModelConfigurationAudioToJSON(
+  fallbackModelConfigurationAudio: FallbackModelConfigurationAudio,
 ): string {
   return JSON.stringify(
-    FallbackModelsAudio$outboundSchema.parse(fallbackModelsAudio),
+    FallbackModelConfigurationAudio$outboundSchema.parse(
+      fallbackModelConfigurationAudio,
+    ),
   );
 }
-
-export function fallbackModelsAudioFromJSON(
+export function fallbackModelConfigurationAudioFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsAudio, SDKValidationError> {
+): SafeParseResult<FallbackModelConfigurationAudio, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsAudio' from JSON`,
+    (x) => FallbackModelConfigurationAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -3189,7 +2801,6 @@ export const CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
   > = z.nativeEnum(
     CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType,
   );
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema:
   z.ZodNativeEnum<
@@ -3197,22 +2808,9 @@ export const CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
   > =
     CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema;
-}
-
 /** @internal */
-export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  ResponseFormatJsonSchema,
+export const CreateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatAgentsJsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3221,9 +2819,8 @@ export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().optional(),
 });
-
 /** @internal */
-export type ResponseFormatJsonSchema$Outbound = {
+export type CreateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
@@ -3231,112 +2828,100 @@ export type ResponseFormatJsonSchema$Outbound = {
 };
 
 /** @internal */
-export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  ResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  ResponseFormatJsonSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+export const CreateAgentResponseFormatAgentsJsonSchema$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsJsonSchema$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsJsonSchema
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseFormatJsonSchema$ {
-  /** @deprecated use `ResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema = ResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `ResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema = ResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `ResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = ResponseFormatJsonSchema$Outbound;
-}
-
-export function responseFormatJsonSchemaToJSON(
-  responseFormatJsonSchema: ResponseFormatJsonSchema,
+export function createAgentResponseFormatAgentsJsonSchemaToJSON(
+  createAgentResponseFormatAgentsJsonSchema:
+    CreateAgentResponseFormatAgentsJsonSchema,
 ): string {
   return JSON.stringify(
-    ResponseFormatJsonSchema$outboundSchema.parse(responseFormatJsonSchema),
+    CreateAgentResponseFormatAgentsJsonSchema$outboundSchema.parse(
+      createAgentResponseFormatAgentsJsonSchema,
+    ),
   );
 }
-
-export function responseFormatJsonSchemaFromJSON(
+export function createAgentResponseFormatAgentsJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentResponseFormatAgentsJsonSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormatJsonSchema' from JSON`,
+    (x) =>
+      CreateAgentResponseFormatAgentsJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseFormatAgentsJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentResponseFormat3$inboundSchema: z.ZodType<
-  CreateAgentResponseFormat3,
+export const CreateAgentResponseFormatJSONSchema$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatJSONSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type:
     CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema,
-  json_schema: z.lazy(() => ResponseFormatJsonSchema$inboundSchema),
+  json_schema: z.lazy(() =>
+    CreateAgentResponseFormatAgentsJsonSchema$inboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     "json_schema": "jsonSchema",
   });
 });
-
 /** @internal */
-export type CreateAgentResponseFormat3$Outbound = {
+export type CreateAgentResponseFormatJSONSchema$Outbound = {
   type: string;
-  json_schema: ResponseFormatJsonSchema$Outbound;
+  json_schema: CreateAgentResponseFormatAgentsJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreateAgentResponseFormat3$outboundSchema: z.ZodType<
-  CreateAgentResponseFormat3$Outbound,
+export const CreateAgentResponseFormatJSONSchema$outboundSchema: z.ZodType<
+  CreateAgentResponseFormatJSONSchema$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormat3
+  CreateAgentResponseFormatJSONSchema
 > = z.object({
   type:
     CreateAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema,
-  jsonSchema: z.lazy(() => ResponseFormatJsonSchema$outboundSchema),
+  jsonSchema: z.lazy(() =>
+    CreateAgentResponseFormatAgentsJsonSchema$outboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     jsonSchema: "json_schema",
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormat3$ {
-  /** @deprecated use `CreateAgentResponseFormat3$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormat3$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat3$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormat3$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat3$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormat3$Outbound;
-}
-
-export function createAgentResponseFormat3ToJSON(
-  createAgentResponseFormat3: CreateAgentResponseFormat3,
+export function createAgentResponseFormatJSONSchemaToJSON(
+  createAgentResponseFormatJSONSchema: CreateAgentResponseFormatJSONSchema,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormat3$outboundSchema.parse(createAgentResponseFormat3),
+    CreateAgentResponseFormatJSONSchema$outboundSchema.parse(
+      createAgentResponseFormatJSONSchema,
+    ),
   );
 }
-
-export function createAgentResponseFormat3FromJSON(
+export function createAgentResponseFormatJSONSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormat3, SDKValidationError> {
+): SafeParseResult<CreateAgentResponseFormatJSONSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormat3' from JSON`,
+    (x) =>
+      CreateAgentResponseFormatJSONSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatJSONSchema' from JSON`,
   );
 }
 
@@ -3345,77 +2930,48 @@ export const CreateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema
   z.ZodNativeEnum<
     typeof CreateAgentResponseFormatAgentsRequestRequestBodyType
   > = z.nativeEnum(CreateAgentResponseFormatAgentsRequestRequestBodyType);
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentResponseFormatAgentsRequestRequestBodyType
   > = CreateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsRequestRequestBodyType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormat2$inboundSchema: z.ZodType<
-  CreateAgentResponseFormat2,
+export const ResponseFormatJSONObject$inboundSchema: z.ZodType<
+  ResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormat2$Outbound = {
+export type ResponseFormatJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormat2$outboundSchema: z.ZodType<
-  CreateAgentResponseFormat2$Outbound,
+export const ResponseFormatJSONObject$outboundSchema: z.ZodType<
+  ResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormat2
+  ResponseFormatJSONObject
 > = z.object({
   type: CreateAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormat2$ {
-  /** @deprecated use `CreateAgentResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormat2$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormat2$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat2$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormat2$Outbound;
-}
-
-export function createAgentResponseFormat2ToJSON(
-  createAgentResponseFormat2: CreateAgentResponseFormat2,
+export function responseFormatJSONObjectToJSON(
+  responseFormatJSONObject: ResponseFormatJSONObject,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormat2$outboundSchema.parse(createAgentResponseFormat2),
+    ResponseFormatJSONObject$outboundSchema.parse(responseFormatJSONObject),
   );
 }
-
-export function createAgentResponseFormat2FromJSON(
+export function responseFormatJSONObjectFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormat2, SDKValidationError> {
+): SafeParseResult<ResponseFormatJSONObject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormat2' from JSON`,
+    (x) => ResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormatJSONObject' from JSON`,
   );
 }
 
@@ -3423,191 +2979,141 @@ export function createAgentResponseFormat2FromJSON(
 export const CreateAgentResponseFormatAgentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsRequestType> = z
     .nativeEnum(CreateAgentResponseFormatAgentsRequestType);
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsRequestType> =
     CreateAgentResponseFormatAgentsRequestType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsRequestType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsRequestType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsRequestType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormat1$inboundSchema: z.ZodType<
-  CreateAgentResponseFormat1,
+export const ResponseFormatText$inboundSchema: z.ZodType<
+  ResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatAgentsRequestType$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormat1$Outbound = {
+export type ResponseFormatText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormat1$outboundSchema: z.ZodType<
-  CreateAgentResponseFormat1$Outbound,
+export const ResponseFormatText$outboundSchema: z.ZodType<
+  ResponseFormatText$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormat1
+  ResponseFormatText
 > = z.object({
   type: CreateAgentResponseFormatAgentsRequestType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormat1$ {
-  /** @deprecated use `CreateAgentResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormat1$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormat1$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat1$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormat1$Outbound;
-}
-
-export function createAgentResponseFormat1ToJSON(
-  createAgentResponseFormat1: CreateAgentResponseFormat1,
+export function responseFormatTextToJSON(
+  responseFormatText: ResponseFormatText,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormat1$outboundSchema.parse(createAgentResponseFormat1),
+    ResponseFormatText$outboundSchema.parse(responseFormatText),
   );
 }
-
-export function createAgentResponseFormat1FromJSON(
+export function responseFormatTextFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormat1, SDKValidationError> {
+): SafeParseResult<ResponseFormatText, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormat1' from JSON`,
+    (x) => ResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormatText' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsResponseFormat$inboundSchema: z.ZodType<
-  FallbackModelsResponseFormat,
+export const FallbackModelConfigurationResponseFormat$inboundSchema: z.ZodType<
+  FallbackModelConfigurationResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateAgentResponseFormat3$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormat1$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormat2$inboundSchema),
+  z.lazy(() => CreateAgentResponseFormatJSONSchema$inboundSchema),
+  z.lazy(() => ResponseFormatText$inboundSchema),
+  z.lazy(() => ResponseFormatJSONObject$inboundSchema),
 ]);
+/** @internal */
+export type FallbackModelConfigurationResponseFormat$Outbound =
+  | CreateAgentResponseFormatJSONSchema$Outbound
+  | ResponseFormatText$Outbound
+  | ResponseFormatJSONObject$Outbound;
 
 /** @internal */
-export type FallbackModelsResponseFormat$Outbound =
-  | CreateAgentResponseFormat3$Outbound
-  | CreateAgentResponseFormat1$Outbound
-  | CreateAgentResponseFormat2$Outbound;
-
-/** @internal */
-export const FallbackModelsResponseFormat$outboundSchema: z.ZodType<
-  FallbackModelsResponseFormat$Outbound,
+export const FallbackModelConfigurationResponseFormat$outboundSchema: z.ZodType<
+  FallbackModelConfigurationResponseFormat$Outbound,
   z.ZodTypeDef,
-  FallbackModelsResponseFormat
+  FallbackModelConfigurationResponseFormat
 > = z.union([
-  z.lazy(() => CreateAgentResponseFormat3$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormat1$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormat2$outboundSchema),
+  z.lazy(() => CreateAgentResponseFormatJSONSchema$outboundSchema),
+  z.lazy(() => ResponseFormatText$outboundSchema),
+  z.lazy(() => ResponseFormatJSONObject$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsResponseFormat$ {
-  /** @deprecated use `FallbackModelsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsResponseFormat$inboundSchema;
-  /** @deprecated use `FallbackModelsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsResponseFormat$outboundSchema;
-  /** @deprecated use `FallbackModelsResponseFormat$Outbound` instead. */
-  export type Outbound = FallbackModelsResponseFormat$Outbound;
-}
-
-export function fallbackModelsResponseFormatToJSON(
-  fallbackModelsResponseFormat: FallbackModelsResponseFormat,
+export function fallbackModelConfigurationResponseFormatToJSON(
+  fallbackModelConfigurationResponseFormat:
+    FallbackModelConfigurationResponseFormat,
 ): string {
   return JSON.stringify(
-    FallbackModelsResponseFormat$outboundSchema.parse(
-      fallbackModelsResponseFormat,
+    FallbackModelConfigurationResponseFormat$outboundSchema.parse(
+      fallbackModelConfigurationResponseFormat,
     ),
   );
 }
-
-export function fallbackModelsResponseFormatFromJSON(
+export function fallbackModelConfigurationResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsResponseFormat, SDKValidationError> {
+): SafeParseResult<
+  FallbackModelConfigurationResponseFormat,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsResponseFormat' from JSON`,
+    (x) =>
+      FallbackModelConfigurationResponseFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'FallbackModelConfigurationResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsStop$inboundSchema: z.ZodType<
-  FallbackModelsStop,
+export const FallbackModelConfigurationStop$inboundSchema: z.ZodType<
+  FallbackModelConfigurationStop,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
+/** @internal */
+export type FallbackModelConfigurationStop$Outbound = string | Array<string>;
 
 /** @internal */
-export type FallbackModelsStop$Outbound = string | Array<string>;
-
-/** @internal */
-export const FallbackModelsStop$outboundSchema: z.ZodType<
-  FallbackModelsStop$Outbound,
+export const FallbackModelConfigurationStop$outboundSchema: z.ZodType<
+  FallbackModelConfigurationStop$Outbound,
   z.ZodTypeDef,
-  FallbackModelsStop
+  FallbackModelConfigurationStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsStop$ {
-  /** @deprecated use `FallbackModelsStop$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsStop$inboundSchema;
-  /** @deprecated use `FallbackModelsStop$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsStop$outboundSchema;
-  /** @deprecated use `FallbackModelsStop$Outbound` instead. */
-  export type Outbound = FallbackModelsStop$Outbound;
-}
-
-export function fallbackModelsStopToJSON(
-  fallbackModelsStop: FallbackModelsStop,
+export function fallbackModelConfigurationStopToJSON(
+  fallbackModelConfigurationStop: FallbackModelConfigurationStop,
 ): string {
   return JSON.stringify(
-    FallbackModelsStop$outboundSchema.parse(fallbackModelsStop),
+    FallbackModelConfigurationStop$outboundSchema.parse(
+      fallbackModelConfigurationStop,
+    ),
   );
 }
-
-export function fallbackModelsStopFromJSON(
+export function fallbackModelConfigurationStopFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsStop, SDKValidationError> {
+): SafeParseResult<FallbackModelConfigurationStop, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsStop' from JSON`,
+    (x) => FallbackModelConfigurationStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfigurationStop' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsStreamOptions$inboundSchema: z.ZodType<
-  FallbackModelsStreamOptions,
+export const FallbackModelConfigurationStreamOptions$inboundSchema: z.ZodType<
+  FallbackModelConfigurationStreamOptions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3617,17 +3123,16 @@ export const FallbackModelsStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
-export type FallbackModelsStreamOptions$Outbound = {
+export type FallbackModelConfigurationStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
 };
 
 /** @internal */
-export const FallbackModelsStreamOptions$outboundSchema: z.ZodType<
-  FallbackModelsStreamOptions$Outbound,
+export const FallbackModelConfigurationStreamOptions$outboundSchema: z.ZodType<
+  FallbackModelConfigurationStreamOptions$Outbound,
   z.ZodTypeDef,
-  FallbackModelsStreamOptions
+  FallbackModelConfigurationStreamOptions
 > = z.object({
   includeUsage: z.boolean().optional(),
 }).transform((v) => {
@@ -3636,87 +3141,67 @@ export const FallbackModelsStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsStreamOptions$ {
-  /** @deprecated use `FallbackModelsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsStreamOptions$inboundSchema;
-  /** @deprecated use `FallbackModelsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsStreamOptions$outboundSchema;
-  /** @deprecated use `FallbackModelsStreamOptions$Outbound` instead. */
-  export type Outbound = FallbackModelsStreamOptions$Outbound;
-}
-
-export function fallbackModelsStreamOptionsToJSON(
-  fallbackModelsStreamOptions: FallbackModelsStreamOptions,
+export function fallbackModelConfigurationStreamOptionsToJSON(
+  fallbackModelConfigurationStreamOptions:
+    FallbackModelConfigurationStreamOptions,
 ): string {
   return JSON.stringify(
-    FallbackModelsStreamOptions$outboundSchema.parse(
-      fallbackModelsStreamOptions,
+    FallbackModelConfigurationStreamOptions$outboundSchema.parse(
+      fallbackModelConfigurationStreamOptions,
     ),
   );
 }
-
-export function fallbackModelsStreamOptionsFromJSON(
+export function fallbackModelConfigurationStreamOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsStreamOptions, SDKValidationError> {
+): SafeParseResult<
+  FallbackModelConfigurationStreamOptions,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsStreamOptions' from JSON`,
+    (x) =>
+      FallbackModelConfigurationStreamOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'FallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsType$inboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsType
-> = z.nativeEnum(FallbackModelsType);
+export const FallbackModelConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationType
+> = z.nativeEnum(FallbackModelConfigurationType);
+/** @internal */
+export const FallbackModelConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof FallbackModelConfigurationType
+> = FallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
-export const FallbackModelsType$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsType
-> = FallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsType$ {
-  /** @deprecated use `FallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsType$inboundSchema;
-  /** @deprecated use `FallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsType$outboundSchema;
-}
-
-/** @internal */
-export const FallbackModelsThinking$inboundSchema: z.ZodType<
-  FallbackModelsThinking,
+export const FallbackModelConfigurationThinking$inboundSchema: z.ZodType<
+  FallbackModelConfigurationThinking,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: FallbackModelsType$inboundSchema,
+  type: FallbackModelConfigurationType$inboundSchema,
   budget_tokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
-export type FallbackModelsThinking$Outbound = {
+export type FallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
 };
 
 /** @internal */
-export const FallbackModelsThinking$outboundSchema: z.ZodType<
-  FallbackModelsThinking$Outbound,
+export const FallbackModelConfigurationThinking$outboundSchema: z.ZodType<
+  FallbackModelConfigurationThinking$Outbound,
   z.ZodTypeDef,
-  FallbackModelsThinking
+  FallbackModelConfigurationThinking
 > = z.object({
-  type: FallbackModelsType$outboundSchema,
+  type: FallbackModelConfigurationType$outboundSchema,
   budgetTokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -3724,34 +3209,23 @@ export const FallbackModelsThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsThinking$ {
-  /** @deprecated use `FallbackModelsThinking$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsThinking$inboundSchema;
-  /** @deprecated use `FallbackModelsThinking$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsThinking$outboundSchema;
-  /** @deprecated use `FallbackModelsThinking$Outbound` instead. */
-  export type Outbound = FallbackModelsThinking$Outbound;
-}
-
-export function fallbackModelsThinkingToJSON(
-  fallbackModelsThinking: FallbackModelsThinking,
+export function fallbackModelConfigurationThinkingToJSON(
+  fallbackModelConfigurationThinking: FallbackModelConfigurationThinking,
 ): string {
   return JSON.stringify(
-    FallbackModelsThinking$outboundSchema.parse(fallbackModelsThinking),
+    FallbackModelConfigurationThinking$outboundSchema.parse(
+      fallbackModelConfigurationThinking,
+    ),
   );
 }
-
-export function fallbackModelsThinkingFromJSON(
+export function fallbackModelConfigurationThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsThinking, SDKValidationError> {
+): SafeParseResult<FallbackModelConfigurationThinking, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsThinking' from JSON`,
+    (x) =>
+      FallbackModelConfigurationThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfigurationThinking' from JSON`,
   );
 }
 
@@ -3759,22 +3233,10 @@ export function fallbackModelsThinkingFromJSON(
 export const CreateAgentToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceType
 > = z.nativeEnum(CreateAgentToolChoiceType);
-
 /** @internal */
 export const CreateAgentToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceType
 > = CreateAgentToolChoiceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceType$ {
-  /** @deprecated use `CreateAgentToolChoiceType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoiceType$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoiceType$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentToolChoiceFunction$inboundSchema: z.ZodType<
@@ -3784,7 +3246,6 @@ export const CreateAgentToolChoiceFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type CreateAgentToolChoiceFunction$Outbound = {
   name?: string | undefined;
@@ -3799,19 +3260,6 @@ export const CreateAgentToolChoiceFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceFunction$ {
-  /** @deprecated use `CreateAgentToolChoiceFunction$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoiceFunction$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceFunction$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoiceFunction$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceFunction$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoiceFunction$Outbound;
-}
-
 export function createAgentToolChoiceFunctionToJSON(
   createAgentToolChoiceFunction: CreateAgentToolChoiceFunction,
 ): string {
@@ -3821,7 +3269,6 @@ export function createAgentToolChoiceFunctionToJSON(
     ),
   );
 }
-
 export function createAgentToolChoiceFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoiceFunction, SDKValidationError> {
@@ -3841,7 +3288,6 @@ export const CreateAgentToolChoice2$inboundSchema: z.ZodType<
   type: CreateAgentToolChoiceType$inboundSchema.optional(),
   function: z.lazy(() => CreateAgentToolChoiceFunction$inboundSchema),
 });
-
 /** @internal */
 export type CreateAgentToolChoice2$Outbound = {
   type?: string | undefined;
@@ -3858,19 +3304,6 @@ export const CreateAgentToolChoice2$outboundSchema: z.ZodType<
   function: z.lazy(() => CreateAgentToolChoiceFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoice2$ {
-  /** @deprecated use `CreateAgentToolChoice2$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoice2$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoice2$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoice2$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoice2$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoice2$Outbound;
-}
-
 export function createAgentToolChoice2ToJSON(
   createAgentToolChoice2: CreateAgentToolChoice2,
 ): string {
@@ -3878,7 +3311,6 @@ export function createAgentToolChoice2ToJSON(
     CreateAgentToolChoice2$outboundSchema.parse(createAgentToolChoice2),
   );
 }
-
 export function createAgentToolChoice2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoice2, SDKValidationError> {
@@ -3893,163 +3325,73 @@ export function createAgentToolChoice2FromJSON(
 export const CreateAgentToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoice1
 > = z.nativeEnum(CreateAgentToolChoice1);
-
 /** @internal */
 export const CreateAgentToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoice1
 > = CreateAgentToolChoice1$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoice1$ {
-  /** @deprecated use `CreateAgentToolChoice1$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoice1$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoice1$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoice1$outboundSchema;
-}
-
 /** @internal */
-export const FallbackModelsToolChoice$inboundSchema: z.ZodType<
-  FallbackModelsToolChoice,
+export const FallbackModelConfigurationToolChoice$inboundSchema: z.ZodType<
+  FallbackModelConfigurationToolChoice,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.lazy(() => CreateAgentToolChoice2$inboundSchema),
   CreateAgentToolChoice1$inboundSchema,
 ]);
-
 /** @internal */
-export type FallbackModelsToolChoice$Outbound =
+export type FallbackModelConfigurationToolChoice$Outbound =
   | CreateAgentToolChoice2$Outbound
   | string;
 
 /** @internal */
-export const FallbackModelsToolChoice$outboundSchema: z.ZodType<
-  FallbackModelsToolChoice$Outbound,
+export const FallbackModelConfigurationToolChoice$outboundSchema: z.ZodType<
+  FallbackModelConfigurationToolChoice$Outbound,
   z.ZodTypeDef,
-  FallbackModelsToolChoice
+  FallbackModelConfigurationToolChoice
 > = z.union([
   z.lazy(() => CreateAgentToolChoice2$outboundSchema),
   CreateAgentToolChoice1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsToolChoice$ {
-  /** @deprecated use `FallbackModelsToolChoice$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsToolChoice$inboundSchema;
-  /** @deprecated use `FallbackModelsToolChoice$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsToolChoice$outboundSchema;
-  /** @deprecated use `FallbackModelsToolChoice$Outbound` instead. */
-  export type Outbound = FallbackModelsToolChoice$Outbound;
-}
-
-export function fallbackModelsToolChoiceToJSON(
-  fallbackModelsToolChoice: FallbackModelsToolChoice,
+export function fallbackModelConfigurationToolChoiceToJSON(
+  fallbackModelConfigurationToolChoice: FallbackModelConfigurationToolChoice,
 ): string {
   return JSON.stringify(
-    FallbackModelsToolChoice$outboundSchema.parse(fallbackModelsToolChoice),
-  );
-}
-
-export function fallbackModelsToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<FallbackModelsToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FallbackModelsToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsToolChoice' from JSON`,
-  );
-}
-
-/** @internal */
-export const FallbackModelsModalities$inboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsModalities
-> = z.nativeEnum(FallbackModelsModalities);
-
-/** @internal */
-export const FallbackModelsModalities$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelsModalities
-> = FallbackModelsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsModalities$ {
-  /** @deprecated use `FallbackModelsModalities$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsModalities$inboundSchema;
-  /** @deprecated use `FallbackModelsModalities$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsModalities$outboundSchema;
-}
-
-/** @internal */
-export const FallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
-  FallbackModelsWebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/** @internal */
-export type FallbackModelsWebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const FallbackModelsWebSearchOptions$outboundSchema: z.ZodType<
-  FallbackModelsWebSearchOptions$Outbound,
-  z.ZodTypeDef,
-  FallbackModelsWebSearchOptions
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsWebSearchOptions$ {
-  /** @deprecated use `FallbackModelsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsWebSearchOptions$inboundSchema;
-  /** @deprecated use `FallbackModelsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsWebSearchOptions$outboundSchema;
-  /** @deprecated use `FallbackModelsWebSearchOptions$Outbound` instead. */
-  export type Outbound = FallbackModelsWebSearchOptions$Outbound;
-}
-
-export function fallbackModelsWebSearchOptionsToJSON(
-  fallbackModelsWebSearchOptions: FallbackModelsWebSearchOptions,
-): string {
-  return JSON.stringify(
-    FallbackModelsWebSearchOptions$outboundSchema.parse(
-      fallbackModelsWebSearchOptions,
+    FallbackModelConfigurationToolChoice$outboundSchema.parse(
+      fallbackModelConfigurationToolChoice,
     ),
   );
 }
-
-export function fallbackModelsWebSearchOptionsFromJSON(
+export function fallbackModelConfigurationToolChoiceFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsWebSearchOptions, SDKValidationError> {
+): SafeParseResult<FallbackModelConfigurationToolChoice, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsWebSearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsWebSearchOptions' from JSON`,
+    (x) =>
+      FallbackModelConfigurationToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfigurationToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModelsParameters$inboundSchema: z.ZodType<
-  FallbackModelsParameters,
+export const FallbackModelConfigurationModalities$inboundSchema:
+  z.ZodNativeEnum<typeof FallbackModelConfigurationModalities> = z.nativeEnum(
+    FallbackModelConfigurationModalities,
+  );
+/** @internal */
+export const FallbackModelConfigurationModalities$outboundSchema:
+  z.ZodNativeEnum<typeof FallbackModelConfigurationModalities> =
+    FallbackModelConfigurationModalities$inboundSchema;
+
+/** @internal */
+export const FallbackModelConfigurationParameters$inboundSchema: z.ZodType<
+  FallbackModelConfigurationParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  audio: z.nullable(z.lazy(() => FallbackModelsAudio$inboundSchema)).optional(),
+  audio: z.nullable(z.lazy(() => FallbackModelConfigurationAudio$inboundSchema))
+    .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
@@ -4058,18 +3400,19 @@ export const FallbackModelsParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => CreateAgentResponseFormat3$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormat1$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormat2$inboundSchema),
+    z.lazy(() => CreateAgentResponseFormatJSONSchema$inboundSchema),
+    z.lazy(() => ResponseFormatText$inboundSchema),
+    z.lazy(() => ResponseFormatJSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
   stream_options: z.nullable(
-    z.lazy(() => FallbackModelsStreamOptions$inboundSchema),
+    z.lazy(() => FallbackModelConfigurationStreamOptions$inboundSchema),
   ).optional(),
-  thinking: z.lazy(() => FallbackModelsThinking$inboundSchema).optional(),
+  thinking: z.lazy(() => FallbackModelConfigurationThinking$inboundSchema)
+    .optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
   top_k: z.nullable(z.number()).optional(),
@@ -4078,10 +3421,9 @@ export const FallbackModelsParameters$inboundSchema: z.ZodType<
     CreateAgentToolChoice1$inboundSchema,
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(FallbackModelsModalities$inboundSchema))
-    .optional(),
-  web_search_options: z.lazy(() => FallbackModelsWebSearchOptions$inboundSchema)
-    .optional(),
+  modalities: z.nullable(
+    z.array(FallbackModelConfigurationModalities$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -4096,13 +3438,11 @@ export const FallbackModelsParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
-export type FallbackModelsParameters$Outbound = {
-  audio?: FallbackModelsAudio$Outbound | null | undefined;
+export type FallbackModelConfigurationParameters$Outbound = {
+  audio?: FallbackModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
@@ -4111,33 +3451,36 @@ export type FallbackModelsParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentResponseFormat3$Outbound
-    | CreateAgentResponseFormat1$Outbound
-    | CreateAgentResponseFormat2$Outbound
+    | CreateAgentResponseFormatJSONSchema$Outbound
+    | ResponseFormatText$Outbound
+    | ResponseFormatJSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?: FallbackModelsStreamOptions$Outbound | null | undefined;
-  thinking?: FallbackModelsThinking$Outbound | undefined;
+  stream_options?:
+    | FallbackModelConfigurationStreamOptions$Outbound
+    | null
+    | undefined;
+  thinking?: FallbackModelConfigurationThinking$Outbound | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
   tool_choice?: CreateAgentToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?: FallbackModelsWebSearchOptions$Outbound | undefined;
 };
 
 /** @internal */
-export const FallbackModelsParameters$outboundSchema: z.ZodType<
-  FallbackModelsParameters$Outbound,
+export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
+  FallbackModelConfigurationParameters$Outbound,
   z.ZodTypeDef,
-  FallbackModelsParameters
+  FallbackModelConfigurationParameters
 > = z.object({
-  audio: z.nullable(z.lazy(() => FallbackModelsAudio$outboundSchema))
-    .optional(),
+  audio: z.nullable(
+    z.lazy(() => FallbackModelConfigurationAudio$outboundSchema),
+  ).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
@@ -4146,18 +3489,19 @@ export const FallbackModelsParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => CreateAgentResponseFormat3$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormat1$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormat2$outboundSchema),
+    z.lazy(() => CreateAgentResponseFormatJSONSchema$outboundSchema),
+    z.lazy(() => ResponseFormatText$outboundSchema),
+    z.lazy(() => ResponseFormatJSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
   streamOptions: z.nullable(
-    z.lazy(() => FallbackModelsStreamOptions$outboundSchema),
+    z.lazy(() => FallbackModelConfigurationStreamOptions$outboundSchema),
   ).optional(),
-  thinking: z.lazy(() => FallbackModelsThinking$outboundSchema).optional(),
+  thinking: z.lazy(() => FallbackModelConfigurationThinking$outboundSchema)
+    .optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
   topK: z.nullable(z.number()).optional(),
@@ -4166,10 +3510,9 @@ export const FallbackModelsParameters$outboundSchema: z.ZodType<
     CreateAgentToolChoice1$outboundSchema,
   ]).optional(),
   parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(FallbackModelsModalities$outboundSchema))
-    .optional(),
-  webSearchOptions: z.lazy(() => FallbackModelsWebSearchOptions$outboundSchema)
-    .optional(),
+  modalities: z.nullable(
+    z.array(FallbackModelConfigurationModalities$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -4184,148 +3527,113 @@ export const FallbackModelsParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModelsParameters$ {
-  /** @deprecated use `FallbackModelsParameters$inboundSchema` instead. */
-  export const inboundSchema = FallbackModelsParameters$inboundSchema;
-  /** @deprecated use `FallbackModelsParameters$outboundSchema` instead. */
-  export const outboundSchema = FallbackModelsParameters$outboundSchema;
-  /** @deprecated use `FallbackModelsParameters$Outbound` instead. */
-  export type Outbound = FallbackModelsParameters$Outbound;
-}
-
-export function fallbackModelsParametersToJSON(
-  fallbackModelsParameters: FallbackModelsParameters,
+export function fallbackModelConfigurationParametersToJSON(
+  fallbackModelConfigurationParameters: FallbackModelConfigurationParameters,
 ): string {
   return JSON.stringify(
-    FallbackModelsParameters$outboundSchema.parse(fallbackModelsParameters),
+    FallbackModelConfigurationParameters$outboundSchema.parse(
+      fallbackModelConfigurationParameters,
+    ),
   );
 }
-
-export function fallbackModelsParametersFromJSON(
+export function fallbackModelConfigurationParametersFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModelsParameters, SDKValidationError> {
+): SafeParseResult<FallbackModelConfigurationParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModelsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelsParameters' from JSON`,
+    (x) =>
+      FallbackModelConfigurationParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfigurationParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModels2$inboundSchema: z.ZodType<
-  FallbackModels2,
+export const FallbackModelConfiguration2$inboundSchema: z.ZodType<
+  FallbackModelConfiguration2,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => FallbackModelsParameters$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-  });
+  parameters: z.lazy(() => FallbackModelConfigurationParameters$inboundSchema)
+    .optional(),
 });
-
 /** @internal */
-export type FallbackModels2$Outbound = {
+export type FallbackModelConfiguration2$Outbound = {
   id: string;
-  integration_id?: string | null | undefined;
-  parameters?: FallbackModelsParameters$Outbound | undefined;
+  parameters?: FallbackModelConfigurationParameters$Outbound | undefined;
 };
 
 /** @internal */
-export const FallbackModels2$outboundSchema: z.ZodType<
-  FallbackModels2$Outbound,
+export const FallbackModelConfiguration2$outboundSchema: z.ZodType<
+  FallbackModelConfiguration2$Outbound,
   z.ZodTypeDef,
-  FallbackModels2
+  FallbackModelConfiguration2
 > = z.object({
   id: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => FallbackModelsParameters$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-  });
+  parameters: z.lazy(() => FallbackModelConfigurationParameters$outboundSchema)
+    .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModels2$ {
-  /** @deprecated use `FallbackModels2$inboundSchema` instead. */
-  export const inboundSchema = FallbackModels2$inboundSchema;
-  /** @deprecated use `FallbackModels2$outboundSchema` instead. */
-  export const outboundSchema = FallbackModels2$outboundSchema;
-  /** @deprecated use `FallbackModels2$Outbound` instead. */
-  export type Outbound = FallbackModels2$Outbound;
-}
-
-export function fallbackModels2ToJSON(
-  fallbackModels2: FallbackModels2,
+export function fallbackModelConfiguration2ToJSON(
+  fallbackModelConfiguration2: FallbackModelConfiguration2,
 ): string {
-  return JSON.stringify(FallbackModels2$outboundSchema.parse(fallbackModels2));
+  return JSON.stringify(
+    FallbackModelConfiguration2$outboundSchema.parse(
+      fallbackModelConfiguration2,
+    ),
+  );
 }
-
-export function fallbackModels2FromJSON(
+export function fallbackModelConfiguration2FromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModels2, SDKValidationError> {
+): SafeParseResult<FallbackModelConfiguration2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModels2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModels2' from JSON`,
+    (x) => FallbackModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfiguration2' from JSON`,
   );
 }
 
 /** @internal */
-export const FallbackModels$inboundSchema: z.ZodType<
-  FallbackModels,
+export const FallbackModelConfiguration$inboundSchema: z.ZodType<
+  FallbackModelConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => FallbackModels2$inboundSchema), z.string()]);
+> = z.union([
+  z.lazy(() => FallbackModelConfiguration2$inboundSchema),
+  z.string(),
+]);
+/** @internal */
+export type FallbackModelConfiguration$Outbound =
+  | FallbackModelConfiguration2$Outbound
+  | string;
 
 /** @internal */
-export type FallbackModels$Outbound = FallbackModels2$Outbound | string;
-
-/** @internal */
-export const FallbackModels$outboundSchema: z.ZodType<
-  FallbackModels$Outbound,
+export const FallbackModelConfiguration$outboundSchema: z.ZodType<
+  FallbackModelConfiguration$Outbound,
   z.ZodTypeDef,
-  FallbackModels
-> = z.union([z.lazy(() => FallbackModels2$outboundSchema), z.string()]);
+  FallbackModelConfiguration
+> = z.union([
+  z.lazy(() => FallbackModelConfiguration2$outboundSchema),
+  z.string(),
+]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FallbackModels$ {
-  /** @deprecated use `FallbackModels$inboundSchema` instead. */
-  export const inboundSchema = FallbackModels$inboundSchema;
-  /** @deprecated use `FallbackModels$outboundSchema` instead. */
-  export const outboundSchema = FallbackModels$outboundSchema;
-  /** @deprecated use `FallbackModels$Outbound` instead. */
-  export type Outbound = FallbackModels$Outbound;
+export function fallbackModelConfigurationToJSON(
+  fallbackModelConfiguration: FallbackModelConfiguration,
+): string {
+  return JSON.stringify(
+    FallbackModelConfiguration$outboundSchema.parse(fallbackModelConfiguration),
+  );
 }
-
-export function fallbackModelsToJSON(fallbackModels: FallbackModels): string {
-  return JSON.stringify(FallbackModels$outboundSchema.parse(fallbackModels));
-}
-
-export function fallbackModelsFromJSON(
+export function fallbackModelConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<FallbackModels, SDKValidationError> {
+): SafeParseResult<FallbackModelConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FallbackModels$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModels' from JSON`,
+    (x) => FallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FallbackModelConfiguration' from JSON`,
   );
 }
 
@@ -4333,22 +3641,10 @@ export function fallbackModelsFromJSON(
 export const ToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalRequired
 > = z.nativeEnum(ToolApprovalRequired);
-
 /** @internal */
 export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalRequired
 > = ToolApprovalRequired$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolApprovalRequired$ {
-  /** @deprecated use `ToolApprovalRequired$inboundSchema` instead. */
-  export const inboundSchema = ToolApprovalRequired$inboundSchema;
-  /** @deprecated use `ToolApprovalRequired$outboundSchema` instead. */
-  export const outboundSchema = ToolApprovalRequired$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
@@ -4357,26 +3653,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema;
-}
 
 /** @internal */
 export const FunctionTool$inboundSchema: z.ZodType<
@@ -4394,7 +3676,6 @@ export const FunctionTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type FunctionTool$Outbound = {
   type: string;
@@ -4420,23 +3701,9 @@ export const FunctionTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionTool$ {
-  /** @deprecated use `FunctionTool$inboundSchema` instead. */
-  export const inboundSchema = FunctionTool$inboundSchema;
-  /** @deprecated use `FunctionTool$outboundSchema` instead. */
-  export const outboundSchema = FunctionTool$outboundSchema;
-  /** @deprecated use `FunctionTool$Outbound` instead. */
-  export type Outbound = FunctionTool$Outbound;
-}
-
 export function functionToolToJSON(functionTool: FunctionTool): string {
   return JSON.stringify(FunctionTool$outboundSchema.parse(functionTool));
 }
-
 export function functionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionTool, SDKValidationError> {
@@ -4454,26 +3721,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema;
-}
 
 /** @internal */
 export const CodeExecutionTool$inboundSchema: z.ZodType<
@@ -4491,7 +3744,6 @@ export const CodeExecutionTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type CodeExecutionTool$Outbound = {
   type: string;
@@ -4517,19 +3769,6 @@ export const CodeExecutionTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CodeExecutionTool$ {
-  /** @deprecated use `CodeExecutionTool$inboundSchema` instead. */
-  export const inboundSchema = CodeExecutionTool$inboundSchema;
-  /** @deprecated use `CodeExecutionTool$outboundSchema` instead. */
-  export const outboundSchema = CodeExecutionTool$outboundSchema;
-  /** @deprecated use `CodeExecutionTool$Outbound` instead. */
-  export type Outbound = CodeExecutionTool$Outbound;
-}
-
 export function codeExecutionToolToJSON(
   codeExecutionTool: CodeExecutionTool,
 ): string {
@@ -4537,7 +3776,6 @@ export function codeExecutionToolToJSON(
     CodeExecutionTool$outboundSchema.parse(codeExecutionTool),
   );
 }
-
 export function codeExecutionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<CodeExecutionTool, SDKValidationError> {
@@ -4555,26 +3793,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema;
-}
 
 /** @internal */
 export const HTTPTool$inboundSchema: z.ZodType<
@@ -4592,7 +3816,6 @@ export const HTTPTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type HTTPTool$Outbound = {
   type: string;
@@ -4618,23 +3841,9 @@ export const HTTPTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HTTPTool$ {
-  /** @deprecated use `HTTPTool$inboundSchema` instead. */
-  export const inboundSchema = HTTPTool$inboundSchema;
-  /** @deprecated use `HTTPTool$outboundSchema` instead. */
-  export const outboundSchema = HTTPTool$outboundSchema;
-  /** @deprecated use `HTTPTool$Outbound` instead. */
-  export type Outbound = HTTPTool$Outbound;
-}
-
 export function httpToolToJSON(httpTool: HTTPTool): string {
   return JSON.stringify(HTTPTool$outboundSchema.parse(httpTool));
 }
-
 export function httpToolFromJSON(
   jsonString: string,
 ): SafeParseResult<HTTPTool, SDKValidationError> {
@@ -4652,26 +3861,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema;
-}
 
 /** @internal */
 export const CurrentDateTool$inboundSchema: z.ZodType<
@@ -4687,7 +3882,6 @@ export const CurrentDateTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type CurrentDateTool$Outbound = {
   type: string;
@@ -4709,25 +3903,11 @@ export const CurrentDateTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CurrentDateTool$ {
-  /** @deprecated use `CurrentDateTool$inboundSchema` instead. */
-  export const inboundSchema = CurrentDateTool$inboundSchema;
-  /** @deprecated use `CurrentDateTool$outboundSchema` instead. */
-  export const outboundSchema = CurrentDateTool$outboundSchema;
-  /** @deprecated use `CurrentDateTool$Outbound` instead. */
-  export type Outbound = CurrentDateTool$Outbound;
-}
-
 export function currentDateToolToJSON(
   currentDateTool: CurrentDateTool,
 ): string {
   return JSON.stringify(CurrentDateTool$outboundSchema.parse(currentDateTool));
 }
-
 export function currentDateToolFromJSON(
   jsonString: string,
 ): SafeParseResult<CurrentDateTool, SDKValidationError> {
@@ -4745,26 +3925,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools1
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema;
-}
 
 /** @internal */
 export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
@@ -4780,7 +3946,6 @@ export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type QueryKnowledgeBaseTool$Outbound = {
   type: string;
@@ -4802,19 +3967,6 @@ export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace QueryKnowledgeBaseTool$ {
-  /** @deprecated use `QueryKnowledgeBaseTool$inboundSchema` instead. */
-  export const inboundSchema = QueryKnowledgeBaseTool$inboundSchema;
-  /** @deprecated use `QueryKnowledgeBaseTool$outboundSchema` instead. */
-  export const outboundSchema = QueryKnowledgeBaseTool$outboundSchema;
-  /** @deprecated use `QueryKnowledgeBaseTool$Outbound` instead. */
-  export type Outbound = QueryKnowledgeBaseTool$Outbound;
-}
-
 export function queryKnowledgeBaseToolToJSON(
   queryKnowledgeBaseTool: QueryKnowledgeBaseTool,
 ): string {
@@ -4822,7 +3974,6 @@ export function queryKnowledgeBaseToolToJSON(
     QueryKnowledgeBaseTool$outboundSchema.parse(queryKnowledgeBaseTool),
   );
 }
-
 export function queryKnowledgeBaseToolFromJSON(
   jsonString: string,
 ): SafeParseResult<QueryKnowledgeBaseTool, SDKValidationError> {
@@ -4840,26 +3991,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema;
-}
 
 /** @internal */
 export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
@@ -4875,7 +4012,6 @@ export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type RetrieveKnowledgeBasesTool$Outbound = {
   type: string;
@@ -4897,19 +4033,6 @@ export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveKnowledgeBasesTool$ {
-  /** @deprecated use `RetrieveKnowledgeBasesTool$inboundSchema` instead. */
-  export const inboundSchema = RetrieveKnowledgeBasesTool$inboundSchema;
-  /** @deprecated use `RetrieveKnowledgeBasesTool$outboundSchema` instead. */
-  export const outboundSchema = RetrieveKnowledgeBasesTool$outboundSchema;
-  /** @deprecated use `RetrieveKnowledgeBasesTool$Outbound` instead. */
-  export type Outbound = RetrieveKnowledgeBasesTool$Outbound;
-}
-
 export function retrieveKnowledgeBasesToolToJSON(
   retrieveKnowledgeBasesTool: RetrieveKnowledgeBasesTool,
 ): string {
@@ -4917,7 +4040,6 @@ export function retrieveKnowledgeBasesToolToJSON(
     RetrieveKnowledgeBasesTool$outboundSchema.parse(retrieveKnowledgeBasesTool),
   );
 }
-
 export function retrieveKnowledgeBasesToolFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveKnowledgeBasesTool, SDKValidationError> {
@@ -4935,26 +4057,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema;
-}
 
 /** @internal */
 export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
@@ -4970,7 +4078,6 @@ export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type DeleteMemoryDocumentTool$Outbound = {
   type: string;
@@ -4992,19 +4099,6 @@ export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteMemoryDocumentTool$ {
-  /** @deprecated use `DeleteMemoryDocumentTool$inboundSchema` instead. */
-  export const inboundSchema = DeleteMemoryDocumentTool$inboundSchema;
-  /** @deprecated use `DeleteMemoryDocumentTool$outboundSchema` instead. */
-  export const outboundSchema = DeleteMemoryDocumentTool$outboundSchema;
-  /** @deprecated use `DeleteMemoryDocumentTool$Outbound` instead. */
-  export type Outbound = DeleteMemoryDocumentTool$Outbound;
-}
-
 export function deleteMemoryDocumentToolToJSON(
   deleteMemoryDocumentTool: DeleteMemoryDocumentTool,
 ): string {
@@ -5012,7 +4106,6 @@ export function deleteMemoryDocumentToolToJSON(
     DeleteMemoryDocumentTool$outboundSchema.parse(deleteMemoryDocumentTool),
   );
 }
-
 export function deleteMemoryDocumentToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteMemoryDocumentTool, SDKValidationError> {
@@ -5030,26 +4123,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsT
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema;
-}
 
 /** @internal */
 export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
@@ -5065,7 +4144,6 @@ export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type RetrieveMemoryStoresTool$Outbound = {
   type: string;
@@ -5087,19 +4165,6 @@ export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveMemoryStoresTool$ {
-  /** @deprecated use `RetrieveMemoryStoresTool$inboundSchema` instead. */
-  export const inboundSchema = RetrieveMemoryStoresTool$inboundSchema;
-  /** @deprecated use `RetrieveMemoryStoresTool$outboundSchema` instead. */
-  export const outboundSchema = RetrieveMemoryStoresTool$outboundSchema;
-  /** @deprecated use `RetrieveMemoryStoresTool$Outbound` instead. */
-  export type Outbound = RetrieveMemoryStoresTool$Outbound;
-}
-
 export function retrieveMemoryStoresToolToJSON(
   retrieveMemoryStoresTool: RetrieveMemoryStoresTool,
 ): string {
@@ -5107,7 +4172,6 @@ export function retrieveMemoryStoresToolToJSON(
     RetrieveMemoryStoresTool$outboundSchema.parse(retrieveMemoryStoresTool),
   );
 }
-
 export function retrieveMemoryStoresToolFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryStoresTool, SDKValidationError> {
@@ -5125,26 +4189,12 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$i
   > = z.nativeEnum(
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
   );
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType
   > =
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema;
-}
 
 /** @internal */
 export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
@@ -5160,7 +4210,6 @@ export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type WriteMemoryStoreTool$Outbound = {
   type: string;
@@ -5182,19 +4231,6 @@ export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WriteMemoryStoreTool$ {
-  /** @deprecated use `WriteMemoryStoreTool$inboundSchema` instead. */
-  export const inboundSchema = WriteMemoryStoreTool$inboundSchema;
-  /** @deprecated use `WriteMemoryStoreTool$outboundSchema` instead. */
-  export const outboundSchema = WriteMemoryStoreTool$outboundSchema;
-  /** @deprecated use `WriteMemoryStoreTool$Outbound` instead. */
-  export type Outbound = WriteMemoryStoreTool$Outbound;
-}
-
 export function writeMemoryStoreToolToJSON(
   writeMemoryStoreTool: WriteMemoryStoreTool,
 ): string {
@@ -5202,7 +4238,6 @@ export function writeMemoryStoreToolToJSON(
     WriteMemoryStoreTool$outboundSchema.parse(writeMemoryStoreTool),
   );
 }
-
 export function writeMemoryStoreToolFromJSON(
   jsonString: string,
 ): SafeParseResult<WriteMemoryStoreTool, SDKValidationError> {
@@ -5218,25 +4253,11 @@ export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSc
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
   > = z.nativeEnum(CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType);
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
   > = CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema;
-}
 
 /** @internal */
 export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
@@ -5251,7 +4272,6 @@ export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type QueryMemoryStoreTool$Outbound = {
   type: string;
@@ -5273,19 +4293,6 @@ export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace QueryMemoryStoreTool$ {
-  /** @deprecated use `QueryMemoryStoreTool$inboundSchema` instead. */
-  export const inboundSchema = QueryMemoryStoreTool$inboundSchema;
-  /** @deprecated use `QueryMemoryStoreTool$outboundSchema` instead. */
-  export const outboundSchema = QueryMemoryStoreTool$outboundSchema;
-  /** @deprecated use `QueryMemoryStoreTool$Outbound` instead. */
-  export type Outbound = QueryMemoryStoreTool$Outbound;
-}
-
 export function queryMemoryStoreToolToJSON(
   queryMemoryStoreTool: QueryMemoryStoreTool,
 ): string {
@@ -5293,7 +4300,6 @@ export function queryMemoryStoreToolToJSON(
     QueryMemoryStoreTool$outboundSchema.parse(queryMemoryStoreTool),
   );
 }
-
 export function queryMemoryStoreToolFromJSON(
   jsonString: string,
 ): SafeParseResult<QueryMemoryStoreTool, SDKValidationError> {
@@ -5308,24 +4314,10 @@ export function queryMemoryStoreToolFromJSON(
 export const CreateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentAgentToolInputCRUDAgentsRequestType> = z
     .nativeEnum(CreateAgentAgentToolInputCRUDAgentsRequestType);
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentAgentToolInputCRUDAgentsRequestType> =
     CreateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsRequestType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const RetrieveAgentsTool$inboundSchema: z.ZodType<
@@ -5340,7 +4332,6 @@ export const RetrieveAgentsTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type RetrieveAgentsTool$Outbound = {
   type: string;
@@ -5361,19 +4352,6 @@ export const RetrieveAgentsTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveAgentsTool$ {
-  /** @deprecated use `RetrieveAgentsTool$inboundSchema` instead. */
-  export const inboundSchema = RetrieveAgentsTool$inboundSchema;
-  /** @deprecated use `RetrieveAgentsTool$outboundSchema` instead. */
-  export const outboundSchema = RetrieveAgentsTool$outboundSchema;
-  /** @deprecated use `RetrieveAgentsTool$Outbound` instead. */
-  export type Outbound = RetrieveAgentsTool$Outbound;
-}
-
 export function retrieveAgentsToolToJSON(
   retrieveAgentsTool: RetrieveAgentsTool,
 ): string {
@@ -5381,7 +4359,6 @@ export function retrieveAgentsToolToJSON(
     RetrieveAgentsTool$outboundSchema.parse(retrieveAgentsTool),
   );
 }
-
 export function retrieveAgentsToolFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveAgentsTool, SDKValidationError> {
@@ -5396,24 +4373,10 @@ export function retrieveAgentsToolFromJSON(
 export const CreateAgentAgentToolInputCRUDAgentsType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentAgentToolInputCRUDAgentsType> = z
     .nativeEnum(CreateAgentAgentToolInputCRUDAgentsType);
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentAgentToolInputCRUDAgentsType> =
     CreateAgentAgentToolInputCRUDAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDAgentsType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const CallSubAgentTool$inboundSchema: z.ZodType<
@@ -5428,7 +4391,6 @@ export const CallSubAgentTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type CallSubAgentTool$Outbound = {
   type: string;
@@ -5449,19 +4411,6 @@ export const CallSubAgentTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CallSubAgentTool$ {
-  /** @deprecated use `CallSubAgentTool$inboundSchema` instead. */
-  export const inboundSchema = CallSubAgentTool$inboundSchema;
-  /** @deprecated use `CallSubAgentTool$outboundSchema` instead. */
-  export const outboundSchema = CallSubAgentTool$outboundSchema;
-  /** @deprecated use `CallSubAgentTool$Outbound` instead. */
-  export type Outbound = CallSubAgentTool$Outbound;
-}
-
 export function callSubAgentToolToJSON(
   callSubAgentTool: CallSubAgentTool,
 ): string {
@@ -5469,7 +4418,6 @@ export function callSubAgentToolToJSON(
     CallSubAgentTool$outboundSchema.parse(callSubAgentTool),
   );
 }
-
 export function callSubAgentToolFromJSON(
   jsonString: string,
 ): SafeParseResult<CallSubAgentTool, SDKValidationError> {
@@ -5484,23 +4432,10 @@ export function callSubAgentToolFromJSON(
 export const CreateAgentAgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentAgentToolInputCRUDType
 > = z.nativeEnum(CreateAgentAgentToolInputCRUDType);
-
 /** @internal */
 export const CreateAgentAgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentAgentToolInputCRUDType
 > = CreateAgentAgentToolInputCRUDType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAgentToolInputCRUDType$ {
-  /** @deprecated use `CreateAgentAgentToolInputCRUDType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentAgentToolInputCRUDType$inboundSchema;
-  /** @deprecated use `CreateAgentAgentToolInputCRUDType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentAgentToolInputCRUDType$outboundSchema;
-}
 
 /** @internal */
 export const WebScraperTool$inboundSchema: z.ZodType<
@@ -5515,7 +4450,6 @@ export const WebScraperTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type WebScraperTool$Outbound = {
   type: string;
@@ -5536,23 +4470,9 @@ export const WebScraperTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebScraperTool$ {
-  /** @deprecated use `WebScraperTool$inboundSchema` instead. */
-  export const inboundSchema = WebScraperTool$inboundSchema;
-  /** @deprecated use `WebScraperTool$outboundSchema` instead. */
-  export const outboundSchema = WebScraperTool$outboundSchema;
-  /** @deprecated use `WebScraperTool$Outbound` instead. */
-  export type Outbound = WebScraperTool$Outbound;
-}
-
 export function webScraperToolToJSON(webScraperTool: WebScraperTool): string {
   return JSON.stringify(WebScraperTool$outboundSchema.parse(webScraperTool));
 }
-
 export function webScraperToolFromJSON(
   jsonString: string,
 ): SafeParseResult<WebScraperTool, SDKValidationError> {
@@ -5567,22 +4487,10 @@ export function webScraperToolFromJSON(
 export const AgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputCRUDType
 > = z.nativeEnum(AgentToolInputCRUDType);
-
 /** @internal */
 export const AgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputCRUDType
 > = AgentToolInputCRUDType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUDType$ {
-  /** @deprecated use `AgentToolInputCRUDType$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUDType$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUDType$outboundSchema` instead. */
-  export const outboundSchema = AgentToolInputCRUDType$outboundSchema;
-}
 
 /** @internal */
 export const GoogleSearchTool$inboundSchema: z.ZodType<
@@ -5597,7 +4505,6 @@ export const GoogleSearchTool$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type GoogleSearchTool$Outbound = {
   type: string;
@@ -5618,19 +4525,6 @@ export const GoogleSearchTool$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GoogleSearchTool$ {
-  /** @deprecated use `GoogleSearchTool$inboundSchema` instead. */
-  export const inboundSchema = GoogleSearchTool$inboundSchema;
-  /** @deprecated use `GoogleSearchTool$outboundSchema` instead. */
-  export const outboundSchema = GoogleSearchTool$outboundSchema;
-  /** @deprecated use `GoogleSearchTool$Outbound` instead. */
-  export type Outbound = GoogleSearchTool$Outbound;
-}
-
 export function googleSearchToolToJSON(
   googleSearchTool: GoogleSearchTool,
 ): string {
@@ -5638,7 +4532,6 @@ export function googleSearchToolToJSON(
     GoogleSearchTool$outboundSchema.parse(googleSearchTool),
   );
 }
-
 export function googleSearchToolFromJSON(
   jsonString: string,
 ): SafeParseResult<GoogleSearchTool, SDKValidationError> {
@@ -5670,7 +4563,6 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
 ]);
-
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
   | GoogleSearchTool$Outbound
@@ -5710,19 +4602,6 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => FunctionTool$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentToolInputCRUD$ {
-  /** @deprecated use `AgentToolInputCRUD$inboundSchema` instead. */
-  export const inboundSchema = AgentToolInputCRUD$inboundSchema;
-  /** @deprecated use `AgentToolInputCRUD$outboundSchema` instead. */
-  export const outboundSchema = AgentToolInputCRUD$outboundSchema;
-  /** @deprecated use `AgentToolInputCRUD$Outbound` instead. */
-  export type Outbound = AgentToolInputCRUD$Outbound;
-}
-
 export function agentToolInputCRUDToJSON(
   agentToolInputCRUD: AgentToolInputCRUD,
 ): string {
@@ -5730,7 +4609,6 @@ export function agentToolInputCRUDToJSON(
     AgentToolInputCRUD$outboundSchema.parse(agentToolInputCRUD),
   );
 }
-
 export function agentToolInputCRUDFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentToolInputCRUD, SDKValidationError> {
@@ -5777,7 +4655,6 @@ export const Settings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-
 /** @internal */
 export type Settings$Outbound = {
   max_iterations: number;
@@ -5840,23 +4717,9 @@ export const Settings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Settings$ {
-  /** @deprecated use `Settings$inboundSchema` instead. */
-  export const inboundSchema = Settings$inboundSchema;
-  /** @deprecated use `Settings$outboundSchema` instead. */
-  export const outboundSchema = Settings$outboundSchema;
-  /** @deprecated use `Settings$Outbound` instead. */
-  export type Outbound = Settings$Outbound;
-}
-
 export function settingsToJSON(settings: Settings): string {
   return JSON.stringify(Settings$outboundSchema.parse(settings));
 }
-
 export function settingsFromJSON(
   jsonString: string,
 ): SafeParseResult<Settings, SDKValidationError> {
@@ -5879,7 +4742,6 @@ export const KnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type KnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -5898,23 +4760,9 @@ export const KnowledgeBases$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace KnowledgeBases$ {
-  /** @deprecated use `KnowledgeBases$inboundSchema` instead. */
-  export const inboundSchema = KnowledgeBases$inboundSchema;
-  /** @deprecated use `KnowledgeBases$outboundSchema` instead. */
-  export const outboundSchema = KnowledgeBases$outboundSchema;
-  /** @deprecated use `KnowledgeBases$Outbound` instead. */
-  export type Outbound = KnowledgeBases$Outbound;
-}
-
 export function knowledgeBasesToJSON(knowledgeBases: KnowledgeBases): string {
   return JSON.stringify(KnowledgeBases$outboundSchema.parse(knowledgeBases));
 }
-
 export function knowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<KnowledgeBases, SDKValidationError> {
@@ -5934,7 +4782,6 @@ export const TeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-
 /** @internal */
 export type TeamOfAgents$Outbound = {
   key: string;
@@ -5951,23 +4798,9 @@ export const TeamOfAgents$outboundSchema: z.ZodType<
   role: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TeamOfAgents$ {
-  /** @deprecated use `TeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = TeamOfAgents$inboundSchema;
-  /** @deprecated use `TeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = TeamOfAgents$outboundSchema;
-  /** @deprecated use `TeamOfAgents$Outbound` instead. */
-  export type Outbound = TeamOfAgents$Outbound;
-}
-
 export function teamOfAgentsToJSON(teamOfAgents: TeamOfAgents): string {
   return JSON.stringify(TeamOfAgents$outboundSchema.parse(teamOfAgents));
 }
-
 export function teamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<TeamOfAgents, SDKValidationError> {
@@ -5990,9 +4823,12 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   description: z.string(),
   instructions: z.string(),
   system_prompt: z.string().optional(),
-  model: z.union([z.lazy(() => Model2$inboundSchema), z.string()]),
+  model: z.union([z.lazy(() => ModelConfiguration2$inboundSchema), z.string()]),
   fallback_models: z.array(
-    z.union([z.lazy(() => FallbackModels2$inboundSchema), z.string()]),
+    z.union([
+      z.lazy(() => FallbackModelConfiguration2$inboundSchema),
+      z.string(),
+    ]),
   ).optional(),
   settings: z.lazy(() => Settings$inboundSchema),
   memory_stores: z.array(z.string()).optional(),
@@ -6008,7 +4844,6 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
     "team_of_agents": "teamOfAgents",
   });
 });
-
 /** @internal */
 export type CreateAgentRequestBody$Outbound = {
   path: string;
@@ -6017,8 +4852,10 @@ export type CreateAgentRequestBody$Outbound = {
   description: string;
   instructions: string;
   system_prompt?: string | undefined;
-  model: Model2$Outbound | string;
-  fallback_models?: Array<FallbackModels2$Outbound | string> | undefined;
+  model: ModelConfiguration2$Outbound | string;
+  fallback_models?:
+    | Array<FallbackModelConfiguration2$Outbound | string>
+    | undefined;
   settings: Settings$Outbound;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
@@ -6037,9 +4874,15 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   description: z.string(),
   instructions: z.string(),
   systemPrompt: z.string().optional(),
-  model: z.union([z.lazy(() => Model2$outboundSchema), z.string()]),
+  model: z.union([
+    z.lazy(() => ModelConfiguration2$outboundSchema),
+    z.string(),
+  ]),
   fallbackModels: z.array(
-    z.union([z.lazy(() => FallbackModels2$outboundSchema), z.string()]),
+    z.union([
+      z.lazy(() => FallbackModelConfiguration2$outboundSchema),
+      z.string(),
+    ]),
   ).optional(),
   settings: z.lazy(() => Settings$outboundSchema),
   memoryStores: z.array(z.string()).optional(),
@@ -6056,19 +4899,6 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentRequestBody$ {
-  /** @deprecated use `CreateAgentRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentRequestBody$inboundSchema;
-  /** @deprecated use `CreateAgentRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentRequestBody$outboundSchema;
-  /** @deprecated use `CreateAgentRequestBody$Outbound` instead. */
-  export type Outbound = CreateAgentRequestBody$Outbound;
-}
-
 export function createAgentRequestBodyToJSON(
   createAgentRequestBody: CreateAgentRequestBody,
 ): string {
@@ -6076,7 +4906,6 @@ export function createAgentRequestBodyToJSON(
     CreateAgentRequestBody$outboundSchema.parse(createAgentRequestBody),
   );
 }
-
 export function createAgentRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentRequestBody, SDKValidationError> {
@@ -6091,43 +4920,19 @@ export function createAgentRequestBodyFromJSON(
 export const CreateAgentStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentStatus
 > = z.nativeEnum(CreateAgentStatus);
-
 /** @internal */
 export const CreateAgentStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentStatus
 > = CreateAgentStatus$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentStatus$ {
-  /** @deprecated use `CreateAgentStatus$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentStatus$inboundSchema;
-  /** @deprecated use `CreateAgentStatus$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentStatus$outboundSchema;
-}
-
 /** @internal */
 export const CreateAgentToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolApprovalRequired
 > = z.nativeEnum(CreateAgentToolApprovalRequired);
-
 /** @internal */
 export const CreateAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolApprovalRequired
 > = CreateAgentToolApprovalRequired$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolApprovalRequired$ {
-  /** @deprecated use `CreateAgentToolApprovalRequired$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolApprovalRequired$inboundSchema;
-  /** @deprecated use `CreateAgentToolApprovalRequired$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolApprovalRequired$outboundSchema;
-}
 
 /** @internal */
 export const Conditions$inboundSchema: z.ZodType<
@@ -6139,7 +4944,6 @@ export const Conditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-
 /** @internal */
 export type Conditions$Outbound = {
   condition: string;
@@ -6158,23 +4962,9 @@ export const Conditions$outboundSchema: z.ZodType<
   value: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Conditions$ {
-  /** @deprecated use `Conditions$inboundSchema` instead. */
-  export const inboundSchema = Conditions$inboundSchema;
-  /** @deprecated use `Conditions$outboundSchema` instead. */
-  export const outboundSchema = Conditions$outboundSchema;
-  /** @deprecated use `Conditions$Outbound` instead. */
-  export type Outbound = Conditions$Outbound;
-}
-
 export function conditionsToJSON(conditions: Conditions): string {
   return JSON.stringify(Conditions$outboundSchema.parse(conditions));
 }
-
 export function conditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<Conditions, SDKValidationError> {
@@ -6206,7 +4996,6 @@ export const CreateAgentTools$inboundSchema: z.ZodType<
     "requires_approval": "requiresApproval",
   });
 });
-
 /** @internal */
 export type CreateAgentTools$Outbound = {
   id: string;
@@ -6241,19 +5030,6 @@ export const CreateAgentTools$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentTools$ {
-  /** @deprecated use `CreateAgentTools$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentTools$inboundSchema;
-  /** @deprecated use `CreateAgentTools$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentTools$outboundSchema;
-  /** @deprecated use `CreateAgentTools$Outbound` instead. */
-  export type Outbound = CreateAgentTools$Outbound;
-}
-
 export function createAgentToolsToJSON(
   createAgentTools: CreateAgentTools,
 ): string {
@@ -6261,7 +5037,6 @@ export function createAgentToolsToJSON(
     CreateAgentTools$outboundSchema.parse(createAgentTools),
   );
 }
-
 export function createAgentToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentTools, SDKValidationError> {
@@ -6291,7 +5066,6 @@ export const CreateAgentSettings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-
 /** @internal */
 export type CreateAgentSettings$Outbound = {
   max_iterations: number;
@@ -6320,19 +5094,6 @@ export const CreateAgentSettings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentSettings$ {
-  /** @deprecated use `CreateAgentSettings$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentSettings$inboundSchema;
-  /** @deprecated use `CreateAgentSettings$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentSettings$outboundSchema;
-  /** @deprecated use `CreateAgentSettings$Outbound` instead. */
-  export type Outbound = CreateAgentSettings$Outbound;
-}
-
 export function createAgentSettingsToJSON(
   createAgentSettings: CreateAgentSettings,
 ): string {
@@ -6340,7 +5101,6 @@ export function createAgentSettingsToJSON(
     CreateAgentSettings$outboundSchema.parse(createAgentSettings),
   );
 }
-
 export function createAgentSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentSettings, SDKValidationError> {
@@ -6355,43 +5115,19 @@ export function createAgentSettingsFromJSON(
 export const CreateAgentVoice$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentVoice
 > = z.nativeEnum(CreateAgentVoice);
-
 /** @internal */
 export const CreateAgentVoice$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentVoice
 > = CreateAgentVoice$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentVoice$ {
-  /** @deprecated use `CreateAgentVoice$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentVoice$inboundSchema;
-  /** @deprecated use `CreateAgentVoice$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentVoice$outboundSchema;
-}
-
 /** @internal */
 export const CreateAgentFormat$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentFormat
 > = z.nativeEnum(CreateAgentFormat);
-
 /** @internal */
 export const CreateAgentFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentFormat
 > = CreateAgentFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFormat$ {
-  /** @deprecated use `CreateAgentFormat$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFormat$inboundSchema;
-  /** @deprecated use `CreateAgentFormat$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFormat$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentAudio$inboundSchema: z.ZodType<
@@ -6402,7 +5138,6 @@ export const CreateAgentAudio$inboundSchema: z.ZodType<
   voice: CreateAgentVoice$inboundSchema,
   format: CreateAgentFormat$inboundSchema,
 });
-
 /** @internal */
 export type CreateAgentAudio$Outbound = {
   voice: string;
@@ -6419,19 +5154,6 @@ export const CreateAgentAudio$outboundSchema: z.ZodType<
   format: CreateAgentFormat$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentAudio$ {
-  /** @deprecated use `CreateAgentAudio$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentAudio$inboundSchema;
-  /** @deprecated use `CreateAgentAudio$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentAudio$outboundSchema;
-  /** @deprecated use `CreateAgentAudio$Outbound` instead. */
-  export type Outbound = CreateAgentAudio$Outbound;
-}
-
 export function createAgentAudioToJSON(
   createAgentAudio: CreateAgentAudio,
 ): string {
@@ -6439,7 +5161,6 @@ export function createAgentAudioToJSON(
     CreateAgentAudio$outboundSchema.parse(createAgentAudio),
   );
 }
-
 export function createAgentAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentAudio, SDKValidationError> {
@@ -6457,7 +5178,6 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inbou
   > = z.nativeEnum(
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONType,
   );
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema:
   z.ZodNativeEnum<
@@ -6465,33 +5185,20 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outbo
   > =
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
-
+export const CreateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
 /** @internal */
-export type CreateAgentResponseFormatJsonSchema$Outbound = {
+export type CreateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
@@ -6499,119 +5206,108 @@ export type CreateAgentResponseFormatJsonSchema$Outbound = {
 };
 
 /** @internal */
-export const CreateAgentResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseFormatJsonSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+export const CreateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponseJsonSchema$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsResponseJsonSchema
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatJsonSchema$ {
-  /** @deprecated use `CreateAgentResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatJsonSchema$Outbound;
-}
-
-export function createAgentResponseFormatJsonSchemaToJSON(
-  createAgentResponseFormatJsonSchema: CreateAgentResponseFormatJsonSchema,
+export function createAgentResponseFormatAgentsResponseJsonSchemaToJSON(
+  createAgentResponseFormatAgentsResponseJsonSchema:
+    CreateAgentResponseFormatAgentsResponseJsonSchema,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatJsonSchema$outboundSchema.parse(
-      createAgentResponseFormatJsonSchema,
+    CreateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema.parse(
+      createAgentResponseFormatAgentsResponseJsonSchema,
     ),
   );
 }
-
-export function createAgentResponseFormatJsonSchemaFromJSON(
+export function createAgentResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentResponseFormatAgentsResponseJsonSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormatJsonSchema' from JSON`,
+      CreateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseFormatAgentsResponseJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentResponseFormatAgents3$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema,
-  json_schema: z.lazy(() => CreateAgentResponseFormatJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
+export const CreateAgentResponseFormatAgentsResponse201JSONSchema$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponse201JSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema,
+    json_schema: z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
   });
-});
-
 /** @internal */
-export type CreateAgentResponseFormatAgents3$Outbound = {
+export type CreateAgentResponseFormatAgentsResponse201JSONSchema$Outbound = {
   type: string;
-  json_schema: CreateAgentResponseFormatJsonSchema$Outbound;
+  json_schema: CreateAgentResponseFormatAgentsResponseJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreateAgentResponseFormatAgents3$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents3$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseFormatAgents3
-> = z.object({
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema,
-  jsonSchema: z.lazy(() => CreateAgentResponseFormatJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
+export const CreateAgentResponseFormatAgentsResponse201JSONSchema$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponse201JSONSchema$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsResponse201JSONSchema
+  > = z.object({
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema,
+    jsonSchema: z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
   });
-});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgents3$ {
-  /** @deprecated use `CreateAgentResponseFormatAgents3$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormatAgents3$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents3$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormatAgents3$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents3$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgents3$Outbound;
-}
-
-export function createAgentResponseFormatAgents3ToJSON(
-  createAgentResponseFormatAgents3: CreateAgentResponseFormatAgents3,
+export function createAgentResponseFormatAgentsResponse201JSONSchemaToJSON(
+  createAgentResponseFormatAgentsResponse201JSONSchema:
+    CreateAgentResponseFormatAgentsResponse201JSONSchema,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgents3$outboundSchema.parse(
-      createAgentResponseFormatAgents3,
+    CreateAgentResponseFormatAgentsResponse201JSONSchema$outboundSchema.parse(
+      createAgentResponseFormatAgentsResponse201JSONSchema,
     ),
   );
 }
-
-export function createAgentResponseFormatAgents3FromJSON(
+export function createAgentResponseFormatAgentsResponse201JSONSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormatAgents3, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentResponseFormatAgentsResponse201JSONSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormatAgents3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormatAgents3' from JSON`,
+    (x) =>
+      CreateAgentResponseFormatAgentsResponse201JSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseFormatAgentsResponse201JSONSchema' from JSON`,
   );
 }
 
@@ -6619,78 +5315,50 @@ export function createAgentResponseFormatAgents3FromJSON(
 export const CreateAgentResponseFormatAgentsResponse201Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsResponse201Type> = z
     .nativeEnum(CreateAgentResponseFormatAgentsResponse201Type);
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponse201Type$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsResponse201Type> =
     CreateAgentResponseFormatAgentsResponse201Type$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse201Type$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse201Type$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse201Type$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatAgents2$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents2,
+export const CreateAgentResponseFormatJSONObject$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatAgentsResponse201Type$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormatAgents2$Outbound = {
+export type CreateAgentResponseFormatJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormatAgents2$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents2$Outbound,
+export const CreateAgentResponseFormatJSONObject$outboundSchema: z.ZodType<
+  CreateAgentResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormatAgents2
+  CreateAgentResponseFormatJSONObject
 > = z.object({
   type: CreateAgentResponseFormatAgentsResponse201Type$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgents2$ {
-  /** @deprecated use `CreateAgentResponseFormatAgents2$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormatAgents2$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents2$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormatAgents2$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents2$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgents2$Outbound;
-}
-
-export function createAgentResponseFormatAgents2ToJSON(
-  createAgentResponseFormatAgents2: CreateAgentResponseFormatAgents2,
+export function createAgentResponseFormatJSONObjectToJSON(
+  createAgentResponseFormatJSONObject: CreateAgentResponseFormatJSONObject,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgents2$outboundSchema.parse(
-      createAgentResponseFormatAgents2,
+    CreateAgentResponseFormatJSONObject$outboundSchema.parse(
+      createAgentResponseFormatJSONObject,
     ),
   );
 }
-
-export function createAgentResponseFormatAgents2FromJSON(
+export function createAgentResponseFormatJSONObjectFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormatAgents2, SDKValidationError> {
+): SafeParseResult<CreateAgentResponseFormatJSONObject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormatAgents2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormatAgents2' from JSON`,
+    (x) =>
+      CreateAgentResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatJSONObject' from JSON`,
   );
 }
 
@@ -6698,78 +5366,49 @@ export function createAgentResponseFormatAgents2FromJSON(
 export const CreateAgentResponseFormatAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsResponseType> = z
     .nativeEnum(CreateAgentResponseFormatAgentsResponseType);
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentResponseFormatAgentsResponseType> =
     CreateAgentResponseFormatAgentsResponseType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponseType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponseType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponseType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatAgents1$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents1,
+export const CreateAgentResponseFormatText$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentResponseFormatAgentsResponseType$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormatAgents1$Outbound = {
+export type CreateAgentResponseFormatText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormatAgents1$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgents1$Outbound,
+export const CreateAgentResponseFormatText$outboundSchema: z.ZodType<
+  CreateAgentResponseFormatText$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormatAgents1
+  CreateAgentResponseFormatText
 > = z.object({
   type: CreateAgentResponseFormatAgentsResponseType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgents1$ {
-  /** @deprecated use `CreateAgentResponseFormatAgents1$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormatAgents1$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents1$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormatAgents1$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgents1$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgents1$Outbound;
-}
-
-export function createAgentResponseFormatAgents1ToJSON(
-  createAgentResponseFormatAgents1: CreateAgentResponseFormatAgents1,
+export function createAgentResponseFormatTextToJSON(
+  createAgentResponseFormatText: CreateAgentResponseFormatText,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgents1$outboundSchema.parse(
-      createAgentResponseFormatAgents1,
+    CreateAgentResponseFormatText$outboundSchema.parse(
+      createAgentResponseFormatText,
     ),
   );
 }
-
-export function createAgentResponseFormatAgents1FromJSON(
+export function createAgentResponseFormatTextFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentResponseFormatAgents1, SDKValidationError> {
+): SafeParseResult<CreateAgentResponseFormatText, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentResponseFormatAgents1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseFormatAgents1' from JSON`,
+    (x) => CreateAgentResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatText' from JSON`,
   );
 }
 
@@ -6779,16 +5418,17 @@ export const CreateAgentResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateAgentResponseFormatAgents3$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgents1$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgents2$inboundSchema),
+  z.lazy(() =>
+    CreateAgentResponseFormatAgentsResponse201JSONSchema$inboundSchema
+  ),
+  z.lazy(() => CreateAgentResponseFormatText$inboundSchema),
+  z.lazy(() => CreateAgentResponseFormatJSONObject$inboundSchema),
 ]);
-
 /** @internal */
 export type CreateAgentResponseFormat$Outbound =
-  | CreateAgentResponseFormatAgents3$Outbound
-  | CreateAgentResponseFormatAgents1$Outbound
-  | CreateAgentResponseFormatAgents2$Outbound;
+  | CreateAgentResponseFormatAgentsResponse201JSONSchema$Outbound
+  | CreateAgentResponseFormatText$Outbound
+  | CreateAgentResponseFormatJSONObject$Outbound;
 
 /** @internal */
 export const CreateAgentResponseFormat$outboundSchema: z.ZodType<
@@ -6796,23 +5436,12 @@ export const CreateAgentResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentResponseFormat
 > = z.union([
-  z.lazy(() => CreateAgentResponseFormatAgents3$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgents1$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgents2$outboundSchema),
+  z.lazy(() =>
+    CreateAgentResponseFormatAgentsResponse201JSONSchema$outboundSchema
+  ),
+  z.lazy(() => CreateAgentResponseFormatText$outboundSchema),
+  z.lazy(() => CreateAgentResponseFormatJSONObject$outboundSchema),
 ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormat$ {
-  /** @deprecated use `CreateAgentResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseFormat$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseFormat$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormat$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormat$Outbound;
-}
 
 export function createAgentResponseFormatToJSON(
   createAgentResponseFormat: CreateAgentResponseFormat,
@@ -6821,7 +5450,6 @@ export function createAgentResponseFormatToJSON(
     CreateAgentResponseFormat$outboundSchema.parse(createAgentResponseFormat),
   );
 }
-
 export function createAgentResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentResponseFormat, SDKValidationError> {
@@ -6838,7 +5466,6 @@ export const CreateAgentStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type CreateAgentStop$Outbound = string | Array<string>;
 
@@ -6849,25 +5476,11 @@ export const CreateAgentStop$outboundSchema: z.ZodType<
   CreateAgentStop
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentStop$ {
-  /** @deprecated use `CreateAgentStop$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentStop$inboundSchema;
-  /** @deprecated use `CreateAgentStop$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentStop$outboundSchema;
-  /** @deprecated use `CreateAgentStop$Outbound` instead. */
-  export type Outbound = CreateAgentStop$Outbound;
-}
-
 export function createAgentStopToJSON(
   createAgentStop: CreateAgentStop,
 ): string {
   return JSON.stringify(CreateAgentStop$outboundSchema.parse(createAgentStop));
 }
-
 export function createAgentStopFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentStop, SDKValidationError> {
@@ -6890,7 +5503,6 @@ export const CreateAgentStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-
 /** @internal */
 export type CreateAgentStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -6909,19 +5521,6 @@ export const CreateAgentStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentStreamOptions$ {
-  /** @deprecated use `CreateAgentStreamOptions$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentStreamOptions$inboundSchema;
-  /** @deprecated use `CreateAgentStreamOptions$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentStreamOptions$outboundSchema;
-  /** @deprecated use `CreateAgentStreamOptions$Outbound` instead. */
-  export type Outbound = CreateAgentStreamOptions$Outbound;
-}
-
 export function createAgentStreamOptionsToJSON(
   createAgentStreamOptions: CreateAgentStreamOptions,
 ): string {
@@ -6929,7 +5528,6 @@ export function createAgentStreamOptionsToJSON(
     CreateAgentStreamOptions$outboundSchema.parse(createAgentStreamOptions),
   );
 }
-
 export function createAgentStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentStreamOptions, SDKValidationError> {
@@ -6944,22 +5542,10 @@ export function createAgentStreamOptionsFromJSON(
 export const CreateAgentType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentType
 > = z.nativeEnum(CreateAgentType);
-
 /** @internal */
 export const CreateAgentType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentType
 > = CreateAgentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentType$ {
-  /** @deprecated use `CreateAgentType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentType$inboundSchema;
-  /** @deprecated use `CreateAgentType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentType$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentThinking$inboundSchema: z.ZodType<
@@ -6974,7 +5560,6 @@ export const CreateAgentThinking$inboundSchema: z.ZodType<
     "budget_tokens": "budgetTokens",
   });
 });
-
 /** @internal */
 export type CreateAgentThinking$Outbound = {
   type: string;
@@ -6995,19 +5580,6 @@ export const CreateAgentThinking$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentThinking$ {
-  /** @deprecated use `CreateAgentThinking$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentThinking$inboundSchema;
-  /** @deprecated use `CreateAgentThinking$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentThinking$outboundSchema;
-  /** @deprecated use `CreateAgentThinking$Outbound` instead. */
-  export type Outbound = CreateAgentThinking$Outbound;
-}
-
 export function createAgentThinkingToJSON(
   createAgentThinking: CreateAgentThinking,
 ): string {
@@ -7015,7 +5587,6 @@ export function createAgentThinkingToJSON(
     CreateAgentThinking$outboundSchema.parse(createAgentThinking),
   );
 }
-
 export function createAgentThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentThinking, SDKValidationError> {
@@ -7030,22 +5601,10 @@ export function createAgentThinkingFromJSON(
 export const CreateAgentToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceAgentsType
 > = z.nativeEnum(CreateAgentToolChoiceAgentsType);
-
 /** @internal */
 export const CreateAgentToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceAgentsType
 > = CreateAgentToolChoiceAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsType$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoiceAgentsType$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoiceAgentsType$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
@@ -7055,7 +5614,6 @@ export const CreateAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
 /** @internal */
 export type CreateAgentToolChoiceAgentsFunction$Outbound = {
   name?: string | undefined;
@@ -7070,21 +5628,6 @@ export const CreateAgentToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsFunction$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentToolChoiceAgentsFunction$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentToolChoiceAgentsFunction$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsFunction$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoiceAgentsFunction$Outbound;
-}
-
 export function createAgentToolChoiceAgentsFunctionToJSON(
   createAgentToolChoiceAgentsFunction: CreateAgentToolChoiceAgentsFunction,
 ): string {
@@ -7094,7 +5637,6 @@ export function createAgentToolChoiceAgentsFunctionToJSON(
     ),
   );
 }
-
 export function createAgentToolChoiceAgentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoiceAgentsFunction, SDKValidationError> {
@@ -7115,7 +5657,6 @@ export const CreateAgentToolChoiceAgents2$inboundSchema: z.ZodType<
   type: CreateAgentToolChoiceAgentsType$inboundSchema.optional(),
   function: z.lazy(() => CreateAgentToolChoiceAgentsFunction$inboundSchema),
 });
-
 /** @internal */
 export type CreateAgentToolChoiceAgents2$Outbound = {
   type?: string | undefined;
@@ -7132,19 +5673,6 @@ export const CreateAgentToolChoiceAgents2$outboundSchema: z.ZodType<
   function: z.lazy(() => CreateAgentToolChoiceAgentsFunction$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgents2$ {
-  /** @deprecated use `CreateAgentToolChoiceAgents2$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoiceAgents2$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgents2$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoiceAgents2$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgents2$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoiceAgents2$Outbound;
-}
-
 export function createAgentToolChoiceAgents2ToJSON(
   createAgentToolChoiceAgents2: CreateAgentToolChoiceAgents2,
 ): string {
@@ -7154,7 +5682,6 @@ export function createAgentToolChoiceAgents2ToJSON(
     ),
   );
 }
-
 export function createAgentToolChoiceAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoiceAgents2, SDKValidationError> {
@@ -7169,22 +5696,10 @@ export function createAgentToolChoiceAgents2FromJSON(
 export const CreateAgentToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceAgents1
 > = z.nativeEnum(CreateAgentToolChoiceAgents1);
-
 /** @internal */
 export const CreateAgentToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentToolChoiceAgents1
 > = CreateAgentToolChoiceAgents1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgents1$ {
-  /** @deprecated use `CreateAgentToolChoiceAgents1$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoiceAgents1$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgents1$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoiceAgents1$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentToolChoice$inboundSchema: z.ZodType<
@@ -7195,7 +5710,6 @@ export const CreateAgentToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => CreateAgentToolChoiceAgents2$inboundSchema),
   CreateAgentToolChoiceAgents1$inboundSchema,
 ]);
-
 /** @internal */
 export type CreateAgentToolChoice$Outbound =
   | CreateAgentToolChoiceAgents2$Outbound
@@ -7211,19 +5725,6 @@ export const CreateAgentToolChoice$outboundSchema: z.ZodType<
   CreateAgentToolChoiceAgents1$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoice$ {
-  /** @deprecated use `CreateAgentToolChoice$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentToolChoice$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoice$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentToolChoice$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoice$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoice$Outbound;
-}
-
 export function createAgentToolChoiceToJSON(
   createAgentToolChoice: CreateAgentToolChoice,
 ): string {
@@ -7231,7 +5732,6 @@ export function createAgentToolChoiceToJSON(
     CreateAgentToolChoice$outboundSchema.parse(createAgentToolChoice),
   );
 }
-
 export function createAgentToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoice, SDKValidationError> {
@@ -7246,78 +5746,10 @@ export function createAgentToolChoiceFromJSON(
 export const CreateAgentModalities$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentModalities
 > = z.nativeEnum(CreateAgentModalities);
-
 /** @internal */
 export const CreateAgentModalities$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentModalities
 > = CreateAgentModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentModalities$ {
-  /** @deprecated use `CreateAgentModalities$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentModalities$inboundSchema;
-  /** @deprecated use `CreateAgentModalities$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentModalities$outboundSchema;
-}
-
-/** @internal */
-export const CreateAgentWebSearchOptions$inboundSchema: z.ZodType<
-  CreateAgentWebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/** @internal */
-export type CreateAgentWebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const CreateAgentWebSearchOptions$outboundSchema: z.ZodType<
-  CreateAgentWebSearchOptions$Outbound,
-  z.ZodTypeDef,
-  CreateAgentWebSearchOptions
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentWebSearchOptions$ {
-  /** @deprecated use `CreateAgentWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentWebSearchOptions$inboundSchema;
-  /** @deprecated use `CreateAgentWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentWebSearchOptions$outboundSchema;
-  /** @deprecated use `CreateAgentWebSearchOptions$Outbound` instead. */
-  export type Outbound = CreateAgentWebSearchOptions$Outbound;
-}
-
-export function createAgentWebSearchOptionsToJSON(
-  createAgentWebSearchOptions: CreateAgentWebSearchOptions,
-): string {
-  return JSON.stringify(
-    CreateAgentWebSearchOptions$outboundSchema.parse(
-      createAgentWebSearchOptions,
-    ),
-  );
-}
-
-export function createAgentWebSearchOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentWebSearchOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentWebSearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentWebSearchOptions' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateAgentParameters$inboundSchema: z.ZodType<
@@ -7334,9 +5766,11 @@ export const CreateAgentParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => CreateAgentResponseFormatAgents3$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgents1$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgents2$inboundSchema),
+    z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201JSONSchema$inboundSchema
+    ),
+    z.lazy(() => CreateAgentResponseFormatText$inboundSchema),
+    z.lazy(() => CreateAgentResponseFormatJSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -7356,8 +5790,6 @@ export const CreateAgentParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(CreateAgentModalities$inboundSchema))
     .optional(),
-  web_search_options: z.lazy(() => CreateAgentWebSearchOptions$inboundSchema)
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -7372,10 +5804,8 @@ export const CreateAgentParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
   });
 });
-
 /** @internal */
 export type CreateAgentParameters$Outbound = {
   audio?: CreateAgentAudio$Outbound | null | undefined;
@@ -7387,9 +5817,9 @@ export type CreateAgentParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentResponseFormatAgents3$Outbound
-    | CreateAgentResponseFormatAgents1$Outbound
-    | CreateAgentResponseFormatAgents2$Outbound
+    | CreateAgentResponseFormatAgentsResponse201JSONSchema$Outbound
+    | CreateAgentResponseFormatText$Outbound
+    | CreateAgentResponseFormatJSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -7403,7 +5833,6 @@ export type CreateAgentParameters$Outbound = {
   tool_choice?: CreateAgentToolChoiceAgents2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?: CreateAgentWebSearchOptions$Outbound | undefined;
 };
 
 /** @internal */
@@ -7421,9 +5850,11 @@ export const CreateAgentParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => CreateAgentResponseFormatAgents3$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgents1$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgents2$outboundSchema),
+    z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201JSONSchema$outboundSchema
+    ),
+    z.lazy(() => CreateAgentResponseFormatText$outboundSchema),
+    z.lazy(() => CreateAgentResponseFormatJSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -7443,8 +5874,6 @@ export const CreateAgentParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(CreateAgentModalities$outboundSchema))
     .optional(),
-  webSearchOptions: z.lazy(() => CreateAgentWebSearchOptions$outboundSchema)
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -7459,22 +5888,8 @@ export const CreateAgentParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
   });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentParameters$ {
-  /** @deprecated use `CreateAgentParameters$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentParameters$inboundSchema;
-  /** @deprecated use `CreateAgentParameters$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentParameters$outboundSchema;
-  /** @deprecated use `CreateAgentParameters$Outbound` instead. */
-  export type Outbound = CreateAgentParameters$Outbound;
-}
 
 export function createAgentParametersToJSON(
   createAgentParameters: CreateAgentParameters,
@@ -7483,7 +5898,6 @@ export function createAgentParametersToJSON(
     CreateAgentParameters$outboundSchema.parse(createAgentParameters),
   );
 }
-
 export function createAgentParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentParameters, SDKValidationError> {
@@ -7495,103 +5909,70 @@ export function createAgentParametersFromJSON(
 }
 
 /** @internal */
-export const CreateAgentFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsVoice
-> = z.nativeEnum(CreateAgentFallbackModelsVoice);
+export const CreateAgentFallbackModelConfigurationVoice$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationVoice> = z
+    .nativeEnum(CreateAgentFallbackModelConfigurationVoice);
+/** @internal */
+export const CreateAgentFallbackModelConfigurationVoice$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationVoice> =
+    CreateAgentFallbackModelConfigurationVoice$inboundSchema;
 
 /** @internal */
-export const CreateAgentFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsVoice
-> = CreateAgentFallbackModelsVoice$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsVoice$ {
-  /** @deprecated use `CreateAgentFallbackModelsVoice$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsVoice$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsVoice$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModelsVoice$outboundSchema;
-}
+export const CreateAgentFallbackModelConfigurationFormat$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationFormat> = z
+    .nativeEnum(CreateAgentFallbackModelConfigurationFormat);
+/** @internal */
+export const CreateAgentFallbackModelConfigurationFormat$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationFormat> =
+    CreateAgentFallbackModelConfigurationFormat$inboundSchema;
 
 /** @internal */
-export const CreateAgentFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsFormat
-> = z.nativeEnum(CreateAgentFallbackModelsFormat);
-
+export const CreateAgentFallbackModelConfigurationAudio$inboundSchema:
+  z.ZodType<CreateAgentFallbackModelConfigurationAudio, z.ZodTypeDef, unknown> =
+    z.object({
+      voice: CreateAgentFallbackModelConfigurationVoice$inboundSchema,
+      format: CreateAgentFallbackModelConfigurationFormat$inboundSchema,
+    });
 /** @internal */
-export const CreateAgentFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsFormat
-> = CreateAgentFallbackModelsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsFormat$ {
-  /** @deprecated use `CreateAgentFallbackModelsFormat$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsFormat$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsFormat$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModelsFormat$outboundSchema;
-}
-
-/** @internal */
-export const CreateAgentFallbackModelsAudio$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: CreateAgentFallbackModelsVoice$inboundSchema,
-  format: CreateAgentFallbackModelsFormat$inboundSchema,
-});
-
-/** @internal */
-export type CreateAgentFallbackModelsAudio$Outbound = {
+export type CreateAgentFallbackModelConfigurationAudio$Outbound = {
   voice: string;
   format: string;
 };
 
 /** @internal */
-export const CreateAgentFallbackModelsAudio$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsAudio$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsAudio
-> = z.object({
-  voice: CreateAgentFallbackModelsVoice$outboundSchema,
-  format: CreateAgentFallbackModelsFormat$outboundSchema,
-});
+export const CreateAgentFallbackModelConfigurationAudio$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationAudio$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationAudio
+  > = z.object({
+    voice: CreateAgentFallbackModelConfigurationVoice$outboundSchema,
+    format: CreateAgentFallbackModelConfigurationFormat$outboundSchema,
+  });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsAudio$ {
-  /** @deprecated use `CreateAgentFallbackModelsAudio$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsAudio$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsAudio$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModelsAudio$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsAudio$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsAudio$Outbound;
-}
-
-export function createAgentFallbackModelsAudioToJSON(
-  createAgentFallbackModelsAudio: CreateAgentFallbackModelsAudio,
+export function createAgentFallbackModelConfigurationAudioToJSON(
+  createAgentFallbackModelConfigurationAudio:
+    CreateAgentFallbackModelConfigurationAudio,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsAudio$outboundSchema.parse(
-      createAgentFallbackModelsAudio,
+    CreateAgentFallbackModelConfigurationAudio$outboundSchema.parse(
+      createAgentFallbackModelConfigurationAudio,
     ),
   );
 }
-
-export function createAgentFallbackModelsAudioFromJSON(
+export function createAgentFallbackModelConfigurationAudioFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsAudio, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentFallbackModelConfigurationAudio,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentFallbackModelsAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsAudio' from JSON`,
+    (x) =>
+      CreateAgentFallbackModelConfigurationAudio$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -7602,7 +5983,6 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > = z.nativeEnum(
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType,
   );
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema:
   z.ZodNativeEnum<
@@ -7610,45 +5990,33 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > =
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
-
-/** @internal */
-export type CreateAgentResponseFormatAgentsJsonSchema$Outbound = {
-  description?: string | undefined;
-  name: string;
-  schema?: any | undefined;
-  strict?: boolean | undefined;
-};
-
-/** @internal */
-export const CreateAgentResponseFormatAgentsJsonSchema$outboundSchema:
+export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema:
   z.ZodType<
-    CreateAgentResponseFormatAgentsJsonSchema$Outbound,
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
     z.ZodTypeDef,
-    CreateAgentResponseFormatAgentsJsonSchema
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().optional(),
+  });
+/** @internal */
+export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$Outbound =
+  {
+    description?: string | undefined;
+    name: string;
+    schema?: any | undefined;
+    strict?: boolean | undefined;
+  };
+
+/** @internal */
+export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema
   > = z.object({
     description: z.string().optional(),
     name: z.string(),
@@ -7656,127 +6024,98 @@ export const CreateAgentResponseFormatAgentsJsonSchema$outboundSchema:
     strict: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsJsonSchema$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsJsonSchema$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsJsonSchema$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsJsonSchema$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgentsJsonSchema$Outbound;
-}
-
-export function createAgentResponseFormatAgentsJsonSchemaToJSON(
-  createAgentResponseFormatAgentsJsonSchema:
-    CreateAgentResponseFormatAgentsJsonSchema,
+export function createAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchemaToJSON(
+  createAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema:
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgentsJsonSchema$outboundSchema.parse(
-      createAgentResponseFormatAgentsJsonSchema,
-    ),
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$outboundSchema
+      .parse(
+        createAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
+      ),
   );
 }
-
-export function createAgentResponseFormatAgentsJsonSchemaFromJSON(
+export function createAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentResponseFormatAgentsJsonSchema,
+  CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentResponseFormatAgentsJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAgentResponseFormatAgentsJsonSchema' from JSON`,
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentResponseFormatAgentsResponse3$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema,
-  json_schema: z.lazy(() =>
-    CreateAgentResponseFormatAgentsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
+export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema,
+    json_schema: z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
   });
-});
+/** @internal */
+export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound =
+  {
+    type: string;
+    json_schema:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$Outbound;
+  };
 
 /** @internal */
-export type CreateAgentResponseFormatAgentsResponse3$Outbound = {
-  type: string;
-  json_schema: CreateAgentResponseFormatAgentsJsonSchema$Outbound;
-};
-
-/** @internal */
-export const CreateAgentResponseFormatAgentsResponse3$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse3$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseFormatAgentsResponse3
-> = z.object({
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    CreateAgentResponseFormatAgentsJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
+export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
+  > = z.object({
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema,
+    jsonSchema: z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
   });
-});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse3$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse3$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse3$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse3$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse3$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse3$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgentsResponse3$Outbound;
-}
-
-export function createAgentResponseFormatAgentsResponse3ToJSON(
-  createAgentResponseFormatAgentsResponse3:
-    CreateAgentResponseFormatAgentsResponse3,
+export function createAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchemaToJSON(
+  createAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema:
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgentsResponse3$outboundSchema.parse(
-      createAgentResponseFormatAgentsResponse3,
-    ),
+    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
+      .parse(
+        createAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema,
+      ),
   );
 }
-
-export function createAgentResponseFormatAgentsResponse3FromJSON(
+export function createAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentResponseFormatAgentsResponse3,
+  CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentResponseFormatAgentsResponse3$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAgentResponseFormatAgentsResponse3' from JSON`,
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema' from JSON`,
   );
 }
 
@@ -7787,7 +6126,6 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > = z.nativeEnum(
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType,
   );
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema:
   z.ZodNativeEnum<
@@ -7795,83 +6133,54 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > =
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatAgentsResponse2$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse2,
+export const CreateAgentResponseFormatAgentsJSONObject$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatAgentsJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type:
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormatAgentsResponse2$Outbound = {
+export type CreateAgentResponseFormatAgentsJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormatAgentsResponse2$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse2$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseFormatAgentsResponse2
-> = z.object({
-  type:
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema,
-});
+export const CreateAgentResponseFormatAgentsJSONObject$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseFormatAgentsJSONObject$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseFormatAgentsJSONObject
+  > = z.object({
+    type:
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema,
+  });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse2$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse2$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse2$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse2$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgentsResponse2$Outbound;
-}
-
-export function createAgentResponseFormatAgentsResponse2ToJSON(
-  createAgentResponseFormatAgentsResponse2:
-    CreateAgentResponseFormatAgentsResponse2,
+export function createAgentResponseFormatAgentsJSONObjectToJSON(
+  createAgentResponseFormatAgentsJSONObject:
+    CreateAgentResponseFormatAgentsJSONObject,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgentsResponse2$outboundSchema.parse(
-      createAgentResponseFormatAgentsResponse2,
+    CreateAgentResponseFormatAgentsJSONObject$outboundSchema.parse(
+      createAgentResponseFormatAgentsJSONObject,
     ),
   );
 }
-
-export function createAgentResponseFormatAgentsResponse2FromJSON(
+export function createAgentResponseFormatAgentsJSONObjectFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentResponseFormatAgentsResponse2,
+  CreateAgentResponseFormatAgentsJSONObject,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentResponseFormatAgentsResponse2$inboundSchema.parse(
+      CreateAgentResponseFormatAgentsJSONObject$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateAgentResponseFormatAgentsResponse2' from JSON`,
+    `Failed to parse 'CreateAgentResponseFormatAgentsJSONObject' from JSON`,
   );
 }
 
@@ -7882,7 +6191,6 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > = z.nativeEnum(
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType,
   );
-
 /** @internal */
 export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema:
   z.ZodNativeEnum<
@@ -7890,360 +6198,279 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBo
   > =
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentResponseFormatAgentsResponse1$inboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse1,
+export const CreateAgentResponseFormatAgentsText$inboundSchema: z.ZodType<
+  CreateAgentResponseFormatAgentsText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type:
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema,
 });
-
 /** @internal */
-export type CreateAgentResponseFormatAgentsResponse1$Outbound = {
+export type CreateAgentResponseFormatAgentsText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateAgentResponseFormatAgentsResponse1$outboundSchema: z.ZodType<
-  CreateAgentResponseFormatAgentsResponse1$Outbound,
+export const CreateAgentResponseFormatAgentsText$outboundSchema: z.ZodType<
+  CreateAgentResponseFormatAgentsText$Outbound,
   z.ZodTypeDef,
-  CreateAgentResponseFormatAgentsResponse1
+  CreateAgentResponseFormatAgentsText
 > = z.object({
   type:
     CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseFormatAgentsResponse1$ {
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentResponseFormatAgentsResponse1$inboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentResponseFormatAgentsResponse1$outboundSchema;
-  /** @deprecated use `CreateAgentResponseFormatAgentsResponse1$Outbound` instead. */
-  export type Outbound = CreateAgentResponseFormatAgentsResponse1$Outbound;
-}
-
-export function createAgentResponseFormatAgentsResponse1ToJSON(
-  createAgentResponseFormatAgentsResponse1:
-    CreateAgentResponseFormatAgentsResponse1,
+export function createAgentResponseFormatAgentsTextToJSON(
+  createAgentResponseFormatAgentsText: CreateAgentResponseFormatAgentsText,
 ): string {
   return JSON.stringify(
-    CreateAgentResponseFormatAgentsResponse1$outboundSchema.parse(
-      createAgentResponseFormatAgentsResponse1,
+    CreateAgentResponseFormatAgentsText$outboundSchema.parse(
+      createAgentResponseFormatAgentsText,
     ),
   );
 }
+export function createAgentResponseFormatAgentsTextFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentResponseFormatAgentsText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentResponseFormatAgentsText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseFormatAgentsText' from JSON`,
+  );
+}
 
-export function createAgentResponseFormatAgentsResponse1FromJSON(
+/** @internal */
+export const CreateAgentFallbackModelConfigurationResponseFormat$inboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationResponseFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+    ),
+    z.lazy(() => CreateAgentResponseFormatAgentsText$inboundSchema),
+    z.lazy(() => CreateAgentResponseFormatAgentsJSONObject$inboundSchema),
+  ]);
+/** @internal */
+export type CreateAgentFallbackModelConfigurationResponseFormat$Outbound =
+  | CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound
+  | CreateAgentResponseFormatAgentsText$Outbound
+  | CreateAgentResponseFormatAgentsJSONObject$Outbound;
+
+/** @internal */
+export const CreateAgentFallbackModelConfigurationResponseFormat$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationResponseFormat$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationResponseFormat
+  > = z.union([
+    z.lazy(() =>
+      CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
+    ),
+    z.lazy(() => CreateAgentResponseFormatAgentsText$outboundSchema),
+    z.lazy(() => CreateAgentResponseFormatAgentsJSONObject$outboundSchema),
+  ]);
+
+export function createAgentFallbackModelConfigurationResponseFormatToJSON(
+  createAgentFallbackModelConfigurationResponseFormat:
+    CreateAgentFallbackModelConfigurationResponseFormat,
+): string {
+  return JSON.stringify(
+    CreateAgentFallbackModelConfigurationResponseFormat$outboundSchema.parse(
+      createAgentFallbackModelConfigurationResponseFormat,
+    ),
+  );
+}
+export function createAgentFallbackModelConfigurationResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentResponseFormatAgentsResponse1,
+  CreateAgentFallbackModelConfigurationResponseFormat,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentResponseFormatAgentsResponse1$inboundSchema.parse(
+      CreateAgentFallbackModelConfigurationResponseFormat$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateAgentResponseFormatAgentsResponse1' from JSON`,
+    `Failed to parse 'CreateAgentFallbackModelConfigurationResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentFallbackModelsResponseFormat$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsResponseFormat,
+export const CreateAgentFallbackModelConfigurationStop$inboundSchema: z.ZodType<
+  CreateAgentFallbackModelConfigurationStop,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse3$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse1$inboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse2$inboundSchema),
-]);
+> = z.union([z.string(), z.array(z.string())]);
+/** @internal */
+export type CreateAgentFallbackModelConfigurationStop$Outbound =
+  | string
+  | Array<string>;
 
 /** @internal */
-export type CreateAgentFallbackModelsResponseFormat$Outbound =
-  | CreateAgentResponseFormatAgentsResponse3$Outbound
-  | CreateAgentResponseFormatAgentsResponse1$Outbound
-  | CreateAgentResponseFormatAgentsResponse2$Outbound;
+export const CreateAgentFallbackModelConfigurationStop$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationStop$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationStop
+  > = z.union([z.string(), z.array(z.string())]);
 
-/** @internal */
-export const CreateAgentFallbackModelsResponseFormat$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsResponseFormat$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsResponseFormat
-> = z.union([
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse3$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse1$outboundSchema),
-  z.lazy(() => CreateAgentResponseFormatAgentsResponse2$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsResponseFormat$ {
-  /** @deprecated use `CreateAgentFallbackModelsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsResponseFormat$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsResponseFormat$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsResponseFormat$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsResponseFormat$Outbound;
-}
-
-export function createAgentFallbackModelsResponseFormatToJSON(
-  createAgentFallbackModelsResponseFormat:
-    CreateAgentFallbackModelsResponseFormat,
+export function createAgentFallbackModelConfigurationStopToJSON(
+  createAgentFallbackModelConfigurationStop:
+    CreateAgentFallbackModelConfigurationStop,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsResponseFormat$outboundSchema.parse(
-      createAgentFallbackModelsResponseFormat,
+    CreateAgentFallbackModelConfigurationStop$outboundSchema.parse(
+      createAgentFallbackModelConfigurationStop,
     ),
   );
 }
-
-export function createAgentFallbackModelsResponseFormatFromJSON(
+export function createAgentFallbackModelConfigurationStopFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentFallbackModelsResponseFormat,
+  CreateAgentFallbackModelConfigurationStop,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentFallbackModelsResponseFormat$inboundSchema.parse(
+      CreateAgentFallbackModelConfigurationStop$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateAgentFallbackModelsResponseFormat' from JSON`,
+    `Failed to parse 'CreateAgentFallbackModelConfigurationStop' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentFallbackModelsStop$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
-
-/** @internal */
-export type CreateAgentFallbackModelsStop$Outbound = string | Array<string>;
-
-/** @internal */
-export const CreateAgentFallbackModelsStop$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsStop$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsStop
-> = z.union([z.string(), z.array(z.string())]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsStop$ {
-  /** @deprecated use `CreateAgentFallbackModelsStop$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsStop$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsStop$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModelsStop$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsStop$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsStop$Outbound;
-}
-
-export function createAgentFallbackModelsStopToJSON(
-  createAgentFallbackModelsStop: CreateAgentFallbackModelsStop,
-): string {
-  return JSON.stringify(
-    CreateAgentFallbackModelsStop$outboundSchema.parse(
-      createAgentFallbackModelsStop,
-    ),
-  );
-}
-
-export function createAgentFallbackModelsStopFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsStop, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentFallbackModelsStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentFallbackModelsStreamOptions$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
+export const CreateAgentFallbackModelConfigurationStreamOptions$inboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationStreamOptions,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    include_usage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+    });
   });
-});
-
 /** @internal */
-export type CreateAgentFallbackModelsStreamOptions$Outbound = {
+export type CreateAgentFallbackModelConfigurationStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
 };
 
 /** @internal */
-export const CreateAgentFallbackModelsStreamOptions$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsStreamOptions$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
+export const CreateAgentFallbackModelConfigurationStreamOptions$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationStreamOptions$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationStreamOptions
+  > = z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
   });
-});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsStreamOptions$ {
-  /** @deprecated use `CreateAgentFallbackModelsStreamOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsStreamOptions$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsStreamOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsStreamOptions$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsStreamOptions$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsStreamOptions$Outbound;
-}
-
-export function createAgentFallbackModelsStreamOptionsToJSON(
-  createAgentFallbackModelsStreamOptions:
-    CreateAgentFallbackModelsStreamOptions,
+export function createAgentFallbackModelConfigurationStreamOptionsToJSON(
+  createAgentFallbackModelConfigurationStreamOptions:
+    CreateAgentFallbackModelConfigurationStreamOptions,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsStreamOptions$outboundSchema.parse(
-      createAgentFallbackModelsStreamOptions,
+    CreateAgentFallbackModelConfigurationStreamOptions$outboundSchema.parse(
+      createAgentFallbackModelConfigurationStreamOptions,
     ),
   );
 }
-
-export function createAgentFallbackModelsStreamOptionsFromJSON(
+export function createAgentFallbackModelConfigurationStreamOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsStreamOptions, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentFallbackModelConfigurationStreamOptions,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentFallbackModelsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsStreamOptions' from JSON`,
+      CreateAgentFallbackModelConfigurationStreamOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentFallbackModelsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsType
-> = z.nativeEnum(CreateAgentFallbackModelsType);
+export const CreateAgentFallbackModelConfigurationType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationType> = z
+    .nativeEnum(CreateAgentFallbackModelConfigurationType);
+/** @internal */
+export const CreateAgentFallbackModelConfigurationType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationType> =
+    CreateAgentFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
-export const CreateAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsType
-> = CreateAgentFallbackModelsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsType$ {
-  /** @deprecated use `CreateAgentFallbackModelsType$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsType$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsType$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModelsType$outboundSchema;
-}
-
-/** @internal */
-export const CreateAgentFallbackModelsThinking$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsThinking,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateAgentFallbackModelsType$inboundSchema,
-  budget_tokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
+export const CreateAgentFallbackModelConfigurationThinking$inboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationThinking,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: CreateAgentFallbackModelConfigurationType$inboundSchema,
+    budget_tokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_tokens": "budgetTokens",
+    });
   });
-});
-
 /** @internal */
-export type CreateAgentFallbackModelsThinking$Outbound = {
+export type CreateAgentFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
 };
 
 /** @internal */
-export const CreateAgentFallbackModelsThinking$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsThinking$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsThinking
-> = z.object({
-  type: CreateAgentFallbackModelsType$outboundSchema,
-  budgetTokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
+export const CreateAgentFallbackModelConfigurationThinking$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationThinking$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationThinking
+  > = z.object({
+    type: CreateAgentFallbackModelConfigurationType$outboundSchema,
+    budgetTokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetTokens: "budget_tokens",
+    });
   });
-});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsThinking$ {
-  /** @deprecated use `CreateAgentFallbackModelsThinking$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModelsThinking$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsThinking$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsThinking$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsThinking$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsThinking$Outbound;
-}
-
-export function createAgentFallbackModelsThinkingToJSON(
-  createAgentFallbackModelsThinking: CreateAgentFallbackModelsThinking,
+export function createAgentFallbackModelConfigurationThinkingToJSON(
+  createAgentFallbackModelConfigurationThinking:
+    CreateAgentFallbackModelConfigurationThinking,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsThinking$outboundSchema.parse(
-      createAgentFallbackModelsThinking,
+    CreateAgentFallbackModelConfigurationThinking$outboundSchema.parse(
+      createAgentFallbackModelConfigurationThinking,
     ),
   );
 }
-
-export function createAgentFallbackModelsThinkingFromJSON(
+export function createAgentFallbackModelConfigurationThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsThinking, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentFallbackModelConfigurationThinking,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentFallbackModelsThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsThinking' from JSON`,
+    (x) =>
+      CreateAgentFallbackModelConfigurationThinking$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentFallbackModelConfigurationThinking' from JSON`,
   );
 }
 
@@ -8251,24 +6478,10 @@ export function createAgentFallbackModelsThinkingFromJSON(
 export const CreateAgentToolChoiceAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentToolChoiceAgentsResponseType> = z
     .nativeEnum(CreateAgentToolChoiceAgentsResponseType);
-
 /** @internal */
 export const CreateAgentToolChoiceAgentsResponseType$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentToolChoiceAgentsResponseType> =
     CreateAgentToolChoiceAgentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsResponseType$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentToolChoiceAgentsResponseType$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentToolChoiceAgentsResponseType$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentToolChoiceAgentsResponseFunction$inboundSchema:
@@ -8279,7 +6492,6 @@ export const CreateAgentToolChoiceAgentsResponseFunction$inboundSchema:
   > = z.object({
     name: z.string().optional(),
   });
-
 /** @internal */
 export type CreateAgentToolChoiceAgentsResponseFunction$Outbound = {
   name?: string | undefined;
@@ -8295,21 +6507,6 @@ export const CreateAgentToolChoiceAgentsResponseFunction$outboundSchema:
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsResponseFunction$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponseFunction$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentToolChoiceAgentsResponseFunction$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponseFunction$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentToolChoiceAgentsResponseFunction$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponseFunction$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoiceAgentsResponseFunction$Outbound;
-}
-
 export function createAgentToolChoiceAgentsResponseFunctionToJSON(
   createAgentToolChoiceAgentsResponseFunction:
     CreateAgentToolChoiceAgentsResponseFunction,
@@ -8320,7 +6517,6 @@ export function createAgentToolChoiceAgentsResponseFunctionToJSON(
     ),
   );
 }
-
 export function createAgentToolChoiceAgentsResponseFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8348,7 +6544,6 @@ export const CreateAgentToolChoiceAgentsResponse2$inboundSchema: z.ZodType<
     CreateAgentToolChoiceAgentsResponseFunction$inboundSchema
   ),
 });
-
 /** @internal */
 export type CreateAgentToolChoiceAgentsResponse2$Outbound = {
   type?: string | undefined;
@@ -8367,21 +6562,6 @@ export const CreateAgentToolChoiceAgentsResponse2$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsResponse2$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentToolChoiceAgentsResponse2$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentToolChoiceAgentsResponse2$outboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponse2$Outbound` instead. */
-  export type Outbound = CreateAgentToolChoiceAgentsResponse2$Outbound;
-}
-
 export function createAgentToolChoiceAgentsResponse2ToJSON(
   createAgentToolChoiceAgentsResponse2: CreateAgentToolChoiceAgentsResponse2,
 ): string {
@@ -8391,7 +6571,6 @@ export function createAgentToolChoiceAgentsResponse2ToJSON(
     ),
   );
 }
-
 export function createAgentToolChoiceAgentsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentToolChoiceAgentsResponse2, SDKValidationError> {
@@ -8408,239 +6587,141 @@ export const CreateAgentToolChoiceAgentsResponse1$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentToolChoiceAgentsResponse1> = z.nativeEnum(
     CreateAgentToolChoiceAgentsResponse1,
   );
-
 /** @internal */
 export const CreateAgentToolChoiceAgentsResponse1$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentToolChoiceAgentsResponse1> =
     CreateAgentToolChoiceAgentsResponse1$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentToolChoiceAgentsResponse1$ {
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentToolChoiceAgentsResponse1$inboundSchema;
-  /** @deprecated use `CreateAgentToolChoiceAgentsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentToolChoiceAgentsResponse1$outboundSchema;
-}
-
 /** @internal */
-export const CreateAgentFallbackModelsToolChoice$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateAgentToolChoiceAgentsResponse2$inboundSchema),
-  CreateAgentToolChoiceAgentsResponse1$inboundSchema,
-]);
-
+export const CreateAgentFallbackModelConfigurationToolChoice$inboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationToolChoice,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => CreateAgentToolChoiceAgentsResponse2$inboundSchema),
+    CreateAgentToolChoiceAgentsResponse1$inboundSchema,
+  ]);
 /** @internal */
-export type CreateAgentFallbackModelsToolChoice$Outbound =
+export type CreateAgentFallbackModelConfigurationToolChoice$Outbound =
   | CreateAgentToolChoiceAgentsResponse2$Outbound
   | string;
 
 /** @internal */
-export const CreateAgentFallbackModelsToolChoice$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsToolChoice$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModelsToolChoice
-> = z.union([
-  z.lazy(() => CreateAgentToolChoiceAgentsResponse2$outboundSchema),
-  CreateAgentToolChoiceAgentsResponse1$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsToolChoice$ {
-  /** @deprecated use `CreateAgentFallbackModelsToolChoice$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsToolChoice$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsToolChoice$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsToolChoice$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsToolChoice$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsToolChoice$Outbound;
-}
-
-export function createAgentFallbackModelsToolChoiceToJSON(
-  createAgentFallbackModelsToolChoice: CreateAgentFallbackModelsToolChoice,
-): string {
-  return JSON.stringify(
-    CreateAgentFallbackModelsToolChoice$outboundSchema.parse(
-      createAgentFallbackModelsToolChoice,
-    ),
-  );
-}
-
-export function createAgentFallbackModelsToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentFallbackModelsToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsToolChoice' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentFallbackModelsModalities$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentFallbackModelsModalities
-> = z.nativeEnum(CreateAgentFallbackModelsModalities);
-
-/** @internal */
-export const CreateAgentFallbackModelsModalities$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentFallbackModelsModalities> =
-    CreateAgentFallbackModelsModalities$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsModalities$ {
-  /** @deprecated use `CreateAgentFallbackModelsModalities$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsModalities$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsModalities$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsModalities$outboundSchema;
-}
-
-/** @internal */
-export const CreateAgentFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsWebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-/** @internal */
-export type CreateAgentFallbackModelsWebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const CreateAgentFallbackModelsWebSearchOptions$outboundSchema:
+export const CreateAgentFallbackModelConfigurationToolChoice$outboundSchema:
   z.ZodType<
-    CreateAgentFallbackModelsWebSearchOptions$Outbound,
+    CreateAgentFallbackModelConfigurationToolChoice$Outbound,
     z.ZodTypeDef,
-    CreateAgentFallbackModelsWebSearchOptions
-  > = z.object({
-    enabled: z.boolean().optional(),
-  });
+    CreateAgentFallbackModelConfigurationToolChoice
+  > = z.union([
+    z.lazy(() => CreateAgentToolChoiceAgentsResponse2$outboundSchema),
+    CreateAgentToolChoiceAgentsResponse1$outboundSchema,
+  ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsWebSearchOptions$ {
-  /** @deprecated use `CreateAgentFallbackModelsWebSearchOptions$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsWebSearchOptions$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsWebSearchOptions$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsWebSearchOptions$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsWebSearchOptions$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsWebSearchOptions$Outbound;
-}
-
-export function createAgentFallbackModelsWebSearchOptionsToJSON(
-  createAgentFallbackModelsWebSearchOptions:
-    CreateAgentFallbackModelsWebSearchOptions,
+export function createAgentFallbackModelConfigurationToolChoiceToJSON(
+  createAgentFallbackModelConfigurationToolChoice:
+    CreateAgentFallbackModelConfigurationToolChoice,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsWebSearchOptions$outboundSchema.parse(
-      createAgentFallbackModelsWebSearchOptions,
+    CreateAgentFallbackModelConfigurationToolChoice$outboundSchema.parse(
+      createAgentFallbackModelConfigurationToolChoice,
     ),
   );
 }
-
-export function createAgentFallbackModelsWebSearchOptionsFromJSON(
+export function createAgentFallbackModelConfigurationToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentFallbackModelsWebSearchOptions,
+  CreateAgentFallbackModelConfigurationToolChoice,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentFallbackModelsWebSearchOptions$inboundSchema.parse(
+      CreateAgentFallbackModelConfigurationToolChoice$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateAgentFallbackModelsWebSearchOptions' from JSON`,
+    `Failed to parse 'CreateAgentFallbackModelConfigurationToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentFallbackModelsParameters$inboundSchema: z.ZodType<
-  CreateAgentFallbackModelsParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  audio: z.nullable(z.lazy(() => CreateAgentFallbackModelsAudio$inboundSchema))
-    .optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse3$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse1$inboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse2$inboundSchema),
-  ]).optional(),
-  reasoning_effort: z.string().optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => CreateAgentFallbackModelsStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.lazy(() => CreateAgentFallbackModelsThinking$inboundSchema)
-    .optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => CreateAgentToolChoiceAgentsResponse2$inboundSchema),
-    CreateAgentToolChoiceAgentsResponse1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(
-    z.array(CreateAgentFallbackModelsModalities$inboundSchema),
-  ).optional(),
-  web_search_options: z.lazy(() =>
-    CreateAgentFallbackModelsWebSearchOptions$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
-  });
-});
+export const CreateAgentFallbackModelConfigurationModalities$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationModalities> = z
+    .nativeEnum(CreateAgentFallbackModelConfigurationModalities);
+/** @internal */
+export const CreateAgentFallbackModelConfigurationModalities$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationModalities> =
+    CreateAgentFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
-export type CreateAgentFallbackModelsParameters$Outbound = {
-  audio?: CreateAgentFallbackModelsAudio$Outbound | null | undefined;
+export const CreateAgentFallbackModelConfigurationParameters$inboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationParameters,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    audio: z.nullable(
+      z.lazy(() => CreateAgentFallbackModelConfigurationAudio$inboundSchema),
+    ).optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    top_logprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() =>
+        CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+      ),
+      z.lazy(() => CreateAgentResponseFormatAgentsText$inboundSchema),
+      z.lazy(() => CreateAgentResponseFormatAgentsJSONObject$inboundSchema),
+    ]).optional(),
+    reasoning_effort: z.string().optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    stream_options: z.nullable(
+      z.lazy(() =>
+        CreateAgentFallbackModelConfigurationStreamOptions$inboundSchema
+      ),
+    ).optional(),
+    thinking: z.lazy(() =>
+      CreateAgentFallbackModelConfigurationThinking$inboundSchema
+    ).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => CreateAgentToolChoiceAgentsResponse2$inboundSchema),
+      CreateAgentToolChoiceAgentsResponse1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(CreateAgentFallbackModelConfigurationModalities$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "top_logprobs": "topLogprobs",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "stream_options": "streamOptions",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+    });
+  });
+/** @internal */
+export type CreateAgentFallbackModelConfigurationParameters$Outbound = {
+  audio?:
+    | CreateAgentFallbackModelConfigurationAudio$Outbound
+    | null
+    | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
@@ -8649,19 +6730,19 @@ export type CreateAgentFallbackModelsParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentResponseFormatAgentsResponse3$Outbound
-    | CreateAgentResponseFormatAgentsResponse1$Outbound
-    | CreateAgentResponseFormatAgentsResponse2$Outbound
+    | CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound
+    | CreateAgentResponseFormatAgentsText$Outbound
+    | CreateAgentResponseFormatAgentsJSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
   stream_options?:
-    | CreateAgentFallbackModelsStreamOptions$Outbound
+    | CreateAgentFallbackModelConfigurationStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: CreateAgentFallbackModelsThinking$Outbound | undefined;
+  thinking?: CreateAgentFallbackModelConfigurationThinking$Outbound | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -8671,231 +6752,191 @@ export type CreateAgentFallbackModelsParameters$Outbound = {
     | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?:
-    | CreateAgentFallbackModelsWebSearchOptions$Outbound
+};
+
+/** @internal */
+export const CreateAgentFallbackModelConfigurationParameters$outboundSchema:
+  z.ZodType<
+    CreateAgentFallbackModelConfigurationParameters$Outbound,
+    z.ZodTypeDef,
+    CreateAgentFallbackModelConfigurationParameters
+  > = z.object({
+    audio: z.nullable(
+      z.lazy(() => CreateAgentFallbackModelConfigurationAudio$outboundSchema),
+    ).optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    topLogprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() =>
+        CreateAgentResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
+      ),
+      z.lazy(() => CreateAgentResponseFormatAgentsText$outboundSchema),
+      z.lazy(() => CreateAgentResponseFormatAgentsJSONObject$outboundSchema),
+    ]).optional(),
+    reasoningEffort: z.string().optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    streamOptions: z.nullable(
+      z.lazy(() =>
+        CreateAgentFallbackModelConfigurationStreamOptions$outboundSchema
+      ),
+    ).optional(),
+    thinking: z.lazy(() =>
+      CreateAgentFallbackModelConfigurationThinking$outboundSchema
+    ).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    toolChoice: z.union([
+      z.lazy(() => CreateAgentToolChoiceAgentsResponse2$outboundSchema),
+      CreateAgentToolChoiceAgentsResponse1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(CreateAgentFallbackModelConfigurationModalities$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      topLogprobs: "top_logprobs",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      streamOptions: "stream_options",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+    });
+  });
+
+export function createAgentFallbackModelConfigurationParametersToJSON(
+  createAgentFallbackModelConfigurationParameters:
+    CreateAgentFallbackModelConfigurationParameters,
+): string {
+  return JSON.stringify(
+    CreateAgentFallbackModelConfigurationParameters$outboundSchema.parse(
+      createAgentFallbackModelConfigurationParameters,
+    ),
+  );
+}
+export function createAgentFallbackModelConfigurationParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateAgentFallbackModelConfigurationParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentFallbackModelConfigurationParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentFallbackModelConfigurationParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
+  CreateAgentFallbackModelConfiguration2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  parameters: z.lazy(() =>
+    CreateAgentFallbackModelConfigurationParameters$inboundSchema
+  ).optional(),
+});
+/** @internal */
+export type CreateAgentFallbackModelConfiguration2$Outbound = {
+  id: string;
+  parameters?:
+    | CreateAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
 };
 
 /** @internal */
-export const CreateAgentFallbackModelsParameters$outboundSchema: z.ZodType<
-  CreateAgentFallbackModelsParameters$Outbound,
+export const CreateAgentFallbackModelConfiguration2$outboundSchema: z.ZodType<
+  CreateAgentFallbackModelConfiguration2$Outbound,
   z.ZodTypeDef,
-  CreateAgentFallbackModelsParameters
+  CreateAgentFallbackModelConfiguration2
 > = z.object({
-  audio: z.nullable(z.lazy(() => CreateAgentFallbackModelsAudio$outboundSchema))
-    .optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse3$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse1$outboundSchema),
-    z.lazy(() => CreateAgentResponseFormatAgentsResponse2$outboundSchema),
-  ]).optional(),
-  reasoningEffort: z.string().optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => CreateAgentFallbackModelsStreamOptions$outboundSchema),
+  id: z.string(),
+  parameters: z.lazy(() =>
+    CreateAgentFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
-  thinking: z.lazy(() => CreateAgentFallbackModelsThinking$outboundSchema)
-    .optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => CreateAgentToolChoiceAgentsResponse2$outboundSchema),
-    CreateAgentToolChoiceAgentsResponse1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(
-    z.array(CreateAgentFallbackModelsModalities$outboundSchema),
-  ).optional(),
-  webSearchOptions: z.lazy(() =>
-    CreateAgentFallbackModelsWebSearchOptions$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
-  });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModelsParameters$ {
-  /** @deprecated use `CreateAgentFallbackModelsParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAgentFallbackModelsParameters$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAgentFallbackModelsParameters$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModelsParameters$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModelsParameters$Outbound;
-}
-
-export function createAgentFallbackModelsParametersToJSON(
-  createAgentFallbackModelsParameters: CreateAgentFallbackModelsParameters,
+export function createAgentFallbackModelConfiguration2ToJSON(
+  createAgentFallbackModelConfiguration2:
+    CreateAgentFallbackModelConfiguration2,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModelsParameters$outboundSchema.parse(
-      createAgentFallbackModelsParameters,
+    CreateAgentFallbackModelConfiguration2$outboundSchema.parse(
+      createAgentFallbackModelConfiguration2,
     ),
   );
 }
-
-export function createAgentFallbackModelsParametersFromJSON(
+export function createAgentFallbackModelConfiguration2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentFallbackModelsParameters, SDKValidationError> {
+): SafeParseResult<CreateAgentFallbackModelConfiguration2, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentFallbackModelsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModelsParameters' from JSON`,
+      CreateAgentFallbackModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentFallbackModelConfiguration2' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateAgentFallbackModels2$inboundSchema: z.ZodType<
-  CreateAgentFallbackModels2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => CreateAgentFallbackModelsParameters$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-  });
-});
-
-/** @internal */
-export type CreateAgentFallbackModels2$Outbound = {
-  id: string;
-  integration_id?: string | null | undefined;
-  parameters?: CreateAgentFallbackModelsParameters$Outbound | undefined;
-};
-
-/** @internal */
-export const CreateAgentFallbackModels2$outboundSchema: z.ZodType<
-  CreateAgentFallbackModels2$Outbound,
-  z.ZodTypeDef,
-  CreateAgentFallbackModels2
-> = z.object({
-  id: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => CreateAgentFallbackModelsParameters$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModels2$ {
-  /** @deprecated use `CreateAgentFallbackModels2$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModels2$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModels2$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModels2$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModels2$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModels2$Outbound;
-}
-
-export function createAgentFallbackModels2ToJSON(
-  createAgentFallbackModels2: CreateAgentFallbackModels2,
-): string {
-  return JSON.stringify(
-    CreateAgentFallbackModels2$outboundSchema.parse(createAgentFallbackModels2),
-  );
-}
-
-export function createAgentFallbackModels2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentFallbackModels2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentFallbackModels2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModels2' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentFallbackModels$inboundSchema: z.ZodType<
-  CreateAgentFallbackModels,
+export const CreateAgentFallbackModelConfiguration$inboundSchema: z.ZodType<
+  CreateAgentFallbackModelConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateAgentFallbackModels2$inboundSchema),
+  z.lazy(() => CreateAgentFallbackModelConfiguration2$inboundSchema),
   z.string(),
 ]);
-
 /** @internal */
-export type CreateAgentFallbackModels$Outbound =
-  | CreateAgentFallbackModels2$Outbound
+export type CreateAgentFallbackModelConfiguration$Outbound =
+  | CreateAgentFallbackModelConfiguration2$Outbound
   | string;
 
 /** @internal */
-export const CreateAgentFallbackModels$outboundSchema: z.ZodType<
-  CreateAgentFallbackModels$Outbound,
+export const CreateAgentFallbackModelConfiguration$outboundSchema: z.ZodType<
+  CreateAgentFallbackModelConfiguration$Outbound,
   z.ZodTypeDef,
-  CreateAgentFallbackModels
+  CreateAgentFallbackModelConfiguration
 > = z.union([
-  z.lazy(() => CreateAgentFallbackModels2$outboundSchema),
+  z.lazy(() => CreateAgentFallbackModelConfiguration2$outboundSchema),
   z.string(),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentFallbackModels$ {
-  /** @deprecated use `CreateAgentFallbackModels$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentFallbackModels$inboundSchema;
-  /** @deprecated use `CreateAgentFallbackModels$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentFallbackModels$outboundSchema;
-  /** @deprecated use `CreateAgentFallbackModels$Outbound` instead. */
-  export type Outbound = CreateAgentFallbackModels$Outbound;
-}
-
-export function createAgentFallbackModelsToJSON(
-  createAgentFallbackModels: CreateAgentFallbackModels,
+export function createAgentFallbackModelConfigurationToJSON(
+  createAgentFallbackModelConfiguration: CreateAgentFallbackModelConfiguration,
 ): string {
   return JSON.stringify(
-    CreateAgentFallbackModels$outboundSchema.parse(createAgentFallbackModels),
+    CreateAgentFallbackModelConfiguration$outboundSchema.parse(
+      createAgentFallbackModelConfiguration,
+    ),
   );
 }
-
-export function createAgentFallbackModelsFromJSON(
+export function createAgentFallbackModelConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentFallbackModels, SDKValidationError> {
+): SafeParseResult<CreateAgentFallbackModelConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentFallbackModels$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentFallbackModels' from JSON`,
+    (x) =>
+      CreateAgentFallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentFallbackModelConfiguration' from JSON`,
   );
 }
 
@@ -8910,7 +6951,7 @@ export const CreateAgentModel$inboundSchema: z.ZodType<
   parameters: z.lazy(() => CreateAgentParameters$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
-      z.lazy(() => CreateAgentFallbackModels2$inboundSchema),
+      z.lazy(() => CreateAgentFallbackModelConfiguration2$inboundSchema),
       z.string(),
     ])),
   ).optional(),
@@ -8920,14 +6961,13 @@ export const CreateAgentModel$inboundSchema: z.ZodType<
     "fallback_models": "fallbackModels",
   });
 });
-
 /** @internal */
 export type CreateAgentModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: CreateAgentParameters$Outbound | undefined;
   fallback_models?:
-    | Array<CreateAgentFallbackModels2$Outbound | string>
+    | Array<CreateAgentFallbackModelConfiguration2$Outbound | string>
     | null
     | undefined;
 };
@@ -8943,7 +6983,7 @@ export const CreateAgentModel$outboundSchema: z.ZodType<
   parameters: z.lazy(() => CreateAgentParameters$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
-      z.lazy(() => CreateAgentFallbackModels2$outboundSchema),
+      z.lazy(() => CreateAgentFallbackModelConfiguration2$outboundSchema),
       z.string(),
     ])),
   ).optional(),
@@ -8954,19 +6994,6 @@ export const CreateAgentModel$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentModel$ {
-  /** @deprecated use `CreateAgentModel$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentModel$inboundSchema;
-  /** @deprecated use `CreateAgentModel$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentModel$outboundSchema;
-  /** @deprecated use `CreateAgentModel$Outbound` instead. */
-  export type Outbound = CreateAgentModel$Outbound;
-}
-
 export function createAgentModelToJSON(
   createAgentModel: CreateAgentModel,
 ): string {
@@ -8974,7 +7001,6 @@ export function createAgentModelToJSON(
     CreateAgentModel$outboundSchema.parse(createAgentModel),
   );
 }
-
 export function createAgentModelFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentModel, SDKValidationError> {
@@ -8994,7 +7020,6 @@ export const CreateAgentTeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-
 /** @internal */
 export type CreateAgentTeamOfAgents$Outbound = {
   key: string;
@@ -9011,19 +7036,6 @@ export const CreateAgentTeamOfAgents$outboundSchema: z.ZodType<
   role: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentTeamOfAgents$ {
-  /** @deprecated use `CreateAgentTeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentTeamOfAgents$inboundSchema;
-  /** @deprecated use `CreateAgentTeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentTeamOfAgents$outboundSchema;
-  /** @deprecated use `CreateAgentTeamOfAgents$Outbound` instead. */
-  export type Outbound = CreateAgentTeamOfAgents$Outbound;
-}
-
 export function createAgentTeamOfAgentsToJSON(
   createAgentTeamOfAgents: CreateAgentTeamOfAgents,
 ): string {
@@ -9031,7 +7043,6 @@ export function createAgentTeamOfAgentsToJSON(
     CreateAgentTeamOfAgents$outboundSchema.parse(createAgentTeamOfAgents),
   );
 }
-
 export function createAgentTeamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentTeamOfAgents, SDKValidationError> {
@@ -9051,7 +7062,6 @@ export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
       "total_cost": "totalCost",
     });
   });
-
 /** @internal */
 export type Metrics$Outbound = {
   total_cost: number;
@@ -9070,23 +7080,9 @@ export const Metrics$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Metrics$ {
-  /** @deprecated use `Metrics$inboundSchema` instead. */
-  export const inboundSchema = Metrics$inboundSchema;
-  /** @deprecated use `Metrics$outboundSchema` instead. */
-  export const outboundSchema = Metrics$outboundSchema;
-  /** @deprecated use `Metrics$Outbound` instead. */
-  export type Outbound = Metrics$Outbound;
-}
-
 export function metricsToJSON(metrics: Metrics): string {
   return JSON.stringify(Metrics$outboundSchema.parse(metrics));
 }
-
 export function metricsFromJSON(
   jsonString: string,
 ): SafeParseResult<Metrics, SDKValidationError> {
@@ -9109,7 +7105,6 @@ export const CreateAgentKnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-
 /** @internal */
 export type CreateAgentKnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -9128,19 +7123,6 @@ export const CreateAgentKnowledgeBases$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentKnowledgeBases$ {
-  /** @deprecated use `CreateAgentKnowledgeBases$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentKnowledgeBases$inboundSchema;
-  /** @deprecated use `CreateAgentKnowledgeBases$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentKnowledgeBases$outboundSchema;
-  /** @deprecated use `CreateAgentKnowledgeBases$Outbound` instead. */
-  export type Outbound = CreateAgentKnowledgeBases$Outbound;
-}
-
 export function createAgentKnowledgeBasesToJSON(
   createAgentKnowledgeBases: CreateAgentKnowledgeBases,
 ): string {
@@ -9148,7 +7130,6 @@ export function createAgentKnowledgeBasesToJSON(
     CreateAgentKnowledgeBases$outboundSchema.parse(createAgentKnowledgeBases),
   );
 }
-
 export function createAgentKnowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentKnowledgeBases, SDKValidationError> {
@@ -9162,21 +7143,9 @@ export function createAgentKnowledgeBasesFromJSON(
 /** @internal */
 export const HiddenPanels$inboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
   z.nativeEnum(HiddenPanels);
-
 /** @internal */
 export const HiddenPanels$outboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
   HiddenPanels$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HiddenPanels$ {
-  /** @deprecated use `HiddenPanels$inboundSchema` instead. */
-  export const inboundSchema = HiddenPanels$inboundSchema;
-  /** @deprecated use `HiddenPanels$outboundSchema` instead. */
-  export const outboundSchema = HiddenPanels$outboundSchema;
-}
 
 /** @internal */
 export const CreateAgentResponseBody$inboundSchema: z.ZodType<
@@ -9224,7 +7193,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
     "hidden_panels": "hiddenPanels",
   });
 });
-
 /** @internal */
 export type CreateAgentResponseBody$Outbound = {
   _id: string;
@@ -9299,19 +7267,6 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAgentResponseBody$ {
-  /** @deprecated use `CreateAgentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateAgentResponseBody$inboundSchema;
-  /** @deprecated use `CreateAgentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateAgentResponseBody$outboundSchema;
-  /** @deprecated use `CreateAgentResponseBody$Outbound` instead. */
-  export type Outbound = CreateAgentResponseBody$Outbound;
-}
-
 export function createAgentResponseBodyToJSON(
   createAgentResponseBody: CreateAgentResponseBody,
 ): string {
@@ -9319,7 +7274,6 @@ export function createAgentResponseBodyToJSON(
     CreateAgentResponseBody$outboundSchema.parse(createAgentResponseBody),
   );
 }
-
 export function createAgentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentResponseBody, SDKValidationError> {

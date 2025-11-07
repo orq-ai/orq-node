@@ -76,16 +76,3 @@ export const DeleteContactResponseBody$outboundSchema: z.ZodType<
   .pipe(z.object({
     error: z.string(),
   }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteContactResponseBody$ {
-  /** @deprecated use `DeleteContactResponseBody$inboundSchema` instead. */
-  export const inboundSchema = DeleteContactResponseBody$inboundSchema;
-  /** @deprecated use `DeleteContactResponseBody$outboundSchema` instead. */
-  export const outboundSchema = DeleteContactResponseBody$outboundSchema;
-  /** @deprecated use `DeleteContactResponseBody$Outbound` instead. */
-  export type Outbound = DeleteContactResponseBody$Outbound;
-}

@@ -27,7 +27,6 @@ export const ClearDatasetRequest$inboundSchema: z.ZodType<
     "dataset_id": "datasetId",
   });
 });
-
 /** @internal */
 export type ClearDatasetRequest$Outbound = {
   dataset_id: string;
@@ -46,19 +45,6 @@ export const ClearDatasetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ClearDatasetRequest$ {
-  /** @deprecated use `ClearDatasetRequest$inboundSchema` instead. */
-  export const inboundSchema = ClearDatasetRequest$inboundSchema;
-  /** @deprecated use `ClearDatasetRequest$outboundSchema` instead. */
-  export const outboundSchema = ClearDatasetRequest$outboundSchema;
-  /** @deprecated use `ClearDatasetRequest$Outbound` instead. */
-  export type Outbound = ClearDatasetRequest$Outbound;
-}
-
 export function clearDatasetRequestToJSON(
   clearDatasetRequest: ClearDatasetRequest,
 ): string {
@@ -66,7 +52,6 @@ export function clearDatasetRequestToJSON(
     ClearDatasetRequest$outboundSchema.parse(clearDatasetRequest),
   );
 }
-
 export function clearDatasetRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ClearDatasetRequest, SDKValidationError> {

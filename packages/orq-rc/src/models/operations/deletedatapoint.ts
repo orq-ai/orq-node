@@ -33,7 +33,6 @@ export const DeleteDatapointRequest$inboundSchema: z.ZodType<
     "datapoint_id": "datapointId",
   });
 });
-
 /** @internal */
 export type DeleteDatapointRequest$Outbound = {
   dataset_id: string;
@@ -55,19 +54,6 @@ export const DeleteDatapointRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteDatapointRequest$ {
-  /** @deprecated use `DeleteDatapointRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteDatapointRequest$inboundSchema;
-  /** @deprecated use `DeleteDatapointRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteDatapointRequest$outboundSchema;
-  /** @deprecated use `DeleteDatapointRequest$Outbound` instead. */
-  export type Outbound = DeleteDatapointRequest$Outbound;
-}
-
 export function deleteDatapointRequestToJSON(
   deleteDatapointRequest: DeleteDatapointRequest,
 ): string {
@@ -75,7 +61,6 @@ export function deleteDatapointRequestToJSON(
     DeleteDatapointRequest$outboundSchema.parse(deleteDatapointRequest),
   );
 }
-
 export function deleteDatapointRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteDatapointRequest, SDKValidationError> {

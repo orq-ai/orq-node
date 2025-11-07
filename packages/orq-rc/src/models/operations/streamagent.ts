@@ -265,43 +265,19 @@ export type StreamAgentResponseBody = {
 export const StreamAgentRoleToolMessage$inboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleToolMessage
 > = z.nativeEnum(StreamAgentRoleToolMessage);
-
 /** @internal */
 export const StreamAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleToolMessage
 > = StreamAgentRoleToolMessage$inboundSchema;
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentRoleToolMessage$ {
-  /** @deprecated use `StreamAgentRoleToolMessage$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentRoleToolMessage$inboundSchema;
-  /** @deprecated use `StreamAgentRoleToolMessage$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentRoleToolMessage$outboundSchema;
-}
-
 /** @internal */
 export const StreamAgentRoleUserMessage$inboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleUserMessage
 > = z.nativeEnum(StreamAgentRoleUserMessage);
-
 /** @internal */
 export const StreamAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleUserMessage
 > = StreamAgentRoleUserMessage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentRoleUserMessage$ {
-  /** @deprecated use `StreamAgentRoleUserMessage$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentRoleUserMessage$inboundSchema;
-  /** @deprecated use `StreamAgentRoleUserMessage$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentRoleUserMessage$outboundSchema;
-}
 
 /** @internal */
 export const StreamAgentRole$inboundSchema: z.ZodType<
@@ -312,7 +288,6 @@ export const StreamAgentRole$inboundSchema: z.ZodType<
   StreamAgentRoleUserMessage$inboundSchema,
   StreamAgentRoleToolMessage$inboundSchema,
 ]);
-
 /** @internal */
 export type StreamAgentRole$Outbound = string | string;
 
@@ -326,25 +301,11 @@ export const StreamAgentRole$outboundSchema: z.ZodType<
   StreamAgentRoleToolMessage$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentRole$ {
-  /** @deprecated use `StreamAgentRole$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentRole$inboundSchema;
-  /** @deprecated use `StreamAgentRole$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentRole$outboundSchema;
-  /** @deprecated use `StreamAgentRole$Outbound` instead. */
-  export type Outbound = StreamAgentRole$Outbound;
-}
-
 export function streamAgentRoleToJSON(
   streamAgentRole: StreamAgentRole,
 ): string {
   return JSON.stringify(StreamAgentRole$outboundSchema.parse(streamAgentRole));
 }
-
 export function streamAgentRoleFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentRole, SDKValidationError> {
@@ -359,24 +320,10 @@ export function streamAgentRoleFromJSON(
 export const StreamAgentPublicMessagePartAgentsRequestKind$inboundSchema:
   z.ZodNativeEnum<typeof StreamAgentPublicMessagePartAgentsRequestKind> = z
     .nativeEnum(StreamAgentPublicMessagePartAgentsRequestKind);
-
 /** @internal */
 export const StreamAgentPublicMessagePartAgentsRequestKind$outboundSchema:
   z.ZodNativeEnum<typeof StreamAgentPublicMessagePartAgentsRequestKind> =
     StreamAgentPublicMessagePartAgentsRequestKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartAgentsRequestKind$ {
-  /** @deprecated use `StreamAgentPublicMessagePartAgentsRequestKind$inboundSchema` instead. */
-  export const inboundSchema =
-    StreamAgentPublicMessagePartAgentsRequestKind$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartAgentsRequestKind$outboundSchema` instead. */
-  export const outboundSchema =
-    StreamAgentPublicMessagePartAgentsRequestKind$outboundSchema;
-}
 
 /** @internal */
 export const StreamAgentPublicMessagePartToolResultPart$inboundSchema:
@@ -391,7 +338,6 @@ export const StreamAgentPublicMessagePartToolResultPart$inboundSchema:
         "tool_call_id": "toolCallId",
       });
     });
-
 /** @internal */
 export type StreamAgentPublicMessagePartToolResultPart$Outbound = {
   kind: string;
@@ -417,21 +363,6 @@ export const StreamAgentPublicMessagePartToolResultPart$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartToolResultPart$ {
-  /** @deprecated use `StreamAgentPublicMessagePartToolResultPart$inboundSchema` instead. */
-  export const inboundSchema =
-    StreamAgentPublicMessagePartToolResultPart$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartToolResultPart$outboundSchema` instead. */
-  export const outboundSchema =
-    StreamAgentPublicMessagePartToolResultPart$outboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartToolResultPart$Outbound` instead. */
-  export type Outbound = StreamAgentPublicMessagePartToolResultPart$Outbound;
-}
-
 export function streamAgentPublicMessagePartToolResultPartToJSON(
   streamAgentPublicMessagePartToolResultPart:
     StreamAgentPublicMessagePartToolResultPart,
@@ -442,7 +373,6 @@ export function streamAgentPublicMessagePartToolResultPartToJSON(
     ),
   );
 }
-
 export function streamAgentPublicMessagePartToolResultPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -464,24 +394,10 @@ export const StreamAgentPublicMessagePartAgentsKind$inboundSchema:
   z.ZodNativeEnum<typeof StreamAgentPublicMessagePartAgentsKind> = z.nativeEnum(
     StreamAgentPublicMessagePartAgentsKind,
   );
-
 /** @internal */
 export const StreamAgentPublicMessagePartAgentsKind$outboundSchema:
   z.ZodNativeEnum<typeof StreamAgentPublicMessagePartAgentsKind> =
     StreamAgentPublicMessagePartAgentsKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartAgentsKind$ {
-  /** @deprecated use `StreamAgentPublicMessagePartAgentsKind$inboundSchema` instead. */
-  export const inboundSchema =
-    StreamAgentPublicMessagePartAgentsKind$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartAgentsKind$outboundSchema` instead. */
-  export const outboundSchema =
-    StreamAgentPublicMessagePartAgentsKind$outboundSchema;
-}
 
 /** @internal */
 export const StreamAgentFileFileInURIFormat$inboundSchema: z.ZodType<
@@ -493,7 +409,6 @@ export const StreamAgentFileFileInURIFormat$inboundSchema: z.ZodType<
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type StreamAgentFileFileInURIFormat$Outbound = {
   uri: string;
@@ -512,19 +427,6 @@ export const StreamAgentFileFileInURIFormat$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentFileFileInURIFormat$ {
-  /** @deprecated use `StreamAgentFileFileInURIFormat$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentFileFileInURIFormat$inboundSchema;
-  /** @deprecated use `StreamAgentFileFileInURIFormat$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentFileFileInURIFormat$outboundSchema;
-  /** @deprecated use `StreamAgentFileFileInURIFormat$Outbound` instead. */
-  export type Outbound = StreamAgentFileFileInURIFormat$Outbound;
-}
-
 export function streamAgentFileFileInURIFormatToJSON(
   streamAgentFileFileInURIFormat: StreamAgentFileFileInURIFormat,
 ): string {
@@ -534,7 +436,6 @@ export function streamAgentFileFileInURIFormatToJSON(
     ),
   );
 }
-
 export function streamAgentFileFileInURIFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentFileFileInURIFormat, SDKValidationError> {
@@ -555,7 +456,6 @@ export const StreamAgentFileBinaryFormat$inboundSchema: z.ZodType<
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
-
 /** @internal */
 export type StreamAgentFileBinaryFormat$Outbound = {
   bytes: string;
@@ -574,19 +474,6 @@ export const StreamAgentFileBinaryFormat$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentFileBinaryFormat$ {
-  /** @deprecated use `StreamAgentFileBinaryFormat$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentFileBinaryFormat$inboundSchema;
-  /** @deprecated use `StreamAgentFileBinaryFormat$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentFileBinaryFormat$outboundSchema;
-  /** @deprecated use `StreamAgentFileBinaryFormat$Outbound` instead. */
-  export type Outbound = StreamAgentFileBinaryFormat$Outbound;
-}
-
 export function streamAgentFileBinaryFormatToJSON(
   streamAgentFileBinaryFormat: StreamAgentFileBinaryFormat,
 ): string {
@@ -596,7 +483,6 @@ export function streamAgentFileBinaryFormatToJSON(
     ),
   );
 }
-
 export function streamAgentFileBinaryFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentFileBinaryFormat, SDKValidationError> {
@@ -616,7 +502,6 @@ export const StreamAgentPublicMessagePartFile$inboundSchema: z.ZodType<
   z.lazy(() => StreamAgentFileBinaryFormat$inboundSchema),
   z.lazy(() => StreamAgentFileFileInURIFormat$inboundSchema),
 ]);
-
 /** @internal */
 export type StreamAgentPublicMessagePartFile$Outbound =
   | StreamAgentFileBinaryFormat$Outbound
@@ -632,19 +517,6 @@ export const StreamAgentPublicMessagePartFile$outboundSchema: z.ZodType<
   z.lazy(() => StreamAgentFileFileInURIFormat$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartFile$ {
-  /** @deprecated use `StreamAgentPublicMessagePartFile$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentPublicMessagePartFile$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartFile$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentPublicMessagePartFile$outboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartFile$Outbound` instead. */
-  export type Outbound = StreamAgentPublicMessagePartFile$Outbound;
-}
-
 export function streamAgentPublicMessagePartFileToJSON(
   streamAgentPublicMessagePartFile: StreamAgentPublicMessagePartFile,
 ): string {
@@ -654,7 +526,6 @@ export function streamAgentPublicMessagePartFileToJSON(
     ),
   );
 }
-
 export function streamAgentPublicMessagePartFileFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentPublicMessagePartFile, SDKValidationError> {
@@ -678,7 +549,6 @@ export const StreamAgentPublicMessagePartFilePart$inboundSchema: z.ZodType<
   ]),
   metadata: z.record(z.any()).optional(),
 });
-
 /** @internal */
 export type StreamAgentPublicMessagePartFilePart$Outbound = {
   kind: string;
@@ -702,21 +572,6 @@ export const StreamAgentPublicMessagePartFilePart$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartFilePart$ {
-  /** @deprecated use `StreamAgentPublicMessagePartFilePart$inboundSchema` instead. */
-  export const inboundSchema =
-    StreamAgentPublicMessagePartFilePart$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartFilePart$outboundSchema` instead. */
-  export const outboundSchema =
-    StreamAgentPublicMessagePartFilePart$outboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartFilePart$Outbound` instead. */
-  export type Outbound = StreamAgentPublicMessagePartFilePart$Outbound;
-}
-
 export function streamAgentPublicMessagePartFilePartToJSON(
   streamAgentPublicMessagePartFilePart: StreamAgentPublicMessagePartFilePart,
 ): string {
@@ -726,7 +581,6 @@ export function streamAgentPublicMessagePartFilePartToJSON(
     ),
   );
 }
-
 export function streamAgentPublicMessagePartFilePartFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentPublicMessagePartFilePart, SDKValidationError> {
@@ -742,22 +596,10 @@ export function streamAgentPublicMessagePartFilePartFromJSON(
 export const StreamAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
   typeof StreamAgentPublicMessagePartKind
 > = z.nativeEnum(StreamAgentPublicMessagePartKind);
-
 /** @internal */
 export const StreamAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentPublicMessagePartKind
 > = StreamAgentPublicMessagePartKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartKind$ {
-  /** @deprecated use `StreamAgentPublicMessagePartKind$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentPublicMessagePartKind$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartKind$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentPublicMessagePartKind$outboundSchema;
-}
 
 /** @internal */
 export const StreamAgentPublicMessagePartTextPart$inboundSchema: z.ZodType<
@@ -768,7 +610,6 @@ export const StreamAgentPublicMessagePartTextPart$inboundSchema: z.ZodType<
   kind: StreamAgentPublicMessagePartKind$inboundSchema,
   text: z.string(),
 });
-
 /** @internal */
 export type StreamAgentPublicMessagePartTextPart$Outbound = {
   kind: string;
@@ -785,21 +626,6 @@ export const StreamAgentPublicMessagePartTextPart$outboundSchema: z.ZodType<
   text: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePartTextPart$ {
-  /** @deprecated use `StreamAgentPublicMessagePartTextPart$inboundSchema` instead. */
-  export const inboundSchema =
-    StreamAgentPublicMessagePartTextPart$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartTextPart$outboundSchema` instead. */
-  export const outboundSchema =
-    StreamAgentPublicMessagePartTextPart$outboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePartTextPart$Outbound` instead. */
-  export type Outbound = StreamAgentPublicMessagePartTextPart$Outbound;
-}
-
 export function streamAgentPublicMessagePartTextPartToJSON(
   streamAgentPublicMessagePartTextPart: StreamAgentPublicMessagePartTextPart,
 ): string {
@@ -809,7 +635,6 @@ export function streamAgentPublicMessagePartTextPartToJSON(
     ),
   );
 }
-
 export function streamAgentPublicMessagePartTextPartFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentPublicMessagePartTextPart, SDKValidationError> {
@@ -831,7 +656,6 @@ export const StreamAgentPublicMessagePart$inboundSchema: z.ZodType<
   z.lazy(() => StreamAgentPublicMessagePartFilePart$inboundSchema),
   z.lazy(() => StreamAgentPublicMessagePartToolResultPart$inboundSchema),
 ]);
-
 /** @internal */
 export type StreamAgentPublicMessagePart$Outbound =
   | StreamAgentPublicMessagePartTextPart$Outbound
@@ -849,19 +673,6 @@ export const StreamAgentPublicMessagePart$outboundSchema: z.ZodType<
   z.lazy(() => StreamAgentPublicMessagePartToolResultPart$outboundSchema),
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentPublicMessagePart$ {
-  /** @deprecated use `StreamAgentPublicMessagePart$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentPublicMessagePart$inboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePart$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentPublicMessagePart$outboundSchema;
-  /** @deprecated use `StreamAgentPublicMessagePart$Outbound` instead. */
-  export type Outbound = StreamAgentPublicMessagePart$Outbound;
-}
-
 export function streamAgentPublicMessagePartToJSON(
   streamAgentPublicMessagePart: StreamAgentPublicMessagePart,
 ): string {
@@ -871,7 +682,6 @@ export function streamAgentPublicMessagePartToJSON(
     ),
   );
 }
-
 export function streamAgentPublicMessagePartFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentPublicMessagePart, SDKValidationError> {
@@ -901,7 +711,6 @@ export const StreamAgentMessage$inboundSchema: z.ZodType<
     ]),
   ),
 });
-
 /** @internal */
 export type StreamAgentMessage$Outbound = {
   messageId?: string | undefined;
@@ -933,19 +742,6 @@ export const StreamAgentMessage$outboundSchema: z.ZodType<
   ),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentMessage$ {
-  /** @deprecated use `StreamAgentMessage$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentMessage$inboundSchema;
-  /** @deprecated use `StreamAgentMessage$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentMessage$outboundSchema;
-  /** @deprecated use `StreamAgentMessage$Outbound` instead. */
-  export type Outbound = StreamAgentMessage$Outbound;
-}
-
 export function streamAgentMessageToJSON(
   streamAgentMessage: StreamAgentMessage,
 ): string {
@@ -953,7 +749,6 @@ export function streamAgentMessageToJSON(
     StreamAgentMessage$outboundSchema.parse(streamAgentMessage),
   );
 }
-
 export function streamAgentMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentMessage, SDKValidationError> {
@@ -982,7 +777,6 @@ export const StreamAgentContact$inboundSchema: z.ZodType<
     "logo_url": "logoUrl",
   });
 });
-
 /** @internal */
 export type StreamAgentContact$Outbound = {
   id: string;
@@ -1012,19 +806,6 @@ export const StreamAgentContact$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentContact$ {
-  /** @deprecated use `StreamAgentContact$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentContact$inboundSchema;
-  /** @deprecated use `StreamAgentContact$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentContact$outboundSchema;
-  /** @deprecated use `StreamAgentContact$Outbound` instead. */
-  export type Outbound = StreamAgentContact$Outbound;
-}
-
 export function streamAgentContactToJSON(
   streamAgentContact: StreamAgentContact,
 ): string {
@@ -1032,7 +813,6 @@ export function streamAgentContactToJSON(
     StreamAgentContact$outboundSchema.parse(streamAgentContact),
   );
 }
-
 export function streamAgentContactFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentContact, SDKValidationError> {
@@ -1052,7 +832,6 @@ export const StreamAgentThread$inboundSchema: z.ZodType<
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
-
 /** @internal */
 export type StreamAgentThread$Outbound = {
   id: string;
@@ -1069,19 +848,6 @@ export const StreamAgentThread$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentThread$ {
-  /** @deprecated use `StreamAgentThread$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentThread$inboundSchema;
-  /** @deprecated use `StreamAgentThread$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentThread$outboundSchema;
-  /** @deprecated use `StreamAgentThread$Outbound` instead. */
-  export type Outbound = StreamAgentThread$Outbound;
-}
-
 export function streamAgentThreadToJSON(
   streamAgentThread: StreamAgentThread,
 ): string {
@@ -1089,7 +855,6 @@ export function streamAgentThreadToJSON(
     StreamAgentThread$outboundSchema.parse(streamAgentThread),
   );
 }
-
 export function streamAgentThreadFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentThread, SDKValidationError> {
@@ -1112,7 +877,6 @@ export const StreamAgentMemory$inboundSchema: z.ZodType<
     "entity_id": "entityId",
   });
 });
-
 /** @internal */
 export type StreamAgentMemory$Outbound = {
   entity_id: string;
@@ -1131,19 +895,6 @@ export const StreamAgentMemory$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentMemory$ {
-  /** @deprecated use `StreamAgentMemory$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentMemory$inboundSchema;
-  /** @deprecated use `StreamAgentMemory$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentMemory$outboundSchema;
-  /** @deprecated use `StreamAgentMemory$Outbound` instead. */
-  export type Outbound = StreamAgentMemory$Outbound;
-}
-
 export function streamAgentMemoryToJSON(
   streamAgentMemory: StreamAgentMemory,
 ): string {
@@ -1151,7 +902,6 @@ export function streamAgentMemoryToJSON(
     StreamAgentMemory$outboundSchema.parse(streamAgentMemory),
   );
 }
-
 export function streamAgentMemoryFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentMemory, SDKValidationError> {
@@ -1182,7 +932,6 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
     "stream_timeout_seconds": "streamTimeoutSeconds",
   });
 });
-
 /** @internal */
 export type StreamAgentRequestBody$Outbound = {
   task_id?: string | undefined;
@@ -1216,19 +965,6 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentRequestBody$ {
-  /** @deprecated use `StreamAgentRequestBody$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentRequestBody$inboundSchema;
-  /** @deprecated use `StreamAgentRequestBody$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentRequestBody$outboundSchema;
-  /** @deprecated use `StreamAgentRequestBody$Outbound` instead. */
-  export type Outbound = StreamAgentRequestBody$Outbound;
-}
-
 export function streamAgentRequestBodyToJSON(
   streamAgentRequestBody: StreamAgentRequestBody,
 ): string {
@@ -1236,7 +972,6 @@ export function streamAgentRequestBodyToJSON(
     StreamAgentRequestBody$outboundSchema.parse(streamAgentRequestBody),
   );
 }
-
 export function streamAgentRequestBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentRequestBody, SDKValidationError> {
@@ -1260,7 +995,6 @@ export const StreamAgentRequest$inboundSchema: z.ZodType<
     "RequestBody": "requestBody",
   });
 });
-
 /** @internal */
 export type StreamAgentRequest$Outbound = {
   key: string;
@@ -1281,19 +1015,6 @@ export const StreamAgentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentRequest$ {
-  /** @deprecated use `StreamAgentRequest$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentRequest$inboundSchema;
-  /** @deprecated use `StreamAgentRequest$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentRequest$outboundSchema;
-  /** @deprecated use `StreamAgentRequest$Outbound` instead. */
-  export type Outbound = StreamAgentRequest$Outbound;
-}
-
 export function streamAgentRequestToJSON(
   streamAgentRequest: StreamAgentRequest,
 ): string {
@@ -1301,7 +1022,6 @@ export function streamAgentRequestToJSON(
     StreamAgentRequest$outboundSchema.parse(streamAgentRequest),
   );
 }
-
 export function streamAgentRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentRequest, SDKValidationError> {
@@ -1320,7 +1040,6 @@ export const StreamAgentResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   data: z.string(),
 });
-
 /** @internal */
 export type StreamAgentResponseBody$Outbound = {
   data: string;
@@ -1335,19 +1054,6 @@ export const StreamAgentResponseBody$outboundSchema: z.ZodType<
   data: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StreamAgentResponseBody$ {
-  /** @deprecated use `StreamAgentResponseBody$inboundSchema` instead. */
-  export const inboundSchema = StreamAgentResponseBody$inboundSchema;
-  /** @deprecated use `StreamAgentResponseBody$outboundSchema` instead. */
-  export const outboundSchema = StreamAgentResponseBody$outboundSchema;
-  /** @deprecated use `StreamAgentResponseBody$Outbound` instead. */
-  export type Outbound = StreamAgentResponseBody$Outbound;
-}
-
 export function streamAgentResponseBodyToJSON(
   streamAgentResponseBody: StreamAgentResponseBody,
 ): string {
@@ -1355,7 +1061,6 @@ export function streamAgentResponseBodyToJSON(
     StreamAgentResponseBody$outboundSchema.parse(streamAgentResponseBody),
   );
 }
-
 export function streamAgentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<StreamAgentResponseBody, SDKValidationError> {
