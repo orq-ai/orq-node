@@ -1249,7 +1249,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1257,7 +1257,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1392,7 +1392,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-07T19:15:11.176Z"
+                          default: "2025-11-08T09:16:35.288Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1400,7 +1400,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:11.176Z"
+                              default: "2025-11-08T09:16:35.289Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1568,10 +1568,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1642,10 +1642,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1713,10 +1713,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1799,10 +1799,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1870,10 +1870,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2268,10 +2268,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2355,10 +2355,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-07T19:15:13.898Z"
+                              default: "2025-11-08T09:16:37.832Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2773,10 +2773,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2847,10 +2847,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2918,10 +2918,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3004,10 +3004,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3075,10 +3075,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3473,10 +3473,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3560,10 +3560,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3965,10 +3965,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4039,10 +4039,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4110,10 +4110,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4196,10 +4196,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4267,10 +4267,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4665,10 +4665,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4752,10 +4752,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-07T19:15:13.898Z"
+                        default: "2025-11-08T09:16:37.832Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4931,7 +4931,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4939,7 +4939,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5075,7 +5075,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5083,7 +5083,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5218,6 +5218,8 @@ paths:
                                 allOf:
                                   - type: "object"
                                     properties:
+                                      "display_name":
+                                        type: "string"
                                       "type":
                                         type: "string"
                                         enum:
@@ -5333,6 +5335,8 @@ paths:
                                           type: "string"
                                           enum:
                                             - "json_schema"
+                                        "display_name":
+                                          type: "string"
                                         "json_schema":
                                           type: "object"
                                           properties:
@@ -6918,6 +6922,8 @@ paths:
                                 type: "string"
                                 enum:
                                   - "json_schema"
+                              "display_name":
+                                type: "string"
                               "json_schema":
                                 type: "object"
                                 properties:
@@ -9553,7 +9559,7 @@ paths:
               properties:
                 "path":
                   type: "string"
-                  description: "The path where the agent will be stored in the project structure"
+                  description: "The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
                   example: "Default"
                 "key":
                   type: "string"
@@ -9574,17 +9580,12 @@ paths:
                 "model":
                   anyOf:
                     - type: "string"
-                      description: "Model ID or provider/model string (e.g., \"openai/gpt-4o\")"
+                      description: "\n\nA model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). The agent can be run with a wide range of models with different capabilities, performance characteristics, and price points. Only models that support tool calling (function_calling) can be used to run agents. See (supported models)[/docs/proxy/supported-models] documentation for the complete list of available models."
                     - type: "object"
                       properties:
                         "id":
                           type: "string"
-                          description: "Model ID or provider/model string"
-                        "integration_id":
-                          type:
-                            - "string"
-                            - "null"
-                          description: "Optional integration ID for custom configurations"
+                          description: "A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents."
                         "parameters":
                           type: "object"
                           properties:
@@ -9664,6 +9665,8 @@ paths:
                                         - "text"
                                   required:
                                     - "type"
+                                  title: "Text"
+                                  description: "\n\nDefault response format. Used to generate text responses"
                                 - type: "object"
                                   properties:
                                     "type":
@@ -9672,6 +9675,8 @@ paths:
                                         - "json_object"
                                   required:
                                     - "type"
+                                  title: "JSON object"
+                                  description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                 - type: "object"
                                   properties:
                                     "type":
@@ -9697,6 +9702,8 @@ paths:
                                   required:
                                     - "type"
                                     - "json_schema"
+                                  title: "JSON schema"
+                                  description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
@@ -9795,33 +9802,23 @@ paths:
                                   - "text"
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                            "web_search_options":
-                              type: "object"
-                              properties:
-                                "enabled":
-                                  type: "boolean"
-                                  description: "Whether to enable web search for this request."
-                              description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                          description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                       required:
                         - "id"
-                      description: "Model configuration with parameters"
-                  description: "The primary language model that powers the agent. Can be a simple string (e.g., \"anthropic/claude-3-sonnet-20240229\") or an object with model ID and parameters."
+                      description: "\n\nModel configuration with parameters."
+                  title: "Model Configuration"
+                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters."
                 "fallback_models":
                   type: "array"
                   items:
                     anyOf:
                       - type: "string"
-                        description: "Fallback model ID"
+                        description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                       - type: "object"
                         properties:
                           "id":
                             type: "string"
-                            description: "Fallback model ID"
-                          "integration_id":
-                            type:
-                              - "string"
-                              - "null"
+                            description: "A fallback model ID string. Must support tool calling."
                           "parameters":
                             type: "object"
                             properties:
@@ -9901,6 +9898,8 @@ paths:
                                           - "text"
                                     required:
                                       - "type"
+                                    title: "Text"
+                                    description: "\n\nDefault response format. Used to generate text responses"
                                   - type: "object"
                                     properties:
                                       "type":
@@ -9909,6 +9908,8 @@ paths:
                                           - "json_object"
                                     required:
                                       - "type"
+                                    title: "JSON object"
+                                    description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                   - type: "object"
                                     properties:
                                       "type":
@@ -9934,6 +9935,8 @@ paths:
                                     required:
                                       - "type"
                                       - "json_schema"
+                                    title: "JSON schema"
+                                    description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
@@ -10032,16 +10035,13 @@ paths:
                                     - "text"
                                     - "audio"
                                 description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                              "web_search_options":
-                                type: "object"
-                                properties:
-                                  "enabled":
-                                    type: "boolean"
-                                    description: "Whether to enable web search for this request."
-                                description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                            description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                         required:
                           - "id"
-                  description: "Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities."
+                        description: "Fallback model configuration with optional parameters."
+                    title: "Fallback Model Configuration"
+                    description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
+                  description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
                 "settings":
                   type: "object"
                   properties:
@@ -10539,6 +10539,8 @@ paths:
                                       - "text"
                                 required:
                                   - "type"
+                                title: "Text"
+                                description: "\n\nDefault response format. Used to generate text responses"
                               - type: "object"
                                 properties:
                                   "type":
@@ -10547,6 +10549,8 @@ paths:
                                       - "json_object"
                                 required:
                                   - "type"
+                                title: "JSON object"
+                                description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                               - type: "object"
                                 properties:
                                   "type":
@@ -10572,6 +10576,8 @@ paths:
                                 required:
                                   - "type"
                                   - "json_schema"
+                                title: "JSON schema"
+                                description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
@@ -10670,14 +10676,7 @@ paths:
                                 - "text"
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                          "web_search_options":
-                            type: "object"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                                description: "Whether to enable web search for this request."
-                            description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                        description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       "fallback_models":
                         type:
                           - "array"
@@ -10685,16 +10684,12 @@ paths:
                         items:
                           anyOf:
                             - type: "string"
-                              description: "Fallback model ID"
+                              description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                             - type: "object"
                               properties:
                                 "id":
                                   type: "string"
-                                  description: "Fallback model ID"
-                                "integration_id":
-                                  type:
-                                    - "string"
-                                    - "null"
+                                  description: "A fallback model ID string. Must support tool calling."
                                 "parameters":
                                   type: "object"
                                   properties:
@@ -10774,6 +10769,8 @@ paths:
                                                 - "text"
                                           required:
                                             - "type"
+                                          title: "Text"
+                                          description: "\n\nDefault response format. Used to generate text responses"
                                         - type: "object"
                                           properties:
                                             "type":
@@ -10782,6 +10779,8 @@ paths:
                                                 - "json_object"
                                           required:
                                             - "type"
+                                          title: "JSON object"
+                                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                         - type: "object"
                                           properties:
                                             "type":
@@ -10807,6 +10806,8 @@ paths:
                                           required:
                                             - "type"
                                             - "json_schema"
+                                          title: "JSON schema"
+                                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
@@ -10905,15 +10906,12 @@ paths:
                                           - "text"
                                           - "audio"
                                       description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                    "web_search_options":
-                                      type: "object"
-                                      properties:
-                                        "enabled":
-                                          type: "boolean"
-                                          description: "Whether to enable web search for this request."
-                                      description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                                  description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                               required:
                                 - "id"
+                              description: "Fallback model configuration with optional parameters."
+                          title: "Fallback Model Configuration"
+                          description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
@@ -11260,6 +11258,8 @@ paths:
                                             - "text"
                                       required:
                                         - "type"
+                                      title: "Text"
+                                      description: "\n\nDefault response format. Used to generate text responses"
                                     - type: "object"
                                       properties:
                                         "type":
@@ -11268,6 +11268,8 @@ paths:
                                             - "json_object"
                                       required:
                                         - "type"
+                                      title: "JSON object"
+                                      description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                     - type: "object"
                                       properties:
                                         "type":
@@ -11293,6 +11295,8 @@ paths:
                                       required:
                                         - "type"
                                         - "json_schema"
+                                      title: "JSON schema"
+                                      description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                   description: "An object specifying the format that the model must output"
                                 "reasoning_effort":
                                   type: "string"
@@ -11391,14 +11395,7 @@ paths:
                                       - "text"
                                       - "audio"
                                   description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                "web_search_options":
-                                  type: "object"
-                                  properties:
-                                    "enabled":
-                                      type: "boolean"
-                                      description: "Whether to enable web search for this request."
-                                  description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                              description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies."
+                              description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                             "fallback_models":
                               type:
                                 - "array"
@@ -11406,16 +11403,12 @@ paths:
                               items:
                                 anyOf:
                                   - type: "string"
-                                    description: "Fallback model ID"
+                                    description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                                   - type: "object"
                                     properties:
                                       "id":
                                         type: "string"
-                                        description: "Fallback model ID"
-                                      "integration_id":
-                                        type:
-                                          - "string"
-                                          - "null"
+                                        description: "A fallback model ID string. Must support tool calling."
                                       "parameters":
                                         type: "object"
                                         properties:
@@ -11495,6 +11488,8 @@ paths:
                                                       - "text"
                                                 required:
                                                   - "type"
+                                                title: "Text"
+                                                description: "\n\nDefault response format. Used to generate text responses"
                                               - type: "object"
                                                 properties:
                                                   "type":
@@ -11503,6 +11498,8 @@ paths:
                                                       - "json_object"
                                                 required:
                                                   - "type"
+                                                title: "JSON object"
+                                                description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                               - type: "object"
                                                 properties:
                                                   "type":
@@ -11528,6 +11525,8 @@ paths:
                                                 required:
                                                   - "type"
                                                   - "json_schema"
+                                                title: "JSON schema"
+                                                description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                             description: "An object specifying the format that the model must output"
                                           "reasoning_effort":
                                             type: "string"
@@ -11626,15 +11625,12 @@ paths:
                                                 - "text"
                                                 - "audio"
                                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                          "web_search_options":
-                                            type: "object"
-                                            properties:
-                                              "enabled":
-                                                type: "boolean"
-                                                description: "Whether to enable web search for this request."
-                                            description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                                        description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                     required:
                                       - "id"
+                                    description: "Fallback model configuration with optional parameters."
+                                title: "Fallback Model Configuration"
+                                description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                               description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                           required:
                             - "id"
@@ -11983,6 +11979,8 @@ paths:
                                       - "text"
                                 required:
                                   - "type"
+                                title: "Text"
+                                description: "\n\nDefault response format. Used to generate text responses"
                               - type: "object"
                                 properties:
                                   "type":
@@ -11991,6 +11989,8 @@ paths:
                                       - "json_object"
                                 required:
                                   - "type"
+                                title: "JSON object"
+                                description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                               - type: "object"
                                 properties:
                                   "type":
@@ -12016,6 +12016,8 @@ paths:
                                 required:
                                   - "type"
                                   - "json_schema"
+                                title: "JSON schema"
+                                description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
@@ -12114,14 +12116,7 @@ paths:
                                 - "text"
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                          "web_search_options":
-                            type: "object"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                                description: "Whether to enable web search for this request."
-                            description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                        description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       "fallback_models":
                         type:
                           - "array"
@@ -12129,16 +12124,12 @@ paths:
                         items:
                           anyOf:
                             - type: "string"
-                              description: "Fallback model ID"
+                              description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                             - type: "object"
                               properties:
                                 "id":
                                   type: "string"
-                                  description: "Fallback model ID"
-                                "integration_id":
-                                  type:
-                                    - "string"
-                                    - "null"
+                                  description: "A fallback model ID string. Must support tool calling."
                                 "parameters":
                                   type: "object"
                                   properties:
@@ -12218,6 +12209,8 @@ paths:
                                                 - "text"
                                           required:
                                             - "type"
+                                          title: "Text"
+                                          description: "\n\nDefault response format. Used to generate text responses"
                                         - type: "object"
                                           properties:
                                             "type":
@@ -12226,6 +12219,8 @@ paths:
                                                 - "json_object"
                                           required:
                                             - "type"
+                                          title: "JSON object"
+                                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                         - type: "object"
                                           properties:
                                             "type":
@@ -12251,6 +12246,8 @@ paths:
                                           required:
                                             - "type"
                                             - "json_schema"
+                                          title: "JSON schema"
+                                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
@@ -12349,15 +12346,12 @@ paths:
                                           - "text"
                                           - "audio"
                                       description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                    "web_search_options":
-                                      type: "object"
-                                      properties:
-                                        "enabled":
-                                          type: "boolean"
-                                          description: "Whether to enable web search for this request."
-                                      description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                                  description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                               required:
                                 - "id"
+                              description: "Fallback model configuration with optional parameters."
+                          title: "Fallback Model Configuration"
+                          description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
@@ -12486,17 +12480,12 @@ paths:
                 "model":
                   anyOf:
                     - type: "string"
-                      description: "Model ID or provider/model string (e.g., \"openai/gpt-4o\")"
+                      description: "\n\nA model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). The agent can be run with a wide range of models with different capabilities, performance characteristics, and price points. Only models that support tool calling (function_calling) can be used to run agents. See (supported models)[/docs/proxy/supported-models] documentation for the complete list of available models."
                     - type: "object"
                       properties:
                         "id":
                           type: "string"
-                          description: "Model ID or provider/model string"
-                        "integration_id":
-                          type:
-                            - "string"
-                            - "null"
-                          description: "Optional integration ID for custom configurations"
+                          description: "A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents."
                         "parameters":
                           type: "object"
                           properties:
@@ -12576,6 +12565,8 @@ paths:
                                         - "text"
                                   required:
                                     - "type"
+                                  title: "Text"
+                                  description: "\n\nDefault response format. Used to generate text responses"
                                 - type: "object"
                                   properties:
                                     "type":
@@ -12584,6 +12575,8 @@ paths:
                                         - "json_object"
                                   required:
                                     - "type"
+                                  title: "JSON object"
+                                  description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                 - type: "object"
                                   properties:
                                     "type":
@@ -12609,6 +12602,8 @@ paths:
                                   required:
                                     - "type"
                                     - "json_schema"
+                                  title: "JSON schema"
+                                  description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
@@ -12707,33 +12702,23 @@ paths:
                                   - "text"
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                            "web_search_options":
-                              type: "object"
-                              properties:
-                                "enabled":
-                                  type: "boolean"
-                                  description: "Whether to enable web search for this request."
-                              description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                          description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                       required:
                         - "id"
-                      description: "Model configuration with parameters"
-                  description: "The primary language model that powers the agent. Can be a simple string (e.g., \"anthropic/claude-3-sonnet-20240229\") or an object with model ID and parameters."
+                      description: "\n\nModel configuration with parameters."
+                  title: "Model Configuration"
+                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters."
                 "fallback_models":
                   type: "array"
                   items:
                     anyOf:
                       - type: "string"
-                        description: "Fallback model ID"
+                        description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                       - type: "object"
                         properties:
                           "id":
                             type: "string"
-                            description: "Fallback model ID"
-                          "integration_id":
-                            type:
-                              - "string"
-                              - "null"
+                            description: "A fallback model ID string. Must support tool calling."
                           "parameters":
                             type: "object"
                             properties:
@@ -12813,6 +12798,8 @@ paths:
                                           - "text"
                                     required:
                                       - "type"
+                                    title: "Text"
+                                    description: "\n\nDefault response format. Used to generate text responses"
                                   - type: "object"
                                     properties:
                                       "type":
@@ -12821,6 +12808,8 @@ paths:
                                           - "json_object"
                                     required:
                                       - "type"
+                                    title: "JSON object"
+                                    description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                   - type: "object"
                                     properties:
                                       "type":
@@ -12846,6 +12835,8 @@ paths:
                                     required:
                                       - "type"
                                       - "json_schema"
+                                    title: "JSON schema"
+                                    description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
@@ -12944,16 +12935,13 @@ paths:
                                     - "text"
                                     - "audio"
                                 description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                              "web_search_options":
-                                type: "object"
-                                properties:
-                                  "enabled":
-                                    type: "boolean"
-                                    description: "Whether to enable web search for this request."
-                                description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                            description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                         required:
                           - "id"
-                  description: "Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities."
+                        description: "Fallback model configuration with optional parameters."
+                    title: "Fallback Model Configuration"
+                    description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
+                  description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
                 "settings":
                   type: "object"
                   properties:
@@ -13441,6 +13429,8 @@ paths:
                                       - "text"
                                 required:
                                   - "type"
+                                title: "Text"
+                                description: "\n\nDefault response format. Used to generate text responses"
                               - type: "object"
                                 properties:
                                   "type":
@@ -13449,6 +13439,8 @@ paths:
                                       - "json_object"
                                 required:
                                   - "type"
+                                title: "JSON object"
+                                description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                               - type: "object"
                                 properties:
                                   "type":
@@ -13474,6 +13466,8 @@ paths:
                                 required:
                                   - "type"
                                   - "json_schema"
+                                title: "JSON schema"
+                                description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
@@ -13572,14 +13566,7 @@ paths:
                                 - "text"
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                          "web_search_options":
-                            type: "object"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                                description: "Whether to enable web search for this request."
-                            description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                        description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       "fallback_models":
                         type:
                           - "array"
@@ -13587,16 +13574,12 @@ paths:
                         items:
                           anyOf:
                             - type: "string"
-                              description: "Fallback model ID"
+                              description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                             - type: "object"
                               properties:
                                 "id":
                                   type: "string"
-                                  description: "Fallback model ID"
-                                "integration_id":
-                                  type:
-                                    - "string"
-                                    - "null"
+                                  description: "A fallback model ID string. Must support tool calling."
                                 "parameters":
                                   type: "object"
                                   properties:
@@ -13676,6 +13659,8 @@ paths:
                                                 - "text"
                                           required:
                                             - "type"
+                                          title: "Text"
+                                          description: "\n\nDefault response format. Used to generate text responses"
                                         - type: "object"
                                           properties:
                                             "type":
@@ -13684,6 +13669,8 @@ paths:
                                                 - "json_object"
                                           required:
                                             - "type"
+                                          title: "JSON object"
+                                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                         - type: "object"
                                           properties:
                                             "type":
@@ -13709,6 +13696,8 @@ paths:
                                           required:
                                             - "type"
                                             - "json_schema"
+                                          title: "JSON schema"
+                                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
@@ -13807,15 +13796,12 @@ paths:
                                           - "text"
                                           - "audio"
                                       description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                    "web_search_options":
-                                      type: "object"
-                                      properties:
-                                        "enabled":
-                                          type: "boolean"
-                                          description: "Whether to enable web search for this request."
-                                      description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                                  description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                               required:
                                 - "id"
+                              description: "Fallback model configuration with optional parameters."
+                          title: "Fallback Model Configuration"
+                          description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
@@ -14360,6 +14346,8 @@ paths:
                                                 - "text"
                                           required:
                                             - "type"
+                                          title: "Text"
+                                          description: "\n\nDefault response format. Used to generate text responses"
                                         - type: "object"
                                           properties:
                                             "type":
@@ -14368,6 +14356,8 @@ paths:
                                                 - "json_object"
                                           required:
                                             - "type"
+                                          title: "JSON object"
+                                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                         - type: "object"
                                           properties:
                                             "type":
@@ -14393,6 +14383,8 @@ paths:
                                           required:
                                             - "type"
                                             - "json_schema"
+                                          title: "JSON schema"
+                                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
@@ -14491,14 +14483,7 @@ paths:
                                           - "text"
                                           - "audio"
                                       description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                    "web_search_options":
-                                      type: "object"
-                                      properties:
-                                        "enabled":
-                                          type: "boolean"
-                                          description: "Whether to enable web search for this request."
-                                      description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                                  description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies."
+                                  description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                                 "fallback_models":
                                   type:
                                     - "array"
@@ -14506,16 +14491,12 @@ paths:
                                   items:
                                     anyOf:
                                       - type: "string"
-                                        description: "Fallback model ID"
+                                        description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                                       - type: "object"
                                         properties:
                                           "id":
                                             type: "string"
-                                            description: "Fallback model ID"
-                                          "integration_id":
-                                            type:
-                                              - "string"
-                                              - "null"
+                                            description: "A fallback model ID string. Must support tool calling."
                                           "parameters":
                                             type: "object"
                                             properties:
@@ -14595,6 +14576,8 @@ paths:
                                                           - "text"
                                                     required:
                                                       - "type"
+                                                    title: "Text"
+                                                    description: "\n\nDefault response format. Used to generate text responses"
                                                   - type: "object"
                                                     properties:
                                                       "type":
@@ -14603,6 +14586,8 @@ paths:
                                                           - "json_object"
                                                     required:
                                                       - "type"
+                                                    title: "JSON object"
+                                                    description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                                   - type: "object"
                                                     properties:
                                                       "type":
@@ -14628,6 +14613,8 @@ paths:
                                                     required:
                                                       - "type"
                                                       - "json_schema"
+                                                    title: "JSON schema"
+                                                    description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                                 description: "An object specifying the format that the model must output"
                                               "reasoning_effort":
                                                 type: "string"
@@ -14726,15 +14713,12 @@ paths:
                                                     - "text"
                                                     - "audio"
                                                 description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                                              "web_search_options":
-                                                type: "object"
-                                                properties:
-                                                  "enabled":
-                                                    type: "boolean"
-                                                    description: "Whether to enable web search for this request."
-                                                description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                                            description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                         required:
                                           - "id"
+                                        description: "Fallback model configuration with optional parameters."
+                                    title: "Fallback Model Configuration"
+                                    description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                                   description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                               required:
                                 - "id"
@@ -14950,17 +14934,12 @@ paths:
                 "model":
                   anyOf:
                     - type: "string"
-                      description: "Model ID or provider/model string (e.g., \"openai/gpt-4o\")"
+                      description: "\n\nA model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). The agent can be run with a wide range of models with different capabilities, performance characteristics, and price points. Only models that support tool calling (function_calling) can be used to run agents. See (supported models)[/docs/proxy/supported-models] documentation for the complete list of available models."
                     - type: "object"
                       properties:
                         "id":
                           type: "string"
-                          description: "Model ID or provider/model string"
-                        "integration_id":
-                          type:
-                            - "string"
-                            - "null"
-                          description: "Optional integration ID for custom configurations"
+                          description: "A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents."
                         "parameters":
                           type: "object"
                           properties:
@@ -15040,6 +15019,8 @@ paths:
                                         - "text"
                                   required:
                                     - "type"
+                                  title: "Text"
+                                  description: "\n\nDefault response format. Used to generate text responses"
                                 - type: "object"
                                   properties:
                                     "type":
@@ -15048,6 +15029,8 @@ paths:
                                         - "json_object"
                                   required:
                                     - "type"
+                                  title: "JSON object"
+                                  description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                 - type: "object"
                                   properties:
                                     "type":
@@ -15073,6 +15056,8 @@ paths:
                                   required:
                                     - "type"
                                     - "json_schema"
+                                  title: "JSON schema"
+                                  description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
@@ -15171,33 +15156,23 @@ paths:
                                   - "text"
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                            "web_search_options":
-                              type: "object"
-                              properties:
-                                "enabled":
-                                  type: "boolean"
-                                  description: "Whether to enable web search for this request."
-                              description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                          description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                       required:
                         - "id"
-                      description: "Model configuration with parameters"
-                  description: "The language model that powers the agent. Can be a simple string (e.g., \"openai/gpt-4o\") or an object with model ID and parameters. The model must support tool calling capabilities."
+                      description: "\n\nModel configuration with parameters."
+                  title: "Model Configuration"
+                  description: "Model configuration for this execution. Can override the agent manifest defaults if the agent already exists."
                 "fallback_models":
                   type: "array"
                   items:
                     anyOf:
                       - type: "string"
-                        description: "Fallback model ID"
+                        description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                       - type: "object"
                         properties:
                           "id":
                             type: "string"
-                            description: "Fallback model ID"
-                          "integration_id":
-                            type:
-                              - "string"
-                              - "null"
+                            description: "A fallback model ID string. Must support tool calling."
                           "parameters":
                             type: "object"
                             properties:
@@ -15277,6 +15252,8 @@ paths:
                                           - "text"
                                     required:
                                       - "type"
+                                    title: "Text"
+                                    description: "\n\nDefault response format. Used to generate text responses"
                                   - type: "object"
                                     properties:
                                       "type":
@@ -15285,6 +15262,8 @@ paths:
                                           - "json_object"
                                     required:
                                       - "type"
+                                    title: "JSON object"
+                                    description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                   - type: "object"
                                     properties:
                                       "type":
@@ -15310,6 +15289,8 @@ paths:
                                     required:
                                       - "type"
                                       - "json_schema"
+                                    title: "JSON schema"
+                                    description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
@@ -15408,16 +15389,13 @@ paths:
                                     - "text"
                                     - "audio"
                                 description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                              "web_search_options":
-                                type: "object"
-                                properties:
-                                  "enabled":
-                                    type: "boolean"
-                                    description: "Whether to enable web search for this request."
-                                description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                            description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                         required:
                           - "id"
-                  description: "Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities."
+                        description: "Fallback model configuration with optional parameters."
+                    title: "Fallback Model Configuration"
+                    description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
+                  description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
                 "role":
                   type: "string"
                   minLength: 1
@@ -16116,17 +16094,12 @@ paths:
                 "model":
                   anyOf:
                     - type: "string"
-                      description: "Model ID or provider/model string (e.g., \"openai/gpt-4o\")"
+                      description: "\n\nA model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). The agent can be run with a wide range of models with different capabilities, performance characteristics, and price points. Only models that support tool calling (function_calling) can be used to run agents. See (supported models)[/docs/proxy/supported-models] documentation for the complete list of available models."
                     - type: "object"
                       properties:
                         "id":
                           type: "string"
-                          description: "Model ID or provider/model string"
-                        "integration_id":
-                          type:
-                            - "string"
-                            - "null"
-                          description: "Optional integration ID for custom configurations"
+                          description: "A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents."
                         "parameters":
                           type: "object"
                           properties:
@@ -16206,6 +16179,8 @@ paths:
                                         - "text"
                                   required:
                                     - "type"
+                                  title: "Text"
+                                  description: "\n\nDefault response format. Used to generate text responses"
                                 - type: "object"
                                   properties:
                                     "type":
@@ -16214,6 +16189,8 @@ paths:
                                         - "json_object"
                                   required:
                                     - "type"
+                                  title: "JSON object"
+                                  description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                 - type: "object"
                                   properties:
                                     "type":
@@ -16239,6 +16216,8 @@ paths:
                                   required:
                                     - "type"
                                     - "json_schema"
+                                  title: "JSON schema"
+                                  description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
@@ -16337,33 +16316,23 @@ paths:
                                   - "text"
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                            "web_search_options":
-                              type: "object"
-                              properties:
-                                "enabled":
-                                  type: "boolean"
-                                  description: "Whether to enable web search for this request."
-                              description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
-                          description: "Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p (nucleus sampling), frequency_penalty, presence_penalty, response_format, reasoning_effort. Not all parameters work with all models."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                       required:
                         - "id"
-                      description: "Model configuration with parameters"
-                  description: "The language model that powers the agent. Can be a simple string (e.g., \"openai/gpt-4o\") or an object with model ID and parameters. The model must support tool calling capabilities."
+                      description: "\n\nModel configuration with parameters."
+                  title: "Model Configuration"
+                  description: "Model configuration for this execution. Can override the agent manifest defaults if the agent already exists."
                 "fallback_models":
                   type: "array"
                   items:
                     anyOf:
                       - type: "string"
-                        description: "Fallback model ID"
+                        description: "A fallback model ID string (e.g., `openai/gpt-4o-mini`). Will be used if the primary model request fails. Must support tool calling."
                       - type: "object"
                         properties:
                           "id":
                             type: "string"
-                            description: "Fallback model ID"
-                          "integration_id":
-                            type:
-                              - "string"
-                              - "null"
+                            description: "A fallback model ID string. Must support tool calling."
                           "parameters":
                             type: "object"
                             properties:
@@ -16443,6 +16412,8 @@ paths:
                                           - "text"
                                     required:
                                       - "type"
+                                    title: "Text"
+                                    description: "\n\nDefault response format. Used to generate text responses"
                                   - type: "object"
                                     properties:
                                       "type":
@@ -16451,6 +16422,8 @@ paths:
                                           - "json_object"
                                     required:
                                       - "type"
+                                    title: "JSON object"
+                                    description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                                   - type: "object"
                                     properties:
                                       "type":
@@ -16476,6 +16449,8 @@ paths:
                                     required:
                                       - "type"
                                       - "json_schema"
+                                    title: "JSON schema"
+                                    description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
@@ -16574,16 +16549,13 @@ paths:
                                     - "text"
                                     - "audio"
                                 description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
-                              "web_search_options":
-                                type: "object"
-                                properties:
-                                  "enabled":
-                                    type: "boolean"
-                                    description: "Whether to enable web search for this request."
-                                description: "This tool searches the web for relevant results to use in a response. Learn more about the web search tool."
+                            description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                         required:
                           - "id"
-                  description: "Optional array of fallback models (string IDs or config objects) to use when the primary model fails. Models are tried in order. All models must support tool calling capabilities."
+                        description: "Fallback model configuration with optional parameters."
+                    title: "Fallback Model Configuration"
+                    description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
+                  description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
                 "role":
                   type: "string"
                   minLength: 1
@@ -17749,7 +17721,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-07T19:15:15.015Z"
+                    default: "2025-11-08T09:16:38.732Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -17838,7 +17810,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-07T19:15:15.015Z"
+                          default: "2025-11-08T09:16:38.732Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -17906,7 +17878,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-07T19:15:15.015Z"
+                    default: "2025-11-08T09:16:38.732Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -18109,6 +18081,8 @@ paths:
                                           type: "string"
                                           enum:
                                             - "json_schema"
+                                        "display_name":
+                                          type: "string"
                                         "json_schema":
                                           type: "object"
                                           properties:
@@ -18670,6 +18644,8 @@ paths:
                                   type: "string"
                                   enum:
                                     - "json_schema"
+                                "display_name":
+                                  type: "string"
                                 "json_schema":
                                   type: "object"
                                   properties:
@@ -19105,6 +19081,8 @@ paths:
                                 - "text"
                           required:
                             - "type"
+                          title: "Text"
+                          description: "\n\nDefault response format. Used to generate text responses"
                         - type: "object"
                           properties:
                             "type":
@@ -19113,6 +19091,8 @@ paths:
                                 - "json_object"
                           required:
                             - "type"
+                          title: "JSON object"
+                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                         - type: "object"
                           properties:
                             "type":
@@ -19138,6 +19118,8 @@ paths:
                           required:
                             - "type"
                             - "json_schema"
+                          title: "JSON schema"
+                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                       description: "An object specifying the format that the model must output"
                   required:
                     - "messages"
@@ -19275,6 +19257,8 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_schema"
+                                  "display_name":
+                                    type: "string"
                                   "json_schema":
                                     type: "object"
                                     properties:
@@ -19722,6 +19706,8 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_schema"
+                                  "display_name":
+                                    type: "string"
                                   "json_schema":
                                     type: "object"
                                     properties:
@@ -20136,6 +20122,8 @@ paths:
                                   type: "string"
                                   enum:
                                     - "json_schema"
+                                "display_name":
+                                  type: "string"
                                 "json_schema":
                                   type: "object"
                                   properties:
@@ -20801,6 +20789,8 @@ paths:
                                 - "text"
                           required:
                             - "type"
+                          title: "Text"
+                          description: "\n\nDefault response format. Used to generate text responses"
                         - type: "object"
                           properties:
                             "type":
@@ -20809,6 +20799,8 @@ paths:
                                 - "json_object"
                           required:
                             - "type"
+                          title: "JSON object"
+                          description: "\n\nJSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so."
                         - type: "object"
                           properties:
                             "type":
@@ -20834,6 +20826,8 @@ paths:
                           required:
                             - "type"
                             - "json_schema"
+                          title: "JSON schema"
+                          description: "\n\nJSON Schema response format. Used to generate structured JSON responses"
                       description: "An object specifying the format that the model must output"
                   title: "PromptInput"
                   description: "Prompt configuration with model and messages. Use this to update the prompt."
@@ -20962,6 +20956,8 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_schema"
+                                  "display_name":
+                                    type: "string"
                                   "json_schema":
                                     type: "object"
                                     properties:
@@ -21455,6 +21451,8 @@ paths:
                                               type: "string"
                                               enum:
                                                 - "json_schema"
+                                            "display_name":
+                                              type: "string"
                                             "json_schema":
                                               type: "object"
                                               properties:
@@ -21897,6 +21895,8 @@ paths:
                                         type: "string"
                                         enum:
                                           - "json_schema"
+                                      "display_name":
+                                        type: "string"
                                       "json_schema":
                                         type: "object"
                                         properties:
@@ -22389,7 +22389,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K9FVXBKXREHTPC3V1PE17GR2"
+                              default: "01K9HC1Z8KJJMB0W1XSNX892JN"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22468,7 +22468,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K9FVXBKZ3K08S3XXXK54NAYE"
+                              default: "01K9HC1Z92938PSKZTX86KJR48"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22548,7 +22548,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K9FVXBM2DWVPMBHWRE6KWSJ3"
+                              default: "01K9HC1Z95DP5X83XDHDAJ5YQK"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22671,7 +22671,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K9FVXBM5NE0FVKRZ626Q53ZA"
+                              default: "01K9HC1Z982C172CVX4GEYEQ5H"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22788,7 +22788,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K9FVXBMKFXGYHKTVKWZ5R4H2"
+                              default: "01K9HC1Z9B54KWRX1S1SF39WQA"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23267,7 +23267,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBP2YR3XEJVVKFHST32X"
+                        default: "01K9HC1Z9V2XTE56296E27QAYX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23346,7 +23346,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBP3Q83XEFY5YGP8HW0H"
+                        default: "01K9HC1Z9W9E6HCJQ9S2JYG35Q"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23426,7 +23426,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBP4B0CG77ZCACDCAA4Q"
+                        default: "01K9HC1Z9XAJA7QDC41C8REWPT"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23549,7 +23549,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBP6J7FFAXAK1AS5FS8H"
+                        default: "01K9HC1Z9ZPBECV3186VWPZJK1"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23666,7 +23666,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBP8AN0HH69KM2HB9W13"
+                        default: "01K9HC1ZA1GN2667S6V2B25ZEB"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24115,7 +24115,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBPKE8VJMEXQ9B9GB50Q"
+                        default: "01K9HC1ZA9VPVAXN5NY82T2FVS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24194,7 +24194,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBPPJS5PDY8FEGBNT6XQ"
+                        default: "01K9HC1ZAA6WNM9YSJ3AN5FRM1"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24274,7 +24274,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBPQVQWEZJHHVN1YTZR5"
+                        default: "01K9HC1ZAC7GK78DBEJZ18ZWAD"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24397,7 +24397,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBPTA27D7QYB5DTX2G5D"
+                        default: "01K9HC1ZAFNSRKC98V7S6AVTQG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24514,7 +24514,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBPZ3PW4NWKWK8XENYVP"
+                        default: "01K9HC1ZAH3MWVK8DTC9GQF2NS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24647,7 +24647,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQNB1THQTS655SCD8P3"
+                        default: "01K9HC1ZB6EJFS0G8JKNQSTACV"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24726,7 +24726,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQQ2YMEQP994ER1QSAY"
+                        default: "01K9HC1ZB7N5YGF3558Q1CAFFA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24806,7 +24806,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBR1X1KRPFDJWWC5ZQSQ"
+                        default: "01K9HC1ZB9Z99CCSRQJT8PE2W5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24929,7 +24929,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBR35QJSP23FBZ2Y4KWK"
+                        default: "01K9HC1ZBAZ8Y3T8S0GJAQTMG5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25046,7 +25046,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBR6J9K693T27271FP7R"
+                        default: "01K9HC1ZBCZH6C9YMYYD75EWG2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25150,7 +25150,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQ96XNH76G068G5XK7R"
+                        default: "01K9HC1ZAZWTNZK5EMJ5BSQMKH"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25229,7 +25229,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQBVCKYM7E3FETRYAY8"
+                        default: "01K9HC1ZB0QE1NHJX906SPE1PE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25309,7 +25309,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQCM9VMH96V59JS098A"
+                        default: "01K9HC1ZB1HVYJERA0G1TVC32B"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25432,7 +25432,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQFGJHTNPP9JZVD1P56"
+                        default: "01K9HC1ZB3HCVFTQ8KQPVDJVDD"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25549,7 +25549,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K9FVXBQH8GCR6V9E766AKVSN"
+                        default: "01K9HC1ZB4YHHJ34WFJS907B5N"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25800,7 +25800,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-07T19:15:11.603Z"
+                          default: "2025-11-08T09:16:35.610Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -25808,7 +25808,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:11.603Z"
+                              default: "2025-11-08T09:16:35.610Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -26002,7 +26002,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.603Z"
+                    default: "2025-11-08T09:16:35.610Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -26010,7 +26010,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.603Z"
+                        default: "2025-11-08T09:16:35.610Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -26144,7 +26144,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.603Z"
+                    default: "2025-11-08T09:16:35.610Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -26152,7 +26152,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.603Z"
+                        default: "2025-11-08T09:16:35.610Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -26312,7 +26312,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.603Z"
+                    default: "2025-11-08T09:16:35.610Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -26320,7 +26320,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.603Z"
+                        default: "2025-11-08T09:16:35.610Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28220,7 +28220,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01K9FVXBVG3711NAW9NS146J7Q"
+                          default: "01K9HC1ZDXDQ3AW0GWR1R9FTJZ"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -28386,7 +28386,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K9FVXBVM6KRJ9X81DFXT0HC5"
+                    default: "01K9HC1ZDZB2SF4BFVZAD1CV9A"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -28482,7 +28482,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K9FVXBVKPEK72Y68E086STWS"
+                    default: "01K9HC1ZDYKYTNPDKXX1X8KK9P"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -28614,7 +28614,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K9FVXBW1H0G4EGT9D2TT3EFP"
+                    default: "01K9HC1ZE366GCTGANE1BKBCWA"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31405,7 +31405,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-07T19:15:11.176Z"
+                          default: "2025-11-08T09:16:35.288Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -31413,7 +31413,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:11.176Z"
+                              default: "2025-11-08T09:16:35.289Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -31549,7 +31549,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31557,7 +31557,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -31680,7 +31680,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31688,7 +31688,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -31841,7 +31841,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31849,7 +31849,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -32319,7 +32319,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-07T19:15:23.735Z"
+                                    default: "2025-11-08T09:16:46.512Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -32359,7 +32359,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-07T19:15:23.736Z"
+                                    default: "2025-11-08T09:16:46.513Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -32399,7 +32399,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-07T19:15:23.737Z"
+                                    default: "2025-11-08T09:16:46.514Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -32435,7 +32435,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-07T19:15:11.176Z"
+                          default: "2025-11-08T09:16:35.288Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -32443,7 +32443,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:11.176Z"
+                              default: "2025-11-08T09:16:35.289Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -33203,7 +33203,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-07T19:15:23.761Z"
+                                default: "2025-11-08T09:16:46.550Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -33243,7 +33243,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-07T19:15:23.762Z"
+                                default: "2025-11-08T09:16:46.550Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -33283,7 +33283,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-07T19:15:23.774Z"
+                                default: "2025-11-08T09:16:46.550Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -33319,7 +33319,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-07T19:15:11.176Z"
+                      default: "2025-11-08T09:16:35.288Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -33327,7 +33327,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-07T19:15:11.176Z"
+                          default: "2025-11-08T09:16:35.289Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -33741,7 +33741,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.750Z"
+                              default: "2025-11-08T09:16:46.532Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33781,7 +33781,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.751Z"
+                              default: "2025-11-08T09:16:46.533Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33821,7 +33821,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.752Z"
+                              default: "2025-11-08T09:16:46.536Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33857,7 +33857,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33865,7 +33865,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34623,7 +34623,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.834Z"
+                              default: "2025-11-08T09:16:46.570Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -34663,7 +34663,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.834Z"
+                              default: "2025-11-08T09:16:46.571Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -34703,7 +34703,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-07T19:15:23.835Z"
+                              default: "2025-11-08T09:16:46.571Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -34739,7 +34739,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-07T19:15:11.176Z"
+                    default: "2025-11-08T09:16:35.288Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34747,7 +34747,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-07T19:15:11.176Z"
+                        default: "2025-11-08T09:16:35.289Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
