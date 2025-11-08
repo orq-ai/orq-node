@@ -4143,7 +4143,7 @@ export const AgentToolInputCRUDCurrentDateTool$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4152,7 +4152,7 @@ export const AgentToolInputCRUDCurrentDateTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDCurrentDateTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4163,7 +4163,7 @@ export const AgentToolInputCRUDCurrentDateTool$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4211,7 +4211,7 @@ export const AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4220,7 +4220,7 @@ export const AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4231,7 +4231,7 @@ export const AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4287,7 +4287,7 @@ export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema:
   > = z.object({
     type:
       UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
-    requires_approval: z.boolean().default(false),
+    requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_approval": "requiresApproval",
@@ -4296,7 +4296,7 @@ export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema:
 /** @internal */
 export type AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4308,7 +4308,7 @@ export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema:
   > = z.object({
     type:
       UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4361,7 +4361,7 @@ export const AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema:
     z.object({
       type:
         UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
-      requires_approval: z.boolean().default(false),
+      requires_approval: z.boolean().optional(),
     }).transform((v) => {
       return remap$(v, {
         "requires_approval": "requiresApproval",
@@ -4370,7 +4370,7 @@ export const AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema:
 /** @internal */
 export type AgentToolInputCRUDDeleteMemoryDocumentTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4382,7 +4382,7 @@ export const AgentToolInputCRUDDeleteMemoryDocumentTool$outboundSchema:
   > = z.object({
     type:
       UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4435,7 +4435,7 @@ export const AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema:
     z.object({
       type:
         UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema,
-      requires_approval: z.boolean().default(false),
+      requires_approval: z.boolean().optional(),
     }).transform((v) => {
       return remap$(v, {
         "requires_approval": "requiresApproval",
@@ -4444,7 +4444,7 @@ export const AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema:
 /** @internal */
 export type AgentToolInputCRUDRetrieveMemoryStoresTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4456,7 +4456,7 @@ export const AgentToolInputCRUDRetrieveMemoryStoresTool$outboundSchema:
   > = z.object({
     type:
       UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema,
-    requiresApproval: z.boolean().default(false),
+    requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4511,7 +4511,7 @@ export const AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4520,7 +4520,7 @@ export const AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDWriteMemoryStoreTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4531,7 +4531,7 @@ export const AgentToolInputCRUDWriteMemoryStoreTool$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4581,7 +4581,7 @@ export const AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4590,7 +4590,7 @@ export const AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDQueryMemoryStoreTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4601,7 +4601,7 @@ export const AgentToolInputCRUDQueryMemoryStoreTool$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4647,7 +4647,7 @@ export const AgentToolInputCRUDRetrieveAgentsTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4656,7 +4656,7 @@ export const AgentToolInputCRUDRetrieveAgentsTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDRetrieveAgentsTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4667,7 +4667,7 @@ export const AgentToolInputCRUDRetrieveAgentsTool$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4710,7 +4710,7 @@ export const AgentToolInputCRUDCallSubAgentTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4719,7 +4719,7 @@ export const AgentToolInputCRUDCallSubAgentTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDCallSubAgentTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4729,7 +4729,7 @@ export const AgentToolInputCRUDCallSubAgentTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDCallSubAgentTool
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4772,7 +4772,7 @@ export const AgentToolInputCRUDWebScraperTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4781,7 +4781,7 @@ export const AgentToolInputCRUDWebScraperTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDWebScraperTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4791,7 +4791,7 @@ export const AgentToolInputCRUDWebScraperTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDWebScraperTool
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDAgentsType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4833,7 +4833,7 @@ export const AgentToolInputCRUDGoogleSearchTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDType$inboundSchema,
-  requires_approval: z.boolean().default(false),
+  requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_approval": "requiresApproval",
@@ -4842,7 +4842,7 @@ export const AgentToolInputCRUDGoogleSearchTool$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentToolInputCRUDGoogleSearchTool$Outbound = {
   type: string;
-  requires_approval: boolean;
+  requires_approval?: boolean | undefined;
 };
 
 /** @internal */
@@ -4852,7 +4852,7 @@ export const AgentToolInputCRUDGoogleSearchTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDGoogleSearchTool
 > = z.object({
   type: UpdateAgentAgentToolInputCRUDType$outboundSchema,
-  requiresApproval: z.boolean().default(false),
+  requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",

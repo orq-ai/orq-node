@@ -823,6 +823,7 @@ export type ListAgentTasksState = {
   error?: string | undefined;
   iteration?: number | undefined;
   accumulatedExecutionTime?: number | undefined;
+  variables?: { [k: string]: any } | undefined;
 };
 
 export type ListAgentTasksMetrics = {
@@ -3135,6 +3136,7 @@ export const ListAgentTasksState$inboundSchema: z.ZodType<
   error: z.string().optional(),
   iteration: z.number().int().default(1),
   accumulated_execution_time: z.number().default(0),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "waiting_for_approval": "waitingForApproval",
@@ -3148,6 +3150,7 @@ export type ListAgentTasksState$Outbound = {
   error?: string | undefined;
   iteration: number;
   accumulated_execution_time: number;
+  variables?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -3161,6 +3164,7 @@ export const ListAgentTasksState$outboundSchema: z.ZodType<
   error: z.string().optional(),
   iteration: z.number().int().default(1),
   accumulatedExecutionTime: z.number().default(0),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     waitingForApproval: "waiting_for_approval",

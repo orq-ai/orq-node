@@ -17,3 +17,4 @@ let value: ListAgentTasksState = {};
 | `error`                    | *string*                   | :heavy_minus_sign:         | N/A                        |
 | `iteration`                | *number*                   | :heavy_minus_sign:         | N/A                        |
 | `accumulatedExecutionTime` | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `variables`                | Record<string, *any*>      | :heavy_minus_sign:         | N/A                        |
