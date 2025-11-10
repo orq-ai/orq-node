@@ -277,6 +277,11 @@ export type DuplicateToolResponseBodyMethod = ClosedEnum<
   typeof DuplicateToolResponseBodyMethod
 >;
 
+export type DuplicateToolResponseBodyToolsHeaders = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
  */
@@ -292,7 +297,7 @@ export type DuplicateToolResponseBodyBlueprint = {
   /**
    * The headers to send with the request.
    */
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: DuplicateToolResponseBodyToolsHeaders } | undefined;
   /**
    * The body to send with the request.
    */
@@ -716,7 +721,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9P3D6633GXYDKXWVYN6X504"),
+  _id: z.string().default("01K9PVD4J28KT6D2MQD7A8K0RK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -771,7 +776,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K9P3D6633GXYDKXWVYN6X504"),
+  id: z.string().default("01K9PVD4J28KT6D2MQD7A8K0RK"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1042,7 +1047,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9P3D661CSSJR6F99NVTT2S9"),
+  _id: z.string().default("01K9PVD4HZW005KP4DABZNV3SY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1095,7 +1100,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K9P3D661CSSJR6F99NVTT2S9"),
+  id: z.string().default("01K9PVD4HZW005KP4DABZNV3SY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1168,6 +1173,51 @@ export const DuplicateToolResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
 > = DuplicateToolResponseBodyMethod$inboundSchema;
 
 /** @internal */
+export const DuplicateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+/** @internal */
+export type DuplicateToolResponseBodyToolsHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const DuplicateToolResponseBodyToolsHeaders$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsHeaders$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolResponseBodyToolsHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function duplicateToolResponseBodyToolsHeadersToJSON(
+  duplicateToolResponseBodyToolsHeaders: DuplicateToolResponseBodyToolsHeaders,
+): string {
+  return JSON.stringify(
+    DuplicateToolResponseBodyToolsHeaders$outboundSchema.parse(
+      duplicateToolResponseBodyToolsHeaders,
+    ),
+  );
+}
+export function duplicateToolResponseBodyToolsHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolResponseBodyToolsHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DuplicateToolResponseBodyToolsHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolResponseBodyToolsHeaders' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   DuplicateToolResponseBodyBlueprint,
   z.ZodTypeDef,
@@ -1175,14 +1225,18 @@ export const DuplicateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: DuplicateToolResponseBodyMethod$inboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(
+    z.lazy(() => DuplicateToolResponseBodyToolsHeaders$inboundSchema),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type DuplicateToolResponseBodyBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: string } | undefined;
+  headers?:
+    | { [k: string]: DuplicateToolResponseBodyToolsHeaders$Outbound }
+    | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -1194,7 +1248,9 @@ export const DuplicateToolResponseBodyBlueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: DuplicateToolResponseBodyMethod$outboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(
+    z.lazy(() => DuplicateToolResponseBodyToolsHeaders$outboundSchema),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 
@@ -1390,7 +1446,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9P3D65SYERV2A24EFVJJKBG"),
+  _id: z.string().default("01K9PVD4HY6TEK80AZK4MR3XB8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1443,7 +1499,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K9P3D65SYERV2A24EFVJJKBG"),
+  id: z.string().default("01K9PVD4HY6TEK80AZK4MR3XB8"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1565,7 +1621,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9P3D65RQQCKSK2TQTR3T51C"),
+  _id: z.string().default("01K9PVD4HW1DKYRCE3NZPT0QRT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1617,7 +1673,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K9P3D65RQQCKSK2TQTR3T51C"),
+  id: z.string().default("01K9PVD4HW1DKYRCE3NZPT0QRT"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1736,7 +1792,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9P3D65QZFH0CZ9HC0TJ4MPS"),
+  _id: z.string().default("01K9PVD4HV5N1BBF5FNQ2MYCH1"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1787,7 +1843,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K9P3D65QZFH0CZ9HC0TJ4MPS"),
+  id: z.string().default("01K9PVD4HV5N1BBF5FNQ2MYCH1"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

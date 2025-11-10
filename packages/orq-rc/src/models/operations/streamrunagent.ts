@@ -1042,6 +1042,11 @@ export type AgentToolInputRunMethod = ClosedEnum<
   typeof AgentToolInputRunMethod
 >;
 
+export type AgentToolInputRunHeaders = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
  */
@@ -1057,7 +1062,7 @@ export type AgentToolInputRunBlueprint = {
   /**
    * The headers to send with the request.
    */
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
   /**
    * The body to send with the request.
    */
@@ -4571,6 +4576,48 @@ export const AgentToolInputRunMethod$outboundSchema: z.ZodNativeEnum<
 > = AgentToolInputRunMethod$inboundSchema;
 
 /** @internal */
+export const AgentToolInputRunHeaders$inboundSchema: z.ZodType<
+  AgentToolInputRunHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+/** @internal */
+export type AgentToolInputRunHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  AgentToolInputRunHeaders$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function agentToolInputRunHeadersToJSON(
+  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+  );
+}
+export function agentToolInputRunHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunHeaders' from JSON`,
+  );
+}
+
+/** @internal */
 export const AgentToolInputRunBlueprint$inboundSchema: z.ZodType<
   AgentToolInputRunBlueprint,
   z.ZodTypeDef,
@@ -4578,14 +4625,15 @@ export const AgentToolInputRunBlueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: AgentToolInputRunMethod$inboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => AgentToolInputRunHeaders$inboundSchema))
+    .optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type AgentToolInputRunBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -4597,7 +4645,8 @@ export const AgentToolInputRunBlueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: AgentToolInputRunMethod$outboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
+    .optional(),
   body: z.record(z.any()).optional(),
 });
 

@@ -1018,6 +1018,11 @@ export const Method = {
  */
 export type Method = ClosedEnum<typeof Method>;
 
+export type Headers = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
  */
@@ -1033,7 +1038,7 @@ export type Blueprint = {
   /**
    * The headers to send with the request.
    */
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: Headers } | undefined;
   /**
    * The body to send with the request.
    */
@@ -4435,6 +4440,41 @@ export const Method$outboundSchema: z.ZodNativeEnum<typeof Method> =
   Method$inboundSchema;
 
 /** @internal */
+export const Headers$inboundSchema: z.ZodType<Headers, z.ZodTypeDef, unknown> =
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  });
+/** @internal */
+export type Headers$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const Headers$outboundSchema: z.ZodType<
+  Headers$Outbound,
+  z.ZodTypeDef,
+  Headers
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function headersToJSON(headers: Headers): string {
+  return JSON.stringify(Headers$outboundSchema.parse(headers));
+}
+export function headersFromJSON(
+  jsonString: string,
+): SafeParseResult<Headers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Headers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Headers' from JSON`,
+  );
+}
+
+/** @internal */
 export const Blueprint$inboundSchema: z.ZodType<
   Blueprint,
   z.ZodTypeDef,
@@ -4442,14 +4482,14 @@ export const Blueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: Method$inboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => Headers$inboundSchema)).optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type Blueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: Headers$Outbound } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -4461,7 +4501,7 @@ export const Blueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: Method$outboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => Headers$outboundSchema)).optional(),
   body: z.record(z.any()).optional(),
 });
 

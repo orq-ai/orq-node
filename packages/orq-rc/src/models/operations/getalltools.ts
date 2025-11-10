@@ -280,6 +280,11 @@ export const GetAllToolsDataMethod = {
  */
 export type GetAllToolsDataMethod = ClosedEnum<typeof GetAllToolsDataMethod>;
 
+export type GetAllToolsDataHeaders = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
  */
@@ -295,7 +300,7 @@ export type DataBlueprint = {
   /**
    * The headers to send with the request.
    */
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: GetAllToolsDataHeaders } | undefined;
   /**
    * The body to send with the request.
    */
@@ -711,7 +716,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9P3D64E5CT4KZ9PX74N4P7A"),
+    _id: z.string().default("01K9PVD4G840RW8XRPP690P9YF"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -763,7 +768,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K9P3D64E5CT4KZ9PX74N4P7A"),
+  id: z.string().default("01K9PVD4G840RW8XRPP690P9YF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -994,7 +999,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9P3D6463G4S20N7TR6HNM3Y"),
+    _id: z.string().default("01K9PVD4G6SSD4EYY3BF7JWKRS"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1045,7 +1050,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K9P3D6463G4S20N7TR6HNM3Y"),
+  id: z.string().default("01K9PVD4G6SSD4EYY3BF7JWKRS"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1113,6 +1118,48 @@ export const GetAllToolsDataMethod$outboundSchema: z.ZodNativeEnum<
 > = GetAllToolsDataMethod$inboundSchema;
 
 /** @internal */
+export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
+  GetAllToolsDataHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+/** @internal */
+export type GetAllToolsDataHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const GetAllToolsDataHeaders$outboundSchema: z.ZodType<
+  GetAllToolsDataHeaders$Outbound,
+  z.ZodTypeDef,
+  GetAllToolsDataHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function getAllToolsDataHeadersToJSON(
+  getAllToolsDataHeaders: GetAllToolsDataHeaders,
+): string {
+  return JSON.stringify(
+    GetAllToolsDataHeaders$outboundSchema.parse(getAllToolsDataHeaders),
+  );
+}
+export function getAllToolsDataHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllToolsDataHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllToolsDataHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataHeaders' from JSON`,
+  );
+}
+
+/** @internal */
 export const DataBlueprint$inboundSchema: z.ZodType<
   DataBlueprint,
   z.ZodTypeDef,
@@ -1120,14 +1167,15 @@ export const DataBlueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: GetAllToolsDataMethod$inboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => GetAllToolsDataHeaders$inboundSchema))
+    .optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type DataBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: string } | undefined;
+  headers?: { [k: string]: GetAllToolsDataHeaders$Outbound } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -1139,7 +1187,8 @@ export const DataBlueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: GetAllToolsDataMethod$outboundSchema,
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.lazy(() => GetAllToolsDataHeaders$outboundSchema))
+    .optional(),
   body: z.record(z.any()).optional(),
 });
 
@@ -1304,7 +1353,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9P3D64380AR8M77TBATFRAN"),
+    _id: z.string().default("01K9PVD4G4S5NS380DGGMNENAH"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1355,7 +1404,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K9P3D64380AR8M77TBATFRAN"),
+  id: z.string().default("01K9PVD4G4S5NS380DGGMNENAH"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1460,7 +1509,7 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9P3D641T829Z2T0JRSSF3MQ"),
+    _id: z.string().default("01K9PVD4G359H09Y1VB3SSGPM7"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1512,7 +1561,7 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K9P3D641T829Z2T0JRSSF3MQ"),
+  id: z.string().default("01K9PVD4G359H09Y1VB3SSGPM7"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1620,7 +1669,7 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9P3D63ZS2Z8G6KWR1YHBS64"),
+    _id: z.string().default("01K9PVD4G162E6W06FGC91DSAE"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1671,7 +1720,7 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K9P3D63ZS2Z8G6KWR1YHBS64"),
+  id: z.string().default("01K9PVD4G162E6W06FGC91DSAE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
