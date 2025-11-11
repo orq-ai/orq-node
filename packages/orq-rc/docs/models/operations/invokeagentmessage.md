@@ -11,9 +11,7 @@ let value: InvokeAgentMessage = {
   kind: "message",
   messageId: "<id>",
   role: "user",
-  parts: [
-    "<value 1>",
-  ],
+  parts: [],
 };
 ```
 
@@ -24,4 +22,4 @@ let value: InvokeAgentMessage = {
 | `kind`                                                                               | [operations.InvokeAgentAgentsKind](../../models/operations/invokeagentagentskind.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `messageId`                                                                          | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `role`                                                                               | [operations.InvokeAgentAgentsRole](../../models/operations/invokeagentagentsrole.md) | :heavy_check_mark:                                                                   | Extended A2A message role                                                            |
-| `parts`                                                                              | *any*[]                                                                              | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `parts`                                                                              | *operations.InvokeAgentParts*[]                                                      | :heavy_check_mark:                                                                   | N/A                                                                                  |

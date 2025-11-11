@@ -15,8 +15,21 @@ let value: GetAgentTaskResponseBody = {
     state: "South Carolina",
   },
   history: [
-    "<value 1>",
-    "<value 2>",
+    {
+      kind: "message",
+      messageId: "<id>",
+      role: "agent",
+      parts: [
+        {
+          kind: "tool_call",
+          toolName: "<value>",
+          toolCallId: "<id>",
+          arguments: {
+            "key": "<value>",
+          },
+        },
+      ],
+    },
   ],
 };
 ```
@@ -29,6 +42,6 @@ let value: GetAgentTaskResponseBody = {
 | `contextId`                                                                    | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
 | `kind`                                                                         | [operations.GetAgentTaskKind](../../models/operations/getagenttaskkind.md)     | :heavy_check_mark:                                                             | N/A                                                                            |
 | `status`                                                                       | [operations.GetAgentTaskStatus](../../models/operations/getagenttaskstatus.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `history`                                                                      | *any*[]                                                                        | :heavy_check_mark:                                                             | N/A                                                                            |
-| `artifacts`                                                                    | *any*[]                                                                        | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `history`                                                                      | [operations.History](../../models/operations/history.md)[]                     | :heavy_check_mark:                                                             | N/A                                                                            |
+| `artifacts`                                                                    | [operations.Artifacts](../../models/operations/artifacts.md)[]                 | :heavy_minus_sign:                                                             | N/A                                                                            |
 | `metadata`                                                                     | Record<string, *any*>                                                          | :heavy_minus_sign:                                                             | N/A                                                                            |

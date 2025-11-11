@@ -1104,6 +1104,17 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export const CollapsedConfigurationSections = {
+  Information: "information",
+  Model: "model",
+  Tools: "tools",
+  Context: "context",
+  RuntimeConstraints: "runtime_constraints",
+} as const;
+export type CollapsedConfigurationSections = ClosedEnum<
+  typeof CollapsedConfigurationSections
+>;
+
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
   projectId?: string | undefined;
@@ -1135,12 +1146,25 @@ export type UpdateAgentRequestBody = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores?: Array<string> | undefined;
   knowledgeBases?: Array<UpdateAgentKnowledgeBases> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<UpdateAgentTeamOfAgents> | undefined;
+  /**
+   * List of collapsed sections in configuration. Duplicates are not allowed.
+   */
+  collapsedConfigurationSections?:
+    | Array<CollapsedConfigurationSections>
+    | undefined;
+  /**
+   * Extracted variables from agent instructions
+   */
+  variables?: { [k: string]: any } | undefined;
 };
 
 export type UpdateAgentRequest = {
@@ -1944,15 +1968,15 @@ export type UpdateAgentAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const UpdateAgentHiddenPanels = {
+export const UpdateAgentCollapsedConfigurationSections = {
+  Information: "information",
   Model: "model",
   Tools: "tools",
-  KnowledgeBases: "knowledge_bases",
-  Variables: "variables",
+  Context: "context",
   RuntimeConstraints: "runtime_constraints",
 } as const;
-export type UpdateAgentHiddenPanels = ClosedEnum<
-  typeof UpdateAgentHiddenPanels
+export type UpdateAgentCollapsedConfigurationSections = ClosedEnum<
+  typeof UpdateAgentCollapsedConfigurationSections
 >;
 
 /**
@@ -1988,6 +2012,9 @@ export type UpdateAgentResponseBody = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores: Array<string>;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
@@ -2003,9 +2030,11 @@ export type UpdateAgentResponseBody = {
    */
   knowledgeBases?: Array<UpdateAgentAgentsKnowledgeBases> | undefined;
   /**
-   * List of hidden collapsed panels in configuration. Duplicates are not allowed.
+   * List of collapsed sections in configuration. Duplicates are not allowed.
    */
-  hiddenPanels?: Array<UpdateAgentHiddenPanels> | undefined;
+  collapsedConfigurationSections?:
+    | Array<UpdateAgentCollapsedConfigurationSections>
+    | undefined;
 };
 
 /** @internal */
@@ -5163,6 +5192,15 @@ export function updateAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
+export const CollapsedConfigurationSections$inboundSchema: z.ZodNativeEnum<
+  typeof CollapsedConfigurationSections
+> = z.nativeEnum(CollapsedConfigurationSections);
+/** @internal */
+export const CollapsedConfigurationSections$outboundSchema: z.ZodNativeEnum<
+  typeof CollapsedConfigurationSections
+> = CollapsedConfigurationSections$inboundSchema;
+
+/** @internal */
 export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   UpdateAgentRequestBody,
   z.ZodTypeDef,
@@ -5192,6 +5230,10 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   team_of_agents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$inboundSchema))
     .optional(),
+  collapsed_configuration_sections: z.array(
+    CollapsedConfigurationSections$inboundSchema,
+  ).optional(),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
@@ -5200,6 +5242,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "knowledge_bases": "knowledgeBases",
     "team_of_agents": "teamOfAgents",
+    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -5219,6 +5262,8 @@ export type UpdateAgentRequestBody$Outbound = {
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
+  collapsed_configuration_sections?: Array<string> | undefined;
+  variables?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -5251,6 +5296,10 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
+  collapsedConfigurationSections: z.array(
+    CollapsedConfigurationSections$outboundSchema,
+  ).optional(),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
@@ -5259,6 +5308,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     knowledgeBases: "knowledge_bases",
     teamOfAgents: "team_of_agents",
+    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 
@@ -7666,13 +7716,13 @@ export function updateAgentAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentHiddenPanels$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentHiddenPanels
-> = z.nativeEnum(UpdateAgentHiddenPanels);
+export const UpdateAgentCollapsedConfigurationSections$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentCollapsedConfigurationSections> = z
+    .nativeEnum(UpdateAgentCollapsedConfigurationSections);
 /** @internal */
-export const UpdateAgentHiddenPanels$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentHiddenPanels
-> = UpdateAgentHiddenPanels$inboundSchema;
+export const UpdateAgentCollapsedConfigurationSections$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentCollapsedConfigurationSections> =
+    UpdateAgentCollapsedConfigurationSections$inboundSchema;
 
 /** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
@@ -7706,7 +7756,9 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$inboundSchema),
   ).optional(),
-  hidden_panels: z.array(UpdateAgentHiddenPanels$inboundSchema).optional(),
+  collapsed_configuration_sections: z.array(
+    UpdateAgentCollapsedConfigurationSections$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -7719,7 +7771,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "hidden_panels": "hiddenPanels",
+    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -7746,7 +7798,7 @@ export type UpdateAgentResponseBody$Outbound = {
   metrics?: UpdateAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<UpdateAgentAgentsKnowledgeBases$Outbound> | undefined;
-  hidden_panels?: Array<string> | undefined;
+  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -7781,7 +7833,9 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$outboundSchema),
   ).optional(),
-  hiddenPanels: z.array(UpdateAgentHiddenPanels$outboundSchema).optional(),
+  collapsedConfigurationSections: z.array(
+    UpdateAgentCollapsedConfigurationSections$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -7794,7 +7848,7 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    hiddenPanels: "hidden_panels",
+    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

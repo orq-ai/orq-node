@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * List all agents
  *
  * @remarks
- * Retrieves a paginated list of all agents in your workspace. Each agent includes its configuration, primary model, and optional fallback model settings.
+ * Retrieves a list of all agents in your workspace. When no limit is provided, returns all agents without pagination. When a limit is specified, returns a paginated list. Each agent includes its configuration, primary model, and optional fallback model settings.
  */
 export function agentsList(
   client: OrqCore,

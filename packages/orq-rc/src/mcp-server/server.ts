@@ -15,6 +15,7 @@ import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$agentsCreate } from "./tools/agentsCreate.js";
 import { tool$agentsDelete } from "./tools/agentsDelete.js";
+import { tool$agentsDuplicate } from "./tools/agentsDuplicate.js";
 import { tool$agentsInvoke } from "./tools/agentsInvoke.js";
 import { tool$agentsList } from "./tools/agentsList.js";
 import { tool$agentsListActions } from "./tools/agentsListActions.js";
@@ -124,7 +125,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.0-rc.20",
+    version: "4.0.0-rc.21",
   });
 
   const client = new OrqCore({
@@ -176,6 +177,7 @@ export function createMCPServer(deps: {
   tool(tool$agentsDelete);
   tool(tool$agentsRetrieve);
   tool(tool$agentsUpdate);
+  tool(tool$agentsDuplicate);
   tool(tool$agentsInvoke);
   tool(tool$agentsListTasks);
   tool(tool$agentsRun);

@@ -38,6 +38,7 @@ export * from "./deploymentgetconfig.js";
 export * from "./deploymentinvoke.js";
 export * from "./deployments.js";
 export * from "./deploymentstream.js";
+export * from "./duplicateagent.js";
 export * from "./duplicatetool.js";
 export * from "./filedelete.js";
 export * from "./fileget.js";

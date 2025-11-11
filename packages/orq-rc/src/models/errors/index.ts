@@ -8,6 +8,7 @@ export * from "./createeval.js";
 export * from "./deleteagent.js";
 export * from "./deletecontact.js";
 export * from "./deleteeval.js";
+export * from "./duplicateagent.js";
 export * from "./duplicatetool.js";
 export * from "./getagent.js";
 export * from "./getagenttask.js";

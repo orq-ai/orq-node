@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAgentsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.
    */
   limit?: number | undefined;
   /**
@@ -804,14 +804,16 @@ export type ListAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const ListAgentsHiddenPanels = {
+export const ListAgentsCollapsedConfigurationSections = {
+  Information: "information",
   Model: "model",
   Tools: "tools",
-  KnowledgeBases: "knowledge_bases",
-  Variables: "variables",
+  Context: "context",
   RuntimeConstraints: "runtime_constraints",
 } as const;
-export type ListAgentsHiddenPanels = ClosedEnum<typeof ListAgentsHiddenPanels>;
+export type ListAgentsCollapsedConfigurationSections = ClosedEnum<
+  typeof ListAgentsCollapsedConfigurationSections
+>;
 
 export type ListAgentsData = {
   id: string;
@@ -843,6 +845,9 @@ export type ListAgentsData = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores: Array<string>;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
@@ -858,9 +863,11 @@ export type ListAgentsData = {
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
   /**
-   * List of hidden collapsed panels in configuration. Duplicates are not allowed.
+   * List of collapsed sections in configuration. Duplicates are not allowed.
    */
-  hiddenPanels?: Array<ListAgentsHiddenPanels> | undefined;
+  collapsedConfigurationSections?:
+    | Array<ListAgentsCollapsedConfigurationSections>
+    | undefined;
 };
 
 /**
@@ -878,7 +885,7 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().optional(),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
 }).transform((v) => {
@@ -889,7 +896,7 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ListAgentsRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
 };
@@ -900,7 +907,7 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -3103,13 +3110,13 @@ export function listAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const ListAgentsHiddenPanels$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsHiddenPanels
-> = z.nativeEnum(ListAgentsHiddenPanels);
+export const ListAgentsCollapsedConfigurationSections$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> = z
+    .nativeEnum(ListAgentsCollapsedConfigurationSections);
 /** @internal */
-export const ListAgentsHiddenPanels$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsHiddenPanels
-> = ListAgentsHiddenPanels$inboundSchema;
+export const ListAgentsCollapsedConfigurationSections$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> =
+    ListAgentsCollapsedConfigurationSections$inboundSchema;
 
 /** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
@@ -3140,7 +3147,9 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
-  hidden_panels: z.array(ListAgentsHiddenPanels$inboundSchema).optional(),
+  collapsed_configuration_sections: z.array(
+    ListAgentsCollapsedConfigurationSections$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3153,7 +3162,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "hidden_panels": "hiddenPanels",
+    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -3180,7 +3189,7 @@ export type ListAgentsData$Outbound = {
   metrics?: ListAgentsMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<ListAgentsKnowledgeBases$Outbound> | undefined;
-  hidden_panels?: Array<string> | undefined;
+  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3212,7 +3221,9 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => ListAgentsKnowledgeBases$outboundSchema))
     .optional(),
-  hiddenPanels: z.array(ListAgentsHiddenPanels$outboundSchema).optional(),
+  collapsedConfigurationSections: z.array(
+    ListAgentsCollapsedConfigurationSections$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -3225,7 +3236,7 @@ export const ListAgentsData$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    hiddenPanels: "hidden_panels",
+    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

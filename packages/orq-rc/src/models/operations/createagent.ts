@@ -1106,7 +1106,7 @@ export type CreateAgentRequestBody = {
    */
   settings: Settings;
   /**
-   * Optional array of memory store keys for the agent to access
+   * Optional array of memory store identifiers for the agent to access. Accepts both memory store IDs and keys.
    */
   memoryStores?: Array<string> | undefined;
   /**
@@ -1117,6 +1117,7 @@ export type CreateAgentRequestBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<TeamOfAgents> | undefined;
+  variables?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1908,14 +1909,16 @@ export type CreateAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const HiddenPanels = {
+export const CreateAgentCollapsedConfigurationSections = {
+  Information: "information",
   Model: "model",
   Tools: "tools",
-  KnowledgeBases: "knowledge_bases",
-  Variables: "variables",
+  Context: "context",
   RuntimeConstraints: "runtime_constraints",
 } as const;
-export type HiddenPanels = ClosedEnum<typeof HiddenPanels>;
+export type CreateAgentCollapsedConfigurationSections = ClosedEnum<
+  typeof CreateAgentCollapsedConfigurationSections
+>;
 
 /**
  * Agent created successfully
@@ -1950,6 +1953,9 @@ export type CreateAgentResponseBody = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores: Array<string>;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
@@ -1965,9 +1971,11 @@ export type CreateAgentResponseBody = {
    */
   knowledgeBases?: Array<CreateAgentKnowledgeBases> | undefined;
   /**
-   * List of hidden collapsed panels in configuration. Duplicates are not allowed.
+   * List of collapsed sections in configuration. Duplicates are not allowed.
    */
-  hiddenPanels?: Array<HiddenPanels> | undefined;
+  collapsedConfigurationSections?:
+    | Array<CreateAgentCollapsedConfigurationSections>
+    | undefined;
 };
 
 /** @internal */
@@ -4835,6 +4843,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(z.lazy(() => KnowledgeBases$inboundSchema))
     .optional(),
   team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "system_prompt": "systemPrompt",
@@ -4860,6 +4869,7 @@ export type CreateAgentRequestBody$Outbound = {
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
+  variables?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4889,6 +4899,7 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
     .optional(),
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
+  variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     systemPrompt: "system_prompt",
@@ -7141,11 +7152,13 @@ export function createAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const HiddenPanels$inboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
-  z.nativeEnum(HiddenPanels);
+export const CreateAgentCollapsedConfigurationSections$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentCollapsedConfigurationSections> = z
+    .nativeEnum(CreateAgentCollapsedConfigurationSections);
 /** @internal */
-export const HiddenPanels$outboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
-  HiddenPanels$inboundSchema;
+export const CreateAgentCollapsedConfigurationSections$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentCollapsedConfigurationSections> =
+    CreateAgentCollapsedConfigurationSections$inboundSchema;
 
 /** @internal */
 export const CreateAgentResponseBody$inboundSchema: z.ZodType<
@@ -7177,7 +7190,9 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => CreateAgentKnowledgeBases$inboundSchema),
   ).optional(),
-  hidden_panels: z.array(HiddenPanels$inboundSchema).optional(),
+  collapsed_configuration_sections: z.array(
+    CreateAgentCollapsedConfigurationSections$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -7190,7 +7205,7 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "hidden_panels": "hiddenPanels",
+    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -7217,7 +7232,7 @@ export type CreateAgentResponseBody$Outbound = {
   metrics?: Metrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<CreateAgentKnowledgeBases$Outbound> | undefined;
-  hidden_panels?: Array<string> | undefined;
+  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -7250,7 +7265,9 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => CreateAgentKnowledgeBases$outboundSchema),
   ).optional(),
-  hiddenPanels: z.array(HiddenPanels$outboundSchema).optional(),
+  collapsedConfigurationSections: z.array(
+    CreateAgentCollapsedConfigurationSections$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -7263,7 +7280,7 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    hiddenPanels: "hidden_panels",
+    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

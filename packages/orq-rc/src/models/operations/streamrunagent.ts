@@ -1497,7 +1497,7 @@ export type StreamRunAgentRequestBody = {
    */
   systemPrompt?: string | undefined;
   /**
-   * The list of keys of the memory stores that are accessible to the agent.
+   * Array of memory store identifiers that are accessible to the agent. Accepts both memory store IDs and keys.
    */
   memoryStores?: Array<string> | undefined;
   /**

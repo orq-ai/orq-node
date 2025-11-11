@@ -4,6 +4,7 @@
 
 import { agentsCreate } from "../funcs/agentsCreate.js";
 import { agentsDelete } from "../funcs/agentsDelete.js";
+import { agentsDuplicate } from "../funcs/agentsDuplicate.js";
 import { agentsInvoke } from "../funcs/agentsInvoke.js";
 import { agentsList } from "../funcs/agentsList.js";
 import { agentsListActions } from "../funcs/agentsListActions.js";
@@ -59,7 +60,7 @@ export class Agents extends ClientSDK {
    * List all agents
    *
    * @remarks
-   * Retrieves a paginated list of all agents in your workspace. Each agent includes its configuration, primary model, and optional fallback model settings.
+   * Retrieves a list of all agents in your workspace. When no limit is provided, returns all agents without pagination. When a limit is specified, returns a paginated list. Each agent includes its configuration, primary model, and optional fallback model settings.
    */
   async list(
     request?: operations.ListAgentsRequest | undefined,
@@ -117,6 +118,23 @@ export class Agents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateAgentResponseBody> {
     return unwrapAsync(agentsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Duplicate an existing agent
+   *
+   * @remarks
+   * Creates a copy of an existing agent with a new unique key. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
+   */
+  async duplicate(
+    request: operations.DuplicateAgentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DuplicateAgentResponseBody> {
+    return unwrapAsync(agentsDuplicate(
       this,
       request,
       options,

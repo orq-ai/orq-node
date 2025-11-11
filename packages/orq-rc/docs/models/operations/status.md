@@ -7,11 +7,11 @@ Comma-separated list of task statuses to filter by. Available values: inactive, 
 ```typescript
 import { Status } from "@orq-ai/node/models/operations";
 
-let value: Status = "in_progress";
+let value: Status = "failed";
 ```
 
 ## Values
 
 ```typescript
-"inactive" | "approval_required" | "in_progress" | "errored"
+"submitted" | "working" | "input-required" | "auth-required" | "completed" | "failed" | "canceled" | "rejected"
 ```

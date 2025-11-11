@@ -784,14 +784,16 @@ export type GetAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const GetAgentHiddenPanels = {
+export const GetAgentCollapsedConfigurationSections = {
+  Information: "information",
   Model: "model",
   Tools: "tools",
-  KnowledgeBases: "knowledge_bases",
-  Variables: "variables",
+  Context: "context",
   RuntimeConstraints: "runtime_constraints",
 } as const;
-export type GetAgentHiddenPanels = ClosedEnum<typeof GetAgentHiddenPanels>;
+export type GetAgentCollapsedConfigurationSections = ClosedEnum<
+  typeof GetAgentCollapsedConfigurationSections
+>;
 
 /**
  * Agent retrieved successfully
@@ -826,6 +828,9 @@ export type GetAgentResponseBody = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores: Array<string>;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
@@ -841,9 +846,11 @@ export type GetAgentResponseBody = {
    */
   knowledgeBases?: Array<GetAgentKnowledgeBases> | undefined;
   /**
-   * List of hidden collapsed panels in configuration. Duplicates are not allowed.
+   * List of collapsed sections in configuration. Duplicates are not allowed.
    */
-  hiddenPanels?: Array<GetAgentHiddenPanels> | undefined;
+  collapsedConfigurationSections?:
+    | Array<GetAgentCollapsedConfigurationSections>
+    | undefined;
 };
 
 /** @internal */
@@ -3011,13 +3018,14 @@ export function getAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const GetAgentHiddenPanels$inboundSchema: z.ZodNativeEnum<
-  typeof GetAgentHiddenPanels
-> = z.nativeEnum(GetAgentHiddenPanels);
+export const GetAgentCollapsedConfigurationSections$inboundSchema:
+  z.ZodNativeEnum<typeof GetAgentCollapsedConfigurationSections> = z.nativeEnum(
+    GetAgentCollapsedConfigurationSections,
+  );
 /** @internal */
-export const GetAgentHiddenPanels$outboundSchema: z.ZodNativeEnum<
-  typeof GetAgentHiddenPanels
-> = GetAgentHiddenPanels$inboundSchema;
+export const GetAgentCollapsedConfigurationSections$outboundSchema:
+  z.ZodNativeEnum<typeof GetAgentCollapsedConfigurationSections> =
+    GetAgentCollapsedConfigurationSections$inboundSchema;
 
 /** @internal */
 export const GetAgentResponseBody$inboundSchema: z.ZodType<
@@ -3048,7 +3056,9 @@ export const GetAgentResponseBody$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => GetAgentKnowledgeBases$inboundSchema))
     .optional(),
-  hidden_panels: z.array(GetAgentHiddenPanels$inboundSchema).optional(),
+  collapsed_configuration_sections: z.array(
+    GetAgentCollapsedConfigurationSections$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3061,7 +3071,7 @@ export const GetAgentResponseBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "hidden_panels": "hiddenPanels",
+    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -3088,7 +3098,7 @@ export type GetAgentResponseBody$Outbound = {
   metrics?: GetAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<GetAgentKnowledgeBases$Outbound> | undefined;
-  hidden_panels?: Array<string> | undefined;
+  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3120,7 +3130,9 @@ export const GetAgentResponseBody$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => GetAgentKnowledgeBases$outboundSchema))
     .optional(),
-  hiddenPanels: z.array(GetAgentHiddenPanels$outboundSchema).optional(),
+  collapsedConfigurationSections: z.array(
+    GetAgentCollapsedConfigurationSections$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -3133,7 +3145,7 @@ export const GetAgentResponseBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    hiddenPanels: "hidden_panels",
+    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 
