@@ -112,11 +112,11 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.agents.create({
-    path: "Default",
     key: "<key>",
     role: "<value>",
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
+    path: "Default",
     model: "Camaro",
     settings: {},
     knowledgeBases: [
@@ -148,11 +148,11 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await agentsCreate(orq, {
-    path: "Default",
     key: "<key>",
     role: "<value>",
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
+    path: "Default",
     model: "Camaro",
     settings: {},
     knowledgeBases: [

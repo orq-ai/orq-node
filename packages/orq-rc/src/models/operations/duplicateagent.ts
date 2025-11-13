@@ -83,6 +83,64 @@ export type DuplicateAgentTools = {
   timeout?: number | undefined;
 };
 
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const DuplicateAgentExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type DuplicateAgentExecuteOn = ClosedEnum<
+  typeof DuplicateAgentExecuteOn
+>;
+
+export type DuplicateAgentEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: DuplicateAgentExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const DuplicateAgentAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type DuplicateAgentAgentsExecuteOn = ClosedEnum<
+  typeof DuplicateAgentAgentsExecuteOn
+>;
+
+export type DuplicateAgentGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: DuplicateAgentAgentsExecuteOn;
+};
+
 export type DuplicateAgentSettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
@@ -97,6 +155,14 @@ export type DuplicateAgentSettings = {
    */
   toolApprovalRequired?: DuplicateAgentToolApprovalRequired | undefined;
   tools?: Array<DuplicateAgentTools> | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<DuplicateAgentEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<DuplicateAgentGuardrails> | undefined;
 };
 
 /**
@@ -807,6 +873,8 @@ export const DuplicateAgentCollapsedConfigurationSections = {
   Tools: "tools",
   Context: "context",
   RuntimeConstraints: "runtime_constraints",
+  Evaluators: "evaluators",
+  Guardrails: "guardrails",
 } as const;
 export type DuplicateAgentCollapsedConfigurationSections = ClosedEnum<
   typeof DuplicateAgentCollapsedConfigurationSections
@@ -1047,6 +1115,134 @@ export function duplicateAgentToolsFromJSON(
 }
 
 /** @internal */
+export const DuplicateAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentExecuteOn
+> = z.nativeEnum(DuplicateAgentExecuteOn);
+/** @internal */
+export const DuplicateAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentExecuteOn
+> = DuplicateAgentExecuteOn$inboundSchema;
+
+/** @internal */
+export const DuplicateAgentEvaluators$inboundSchema: z.ZodType<
+  DuplicateAgentEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: DuplicateAgentExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type DuplicateAgentEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const DuplicateAgentEvaluators$outboundSchema: z.ZodType<
+  DuplicateAgentEvaluators$Outbound,
+  z.ZodTypeDef,
+  DuplicateAgentEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: DuplicateAgentExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function duplicateAgentEvaluatorsToJSON(
+  duplicateAgentEvaluators: DuplicateAgentEvaluators,
+): string {
+  return JSON.stringify(
+    DuplicateAgentEvaluators$outboundSchema.parse(duplicateAgentEvaluators),
+  );
+}
+export function duplicateAgentEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateAgentEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateAgentEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const DuplicateAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentAgentsExecuteOn
+> = z.nativeEnum(DuplicateAgentAgentsExecuteOn);
+/** @internal */
+export const DuplicateAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentAgentsExecuteOn
+> = DuplicateAgentAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const DuplicateAgentGuardrails$inboundSchema: z.ZodType<
+  DuplicateAgentGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: DuplicateAgentAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type DuplicateAgentGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const DuplicateAgentGuardrails$outboundSchema: z.ZodType<
+  DuplicateAgentGuardrails$Outbound,
+  z.ZodTypeDef,
+  DuplicateAgentGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: DuplicateAgentAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function duplicateAgentGuardrailsToJSON(
+  duplicateAgentGuardrails: DuplicateAgentGuardrails,
+): string {
+  return JSON.stringify(
+    DuplicateAgentGuardrails$outboundSchema.parse(duplicateAgentGuardrails),
+  );
+}
+export function duplicateAgentGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateAgentGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateAgentGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateAgentSettings$inboundSchema: z.ZodType<
   DuplicateAgentSettings,
   z.ZodTypeDef,
@@ -1057,6 +1253,10 @@ export const DuplicateAgentSettings$inboundSchema: z.ZodType<
   tool_approval_required: DuplicateAgentToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => DuplicateAgentTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => DuplicateAgentEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => DuplicateAgentGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -1070,6 +1270,8 @@ export type DuplicateAgentSettings$Outbound = {
   max_execution_time: number;
   tool_approval_required: string;
   tools?: Array<DuplicateAgentTools$Outbound> | undefined;
+  evaluators?: Array<DuplicateAgentEvaluators$Outbound> | undefined;
+  guardrails?: Array<DuplicateAgentGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -1083,6 +1285,10 @@ export const DuplicateAgentSettings$outboundSchema: z.ZodType<
   toolApprovalRequired: DuplicateAgentToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => DuplicateAgentTools$outboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => DuplicateAgentEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => DuplicateAgentGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

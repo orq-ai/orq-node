@@ -462,7 +462,6 @@ export type ModelType = ClosedEnum<typeof ModelType>;
 export type PromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  displayName?: string | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -1638,7 +1637,6 @@ export type UpdatePromptPromptsResponseMessages = {
 export type UpdatePromptPromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  displayName?: string | undefined;
   /**
    * The id of the resource
    */
@@ -2769,7 +2767,6 @@ export const PromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  display_name: z.string().optional(),
   model_parameters: z.lazy(() => UpdatePromptModelParameters$inboundSchema)
     .optional(),
   provider: Provider$inboundSchema.optional(),
@@ -2780,7 +2777,6 @@ export const PromptConfig$inboundSchema: z.ZodType<
   is_private: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    "display_name": "displayName",
     "model_parameters": "modelParameters",
     "model_db_id": "modelDbId",
     "model_type": "modelType",
@@ -2791,7 +2787,6 @@ export const PromptConfig$inboundSchema: z.ZodType<
 export type PromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  display_name?: string | undefined;
   model_parameters?: UpdatePromptModelParameters$Outbound | undefined;
   provider?: string | undefined;
   version?: string | undefined;
@@ -2809,7 +2804,6 @@ export const PromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  displayName: z.string().optional(),
   modelParameters: z.lazy(() => UpdatePromptModelParameters$outboundSchema)
     .optional(),
   provider: Provider$outboundSchema.optional(),
@@ -2820,7 +2814,6 @@ export const PromptConfig$outboundSchema: z.ZodType<
   isPrivate: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    displayName: "display_name",
     modelParameters: "model_parameters",
     modelDbId: "model_db_id",
     modelType: "model_type",
@@ -6117,7 +6110,6 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  display_name: z.string().optional(),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(UpdatePromptModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() =>
@@ -6131,7 +6123,6 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
   ),
 }).transform((v) => {
   return remap$(v, {
-    "display_name": "displayName",
     "model_db_id": "modelDbId",
     "model_type": "modelType",
     "model_parameters": "modelParameters",
@@ -6142,7 +6133,6 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
 export type UpdatePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  display_name?: string | undefined;
   model_db_id?: string | null | undefined;
   model_type?: string | null | undefined;
   model_parameters?: UpdatePromptPromptsModelParameters$Outbound | undefined;
@@ -6160,7 +6150,6 @@ export const UpdatePromptPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  displayName: z.string().optional(),
   modelDbId: z.nullable(z.string()).optional(),
   modelType: z.nullable(UpdatePromptModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() =>
@@ -6174,7 +6163,6 @@ export const UpdatePromptPromptConfig$outboundSchema: z.ZodType<
   ),
 }).transform((v) => {
   return remap$(v, {
-    displayName: "display_name",
     modelDbId: "model_db_id",
     modelType: "model_type",
     modelParameters: "model_parameters",

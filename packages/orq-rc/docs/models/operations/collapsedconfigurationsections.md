@@ -5,11 +5,11 @@
 ```typescript
 import { CollapsedConfigurationSections } from "@orq-ai/node/models/operations";
 
-let value: CollapsedConfigurationSections = "runtime_constraints";
+let value: CollapsedConfigurationSections = "guardrails";
 ```
 
 ## Values
 
 ```typescript
-"information" | "model" | "tools" | "context" | "runtime_constraints"
+"information" | "model" | "tools" | "context" | "runtime_constraints" | "evaluators" | "guardrails"
 ```

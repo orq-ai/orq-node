@@ -1395,6 +1395,64 @@ export type StreamRunAgentToolApprovalRequired = ClosedEnum<
   typeof StreamRunAgentToolApprovalRequired
 >;
 
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const StreamRunAgentExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type StreamRunAgentExecuteOn = ClosedEnum<
+  typeof StreamRunAgentExecuteOn
+>;
+
+export type StreamRunAgentEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: StreamRunAgentExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const StreamRunAgentAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type StreamRunAgentAgentsExecuteOn = ClosedEnum<
+  typeof StreamRunAgentAgentsExecuteOn
+>;
+
+export type StreamRunAgentGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: StreamRunAgentAgentsExecuteOn;
+};
+
 export type StreamRunAgentSettings = {
   /**
    * Tools available to the agent
@@ -1429,6 +1487,14 @@ export type StreamRunAgentSettings = {
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
   maxExecutionTime?: number | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<StreamRunAgentEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<StreamRunAgentGuardrails> | undefined;
 };
 
 export type StreamRunAgentRequestBody = {
@@ -5826,6 +5892,134 @@ export const StreamRunAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = StreamRunAgentToolApprovalRequired$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentExecuteOn
+> = z.nativeEnum(StreamRunAgentExecuteOn);
+/** @internal */
+export const StreamRunAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentExecuteOn
+> = StreamRunAgentExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentEvaluators$inboundSchema: z.ZodType<
+  StreamRunAgentEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: StreamRunAgentExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type StreamRunAgentEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamRunAgentEvaluators$outboundSchema: z.ZodType<
+  StreamRunAgentEvaluators$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: StreamRunAgentExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function streamRunAgentEvaluatorsToJSON(
+  streamRunAgentEvaluators: StreamRunAgentEvaluators,
+): string {
+  return JSON.stringify(
+    StreamRunAgentEvaluators$outboundSchema.parse(streamRunAgentEvaluators),
+  );
+}
+export function streamRunAgentEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentAgentsExecuteOn
+> = z.nativeEnum(StreamRunAgentAgentsExecuteOn);
+/** @internal */
+export const StreamRunAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentAgentsExecuteOn
+> = StreamRunAgentAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentGuardrails$inboundSchema: z.ZodType<
+  StreamRunAgentGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: StreamRunAgentAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type StreamRunAgentGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamRunAgentGuardrails$outboundSchema: z.ZodType<
+  StreamRunAgentGuardrails$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: StreamRunAgentAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function streamRunAgentGuardrailsToJSON(
+  streamRunAgentGuardrails: StreamRunAgentGuardrails,
+): string {
+  return JSON.stringify(
+    StreamRunAgentGuardrails$outboundSchema.parse(streamRunAgentGuardrails),
+  );
+}
+export function streamRunAgentGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentSettings$inboundSchema: z.ZodType<
   StreamRunAgentSettings,
   z.ZodTypeDef,
@@ -5875,6 +6069,10 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
     .default("none"),
   max_iterations: z.number().int().default(15),
   max_execution_time: z.number().int().default(300),
+  evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_approval_required": "toolApprovalRequired",
@@ -5905,6 +6103,8 @@ export type StreamRunAgentSettings$Outbound = {
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
+  evaluators?: Array<StreamRunAgentEvaluators$Outbound> | undefined;
+  guardrails?: Array<StreamRunAgentGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -5957,6 +6157,10 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
     .default("none"),
   maxIterations: z.number().int().default(15),
   maxExecutionTime: z.number().int().default(300),
+  evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     toolApprovalRequired: "tool_approval_required",

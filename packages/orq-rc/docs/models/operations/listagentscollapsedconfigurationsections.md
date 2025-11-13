@@ -11,5 +11,5 @@ let value: ListAgentsCollapsedConfigurationSections = "tools";
 ## Values
 
 ```typescript
-"information" | "model" | "tools" | "context" | "runtime_constraints"
+"information" | "model" | "tools" | "context" | "runtime_constraints" | "evaluators" | "guardrails"
 ```

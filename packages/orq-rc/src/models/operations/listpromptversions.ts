@@ -501,7 +501,6 @@ export type ListPromptVersionsMessages = {
 export type ListPromptVersionsPromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  displayName?: string | undefined;
   /**
    * The id of the resource
    */
@@ -1741,7 +1740,6 @@ export const ListPromptVersionsPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  display_name: z.string().optional(),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(ListPromptVersionsModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() =>
@@ -1753,7 +1751,6 @@ export const ListPromptVersionsPromptConfig$inboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => ListPromptVersionsMessages$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
-    "display_name": "displayName",
     "model_db_id": "modelDbId",
     "model_type": "modelType",
     "model_parameters": "modelParameters",
@@ -1764,7 +1761,6 @@ export const ListPromptVersionsPromptConfig$inboundSchema: z.ZodType<
 export type ListPromptVersionsPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  display_name?: string | undefined;
   model_db_id?: string | null | undefined;
   model_type?: string | null | undefined;
   model_parameters?: ListPromptVersionsModelParameters$Outbound | undefined;
@@ -1782,7 +1778,6 @@ export const ListPromptVersionsPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  displayName: z.string().optional(),
   modelDbId: z.nullable(z.string()).optional(),
   modelType: z.nullable(ListPromptVersionsModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() =>
@@ -1794,7 +1789,6 @@ export const ListPromptVersionsPromptConfig$outboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => ListPromptVersionsMessages$outboundSchema)),
 }).transform((v) => {
   return remap$(v, {
-    displayName: "display_name",
     modelDbId: "model_db_id",
     modelType: "model_type",
     modelParameters: "model_parameters",

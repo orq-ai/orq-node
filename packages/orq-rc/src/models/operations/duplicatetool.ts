@@ -9,11 +9,19 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type DuplicateToolRequestBody = {
+  /**
+   * Custom display name for the duplicated tool
+   */
+  displayName?: string | undefined;
+};
+
 export type DuplicateToolRequest = {
   /**
    * The id of the tool to duplicate
    */
   toolId: string;
+  requestBody?: DuplicateToolRequestBody | undefined;
 };
 
 /**
@@ -585,20 +593,70 @@ export type DuplicateToolResponseBody =
   | DuplicateToolResponseBody5;
 
 /** @internal */
+export const DuplicateToolRequestBody$inboundSchema: z.ZodType<
+  DuplicateToolRequestBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  display_name: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+  });
+});
+/** @internal */
+export type DuplicateToolRequestBody$Outbound = {
+  display_name?: string | undefined;
+};
+
+/** @internal */
+export const DuplicateToolRequestBody$outboundSchema: z.ZodType<
+  DuplicateToolRequestBody$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolRequestBody
+> = z.object({
+  displayName: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+  });
+});
+
+export function duplicateToolRequestBodyToJSON(
+  duplicateToolRequestBody: DuplicateToolRequestBody,
+): string {
+  return JSON.stringify(
+    DuplicateToolRequestBody$outboundSchema.parse(duplicateToolRequestBody),
+  );
+}
+export function duplicateToolRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateToolRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateToolRequest$inboundSchema: z.ZodType<
   DuplicateToolRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   tool_id: z.string(),
+  RequestBody: z.lazy(() => DuplicateToolRequestBody$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_id": "toolId",
+    "RequestBody": "requestBody",
   });
 });
 /** @internal */
 export type DuplicateToolRequest$Outbound = {
   tool_id: string;
+  RequestBody?: DuplicateToolRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -608,9 +666,11 @@ export const DuplicateToolRequest$outboundSchema: z.ZodType<
   DuplicateToolRequest
 > = z.object({
   toolId: z.string(),
+  requestBody: z.lazy(() => DuplicateToolRequestBody$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolId: "tool_id",
+    requestBody: "RequestBody",
   });
 });
 
@@ -721,7 +781,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9W4THMV77WNY09JRFY7EJ98"),
+  _id: z.string().default("01K9Y30Q7RP2BAC22EJYFQ6Z5Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -776,7 +836,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K9W4THMV77WNY09JRFY7EJ98"),
+  id: z.string().default("01K9Y30Q7RP2BAC22EJYFQ6Z5Z"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1047,7 +1107,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9W4THMSQK0S2K9HN2ZXVRJP"),
+  _id: z.string().default("01K9Y30Q7FBH1RPNYS4CFXHV9W"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1100,7 +1160,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K9W4THMSQK0S2K9HN2ZXVRJP"),
+  id: z.string().default("01K9Y30Q7FBH1RPNYS4CFXHV9W"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1446,7 +1506,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9W4THMPBGGD2TFWG6GT3QV6"),
+  _id: z.string().default("01K9Y30Q7C43EY98CPYWZWB1PR"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1499,7 +1559,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K9W4THMPBGGD2TFWG6GT3QV6"),
+  id: z.string().default("01K9Y30Q7C43EY98CPYWZWB1PR"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1621,7 +1681,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9W4THMMNHJNVKAFXE2HFPD6"),
+  _id: z.string().default("01K9Y30Q7BH5A6D7D1QCWFP1TP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1673,7 +1733,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K9W4THMMNHJNVKAFXE2HFPD6"),
+  id: z.string().default("01K9Y30Q7BH5A6D7D1QCWFP1TP"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1792,7 +1852,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9W4THMJPZ6J3WRM7FVB4R00"),
+  _id: z.string().default("01K9Y30Q79726MTXAWGBKCR922"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1843,7 +1903,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K9W4THMJPZ6J3WRM7FVB4R00"),
+  id: z.string().default("01K9Y30Q79726MTXAWGBKCR922"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

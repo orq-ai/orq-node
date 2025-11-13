@@ -13,5 +13,5 @@ let value: OutputType = "number";
 ## Values
 
 ```typescript
-"boolean" | "number" | "string"
+"boolean" | "categorical" | "number" | "string"
 ```

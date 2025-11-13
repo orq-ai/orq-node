@@ -1358,6 +1358,62 @@ export type RunAgentToolApprovalRequired = ClosedEnum<
   typeof RunAgentToolApprovalRequired
 >;
 
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const RunAgentExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type RunAgentExecuteOn = ClosedEnum<typeof RunAgentExecuteOn>;
+
+export type RunAgentEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: RunAgentExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const RunAgentAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type RunAgentAgentsExecuteOn = ClosedEnum<
+  typeof RunAgentAgentsExecuteOn
+>;
+
+export type RunAgentGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: RunAgentAgentsExecuteOn;
+};
+
 export type RunAgentSettings = {
   /**
    * Tools available to the agent
@@ -1392,6 +1448,14 @@ export type RunAgentSettings = {
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
   maxExecutionTime?: number | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<RunAgentEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<RunAgentGuardrails> | undefined;
 };
 
 export type RunAgentRequestBody = {
@@ -5671,6 +5735,134 @@ export const RunAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = RunAgentToolApprovalRequired$inboundSchema;
 
 /** @internal */
+export const RunAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentExecuteOn
+> = z.nativeEnum(RunAgentExecuteOn);
+/** @internal */
+export const RunAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentExecuteOn
+> = RunAgentExecuteOn$inboundSchema;
+
+/** @internal */
+export const RunAgentEvaluators$inboundSchema: z.ZodType<
+  RunAgentEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: RunAgentExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type RunAgentEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const RunAgentEvaluators$outboundSchema: z.ZodType<
+  RunAgentEvaluators$Outbound,
+  z.ZodTypeDef,
+  RunAgentEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: RunAgentExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function runAgentEvaluatorsToJSON(
+  runAgentEvaluators: RunAgentEvaluators,
+): string {
+  return JSON.stringify(
+    RunAgentEvaluators$outboundSchema.parse(runAgentEvaluators),
+  );
+}
+export function runAgentEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentAgentsExecuteOn
+> = z.nativeEnum(RunAgentAgentsExecuteOn);
+/** @internal */
+export const RunAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentAgentsExecuteOn
+> = RunAgentAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const RunAgentGuardrails$inboundSchema: z.ZodType<
+  RunAgentGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: RunAgentAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type RunAgentGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const RunAgentGuardrails$outboundSchema: z.ZodType<
+  RunAgentGuardrails$Outbound,
+  z.ZodTypeDef,
+  RunAgentGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: RunAgentAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function runAgentGuardrailsToJSON(
+  runAgentGuardrails: RunAgentGuardrails,
+): string {
+  return JSON.stringify(
+    RunAgentGuardrails$outboundSchema.parse(runAgentGuardrails),
+  );
+}
+export function runAgentGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentSettings$inboundSchema: z.ZodType<
   RunAgentSettings,
   z.ZodTypeDef,
@@ -5699,6 +5891,10 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
   ),
   max_iterations: z.number().int().default(15),
   max_execution_time: z.number().int().default(300),
+  evaluators: z.array(z.lazy(() => RunAgentEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => RunAgentGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_approval_required": "toolApprovalRequired",
@@ -5729,6 +5925,8 @@ export type RunAgentSettings$Outbound = {
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
+  evaluators?: Array<RunAgentEvaluators$Outbound> | undefined;
+  guardrails?: Array<RunAgentGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -5760,6 +5958,10 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
   ),
   maxIterations: z.number().int().default(15),
   maxExecutionTime: z.number().int().default(300),
+  evaluators: z.array(z.lazy(() => RunAgentEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => RunAgentGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     toolApprovalRequired: "tool_approval_required",

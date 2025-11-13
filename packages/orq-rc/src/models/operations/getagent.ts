@@ -83,6 +83,62 @@ export type GetAgentTools = {
   timeout?: number | undefined;
 };
 
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const GetAgentExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type GetAgentExecuteOn = ClosedEnum<typeof GetAgentExecuteOn>;
+
+export type GetAgentEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: GetAgentExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const GetAgentAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type GetAgentAgentsExecuteOn = ClosedEnum<
+  typeof GetAgentAgentsExecuteOn
+>;
+
+export type GetAgentGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: GetAgentAgentsExecuteOn;
+};
+
 export type GetAgentSettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
@@ -97,6 +153,14 @@ export type GetAgentSettings = {
    */
   toolApprovalRequired?: GetAgentToolApprovalRequired | undefined;
   tools?: Array<GetAgentTools> | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<GetAgentEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<GetAgentGuardrails> | undefined;
 };
 
 /**
@@ -790,6 +854,8 @@ export const GetAgentCollapsedConfigurationSections = {
   Tools: "tools",
   Context: "context",
   RuntimeConstraints: "runtime_constraints",
+  Evaluators: "evaluators",
+  Guardrails: "guardrails",
 } as const;
 export type GetAgentCollapsedConfigurationSections = ClosedEnum<
   typeof GetAgentCollapsedConfigurationSections
@@ -1032,6 +1098,134 @@ export function getAgentToolsFromJSON(
 }
 
 /** @internal */
+export const GetAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof GetAgentExecuteOn
+> = z.nativeEnum(GetAgentExecuteOn);
+/** @internal */
+export const GetAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof GetAgentExecuteOn
+> = GetAgentExecuteOn$inboundSchema;
+
+/** @internal */
+export const GetAgentEvaluators$inboundSchema: z.ZodType<
+  GetAgentEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: GetAgentExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type GetAgentEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const GetAgentEvaluators$outboundSchema: z.ZodType<
+  GetAgentEvaluators$Outbound,
+  z.ZodTypeDef,
+  GetAgentEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: GetAgentExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function getAgentEvaluatorsToJSON(
+  getAgentEvaluators: GetAgentEvaluators,
+): string {
+  return JSON.stringify(
+    GetAgentEvaluators$outboundSchema.parse(getAgentEvaluators),
+  );
+}
+export function getAgentEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAgentEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof GetAgentAgentsExecuteOn
+> = z.nativeEnum(GetAgentAgentsExecuteOn);
+/** @internal */
+export const GetAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof GetAgentAgentsExecuteOn
+> = GetAgentAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const GetAgentGuardrails$inboundSchema: z.ZodType<
+  GetAgentGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: GetAgentAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type GetAgentGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const GetAgentGuardrails$outboundSchema: z.ZodType<
+  GetAgentGuardrails$Outbound,
+  z.ZodTypeDef,
+  GetAgentGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: GetAgentAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function getAgentGuardrailsToJSON(
+  getAgentGuardrails: GetAgentGuardrails,
+): string {
+  return JSON.stringify(
+    GetAgentGuardrails$outboundSchema.parse(getAgentGuardrails),
+  );
+}
+export function getAgentGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAgentGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAgentSettings$inboundSchema: z.ZodType<
   GetAgentSettings,
   z.ZodTypeDef,
@@ -1043,6 +1237,10 @@ export const GetAgentSettings$inboundSchema: z.ZodType<
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => GetAgentTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => GetAgentEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetAgentGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -1056,6 +1254,8 @@ export type GetAgentSettings$Outbound = {
   max_execution_time: number;
   tool_approval_required: string;
   tools?: Array<GetAgentTools$Outbound> | undefined;
+  evaluators?: Array<GetAgentEvaluators$Outbound> | undefined;
+  guardrails?: Array<GetAgentGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -1070,6 +1270,10 @@ export const GetAgentSettings$outboundSchema: z.ZodType<
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => GetAgentTools$outboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => GetAgentEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetAgentGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

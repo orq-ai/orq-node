@@ -1008,6 +1008,60 @@ export type AgentToolInputCRUD =
   | FunctionTool;
 
 /**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const ExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
+
+export type Evaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: ExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const CreateAgentExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type CreateAgentExecuteOn = ClosedEnum<typeof CreateAgentExecuteOn>;
+
+export type Guardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: CreateAgentExecuteOn;
+};
+
+/**
  * Configuration settings for the agent's behavior
  */
 export type Settings = {
@@ -1044,6 +1098,14 @@ export type Settings = {
       | FunctionTool
     >
     | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<Evaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<Guardrails> | undefined;
 };
 
 export type KnowledgeBases = {
@@ -1066,14 +1128,6 @@ export type TeamOfAgents = {
 
 export type CreateAgentRequestBody = {
   /**
-   * The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).
-   *
-   * @remarks
-   *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
-   */
-  path: string;
-  /**
    * Unique identifier for the agent within the workspace
    */
   key: string;
@@ -1093,6 +1147,14 @@ export type CreateAgentRequestBody = {
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
   systemPrompt?: string | undefined;
+  /**
+   * The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * @remarks
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
   /**
    * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters.
    */
@@ -1187,6 +1249,64 @@ export type CreateAgentTools = {
   timeout?: number | undefined;
 };
 
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const CreateAgentAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type CreateAgentAgentsExecuteOn = ClosedEnum<
+  typeof CreateAgentAgentsExecuteOn
+>;
+
+export type CreateAgentEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: CreateAgentAgentsExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const CreateAgentAgentsResponseExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type CreateAgentAgentsResponseExecuteOn = ClosedEnum<
+  typeof CreateAgentAgentsResponseExecuteOn
+>;
+
+export type CreateAgentGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: CreateAgentAgentsResponseExecuteOn;
+};
+
 export type CreateAgentSettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
@@ -1201,6 +1321,14 @@ export type CreateAgentSettings = {
    */
   toolApprovalRequired?: CreateAgentToolApprovalRequired | undefined;
   tools?: Array<CreateAgentTools> | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<CreateAgentEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<CreateAgentGuardrails> | undefined;
 };
 
 /**
@@ -1915,6 +2043,8 @@ export const CreateAgentCollapsedConfigurationSections = {
   Tools: "tools",
   Context: "context",
   RuntimeConstraints: "runtime_constraints",
+  Evaluators: "evaluators",
+  Guardrails: "guardrails",
 } as const;
 export type CreateAgentCollapsedConfigurationSections = ClosedEnum<
   typeof CreateAgentCollapsedConfigurationSections
@@ -1926,7 +2056,6 @@ export type CreateAgentCollapsedConfigurationSections = ClosedEnum<
 export type CreateAgentResponseBody = {
   id: string;
   key: string;
-  workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
@@ -4628,6 +4757,124 @@ export function agentToolInputCRUDFromJSON(
 }
 
 /** @internal */
+export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
+  .nativeEnum(ExecuteOn);
+/** @internal */
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
+  ExecuteOn$inboundSchema;
+
+/** @internal */
+export const Evaluators$inboundSchema: z.ZodType<
+  Evaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: ExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type Evaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const Evaluators$outboundSchema: z.ZodType<
+  Evaluators$Outbound,
+  z.ZodTypeDef,
+  Evaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: ExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function evaluatorsToJSON(evaluators: Evaluators): string {
+  return JSON.stringify(Evaluators$outboundSchema.parse(evaluators));
+}
+export function evaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentExecuteOn
+> = z.nativeEnum(CreateAgentExecuteOn);
+/** @internal */
+export const CreateAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentExecuteOn
+> = CreateAgentExecuteOn$inboundSchema;
+
+/** @internal */
+export const Guardrails$inboundSchema: z.ZodType<
+  Guardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: CreateAgentExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type Guardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const Guardrails$outboundSchema: z.ZodType<
+  Guardrails$Outbound,
+  z.ZodTypeDef,
+  Guardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: CreateAgentExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function guardrailsToJSON(guardrails: Guardrails): string {
+  return JSON.stringify(Guardrails$outboundSchema.parse(guardrails));
+}
+export function guardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<Guardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Guardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Guardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const Settings$inboundSchema: z.ZodType<
   Settings,
   z.ZodTypeDef,
@@ -4656,6 +4903,8 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => FunctionTool$inboundSchema),
     ]),
   ).optional(),
+  evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
+  guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -4686,6 +4935,8 @@ export type Settings$Outbound = {
       | FunctionTool$Outbound
     >
     | undefined;
+  evaluators?: Array<Evaluators$Outbound> | undefined;
+  guardrails?: Array<Guardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -4717,6 +4968,8 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => FunctionTool$outboundSchema),
     ]),
   ).optional(),
+  evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
+  guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -4825,12 +5078,12 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  path: z.string(),
   key: z.string(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
   system_prompt: z.string().optional(),
+  path: z.string(),
   model: z.union([z.lazy(() => ModelConfiguration2$inboundSchema), z.string()]),
   fallback_models: z.array(
     z.union([
@@ -4855,12 +5108,12 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateAgentRequestBody$Outbound = {
-  path: string;
   key: string;
   role: string;
   description: string;
   instructions: string;
   system_prompt?: string | undefined;
+  path: string;
   model: ModelConfiguration2$Outbound | string;
   fallback_models?:
     | Array<FallbackModelConfiguration2$Outbound | string>
@@ -4878,12 +5131,12 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentRequestBody
 > = z.object({
-  path: z.string(),
   key: z.string(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
   systemPrompt: z.string().optional(),
+  path: z.string(),
   model: z.union([
     z.lazy(() => ModelConfiguration2$outboundSchema),
     z.string(),
@@ -5059,6 +5312,134 @@ export function createAgentToolsFromJSON(
 }
 
 /** @internal */
+export const CreateAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentAgentsExecuteOn
+> = z.nativeEnum(CreateAgentAgentsExecuteOn);
+/** @internal */
+export const CreateAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentAgentsExecuteOn
+> = CreateAgentAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const CreateAgentEvaluators$inboundSchema: z.ZodType<
+  CreateAgentEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: CreateAgentAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type CreateAgentEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const CreateAgentEvaluators$outboundSchema: z.ZodType<
+  CreateAgentEvaluators$Outbound,
+  z.ZodTypeDef,
+  CreateAgentEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: CreateAgentAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function createAgentEvaluatorsToJSON(
+  createAgentEvaluators: CreateAgentEvaluators,
+): string {
+  return JSON.stringify(
+    CreateAgentEvaluators$outboundSchema.parse(createAgentEvaluators),
+  );
+}
+export function createAgentEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentAgentsResponseExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentAgentsResponseExecuteOn
+> = z.nativeEnum(CreateAgentAgentsResponseExecuteOn);
+/** @internal */
+export const CreateAgentAgentsResponseExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentAgentsResponseExecuteOn
+> = CreateAgentAgentsResponseExecuteOn$inboundSchema;
+
+/** @internal */
+export const CreateAgentGuardrails$inboundSchema: z.ZodType<
+  CreateAgentGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: CreateAgentAgentsResponseExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type CreateAgentGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const CreateAgentGuardrails$outboundSchema: z.ZodType<
+  CreateAgentGuardrails$Outbound,
+  z.ZodTypeDef,
+  CreateAgentGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: CreateAgentAgentsResponseExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function createAgentGuardrailsToJSON(
+  createAgentGuardrails: CreateAgentGuardrails,
+): string {
+  return JSON.stringify(
+    CreateAgentGuardrails$outboundSchema.parse(createAgentGuardrails),
+  );
+}
+export function createAgentGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentSettings$inboundSchema: z.ZodType<
   CreateAgentSettings,
   z.ZodTypeDef,
@@ -5070,6 +5451,10 @@ export const CreateAgentSettings$inboundSchema: z.ZodType<
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => CreateAgentTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => CreateAgentEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => CreateAgentGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -5083,6 +5468,8 @@ export type CreateAgentSettings$Outbound = {
   max_execution_time: number;
   tool_approval_required: string;
   tools?: Array<CreateAgentTools$Outbound> | undefined;
+  evaluators?: Array<CreateAgentEvaluators$Outbound> | undefined;
+  guardrails?: Array<CreateAgentGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -5097,6 +5484,10 @@ export const CreateAgentSettings$outboundSchema: z.ZodType<
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => CreateAgentTools$outboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => CreateAgentEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => CreateAgentGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -7168,7 +7559,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
@@ -7196,7 +7586,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -7212,7 +7601,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 export type CreateAgentResponseBody$Outbound = {
   _id: string;
   key: string;
-  workspace_id: string;
   project_id: string;
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
@@ -7243,7 +7631,6 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
-  workspaceId: z.string(),
   projectId: z.string(),
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
@@ -7271,7 +7658,6 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    workspaceId: "workspace_id",
     projectId: "project_id",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
