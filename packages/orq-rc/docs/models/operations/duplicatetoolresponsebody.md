@@ -37,7 +37,18 @@ const value: operations.DuplicateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    description: "collaboration without finally of",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+    },
   },
 };
 ```
@@ -76,13 +87,16 @@ const value: operations.DuplicateToolResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://dutiful-ethyl.net",
-    inputSchema: {
-      type: "object",
-    },
-    connectionType: "sse",
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
+    connectionType: "http",
   },
 };
 ```

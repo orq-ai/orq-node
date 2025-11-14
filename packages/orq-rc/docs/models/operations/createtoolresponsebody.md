@@ -37,8 +37,15 @@ const value: operations.ResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "elegantly like meh giggle yuck off",
     schema: {
-      "key": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [],
     },
   },
 };
@@ -78,12 +85,15 @@ const value: operations.ResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://noteworthy-devastation.com/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "sse",
   },
 };

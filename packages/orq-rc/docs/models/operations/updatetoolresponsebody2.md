@@ -16,7 +16,16 @@ let value: UpdateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    description: "instead odd yuck where",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [],
+    },
   },
 };
 ```

@@ -37,7 +37,16 @@ const value: operations.UpdateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    description: "instead odd yuck where",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [],
+    },
   },
 };
 ```
@@ -76,12 +85,8 @@ const value: operations.UpdateToolResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://incomplete-crest.name/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [],
     connectionType: "http",
   },
 };

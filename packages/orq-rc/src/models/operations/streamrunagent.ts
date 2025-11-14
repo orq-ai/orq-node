@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -924,6 +927,97 @@ export type StreamRunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
+  {
+    Mcp: "mcp",
+  } as const;
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
+  ClosedEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  >;
+
+export type StreamRunAgentAgentToolInputRunAgentsHeaders = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+  {
+    Object: "object",
+  } as const;
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+  ClosedEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  >;
+
+export type AgentToolInputRunSchema = {
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType;
+  properties?: { [k: string]: any } | undefined;
+  required?: Array<string> | undefined;
+};
+
+export type AgentToolInputRunTools = {
+  name: string;
+  description?: string | undefined;
+  schema: AgentToolInputRunSchema;
+};
+
+/**
+ * The connection type used by the MCP server
+ */
+export const AgentToolInputRunConnectionType = {
+  Http: "http",
+  Sse: "sse",
+} as const;
+/**
+ * The connection type used by the MCP server
+ */
+export type AgentToolInputRunConnectionType = ClosedEnum<
+  typeof AgentToolInputRunConnectionType
+>;
+
+export type AgentToolInputRunMcp = {
+  /**
+   * The MCP server URL (cached for execution)
+   */
+  serverUrl: string;
+  /**
+   * HTTP headers for MCP server requests with encryption support
+   */
+  headers?:
+    | { [k: string]: StreamRunAgentAgentToolInputRunAgentsHeaders }
+    | undefined;
+  /**
+   * Array of tools available from the MCP server
+   */
+  tools: Array<AgentToolInputRunTools>;
+  /**
+   * The connection type used by the MCP server
+   */
+  connectionType: AgentToolInputRunConnectionType;
+};
+
+/**
+ * MCP tool with inline definition for on-the-fly creation in run endpoint
+ */
+export type AgentToolInputRunMCPToolRun = {
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key: string;
+  id?: string | undefined;
+  displayName?: string | undefined;
+  /**
+   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
+   */
+  description: string;
+  mcp: AgentToolInputRunMcp;
+  requiresApproval?: boolean | undefined;
+};
+
 export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type =
   {
     Function: "function",
@@ -932,6 +1026,41 @@ export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools
   ClosedEnum<
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
   >;
+
+/**
+ * The type must be "object"
+ */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+  {
+    Object: "object",
+  } as const;
+/**
+ * The type must be "object"
+ */
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+  ClosedEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type StreamRunAgentAgentToolInputRunAgentsParameters = {
+  /**
+   * The type must be "object"
+   */
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 export type StreamRunAgentAgentToolInputRunFunction = {
   /**
@@ -949,7 +1078,7 @@ export type StreamRunAgentAgentToolInputRunFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: StreamRunAgentAgentToolInputRunAgentsParameters | undefined;
 };
 
 /**
@@ -978,6 +1107,41 @@ export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
   >;
 
+/**
+ * The type must be "object"
+ */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+  {
+    Object: "object",
+  } as const;
+/**
+ * The type must be "object"
+ */
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+  ClosedEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type StreamRunAgentAgentToolInputRunParameters = {
+  /**
+   * The type must be "object"
+   */
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export const AgentToolInputRunLanguage = {
   Python: "python",
 } as const;
@@ -989,7 +1153,7 @@ export type AgentToolInputRunCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: StreamRunAgentAgentToolInputRunParameters | undefined;
   language: AgentToolInputRunLanguage;
   /**
    * The code to execute.
@@ -1042,10 +1206,14 @@ export type AgentToolInputRunMethod = ClosedEnum<
   typeof AgentToolInputRunMethod
 >;
 
-export type AgentToolInputRunHeaders = {
+export type StreamRunAgentHeaders2 = {
   value: string;
   encrypted?: boolean | undefined;
 };
+
+export type StreamRunAgentAgentToolInputRunHeaders =
+  | StreamRunAgentHeaders2
+  | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -1060,9 +1228,9 @@ export type AgentToolInputRunBlueprint = {
    */
   method: AgentToolInputRunMethod;
   /**
-   * The headers to send with the request.
+   * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
-  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
+  headers?: { [k: string]: StreamRunAgentHeaders2 | string } | undefined;
   /**
    * The body to send with the request.
    */
@@ -1362,11 +1530,12 @@ export type StreamRunAgentAgentToolInputRunGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation.
+ * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
  */
 export type StreamRunAgentAgentToolInputRun =
   | AgentToolInputRunHTTPToolRun
   | AgentToolInputRunCodeToolRun
+  | AgentToolInputRunMCPToolRun
   | AgentToolInputRunFunctionToolRun
   | StreamRunAgentAgentToolInputRunGoogleSearchTool
   | StreamRunAgentAgentToolInputRunWebScraperTool
@@ -1461,6 +1630,7 @@ export type StreamRunAgentSettings = {
     | Array<
       | AgentToolInputRunHTTPToolRun
       | AgentToolInputRunCodeToolRun
+      | AgentToolInputRunMCPToolRun
       | AgentToolInputRunFunctionToolRun
       | StreamRunAgentAgentToolInputRunGoogleSearchTool
       | StreamRunAgentAgentToolInputRunWebScraperTool
@@ -4330,6 +4500,325 @@ export function streamRunAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  > = z.nativeEnum(
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type,
+  );
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  > =
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsHeaders$inboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsHeaders,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  });
+/** @internal */
+export type StreamRunAgentAgentToolInputRunAgentsHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsHeaders$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentAgentToolInputRunAgentsHeaders
+  > = z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  });
+
+export function streamRunAgentAgentToolInputRunAgentsHeadersToJSON(
+  streamRunAgentAgentToolInputRunAgentsHeaders:
+    StreamRunAgentAgentToolInputRunAgentsHeaders,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunAgentsHeaders,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunAgentsHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentAgentToolInputRunAgentsHeaders,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunAgentsHeaders$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunAgentsHeaders' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  > = z.nativeEnum(
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType,
+  );
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  > =
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema;
+
+/** @internal */
+export const AgentToolInputRunSchema$inboundSchema: z.ZodType<
+  AgentToolInputRunSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema,
+  properties: z.record(z.any()).optional(),
+  required: z.array(z.string()).optional(),
+});
+/** @internal */
+export type AgentToolInputRunSchema$Outbound = {
+  type: string;
+  properties?: { [k: string]: any } | undefined;
+  required?: Array<string> | undefined;
+};
+
+/** @internal */
+export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
+  AgentToolInputRunSchema$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunSchema
+> = z.object({
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema,
+  properties: z.record(z.any()).optional(),
+  required: z.array(z.string()).optional(),
+});
+
+export function agentToolInputRunSchemaToJSON(
+  agentToolInputRunSchema: AgentToolInputRunSchema,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunSchema$outboundSchema.parse(agentToolInputRunSchema),
+  );
+}
+export function agentToolInputRunSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const AgentToolInputRunTools$inboundSchema: z.ZodType<
+  AgentToolInputRunTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
+});
+/** @internal */
+export type AgentToolInputRunTools$Outbound = {
+  name: string;
+  description?: string | undefined;
+  schema: AgentToolInputRunSchema$Outbound;
+};
+
+/** @internal */
+export const AgentToolInputRunTools$outboundSchema: z.ZodType<
+  AgentToolInputRunTools$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunTools
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
+});
+
+export function agentToolInputRunToolsToJSON(
+  agentToolInputRunTools: AgentToolInputRunTools,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunTools$outboundSchema.parse(agentToolInputRunTools),
+  );
+}
+export function agentToolInputRunToolsFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunTools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunTools' from JSON`,
+  );
+}
+
+/** @internal */
+export const AgentToolInputRunConnectionType$inboundSchema: z.ZodNativeEnum<
+  typeof AgentToolInputRunConnectionType
+> = z.nativeEnum(AgentToolInputRunConnectionType);
+/** @internal */
+export const AgentToolInputRunConnectionType$outboundSchema: z.ZodNativeEnum<
+  typeof AgentToolInputRunConnectionType
+> = AgentToolInputRunConnectionType$inboundSchema;
+
+/** @internal */
+export const AgentToolInputRunMcp$inboundSchema: z.ZodType<
+  AgentToolInputRunMcp,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  server_url: z.string(),
+  headers: z.record(
+    z.lazy(() => StreamRunAgentAgentToolInputRunAgentsHeaders$inboundSchema),
+  ).optional(),
+  tools: z.array(z.lazy(() => AgentToolInputRunTools$inboundSchema)),
+  connection_type: AgentToolInputRunConnectionType$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "server_url": "serverUrl",
+    "connection_type": "connectionType",
+  });
+});
+/** @internal */
+export type AgentToolInputRunMcp$Outbound = {
+  server_url: string;
+  headers?: {
+    [k: string]: StreamRunAgentAgentToolInputRunAgentsHeaders$Outbound;
+  } | undefined;
+  tools: Array<AgentToolInputRunTools$Outbound>;
+  connection_type: string;
+};
+
+/** @internal */
+export const AgentToolInputRunMcp$outboundSchema: z.ZodType<
+  AgentToolInputRunMcp$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunMcp
+> = z.object({
+  serverUrl: z.string(),
+  headers: z.record(
+    z.lazy(() => StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema),
+  ).optional(),
+  tools: z.array(z.lazy(() => AgentToolInputRunTools$outboundSchema)),
+  connectionType: AgentToolInputRunConnectionType$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    serverUrl: "server_url",
+    connectionType: "connection_type",
+  });
+});
+
+export function agentToolInputRunMcpToJSON(
+  agentToolInputRunMcp: AgentToolInputRunMcp,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunMcp$outboundSchema.parse(agentToolInputRunMcp),
+  );
+}
+export function agentToolInputRunMcpFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunMcp, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunMcp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunMcp' from JSON`,
+  );
+}
+
+/** @internal */
+export const AgentToolInputRunMCPToolRun$inboundSchema: z.ZodType<
+  AgentToolInputRunMCPToolRun,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
+  key: z.string(),
+  _id: z.string().optional(),
+  display_name: z.string().optional(),
+  description: z.string(),
+  mcp: z.lazy(() => AgentToolInputRunMcp$inboundSchema),
+  requires_approval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
+  });
+});
+/** @internal */
+export type AgentToolInputRunMCPToolRun$Outbound = {
+  type: string;
+  key: string;
+  _id?: string | undefined;
+  display_name?: string | undefined;
+  description: string;
+  mcp: AgentToolInputRunMcp$Outbound;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const AgentToolInputRunMCPToolRun$outboundSchema: z.ZodType<
+  AgentToolInputRunMCPToolRun$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunMCPToolRun
+> = z.object({
+  type:
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
+  key: z.string(),
+  id: z.string().optional(),
+  displayName: z.string().optional(),
+  description: z.string(),
+  mcp: z.lazy(() => AgentToolInputRunMcp$outboundSchema),
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    displayName: "display_name",
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputRunMCPToolRunToJSON(
+  agentToolInputRunMCPToolRun: AgentToolInputRunMCPToolRun,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunMCPToolRun$outboundSchema.parse(
+      agentToolInputRunMCPToolRun,
+    ),
+  );
+}
+export function agentToolInputRunMCPToolRunFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunMCPToolRun, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunMCPToolRun$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunMCPToolRun' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
   z.ZodNativeEnum<
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
@@ -4344,6 +4833,91 @@ export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTool
     StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  > = z.nativeEnum(
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType,
+  );
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  > =
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsParameters$inboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsParameters,
+    z.ZodTypeDef,
+    unknown
+  > = collectExtraKeys$(
+    z.object({
+      type:
+        StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  );
+/** @internal */
+export type StreamRunAgentAgentToolInputRunAgentsParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsParameters$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentAgentToolInputRunAgentsParameters
+  > = z.object({
+    type:
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  });
+
+export function streamRunAgentAgentToolInputRunAgentsParametersToJSON(
+  streamRunAgentAgentToolInputRunAgentsParameters:
+    StreamRunAgentAgentToolInputRunAgentsParameters,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunAgentsParameters,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunAgentsParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentAgentToolInputRunAgentsParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunAgentsParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunAgentsParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentAgentToolInputRunFunction$inboundSchema: z.ZodType<
   StreamRunAgentAgentToolInputRunFunction,
   z.ZodTypeDef,
@@ -4352,14 +4926,18 @@ export const StreamRunAgentAgentToolInputRunFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunAgentsParameters$inboundSchema
+  ).optional(),
 });
 /** @internal */
 export type StreamRunAgentAgentToolInputRunFunction$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
-  parameters?: { [k: string]: any } | undefined;
+  parameters?:
+    | StreamRunAgentAgentToolInputRunAgentsParameters$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -4371,7 +4949,9 @@ export const StreamRunAgentAgentToolInputRunFunction$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema
+  ).optional(),
 });
 
 export function streamRunAgentAgentToolInputRunFunctionToJSON(
@@ -4490,6 +5070,90 @@ export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTool
     StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  > = z.nativeEnum(
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType,
+  );
+/** @internal */
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  > =
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunParameters$inboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type StreamRunAgentAgentToolInputRunParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunParameters$outboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunParameters$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentAgentToolInputRunParameters
+  > = z.object({
+    type:
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  });
+
+export function streamRunAgentAgentToolInputRunParametersToJSON(
+  streamRunAgentAgentToolInputRunParameters:
+    StreamRunAgentAgentToolInputRunParameters,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunParameters$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunParameters,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentAgentToolInputRunParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const AgentToolInputRunLanguage$inboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputRunLanguage
 > = z.nativeEnum(AgentToolInputRunLanguage);
@@ -4504,13 +5168,15 @@ export const AgentToolInputRunCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunParameters$inboundSchema
+  ).optional(),
   language: AgentToolInputRunLanguage$inboundSchema,
   code: z.string(),
 });
 /** @internal */
 export type AgentToolInputRunCodeTool$Outbound = {
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: StreamRunAgentAgentToolInputRunParameters$Outbound | undefined;
   language: string;
   code: string;
 };
@@ -4521,7 +5187,9 @@ export const AgentToolInputRunCodeTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunCodeTool
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunParameters$outboundSchema
+  ).optional(),
   language: AgentToolInputRunLanguage$outboundSchema,
   code: z.string(),
 });
@@ -4642,8 +5310,8 @@ export const AgentToolInputRunMethod$outboundSchema: z.ZodNativeEnum<
 > = AgentToolInputRunMethod$inboundSchema;
 
 /** @internal */
-export const AgentToolInputRunHeaders$inboundSchema: z.ZodType<
-  AgentToolInputRunHeaders,
+export const StreamRunAgentHeaders2$inboundSchema: z.ZodType<
+  StreamRunAgentHeaders2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4651,35 +5319,74 @@ export const AgentToolInputRunHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 /** @internal */
-export type AgentToolInputRunHeaders$Outbound = {
+export type StreamRunAgentHeaders2$Outbound = {
   value: string;
   encrypted: boolean;
 };
 
 /** @internal */
-export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
-  AgentToolInputRunHeaders$Outbound,
+export const StreamRunAgentHeaders2$outboundSchema: z.ZodType<
+  StreamRunAgentHeaders2$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunHeaders
+  StreamRunAgentHeaders2
 > = z.object({
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
 
-export function agentToolInputRunHeadersToJSON(
-  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+export function streamRunAgentHeaders2ToJSON(
+  streamRunAgentHeaders2: StreamRunAgentHeaders2,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+    StreamRunAgentHeaders2$outboundSchema.parse(streamRunAgentHeaders2),
   );
 }
-export function agentToolInputRunHeadersFromJSON(
+export function streamRunAgentHeaders2FromJSON(
   jsonString: string,
-): SafeParseResult<AgentToolInputRunHeaders, SDKValidationError> {
+): SafeParseResult<StreamRunAgentHeaders2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AgentToolInputRunHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputRunHeaders' from JSON`,
+    (x) => StreamRunAgentHeaders2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentHeaders2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunHeaders$inboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => StreamRunAgentHeaders2$inboundSchema), z.string()]);
+/** @internal */
+export type StreamRunAgentAgentToolInputRunHeaders$Outbound =
+  | StreamRunAgentHeaders2$Outbound
+  | string;
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunHeaders$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentAgentToolInputRunHeaders
+> = z.union([z.lazy(() => StreamRunAgentHeaders2$outboundSchema), z.string()]);
+
+export function streamRunAgentAgentToolInputRunHeadersToJSON(
+  streamRunAgentAgentToolInputRunHeaders:
+    StreamRunAgentAgentToolInputRunHeaders,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunHeaders$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunHeaders,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentAgentToolInputRunHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunHeaders' from JSON`,
   );
 }
 
@@ -4691,15 +5398,18 @@ export const AgentToolInputRunBlueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: AgentToolInputRunMethod$inboundSchema,
-  headers: z.record(z.lazy(() => AgentToolInputRunHeaders$inboundSchema))
-    .optional(),
+  headers: z.record(
+    z.union([z.lazy(() => StreamRunAgentHeaders2$inboundSchema), z.string()]),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type AgentToolInputRunBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
+  headers?:
+    | { [k: string]: StreamRunAgentHeaders2$Outbound | string }
+    | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -4711,8 +5421,9 @@ export const AgentToolInputRunBlueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: AgentToolInputRunMethod$outboundSchema,
-  headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
-    .optional(),
+  headers: z.record(
+    z.union([z.lazy(() => StreamRunAgentHeaders2$outboundSchema), z.string()]),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 
@@ -5785,6 +6496,7 @@ export const StreamRunAgentAgentToolInputRun$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => AgentToolInputRunHTTPToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunCodeToolRun$inboundSchema),
+  z.lazy(() => AgentToolInputRunMCPToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunFunctionToolRun$inboundSchema),
   z.lazy(() => StreamRunAgentAgentToolInputRunGoogleSearchTool$inboundSchema),
   z.lazy(() => StreamRunAgentAgentToolInputRunWebScraperTool$inboundSchema),
@@ -5814,6 +6526,7 @@ export const StreamRunAgentAgentToolInputRun$inboundSchema: z.ZodType<
 export type StreamRunAgentAgentToolInputRun$Outbound =
   | AgentToolInputRunHTTPToolRun$Outbound
   | AgentToolInputRunCodeToolRun$Outbound
+  | AgentToolInputRunMCPToolRun$Outbound
   | AgentToolInputRunFunctionToolRun$Outbound
   | StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound
   | StreamRunAgentAgentToolInputRunWebScraperTool$Outbound
@@ -5835,6 +6548,7 @@ export const StreamRunAgentAgentToolInputRun$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
+  z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
   z.lazy(() => StreamRunAgentAgentToolInputRunGoogleSearchTool$outboundSchema),
   z.lazy(() => StreamRunAgentAgentToolInputRunWebScraperTool$outboundSchema),
@@ -6029,13 +6743,12 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => AgentToolInputRunHTTPToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunCodeToolRun$inboundSchema),
+      z.lazy(() => AgentToolInputRunMCPToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunFunctionToolRun$inboundSchema),
       z.lazy(() =>
         StreamRunAgentAgentToolInputRunGoogleSearchTool$inboundSchema
       ),
-      z.lazy(() =>
-        StreamRunAgentAgentToolInputRunWebScraperTool$inboundSchema
-      ),
+      z.lazy(() => StreamRunAgentAgentToolInputRunWebScraperTool$inboundSchema),
       z.lazy(() =>
         StreamRunAgentAgentToolInputRunCallSubAgentTool$inboundSchema
       ),
@@ -6086,6 +6799,7 @@ export type StreamRunAgentSettings$Outbound = {
     | Array<
       | AgentToolInputRunHTTPToolRun$Outbound
       | AgentToolInputRunCodeToolRun$Outbound
+      | AgentToolInputRunMCPToolRun$Outbound
       | AgentToolInputRunFunctionToolRun$Outbound
       | StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound
       | StreamRunAgentAgentToolInputRunWebScraperTool$Outbound
@@ -6117,6 +6831,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
+      z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
       z.lazy(() =>
         StreamRunAgentAgentToolInputRunGoogleSearchTool$outboundSchema

@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,6 +52,39 @@ export type DuplicateToolResponseBodyToolsResponse200ApplicationJSONType =
     typeof DuplicateToolResponseBodyToolsResponse200ApplicationJSONType
   >;
 
+/**
+ * The type must be "object"
+ */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type =
+  ClosedEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type DuplicateToolResponseBodyToolsParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export const DuplicateToolResponseBodyLanguage = {
   Python: "python",
 } as const;
@@ -60,7 +96,7 @@ export type DuplicateToolResponseBodyCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DuplicateToolResponseBodyToolsParameters | undefined;
   language: DuplicateToolResponseBodyLanguage;
   /**
    * The code to execute.
@@ -151,13 +187,16 @@ export type DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type =
     typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type
   >;
 
-/**
- * The original MCP tool input schema for LLM conversion
- */
-export type DuplicateToolResponseBodyInputSchema = {
+export type DuplicateToolResponseBodyToolsSchema = {
   type: DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
+};
+
+export type DuplicateToolResponseBodyTools = {
+  name: string;
+  description?: string | undefined;
+  schema: DuplicateToolResponseBodyToolsSchema;
 };
 
 /**
@@ -176,25 +215,17 @@ export type DuplicateToolResponseBodyConnectionType = ClosedEnum<
 
 export type DuplicateToolResponseBodyMcp = {
   /**
-   * The ID of the MCP server this tool belongs to
-   */
-  serverId: string;
-  /**
-   * The original tool name from the MCP server
-   */
-  toolName: string;
-  /**
    * The MCP server URL (cached for execution)
    */
   serverUrl: string;
   /**
-   * HTTP headers for MCP server requests (encrypted format)
+   * HTTP headers for MCP server requests with encryption support
    */
   headers?: { [k: string]: DuplicateToolResponseBodyHeaders } | undefined;
   /**
-   * The original MCP tool input schema for LLM conversion
+   * Array of tools available from the MCP server
    */
-  inputSchema: DuplicateToolResponseBodyInputSchema;
+  tools: Array<DuplicateToolResponseBodyTools>;
   /**
    * The connection type used by the MCP server
    */
@@ -285,10 +316,14 @@ export type DuplicateToolResponseBodyMethod = ClosedEnum<
   typeof DuplicateToolResponseBodyMethod
 >;
 
-export type DuplicateToolResponseBodyToolsHeaders = {
+export type DuplicateToolHeaders2 = {
   value: string;
   encrypted?: boolean | undefined;
 };
+
+export type DuplicateToolResponseBodyToolsHeaders =
+  | DuplicateToolHeaders2
+  | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -303,9 +338,9 @@ export type DuplicateToolResponseBodyBlueprint = {
    */
   method: DuplicateToolResponseBodyMethod;
   /**
-   * The headers to send with the request.
+   * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
-  headers?: { [k: string]: DuplicateToolResponseBodyToolsHeaders } | undefined;
+  headers?: { [k: string]: DuplicateToolHeaders2 | string } | undefined;
   /**
    * The body to send with the request.
    */
@@ -431,6 +466,25 @@ export type DuplicateToolResponseBodyToolsType = ClosedEnum<
   typeof DuplicateToolResponseBodyToolsType
 >;
 
+/**
+ * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type DuplicateToolResponseBodySchema = {
+  /**
+   * The JSON Schema type
+   */
+  type: string;
+  /**
+   * The properties of the JSON Schema object
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required property names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type DuplicateToolResponseBodyJsonSchema = {
   /**
    * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -439,11 +493,11 @@ export type DuplicateToolResponseBodyJsonSchema = {
   /**
    * A description of what the response format is for. This will be shown to the user.
    */
-  description?: string | undefined;
+  description: string;
   /**
    * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  schema: { [k: string]: any };
+  schema: DuplicateToolResponseBodySchema;
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
@@ -518,6 +572,39 @@ export type DuplicateToolResponseBodyType = ClosedEnum<
   typeof DuplicateToolResponseBodyType
 >;
 
+/**
+ * The type must be "object"
+ */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type =
+  ClosedEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type DuplicateToolResponseBodyParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type DuplicateToolResponseBodyFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -534,7 +621,7 @@ export type DuplicateToolResponseBodyFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DuplicateToolResponseBodyParameters | undefined;
 };
 
 export type DuplicateToolResponseBody1 = {
@@ -720,6 +807,89 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$outbou
     DuplicateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type
+  > = z.nativeEnum(
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type,
+  );
+/** @internal */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type
+  > =
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema;
+
+/** @internal */
+export const DuplicateToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type DuplicateToolResponseBodyToolsParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DuplicateToolResponseBodyToolsParameters$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsParameters$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolResponseBodyToolsParameters
+> = z.object({
+  type:
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function duplicateToolResponseBodyToolsParametersToJSON(
+  duplicateToolResponseBodyToolsParameters:
+    DuplicateToolResponseBodyToolsParameters,
+): string {
+  return JSON.stringify(
+    DuplicateToolResponseBodyToolsParameters$outboundSchema.parse(
+      duplicateToolResponseBodyToolsParameters,
+    ),
+  );
+}
+export function duplicateToolResponseBodyToolsParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DuplicateToolResponseBodyToolsParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DuplicateToolResponseBodyToolsParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DuplicateToolResponseBodyToolsParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateToolResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof DuplicateToolResponseBodyLanguage
 > = z.nativeEnum(DuplicateToolResponseBodyLanguage);
@@ -734,13 +904,15 @@ export const DuplicateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    DuplicateToolResponseBodyToolsParameters$inboundSchema
+  ).optional(),
   language: DuplicateToolResponseBodyLanguage$inboundSchema,
   code: z.string(),
 });
 /** @internal */
 export type DuplicateToolResponseBodyCodeTool$Outbound = {
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DuplicateToolResponseBodyToolsParameters$Outbound | undefined;
   language: string;
   code: string;
 };
@@ -751,7 +923,9 @@ export const DuplicateToolResponseBodyCodeTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBodyCodeTool
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    DuplicateToolResponseBodyToolsParameters$outboundSchema
+  ).optional(),
   language: DuplicateToolResponseBodyLanguage$outboundSchema,
   code: z.string(),
 });
@@ -781,7 +955,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE412KGDTJVMYCZKVFWQG"),
+  _id: z.string().default("tool_01KA0EAFQG334050969MBCKRXV"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -836,7 +1010,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K9YEE412KGDTJVMYCZKVFWQG"),
+  id: z.string().default("tool_01KA0EAFQG334050969MBCKRXV"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -961,8 +1135,8 @@ export const DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$outbo
     DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema;
 
 /** @internal */
-export const DuplicateToolResponseBodyInputSchema$inboundSchema: z.ZodType<
-  DuplicateToolResponseBodyInputSchema,
+export const DuplicateToolResponseBodyToolsSchema$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -972,17 +1146,17 @@ export const DuplicateToolResponseBodyInputSchema$inboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 /** @internal */
-export type DuplicateToolResponseBodyInputSchema$Outbound = {
+export type DuplicateToolResponseBodyToolsSchema$Outbound = {
   type: string;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
 
 /** @internal */
-export const DuplicateToolResponseBodyInputSchema$outboundSchema: z.ZodType<
-  DuplicateToolResponseBodyInputSchema$Outbound,
+export const DuplicateToolResponseBodyToolsSchema$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsSchema$Outbound,
   z.ZodTypeDef,
-  DuplicateToolResponseBodyInputSchema
+  DuplicateToolResponseBodyToolsSchema
 > = z.object({
   type:
     DuplicateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema,
@@ -990,23 +1164,70 @@ export const DuplicateToolResponseBodyInputSchema$outboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 
-export function duplicateToolResponseBodyInputSchemaToJSON(
-  duplicateToolResponseBodyInputSchema: DuplicateToolResponseBodyInputSchema,
+export function duplicateToolResponseBodyToolsSchemaToJSON(
+  duplicateToolResponseBodyToolsSchema: DuplicateToolResponseBodyToolsSchema,
 ): string {
   return JSON.stringify(
-    DuplicateToolResponseBodyInputSchema$outboundSchema.parse(
-      duplicateToolResponseBodyInputSchema,
+    DuplicateToolResponseBodyToolsSchema$outboundSchema.parse(
+      duplicateToolResponseBodyToolsSchema,
     ),
   );
 }
-export function duplicateToolResponseBodyInputSchemaFromJSON(
+export function duplicateToolResponseBodyToolsSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<DuplicateToolResponseBodyInputSchema, SDKValidationError> {
+): SafeParseResult<DuplicateToolResponseBodyToolsSchema, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      DuplicateToolResponseBodyInputSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DuplicateToolResponseBodyInputSchema' from JSON`,
+      DuplicateToolResponseBodyToolsSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolResponseBodyToolsSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const DuplicateToolResponseBodyTools$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => DuplicateToolResponseBodyToolsSchema$inboundSchema),
+});
+/** @internal */
+export type DuplicateToolResponseBodyTools$Outbound = {
+  name: string;
+  description?: string | undefined;
+  schema: DuplicateToolResponseBodyToolsSchema$Outbound;
+};
+
+/** @internal */
+export const DuplicateToolResponseBodyTools$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodyTools$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolResponseBodyTools
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => DuplicateToolResponseBodyToolsSchema$outboundSchema),
+});
+
+export function duplicateToolResponseBodyToolsToJSON(
+  duplicateToolResponseBodyTools: DuplicateToolResponseBodyTools,
+): string {
+  return JSON.stringify(
+    DuplicateToolResponseBodyTools$outboundSchema.parse(
+      duplicateToolResponseBodyTools,
+    ),
+  );
+}
+export function duplicateToolResponseBodyToolsFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolResponseBodyTools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateToolResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolResponseBodyTools' from JSON`,
   );
 }
 
@@ -1025,34 +1246,25 @@ export const DuplicateToolResponseBodyMcp$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  server_id: z.string(),
-  tool_name: z.string(),
   server_url: z.string(),
   headers: z.record(
     z.lazy(() => DuplicateToolResponseBodyHeaders$inboundSchema),
   ).optional(),
-  input_schema: z.lazy(() =>
-    DuplicateToolResponseBodyInputSchema$inboundSchema
-  ),
+  tools: z.array(z.lazy(() => DuplicateToolResponseBodyTools$inboundSchema)),
   connection_type: DuplicateToolResponseBodyConnectionType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    "server_id": "serverId",
-    "tool_name": "toolName",
     "server_url": "serverUrl",
-    "input_schema": "inputSchema",
     "connection_type": "connectionType",
   });
 });
 /** @internal */
 export type DuplicateToolResponseBodyMcp$Outbound = {
-  server_id: string;
-  tool_name: string;
   server_url: string;
   headers?:
     | { [k: string]: DuplicateToolResponseBodyHeaders$Outbound }
     | undefined;
-  input_schema: DuplicateToolResponseBodyInputSchema$Outbound;
+  tools: Array<DuplicateToolResponseBodyTools$Outbound>;
   connection_type: string;
 };
 
@@ -1062,22 +1274,15 @@ export const DuplicateToolResponseBodyMcp$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBodyMcp
 > = z.object({
-  serverId: z.string(),
-  toolName: z.string(),
   serverUrl: z.string(),
   headers: z.record(
     z.lazy(() => DuplicateToolResponseBodyHeaders$outboundSchema),
   ).optional(),
-  inputSchema: z.lazy(() =>
-    DuplicateToolResponseBodyInputSchema$outboundSchema
-  ),
+  tools: z.array(z.lazy(() => DuplicateToolResponseBodyTools$outboundSchema)),
   connectionType: DuplicateToolResponseBodyConnectionType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    serverId: "server_id",
-    toolName: "tool_name",
     serverUrl: "server_url",
-    inputSchema: "input_schema",
     connectionType: "connection_type",
   });
 });
@@ -1107,7 +1312,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE40ZD6F3Z50P3MRQZ403"),
+  _id: z.string().default("tool_01KA0EAFQ8T5MH8DKQSP3VCVGM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1160,7 +1365,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K9YEE40ZD6F3Z50P3MRQZ403"),
+  id: z.string().default("tool_01KA0EAFQ8T5MH8DKQSP3VCVGM"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1233,8 +1438,8 @@ export const DuplicateToolResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
 > = DuplicateToolResponseBodyMethod$inboundSchema;
 
 /** @internal */
-export const DuplicateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
-  DuplicateToolResponseBodyToolsHeaders,
+export const DuplicateToolHeaders2$inboundSchema: z.ZodType<
+  DuplicateToolHeaders2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1242,20 +1447,55 @@ export const DuplicateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 /** @internal */
-export type DuplicateToolResponseBodyToolsHeaders$Outbound = {
+export type DuplicateToolHeaders2$Outbound = {
   value: string;
   encrypted: boolean;
 };
+
+/** @internal */
+export const DuplicateToolHeaders2$outboundSchema: z.ZodType<
+  DuplicateToolHeaders2$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolHeaders2
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function duplicateToolHeaders2ToJSON(
+  duplicateToolHeaders2: DuplicateToolHeaders2,
+): string {
+  return JSON.stringify(
+    DuplicateToolHeaders2$outboundSchema.parse(duplicateToolHeaders2),
+  );
+}
+export function duplicateToolHeaders2FromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolHeaders2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateToolHeaders2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolHeaders2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DuplicateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyToolsHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => DuplicateToolHeaders2$inboundSchema), z.string()]);
+/** @internal */
+export type DuplicateToolResponseBodyToolsHeaders$Outbound =
+  | DuplicateToolHeaders2$Outbound
+  | string;
 
 /** @internal */
 export const DuplicateToolResponseBodyToolsHeaders$outboundSchema: z.ZodType<
   DuplicateToolResponseBodyToolsHeaders$Outbound,
   z.ZodTypeDef,
   DuplicateToolResponseBodyToolsHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = z.union([z.lazy(() => DuplicateToolHeaders2$outboundSchema), z.string()]);
 
 export function duplicateToolResponseBodyToolsHeadersToJSON(
   duplicateToolResponseBodyToolsHeaders: DuplicateToolResponseBodyToolsHeaders,
@@ -1286,7 +1526,7 @@ export const DuplicateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   url: z.string(),
   method: DuplicateToolResponseBodyMethod$inboundSchema,
   headers: z.record(
-    z.lazy(() => DuplicateToolResponseBodyToolsHeaders$inboundSchema),
+    z.union([z.lazy(() => DuplicateToolHeaders2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
 });
@@ -1295,7 +1535,7 @@ export type DuplicateToolResponseBodyBlueprint$Outbound = {
   url: string;
   method: string;
   headers?:
-    | { [k: string]: DuplicateToolResponseBodyToolsHeaders$Outbound }
+    | { [k: string]: DuplicateToolHeaders2$Outbound | string }
     | undefined;
   body?: { [k: string]: any } | undefined;
 };
@@ -1309,7 +1549,7 @@ export const DuplicateToolResponseBodyBlueprint$outboundSchema: z.ZodType<
   url: z.string(),
   method: DuplicateToolResponseBodyMethod$outboundSchema,
   headers: z.record(
-    z.lazy(() => DuplicateToolResponseBodyToolsHeaders$outboundSchema),
+    z.union([z.lazy(() => DuplicateToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
 });
@@ -1506,7 +1746,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE40X4525MYV8FTNNKRNN"),
+  _id: z.string().default("tool_01KA0EAFQ5A5HFZZCN46WYSS09"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1559,7 +1799,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K9YEE40X4525MYV8FTNNKRNN"),
+  id: z.string().default("tool_01KA0EAFQ5A5HFZZCN46WYSS09"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1625,21 +1865,81 @@ export const DuplicateToolResponseBodyToolsType$outboundSchema: z.ZodNativeEnum<
 > = DuplicateToolResponseBodyToolsType$inboundSchema;
 
 /** @internal */
+export const DuplicateToolResponseBodySchema$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodySchema,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type DuplicateToolResponseBodySchema$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DuplicateToolResponseBodySchema$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodySchema$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolResponseBodySchema
+> = z.object({
+  type: z.string(),
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function duplicateToolResponseBodySchemaToJSON(
+  duplicateToolResponseBodySchema: DuplicateToolResponseBodySchema,
+): string {
+  return JSON.stringify(
+    DuplicateToolResponseBodySchema$outboundSchema.parse(
+      duplicateToolResponseBodySchema,
+    ),
+  );
+}
+export function duplicateToolResponseBodySchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolResponseBodySchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateToolResponseBodySchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolResponseBodySchema' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   DuplicateToolResponseBodyJsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => DuplicateToolResponseBodySchema$inboundSchema),
   strict: z.boolean().optional(),
 });
 /** @internal */
 export type DuplicateToolResponseBodyJsonSchema$Outbound = {
   name: string;
-  description?: string | undefined;
-  schema: { [k: string]: any };
+  description: string;
+  schema: DuplicateToolResponseBodySchema$Outbound;
   strict?: boolean | undefined;
 };
 
@@ -1650,8 +1950,8 @@ export const DuplicateToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
   DuplicateToolResponseBodyJsonSchema
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => DuplicateToolResponseBodySchema$outboundSchema),
   strict: z.boolean().optional(),
 });
 
@@ -1681,7 +1981,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE40MGZNHZHJSKXEZ7PE8"),
+  _id: z.string().default("tool_01KA0EAFQ3VH8Y6EJXTS86AT9C"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1733,7 +2033,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K9YEE40MGZNHZHJSKXEZ7PE8"),
+  id: z.string().default("tool_01KA0EAFQ3VH8Y6EJXTS86AT9C"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1797,6 +2097,83 @@ export const DuplicateToolResponseBodyType$outboundSchema: z.ZodNativeEnum<
 > = DuplicateToolResponseBodyType$inboundSchema;
 
 /** @internal */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type
+  > = z.nativeEnum(
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type,
+  );
+/** @internal */
+export const DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type
+  > =
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema;
+
+/** @internal */
+export const DuplicateToolResponseBodyParameters$inboundSchema: z.ZodType<
+  DuplicateToolResponseBodyParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type DuplicateToolResponseBodyParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DuplicateToolResponseBodyParameters$outboundSchema: z.ZodType<
+  DuplicateToolResponseBodyParameters$Outbound,
+  z.ZodTypeDef,
+  DuplicateToolResponseBodyParameters
+> = z.object({
+  type:
+    DuplicateToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function duplicateToolResponseBodyParametersToJSON(
+  duplicateToolResponseBodyParameters: DuplicateToolResponseBodyParameters,
+): string {
+  return JSON.stringify(
+    DuplicateToolResponseBodyParameters$outboundSchema.parse(
+      duplicateToolResponseBodyParameters,
+    ),
+  );
+}
+export function duplicateToolResponseBodyParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateToolResponseBodyParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DuplicateToolResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateToolResponseBodyParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateToolResponseBodyFunction$inboundSchema: z.ZodType<
   DuplicateToolResponseBodyFunction,
   z.ZodTypeDef,
@@ -1805,14 +2182,15 @@ export const DuplicateToolResponseBodyFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => DuplicateToolResponseBodyParameters$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type DuplicateToolResponseBodyFunction$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DuplicateToolResponseBodyParameters$Outbound | undefined;
 };
 
 /** @internal */
@@ -1824,7 +2202,8 @@ export const DuplicateToolResponseBodyFunction$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => DuplicateToolResponseBodyParameters$outboundSchema)
+    .optional(),
 });
 
 export function duplicateToolResponseBodyFunctionToJSON(
@@ -1852,7 +2231,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE40KZYMJ7FPXHZT5TKFN"),
+  _id: z.string().default("tool_01KA0EAFQ1M0T9KF7P2NFGQXXF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1903,7 +2282,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K9YEE40KZYMJ7FPXHZT5TKFN"),
+  id: z.string().default("tool_01KA0EAFQ1M0T9KF7P2NFGQXXF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

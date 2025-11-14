@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -906,6 +909,91 @@ export type RunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
+  {
+    Mcp: "mcp",
+  } as const;
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
+  ClosedEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  >;
+
+export type AgentToolInputRunHeaders = {
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+  {
+    Object: "object",
+  } as const;
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+  ClosedEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  >;
+
+export type Schema = {
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType;
+  properties?: { [k: string]: any } | undefined;
+  required?: Array<string> | undefined;
+};
+
+export type Tools = {
+  name: string;
+  description?: string | undefined;
+  schema: Schema;
+};
+
+/**
+ * The connection type used by the MCP server
+ */
+export const ConnectionType = {
+  Http: "http",
+  Sse: "sse",
+} as const;
+/**
+ * The connection type used by the MCP server
+ */
+export type ConnectionType = ClosedEnum<typeof ConnectionType>;
+
+export type Mcp = {
+  /**
+   * The MCP server URL (cached for execution)
+   */
+  serverUrl: string;
+  /**
+   * HTTP headers for MCP server requests with encryption support
+   */
+  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
+  /**
+   * Array of tools available from the MCP server
+   */
+  tools: Array<Tools>;
+  /**
+   * The connection type used by the MCP server
+   */
+  connectionType: ConnectionType;
+};
+
+/**
+ * MCP tool with inline definition for on-the-fly creation in run endpoint
+ */
+export type MCPToolRun = {
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key: string;
+  id?: string | undefined;
+  displayName?: string | undefined;
+  /**
+   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
+   */
+  description: string;
+  mcp: Mcp;
+  requiresApproval?: boolean | undefined;
+};
+
 export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type =
   {
     Function: "function",
@@ -914,6 +1002,41 @@ export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
   ClosedEnum<
     typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
   >;
+
+/**
+ * The type must be "object"
+ */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+  {
+    Object: "object",
+  } as const;
+/**
+ * The type must be "object"
+ */
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+  ClosedEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type RunAgentAgentToolInputRunParameters = {
+  /**
+   * The type must be "object"
+   */
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 export type AgentToolInputRunFunction = {
   /**
@@ -931,7 +1054,7 @@ export type AgentToolInputRunFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RunAgentAgentToolInputRunParameters | undefined;
 };
 
 /**
@@ -959,6 +1082,41 @@ export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
     typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
   >;
 
+/**
+ * The type must be "object"
+ */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+  {
+    Object: "object",
+  } as const;
+/**
+ * The type must be "object"
+ */
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+  ClosedEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type AgentToolInputRunParameters = {
+  /**
+   * The type must be "object"
+   */
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export const Language = {
   Python: "python",
 } as const;
@@ -968,7 +1126,7 @@ export type CodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: AgentToolInputRunParameters | undefined;
   language: Language;
   /**
    * The code to execute.
@@ -1018,10 +1176,12 @@ export const Method = {
  */
 export type Method = ClosedEnum<typeof Method>;
 
-export type Headers = {
+export type Headers2 = {
   value: string;
   encrypted?: boolean | undefined;
 };
+
+export type Headers = Headers2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -1036,9 +1196,9 @@ export type Blueprint = {
    */
   method: Method;
   /**
-   * The headers to send with the request.
+   * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
-  headers?: { [k: string]: Headers } | undefined;
+  headers?: { [k: string]: Headers2 | string } | undefined;
   /**
    * The body to send with the request.
    */
@@ -1325,11 +1485,12 @@ export type AgentToolInputRunGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation.
+ * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
   | HTTPToolRun
   | CodeToolRun
+  | MCPToolRun
   | FunctionToolRun
   | AgentToolInputRunGoogleSearchTool
   | AgentToolInputRunWebScraperTool
@@ -1422,6 +1583,7 @@ export type RunAgentSettings = {
     | Array<
       | HTTPToolRun
       | CodeToolRun
+      | MCPToolRun
       | FunctionToolRun
       | AgentToolInputRunGoogleSearchTool
       | AgentToolInputRunWebScraperTool
@@ -4339,6 +4501,280 @@ export function runAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  > = z.nativeEnum(
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type,
+  );
+/** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
+  > =
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
+
+/** @internal */
+export const AgentToolInputRunHeaders$inboundSchema: z.ZodType<
+  AgentToolInputRunHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+/** @internal */
+export type AgentToolInputRunHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  AgentToolInputRunHeaders$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function agentToolInputRunHeadersToJSON(
+  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+  );
+}
+export function agentToolInputRunHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunHeaders' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  > = z.nativeEnum(
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType,
+  );
+/** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+  > =
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema;
+
+/** @internal */
+export const Schema$inboundSchema: z.ZodType<Schema, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema,
+    properties: z.record(z.any()).optional(),
+    required: z.array(z.string()).optional(),
+  });
+/** @internal */
+export type Schema$Outbound = {
+  type: string;
+  properties?: { [k: string]: any } | undefined;
+  required?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Schema$outboundSchema: z.ZodType<
+  Schema$Outbound,
+  z.ZodTypeDef,
+  Schema
+> = z.object({
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema,
+  properties: z.record(z.any()).optional(),
+  required: z.array(z.string()).optional(),
+});
+
+export function schemaToJSON(schema: Schema): string {
+  return JSON.stringify(Schema$outboundSchema.parse(schema));
+}
+export function schemaFromJSON(
+  jsonString: string,
+): SafeParseResult<Schema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Schema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Schema' from JSON`,
+  );
+}
+
+/** @internal */
+export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
+  .object({
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.lazy(() => Schema$inboundSchema),
+  });
+/** @internal */
+export type Tools$Outbound = {
+  name: string;
+  description?: string | undefined;
+  schema: Schema$Outbound;
+};
+
+/** @internal */
+export const Tools$outboundSchema: z.ZodType<
+  Tools$Outbound,
+  z.ZodTypeDef,
+  Tools
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => Schema$outboundSchema),
+});
+
+export function toolsToJSON(tools: Tools): string {
+  return JSON.stringify(Tools$outboundSchema.parse(tools));
+}
+export function toolsFromJSON(
+  jsonString: string,
+): SafeParseResult<Tools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Tools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tools' from JSON`,
+  );
+}
+
+/** @internal */
+export const ConnectionType$inboundSchema: z.ZodNativeEnum<
+  typeof ConnectionType
+> = z.nativeEnum(ConnectionType);
+/** @internal */
+export const ConnectionType$outboundSchema: z.ZodNativeEnum<
+  typeof ConnectionType
+> = ConnectionType$inboundSchema;
+
+/** @internal */
+export const Mcp$inboundSchema: z.ZodType<Mcp, z.ZodTypeDef, unknown> = z
+  .object({
+    server_url: z.string(),
+    headers: z.record(z.lazy(() => AgentToolInputRunHeaders$inboundSchema))
+      .optional(),
+    tools: z.array(z.lazy(() => Tools$inboundSchema)),
+    connection_type: ConnectionType$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "server_url": "serverUrl",
+      "connection_type": "connectionType",
+    });
+  });
+/** @internal */
+export type Mcp$Outbound = {
+  server_url: string;
+  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
+  tools: Array<Tools$Outbound>;
+  connection_type: string;
+};
+
+/** @internal */
+export const Mcp$outboundSchema: z.ZodType<Mcp$Outbound, z.ZodTypeDef, Mcp> = z
+  .object({
+    serverUrl: z.string(),
+    headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
+      .optional(),
+    tools: z.array(z.lazy(() => Tools$outboundSchema)),
+    connectionType: ConnectionType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      serverUrl: "server_url",
+      connectionType: "connection_type",
+    });
+  });
+
+export function mcpToJSON(mcp: Mcp): string {
+  return JSON.stringify(Mcp$outboundSchema.parse(mcp));
+}
+export function mcpFromJSON(
+  jsonString: string,
+): SafeParseResult<Mcp, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Mcp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Mcp' from JSON`,
+  );
+}
+
+/** @internal */
+export const MCPToolRun$inboundSchema: z.ZodType<
+  MCPToolRun,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
+  key: z.string(),
+  _id: z.string().optional(),
+  display_name: z.string().optional(),
+  description: z.string(),
+  mcp: z.lazy(() => Mcp$inboundSchema),
+  requires_approval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
+  });
+});
+/** @internal */
+export type MCPToolRun$Outbound = {
+  type: string;
+  key: string;
+  _id?: string | undefined;
+  display_name?: string | undefined;
+  description: string;
+  mcp: Mcp$Outbound;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const MCPToolRun$outboundSchema: z.ZodType<
+  MCPToolRun$Outbound,
+  z.ZodTypeDef,
+  MCPToolRun
+> = z.object({
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
+  key: z.string(),
+  id: z.string().optional(),
+  displayName: z.string().optional(),
+  description: z.string(),
+  mcp: z.lazy(() => Mcp$outboundSchema),
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    displayName: "display_name",
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function mcpToolRunToJSON(mcpToolRun: MCPToolRun): string {
+  return JSON.stringify(MCPToolRun$outboundSchema.parse(mcpToolRun));
+}
+export function mcpToolRunFromJSON(
+  jsonString: string,
+): SafeParseResult<MCPToolRun, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MCPToolRun$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MCPToolRun' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
   z.ZodNativeEnum<
     typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
@@ -4353,6 +4789,83 @@ export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Typ
     RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
 
 /** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  > = z.nativeEnum(
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType,
+  );
+/** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+  > =
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema;
+
+/** @internal */
+export const RunAgentAgentToolInputRunParameters$inboundSchema: z.ZodType<
+  RunAgentAgentToolInputRunParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type RunAgentAgentToolInputRunParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const RunAgentAgentToolInputRunParameters$outboundSchema: z.ZodType<
+  RunAgentAgentToolInputRunParameters$Outbound,
+  z.ZodTypeDef,
+  RunAgentAgentToolInputRunParameters
+> = z.object({
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function runAgentAgentToolInputRunParametersToJSON(
+  runAgentAgentToolInputRunParameters: RunAgentAgentToolInputRunParameters,
+): string {
+  return JSON.stringify(
+    RunAgentAgentToolInputRunParameters$outboundSchema.parse(
+      runAgentAgentToolInputRunParameters,
+    ),
+  );
+}
+export function runAgentAgentToolInputRunParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentAgentToolInputRunParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RunAgentAgentToolInputRunParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentAgentToolInputRunParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const AgentToolInputRunFunction$inboundSchema: z.ZodType<
   AgentToolInputRunFunction,
   z.ZodTypeDef,
@@ -4361,14 +4874,15 @@ export const AgentToolInputRunFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => RunAgentAgentToolInputRunParameters$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type AgentToolInputRunFunction$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RunAgentAgentToolInputRunParameters$Outbound | undefined;
 };
 
 /** @internal */
@@ -4380,7 +4894,8 @@ export const AgentToolInputRunFunction$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => RunAgentAgentToolInputRunParameters$outboundSchema)
+    .optional(),
 });
 
 export function agentToolInputRunFunctionToJSON(
@@ -4484,6 +4999,82 @@ export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Typ
     RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
 
 /** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  > = z.nativeEnum(
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType,
+  );
+/** @internal */
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+  > =
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema;
+
+/** @internal */
+export const AgentToolInputRunParameters$inboundSchema: z.ZodType<
+  AgentToolInputRunParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type AgentToolInputRunParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const AgentToolInputRunParameters$outboundSchema: z.ZodType<
+  AgentToolInputRunParameters$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunParameters
+> = z.object({
+  type:
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function agentToolInputRunParametersToJSON(
+  agentToolInputRunParameters: AgentToolInputRunParameters,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunParameters$outboundSchema.parse(
+      agentToolInputRunParameters,
+    ),
+  );
+}
+export function agentToolInputRunParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentToolInputRunParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> = z
   .nativeEnum(Language);
 /** @internal */
@@ -4496,13 +5087,14 @@ export const CodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => AgentToolInputRunParameters$inboundSchema)
+    .optional(),
   language: Language$inboundSchema,
   code: z.string(),
 });
 /** @internal */
 export type CodeTool$Outbound = {
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: AgentToolInputRunParameters$Outbound | undefined;
   language: string;
   code: string;
 };
@@ -4513,7 +5105,8 @@ export const CodeTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CodeTool
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => AgentToolInputRunParameters$outboundSchema)
+    .optional(),
   language: Language$outboundSchema,
   code: z.string(),
 });
@@ -4622,26 +5215,55 @@ export const Method$outboundSchema: z.ZodNativeEnum<typeof Method> =
   Method$inboundSchema;
 
 /** @internal */
-export const Headers$inboundSchema: z.ZodType<Headers, z.ZodTypeDef, unknown> =
-  z.object({
-    value: z.string(),
-    encrypted: z.boolean().default(false),
-  });
+export const Headers2$inboundSchema: z.ZodType<
+  Headers2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
 /** @internal */
-export type Headers$Outbound = {
+export type Headers2$Outbound = {
   value: string;
   encrypted: boolean;
 };
+
+/** @internal */
+export const Headers2$outboundSchema: z.ZodType<
+  Headers2$Outbound,
+  z.ZodTypeDef,
+  Headers2
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function headers2ToJSON(headers2: Headers2): string {
+  return JSON.stringify(Headers2$outboundSchema.parse(headers2));
+}
+export function headers2FromJSON(
+  jsonString: string,
+): SafeParseResult<Headers2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Headers2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Headers2' from JSON`,
+  );
+}
+
+/** @internal */
+export const Headers$inboundSchema: z.ZodType<Headers, z.ZodTypeDef, unknown> =
+  z.union([z.lazy(() => Headers2$inboundSchema), z.string()]);
+/** @internal */
+export type Headers$Outbound = Headers2$Outbound | string;
 
 /** @internal */
 export const Headers$outboundSchema: z.ZodType<
   Headers$Outbound,
   z.ZodTypeDef,
   Headers
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = z.union([z.lazy(() => Headers2$outboundSchema), z.string()]);
 
 export function headersToJSON(headers: Headers): string {
   return JSON.stringify(Headers$outboundSchema.parse(headers));
@@ -4664,14 +5286,15 @@ export const Blueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: Method$inboundSchema,
-  headers: z.record(z.lazy(() => Headers$inboundSchema)).optional(),
+  headers: z.record(z.union([z.lazy(() => Headers2$inboundSchema), z.string()]))
+    .optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type Blueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: Headers$Outbound } | undefined;
+  headers?: { [k: string]: Headers2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -4683,7 +5306,9 @@ export const Blueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: Method$outboundSchema,
-  headers: z.record(z.lazy(() => Headers$outboundSchema)).optional(),
+  headers: z.record(
+    z.union([z.lazy(() => Headers2$outboundSchema), z.string()]),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 
@@ -5656,6 +6281,7 @@ export const AgentToolInputRun$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => HTTPToolRun$inboundSchema),
   z.lazy(() => CodeToolRun$inboundSchema),
+  z.lazy(() => MCPToolRun$inboundSchema),
   z.lazy(() => FunctionToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunGoogleSearchTool$inboundSchema),
   z.lazy(() => AgentToolInputRunWebScraperTool$inboundSchema),
@@ -5673,6 +6299,7 @@ export const AgentToolInputRun$inboundSchema: z.ZodType<
 export type AgentToolInputRun$Outbound =
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
+  | MCPToolRun$Outbound
   | FunctionToolRun$Outbound
   | AgentToolInputRunGoogleSearchTool$Outbound
   | AgentToolInputRunWebScraperTool$Outbound
@@ -5694,6 +6321,7 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
+  z.lazy(() => MCPToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
   z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
@@ -5872,6 +6500,7 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => HTTPToolRun$inboundSchema),
       z.lazy(() => CodeToolRun$inboundSchema),
+      z.lazy(() => MCPToolRun$inboundSchema),
       z.lazy(() => FunctionToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunGoogleSearchTool$inboundSchema),
       z.lazy(() => AgentToolInputRunWebScraperTool$inboundSchema),
@@ -5908,6 +6537,7 @@ export type RunAgentSettings$Outbound = {
     | Array<
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
+      | MCPToolRun$Outbound
       | FunctionToolRun$Outbound
       | AgentToolInputRunGoogleSearchTool$Outbound
       | AgentToolInputRunWebScraperTool$Outbound
@@ -5939,6 +6569,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
+      z.lazy(() => MCPToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
       z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),

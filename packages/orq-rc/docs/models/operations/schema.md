@@ -1,0 +1,19 @@
+# Schema
+
+## Example Usage
+
+```typescript
+import { Schema } from "@orq-ai/node/models/operations";
+
+let value: Schema = {
+  type: "object",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                    | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                   | [operations.RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType](../../models/operations/runagentagenttoolinputrunagentsrequestrequestbodysettingstools15mcptype.md) | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `properties`                                                                                                                                                                             | Record<string, *any*>                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `required`                                                                                                                                                                               | *string*[]                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |

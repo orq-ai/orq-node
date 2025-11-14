@@ -666,6 +666,44 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
+ * MCP tool type
+ */
+export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+  {
+    Mcp: "mcp",
+  } as const;
+/**
+ * MCP tool type
+ */
+export type CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+  ClosedEnum<
+    typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  >;
+
+/**
+ * Executes tools from Model Context Protocol (MCP) servers. Must reference a pre-created MCP tool by key or id.
+ */
+export type MCPTool = {
+  /**
+   * MCP tool type
+   */
+  type:
+    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type;
+  /**
+   * The key of the pre-created MCP tool
+   */
+  key?: string | undefined;
+  /**
+   * The ID of the pre-created MCP tool
+   */
+  id?: string | undefined;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+};
+
+/**
  * Function tool type
  */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
@@ -989,7 +1027,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool
@@ -1005,7 +1043,8 @@ export type AgentToolInputCRUD =
   | CurrentDateTool
   | HTTPTool
   | CodeExecutionTool
-  | FunctionTool;
+  | FunctionTool
+  | MCPTool;
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1096,6 +1135,7 @@ export type Settings = {
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
+      | MCPTool
     >
     | undefined;
   /**
@@ -2037,19 +2077,6 @@ export type CreateAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const CreateAgentCollapsedConfigurationSections = {
-  Information: "information",
-  Model: "model",
-  Tools: "tools",
-  Context: "context",
-  RuntimeConstraints: "runtime_constraints",
-  Evaluators: "evaluators",
-  Guardrails: "guardrails",
-} as const;
-export type CreateAgentCollapsedConfigurationSections = ClosedEnum<
-  typeof CreateAgentCollapsedConfigurationSections
->;
-
 /**
  * Agent created successfully
  */
@@ -2099,12 +2126,6 @@ export type CreateAgentResponseBody = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<CreateAgentKnowledgeBases> | undefined;
-  /**
-   * List of collapsed sections in configuration. Duplicates are not allowed.
-   */
-  collapsedConfigurationSections?:
-    | Array<CreateAgentCollapsedConfigurationSections>
-    | undefined;
 };
 
 /** @internal */
@@ -3784,6 +3805,71 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = ToolApprovalRequired$inboundSchema;
 
 /** @internal */
+export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  > = z.nativeEnum(
+    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
+  );
+/** @internal */
+export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  > =
+    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
+
+/** @internal */
+export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
+  z.object({
+    type:
+      CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
+    key: z.string().optional(),
+    id: z.string().optional(),
+    requires_approval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "requires_approval": "requiresApproval",
+    });
+  });
+/** @internal */
+export type MCPTool$Outbound = {
+  type: string;
+  key?: string | undefined;
+  id?: string | undefined;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const MCPTool$outboundSchema: z.ZodType<
+  MCPTool$Outbound,
+  z.ZodTypeDef,
+  MCPTool
+> = z.object({
+  type:
+    CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
+  key: z.string().optional(),
+  id: z.string().optional(),
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function mcpToolToJSON(mcpTool: MCPTool): string {
+  return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
+}
+export function mcpToolFromJSON(
+  jsonString: string,
+): SafeParseResult<MCPTool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MCPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MCPTool' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
@@ -4699,6 +4785,7 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$inboundSchema),
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
+  z.lazy(() => MCPTool$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
@@ -4715,7 +4802,8 @@ export type AgentToolInputCRUD$Outbound =
   | CurrentDateTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound;
+  | FunctionTool$Outbound
+  | MCPTool$Outbound;
 
 /** @internal */
 export const AgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -4737,6 +4825,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function agentToolInputCRUDToJSON(
@@ -4901,6 +4990,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$inboundSchema),
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
+      z.lazy(() => MCPTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
@@ -4933,6 +5023,7 @@ export type Settings$Outbound = {
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
+      | MCPTool$Outbound
     >
     | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
@@ -4966,6 +5057,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
+      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
@@ -7543,15 +7635,6 @@ export function createAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const CreateAgentCollapsedConfigurationSections$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentCollapsedConfigurationSections> = z
-    .nativeEnum(CreateAgentCollapsedConfigurationSections);
-/** @internal */
-export const CreateAgentCollapsedConfigurationSections$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentCollapsedConfigurationSections> =
-    CreateAgentCollapsedConfigurationSections$inboundSchema;
-
-/** @internal */
 export const CreateAgentResponseBody$inboundSchema: z.ZodType<
   CreateAgentResponseBody,
   z.ZodTypeDef,
@@ -7580,9 +7663,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => CreateAgentKnowledgeBases$inboundSchema),
   ).optional(),
-  collapsed_configuration_sections: z.array(
-    CreateAgentCollapsedConfigurationSections$inboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -7594,7 +7674,6 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -7620,7 +7699,6 @@ export type CreateAgentResponseBody$Outbound = {
   metrics?: Metrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<CreateAgentKnowledgeBases$Outbound> | undefined;
-  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -7652,9 +7730,6 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => CreateAgentKnowledgeBases$outboundSchema),
   ).optional(),
-  collapsedConfigurationSections: z.array(
-    CreateAgentCollapsedConfigurationSections$outboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -7666,7 +7741,6 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

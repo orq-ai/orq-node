@@ -38,8 +38,19 @@ const value: operations.RetrieveToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "complete till slipper supposing obligation",
     schema: {
-      "key": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   },
 };
@@ -79,12 +90,15 @@ const value: operations.RetrieveToolResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://voluminous-stool.com/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "sse",
   },
 };

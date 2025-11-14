@@ -867,19 +867,6 @@ export type DuplicateAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const DuplicateAgentCollapsedConfigurationSections = {
-  Information: "information",
-  Model: "model",
-  Tools: "tools",
-  Context: "context",
-  RuntimeConstraints: "runtime_constraints",
-  Evaluators: "evaluators",
-  Guardrails: "guardrails",
-} as const;
-export type DuplicateAgentCollapsedConfigurationSections = ClosedEnum<
-  typeof DuplicateAgentCollapsedConfigurationSections
->;
-
 /**
  * Agent duplicated successfully
  */
@@ -930,12 +917,6 @@ export type DuplicateAgentResponseBody = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<DuplicateAgentKnowledgeBases> | undefined;
-  /**
-   * List of collapsed sections in configuration. Duplicates are not allowed.
-   */
-  collapsedConfigurationSections?:
-    | Array<DuplicateAgentCollapsedConfigurationSections>
-    | undefined;
 };
 
 /** @internal */
@@ -3332,15 +3313,6 @@ export function duplicateAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const DuplicateAgentCollapsedConfigurationSections$inboundSchema:
-  z.ZodNativeEnum<typeof DuplicateAgentCollapsedConfigurationSections> = z
-    .nativeEnum(DuplicateAgentCollapsedConfigurationSections);
-/** @internal */
-export const DuplicateAgentCollapsedConfigurationSections$outboundSchema:
-  z.ZodNativeEnum<typeof DuplicateAgentCollapsedConfigurationSections> =
-    DuplicateAgentCollapsedConfigurationSections$inboundSchema;
-
-/** @internal */
 export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
   DuplicateAgentResponseBody,
   z.ZodTypeDef,
@@ -3372,9 +3344,6 @@ export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => DuplicateAgentKnowledgeBases$inboundSchema),
   ).optional(),
-  collapsed_configuration_sections: z.array(
-    DuplicateAgentCollapsedConfigurationSections$inboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3387,7 +3356,6 @@ export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -3414,7 +3382,6 @@ export type DuplicateAgentResponseBody$Outbound = {
   metrics?: DuplicateAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<DuplicateAgentKnowledgeBases$Outbound> | undefined;
-  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3449,9 +3416,6 @@ export const DuplicateAgentResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => DuplicateAgentKnowledgeBases$outboundSchema),
   ).optional(),
-  collapsedConfigurationSections: z.array(
-    DuplicateAgentCollapsedConfigurationSections$outboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -3464,7 +3428,6 @@ export const DuplicateAgentResponseBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

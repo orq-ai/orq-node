@@ -15,12 +15,8 @@ let value: UpdateToolResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://incomplete-crest.name/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [],
     connectionType: "http",
   },
 };

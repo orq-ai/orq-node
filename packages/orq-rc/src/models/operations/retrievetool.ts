@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,6 +41,39 @@ export type RetrieveToolResponseBodyToolsResponse200ApplicationJSONType =
     typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
   >;
 
+/**
+ * The type must be "object"
+ */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type =
+  ClosedEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type RetrieveToolResponseBodyToolsParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export const RetrieveToolResponseBodyLanguage = {
   Python: "python",
 } as const;
@@ -49,7 +85,7 @@ export type RetrieveToolResponseBodyCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RetrieveToolResponseBodyToolsParameters | undefined;
   language: RetrieveToolResponseBodyLanguage;
   /**
    * The code to execute.
@@ -140,13 +176,16 @@ export type RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type =
     typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
   >;
 
-/**
- * The original MCP tool input schema for LLM conversion
- */
-export type RetrieveToolResponseBodyInputSchema = {
+export type RetrieveToolResponseBodyToolsSchema = {
   type: RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
+};
+
+export type RetrieveToolResponseBodyTools = {
+  name: string;
+  description?: string | undefined;
+  schema: RetrieveToolResponseBodyToolsSchema;
 };
 
 /**
@@ -165,25 +204,17 @@ export type RetrieveToolResponseBodyConnectionType = ClosedEnum<
 
 export type RetrieveToolResponseBodyMcp = {
   /**
-   * The ID of the MCP server this tool belongs to
-   */
-  serverId: string;
-  /**
-   * The original tool name from the MCP server
-   */
-  toolName: string;
-  /**
    * The MCP server URL (cached for execution)
    */
   serverUrl: string;
   /**
-   * HTTP headers for MCP server requests (encrypted format)
+   * HTTP headers for MCP server requests with encryption support
    */
   headers?: { [k: string]: RetrieveToolResponseBodyHeaders } | undefined;
   /**
-   * The original MCP tool input schema for LLM conversion
+   * Array of tools available from the MCP server
    */
-  inputSchema: RetrieveToolResponseBodyInputSchema;
+  tools: Array<RetrieveToolResponseBodyTools>;
   /**
    * The connection type used by the MCP server
    */
@@ -274,10 +305,14 @@ export type RetrieveToolResponseBodyMethod = ClosedEnum<
   typeof RetrieveToolResponseBodyMethod
 >;
 
-export type RetrieveToolResponseBodyToolsHeaders = {
+export type RetrieveToolHeaders2 = {
   value: string;
   encrypted?: boolean | undefined;
 };
+
+export type RetrieveToolResponseBodyToolsHeaders =
+  | RetrieveToolHeaders2
+  | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -292,9 +327,9 @@ export type RetrieveToolResponseBodyBlueprint = {
    */
   method: RetrieveToolResponseBodyMethod;
   /**
-   * The headers to send with the request.
+   * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
-  headers?: { [k: string]: RetrieveToolResponseBodyToolsHeaders } | undefined;
+  headers?: { [k: string]: RetrieveToolHeaders2 | string } | undefined;
   /**
    * The body to send with the request.
    */
@@ -420,6 +455,25 @@ export type RetrieveToolResponseBodyToolsType = ClosedEnum<
   typeof RetrieveToolResponseBodyToolsType
 >;
 
+/**
+ * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type RetrieveToolResponseBodySchema = {
+  /**
+   * The JSON Schema type
+   */
+  type: string;
+  /**
+   * The properties of the JSON Schema object
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required property names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type RetrieveToolResponseBodyJsonSchema = {
   /**
    * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -428,11 +482,11 @@ export type RetrieveToolResponseBodyJsonSchema = {
   /**
    * A description of what the response format is for. This will be shown to the user.
    */
-  description?: string | undefined;
+  description: string;
   /**
    * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  schema: { [k: string]: any };
+  schema: RetrieveToolResponseBodySchema;
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
@@ -507,6 +561,39 @@ export type RetrieveToolResponseBodyType = ClosedEnum<
   typeof RetrieveToolResponseBodyType
 >;
 
+/**
+ * The type must be "object"
+ */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type =
+  ClosedEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type RetrieveToolResponseBodyParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type RetrieveToolResponseBodyFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -523,7 +610,7 @@ export type RetrieveToolResponseBodyFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RetrieveToolResponseBodyParameters | undefined;
 };
 
 export type RetrieveToolResponseBody1 = {
@@ -654,6 +741,89 @@ export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$outboun
   > = RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type
+  > = z.nativeEnum(
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type,
+  );
+/** @internal */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type
+  > =
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema;
+
+/** @internal */
+export const RetrieveToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyToolsParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type RetrieveToolResponseBodyToolsParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const RetrieveToolResponseBodyToolsParameters$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyToolsParameters$Outbound,
+  z.ZodTypeDef,
+  RetrieveToolResponseBodyToolsParameters
+> = z.object({
+  type:
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function retrieveToolResponseBodyToolsParametersToJSON(
+  retrieveToolResponseBodyToolsParameters:
+    RetrieveToolResponseBodyToolsParameters,
+): string {
+  return JSON.stringify(
+    RetrieveToolResponseBodyToolsParameters$outboundSchema.parse(
+      retrieveToolResponseBodyToolsParameters,
+    ),
+  );
+}
+export function retrieveToolResponseBodyToolsParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveToolResponseBodyToolsParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveToolResponseBodyToolsParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveToolResponseBodyToolsParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveToolResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveToolResponseBodyLanguage
 > = z.nativeEnum(RetrieveToolResponseBodyLanguage);
@@ -668,13 +838,15 @@ export const RetrieveToolResponseBodyCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    RetrieveToolResponseBodyToolsParameters$inboundSchema
+  ).optional(),
   language: RetrieveToolResponseBodyLanguage$inboundSchema,
   code: z.string(),
 });
 /** @internal */
 export type RetrieveToolResponseBodyCodeTool$Outbound = {
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RetrieveToolResponseBodyToolsParameters$Outbound | undefined;
   language: string;
   code: string;
 };
@@ -685,7 +857,9 @@ export const RetrieveToolResponseBodyCodeTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyCodeTool
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() =>
+    RetrieveToolResponseBodyToolsParameters$outboundSchema
+  ).optional(),
   language: RetrieveToolResponseBodyLanguage$outboundSchema,
   code: z.string(),
 });
@@ -715,7 +889,7 @@ export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE41DZ9HP5AY0JVAAYYFC"),
+  _id: z.string().default("tool_01KA0EAFQRJKMVM2E2P5R1CQF5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -770,7 +944,7 @@ export const RetrieveToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody5
 > = z.object({
-  id: z.string().default("01K9YEE41DZ9HP5AY0JVAAYYFC"),
+  id: z.string().default("tool_01KA0EAFQRJKMVM2E2P5R1CQF5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -895,8 +1069,8 @@ export const RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$outbou
     RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema;
 
 /** @internal */
-export const RetrieveToolResponseBodyInputSchema$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyInputSchema,
+export const RetrieveToolResponseBodyToolsSchema$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyToolsSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -906,17 +1080,17 @@ export const RetrieveToolResponseBodyInputSchema$inboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 /** @internal */
-export type RetrieveToolResponseBodyInputSchema$Outbound = {
+export type RetrieveToolResponseBodyToolsSchema$Outbound = {
   type: string;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
 
 /** @internal */
-export const RetrieveToolResponseBodyInputSchema$outboundSchema: z.ZodType<
-  RetrieveToolResponseBodyInputSchema$Outbound,
+export const RetrieveToolResponseBodyToolsSchema$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyToolsSchema$Outbound,
   z.ZodTypeDef,
-  RetrieveToolResponseBodyInputSchema
+  RetrieveToolResponseBodyToolsSchema
 > = z.object({
   type:
     RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema,
@@ -924,23 +1098,70 @@ export const RetrieveToolResponseBodyInputSchema$outboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
 });
 
-export function retrieveToolResponseBodyInputSchemaToJSON(
-  retrieveToolResponseBodyInputSchema: RetrieveToolResponseBodyInputSchema,
+export function retrieveToolResponseBodyToolsSchemaToJSON(
+  retrieveToolResponseBodyToolsSchema: RetrieveToolResponseBodyToolsSchema,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBodyInputSchema$outboundSchema.parse(
-      retrieveToolResponseBodyInputSchema,
+    RetrieveToolResponseBodyToolsSchema$outboundSchema.parse(
+      retrieveToolResponseBodyToolsSchema,
     ),
   );
 }
-export function retrieveToolResponseBodyInputSchemaFromJSON(
+export function retrieveToolResponseBodyToolsSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyInputSchema, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyToolsSchema, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      RetrieveToolResponseBodyInputSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyInputSchema' from JSON`,
+      RetrieveToolResponseBodyToolsSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyToolsSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
+});
+/** @internal */
+export type RetrieveToolResponseBodyTools$Outbound = {
+  name: string;
+  description?: string | undefined;
+  schema: RetrieveToolResponseBodyToolsSchema$Outbound;
+};
+
+/** @internal */
+export const RetrieveToolResponseBodyTools$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyTools$Outbound,
+  z.ZodTypeDef,
+  RetrieveToolResponseBodyTools
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$outboundSchema),
+});
+
+export function retrieveToolResponseBodyToolsToJSON(
+  retrieveToolResponseBodyTools: RetrieveToolResponseBodyTools,
+): string {
+  return JSON.stringify(
+    RetrieveToolResponseBodyTools$outboundSchema.parse(
+      retrieveToolResponseBodyTools,
+    ),
+  );
+}
+export function retrieveToolResponseBodyToolsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveToolResponseBodyTools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveToolResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyTools' from JSON`,
   );
 }
 
@@ -960,31 +1181,24 @@ export const RetrieveToolResponseBodyMcp$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  server_id: z.string(),
-  tool_name: z.string(),
   server_url: z.string(),
   headers: z.record(z.lazy(() => RetrieveToolResponseBodyHeaders$inboundSchema))
     .optional(),
-  input_schema: z.lazy(() => RetrieveToolResponseBodyInputSchema$inboundSchema),
+  tools: z.array(z.lazy(() => RetrieveToolResponseBodyTools$inboundSchema)),
   connection_type: RetrieveToolResponseBodyConnectionType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    "server_id": "serverId",
-    "tool_name": "toolName",
     "server_url": "serverUrl",
-    "input_schema": "inputSchema",
     "connection_type": "connectionType",
   });
 });
 /** @internal */
 export type RetrieveToolResponseBodyMcp$Outbound = {
-  server_id: string;
-  tool_name: string;
   server_url: string;
   headers?:
     | { [k: string]: RetrieveToolResponseBodyHeaders$Outbound }
     | undefined;
-  input_schema: RetrieveToolResponseBodyInputSchema$Outbound;
+  tools: Array<RetrieveToolResponseBodyTools$Outbound>;
   connection_type: string;
 };
 
@@ -994,20 +1208,15 @@ export const RetrieveToolResponseBodyMcp$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyMcp
 > = z.object({
-  serverId: z.string(),
-  toolName: z.string(),
   serverUrl: z.string(),
   headers: z.record(
     z.lazy(() => RetrieveToolResponseBodyHeaders$outboundSchema),
   ).optional(),
-  inputSchema: z.lazy(() => RetrieveToolResponseBodyInputSchema$outboundSchema),
+  tools: z.array(z.lazy(() => RetrieveToolResponseBodyTools$outboundSchema)),
   connectionType: RetrieveToolResponseBodyConnectionType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    serverId: "server_id",
-    toolName: "tool_name",
     serverUrl: "server_url",
-    inputSchema: "input_schema",
     connectionType: "connection_type",
   });
 });
@@ -1037,7 +1246,7 @@ export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE41BM416K7XK0N55VK1C"),
+  _id: z.string().default("tool_01KA0EAFQQRFBHF4776J75QPSK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1090,7 +1299,7 @@ export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody4
 > = z.object({
-  id: z.string().default("01K9YEE41BM416K7XK0N55VK1C"),
+  id: z.string().default("tool_01KA0EAFQQRFBHF4776J75QPSK"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1164,8 +1373,8 @@ export const RetrieveToolResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
 > = RetrieveToolResponseBodyMethod$inboundSchema;
 
 /** @internal */
-export const RetrieveToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyToolsHeaders,
+export const RetrieveToolHeaders2$inboundSchema: z.ZodType<
+  RetrieveToolHeaders2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1173,20 +1382,55 @@ export const RetrieveToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 /** @internal */
-export type RetrieveToolResponseBodyToolsHeaders$Outbound = {
+export type RetrieveToolHeaders2$Outbound = {
   value: string;
   encrypted: boolean;
 };
+
+/** @internal */
+export const RetrieveToolHeaders2$outboundSchema: z.ZodType<
+  RetrieveToolHeaders2$Outbound,
+  z.ZodTypeDef,
+  RetrieveToolHeaders2
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function retrieveToolHeaders2ToJSON(
+  retrieveToolHeaders2: RetrieveToolHeaders2,
+): string {
+  return JSON.stringify(
+    RetrieveToolHeaders2$outboundSchema.parse(retrieveToolHeaders2),
+  );
+}
+export function retrieveToolHeaders2FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveToolHeaders2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveToolHeaders2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolHeaders2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyToolsHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => RetrieveToolHeaders2$inboundSchema), z.string()]);
+/** @internal */
+export type RetrieveToolResponseBodyToolsHeaders$Outbound =
+  | RetrieveToolHeaders2$Outbound
+  | string;
 
 /** @internal */
 export const RetrieveToolResponseBodyToolsHeaders$outboundSchema: z.ZodType<
   RetrieveToolResponseBodyToolsHeaders$Outbound,
   z.ZodTypeDef,
   RetrieveToolResponseBodyToolsHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = z.union([z.lazy(() => RetrieveToolHeaders2$outboundSchema), z.string()]);
 
 export function retrieveToolResponseBodyToolsHeadersToJSON(
   retrieveToolResponseBodyToolsHeaders: RetrieveToolResponseBodyToolsHeaders,
@@ -1217,7 +1461,7 @@ export const RetrieveToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   url: z.string(),
   method: RetrieveToolResponseBodyMethod$inboundSchema,
   headers: z.record(
-    z.lazy(() => RetrieveToolResponseBodyToolsHeaders$inboundSchema),
+    z.union([z.lazy(() => RetrieveToolHeaders2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
 });
@@ -1225,9 +1469,7 @@ export const RetrieveToolResponseBodyBlueprint$inboundSchema: z.ZodType<
 export type RetrieveToolResponseBodyBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?:
-    | { [k: string]: RetrieveToolResponseBodyToolsHeaders$Outbound }
-    | undefined;
+  headers?: { [k: string]: RetrieveToolHeaders2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -1240,7 +1482,7 @@ export const RetrieveToolResponseBodyBlueprint$outboundSchema: z.ZodType<
   url: z.string(),
   method: RetrieveToolResponseBodyMethod$outboundSchema,
   headers: z.record(
-    z.lazy(() => RetrieveToolResponseBodyToolsHeaders$outboundSchema),
+    z.union([z.lazy(() => RetrieveToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
 });
@@ -1435,7 +1677,7 @@ export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE418EP0NDH2FBK7VQCD6"),
+  _id: z.string().default("tool_01KA0EAFQN1DHVSX00510BQE1Y"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1488,7 +1730,7 @@ export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody3
 > = z.object({
-  id: z.string().default("01K9YEE418EP0NDH2FBK7VQCD6"),
+  id: z.string().default("tool_01KA0EAFQN1DHVSX00510BQE1Y"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1553,21 +1795,81 @@ export const RetrieveToolResponseBodyToolsType$outboundSchema: z.ZodNativeEnum<
 > = RetrieveToolResponseBodyToolsType$inboundSchema;
 
 /** @internal */
+export const RetrieveToolResponseBodySchema$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodySchema,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type RetrieveToolResponseBodySchema$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const RetrieveToolResponseBodySchema$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodySchema$Outbound,
+  z.ZodTypeDef,
+  RetrieveToolResponseBodySchema
+> = z.object({
+  type: z.string(),
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function retrieveToolResponseBodySchemaToJSON(
+  retrieveToolResponseBodySchema: RetrieveToolResponseBodySchema,
+): string {
+  return JSON.stringify(
+    RetrieveToolResponseBodySchema$outboundSchema.parse(
+      retrieveToolResponseBodySchema,
+    ),
+  );
+}
+export function retrieveToolResponseBodySchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveToolResponseBodySchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveToolResponseBodySchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodySchema' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   RetrieveToolResponseBodyJsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => RetrieveToolResponseBodySchema$inboundSchema),
   strict: z.boolean().optional(),
 });
 /** @internal */
 export type RetrieveToolResponseBodyJsonSchema$Outbound = {
   name: string;
-  description?: string | undefined;
-  schema: { [k: string]: any };
+  description: string;
+  schema: RetrieveToolResponseBodySchema$Outbound;
   strict?: boolean | undefined;
 };
 
@@ -1578,8 +1880,8 @@ export const RetrieveToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
   RetrieveToolResponseBodyJsonSchema
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => RetrieveToolResponseBodySchema$outboundSchema),
   strict: z.boolean().optional(),
 });
 
@@ -1609,7 +1911,7 @@ export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE416J2NWMQHJQGPCCTJ5"),
+  _id: z.string().default("tool_01KA0EAFQMXCW92V1E89J6M3W2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1661,7 +1963,7 @@ export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody2
 > = z.object({
-  id: z.string().default("01K9YEE416J2NWMQHJQGPCCTJ5"),
+  id: z.string().default("tool_01KA0EAFQMXCW92V1E89J6M3W2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1725,6 +2027,83 @@ export const RetrieveToolResponseBodyType$outboundSchema: z.ZodNativeEnum<
 > = RetrieveToolResponseBodyType$inboundSchema;
 
 /** @internal */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type
+  > = z.nativeEnum(
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type,
+  );
+/** @internal */
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type
+  > =
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema;
+
+/** @internal */
+export const RetrieveToolResponseBodyParameters$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type RetrieveToolResponseBodyParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const RetrieveToolResponseBodyParameters$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyParameters$Outbound,
+  z.ZodTypeDef,
+  RetrieveToolResponseBodyParameters
+> = z.object({
+  type:
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function retrieveToolResponseBodyParametersToJSON(
+  retrieveToolResponseBodyParameters: RetrieveToolResponseBodyParameters,
+): string {
+  return JSON.stringify(
+    RetrieveToolResponseBodyParameters$outboundSchema.parse(
+      retrieveToolResponseBodyParameters,
+    ),
+  );
+}
+export function retrieveToolResponseBodyParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveToolResponseBodyParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveToolResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveToolResponseBodyFunction$inboundSchema: z.ZodType<
   RetrieveToolResponseBodyFunction,
   z.ZodTypeDef,
@@ -1733,14 +2112,15 @@ export const RetrieveToolResponseBodyFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => RetrieveToolResponseBodyParameters$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type RetrieveToolResponseBodyFunction$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: RetrieveToolResponseBodyParameters$Outbound | undefined;
 };
 
 /** @internal */
@@ -1752,7 +2132,8 @@ export const RetrieveToolResponseBodyFunction$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => RetrieveToolResponseBodyParameters$outboundSchema)
+    .optional(),
 });
 
 export function retrieveToolResponseBodyFunctionToJSON(
@@ -1780,7 +2161,7 @@ export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YEE415JRXX26ECYJ07X69M"),
+  _id: z.string().default("tool_01KA0EAFQJZDXPD49SAKHW2Z8E"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1831,7 +2212,7 @@ export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody1
 > = z.object({
-  id: z.string().default("01K9YEE415JRXX26ECYJ07X69M"),
+  id: z.string().default("tool_01KA0EAFQJZDXPD49SAKHW2Z8E"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

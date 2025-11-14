@@ -87,6 +87,7 @@ export * from "./runagent.js";
 export * from "./searchknowledge.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
+export * from "./syncmcptool.js";
 export * from "./updateagent.js";
 export * from "./updatebudget.js";
 export * from "./updatechunk.js";

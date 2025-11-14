@@ -868,19 +868,6 @@ export type ListAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const ListAgentsCollapsedConfigurationSections = {
-  Information: "information",
-  Model: "model",
-  Tools: "tools",
-  Context: "context",
-  RuntimeConstraints: "runtime_constraints",
-  Evaluators: "evaluators",
-  Guardrails: "guardrails",
-} as const;
-export type ListAgentsCollapsedConfigurationSections = ClosedEnum<
-  typeof ListAgentsCollapsedConfigurationSections
->;
-
 export type ListAgentsData = {
   id: string;
   key: string;
@@ -928,12 +915,6 @@ export type ListAgentsData = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
-  /**
-   * List of collapsed sections in configuration. Duplicates are not allowed.
-   */
-  collapsedConfigurationSections?:
-    | Array<ListAgentsCollapsedConfigurationSections>
-    | undefined;
 };
 
 /**
@@ -3314,15 +3295,6 @@ export function listAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const ListAgentsCollapsedConfigurationSections$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> = z
-    .nativeEnum(ListAgentsCollapsedConfigurationSections);
-/** @internal */
-export const ListAgentsCollapsedConfigurationSections$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> =
-    ListAgentsCollapsedConfigurationSections$inboundSchema;
-
-/** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
@@ -3351,9 +3323,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
-  collapsed_configuration_sections: z.array(
-    ListAgentsCollapsedConfigurationSections$inboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3366,7 +3335,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
@@ -3393,7 +3361,6 @@ export type ListAgentsData$Outbound = {
   metrics?: ListAgentsMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<ListAgentsKnowledgeBases$Outbound> | undefined;
-  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3425,9 +3392,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => ListAgentsKnowledgeBases$outboundSchema))
     .optional(),
-  collapsedConfigurationSections: z.array(
-    ListAgentsCollapsedConfigurationSections$outboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -3440,7 +3404,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

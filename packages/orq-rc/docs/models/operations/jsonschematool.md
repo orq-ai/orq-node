@@ -14,9 +14,13 @@ let value: JSONSchemaTool = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "barring climb usefully however ouch yuck bicycle",
     schema: {
-      "key": "<value>",
-      "key1": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+      },
+      required: [],
     },
   },
 };

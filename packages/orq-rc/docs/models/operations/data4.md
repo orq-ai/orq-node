@@ -15,13 +15,9 @@ let value: Data4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://lawful-disclosure.com",
-    inputSchema: {
-      type: "object",
-    },
-    connectionType: "http",
+    tools: [],
+    connectionType: "sse",
   },
 };
 ```

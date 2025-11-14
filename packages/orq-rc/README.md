@@ -402,6 +402,7 @@ run();
 * [delete](docs/sdks/tools/README.md#delete) - Delete tool
 * [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 * [duplicate](docs/sdks/tools/README.md#duplicate) - Duplicate tool
+* [sync](docs/sdks/tools/README.md#sync) - Sync MCP tool
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -519,6 +520,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`toolsDuplicate`](docs/sdks/tools/README.md#duplicate) - Duplicate tool
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
 - [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
+- [`toolsSync`](docs/sdks/tools/README.md#sync) - Sync MCP tool
 - [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
 
 </details>
@@ -757,28 +759,28 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 99 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetAgentTaskResponseBody`](./src/models/errors/getagenttaskresponsebody.ts): Agent task not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetAgentResponseBody`](./src/models/errors/getagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DuplicateAgentResponseBody`](./src/models/errors/duplicateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`ListAgentTasksResponseBody`](./src/models/errors/listagenttasksresponsebody.ts): No agent tasks found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DuplicateToolResponseBody`](./src/models/errors/duplicatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`CreateAgentResponseBody`](./src/models/errors/createagentresponsebody.ts): Agent with this key already exists in the workspace. Status code `409`. Applicable to 1 of 99 methods.*
-* [`DuplicateAgentAgentsResponseBody`](./src/models/errors/duplicateagentagentsresponsebody.ts): Agent with generated key already exists. Status code `409`. Applicable to 1 of 99 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 100 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetAgentTaskResponseBody`](./src/models/errors/getagenttaskresponsebody.ts): Agent task not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetAgentResponseBody`](./src/models/errors/getagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DuplicateAgentResponseBody`](./src/models/errors/duplicateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`ListAgentTasksResponseBody`](./src/models/errors/listagenttasksresponsebody.ts): No agent tasks found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DuplicateToolResponseBody`](./src/models/errors/duplicatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`CreateAgentResponseBody`](./src/models/errors/createagentresponsebody.ts): Agent with this key already exists in the workspace. Status code `409`. Applicable to 1 of 100 methods.*
+* [`DuplicateAgentAgentsResponseBody`](./src/models/errors/duplicateagentagentsresponsebody.ts): Agent with generated key already exists. Status code `409`. Applicable to 1 of 100 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

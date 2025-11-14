@@ -16,9 +16,19 @@ let value: Data2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "angrily than rim flat until anxiously wheel apropos",
     schema: {
-      "key": "<value>",
-      "key1": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   },
 };

@@ -36,9 +36,19 @@ const value: operations.Data2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "angrily than rim flat until anxiously wheel apropos",
     schema: {
-      "key": "<value>",
-      "key1": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   },
 };
@@ -78,13 +88,9 @@ const value: operations.Data4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://lawful-disclosure.com",
-    inputSchema: {
-      type: "object",
-    },
-    connectionType: "http",
+    tools: [],
+    connectionType: "sse",
   },
 };
 ```

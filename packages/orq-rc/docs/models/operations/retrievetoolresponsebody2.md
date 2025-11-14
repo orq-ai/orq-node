@@ -16,8 +16,19 @@ let value: RetrieveToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "complete till slipper supposing obligation",
     schema: {
-      "key": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   },
 };

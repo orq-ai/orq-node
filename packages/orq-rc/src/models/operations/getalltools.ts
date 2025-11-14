@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,6 +55,39 @@ export type GetAllToolsDataToolsResponse200ApplicationJSONType = ClosedEnum<
   typeof GetAllToolsDataToolsResponse200ApplicationJSONType
 >;
 
+/**
+ * The type must be "object"
+ */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type =
+  ClosedEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type GetAllToolsDataParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export const DataLanguage = {
   Python: "python",
 } as const;
@@ -61,7 +97,7 @@ export type DataCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: GetAllToolsDataParameters | undefined;
   language: DataLanguage;
   /**
    * The code to execute.
@@ -142,21 +178,24 @@ export type DataHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type = {
   Object: "object",
 } as const;
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
+export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type =
   ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
   >;
 
-/**
- * The original MCP tool input schema for LLM conversion
- */
-export type DataInputSchema = {
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
+export type GetAllToolsDataSchema = {
+  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
+};
+
+export type DataTools = {
+  name: string;
+  description?: string | undefined;
+  schema: GetAllToolsDataSchema;
 };
 
 /**
@@ -173,25 +212,17 @@ export type DataConnectionType = ClosedEnum<typeof DataConnectionType>;
 
 export type DataMcp = {
   /**
-   * The ID of the MCP server this tool belongs to
-   */
-  serverId: string;
-  /**
-   * The original tool name from the MCP server
-   */
-  toolName: string;
-  /**
    * The MCP server URL (cached for execution)
    */
   serverUrl: string;
   /**
-   * HTTP headers for MCP server requests (encrypted format)
+   * HTTP headers for MCP server requests with encryption support
    */
   headers?: { [k: string]: DataHeaders } | undefined;
   /**
-   * The original MCP tool input schema for LLM conversion
+   * Array of tools available from the MCP server
    */
-  inputSchema: DataInputSchema;
+  tools: Array<DataTools>;
   /**
    * The connection type used by the MCP server
    */
@@ -280,10 +311,12 @@ export const GetAllToolsDataMethod = {
  */
 export type GetAllToolsDataMethod = ClosedEnum<typeof GetAllToolsDataMethod>;
 
-export type GetAllToolsDataHeaders = {
+export type GetAllToolsHeaders2 = {
   value: string;
   encrypted?: boolean | undefined;
 };
+
+export type GetAllToolsDataHeaders = GetAllToolsHeaders2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -298,9 +331,9 @@ export type DataBlueprint = {
    */
   method: GetAllToolsDataMethod;
   /**
-   * The headers to send with the request.
+   * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
-  headers?: { [k: string]: GetAllToolsDataHeaders } | undefined;
+  headers?: { [k: string]: GetAllToolsHeaders2 | string } | undefined;
   /**
    * The body to send with the request.
    */
@@ -424,6 +457,25 @@ export type GetAllToolsDataToolsType = ClosedEnum<
   typeof GetAllToolsDataToolsType
 >;
 
+/**
+ * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type DataSchema = {
+  /**
+   * The JSON Schema type
+   */
+  type: string;
+  /**
+   * The properties of the JSON Schema object
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required property names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type DataJsonSchema = {
   /**
    * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -432,11 +484,11 @@ export type DataJsonSchema = {
   /**
    * A description of what the response format is for. This will be shown to the user.
    */
-  description?: string | undefined;
+  description: string;
   /**
    * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  schema: { [k: string]: any };
+  schema: DataSchema;
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
    */
@@ -507,6 +559,39 @@ export const GetAllToolsDataType = {
 } as const;
 export type GetAllToolsDataType = ClosedEnum<typeof GetAllToolsDataType>;
 
+/**
+ * The type must be "object"
+ */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
+  Object: "object",
+} as const;
+/**
+ * The type must be "object"
+ */
+export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+  >;
+
+/**
+ * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type DataParameters = {
+  /**
+   * The type must be "object"
+   */
+  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
+  /**
+   * The properties of the function parameters
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required parameter names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
 export type GetAllToolsDataFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -523,7 +608,7 @@ export type GetAllToolsDataFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DataParameters | undefined;
 };
 
 export type Data1 = {
@@ -666,6 +751,80 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema:
     GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
+  > = z.nativeEnum(
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type,
+  );
+/** @internal */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
+  > =
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
+
+/** @internal */
+export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
+  GetAllToolsDataParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type GetAllToolsDataParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const GetAllToolsDataParameters$outboundSchema: z.ZodType<
+  GetAllToolsDataParameters$Outbound,
+  z.ZodTypeDef,
+  GetAllToolsDataParameters
+> = z.object({
+  type:
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function getAllToolsDataParametersToJSON(
+  getAllToolsDataParameters: GetAllToolsDataParameters,
+): string {
+  return JSON.stringify(
+    GetAllToolsDataParameters$outboundSchema.parse(getAllToolsDataParameters),
+  );
+}
+export function getAllToolsDataParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllToolsDataParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllToolsDataParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const DataLanguage$inboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
   z.nativeEnum(DataLanguage);
 /** @internal */
@@ -678,13 +837,13 @@ export const DataCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => GetAllToolsDataParameters$inboundSchema).optional(),
   language: DataLanguage$inboundSchema,
   code: z.string(),
 });
 /** @internal */
 export type DataCodeTool$Outbound = {
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: GetAllToolsDataParameters$Outbound | undefined;
   language: string;
   code: string;
 };
@@ -695,7 +854,7 @@ export const DataCodeTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataCodeTool
 > = z.object({
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => GetAllToolsDataParameters$outboundSchema).optional(),
   language: DataLanguage$outboundSchema,
   code: z.string(),
 });
@@ -716,7 +875,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9YEE3ZA6FHW41G4Y51H5T6T"),
+    _id: z.string().default("tool_01KA0EAFMWKTZNVCA784DGZR9B"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -768,7 +927,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K9YEE3ZA6FHW41G4Y51H5T6T"),
+  id: z.string().default("tool_01KA0EAFMWKTZNVCA784DGZR9B"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -866,61 +1025,104 @@ export function dataHeadersFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema:
   z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
   > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type,
   );
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
   > =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
 
 /** @internal */
-export const DataInputSchema$inboundSchema: z.ZodType<
-  DataInputSchema,
+export const GetAllToolsDataSchema$inboundSchema: z.ZodType<
+  GetAllToolsDataSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
 /** @internal */
-export type DataInputSchema$Outbound = {
+export type GetAllToolsDataSchema$Outbound = {
   type: string;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
 
 /** @internal */
-export const DataInputSchema$outboundSchema: z.ZodType<
-  DataInputSchema$Outbound,
+export const GetAllToolsDataSchema$outboundSchema: z.ZodType<
+  GetAllToolsDataSchema$Outbound,
   z.ZodTypeDef,
-  DataInputSchema
+  GetAllToolsDataSchema
 > = z.object({
   type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
 
-export function dataInputSchemaToJSON(
-  dataInputSchema: DataInputSchema,
+export function getAllToolsDataSchemaToJSON(
+  getAllToolsDataSchema: GetAllToolsDataSchema,
 ): string {
-  return JSON.stringify(DataInputSchema$outboundSchema.parse(dataInputSchema));
+  return JSON.stringify(
+    GetAllToolsDataSchema$outboundSchema.parse(getAllToolsDataSchema),
+  );
 }
-export function dataInputSchemaFromJSON(
+export function getAllToolsDataSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<DataInputSchema, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DataInputSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataInputSchema' from JSON`,
+    (x) => GetAllToolsDataSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataTools$inboundSchema: z.ZodType<
+  DataTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
+});
+/** @internal */
+export type DataTools$Outbound = {
+  name: string;
+  description?: string | undefined;
+  schema: GetAllToolsDataSchema$Outbound;
+};
+
+/** @internal */
+export const DataTools$outboundSchema: z.ZodType<
+  DataTools$Outbound,
+  z.ZodTypeDef,
+  DataTools
+> = z.object({
+  name: z.string(),
+  description: z.string().optional(),
+  schema: z.lazy(() => GetAllToolsDataSchema$outboundSchema),
+});
+
+export function dataToolsToJSON(dataTools: DataTools): string {
+  return JSON.stringify(DataTools$outboundSchema.parse(dataTools));
+}
+export function dataToolsFromJSON(
+  jsonString: string,
+): SafeParseResult<DataTools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTools' from JSON`,
   );
 }
 
@@ -936,28 +1138,21 @@ export const DataConnectionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
   z.object({
-    server_id: z.string(),
-    tool_name: z.string(),
     server_url: z.string(),
     headers: z.record(z.lazy(() => DataHeaders$inboundSchema)).optional(),
-    input_schema: z.lazy(() => DataInputSchema$inboundSchema),
+    tools: z.array(z.lazy(() => DataTools$inboundSchema)),
     connection_type: DataConnectionType$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      "server_id": "serverId",
-      "tool_name": "toolName",
       "server_url": "serverUrl",
-      "input_schema": "inputSchema",
       "connection_type": "connectionType",
     });
   });
 /** @internal */
 export type DataMcp$Outbound = {
-  server_id: string;
-  tool_name: string;
   server_url: string;
   headers?: { [k: string]: DataHeaders$Outbound } | undefined;
-  input_schema: DataInputSchema$Outbound;
+  tools: Array<DataTools$Outbound>;
   connection_type: string;
 };
 
@@ -967,18 +1162,13 @@ export const DataMcp$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataMcp
 > = z.object({
-  serverId: z.string(),
-  toolName: z.string(),
   serverUrl: z.string(),
   headers: z.record(z.lazy(() => DataHeaders$outboundSchema)).optional(),
-  inputSchema: z.lazy(() => DataInputSchema$outboundSchema),
+  tools: z.array(z.lazy(() => DataTools$outboundSchema)),
   connectionType: DataConnectionType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    serverId: "server_id",
-    toolName: "tool_name",
     serverUrl: "server_url",
-    inputSchema: "input_schema",
     connectionType: "connection_type",
   });
 });
@@ -999,7 +1189,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9YEE3Z10A676WTP4XM1PND0"),
+    _id: z.string().default("tool_01KA0EAFMSJ7BJEXCXT5APAS9F"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1050,7 +1240,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K9YEE3Z10A676WTP4XM1PND0"),
+  id: z.string().default("tool_01KA0EAFMSJ7BJEXCXT5APAS9F"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1118,8 +1308,8 @@ export const GetAllToolsDataMethod$outboundSchema: z.ZodNativeEnum<
 > = GetAllToolsDataMethod$inboundSchema;
 
 /** @internal */
-export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
-  GetAllToolsDataHeaders,
+export const GetAllToolsHeaders2$inboundSchema: z.ZodType<
+  GetAllToolsHeaders2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1127,20 +1317,55 @@ export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 /** @internal */
-export type GetAllToolsDataHeaders$Outbound = {
+export type GetAllToolsHeaders2$Outbound = {
   value: string;
   encrypted: boolean;
 };
+
+/** @internal */
+export const GetAllToolsHeaders2$outboundSchema: z.ZodType<
+  GetAllToolsHeaders2$Outbound,
+  z.ZodTypeDef,
+  GetAllToolsHeaders2
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function getAllToolsHeaders2ToJSON(
+  getAllToolsHeaders2: GetAllToolsHeaders2,
+): string {
+  return JSON.stringify(
+    GetAllToolsHeaders2$outboundSchema.parse(getAllToolsHeaders2),
+  );
+}
+export function getAllToolsHeaders2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllToolsHeaders2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllToolsHeaders2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsHeaders2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
+  GetAllToolsDataHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]);
+/** @internal */
+export type GetAllToolsDataHeaders$Outbound =
+  | GetAllToolsHeaders2$Outbound
+  | string;
 
 /** @internal */
 export const GetAllToolsDataHeaders$outboundSchema: z.ZodType<
   GetAllToolsDataHeaders$Outbound,
   z.ZodTypeDef,
   GetAllToolsDataHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = z.union([z.lazy(() => GetAllToolsHeaders2$outboundSchema), z.string()]);
 
 export function getAllToolsDataHeadersToJSON(
   getAllToolsDataHeaders: GetAllToolsDataHeaders,
@@ -1167,15 +1392,16 @@ export const DataBlueprint$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: GetAllToolsDataMethod$inboundSchema,
-  headers: z.record(z.lazy(() => GetAllToolsDataHeaders$inboundSchema))
-    .optional(),
+  headers: z.record(
+    z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 /** @internal */
 export type DataBlueprint$Outbound = {
   url: string;
   method: string;
-  headers?: { [k: string]: GetAllToolsDataHeaders$Outbound } | undefined;
+  headers?: { [k: string]: GetAllToolsHeaders2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
 };
 
@@ -1187,8 +1413,9 @@ export const DataBlueprint$outboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
   method: GetAllToolsDataMethod$outboundSchema,
-  headers: z.record(z.lazy(() => GetAllToolsDataHeaders$outboundSchema))
-    .optional(),
+  headers: z.record(
+    z.union([z.lazy(() => GetAllToolsHeaders2$outboundSchema), z.string()]),
+  ).optional(),
   body: z.record(z.any()).optional(),
 });
 
@@ -1353,7 +1580,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9YEE3YZ5KN6SE9BY8PQ7CWM"),
+    _id: z.string().default("tool_01KA0EAFMNQQS30M3CP5VRN98J"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1404,7 +1631,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K9YEE3YZ5KN6SE9BY8PQ7CWM"),
+  id: z.string().default("tool_01KA0EAFMNQQS30M3CP5VRN98J"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1463,21 +1690,75 @@ export const GetAllToolsDataToolsType$outboundSchema: z.ZodNativeEnum<
 > = GetAllToolsDataToolsType$inboundSchema;
 
 /** @internal */
+export const DataSchema$inboundSchema: z.ZodType<
+  DataSchema,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type DataSchema$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DataSchema$outboundSchema: z.ZodType<
+  DataSchema$Outbound,
+  z.ZodTypeDef,
+  DataSchema
+> = z.object({
+  type: z.string(),
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function dataSchemaToJSON(dataSchema: DataSchema): string {
+  return JSON.stringify(DataSchema$outboundSchema.parse(dataSchema));
+}
+export function dataSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<DataSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataSchema' from JSON`,
+  );
+}
+
+/** @internal */
 export const DataJsonSchema$inboundSchema: z.ZodType<
   DataJsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => DataSchema$inboundSchema),
   strict: z.boolean().optional(),
 });
 /** @internal */
 export type DataJsonSchema$Outbound = {
   name: string;
-  description?: string | undefined;
-  schema: { [k: string]: any };
+  description: string;
+  schema: DataSchema$Outbound;
   strict?: boolean | undefined;
 };
 
@@ -1488,8 +1769,8 @@ export const DataJsonSchema$outboundSchema: z.ZodType<
   DataJsonSchema
 > = z.object({
   name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
+  description: z.string(),
+  schema: z.lazy(() => DataSchema$outboundSchema),
   strict: z.boolean().optional(),
 });
 
@@ -1509,7 +1790,7 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9YEE3YYTDGV390K92565CWK"),
+    _id: z.string().default("tool_01KA0EAFMK1JQCG5BPM0S4TWCV"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1561,7 +1842,7 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K9YEE3YYTDGV390K92565CWK"),
+  id: z.string().default("tool_01KA0EAFMK1JQCG5BPM0S4TWCV"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1619,6 +1900,76 @@ export const GetAllToolsDataType$outboundSchema: z.ZodNativeEnum<
 > = GetAllToolsDataType$inboundSchema;
 
 /** @internal */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
+  );
+/** @internal */
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
+  > =
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/** @internal */
+export const DataParameters$inboundSchema: z.ZodType<
+  DataParameters,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type:
+      GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type DataParameters$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DataParameters$outboundSchema: z.ZodType<
+  DataParameters$Outbound,
+  z.ZodTypeDef,
+  DataParameters
+> = z.object({
+  type:
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function dataParametersToJSON(dataParameters: DataParameters): string {
+  return JSON.stringify(DataParameters$outboundSchema.parse(dataParameters));
+}
+export function dataParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<DataParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataParameters' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   GetAllToolsDataFunction,
   z.ZodTypeDef,
@@ -1627,14 +1978,14 @@ export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
 });
 /** @internal */
 export type GetAllToolsDataFunction$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
-  parameters?: { [k: string]: any } | undefined;
+  parameters?: DataParameters$Outbound | undefined;
 };
 
 /** @internal */
@@ -1646,7 +1997,7 @@ export const GetAllToolsDataFunction$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()).optional(),
+  parameters: z.lazy(() => DataParameters$outboundSchema).optional(),
 });
 
 export function getAllToolsDataFunctionToJSON(
@@ -1669,7 +2020,7 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K9YEE3YWQ90C8JTM5EWNF0DS"),
+    _id: z.string().default("tool_01KA0EAFMHP987V9QDMX82BHQH"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1720,7 +2071,7 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K9YEE3YWQ90C8JTM5EWNF0DS"),
+  id: z.string().default("tool_01KA0EAFMHP987V9QDMX82BHQH"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

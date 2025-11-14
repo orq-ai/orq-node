@@ -111,6 +111,7 @@ import { tool$toolsDelete } from "./tools/toolsDelete.js";
 import { tool$toolsDuplicate } from "./tools/toolsDuplicate.js";
 import { tool$toolsList } from "./tools/toolsList.js";
 import { tool$toolsRetrieve } from "./tools/toolsRetrieve.js";
+import { tool$toolsSync } from "./tools/toolsSync.js";
 import { tool$toolsUpdate } from "./tools/toolsUpdate.js";
 
 export function createMCPServer(deps: {
@@ -125,7 +126,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.0-rc.30",
+    version: "4.0.0-rc.31",
   });
 
   const client = new OrqCore({
@@ -204,6 +205,7 @@ export function createMCPServer(deps: {
   tool(tool$toolsDelete);
   tool(tool$toolsRetrieve);
   tool(tool$toolsDuplicate);
+  tool(tool$toolsSync);
   tool(tool$budgetsList);
   tool(tool$budgetsCreate);
   tool(tool$budgetsGet);

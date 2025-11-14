@@ -15,12 +15,15 @@ let value: RetrieveToolResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://voluminous-stool.com/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "sse",
   },
 };

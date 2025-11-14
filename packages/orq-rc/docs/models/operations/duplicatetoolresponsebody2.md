@@ -16,7 +16,18 @@ let value: DuplicateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    description: "collaboration without finally of",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+    },
   },
 };
 ```

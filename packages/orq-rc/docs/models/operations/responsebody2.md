@@ -16,8 +16,15 @@ let value: ResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "elegantly like meh giggle yuck off",
     schema: {
-      "key": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [],
     },
   },
 };

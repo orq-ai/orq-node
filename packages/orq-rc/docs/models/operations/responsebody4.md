@@ -15,12 +15,15 @@ let value: ResponseBody4 = {
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
     serverUrl: "https://noteworthy-devastation.com/",
-    inputSchema: {
-      type: "object",
-    },
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "sse",
   },
 };
