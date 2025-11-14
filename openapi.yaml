@@ -1254,7 +1254,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1262,7 +1262,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1397,7 +1397,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-14T14:03:09.284Z"
+                          default: "2025-11-14T14:39:28.174Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1405,7 +1405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:09.284Z"
+                              default: "2025-11-14T14:39:28.175Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1573,10 +1573,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1647,10 +1647,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1718,10 +1718,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1804,10 +1804,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1875,10 +1875,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2273,10 +2273,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2360,10 +2360,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-14T14:03:11.889Z"
+                              default: "2025-11-14T14:39:30.872Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2780,10 +2780,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2854,10 +2854,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2925,10 +2925,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3011,10 +3011,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3082,10 +3082,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3480,10 +3480,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3567,10 +3567,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3974,10 +3974,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4048,10 +4048,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4119,10 +4119,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4205,10 +4205,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4276,10 +4276,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4674,10 +4674,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4761,10 +4761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-14T14:03:11.889Z"
+                        default: "2025-11-14T14:39:30.872Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4940,7 +4940,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4948,7 +4948,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5084,7 +5084,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5092,7 +5092,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9985,11 +9985,29 @@ paths:
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                        "retry":
+                          type: "object"
+                          properties:
+                            "count":
+                              type: "number"
+                              minimum: 1
+                              maximum: 5
+                              default: 3
+                              description: "Number of retry attempts (1-5)"
+                              example: 3
+                            "on_codes":
+                              type: "array"
+                              items:
+                                type: "number"
+                              default: [429]
+                              description: "HTTP status codes that trigger retry logic"
+                              example: [429, 500, 502, 503, 504]
+                          description: "Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes."
                       required:
                         - "id"
-                      description: "\n\nModel configuration with parameters."
+                      description: "\n\nModel configuration with parameters and retry settings."
                   title: "Model Configuration"
-                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters."
+                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings."
                 "fallback_models":
                   type: "array"
                   items:
@@ -10981,6 +10999,24 @@ paths:
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                      "retry":
+                        type: "object"
+                        properties:
+                          "count":
+                            type: "number"
+                            minimum: 1
+                            maximum: 5
+                            default: 3
+                            description: "Number of retry attempts (1-5)"
+                            example: 3
+                          "on_codes":
+                            type: "array"
+                            items:
+                              type: "number"
+                            default: [429]
+                            description: "HTTP status codes that trigger retry logic"
+                            example: [429, 500, 502, 503, 504]
+                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors)."
                       "fallback_models":
                         type:
                           - "array"
@@ -11738,6 +11774,24 @@ paths:
                                       - "audio"
                                   description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                               description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                            "retry":
+                              type: "object"
+                              properties:
+                                "count":
+                                  type: "number"
+                                  minimum: 1
+                                  maximum: 5
+                                  default: 3
+                                  description: "Number of retry attempts (1-5)"
+                                  example: 3
+                                "on_codes":
+                                  type: "array"
+                                  items:
+                                    type: "number"
+                                  default: [429]
+                                  description: "HTTP status codes that trigger retry logic"
+                                  example: [429, 500, 502, 503, 504]
+                              description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors)."
                             "fallback_models":
                               type:
                                 - "array"
@@ -12499,6 +12553,24 @@ paths:
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                      "retry":
+                        type: "object"
+                        properties:
+                          "count":
+                            type: "number"
+                            minimum: 1
+                            maximum: 5
+                            default: 3
+                            description: "Number of retry attempts (1-5)"
+                            example: 3
+                          "on_codes":
+                            type: "array"
+                            items:
+                              type: "number"
+                            default: [429]
+                            description: "HTTP status codes that trigger retry logic"
+                            example: [429, 500, 502, 503, 504]
+                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors)."
                       "fallback_models":
                         type:
                           - "array"
@@ -13075,11 +13147,29 @@ paths:
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                        "retry":
+                          type: "object"
+                          properties:
+                            "count":
+                              type: "number"
+                              minimum: 1
+                              maximum: 5
+                              default: 3
+                              description: "Number of retry attempts (1-5)"
+                              example: 3
+                            "on_codes":
+                              type: "array"
+                              items:
+                                type: "number"
+                              default: [429]
+                              description: "HTTP status codes that trigger retry logic"
+                              example: [429, 500, 502, 503, 504]
+                          description: "Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes."
                       required:
                         - "id"
-                      description: "\n\nModel configuration with parameters."
+                      description: "\n\nModel configuration with parameters and retry settings."
                   title: "Model Configuration"
-                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters."
+                  description: "Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings."
                 "fallback_models":
                   type: "array"
                   items:
@@ -14065,6 +14155,24 @@ paths:
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                      "retry":
+                        type: "object"
+                        properties:
+                          "count":
+                            type: "number"
+                            minimum: 1
+                            maximum: 5
+                            default: 3
+                            description: "Number of retry attempts (1-5)"
+                            example: 3
+                          "on_codes":
+                            type: "array"
+                            items:
+                              type: "number"
+                            default: [429]
+                            description: "HTTP status codes that trigger retry logic"
+                            example: [429, 500, 502, 503, 504]
+                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors)."
                       "fallback_models":
                         type:
                           - "array"
@@ -14799,6 +14907,24 @@ paths:
                                 - "audio"
                             description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                      "retry":
+                        type: "object"
+                        properties:
+                          "count":
+                            type: "number"
+                            minimum: 1
+                            maximum: 5
+                            default: 3
+                            description: "Number of retry attempts (1-5)"
+                            example: 3
+                          "on_codes":
+                            type: "array"
+                            items:
+                              type: "number"
+                            default: [429]
+                            description: "HTTP status codes that trigger retry logic"
+                            example: [429, 500, 502, 503, 504]
+                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors)."
                       "fallback_models":
                         type:
                           - "array"
@@ -16040,9 +16166,27 @@ paths:
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                        "retry":
+                          type: "object"
+                          properties:
+                            "count":
+                              type: "number"
+                              minimum: 1
+                              maximum: 5
+                              default: 3
+                              description: "Number of retry attempts (1-5)"
+                              example: 3
+                            "on_codes":
+                              type: "array"
+                              items:
+                                type: "number"
+                              default: [429]
+                              description: "HTTP status codes that trigger retry logic"
+                              example: [429, 500, 502, 503, 504]
+                          description: "Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes."
                       required:
                         - "id"
-                      description: "\n\nModel configuration with parameters."
+                      description: "\n\nModel configuration with parameters and retry settings."
                   title: "Model Configuration"
                   description: "Model configuration for this execution. Can override the agent manifest defaults if the agent already exists."
                 "fallback_models":
@@ -17496,9 +17640,27 @@ paths:
                                   - "audio"
                               description: "Output types that you would like the model to generate. Most models are capable of generating text, which is the default: [\"text\"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: [\"text\", \"audio\"]."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                        "retry":
+                          type: "object"
+                          properties:
+                            "count":
+                              type: "number"
+                              minimum: 1
+                              maximum: 5
+                              default: 3
+                              description: "Number of retry attempts (1-5)"
+                              example: 3
+                            "on_codes":
+                              type: "array"
+                              items:
+                                type: "number"
+                              default: [429]
+                              description: "HTTP status codes that trigger retry logic"
+                              example: [429, 500, 502, 503, 504]
+                          description: "Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes."
                       required:
                         - "id"
-                      description: "\n\nModel configuration with parameters."
+                      description: "\n\nModel configuration with parameters and retry settings."
                   title: "Model Configuration"
                   description: "Model configuration for this execution. Can override the agent manifest defaults if the agent already exists."
                 "fallback_models":
@@ -19088,7 +19250,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-14T14:03:12.817Z"
+                    default: "2025-11-14T14:39:31.806Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -19177,7 +19339,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-14T14:03:12.817Z"
+                          default: "2025-11-14T14:39:31.806Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -19245,7 +19407,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-14T14:03:12.817Z"
+                    default: "2025-11-14T14:39:31.806Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -23763,7 +23925,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KA1AV0QE4Z8YXK541ANXVKMT"
+                              default: "tool_01KA1CXJF3YXCEKXPJGDNJ5FHG"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23860,7 +24022,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KA1AV0QGHBW1NVA2HXFBRRQM"
+                              default: "tool_01KA1CXJF5ZTV5BAZYEBZMW98W"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23959,7 +24121,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KA1AV0QH9EZ36KGHTG3GMY23"
+                              default: "tool_01KA1CXJF64XKM629WPYFYDCHT"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24091,7 +24253,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KA1AV0QMVA91RYRT2D6SHGYJ"
+                              default: "tool_01KA1CXJFADXFDTT68VJ3G7G7C"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24211,7 +24373,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KA1AV0QQC20SS6VA9FYMZEJ7"
+                              default: "tool_01KA1CXJFD17ARZSS2A6EDG6TM"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24752,7 +24914,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0RF9X531GGHM9GSR7J3"
+                        default: "tool_01KA1CXJG5N44NMZWXWT5AK38Q"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24849,7 +25011,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0RH2RX1D18FWGQB4GHA"
+                        default: "tool_01KA1CXJG8FFFQVCDQRW0RWWJ7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24948,7 +25110,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0RM3C1SWJK6Z0FM273H"
+                        default: "tool_01KA1CXJGARPWGND5W59TFRZY0"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25080,7 +25242,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0RQV93SY1R0A3QNTSV4"
+                        default: "tool_01KA1CXJGE9GQKK0Q238M4GV93"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25200,7 +25362,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0RVGSHNQ92FH90VAJZQ"
+                        default: "tool_01KA1CXJGHQYCY7BGXKKH0NW09"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25747,7 +25909,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0S26026B227X6G8S3Q5"
+                        default: "tool_01KA1CXJGRR8N1JGWHNKYFSJNY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25844,7 +26006,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0S3QY1YYZ0AAETZQG4Q"
+                        default: "tool_01KA1CXJGTTYHPWD4GTZ124NZB"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25943,7 +26105,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0S4DKCD9G09GY61NFWB"
+                        default: "tool_01KA1CXJGV5JB5ZQV8X6VFGK85"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26075,7 +26237,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0S789XAY99R37H6N1KF"
+                        default: "tool_01KA1CXJGYS8BP7HW1G81782H7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26195,7 +26357,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0S93QYTM0N94B272K65"
+                        default: "tool_01KA1CXJH0CE1D7G19GGKNDJ12"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26347,7 +26509,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0T5C52007ER43YWTFEF"
+                        default: "tool_01KA1CXJHWG44A9S7R7MFG9PNT"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26444,7 +26606,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0T6CM6CF9ZM162K57N8"
+                        default: "tool_01KA1CXJHYE3HXV2DJN2E10R7V"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26543,7 +26705,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0T7J4RQDAXNW8P9SG1D"
+                        default: "tool_01KA1CXJJ0ME9HG3B1VE389BB6"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26675,7 +26837,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0T9P6RA3B0579CDPG9S"
+                        default: "tool_01KA1CXJJ35S5YRF3EK1PHR3TW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26795,7 +26957,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0TBVB0GP2RY35HSHA2S"
+                        default: "tool_01KA1CXJJ6WA4CQVPBD0PQNFWJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26928,7 +27090,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0SK10FZJ0DC5DXZG2A1"
+                        default: "tool_01KA1CXJHBYPHR69AFEZ5J6NGZ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27025,7 +27187,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0SNK3S7XFC4KY215WW8"
+                        default: "tool_01KA1CXJHDF4JC2N9T1A3NJXD5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27124,7 +27286,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0SRARA53WSWZXA5BNZX"
+                        default: "tool_01KA1CXJHP0S5KP16DVH4AY2AB"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27256,7 +27418,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0STH2E66VVSF85FXXVT"
+                        default: "tool_01KA1CXJHR6BG4MCQGJYJFZ6PZ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27376,7 +27538,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KA1AV0T3JJDNQ5GHJX01JY0M"
+                        default: "tool_01KA1CXJHTJJMFNA8V078H5M26"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27514,7 +27676,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KA1AV0TDJZDZCJ6VZ49J5JB8"
+                            default: "tool_01KA1CXJJ7B6SR2C9A2607H85C"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27611,7 +27773,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KA1AV0TEQXPZ3T1HG9GX9626"
+                            default: "tool_01KA1CXJJ9P0TEAJK4Y1P7M47G"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27710,7 +27872,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KA1AV0TFJJSP0H152FKN7KSZ"
+                            default: "tool_01KA1CXJJA52Z3DVTAFT5NE2T4"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27842,7 +28004,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KA1AV0TH51SMXKG38E89K48Q"
+                            default: "tool_01KA1CXJJCVS4H9FASFJ8AJDK9"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27962,7 +28124,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KA1AV0TKQGW4KK4A3ZM5A9PV"
+                            default: "tool_01KA1CXJJEW253GFC72GSPBA98"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28256,7 +28418,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-14T14:03:09.654Z"
+                          default: "2025-11-14T14:39:28.555Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -28264,7 +28426,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:09.655Z"
+                              default: "2025-11-14T14:39:28.555Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -28458,7 +28620,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.654Z"
+                    default: "2025-11-14T14:39:28.555Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28466,7 +28628,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.655Z"
+                        default: "2025-11-14T14:39:28.555Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28600,7 +28762,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.654Z"
+                    default: "2025-11-14T14:39:28.555Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28608,7 +28770,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.655Z"
+                        default: "2025-11-14T14:39:28.555Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28768,7 +28930,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.654Z"
+                    default: "2025-11-14T14:39:28.555Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28776,7 +28938,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.655Z"
+                        default: "2025-11-14T14:39:28.555Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30682,7 +30844,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KA1AV0XRYWJ8DHSQ4QPY7MQV"
+                          default: "01KA1CXJNCCJMEDA17PZKZM9NK"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -30848,7 +31010,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KA1AV0XZQ0A9MAVS7RG2TJAA"
+                    default: "01KA1CXJNHJH6YC2WKWHJNQ5D1"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -30944,7 +31106,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KA1AV0XW5E9T88ZQB5353W2A"
+                    default: "01KA1CXJNFXHHXNKMB95R13RNG"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31076,7 +31238,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KA1AV0Y2CGQB482WE64EVRZJ"
+                    default: "01KA1CXJNMM3S2S3Q2BSBMGB2C"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33867,7 +34029,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-14T14:03:09.284Z"
+                          default: "2025-11-14T14:39:28.174Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -33875,7 +34037,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:09.284Z"
+                              default: "2025-11-14T14:39:28.175Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34011,7 +34173,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34019,7 +34181,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34142,7 +34304,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34150,7 +34312,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34303,7 +34465,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34311,7 +34473,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34781,7 +34943,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-14T14:03:20.967Z"
+                                    default: "2025-11-14T14:39:41.823Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34821,7 +34983,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-14T14:03:20.968Z"
+                                    default: "2025-11-14T14:39:41.823Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34861,7 +35023,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-14T14:03:20.968Z"
+                                    default: "2025-11-14T14:39:41.824Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34897,7 +35059,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-14T14:03:09.284Z"
+                          default: "2025-11-14T14:39:28.174Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34905,7 +35067,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:09.284Z"
+                              default: "2025-11-14T14:39:28.175Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35665,7 +35827,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-14T14:03:20.992Z"
+                                default: "2025-11-14T14:39:41.850Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35705,7 +35867,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-14T14:03:20.993Z"
+                                default: "2025-11-14T14:39:41.851Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35745,7 +35907,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-14T14:03:20.994Z"
+                                default: "2025-11-14T14:39:41.851Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35781,7 +35943,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-14T14:03:09.284Z"
+                      default: "2025-11-14T14:39:28.174Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -35789,7 +35951,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-14T14:03:09.284Z"
+                          default: "2025-11-14T14:39:28.175Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36203,7 +36365,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:20.981Z"
+                              default: "2025-11-14T14:39:41.833Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36243,7 +36405,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:20.982Z"
+                              default: "2025-11-14T14:39:41.836Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36283,7 +36445,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:20.982Z"
+                              default: "2025-11-14T14:39:41.837Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36319,7 +36481,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36327,7 +36489,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37085,7 +37247,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:21.029Z"
+                              default: "2025-11-14T14:39:41.883Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37125,7 +37287,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:21.030Z"
+                              default: "2025-11-14T14:39:41.884Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37165,7 +37327,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-14T14:03:21.030Z"
+                              default: "2025-11-14T14:39:41.884Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37201,7 +37363,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-14T14:03:09.284Z"
+                    default: "2025-11-14T14:39:28.174Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37209,7 +37371,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-14T14:03:09.284Z"
+                        default: "2025-11-14T14:39:28.175Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
