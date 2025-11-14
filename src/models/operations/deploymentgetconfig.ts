@@ -1041,7 +1041,10 @@ export type OrGte = {
   gte: number;
 };
 
-export type Or3 = {
+/**
+ * Greater than
+ */
+export type OrGt = {
   gt: number;
 };
 
@@ -1066,7 +1069,7 @@ export type OrEq = {
 export type KnowledgeFilterOr =
   | OrEq
   | OrNe
-  | Or3
+  | OrGt
   | OrGte
   | OrLt
   | OrLte
@@ -1083,7 +1086,7 @@ export type Or = {
       [k: string]:
         | OrEq
         | OrNe
-        | Or3
+        | OrGt
         | OrGte
         | OrLt
         | OrLte
@@ -1140,7 +1143,10 @@ export type AndGte = {
   gte: number;
 };
 
-export type And3 = {
+/**
+ * Greater than
+ */
+export type AndGt = {
   gt: number;
 };
 
@@ -1165,7 +1171,7 @@ export type AndEq = {
 export type KnowledgeFilterAnd =
   | AndEq
   | AndNe
-  | And3
+  | AndGt
   | AndGte
   | AndLt
   | AndLte
@@ -1182,7 +1188,7 @@ export type And = {
       [k: string]:
         | AndEq
         | AndNe
-        | And3
+        | AndGt
         | AndGte
         | AndLt
         | AndLte
@@ -1239,7 +1245,10 @@ export type Gte = {
   gte: number;
 };
 
-export type One3 = {
+/**
+ * Greater than
+ */
+export type Gt = {
   gt: number;
 };
 
@@ -1264,7 +1273,7 @@ export type Eq = {
 export type KnowledgeFilter1 =
   | Eq
   | Ne
-  | One3
+  | Gt
   | Gte
   | Lt
   | Lte
@@ -1276,7 +1285,7 @@ export type KnowledgeFilter1 =
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
  */
 export type KnowledgeFilter = And | Or | {
-  [k: string]: Eq | Ne | One3 | Gte | Lt | Lte | In | Nin | Exists;
+  [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
 };
 
 export type DeploymentGetConfigRequestBody = {
@@ -1338,7 +1347,7 @@ export type DeploymentGetConfigRequestBody = {
    * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
    */
   knowledgeFilter?: And | Or | {
-    [k: string]: Eq | Ne | One3 | Gte | Lt | Lte | In | Nin | Exists;
+    [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
   } | undefined;
 };
 
@@ -1665,6 +1674,7 @@ export type DeploymentGetConfigEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const DeploymentGetConfigReasoningEffort = {
+  None: "none",
   Disable: "disable",
   Minimal: "minimal",
   Low: "low",
@@ -5256,31 +5266,31 @@ export function orGteFromJSON(
 }
 
 /** @internal */
-export const Or3$inboundSchema: z.ZodType<Or3, z.ZodTypeDef, unknown> = z
+export const OrGt$inboundSchema: z.ZodType<OrGt, z.ZodTypeDef, unknown> = z
   .object({
     gt: z.number(),
   });
 /** @internal */
-export type Or3$Outbound = {
+export type OrGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const Or3$outboundSchema: z.ZodType<Or3$Outbound, z.ZodTypeDef, Or3> = z
-  .object({
+export const OrGt$outboundSchema: z.ZodType<OrGt$Outbound, z.ZodTypeDef, OrGt> =
+  z.object({
     gt: z.number(),
   });
 
-export function or3ToJSON(or3: Or3): string {
-  return JSON.stringify(Or3$outboundSchema.parse(or3));
+export function orGtToJSON(orGt: OrGt): string {
+  return JSON.stringify(OrGt$outboundSchema.parse(orGt));
 }
-export function or3FromJSON(
+export function orGtFromJSON(
   jsonString: string,
-): SafeParseResult<Or3, SDKValidationError> {
+): SafeParseResult<OrGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Or3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Or3' from JSON`,
+    (x) => OrGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrGt' from JSON`,
   );
 }
 
@@ -5416,7 +5426,7 @@ export const KnowledgeFilterOr$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => OrEq$inboundSchema),
   z.lazy(() => OrNe$inboundSchema),
-  z.lazy(() => Or3$inboundSchema),
+  z.lazy(() => OrGt$inboundSchema),
   z.lazy(() => OrGte$inboundSchema),
   z.lazy(() => OrLt$inboundSchema),
   z.lazy(() => OrLte$inboundSchema),
@@ -5428,7 +5438,7 @@ export const KnowledgeFilterOr$inboundSchema: z.ZodType<
 export type KnowledgeFilterOr$Outbound =
   | OrEq$Outbound
   | OrNe$Outbound
-  | Or3$Outbound
+  | OrGt$Outbound
   | OrGte$Outbound
   | OrLt$Outbound
   | OrLte$Outbound
@@ -5444,7 +5454,7 @@ export const KnowledgeFilterOr$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => OrEq$outboundSchema),
   z.lazy(() => OrNe$outboundSchema),
-  z.lazy(() => Or3$outboundSchema),
+  z.lazy(() => OrGt$outboundSchema),
   z.lazy(() => OrGte$outboundSchema),
   z.lazy(() => OrLt$outboundSchema),
   z.lazy(() => OrLte$outboundSchema),
@@ -5478,7 +5488,7 @@ export const Or$inboundSchema: z.ZodType<Or, z.ZodTypeDef, unknown> = z.object({
       z.lazy(() =>
         OrNe$inboundSchema
       ),
-      z.lazy(() => Or3$inboundSchema),
+      z.lazy(() => OrGt$inboundSchema),
       z.lazy(() => OrGte$inboundSchema),
       z.lazy(() => OrLt$inboundSchema),
       z.lazy(() => OrLte$inboundSchema),
@@ -5495,7 +5505,7 @@ export type Or$Outbound = {
       [k: string]:
         | OrEq$Outbound
         | OrNe$Outbound
-        | Or3$Outbound
+        | OrGt$Outbound
         | OrGte$Outbound
         | OrLt$Outbound
         | OrLte$Outbound
@@ -5515,7 +5525,7 @@ export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
         z.lazy(() =>
           OrNe$outboundSchema
         ),
-        z.lazy(() => Or3$outboundSchema),
+        z.lazy(() => OrGt$outboundSchema),
         z.lazy(() => OrGte$outboundSchema),
         z.lazy(() => OrLt$outboundSchema),
         z.lazy(() => OrLte$outboundSchema),
@@ -5801,31 +5811,34 @@ export function andGteFromJSON(
 }
 
 /** @internal */
-export const And3$inboundSchema: z.ZodType<And3, z.ZodTypeDef, unknown> = z
+export const AndGt$inboundSchema: z.ZodType<AndGt, z.ZodTypeDef, unknown> = z
   .object({
     gt: z.number(),
   });
 /** @internal */
-export type And3$Outbound = {
+export type AndGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const And3$outboundSchema: z.ZodType<And3$Outbound, z.ZodTypeDef, And3> =
-  z.object({
-    gt: z.number(),
-  });
+export const AndGt$outboundSchema: z.ZodType<
+  AndGt$Outbound,
+  z.ZodTypeDef,
+  AndGt
+> = z.object({
+  gt: z.number(),
+});
 
-export function and3ToJSON(and3: And3): string {
-  return JSON.stringify(And3$outboundSchema.parse(and3));
+export function andGtToJSON(andGt: AndGt): string {
+  return JSON.stringify(AndGt$outboundSchema.parse(andGt));
 }
-export function and3FromJSON(
+export function andGtFromJSON(
   jsonString: string,
-): SafeParseResult<And3, SDKValidationError> {
+): SafeParseResult<AndGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => And3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'And3' from JSON`,
+    (x) => AndGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AndGt' from JSON`,
   );
 }
 
@@ -5967,7 +5980,7 @@ export const KnowledgeFilterAnd$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => AndEq$inboundSchema),
   z.lazy(() => AndNe$inboundSchema),
-  z.lazy(() => And3$inboundSchema),
+  z.lazy(() => AndGt$inboundSchema),
   z.lazy(() => AndGte$inboundSchema),
   z.lazy(() => AndLt$inboundSchema),
   z.lazy(() => AndLte$inboundSchema),
@@ -5979,7 +5992,7 @@ export const KnowledgeFilterAnd$inboundSchema: z.ZodType<
 export type KnowledgeFilterAnd$Outbound =
   | AndEq$Outbound
   | AndNe$Outbound
-  | And3$Outbound
+  | AndGt$Outbound
   | AndGte$Outbound
   | AndLt$Outbound
   | AndLte$Outbound
@@ -5995,7 +6008,7 @@ export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => AndEq$outboundSchema),
   z.lazy(() => AndNe$outboundSchema),
-  z.lazy(() => And3$outboundSchema),
+  z.lazy(() => AndGt$outboundSchema),
   z.lazy(() => AndGte$outboundSchema),
   z.lazy(() => AndLt$outboundSchema),
   z.lazy(() => AndLte$outboundSchema),
@@ -6030,7 +6043,7 @@ export const And$inboundSchema: z.ZodType<And, z.ZodTypeDef, unknown> = z
         z.lazy(() =>
           AndNe$inboundSchema
         ),
-        z.lazy(() => And3$inboundSchema),
+        z.lazy(() => AndGt$inboundSchema),
         z.lazy(() => AndGte$inboundSchema),
         z.lazy(() => AndLt$inboundSchema),
         z.lazy(() => AndLte$inboundSchema),
@@ -6047,7 +6060,7 @@ export type And$Outbound = {
       [k: string]:
         | AndEq$Outbound
         | AndNe$Outbound
-        | And3$Outbound
+        | AndGt$Outbound
         | AndGte$Outbound
         | AndLt$Outbound
         | AndLte$Outbound
@@ -6067,7 +6080,7 @@ export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
         z.lazy(() =>
           AndNe$outboundSchema
         ),
-        z.lazy(() => And3$outboundSchema),
+        z.lazy(() => AndGt$outboundSchema),
         z.lazy(() => AndGte$outboundSchema),
         z.lazy(() => AndLt$outboundSchema),
         z.lazy(() => AndLte$outboundSchema),
@@ -6319,31 +6332,30 @@ export function gteFromJSON(
 }
 
 /** @internal */
-export const One3$inboundSchema: z.ZodType<One3, z.ZodTypeDef, unknown> = z
-  .object({
-    gt: z.number(),
-  });
+export const Gt$inboundSchema: z.ZodType<Gt, z.ZodTypeDef, unknown> = z.object({
+  gt: z.number(),
+});
 /** @internal */
-export type One3$Outbound = {
+export type Gt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const One3$outboundSchema: z.ZodType<One3$Outbound, z.ZodTypeDef, One3> =
-  z.object({
+export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> = z
+  .object({
     gt: z.number(),
   });
 
-export function one3ToJSON(one3: One3): string {
-  return JSON.stringify(One3$outboundSchema.parse(one3));
+export function gtToJSON(gt: Gt): string {
+  return JSON.stringify(Gt$outboundSchema.parse(gt));
 }
-export function one3FromJSON(
+export function gtFromJSON(
   jsonString: string,
-): SafeParseResult<One3, SDKValidationError> {
+): SafeParseResult<Gt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One3' from JSON`,
+    (x) => Gt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Gt' from JSON`,
   );
 }
 
@@ -6463,7 +6475,7 @@ export const KnowledgeFilter1$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Eq$inboundSchema),
   z.lazy(() => Ne$inboundSchema),
-  z.lazy(() => One3$inboundSchema),
+  z.lazy(() => Gt$inboundSchema),
   z.lazy(() => Gte$inboundSchema),
   z.lazy(() => Lt$inboundSchema),
   z.lazy(() => Lte$inboundSchema),
@@ -6475,7 +6487,7 @@ export const KnowledgeFilter1$inboundSchema: z.ZodType<
 export type KnowledgeFilter1$Outbound =
   | Eq$Outbound
   | Ne$Outbound
-  | One3$Outbound
+  | Gt$Outbound
   | Gte$Outbound
   | Lt$Outbound
   | Lte$Outbound
@@ -6491,7 +6503,7 @@ export const KnowledgeFilter1$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Eq$outboundSchema),
   z.lazy(() => Ne$outboundSchema),
-  z.lazy(() => One3$outboundSchema),
+  z.lazy(() => Gt$outboundSchema),
   z.lazy(() => Gte$outboundSchema),
   z.lazy(() => Lt$outboundSchema),
   z.lazy(() => Lte$outboundSchema),
@@ -6528,7 +6540,7 @@ export const KnowledgeFilter$inboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => Eq$inboundSchema),
     z.lazy(() => Ne$inboundSchema),
-    z.lazy(() => One3$inboundSchema),
+    z.lazy(() => Gt$inboundSchema),
     z.lazy(() => Gte$inboundSchema),
     z.lazy(() => Lt$inboundSchema),
     z.lazy(() => Lte$inboundSchema),
@@ -6542,7 +6554,7 @@ export type KnowledgeFilter$Outbound = And$Outbound | Or$Outbound | {
   [k: string]:
     | Eq$Outbound
     | Ne$Outbound
-    | One3$Outbound
+    | Gt$Outbound
     | Gte$Outbound
     | Lt$Outbound
     | Lte$Outbound
@@ -6562,7 +6574,7 @@ export const KnowledgeFilter$outboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => Eq$outboundSchema),
     z.lazy(() => Ne$outboundSchema),
-    z.lazy(() => One3$outboundSchema),
+    z.lazy(() => Gt$outboundSchema),
     z.lazy(() => Gte$outboundSchema),
     z.lazy(() => Lt$outboundSchema),
     z.lazy(() => Lte$outboundSchema),
@@ -6626,7 +6638,7 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
     z.record(z.union([
       z.lazy(() => Eq$inboundSchema),
       z.lazy(() => Ne$inboundSchema),
-      z.lazy(() => One3$inboundSchema),
+      z.lazy(() => Gt$inboundSchema),
       z.lazy(() => Gte$inboundSchema),
       z.lazy(() => Lt$inboundSchema),
       z.lazy(() => Lte$inboundSchema),
@@ -6677,7 +6689,7 @@ export type DeploymentGetConfigRequestBody$Outbound = {
     [k: string]:
       | Eq$Outbound
       | Ne$Outbound
-      | One3$Outbound
+      | Gt$Outbound
       | Gte$Outbound
       | Lt$Outbound
       | Lte$Outbound
@@ -6726,7 +6738,7 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
     z.record(z.union([
       z.lazy(() => Eq$outboundSchema),
       z.lazy(() => Ne$outboundSchema),
-      z.lazy(() => One3$outboundSchema),
+      z.lazy(() => Gt$outboundSchema),
       z.lazy(() => Gte$outboundSchema),
       z.lazy(() => Lt$outboundSchema),
       z.lazy(() => Lte$outboundSchema),

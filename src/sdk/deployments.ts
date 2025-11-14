@@ -20,6 +20,23 @@ export class Deployments extends ClientSDK {
   }
 
   /**
+   * Invoke
+   *
+   * @remarks
+   * Invoke a deployment with a given payload
+   */
+  async invoke(
+    request: components.InvokeDeploymentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DeploymentInvokeResponseBody | undefined> {
+    return unwrapAsync(deploymentsInvoke(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List all deployments
    *
    * @remarks
@@ -47,23 +64,6 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentGetConfigResponseBody | undefined> {
     return unwrapAsync(deploymentsGetConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Invoke
-   *
-   * @remarks
-   * Invoke a deployment with a given payload
-   */
-  async invoke(
-    request: components.Deployments,
-    options?: RequestOptions,
-  ): Promise<operations.DeploymentInvokeResponseBody | undefined> {
-    return unwrapAsync(deploymentsInvoke(
       this,
       request,
       options,

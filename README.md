@@ -308,9 +308,9 @@ run();
 
 ### [deployments](docs/sdks/deployments/README.md)
 
+* [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
-* [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 69b2ae513d61403004d705cf263c7649
+  docChecksum: ff3d2713cb68fae0cc2281df161b7dec
   docVersion: "2.0"
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 3.14.35
-  configChecksum: 41fb86e400602c1b956df752531b2557
+  speakeasyVersion: 1.656.2
+  generationVersion: 2.753.6
+  releaseVersion: 3.14.36
+  configChecksum: 08fa0c5887588d4c74c98265dc5ed2f9
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -26,7 +26,6 @@ features:
     globals: 2.82.2
     groups: 2.81.3
     hiddenGlobals: 0.1.0
-    ignores: 2.81.1
     inputOutputModels: 2.82.0
     mcpServer: 0.9.3
     methodArguments: 0.1.2
@@ -48,9 +47,9 @@ generatedFiles:
   - USAGE.md
   - docs/lib/utils/retryconfig.md
   - docs/models/components/and.md
-  - docs/models/components/and3.md
   - docs/models/components/andeq.md
   - docs/models/components/andexists.md
+  - docs/models/components/andgt.md
   - docs/models/components/andgte.md
   - docs/models/components/andin.md
   - docs/models/components/andlt.md
@@ -67,46 +66,6 @@ generatedFiles:
   - docs/models/components/audio.md
   - docs/models/components/content.md
   - docs/models/components/content2.md
-  - docs/models/components/deployments.md
-  - docs/models/components/deployments21.md
-  - docs/models/components/deployments22.md
-  - docs/models/components/deployments23.md
-  - docs/models/components/deployments2messages3content4type.md
-  - docs/models/components/deployments2messages3contenttype.md
-  - docs/models/components/deployments2messages3type.md
-  - docs/models/components/deployments2messages4contenttype.md
-  - docs/models/components/deployments2messages4type.md
-  - docs/models/components/deployments2messagestype.md
-  - docs/models/components/deployments2prefixmessages3type.md
-  - docs/models/components/deployments2prefixmessages4contenttype.md
-  - docs/models/components/deployments2prefixmessages4type.md
-  - docs/models/components/deployments2prefixmessagestype.md
-  - docs/models/components/deployments2type.md
-  - docs/models/components/deploymentsandeq.md
-  - docs/models/components/deploymentsandin.md
-  - docs/models/components/deploymentsandne.md
-  - docs/models/components/deploymentsandnin.md
-  - docs/models/components/deploymentsannotations1.md
-  - docs/models/components/deploymentsannotations2.md
-  - docs/models/components/deploymentsannotationsmessages4type.md
-  - docs/models/components/deploymentsannotationsmessagestype.md
-  - docs/models/components/deploymentsannotationstype.md
-  - docs/models/components/deploymentscontent2.md
-  - docs/models/components/deploymentscontentmessages2.md
-  - docs/models/components/deploymentsmessages3role.md
-  - docs/models/components/deploymentsmessages4role.md
-  - docs/models/components/deploymentsmessages5content.md
-  - docs/models/components/deploymentsmessages5role.md
-  - docs/models/components/deploymentsmessagescontent.md
-  - docs/models/components/deploymentsmessagesrole.md
-  - docs/models/components/deploymentsoreq.md
-  - docs/models/components/deploymentsorin.md
-  - docs/models/components/deploymentsorne.md
-  - docs/models/components/deploymentsornin.md
-  - docs/models/components/deploymentsprefixmessages4role.md
-  - docs/models/components/deploymentsprefixmessages5role.md
-  - docs/models/components/deploymentsprefixmessagescontent.md
-  - docs/models/components/deploymentsprefixmessagesrole.md
   - docs/models/components/detail.md
   - docs/models/components/developermessage.md
   - docs/models/components/documents.md
@@ -118,10 +77,50 @@ generatedFiles:
   - docs/models/components/format.md
   - docs/models/components/four.md
   - docs/models/components/functiont.md
+  - docs/models/components/gt.md
   - docs/models/components/gte.md
   - docs/models/components/imageurl.md
   - docs/models/components/in.md
   - docs/models/components/inputaudio.md
+  - docs/models/components/invokedeploymentrequest.md
+  - docs/models/components/invokedeploymentrequest21.md
+  - docs/models/components/invokedeploymentrequest22.md
+  - docs/models/components/invokedeploymentrequest2messages3content4type.md
+  - docs/models/components/invokedeploymentrequest2messages3contenttype.md
+  - docs/models/components/invokedeploymentrequest2messages3type.md
+  - docs/models/components/invokedeploymentrequest2messages4contenttype.md
+  - docs/models/components/invokedeploymentrequest2messages4type.md
+  - docs/models/components/invokedeploymentrequest2messagestype.md
+  - docs/models/components/invokedeploymentrequest2prefixmessages3type.md
+  - docs/models/components/invokedeploymentrequest2prefixmessages4contenttype.md
+  - docs/models/components/invokedeploymentrequest2prefixmessages4type.md
+  - docs/models/components/invokedeploymentrequest2prefixmessagestype.md
+  - docs/models/components/invokedeploymentrequest2type.md
+  - docs/models/components/invokedeploymentrequestandeq.md
+  - docs/models/components/invokedeploymentrequestandin.md
+  - docs/models/components/invokedeploymentrequestandne.md
+  - docs/models/components/invokedeploymentrequestandnin.md
+  - docs/models/components/invokedeploymentrequestannotations1.md
+  - docs/models/components/invokedeploymentrequestannotations2.md
+  - docs/models/components/invokedeploymentrequestannotationsmessages4type.md
+  - docs/models/components/invokedeploymentrequestannotationsmessagestype.md
+  - docs/models/components/invokedeploymentrequestannotationstype.md
+  - docs/models/components/invokedeploymentrequestcontent2.md
+  - docs/models/components/invokedeploymentrequestcontentmessages2.md
+  - docs/models/components/invokedeploymentrequestmessages3role.md
+  - docs/models/components/invokedeploymentrequestmessages4role.md
+  - docs/models/components/invokedeploymentrequestmessages5content.md
+  - docs/models/components/invokedeploymentrequestmessages5role.md
+  - docs/models/components/invokedeploymentrequestmessagescontent.md
+  - docs/models/components/invokedeploymentrequestmessagesrole.md
+  - docs/models/components/invokedeploymentrequestoreq.md
+  - docs/models/components/invokedeploymentrequestorin.md
+  - docs/models/components/invokedeploymentrequestorne.md
+  - docs/models/components/invokedeploymentrequestornin.md
+  - docs/models/components/invokedeploymentrequestprefixmessages4role.md
+  - docs/models/components/invokedeploymentrequestprefixmessages5role.md
+  - docs/models/components/invokedeploymentrequestprefixmessagescontent.md
+  - docs/models/components/invokedeploymentrequestprefixmessagesrole.md
   - docs/models/components/invokeoptions.md
   - docs/models/components/knowledgefilter.md
   - docs/models/components/knowledgefilterand.md
@@ -149,9 +148,9 @@ generatedFiles:
   - docs/models/components/onene.md
   - docs/models/components/onenin.md
   - docs/models/components/or.md
-  - docs/models/components/or3.md
   - docs/models/components/oreq.md
   - docs/models/components/orexists.md
+  - docs/models/components/orgt.md
   - docs/models/components/orgte.md
   - docs/models/components/orin.md
   - docs/models/components/orlt.md
@@ -251,9 +250,9 @@ generatedFiles:
   - docs/models/operations/agenttoolinputrunwebscrapertool.md
   - docs/models/operations/agenttoolinputrunwritememorystoretool.md
   - docs/models/operations/and.md
-  - docs/models/operations/and3.md
   - docs/models/operations/andeq.md
   - docs/models/operations/andexists.md
+  - docs/models/operations/andgt.md
   - docs/models/operations/andgte.md
   - docs/models/operations/andin.md
   - docs/models/operations/andlt.md
@@ -1091,7 +1090,6 @@ generatedFiles:
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
-  - docs/models/operations/deploymentstream13.md
   - docs/models/operations/deploymentstream1deploymentseq.md
   - docs/models/operations/deploymentstream1deploymentsin.md
   - docs/models/operations/deploymentstream1deploymentsne.md
@@ -1136,13 +1134,13 @@ generatedFiles:
   - docs/models/operations/deploymentstream2refusalcontentpart.md
   - docs/models/operations/deploymentstream2textcontentpart.md
   - docs/models/operations/deploymentstream2type.md
-  - docs/models/operations/deploymentstreamand3.md
   - docs/models/operations/deploymentstreamanddeploymentseq.md
   - docs/models/operations/deploymentstreamanddeploymentsin.md
   - docs/models/operations/deploymentstreamanddeploymentsne.md
   - docs/models/operations/deploymentstreamanddeploymentsnin.md
   - docs/models/operations/deploymentstreamandeq.md
   - docs/models/operations/deploymentstreamandexists.md
+  - docs/models/operations/deploymentstreamandgt.md
   - docs/models/operations/deploymentstreamandgte.md
   - docs/models/operations/deploymentstreamandin.md
   - docs/models/operations/deploymentstreamandlt.md
@@ -1210,13 +1208,13 @@ generatedFiles:
   - docs/models/operations/deploymentstreammessagetype.md
   - docs/models/operations/deploymentstreammetadata.md
   - docs/models/operations/deploymentstreamobject.md
-  - docs/models/operations/deploymentstreamor3.md
   - docs/models/operations/deploymentstreamordeploymentseq.md
   - docs/models/operations/deploymentstreamordeploymentsin.md
   - docs/models/operations/deploymentstreamordeploymentsne.md
   - docs/models/operations/deploymentstreamordeploymentsnin.md
   - docs/models/operations/deploymentstreamoreq.md
   - docs/models/operations/deploymentstreamorexists.md
+  - docs/models/operations/deploymentstreamorgt.md
   - docs/models/operations/deploymentstreamorgte.md
   - docs/models/operations/deploymentstreamorin.md
   - docs/models/operations/deploymentstreamorlt.md
@@ -1766,6 +1764,7 @@ generatedFiles:
   - docs/models/operations/getpromptversionusecases.md
   - docs/models/operations/getpromptversionverbosity.md
   - docs/models/operations/googlesearchtool.md
+  - docs/models/operations/gt.md
   - docs/models/operations/gte.md
   - docs/models/operations/guardrailconfig.md
   - docs/models/operations/guardrailconfigboolean.md
@@ -2159,9 +2158,9 @@ generatedFiles:
   - docs/models/operations/numbert.md
   - docs/models/operations/objectt.md
   - docs/models/operations/one.md
-  - docs/models/operations/one3.md
   - docs/models/operations/oneeq.md
   - docs/models/operations/oneexists.md
+  - docs/models/operations/onegt.md
   - docs/models/operations/onegte.md
   - docs/models/operations/onein.md
   - docs/models/operations/onelt.md
@@ -2170,9 +2169,9 @@ generatedFiles:
   - docs/models/operations/onenin.md
   - docs/models/operations/operator.md
   - docs/models/operations/or.md
-  - docs/models/operations/or3.md
   - docs/models/operations/oreq.md
   - docs/models/operations/orexists.md
+  - docs/models/operations/orgt.md
   - docs/models/operations/orgte.md
   - docs/models/operations/orin.md
   - docs/models/operations/orlt.md
@@ -2538,9 +2537,9 @@ generatedFiles:
   - docs/models/operations/runagenttoolchoicefunction.md
   - docs/models/operations/runagenttoolchoicetype.md
   - docs/models/operations/scores.md
-  - docs/models/operations/searchknowledge13.md
   - docs/models/operations/searchknowledge1eq.md
   - docs/models/operations/searchknowledge1exists.md
+  - docs/models/operations/searchknowledge1gt.md
   - docs/models/operations/searchknowledge1gte.md
   - docs/models/operations/searchknowledge1in.md
   - docs/models/operations/searchknowledge1knowledgeeq.md
@@ -2551,9 +2550,9 @@ generatedFiles:
   - docs/models/operations/searchknowledge1lte.md
   - docs/models/operations/searchknowledge1ne.md
   - docs/models/operations/searchknowledge1nin.md
-  - docs/models/operations/searchknowledgeand3.md
   - docs/models/operations/searchknowledgeandeq.md
   - docs/models/operations/searchknowledgeandexists.md
+  - docs/models/operations/searchknowledgeandgt.md
   - docs/models/operations/searchknowledgeandgte.md
   - docs/models/operations/searchknowledgeandin.md
   - docs/models/operations/searchknowledgeandknowledgeeq.md
@@ -2566,9 +2565,9 @@ generatedFiles:
   - docs/models/operations/searchknowledgeandnin.md
   - docs/models/operations/searchknowledgefilterbyand.md
   - docs/models/operations/searchknowledgefilterbyor.md
-  - docs/models/operations/searchknowledgeor3.md
   - docs/models/operations/searchknowledgeoreq.md
   - docs/models/operations/searchknowledgeorexists.md
+  - docs/models/operations/searchknowledgeorgt.md
   - docs/models/operations/searchknowledgeorgte.md
   - docs/models/operations/searchknowledgeorin.md
   - docs/models/operations/searchknowledgeorknowledgeeq.md
@@ -3642,8 +3641,8 @@ generatedFiles:
   - src/mcp-server/tools/toolsList.ts
   - src/mcp-server/tools/toolsRetrieve.ts
   - src/mcp-server/tools/toolsUpdate.ts
-  - src/models/components/deployments.ts
   - src/models/components/index.ts
+  - src/models/components/invokedeploymentrequest.ts
   - src/models/components/security.ts
   - src/models/errors/apierror.ts
   - src/models/errors/createagent.ts
@@ -3807,7 +3806,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-17T14:04:15.852Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-14T09:33:27.338Z"}
   CreateFeedback:
     "":
       requestBody:
@@ -3841,7 +3840,7 @@ examples:
   DeploymentInvoke:
     speakeasy-default-deployment-invoke:
       requestBody:
-        application/json: {"key": "<key>"}
+        application/json: {"key": "<key>", "stream": false}
       responses:
         "200":
           application/json: {"id": "<id>", "created": "2024-04-18T18:48:22.476Z", "object": "image", "model": "2", "provider": "groq", "is_final": true, "choices": []}
@@ -3865,7 +3864,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-11-13T15:09:54.392Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-11-14T09:33:30.800Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -3881,7 +3880,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-11-13T15:09:54.392Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-11-14T09:33:30.800Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -3972,7 +3971,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-11-14T09:33:27.338Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -3980,7 +3979,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -3992,7 +3991,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -4026,7 +4025,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -4037,7 +4036,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -4120,7 +4119,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K9YW8DWNPZERVQJ89B1QDY1C", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01KA0VD64CZAGN9X0GBWBDCHS8", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -4129,7 +4128,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K9YW8DWM0EFXPHQ810ASGK2B", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01KA0VD64BSVFT05DDRRZEBRAZ", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -4146,7 +4145,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K9YW8DWRWAK8MAST5266DDDC", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01KA0VD64FM8VQ67RGYR2B5VTR", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -4242,7 +4241,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -4254,7 +4253,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-13T15:09:50.596Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-11-14T09:33:27.338Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -4680,7 +4679,7 @@ examples:
         application/json: {"type": "workspace", "period": "monthly", "amount": 250}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-13T15:09:50.938Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-14T09:33:27.717Z"}
   GetBudget:
     speakeasy-default-get-budget:
       parameters:
@@ -4688,7 +4687,7 @@ examples:
           id: "01K1J1AX8PGR63QRP7423NY008"
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-13T15:09:50.938Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-14T09:33:27.717Z"}
   UpdateBudget:
     speakeasy-default-update-budget:
       parameters:
@@ -4698,7 +4697,7 @@ examples:
         application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-13T15:09:50.938Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-11-14T09:33:27.717Z"}
   DeleteBudget:
     speakeasy-default-delete-budget:
       parameters:

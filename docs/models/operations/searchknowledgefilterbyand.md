@@ -19,11 +19,11 @@ const value: operations.SearchKnowledgeAndNe = {
 };
 ```
 
-### `operations.SearchKnowledgeAnd3`
+### `operations.SearchKnowledgeAndGt`
 
 ```typescript
-const value: operations.SearchKnowledgeAnd3 = {
-  gt: 4487.91,
+const value: operations.SearchKnowledgeAndGt = {
+  gt: 1.58,
 };
 ```
 

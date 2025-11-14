@@ -19,11 +19,11 @@ const value: components.OneNe = {
 };
 ```
 
-### `components.Three`
+### `components.Gt`
 
 ```typescript
-const value: components.Three = {
-  gt: 8279.38,
+const value: components.Gt = {
+  gt: 2952.97,
 };
 ```
 

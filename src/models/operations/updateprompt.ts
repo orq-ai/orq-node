@@ -142,6 +142,7 @@ export type UpdatePromptEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const UpdatePromptReasoningEffort = {
+  None: "none",
   Disable: "disable",
   Minimal: "minimal",
   Low: "low",
@@ -1302,6 +1303,7 @@ export type UpdatePromptPromptsEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const UpdatePromptPromptsReasoningEffort = {
+  None: "none",
   Disable: "disable",
   Minimal: "minimal",
   Low: "low",

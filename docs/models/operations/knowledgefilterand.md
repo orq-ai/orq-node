@@ -19,11 +19,11 @@ const value: operations.AndNe = {
 };
 ```
 
-### `operations.And3`
+### `operations.AndGt`
 
 ```typescript
-const value: operations.And3 = {
-  gt: 71.84,
+const value: operations.AndGt = {
+  gt: 339.87,
 };
 ```
 

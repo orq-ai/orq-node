@@ -19,11 +19,11 @@ const value: operations.Ne = {
 };
 ```
 
-### `operations.One3`
+### `operations.Gt`
 
 ```typescript
-const value: operations.One3 = {
-  gt: 2853.99,
+const value: operations.Gt = {
+  gt: 2952.97,
 };
 ```
 

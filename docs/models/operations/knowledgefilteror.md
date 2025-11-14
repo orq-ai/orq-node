@@ -19,11 +19,11 @@ const value: operations.OrNe = {
 };
 ```
 
-### `operations.Or3`
+### `operations.OrGt`
 
 ```typescript
-const value: operations.Or3 = {
-  gt: 1544.58,
+const value: operations.OrGt = {
+  gt: 4322.19,
 };
 ```
 

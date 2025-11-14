@@ -1123,7 +1123,10 @@ export type DeploymentStreamOrGte = {
   gte: number;
 };
 
-export type DeploymentStreamOr3 = {
+/**
+ * Greater than
+ */
+export type DeploymentStreamOrGt = {
   gt: number;
 };
 
@@ -1148,7 +1151,7 @@ export type DeploymentStreamOrEq = {
 export type DeploymentStreamKnowledgeFilterDeploymentsOr =
   | DeploymentStreamOrEq
   | DeploymentStreamOrNe
-  | DeploymentStreamOr3
+  | DeploymentStreamOrGt
   | DeploymentStreamOrGte
   | DeploymentStreamOrLt
   | DeploymentStreamOrLte
@@ -1165,7 +1168,7 @@ export type DeploymentStreamKnowledgeFilterOr = {
       [k: string]:
         | DeploymentStreamOrEq
         | DeploymentStreamOrNe
-        | DeploymentStreamOr3
+        | DeploymentStreamOrGt
         | DeploymentStreamOrGte
         | DeploymentStreamOrLt
         | DeploymentStreamOrLte
@@ -1222,7 +1225,10 @@ export type DeploymentStreamAndGte = {
   gte: number;
 };
 
-export type DeploymentStreamAnd3 = {
+/**
+ * Greater than
+ */
+export type DeploymentStreamAndGt = {
   gt: number;
 };
 
@@ -1247,7 +1253,7 @@ export type DeploymentStreamAndEq = {
 export type DeploymentStreamKnowledgeFilterDeploymentsAnd =
   | DeploymentStreamAndEq
   | DeploymentStreamAndNe
-  | DeploymentStreamAnd3
+  | DeploymentStreamAndGt
   | DeploymentStreamAndGte
   | DeploymentStreamAndLt
   | DeploymentStreamAndLte
@@ -1264,7 +1270,7 @@ export type DeploymentStreamKnowledgeFilterAnd = {
       [k: string]:
         | DeploymentStreamAndEq
         | DeploymentStreamAndNe
-        | DeploymentStreamAnd3
+        | DeploymentStreamAndGt
         | DeploymentStreamAndGte
         | DeploymentStreamAndLt
         | DeploymentStreamAndLte
@@ -1321,7 +1327,10 @@ export type OneGte = {
   gte: number;
 };
 
-export type DeploymentStream13 = {
+/**
+ * Greater than
+ */
+export type OneGt = {
   gt: number;
 };
 
@@ -1346,7 +1355,7 @@ export type DeploymentStream1Eq = {
 export type DeploymentStreamKnowledgeFilter1 =
   | DeploymentStream1Eq
   | DeploymentStream1Ne
-  | DeploymentStream13
+  | OneGt
   | OneGte
   | OneLt
   | OneLte
@@ -1364,7 +1373,7 @@ export type DeploymentStreamKnowledgeFilter =
     [k: string]:
       | DeploymentStream1Eq
       | DeploymentStream1Ne
-      | DeploymentStream13
+      | OneGt
       | OneGte
       | OneLt
       | OneLte
@@ -1438,7 +1447,7 @@ export type DeploymentStreamRequestBody = {
       [k: string]:
         | DeploymentStream1Eq
         | DeploymentStream1Ne
-        | DeploymentStream13
+        | OneGt
         | OneGte
         | OneLt
         | OneLte
@@ -5745,41 +5754,41 @@ export function deploymentStreamOrGteFromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamOr3$inboundSchema: z.ZodType<
-  DeploymentStreamOr3,
+export const DeploymentStreamOrGt$inboundSchema: z.ZodType<
+  DeploymentStreamOrGt,
   z.ZodTypeDef,
   unknown
 > = z.object({
   gt: z.number(),
 });
 /** @internal */
-export type DeploymentStreamOr3$Outbound = {
+export type DeploymentStreamOrGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const DeploymentStreamOr3$outboundSchema: z.ZodType<
-  DeploymentStreamOr3$Outbound,
+export const DeploymentStreamOrGt$outboundSchema: z.ZodType<
+  DeploymentStreamOrGt$Outbound,
   z.ZodTypeDef,
-  DeploymentStreamOr3
+  DeploymentStreamOrGt
 > = z.object({
   gt: z.number(),
 });
 
-export function deploymentStreamOr3ToJSON(
-  deploymentStreamOr3: DeploymentStreamOr3,
+export function deploymentStreamOrGtToJSON(
+  deploymentStreamOrGt: DeploymentStreamOrGt,
 ): string {
   return JSON.stringify(
-    DeploymentStreamOr3$outboundSchema.parse(deploymentStreamOr3),
+    DeploymentStreamOrGt$outboundSchema.parse(deploymentStreamOrGt),
   );
 }
-export function deploymentStreamOr3FromJSON(
+export function deploymentStreamOrGtFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStreamOr3, SDKValidationError> {
+): SafeParseResult<DeploymentStreamOrGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentStreamOr3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamOr3' from JSON`,
+    (x) => DeploymentStreamOrGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamOrGt' from JSON`,
   );
 }
 
@@ -5946,7 +5955,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$inboundSchema:
   > = z.union([
     z.lazy(() => DeploymentStreamOrEq$inboundSchema),
     z.lazy(() => DeploymentStreamOrNe$inboundSchema),
-    z.lazy(() => DeploymentStreamOr3$inboundSchema),
+    z.lazy(() => DeploymentStreamOrGt$inboundSchema),
     z.lazy(() => DeploymentStreamOrGte$inboundSchema),
     z.lazy(() => DeploymentStreamOrLt$inboundSchema),
     z.lazy(() => DeploymentStreamOrLte$inboundSchema),
@@ -5958,7 +5967,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$inboundSchema:
 export type DeploymentStreamKnowledgeFilterDeploymentsOr$Outbound =
   | DeploymentStreamOrEq$Outbound
   | DeploymentStreamOrNe$Outbound
-  | DeploymentStreamOr3$Outbound
+  | DeploymentStreamOrGt$Outbound
   | DeploymentStreamOrGte$Outbound
   | DeploymentStreamOrLt$Outbound
   | DeploymentStreamOrLte$Outbound
@@ -5975,7 +5984,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema:
   > = z.union([
     z.lazy(() => DeploymentStreamOrEq$outboundSchema),
     z.lazy(() => DeploymentStreamOrNe$outboundSchema),
-    z.lazy(() => DeploymentStreamOr3$outboundSchema),
+    z.lazy(() => DeploymentStreamOrGt$outboundSchema),
     z.lazy(() => DeploymentStreamOrGte$outboundSchema),
     z.lazy(() => DeploymentStreamOrLt$outboundSchema),
     z.lazy(() => DeploymentStreamOrLte$outboundSchema),
@@ -6022,7 +6031,7 @@ export const DeploymentStreamKnowledgeFilterOr$inboundSchema: z.ZodType<
       z.lazy(() =>
         DeploymentStreamOrNe$inboundSchema
       ),
-      z.lazy(() => DeploymentStreamOr3$inboundSchema),
+      z.lazy(() => DeploymentStreamOrGt$inboundSchema),
       z.lazy(() => DeploymentStreamOrGte$inboundSchema),
       z.lazy(() => DeploymentStreamOrLt$inboundSchema),
       z.lazy(() => DeploymentStreamOrLte$inboundSchema),
@@ -6039,7 +6048,7 @@ export type DeploymentStreamKnowledgeFilterOr$Outbound = {
       [k: string]:
         | DeploymentStreamOrEq$Outbound
         | DeploymentStreamOrNe$Outbound
-        | DeploymentStreamOr3$Outbound
+        | DeploymentStreamOrGt$Outbound
         | DeploymentStreamOrGte$Outbound
         | DeploymentStreamOrLt$Outbound
         | DeploymentStreamOrLte$Outbound
@@ -6062,7 +6071,7 @@ export const DeploymentStreamKnowledgeFilterOr$outboundSchema: z.ZodType<
       z.lazy(() =>
         DeploymentStreamOrNe$outboundSchema
       ),
-      z.lazy(() => DeploymentStreamOr3$outboundSchema),
+      z.lazy(() => DeploymentStreamOrGt$outboundSchema),
       z.lazy(() => DeploymentStreamOrGte$outboundSchema),
       z.lazy(() => DeploymentStreamOrLt$outboundSchema),
       z.lazy(() => DeploymentStreamOrLte$outboundSchema),
@@ -6403,41 +6412,41 @@ export function deploymentStreamAndGteFromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamAnd3$inboundSchema: z.ZodType<
-  DeploymentStreamAnd3,
+export const DeploymentStreamAndGt$inboundSchema: z.ZodType<
+  DeploymentStreamAndGt,
   z.ZodTypeDef,
   unknown
 > = z.object({
   gt: z.number(),
 });
 /** @internal */
-export type DeploymentStreamAnd3$Outbound = {
+export type DeploymentStreamAndGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const DeploymentStreamAnd3$outboundSchema: z.ZodType<
-  DeploymentStreamAnd3$Outbound,
+export const DeploymentStreamAndGt$outboundSchema: z.ZodType<
+  DeploymentStreamAndGt$Outbound,
   z.ZodTypeDef,
-  DeploymentStreamAnd3
+  DeploymentStreamAndGt
 > = z.object({
   gt: z.number(),
 });
 
-export function deploymentStreamAnd3ToJSON(
-  deploymentStreamAnd3: DeploymentStreamAnd3,
+export function deploymentStreamAndGtToJSON(
+  deploymentStreamAndGt: DeploymentStreamAndGt,
 ): string {
   return JSON.stringify(
-    DeploymentStreamAnd3$outboundSchema.parse(deploymentStreamAnd3),
+    DeploymentStreamAndGt$outboundSchema.parse(deploymentStreamAndGt),
   );
 }
-export function deploymentStreamAnd3FromJSON(
+export function deploymentStreamAndGtFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStreamAnd3, SDKValidationError> {
+): SafeParseResult<DeploymentStreamAndGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentStreamAnd3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamAnd3' from JSON`,
+    (x) => DeploymentStreamAndGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamAndGt' from JSON`,
   );
 }
 
@@ -6604,7 +6613,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$inboundSchema:
   > = z.union([
     z.lazy(() => DeploymentStreamAndEq$inboundSchema),
     z.lazy(() => DeploymentStreamAndNe$inboundSchema),
-    z.lazy(() => DeploymentStreamAnd3$inboundSchema),
+    z.lazy(() => DeploymentStreamAndGt$inboundSchema),
     z.lazy(() => DeploymentStreamAndGte$inboundSchema),
     z.lazy(() => DeploymentStreamAndLt$inboundSchema),
     z.lazy(() => DeploymentStreamAndLte$inboundSchema),
@@ -6616,7 +6625,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$inboundSchema:
 export type DeploymentStreamKnowledgeFilterDeploymentsAnd$Outbound =
   | DeploymentStreamAndEq$Outbound
   | DeploymentStreamAndNe$Outbound
-  | DeploymentStreamAnd3$Outbound
+  | DeploymentStreamAndGt$Outbound
   | DeploymentStreamAndGte$Outbound
   | DeploymentStreamAndLt$Outbound
   | DeploymentStreamAndLte$Outbound
@@ -6633,7 +6642,7 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema:
   > = z.union([
     z.lazy(() => DeploymentStreamAndEq$outboundSchema),
     z.lazy(() => DeploymentStreamAndNe$outboundSchema),
-    z.lazy(() => DeploymentStreamAnd3$outboundSchema),
+    z.lazy(() => DeploymentStreamAndGt$outboundSchema),
     z.lazy(() => DeploymentStreamAndGte$outboundSchema),
     z.lazy(() => DeploymentStreamAndLt$outboundSchema),
     z.lazy(() => DeploymentStreamAndLte$outboundSchema),
@@ -6680,7 +6689,7 @@ export const DeploymentStreamKnowledgeFilterAnd$inboundSchema: z.ZodType<
       z.lazy(() =>
         DeploymentStreamAndNe$inboundSchema
       ),
-      z.lazy(() => DeploymentStreamAnd3$inboundSchema),
+      z.lazy(() => DeploymentStreamAndGt$inboundSchema),
       z.lazy(() => DeploymentStreamAndGte$inboundSchema),
       z.lazy(() => DeploymentStreamAndLt$inboundSchema),
       z.lazy(() => DeploymentStreamAndLte$inboundSchema),
@@ -6697,7 +6706,7 @@ export type DeploymentStreamKnowledgeFilterAnd$Outbound = {
       [k: string]:
         | DeploymentStreamAndEq$Outbound
         | DeploymentStreamAndNe$Outbound
-        | DeploymentStreamAnd3$Outbound
+        | DeploymentStreamAndGt$Outbound
         | DeploymentStreamAndGte$Outbound
         | DeploymentStreamAndLt$Outbound
         | DeploymentStreamAndLte$Outbound
@@ -6720,7 +6729,7 @@ export const DeploymentStreamKnowledgeFilterAnd$outboundSchema: z.ZodType<
       z.lazy(() =>
         DeploymentStreamAndNe$outboundSchema
       ),
-      z.lazy(() => DeploymentStreamAnd3$outboundSchema),
+      z.lazy(() => DeploymentStreamAndGt$outboundSchema),
       z.lazy(() => DeploymentStreamAndGte$outboundSchema),
       z.lazy(() => DeploymentStreamAndLt$outboundSchema),
       z.lazy(() => DeploymentStreamAndLte$outboundSchema),
@@ -7034,41 +7043,34 @@ export function oneGteFromJSON(
 }
 
 /** @internal */
-export const DeploymentStream13$inboundSchema: z.ZodType<
-  DeploymentStream13,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
+export const OneGt$inboundSchema: z.ZodType<OneGt, z.ZodTypeDef, unknown> = z
+  .object({
+    gt: z.number(),
+  });
 /** @internal */
-export type DeploymentStream13$Outbound = {
+export type OneGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const DeploymentStream13$outboundSchema: z.ZodType<
-  DeploymentStream13$Outbound,
+export const OneGt$outboundSchema: z.ZodType<
+  OneGt$Outbound,
   z.ZodTypeDef,
-  DeploymentStream13
+  OneGt
 > = z.object({
   gt: z.number(),
 });
 
-export function deploymentStream13ToJSON(
-  deploymentStream13: DeploymentStream13,
-): string {
-  return JSON.stringify(
-    DeploymentStream13$outboundSchema.parse(deploymentStream13),
-  );
+export function oneGtToJSON(oneGt: OneGt): string {
+  return JSON.stringify(OneGt$outboundSchema.parse(oneGt));
 }
-export function deploymentStream13FromJSON(
+export function oneGtFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStream13, SDKValidationError> {
+): SafeParseResult<OneGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentStream13$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStream13' from JSON`,
+    (x) => OneGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneGt' from JSON`,
   );
 }
 
@@ -7228,7 +7230,7 @@ export const DeploymentStreamKnowledgeFilter1$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => DeploymentStream1Eq$inboundSchema),
   z.lazy(() => DeploymentStream1Ne$inboundSchema),
-  z.lazy(() => DeploymentStream13$inboundSchema),
+  z.lazy(() => OneGt$inboundSchema),
   z.lazy(() => OneGte$inboundSchema),
   z.lazy(() => OneLt$inboundSchema),
   z.lazy(() => OneLte$inboundSchema),
@@ -7240,7 +7242,7 @@ export const DeploymentStreamKnowledgeFilter1$inboundSchema: z.ZodType<
 export type DeploymentStreamKnowledgeFilter1$Outbound =
   | DeploymentStream1Eq$Outbound
   | DeploymentStream1Ne$Outbound
-  | DeploymentStream13$Outbound
+  | OneGt$Outbound
   | OneGte$Outbound
   | OneLt$Outbound
   | OneLte$Outbound
@@ -7256,7 +7258,7 @@ export const DeploymentStreamKnowledgeFilter1$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => DeploymentStream1Eq$outboundSchema),
   z.lazy(() => DeploymentStream1Ne$outboundSchema),
-  z.lazy(() => DeploymentStream13$outboundSchema),
+  z.lazy(() => OneGt$outboundSchema),
   z.lazy(() => OneGte$outboundSchema),
   z.lazy(() => OneLt$outboundSchema),
   z.lazy(() => OneLte$outboundSchema),
@@ -7295,7 +7297,7 @@ export const DeploymentStreamKnowledgeFilter$inboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => DeploymentStream1Eq$inboundSchema),
     z.lazy(() => DeploymentStream1Ne$inboundSchema),
-    z.lazy(() => DeploymentStream13$inboundSchema),
+    z.lazy(() => OneGt$inboundSchema),
     z.lazy(() => OneGte$inboundSchema),
     z.lazy(() => OneLt$inboundSchema),
     z.lazy(() => OneLte$inboundSchema),
@@ -7312,7 +7314,7 @@ export type DeploymentStreamKnowledgeFilter$Outbound =
     [k: string]:
       | DeploymentStream1Eq$Outbound
       | DeploymentStream1Ne$Outbound
-      | DeploymentStream13$Outbound
+      | OneGt$Outbound
       | OneGte$Outbound
       | OneLt$Outbound
       | OneLte$Outbound
@@ -7332,7 +7334,7 @@ export const DeploymentStreamKnowledgeFilter$outboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => DeploymentStream1Eq$outboundSchema),
     z.lazy(() => DeploymentStream1Ne$outboundSchema),
-    z.lazy(() => DeploymentStream13$outboundSchema),
+    z.lazy(() => OneGt$outboundSchema),
     z.lazy(() => OneGte$outboundSchema),
     z.lazy(() => OneLt$outboundSchema),
     z.lazy(() => OneLte$outboundSchema),
@@ -7403,7 +7405,7 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
       z.union([
         z.lazy(() => DeploymentStream1Eq$inboundSchema),
         z.lazy(() => DeploymentStream1Ne$inboundSchema),
-        z.lazy(() => DeploymentStream13$inboundSchema),
+        z.lazy(() => OneGt$inboundSchema),
         z.lazy(() => OneGte$inboundSchema),
         z.lazy(() => OneLt$inboundSchema),
         z.lazy(() => OneLte$inboundSchema),
@@ -7458,7 +7460,7 @@ export type DeploymentStreamRequestBody$Outbound = {
       [k: string]:
         | DeploymentStream1Eq$Outbound
         | DeploymentStream1Ne$Outbound
-        | DeploymentStream13$Outbound
+        | OneGt$Outbound
         | OneGte$Outbound
         | OneLt$Outbound
         | OneLte$Outbound
@@ -7511,7 +7513,7 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
       z.union([
         z.lazy(() => DeploymentStream1Eq$outboundSchema),
         z.lazy(() => DeploymentStream1Ne$outboundSchema),
-        z.lazy(() => DeploymentStream13$outboundSchema),
+        z.lazy(() => OneGt$outboundSchema),
         z.lazy(() => OneGte$outboundSchema),
         z.lazy(() => OneLt$outboundSchema),
         z.lazy(() => OneLte$outboundSchema),

@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `components.Deployments21`
+### `components.InvokeDeploymentRequest21`
 
 ```typescript
-const value: components.Deployments21 = {
+const value: components.InvokeDeploymentRequest21 = {
   type: "text",
   text: "<value>",
 };
@@ -23,10 +23,10 @@ const value: components.Two2 = {
 };
 ```
 
-### `components.Deployments23`
+### `components.Three`
 
 ```typescript
-const value: components.Deployments23 = {
+const value: components.Three = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
