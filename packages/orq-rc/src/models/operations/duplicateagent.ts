@@ -475,6 +475,20 @@ export type DuplicateAgentParameters = {
 };
 
 /**
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ */
+export type DuplicateAgentRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
 export const DuplicateAgentFallbackModelConfigurationVoice = {
@@ -836,6 +850,10 @@ export type DuplicateAgentModel = {
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: DuplicateAgentParameters | undefined;
+  /**
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   */
+  retry?: DuplicateAgentRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -2077,6 +2095,56 @@ export function duplicateAgentParametersFromJSON(
 }
 
 /** @internal */
+export const DuplicateAgentRetry$inboundSchema: z.ZodType<
+  DuplicateAgentRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type DuplicateAgentRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const DuplicateAgentRetry$outboundSchema: z.ZodType<
+  DuplicateAgentRetry$Outbound,
+  z.ZodTypeDef,
+  DuplicateAgentRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function duplicateAgentRetryToJSON(
+  duplicateAgentRetry: DuplicateAgentRetry,
+): string {
+  return JSON.stringify(
+    DuplicateAgentRetry$outboundSchema.parse(duplicateAgentRetry),
+  );
+}
+export function duplicateAgentRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateAgentRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateAgentRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateAgentRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateAgentFallbackModelConfigurationVoice$inboundSchema:
   z.ZodNativeEnum<typeof DuplicateAgentFallbackModelConfigurationVoice> = z
     .nativeEnum(DuplicateAgentFallbackModelConfigurationVoice);
@@ -3112,6 +3180,7 @@ export const DuplicateAgentModel$inboundSchema: z.ZodType<
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => DuplicateAgentParameters$inboundSchema).optional(),
+  retry: z.lazy(() => DuplicateAgentRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => DuplicateAgentFallbackModelConfiguration2$inboundSchema),
@@ -3129,6 +3198,7 @@ export type DuplicateAgentModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: DuplicateAgentParameters$Outbound | undefined;
+  retry?: DuplicateAgentRetry$Outbound | undefined;
   fallback_models?:
     | Array<DuplicateAgentFallbackModelConfiguration2$Outbound | string>
     | null
@@ -3144,6 +3214,7 @@ export const DuplicateAgentModel$outboundSchema: z.ZodType<
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => DuplicateAgentParameters$outboundSchema).optional(),
+  retry: z.lazy(() => DuplicateAgentRetry$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
       z.lazy(() => DuplicateAgentFallbackModelConfiguration2$outboundSchema),

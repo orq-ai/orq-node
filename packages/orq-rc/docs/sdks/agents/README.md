@@ -431,6 +431,7 @@ async function run() {
   const result = await orq.agents.update({
     agentKey: "<value>",
     requestBody: {
+      model: "El Camino",
       path: "Default",
       knowledgeBases: [
         {
@@ -464,6 +465,7 @@ async function run() {
   const res = await agentsUpdate(orq, {
     agentKey: "<value>",
     requestBody: {
+      model: "El Camino",
       path: "Default",
       knowledgeBases: [
         {

@@ -301,9 +301,23 @@ export type ParametersT = {
 };
 
 /**
+ * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+ */
+export type Retry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * @remarks
  *
- * Model configuration with parameters.
+ * Model configuration with parameters and retry settings.
  */
 export type ModelConfiguration2 = {
   /**
@@ -314,10 +328,14 @@ export type ModelConfiguration2 = {
    * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: ParametersT | undefined;
+  /**
+   * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+   */
+  retry?: Retry | undefined;
 };
 
 /**
- * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters.
+ * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings.
  */
 export type ModelConfiguration = ModelConfiguration2 | string;
 
@@ -1196,7 +1214,7 @@ export type CreateAgentRequestBody = {
    */
   path: string;
   /**
-   * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters.
+   * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings.
    */
   model: ModelConfiguration2 | string;
   /**
@@ -1680,6 +1698,20 @@ export type CreateAgentParameters = {
 };
 
 /**
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ */
+export type CreateAgentRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
 export const CreateAgentFallbackModelConfigurationVoice = {
@@ -2046,6 +2078,10 @@ export type CreateAgentModel = {
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: CreateAgentParameters | undefined;
+  /**
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   */
+  retry?: CreateAgentRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -2816,6 +2852,49 @@ export function parametersFromJSON(
 }
 
 /** @internal */
+export const Retry$inboundSchema: z.ZodType<Retry, z.ZodTypeDef, unknown> = z
+  .object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  });
+/** @internal */
+export type Retry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const Retry$outboundSchema: z.ZodType<
+  Retry$Outbound,
+  z.ZodTypeDef,
+  Retry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function retryToJSON(retry: Retry): string {
+  return JSON.stringify(Retry$outboundSchema.parse(retry));
+}
+export function retryFromJSON(
+  jsonString: string,
+): SafeParseResult<Retry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Retry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Retry' from JSON`,
+  );
+}
+
+/** @internal */
 export const ModelConfiguration2$inboundSchema: z.ZodType<
   ModelConfiguration2,
   z.ZodTypeDef,
@@ -2823,11 +2902,13 @@ export const ModelConfiguration2$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$inboundSchema).optional(),
+  retry: z.lazy(() => Retry$inboundSchema).optional(),
 });
 /** @internal */
 export type ModelConfiguration2$Outbound = {
   id: string;
   parameters?: ParametersT$Outbound | undefined;
+  retry?: Retry$Outbound | undefined;
 };
 
 /** @internal */
@@ -2838,6 +2919,7 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
+  retry: z.lazy(() => Retry$outboundSchema).optional(),
 });
 
 export function modelConfiguration2ToJSON(
@@ -6403,6 +6485,56 @@ export function createAgentParametersFromJSON(
 }
 
 /** @internal */
+export const CreateAgentRetry$inboundSchema: z.ZodType<
+  CreateAgentRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type CreateAgentRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateAgentRetry$outboundSchema: z.ZodType<
+  CreateAgentRetry$Outbound,
+  z.ZodTypeDef,
+  CreateAgentRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createAgentRetryToJSON(
+  createAgentRetry: CreateAgentRetry,
+): string {
+  return JSON.stringify(
+    CreateAgentRetry$outboundSchema.parse(createAgentRetry),
+  );
+}
+export function createAgentRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateAgentRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentFallbackModelConfigurationVoice$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationVoice> = z
     .nativeEnum(CreateAgentFallbackModelConfigurationVoice);
@@ -7443,6 +7575,7 @@ export const CreateAgentModel$inboundSchema: z.ZodType<
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => CreateAgentParameters$inboundSchema).optional(),
+  retry: z.lazy(() => CreateAgentRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => CreateAgentFallbackModelConfiguration2$inboundSchema),
@@ -7460,6 +7593,7 @@ export type CreateAgentModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: CreateAgentParameters$Outbound | undefined;
+  retry?: CreateAgentRetry$Outbound | undefined;
   fallback_models?:
     | Array<CreateAgentFallbackModelConfiguration2$Outbound | string>
     | null
@@ -7475,6 +7609,7 @@ export const CreateAgentModel$outboundSchema: z.ZodType<
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => CreateAgentParameters$outboundSchema).optional(),
+  retry: z.lazy(() => CreateAgentRetry$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
       z.lazy(() => CreateAgentFallbackModelConfiguration2$outboundSchema),

@@ -462,6 +462,20 @@ export type GetAgentParameters = {
 };
 
 /**
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ */
+export type GetAgentRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
 export const GetAgentFallbackModelConfigurationVoice = {
@@ -817,6 +831,10 @@ export type GetAgentModel = {
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: GetAgentParameters | undefined;
+  /**
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   */
+  retry?: GetAgentRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -2021,6 +2039,52 @@ export function getAgentParametersFromJSON(
 }
 
 /** @internal */
+export const GetAgentRetry$inboundSchema: z.ZodType<
+  GetAgentRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type GetAgentRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const GetAgentRetry$outboundSchema: z.ZodType<
+  GetAgentRetry$Outbound,
+  z.ZodTypeDef,
+  GetAgentRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function getAgentRetryToJSON(getAgentRetry: GetAgentRetry): string {
+  return JSON.stringify(GetAgentRetry$outboundSchema.parse(getAgentRetry));
+}
+export function getAgentRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAgentRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAgentRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAgentFallbackModelConfigurationVoice$inboundSchema:
   z.ZodNativeEnum<typeof GetAgentFallbackModelConfigurationVoice> = z
     .nativeEnum(GetAgentFallbackModelConfigurationVoice);
@@ -3010,6 +3074,7 @@ export const GetAgentModel$inboundSchema: z.ZodType<
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => GetAgentParameters$inboundSchema).optional(),
+  retry: z.lazy(() => GetAgentRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => GetAgentFallbackModelConfiguration2$inboundSchema),
@@ -3027,6 +3092,7 @@ export type GetAgentModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: GetAgentParameters$Outbound | undefined;
+  retry?: GetAgentRetry$Outbound | undefined;
   fallback_models?:
     | Array<GetAgentFallbackModelConfiguration2$Outbound | string>
     | null
@@ -3042,6 +3108,7 @@ export const GetAgentModel$outboundSchema: z.ZodType<
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => GetAgentParameters$outboundSchema).optional(),
+  retry: z.lazy(() => GetAgentRetry$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
       z.lazy(() => GetAgentFallbackModelConfiguration2$outboundSchema),

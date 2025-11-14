@@ -18,6 +18,15 @@ let value: DuplicateAgentResponseBody = {
   status: "published",
   model: {
     id: "<id>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
   },
   path: "Default",
   memoryStores: [

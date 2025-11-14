@@ -334,9 +334,23 @@ export type StreamRunAgentModelConfigurationParameters = {
 };
 
 /**
+ * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+ */
+export type StreamRunAgentModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * @remarks
  *
- * Model configuration with parameters.
+ * Model configuration with parameters and retry settings.
  */
 export type StreamRunAgentModelConfiguration2 = {
   /**
@@ -347,6 +361,10 @@ export type StreamRunAgentModelConfiguration2 = {
    * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: StreamRunAgentModelConfigurationParameters | undefined;
+  /**
+   * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+   */
+  retry?: StreamRunAgentModelConfigurationRetry | undefined;
 };
 
 /**
@@ -2617,6 +2635,59 @@ export function streamRunAgentModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentModelConfigurationRetry$inboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type StreamRunAgentModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationRetry$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelConfigurationRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function streamRunAgentModelConfigurationRetryToJSON(
+  streamRunAgentModelConfigurationRetry: StreamRunAgentModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationRetry$outboundSchema.parse(
+      streamRunAgentModelConfigurationRetry,
+    ),
+  );
+}
+export function streamRunAgentModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelConfigurationRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentModelConfigurationRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentModelConfiguration2$inboundSchema: z.ZodType<
   StreamRunAgentModelConfiguration2,
   z.ZodTypeDef,
@@ -2626,11 +2697,14 @@ export const StreamRunAgentModelConfiguration2$inboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     StreamRunAgentModelConfigurationParameters$inboundSchema
   ).optional(),
+  retry: z.lazy(() => StreamRunAgentModelConfigurationRetry$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type StreamRunAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: StreamRunAgentModelConfigurationParameters$Outbound | undefined;
+  retry?: StreamRunAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -2643,6 +2717,8 @@ export const StreamRunAgentModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     StreamRunAgentModelConfigurationParameters$outboundSchema
   ).optional(),
+  retry: z.lazy(() => StreamRunAgentModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function streamRunAgentModelConfiguration2ToJSON(

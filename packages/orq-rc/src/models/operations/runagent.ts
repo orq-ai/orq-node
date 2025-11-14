@@ -321,9 +321,23 @@ export type RunAgentModelConfigurationParameters = {
 };
 
 /**
+ * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+ */
+export type RunAgentModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
  * @remarks
  *
- * Model configuration with parameters.
+ * Model configuration with parameters and retry settings.
  */
 export type RunAgentModelConfiguration2 = {
   /**
@@ -334,6 +348,10 @@ export type RunAgentModelConfiguration2 = {
    * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: RunAgentModelConfigurationParameters | undefined;
+  /**
+   * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+   */
+  retry?: RunAgentModelConfigurationRetry | undefined;
 };
 
 /**
@@ -2731,6 +2749,58 @@ export function runAgentModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
+export const RunAgentModelConfigurationRetry$inboundSchema: z.ZodType<
+  RunAgentModelConfigurationRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type RunAgentModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const RunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  RunAgentModelConfigurationRetry$Outbound,
+  z.ZodTypeDef,
+  RunAgentModelConfigurationRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function runAgentModelConfigurationRetryToJSON(
+  runAgentModelConfigurationRetry: RunAgentModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    RunAgentModelConfigurationRetry$outboundSchema.parse(
+      runAgentModelConfigurationRetry,
+    ),
+  );
+}
+export function runAgentModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentModelConfigurationRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentModelConfigurationRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentModelConfiguration2$inboundSchema: z.ZodType<
   RunAgentModelConfiguration2,
   z.ZodTypeDef,
@@ -2739,11 +2809,13 @@ export const RunAgentModelConfiguration2$inboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => RunAgentModelConfigurationParameters$inboundSchema)
     .optional(),
+  retry: z.lazy(() => RunAgentModelConfigurationRetry$inboundSchema).optional(),
 });
 /** @internal */
 export type RunAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: RunAgentModelConfigurationParameters$Outbound | undefined;
+  retry?: RunAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -2754,6 +2826,8 @@ export const RunAgentModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => RunAgentModelConfigurationParameters$outboundSchema)
+    .optional(),
+  retry: z.lazy(() => RunAgentModelConfigurationRetry$outboundSchema)
     .optional(),
 });
 

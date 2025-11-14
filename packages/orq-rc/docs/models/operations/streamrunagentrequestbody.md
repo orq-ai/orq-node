@@ -9,6 +9,16 @@ let value: StreamRunAgentRequestBody = {
   key: "<key>",
   model: {
     id: "<id>",
+    retry: {
+      count: 3,
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
   },
   role: "<value>",
   instructions: "<value>",
