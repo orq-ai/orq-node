@@ -3,31 +3,31 @@
 
 ## Supported Types
 
-### `components.DeploymentsAnnotations1`
+### `components.InvokeDeploymentRequestAnnotations1`
 
 ```typescript
-const value: components.DeploymentsAnnotations1 = {
+const value: components.InvokeDeploymentRequestAnnotations1 = {
   type: "file_citation",
   text: "<value>",
   fileCitation: {
     fileId: "<id>",
   },
-  startIndex: 850856,
-  endIndex: 168346,
+  startIndex: 102759,
+  endIndex: 928876,
 };
 ```
 
-### `components.DeploymentsAnnotations2`
+### `components.InvokeDeploymentRequestAnnotations2`
 
 ```typescript
-const value: components.DeploymentsAnnotations2 = {
+const value: components.InvokeDeploymentRequestAnnotations2 = {
   type: "file_path",
   text: "<value>",
   filePath: {
     fileId: "<id>",
   },
-  startIndex: 875798,
-  endIndex: 835446,
+  startIndex: 736692,
+  endIndex: 171464,
 };
 ```
 

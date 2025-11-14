@@ -11,14 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `components.DeploymentsContent2[]`
+### `components.InvokeDeploymentRequestContent2[]`
 
 ```typescript
-const value: components.DeploymentsContent2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: components.InvokeDeploymentRequestContent2[] = [];
 ```
 

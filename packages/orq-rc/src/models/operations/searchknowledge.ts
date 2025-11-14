@@ -68,7 +68,10 @@ export type SearchKnowledgeOrGte = {
   gte: number;
 };
 
-export type SearchKnowledgeOr3 = {
+/**
+ * Greater than
+ */
+export type SearchKnowledgeOrGt = {
   gt: number;
 };
 
@@ -93,7 +96,7 @@ export type SearchKnowledgeOrEq = {
 export type SearchKnowledgeFilterByOr =
   | SearchKnowledgeOrEq
   | SearchKnowledgeOrNe
-  | SearchKnowledgeOr3
+  | SearchKnowledgeOrGt
   | SearchKnowledgeOrGte
   | SearchKnowledgeOrLt
   | SearchKnowledgeOrLte
@@ -110,7 +113,7 @@ export type FilterByOr = {
       [k: string]:
         | SearchKnowledgeOrEq
         | SearchKnowledgeOrNe
-        | SearchKnowledgeOr3
+        | SearchKnowledgeOrGt
         | SearchKnowledgeOrGte
         | SearchKnowledgeOrLt
         | SearchKnowledgeOrLte
@@ -167,7 +170,10 @@ export type SearchKnowledgeAndGte = {
   gte: number;
 };
 
-export type SearchKnowledgeAnd3 = {
+/**
+ * Greater than
+ */
+export type SearchKnowledgeAndGt = {
   gt: number;
 };
 
@@ -192,7 +198,7 @@ export type SearchKnowledgeAndEq = {
 export type SearchKnowledgeFilterByAnd =
   | SearchKnowledgeAndEq
   | SearchKnowledgeAndNe
-  | SearchKnowledgeAnd3
+  | SearchKnowledgeAndGt
   | SearchKnowledgeAndGte
   | SearchKnowledgeAndLt
   | SearchKnowledgeAndLte
@@ -209,7 +215,7 @@ export type FilterByAnd = {
       [k: string]:
         | SearchKnowledgeAndEq
         | SearchKnowledgeAndNe
-        | SearchKnowledgeAnd3
+        | SearchKnowledgeAndGt
         | SearchKnowledgeAndGte
         | SearchKnowledgeAndLt
         | SearchKnowledgeAndLte
@@ -266,7 +272,10 @@ export type SearchKnowledge1Gte = {
   gte: number;
 };
 
-export type SearchKnowledge13 = {
+/**
+ * Greater than
+ */
+export type SearchKnowledge1Gt = {
   gt: number;
 };
 
@@ -291,7 +300,7 @@ export type SearchKnowledge1Eq = {
 export type FilterBy1 =
   | SearchKnowledge1Eq
   | SearchKnowledge1Ne
-  | SearchKnowledge13
+  | SearchKnowledge1Gt
   | SearchKnowledge1Gte
   | SearchKnowledge1Lt
   | SearchKnowledge1Lte
@@ -306,7 +315,7 @@ export type FilterBy = FilterByAnd | FilterByOr | {
   [k: string]:
     | SearchKnowledge1Eq
     | SearchKnowledge1Ne
-    | SearchKnowledge13
+    | SearchKnowledge1Gt
     | SearchKnowledge1Gte
     | SearchKnowledge1Lt
     | SearchKnowledge1Lte
@@ -388,7 +397,7 @@ export type SearchKnowledgeRequestBody = {
     [k: string]:
       | SearchKnowledge1Eq
       | SearchKnowledge1Ne
-      | SearchKnowledge13
+      | SearchKnowledge1Gt
       | SearchKnowledge1Gte
       | SearchKnowledge1Lt
       | SearchKnowledge1Lte
@@ -753,41 +762,41 @@ export function searchKnowledgeOrGteFromJSON(
 }
 
 /** @internal */
-export const SearchKnowledgeOr3$inboundSchema: z.ZodType<
-  SearchKnowledgeOr3,
+export const SearchKnowledgeOrGt$inboundSchema: z.ZodType<
+  SearchKnowledgeOrGt,
   z.ZodTypeDef,
   unknown
 > = z.object({
   gt: z.number(),
 });
 /** @internal */
-export type SearchKnowledgeOr3$Outbound = {
+export type SearchKnowledgeOrGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const SearchKnowledgeOr3$outboundSchema: z.ZodType<
-  SearchKnowledgeOr3$Outbound,
+export const SearchKnowledgeOrGt$outboundSchema: z.ZodType<
+  SearchKnowledgeOrGt$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeOr3
+  SearchKnowledgeOrGt
 > = z.object({
   gt: z.number(),
 });
 
-export function searchKnowledgeOr3ToJSON(
-  searchKnowledgeOr3: SearchKnowledgeOr3,
+export function searchKnowledgeOrGtToJSON(
+  searchKnowledgeOrGt: SearchKnowledgeOrGt,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeOr3$outboundSchema.parse(searchKnowledgeOr3),
+    SearchKnowledgeOrGt$outboundSchema.parse(searchKnowledgeOrGt),
   );
 }
-export function searchKnowledgeOr3FromJSON(
+export function searchKnowledgeOrGtFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeOr3, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeOrGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeOr3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOr3' from JSON`,
+    (x) => SearchKnowledgeOrGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrGt' from JSON`,
   );
 }
 
@@ -947,7 +956,7 @@ export const SearchKnowledgeFilterByOr$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledgeOrEq$inboundSchema),
   z.lazy(() => SearchKnowledgeOrNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeOr3$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrGt$inboundSchema),
   z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
   z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
   z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
@@ -959,7 +968,7 @@ export const SearchKnowledgeFilterByOr$inboundSchema: z.ZodType<
 export type SearchKnowledgeFilterByOr$Outbound =
   | SearchKnowledgeOrEq$Outbound
   | SearchKnowledgeOrNe$Outbound
-  | SearchKnowledgeOr3$Outbound
+  | SearchKnowledgeOrGt$Outbound
   | SearchKnowledgeOrGte$Outbound
   | SearchKnowledgeOrLt$Outbound
   | SearchKnowledgeOrLte$Outbound
@@ -975,7 +984,7 @@ export const SearchKnowledgeFilterByOr$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledgeOrEq$outboundSchema),
   z.lazy(() => SearchKnowledgeOrNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeOr3$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrGt$outboundSchema),
   z.lazy(() => SearchKnowledgeOrGte$outboundSchema),
   z.lazy(() => SearchKnowledgeOrLt$outboundSchema),
   z.lazy(() => SearchKnowledgeOrLte$outboundSchema),
@@ -1013,7 +1022,7 @@ export const FilterByOr$inboundSchema: z.ZodType<
       z.lazy(() =>
         SearchKnowledgeOrNe$inboundSchema
       ),
-      z.lazy(() => SearchKnowledgeOr3$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrGt$inboundSchema),
       z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
       z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
       z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
@@ -1030,7 +1039,7 @@ export type FilterByOr$Outbound = {
       [k: string]:
         | SearchKnowledgeOrEq$Outbound
         | SearchKnowledgeOrNe$Outbound
-        | SearchKnowledgeOr3$Outbound
+        | SearchKnowledgeOrGt$Outbound
         | SearchKnowledgeOrGte$Outbound
         | SearchKnowledgeOrLt$Outbound
         | SearchKnowledgeOrLte$Outbound
@@ -1053,7 +1062,7 @@ export const FilterByOr$outboundSchema: z.ZodType<
       z.lazy(() =>
         SearchKnowledgeOrNe$outboundSchema
       ),
-      z.lazy(() => SearchKnowledgeOr3$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrGt$outboundSchema),
       z.lazy(() => SearchKnowledgeOrGte$outboundSchema),
       z.lazy(() => SearchKnowledgeOrLt$outboundSchema),
       z.lazy(() => SearchKnowledgeOrLte$outboundSchema),
@@ -1382,41 +1391,41 @@ export function searchKnowledgeAndGteFromJSON(
 }
 
 /** @internal */
-export const SearchKnowledgeAnd3$inboundSchema: z.ZodType<
-  SearchKnowledgeAnd3,
+export const SearchKnowledgeAndGt$inboundSchema: z.ZodType<
+  SearchKnowledgeAndGt,
   z.ZodTypeDef,
   unknown
 > = z.object({
   gt: z.number(),
 });
 /** @internal */
-export type SearchKnowledgeAnd3$Outbound = {
+export type SearchKnowledgeAndGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const SearchKnowledgeAnd3$outboundSchema: z.ZodType<
-  SearchKnowledgeAnd3$Outbound,
+export const SearchKnowledgeAndGt$outboundSchema: z.ZodType<
+  SearchKnowledgeAndGt$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeAnd3
+  SearchKnowledgeAndGt
 > = z.object({
   gt: z.number(),
 });
 
-export function searchKnowledgeAnd3ToJSON(
-  searchKnowledgeAnd3: SearchKnowledgeAnd3,
+export function searchKnowledgeAndGtToJSON(
+  searchKnowledgeAndGt: SearchKnowledgeAndGt,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeAnd3$outboundSchema.parse(searchKnowledgeAnd3),
+    SearchKnowledgeAndGt$outboundSchema.parse(searchKnowledgeAndGt),
   );
 }
-export function searchKnowledgeAnd3FromJSON(
+export function searchKnowledgeAndGtFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeAnd3, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeAndGt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeAnd3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAnd3' from JSON`,
+    (x) => SearchKnowledgeAndGt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndGt' from JSON`,
   );
 }
 
@@ -1576,7 +1585,7 @@ export const SearchKnowledgeFilterByAnd$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledgeAndEq$inboundSchema),
   z.lazy(() => SearchKnowledgeAndNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeAnd3$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndGt$inboundSchema),
   z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
   z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
   z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
@@ -1588,7 +1597,7 @@ export const SearchKnowledgeFilterByAnd$inboundSchema: z.ZodType<
 export type SearchKnowledgeFilterByAnd$Outbound =
   | SearchKnowledgeAndEq$Outbound
   | SearchKnowledgeAndNe$Outbound
-  | SearchKnowledgeAnd3$Outbound
+  | SearchKnowledgeAndGt$Outbound
   | SearchKnowledgeAndGte$Outbound
   | SearchKnowledgeAndLt$Outbound
   | SearchKnowledgeAndLte$Outbound
@@ -1604,7 +1613,7 @@ export const SearchKnowledgeFilterByAnd$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledgeAndEq$outboundSchema),
   z.lazy(() => SearchKnowledgeAndNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeAnd3$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndGt$outboundSchema),
   z.lazy(() => SearchKnowledgeAndGte$outboundSchema),
   z.lazy(() => SearchKnowledgeAndLt$outboundSchema),
   z.lazy(() => SearchKnowledgeAndLte$outboundSchema),
@@ -1642,7 +1651,7 @@ export const FilterByAnd$inboundSchema: z.ZodType<
       z.lazy(() =>
         SearchKnowledgeAndNe$inboundSchema
       ),
-      z.lazy(() => SearchKnowledgeAnd3$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndGt$inboundSchema),
       z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
       z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
       z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
@@ -1659,7 +1668,7 @@ export type FilterByAnd$Outbound = {
       [k: string]:
         | SearchKnowledgeAndEq$Outbound
         | SearchKnowledgeAndNe$Outbound
-        | SearchKnowledgeAnd3$Outbound
+        | SearchKnowledgeAndGt$Outbound
         | SearchKnowledgeAndGte$Outbound
         | SearchKnowledgeAndLt$Outbound
         | SearchKnowledgeAndLte$Outbound
@@ -1682,7 +1691,7 @@ export const FilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() =>
         SearchKnowledgeAndNe$outboundSchema
       ),
-      z.lazy(() => SearchKnowledgeAnd3$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndGt$outboundSchema),
       z.lazy(() => SearchKnowledgeAndGte$outboundSchema),
       z.lazy(() => SearchKnowledgeAndLt$outboundSchema),
       z.lazy(() => SearchKnowledgeAndLte$outboundSchema),
@@ -2011,41 +2020,41 @@ export function searchKnowledge1GteFromJSON(
 }
 
 /** @internal */
-export const SearchKnowledge13$inboundSchema: z.ZodType<
-  SearchKnowledge13,
+export const SearchKnowledge1Gt$inboundSchema: z.ZodType<
+  SearchKnowledge1Gt,
   z.ZodTypeDef,
   unknown
 > = z.object({
   gt: z.number(),
 });
 /** @internal */
-export type SearchKnowledge13$Outbound = {
+export type SearchKnowledge1Gt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const SearchKnowledge13$outboundSchema: z.ZodType<
-  SearchKnowledge13$Outbound,
+export const SearchKnowledge1Gt$outboundSchema: z.ZodType<
+  SearchKnowledge1Gt$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge13
+  SearchKnowledge1Gt
 > = z.object({
   gt: z.number(),
 });
 
-export function searchKnowledge13ToJSON(
-  searchKnowledge13: SearchKnowledge13,
+export function searchKnowledge1GtToJSON(
+  searchKnowledge1Gt: SearchKnowledge1Gt,
 ): string {
   return JSON.stringify(
-    SearchKnowledge13$outboundSchema.parse(searchKnowledge13),
+    SearchKnowledge1Gt$outboundSchema.parse(searchKnowledge1Gt),
   );
 }
-export function searchKnowledge13FromJSON(
+export function searchKnowledge1GtFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge13, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Gt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge13$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge13' from JSON`,
+    (x) => SearchKnowledge1Gt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Gt' from JSON`,
   );
 }
 
@@ -2205,7 +2214,7 @@ export const FilterBy1$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledge1Eq$inboundSchema),
   z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-  z.lazy(() => SearchKnowledge13$inboundSchema),
+  z.lazy(() => SearchKnowledge1Gt$inboundSchema),
   z.lazy(() => SearchKnowledge1Gte$inboundSchema),
   z.lazy(() => SearchKnowledge1Lt$inboundSchema),
   z.lazy(() => SearchKnowledge1Lte$inboundSchema),
@@ -2217,7 +2226,7 @@ export const FilterBy1$inboundSchema: z.ZodType<
 export type FilterBy1$Outbound =
   | SearchKnowledge1Eq$Outbound
   | SearchKnowledge1Ne$Outbound
-  | SearchKnowledge13$Outbound
+  | SearchKnowledge1Gt$Outbound
   | SearchKnowledge1Gte$Outbound
   | SearchKnowledge1Lt$Outbound
   | SearchKnowledge1Lte$Outbound
@@ -2233,7 +2242,7 @@ export const FilterBy1$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => SearchKnowledge1Eq$outboundSchema),
   z.lazy(() => SearchKnowledge1Ne$outboundSchema),
-  z.lazy(() => SearchKnowledge13$outboundSchema),
+  z.lazy(() => SearchKnowledge1Gt$outboundSchema),
   z.lazy(() => SearchKnowledge1Gte$outboundSchema),
   z.lazy(() => SearchKnowledge1Lt$outboundSchema),
   z.lazy(() => SearchKnowledge1Lte$outboundSchema),
@@ -2266,7 +2275,7 @@ export const FilterBy$inboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => SearchKnowledge1Eq$inboundSchema),
     z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-    z.lazy(() => SearchKnowledge13$inboundSchema),
+    z.lazy(() => SearchKnowledge1Gt$inboundSchema),
     z.lazy(() => SearchKnowledge1Gte$inboundSchema),
     z.lazy(() => SearchKnowledge1Lt$inboundSchema),
     z.lazy(() => SearchKnowledge1Lte$inboundSchema),
@@ -2280,7 +2289,7 @@ export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
   [k: string]:
     | SearchKnowledge1Eq$Outbound
     | SearchKnowledge1Ne$Outbound
-    | SearchKnowledge13$Outbound
+    | SearchKnowledge1Gt$Outbound
     | SearchKnowledge1Gte$Outbound
     | SearchKnowledge1Lt$Outbound
     | SearchKnowledge1Lte$Outbound
@@ -2300,7 +2309,7 @@ export const FilterBy$outboundSchema: z.ZodType<
   z.record(z.union([
     z.lazy(() => SearchKnowledge1Eq$outboundSchema),
     z.lazy(() => SearchKnowledge1Ne$outboundSchema),
-    z.lazy(() => SearchKnowledge13$outboundSchema),
+    z.lazy(() => SearchKnowledge1Gt$outboundSchema),
     z.lazy(() => SearchKnowledge1Gte$outboundSchema),
     z.lazy(() => SearchKnowledge1Lt$outboundSchema),
     z.lazy(() => SearchKnowledge1Lte$outboundSchema),
@@ -2480,7 +2489,7 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
     z.record(z.union([
       z.lazy(() => SearchKnowledge1Eq$inboundSchema),
       z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-      z.lazy(() => SearchKnowledge13$inboundSchema),
+      z.lazy(() => SearchKnowledge1Gt$inboundSchema),
       z.lazy(() => SearchKnowledge1Gte$inboundSchema),
       z.lazy(() => SearchKnowledge1Lt$inboundSchema),
       z.lazy(() => SearchKnowledge1Lte$inboundSchema),
@@ -2512,7 +2521,7 @@ export type SearchKnowledgeRequestBody$Outbound = {
     [k: string]:
       | SearchKnowledge1Eq$Outbound
       | SearchKnowledge1Ne$Outbound
-      | SearchKnowledge13$Outbound
+      | SearchKnowledge1Gt$Outbound
       | SearchKnowledge1Gte$Outbound
       | SearchKnowledge1Lt$Outbound
       | SearchKnowledge1Lte$Outbound
@@ -2541,7 +2550,7 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
     z.record(z.union([
       z.lazy(() => SearchKnowledge1Eq$outboundSchema),
       z.lazy(() => SearchKnowledge1Ne$outboundSchema),
-      z.lazy(() => SearchKnowledge13$outboundSchema),
+      z.lazy(() => SearchKnowledge1Gt$outboundSchema),
       z.lazy(() => SearchKnowledge1Gte$outboundSchema),
       z.lazy(() => SearchKnowledge1Lt$outboundSchema),
       z.lazy(() => SearchKnowledge1Lte$outboundSchema),

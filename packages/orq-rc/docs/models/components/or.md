@@ -3,27 +3,27 @@
 
 ## Supported Types
 
-### `components.DeploymentsOrEq`
+### `components.InvokeDeploymentRequestOrEq`
 
 ```typescript
-const value: components.DeploymentsOrEq = {
-  eq: 9960.4,
+const value: components.InvokeDeploymentRequestOrEq = {
+  eq: "<value>",
 };
 ```
 
-### `components.DeploymentsOrNe`
+### `components.InvokeDeploymentRequestOrNe`
 
 ```typescript
-const value: components.DeploymentsOrNe = {
-  ne: 8296.56,
+const value: components.InvokeDeploymentRequestOrNe = {
+  ne: "<value>",
 };
 ```
 
-### `components.Or3`
+### `components.OrGt`
 
 ```typescript
-const value: components.Or3 = {
-  gt: 1544.58,
+const value: components.OrGt = {
+  gt: 4322.19,
 };
 ```
 
@@ -51,18 +51,20 @@ const value: components.OrLte = {
 };
 ```
 
-### `components.DeploymentsOrIn`
+### `components.InvokeDeploymentRequestOrIn`
 
 ```typescript
-const value: components.DeploymentsOrIn = {
-  in: [],
+const value: components.InvokeDeploymentRequestOrIn = {
+  in: [
+    5338.03,
+  ],
 };
 ```
 
-### `components.DeploymentsOrNin`
+### `components.InvokeDeploymentRequestOrNin`
 
 ```typescript
-const value: components.DeploymentsOrNin = {
+const value: components.InvokeDeploymentRequestOrNin = {
   nin: [],
 };
 ```
