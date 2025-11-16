@@ -56,23 +56,6 @@ export class Agents extends ClientSDK {
   }
 
   /**
-   * List all agents
-   *
-   * @remarks
-   * Retrieves a paginated list of all agents in your workspace. Each agent includes its configuration, primary model, and optional fallback model settings.
-   */
-  async list(
-    request?: operations.ListAgentsRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.ListAgentsResponseBody> {
-    return unwrapAsync(agentsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete an agent
    *
    * @remarks
@@ -151,6 +134,23 @@ export class Agents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ListAgentTasksResponseBody> {
     return unwrapAsync(agentsListTasks(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all agents
+   *
+   * @remarks
+   * Retrieves a paginated list of all agents in your workspace. Each agent includes its configuration, primary model, and optional fallback model settings.
+   */
+  async list(
+    request?: operations.ListAgentsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.ListAgentsResponseBody> {
+    return unwrapAsync(agentsList(
       this,
       request,
       options,

@@ -260,12 +260,12 @@ run();
 
 * [retrieveTask](docs/sdks/agents/README.md#retrievetask) - Retrieve a specific agent task
 * [create](docs/sdks/agents/README.md#create) - Create a new agent
-* [list](docs/sdks/agents/README.md#list) - List all agents
 * [delete](docs/sdks/agents/README.md#delete) - Delete an agent
 * [retrieve](docs/sdks/agents/README.md#retrieve) - Get an agent
 * [update](docs/sdks/agents/README.md#update) - Update an agent
 * [invoke](docs/sdks/agents/README.md#invoke) - Invoke an agent
 * [listTasks](docs/sdks/agents/README.md#listtasks) - List all tasks for an agent
+* [list](docs/sdks/agents/README.md#list) - List all agents
 * [run](docs/sdks/agents/README.md#run) - Run an agent
 * [streamRun](docs/sdks/agents/README.md#streamrun) - Run and stream agent execution
 * [stream](docs/sdks/agents/README.md#stream) - Stream agent execution events
