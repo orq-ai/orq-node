@@ -976,6 +976,7 @@ export type AgentToolInputRunSchema = {
 };
 
 export type AgentToolInputRunTools = {
+  id?: string | undefined;
   name: string;
   description?: string | undefined;
   schema: AgentToolInputRunSchema;
@@ -4709,12 +4710,14 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  id: z.string().default("01KA80WWD7NMYX8ETSY1KWYCGP"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
 });
 /** @internal */
 export type AgentToolInputRunTools$Outbound = {
+  id: string;
   name: string;
   description?: string | undefined;
   schema: AgentToolInputRunSchema$Outbound;
@@ -4726,6 +4729,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
+  id: z.string().default("01KA80WWD7NMYX8ETSY1KWYCGP"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

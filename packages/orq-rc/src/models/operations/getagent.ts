@@ -71,6 +71,10 @@ export type GetAgentTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
   requiresApproval?: boolean | undefined;
   conditions?: Array<GetAgentConditions> | undefined;
   /**
@@ -1036,6 +1040,7 @@ export const GetAgentTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => GetAgentConditions$inboundSchema))
     .optional(),
@@ -1054,6 +1059,7 @@ export type GetAgentTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<GetAgentConditions$Outbound> | undefined;
   mcpServer?: string | undefined;
@@ -1070,6 +1076,7 @@ export const GetAgentTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => GetAgentConditions$outboundSchema))
     .optional(),

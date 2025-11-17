@@ -1335,6 +1335,10 @@ export type UpdateAgentTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
   requiresApproval?: boolean | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
@@ -5878,6 +5882,7 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$inboundSchema))
     .optional(),
@@ -5896,6 +5901,7 @@ export type UpdateAgentTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<UpdateAgentConditions$Outbound> | undefined;
   mcpServer?: string | undefined;
@@ -5912,6 +5918,7 @@ export const UpdateAgentTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$outboundSchema))
     .optional(),

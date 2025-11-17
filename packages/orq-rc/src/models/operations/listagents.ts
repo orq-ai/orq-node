@@ -84,6 +84,10 @@ export type ListAgentsTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
   requiresApproval?: boolean | undefined;
   conditions?: Array<ListAgentsConditions> | undefined;
   /**
@@ -1081,6 +1085,7 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
     .optional(),
@@ -1099,6 +1104,7 @@ export type ListAgentsTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<ListAgentsConditions$Outbound> | undefined;
   mcpServer?: string | undefined;
@@ -1115,6 +1121,7 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => ListAgentsConditions$outboundSchema))
     .optional(),

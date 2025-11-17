@@ -71,6 +71,10 @@ export type DuplicateAgentTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
   requiresApproval?: boolean | undefined;
   conditions?: Array<DuplicateAgentConditions> | undefined;
   /**
@@ -1049,6 +1053,7 @@ export const DuplicateAgentTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => DuplicateAgentConditions$inboundSchema))
     .optional(),
@@ -1067,6 +1072,7 @@ export type DuplicateAgentTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<DuplicateAgentConditions$Outbound> | undefined;
   mcpServer?: string | undefined;
@@ -1083,6 +1089,7 @@ export const DuplicateAgentTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => DuplicateAgentConditions$outboundSchema))
     .optional(),

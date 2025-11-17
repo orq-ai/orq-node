@@ -17,6 +17,7 @@ let value: Tools = {
 
 | Field                                                  | Type                                                   | Required                                               | Description                                            |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `id`                                                   | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |
 | `name`                                                 | *string*                                               | :heavy_check_mark:                                     | N/A                                                    |
 | `description`                                          | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |
 | `schema`                                               | [operations.Schema](../../models/operations/schema.md) | :heavy_check_mark:                                     | N/A                                                    |
