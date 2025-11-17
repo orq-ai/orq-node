@@ -1302,10 +1302,6 @@ export type CreateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
-   * Optional MCP server reference for tools from MCP servers
-   */
-  mcpServer?: string | undefined;
-  /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
   timeout?: number | undefined;
@@ -5430,7 +5426,6 @@ export const CreateAgentTools$inboundSchema: z.ZodType<
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -5448,7 +5443,6 @@ export type CreateAgentTools$Outbound = {
   description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<Conditions$Outbound> | undefined;
-  mcpServer?: string | undefined;
   timeout: number;
 };
 
@@ -5465,7 +5459,6 @@ export const CreateAgentTools$outboundSchema: z.ZodType<
   description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => Conditions$outboundSchema)).optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {

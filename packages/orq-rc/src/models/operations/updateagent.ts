@@ -1342,10 +1342,6 @@ export type UpdateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
-   * Optional MCP server reference for tools from MCP servers
-   */
-  mcpServer?: string | undefined;
-  /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
   timeout?: number | undefined;
@@ -5886,7 +5882,6 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$inboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -5904,7 +5899,6 @@ export type UpdateAgentTools$Outbound = {
   description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<UpdateAgentConditions$Outbound> | undefined;
-  mcpServer?: string | undefined;
   timeout: number;
 };
 
@@ -5922,7 +5916,6 @@ export const UpdateAgentTools$outboundSchema: z.ZodType<
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$outboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {

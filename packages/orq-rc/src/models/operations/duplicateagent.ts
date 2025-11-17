@@ -78,10 +78,6 @@ export type DuplicateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<DuplicateAgentConditions> | undefined;
   /**
-   * Optional MCP server reference for tools from MCP servers
-   */
-  mcpServer?: string | undefined;
-  /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
   timeout?: number | undefined;
@@ -1057,7 +1053,6 @@ export const DuplicateAgentTools$inboundSchema: z.ZodType<
   requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => DuplicateAgentConditions$inboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -1075,7 +1070,6 @@ export type DuplicateAgentTools$Outbound = {
   description?: string | undefined;
   requires_approval: boolean;
   conditions?: Array<DuplicateAgentConditions$Outbound> | undefined;
-  mcpServer?: string | undefined;
   timeout: number;
 };
 
@@ -1093,7 +1087,6 @@ export const DuplicateAgentTools$outboundSchema: z.ZodType<
   requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => DuplicateAgentConditions$outboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
