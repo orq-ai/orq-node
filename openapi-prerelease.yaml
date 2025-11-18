@@ -1254,7 +1254,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1262,7 +1262,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1397,7 +1397,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-18T08:38:00.990Z"
+                          default: "2025-11-18T09:59:12.811Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1405,7 +1405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:00.991Z"
+                              default: "2025-11-18T09:59:12.811Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1573,10 +1573,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1647,10 +1647,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1718,10 +1718,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1804,10 +1804,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1875,10 +1875,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2273,10 +2273,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2360,10 +2360,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-18T08:38:02.995Z"
+                              default: "2025-11-18T09:59:14.972Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2780,10 +2780,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2854,10 +2854,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2925,10 +2925,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3011,10 +3011,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3082,10 +3082,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3480,10 +3480,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3567,10 +3567,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3974,10 +3974,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4048,10 +4048,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4119,10 +4119,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4205,10 +4205,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4276,10 +4276,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4674,10 +4674,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4761,10 +4761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-18T08:38:02.995Z"
+                        default: "2025-11-18T09:59:14.972Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4940,7 +4940,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4948,7 +4948,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5084,7 +5084,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5092,7 +5092,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -16855,7 +16855,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -16956,7 +16956,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -17022,7 +17022,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -17086,7 +17086,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -17123,7 +17123,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAB1TG89PVTJ1SANBDSENRV6"
+                                          default: "01KAB6F6PSZ067TM6T46DRYPVZ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18336,7 +18336,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -18437,7 +18437,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -18503,7 +18503,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -18567,7 +18567,7 @@ paths:
                                 type: "string"
                                 minLength: 1
                                 maxLength: 64
-                                pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                                pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                                 description: "Unique key of the tool as it will be displayed in the UI"
                               "_id":
                                 type: "string"
@@ -18604,7 +18604,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAB1TG8YK824TRTBFAPQ8CHM"
+                                          default: "01KAB6F6Q86TCR9HKKNJK27NPW"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19306,7 +19306,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-18T08:38:03.855Z"
+                    default: "2025-11-18T09:59:15.992Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -19395,7 +19395,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-18T08:38:03.855Z"
+                          default: "2025-11-18T09:59:15.992Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -19463,7 +19463,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-18T08:38:03.855Z"
+                    default: "2025-11-18T09:59:15.992Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -23985,7 +23985,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAB1TGFBKGEPCX1WQ6WM3Q9Q"
+                              default: "tool_01KAB6F6XHQHCHH8GSRTNRPTSE"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23994,7 +23994,7 @@ paths:
                               type: "string"
                               minLength: 1
                               maxLength: 64
-                              pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                              pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                               description: "Unique key of the tool as it will be displayed in the UI"
                             "display_name":
                               type: "string"
@@ -24082,7 +24082,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAB1TGFCFHCKA9TH9BBFDSDF"
+                              default: "tool_01KAB6F6XKKXV6CDJ2JDNP3196"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24091,7 +24091,7 @@ paths:
                               type: "string"
                               minLength: 1
                               maxLength: 64
-                              pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                              pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                               description: "Unique key of the tool as it will be displayed in the UI"
                             "display_name":
                               type: "string"
@@ -24181,7 +24181,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAB1TGFEJ9RRNX0Z8J63BR5S"
+                              default: "tool_01KAB6F6XMR44FPR9SY81GSZNV"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24190,7 +24190,7 @@ paths:
                               type: "string"
                               minLength: 1
                               maxLength: 64
-                              pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                              pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                               description: "Unique key of the tool as it will be displayed in the UI"
                             "display_name":
                               type: "string"
@@ -24313,7 +24313,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAB1TGFKNXZ2932E1KD1GBER"
+                              default: "tool_01KAB6F6XRH1FK4RSTTN0GRZZR"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24322,7 +24322,7 @@ paths:
                               type: "string"
                               minLength: 1
                               maxLength: 64
-                              pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                              pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                               description: "Unique key of the tool as it will be displayed in the UI"
                             "display_name":
                               type: "string"
@@ -24387,7 +24387,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KAB1TGFN53CCXJ15RGY3WHFN"
+                                        default: "01KAB6F6XTJNKVWN7DXWDJ85EV"
                                       "name":
                                         type: "string"
                                       "description":
@@ -24436,7 +24436,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAB1TGFP9DB3NADCZ5R66ZSC"
+                              default: "tool_01KAB6F6XV6G00Z15KZABAFJSE"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24445,7 +24445,7 @@ paths:
                               type: "string"
                               minLength: 1
                               maxLength: 64
-                              pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                              pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                               description: "Unique key of the tool as it will be displayed in the UI"
                             "display_name":
                               type: "string"
@@ -24566,7 +24566,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -24642,7 +24642,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -24720,7 +24720,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -24831,7 +24831,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -24900,7 +24900,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -24977,7 +24977,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGB7S2CXJQBTMG9TQCR"
+                        default: "tool_01KAB6F6Y9CHPP89YR4WRY6FKN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24986,7 +24986,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -25074,7 +25074,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGDMY0TK5CY359PTK80"
+                        default: "tool_01KAB6F6YAMH0NSSNRR655SS7R"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25083,7 +25083,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -25173,7 +25173,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGFD37HTVCYQ7H8MVBA"
+                        default: "tool_01KAB6F6YKD555GWD4P7WDG24A"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25182,7 +25182,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -25305,7 +25305,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGK8RZ7BGPY2DZJFSTB"
+                        default: "tool_01KAB6F6YQFBVKSSWCKK2ZJVSP"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25314,7 +25314,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -25379,7 +25379,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAB1TGGMDJD899CQ26ZGM1FH"
+                                  default: "01KAB6F6YSN8CBME0A4G7J3FZ7"
                                 "name":
                                   type: "string"
                                 "description":
@@ -25428,7 +25428,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGNZ9T7NJPJ6P78XSE8"
+                        default: "tool_01KAB6F6YTA5396THMQDRWSEZA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25437,7 +25437,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -25564,7 +25564,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -25636,7 +25636,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -25710,7 +25710,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -25817,7 +25817,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -25866,7 +25866,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KAB1TGHBRY9FFWZN5BBXGRDP"
+                                default: "01KAB6F6ZMHKQV472SN0ABMWAT"
                               "name":
                                 type: "string"
                               "description":
@@ -25911,7 +25911,7 @@ paths:
                       type: "string"
                       minLength: 1
                       maxLength: 64
-                      pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                      pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                       description: "Unique key of the tool as it will be displayed in the UI"
                     "display_name":
                       type: "string"
@@ -25984,7 +25984,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGVZP2BGHHS0EVP4NSR"
+                        default: "tool_01KAB6F6Z4A8X86EH09H7PRYFJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25993,7 +25993,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26081,7 +26081,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGWGX7RV8YYFGJ2PT8T"
+                        default: "tool_01KAB6F6Z5K7M0D8R6FDSE6NP3"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26090,7 +26090,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26180,7 +26180,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGGYNPXFCDXHMJQEG3ET"
+                        default: "tool_01KAB6F6Z7MPKVF4PMTX64X26V"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26189,7 +26189,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26312,7 +26312,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGH0B9D7XAS0T2MXF05Q"
+                        default: "tool_01KAB6F6Z958WGX9TH51C0EP54"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26321,7 +26321,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26386,7 +26386,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAB1TGH1NYW0M0C1QS1921S5"
+                                  default: "01KAB6F6ZAY89E7E2KDMY9ZH6J"
                                 "name":
                                   type: "string"
                                 "description":
@@ -26435,7 +26435,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGH2RVKAYQ5WM8W41X7J"
+                        default: "tool_01KAB6F6ZB7YCGR75PH1X1DCCD"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26444,7 +26444,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26587,7 +26587,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHWGYV7FEJGR6G0WDVW"
+                        default: "tool_01KAB6F700SY26CZFZNTNPTBZY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26596,7 +26596,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26684,7 +26684,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHYTWK9C0AC7437C08V"
+                        default: "tool_01KAB6F701RZFTEJT94NJEG6G3"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26693,7 +26693,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26783,7 +26783,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHZABZP263GJ0HQBC98"
+                        default: "tool_01KAB6F709R40DC9CXS8X7MENS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26792,7 +26792,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26915,7 +26915,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGJ1N1CJH3XA099VKYG7"
+                        default: "tool_01KAB6F70B80Z82MV3560MNHTN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26924,7 +26924,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -26989,7 +26989,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAB1TGJ12368FA930CBFQ5HZ"
+                                  default: "01KAB6F70C2RYYSKEY766BP9P4"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27038,7 +27038,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGJ28YN5KZ3NPEGMPF2W"
+                        default: "tool_01KAB6F70DMX622PBZGWMS39PF"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27047,7 +27047,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27160,7 +27160,7 @@ paths:
                   type: "string"
                   minLength: 1
                   maxLength: 64
-                  pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                  pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                   description: "Unique key of the tool as it will be displayed in the UI"
                 "display_name":
                   type: "string"
@@ -27182,7 +27182,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHNM52QRHY0FHKXMTRJ"
+                        default: "tool_01KAB6F6ZQ4RZJZX4ZR83GNQFR"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27191,7 +27191,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27279,7 +27279,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHPVCQGZDNKJSM8SCMQ"
+                        default: "tool_01KAB6F6ZS4G9CN1DCKR5HE0NZ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27288,7 +27288,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27378,7 +27378,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHQHV6QETE29NB6B937"
+                        default: "tool_01KAB6F6ZTN48NGFMY4M440E4T"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27387,7 +27387,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27510,7 +27510,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHS1F81DNVYVYMJS1BS"
+                        default: "tool_01KAB6F6ZWY66W6N814J7EJ6WR"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27519,7 +27519,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27584,7 +27584,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAB1TGHTXR8PJ2MJVC5XC435"
+                                  default: "01KAB6F6ZXAS28G8SQCX56N6A4"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27633,7 +27633,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAB1TGHVWCMVPEPMBHXER7ZR"
+                        default: "tool_01KAB6F6ZY8ZQ48MCS24YFA0KW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27642,7 +27642,7 @@ paths:
                         type: "string"
                         minLength: 1
                         maxLength: 64
-                        pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                        pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                         description: "Unique key of the tool as it will be displayed in the UI"
                       "display_name":
                         type: "string"
@@ -27771,7 +27771,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KAB1TGJ4XA12AQ01Y8ZWNYGR"
+                            default: "tool_01KAB6F70FY4XJD6XDNC9FEB77"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27780,7 +27780,7 @@ paths:
                             type: "string"
                             minLength: 1
                             maxLength: 64
-                            pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                            pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                             description: "Unique key of the tool as it will be displayed in the UI"
                           "display_name":
                             type: "string"
@@ -27868,7 +27868,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KAB1TGJ5K9333S7BWZM9KX9A"
+                            default: "tool_01KAB6F70G6J2X8BNXF0Q6NVQC"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27877,7 +27877,7 @@ paths:
                             type: "string"
                             minLength: 1
                             maxLength: 64
-                            pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                            pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                             description: "Unique key of the tool as it will be displayed in the UI"
                           "display_name":
                             type: "string"
@@ -27967,7 +27967,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KAB1TGJ7M9SJCMBHYMDGP8PV"
+                            default: "tool_01KAB6F70JPSFNGPFRMDMMVR5Z"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27976,7 +27976,7 @@ paths:
                             type: "string"
                             minLength: 1
                             maxLength: 64
-                            pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                            pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                             description: "Unique key of the tool as it will be displayed in the UI"
                           "display_name":
                             type: "string"
@@ -28099,7 +28099,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KAB1TGJAEF1S3Z7B87036NYG"
+                            default: "tool_01KAB6F70NBX5KRCTWXMETP9NY"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28108,7 +28108,7 @@ paths:
                             type: "string"
                             minLength: 1
                             maxLength: 64
-                            pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                            pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                             description: "Unique key of the tool as it will be displayed in the UI"
                           "display_name":
                             type: "string"
@@ -28173,7 +28173,7 @@ paths:
                                   properties:
                                     "id":
                                       type: "string"
-                                      default: "01KAB1TGJCAFM0GJM63XST0T7P"
+                                      default: "01KAB6F70QJFQVJNQ4P8CV2081"
                                     "name":
                                       type: "string"
                                     "description":
@@ -28222,7 +28222,7 @@ paths:
                         properties:
                           "_id":
                             type: "string"
-                            default: "tool_01KAB1TGJD5H6G0G42QSV87A5J"
+                            default: "tool_01KAB6F70RY6NXMPTWE7GCSX6E"
                           "path":
                             type: "string"
                             description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28231,7 +28231,7 @@ paths:
                             type: "string"
                             minLength: 1
                             maxLength: 64
-                            pattern: "^[A-Za-z]([A-Za-z0-9]*([_-][A-Za-z0-9]+)*)?$"
+                            pattern: "^[a-z]([a-z0-9]*([_-][a-z0-9]+)*)?$"
                             description: "Unique key of the tool as it will be displayed in the UI"
                           "display_name":
                             type: "string"
@@ -28516,7 +28516,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-18T08:38:01.308Z"
+                          default: "2025-11-18T09:59:13.230Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -28524,7 +28524,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:01.308Z"
+                              default: "2025-11-18T09:59:13.230Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -28718,7 +28718,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:01.308Z"
+                    default: "2025-11-18T09:59:13.230Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28726,7 +28726,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:01.308Z"
+                        default: "2025-11-18T09:59:13.230Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28860,7 +28860,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:01.308Z"
+                    default: "2025-11-18T09:59:13.230Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28868,7 +28868,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:01.308Z"
+                        default: "2025-11-18T09:59:13.230Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -29028,7 +29028,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:01.308Z"
+                    default: "2025-11-18T09:59:13.230Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -29036,7 +29036,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:01.308Z"
+                        default: "2025-11-18T09:59:13.230Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30939,7 +30939,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KAB1TGN0G7NZJ4X01N6N32G6"
+                          default: "01KAB6F73NSF08HRW9C8657FVJ"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -31105,7 +31105,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAB1TGN47491SVA9STS1GEM4"
+                    default: "01KAB6F73YN37XGZA2VZRTM6BF"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31201,7 +31201,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAB1TGN2DBMCE860W99DNV7Q"
+                    default: "01KAB6F73TR6YZ39DHREPD5FKV"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31333,7 +31333,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAB1TGN7ZYTMWZ9NNFREFXEA"
+                    default: "01KAB6F741BFHECGQV895AJA86"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -34124,7 +34124,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-18T08:38:00.990Z"
+                          default: "2025-11-18T09:59:12.811Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34132,7 +34132,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:00.991Z"
+                              default: "2025-11-18T09:59:12.811Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34268,7 +34268,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34276,7 +34276,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34399,7 +34399,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34407,7 +34407,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34560,7 +34560,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34568,7 +34568,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35038,7 +35038,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-18T08:38:11.440Z"
+                                    default: "2025-11-18T09:59:24.098Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35078,7 +35078,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-18T08:38:11.441Z"
+                                    default: "2025-11-18T09:59:24.099Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35118,7 +35118,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-18T08:38:11.441Z"
+                                    default: "2025-11-18T09:59:24.099Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35154,7 +35154,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-18T08:38:00.990Z"
+                          default: "2025-11-18T09:59:12.811Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35162,7 +35162,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:00.991Z"
+                              default: "2025-11-18T09:59:12.811Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35922,7 +35922,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-18T08:38:11.465Z"
+                                default: "2025-11-18T09:59:24.126Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35962,7 +35962,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-18T08:38:11.465Z"
+                                default: "2025-11-18T09:59:24.126Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36002,7 +36002,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-18T08:38:11.466Z"
+                                default: "2025-11-18T09:59:24.127Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36038,7 +36038,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-18T08:38:00.990Z"
+                      default: "2025-11-18T09:59:12.811Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -36046,7 +36046,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-18T08:38:00.991Z"
+                          default: "2025-11-18T09:59:12.811Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36460,7 +36460,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.448Z"
+                              default: "2025-11-18T09:59:24.114Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36500,7 +36500,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.453Z"
+                              default: "2025-11-18T09:59:24.115Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36540,7 +36540,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.454Z"
+                              default: "2025-11-18T09:59:24.116Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36576,7 +36576,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36584,7 +36584,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37342,7 +37342,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.492Z"
+                              default: "2025-11-18T09:59:24.154Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37382,7 +37382,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.493Z"
+                              default: "2025-11-18T09:59:24.154Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37422,7 +37422,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-18T08:38:11.493Z"
+                              default: "2025-11-18T09:59:24.154Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37458,7 +37458,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-18T08:38:00.990Z"
+                    default: "2025-11-18T09:59:12.811Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37466,7 +37466,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-18T08:38:00.991Z"
+                        default: "2025-11-18T09:59:12.811Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
