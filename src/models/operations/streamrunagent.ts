@@ -148,6 +148,20 @@ export type StreamRunAgentModelType = ClosedEnum<
   typeof StreamRunAgentModelType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const StreamRunAgentModelThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type StreamRunAgentModelThinkingLevel = ClosedEnum<
+  typeof StreamRunAgentModelThinkingLevel
+>;
+
 export type StreamRunAgentModelThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -157,6 +171,10 @@ export type StreamRunAgentModelThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: StreamRunAgentModelThinkingLevel | undefined;
 };
 
 /**
@@ -488,6 +506,20 @@ export type StreamRunAgentFallbackModelsType = ClosedEnum<
   typeof StreamRunAgentFallbackModelsType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const StreamRunAgentFallbackModelsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type StreamRunAgentFallbackModelsThinkingLevel = ClosedEnum<
+  typeof StreamRunAgentFallbackModelsThinkingLevel
+>;
+
 export type StreamRunAgentFallbackModelsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -497,6 +529,10 @@ export type StreamRunAgentFallbackModelsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: StreamRunAgentFallbackModelsThinkingLevel | undefined;
 };
 
 /**
@@ -1910,6 +1946,15 @@ export const StreamRunAgentModelType$outboundSchema: z.ZodNativeEnum<
 > = StreamRunAgentModelType$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentModelThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelThinkingLevel
+> = z.nativeEnum(StreamRunAgentModelThinkingLevel);
+/** @internal */
+export const StreamRunAgentModelThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentModelThinkingLevel
+> = StreamRunAgentModelThinkingLevel$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentModelThinking$inboundSchema: z.ZodType<
   StreamRunAgentModelThinking,
   z.ZodTypeDef,
@@ -1917,15 +1962,18 @@ export const StreamRunAgentModelThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentModelType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: StreamRunAgentModelThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type StreamRunAgentModelThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1936,9 +1984,11 @@ export const StreamRunAgentModelThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentModelType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: StreamRunAgentModelThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -2871,6 +2921,15 @@ export const StreamRunAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
 > = StreamRunAgentFallbackModelsType$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentFallbackModelsThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelsThinkingLevel> = z
+    .nativeEnum(StreamRunAgentFallbackModelsThinkingLevel);
+/** @internal */
+export const StreamRunAgentFallbackModelsThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelsThinkingLevel> =
+    StreamRunAgentFallbackModelsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentFallbackModelsThinking$inboundSchema: z.ZodType<
   StreamRunAgentFallbackModelsThinking,
   z.ZodTypeDef,
@@ -2878,15 +2937,19 @@ export const StreamRunAgentFallbackModelsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentFallbackModelsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: StreamRunAgentFallbackModelsThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type StreamRunAgentFallbackModelsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2897,9 +2960,12 @@ export const StreamRunAgentFallbackModelsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentFallbackModelsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: StreamRunAgentFallbackModelsThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 

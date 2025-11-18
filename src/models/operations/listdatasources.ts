@@ -20,10 +20,6 @@ export type ListDatasourcesRequest = {
    */
   knowledgeId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
-  /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
   startingAfter?: string | undefined;
@@ -35,6 +31,10 @@ export type ListDatasourcesRequest = {
    * Search query to find datasources by name.
    */
   q?: string | undefined;
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
+  limit?: number | undefined;
   /**
    * Filter datasources by status.
    */
@@ -148,10 +148,10 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   knowledge_id: z.string(),
-  limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
   q: z.string().optional(),
+  limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -163,10 +163,10 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
-  limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   q?: string | undefined;
+  limit: number;
   status?: Array<string> | string | undefined;
 };
 
@@ -177,10 +177,10 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   ListDatasourcesRequest
 > = z.object({
   knowledgeId: z.string(),
-  limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   q: z.string().optional(),
+  limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -231,7 +231,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KA6PZ7SEXAZ17JJ379J3XYR5"),
+  _id: z.string().default("01KACG31AJJHNAN9FCDRCJDEWE"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -274,7 +274,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01KA6PZ7SEXAZ17JJ379J3XYR5"),
+  id: z.string().default("01KACG31AJJHNAN9FCDRCJDEWE"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

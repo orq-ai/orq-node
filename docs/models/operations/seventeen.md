@@ -5,11 +5,13 @@
 ```typescript
 import { Seventeen } from "@orq-ai/node/models/operations";
 
-let value: Seventeen = "jina/jina-embeddings-v2-base-es";
+let value: Seventeen = {
+  type: "moderations_openai",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"jina/jina-embeddings-v2-base-es"
-```
+| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody517type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |

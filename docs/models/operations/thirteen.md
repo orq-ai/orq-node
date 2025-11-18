@@ -5,11 +5,15 @@
 ```typescript
 import { Thirteen } from "@orq-ai/node/models/operations";
 
-let value: Thirteen = "google/multimodalembedding@001";
+let value: Thirteen = {
+  type: "length_greater_than",
+  value: 1177.11,
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"google/multimodalembedding@001"
-```
+| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody513type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+| `value`                                                                                                                                                                                        | *number*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |

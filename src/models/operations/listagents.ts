@@ -245,6 +245,20 @@ export const ListAgentsType = {
  */
 export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ListAgentsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ListAgentsThinkingLevel = ClosedEnum<
+  typeof ListAgentsThinkingLevel
+>;
+
 export type ListAgentsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -254,6 +268,10 @@ export type ListAgentsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ListAgentsThinkingLevel | undefined;
 };
 
 /**
@@ -556,6 +574,20 @@ export type ListAgentsFallbackModelsType = ClosedEnum<
   typeof ListAgentsFallbackModelsType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ListAgentsFallbackModelsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ListAgentsFallbackModelsThinkingLevel = ClosedEnum<
+  typeof ListAgentsFallbackModelsThinkingLevel
+>;
+
 export type ListAgentsFallbackModelsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -565,6 +597,10 @@ export type ListAgentsFallbackModelsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ListAgentsFallbackModelsThinkingLevel | undefined;
 };
 
 /**
@@ -1505,6 +1541,15 @@ export const ListAgentsType$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsType$inboundSchema;
 
 /** @internal */
+export const ListAgentsThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsThinkingLevel
+> = z.nativeEnum(ListAgentsThinkingLevel);
+/** @internal */
+export const ListAgentsThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsThinkingLevel
+> = ListAgentsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ListAgentsThinking$inboundSchema: z.ZodType<
   ListAgentsThinking,
   z.ZodTypeDef,
@@ -1512,15 +1557,18 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: ListAgentsThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type ListAgentsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1531,9 +1579,11 @@ export const ListAgentsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: ListAgentsThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -2345,6 +2395,16 @@ export const ListAgentsFallbackModelsType$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsFallbackModelsType$inboundSchema;
 
 /** @internal */
+export const ListAgentsFallbackModelsThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelsThinkingLevel> = z.nativeEnum(
+    ListAgentsFallbackModelsThinkingLevel,
+  );
+/** @internal */
+export const ListAgentsFallbackModelsThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelsThinkingLevel> =
+    ListAgentsFallbackModelsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ListAgentsFallbackModelsThinking$inboundSchema: z.ZodType<
   ListAgentsFallbackModelsThinking,
   z.ZodTypeDef,
@@ -2352,15 +2412,19 @@ export const ListAgentsFallbackModelsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsFallbackModelsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: ListAgentsFallbackModelsThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type ListAgentsFallbackModelsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2371,9 +2435,12 @@ export const ListAgentsFallbackModelsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsFallbackModelsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: ListAgentsFallbackModelsThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 

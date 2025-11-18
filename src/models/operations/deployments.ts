@@ -274,6 +274,20 @@ export const DeploymentsVerbosity = {
 export type DeploymentsVerbosity = ClosedEnum<typeof DeploymentsVerbosity>;
 
 /**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const DeploymentsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type DeploymentsThinkingLevel = ClosedEnum<
+  typeof DeploymentsThinkingLevel
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type DeploymentsModelParameters = {
@@ -365,6 +379,10 @@ export type DeploymentsModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: DeploymentsVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: DeploymentsThinkingLevel | undefined;
 };
 
 export const DeploymentsProvider = {
@@ -1155,6 +1173,15 @@ export const DeploymentsVerbosity$outboundSchema: z.ZodNativeEnum<
 > = DeploymentsVerbosity$inboundSchema;
 
 /** @internal */
+export const DeploymentsThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsThinkingLevel
+> = z.nativeEnum(DeploymentsThinkingLevel);
+/** @internal */
+export const DeploymentsThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsThinkingLevel
+> = DeploymentsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   DeploymentsModelParameters,
   z.ZodTypeDef,
@@ -1187,6 +1214,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: DeploymentsVerbosity$inboundSchema.optional(),
+  thinkingLevel: DeploymentsThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1220,6 +1248,7 @@ export type DeploymentsModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -1255,6 +1284,7 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: DeploymentsVerbosity$outboundSchema.optional(),
+  thinkingLevel: DeploymentsThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

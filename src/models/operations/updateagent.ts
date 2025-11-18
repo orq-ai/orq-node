@@ -142,6 +142,18 @@ export const UpdateAgentModelType = {
  */
 export type UpdateAgentModelType = ClosedEnum<typeof UpdateAgentModelType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ModelThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ModelThinkingLevel = ClosedEnum<typeof ModelThinkingLevel>;
+
 export type ModelThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -151,6 +163,10 @@ export type ModelThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ModelThinkingLevel | undefined;
 };
 
 /**
@@ -474,6 +490,20 @@ export type UpdateAgentFallbackModelsType = ClosedEnum<
   typeof UpdateAgentFallbackModelsType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const UpdateAgentFallbackModelsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type UpdateAgentFallbackModelsThinkingLevel = ClosedEnum<
+  typeof UpdateAgentFallbackModelsThinkingLevel
+>;
+
 export type UpdateAgentFallbackModelsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -483,6 +513,10 @@ export type UpdateAgentFallbackModelsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: UpdateAgentFallbackModelsThinkingLevel | undefined;
 };
 
 /**
@@ -1334,6 +1368,20 @@ export const UpdateAgentType = {
  */
 export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const UpdateAgentThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type UpdateAgentThinkingLevel = ClosedEnum<
+  typeof UpdateAgentThinkingLevel
+>;
+
 export type UpdateAgentThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -1343,6 +1391,10 @@ export type UpdateAgentThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: UpdateAgentThinkingLevel | undefined;
 };
 
 /**
@@ -1655,6 +1707,20 @@ export type UpdateAgentFallbackModelsAgentsType = ClosedEnum<
   typeof UpdateAgentFallbackModelsAgentsType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const UpdateAgentFallbackModelsAgentsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type UpdateAgentFallbackModelsAgentsThinkingLevel = ClosedEnum<
+  typeof UpdateAgentFallbackModelsAgentsThinkingLevel
+>;
+
 export type UpdateAgentFallbackModelsAgentsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -1664,6 +1730,10 @@ export type UpdateAgentFallbackModelsAgentsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: UpdateAgentFallbackModelsAgentsThinkingLevel | undefined;
 };
 
 /**
@@ -2350,6 +2420,15 @@ export const UpdateAgentModelType$outboundSchema: z.ZodNativeEnum<
 > = UpdateAgentModelType$inboundSchema;
 
 /** @internal */
+export const ModelThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ModelThinkingLevel
+> = z.nativeEnum(ModelThinkingLevel);
+/** @internal */
+export const ModelThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ModelThinkingLevel
+> = ModelThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ModelThinking$inboundSchema: z.ZodType<
   ModelThinking,
   z.ZodTypeDef,
@@ -2357,15 +2436,18 @@ export const ModelThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentModelType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: ModelThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type ModelThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2376,9 +2458,11 @@ export const ModelThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentModelType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: ModelThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -3276,6 +3360,16 @@ export const UpdateAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
 > = UpdateAgentFallbackModelsType$inboundSchema;
 
 /** @internal */
+export const UpdateAgentFallbackModelsThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelsThinkingLevel> = z.nativeEnum(
+    UpdateAgentFallbackModelsThinkingLevel,
+  );
+/** @internal */
+export const UpdateAgentFallbackModelsThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelsThinkingLevel> =
+    UpdateAgentFallbackModelsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const UpdateAgentFallbackModelsThinking$inboundSchema: z.ZodType<
   UpdateAgentFallbackModelsThinking,
   z.ZodTypeDef,
@@ -3283,15 +3377,19 @@ export const UpdateAgentFallbackModelsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentFallbackModelsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: UpdateAgentFallbackModelsThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type UpdateAgentFallbackModelsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -3302,9 +3400,12 @@ export const UpdateAgentFallbackModelsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentFallbackModelsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: UpdateAgentFallbackModelsThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -5885,6 +5986,15 @@ export const UpdateAgentType$outboundSchema: z.ZodNativeEnum<
 > = UpdateAgentType$inboundSchema;
 
 /** @internal */
+export const UpdateAgentThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentThinkingLevel
+> = z.nativeEnum(UpdateAgentThinkingLevel);
+/** @internal */
+export const UpdateAgentThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentThinkingLevel
+> = UpdateAgentThinkingLevel$inboundSchema;
+
+/** @internal */
 export const UpdateAgentThinking$inboundSchema: z.ZodType<
   UpdateAgentThinking,
   z.ZodTypeDef,
@@ -5892,15 +6002,18 @@ export const UpdateAgentThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: UpdateAgentThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type UpdateAgentThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -5911,9 +6024,11 @@ export const UpdateAgentThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: UpdateAgentThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -6804,6 +6919,15 @@ export const UpdateAgentFallbackModelsAgentsType$outboundSchema:
     UpdateAgentFallbackModelsAgentsType$inboundSchema;
 
 /** @internal */
+export const UpdateAgentFallbackModelsAgentsThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsThinkingLevel> = z
+    .nativeEnum(UpdateAgentFallbackModelsAgentsThinkingLevel);
+/** @internal */
+export const UpdateAgentFallbackModelsAgentsThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelsAgentsThinkingLevel> =
+    UpdateAgentFallbackModelsAgentsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const UpdateAgentFallbackModelsAgentsThinking$inboundSchema: z.ZodType<
   UpdateAgentFallbackModelsAgentsThinking,
   z.ZodTypeDef,
@@ -6811,15 +6935,19 @@ export const UpdateAgentFallbackModelsAgentsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentFallbackModelsAgentsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: UpdateAgentFallbackModelsAgentsThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type UpdateAgentFallbackModelsAgentsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -6830,9 +6958,12 @@ export const UpdateAgentFallbackModelsAgentsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: UpdateAgentFallbackModelsAgentsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: UpdateAgentFallbackModelsAgentsThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 

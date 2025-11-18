@@ -1704,6 +1704,20 @@ export type DeploymentGetConfigVerbosity = ClosedEnum<
 >;
 
 /**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const DeploymentGetConfigThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type DeploymentGetConfigThinkingLevel = ClosedEnum<
+  typeof DeploymentGetConfigThinkingLevel
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type DeploymentGetConfigParameters = {
@@ -1795,6 +1809,10 @@ export type DeploymentGetConfigParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: DeploymentGetConfigVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: DeploymentGetConfigThinkingLevel | undefined;
 };
 
 /**
@@ -7729,6 +7747,15 @@ export const DeploymentGetConfigVerbosity$outboundSchema: z.ZodNativeEnum<
 > = DeploymentGetConfigVerbosity$inboundSchema;
 
 /** @internal */
+export const DeploymentGetConfigThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigThinkingLevel
+> = z.nativeEnum(DeploymentGetConfigThinkingLevel);
+/** @internal */
+export const DeploymentGetConfigThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigThinkingLevel
+> = DeploymentGetConfigThinkingLevel$inboundSchema;
+
+/** @internal */
 export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
   DeploymentGetConfigParameters,
   z.ZodTypeDef,
@@ -7762,6 +7789,7 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
   reasoningEffort: DeploymentGetConfigReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: DeploymentGetConfigVerbosity$inboundSchema.optional(),
+  thinkingLevel: DeploymentGetConfigThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -7795,6 +7823,7 @@ export type DeploymentGetConfigParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -7831,6 +7860,7 @@ export const DeploymentGetConfigParameters$outboundSchema: z.ZodType<
   reasoningEffort: DeploymentGetConfigReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: DeploymentGetConfigVerbosity$outboundSchema.optional(),
+  thinkingLevel: DeploymentGetConfigThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

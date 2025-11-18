@@ -142,6 +142,20 @@ export const RunAgentModelType = {
  */
 export type RunAgentModelType = ClosedEnum<typeof RunAgentModelType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const RunAgentModelThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type RunAgentModelThinkingLevel = ClosedEnum<
+  typeof RunAgentModelThinkingLevel
+>;
+
 export type RunAgentModelThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -151,6 +165,10 @@ export type RunAgentModelThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: RunAgentModelThinkingLevel | undefined;
 };
 
 /**
@@ -474,6 +492,20 @@ export type RunAgentFallbackModelsType = ClosedEnum<
   typeof RunAgentFallbackModelsType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const RunAgentFallbackModelsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type RunAgentFallbackModelsThinkingLevel = ClosedEnum<
+  typeof RunAgentFallbackModelsThinkingLevel
+>;
+
 export type RunAgentFallbackModelsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -483,6 +515,10 @@ export type RunAgentFallbackModelsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: RunAgentFallbackModelsThinkingLevel | undefined;
 };
 
 /**
@@ -1950,6 +1986,15 @@ export const RunAgentModelType$outboundSchema: z.ZodNativeEnum<
 > = RunAgentModelType$inboundSchema;
 
 /** @internal */
+export const RunAgentModelThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentModelThinkingLevel
+> = z.nativeEnum(RunAgentModelThinkingLevel);
+/** @internal */
+export const RunAgentModelThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentModelThinkingLevel
+> = RunAgentModelThinkingLevel$inboundSchema;
+
+/** @internal */
 export const RunAgentModelThinking$inboundSchema: z.ZodType<
   RunAgentModelThinking,
   z.ZodTypeDef,
@@ -1957,15 +2002,18 @@ export const RunAgentModelThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: RunAgentModelType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: RunAgentModelThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type RunAgentModelThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1976,9 +2024,11 @@ export const RunAgentModelThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: RunAgentModelType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: RunAgentModelThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -2860,6 +2910,15 @@ export const RunAgentFallbackModelsType$outboundSchema: z.ZodNativeEnum<
 > = RunAgentFallbackModelsType$inboundSchema;
 
 /** @internal */
+export const RunAgentFallbackModelsThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentFallbackModelsThinkingLevel
+> = z.nativeEnum(RunAgentFallbackModelsThinkingLevel);
+/** @internal */
+export const RunAgentFallbackModelsThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelsThinkingLevel> =
+    RunAgentFallbackModelsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const RunAgentFallbackModelsThinking$inboundSchema: z.ZodType<
   RunAgentFallbackModelsThinking,
   z.ZodTypeDef,
@@ -2867,15 +2926,18 @@ export const RunAgentFallbackModelsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: RunAgentFallbackModelsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: RunAgentFallbackModelsThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type RunAgentFallbackModelsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2886,9 +2948,11 @@ export const RunAgentFallbackModelsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: RunAgentFallbackModelsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: RunAgentFallbackModelsThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
