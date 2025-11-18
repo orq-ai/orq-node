@@ -79,7 +79,7 @@ export type ResponseFormatJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -413,7 +413,7 @@ export type CreateAgentResponseFormatAgentsJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -1190,6 +1190,10 @@ export type CreateAgentRequestBody = {
    */
   key: string;
   /**
+   * agent display name within the workspace
+   */
+  displayName: string;
+  /**
    * The role or function of the agent
    */
   role: string;
@@ -1458,7 +1462,7 @@ export type CreateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -1786,7 +1790,7 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema 
     /**
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
      */
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /**
@@ -2119,6 +2123,7 @@ export type CreateAgentKnowledgeBases = {
 export type CreateAgentResponseBody = {
   id: string;
   key: string;
+  displayName: string;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
@@ -2241,14 +2246,14 @@ export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type ResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -2260,7 +2265,7 @@ export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 
 export function responseFormatJsonSchemaToJSON(
@@ -3057,14 +3062,14 @@ export const CreateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type CreateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -3077,7 +3082,7 @@ export const CreateAgentResponseFormatAgentsJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function createAgentResponseFormatAgentsJsonSchemaToJSON(
@@ -5253,6 +5258,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
+  display_name: z.string(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
@@ -5273,6 +5279,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "system_prompt": "systemPrompt",
     "fallback_models": "fallbackModels",
     "memory_stores": "memoryStores",
@@ -5283,6 +5290,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateAgentRequestBody$Outbound = {
   key: string;
+  display_name: string;
   role: string;
   description: string;
   instructions: string;
@@ -5306,6 +5314,7 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   CreateAgentRequestBody
 > = z.object({
   key: z.string(),
+  displayName: z.string(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
@@ -5329,6 +5338,7 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     systemPrompt: "system_prompt",
     fallbackModels: "fallback_models",
     memoryStores: "memory_stores",
@@ -5771,14 +5781,14 @@ export const CreateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type CreateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -5791,7 +5801,7 @@ export const CreateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function createAgentResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -6626,7 +6636,7 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$Outbound =
@@ -6634,7 +6644,7 @@ export type CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema$
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /** @internal */
@@ -6647,7 +6657,7 @@ export const CreateAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function createAgentResponseFormatAgentsResponse201ApplicationJSONJSONSchemaToJSON(
@@ -7777,6 +7787,7 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
+  display_name: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
@@ -7801,6 +7812,7 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "display_name": "displayName",
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -7815,6 +7827,7 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
 export type CreateAgentResponseBody$Outbound = {
   _id: string;
   key: string;
+  display_name: string;
   project_id: string;
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
@@ -7844,6 +7857,7 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
+  displayName: z.string(),
   projectId: z.string(),
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
@@ -7868,6 +7882,7 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    displayName: "display_name",
     projectId: "project_id",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

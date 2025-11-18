@@ -120,10 +120,9 @@ export type RequestBody1 = {
   key: string;
   description?: string | undefined;
   /**
-   * The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base.
+   * The embeddings model to use for the knowledge base in the format "provider/model" for public models or "workspaceKey@provider/model" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base.
    */
   embeddingModel: string;
-  isPrivateModel?: boolean | undefined;
   /**
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
@@ -720,13 +719,11 @@ export const RequestBody1$inboundSchema: z.ZodType<
   key: z.string(),
   description: z.string().optional(),
   embedding_model: z.string(),
-  is_private_model: z.boolean().default(false),
   retrieval_settings: z.lazy(() => RetrievalSettings$inboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "embedding_model": "embeddingModel",
-    "is_private_model": "isPrivateModel",
     "retrieval_settings": "retrievalSettings",
   });
 });
@@ -736,7 +733,6 @@ export type RequestBody1$Outbound = {
   key: string;
   description?: string | undefined;
   embedding_model: string;
-  is_private_model: boolean;
   retrieval_settings?: RetrievalSettings$Outbound | undefined;
   path: string;
 };
@@ -751,13 +747,11 @@ export const RequestBody1$outboundSchema: z.ZodType<
   key: z.string(),
   description: z.string().optional(),
   embeddingModel: z.string(),
-  isPrivateModel: z.boolean().default(false),
   retrievalSettings: z.lazy(() => RetrievalSettings$outboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
     embeddingModel: "embedding_model",
-    isPrivateModel: "is_private_model",
     retrievalSettings: "retrieval_settings",
   });
 });

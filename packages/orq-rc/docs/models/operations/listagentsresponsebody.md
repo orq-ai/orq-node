@@ -13,12 +13,14 @@ let value: ListAgentsResponseBody = {
     {
       id: "<id>",
       key: "<key>",
+      displayName: "Fleta.Oberbrunner",
       workspaceId: "<id>",
       projectId: "<id>",
       role: "<value>",
-      description: "stock coincide ah agreement presume",
+      description:
+        "lasting functional into if excepting apprehensive tray thoughtfully wallop",
       instructions: "<value>",
-      status: "draft",
+      status: "published",
       model: {
         id: "<id>",
         retry: {
@@ -32,8 +34,16 @@ let value: ListAgentsResponseBody = {
         },
       },
       path: "Default",
-      memoryStores: [],
-      teamOfAgents: [],
+      memoryStores: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+      teamOfAgents: [
+        {
+          key: "<key>",
+        },
+      ],
       knowledgeBases: [
         {
           knowledgeId: "customer-knowledge-base",

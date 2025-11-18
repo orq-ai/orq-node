@@ -233,7 +233,7 @@ export type DuplicateAgentResponseFormatJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -562,7 +562,7 @@ export type DuplicateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -891,6 +891,7 @@ export type DuplicateAgentKnowledgeBases = {
 export type DuplicateAgentResponseBody = {
   id: string;
   key: string;
+  displayName: string;
   workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
@@ -1391,14 +1392,14 @@ export const DuplicateAgentResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type DuplicateAgentResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -1410,7 +1411,7 @@ export const DuplicateAgentResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 
 export function duplicateAgentResponseFormatJsonSchemaToJSON(
@@ -2239,14 +2240,14 @@ export const DuplicateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type DuplicateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -2259,7 +2260,7 @@ export const DuplicateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function duplicateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -3391,6 +3392,7 @@ export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
+  display_name: z.string(),
   workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
@@ -3418,6 +3420,7 @@ export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "display_name": "displayName",
     "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
@@ -3433,6 +3436,7 @@ export const DuplicateAgentResponseBody$inboundSchema: z.ZodType<
 export type DuplicateAgentResponseBody$Outbound = {
   _id: string;
   key: string;
+  display_name: string;
   workspace_id: string;
   project_id: string;
   created_by_id?: string | null | undefined;
@@ -3463,6 +3467,7 @@ export const DuplicateAgentResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
+  displayName: z.string(),
   workspaceId: z.string(),
   projectId: z.string(),
   createdById: z.nullable(z.string()).optional(),
@@ -3490,6 +3495,7 @@ export const DuplicateAgentResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    displayName: "display_name",
     workspaceId: "workspace_id",
     projectId: "project_id",
     createdById: "created_by_id",

@@ -84,7 +84,7 @@ export type StreamRunAgentResponseFormatAgentsJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -448,7 +448,7 @@ export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -1868,14 +1868,14 @@ export const StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type StreamRunAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -1888,7 +1888,7 @@ export const StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function streamRunAgentResponseFormatAgentsJsonSchemaToJSON(
@@ -2879,7 +2879,7 @@ export const StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inbo
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound =
@@ -2887,7 +2887,7 @@ export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbo
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /** @internal */
@@ -2900,7 +2900,7 @@ export const StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outb
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function streamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSON(
@@ -4710,7 +4710,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KA9E2D651Y1D2Y9PWDNBJWVT"),
+  id: z.string().default("01KAA6WQXCNX79B4C9W9BFD6VS"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4729,7 +4729,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KA9E2D651Y1D2Y9PWDNBJWVT"),
+  id: z.string().default("01KAA6WQXCNX79B4C9W9BFD6VS"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

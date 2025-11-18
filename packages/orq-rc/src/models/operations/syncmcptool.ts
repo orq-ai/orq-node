@@ -979,7 +979,7 @@ export const SyncMcpToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KA9E2DG5YZTX24TTPB4352HJ"),
+  _id: z.string().default("tool_01KAA6WRQCYGN4JCQBAQHVZHC8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1038,7 +1038,7 @@ export const SyncMcpToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBody5
 > = z.object({
-  id: z.string().default("tool_01KA9E2DG5YZTX24TTPB4352HJ"),
+  id: z.string().default("tool_01KAA6WRQCYGN4JCQBAQHVZHC8"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1218,7 +1218,7 @@ export const SyncMcpToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KA9E2DG464KMZJRCD4P32P4F"),
+  id: z.string().default("01KAA6WRQB2PBSS9PY6G84TZ8S"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => SyncMcpToolResponseBodyToolsSchema$inboundSchema),
@@ -1237,7 +1237,7 @@ export const SyncMcpToolResponseBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBodyTools
 > = z.object({
-  id: z.string().default("01KA9E2DG464KMZJRCD4P32P4F"),
+  id: z.string().default("01KAA6WRQB2PBSS9PY6G84TZ8S"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => SyncMcpToolResponseBodyToolsSchema$outboundSchema),
@@ -1392,7 +1392,7 @@ export const SyncMcpToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KA9E2DG2ER51JCZMQHCWS3TF"),
+  _id: z.string().default("tool_01KAA6WRQ9MF2W2PN9T3FVBED0"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1449,7 +1449,7 @@ export const SyncMcpToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBody4
 > = z.object({
-  id: z.string().default("tool_01KA9E2DG2ER51JCZMQHCWS3TF"),
+  id: z.string().default("tool_01KAA6WRQ9MF2W2PN9T3FVBED0"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1877,7 +1877,7 @@ export const SyncMcpToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KA9E2DFZ9E57JZZ8SFMVY5NZ"),
+  _id: z.string().default("tool_01KAA6WRQ6T1KWRNRT3RQ9JTH3"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1932,7 +1932,7 @@ export const SyncMcpToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBody3
 > = z.object({
-  id: z.string().default("tool_01KA9E2DFZ9E57JZZ8SFMVY5NZ"),
+  id: z.string().default("tool_01KAA6WRQ6T1KWRNRT3RQ9JTH3"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2161,7 +2161,7 @@ export const SyncMcpToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KA9E2DFXG722K9H4EW735J72"),
+  _id: z.string().default("tool_01KAA6WRQ3NQSCVQ3E1JE9PZXE"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2215,7 +2215,7 @@ export const SyncMcpToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBody2
 > = z.object({
-  id: z.string().default("tool_01KA9E2DFXG722K9H4EW735J72"),
+  id: z.string().default("tool_01KAA6WRQ3NQSCVQ3E1JE9PZXE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2454,7 +2454,7 @@ export const SyncMcpToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KA9E2DFVX6H24PW6FAQS01WN"),
+  _id: z.string().default("tool_01KAA6WRQ2XYRPN63YB8KH3CBR"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2507,7 +2507,7 @@ export const SyncMcpToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SyncMcpToolResponseBody1
 > = z.object({
-  id: z.string().default("tool_01KA9E2DFVX6H24PW6FAQS01WN"),
+  id: z.string().default("tool_01KAA6WRQ2XYRPN63YB8KH3CBR"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

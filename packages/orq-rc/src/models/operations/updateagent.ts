@@ -81,7 +81,7 @@ export type UpdateAgentResponseFormatAgentsJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -434,7 +434,7 @@ export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -1228,6 +1228,7 @@ export type UpdateAgentTeamOfAgents = {
 
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
+  displayName?: string | undefined;
   projectId?: string | undefined;
   role?: string | undefined;
   description?: string | undefined;
@@ -1498,7 +1499,7 @@ export type UpdateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /**
@@ -1826,7 +1827,7 @@ export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema 
     /**
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
      */
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /**
@@ -2163,6 +2164,7 @@ export type UpdateAgentAgentsKnowledgeBases = {
 export type UpdateAgentResponseBody = {
   id: string;
   key: string;
+  displayName: string;
   workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
@@ -2290,14 +2292,14 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -2310,7 +2312,7 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function updateAgentResponseFormatAgentsJsonSchemaToJSON(
@@ -3230,7 +3232,7 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inbound
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound =
@@ -3238,7 +3240,7 @@ export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /** @internal */
@@ -3251,7 +3253,7 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outboun
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function updateAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSON(
@@ -5639,6 +5641,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string().optional(),
+  display_name: z.string().optional(),
   project_id: z.string().optional(),
   role: z.string().optional(),
   description: z.string().optional(),
@@ -5665,6 +5668,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "project_id": "projectId",
     "system_prompt": "systemPrompt",
     "fallback_models": "fallbackModels",
@@ -5676,6 +5680,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateAgentRequestBody$Outbound = {
   key?: string | undefined;
+  display_name?: string | undefined;
   project_id?: string | undefined;
   role?: string | undefined;
   description?: string | undefined;
@@ -5700,6 +5705,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   UpdateAgentRequestBody
 > = z.object({
   key: z.string().optional(),
+  displayName: z.string().optional(),
   projectId: z.string().optional(),
   role: z.string().optional(),
   description: z.string().optional(),
@@ -5726,6 +5732,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     projectId: "project_id",
     systemPrompt: "system_prompt",
     fallbackModels: "fallback_models",
@@ -6231,14 +6238,14 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -6251,7 +6258,7 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function updateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -7129,7 +7136,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$Outbound =
@@ -7137,7 +7144,7 @@ export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | undefined;
+    strict?: boolean | null | undefined;
   };
 
 /** @internal */
@@ -7150,7 +7157,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.nullable(z.boolean()).optional(),
   });
 
 export function updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchemaToJSON(
@@ -8342,6 +8349,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
+  display_name: z.string(),
   workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
@@ -8369,6 +8377,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "display_name": "displayName",
     "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
@@ -8384,6 +8393,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
 export type UpdateAgentResponseBody$Outbound = {
   _id: string;
   key: string;
+  display_name: string;
   workspace_id: string;
   project_id: string;
   created_by_id?: string | null | undefined;
@@ -8414,6 +8424,7 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
+  displayName: z.string(),
   workspaceId: z.string(),
   projectId: z.string(),
   createdById: z.nullable(z.string()).optional(),
@@ -8441,6 +8452,7 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    displayName: "display_name",
     workspaceId: "workspace_id",
     projectId: "project_id",
     createdById: "created_by_id",
