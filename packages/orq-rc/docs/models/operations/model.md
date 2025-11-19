@@ -1,143 +1,30 @@
 # Model
 
-
-## Supported Types
-
-### `operations.Model1`
+## Example Usage
 
 ```typescript
-const value: operations.Model1 = "cohere/embed-multilingual-v3.0";
+import { Model } from "@orq-ai/node/models/operations";
+
+let value: Model = {
+  id: "<id>",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
+};
 ```
 
-### `operations.Model2`
+## Fields
 
-```typescript
-const value: operations.Model2 = "cohere/embed-multilingual-light-v3.0";
-```
-
-### `operations.Model3`
-
-```typescript
-const value: operations.Model3 = "cohere/embed-english-light-v3.0";
-```
-
-### `operations.Model4`
-
-```typescript
-const value: operations.Model4 = "cohere/embed-english-v3.0";
-```
-
-### `operations.Model5`
-
-```typescript
-const value: operations.Model5 = "cohere/embed-v4.0";
-```
-
-### `operations.Model6`
-
-```typescript
-const value: operations.Model6 = "azure/text-embedding-ada-002";
-```
-
-### `operations.Seven`
-
-```typescript
-const value: operations.Seven = "azure/text-embedding-3-small";
-```
-
-### `operations.Eight`
-
-```typescript
-const value: operations.Eight = "openai/text-embedding-3-large";
-```
-
-### `operations.Nine`
-
-```typescript
-const value: operations.Nine = "openai/text-embedding-3-small";
-```
-
-### `operations.Ten`
-
-```typescript
-const value: operations.Ten = "openai/text-embedding-ada-002";
-```
-
-### `operations.Eleven`
-
-```typescript
-const value: operations.Eleven = "google/gemini-embedding-001";
-```
-
-### `operations.Twelve`
-
-```typescript
-const value: operations.Twelve = "google/text-multilingual-embedding-002";
-```
-
-### `operations.Thirteen`
-
-```typescript
-const value: operations.Thirteen = "google/multimodalembedding@001";
-```
-
-### `operations.Fourteen`
-
-```typescript
-const value: operations.Fourteen = "google-ai/text-embedding-004";
-```
-
-### `operations.Fifteen`
-
-```typescript
-const value: operations.Fifteen = "mistral/mistral-embed";
-```
-
-### `operations.Sixteen`
-
-```typescript
-const value: operations.Sixteen = "jina/jina-clip-v1";
-```
-
-### `operations.Seventeen`
-
-```typescript
-const value: operations.Seventeen = "jina/jina-embeddings-v2-base-es";
-```
-
-### `operations.Eighteen`
-
-```typescript
-const value: operations.Eighteen = "jina/jina-embeddings-v2-base-en";
-```
-
-### `operations.Nineteen`
-
-```typescript
-const value: operations.Nineteen = "jina/jina-embeddings-v2-base-zh";
-```
-
-### `operations.Twenty`
-
-```typescript
-const value: operations.Twenty = "jina/jina-embeddings-v2-base-code";
-```
-
-### `operations.TwentyOne`
-
-```typescript
-const value: operations.TwentyOne = "jina/jina-embeddings-v2-base-de";
-```
-
-### `operations.TwentyTwo`
-
-```typescript
-const value: operations.TwentyTwo = "jina/jina-clip-v2";
-```
-
-### `operations.TwentyThree`
-
-```typescript
-const value: operations.TwentyThree = "jina/jina-embeddings-v3";
-```
-
+| Field                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | The database ID of the primary model                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `integrationId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Optional integration ID for custom model configurations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `parameters`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | [operations.CreateAgentParameters](../../models/operations/createagentparameters.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults. |
+| `retry`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | [operations.CreateAgentRetry](../../models/operations/createagentretry.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).                                                                                                                                                                                                                                                                                                                                      |
+| `fallbackModels`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | *operations.CreateAgentFallbackModelConfiguration*[]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails                                                                                                                                                                                                                                                                                                                                                                                                                                    |

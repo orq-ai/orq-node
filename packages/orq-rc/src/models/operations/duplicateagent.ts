@@ -313,6 +313,20 @@ export const DuplicateAgentType = {
  */
 export type DuplicateAgentType = ClosedEnum<typeof DuplicateAgentType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const DuplicateAgentThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type DuplicateAgentThinkingLevel = ClosedEnum<
+  typeof DuplicateAgentThinkingLevel
+>;
+
 export type DuplicateAgentThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -322,6 +336,10 @@ export type DuplicateAgentThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: DuplicateAgentThinkingLevel | undefined;
 };
 
 /**
@@ -649,6 +667,20 @@ export type DuplicateAgentFallbackModelConfigurationType = ClosedEnum<
   typeof DuplicateAgentFallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const DuplicateAgentFallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type DuplicateAgentFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof DuplicateAgentFallbackModelConfigurationThinkingLevel
+>;
+
 export type DuplicateAgentFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -658,6 +690,12 @@ export type DuplicateAgentFallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?:
+    | DuplicateAgentFallbackModelConfigurationThinkingLevel
+    | undefined;
 };
 
 /**
@@ -1741,6 +1779,15 @@ export const DuplicateAgentType$outboundSchema: z.ZodNativeEnum<
 > = DuplicateAgentType$inboundSchema;
 
 /** @internal */
+export const DuplicateAgentThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentThinkingLevel
+> = z.nativeEnum(DuplicateAgentThinkingLevel);
+/** @internal */
+export const DuplicateAgentThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof DuplicateAgentThinkingLevel
+> = DuplicateAgentThinkingLevel$inboundSchema;
+
+/** @internal */
 export const DuplicateAgentThinking$inboundSchema: z.ZodType<
   DuplicateAgentThinking,
   z.ZodTypeDef,
@@ -1748,15 +1795,18 @@ export const DuplicateAgentThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: DuplicateAgentType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: DuplicateAgentThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type DuplicateAgentThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1767,9 +1817,11 @@ export const DuplicateAgentThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: DuplicateAgentType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: DuplicateAgentThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -2644,6 +2696,17 @@ export const DuplicateAgentFallbackModelConfigurationType$outboundSchema:
     DuplicateAgentFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const DuplicateAgentFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateAgentFallbackModelConfigurationThinkingLevel
+  > = z.nativeEnum(DuplicateAgentFallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const DuplicateAgentFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DuplicateAgentFallbackModelConfigurationThinkingLevel
+  > = DuplicateAgentFallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const DuplicateAgentFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     DuplicateAgentFallbackModelConfigurationThinking,
@@ -2652,15 +2715,20 @@ export const DuplicateAgentFallbackModelConfigurationThinking$inboundSchema:
   > = z.object({
     type: DuplicateAgentFallbackModelConfigurationType$inboundSchema,
     budget_tokens: z.number(),
+    thinking_level:
+      DuplicateAgentFallbackModelConfigurationThinkingLevel$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
     });
   });
 /** @internal */
 export type DuplicateAgentFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2672,9 +2740,13 @@ export const DuplicateAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.object({
     type: DuplicateAgentFallbackModelConfigurationType$outboundSchema,
     budgetTokens: z.number(),
+    thinkingLevel:
+      DuplicateAgentFallbackModelConfigurationThinkingLevel$outboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
     });
   });
 

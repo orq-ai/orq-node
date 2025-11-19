@@ -166,6 +166,20 @@ export type StreamRunAgentModelConfigurationType = ClosedEnum<
   typeof StreamRunAgentModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const StreamRunAgentModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type StreamRunAgentModelConfigurationThinkingLevel = ClosedEnum<
+  typeof StreamRunAgentModelConfigurationThinkingLevel
+>;
+
 export type StreamRunAgentModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -175,6 +189,10 @@ export type StreamRunAgentModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: StreamRunAgentModelConfigurationThinkingLevel | undefined;
 };
 
 /**
@@ -534,6 +552,20 @@ export type StreamRunAgentFallbackModelConfigurationType = ClosedEnum<
   typeof StreamRunAgentFallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const StreamRunAgentFallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type StreamRunAgentFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof StreamRunAgentFallbackModelConfigurationThinkingLevel
+>;
+
 export type StreamRunAgentFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -543,6 +575,12 @@ export type StreamRunAgentFallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?:
+    | StreamRunAgentFallbackModelConfigurationThinkingLevel
+    | undefined;
 };
 
 /**
@@ -2240,6 +2278,15 @@ export const StreamRunAgentModelConfigurationType$outboundSchema:
     StreamRunAgentModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationThinkingLevel> = z
+    .nativeEnum(StreamRunAgentModelConfigurationThinkingLevel);
+/** @internal */
+export const StreamRunAgentModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationThinkingLevel> =
+    StreamRunAgentModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentModelConfigurationThinking$inboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationThinking,
   z.ZodTypeDef,
@@ -2247,15 +2294,19 @@ export const StreamRunAgentModelConfigurationThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentModelConfigurationType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: StreamRunAgentModelConfigurationThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type StreamRunAgentModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2266,9 +2317,12 @@ export const StreamRunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: StreamRunAgentModelConfigurationType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: StreamRunAgentModelConfigurationThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -3287,6 +3341,17 @@ export const StreamRunAgentFallbackModelConfigurationType$outboundSchema:
     StreamRunAgentFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentFallbackModelConfigurationThinkingLevel
+  > = z.nativeEnum(StreamRunAgentFallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentFallbackModelConfigurationThinkingLevel
+  > = StreamRunAgentFallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     StreamRunAgentFallbackModelConfigurationThinking,
@@ -3295,15 +3360,20 @@ export const StreamRunAgentFallbackModelConfigurationThinking$inboundSchema:
   > = z.object({
     type: StreamRunAgentFallbackModelConfigurationType$inboundSchema,
     budget_tokens: z.number(),
+    thinking_level:
+      StreamRunAgentFallbackModelConfigurationThinkingLevel$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
     });
   });
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -3315,9 +3385,13 @@ export const StreamRunAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.object({
     type: StreamRunAgentFallbackModelConfigurationType$outboundSchema,
     budgetTokens: z.number(),
+    thinkingLevel:
+      StreamRunAgentFallbackModelConfigurationThinkingLevel$outboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
     });
   });
 
@@ -4710,7 +4784,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KABAYFMTM12PV43GXRA8SP9C"),
+  id: z.string().default("01KAD4TRAENBG3TXYP990STGQZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4729,7 +4803,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KABAYFMTM12PV43GXRA8SP9C"),
+  id: z.string().default("01KAD4TRAENBG3TXYP990STGQZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

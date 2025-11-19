@@ -12,7 +12,7 @@ let value: GetAllMemoryStoresData = {
   created: "<value>",
   updated: "<value>",
   embeddingConfig: {
-    model: "mistral/mistral-embed",
+    model: "Land Cruiser",
   },
 };
 ```

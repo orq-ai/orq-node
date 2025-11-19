@@ -5,11 +5,15 @@
 ```typescript
 import { Eleven } from "@orq-ai/node/models/operations";
 
-let value: Eleven = "google/gemini-embedding-001";
+let value: Eleven = {
+  type: "length_less_than",
+  value: 1493.93,
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"google/gemini-embedding-001"
-```
+| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody511type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+| `value`                                                                                                                                                                                        | *number*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |

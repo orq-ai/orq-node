@@ -119,7 +119,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-11-18T11:17:30.762Z",
+    "2025-11-19T04:09:05.943Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -152,7 +152,7 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-11-18T11:17:30.762Z"))
+  created: z.date().default(() => new Date("2025-11-19T04:09:05.943Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

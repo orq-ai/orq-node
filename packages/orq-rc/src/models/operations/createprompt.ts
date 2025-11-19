@@ -360,6 +360,20 @@ export const Verbosity = {
 export type Verbosity = ClosedEnum<typeof Verbosity>;
 
 /**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const CreatePromptThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type CreatePromptThinkingLevel = ClosedEnum<
+  typeof CreatePromptThinkingLevel
+>;
+
+/**
  * Optional model parameters like temperature and maxTokens.
  */
 export type ModelParameters = {
@@ -451,6 +465,10 @@ export type ModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: Verbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: CreatePromptThinkingLevel | undefined;
 };
 
 /**
@@ -1274,6 +1292,20 @@ export const CreatePromptVerbosity = {
 export type CreatePromptVerbosity = ClosedEnum<typeof CreatePromptVerbosity>;
 
 /**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const CreatePromptPromptsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type CreatePromptPromptsThinkingLevel = ClosedEnum<
+  typeof CreatePromptPromptsThinkingLevel
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type CreatePromptModelParameters = {
@@ -1365,6 +1397,10 @@ export type CreatePromptModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: CreatePromptVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: CreatePromptPromptsThinkingLevel | undefined;
 };
 
 export const CreatePromptProvider = {
@@ -2592,6 +2628,15 @@ export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
   Verbosity$inboundSchema;
 
 /** @internal */
+export const CreatePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptThinkingLevel
+> = z.nativeEnum(CreatePromptThinkingLevel);
+/** @internal */
+export const CreatePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptThinkingLevel
+> = CreatePromptThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ModelParameters$inboundSchema: z.ZodType<
   ModelParameters,
   z.ZodTypeDef,
@@ -2624,6 +2669,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: ReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: Verbosity$inboundSchema.optional(),
+  thinkingLevel: CreatePromptThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -2657,6 +2703,7 @@ export type ModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -2692,6 +2739,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: ReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: Verbosity$outboundSchema.optional(),
+  thinkingLevel: CreatePromptThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -5164,6 +5212,15 @@ export const CreatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
 > = CreatePromptVerbosity$inboundSchema;
 
 /** @internal */
+export const CreatePromptPromptsThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsThinkingLevel
+> = z.nativeEnum(CreatePromptPromptsThinkingLevel);
+/** @internal */
+export const CreatePromptPromptsThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsThinkingLevel
+> = CreatePromptPromptsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   CreatePromptModelParameters,
   z.ZodTypeDef,
@@ -5196,6 +5253,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: CreatePromptVerbosity$inboundSchema.optional(),
+  thinkingLevel: CreatePromptPromptsThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -5229,6 +5287,7 @@ export type CreatePromptModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -5264,6 +5323,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: CreatePromptVerbosity$outboundSchema.optional(),
+  thinkingLevel: CreatePromptPromptsThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

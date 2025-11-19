@@ -206,6 +206,20 @@ export const GetOnePromptVerbosity = {
 export type GetOnePromptVerbosity = ClosedEnum<typeof GetOnePromptVerbosity>;
 
 /**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const GetOnePromptThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type GetOnePromptThinkingLevel = ClosedEnum<
+  typeof GetOnePromptThinkingLevel
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type GetOnePromptModelParameters = {
@@ -297,6 +311,10 @@ export type GetOnePromptModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: GetOnePromptVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: GetOnePromptThinkingLevel | undefined;
 };
 
 export const GetOnePromptProvider = {
@@ -984,6 +1002,15 @@ export const GetOnePromptVerbosity$outboundSchema: z.ZodNativeEnum<
 > = GetOnePromptVerbosity$inboundSchema;
 
 /** @internal */
+export const GetOnePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptThinkingLevel
+> = z.nativeEnum(GetOnePromptThinkingLevel);
+/** @internal */
+export const GetOnePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptThinkingLevel
+> = GetOnePromptThinkingLevel$inboundSchema;
+
+/** @internal */
 export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   GetOnePromptModelParameters,
   z.ZodTypeDef,
@@ -1016,6 +1043,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: GetOnePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
+  thinkingLevel: GetOnePromptThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1049,6 +1077,7 @@ export type GetOnePromptModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -1084,6 +1113,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$outboundSchema.optional(),
+  thinkingLevel: GetOnePromptThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

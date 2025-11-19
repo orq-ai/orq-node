@@ -311,6 +311,18 @@ export const GetAgentType = {
  */
 export type GetAgentType = ClosedEnum<typeof GetAgentType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const GetAgentThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type GetAgentThinkingLevel = ClosedEnum<typeof GetAgentThinkingLevel>;
+
 export type GetAgentThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -320,6 +332,10 @@ export type GetAgentThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: GetAgentThinkingLevel | undefined;
 };
 
 /**
@@ -630,6 +646,20 @@ export type GetAgentFallbackModelConfigurationType = ClosedEnum<
   typeof GetAgentFallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const GetAgentFallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type GetAgentFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof GetAgentFallbackModelConfigurationThinkingLevel
+>;
+
 export type GetAgentFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -639,6 +669,10 @@ export type GetAgentFallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: GetAgentFallbackModelConfigurationThinkingLevel | undefined;
 };
 
 /**
@@ -1694,6 +1728,15 @@ export const GetAgentType$outboundSchema: z.ZodNativeEnum<typeof GetAgentType> =
   GetAgentType$inboundSchema;
 
 /** @internal */
+export const GetAgentThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof GetAgentThinkingLevel
+> = z.nativeEnum(GetAgentThinkingLevel);
+/** @internal */
+export const GetAgentThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof GetAgentThinkingLevel
+> = GetAgentThinkingLevel$inboundSchema;
+
+/** @internal */
 export const GetAgentThinking$inboundSchema: z.ZodType<
   GetAgentThinking,
   z.ZodTypeDef,
@@ -1701,15 +1744,18 @@ export const GetAgentThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: GetAgentType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: GetAgentThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type GetAgentThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1720,9 +1766,11 @@ export const GetAgentThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: GetAgentType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: GetAgentThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -2567,20 +2615,34 @@ export const GetAgentFallbackModelConfigurationType$outboundSchema:
     GetAgentFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const GetAgentFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof GetAgentFallbackModelConfigurationThinkingLevel> = z
+    .nativeEnum(GetAgentFallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const GetAgentFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof GetAgentFallbackModelConfigurationThinkingLevel> =
+    GetAgentFallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const GetAgentFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<GetAgentFallbackModelConfigurationThinking, z.ZodTypeDef, unknown> =
     z.object({
       type: GetAgentFallbackModelConfigurationType$inboundSchema,
       budget_tokens: z.number(),
+      thinking_level:
+        GetAgentFallbackModelConfigurationThinkingLevel$inboundSchema
+          .optional(),
     }).transform((v) => {
       return remap$(v, {
         "budget_tokens": "budgetTokens",
+        "thinking_level": "thinkingLevel",
       });
     });
 /** @internal */
 export type GetAgentFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2592,9 +2654,12 @@ export const GetAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.object({
     type: GetAgentFallbackModelConfigurationType$outboundSchema,
     budgetTokens: z.number(),
+    thinkingLevel:
+      GetAgentFallbackModelConfigurationThinkingLevel$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
     });
   });
 

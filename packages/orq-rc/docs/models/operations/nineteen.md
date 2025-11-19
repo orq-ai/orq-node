@@ -5,11 +5,13 @@
 ```typescript
 import { Nineteen } from "@orq-ai/node/models/operations";
 
-let value: Nineteen = "jina/jina-embeddings-v2-base-zh";
+let value: Nineteen = {
+  type: "bert_score",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"jina/jina-embeddings-v2-base-zh"
-```
+| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody519type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |

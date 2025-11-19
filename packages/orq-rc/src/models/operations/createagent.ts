@@ -154,6 +154,18 @@ export const ModelConfigurationType = {
  */
 export type ModelConfigurationType = ClosedEnum<typeof ModelConfigurationType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ThinkingLevel = ClosedEnum<typeof ThinkingLevel>;
+
 export type Thinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -163,6 +175,10 @@ export type Thinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ThinkingLevel | undefined;
 };
 
 /**
@@ -495,6 +511,20 @@ export type FallbackModelConfigurationType = ClosedEnum<
   typeof FallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const FallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type FallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof FallbackModelConfigurationThinkingLevel
+>;
+
 export type FallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -504,6 +534,10 @@ export type FallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: FallbackModelConfigurationThinkingLevel | undefined;
 };
 
 /**
@@ -1542,6 +1576,20 @@ export const CreateAgentType = {
  */
 export type CreateAgentType = ClosedEnum<typeof CreateAgentType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const CreateAgentThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type CreateAgentThinkingLevel = ClosedEnum<
+  typeof CreateAgentThinkingLevel
+>;
+
 export type CreateAgentThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -1551,6 +1599,10 @@ export type CreateAgentThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: CreateAgentThinkingLevel | undefined;
 };
 
 /**
@@ -1881,6 +1933,20 @@ export type CreateAgentFallbackModelConfigurationType = ClosedEnum<
   typeof CreateAgentFallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const CreateAgentFallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type CreateAgentFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof CreateAgentFallbackModelConfigurationThinkingLevel
+>;
+
 export type CreateAgentFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -1890,6 +1956,12 @@ export type CreateAgentFallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?:
+    | CreateAgentFallbackModelConfigurationThinkingLevel
+    | undefined;
 };
 
 /**
@@ -2069,7 +2141,7 @@ export type CreateAgentFallbackModelConfiguration =
   | CreateAgentFallbackModelConfiguration2
   | string;
 
-export type CreateAgentModel = {
+export type Model = {
   /**
    * The database ID of the primary model
    */
@@ -2138,7 +2210,7 @@ export type CreateAgentResponseBody = {
    */
   status: CreateAgentStatus;
   settings?: CreateAgentSettings | undefined;
-  model: CreateAgentModel;
+  model: Model;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2529,6 +2601,15 @@ export const ModelConfigurationType$outboundSchema: z.ZodNativeEnum<
 > = ModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const ThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ThinkingLevel
+> = z.nativeEnum(ThinkingLevel);
+/** @internal */
+export const ThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ThinkingLevel
+> = ThinkingLevel$inboundSchema;
+
+/** @internal */
 export const Thinking$inboundSchema: z.ZodType<
   Thinking,
   z.ZodTypeDef,
@@ -2536,15 +2617,18 @@ export const Thinking$inboundSchema: z.ZodType<
 > = z.object({
   type: ModelConfigurationType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: ThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type Thinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2555,9 +2639,11 @@ export const Thinking$outboundSchema: z.ZodType<
 > = z.object({
   type: ModelConfigurationType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: ThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -3422,6 +3508,15 @@ export const FallbackModelConfigurationType$outboundSchema: z.ZodNativeEnum<
 > = FallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const FallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof FallbackModelConfigurationThinkingLevel> = z
+    .nativeEnum(FallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const FallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof FallbackModelConfigurationThinkingLevel> =
+    FallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const FallbackModelConfigurationThinking$inboundSchema: z.ZodType<
   FallbackModelConfigurationThinking,
   z.ZodTypeDef,
@@ -3429,15 +3524,19 @@ export const FallbackModelConfigurationThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: FallbackModelConfigurationType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: FallbackModelConfigurationThinkingLevel$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type FallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -3448,9 +3547,12 @@ export const FallbackModelConfigurationThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: FallbackModelConfigurationType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: FallbackModelConfigurationThinkingLevel$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -6134,6 +6236,15 @@ export const CreateAgentType$outboundSchema: z.ZodNativeEnum<
 > = CreateAgentType$inboundSchema;
 
 /** @internal */
+export const CreateAgentThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentThinkingLevel
+> = z.nativeEnum(CreateAgentThinkingLevel);
+/** @internal */
+export const CreateAgentThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentThinkingLevel
+> = CreateAgentThinkingLevel$inboundSchema;
+
+/** @internal */
 export const CreateAgentThinking$inboundSchema: z.ZodType<
   CreateAgentThinking,
   z.ZodTypeDef,
@@ -6141,15 +6252,18 @@ export const CreateAgentThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: CreateAgentType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: CreateAgentThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type CreateAgentThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -6160,9 +6274,11 @@ export const CreateAgentThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: CreateAgentType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: CreateAgentThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -7050,6 +7166,15 @@ export const CreateAgentFallbackModelConfigurationType$outboundSchema:
     CreateAgentFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const CreateAgentFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationThinkingLevel> = z
+    .nativeEnum(CreateAgentFallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const CreateAgentFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentFallbackModelConfigurationThinkingLevel> =
+    CreateAgentFallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const CreateAgentFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     CreateAgentFallbackModelConfigurationThinking,
@@ -7058,15 +7183,20 @@ export const CreateAgentFallbackModelConfigurationThinking$inboundSchema:
   > = z.object({
     type: CreateAgentFallbackModelConfigurationType$inboundSchema,
     budget_tokens: z.number(),
+    thinking_level:
+      CreateAgentFallbackModelConfigurationThinkingLevel$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
     });
   });
 /** @internal */
 export type CreateAgentFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -7078,9 +7208,13 @@ export const CreateAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.object({
     type: CreateAgentFallbackModelConfigurationType$outboundSchema,
     budgetTokens: z.number(),
+    thinkingLevel:
+      CreateAgentFallbackModelConfigurationThinkingLevel$outboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
     });
   });
 
@@ -7577,29 +7711,26 @@ export function createAgentFallbackModelConfigurationFromJSON(
 }
 
 /** @internal */
-export const CreateAgentModel$inboundSchema: z.ZodType<
-  CreateAgentModel,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => CreateAgentParameters$inboundSchema).optional(),
-  retry: z.lazy(() => CreateAgentRetry$inboundSchema).optional(),
-  fallback_models: z.nullable(
-    z.array(z.union([
-      z.lazy(() => CreateAgentFallbackModelConfiguration2$inboundSchema),
-      z.string(),
-    ])),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "fallback_models": "fallbackModels",
+export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    parameters: z.lazy(() => CreateAgentParameters$inboundSchema).optional(),
+    retry: z.lazy(() => CreateAgentRetry$inboundSchema).optional(),
+    fallback_models: z.nullable(
+      z.array(z.union([
+        z.lazy(() => CreateAgentFallbackModelConfiguration2$inboundSchema),
+        z.string(),
+      ])),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "fallback_models": "fallbackModels",
+    });
   });
-});
 /** @internal */
-export type CreateAgentModel$Outbound = {
+export type Model$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: CreateAgentParameters$Outbound | undefined;
@@ -7611,10 +7742,10 @@ export type CreateAgentModel$Outbound = {
 };
 
 /** @internal */
-export const CreateAgentModel$outboundSchema: z.ZodType<
-  CreateAgentModel$Outbound,
+export const Model$outboundSchema: z.ZodType<
+  Model$Outbound,
   z.ZodTypeDef,
-  CreateAgentModel
+  Model
 > = z.object({
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
@@ -7633,20 +7764,16 @@ export const CreateAgentModel$outboundSchema: z.ZodType<
   });
 });
 
-export function createAgentModelToJSON(
-  createAgentModel: CreateAgentModel,
-): string {
-  return JSON.stringify(
-    CreateAgentModel$outboundSchema.parse(createAgentModel),
-  );
+export function modelToJSON(model: Model): string {
+  return JSON.stringify(Model$outboundSchema.parse(model));
 }
-export function createAgentModelFromJSON(
+export function modelFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentModel, SDKValidationError> {
+): SafeParseResult<Model, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentModel' from JSON`,
+    (x) => Model$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Model' from JSON`,
   );
 }
 
@@ -7799,7 +7926,7 @@ export const CreateAgentResponseBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   status: CreateAgentStatus$inboundSchema,
   settings: z.lazy(() => CreateAgentSettings$inboundSchema).optional(),
-  model: z.lazy(() => CreateAgentModel$inboundSchema),
+  model: z.lazy(() => Model$inboundSchema),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()),
@@ -7839,7 +7966,7 @@ export type CreateAgentResponseBody$Outbound = {
   instructions: string;
   status: string;
   settings?: CreateAgentSettings$Outbound | undefined;
-  model: CreateAgentModel$Outbound;
+  model: Model$Outbound;
   version_hash?: string | undefined;
   path: string;
   memory_stores: Array<string>;
@@ -7869,7 +7996,7 @@ export const CreateAgentResponseBody$outboundSchema: z.ZodType<
   instructions: z.string(),
   status: CreateAgentStatus$outboundSchema,
   settings: z.lazy(() => CreateAgentSettings$outboundSchema).optional(),
-  model: z.lazy(() => CreateAgentModel$outboundSchema),
+  model: z.lazy(() => Model$outboundSchema),
   versionHash: z.string().optional(),
   path: z.string(),
   memoryStores: z.array(z.string()),
