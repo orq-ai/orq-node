@@ -11,7 +11,6 @@
 * [delete](#delete) - Delete an agent
 * [retrieve](#retrieve) - Get an agent
 * [update](#update) - Update an agent
-* [duplicate](#duplicate) - Duplicate an existing agent
 * [invoke](#invoke) - Invoke an agent
 * [listTasks](#listtasks) - List all tasks for an agent
 * [run](#run) - Run an agent
@@ -504,81 +503,6 @@ run();
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | errors.UpdateAgentResponseBody | 404                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
-
-## duplicate
-
-Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="DuplicateAgent" method="post" path="/v2/agents/{agent_key}/duplicate" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.agents.duplicate({
-    agentKey: "<value>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { agentsDuplicate } from "@orq-ai/node/funcs/agentsDuplicate.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await agentsDuplicate(orq, {
-    agentKey: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("agentsDuplicate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DuplicateAgentRequest](../../models/operations/duplicateagentrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.DuplicateAgentResponseBody](../../models/operations/duplicateagentresponsebody.md)\>**
-
-### Errors
-
-| Error Type                              | Status Code                             | Content Type                            |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| errors.DuplicateAgentResponseBody       | 404                                     | application/json                        |
-| errors.DuplicateAgentAgentsResponseBody | 409                                     | application/json                        |
-| errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |
 
 ## invoke
 

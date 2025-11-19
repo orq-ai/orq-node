@@ -4,7 +4,6 @@
 
 import { agentsCreate } from "../funcs/agentsCreate.js";
 import { agentsDelete } from "../funcs/agentsDelete.js";
-import { agentsDuplicate } from "../funcs/agentsDuplicate.js";
 import { agentsInvoke } from "../funcs/agentsInvoke.js";
 import { agentsList } from "../funcs/agentsList.js";
 import { agentsListActions } from "../funcs/agentsListActions.js";
@@ -118,23 +117,6 @@ export class Agents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateAgentResponseBody> {
     return unwrapAsync(agentsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Duplicate an existing agent
-   *
-   * @remarks
-   * Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
-   */
-  async duplicate(
-    request: operations.DuplicateAgentRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DuplicateAgentResponseBody> {
-    return unwrapAsync(agentsDuplicate(
       this,
       request,
       options,

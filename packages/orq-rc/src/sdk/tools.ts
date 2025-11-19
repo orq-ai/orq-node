@@ -4,10 +4,8 @@
 
 import { toolsCreate } from "../funcs/toolsCreate.js";
 import { toolsDelete } from "../funcs/toolsDelete.js";
-import { toolsDuplicate } from "../funcs/toolsDuplicate.js";
 import { toolsList } from "../funcs/toolsList.js";
 import { toolsRetrieve } from "../funcs/toolsRetrieve.js";
-import { toolsSync } from "../funcs/toolsSync.js";
 import { toolsUpdate } from "../funcs/toolsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -93,40 +91,6 @@ export class Tools extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RetrieveToolResponseBody> {
     return unwrapAsync(toolsRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Duplicate tool
-   *
-   * @remarks
-   * Creates a copy of an existing tool with a new id and ID.
-   */
-  async duplicate(
-    request: operations.DuplicateToolRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DuplicateToolResponseBody> {
-    return unwrapAsync(toolsDuplicate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Sync MCP tool
-   *
-   * @remarks
-   * Manually triggers tool discovery and synchronization from the MCP server. Fetches the latest tools and updates the tool configuration.
-   */
-  async sync(
-    request: operations.SyncMcpToolRequest,
-    options?: RequestOptions,
-  ): Promise<operations.SyncMcpToolResponseBody> {
-    return unwrapAsync(toolsSync(
       this,
       request,
       options,
