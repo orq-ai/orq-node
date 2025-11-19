@@ -187,7 +187,7 @@ export const CreateDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-19T08:04:49.318Z",
+    "2025-11-19T08:25:48.403Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -226,7 +226,7 @@ export const CreateDatasetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-19T08:04:49.318Z"))
+  updated: z.date().default(() => new Date("2025-11-19T08:25:48.403Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
