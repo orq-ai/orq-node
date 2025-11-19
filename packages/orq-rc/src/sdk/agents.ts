@@ -128,7 +128,7 @@ export class Agents extends ClientSDK {
    * Duplicate an existing agent
    *
    * @remarks
-   * Creates a copy of an existing agent with a new unique key. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
+   * Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
    */
   async duplicate(
     request: operations.DuplicateAgentRequest,

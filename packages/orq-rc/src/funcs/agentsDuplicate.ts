@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Duplicate an existing agent
  *
  * @remarks
- * Creates a copy of an existing agent with a new unique key. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
+ * Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
  */
 export function agentsDuplicate(
   client: OrqCore,
@@ -88,18 +88,19 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    agent_key: encodeSimple("agent_key", payload.agent_key, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v2/agents/{id}/duplicate")(pathParams);
+  const path = pathToFunc("/v2/agents/{agent_key}/duplicate")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 

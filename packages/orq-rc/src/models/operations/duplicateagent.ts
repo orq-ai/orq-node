@@ -9,11 +9,23 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type DuplicateAgentRequestBody = {
+  /**
+   * The unique key for the duplicated agent
+   */
+  key: string;
+  /**
+   * The display name for the duplicated agent
+   */
+  displayName?: string | undefined;
+};
+
 export type DuplicateAgentRequest = {
   /**
-   * The ID of the agent to duplicate
+   * The key of the agent to duplicate
    */
-  id: string;
+  agentKey: string;
+  requestBody?: DuplicateAgentRequestBody | undefined;
 };
 
 /**
@@ -977,16 +989,73 @@ export type DuplicateAgentResponseBody = {
 };
 
 /** @internal */
+export const DuplicateAgentRequestBody$inboundSchema: z.ZodType<
+  DuplicateAgentRequestBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  display_name: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+  });
+});
+/** @internal */
+export type DuplicateAgentRequestBody$Outbound = {
+  key: string;
+  display_name?: string | undefined;
+};
+
+/** @internal */
+export const DuplicateAgentRequestBody$outboundSchema: z.ZodType<
+  DuplicateAgentRequestBody$Outbound,
+  z.ZodTypeDef,
+  DuplicateAgentRequestBody
+> = z.object({
+  key: z.string(),
+  displayName: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+  });
+});
+
+export function duplicateAgentRequestBodyToJSON(
+  duplicateAgentRequestBody: DuplicateAgentRequestBody,
+): string {
+  return JSON.stringify(
+    DuplicateAgentRequestBody$outboundSchema.parse(duplicateAgentRequestBody),
+  );
+}
+export function duplicateAgentRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DuplicateAgentRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DuplicateAgentRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DuplicateAgentRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
 export const DuplicateAgentRequest$inboundSchema: z.ZodType<
   DuplicateAgentRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string(),
+  agent_key: z.string(),
+  RequestBody: z.lazy(() => DuplicateAgentRequestBody$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_key": "agentKey",
+    "RequestBody": "requestBody",
+  });
 });
 /** @internal */
 export type DuplicateAgentRequest$Outbound = {
-  id: string;
+  agent_key: string;
+  RequestBody?: DuplicateAgentRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -995,7 +1064,14 @@ export const DuplicateAgentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateAgentRequest
 > = z.object({
-  id: z.string(),
+  agentKey: z.string(),
+  requestBody: z.lazy(() => DuplicateAgentRequestBody$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    agentKey: "agent_key",
+    requestBody: "RequestBody",
+  });
 });
 
 export function duplicateAgentRequestToJSON(

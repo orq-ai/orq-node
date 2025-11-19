@@ -14,7 +14,7 @@ export const tool$agentsDuplicate: ToolDefinition<typeof args> = {
   name: "agents-duplicate",
   description: `Duplicate an existing agent
 
-Creates a copy of an existing agent with a new unique key. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.`,
+Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsDuplicate(

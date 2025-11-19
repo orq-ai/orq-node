@@ -113,7 +113,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.create({
     key: "<key>",
-    displayName: "Orion98",
     role: "<value>",
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
@@ -150,7 +149,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsCreate(orq, {
     key: "<key>",
-    displayName: "Orion98",
     role: "<value>",
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
@@ -509,11 +507,11 @@ run();
 
 ## duplicate
 
-Creates a copy of an existing agent with a new unique key. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
+Creates a copy of an existing agent with a new unique key and display name. The duplicated agent will have all the same configuration as the original, including model settings, instructions, tools, and knowledge bases.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DuplicateAgent" method="post" path="/v2/agents/{id}/duplicate" -->
+<!-- UsageSnippet language="typescript" operationID="DuplicateAgent" method="post" path="/v2/agents/{agent_key}/duplicate" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -523,7 +521,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.agents.duplicate({
-    id: "<id>",
+    agentKey: "<value>",
   });
 
   console.log(result);
@@ -548,7 +546,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await agentsDuplicate(orq, {
-    id: "<id>",
+    agentKey: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;

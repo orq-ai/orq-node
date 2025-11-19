@@ -6,12 +6,13 @@
 import { DuplicateAgentRequest } from "@orq-ai/node/models/operations";
 
 let value: DuplicateAgentRequest = {
-  id: "<id>",
+  agentKey: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                            | Type                             | Required                         | Description                      |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `id`                             | *string*                         | :heavy_check_mark:               | The ID of the agent to duplicate |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `agentKey`                                                                                   | *string*                                                                                     | :heavy_check_mark:                                                                           | The key of the agent to duplicate                                                            |
+| `requestBody`                                                                                | [operations.DuplicateAgentRequestBody](../../models/operations/duplicateagentrequestbody.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

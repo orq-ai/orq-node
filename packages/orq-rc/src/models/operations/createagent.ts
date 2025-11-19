@@ -1226,7 +1226,7 @@ export type CreateAgentRequestBody = {
   /**
    * agent display name within the workspace
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * The role or function of the agent
    */
@@ -5360,7 +5360,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
@@ -5392,7 +5392,7 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateAgentRequestBody$Outbound = {
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   role: string;
   description: string;
   instructions: string;
@@ -5416,7 +5416,7 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   CreateAgentRequestBody
 > = z.object({
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
