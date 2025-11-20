@@ -1,15 +1,16 @@
-# RetrieveToolResponseBody1
+# RetrieveToolResponseBodyFunctionTool
+
+A custom function tool that allows the model to call predefined functions with structured parameters.
 
 ## Example Usage
 
 ```typescript
-import { RetrieveToolResponseBody1 } from "@orq-ai/node/models/operations";
+import { RetrieveToolResponseBodyFunctionTool } from "@orq-ai/node/models/operations";
 
-let value: RetrieveToolResponseBody1 = {
+let value: RetrieveToolResponseBodyFunctionTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "limply accountability blindly under platter ew bandwidth presume wherever boohoo",
+  description: "if necklace yippee but before cheerfully",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

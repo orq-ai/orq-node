@@ -1,14 +1,16 @@
-# RetrieveToolResponseBody2
+# RetrieveToolResponseBodyJSONSchemaTool
+
+A tool that enforces structured output format using JSON Schema for consistent response formatting.
 
 ## Example Usage
 
 ```typescript
-import { RetrieveToolResponseBody2 } from "@orq-ai/node/models/operations";
+import { RetrieveToolResponseBodyJSONSchemaTool } from "@orq-ai/node/models/operations";
 
-let value: RetrieveToolResponseBody2 = {
+let value: RetrieveToolResponseBodyJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "phooey far mythology voluntarily quizzically likely or",
+  description: "lazy commemorate enlist",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -16,7 +18,7 @@ let value: RetrieveToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "complete till slipper supposing obligation",
+    description: "whoa flight convince",
     schema: {
       type: "<value>",
       properties: {

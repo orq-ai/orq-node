@@ -93,7 +93,10 @@ export type RetrieveToolResponseBodyCodeTool = {
   code: string;
 };
 
-export type RetrieveToolResponseBody5 = {
+/**
+ * Executes code snippets in a sandboxed environment, currently supporting Python.
+ */
+export type RetrieveToolResponseBodyCodeExecutionTool = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -222,7 +225,10 @@ export type RetrieveToolResponseBodyMcp = {
   connectionType: RetrieveToolResponseBodyConnectionType;
 };
 
-export type RetrieveToolResponseBody4 = {
+/**
+ * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
+ */
+export type RetrieveToolResponseBodyMCPTool = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -388,7 +394,10 @@ export type RetrieveToolResponseBodyHttp = {
   arguments?: { [k: string]: RetrieveToolResponseBodyArguments } | undefined;
 };
 
-export type RetrieveToolResponseBody3 = {
+/**
+ * Executes HTTP requests to interact with external APIs and web services using customizable blueprints.
+ */
+export type RetrieveToolResponseBodyHTTPTool = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -494,7 +503,10 @@ export type RetrieveToolResponseBodyJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type RetrieveToolResponseBody2 = {
+/**
+ * A tool that enforces structured output format using JSON Schema for consistent response formatting.
+ */
+export type RetrieveToolResponseBodyJSONSchemaTool = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -614,7 +626,10 @@ export type RetrieveToolResponseBodyFunction = {
   parameters?: RetrieveToolResponseBodyParameters | undefined;
 };
 
-export type RetrieveToolResponseBody1 = {
+/**
+ * A custom function tool that allows the model to call predefined functions with structured parameters.
+ */
+export type RetrieveToolResponseBodyFunctionTool = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -663,11 +678,11 @@ export type RetrieveToolResponseBody1 = {
  * Successfully retrieved the tool.
  */
 export type RetrieveToolResponseBody =
-  | RetrieveToolResponseBody1
-  | RetrieveToolResponseBody2
-  | RetrieveToolResponseBody3
-  | RetrieveToolResponseBody4
-  | RetrieveToolResponseBody5;
+  | RetrieveToolResponseBodyFunctionTool
+  | RetrieveToolResponseBodyJSONSchemaTool
+  | RetrieveToolResponseBodyHTTPTool
+  | RetrieveToolResponseBodyMCPTool
+  | RetrieveToolResponseBodyCodeExecutionTool;
 
 /** @internal */
 export const RetrieveToolRequest$inboundSchema: z.ZodType<
@@ -885,12 +900,12 @@ export function retrieveToolResponseBodyCodeToolFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
-  RetrieveToolResponseBody5,
+export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyCodeExecutionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KAGNHD400MTVQY1C0SWX0F9D"),
+  _id: z.string().default("tool_01KAGR8RXMKADZ8211WCAC2Y20"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -921,7 +936,7 @@ export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetrieveToolResponseBody5$Outbound = {
+export type RetrieveToolResponseBodyCodeExecutionTool$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -940,56 +955,66 @@ export type RetrieveToolResponseBody5$Outbound = {
 };
 
 /** @internal */
-export const RetrieveToolResponseBody5$outboundSchema: z.ZodType<
-  RetrieveToolResponseBody5$Outbound,
-  z.ZodTypeDef,
-  RetrieveToolResponseBody5
-> = z.object({
-  id: z.string().default("tool_01KAGNHD400MTVQY1C0SWX0F9D"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema
-      .default("live"),
-  versionHash: z.string().optional(),
-  type:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema,
-  codeTool: z.lazy(() => RetrieveToolResponseBodyCodeTool$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-    codeTool: "code_tool",
+export const RetrieveToolResponseBodyCodeExecutionTool$outboundSchema:
+  z.ZodType<
+    RetrieveToolResponseBodyCodeExecutionTool$Outbound,
+    z.ZodTypeDef,
+    RetrieveToolResponseBodyCodeExecutionTool
+  > = z.object({
+    id: z.string().default("tool_01KAGR8RXMKADZ8211WCAC2Y20"),
+    path: z.string(),
+    key: z.string(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    createdById: z.string().optional(),
+    updatedById: z.string().optional(),
+    projectId: z.string(),
+    workspaceId: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status:
+      RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema
+        .default("live"),
+    versionHash: z.string().optional(),
+    type:
+      RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema,
+    codeTool: z.lazy(() => RetrieveToolResponseBodyCodeTool$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      createdById: "created_by_id",
+      updatedById: "updated_by_id",
+      projectId: "project_id",
+      workspaceId: "workspace_id",
+      versionHash: "version_hash",
+      codeTool: "code_tool",
+    });
   });
-});
 
-export function retrieveToolResponseBody5ToJSON(
-  retrieveToolResponseBody5: RetrieveToolResponseBody5,
+export function retrieveToolResponseBodyCodeExecutionToolToJSON(
+  retrieveToolResponseBodyCodeExecutionTool:
+    RetrieveToolResponseBodyCodeExecutionTool,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBody5$outboundSchema.parse(retrieveToolResponseBody5),
+    RetrieveToolResponseBodyCodeExecutionTool$outboundSchema.parse(
+      retrieveToolResponseBodyCodeExecutionTool,
+    ),
   );
 }
-export function retrieveToolResponseBody5FromJSON(
+export function retrieveToolResponseBodyCodeExecutionToolFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBody5, SDKValidationError> {
+): SafeParseResult<
+  RetrieveToolResponseBodyCodeExecutionTool,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveToolResponseBody5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBody5' from JSON`,
+    (x) =>
+      RetrieveToolResponseBodyCodeExecutionTool$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveToolResponseBodyCodeExecutionTool' from JSON`,
   );
 }
 
@@ -1125,7 +1150,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KAGNHD3ZMPMDTMAG9XBK6AGY"),
+  id: z.string().default("01KAGR8RXKKQ0791ZWNSNCHS4T"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -1144,7 +1169,7 @@ export const RetrieveToolResponseBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyTools
 > = z.object({
-  id: z.string().default("01KAGNHD3ZMPMDTMAG9XBK6AGY"),
+  id: z.string().default("01KAGR8RXKKQ0791ZWNSNCHS4T"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$outboundSchema),
@@ -1245,12 +1270,12 @@ export function retrieveToolResponseBodyMcpFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
-  RetrieveToolResponseBody4,
+export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyMCPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KAGNHD3XB09J83HWE3JB8B5G"),
+  _id: z.string().default("tool_01KAGR8RXJRT5RMDH14A1VW00J"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1279,7 +1304,7 @@ export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetrieveToolResponseBody4$Outbound = {
+export type RetrieveToolResponseBodyMCPTool$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -1298,12 +1323,12 @@ export type RetrieveToolResponseBody4$Outbound = {
 };
 
 /** @internal */
-export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
-  RetrieveToolResponseBody4$Outbound,
+export const RetrieveToolResponseBodyMCPTool$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyMCPTool$Outbound,
   z.ZodTypeDef,
-  RetrieveToolResponseBody4
+  RetrieveToolResponseBodyMCPTool
 > = z.object({
-  id: z.string().default("tool_01KAGNHD3XB09J83HWE3JB8B5G"),
+  id: z.string().default("tool_01KAGR8RXJRT5RMDH14A1VW00J"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1332,20 +1357,22 @@ export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
   });
 });
 
-export function retrieveToolResponseBody4ToJSON(
-  retrieveToolResponseBody4: RetrieveToolResponseBody4,
+export function retrieveToolResponseBodyMCPToolToJSON(
+  retrieveToolResponseBodyMCPTool: RetrieveToolResponseBodyMCPTool,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBody4$outboundSchema.parse(retrieveToolResponseBody4),
+    RetrieveToolResponseBodyMCPTool$outboundSchema.parse(
+      retrieveToolResponseBodyMCPTool,
+    ),
   );
 }
-export function retrieveToolResponseBody4FromJSON(
+export function retrieveToolResponseBodyMCPToolFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBody4, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyMCPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveToolResponseBody4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBody4' from JSON`,
+    (x) => RetrieveToolResponseBodyMCPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyMCPTool' from JSON`,
   );
 }
 
@@ -1676,12 +1703,12 @@ export function retrieveToolResponseBodyHttpFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
-  RetrieveToolResponseBody3,
+export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyHTTPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KAGNHD3TP1SE44RCKXP3JCPP"),
+  _id: z.string().default("tool_01KAGR8RXETMKGSTXNC8XV02ND"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1710,7 +1737,7 @@ export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetrieveToolResponseBody3$Outbound = {
+export type RetrieveToolResponseBodyHTTPTool$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -1729,12 +1756,12 @@ export type RetrieveToolResponseBody3$Outbound = {
 };
 
 /** @internal */
-export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
-  RetrieveToolResponseBody3$Outbound,
+export const RetrieveToolResponseBodyHTTPTool$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyHTTPTool$Outbound,
   z.ZodTypeDef,
-  RetrieveToolResponseBody3
+  RetrieveToolResponseBodyHTTPTool
 > = z.object({
-  id: z.string().default("tool_01KAGNHD3TP1SE44RCKXP3JCPP"),
+  id: z.string().default("tool_01KAGR8RXETMKGSTXNC8XV02ND"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1763,20 +1790,22 @@ export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
   });
 });
 
-export function retrieveToolResponseBody3ToJSON(
-  retrieveToolResponseBody3: RetrieveToolResponseBody3,
+export function retrieveToolResponseBodyHTTPToolToJSON(
+  retrieveToolResponseBodyHTTPTool: RetrieveToolResponseBodyHTTPTool,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBody3$outboundSchema.parse(retrieveToolResponseBody3),
+    RetrieveToolResponseBodyHTTPTool$outboundSchema.parse(
+      retrieveToolResponseBodyHTTPTool,
+    ),
   );
 }
-export function retrieveToolResponseBody3FromJSON(
+export function retrieveToolResponseBodyHTTPToolFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBody3, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyHTTPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveToolResponseBody3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBody3' from JSON`,
+    (x) => RetrieveToolResponseBodyHTTPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyHTTPTool' from JSON`,
   );
 }
 
@@ -1910,12 +1939,12 @@ export function retrieveToolResponseBodyJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
-  RetrieveToolResponseBody2,
+export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyJSONSchemaTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KAGNHD3RXSBAYDR3GHTMGXX6"),
+  _id: z.string().default("tool_01KAGR8RXD3EZSVKPQAKG594AY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1943,7 +1972,7 @@ export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetrieveToolResponseBody2$Outbound = {
+export type RetrieveToolResponseBodyJSONSchemaTool$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -1962,12 +1991,12 @@ export type RetrieveToolResponseBody2$Outbound = {
 };
 
 /** @internal */
-export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
-  RetrieveToolResponseBody2$Outbound,
+export const RetrieveToolResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyJSONSchemaTool$Outbound,
   z.ZodTypeDef,
-  RetrieveToolResponseBody2
+  RetrieveToolResponseBodyJSONSchemaTool
 > = z.object({
-  id: z.string().default("tool_01KAGNHD3RXSBAYDR3GHTMGXX6"),
+  id: z.string().default("tool_01KAGR8RXD3EZSVKPQAKG594AY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1995,20 +2024,24 @@ export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
   });
 });
 
-export function retrieveToolResponseBody2ToJSON(
-  retrieveToolResponseBody2: RetrieveToolResponseBody2,
+export function retrieveToolResponseBodyJSONSchemaToolToJSON(
+  retrieveToolResponseBodyJSONSchemaTool:
+    RetrieveToolResponseBodyJSONSchemaTool,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBody2$outboundSchema.parse(retrieveToolResponseBody2),
+    RetrieveToolResponseBodyJSONSchemaTool$outboundSchema.parse(
+      retrieveToolResponseBodyJSONSchemaTool,
+    ),
   );
 }
-export function retrieveToolResponseBody2FromJSON(
+export function retrieveToolResponseBodyJSONSchemaToolFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBody2, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyJSONSchemaTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveToolResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBody2' from JSON`,
+    (x) =>
+      RetrieveToolResponseBodyJSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyJSONSchemaTool' from JSON`,
   );
 }
 
@@ -2160,12 +2193,12 @@ export function retrieveToolResponseBodyFunctionFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
-  RetrieveToolResponseBody1,
+export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyFunctionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KAGNHD3Q9VHCHRAT971NHCKT"),
+  _id: z.string().default("tool_01KAGR8RXBH1MCQY04M4ENVG9V"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2192,7 +2225,7 @@ export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetrieveToolResponseBody1$Outbound = {
+export type RetrieveToolResponseBodyFunctionTool$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -2211,12 +2244,12 @@ export type RetrieveToolResponseBody1$Outbound = {
 };
 
 /** @internal */
-export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
-  RetrieveToolResponseBody1$Outbound,
+export const RetrieveToolResponseBodyFunctionTool$outboundSchema: z.ZodType<
+  RetrieveToolResponseBodyFunctionTool$Outbound,
   z.ZodTypeDef,
-  RetrieveToolResponseBody1
+  RetrieveToolResponseBodyFunctionTool
 > = z.object({
-  id: z.string().default("tool_01KAGNHD3Q9VHCHRAT971NHCKT"),
+  id: z.string().default("tool_01KAGR8RXBH1MCQY04M4ENVG9V"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2243,20 +2276,23 @@ export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
   });
 });
 
-export function retrieveToolResponseBody1ToJSON(
-  retrieveToolResponseBody1: RetrieveToolResponseBody1,
+export function retrieveToolResponseBodyFunctionToolToJSON(
+  retrieveToolResponseBodyFunctionTool: RetrieveToolResponseBodyFunctionTool,
 ): string {
   return JSON.stringify(
-    RetrieveToolResponseBody1$outboundSchema.parse(retrieveToolResponseBody1),
+    RetrieveToolResponseBodyFunctionTool$outboundSchema.parse(
+      retrieveToolResponseBodyFunctionTool,
+    ),
   );
 }
-export function retrieveToolResponseBody1FromJSON(
+export function retrieveToolResponseBodyFunctionToolFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBody1, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyFunctionTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveToolResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBody1' from JSON`,
+    (x) =>
+      RetrieveToolResponseBodyFunctionTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyFunctionTool' from JSON`,
   );
 }
 
@@ -2266,19 +2302,19 @@ export const RetrieveToolResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RetrieveToolResponseBody1$inboundSchema),
-  z.lazy(() => RetrieveToolResponseBody2$inboundSchema),
-  z.lazy(() => RetrieveToolResponseBody3$inboundSchema),
-  z.lazy(() => RetrieveToolResponseBody4$inboundSchema),
-  z.lazy(() => RetrieveToolResponseBody5$inboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyFunctionTool$inboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyJSONSchemaTool$inboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyHTTPTool$inboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyMCPTool$inboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyCodeExecutionTool$inboundSchema),
 ]);
 /** @internal */
 export type RetrieveToolResponseBody$Outbound =
-  | RetrieveToolResponseBody1$Outbound
-  | RetrieveToolResponseBody2$Outbound
-  | RetrieveToolResponseBody3$Outbound
-  | RetrieveToolResponseBody4$Outbound
-  | RetrieveToolResponseBody5$Outbound;
+  | RetrieveToolResponseBodyFunctionTool$Outbound
+  | RetrieveToolResponseBodyJSONSchemaTool$Outbound
+  | RetrieveToolResponseBodyHTTPTool$Outbound
+  | RetrieveToolResponseBodyMCPTool$Outbound
+  | RetrieveToolResponseBodyCodeExecutionTool$Outbound;
 
 /** @internal */
 export const RetrieveToolResponseBody$outboundSchema: z.ZodType<
@@ -2286,11 +2322,11 @@ export const RetrieveToolResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody
 > = z.union([
-  z.lazy(() => RetrieveToolResponseBody1$outboundSchema),
-  z.lazy(() => RetrieveToolResponseBody2$outboundSchema),
-  z.lazy(() => RetrieveToolResponseBody3$outboundSchema),
-  z.lazy(() => RetrieveToolResponseBody4$outboundSchema),
-  z.lazy(() => RetrieveToolResponseBody5$outboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyFunctionTool$outboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyJSONSchemaTool$outboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyHTTPTool$outboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyMCPTool$outboundSchema),
+  z.lazy(() => RetrieveToolResponseBodyCodeExecutionTool$outboundSchema),
 ]);
 
 export function retrieveToolResponseBodyToJSON(

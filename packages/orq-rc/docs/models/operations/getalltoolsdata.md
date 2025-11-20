@@ -3,13 +3,13 @@
 
 ## Supported Types
 
-### `operations.GetAllToolsData1`
+### `operations.DataFunctionTool`
 
 ```typescript
-const value: operations.GetAllToolsData1 = {
+const value: operations.DataFunctionTool = {
   path: "Default",
   key: "<key>",
-  description: "amid eek winged blah rural softly hold",
+  description: "mid via yum reluctantly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -21,13 +21,13 @@ const value: operations.GetAllToolsData1 = {
 };
 ```
 
-### `operations.GetAllToolsData2`
+### `operations.DataJSONSchemaTool`
 
 ```typescript
-const value: operations.GetAllToolsData2 = {
+const value: operations.DataJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "uh-huh reckless for",
+  description: "after intrigue distinct fluffy even off um",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -35,7 +35,8 @@ const value: operations.GetAllToolsData2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "engage whose settler phooey not institutionalize",
+    description:
+      "crushing worth obediently ouch kaleidoscopic blah unimpressively oh",
     schema: {
       type: "<value>",
       properties: {
@@ -53,13 +54,13 @@ const value: operations.GetAllToolsData2 = {
 };
 ```
 
-### `operations.GetAllToolsData3`
+### `operations.DataHTTPTool`
 
 ```typescript
-const value: operations.GetAllToolsData3 = {
+const value: operations.DataHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "whoa soon boohoo slushy eek whereas finally",
+  description: "ceramic pfft where mortally gosh or co-producer for",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -74,21 +75,20 @@ const value: operations.GetAllToolsData3 = {
 };
 ```
 
-### `operations.GetAllToolsData4`
+### `operations.DataMCPTool`
 
 ```typescript
-const value: operations.GetAllToolsData4 = {
+const value: operations.DataMCPTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "besmirch huzzah questioningly deed knowingly metallic incomplete and aboard",
+  description: "reboot aw without webbed lasting",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverUrl: "https://dazzling-mouser.com/",
+    serverUrl: "https://stable-bran.net",
     tools: [
       {
         name: "<value>",
@@ -97,19 +97,18 @@ const value: operations.GetAllToolsData4 = {
         },
       },
     ],
-    connectionType: "sse",
+    connectionType: "http",
   },
 };
 ```
 
-### `operations.GetAllToolsData5`
+### `operations.DataCodeExecutionTool`
 
 ```typescript
-const value: operations.GetAllToolsData5 = {
+const value: operations.DataCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "contractor minus faithfully odd wisely toward because chainstay nasalise",
+  description: "fervently pace but blah upon charm quarterly on neglect",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

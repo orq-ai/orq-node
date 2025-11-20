@@ -5,13 +5,13 @@ Successfully updated the tool.
 
 ## Supported Types
 
-### `operations.UpdateToolResponseBody1`
+### `operations.UpdateToolResponseBodyFunctionTool`
 
 ```typescript
-const value: operations.UpdateToolResponseBody1 = {
+const value: operations.UpdateToolResponseBodyFunctionTool = {
   path: "Default",
   key: "<key>",
-  description: "past mathematics throughout versus monstrous geez gee very",
+  description: "throughout gosh across about reproach accredit ah",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -23,13 +23,14 @@ const value: operations.UpdateToolResponseBody1 = {
 };
 ```
 
-### `operations.UpdateToolResponseBody2`
+### `operations.UpdateToolResponseBodyJSONSchemaTool`
 
 ```typescript
-const value: operations.UpdateToolResponseBody2 = {
+const value: operations.UpdateToolResponseBodyJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "almost agile joyful beneath after down priesthood",
+  description:
+    "zowie tomatillo insist flight yowza toward loosely chasuble above",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -37,7 +38,7 @@ const value: operations.UpdateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "instead odd yuck where",
+    description: "along diligently across mortally bleak incomparable boo drat",
     schema: {
       type: "<value>",
       properties: {
@@ -51,13 +52,13 @@ const value: operations.UpdateToolResponseBody2 = {
 };
 ```
 
-### `operations.UpdateToolResponseBody3`
+### `operations.UpdateToolResponseBodyHTTPTool`
 
 ```typescript
-const value: operations.UpdateToolResponseBody3 = {
+const value: operations.UpdateToolResponseBodyHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "essential SUV consequently incidentally kit through",
+  description: "search whenever psst",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -72,33 +73,41 @@ const value: operations.UpdateToolResponseBody3 = {
 };
 ```
 
-### `operations.UpdateToolResponseBody4`
+### `operations.UpdateToolResponseBodyMCPTool`
 
 ```typescript
-const value: operations.UpdateToolResponseBody4 = {
+const value: operations.UpdateToolResponseBodyMCPTool = {
   path: "Default",
   key: "<key>",
-  description: "lively beneath whoever pulp incidentally despite",
+  description: "astride decisive smoothly rim consequently tinted",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverUrl: "https://incomplete-crest.name/",
-    tools: [],
-    connectionType: "http",
+    serverUrl: "https://eminent-tomatillo.info",
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
+    connectionType: "sse",
   },
 };
 ```
 
-### `operations.UpdateToolResponseBody5`
+### `operations.UpdateToolResponseBodyCodeExecutionTool`
 
 ```typescript
-const value: operations.UpdateToolResponseBody5 = {
+const value: operations.UpdateToolResponseBodyCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description: "bah trench cleaner vibration interestingly",
+  description:
+    "substitution loosely as underneath quarrelsomely equally climb stranger whine",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

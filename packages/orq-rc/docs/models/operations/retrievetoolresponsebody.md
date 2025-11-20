@@ -5,14 +5,13 @@ Successfully retrieved the tool.
 
 ## Supported Types
 
-### `operations.RetrieveToolResponseBody1`
+### `operations.RetrieveToolResponseBodyFunctionTool`
 
 ```typescript
-const value: operations.RetrieveToolResponseBody1 = {
+const value: operations.RetrieveToolResponseBodyFunctionTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "limply accountability blindly under platter ew bandwidth presume wherever boohoo",
+  description: "if necklace yippee but before cheerfully",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -24,13 +23,13 @@ const value: operations.RetrieveToolResponseBody1 = {
 };
 ```
 
-### `operations.RetrieveToolResponseBody2`
+### `operations.RetrieveToolResponseBodyJSONSchemaTool`
 
 ```typescript
-const value: operations.RetrieveToolResponseBody2 = {
+const value: operations.RetrieveToolResponseBodyJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "phooey far mythology voluntarily quizzically likely or",
+  description: "lazy commemorate enlist",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -38,7 +37,7 @@ const value: operations.RetrieveToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "complete till slipper supposing obligation",
+    description: "whoa flight convince",
     schema: {
       type: "<value>",
       properties: {
@@ -56,13 +55,13 @@ const value: operations.RetrieveToolResponseBody2 = {
 };
 ```
 
-### `operations.RetrieveToolResponseBody3`
+### `operations.RetrieveToolResponseBodyHTTPTool`
 
 ```typescript
-const value: operations.RetrieveToolResponseBody3 = {
+const value: operations.RetrieveToolResponseBodyHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "likewise practical before",
+  description: "weird mummify scrape massage athwart",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -77,20 +76,21 @@ const value: operations.RetrieveToolResponseBody3 = {
 };
 ```
 
-### `operations.RetrieveToolResponseBody4`
+### `operations.RetrieveToolResponseBodyMCPTool`
 
 ```typescript
-const value: operations.RetrieveToolResponseBody4 = {
+const value: operations.RetrieveToolResponseBodyMCPTool = {
   path: "Default",
   key: "<key>",
-  description: "psst railway above airmail",
+  description:
+    "regarding immaculate amongst in pleasure label beside er before somber",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverUrl: "https://voluminous-stool.com/",
+    serverUrl: "https://warmhearted-tuba.net",
     tools: [
       {
         name: "<value>",
@@ -104,13 +104,13 @@ const value: operations.RetrieveToolResponseBody4 = {
 };
 ```
 
-### `operations.RetrieveToolResponseBody5`
+### `operations.RetrieveToolResponseBodyCodeExecutionTool`
 
 ```typescript
-const value: operations.RetrieveToolResponseBody5 = {
+const value: operations.RetrieveToolResponseBodyCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description: "ironclad crossly rapidly meh well provided",
+  description: "acidly highly monocle",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

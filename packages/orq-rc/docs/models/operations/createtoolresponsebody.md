@@ -5,13 +5,13 @@ Successfully created the tool.
 
 ## Supported Types
 
-### `operations.ResponseBody1`
+### `operations.ResponseBodyFunctionTool`
 
 ```typescript
-const value: operations.ResponseBody1 = {
+const value: operations.ResponseBodyFunctionTool = {
   path: "Default",
   key: "<key>",
-  description: "unto and times upon",
+  description: "deer brightly clamor wherever boo since solidly blah extremely",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -23,13 +23,13 @@ const value: operations.ResponseBody1 = {
 };
 ```
 
-### `operations.ResponseBody2`
+### `operations.ResponseBodyJSONSchemaTool`
 
 ```typescript
-const value: operations.ResponseBody2 = {
+const value: operations.ResponseBodyJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "noteworthy acquire below ouch palate nor",
+  description: "blah neighboring fooey gently",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -37,7 +37,7 @@ const value: operations.ResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "elegantly like meh giggle yuck off",
+    description: "carelessly arrogantly conservation equal however unbalance",
     schema: {
       type: "<value>",
       properties: {
@@ -51,13 +51,14 @@ const value: operations.ResponseBody2 = {
 };
 ```
 
-### `operations.ResponseBody3`
+### `operations.ResponseBodyHTTPTool`
 
 ```typescript
-const value: operations.ResponseBody3 = {
+const value: operations.ResponseBodyHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "refute the besides before brr oof ah ew afore",
+  description:
+    "chops though rebound impish zowie ha soft potentially vestment youthful",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -72,40 +73,35 @@ const value: operations.ResponseBody3 = {
 };
 ```
 
-### `operations.ResponseBody4`
+### `operations.ResponseBodyMCPTool`
 
 ```typescript
-const value: operations.ResponseBody4 = {
+const value: operations.ResponseBodyMCPTool = {
   path: "Default",
   key: "<key>",
-  description: "husky too furiously shameless",
+  description:
+    "retool gaseous officially urgently vivaciously bah positively chilly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverUrl: "https://noteworthy-devastation.com/",
-    tools: [
-      {
-        name: "<value>",
-        schema: {
-          type: "object",
-        },
-      },
-    ],
-    connectionType: "sse",
+    serverUrl: "https://unwilling-coliseum.biz/",
+    tools: [],
+    connectionType: "http",
   },
 };
 ```
 
-### `operations.ResponseBody5`
+### `operations.ResponseBodyCodeExecutionTool`
 
 ```typescript
-const value: operations.ResponseBody5 = {
+const value: operations.ResponseBodyCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description: "edge tank brightly hm",
+  description:
+    "finally radiant to disappointment including chiffonier sheepishly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
