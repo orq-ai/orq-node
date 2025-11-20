@@ -8,12 +8,19 @@ SSE stream of agent events
 import { StreamRunAgentResponseBody } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentResponseBody = {
-  data: "<value>",
+  data: {
+    type: "event.agents.handed_off",
+    timestamp: "<value>",
+    data: {
+      agentId: "<id>",
+      input: "<value>",
+    },
+  },
 };
 ```
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `data`                  | *string*                | :heavy_check_mark:      | JSON-encoded event data |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `data`                          | *operations.StreamRunAgentData* | :heavy_check_mark:              | N/A                             |

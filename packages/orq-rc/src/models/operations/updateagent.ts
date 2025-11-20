@@ -776,7 +776,7 @@ export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15
   >;
 
 /**
- * Executes tools from Model Context Protocol (MCP) servers. Must reference a pre-created MCP tool by key or id.
+ * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
  */
 export type AgentToolInputCRUDMCPTool = {
   /**
@@ -785,13 +785,17 @@ export type AgentToolInputCRUDMCPTool = {
   type:
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type;
   /**
-   * The key of the pre-created MCP tool
+   * The key of the parent MCP tool
    */
   key?: string | undefined;
   /**
-   * The ID of the pre-created MCP tool
+   * The ID of the parent MCP tool
    */
   id?: string | undefined;
+  /**
+   * The ID of the specific nested tool within the MCP server
+   */
+  toolId: string;
   /**
    * Whether this tool requires approval before execution
    */
@@ -1129,6 +1133,7 @@ export type AgentToolInputCRUDGoogleSearchTool = {
  * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
  */
 export type UpdateAgentAgentToolInputCRUD =
+  | AgentToolInputCRUDMCPTool
   | AgentToolInputCRUDGoogleSearchTool
   | AgentToolInputCRUDWebScraperTool
   | AgentToolInputCRUDCallSubAgentTool
@@ -1142,8 +1147,7 @@ export type UpdateAgentAgentToolInputCRUD =
   | AgentToolInputCRUDCurrentDateTool
   | AgentToolInputCRUDHTTPTool
   | AgentToolInputCRUDCodeExecutionTool
-  | AgentToolInputCRUDFunctionTool
-  | AgentToolInputCRUDMCPTool;
+  | AgentToolInputCRUDFunctionTool;
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1219,6 +1223,7 @@ export type UpdateAgentSettings = {
    */
   tools?:
     | Array<
+      | AgentToolInputCRUDMCPTool
       | AgentToolInputCRUDGoogleSearchTool
       | AgentToolInputCRUDWebScraperTool
       | AgentToolInputCRUDCallSubAgentTool
@@ -1233,7 +1238,6 @@ export type UpdateAgentSettings = {
       | AgentToolInputCRUDHTTPTool
       | AgentToolInputCRUDCodeExecutionTool
       | AgentToolInputCRUDFunctionTool
-      | AgentToolInputCRUDMCPTool
     >
     | undefined;
   /**
@@ -1382,6 +1386,10 @@ export type UpdateAgentTools = {
    */
   description?: string | undefined;
   requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
@@ -4290,9 +4298,11 @@ export const AgentToolInputCRUDMCPTool$inboundSchema: z.ZodType<
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
   key: z.string().optional(),
   id: z.string().optional(),
+  tool_id: z.string(),
   requires_approval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
+    "tool_id": "toolId",
     "requires_approval": "requiresApproval",
   });
 });
@@ -4301,6 +4311,7 @@ export type AgentToolInputCRUDMCPTool$Outbound = {
   type: string;
   key?: string | undefined;
   id?: string | undefined;
+  tool_id: string;
   requires_approval: boolean;
 };
 
@@ -4314,9 +4325,11 @@ export const AgentToolInputCRUDMCPTool$outboundSchema: z.ZodType<
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
   key: z.string().optional(),
   id: z.string().optional(),
+  toolId: z.string(),
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
+    toolId: "tool_id",
     requiresApproval: "requires_approval",
   });
 });
@@ -5323,6 +5336,7 @@ export const UpdateAgentAgentToolInputCRUD$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDGoogleSearchTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDWebScraperTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDCallSubAgentTool$inboundSchema),
@@ -5337,10 +5351,10 @@ export const UpdateAgentAgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDHTTPTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDCodeExecutionTool$inboundSchema),
   z.lazy(() => AgentToolInputCRUDFunctionTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
 ]);
 /** @internal */
 export type UpdateAgentAgentToolInputCRUD$Outbound =
+  | AgentToolInputCRUDMCPTool$Outbound
   | AgentToolInputCRUDGoogleSearchTool$Outbound
   | AgentToolInputCRUDWebScraperTool$Outbound
   | AgentToolInputCRUDCallSubAgentTool$Outbound
@@ -5354,8 +5368,7 @@ export type UpdateAgentAgentToolInputCRUD$Outbound =
   | AgentToolInputCRUDCurrentDateTool$Outbound
   | AgentToolInputCRUDHTTPTool$Outbound
   | AgentToolInputCRUDCodeExecutionTool$Outbound
-  | AgentToolInputCRUDFunctionTool$Outbound
-  | AgentToolInputCRUDMCPTool$Outbound;
+  | AgentToolInputCRUDFunctionTool$Outbound;
 
 /** @internal */
 export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -5363,6 +5376,7 @@ export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAgentAgentToolInputCRUD
 > = z.union([
+  z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDGoogleSearchTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDWebScraperTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDCallSubAgentTool$outboundSchema),
@@ -5377,7 +5391,6 @@ export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDCodeExecutionTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDFunctionTool$outboundSchema),
-  z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
 ]);
 
 export function updateAgentAgentToolInputCRUDToJSON(
@@ -5540,6 +5553,7 @@ export const UpdateAgentSettings$inboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
+      z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
       z.lazy(() => AgentToolInputCRUDGoogleSearchTool$inboundSchema),
       z.lazy(() => AgentToolInputCRUDWebScraperTool$inboundSchema),
       z.lazy(() => AgentToolInputCRUDCallSubAgentTool$inboundSchema),
@@ -5554,7 +5568,6 @@ export const UpdateAgentSettings$inboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputCRUDHTTPTool$inboundSchema),
       z.lazy(() => AgentToolInputCRUDCodeExecutionTool$inboundSchema),
       z.lazy(() => AgentToolInputCRUDFunctionTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => UpdateAgentEvaluators$inboundSchema))
@@ -5575,6 +5588,7 @@ export type UpdateAgentSettings$Outbound = {
   tool_approval_required: string;
   tools?:
     | Array<
+      | AgentToolInputCRUDMCPTool$Outbound
       | AgentToolInputCRUDGoogleSearchTool$Outbound
       | AgentToolInputCRUDWebScraperTool$Outbound
       | AgentToolInputCRUDCallSubAgentTool$Outbound
@@ -5589,7 +5603,6 @@ export type UpdateAgentSettings$Outbound = {
       | AgentToolInputCRUDHTTPTool$Outbound
       | AgentToolInputCRUDCodeExecutionTool$Outbound
       | AgentToolInputCRUDFunctionTool$Outbound
-      | AgentToolInputCRUDMCPTool$Outbound
     >
     | undefined;
   evaluators?: Array<UpdateAgentEvaluators$Outbound> | undefined;
@@ -5609,6 +5622,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
+      z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDGoogleSearchTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDWebScraperTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDCallSubAgentTool$outboundSchema),
@@ -5623,7 +5637,6 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDCodeExecutionTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDFunctionTool$outboundSchema),
-      z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => UpdateAgentEvaluators$outboundSchema))
@@ -6001,6 +6014,7 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$inboundSchema))
     .optional(),
   timeout: z.number().default(120),
@@ -6009,6 +6023,7 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
     "action_type": "actionType",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
   });
 });
 /** @internal */
@@ -6019,6 +6034,7 @@ export type UpdateAgentTools$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   requires_approval: boolean;
+  tool_id?: string | undefined;
   conditions?: Array<UpdateAgentConditions$Outbound> | undefined;
   timeout: number;
 };
@@ -6035,6 +6051,7 @@ export const UpdateAgentTools$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$outboundSchema))
     .optional(),
   timeout: z.number().default(120),
@@ -6043,6 +6060,7 @@ export const UpdateAgentTools$outboundSchema: z.ZodType<
     actionType: "action_type",
     displayName: "display_name",
     requiresApproval: "requires_approval",
+    toolId: "tool_id",
   });
 });
 

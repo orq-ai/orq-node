@@ -122,6 +122,8 @@ const value: operations.FunctionTool = {
 ```typescript
 const value: operations.MCPTool = {
   type: "mcp",
+  id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+  toolId: "01KXYZ123456789",
 };
 ```
 

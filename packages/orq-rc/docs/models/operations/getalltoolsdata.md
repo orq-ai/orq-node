@@ -3,14 +3,13 @@
 
 ## Supported Types
 
-### `operations.Data1`
+### `operations.GetAllToolsData1`
 
 ```typescript
-const value: operations.Data1 = {
+const value: operations.GetAllToolsData1 = {
   path: "Default",
   key: "<key>",
-  description:
-    "mispronounce sedately twin hospitable jovially now council yogurt yuck worth",
+  description: "amid eek winged blah rural softly hold",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -22,13 +21,13 @@ const value: operations.Data1 = {
 };
 ```
 
-### `operations.Data2`
+### `operations.GetAllToolsData2`
 
 ```typescript
-const value: operations.Data2 = {
+const value: operations.GetAllToolsData2 = {
   path: "Default",
   key: "<key>",
-  description: "not circulate now drab",
+  description: "uh-huh reckless for",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -36,7 +35,7 @@ const value: operations.Data2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "angrily than rim flat until anxiously wheel apropos",
+    description: "engage whose settler phooey not institutionalize",
     schema: {
       type: "<value>",
       properties: {
@@ -54,13 +53,13 @@ const value: operations.Data2 = {
 };
 ```
 
-### `operations.Data3`
+### `operations.GetAllToolsData3`
 
 ```typescript
-const value: operations.Data3 = {
+const value: operations.GetAllToolsData3 = {
   path: "Default",
   key: "<key>",
-  description: "noteworthy limply whoa proper delightfully",
+  description: "whoa soon boohoo slushy eek whereas finally",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -75,33 +74,42 @@ const value: operations.Data3 = {
 };
 ```
 
-### `operations.Data4`
+### `operations.GetAllToolsData4`
 
 ```typescript
-const value: operations.Data4 = {
+const value: operations.GetAllToolsData4 = {
   path: "Default",
   key: "<key>",
-  description: "why meanwhile but important exactly",
+  description:
+    "besmirch huzzah questioningly deed knowingly metallic incomplete and aboard",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverUrl: "https://lawful-disclosure.com",
-    tools: [],
+    serverUrl: "https://dazzling-mouser.com/",
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "sse",
   },
 };
 ```
 
-### `operations.Data5`
+### `operations.GetAllToolsData5`
 
 ```typescript
-const value: operations.Data5 = {
+const value: operations.GetAllToolsData5 = {
   path: "Default",
   key: "<key>",
-  description: "and furthermore bravely midst finally enhance",
+  description:
+    "contractor minus faithfully odd wisely toward because chainstay nasalise",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

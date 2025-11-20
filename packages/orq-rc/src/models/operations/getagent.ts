@@ -76,6 +76,10 @@ export type GetAgentTools = {
    */
   description?: string | undefined;
   requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
   conditions?: Array<GetAgentConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
@@ -1073,6 +1077,7 @@ export const GetAgentTools$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => GetAgentConditions$inboundSchema))
     .optional(),
   timeout: z.number().default(120),
@@ -1081,6 +1086,7 @@ export const GetAgentTools$inboundSchema: z.ZodType<
     "action_type": "actionType",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
   });
 });
 /** @internal */
@@ -1091,6 +1097,7 @@ export type GetAgentTools$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   requires_approval: boolean;
+  tool_id?: string | undefined;
   conditions?: Array<GetAgentConditions$Outbound> | undefined;
   timeout: number;
 };
@@ -1107,6 +1114,7 @@ export const GetAgentTools$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
   conditions: z.array(z.lazy(() => GetAgentConditions$outboundSchema))
     .optional(),
   timeout: z.number().default(120),
@@ -1115,6 +1123,7 @@ export const GetAgentTools$outboundSchema: z.ZodType<
     actionType: "action_type",
     displayName: "display_name",
     requiresApproval: "requires_approval",
+    toolId: "tool_id",
   });
 });
 

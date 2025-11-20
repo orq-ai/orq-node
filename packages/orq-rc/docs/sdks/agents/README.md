@@ -41,7 +41,16 @@ async function run() {
     instructions: "<value>",
     path: "Default",
     model: "Camaro",
-    settings: {},
+    settings: {
+      tools: [
+        {
+          type: "mcp",
+          id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+          toolId: "01KXYZ123456789",
+          requiresApproval: false,
+        },
+      ],
+    },
     knowledgeBases: [
       {
         knowledgeId: "customer-knowledge-base",
@@ -77,7 +86,16 @@ async function run() {
     instructions: "<value>",
     path: "Default",
     model: "Camaro",
-    settings: {},
+    settings: {
+      tools: [
+        {
+          type: "mcp",
+          id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+          toolId: "01KXYZ123456789",
+          requiresApproval: false,
+        },
+      ],
+    },
     knowledgeBases: [
       {
         knowledgeId: "customer-knowledge-base",
@@ -355,6 +373,16 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       model: "El Camino",
+      settings: {
+        tools: [
+          {
+            type: "mcp",
+            id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+            toolId: "01KXYZ123456789",
+            requiresApproval: false,
+          },
+        ],
+      },
       path: "Default",
       knowledgeBases: [
         {
@@ -389,6 +417,16 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       model: "El Camino",
+      settings: {
+        tools: [
+          {
+            type: "mcp",
+            id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+            toolId: "01KXYZ123456789",
+            requiresApproval: false,
+          },
+        ],
+      },
       path: "Default",
       knowledgeBases: [
         {

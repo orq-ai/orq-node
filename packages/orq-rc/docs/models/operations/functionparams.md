@@ -62,97 +62,97 @@ const value: operations.CreateEvalFunctionParams6 = {
 };
 ```
 
-### `operations.Seven`
+### `operations.CreateEvalFunctionParams7`
 
 ```typescript
-const value: operations.Seven = {
+const value: operations.CreateEvalFunctionParams7 = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.Eight`
+### `operations.CreateEvalFunctionParams8`
 
 ```typescript
-const value: operations.Eight = {
+const value: operations.CreateEvalFunctionParams8 = {
   type: "start_with",
   value: "<value>",
 };
 ```
 
-### `operations.Nine`
+### `operations.CreateEvalFunctionParams9`
 
 ```typescript
-const value: operations.Nine = {
+const value: operations.CreateEvalFunctionParams9 = {
   type: "ends_with",
   value: "<value>",
 };
 ```
 
-### `operations.Ten`
+### `operations.CreateEvalFunctionParams10`
 
 ```typescript
-const value: operations.Ten = {
+const value: operations.CreateEvalFunctionParams10 = {
   type: "exact_match",
 };
 ```
 
-### `operations.Eleven`
+### `operations.CreateEvalFunctionParams11`
 
 ```typescript
-const value: operations.Eleven = {
+const value: operations.CreateEvalFunctionParams11 = {
   type: "length_less_than",
-  value: 1493.93,
+  value: 3529.79,
 };
 ```
 
-### `operations.Twelve`
+### `operations.CreateEvalFunctionParams12`
 
 ```typescript
-const value: operations.Twelve = {
+const value: operations.CreateEvalFunctionParams12 = {
   type: "length_between",
-  min: 4530.84,
-  max: 1705.51,
+  min: 9290.81,
+  max: 1247.95,
 };
 ```
 
-### `operations.Thirteen`
+### `operations.CreateEvalFunctionParams13`
 
 ```typescript
-const value: operations.Thirteen = {
+const value: operations.CreateEvalFunctionParams13 = {
   type: "length_greater_than",
-  value: 1177.11,
+  value: 1582.59,
 };
 ```
 
-### `operations.Fourteen`
+### `operations.CreateEvalFunctionParams14`
 
 ```typescript
-const value: operations.Fourteen = {
+const value: operations.CreateEvalFunctionParams14 = {
   type: "one_line",
 };
 ```
 
-### `operations.Fifteen`
+### `operations.CreateEvalFunctionParams15`
 
 ```typescript
-const value: operations.Fifteen = {
+const value: operations.CreateEvalFunctionParams15 = {
   type: "regex",
   pattern: "<value>",
 };
 ```
 
-### `operations.Sixteen`
+### `operations.CreateEvalFunctionParams16`
 
 ```typescript
-const value: operations.Sixteen = {
+const value: operations.CreateEvalFunctionParams16 = {
   type: "is_valid_json",
 };
 ```
 
-### `operations.Seventeen`
+### `operations.CreateEvalFunctionParams17`
 
 ```typescript
-const value: operations.Seventeen = {
+const value: operations.CreateEvalFunctionParams17 = {
   type: "moderations_openai",
 };
 ```

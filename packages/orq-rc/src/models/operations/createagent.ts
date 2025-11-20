@@ -733,7 +733,7 @@ export type CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15
   >;
 
 /**
- * Executes tools from Model Context Protocol (MCP) servers. Must reference a pre-created MCP tool by key or id.
+ * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
  */
 export type MCPTool = {
   /**
@@ -742,13 +742,17 @@ export type MCPTool = {
   type:
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type;
   /**
-   * The key of the pre-created MCP tool
+   * The key of the parent MCP tool
    */
   key?: string | undefined;
   /**
-   * The ID of the pre-created MCP tool
+   * The ID of the parent MCP tool
    */
   id?: string | undefined;
+  /**
+   * The ID of the specific nested tool within the MCP server
+   */
+  toolId: string;
   /**
    * Whether this tool requires approval before execution
    */
@@ -1082,6 +1086,7 @@ export type GoogleSearchTool = {
  * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
+  | MCPTool
   | GoogleSearchTool
   | WebScraperTool
   | CallSubAgentTool
@@ -1095,8 +1100,7 @@ export type AgentToolInputCRUD =
   | CurrentDateTool
   | HTTPTool
   | CodeExecutionTool
-  | FunctionTool
-  | MCPTool;
+  | FunctionTool;
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1173,6 +1177,7 @@ export type Settings = {
    */
   tools?:
     | Array<
+      | MCPTool
       | GoogleSearchTool
       | WebScraperTool
       | CallSubAgentTool
@@ -1187,7 +1192,6 @@ export type Settings = {
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
-      | MCPTool
     >
     | undefined;
   /**
@@ -1338,6 +1342,10 @@ export type CreateAgentTools = {
    */
   description?: string | undefined;
   requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
@@ -4014,9 +4022,11 @@ export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
       CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
     key: z.string().optional(),
     id: z.string().optional(),
+    tool_id: z.string(),
     requires_approval: z.boolean().default(false),
   }).transform((v) => {
     return remap$(v, {
+      "tool_id": "toolId",
       "requires_approval": "requiresApproval",
     });
   });
@@ -4025,6 +4035,7 @@ export type MCPTool$Outbound = {
   type: string;
   key?: string | undefined;
   id?: string | undefined;
+  tool_id: string;
   requires_approval: boolean;
 };
 
@@ -4038,9 +4049,11 @@ export const MCPTool$outboundSchema: z.ZodType<
     CreateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
   key: z.string().optional(),
   id: z.string().optional(),
+  toolId: z.string(),
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
+    toolId: "tool_id",
     requiresApproval: "requires_approval",
   });
 });
@@ -4960,6 +4973,7 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => MCPTool$inboundSchema),
   z.lazy(() => GoogleSearchTool$inboundSchema),
   z.lazy(() => WebScraperTool$inboundSchema),
   z.lazy(() => CallSubAgentTool$inboundSchema),
@@ -4974,10 +4988,10 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$inboundSchema),
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
-  z.lazy(() => MCPTool$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
+  | MCPTool$Outbound
   | GoogleSearchTool$Outbound
   | WebScraperTool$Outbound
   | CallSubAgentTool$Outbound
@@ -4991,8 +5005,7 @@ export type AgentToolInputCRUD$Outbound =
   | CurrentDateTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound
-  | MCPTool$Outbound;
+  | FunctionTool$Outbound;
 
 /** @internal */
 export const AgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -5000,6 +5013,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputCRUD
 > = z.union([
+  z.lazy(() => MCPTool$outboundSchema),
   z.lazy(() => GoogleSearchTool$outboundSchema),
   z.lazy(() => WebScraperTool$outboundSchema),
   z.lazy(() => CallSubAgentTool$outboundSchema),
@@ -5014,7 +5028,6 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
-  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function agentToolInputCRUDToJSON(
@@ -5165,6 +5178,7 @@ export const Settings$inboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
+      z.lazy(() => MCPTool$inboundSchema),
       z.lazy(() => GoogleSearchTool$inboundSchema),
       z.lazy(() => WebScraperTool$inboundSchema),
       z.lazy(() => CallSubAgentTool$inboundSchema),
@@ -5179,7 +5193,6 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$inboundSchema),
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
-      z.lazy(() => MCPTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
@@ -5198,6 +5211,7 @@ export type Settings$Outbound = {
   tool_approval_required: string;
   tools?:
     | Array<
+      | MCPTool$Outbound
       | GoogleSearchTool$Outbound
       | WebScraperTool$Outbound
       | CallSubAgentTool$Outbound
@@ -5212,7 +5226,6 @@ export type Settings$Outbound = {
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
-      | MCPTool$Outbound
     >
     | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
@@ -5232,6 +5245,7 @@ export const Settings$outboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
+      z.lazy(() => MCPTool$outboundSchema),
       z.lazy(() => GoogleSearchTool$outboundSchema),
       z.lazy(() => WebScraperTool$outboundSchema),
       z.lazy(() => CallSubAgentTool$outboundSchema),
@@ -5246,7 +5260,6 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
-      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
@@ -5537,6 +5550,7 @@ export const CreateAgentTools$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
@@ -5544,6 +5558,7 @@ export const CreateAgentTools$inboundSchema: z.ZodType<
     "action_type": "actionType",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
   });
 });
 /** @internal */
@@ -5554,6 +5569,7 @@ export type CreateAgentTools$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   requires_approval: boolean;
+  tool_id?: string | undefined;
   conditions?: Array<Conditions$Outbound> | undefined;
   timeout: number;
 };
@@ -5570,6 +5586,7 @@ export const CreateAgentTools$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
   conditions: z.array(z.lazy(() => Conditions$outboundSchema)).optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
@@ -5577,6 +5594,7 @@ export const CreateAgentTools$outboundSchema: z.ZodType<
     actionType: "action_type",
     displayName: "display_name",
     requiresApproval: "requires_approval",
+    toolId: "tool_id",
   });
 });
 
