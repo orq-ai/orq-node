@@ -9,7 +9,6 @@ export * from "./deleteagent.js";
 export * from "./deletecontact.js";
 export * from "./deleteeval.js";
 export * from "./getagent.js";
-export * from "./getagenttask.js";
 export * from "./getevals.js";
 export * from "./getpromptversion.js";
 export * from "./honoapierror.js";

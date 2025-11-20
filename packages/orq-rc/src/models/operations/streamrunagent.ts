@@ -761,26 +761,26 @@ export type StreamRunAgentFallbackModelConfiguration =
   | string;
 
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export const StreamRunAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export type StreamRunAgentRoleToolMessage = ClosedEnum<
   typeof StreamRunAgentRoleToolMessage
 >;
 
 /**
- * User message
+ * Message from the end user
  */
 export const StreamRunAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
- * User message
+ * Message from the end user
  */
 export type StreamRunAgentRoleUserMessage = ClosedEnum<
   typeof StreamRunAgentRoleUserMessage
@@ -892,7 +892,7 @@ export type StreamRunAgentPublicMessagePart =
 /**
  * The A2A format message containing the task for the agent to perform.
  */
-export type StreamRunAgentMessage = {
+export type StreamRunAgentA2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -1754,7 +1754,7 @@ export type StreamRunAgentRequestBody = {
   /**
    * The A2A format message containing the task for the agent to perform.
    */
-  message: StreamRunAgentMessage;
+  message: StreamRunAgentA2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -4338,8 +4338,8 @@ export function streamRunAgentPublicMessagePartFromJSON(
 }
 
 /** @internal */
-export const StreamRunAgentMessage$inboundSchema: z.ZodType<
-  StreamRunAgentMessage,
+export const StreamRunAgentA2AMessage$inboundSchema: z.ZodType<
+  StreamRunAgentA2AMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4357,7 +4357,7 @@ export const StreamRunAgentMessage$inboundSchema: z.ZodType<
   ),
 });
 /** @internal */
-export type StreamRunAgentMessage$Outbound = {
+export type StreamRunAgentA2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
@@ -4368,10 +4368,10 @@ export type StreamRunAgentMessage$Outbound = {
 };
 
 /** @internal */
-export const StreamRunAgentMessage$outboundSchema: z.ZodType<
-  StreamRunAgentMessage$Outbound,
+export const StreamRunAgentA2AMessage$outboundSchema: z.ZodType<
+  StreamRunAgentA2AMessage$Outbound,
   z.ZodTypeDef,
-  StreamRunAgentMessage
+  StreamRunAgentA2AMessage
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
@@ -4389,20 +4389,20 @@ export const StreamRunAgentMessage$outboundSchema: z.ZodType<
   ),
 });
 
-export function streamRunAgentMessageToJSON(
-  streamRunAgentMessage: StreamRunAgentMessage,
+export function streamRunAgentA2AMessageToJSON(
+  streamRunAgentA2AMessage: StreamRunAgentA2AMessage,
 ): string {
   return JSON.stringify(
-    StreamRunAgentMessage$outboundSchema.parse(streamRunAgentMessage),
+    StreamRunAgentA2AMessage$outboundSchema.parse(streamRunAgentA2AMessage),
   );
 }
-export function streamRunAgentMessageFromJSON(
+export function streamRunAgentA2AMessageFromJSON(
   jsonString: string,
-): SafeParseResult<StreamRunAgentMessage, SDKValidationError> {
+): SafeParseResult<StreamRunAgentA2AMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StreamRunAgentMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StreamRunAgentMessage' from JSON`,
+    (x) => StreamRunAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentA2AMessage' from JSON`,
   );
 }
 
@@ -4784,7 +4784,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KAE3ET2RDP05HJ0J0VETNQ4H"),
+  id: z.string().default("01KAG3PPQHZ7FSFZG3EQS9WGTW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4803,7 +4803,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KAE3ET2RDP05HJ0J0VETNQ4H"),
+  id: z.string().default("01KAG3PPQHZ7FSFZG3EQS9WGTW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -7075,7 +7075,7 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => StreamRunAgentMessage$inboundSchema),
+  message: z.lazy(() => StreamRunAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamRunAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => StreamRunAgentThread$inboundSchema).optional(),
@@ -7114,7 +7114,7 @@ export type StreamRunAgentRequestBody$Outbound = {
     | undefined;
   role: string;
   instructions: string;
-  message: StreamRunAgentMessage$Outbound;
+  message: StreamRunAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: StreamRunAgentContact$Outbound | undefined;
   thread?: StreamRunAgentThread$Outbound | undefined;
@@ -7150,7 +7150,7 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => StreamRunAgentMessage$outboundSchema),
+  message: z.lazy(() => StreamRunAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamRunAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => StreamRunAgentThread$outboundSchema).optional(),

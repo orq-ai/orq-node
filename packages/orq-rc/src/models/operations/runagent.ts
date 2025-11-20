@@ -743,26 +743,26 @@ export type RunAgentFallbackModelConfiguration =
   | string;
 
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export const RunAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export type RunAgentRoleToolMessage = ClosedEnum<
   typeof RunAgentRoleToolMessage
 >;
 
 /**
- * User message
+ * Message from the end user
  */
 export const RunAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
- * User message
+ * Message from the end user
  */
 export type RunAgentRoleUserMessage = ClosedEnum<
   typeof RunAgentRoleUserMessage
@@ -872,7 +872,7 @@ export type RunAgentPublicMessagePart =
 /**
  * The A2A format message containing the task for the agent to perform.
  */
-export type RunAgentMessage = {
+export type RunAgentA2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -1705,7 +1705,7 @@ export type RunAgentRequestBody = {
   /**
    * The A2A format message containing the task for the agent to perform.
    */
-  message: RunAgentMessage;
+  message: RunAgentA2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -1760,34 +1760,33 @@ export type RunAgentRequestBody = {
 };
 
 /**
- * A2A entity type
+ * A2A entity type identifier
  */
 export const RunAgentKind = {
   Task: "task",
 } as const;
 /**
- * A2A entity type
+ * A2A entity type identifier
  */
 export type RunAgentKind = ClosedEnum<typeof RunAgentKind>;
 
 /**
- * Current task state
+ * Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution.
  */
-export const RunAgentState = {
+export const RunAgentTaskState = {
   Submitted: "submitted",
   Working: "working",
   InputRequired: "input-required",
+  AuthRequired: "auth-required",
   Completed: "completed",
   Failed: "failed",
   Canceled: "canceled",
   Rejected: "rejected",
-  AuthRequired: "auth-required",
-  Unknown: "unknown",
 } as const;
 /**
- * Current task state
+ * Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution.
  */
-export type RunAgentState = ClosedEnum<typeof RunAgentState>;
+export type RunAgentTaskState = ClosedEnum<typeof RunAgentTaskState>;
 
 export const RunAgentAgentsKind = {
   Message: "message",
@@ -1795,18 +1794,20 @@ export const RunAgentAgentsKind = {
 export type RunAgentAgentsKind = ClosedEnum<typeof RunAgentAgentsKind>;
 
 /**
- * Extended A2A message role
+ * Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts).
  */
-export const RunAgentAgentsRole = {
+export const RunAgentExtendedMessageRole = {
   User: "user",
   Agent: "agent",
   Tool: "tool",
   System: "system",
 } as const;
 /**
- * Extended A2A message role
+ * Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts).
  */
-export type RunAgentAgentsRole = ClosedEnum<typeof RunAgentAgentsRole>;
+export type RunAgentExtendedMessageRole = ClosedEnum<
+  typeof RunAgentExtendedMessageRole
+>;
 
 export const RunAgentPartsAgentsResponse200ApplicationJSONKind = {
   ToolResult: "tool_result",
@@ -1815,7 +1816,10 @@ export type RunAgentPartsAgentsResponse200ApplicationJSONKind = ClosedEnum<
   typeof RunAgentPartsAgentsResponse200ApplicationJSONKind
 >;
 
-export type RunAgentParts5 = {
+/**
+ * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ */
+export type RunAgentPartsToolResultPart = {
   kind: RunAgentPartsAgentsResponse200ApplicationJSONKind;
   toolCallId: string;
   result?: any | undefined;
@@ -1829,7 +1833,10 @@ export type RunAgentPartsAgentsResponse200Kind = ClosedEnum<
   typeof RunAgentPartsAgentsResponse200Kind
 >;
 
-export type RunAgentParts4 = {
+/**
+ * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
+ */
+export type RunAgentPartsToolCallPart = {
   kind: RunAgentPartsAgentsResponse200Kind;
   toolName: string;
   toolCallId: string;
@@ -1884,7 +1891,10 @@ export type RunAgentPartsFile =
   | RunAgentFileBinaryFormat
   | RunAgentFileFileInURIFormat;
 
-export type RunAgentParts3 = {
+/**
+ * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+ */
+export type RunAgentPartsFilePart = {
   kind: RunAgentPartsAgentsResponseKind;
   file: RunAgentFileBinaryFormat | RunAgentFileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
@@ -1897,7 +1907,10 @@ export type RunAgentPartsAgentsKind = ClosedEnum<
   typeof RunAgentPartsAgentsKind
 >;
 
-export type RunAgentParts2 = {
+/**
+ * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
+ */
+export type RunAgentPartsDataPart = {
   kind: RunAgentPartsAgentsKind;
   data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
@@ -1908,77 +1921,80 @@ export const RunAgentPartsKind = {
 } as const;
 export type RunAgentPartsKind = ClosedEnum<typeof RunAgentPartsKind>;
 
-export type RunAgentParts1 = {
+/**
+ * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
+ */
+export type RunAgentPartsTextPart = {
   kind: RunAgentPartsKind;
   text: string;
 };
 
 export type RunAgentParts =
-  | RunAgentParts4
-  | RunAgentParts1
-  | RunAgentParts2
-  | RunAgentParts3
-  | RunAgentParts5;
+  | RunAgentPartsToolCallPart
+  | RunAgentPartsTextPart
+  | RunAgentPartsDataPart
+  | RunAgentPartsFilePart
+  | RunAgentPartsToolResultPart;
 
 /**
- * Optional status message
+ * Optional A2A message providing additional context about the current status
  */
-export type RunAgentAgentsMessage = {
+export type RunAgentTaskStatusMessage = {
   kind: RunAgentAgentsKind;
   messageId: string;
   /**
-   * Extended A2A message role
+   * Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts).
    */
-  role: RunAgentAgentsRole;
+  role: RunAgentExtendedMessageRole;
   parts: Array<
-    | RunAgentParts4
-    | RunAgentParts1
-    | RunAgentParts2
-    | RunAgentParts3
-    | RunAgentParts5
+    | RunAgentPartsToolCallPart
+    | RunAgentPartsTextPart
+    | RunAgentPartsDataPart
+    | RunAgentPartsFilePart
+    | RunAgentPartsToolResultPart
   >;
 };
 
 /**
- * Task status information
+ * Current task status information
  */
-export type RunAgentStatus = {
+export type RunAgentTaskStatus = {
   /**
-   * Current task state
+   * Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution.
    */
-  state: RunAgentState;
+  state: RunAgentTaskState;
   /**
-   * ISO timestamp of status update
+   * ISO 8601 timestamp of when the status was updated
    */
   timestamp?: string | undefined;
   /**
-   * Optional status message
+   * Optional A2A message providing additional context about the current status
    */
-  message?: RunAgentAgentsMessage | undefined;
+  message?: RunAgentTaskStatusMessage | undefined;
 };
 
 /**
- * A2A Task response format
+ * Response format following the Agent-to-Agent (A2A) protocol. Returned when starting or continuing an agent task execution.
  */
-export type RunAgentResponseBody = {
+export type RunAgentA2ATaskResponse = {
   /**
-   * The ID of the created agent execution task
+   * The unique ID of the created agent execution task
    */
   id: string;
   /**
-   * The correlation ID for this execution
+   * The correlation ID for this execution (used for tracking)
    */
   contextId: string;
   /**
-   * A2A entity type
+   * A2A entity type identifier
    */
   kind: RunAgentKind;
   /**
-   * Task status information
+   * Current task status information
    */
-  status: RunAgentStatus;
+  status: RunAgentTaskStatus;
   /**
-   * Task metadata containing workspace_id and trace_id for feedback
+   * Task metadata containing workspace_id and trace_id for feedback and tracking
    */
   metadata?: { [k: string]: any } | undefined;
 };
@@ -4348,8 +4364,8 @@ export function runAgentPublicMessagePartFromJSON(
 }
 
 /** @internal */
-export const RunAgentMessage$inboundSchema: z.ZodType<
-  RunAgentMessage,
+export const RunAgentA2AMessage$inboundSchema: z.ZodType<
+  RunAgentA2AMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4367,7 +4383,7 @@ export const RunAgentMessage$inboundSchema: z.ZodType<
   ),
 });
 /** @internal */
-export type RunAgentMessage$Outbound = {
+export type RunAgentA2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
@@ -4378,10 +4394,10 @@ export type RunAgentMessage$Outbound = {
 };
 
 /** @internal */
-export const RunAgentMessage$outboundSchema: z.ZodType<
-  RunAgentMessage$Outbound,
+export const RunAgentA2AMessage$outboundSchema: z.ZodType<
+  RunAgentA2AMessage$Outbound,
   z.ZodTypeDef,
-  RunAgentMessage
+  RunAgentA2AMessage
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
@@ -4397,18 +4413,20 @@ export const RunAgentMessage$outboundSchema: z.ZodType<
   ),
 });
 
-export function runAgentMessageToJSON(
-  runAgentMessage: RunAgentMessage,
+export function runAgentA2AMessageToJSON(
+  runAgentA2AMessage: RunAgentA2AMessage,
 ): string {
-  return JSON.stringify(RunAgentMessage$outboundSchema.parse(runAgentMessage));
+  return JSON.stringify(
+    RunAgentA2AMessage$outboundSchema.parse(runAgentA2AMessage),
+  );
 }
-export function runAgentMessageFromJSON(
+export function runAgentA2AMessageFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentMessage, SDKValidationError> {
+): SafeParseResult<RunAgentA2AMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentMessage' from JSON`,
+    (x) => RunAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentA2AMessage' from JSON`,
   );
 }
 
@@ -4757,7 +4775,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KAE3ET25RM6ZNJ0MR18WR3Q3"),
+    id: z.string().default("01KAG3PPPWACXYWEHBQ4VHBT6R"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4776,7 +4794,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KAE3ET25RM6ZNJ0MR18WR3Q3"),
+  id: z.string().default("01KAG3PPPWACXYWEHBQ4VHBT6R"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -6785,7 +6803,7 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => RunAgentMessage$inboundSchema),
+  message: z.lazy(() => RunAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => RunAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$inboundSchema).optional(),
@@ -6820,7 +6838,7 @@ export type RunAgentRequestBody$Outbound = {
     | undefined;
   role: string;
   instructions: string;
-  message: RunAgentMessage$Outbound;
+  message: RunAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: RunAgentContact$Outbound | undefined;
   thread?: RunAgentThread$Outbound | undefined;
@@ -6855,7 +6873,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => RunAgentMessage$outboundSchema),
+  message: z.lazy(() => RunAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => RunAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$outboundSchema).optional(),
@@ -6906,13 +6924,13 @@ export const RunAgentKind$outboundSchema: z.ZodNativeEnum<typeof RunAgentKind> =
   RunAgentKind$inboundSchema;
 
 /** @internal */
-export const RunAgentState$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentState
-> = z.nativeEnum(RunAgentState);
+export const RunAgentTaskState$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentTaskState
+> = z.nativeEnum(RunAgentTaskState);
 /** @internal */
-export const RunAgentState$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentState
-> = RunAgentState$inboundSchema;
+export const RunAgentTaskState$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentTaskState
+> = RunAgentTaskState$inboundSchema;
 
 /** @internal */
 export const RunAgentAgentsKind$inboundSchema: z.ZodNativeEnum<
@@ -6924,13 +6942,13 @@ export const RunAgentAgentsKind$outboundSchema: z.ZodNativeEnum<
 > = RunAgentAgentsKind$inboundSchema;
 
 /** @internal */
-export const RunAgentAgentsRole$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentAgentsRole
-> = z.nativeEnum(RunAgentAgentsRole);
+export const RunAgentExtendedMessageRole$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentExtendedMessageRole
+> = z.nativeEnum(RunAgentExtendedMessageRole);
 /** @internal */
-export const RunAgentAgentsRole$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentAgentsRole
-> = RunAgentAgentsRole$inboundSchema;
+export const RunAgentExtendedMessageRole$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentExtendedMessageRole
+> = RunAgentExtendedMessageRole$inboundSchema;
 
 /** @internal */
 export const RunAgentPartsAgentsResponse200ApplicationJSONKind$inboundSchema:
@@ -6942,8 +6960,8 @@ export const RunAgentPartsAgentsResponse200ApplicationJSONKind$outboundSchema:
     RunAgentPartsAgentsResponse200ApplicationJSONKind$inboundSchema;
 
 /** @internal */
-export const RunAgentParts5$inboundSchema: z.ZodType<
-  RunAgentParts5,
+export const RunAgentPartsToolResultPart$inboundSchema: z.ZodType<
+  RunAgentPartsToolResultPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6957,7 +6975,7 @@ export const RunAgentParts5$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RunAgentParts5$Outbound = {
+export type RunAgentPartsToolResultPart$Outbound = {
   kind: string;
   tool_call_id: string;
   result?: any | undefined;
@@ -6965,10 +6983,10 @@ export type RunAgentParts5$Outbound = {
 };
 
 /** @internal */
-export const RunAgentParts5$outboundSchema: z.ZodType<
-  RunAgentParts5$Outbound,
+export const RunAgentPartsToolResultPart$outboundSchema: z.ZodType<
+  RunAgentPartsToolResultPart$Outbound,
   z.ZodTypeDef,
-  RunAgentParts5
+  RunAgentPartsToolResultPart
 > = z.object({
   kind: RunAgentPartsAgentsResponse200ApplicationJSONKind$outboundSchema,
   toolCallId: z.string(),
@@ -6980,16 +6998,22 @@ export const RunAgentParts5$outboundSchema: z.ZodType<
   });
 });
 
-export function runAgentParts5ToJSON(runAgentParts5: RunAgentParts5): string {
-  return JSON.stringify(RunAgentParts5$outboundSchema.parse(runAgentParts5));
+export function runAgentPartsToolResultPartToJSON(
+  runAgentPartsToolResultPart: RunAgentPartsToolResultPart,
+): string {
+  return JSON.stringify(
+    RunAgentPartsToolResultPart$outboundSchema.parse(
+      runAgentPartsToolResultPart,
+    ),
+  );
 }
-export function runAgentParts5FromJSON(
+export function runAgentPartsToolResultPartFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentParts5, SDKValidationError> {
+): SafeParseResult<RunAgentPartsToolResultPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentParts5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentParts5' from JSON`,
+    (x) => RunAgentPartsToolResultPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPartsToolResultPart' from JSON`,
   );
 }
 
@@ -7003,8 +7027,8 @@ export const RunAgentPartsAgentsResponse200Kind$outboundSchema: z.ZodNativeEnum<
 > = RunAgentPartsAgentsResponse200Kind$inboundSchema;
 
 /** @internal */
-export const RunAgentParts4$inboundSchema: z.ZodType<
-  RunAgentParts4,
+export const RunAgentPartsToolCallPart$inboundSchema: z.ZodType<
+  RunAgentPartsToolCallPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7020,7 +7044,7 @@ export const RunAgentParts4$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RunAgentParts4$Outbound = {
+export type RunAgentPartsToolCallPart$Outbound = {
   kind: string;
   tool_name: string;
   tool_call_id: string;
@@ -7029,10 +7053,10 @@ export type RunAgentParts4$Outbound = {
 };
 
 /** @internal */
-export const RunAgentParts4$outboundSchema: z.ZodType<
-  RunAgentParts4$Outbound,
+export const RunAgentPartsToolCallPart$outboundSchema: z.ZodType<
+  RunAgentPartsToolCallPart$Outbound,
   z.ZodTypeDef,
-  RunAgentParts4
+  RunAgentPartsToolCallPart
 > = z.object({
   kind: RunAgentPartsAgentsResponse200Kind$outboundSchema,
   toolName: z.string(),
@@ -7046,16 +7070,20 @@ export const RunAgentParts4$outboundSchema: z.ZodType<
   });
 });
 
-export function runAgentParts4ToJSON(runAgentParts4: RunAgentParts4): string {
-  return JSON.stringify(RunAgentParts4$outboundSchema.parse(runAgentParts4));
+export function runAgentPartsToolCallPartToJSON(
+  runAgentPartsToolCallPart: RunAgentPartsToolCallPart,
+): string {
+  return JSON.stringify(
+    RunAgentPartsToolCallPart$outboundSchema.parse(runAgentPartsToolCallPart),
+  );
 }
-export function runAgentParts4FromJSON(
+export function runAgentPartsToolCallPartFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentParts4, SDKValidationError> {
+): SafeParseResult<RunAgentPartsToolCallPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentParts4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentParts4' from JSON`,
+    (x) => RunAgentPartsToolCallPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPartsToolCallPart' from JSON`,
   );
 }
 
@@ -7202,8 +7230,8 @@ export function runAgentPartsFileFromJSON(
 }
 
 /** @internal */
-export const RunAgentParts3$inboundSchema: z.ZodType<
-  RunAgentParts3,
+export const RunAgentPartsFilePart$inboundSchema: z.ZodType<
+  RunAgentPartsFilePart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7215,7 +7243,7 @@ export const RunAgentParts3$inboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 /** @internal */
-export type RunAgentParts3$Outbound = {
+export type RunAgentPartsFilePart$Outbound = {
   kind: string;
   file:
     | RunAgentFileBinaryFormat$Outbound
@@ -7224,10 +7252,10 @@ export type RunAgentParts3$Outbound = {
 };
 
 /** @internal */
-export const RunAgentParts3$outboundSchema: z.ZodType<
-  RunAgentParts3$Outbound,
+export const RunAgentPartsFilePart$outboundSchema: z.ZodType<
+  RunAgentPartsFilePart$Outbound,
   z.ZodTypeDef,
-  RunAgentParts3
+  RunAgentPartsFilePart
 > = z.object({
   kind: RunAgentPartsAgentsResponseKind$outboundSchema,
   file: z.union([
@@ -7237,16 +7265,20 @@ export const RunAgentParts3$outboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 
-export function runAgentParts3ToJSON(runAgentParts3: RunAgentParts3): string {
-  return JSON.stringify(RunAgentParts3$outboundSchema.parse(runAgentParts3));
+export function runAgentPartsFilePartToJSON(
+  runAgentPartsFilePart: RunAgentPartsFilePart,
+): string {
+  return JSON.stringify(
+    RunAgentPartsFilePart$outboundSchema.parse(runAgentPartsFilePart),
+  );
 }
-export function runAgentParts3FromJSON(
+export function runAgentPartsFilePartFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentParts3, SDKValidationError> {
+): SafeParseResult<RunAgentPartsFilePart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentParts3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentParts3' from JSON`,
+    (x) => RunAgentPartsFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPartsFilePart' from JSON`,
   );
 }
 
@@ -7260,8 +7292,8 @@ export const RunAgentPartsAgentsKind$outboundSchema: z.ZodNativeEnum<
 > = RunAgentPartsAgentsKind$inboundSchema;
 
 /** @internal */
-export const RunAgentParts2$inboundSchema: z.ZodType<
-  RunAgentParts2,
+export const RunAgentPartsDataPart$inboundSchema: z.ZodType<
+  RunAgentPartsDataPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7270,33 +7302,37 @@ export const RunAgentParts2$inboundSchema: z.ZodType<
   metadata: z.record(z.any()).optional(),
 });
 /** @internal */
-export type RunAgentParts2$Outbound = {
+export type RunAgentPartsDataPart$Outbound = {
   kind: string;
   data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const RunAgentParts2$outboundSchema: z.ZodType<
-  RunAgentParts2$Outbound,
+export const RunAgentPartsDataPart$outboundSchema: z.ZodType<
+  RunAgentPartsDataPart$Outbound,
   z.ZodTypeDef,
-  RunAgentParts2
+  RunAgentPartsDataPart
 > = z.object({
   kind: RunAgentPartsAgentsKind$outboundSchema,
   data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
 
-export function runAgentParts2ToJSON(runAgentParts2: RunAgentParts2): string {
-  return JSON.stringify(RunAgentParts2$outboundSchema.parse(runAgentParts2));
+export function runAgentPartsDataPartToJSON(
+  runAgentPartsDataPart: RunAgentPartsDataPart,
+): string {
+  return JSON.stringify(
+    RunAgentPartsDataPart$outboundSchema.parse(runAgentPartsDataPart),
+  );
 }
-export function runAgentParts2FromJSON(
+export function runAgentPartsDataPartFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentParts2, SDKValidationError> {
+): SafeParseResult<RunAgentPartsDataPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentParts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentParts2' from JSON`,
+    (x) => RunAgentPartsDataPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPartsDataPart' from JSON`,
   );
 }
 
@@ -7310,8 +7346,8 @@ export const RunAgentPartsKind$outboundSchema: z.ZodNativeEnum<
 > = RunAgentPartsKind$inboundSchema;
 
 /** @internal */
-export const RunAgentParts1$inboundSchema: z.ZodType<
-  RunAgentParts1,
+export const RunAgentPartsTextPart$inboundSchema: z.ZodType<
+  RunAgentPartsTextPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7319,31 +7355,35 @@ export const RunAgentParts1$inboundSchema: z.ZodType<
   text: z.string(),
 });
 /** @internal */
-export type RunAgentParts1$Outbound = {
+export type RunAgentPartsTextPart$Outbound = {
   kind: string;
   text: string;
 };
 
 /** @internal */
-export const RunAgentParts1$outboundSchema: z.ZodType<
-  RunAgentParts1$Outbound,
+export const RunAgentPartsTextPart$outboundSchema: z.ZodType<
+  RunAgentPartsTextPart$Outbound,
   z.ZodTypeDef,
-  RunAgentParts1
+  RunAgentPartsTextPart
 > = z.object({
   kind: RunAgentPartsKind$outboundSchema,
   text: z.string(),
 });
 
-export function runAgentParts1ToJSON(runAgentParts1: RunAgentParts1): string {
-  return JSON.stringify(RunAgentParts1$outboundSchema.parse(runAgentParts1));
+export function runAgentPartsTextPartToJSON(
+  runAgentPartsTextPart: RunAgentPartsTextPart,
+): string {
+  return JSON.stringify(
+    RunAgentPartsTextPart$outboundSchema.parse(runAgentPartsTextPart),
+  );
 }
-export function runAgentParts1FromJSON(
+export function runAgentPartsTextPartFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentParts1, SDKValidationError> {
+): SafeParseResult<RunAgentPartsTextPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentParts1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentParts1' from JSON`,
+    (x) => RunAgentPartsTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPartsTextPart' from JSON`,
   );
 }
 
@@ -7353,19 +7393,19 @@ export const RunAgentParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RunAgentParts4$inboundSchema),
-  z.lazy(() => RunAgentParts1$inboundSchema),
-  z.lazy(() => RunAgentParts2$inboundSchema),
-  z.lazy(() => RunAgentParts3$inboundSchema),
-  z.lazy(() => RunAgentParts5$inboundSchema),
+  z.lazy(() => RunAgentPartsToolCallPart$inboundSchema),
+  z.lazy(() => RunAgentPartsTextPart$inboundSchema),
+  z.lazy(() => RunAgentPartsDataPart$inboundSchema),
+  z.lazy(() => RunAgentPartsFilePart$inboundSchema),
+  z.lazy(() => RunAgentPartsToolResultPart$inboundSchema),
 ]);
 /** @internal */
 export type RunAgentParts$Outbound =
-  | RunAgentParts4$Outbound
-  | RunAgentParts1$Outbound
-  | RunAgentParts2$Outbound
-  | RunAgentParts3$Outbound
-  | RunAgentParts5$Outbound;
+  | RunAgentPartsToolCallPart$Outbound
+  | RunAgentPartsTextPart$Outbound
+  | RunAgentPartsDataPart$Outbound
+  | RunAgentPartsFilePart$Outbound
+  | RunAgentPartsToolResultPart$Outbound;
 
 /** @internal */
 export const RunAgentParts$outboundSchema: z.ZodType<
@@ -7373,11 +7413,11 @@ export const RunAgentParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentParts
 > = z.union([
-  z.lazy(() => RunAgentParts4$outboundSchema),
-  z.lazy(() => RunAgentParts1$outboundSchema),
-  z.lazy(() => RunAgentParts2$outboundSchema),
-  z.lazy(() => RunAgentParts3$outboundSchema),
-  z.lazy(() => RunAgentParts5$outboundSchema),
+  z.lazy(() => RunAgentPartsToolCallPart$outboundSchema),
+  z.lazy(() => RunAgentPartsTextPart$outboundSchema),
+  z.lazy(() => RunAgentPartsDataPart$outboundSchema),
+  z.lazy(() => RunAgentPartsFilePart$outboundSchema),
+  z.lazy(() => RunAgentPartsToolResultPart$outboundSchema),
 ]);
 
 export function runAgentPartsToJSON(runAgentParts: RunAgentParts): string {
@@ -7394,163 +7434,167 @@ export function runAgentPartsFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentsMessage$inboundSchema: z.ZodType<
-  RunAgentAgentsMessage,
+export const RunAgentTaskStatusMessage$inboundSchema: z.ZodType<
+  RunAgentTaskStatusMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
   kind: RunAgentAgentsKind$inboundSchema,
   messageId: z.string(),
-  role: RunAgentAgentsRole$inboundSchema,
+  role: RunAgentExtendedMessageRole$inboundSchema,
   parts: z.array(
     z.union([
-      z.lazy(() => RunAgentParts4$inboundSchema),
-      z.lazy(() => RunAgentParts1$inboundSchema),
-      z.lazy(() => RunAgentParts2$inboundSchema),
-      z.lazy(() => RunAgentParts3$inboundSchema),
-      z.lazy(() => RunAgentParts5$inboundSchema),
+      z.lazy(() => RunAgentPartsToolCallPart$inboundSchema),
+      z.lazy(() => RunAgentPartsTextPart$inboundSchema),
+      z.lazy(() => RunAgentPartsDataPart$inboundSchema),
+      z.lazy(() => RunAgentPartsFilePart$inboundSchema),
+      z.lazy(() => RunAgentPartsToolResultPart$inboundSchema),
     ]),
   ),
 });
 /** @internal */
-export type RunAgentAgentsMessage$Outbound = {
+export type RunAgentTaskStatusMessage$Outbound = {
   kind: string;
   messageId: string;
   role: string;
   parts: Array<
-    | RunAgentParts4$Outbound
-    | RunAgentParts1$Outbound
-    | RunAgentParts2$Outbound
-    | RunAgentParts3$Outbound
-    | RunAgentParts5$Outbound
+    | RunAgentPartsToolCallPart$Outbound
+    | RunAgentPartsTextPart$Outbound
+    | RunAgentPartsDataPart$Outbound
+    | RunAgentPartsFilePart$Outbound
+    | RunAgentPartsToolResultPart$Outbound
   >;
 };
 
 /** @internal */
-export const RunAgentAgentsMessage$outboundSchema: z.ZodType<
-  RunAgentAgentsMessage$Outbound,
+export const RunAgentTaskStatusMessage$outboundSchema: z.ZodType<
+  RunAgentTaskStatusMessage$Outbound,
   z.ZodTypeDef,
-  RunAgentAgentsMessage
+  RunAgentTaskStatusMessage
 > = z.object({
   kind: RunAgentAgentsKind$outboundSchema,
   messageId: z.string(),
-  role: RunAgentAgentsRole$outboundSchema,
+  role: RunAgentExtendedMessageRole$outboundSchema,
   parts: z.array(
     z.union([
-      z.lazy(() => RunAgentParts4$outboundSchema),
-      z.lazy(() => RunAgentParts1$outboundSchema),
-      z.lazy(() => RunAgentParts2$outboundSchema),
-      z.lazy(() => RunAgentParts3$outboundSchema),
-      z.lazy(() => RunAgentParts5$outboundSchema),
+      z.lazy(() => RunAgentPartsToolCallPart$outboundSchema),
+      z.lazy(() => RunAgentPartsTextPart$outboundSchema),
+      z.lazy(() => RunAgentPartsDataPart$outboundSchema),
+      z.lazy(() => RunAgentPartsFilePart$outboundSchema),
+      z.lazy(() => RunAgentPartsToolResultPart$outboundSchema),
     ]),
   ),
 });
 
-export function runAgentAgentsMessageToJSON(
-  runAgentAgentsMessage: RunAgentAgentsMessage,
+export function runAgentTaskStatusMessageToJSON(
+  runAgentTaskStatusMessage: RunAgentTaskStatusMessage,
 ): string {
   return JSON.stringify(
-    RunAgentAgentsMessage$outboundSchema.parse(runAgentAgentsMessage),
+    RunAgentTaskStatusMessage$outboundSchema.parse(runAgentTaskStatusMessage),
   );
 }
-export function runAgentAgentsMessageFromJSON(
+export function runAgentTaskStatusMessageFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentAgentsMessage, SDKValidationError> {
+): SafeParseResult<RunAgentTaskStatusMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentAgentsMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentAgentsMessage' from JSON`,
+    (x) => RunAgentTaskStatusMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentTaskStatusMessage' from JSON`,
   );
 }
 
 /** @internal */
-export const RunAgentStatus$inboundSchema: z.ZodType<
-  RunAgentStatus,
+export const RunAgentTaskStatus$inboundSchema: z.ZodType<
+  RunAgentTaskStatus,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  state: RunAgentState$inboundSchema,
+  state: RunAgentTaskState$inboundSchema,
   timestamp: z.string().optional(),
-  message: z.lazy(() => RunAgentAgentsMessage$inboundSchema).optional(),
+  message: z.lazy(() => RunAgentTaskStatusMessage$inboundSchema).optional(),
 });
 /** @internal */
-export type RunAgentStatus$Outbound = {
+export type RunAgentTaskStatus$Outbound = {
   state: string;
   timestamp?: string | undefined;
-  message?: RunAgentAgentsMessage$Outbound | undefined;
+  message?: RunAgentTaskStatusMessage$Outbound | undefined;
 };
 
 /** @internal */
-export const RunAgentStatus$outboundSchema: z.ZodType<
-  RunAgentStatus$Outbound,
+export const RunAgentTaskStatus$outboundSchema: z.ZodType<
+  RunAgentTaskStatus$Outbound,
   z.ZodTypeDef,
-  RunAgentStatus
+  RunAgentTaskStatus
 > = z.object({
-  state: RunAgentState$outboundSchema,
+  state: RunAgentTaskState$outboundSchema,
   timestamp: z.string().optional(),
-  message: z.lazy(() => RunAgentAgentsMessage$outboundSchema).optional(),
+  message: z.lazy(() => RunAgentTaskStatusMessage$outboundSchema).optional(),
 });
 
-export function runAgentStatusToJSON(runAgentStatus: RunAgentStatus): string {
-  return JSON.stringify(RunAgentStatus$outboundSchema.parse(runAgentStatus));
+export function runAgentTaskStatusToJSON(
+  runAgentTaskStatus: RunAgentTaskStatus,
+): string {
+  return JSON.stringify(
+    RunAgentTaskStatus$outboundSchema.parse(runAgentTaskStatus),
+  );
 }
-export function runAgentStatusFromJSON(
+export function runAgentTaskStatusFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentStatus, SDKValidationError> {
+): SafeParseResult<RunAgentTaskStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentStatus' from JSON`,
+    (x) => RunAgentTaskStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentTaskStatus' from JSON`,
   );
 }
 
 /** @internal */
-export const RunAgentResponseBody$inboundSchema: z.ZodType<
-  RunAgentResponseBody,
+export const RunAgentA2ATaskResponse$inboundSchema: z.ZodType<
+  RunAgentA2ATaskResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   contextId: z.string(),
   kind: RunAgentKind$inboundSchema,
-  status: z.lazy(() => RunAgentStatus$inboundSchema),
+  status: z.lazy(() => RunAgentTaskStatus$inboundSchema),
   metadata: z.record(z.any()).optional(),
 });
 /** @internal */
-export type RunAgentResponseBody$Outbound = {
+export type RunAgentA2ATaskResponse$Outbound = {
   id: string;
   contextId: string;
   kind: string;
-  status: RunAgentStatus$Outbound;
+  status: RunAgentTaskStatus$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const RunAgentResponseBody$outboundSchema: z.ZodType<
-  RunAgentResponseBody$Outbound,
+export const RunAgentA2ATaskResponse$outboundSchema: z.ZodType<
+  RunAgentA2ATaskResponse$Outbound,
   z.ZodTypeDef,
-  RunAgentResponseBody
+  RunAgentA2ATaskResponse
 > = z.object({
   id: z.string(),
   contextId: z.string(),
   kind: RunAgentKind$outboundSchema,
-  status: z.lazy(() => RunAgentStatus$outboundSchema),
+  status: z.lazy(() => RunAgentTaskStatus$outboundSchema),
   metadata: z.record(z.any()).optional(),
 });
 
-export function runAgentResponseBodyToJSON(
-  runAgentResponseBody: RunAgentResponseBody,
+export function runAgentA2ATaskResponseToJSON(
+  runAgentA2ATaskResponse: RunAgentA2ATaskResponse,
 ): string {
   return JSON.stringify(
-    RunAgentResponseBody$outboundSchema.parse(runAgentResponseBody),
+    RunAgentA2ATaskResponse$outboundSchema.parse(runAgentA2ATaskResponse),
   );
 }
-export function runAgentResponseBodyFromJSON(
+export function runAgentA2ATaskResponseFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentResponseBody, SDKValidationError> {
+): SafeParseResult<RunAgentA2ATaskResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentResponseBody' from JSON`,
+    (x) => RunAgentA2ATaskResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentA2ATaskResponse' from JSON`,
   );
 }

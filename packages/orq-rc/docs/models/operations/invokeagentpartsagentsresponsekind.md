@@ -5,11 +5,11 @@
 ```typescript
 import { InvokeAgentPartsAgentsResponseKind } from "@orq-ai/node/models/operations";
 
-let value: InvokeAgentPartsAgentsResponseKind = "file";
+let value: InvokeAgentPartsAgentsResponseKind = "tool_call";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"tool_call"
 ```

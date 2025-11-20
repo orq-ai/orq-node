@@ -3,57 +3,53 @@
 
 ## Supported Types
 
-### `operations.ListAgentTasksParts1`
+### `operations.ListAgentTasksPartsTextPart`
 
 ```typescript
-const value: operations.ListAgentTasksParts1 = {
+const value: operations.ListAgentTasksPartsTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.ListAgentTasksParts2`
+### `operations.ListAgentTasksPartsAgentsDataPart`
 
 ```typescript
-const value: operations.ListAgentTasksParts2 = {
+const value: operations.ListAgentTasksPartsAgentsDataPart = {
   kind: "data",
-  data: {
-    "key": "<value>",
-    "key1": "<value>",
-  },
+  data: {},
 };
 ```
 
-### `operations.ListAgentTasksParts3`
+### `operations.ListAgentTasksPartsFilePart`
 
 ```typescript
-const value: operations.ListAgentTasksParts3 = {
+const value: operations.ListAgentTasksPartsFilePart = {
   kind: "file",
   file: {
-    bytes: "<value>",
+    uri: "https://cuddly-rust.com",
   },
 };
 ```
 
-### `operations.ListAgentTasksParts4`
+### `operations.PartsToolCallPart`
 
 ```typescript
-const value: operations.ListAgentTasksParts4 = {
+const value: operations.PartsToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
   arguments: {
     "key": "<value>",
     "key1": "<value>",
-    "key2": "<value>",
   },
 };
 ```
 
-### `operations.ListAgentTasksParts5`
+### `operations.ListAgentTasksPartsToolResultPart`
 
 ```typescript
-const value: operations.ListAgentTasksParts5 = {
+const value: operations.ListAgentTasksPartsToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

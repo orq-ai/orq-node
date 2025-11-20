@@ -3,55 +3,56 @@
 
 ## Supported Types
 
-### `operations.InvokeAgentParts1`
+### `operations.InvokeAgentPartsTextPart`
 
 ```typescript
-const value: operations.InvokeAgentParts1 = {
+const value: operations.InvokeAgentPartsTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.InvokeAgentParts2`
+### `operations.InvokeAgentPartsDataPart`
 
 ```typescript
-const value: operations.InvokeAgentParts2 = {
+const value: operations.InvokeAgentPartsDataPart = {
   kind: "data",
   data: {
     "key": "<value>",
-    "key1": "<value>",
   },
 };
 ```
 
-### `operations.InvokeAgentParts3`
+### `operations.InvokeAgentPartsFilePart`
 
 ```typescript
-const value: operations.InvokeAgentParts3 = {
+const value: operations.InvokeAgentPartsFilePart = {
   kind: "file",
   file: {
-    uri: "https://admired-descent.name",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.InvokeAgentParts4`
+### `operations.InvokeAgentPartsToolCallPart`
 
 ```typescript
-const value: operations.InvokeAgentParts4 = {
+const value: operations.InvokeAgentPartsToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
   arguments: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
 
-### `operations.InvokeAgentParts5`
+### `operations.InvokeAgentPartsToolResultPart`
 
 ```typescript
-const value: operations.InvokeAgentParts5 = {
+const value: operations.InvokeAgentPartsToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

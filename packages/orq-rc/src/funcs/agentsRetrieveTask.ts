@@ -37,8 +37,8 @@ export function agentsRetrieveTask(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetAgentTaskResponseBody,
-    | errors.GetAgentTaskResponseBody
+    operations.GetAgentTaskExtendedTaskResponse,
+    | errors.HonoApiError
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,8 +63,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetAgentTaskResponseBody,
-      | errors.GetAgentTaskResponseBody
+      operations.GetAgentTaskExtendedTaskResponse,
+      | errors.HonoApiError
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -155,8 +155,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetAgentTaskResponseBody,
-    | errors.GetAgentTaskResponseBody
+    operations.GetAgentTaskExtendedTaskResponse,
+    | errors.HonoApiError
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -166,8 +166,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetAgentTaskResponseBody$inboundSchema),
-    M.jsonErr(404, errors.GetAgentTaskResponseBody$inboundSchema),
+    M.json(200, operations.GetAgentTaskExtendedTaskResponse$inboundSchema),
+    M.jsonErr(404, errors.HonoApiError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

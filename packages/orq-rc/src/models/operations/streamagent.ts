@@ -10,26 +10,26 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export const StreamAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export type StreamAgentRoleToolMessage = ClosedEnum<
   typeof StreamAgentRoleToolMessage
 >;
 
 /**
- * User message
+ * Message from the end user
  */
 export const StreamAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
- * User message
+ * Message from the end user
  */
 export type StreamAgentRoleUserMessage = ClosedEnum<
   typeof StreamAgentRoleUserMessage
@@ -138,7 +138,10 @@ export type StreamAgentPublicMessagePart =
   | StreamAgentPublicMessagePartFilePart
   | StreamAgentPublicMessagePartToolResultPart;
 
-export type StreamAgentMessage = {
+/**
+ * The A2A message to send to the agent (user input or tool results)
+ */
+export type StreamAgentA2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -216,7 +219,10 @@ export type StreamAgentRequestBody = {
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
    */
   taskId?: string | undefined;
-  message: StreamAgentMessage;
+  /**
+   * The A2A message to send to the agent (user input or tool results)
+   */
+  message: StreamAgentA2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -693,8 +699,8 @@ export function streamAgentPublicMessagePartFromJSON(
 }
 
 /** @internal */
-export const StreamAgentMessage$inboundSchema: z.ZodType<
-  StreamAgentMessage,
+export const StreamAgentA2AMessage$inboundSchema: z.ZodType<
+  StreamAgentA2AMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -712,7 +718,7 @@ export const StreamAgentMessage$inboundSchema: z.ZodType<
   ),
 });
 /** @internal */
-export type StreamAgentMessage$Outbound = {
+export type StreamAgentA2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
@@ -723,10 +729,10 @@ export type StreamAgentMessage$Outbound = {
 };
 
 /** @internal */
-export const StreamAgentMessage$outboundSchema: z.ZodType<
-  StreamAgentMessage$Outbound,
+export const StreamAgentA2AMessage$outboundSchema: z.ZodType<
+  StreamAgentA2AMessage$Outbound,
   z.ZodTypeDef,
-  StreamAgentMessage
+  StreamAgentA2AMessage
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
@@ -742,20 +748,20 @@ export const StreamAgentMessage$outboundSchema: z.ZodType<
   ),
 });
 
-export function streamAgentMessageToJSON(
-  streamAgentMessage: StreamAgentMessage,
+export function streamAgentA2AMessageToJSON(
+  streamAgentA2AMessage: StreamAgentA2AMessage,
 ): string {
   return JSON.stringify(
-    StreamAgentMessage$outboundSchema.parse(streamAgentMessage),
+    StreamAgentA2AMessage$outboundSchema.parse(streamAgentA2AMessage),
   );
 }
-export function streamAgentMessageFromJSON(
+export function streamAgentA2AMessageFromJSON(
   jsonString: string,
-): SafeParseResult<StreamAgentMessage, SDKValidationError> {
+): SafeParseResult<StreamAgentA2AMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StreamAgentMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StreamAgentMessage' from JSON`,
+    (x) => StreamAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentA2AMessage' from JSON`,
   );
 }
 
@@ -919,7 +925,7 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   task_id: z.string().optional(),
-  message: z.lazy(() => StreamAgentMessage$inboundSchema),
+  message: z.lazy(() => StreamAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => StreamAgentThread$inboundSchema).optional(),
@@ -935,7 +941,7 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type StreamAgentRequestBody$Outbound = {
   task_id?: string | undefined;
-  message: StreamAgentMessage$Outbound;
+  message: StreamAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: StreamAgentContact$Outbound | undefined;
   thread?: StreamAgentThread$Outbound | undefined;
@@ -951,7 +957,7 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   StreamAgentRequestBody
 > = z.object({
   taskId: z.string().optional(),
-  message: z.lazy(() => StreamAgentMessage$outboundSchema),
+  message: z.lazy(() => StreamAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),

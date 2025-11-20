@@ -5,11 +5,11 @@
 ```typescript
 import { ListAgentTasksAgentsResponseKind } from "@orq-ai/node/models/operations";
 
-let value: ListAgentTasksAgentsResponseKind = "artifact";
+let value: ListAgentTasksAgentsResponseKind = "message";
 ```
 
 ## Values
 
 ```typescript
-"artifact"
+"message"
 ```

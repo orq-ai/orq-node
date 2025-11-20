@@ -3,42 +3,39 @@
 
 ## Supported Types
 
-### `operations.Parts1`
+### `operations.PartsTextPart`
 
 ```typescript
-const value: operations.Parts1 = {
+const value: operations.PartsTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.Parts2`
+### `operations.DataPart`
 
 ```typescript
-const value: operations.Parts2 = {
+const value: operations.DataPart = {
   kind: "data",
-  data: {
-    "key": "<value>",
-    "key1": "<value>",
-  },
+  data: {},
 };
 ```
 
-### `operations.Parts3`
+### `operations.PartsFilePart`
 
 ```typescript
-const value: operations.Parts3 = {
+const value: operations.PartsFilePart = {
   kind: "file",
   file: {
-    bytes: "<value>",
+    uri: "https://grim-markup.com/",
   },
 };
 ```
 
-### `operations.Parts4`
+### `operations.ToolCallPart`
 
 ```typescript
-const value: operations.Parts4 = {
+const value: operations.ToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
@@ -49,10 +46,10 @@ const value: operations.Parts4 = {
 };
 ```
 
-### `operations.Parts5`
+### `operations.PartsToolResultPart`
 
 ```typescript
-const value: operations.Parts5 = {
+const value: operations.PartsToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

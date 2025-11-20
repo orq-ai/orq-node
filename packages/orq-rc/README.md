@@ -258,7 +258,6 @@ run();
 
 ### [agents](docs/sdks/agents/README.md)
 
-* [retrieveTask](docs/sdks/agents/README.md#retrievetask) - Retrieve a specific agent task
 * [create](docs/sdks/agents/README.md#create) - Create a new agent
 * [list](docs/sdks/agents/README.md#list) - List all agents
 * [delete](docs/sdks/agents/README.md#delete) - Delete an agent
@@ -266,6 +265,7 @@ run();
 * [update](docs/sdks/agents/README.md#update) - Update an agent
 * [invoke](docs/sdks/agents/README.md#invoke) - Invoke an agent
 * [listTasks](docs/sdks/agents/README.md#listtasks) - List all tasks for an agent
+* [retrieveTask](docs/sdks/agents/README.md#retrievetask) - Retrieve a specific agent task
 * [run](docs/sdks/agents/README.md#run) - Run an agent
 * [streamRun](docs/sdks/agents/README.md#streamrun) - Run and stream agent execution
 * [stream](docs/sdks/agents/README.md#stream) - Stream agent execution events
@@ -740,7 +740,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (25)</summary>
+<details><summary>Less common errors (24)</summary>
 
 <br />
 
@@ -753,7 +753,7 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 11 of 97 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 97 methods.*
 * [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 97 methods.*
 * [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 97 methods.*
 * [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 97 methods.*
@@ -761,7 +761,6 @@ run();
 * [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 97 methods.*
 * [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 97 methods.*
 * [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 97 methods.*
-* [`GetAgentTaskResponseBody`](./src/models/errors/getagenttaskresponsebody.ts): Agent task not found. Status code `404`. Applicable to 1 of 97 methods.*
 * [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 97 methods.*
 * [`GetAgentResponseBody`](./src/models/errors/getagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 97 methods.*
 * [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 97 methods.*

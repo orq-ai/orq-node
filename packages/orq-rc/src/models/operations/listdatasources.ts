@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type QueryParamStatus = Array<string> | string;
+export type Status = Array<string> | string;
 
 export type ListDatasourcesRequest = {
   /**
@@ -109,35 +109,28 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
-export const QueryParamStatus$inboundSchema: z.ZodType<
-  QueryParamStatus,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.array(z.string()), z.string()]);
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
+  .union([z.array(z.string()), z.string()]);
 /** @internal */
-export type QueryParamStatus$Outbound = Array<string> | string;
+export type Status$Outbound = Array<string> | string;
 
 /** @internal */
-export const QueryParamStatus$outboundSchema: z.ZodType<
-  QueryParamStatus$Outbound,
+export const Status$outboundSchema: z.ZodType<
+  Status$Outbound,
   z.ZodTypeDef,
-  QueryParamStatus
+  Status
 > = z.union([z.array(z.string()), z.string()]);
 
-export function queryParamStatusToJSON(
-  queryParamStatus: QueryParamStatus,
-): string {
-  return JSON.stringify(
-    QueryParamStatus$outboundSchema.parse(queryParamStatus),
-  );
+export function statusToJSON(status: Status): string {
+  return JSON.stringify(Status$outboundSchema.parse(status));
 }
-export function queryParamStatusFromJSON(
+export function statusFromJSON(
   jsonString: string,
-): SafeParseResult<QueryParamStatus, SDKValidationError> {
+): SafeParseResult<Status, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamStatus' from JSON`,
+    (x) => Status$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Status' from JSON`,
   );
 }
 
@@ -231,7 +224,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KAE3ETE5HDVXDCB3WYGM1QPN"),
+  _id: z.string().default("01KAG3PQC6FC4KPN6J7X3ZYQSZ"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -274,7 +267,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01KAE3ETE5HDVXDCB3WYGM1QPN"),
+  id: z.string().default("01KAG3PQC6FC4KPN6J7X3ZYQSZ"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

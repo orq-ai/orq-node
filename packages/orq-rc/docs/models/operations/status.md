@@ -1,17 +1,22 @@
 # Status
 
-Comma-separated list of task statuses to filter by. Available values: inactive, approval_required, in_progress, errored
+Filter datasources by status.
 
-## Example Usage
 
-```typescript
-import { Status } from "@orq-ai/node/models/operations";
+## Supported Types
 
-let value: Status = "failed";
-```
-
-## Values
+### `string[]`
 
 ```typescript
-"submitted" | "working" | "input-required" | "auth-required" | "completed" | "failed" | "canceled" | "rejected"
+const value: string[] = [
+  "completed",
+  "failed",
+];
 ```
+
+### `string`
+
+```typescript
+const value: string = "completed";
+```
+

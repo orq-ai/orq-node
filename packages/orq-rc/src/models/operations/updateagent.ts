@@ -1264,7 +1264,10 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type UpdateAgentRequestBody = {
+/**
+ * Request body for updating an existing agent via the API. Uses simplified tool input format.
+ */
+export type UpdateAgentUpdateAgentRequest = {
   key?: string | undefined;
   displayName?: string | undefined;
   projectId?: string | undefined;
@@ -1316,7 +1319,7 @@ export type UpdateAgentRequest = {
    * The unique key of the agent to update
    */
   agentKey: string;
-  requestBody?: UpdateAgentRequestBody | undefined;
+  requestBody?: UpdateAgentUpdateAgentRequest | undefined;
 };
 
 /**
@@ -5742,8 +5745,8 @@ export function updateAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
-  UpdateAgentRequestBody,
+export const UpdateAgentUpdateAgentRequest$inboundSchema: z.ZodType<
+  UpdateAgentUpdateAgentRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5785,7 +5788,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type UpdateAgentRequestBody$Outbound = {
+export type UpdateAgentUpdateAgentRequest$Outbound = {
   key?: string | undefined;
   display_name?: string | undefined;
   project_id?: string | undefined;
@@ -5806,10 +5809,10 @@ export type UpdateAgentRequestBody$Outbound = {
 };
 
 /** @internal */
-export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
-  UpdateAgentRequestBody$Outbound,
+export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
+  UpdateAgentUpdateAgentRequest$Outbound,
   z.ZodTypeDef,
-  UpdateAgentRequestBody
+  UpdateAgentUpdateAgentRequest
 > = z.object({
   key: z.string().optional(),
   displayName: z.string().optional(),
@@ -5849,20 +5852,22 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentRequestBodyToJSON(
-  updateAgentRequestBody: UpdateAgentRequestBody,
+export function updateAgentUpdateAgentRequestToJSON(
+  updateAgentUpdateAgentRequest: UpdateAgentUpdateAgentRequest,
 ): string {
   return JSON.stringify(
-    UpdateAgentRequestBody$outboundSchema.parse(updateAgentRequestBody),
+    UpdateAgentUpdateAgentRequest$outboundSchema.parse(
+      updateAgentUpdateAgentRequest,
+    ),
   );
 }
-export function updateAgentRequestBodyFromJSON(
+export function updateAgentUpdateAgentRequestFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentRequestBody, SDKValidationError> {
+): SafeParseResult<UpdateAgentUpdateAgentRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentRequestBody' from JSON`,
+    (x) => UpdateAgentUpdateAgentRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentUpdateAgentRequest' from JSON`,
   );
 }
 
@@ -5873,7 +5878,8 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   agent_key: z.string(),
-  RequestBody: z.lazy(() => UpdateAgentRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "agent_key": "agentKey",
@@ -5883,7 +5889,7 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
-  RequestBody?: UpdateAgentRequestBody$Outbound | undefined;
+  RequestBody?: UpdateAgentUpdateAgentRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -5893,7 +5899,8 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest
 > = z.object({
   agentKey: z.string(),
-  requestBody: z.lazy(() => UpdateAgentRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",

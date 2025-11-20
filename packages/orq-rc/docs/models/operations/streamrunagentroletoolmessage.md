@@ -1,6 +1,6 @@
 # StreamRunAgentRoleToolMessage
 
-Tool message
+Message containing tool execution results
 
 ## Example Usage
 

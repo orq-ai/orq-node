@@ -5,11 +5,11 @@
 ```typescript
 import { GetAgentTaskAgentsKind } from "@orq-ai/node/models/operations";
 
-let value: GetAgentTaskAgentsKind = "artifact";
+let value: GetAgentTaskAgentsKind = "message";
 ```
 
 ## Values
 
 ```typescript
-"artifact"
+"message"
 ```

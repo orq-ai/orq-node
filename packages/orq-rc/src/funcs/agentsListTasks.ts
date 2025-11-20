@@ -37,7 +37,7 @@ export function agentsListTasks(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListAgentTasksResponseBody,
+    operations.ListAgentTasksAgentTasksListResponse,
     | errors.ListAgentTasksResponseBody
     | OrqError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.ListAgentTasksResponseBody,
+      operations.ListAgentTasksAgentTasksListResponse,
       | errors.ListAgentTasksResponseBody
       | OrqError
       | ResponseValidationError
@@ -159,7 +159,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ListAgentTasksResponseBody,
+    operations.ListAgentTasksAgentTasksListResponse,
     | errors.ListAgentTasksResponseBody
     | OrqError
     | ResponseValidationError
@@ -170,7 +170,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListAgentTasksResponseBody$inboundSchema),
+    M.json(200, operations.ListAgentTasksAgentTasksListResponse$inboundSchema),
     M.jsonErr(404, errors.ListAgentTasksResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

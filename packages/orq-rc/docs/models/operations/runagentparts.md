@@ -3,41 +3,42 @@
 
 ## Supported Types
 
-### `operations.RunAgentParts1`
+### `operations.RunAgentPartsTextPart`
 
 ```typescript
-const value: operations.RunAgentParts1 = {
+const value: operations.RunAgentPartsTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.RunAgentParts2`
+### `operations.RunAgentPartsDataPart`
 
 ```typescript
-const value: operations.RunAgentParts2 = {
+const value: operations.RunAgentPartsDataPart = {
   kind: "data",
   data: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```
 
-### `operations.RunAgentParts3`
+### `operations.RunAgentPartsFilePart`
 
 ```typescript
-const value: operations.RunAgentParts3 = {
+const value: operations.RunAgentPartsFilePart = {
   kind: "file",
   file: {
-    uri: "https://critical-vista.org/",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.RunAgentParts4`
+### `operations.RunAgentPartsToolCallPart`
 
 ```typescript
-const value: operations.RunAgentParts4 = {
+const value: operations.RunAgentPartsToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
@@ -48,10 +49,10 @@ const value: operations.RunAgentParts4 = {
 };
 ```
 
-### `operations.RunAgentParts5`
+### `operations.RunAgentPartsToolResultPart`
 
 ```typescript
-const value: operations.RunAgentParts5 = {
+const value: operations.RunAgentPartsToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

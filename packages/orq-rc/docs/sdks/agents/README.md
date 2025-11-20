@@ -5,7 +5,6 @@
 
 ### Available Operations
 
-* [retrieveTask](#retrievetask) - Retrieve a specific agent task
 * [create](#create) - Create a new agent
 * [list](#list) - List all agents
 * [delete](#delete) - Delete an agent
@@ -13,87 +12,12 @@
 * [update](#update) - Update an agent
 * [invoke](#invoke) - Invoke an agent
 * [listTasks](#listtasks) - List all tasks for an agent
+* [retrieveTask](#retrievetask) - Retrieve a specific agent task
 * [run](#run) - Run an agent
 * [streamRun](#streamrun) - Run and stream agent execution
 * [stream](#stream) - Stream agent execution events
 * [listActions](#listactions) - List all actions
 * [retrieveAction](#retrieveaction) - Retrieve an action executed by an agent task.
-
-## retrieveTask
-
-Retrieves detailed information about a specific task for a given agent, including execution status and results.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="GetAgentTask" method="get" path="/v2/agents/{agent_key}/tasks/{task_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.agents.retrieveTask({
-    agentKey: "<value>",
-    taskId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { agentsRetrieveTask } from "@orq-ai/node/funcs/agentsRetrieveTask.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await agentsRetrieveTask(orq, {
-    agentKey: "<value>",
-    taskId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("agentsRetrieveTask failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetAgentTaskRequest](../../models/operations/getagenttaskrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetAgentTaskResponseBody](../../models/operations/getagenttaskresponsebody.md)\>**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| errors.GetAgentTaskResponseBody | 404                             | application/json                |
-| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## create
 
@@ -627,7 +551,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.InvokeAgentResponseBody](../../models/operations/invokeagentresponsebody.md)\>**
+**Promise\<[operations.InvokeAgentA2ATaskResponse](../../models/operations/invokeagenta2ataskresponse.md)\>**
 
 ### Errors
 
@@ -700,7 +624,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListAgentTasksResponseBody](../../models/operations/listagenttasksresponsebody.md)\>**
+**Promise\<[operations.ListAgentTasksAgentTasksListResponse](../../models/operations/listagenttasksagenttaskslistresponse.md)\>**
 
 ### Errors
 
@@ -708,6 +632,82 @@ run();
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | errors.ListAgentTasksResponseBody | 404                               | application/json                  |
 | errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
+
+## retrieveTask
+
+Retrieves detailed information about a specific task for a given agent, including execution status and results.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetAgentTask" method="get" path="/v2/agents/{agent_key}/tasks/{task_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.retrieveTask({
+    agentKey: "<value>",
+    taskId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsRetrieveTask } from "@orq-ai/node/funcs/agentsRetrieveTask.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRetrieveTask(orq, {
+    agentKey: "<value>",
+    taskId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRetrieveTask failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetAgentTaskRequest](../../models/operations/getagenttaskrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetAgentTaskExtendedTaskResponse](../../models/operations/getagenttaskextendedtaskresponse.md)\>**
+
+### Errors
+
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| errors.HonoApiError | 404                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## run
 
@@ -862,7 +862,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RunAgentResponseBody](../../models/operations/runagentresponsebody.md)\>**
+**Promise\<[operations.RunAgentA2ATaskResponse](../../models/operations/runagenta2ataskresponse.md)\>**
 
 ### Errors
 

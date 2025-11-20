@@ -36,7 +36,7 @@ export function agentsInvoke(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.InvokeAgentResponseBody,
+    operations.InvokeAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.InvokeAgentResponseBody,
+      operations.InvokeAgentA2ATaskResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -145,7 +145,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.InvokeAgentResponseBody,
+    operations.InvokeAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -155,7 +155,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.InvokeAgentResponseBody$inboundSchema),
+    M.json(200, operations.InvokeAgentA2ATaskResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

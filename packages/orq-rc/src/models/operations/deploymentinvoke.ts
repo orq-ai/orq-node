@@ -250,7 +250,7 @@ export type Message1 = {
   redactedReasoning?: string | undefined;
 };
 
-export type DeploymentInvokeMessage = Message1 | Message2 | Message3;
+export type Message = Message1 | Message2 | Message3;
 
 export type DeploymentInvokeChoices = {
   index: number;
@@ -793,46 +793,39 @@ export function message1FromJSON(
 }
 
 /** @internal */
-export const DeploymentInvokeMessage$inboundSchema: z.ZodType<
-  DeploymentInvokeMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => Message1$inboundSchema),
-  z.lazy(() => Message2$inboundSchema),
-  z.lazy(() => Message3$inboundSchema),
-]);
+export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
+  z.union([
+    z.lazy(() => Message1$inboundSchema),
+    z.lazy(() => Message2$inboundSchema),
+    z.lazy(() => Message3$inboundSchema),
+  ]);
 /** @internal */
-export type DeploymentInvokeMessage$Outbound =
+export type Message$Outbound =
   | Message1$Outbound
   | Message2$Outbound
   | Message3$Outbound;
 
 /** @internal */
-export const DeploymentInvokeMessage$outboundSchema: z.ZodType<
-  DeploymentInvokeMessage$Outbound,
+export const Message$outboundSchema: z.ZodType<
+  Message$Outbound,
   z.ZodTypeDef,
-  DeploymentInvokeMessage
+  Message
 > = z.union([
   z.lazy(() => Message1$outboundSchema),
   z.lazy(() => Message2$outboundSchema),
   z.lazy(() => Message3$outboundSchema),
 ]);
 
-export function deploymentInvokeMessageToJSON(
-  deploymentInvokeMessage: DeploymentInvokeMessage,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeMessage$outboundSchema.parse(deploymentInvokeMessage),
-  );
+export function messageToJSON(message: Message): string {
+  return JSON.stringify(Message$outboundSchema.parse(message));
 }
-export function deploymentInvokeMessageFromJSON(
+export function messageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentInvokeMessage, SDKValidationError> {
+): SafeParseResult<Message, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentInvokeMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentInvokeMessage' from JSON`,
+    (x) => Message$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Message' from JSON`,
   );
 }
 

@@ -22,23 +22,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Agents extends ClientSDK {
   /**
-   * Retrieve a specific agent task
-   *
-   * @remarks
-   * Retrieves detailed information about a specific task for a given agent, including execution status and results.
-   */
-  async retrieveTask(
-    request: operations.GetAgentTaskRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetAgentTaskResponseBody> {
-    return unwrapAsync(agentsRetrieveTask(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Create a new agent
    *
    * @remarks
@@ -132,7 +115,7 @@ export class Agents extends ClientSDK {
   async invoke(
     request: operations.InvokeAgentRequest,
     options?: RequestOptions,
-  ): Promise<operations.InvokeAgentResponseBody> {
+  ): Promise<operations.InvokeAgentA2ATaskResponse> {
     return unwrapAsync(agentsInvoke(
       this,
       request,
@@ -149,8 +132,25 @@ export class Agents extends ClientSDK {
   async listTasks(
     request: operations.ListAgentTasksRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListAgentTasksResponseBody> {
+  ): Promise<operations.ListAgentTasksAgentTasksListResponse> {
     return unwrapAsync(agentsListTasks(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a specific agent task
+   *
+   * @remarks
+   * Retrieves detailed information about a specific task for a given agent, including execution status and results.
+   */
+  async retrieveTask(
+    request: operations.GetAgentTaskRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetAgentTaskExtendedTaskResponse> {
+    return unwrapAsync(agentsRetrieveTask(
       this,
       request,
       options,
@@ -166,7 +166,7 @@ export class Agents extends ClientSDK {
   async run(
     request?: operations.RunAgentRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.RunAgentResponseBody> {
+  ): Promise<operations.RunAgentA2ATaskResponse> {
     return unwrapAsync(agentsRun(
       this,
       request,
