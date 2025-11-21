@@ -157,7 +157,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-11-21T13:19:49.752Z",
+    "2025-11-21T15:03:21.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -190,7 +190,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-11-21T13:19:49.752Z"))
+  created: z.date().default(() => new Date("2025-11-21T15:03:21.166Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
