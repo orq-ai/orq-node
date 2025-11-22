@@ -1254,7 +1254,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1262,7 +1262,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1397,7 +1397,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T21:11:48.435Z"
+                          default: "2025-11-22T22:55:48.622Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1405,7 +1405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:48.435Z"
+                              default: "2025-11-22T22:55:48.623Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1573,10 +1573,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1647,10 +1647,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1718,10 +1718,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1804,10 +1804,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1875,10 +1875,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2273,10 +2273,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2360,10 +2360,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T21:11:50.311Z"
+                              default: "2025-11-22T22:55:50.632Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2780,10 +2780,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2854,10 +2854,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2925,10 +2925,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3011,10 +3011,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3082,10 +3082,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3480,10 +3480,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3567,10 +3567,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3974,10 +3974,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4048,10 +4048,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4119,10 +4119,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4205,10 +4205,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4276,10 +4276,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4674,10 +4674,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4761,10 +4761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T21:11:50.311Z"
+                        default: "2025-11-22T22:55:50.632Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4940,7 +4940,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4948,7 +4948,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5084,7 +5084,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5092,7 +5092,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9509,9 +9509,10 @@ paths:
         - "Agents"
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "create"
-      operationId: "CreateAgent"
-      summary: "Create a new agent"
-      description: "Creates a new AI agent with specified configuration. Agents can be configured with a primary model and an optional fallback model that will be used automatically if the primary model fails."
+      x-speakeasy-max-method-params: 14
+      operationId: "CreateAgentRequest"
+      summary: "Create agent"
+      description: "Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage."
       requestBody:
         content:
           "application/json":
@@ -9665,10 +9666,9 @@ paths:
                                         "schema":
                                           description: "The schema for the response format, described as a JSON Schema object."
                                         "strict":
-                                          type:
-                                            - "boolean"
-                                            - "null"
-                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                          type: "boolean"
+                                          default: false
+                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                       required:
                                         - "name"
                                   required:
@@ -9924,10 +9924,9 @@ paths:
                                           "schema":
                                             description: "The schema for the response format, described as a JSON Schema object."
                                           "strict":
-                                            type:
-                                              - "boolean"
-                                              - "null"
-                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                            type: "boolean"
+                                            default: false
+                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                         required:
                                           - "name"
                                     required:
@@ -10408,7 +10407,7 @@ paths:
                 - "settings"
       responses:
         "201":
-          description: "Agent created successfully"
+          description: "Agent successfully created and ready for use. Returns the complete agent manifest including the generated ID, configuration, and all settings."
           content:
             "application/json":
               schema:
@@ -10702,10 +10701,9 @@ paths:
                                       "schema":
                                         description: "The schema for the response format, described as a JSON Schema object."
                                       "strict":
-                                        type:
-                                          - "boolean"
-                                          - "null"
-                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                        type: "boolean"
+                                        default: false
+                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                     required:
                                       - "name"
                                 required:
@@ -10958,10 +10956,9 @@ paths:
                                                 "schema":
                                                   description: "The schema for the response format, described as a JSON Schema object."
                                                 "strict":
-                                                  type:
-                                                    - "boolean"
-                                                    - "null"
-                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                                  type: "boolean"
+                                                  default: false
+                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                               required:
                                                 - "name"
                                           required:
@@ -11145,7 +11142,7 @@ paths:
                   - "memory_stores"
                   - "team_of_agents"
         "409":
-          description: "Agent with this key already exists in the workspace"
+          description: "Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management."
           content:
             "application/json":
               schema:
@@ -11163,15 +11160,17 @@ paths:
         - "Agents"
       x-speakeasy-group: "agents.responses"
       x-speakeasy-name-override: "create"
-      operationId: "CreateAgentResponse"
-      summary: "Create an agent response"
-      description: "Creates a new response representing an agent interaction. A response tracks the conversation from the initial message until the agent becomes inactive or errors. Supports both synchronous (waiting) and asynchronous (background) execution modes."
+      x-speakeasy-max-method-params: 8
+      x-code-samples: [{"lang": "curl", "label": "cURL", "source": "curl --request POST \\\n  --url 'https://api.orq.ai/v2/agents/customer_support/responses' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"message\": {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"Hi! I am testing your capabilities. Can you describe what you can do?\"\n        }\n      ]\n    }\n  }'"}, {"lang": "python", "label": "Python", "source": "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(\n    api_key=os.environ.get(\"ORQ_API_KEY\")\n)\n\nresponse = client.agents.responses.create(\n    agent_key=\"customer_support\",\n    message={\n        \"role\": \"user\",\n        \"parts\": [\n            {\n                \"kind\": \"text\",\n                \"text\": \"Hi! I am testing your capabilities. Can you describe what you can do?\"\n            }\n        ]\n    }\n)\n\nprint(response.output[0].parts[0].text)\nprint(response.usage)"}, {"lang": "typescript", "label": "Node.js", "source": "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst response = await client.agents.responses.create({\n  agentKey: 'customer_support',\n  message: {\n    role: 'user',\n    parts: [\n      {\n        kind: 'text',\n        text: 'Hi! I am testing your capabilities. Can you describe what you can do?',\n      },\n    ],\n  }\n});\n\nconsole.log(response.output[0].parts[0].text);\nconsole.log(response.usage);"}]
+      operationId: "CreateAgentResponseRequest"
+      summary: "Create response"
+      description: "Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result."
       parameters:
         - schema:
             type: "string"
-            description: "The key or ID of the agent to invoke"
+            description: "The unique key of identifier of the agent to invoke"
           required: true
-          description: "The key or ID of the agent to invoke"
+          description: "The unique key of identifier of the agent to invoke"
           name: "agent_key"
           in: "path"
       requestBody:
@@ -11367,7 +11366,7 @@ paths:
                 - "message"
       responses:
         "200":
-          description: "Agent response created successfully"
+          description: "Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details."
           content:
             "application/json":
               schema:
@@ -11475,9 +11474,10 @@ paths:
         - "Agents"
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "delete"
+      x-speakeasy-max-method-params: 1
       operationId: "DeleteAgent"
-      summary: "Delete an agent"
-      description: "Permanently deletes an agent and all its configuration, including primary and fallback model settings."
+      summary: "Delete agent"
+      description: "Permanently removes an agent from the workspace. This operation is irreversible and will delete all associated configuration including model assignments, tools, knowledge bases, memory stores, and cached data. Active agent sessions will be terminated, and the agent key will become available for reuse."
       parameters:
         - schema:
             type: "string"
@@ -11488,9 +11488,9 @@ paths:
           in: "path"
       responses:
         "204":
-          description: "Agent deleted successfully"
+          description: "Agent successfully deleted. No content is returned, but the agent has been permanently removed from the workspace."
         "404":
-          description: "Agent not found"
+          description: "Agent not found. The specified agent key does not exist in the workspace or has already been deleted."
           content:
             "application/json":
               schema:
@@ -11507,9 +11507,10 @@ paths:
         - "Agents"
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "retrieve"
-      operationId: "GetAgent"
-      summary: "Get an agent"
-      description: "Retrieves a single agent by its unique key, including its full configuration with primary and fallback model settings."
+      x-speakeasy-max-method-params: 1
+      operationId: "RetrieveAgentRequest"
+      summary: "Retrieve agent"
+      description: "Retrieves detailed information about a specific agent identified by its unique key or identifier. Returns the complete agent manifest including configuration settings, model assignments (primary and fallback), tools, knowledge bases, memory stores, instructions, and execution parameters. Use this endpoint to fetch the current state and configuration of an individual agent."
       parameters:
         - schema:
             type: "string"
@@ -11520,7 +11521,7 @@ paths:
           in: "path"
       responses:
         "200":
-          description: "Agent retrieved successfully"
+          description: "Agent successfully retrieved. Returns the complete agent manifest with all configuration details, including models, tools, knowledge bases, and execution settings."
           content:
             "application/json":
               schema:
@@ -11816,10 +11817,9 @@ paths:
                                       "schema":
                                         description: "The schema for the response format, described as a JSON Schema object."
                                       "strict":
-                                        type:
-                                          - "boolean"
-                                          - "null"
-                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                        type: "boolean"
+                                        default: false
+                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                     required:
                                       - "name"
                                 required:
@@ -12072,10 +12072,9 @@ paths:
                                                 "schema":
                                                   description: "The schema for the response format, described as a JSON Schema object."
                                                 "strict":
-                                                  type:
-                                                    - "boolean"
-                                                    - "null"
-                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                                  type: "boolean"
+                                                  default: false
+                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                               required:
                                                 - "name"
                                           required:
@@ -12260,7 +12259,7 @@ paths:
                   - "memory_stores"
                   - "team_of_agents"
         "404":
-          description: "Agent not found"
+          description: "Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it."
           content:
             "application/json":
               schema:
@@ -12277,9 +12276,10 @@ paths:
         - "Agents"
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "update"
+      x-speakeasy-max-method-params: 16
       operationId: "UpdateAgent"
-      summary: "Update an agent"
-      description: "Updates an existing agent's configuration. You can update various fields including the model configuration and fallback model settings."
+      summary: "Update agent"
+      description: "Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations."
       parameters:
         - schema:
             type: "string"
@@ -12429,10 +12429,9 @@ paths:
                                         "schema":
                                           description: "The schema for the response format, described as a JSON Schema object."
                                         "strict":
-                                          type:
-                                            - "boolean"
-                                            - "null"
-                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                          type: "boolean"
+                                          default: false
+                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                       required:
                                         - "name"
                                   required:
@@ -12688,10 +12687,9 @@ paths:
                                           "schema":
                                             description: "The schema for the response format, described as a JSON Schema object."
                                           "strict":
-                                            type:
-                                              - "boolean"
-                                              - "null"
-                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                            type: "boolean"
+                                            default: false
+                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                         required:
                                           - "name"
                                     required:
@@ -13166,7 +13164,7 @@ paths:
               description: "Request body for updating an existing agent via the API. Uses simplified tool input format."
       responses:
         "200":
-          description: "Agent updated successfully"
+          description: "Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made."
           content:
             "application/json":
               schema:
@@ -13462,10 +13460,9 @@ paths:
                                       "schema":
                                         description: "The schema for the response format, described as a JSON Schema object."
                                       "strict":
-                                        type:
-                                          - "boolean"
-                                          - "null"
-                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                        type: "boolean"
+                                        default: false
+                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                     required:
                                       - "name"
                                 required:
@@ -13718,10 +13715,9 @@ paths:
                                                 "schema":
                                                   description: "The schema for the response format, described as a JSON Schema object."
                                                 "strict":
-                                                  type:
-                                                    - "boolean"
-                                                    - "null"
-                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                                  type: "boolean"
+                                                  default: false
+                                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                               required:
                                                 - "name"
                                           required:
@@ -13906,7 +13902,7 @@ paths:
                   - "memory_stores"
                   - "team_of_agents"
         "404":
-          description: "Agent not found"
+          description: "Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it."
           content:
             "application/json":
               schema:
@@ -13922,11 +13918,13 @@ paths:
     post:
       tags:
         - "Agents"
+      deprecated: true
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "invoke"
+      x-speakeasy-max-method-params: 8
       operationId: "InvokeAgent"
-      summary: "Invoke an agent"
-      description: "Executes an existing agent with the provided input. The agent uses its pre-configured primary model and will automatically fall back to its configured fallback model if the primary model fails. Fallback models are configured at the agent level, not during execution."
+      summary: "Execute an agent task"
+      description: "Invokes an agent to perform a task with the provided input message. The agent will process the request using its configured model and tools, maintaining context through memory stores if configured. Supports automatic model fallback on primary model failure, tool execution, knowledge base retrieval, and continuation of previous conversations. Returns a task response that can be used to track execution status and retrieve results."
       parameters:
         - schema:
             type: "string"
@@ -14124,7 +14122,7 @@ paths:
                 - "message"
       responses:
         "200":
-          description: "Agent task created successfully"
+          description: "Agent task successfully initiated. Returns the task details including task ID, execution status, and initial response. Use the task ID to track execution progress and retrieve full results."
           content:
             "application/json":
               schema:
@@ -14323,1063 +14321,16 @@ paths:
                 description: "Response format following the Agent-to-Agent (A2A) protocol. Returned when starting or continuing an agent task execution."
       security:
         - ApiKey: []
-  "/v2/agents/{agent_key}/tasks":
-    get:
-      tags:
-        - "Agents"
-      x-speakeasy-group: "agents"
-      x-speakeasy-name-override: "listTasks"
-      operationId: "ListAgentTasks"
-      summary: "List all tasks for an agent"
-      description: "Retrieves a paginated list of all tasks associated with a specific agent, optionally filtered by status."
-      parameters:
-        - schema:
-            type: "string"
-            description: "The unique key of the agent"
-          required: true
-          description: "The unique key of the agent"
-          name: "agent_key"
-          in: "path"
-        - schema:
-            type: "number"
-            minimum: 1
-            maximum: 200
-            default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          name: "limit"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          required: false
-          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          name: "starting_after"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          required: false
-          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          name: "ending_before"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "Comma-separated list of task statuses to filter by. Available values: submitted, working, input-required, auth-required, completed, failed, canceled, rejected"
-          required: false
-          description: "Comma-separated list of task statuses to filter by. Available values: submitted, working, input-required, auth-required, completed, failed, canceled, rejected"
-          name: "status"
-          in: "query"
-      responses:
-        "200":
-          description: "Agent tasks retrieved"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "tasks":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "id":
-                          type: "string"
-                          description: "Unique task execution identifier"
-                        "contextId":
-                          type: "string"
-                          description: "Correlation ID for tracking"
-                        "kind":
-                          type: "string"
-                          enum:
-                            - "task"
-                          description: "A2A entity type"
-                        "status":
-                          type: "object"
-                          properties:
-                            "state":
-                              type: "string"
-                              enum:
-                                - "submitted"
-                                - "working"
-                                - "input-required"
-                                - "auth-required"
-                                - "completed"
-                                - "failed"
-                                - "canceled"
-                                - "rejected"
-                              title: "Task State"
-                              description: "Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution."
-                            "timestamp":
-                              type: "string"
-                              description: "ISO 8601 timestamp of when the status was updated"
-                            "message":
-                              type: "object"
-                              properties:
-                                "kind":
-                                  type: "string"
-                                  enum:
-                                    - "message"
-                                "messageId":
-                                  type: "string"
-                                "role":
-                                  type: "string"
-                                  enum:
-                                    - "user"
-                                    - "agent"
-                                    - "tool"
-                                    - "system"
-                                  title: "Extended Message Role"
-                                  description: "Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts)."
-                                "parts":
-                                  type: "array"
-                                  items:
-                                    oneOf:
-                                      - type: "object"
-                                        properties:
-                                          "kind":
-                                            type: "string"
-                                            enum:
-                                              - "text"
-                                          "text":
-                                            type: "string"
-                                        required:
-                                          - "kind"
-                                          - "text"
-                                        title: "Text Part"
-                                        description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                      - type: "object"
-                                        properties:
-                                          "kind":
-                                            type: "string"
-                                            enum:
-                                              - "data"
-                                          "data":
-                                            type: "object"
-                                            additionalProperties: {}
-                                          "metadata":
-                                            type: "object"
-                                            additionalProperties: {}
-                                        required:
-                                          - "kind"
-                                          - "data"
-                                        title: "Data Part"
-                                        description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                      - type: "object"
-                                        properties:
-                                          "kind":
-                                            type: "string"
-                                            enum:
-                                              - "file"
-                                          "file":
-                                            anyOf:
-                                              - type: "object"
-                                                properties:
-                                                  "bytes":
-                                                    type: "string"
-                                                    minLength: 1
-                                                    description: "base64 encoded content of the file"
-                                                  "mimeType":
-                                                    type: "string"
-                                                    description: "Optional mimeType for the file"
-                                                  "name":
-                                                    type: "string"
-                                                    description: "Optional name for the file"
-                                                required:
-                                                  - "bytes"
-                                                title: "Binary format"
-                                                description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                              - type: "object"
-                                                properties:
-                                                  "uri":
-                                                    type: "string"
-                                                    description: "URL for the File content"
-                                                  "mimeType":
-                                                    type: "string"
-                                                    description: "Optional mimeType for the file"
-                                                  "name":
-                                                    type: "string"
-                                                    description: "Optional name for the file"
-                                                required:
-                                                  - "uri"
-                                                title: "File in URI format"
-                                                description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                          "metadata":
-                                            type: "object"
-                                            additionalProperties: {}
-                                        required:
-                                          - "kind"
-                                          - "file"
-                                        title: "File Part"
-                                        description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                      - type: "object"
-                                        properties:
-                                          "kind":
-                                            type: "string"
-                                            enum:
-                                              - "tool_call"
-                                          "tool_name":
-                                            type: "string"
-                                          "tool_call_id":
-                                            type: "string"
-                                          "arguments":
-                                            type: "object"
-                                            additionalProperties: {}
-                                          "metadata":
-                                            type: "object"
-                                            additionalProperties: {}
-                                        required:
-                                          - "kind"
-                                          - "tool_name"
-                                          - "tool_call_id"
-                                          - "arguments"
-                                        title: "Tool Call Part"
-                                        description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                      - type: "object"
-                                        properties:
-                                          "kind":
-                                            type: "string"
-                                            enum:
-                                              - "tool_result"
-                                          "tool_call_id":
-                                            type: "string"
-                                          "result": {}
-                                          "metadata":
-                                            type: "object"
-                                            additionalProperties: {}
-                                        required:
-                                          - "kind"
-                                          - "tool_call_id"
-                                        title: "Tool Result Part"
-                                        description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
-                              required:
-                                - "kind"
-                                - "messageId"
-                                - "role"
-                                - "parts"
-                              title: "Task Status Message"
-                              description: "Optional A2A message providing additional context about the current status"
-                          required:
-                            - "state"
-                          title: "Task Status"
-                          description: "Current task execution status"
-                        "history":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "message"
-                              "messageId":
-                                type: "string"
-                                description: "Unique identifier for the message"
-                              "role":
-                                type: "string"
-                                enum:
-                                  - "user"
-                                  - "agent"
-                                  - "tool"
-                                  - "system"
-                                title: "Extended Message Role"
-                                description: "Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts)."
-                              "parts":
-                                type: "array"
-                                items:
-                                  oneOf:
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "text"
-                                        "text":
-                                          type: "string"
-                                      required:
-                                        - "kind"
-                                        - "text"
-                                      title: "Text Part"
-                                      description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "data"
-                                        "data":
-                                          type: "object"
-                                          additionalProperties: {}
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "data"
-                                      title: "Data Part"
-                                      description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "file"
-                                        "file":
-                                          anyOf:
-                                            - type: "object"
-                                              properties:
-                                                "bytes":
-                                                  type: "string"
-                                                  minLength: 1
-                                                  description: "base64 encoded content of the file"
-                                                "mimeType":
-                                                  type: "string"
-                                                  description: "Optional mimeType for the file"
-                                                "name":
-                                                  type: "string"
-                                                  description: "Optional name for the file"
-                                              required:
-                                                - "bytes"
-                                              title: "Binary format"
-                                              description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                            - type: "object"
-                                              properties:
-                                                "uri":
-                                                  type: "string"
-                                                  description: "URL for the File content"
-                                                "mimeType":
-                                                  type: "string"
-                                                  description: "Optional mimeType for the file"
-                                                "name":
-                                                  type: "string"
-                                                  description: "Optional name for the file"
-                                              required:
-                                                - "uri"
-                                              title: "File in URI format"
-                                              description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "file"
-                                      title: "File Part"
-                                      description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "tool_call"
-                                        "tool_name":
-                                          type: "string"
-                                        "tool_call_id":
-                                          type: "string"
-                                        "arguments":
-                                          type: "object"
-                                          additionalProperties: {}
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "tool_name"
-                                        - "tool_call_id"
-                                        - "arguments"
-                                      title: "Tool Call Part"
-                                      description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "tool_result"
-                                        "tool_call_id":
-                                          type: "string"
-                                        "result": {}
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "tool_call_id"
-                                      title: "Tool Result Part"
-                                      description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
-                                description: "Array of message parts (text, file, tool_call, tool_result)"
-                              "taskId":
-                                type: "string"
-                                description: "Associated task ID if applicable"
-                              "contextId":
-                                type: "string"
-                                description: "Correlation ID for execution tracking"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Additional message metadata"
-                            required:
-                              - "kind"
-                              - "messageId"
-                              - "role"
-                              - "parts"
-                            title: "Extended A2A Message"
-                            description: "Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with Orquesta-specific features."
-                          description: "Conversation history with all messages exchanged"
-                        "artifacts":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "artifactId":
-                                type: "string"
-                                description: "Unique identifier for the artifact (ULID format)"
-                              "name":
-                                type: "string"
-                                description: "Required name for the artifact (e.g., filename or descriptive title)"
-                              "description":
-                                type: "string"
-                                description: "Optional human-readable description of the artifact"
-                              "parts":
-                                type: "array"
-                                items:
-                                  anyOf:
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "text"
-                                        "text":
-                                          type: "string"
-                                      required:
-                                        - "kind"
-                                        - "text"
-                                      title: "Text Part"
-                                      description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "file"
-                                        "file":
-                                          anyOf:
-                                            - type: "object"
-                                              properties:
-                                                "bytes":
-                                                  type: "string"
-                                                  minLength: 1
-                                                  description: "base64 encoded content of the file"
-                                                "mimeType":
-                                                  type: "string"
-                                                  description: "Optional mimeType for the file"
-                                                "name":
-                                                  type: "string"
-                                                  description: "Optional name for the file"
-                                              required:
-                                                - "bytes"
-                                              title: "Binary format"
-                                              description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                            - type: "object"
-                                              properties:
-                                                "uri":
-                                                  type: "string"
-                                                  description: "URL for the File content"
-                                                "mimeType":
-                                                  type: "string"
-                                                  description: "Optional mimeType for the file"
-                                                "name":
-                                                  type: "string"
-                                                  description: "Optional name for the file"
-                                              required:
-                                                - "uri"
-                                              title: "File in URI format"
-                                              description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "file"
-                                      title: "File Part"
-                                      description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                    - type: "object"
-                                      properties:
-                                        "kind":
-                                          type: "string"
-                                          enum:
-                                            - "data"
-                                        "data":
-                                          type: "object"
-                                          additionalProperties: {}
-                                        "metadata":
-                                          type: "object"
-                                          additionalProperties: {}
-                                      required:
-                                        - "kind"
-                                        - "data"
-                                      title: "Data Part"
-                                      description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                description: "Array of artifact content parts (text, file, or data). Does not include tool_call or tool_result parts."
-                              "extensions":
-                                type: "array"
-                                items:
-                                  type: "string"
-                                description: "File extensions associated with this artifact (e.g., [\".pdf\"])"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Additional artifact metadata as key-value pairs"
-                            required:
-                              - "artifactId"
-                              - "name"
-                              - "parts"
-                            title: "Task Artifact"
-                            description: "A file or data artifact produced by the agent during task execution. Follows the A2A SDK Artifact structure with required name field."
-                          description: "Optional files or data produced during execution"
-                        "metadata":
-                          type: "object"
-                          additionalProperties: {}
-                          description: "Additional task metadata"
-                      required:
-                        - "id"
-                        - "contextId"
-                        - "kind"
-                        - "status"
-                        - "history"
-                      title: "Extended Task Response"
-                      description: "Agent task execution response format with full conversation history and artifacts. Used for API responses when retrieving task details."
-                    description: "Array of agent tasks with full execution details"
-                  "overall_total":
-                    type: "number"
-                    description: "Total count of tasks for this agent (across all pages, unfiltered)"
-                required:
-                  - "tasks"
-                  - "overall_total"
-                title: "Agent Tasks List Response"
-                description: "Response format for listing all tasks associated with an agent. Includes paginated task array and total count."
-        "404":
-          description: "No agent tasks found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/agents/{agent_key}/tasks/{task_id}":
-    get:
-      tags:
-        - "Agents"
-      x-speakeasy-group: "agents"
-      x-speakeasy-name-override: "retrieveTask"
-      operationId: "GetAgentTask"
-      summary: "Retrieve a specific agent task"
-      description: "Retrieves detailed information about a specific task for a given agent, including execution status and results."
-      parameters:
-        - schema:
-            type: "string"
-          required: true
-          name: "agent_key"
-          in: "path"
-        - schema:
-            type: "string"
-          required: true
-          name: "task_id"
-          in: "path"
-      responses:
-        "200":
-          description: "Agent task retrieved"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "id":
-                    type: "string"
-                    description: "Unique task execution identifier"
-                  "contextId":
-                    type: "string"
-                    description: "Correlation ID for tracking"
-                  "kind":
-                    type: "string"
-                    enum:
-                      - "task"
-                    description: "A2A entity type"
-                  "status":
-                    type: "object"
-                    properties:
-                      "state":
-                        type: "string"
-                        enum:
-                          - "submitted"
-                          - "working"
-                          - "input-required"
-                          - "auth-required"
-                          - "completed"
-                          - "failed"
-                          - "canceled"
-                          - "rejected"
-                        title: "Task State"
-                        description: "Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution."
-                      "timestamp":
-                        type: "string"
-                        description: "ISO 8601 timestamp of when the status was updated"
-                      "message":
-                        type: "object"
-                        properties:
-                          "kind":
-                            type: "string"
-                            enum:
-                              - "message"
-                          "messageId":
-                            type: "string"
-                          "role":
-                            type: "string"
-                            enum:
-                              - "user"
-                              - "agent"
-                              - "tool"
-                              - "system"
-                            title: "Extended Message Role"
-                            description: "Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts)."
-                          "parts":
-                            type: "array"
-                            items:
-                              oneOf:
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "kind"
-                                    - "text"
-                                  title: "Text Part"
-                                  description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "data"
-                                    "data":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "data"
-                                  title: "Data Part"
-                                  description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "file"
-                                    "file":
-                                      anyOf:
-                                        - type: "object"
-                                          properties:
-                                            "bytes":
-                                              type: "string"
-                                              minLength: 1
-                                              description: "base64 encoded content of the file"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "bytes"
-                                          title: "Binary format"
-                                          description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                        - type: "object"
-                                          properties:
-                                            "uri":
-                                              type: "string"
-                                              description: "URL for the File content"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "uri"
-                                          title: "File in URI format"
-                                          description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "file"
-                                  title: "File Part"
-                                  description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_call"
-                                    "tool_name":
-                                      type: "string"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "arguments":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_name"
-                                    - "tool_call_id"
-                                    - "arguments"
-                                  title: "Tool Call Part"
-                                  description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_result"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "result": {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_call_id"
-                                  title: "Tool Result Part"
-                                  description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
-                        required:
-                          - "kind"
-                          - "messageId"
-                          - "role"
-                          - "parts"
-                        title: "Task Status Message"
-                        description: "Optional A2A message providing additional context about the current status"
-                    required:
-                      - "state"
-                    title: "Task Status"
-                    description: "Current task execution status"
-                  "history":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "kind":
-                          type: "string"
-                          enum:
-                            - "message"
-                        "messageId":
-                          type: "string"
-                          description: "Unique identifier for the message"
-                        "role":
-                          type: "string"
-                          enum:
-                            - "user"
-                            - "agent"
-                            - "tool"
-                            - "system"
-                          title: "Extended Message Role"
-                          description: "Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts)."
-                        "parts":
-                          type: "array"
-                          items:
-                            oneOf:
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "text"
-                                  "text":
-                                    type: "string"
-                                required:
-                                  - "kind"
-                                  - "text"
-                                title: "Text Part"
-                                description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "data"
-                                  "data":
-                                    type: "object"
-                                    additionalProperties: {}
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "data"
-                                title: "Data Part"
-                                description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "file"
-                                  "file":
-                                    anyOf:
-                                      - type: "object"
-                                        properties:
-                                          "bytes":
-                                            type: "string"
-                                            minLength: 1
-                                            description: "base64 encoded content of the file"
-                                          "mimeType":
-                                            type: "string"
-                                            description: "Optional mimeType for the file"
-                                          "name":
-                                            type: "string"
-                                            description: "Optional name for the file"
-                                        required:
-                                          - "bytes"
-                                        title: "Binary format"
-                                        description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                      - type: "object"
-                                        properties:
-                                          "uri":
-                                            type: "string"
-                                            description: "URL for the File content"
-                                          "mimeType":
-                                            type: "string"
-                                            description: "Optional mimeType for the file"
-                                          "name":
-                                            type: "string"
-                                            description: "Optional name for the file"
-                                        required:
-                                          - "uri"
-                                        title: "File in URI format"
-                                        description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "file"
-                                title: "File Part"
-                                description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "tool_call"
-                                  "tool_name":
-                                    type: "string"
-                                  "tool_call_id":
-                                    type: "string"
-                                  "arguments":
-                                    type: "object"
-                                    additionalProperties: {}
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "tool_name"
-                                  - "tool_call_id"
-                                  - "arguments"
-                                title: "Tool Call Part"
-                                description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "tool_result"
-                                  "tool_call_id":
-                                    type: "string"
-                                  "result": {}
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "tool_call_id"
-                                title: "Tool Result Part"
-                                description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
-                          description: "Array of message parts (text, file, tool_call, tool_result)"
-                        "taskId":
-                          type: "string"
-                          description: "Associated task ID if applicable"
-                        "contextId":
-                          type: "string"
-                          description: "Correlation ID for execution tracking"
-                        "metadata":
-                          type: "object"
-                          additionalProperties: {}
-                          description: "Additional message metadata"
-                      required:
-                        - "kind"
-                        - "messageId"
-                        - "role"
-                        - "parts"
-                      title: "Extended A2A Message"
-                      description: "Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with Orquesta-specific features."
-                    description: "Conversation history with all messages exchanged"
-                  "artifacts":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "artifactId":
-                          type: "string"
-                          description: "Unique identifier for the artifact (ULID format)"
-                        "name":
-                          type: "string"
-                          description: "Required name for the artifact (e.g., filename or descriptive title)"
-                        "description":
-                          type: "string"
-                          description: "Optional human-readable description of the artifact"
-                        "parts":
-                          type: "array"
-                          items:
-                            anyOf:
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "text"
-                                  "text":
-                                    type: "string"
-                                required:
-                                  - "kind"
-                                  - "text"
-                                title: "Text Part"
-                                description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "file"
-                                  "file":
-                                    anyOf:
-                                      - type: "object"
-                                        properties:
-                                          "bytes":
-                                            type: "string"
-                                            minLength: 1
-                                            description: "base64 encoded content of the file"
-                                          "mimeType":
-                                            type: "string"
-                                            description: "Optional mimeType for the file"
-                                          "name":
-                                            type: "string"
-                                            description: "Optional name for the file"
-                                        required:
-                                          - "bytes"
-                                        title: "Binary format"
-                                        description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                      - type: "object"
-                                        properties:
-                                          "uri":
-                                            type: "string"
-                                            description: "URL for the File content"
-                                          "mimeType":
-                                            type: "string"
-                                            description: "Optional mimeType for the file"
-                                          "name":
-                                            type: "string"
-                                            description: "Optional name for the file"
-                                        required:
-                                          - "uri"
-                                        title: "File in URI format"
-                                        description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "file"
-                                title: "File Part"
-                                description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                              - type: "object"
-                                properties:
-                                  "kind":
-                                    type: "string"
-                                    enum:
-                                      - "data"
-                                  "data":
-                                    type: "object"
-                                    additionalProperties: {}
-                                  "metadata":
-                                    type: "object"
-                                    additionalProperties: {}
-                                required:
-                                  - "kind"
-                                  - "data"
-                                title: "Data Part"
-                                description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                          description: "Array of artifact content parts (text, file, or data). Does not include tool_call or tool_result parts."
-                        "extensions":
-                          type: "array"
-                          items:
-                            type: "string"
-                          description: "File extensions associated with this artifact (e.g., [\".pdf\"])"
-                        "metadata":
-                          type: "object"
-                          additionalProperties: {}
-                          description: "Additional artifact metadata as key-value pairs"
-                      required:
-                        - "artifactId"
-                        - "name"
-                        - "parts"
-                      title: "Task Artifact"
-                      description: "A file or data artifact produced by the agent during task execution. Follows the A2A SDK Artifact structure with required name field."
-                    description: "Optional files or data produced during execution"
-                  "metadata":
-                    type: "object"
-                    additionalProperties: {}
-                    description: "Additional task metadata"
-                required:
-                  - "id"
-                  - "contextId"
-                  - "kind"
-                  - "status"
-                  - "history"
-                title: "Extended Task Response"
-                description: "Agent task execution response format with full conversation history and artifacts. Used for API responses when retrieving task details."
-        "404":
-          description: "Agent task not found"
-          content:
-            "application/json":
-              schema: {"$ref": "#/components/schemas/HonoApiError"}
-      security:
-        - ApiKey: []
   "/v2/agents/":
     get:
       tags:
         - "Agents"
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "list"
+      x-speakeasy-max-method-params: 3
       operationId: "ListAgents"
-      summary: "List all agents"
-      description: "Retrieves a list of all agents in your workspace. When no limit is provided, returns all agents without pagination. When a limit is specified, returns a paginated list. Each agent includes its configuration, primary model, and optional fallback model settings."
+      summary: "List agents"
+      description: "Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents."
       parameters:
         - schema:
             type: "number"
@@ -15406,7 +14357,7 @@ paths:
           in: "query"
       responses:
         "200":
-          description: "List of agents with their configurations including fallback models"
+          description: "Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings."
           content:
             "application/json":
               schema:
@@ -15426,10 +14377,6 @@ paths:
                         "key":
                           type: "string"
                         "display_name":
-                          type: "string"
-                        "workspace_id":
-                          type: "string"
-                        "project_id":
                           type: "string"
                         "created_by_id":
                           type:
@@ -15711,10 +14658,9 @@ paths:
                                             "schema":
                                               description: "The schema for the response format, described as a JSON Schema object."
                                             "strict":
-                                              type:
-                                                - "boolean"
-                                                - "null"
-                                              description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                              type: "boolean"
+                                              default: false
+                                              description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                           required:
                                             - "name"
                                       required:
@@ -15967,10 +14913,9 @@ paths:
                                                       "schema":
                                                         description: "The schema for the response format, described as a JSON Schema object."
                                                       "strict":
-                                                        type:
-                                                          - "boolean"
-                                                          - "null"
-                                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                                        type: "boolean"
+                                                        default: false
+                                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                                     required:
                                                       - "name"
                                                 required:
@@ -16144,8 +15089,6 @@ paths:
                         - "_id"
                         - "key"
                         - "display_name"
-                        - "workspace_id"
-                        - "project_id"
                         - "role"
                         - "description"
                         - "instructions"
@@ -16166,11 +15109,13 @@ paths:
     post:
       tags:
         - "Agents"
+      deprecated: true
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "run"
+      x-speakeasy-max-method-params: 19
       operationId: "RunAgent"
-      summary: "Run an agent"
-      description: "Executes an agent with the provided configuration using A2A message format. If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The fallback model is configured at the agent level and will be used automatically if the primary model fails during execution."
+      summary: "Run an agent with configuration"
+      description: "Executes an agent using inline configuration or references an existing agent. Supports dynamic agent creation where the system automatically manages agent versioning - reusing existing agents with matching configurations or creating new versions when configurations differ. Ideal for programmatic agent execution with flexible configuration management. The agent processes messages in A2A format with support for memory context, tool execution, and automatic model fallback on failure."
       requestBody:
         content:
           "application/json":
@@ -16302,10 +15247,9 @@ paths:
                                         "schema":
                                           description: "The schema for the response format, described as a JSON Schema object."
                                         "strict":
-                                          type:
-                                            - "boolean"
-                                            - "null"
-                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                          type: "boolean"
+                                          default: false
+                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                       required:
                                         - "name"
                                   required:
@@ -16561,10 +15505,9 @@ paths:
                                           "schema":
                                             description: "The schema for the response format, described as a JSON Schema object."
                                           "strict":
-                                            type:
-                                              - "boolean"
-                                              - "null"
-                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                            type: "boolean"
+                                            default: false
+                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                         required:
                                           - "name"
                                     required:
@@ -17338,7 +16281,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAPPHK6BF0YKV93QFZZSJKT9"
+                                          default: "01KAPWG4B10QW3MTAA46C3KV8R"
                                         "name":
                                           type: "string"
                                         "description":
@@ -17471,7 +16414,7 @@ paths:
                 - "settings"
       responses:
         "200":
-          description: "Agent task created successfully"
+          description: "Agent execution initiated successfully. Returns task details including the task ID, execution status, and agent response. The task ID can be used to track execution progress and retrieve results."
           content:
             "application/json":
               schema:
@@ -17674,11 +16617,13 @@ paths:
     post:
       tags:
         - "Agents"
+      deprecated: true
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "streamRun"
+      x-speakeasy-max-method-params: 20
       operationId: "StreamRunAgent"
-      summary: "Run and stream agent execution"
-      description: "Creates or updates an agent with the provided configuration, then streams execution events via Server-Sent Events (SSE). If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The stream will continue until the agent completes, errors, or reaches the configured timeout."
+      summary: "Run agent with streaming response"
+      description: "Dynamically configures and executes an agent while streaming the interaction in real-time via Server-Sent Events (SSE). Intelligently manages agent versioning by reusing existing agents with matching configurations or creating new versions when configurations differ. Combines the flexibility of inline configuration with real-time streaming, making it ideal for dynamic agent interactions with live feedback. The stream provides continuous updates including message chunks, tool executions, and status changes until completion or timeout."
       requestBody:
         content:
           "application/json":
@@ -17810,10 +16755,9 @@ paths:
                                         "schema":
                                           description: "The schema for the response format, described as a JSON Schema object."
                                         "strict":
-                                          type:
-                                            - "boolean"
-                                            - "null"
-                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                          type: "boolean"
+                                          default: false
+                                          description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                       required:
                                         - "name"
                                   required:
@@ -18069,10 +17013,9 @@ paths:
                                           "schema":
                                             description: "The schema for the response format, described as a JSON Schema object."
                                           "strict":
-                                            type:
-                                              - "boolean"
-                                              - "null"
-                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                            type: "boolean"
+                                            default: false
+                                            description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                                         required:
                                           - "name"
                                     required:
@@ -18846,7 +17789,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAPPHK7QM15CJG4A8SSCAAXJ"
+                                          default: "01KAPWG4CRQETTTRT2J2RSC82J"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18984,7 +17927,7 @@ paths:
                 - "settings"
       responses:
         "200":
-          description: "SSE stream of agent events"
+          description: "Server-Sent Event stream successfully established. Delivers real-time agent execution events including message fragments, tool invocations, intermediate results, and completion status. Stream terminates with [DONE] sentinel upon completion."
           content:
             "text/event-stream":
               schema:
@@ -20709,11 +19652,13 @@ paths:
     post:
       tags:
         - "Agents"
+      deprecated: true
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "stream"
+      x-speakeasy-max-method-params: 9
       operationId: "StreamAgent"
-      summary: "Stream agent execution events"
-      description: "Executes an agent and streams events via Server-Sent Events (SSE). The stream will continue until the agent completes, errors, or reaches the configured timeout."
+      summary: "Stream agent execution in real-time"
+      description: "Executes an agent and streams the interaction in real-time using Server-Sent Events (SSE). Provides live updates as the agent processes the request, including message chunks, tool calls, and execution status. Perfect for building responsive chat interfaces and monitoring agent progress. The stream continues until the agent completes its task, encounters an error, or reaches the configured timeout (default 30 minutes, configurable 1-3600 seconds)."
       parameters:
         - schema:
             type: "string"
@@ -20916,7 +19861,7 @@ paths:
                 - "message"
       responses:
         "200":
-          description: "SSE stream of agent events"
+          description: "Server-Sent Event stream successfully established. Returns real-time events including agent messages, tool calls, status updates, and completion signals. The stream ends with a [DONE] sentinel value."
           content:
             "text/event-stream":
               schema:
@@ -22637,250 +21582,6 @@ paths:
                   - "message"
       security:
         - ApiKey: []
-  "/v2/agents/{agent_key}/tasks/{task_id}/actions":
-    get:
-      tags:
-        - "Agents"
-      x-speakeasy-group: "agents"
-      x-speakeasy-name-override: "listActions"
-      operationId: "ListActions"
-      summary: "List all actions"
-      parameters:
-        - schema:
-            type: "string"
-          required: true
-          name: "agent_key"
-          in: "path"
-        - schema:
-            type: "string"
-          required: true
-          name: "task_id"
-          in: "path"
-      responses:
-        "200":
-          description: "List of actions"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "object":
-                    type: "string"
-                    enum:
-                      - "list"
-                  "data":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "_id":
-                          type: "string"
-                          description: "Internal id for the action"
-                        "agent_tool_call_id":
-                          type: "string"
-                          description: "The tool call id what the agent chooses to use and generates"
-                        "tool":
-                          type: "object"
-                          properties:
-                            "id":
-                              type: "string"
-                              description: "The tool' id in orq"
-                            "display_name":
-                              type: "string"
-                            "requires_approval":
-                              type: "boolean"
-                              default: false
-                          required:
-                            - "id"
-                            - "display_name"
-                        "created":
-                          type: "string"
-                        "updated":
-                          type: "string"
-                        "started":
-                          type: "string"
-                        "finished":
-                          type: "string"
-                        "agent_id":
-                          type: "string"
-                        "action_type":
-                          type: "string"
-                        "agent_execution_id":
-                          type: "string"
-                        "workspace_id":
-                          type: "string"
-                        "state":
-                          type: "object"
-                          properties:
-                            "review":
-                              type:
-                                - "string"
-                                - "null"
-                              enum:
-                                - "approved"
-                                - "rejected"
-                              default:
-                              description: "Review status of the tool call"
-                            "review_source":
-                              type: "string"
-                              description: "The source of the review, where it was approved or rejected"
-                            "reviewed_by_id":
-                              type: "string"
-                              description: "Only refers to an internal user of the platform, who approved or rejected the tool execution"
-                            "executed":
-                              type: "boolean"
-                              default: false
-                            "error":
-                              type: "string"
-                            "input":
-                              type: "object"
-                              additionalProperties: {}
-                            "output":
-                              type: "object"
-                              additionalProperties: {}
-                          required:
-                            - "input"
-                            - "output"
-                          description: "An action is a tool that an agent chooses to use. If executed is false, together with the output being there, it can indicate that a tool was mocked"
-                      required:
-                        - "_id"
-                        - "agent_tool_call_id"
-                        - "tool"
-                        - "created"
-                        - "updated"
-                        - "agent_id"
-                        - "action_type"
-                        - "agent_execution_id"
-                        - "workspace_id"
-                        - "state"
-                  "has_more":
-                    type: "boolean"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-      security:
-        - ApiKey: []
-  "/v2/agents/{agent_key}/tasks/{task_id}/actions/{action_id}":
-    get:
-      tags:
-        - "Agents"
-      x-speakeasy-group: "agents"
-      x-speakeasy-name-override: "retrieveAction"
-      operationId: "RetrieveAction"
-      summary: "Retrieve an action executed by an agent task."
-      parameters:
-        - schema:
-            type: "string"
-            description: "The unique key of the agent"
-          required: true
-          description: "The unique key of the agent"
-          name: "agent_key"
-          in: "path"
-        - schema:
-            type: "string"
-            description: "The unique id of the task"
-          required: true
-          description: "The unique id of the task"
-          name: "task_id"
-          in: "path"
-        - schema:
-            type: "string"
-            description: "The unique id of the action"
-          required: true
-          description: "The unique id of the action"
-          name: "action_id"
-          in: "path"
-      responses:
-        "200":
-          description: "The action object"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "_id":
-                    type: "string"
-                    description: "Internal id for the action"
-                  "agent_tool_call_id":
-                    type: "string"
-                    description: "The tool call id what the agent chooses to use and generates"
-                  "tool":
-                    type: "object"
-                    properties:
-                      "id":
-                        type: "string"
-                        description: "The tool' id in orq"
-                      "display_name":
-                        type: "string"
-                      "requires_approval":
-                        type: "boolean"
-                        default: false
-                    required:
-                      - "id"
-                      - "display_name"
-                  "created":
-                    type: "string"
-                  "updated":
-                    type: "string"
-                  "started":
-                    type: "string"
-                  "finished":
-                    type: "string"
-                  "agent_id":
-                    type: "string"
-                  "action_type":
-                    type: "string"
-                  "agent_execution_id":
-                    type: "string"
-                  "workspace_id":
-                    type: "string"
-                  "state":
-                    type: "object"
-                    properties:
-                      "review":
-                        type:
-                          - "string"
-                          - "null"
-                        enum:
-                          - "approved"
-                          - "rejected"
-                        default:
-                        description: "Review status of the tool call"
-                      "review_source":
-                        type: "string"
-                        description: "The source of the review, where it was approved or rejected"
-                      "reviewed_by_id":
-                        type: "string"
-                        description: "Only refers to an internal user of the platform, who approved or rejected the tool execution"
-                      "executed":
-                        type: "boolean"
-                        default: false
-                      "error":
-                        type: "string"
-                      "input":
-                        type: "object"
-                        additionalProperties: {}
-                      "output":
-                        type: "object"
-                        additionalProperties: {}
-                    required:
-                      - "input"
-                      - "output"
-                    description: "An action is a tool that an agent chooses to use. If executed is false, together with the output being there, it can indicate that a tool was mocked"
-                required:
-                  - "_id"
-                  - "agent_tool_call_id"
-                  - "tool"
-                  - "created"
-                  - "updated"
-                  - "agent_id"
-                  - "action_type"
-                  - "agent_execution_id"
-                  - "workspace_id"
-                  - "state"
-      security:
-        - ApiKey: []
   "/v2/files":
     post:
       tags:
@@ -22944,7 +21645,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-22T21:11:51.165Z"
+                    default: "2025-11-22T22:55:51.680Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -23033,7 +21734,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-22T21:11:51.165Z"
+                          default: "2025-11-22T22:55:51.680Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -23101,7 +21802,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-22T21:11:51.165Z"
+                    default: "2025-11-22T22:55:51.680Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -24348,10 +23049,9 @@ paths:
                                 "schema":
                                   description: "The schema for the response format, described as a JSON Schema object."
                                 "strict":
-                                  type:
-                                    - "boolean"
-                                    - "null"
-                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                  type: "boolean"
+                                  default: false
+                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                               required:
                                 - "name"
                           required:
@@ -26079,10 +24779,9 @@ paths:
                                 "schema":
                                   description: "The schema for the response format, described as a JSON Schema object."
                                 "strict":
-                                  type:
-                                    - "boolean"
-                                    - "null"
-                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
+                                  type: "boolean"
+                                  default: false
+                                  description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true."
                               required:
                                 - "name"
                           required:
@@ -27671,7 +26370,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAPPHKFDWTD9TCRT60R01BT7"
+                              default: "tool_01KAPWG4M3QH9RX9EY19SHVMXM"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27770,7 +26469,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAPPHKFP4MS7C2NCBM8T8PG4"
+                              default: "tool_01KAPWG4MB4SP2N4MDJC3T01SE"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27871,7 +26570,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAPPHKFRWGBFFDGX08HFQ7G9"
+                              default: "tool_01KAPWG4MD4VHZPZMPQAQM19DA"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28005,7 +26704,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAPPHKFS35YT2CXTYM000DFV"
+                              default: "tool_01KAPWG4MFF35R3TY97DS76KNZ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28079,7 +26778,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KAPPHKFT138ZPEF6VXT3MNVQ"
+                                        default: "01KAPWG4MG75N867FT3J6PCMNH"
                                       "name":
                                         type: "string"
                                       "description":
@@ -28130,7 +26829,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAPPHKFVDHE3MW5HFQRT8XYB"
+                              default: "tool_01KAPWG4MH5ENE1NPAF2DF4EVZ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28673,7 +27372,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKGBC59YC2X8DVQR2KJ7"
+                        default: "tool_01KAPWG4N1S6WCFGDMP2Q4T00X"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28772,7 +27471,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKGFJ8NQ8X8MEPBS9DVE"
+                        default: "tool_01KAPWG4N4SM4FPZ8C1R64DEH4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28873,7 +27572,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKGHCMFEZYQNAZG3YZQM"
+                        default: "tool_01KAPWG4N6DYH3K13CMBHCZKQ5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29007,7 +27706,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKGMD44BC3KVC8FGNR3D"
+                        default: "tool_01KAPWG4N9DJ84VQFK580S2F72"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29081,7 +27780,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAPPHKGP3QEJ0J0526ZDY7DN"
+                                  default: "01KAPWG4NBA1ZJCCE1WEXXK6M3"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29132,7 +27831,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKGQTGWFH2M1KKPJE1N9"
+                        default: "tool_01KAPWG4NDMMFGZK66VX07C9P2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29572,7 +28271,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KAPPHKHHNHDSM1TZ97JWXGEN"
+                                default: "01KAPWG4PBRH8X8A601KE1X4BX"
                               "name":
                                 type: "string"
                               "description":
@@ -29690,7 +28389,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKH0D3M48GMD51B0GJ20"
+                        default: "tool_01KAPWG4NRFEZBZDYVSF2FTQ74"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29789,7 +28488,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKH1T37YYN56NNQJDGDH"
+                        default: "tool_01KAPWG4NSD37ZZCY8N1RKQ2XY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29890,7 +28589,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKH3C4N7CZVQ3475ZX3K"
+                        default: "tool_01KAPWG4NV8PH5KEX2AHCBK64F"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30024,7 +28723,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKH46CQ4F6D8GFE2M1R5"
+                        default: "tool_01KAPWG4NXNZCCBNXSD5ZGXAYK"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30098,7 +28797,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAPPHKHBA37YRGWRKDY24Z4V"
+                                  default: "01KAPWG4NYAFE0RZBS2BXVEY0G"
                                 "name":
                                   type: "string"
                                 "description":
@@ -30149,7 +28848,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKHCK92NTQ5HR0ZSXZ21"
+                        default: "tool_01KAPWG4P590A4965F09ZZ4HSX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30303,7 +29002,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKHZ0606K018JSXFZ8ZA"
+                        default: "tool_01KAPWG4PVBQR60YA19ACXTMGQ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30402,7 +29101,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKJ170KV7AM46BYC2QAH"
+                        default: "tool_01KAPWG4PWP6F70E91YZQHKDP5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30503,7 +29202,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKJ36PPT2085SHJK0E9W"
+                        default: "tool_01KAPWG4PYHJ0N3M02R009PQWB"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30637,7 +29336,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKJ6SBG8Z93QHKWXM6X8"
+                        default: "tool_01KAPWG4Q0X2NHZ36FVWTQWD3J"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30711,7 +29410,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAPPHKJ85GCNWY1ZBSRSJ1VH"
+                                  default: "01KAPWG4Q1M00VZPVBPMJAJDRZ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -30762,7 +29461,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAPPHKJ952AWAPVNNQKJK2XS"
+                        default: "tool_01KAPWG4Q2KWR8T13W8HBPQGRC"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -31021,7 +29720,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T21:11:48.742Z"
+                          default: "2025-11-22T22:55:48.965Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -31029,7 +29728,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:48.742Z"
+                              default: "2025-11-22T22:55:48.965Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -31223,7 +29922,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.742Z"
+                    default: "2025-11-22T22:55:48.965Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31231,7 +29930,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.742Z"
+                        default: "2025-11-22T22:55:48.965Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -31365,7 +30064,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.742Z"
+                    default: "2025-11-22T22:55:48.965Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31373,7 +30072,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.742Z"
+                        default: "2025-11-22T22:55:48.965Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -31533,7 +30232,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.742Z"
+                    default: "2025-11-22T22:55:48.965Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -31541,7 +30240,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.742Z"
+                        default: "2025-11-22T22:55:48.965Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33444,7 +32143,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KAPPHKNQ6AVEP6KZCXV5Q0S2"
+                          default: "01KAPWG4TY7N0YZ1QR1B7R8HQT"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -33610,7 +32309,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAPPHKNSQ5J76544TNBHWEMB"
+                    default: "01KAPWG4V1256N1P1FK5MPBDBS"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33706,7 +32405,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAPPHKNSEVW72RZTPFQX40KR"
+                    default: "01KAPWG4V0N32H9M9MNB9T45QW"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33838,7 +32537,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAPPHKNWDP8B7JJHVG31SYYK"
+                    default: "01KAPWG4V3KHT23DRX2KMYHNSK"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -36292,7 +34991,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T21:11:48.435Z"
+                          default: "2025-11-22T22:55:48.622Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -36300,7 +34999,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:48.435Z"
+                              default: "2025-11-22T22:55:48.623Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -36436,7 +35135,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36444,7 +35143,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36567,7 +35266,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36575,7 +35274,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36728,7 +35427,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36736,7 +35435,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37206,7 +35905,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T21:11:58.457Z"
+                                    default: "2025-11-22T22:56:01.966Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -37246,7 +35945,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T21:11:58.458Z"
+                                    default: "2025-11-22T22:56:01.966Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -37286,7 +35985,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T21:11:58.458Z"
+                                    default: "2025-11-22T22:56:01.967Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -37322,7 +36021,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T21:11:48.435Z"
+                          default: "2025-11-22T22:55:48.622Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -37330,7 +36029,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:48.435Z"
+                              default: "2025-11-22T22:55:48.623Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -38090,7 +36789,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T21:11:58.471Z"
+                                default: "2025-11-22T22:56:01.982Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -38130,7 +36829,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T21:11:58.472Z"
+                                default: "2025-11-22T22:56:01.982Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -38170,7 +36869,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T21:11:58.473Z"
+                                default: "2025-11-22T22:56:01.983Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -38206,7 +36905,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-22T21:11:48.435Z"
+                      default: "2025-11-22T22:55:48.622Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -38214,7 +36913,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-22T21:11:48.435Z"
+                          default: "2025-11-22T22:55:48.623Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -38628,7 +37327,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.463Z"
+                              default: "2025-11-22T22:56:01.973Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38668,7 +37367,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.464Z"
+                              default: "2025-11-22T22:56:01.973Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38708,7 +37407,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.464Z"
+                              default: "2025-11-22T22:56:01.973Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38744,7 +37443,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -38752,7 +37451,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -39510,7 +38209,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.503Z"
+                              default: "2025-11-22T22:56:02.015Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -39550,7 +38249,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.504Z"
+                              default: "2025-11-22T22:56:02.015Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -39590,7 +38289,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T21:11:58.505Z"
+                              default: "2025-11-22T22:56:02.016Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -39626,7 +38325,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T21:11:48.435Z"
+                    default: "2025-11-22T22:55:48.622Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -39634,7 +38333,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T21:11:48.435Z"
+                        default: "2025-11-22T22:55:48.623Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
