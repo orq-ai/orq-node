@@ -1274,7 +1274,7 @@ export const GetAgentSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(15),
+  max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(300),
   tool_approval_required: GetAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
@@ -1307,7 +1307,7 @@ export const GetAgentSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentSettings
 > = z.object({
-  maxIterations: z.number().int().default(15),
+  maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: GetAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",

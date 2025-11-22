@@ -12,56 +12,64 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Message containing tool execution results
  */
-export const RoleToolMessage = {
+export const InvokeAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
  * Message containing tool execution results
  */
-export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
+export type InvokeAgentRoleToolMessage = ClosedEnum<
+  typeof InvokeAgentRoleToolMessage
+>;
 
 /**
  * Message from the end user
  */
-export const RoleUserMessage = {
+export const InvokeAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
  * Message from the end user
  */
-export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
+export type InvokeAgentRoleUserMessage = ClosedEnum<
+  typeof InvokeAgentRoleUserMessage
+>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type InvokeAgentRole = RoleUserMessage | RoleToolMessage;
+export type InvokeAgentRole =
+  | InvokeAgentRoleUserMessage
+  | InvokeAgentRoleToolMessage;
 
-export const InvokeAgentPublicMessagePartKind = {
+export const InvokeAgentPublicMessagePartAgentsRequestKind = {
   ToolResult: "tool_result",
 } as const;
-export type InvokeAgentPublicMessagePartKind = ClosedEnum<
-  typeof InvokeAgentPublicMessagePartKind
+export type InvokeAgentPublicMessagePartAgentsRequestKind = ClosedEnum<
+  typeof InvokeAgentPublicMessagePartAgentsRequestKind
 >;
 
 /**
  * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
-export type ToolResultPart = {
-  kind: InvokeAgentPublicMessagePartKind;
+export type PublicMessagePartToolResultPart = {
+  kind: InvokeAgentPublicMessagePartAgentsRequestKind;
   toolCallId: string;
   result?: any | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
-export const PublicMessagePartKind = {
+export const InvokeAgentPublicMessagePartAgentsKind = {
   File: "file",
 } as const;
-export type PublicMessagePartKind = ClosedEnum<typeof PublicMessagePartKind>;
+export type InvokeAgentPublicMessagePartAgentsKind = ClosedEnum<
+  typeof InvokeAgentPublicMessagePartAgentsKind
+>;
 
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
  */
-export type FileInURIFormat = {
+export type FileFileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -79,7 +87,7 @@ export type FileInURIFormat = {
 /**
  * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
  */
-export type BinaryFormat = {
+export type FileBinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -94,39 +102,46 @@ export type BinaryFormat = {
   name?: string | undefined;
 };
 
-export type PublicMessagePartFile = BinaryFormat | FileInURIFormat;
+export type InvokeAgentPublicMessagePartFile =
+  | FileBinaryFormat
+  | FileFileInURIFormat;
 
 /**
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
-export type FilePart = {
-  kind: PublicMessagePartKind;
-  file: BinaryFormat | FileInURIFormat;
+export type PublicMessagePartFilePart = {
+  kind: InvokeAgentPublicMessagePartAgentsKind;
+  file: FileBinaryFormat | FileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
-export const Kind = {
+export const InvokeAgentPublicMessagePartKind = {
   Text: "text",
 } as const;
-export type Kind = ClosedEnum<typeof Kind>;
+export type InvokeAgentPublicMessagePartKind = ClosedEnum<
+  typeof InvokeAgentPublicMessagePartKind
+>;
 
 /**
  * Text content part. Use this to send text messages to the agent.
  */
-export type TextPart = {
-  kind: Kind;
+export type PublicMessagePartTextPart = {
+  kind: InvokeAgentPublicMessagePartKind;
   text: string;
 };
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
-export type PublicMessagePart = TextPart | FilePart | ToolResultPart;
+export type InvokeAgentPublicMessagePart =
+  | PublicMessagePartTextPart
+  | PublicMessagePartFilePart
+  | PublicMessagePartToolResultPart;
 
 /**
  * The A2A message to send to the agent (user input or tool results)
  */
-export type A2AMessage = {
+export type InvokeAgentA2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -134,17 +149,21 @@ export type A2AMessage = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: RoleUserMessage | RoleToolMessage;
+  role: InvokeAgentRoleUserMessage | InvokeAgentRoleToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only)
    */
-  parts: Array<TextPart | FilePart | ToolResultPart>;
+  parts: Array<
+    | PublicMessagePartTextPart
+    | PublicMessagePartFilePart
+    | PublicMessagePartToolResultPart
+  >;
 };
 
 /**
  * Information about the contact making the request. If the contact does not exist, it will be created automatically.
  */
-export type Contact = {
+export type InvokeAgentContact = {
   /**
    * Unique identifier for the contact
    */
@@ -188,7 +207,7 @@ export type InvokeAgentThread = {
 /**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
-export type Memory = {
+export type InvokeAgentMemory = {
   /**
    * An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions.
    */
@@ -203,7 +222,7 @@ export type InvokeAgentRequestBody = {
   /**
    * The A2A message to send to the agent (user input or tool results)
    */
-  message: A2AMessage;
+  message: InvokeAgentA2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -211,7 +230,7 @@ export type InvokeAgentRequestBody = {
   /**
    * Information about the contact making the request. If the contact does not exist, it will be created automatically.
    */
-  contact?: Contact | undefined;
+  contact?: InvokeAgentContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -219,7 +238,7 @@ export type InvokeAgentRequestBody = {
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
-  memory?: Memory | undefined;
+  memory?: InvokeAgentMemory | undefined;
   /**
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
@@ -475,29 +494,32 @@ export type InvokeAgentA2ATaskResponse = {
 };
 
 /** @internal */
-export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
+export const InvokeAgentRoleToolMessage$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentRoleToolMessage
+> = z.nativeEnum(InvokeAgentRoleToolMessage);
 /** @internal */
-export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = RoleToolMessage$inboundSchema;
+export const InvokeAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentRoleToolMessage
+> = InvokeAgentRoleToolMessage$inboundSchema;
 
 /** @internal */
-export const RoleUserMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
+export const InvokeAgentRoleUserMessage$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentRoleUserMessage
+> = z.nativeEnum(InvokeAgentRoleUserMessage);
 /** @internal */
-export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = RoleUserMessage$inboundSchema;
+export const InvokeAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentRoleUserMessage
+> = InvokeAgentRoleUserMessage$inboundSchema;
 
 /** @internal */
 export const InvokeAgentRole$inboundSchema: z.ZodType<
   InvokeAgentRole,
   z.ZodTypeDef,
   unknown
-> = z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]);
+> = z.union([
+  InvokeAgentRoleUserMessage$inboundSchema,
+  InvokeAgentRoleToolMessage$inboundSchema,
+]);
 /** @internal */
 export type InvokeAgentRole$Outbound = string | string;
 
@@ -506,7 +528,10 @@ export const InvokeAgentRole$outboundSchema: z.ZodType<
   InvokeAgentRole$Outbound,
   z.ZodTypeDef,
   InvokeAgentRole
-> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
+> = z.union([
+  InvokeAgentRoleUserMessage$outboundSchema,
+  InvokeAgentRoleToolMessage$outboundSchema,
+]);
 
 export function invokeAgentRoleToJSON(
   invokeAgentRole: InvokeAgentRole,
@@ -524,21 +549,21 @@ export function invokeAgentRoleFromJSON(
 }
 
 /** @internal */
-export const InvokeAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentPublicMessagePartKind
-> = z.nativeEnum(InvokeAgentPublicMessagePartKind);
+export const InvokeAgentPublicMessagePartAgentsRequestKind$inboundSchema:
+  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsRequestKind> = z
+    .nativeEnum(InvokeAgentPublicMessagePartAgentsRequestKind);
 /** @internal */
-export const InvokeAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentPublicMessagePartKind
-> = InvokeAgentPublicMessagePartKind$inboundSchema;
+export const InvokeAgentPublicMessagePartAgentsRequestKind$outboundSchema:
+  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsRequestKind> =
+    InvokeAgentPublicMessagePartAgentsRequestKind$inboundSchema;
 
 /** @internal */
-export const ToolResultPart$inboundSchema: z.ZodType<
-  ToolResultPart,
+export const PublicMessagePartToolResultPart$inboundSchema: z.ZodType<
+  PublicMessagePartToolResultPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: InvokeAgentPublicMessagePartKind$inboundSchema,
+  kind: InvokeAgentPublicMessagePartAgentsRequestKind$inboundSchema,
   tool_call_id: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),
@@ -548,7 +573,7 @@ export const ToolResultPart$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type ToolResultPart$Outbound = {
+export type PublicMessagePartToolResultPart$Outbound = {
   kind: string;
   tool_call_id: string;
   result?: any | undefined;
@@ -556,12 +581,12 @@ export type ToolResultPart$Outbound = {
 };
 
 /** @internal */
-export const ToolResultPart$outboundSchema: z.ZodType<
-  ToolResultPart$Outbound,
+export const PublicMessagePartToolResultPart$outboundSchema: z.ZodType<
+  PublicMessagePartToolResultPart$Outbound,
   z.ZodTypeDef,
-  ToolResultPart
+  PublicMessagePartToolResultPart
 > = z.object({
-  kind: InvokeAgentPublicMessagePartKind$outboundSchema,
+  kind: InvokeAgentPublicMessagePartAgentsRequestKind$outboundSchema,
   toolCallId: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),
@@ -571,31 +596,38 @@ export const ToolResultPart$outboundSchema: z.ZodType<
   });
 });
 
-export function toolResultPartToJSON(toolResultPart: ToolResultPart): string {
-  return JSON.stringify(ToolResultPart$outboundSchema.parse(toolResultPart));
+export function publicMessagePartToolResultPartToJSON(
+  publicMessagePartToolResultPart: PublicMessagePartToolResultPart,
+): string {
+  return JSON.stringify(
+    PublicMessagePartToolResultPart$outboundSchema.parse(
+      publicMessagePartToolResultPart,
+    ),
+  );
 }
-export function toolResultPartFromJSON(
+export function publicMessagePartToolResultPartFromJSON(
   jsonString: string,
-): SafeParseResult<ToolResultPart, SDKValidationError> {
+): SafeParseResult<PublicMessagePartToolResultPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolResultPart' from JSON`,
+    (x) => PublicMessagePartToolResultPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartToolResultPart' from JSON`,
   );
 }
 
 /** @internal */
-export const PublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = z.nativeEnum(PublicMessagePartKind);
+export const InvokeAgentPublicMessagePartAgentsKind$inboundSchema:
+  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsKind> = z.nativeEnum(
+    InvokeAgentPublicMessagePartAgentsKind,
+  );
 /** @internal */
-export const PublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = PublicMessagePartKind$inboundSchema;
+export const InvokeAgentPublicMessagePartAgentsKind$outboundSchema:
+  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsKind> =
+    InvokeAgentPublicMessagePartAgentsKind$inboundSchema;
 
 /** @internal */
-export const FileInURIFormat$inboundSchema: z.ZodType<
-  FileInURIFormat,
+export const FileFileInURIFormat$inboundSchema: z.ZodType<
+  FileFileInURIFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -604,41 +636,43 @@ export const FileInURIFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type FileInURIFormat$Outbound = {
+export type FileFileInURIFormat$Outbound = {
   uri: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const FileInURIFormat$outboundSchema: z.ZodType<
-  FileInURIFormat$Outbound,
+export const FileFileInURIFormat$outboundSchema: z.ZodType<
+  FileFileInURIFormat$Outbound,
   z.ZodTypeDef,
-  FileInURIFormat
+  FileFileInURIFormat
 > = z.object({
   uri: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function fileInURIFormatToJSON(
-  fileInURIFormat: FileInURIFormat,
+export function fileFileInURIFormatToJSON(
+  fileFileInURIFormat: FileFileInURIFormat,
 ): string {
-  return JSON.stringify(FileInURIFormat$outboundSchema.parse(fileInURIFormat));
+  return JSON.stringify(
+    FileFileInURIFormat$outboundSchema.parse(fileFileInURIFormat),
+  );
 }
-export function fileInURIFormatFromJSON(
+export function fileFileInURIFormatFromJSON(
   jsonString: string,
-): SafeParseResult<FileInURIFormat, SDKValidationError> {
+): SafeParseResult<FileFileInURIFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileInURIFormat' from JSON`,
+    (x) => FileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileFileInURIFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const BinaryFormat$inboundSchema: z.ZodType<
-  BinaryFormat,
+export const FileBinaryFormat$inboundSchema: z.ZodType<
+  FileBinaryFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -647,287 +681,318 @@ export const BinaryFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type BinaryFormat$Outbound = {
+export type FileBinaryFormat$Outbound = {
   bytes: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const BinaryFormat$outboundSchema: z.ZodType<
-  BinaryFormat$Outbound,
+export const FileBinaryFormat$outboundSchema: z.ZodType<
+  FileBinaryFormat$Outbound,
   z.ZodTypeDef,
-  BinaryFormat
+  FileBinaryFormat
 > = z.object({
   bytes: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
-  return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
+export function fileBinaryFormatToJSON(
+  fileBinaryFormat: FileBinaryFormat,
+): string {
+  return JSON.stringify(
+    FileBinaryFormat$outboundSchema.parse(fileBinaryFormat),
+  );
 }
-export function binaryFormatFromJSON(
+export function fileBinaryFormatFromJSON(
   jsonString: string,
-): SafeParseResult<BinaryFormat, SDKValidationError> {
+): SafeParseResult<FileBinaryFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => BinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BinaryFormat' from JSON`,
+    (x) => FileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileBinaryFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const PublicMessagePartFile$inboundSchema: z.ZodType<
-  PublicMessagePartFile,
+export const InvokeAgentPublicMessagePartFile$inboundSchema: z.ZodType<
+  InvokeAgentPublicMessagePartFile,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => BinaryFormat$inboundSchema),
-  z.lazy(() => FileInURIFormat$inboundSchema),
+  z.lazy(() => FileBinaryFormat$inboundSchema),
+  z.lazy(() => FileFileInURIFormat$inboundSchema),
 ]);
 /** @internal */
-export type PublicMessagePartFile$Outbound =
-  | BinaryFormat$Outbound
-  | FileInURIFormat$Outbound;
+export type InvokeAgentPublicMessagePartFile$Outbound =
+  | FileBinaryFormat$Outbound
+  | FileFileInURIFormat$Outbound;
 
 /** @internal */
-export const PublicMessagePartFile$outboundSchema: z.ZodType<
-  PublicMessagePartFile$Outbound,
+export const InvokeAgentPublicMessagePartFile$outboundSchema: z.ZodType<
+  InvokeAgentPublicMessagePartFile$Outbound,
   z.ZodTypeDef,
-  PublicMessagePartFile
+  InvokeAgentPublicMessagePartFile
 > = z.union([
-  z.lazy(() => BinaryFormat$outboundSchema),
-  z.lazy(() => FileInURIFormat$outboundSchema),
+  z.lazy(() => FileBinaryFormat$outboundSchema),
+  z.lazy(() => FileFileInURIFormat$outboundSchema),
 ]);
 
-export function publicMessagePartFileToJSON(
-  publicMessagePartFile: PublicMessagePartFile,
+export function invokeAgentPublicMessagePartFileToJSON(
+  invokeAgentPublicMessagePartFile: InvokeAgentPublicMessagePartFile,
 ): string {
   return JSON.stringify(
-    PublicMessagePartFile$outboundSchema.parse(publicMessagePartFile),
+    InvokeAgentPublicMessagePartFile$outboundSchema.parse(
+      invokeAgentPublicMessagePartFile,
+    ),
   );
 }
-export function publicMessagePartFileFromJSON(
+export function invokeAgentPublicMessagePartFileFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePartFile, SDKValidationError> {
+): SafeParseResult<InvokeAgentPublicMessagePartFile, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartFile' from JSON`,
+    (x) => InvokeAgentPublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentPublicMessagePartFile' from JSON`,
   );
 }
 
 /** @internal */
-export const FilePart$inboundSchema: z.ZodType<
-  FilePart,
+export const PublicMessagePartFilePart$inboundSchema: z.ZodType<
+  PublicMessagePartFilePart,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: PublicMessagePartKind$inboundSchema,
+  kind: InvokeAgentPublicMessagePartAgentsKind$inboundSchema,
   file: z.union([
-    z.lazy(() => BinaryFormat$inboundSchema),
-    z.lazy(() => FileInURIFormat$inboundSchema),
+    z.lazy(() => FileBinaryFormat$inboundSchema),
+    z.lazy(() => FileFileInURIFormat$inboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
 /** @internal */
-export type FilePart$Outbound = {
+export type PublicMessagePartFilePart$Outbound = {
   kind: string;
-  file: BinaryFormat$Outbound | FileInURIFormat$Outbound;
+  file: FileBinaryFormat$Outbound | FileFileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const FilePart$outboundSchema: z.ZodType<
-  FilePart$Outbound,
+export const PublicMessagePartFilePart$outboundSchema: z.ZodType<
+  PublicMessagePartFilePart$Outbound,
   z.ZodTypeDef,
-  FilePart
+  PublicMessagePartFilePart
 > = z.object({
-  kind: PublicMessagePartKind$outboundSchema,
+  kind: InvokeAgentPublicMessagePartAgentsKind$outboundSchema,
   file: z.union([
-    z.lazy(() => BinaryFormat$outboundSchema),
-    z.lazy(() => FileInURIFormat$outboundSchema),
+    z.lazy(() => FileBinaryFormat$outboundSchema),
+    z.lazy(() => FileFileInURIFormat$outboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
 
-export function filePartToJSON(filePart: FilePart): string {
-  return JSON.stringify(FilePart$outboundSchema.parse(filePart));
+export function publicMessagePartFilePartToJSON(
+  publicMessagePartFilePart: PublicMessagePartFilePart,
+): string {
+  return JSON.stringify(
+    PublicMessagePartFilePart$outboundSchema.parse(publicMessagePartFilePart),
+  );
 }
-export function filePartFromJSON(
+export function publicMessagePartFilePartFromJSON(
   jsonString: string,
-): SafeParseResult<FilePart, SDKValidationError> {
+): SafeParseResult<PublicMessagePartFilePart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilePart' from JSON`,
+    (x) => PublicMessagePartFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartFilePart' from JSON`,
   );
 }
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
+export const InvokeAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentPublicMessagePartKind
+> = z.nativeEnum(InvokeAgentPublicMessagePartKind);
 /** @internal */
-export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
-  Kind$inboundSchema;
+export const InvokeAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentPublicMessagePartKind
+> = InvokeAgentPublicMessagePartKind$inboundSchema;
 
 /** @internal */
-export const TextPart$inboundSchema: z.ZodType<
-  TextPart,
+export const PublicMessagePartTextPart$inboundSchema: z.ZodType<
+  PublicMessagePartTextPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: Kind$inboundSchema,
+  kind: InvokeAgentPublicMessagePartKind$inboundSchema,
   text: z.string(),
 });
 /** @internal */
-export type TextPart$Outbound = {
+export type PublicMessagePartTextPart$Outbound = {
   kind: string;
   text: string;
 };
 
 /** @internal */
-export const TextPart$outboundSchema: z.ZodType<
-  TextPart$Outbound,
+export const PublicMessagePartTextPart$outboundSchema: z.ZodType<
+  PublicMessagePartTextPart$Outbound,
   z.ZodTypeDef,
-  TextPart
+  PublicMessagePartTextPart
 > = z.object({
-  kind: Kind$outboundSchema,
+  kind: InvokeAgentPublicMessagePartKind$outboundSchema,
   text: z.string(),
 });
 
-export function textPartToJSON(textPart: TextPart): string {
-  return JSON.stringify(TextPart$outboundSchema.parse(textPart));
-}
-export function textPartFromJSON(
-  jsonString: string,
-): SafeParseResult<TextPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TextPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TextPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const PublicMessagePart$inboundSchema: z.ZodType<
-  PublicMessagePart,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => TextPart$inboundSchema),
-  z.lazy(() => FilePart$inboundSchema),
-  z.lazy(() => ToolResultPart$inboundSchema),
-]);
-/** @internal */
-export type PublicMessagePart$Outbound =
-  | TextPart$Outbound
-  | FilePart$Outbound
-  | ToolResultPart$Outbound;
-
-/** @internal */
-export const PublicMessagePart$outboundSchema: z.ZodType<
-  PublicMessagePart$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePart
-> = z.union([
-  z.lazy(() => TextPart$outboundSchema),
-  z.lazy(() => FilePart$outboundSchema),
-  z.lazy(() => ToolResultPart$outboundSchema),
-]);
-
-export function publicMessagePartToJSON(
-  publicMessagePart: PublicMessagePart,
+export function publicMessagePartTextPartToJSON(
+  publicMessagePartTextPart: PublicMessagePartTextPart,
 ): string {
   return JSON.stringify(
-    PublicMessagePart$outboundSchema.parse(publicMessagePart),
+    PublicMessagePartTextPart$outboundSchema.parse(publicMessagePartTextPart),
   );
 }
-export function publicMessagePartFromJSON(
+export function publicMessagePartTextPartFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePart, SDKValidationError> {
+): SafeParseResult<PublicMessagePartTextPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePart' from JSON`,
+    (x) => PublicMessagePartTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartTextPart' from JSON`,
   );
 }
 
 /** @internal */
-export const A2AMessage$inboundSchema: z.ZodType<
-  A2AMessage,
+export const InvokeAgentPublicMessagePart$inboundSchema: z.ZodType<
+  InvokeAgentPublicMessagePart,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]),
-  parts: z.array(
-    z.union([
-      z.lazy(() => TextPart$inboundSchema),
-      z.lazy(() => FilePart$inboundSchema),
-      z.lazy(() => ToolResultPart$inboundSchema),
-    ]),
-  ),
-});
+> = z.union([
+  z.lazy(() => PublicMessagePartTextPart$inboundSchema),
+  z.lazy(() => PublicMessagePartFilePart$inboundSchema),
+  z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+]);
 /** @internal */
-export type A2AMessage$Outbound = {
-  messageId?: string | undefined;
-  role: string | string;
-  parts: Array<TextPart$Outbound | FilePart$Outbound | ToolResultPart$Outbound>;
-};
+export type InvokeAgentPublicMessagePart$Outbound =
+  | PublicMessagePartTextPart$Outbound
+  | PublicMessagePartFilePart$Outbound
+  | PublicMessagePartToolResultPart$Outbound;
 
 /** @internal */
-export const A2AMessage$outboundSchema: z.ZodType<
-  A2AMessage$Outbound,
+export const InvokeAgentPublicMessagePart$outboundSchema: z.ZodType<
+  InvokeAgentPublicMessagePart$Outbound,
   z.ZodTypeDef,
-  A2AMessage
+  InvokeAgentPublicMessagePart
+> = z.union([
+  z.lazy(() => PublicMessagePartTextPart$outboundSchema),
+  z.lazy(() => PublicMessagePartFilePart$outboundSchema),
+  z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
+]);
+
+export function invokeAgentPublicMessagePartToJSON(
+  invokeAgentPublicMessagePart: InvokeAgentPublicMessagePart,
+): string {
+  return JSON.stringify(
+    InvokeAgentPublicMessagePart$outboundSchema.parse(
+      invokeAgentPublicMessagePart,
+    ),
+  );
+}
+export function invokeAgentPublicMessagePartFromJSON(
+  jsonString: string,
+): SafeParseResult<InvokeAgentPublicMessagePart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InvokeAgentPublicMessagePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentPublicMessagePart' from JSON`,
+  );
+}
+
+/** @internal */
+export const InvokeAgentA2AMessage$inboundSchema: z.ZodType<
+  InvokeAgentA2AMessage,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
-    RoleUserMessage$outboundSchema,
-    RoleToolMessage$outboundSchema,
+    InvokeAgentRoleUserMessage$inboundSchema,
+    InvokeAgentRoleToolMessage$inboundSchema,
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => TextPart$outboundSchema),
-      z.lazy(() => FilePart$outboundSchema),
-      z.lazy(() => ToolResultPart$outboundSchema),
+      z.lazy(() => PublicMessagePartTextPart$inboundSchema),
+      z.lazy(() => PublicMessagePartFilePart$inboundSchema),
+      z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+    ]),
+  ),
+});
+/** @internal */
+export type InvokeAgentA2AMessage$Outbound = {
+  messageId?: string | undefined;
+  role: string | string;
+  parts: Array<
+    | PublicMessagePartTextPart$Outbound
+    | PublicMessagePartFilePart$Outbound
+    | PublicMessagePartToolResultPart$Outbound
+  >;
+};
+
+/** @internal */
+export const InvokeAgentA2AMessage$outboundSchema: z.ZodType<
+  InvokeAgentA2AMessage$Outbound,
+  z.ZodTypeDef,
+  InvokeAgentA2AMessage
+> = z.object({
+  messageId: z.string().optional(),
+  role: z.union([
+    InvokeAgentRoleUserMessage$outboundSchema,
+    InvokeAgentRoleToolMessage$outboundSchema,
+  ]),
+  parts: z.array(
+    z.union([
+      z.lazy(() => PublicMessagePartTextPart$outboundSchema),
+      z.lazy(() => PublicMessagePartFilePart$outboundSchema),
+      z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
     ]),
   ),
 });
 
-export function a2AMessageToJSON(a2AMessage: A2AMessage): string {
-  return JSON.stringify(A2AMessage$outboundSchema.parse(a2AMessage));
+export function invokeAgentA2AMessageToJSON(
+  invokeAgentA2AMessage: InvokeAgentA2AMessage,
+): string {
+  return JSON.stringify(
+    InvokeAgentA2AMessage$outboundSchema.parse(invokeAgentA2AMessage),
+  );
 }
-export function a2AMessageFromJSON(
+export function invokeAgentA2AMessageFromJSON(
   jsonString: string,
-): SafeParseResult<A2AMessage, SDKValidationError> {
+): SafeParseResult<InvokeAgentA2AMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => A2AMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'A2AMessage' from JSON`,
+    (x) => InvokeAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentA2AMessage' from JSON`,
   );
 }
 
 /** @internal */
-export const Contact$inboundSchema: z.ZodType<Contact, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    display_name: z.string().optional(),
-    email: z.string().optional(),
-    metadata: z.array(z.record(z.any())).optional(),
-    logo_url: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "display_name": "displayName",
-      "logo_url": "logoUrl",
-    });
+export const InvokeAgentContact$inboundSchema: z.ZodType<
+  InvokeAgentContact,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
   });
+});
 /** @internal */
-export type Contact$Outbound = {
+export type InvokeAgentContact$Outbound = {
   id: string;
   display_name?: string | undefined;
   email?: string | undefined;
@@ -937,10 +1002,10 @@ export type Contact$Outbound = {
 };
 
 /** @internal */
-export const Contact$outboundSchema: z.ZodType<
-  Contact$Outbound,
+export const InvokeAgentContact$outboundSchema: z.ZodType<
+  InvokeAgentContact$Outbound,
   z.ZodTypeDef,
-  Contact
+  InvokeAgentContact
 > = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -955,16 +1020,20 @@ export const Contact$outboundSchema: z.ZodType<
   });
 });
 
-export function contactToJSON(contact: Contact): string {
-  return JSON.stringify(Contact$outboundSchema.parse(contact));
+export function invokeAgentContactToJSON(
+  invokeAgentContact: InvokeAgentContact,
+): string {
+  return JSON.stringify(
+    InvokeAgentContact$outboundSchema.parse(invokeAgentContact),
+  );
 }
-export function contactFromJSON(
+export function invokeAgentContactFromJSON(
   jsonString: string,
-): SafeParseResult<Contact, SDKValidationError> {
+): SafeParseResult<InvokeAgentContact, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Contact$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contact' from JSON`,
+    (x) => InvokeAgentContact$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentContact' from JSON`,
   );
 }
 
@@ -1011,24 +1080,27 @@ export function invokeAgentThreadFromJSON(
 }
 
 /** @internal */
-export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
-  .object({
-    entity_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "entity_id": "entityId",
-    });
+export const InvokeAgentMemory$inboundSchema: z.ZodType<
+  InvokeAgentMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
   });
+});
 /** @internal */
-export type Memory$Outbound = {
+export type InvokeAgentMemory$Outbound = {
   entity_id: string;
 };
 
 /** @internal */
-export const Memory$outboundSchema: z.ZodType<
-  Memory$Outbound,
+export const InvokeAgentMemory$outboundSchema: z.ZodType<
+  InvokeAgentMemory$Outbound,
   z.ZodTypeDef,
-  Memory
+  InvokeAgentMemory
 > = z.object({
   entityId: z.string(),
 }).transform((v) => {
@@ -1037,16 +1109,20 @@ export const Memory$outboundSchema: z.ZodType<
   });
 });
 
-export function memoryToJSON(memory: Memory): string {
-  return JSON.stringify(Memory$outboundSchema.parse(memory));
+export function invokeAgentMemoryToJSON(
+  invokeAgentMemory: InvokeAgentMemory,
+): string {
+  return JSON.stringify(
+    InvokeAgentMemory$outboundSchema.parse(invokeAgentMemory),
+  );
 }
-export function memoryFromJSON(
+export function invokeAgentMemoryFromJSON(
   jsonString: string,
-): SafeParseResult<Memory, SDKValidationError> {
+): SafeParseResult<InvokeAgentMemory, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Memory' from JSON`,
+    (x) => InvokeAgentMemory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentMemory' from JSON`,
   );
 }
 
@@ -1057,11 +1133,11 @@ export const InvokeAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   task_id: z.string().optional(),
-  message: z.lazy(() => A2AMessage$inboundSchema),
+  message: z.lazy(() => InvokeAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
-  contact: z.lazy(() => Contact$inboundSchema).optional(),
+  contact: z.lazy(() => InvokeAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => InvokeAgentThread$inboundSchema).optional(),
-  memory: z.lazy(() => Memory$inboundSchema).optional(),
+  memory: z.lazy(() => InvokeAgentMemory$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1071,11 +1147,11 @@ export const InvokeAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type InvokeAgentRequestBody$Outbound = {
   task_id?: string | undefined;
-  message: A2AMessage$Outbound;
+  message: InvokeAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
-  contact?: Contact$Outbound | undefined;
+  contact?: InvokeAgentContact$Outbound | undefined;
   thread?: InvokeAgentThread$Outbound | undefined;
-  memory?: Memory$Outbound | undefined;
+  memory?: InvokeAgentMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1086,11 +1162,11 @@ export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
   InvokeAgentRequestBody
 > = z.object({
   taskId: z.string().optional(),
-  message: z.lazy(() => A2AMessage$outboundSchema),
+  message: z.lazy(() => InvokeAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
-  contact: z.lazy(() => Contact$outboundSchema).optional(),
+  contact: z.lazy(() => InvokeAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => Memory$outboundSchema).optional(),
+  memory: z.lazy(() => InvokeAgentMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {

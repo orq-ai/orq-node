@@ -4,6 +4,7 @@
 
 export * from "./cleardataset.js";
 export * from "./createagent.js";
+export * from "./createagentresponse.js";
 export * from "./createbudget.js";
 export * from "./createchunk.js";
 export * from "./createcontact.js";

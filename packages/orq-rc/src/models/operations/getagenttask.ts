@@ -312,7 +312,7 @@ export type GetAgentTaskPartsAgentsKind = ClosedEnum<
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
  */
-export type GetAgentTaskFileAgentsFileInURIFormat = {
+export type GetAgentTaskFileFileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -330,7 +330,7 @@ export type GetAgentTaskFileAgentsFileInURIFormat = {
 /**
  * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
  */
-export type GetAgentTaskFileAgentsBinaryFormat = {
+export type GetAgentTaskFileBinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -346,17 +346,15 @@ export type GetAgentTaskFileAgentsBinaryFormat = {
 };
 
 export type PartsFile =
-  | GetAgentTaskFileAgentsBinaryFormat
-  | GetAgentTaskFileAgentsFileInURIFormat;
+  | GetAgentTaskFileBinaryFormat
+  | GetAgentTaskFileFileInURIFormat;
 
 /**
  * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
  */
 export type PartsFilePart = {
   kind: GetAgentTaskPartsAgentsKind;
-  file:
-    | GetAgentTaskFileAgentsBinaryFormat
-    | GetAgentTaskFileAgentsFileInURIFormat;
+  file: GetAgentTaskFileBinaryFormat | GetAgentTaskFileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -462,7 +460,7 @@ export type GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind =
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
  */
-export type GetAgentTaskFileFileInURIFormat = {
+export type GetAgentTaskFileAgentsFileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -480,7 +478,7 @@ export type GetAgentTaskFileFileInURIFormat = {
 /**
  * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
  */
-export type GetAgentTaskFileBinaryFormat = {
+export type GetAgentTaskFileAgentsBinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -496,15 +494,17 @@ export type GetAgentTaskFileBinaryFormat = {
 };
 
 export type GetAgentTaskPartsFile =
-  | GetAgentTaskFileBinaryFormat
-  | GetAgentTaskFileFileInURIFormat;
+  | GetAgentTaskFileAgentsBinaryFormat
+  | GetAgentTaskFileAgentsFileInURIFormat;
 
 /**
  * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
  */
 export type GetAgentTaskPartsFilePart = {
   kind: GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind;
-  file: GetAgentTaskFileBinaryFormat | GetAgentTaskFileFileInURIFormat;
+  file:
+    | GetAgentTaskFileAgentsBinaryFormat
+    | GetAgentTaskFileAgentsFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1507,8 +1507,8 @@ export const GetAgentTaskPartsAgentsKind$outboundSchema: z.ZodNativeEnum<
 > = GetAgentTaskPartsAgentsKind$inboundSchema;
 
 /** @internal */
-export const GetAgentTaskFileAgentsFileInURIFormat$inboundSchema: z.ZodType<
-  GetAgentTaskFileAgentsFileInURIFormat,
+export const GetAgentTaskFileFileInURIFormat$inboundSchema: z.ZodType<
+  GetAgentTaskFileFileInURIFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1517,46 +1517,45 @@ export const GetAgentTaskFileAgentsFileInURIFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type GetAgentTaskFileAgentsFileInURIFormat$Outbound = {
+export type GetAgentTaskFileFileInURIFormat$Outbound = {
   uri: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const GetAgentTaskFileAgentsFileInURIFormat$outboundSchema: z.ZodType<
-  GetAgentTaskFileAgentsFileInURIFormat$Outbound,
+export const GetAgentTaskFileFileInURIFormat$outboundSchema: z.ZodType<
+  GetAgentTaskFileFileInURIFormat$Outbound,
   z.ZodTypeDef,
-  GetAgentTaskFileAgentsFileInURIFormat
+  GetAgentTaskFileFileInURIFormat
 > = z.object({
   uri: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function getAgentTaskFileAgentsFileInURIFormatToJSON(
-  getAgentTaskFileAgentsFileInURIFormat: GetAgentTaskFileAgentsFileInURIFormat,
+export function getAgentTaskFileFileInURIFormatToJSON(
+  getAgentTaskFileFileInURIFormat: GetAgentTaskFileFileInURIFormat,
 ): string {
   return JSON.stringify(
-    GetAgentTaskFileAgentsFileInURIFormat$outboundSchema.parse(
-      getAgentTaskFileAgentsFileInURIFormat,
+    GetAgentTaskFileFileInURIFormat$outboundSchema.parse(
+      getAgentTaskFileFileInURIFormat,
     ),
   );
 }
-export function getAgentTaskFileAgentsFileInURIFormatFromJSON(
+export function getAgentTaskFileFileInURIFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetAgentTaskFileAgentsFileInURIFormat, SDKValidationError> {
+): SafeParseResult<GetAgentTaskFileFileInURIFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      GetAgentTaskFileAgentsFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentTaskFileAgentsFileInURIFormat' from JSON`,
+    (x) => GetAgentTaskFileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentTaskFileFileInURIFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const GetAgentTaskFileAgentsBinaryFormat$inboundSchema: z.ZodType<
-  GetAgentTaskFileAgentsBinaryFormat,
+export const GetAgentTaskFileBinaryFormat$inboundSchema: z.ZodType<
+  GetAgentTaskFileBinaryFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1565,40 +1564,39 @@ export const GetAgentTaskFileAgentsBinaryFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type GetAgentTaskFileAgentsBinaryFormat$Outbound = {
+export type GetAgentTaskFileBinaryFormat$Outbound = {
   bytes: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const GetAgentTaskFileAgentsBinaryFormat$outboundSchema: z.ZodType<
-  GetAgentTaskFileAgentsBinaryFormat$Outbound,
+export const GetAgentTaskFileBinaryFormat$outboundSchema: z.ZodType<
+  GetAgentTaskFileBinaryFormat$Outbound,
   z.ZodTypeDef,
-  GetAgentTaskFileAgentsBinaryFormat
+  GetAgentTaskFileBinaryFormat
 > = z.object({
   bytes: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function getAgentTaskFileAgentsBinaryFormatToJSON(
-  getAgentTaskFileAgentsBinaryFormat: GetAgentTaskFileAgentsBinaryFormat,
+export function getAgentTaskFileBinaryFormatToJSON(
+  getAgentTaskFileBinaryFormat: GetAgentTaskFileBinaryFormat,
 ): string {
   return JSON.stringify(
-    GetAgentTaskFileAgentsBinaryFormat$outboundSchema.parse(
-      getAgentTaskFileAgentsBinaryFormat,
+    GetAgentTaskFileBinaryFormat$outboundSchema.parse(
+      getAgentTaskFileBinaryFormat,
     ),
   );
 }
-export function getAgentTaskFileAgentsBinaryFormatFromJSON(
+export function getAgentTaskFileBinaryFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetAgentTaskFileAgentsBinaryFormat, SDKValidationError> {
+): SafeParseResult<GetAgentTaskFileBinaryFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      GetAgentTaskFileAgentsBinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentTaskFileAgentsBinaryFormat' from JSON`,
+    (x) => GetAgentTaskFileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentTaskFileBinaryFormat' from JSON`,
   );
 }
 
@@ -1608,13 +1606,13 @@ export const PartsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$inboundSchema),
-  z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$inboundSchema),
+  z.lazy(() => GetAgentTaskFileBinaryFormat$inboundSchema),
+  z.lazy(() => GetAgentTaskFileFileInURIFormat$inboundSchema),
 ]);
 /** @internal */
 export type PartsFile$Outbound =
-  | GetAgentTaskFileAgentsBinaryFormat$Outbound
-  | GetAgentTaskFileAgentsFileInURIFormat$Outbound;
+  | GetAgentTaskFileBinaryFormat$Outbound
+  | GetAgentTaskFileFileInURIFormat$Outbound;
 
 /** @internal */
 export const PartsFile$outboundSchema: z.ZodType<
@@ -1622,8 +1620,8 @@ export const PartsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PartsFile
 > = z.union([
-  z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$outboundSchema),
-  z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$outboundSchema),
+  z.lazy(() => GetAgentTaskFileBinaryFormat$outboundSchema),
+  z.lazy(() => GetAgentTaskFileFileInURIFormat$outboundSchema),
 ]);
 
 export function partsFileToJSON(partsFile: PartsFile): string {
@@ -1647,8 +1645,8 @@ export const PartsFilePart$inboundSchema: z.ZodType<
 > = z.object({
   kind: GetAgentTaskPartsAgentsKind$inboundSchema,
   file: z.union([
-    z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$inboundSchema),
-    z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$inboundSchema),
+    z.lazy(() => GetAgentTaskFileBinaryFormat$inboundSchema),
+    z.lazy(() => GetAgentTaskFileFileInURIFormat$inboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -1656,8 +1654,8 @@ export const PartsFilePart$inboundSchema: z.ZodType<
 export type PartsFilePart$Outbound = {
   kind: string;
   file:
-    | GetAgentTaskFileAgentsBinaryFormat$Outbound
-    | GetAgentTaskFileAgentsFileInURIFormat$Outbound;
+    | GetAgentTaskFileBinaryFormat$Outbound
+    | GetAgentTaskFileFileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1669,8 +1667,8 @@ export const PartsFilePart$outboundSchema: z.ZodType<
 > = z.object({
   kind: GetAgentTaskPartsAgentsKind$outboundSchema,
   file: z.union([
-    z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$outboundSchema),
-    z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$outboundSchema),
+    z.lazy(() => GetAgentTaskFileBinaryFormat$outboundSchema),
+    z.lazy(() => GetAgentTaskFileFileInURIFormat$outboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -1977,8 +1975,8 @@ export const GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind$o
     GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind$inboundSchema;
 
 /** @internal */
-export const GetAgentTaskFileFileInURIFormat$inboundSchema: z.ZodType<
-  GetAgentTaskFileFileInURIFormat,
+export const GetAgentTaskFileAgentsFileInURIFormat$inboundSchema: z.ZodType<
+  GetAgentTaskFileAgentsFileInURIFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1987,45 +1985,46 @@ export const GetAgentTaskFileFileInURIFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type GetAgentTaskFileFileInURIFormat$Outbound = {
+export type GetAgentTaskFileAgentsFileInURIFormat$Outbound = {
   uri: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const GetAgentTaskFileFileInURIFormat$outboundSchema: z.ZodType<
-  GetAgentTaskFileFileInURIFormat$Outbound,
+export const GetAgentTaskFileAgentsFileInURIFormat$outboundSchema: z.ZodType<
+  GetAgentTaskFileAgentsFileInURIFormat$Outbound,
   z.ZodTypeDef,
-  GetAgentTaskFileFileInURIFormat
+  GetAgentTaskFileAgentsFileInURIFormat
 > = z.object({
   uri: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function getAgentTaskFileFileInURIFormatToJSON(
-  getAgentTaskFileFileInURIFormat: GetAgentTaskFileFileInURIFormat,
+export function getAgentTaskFileAgentsFileInURIFormatToJSON(
+  getAgentTaskFileAgentsFileInURIFormat: GetAgentTaskFileAgentsFileInURIFormat,
 ): string {
   return JSON.stringify(
-    GetAgentTaskFileFileInURIFormat$outboundSchema.parse(
-      getAgentTaskFileFileInURIFormat,
+    GetAgentTaskFileAgentsFileInURIFormat$outboundSchema.parse(
+      getAgentTaskFileAgentsFileInURIFormat,
     ),
   );
 }
-export function getAgentTaskFileFileInURIFormatFromJSON(
+export function getAgentTaskFileAgentsFileInURIFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetAgentTaskFileFileInURIFormat, SDKValidationError> {
+): SafeParseResult<GetAgentTaskFileAgentsFileInURIFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAgentTaskFileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentTaskFileFileInURIFormat' from JSON`,
+    (x) =>
+      GetAgentTaskFileAgentsFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentTaskFileAgentsFileInURIFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const GetAgentTaskFileBinaryFormat$inboundSchema: z.ZodType<
-  GetAgentTaskFileBinaryFormat,
+export const GetAgentTaskFileAgentsBinaryFormat$inboundSchema: z.ZodType<
+  GetAgentTaskFileAgentsBinaryFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2034,39 +2033,40 @@ export const GetAgentTaskFileBinaryFormat$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type GetAgentTaskFileBinaryFormat$Outbound = {
+export type GetAgentTaskFileAgentsBinaryFormat$Outbound = {
   bytes: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const GetAgentTaskFileBinaryFormat$outboundSchema: z.ZodType<
-  GetAgentTaskFileBinaryFormat$Outbound,
+export const GetAgentTaskFileAgentsBinaryFormat$outboundSchema: z.ZodType<
+  GetAgentTaskFileAgentsBinaryFormat$Outbound,
   z.ZodTypeDef,
-  GetAgentTaskFileBinaryFormat
+  GetAgentTaskFileAgentsBinaryFormat
 > = z.object({
   bytes: z.string(),
   mimeType: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function getAgentTaskFileBinaryFormatToJSON(
-  getAgentTaskFileBinaryFormat: GetAgentTaskFileBinaryFormat,
+export function getAgentTaskFileAgentsBinaryFormatToJSON(
+  getAgentTaskFileAgentsBinaryFormat: GetAgentTaskFileAgentsBinaryFormat,
 ): string {
   return JSON.stringify(
-    GetAgentTaskFileBinaryFormat$outboundSchema.parse(
-      getAgentTaskFileBinaryFormat,
+    GetAgentTaskFileAgentsBinaryFormat$outboundSchema.parse(
+      getAgentTaskFileAgentsBinaryFormat,
     ),
   );
 }
-export function getAgentTaskFileBinaryFormatFromJSON(
+export function getAgentTaskFileAgentsBinaryFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetAgentTaskFileBinaryFormat, SDKValidationError> {
+): SafeParseResult<GetAgentTaskFileAgentsBinaryFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAgentTaskFileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentTaskFileBinaryFormat' from JSON`,
+    (x) =>
+      GetAgentTaskFileAgentsBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentTaskFileAgentsBinaryFormat' from JSON`,
   );
 }
 
@@ -2076,13 +2076,13 @@ export const GetAgentTaskPartsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAgentTaskFileBinaryFormat$inboundSchema),
-  z.lazy(() => GetAgentTaskFileFileInURIFormat$inboundSchema),
+  z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$inboundSchema),
+  z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$inboundSchema),
 ]);
 /** @internal */
 export type GetAgentTaskPartsFile$Outbound =
-  | GetAgentTaskFileBinaryFormat$Outbound
-  | GetAgentTaskFileFileInURIFormat$Outbound;
+  | GetAgentTaskFileAgentsBinaryFormat$Outbound
+  | GetAgentTaskFileAgentsFileInURIFormat$Outbound;
 
 /** @internal */
 export const GetAgentTaskPartsFile$outboundSchema: z.ZodType<
@@ -2090,8 +2090,8 @@ export const GetAgentTaskPartsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentTaskPartsFile
 > = z.union([
-  z.lazy(() => GetAgentTaskFileBinaryFormat$outboundSchema),
-  z.lazy(() => GetAgentTaskFileFileInURIFormat$outboundSchema),
+  z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$outboundSchema),
+  z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$outboundSchema),
 ]);
 
 export function getAgentTaskPartsFileToJSON(
@@ -2120,8 +2120,8 @@ export const GetAgentTaskPartsFilePart$inboundSchema: z.ZodType<
   kind:
     GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind$inboundSchema,
   file: z.union([
-    z.lazy(() => GetAgentTaskFileBinaryFormat$inboundSchema),
-    z.lazy(() => GetAgentTaskFileFileInURIFormat$inboundSchema),
+    z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$inboundSchema),
+    z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$inboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -2129,8 +2129,8 @@ export const GetAgentTaskPartsFilePart$inboundSchema: z.ZodType<
 export type GetAgentTaskPartsFilePart$Outbound = {
   kind: string;
   file:
-    | GetAgentTaskFileBinaryFormat$Outbound
-    | GetAgentTaskFileFileInURIFormat$Outbound;
+    | GetAgentTaskFileAgentsBinaryFormat$Outbound
+    | GetAgentTaskFileAgentsFileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -2143,8 +2143,8 @@ export const GetAgentTaskPartsFilePart$outboundSchema: z.ZodType<
   kind:
     GetAgentTaskPartsAgentsResponse200ApplicationJSONResponseBodyKind$outboundSchema,
   file: z.union([
-    z.lazy(() => GetAgentTaskFileBinaryFormat$outboundSchema),
-    z.lazy(() => GetAgentTaskFileFileInURIFormat$outboundSchema),
+    z.lazy(() => GetAgentTaskFileAgentsBinaryFormat$outboundSchema),
+    z.lazy(() => GetAgentTaskFileAgentsFileInURIFormat$outboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });

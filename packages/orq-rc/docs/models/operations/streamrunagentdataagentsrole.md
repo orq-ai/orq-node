@@ -1,5 +1,7 @@
 # StreamRunAgentDataAgentsRole
 
+Extended A2A message role
+
 ## Example Usage
 
 ```typescript
@@ -11,5 +13,5 @@ let value: StreamRunAgentDataAgentsRole = "user";
 ## Values
 
 ```typescript
-"user" | "tool"
+"user" | "agent" | "tool" | "system"
 ```

@@ -19,8 +19,14 @@ import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { Responses } from "./responses.js";
 
 export class Agents extends ClientSDK {
+  private _responses?: Responses;
+  get responses(): Responses {
+    return (this._responses ??= new Responses(this._options));
+  }
+
   /**
    * Create a new agent
    *

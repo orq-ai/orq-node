@@ -19,6 +19,7 @@ import { tool$agentsInvoke } from "./tools/agentsInvoke.js";
 import { tool$agentsList } from "./tools/agentsList.js";
 import { tool$agentsListActions } from "./tools/agentsListActions.js";
 import { tool$agentsListTasks } from "./tools/agentsListTasks.js";
+import { tool$agentsResponsesCreate } from "./tools/agentsResponsesCreate.js";
 import { tool$agentsRetrieve } from "./tools/agentsRetrieve.js";
 import { tool$agentsRetrieveAction } from "./tools/agentsRetrieveAction.js";
 import { tool$agentsRetrieveTask } from "./tools/agentsRetrieveTask.js";
@@ -123,7 +124,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.0-rc.67",
+    version: "4.0.0-rc.68",
   });
 
   const client = new OrqCore({
@@ -252,6 +253,7 @@ export function createMCPServer(deps: {
   tool(tool$datasetsDeleteDatapoint);
   tool(tool$datasetsClear);
   tool(tool$deploymentsMetricsCreate);
+  tool(tool$agentsResponsesCreate);
 
   return server;
 }

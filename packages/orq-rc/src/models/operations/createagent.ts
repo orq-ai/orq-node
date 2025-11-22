@@ -5171,7 +5171,7 @@ export const Settings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(15),
+  max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(300),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
@@ -5238,7 +5238,7 @@ export const Settings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Settings
 > = z.object({
-  maxIterations: z.number().int().default(15),
+  maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
@@ -5749,7 +5749,7 @@ export const CreateAgentSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(15),
+  max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(300),
   tool_approval_required: CreateAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
@@ -5782,7 +5782,7 @@ export const CreateAgentSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentSettings
 > = z.object({
-  maxIterations: z.number().int().default(15),
+  maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: CreateAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",

@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.GetAgentTaskFileAgentsBinaryFormat`
+### `operations.GetAgentTaskFileBinaryFormat`
 
 ```typescript
-const value: operations.GetAgentTaskFileAgentsBinaryFormat = {
+const value: operations.GetAgentTaskFileBinaryFormat = {
   bytes: "<value>",
 };
 ```
 
-### `operations.GetAgentTaskFileAgentsFileInURIFormat`
+### `operations.GetAgentTaskFileFileInURIFormat`
 
 ```typescript
-const value: operations.GetAgentTaskFileAgentsFileInURIFormat = {
-  uri: "https://terrible-legend.net",
+const value: operations.GetAgentTaskFileFileInURIFormat = {
+  uri: "https://abandoned-adrenalin.info/",
 };
 ```
 

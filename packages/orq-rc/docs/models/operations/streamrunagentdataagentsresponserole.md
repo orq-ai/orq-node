@@ -5,11 +5,11 @@
 ```typescript
 import { StreamRunAgentDataAgentsResponseRole } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentDataAgentsResponseRole = "assistant";
+let value: StreamRunAgentDataAgentsResponseRole = "user";
 ```
 
 ## Values
 
 ```typescript
-"assistant"
+"user" | "tool"
 ```
