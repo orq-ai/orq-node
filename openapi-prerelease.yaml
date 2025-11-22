@@ -1254,7 +1254,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1262,7 +1262,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1397,7 +1397,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T10:49:21.595Z"
+                          default: "2025-11-22T21:11:48.435Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1405,7 +1405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:21.596Z"
+                              default: "2025-11-22T21:11:48.435Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1573,10 +1573,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1647,10 +1647,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1718,10 +1718,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1804,10 +1804,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1875,10 +1875,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2273,10 +2273,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2360,10 +2360,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-22T10:49:23.672Z"
+                              default: "2025-11-22T21:11:50.311Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2780,10 +2780,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2854,10 +2854,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2925,10 +2925,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3011,10 +3011,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3082,10 +3082,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3480,10 +3480,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3567,10 +3567,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3974,10 +3974,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4048,10 +4048,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4119,10 +4119,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4205,10 +4205,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4276,10 +4276,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4674,10 +4674,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4761,10 +4761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-22T10:49:23.672Z"
+                        default: "2025-11-22T21:11:50.311Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4940,7 +4940,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4948,7 +4948,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5084,7 +5084,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5092,7 +5092,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -10053,7 +10053,7 @@ paths:
                       type: "integer"
                       exclusiveMinimum: 0
                       minimum: 1
-                      default: 15
+                      default: 100
                       description: "Maximum iterations(llm calls) before the agent will stop executing."
                     "max_execution_time":
                       type: "integer"
@@ -10459,7 +10459,7 @@ paths:
                         type: "integer"
                         exclusiveMinimum: 0
                         minimum: 1
-                        default: 15
+                        default: 100
                         description: "Maximum iterations(llm calls) before the agent will stop executing."
                       "max_execution_time":
                         type: "integer"
@@ -10581,7 +10581,7 @@ paths:
                             - "execute_on"
                         title: "Agent guardrail configuration"
                         description: "Configuration for a guardrail applied to the agent"
-                    default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                    default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                   "model":
                     type: "object"
                     properties:
@@ -11157,6 +11157,318 @@ paths:
                   - "message"
       security:
         - ApiKey: []
+  "/v2/agents/{agent_key}/responses":
+    post:
+      tags:
+        - "Agents"
+      x-speakeasy-group: "agents.responses"
+      x-speakeasy-name-override: "create"
+      operationId: "CreateAgentResponse"
+      summary: "Create an agent response"
+      description: "Creates a new response representing an agent interaction. A response tracks the conversation from the initial message until the agent becomes inactive or errors. Supports both synchronous (waiting) and asynchronous (background) execution modes."
+      parameters:
+        - schema:
+            type: "string"
+            description: "The key or ID of the agent to invoke"
+          required: true
+          description: "The key or ID of the agent to invoke"
+          name: "agent_key"
+          in: "path"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "task_id":
+                  type: "string"
+                  description: "Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue."
+                "message":
+                  type: "object"
+                  properties:
+                    "messageId":
+                      type: "string"
+                      description: "Optional A2A message ID in ULID format"
+                    "role":
+                      anyOf:
+                        - type: "string"
+                          enum:
+                            - "user"
+                          title: "User message"
+                          description: "Message from the end user"
+                        - type: "string"
+                          enum:
+                            - "tool"
+                          title: "Tool message"
+                          description: "Message containing tool execution results"
+                      description: "Message role (user or tool for continuing executions)"
+                    "parts":
+                      type: "array"
+                      items:
+                        oneOf:
+                          - type: "object"
+                            properties:
+                              "kind":
+                                type: "string"
+                                enum:
+                                  - "text"
+                              "text":
+                                type: "string"
+                            required:
+                              - "kind"
+                              - "text"
+                            title: "Text Part"
+                            description: "Text content part. Use this to send text messages to the agent."
+                          - type: "object"
+                            properties:
+                              "kind":
+                                type: "string"
+                                enum:
+                                  - "file"
+                              "file":
+                                anyOf:
+                                  - type: "object"
+                                    properties:
+                                      "bytes":
+                                        type: "string"
+                                        minLength: 1
+                                        description: "base64 encoded content of the file"
+                                      "mimeType":
+                                        type: "string"
+                                        description: "Optional mimeType for the file"
+                                      "name":
+                                        type: "string"
+                                        description: "Optional name for the file"
+                                    required:
+                                      - "bytes"
+                                    title: "Binary format"
+                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
+                                  - type: "object"
+                                    properties:
+                                      "uri":
+                                        type: "string"
+                                        description: "URL for the File content"
+                                      "mimeType":
+                                        type: "string"
+                                        description: "Optional mimeType for the file"
+                                      "name":
+                                        type: "string"
+                                        description: "Optional name for the file"
+                                    required:
+                                      - "uri"
+                                    title: "File in URI format"
+                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
+                              "metadata":
+                                type: "object"
+                                additionalProperties: {}
+                            required:
+                              - "kind"
+                              - "file"
+                            title: "File Part"
+                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                          - type: "object"
+                            properties:
+                              "kind":
+                                type: "string"
+                                enum:
+                                  - "tool_result"
+                              "tool_call_id":
+                                type: "string"
+                              "result": {}
+                              "metadata":
+                                type: "object"
+                                additionalProperties: {}
+                            required:
+                              - "kind"
+                              - "tool_call_id"
+                            title: "Tool Result Part"
+                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                        title: "Public Message Part"
+                        description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
+                      description: "A2A message parts (text, file, or tool_result only)"
+                  required:
+                    - "role"
+                    - "parts"
+                  title: "A2A Message"
+                  description: "The A2A message to send to the agent (user input or tool results)"
+                "variables":
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Optional variables for template replacement in system prompt, instructions, and messages"
+                "contact":
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                      description: "Unique identifier for the contact"
+                      example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                    "display_name":
+                      type: "string"
+                      description: "Display name of the contact"
+                      example: "Jane Doe"
+                    "email":
+                      type: "string"
+                      description: "Email address of the contact"
+                      example: "jane.doe@example.com"
+                    "metadata":
+                      type: "array"
+                      items:
+                        type: "object"
+                        additionalProperties: {}
+                      description: "A hash of key/value pairs containing any other data about the contact"
+                      example: [{"department": "Engineering", "role": "Senior Developer"}]
+                    "logo_url":
+                      type: "string"
+                      description: "URL to the contact's avatar or logo"
+                      example: "https://example.com/avatars/jane-doe.jpg"
+                    "tags":
+                      type: "array"
+                      items:
+                        type: "string"
+                      description: "A list of tags associated with the contact"
+                      example: ["hr", "engineering"]
+                  required:
+                    - "id"
+                  description: "Information about the contact making the request. If the contact does not exist, it will be created automatically."
+                "thread":
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                      description: "Unique thread identifier to group related invocations."
+                      example: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                    "tags":
+                      type: "array"
+                      items:
+                        type: "string"
+                      description: "Optional tags to differentiate or categorize threads"
+                      example: ["customer-support", "priority-high"]
+                  required:
+                    - "id"
+                  description: "Thread information to group related requests"
+                "memory":
+                  type: "object"
+                  properties:
+                    "entity_id":
+                      type: "string"
+                      description: "An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions."
+                  required:
+                    - "entity_id"
+                  description: "Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions."
+                "metadata":
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Optional metadata for the agent invocation as key-value pairs that will be included in traces"
+                "background":
+                  type: "boolean"
+                  default: false
+                  description: "If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors."
+              required:
+                - "message"
+      responses:
+        "200":
+          description: "Agent response created successfully"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique response ID"
+                  "task_id":
+                    type: "string"
+                    description: "The agent execution task ID"
+                  "output":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "messageId":
+                          type: "string"
+                        "role":
+                          type: "string"
+                          enum:
+                            - "user"
+                            - "agent"
+                            - "tool"
+                            - "system"
+                        "parts":
+                          type: "array"
+                          items: {}
+                        "metadata":
+                          type: "object"
+                          additionalProperties: {}
+                      required:
+                        - "messageId"
+                        - "role"
+                        - "parts"
+                    description: "Array of messages from the agent execution"
+                  "created_at":
+                    type: "string"
+                    description: "ISO timestamp of response creation"
+                  "model":
+                    type: "string"
+                    description: "Model used in provider/model format"
+                  "usage":
+                    type:
+                      - "object"
+                      - "null"
+                    properties:
+                      "completion_tokens":
+                        type: "number"
+                        description: "Number of tokens in the generated completion."
+                      "prompt_tokens":
+                        type: "number"
+                        description: "Number of tokens in the prompt."
+                      "total_tokens":
+                        type: "number"
+                        description: "Total number of tokens used in the request (prompt + completion)."
+                      "prompt_tokens_details":
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          "cached_tokens":
+                            type:
+                              - "integer"
+                              - "null"
+                          "audio_tokens":
+                            type:
+                              - "integer"
+                              - "null"
+                            description: "The number of audio input tokens consumed by the request."
+                      "completion_tokens_details":
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          "reasoning_tokens":
+                            type:
+                              - "number"
+                              - "null"
+                          "accepted_prediction_tokens":
+                            type:
+                              - "number"
+                              - "null"
+                          "rejected_prediction_tokens":
+                            type:
+                              - "number"
+                              - "null"
+                          "audio_tokens":
+                            type:
+                              - "integer"
+                              - "null"
+                            description: "The number of audio output tokens produced by the response."
+                    description: "Token usage from the agent execution"
+                required:
+                  - "_id"
+                  - "task_id"
+                  - "output"
+                  - "created_at"
+                  - "model"
+      security:
+        - ApiKey: []
   "/v2/agents/{agent_key}":
     delete:
       tags:
@@ -11261,7 +11573,7 @@ paths:
                         type: "integer"
                         exclusiveMinimum: 0
                         minimum: 1
-                        default: 15
+                        default: 100
                         description: "Maximum iterations(llm calls) before the agent will stop executing."
                       "max_execution_time":
                         type: "integer"
@@ -11383,7 +11695,7 @@ paths:
                             - "execute_on"
                         title: "Agent guardrail configuration"
                         description: "Configuration for a guardrail applied to the agent"
-                    default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                    default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                   "model":
                     type: "object"
                     properties:
@@ -12505,7 +12817,7 @@ paths:
                       type: "integer"
                       exclusiveMinimum: 0
                       minimum: 1
-                      default: 15
+                      default: 100
                       description: "Maximum iterations(llm calls) before the agent will stop executing."
                     "max_execution_time":
                       type: "integer"
@@ -12907,7 +13219,7 @@ paths:
                         type: "integer"
                         exclusiveMinimum: 0
                         minimum: 1
-                        default: 15
+                        default: 100
                         description: "Maximum iterations(llm calls) before the agent will stop executing."
                       "max_execution_time":
                         type: "integer"
@@ -13029,7 +13341,7 @@ paths:
                             - "execute_on"
                         title: "Agent guardrail configuration"
                         description: "Configuration for a guardrail applied to the agent"
-                    default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                    default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                   "model":
                     type: "object"
                     properties:
@@ -15156,7 +15468,7 @@ paths:
                               type: "integer"
                               exclusiveMinimum: 0
                               minimum: 1
-                              default: 15
+                              default: 100
                               description: "Maximum iterations(llm calls) before the agent will stop executing."
                             "max_execution_time":
                               type: "integer"
@@ -15278,7 +15590,7 @@ paths:
                                   - "execute_on"
                               title: "Agent guardrail configuration"
                               description: "Configuration for a guardrail applied to the agent"
-                          default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                          default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                         "model":
                           type: "object"
                           properties:
@@ -17026,7 +17338,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KANJXYWHG46N5W536X6FPPGB"
+                                          default: "01KAPPHK6BF0YKV93QFZZSJKT9"
                                         "name":
                                           type: "string"
                                         "description":
@@ -17087,7 +17399,7 @@ paths:
                       type: "integer"
                       exclusiveMinimum: 0
                       minimum: 1
-                      default: 15
+                      default: 100
                       description: "Maximum iterations(llm calls) before the agent will stop executing."
                     "max_execution_time":
                       type: "integer"
@@ -18534,7 +18846,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KANJXYY5X5KQPGXYH2MBPFRX"
+                                          default: "01KAPPHK7QM15CJG4A8SSCAAXJ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18595,7 +18907,7 @@ paths:
                       type: "integer"
                       exclusiveMinimum: 0
                       minimum: 1
-                      default: 15
+                      default: 100
                       description: "Maximum iterations(llm calls) before the agent will stop executing."
                     "max_execution_time":
                       type: "integer"
@@ -18876,7 +19188,7 @@ paths:
                                     type: "integer"
                                     exclusiveMinimum: 0
                                     minimum: 1
-                                    default: 15
+                                    default: 100
                                     description: "Maximum iterations(llm calls) before the agent will stop executing."
                                   "max_execution_time":
                                     type: "integer"
@@ -18998,7 +19310,7 @@ paths:
                                         - "execute_on"
                                     title: "Agent guardrail configuration"
                                     description: "Configuration for a guardrail applied to the agent"
-                                default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                                default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                               "agent_manifest_id":
                                 type: "string"
                               "agent_key":
@@ -19012,6 +19324,8 @@ paths:
                                 type: "boolean"
                               "stream":
                                 type: "boolean"
+                              "responseId":
+                                type: "string"
                             required:
                               - "inputMessage"
                               - "modelId"
@@ -19390,6 +19704,57 @@ paths:
                                 type: "number"
                               "accumulated_execution_time":
                                 type: "number"
+                              "responseId":
+                                type: "string"
+                              "usage":
+                                type: "object"
+                                properties:
+                                  "completion_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the generated completion."
+                                  "prompt_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the prompt."
+                                  "total_tokens":
+                                    type: "number"
+                                    description: "Total number of tokens used in the request (prompt + completion)."
+                                  "prompt_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "cached_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio input tokens consumed by the request."
+                                  "completion_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "reasoning_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "accepted_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "rejected_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio output tokens produced by the response."
+                                description: "Usage statistics for the completion request."
                             required:
                               - "agent_id"
                               - "message_difference"
@@ -19413,6 +19778,147 @@ paths:
                             properties:
                               "last_message":
                                 type: "string"
+                              "last_message_full":
+                                type: "object"
+                                properties:
+                                  "messageId":
+                                    type: "string"
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "user"
+                                      - "agent"
+                                      - "tool"
+                                      - "system"
+                                    description: "Extended A2A message role"
+                                  "parts":
+                                    type: "array"
+                                    items:
+                                      oneOf:
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "text"
+                                            "text":
+                                              type: "string"
+                                          required:
+                                            - "kind"
+                                            - "text"
+                                          title: "Text Part"
+                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "data"
+                                            "data":
+                                              type: "object"
+                                              additionalProperties: {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "data"
+                                          title: "Data Part"
+                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "file"
+                                            "file":
+                                              anyOf:
+                                                - type: "object"
+                                                  properties:
+                                                    "bytes":
+                                                      type: "string"
+                                                      minLength: 1
+                                                      description: "base64 encoded content of the file"
+                                                    "mimeType":
+                                                      type: "string"
+                                                      description: "Optional mimeType for the file"
+                                                    "name":
+                                                      type: "string"
+                                                      description: "Optional name for the file"
+                                                  required:
+                                                    - "bytes"
+                                                  title: "Binary format"
+                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
+                                                - type: "object"
+                                                  properties:
+                                                    "uri":
+                                                      type: "string"
+                                                      description: "URL for the File content"
+                                                    "mimeType":
+                                                      type: "string"
+                                                      description: "Optional mimeType for the file"
+                                                    "name":
+                                                      type: "string"
+                                                      description: "Optional name for the file"
+                                                  required:
+                                                    - "uri"
+                                                  title: "File in URI format"
+                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "file"
+                                          title: "File Part"
+                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "tool_call"
+                                            "tool_name":
+                                              type: "string"
+                                            "tool_call_id":
+                                              type: "string"
+                                            "arguments":
+                                              type: "object"
+                                              additionalProperties: {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "tool_name"
+                                            - "tool_call_id"
+                                            - "arguments"
+                                          title: "Tool Call Part"
+                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "tool_result"
+                                            "tool_call_id":
+                                              type: "string"
+                                            "result": {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "tool_call_id"
+                                          title: "Tool Result Part"
+                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                  "metadata":
+                                    type: "object"
+                                    additionalProperties: {}
+                                required:
+                                  - "role"
+                                  - "parts"
+                                description: "Full last message in A2A format (for backwards compatibility)"
                               "finish_reason":
                                 type: "string"
                                 enum:
@@ -19447,6 +19953,58 @@ paths:
                                     - "type"
                                     - "function"
                                 description: "Tool calls that are pending user response (for function_call finish reason)"
+                              "usage":
+                                type: "object"
+                                properties:
+                                  "completion_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the generated completion."
+                                  "prompt_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the prompt."
+                                  "total_tokens":
+                                    type: "number"
+                                    description: "Total number of tokens used in the request (prompt + completion)."
+                                  "prompt_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "cached_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio input tokens consumed by the request."
+                                  "completion_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "reasoning_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "accepted_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "rejected_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio output tokens produced by the response."
+                                description: "Token usage from the last agent message"
+                              "responseId":
+                                type: "string"
+                                description: "ID of the response tracking this execution"
                             required:
                               - "last_message"
                               - "finish_reason"
@@ -19470,6 +20028,9 @@ paths:
                                 type: "string"
                               "code":
                                 type: "number"
+                              "responseId":
+                                type: "string"
+                                description: "ID of the response tracking this execution"
                             required:
                               - "error"
                               - "code"
@@ -19552,6 +20113,8 @@ paths:
                                 type: "object"
                                 additionalProperties: {}
                               "agent_tool_call_id":
+                                type: "string"
+                              "responseId":
                                 type: "string"
                             required:
                               - "agent_id"
@@ -19917,6 +20480,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "tool_id"
                               - "action_type"
@@ -19990,6 +20555,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "action_type"
                               - "tool_execution_context"
@@ -20069,6 +20636,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "error"
                               - "action_type"
@@ -20551,7 +21120,7 @@ paths:
                                     type: "integer"
                                     exclusiveMinimum: 0
                                     minimum: 1
-                                    default: 15
+                                    default: 100
                                     description: "Maximum iterations(llm calls) before the agent will stop executing."
                                   "max_execution_time":
                                     type: "integer"
@@ -20673,7 +21242,7 @@ paths:
                                         - "execute_on"
                                     title: "Agent guardrail configuration"
                                     description: "Configuration for a guardrail applied to the agent"
-                                default: {"max_execution_time": 300, "max_iterations": 15, "tool_approval_required": "respect_tool", "tools": []}
+                                default: {"max_execution_time": 300, "max_iterations": 100, "tool_approval_required": "respect_tool", "tools": []}
                               "agent_manifest_id":
                                 type: "string"
                               "agent_key":
@@ -20687,6 +21256,8 @@ paths:
                                 type: "boolean"
                               "stream":
                                 type: "boolean"
+                              "responseId":
+                                type: "string"
                             required:
                               - "inputMessage"
                               - "modelId"
@@ -21065,6 +21636,57 @@ paths:
                                 type: "number"
                               "accumulated_execution_time":
                                 type: "number"
+                              "responseId":
+                                type: "string"
+                              "usage":
+                                type: "object"
+                                properties:
+                                  "completion_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the generated completion."
+                                  "prompt_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the prompt."
+                                  "total_tokens":
+                                    type: "number"
+                                    description: "Total number of tokens used in the request (prompt + completion)."
+                                  "prompt_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "cached_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio input tokens consumed by the request."
+                                  "completion_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "reasoning_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "accepted_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "rejected_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio output tokens produced by the response."
+                                description: "Usage statistics for the completion request."
                             required:
                               - "agent_id"
                               - "message_difference"
@@ -21088,6 +21710,147 @@ paths:
                             properties:
                               "last_message":
                                 type: "string"
+                              "last_message_full":
+                                type: "object"
+                                properties:
+                                  "messageId":
+                                    type: "string"
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "user"
+                                      - "agent"
+                                      - "tool"
+                                      - "system"
+                                    description: "Extended A2A message role"
+                                  "parts":
+                                    type: "array"
+                                    items:
+                                      oneOf:
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "text"
+                                            "text":
+                                              type: "string"
+                                          required:
+                                            - "kind"
+                                            - "text"
+                                          title: "Text Part"
+                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "data"
+                                            "data":
+                                              type: "object"
+                                              additionalProperties: {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "data"
+                                          title: "Data Part"
+                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "file"
+                                            "file":
+                                              anyOf:
+                                                - type: "object"
+                                                  properties:
+                                                    "bytes":
+                                                      type: "string"
+                                                      minLength: 1
+                                                      description: "base64 encoded content of the file"
+                                                    "mimeType":
+                                                      type: "string"
+                                                      description: "Optional mimeType for the file"
+                                                    "name":
+                                                      type: "string"
+                                                      description: "Optional name for the file"
+                                                  required:
+                                                    - "bytes"
+                                                  title: "Binary format"
+                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
+                                                - type: "object"
+                                                  properties:
+                                                    "uri":
+                                                      type: "string"
+                                                      description: "URL for the File content"
+                                                    "mimeType":
+                                                      type: "string"
+                                                      description: "Optional mimeType for the file"
+                                                    "name":
+                                                      type: "string"
+                                                      description: "Optional name for the file"
+                                                  required:
+                                                    - "uri"
+                                                  title: "File in URI format"
+                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "file"
+                                          title: "File Part"
+                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "tool_call"
+                                            "tool_name":
+                                              type: "string"
+                                            "tool_call_id":
+                                              type: "string"
+                                            "arguments":
+                                              type: "object"
+                                              additionalProperties: {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "tool_name"
+                                            - "tool_call_id"
+                                            - "arguments"
+                                          title: "Tool Call Part"
+                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
+                                        - type: "object"
+                                          properties:
+                                            "kind":
+                                              type: "string"
+                                              enum:
+                                                - "tool_result"
+                                            "tool_call_id":
+                                              type: "string"
+                                            "result": {}
+                                            "metadata":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "kind"
+                                            - "tool_call_id"
+                                          title: "Tool Result Part"
+                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                  "metadata":
+                                    type: "object"
+                                    additionalProperties: {}
+                                required:
+                                  - "role"
+                                  - "parts"
+                                description: "Full last message in A2A format (for backwards compatibility)"
                               "finish_reason":
                                 type: "string"
                                 enum:
@@ -21122,6 +21885,58 @@ paths:
                                     - "type"
                                     - "function"
                                 description: "Tool calls that are pending user response (for function_call finish reason)"
+                              "usage":
+                                type: "object"
+                                properties:
+                                  "completion_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the generated completion."
+                                  "prompt_tokens":
+                                    type: "number"
+                                    description: "Number of tokens in the prompt."
+                                  "total_tokens":
+                                    type: "number"
+                                    description: "Total number of tokens used in the request (prompt + completion)."
+                                  "prompt_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "cached_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio input tokens consumed by the request."
+                                  "completion_tokens_details":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "reasoning_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "accepted_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "rejected_prediction_tokens":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "audio_tokens":
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        description: "The number of audio output tokens produced by the response."
+                                description: "Token usage from the last agent message"
+                              "responseId":
+                                type: "string"
+                                description: "ID of the response tracking this execution"
                             required:
                               - "last_message"
                               - "finish_reason"
@@ -21145,6 +21960,9 @@ paths:
                                 type: "string"
                               "code":
                                 type: "number"
+                              "responseId":
+                                type: "string"
+                                description: "ID of the response tracking this execution"
                             required:
                               - "error"
                               - "code"
@@ -21227,6 +22045,8 @@ paths:
                                 type: "object"
                                 additionalProperties: {}
                               "agent_tool_call_id":
+                                type: "string"
+                              "responseId":
                                 type: "string"
                             required:
                               - "agent_id"
@@ -21592,6 +22412,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "tool_id"
                               - "action_type"
@@ -21665,6 +22487,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "action_type"
                               - "tool_execution_context"
@@ -21744,6 +22568,8 @@ paths:
                                   - "agent_manifest_id"
                                   - "agent_execution_id"
                                   - "product"
+                              "responseId":
+                                type: "string"
                             required:
                               - "error"
                               - "action_type"
@@ -22118,7 +22944,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-22T10:49:24.600Z"
+                    default: "2025-11-22T21:11:51.165Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -22207,7 +23033,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-22T10:49:24.600Z"
+                          default: "2025-11-22T21:11:51.165Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -22275,7 +23101,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-22T10:49:24.600Z"
+                    default: "2025-11-22T21:11:51.165Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -26845,7 +27671,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KANJXZ66MWVJZ6GE32HGBRZ1"
+                              default: "tool_01KAPPHKFDWTD9TCRT60R01BT7"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26944,7 +27770,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KANJXZ6940R8515ED7935BRM"
+                              default: "tool_01KAPPHKFP4MS7C2NCBM8T8PG4"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27045,7 +27871,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KANJXZ6BZYCEWGKSJQS86QZB"
+                              default: "tool_01KAPPHKFRWGBFFDGX08HFQ7G9"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27179,7 +28005,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KANJXZ6D6F5RYE6YQ7YSY26C"
+                              default: "tool_01KAPPHKFS35YT2CXTYM000DFV"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27253,7 +28079,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KANJXZ6FP4189HBT9NJQATVW"
+                                        default: "01KAPPHKFT138ZPEF6VXT3MNVQ"
                                       "name":
                                         type: "string"
                                       "description":
@@ -27304,7 +28130,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KANJXZ6F2KB28X1RYKNNGJQ5"
+                              default: "tool_01KAPPHKFVDHE3MW5HFQRT8XYB"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27847,7 +28673,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ72X8526FK11TRBJ8H9"
+                        default: "tool_01KAPPHKGBC59YC2X8DVQR2KJ7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27946,7 +28772,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ74007TM1KVGQ27AQSR"
+                        default: "tool_01KAPPHKGFJ8NQ8X8MEPBS9DVE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28047,7 +28873,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7711BJAQ640WB8K68M"
+                        default: "tool_01KAPPHKGHCMFEZYQNAZG3YZQM"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28181,7 +29007,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7A7HQ3Z4TXYCRQT2YR"
+                        default: "tool_01KAPPHKGMD44BC3KVC8FGNR3D"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28255,7 +29081,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KANJXZ7CKSM3EF0AFKKE5PR2"
+                                  default: "01KAPPHKGP3QEJ0J0526ZDY7DN"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28306,7 +29132,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7EB07SGP68DJGNF48D"
+                        default: "tool_01KAPPHKGQTGWFH2M1KKPJE1N9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28746,7 +29572,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KANJXZ87X0C35YHR99HJ13D3"
+                                default: "01KAPPHKHHNHDSM1TZ97JWXGEN"
                               "name":
                                 type: "string"
                               "description":
@@ -28864,7 +29690,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7SCB1KHWE5SAKJNFSQ"
+                        default: "tool_01KAPPHKH0D3M48GMD51B0GJ20"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28963,7 +29789,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7VZWXH0Z2CYNBTHX3M"
+                        default: "tool_01KAPPHKH1T37YYN56NNQJDGDH"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29064,7 +29890,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7XEGKYH6X9CPB04PF8"
+                        default: "tool_01KAPPHKH3C4N7CZVQ3475ZX3K"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29198,7 +30024,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ7Z8Y5G46WYY0W81JVZ"
+                        default: "tool_01KAPPHKH46CQ4F6D8GFE2M1R5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29272,7 +30098,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KANJXZ80T7J1ZC6BPNM4VZB4"
+                                  default: "01KAPPHKHBA37YRGWRKDY24Z4V"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29323,7 +30149,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ8109C6AWDGAQFW112A"
+                        default: "tool_01KAPPHKHCK92NTQ5HR0ZSXZ21"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29477,7 +30303,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ8RMPPQS6SGMB719XEK"
+                        default: "tool_01KAPPHKHZ0606K018JSXFZ8ZA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29576,7 +30402,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ8SA8TBWYM9NZBCCVGZ"
+                        default: "tool_01KAPPHKJ170KV7AM46BYC2QAH"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29677,7 +30503,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ8VK1G6PE16KV03PFCB"
+                        default: "tool_01KAPPHKJ36PPT2085SHJK0E9W"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29811,7 +30637,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ8YME9EANA8QR6NF52E"
+                        default: "tool_01KAPPHKJ6SBG8Z93QHKWXM6X8"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29885,7 +30711,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KANJXZ90YK8DGKJYMWY8F14M"
+                                  default: "01KAPPHKJ85GCNWY1ZBSRSJ1VH"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29936,7 +30762,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KANJXZ91KKKDHVVJJ4ZF6607"
+                        default: "tool_01KAPPHKJ952AWAPVNNQKJK2XS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -30195,7 +31021,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T10:49:21.995Z"
+                          default: "2025-11-22T21:11:48.742Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -30203,7 +31029,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:21.995Z"
+                              default: "2025-11-22T21:11:48.742Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -30397,7 +31223,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.995Z"
+                    default: "2025-11-22T21:11:48.742Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30405,7 +31231,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.995Z"
+                        default: "2025-11-22T21:11:48.742Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30539,7 +31365,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.995Z"
+                    default: "2025-11-22T21:11:48.742Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30547,7 +31373,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.995Z"
+                        default: "2025-11-22T21:11:48.742Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30707,7 +31533,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.995Z"
+                    default: "2025-11-22T21:11:48.742Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30715,7 +31541,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.995Z"
+                        default: "2025-11-22T21:11:48.742Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -32618,7 +33444,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KANJXZCYSWQGGH3D17DGTXNA"
+                          default: "01KAPPHKNQ6AVEP6KZCXV5Q0S2"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -32784,7 +33610,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KANJXZD09A7GXQ005RQWEDBA"
+                    default: "01KAPPHKNSQ5J76544TNBHWEMB"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32880,7 +33706,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KANJXZCZDDTYT287YQJ0N59F"
+                    default: "01KAPPHKNSEVW72RZTPFQX40KR"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33012,7 +33838,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KANJXZD3CNZ91FGTEFXEB6D9"
+                    default: "01KAPPHKNWDP8B7JJHVG31SYYK"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -35466,7 +36292,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T10:49:21.595Z"
+                          default: "2025-11-22T21:11:48.435Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35474,7 +36300,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:21.596Z"
+                              default: "2025-11-22T21:11:48.435Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35610,7 +36436,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35618,7 +36444,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35741,7 +36567,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35749,7 +36575,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35902,7 +36728,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35910,7 +36736,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36380,7 +37206,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T10:49:34.941Z"
+                                    default: "2025-11-22T21:11:58.457Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -36420,7 +37246,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T10:49:34.941Z"
+                                    default: "2025-11-22T21:11:58.458Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -36460,7 +37286,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-22T10:49:34.942Z"
+                                    default: "2025-11-22T21:11:58.458Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -36496,7 +37322,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-22T10:49:21.595Z"
+                          default: "2025-11-22T21:11:48.435Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -36504,7 +37330,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:21.596Z"
+                              default: "2025-11-22T21:11:48.435Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -37264,7 +38090,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T10:49:34.964Z"
+                                default: "2025-11-22T21:11:58.471Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -37304,7 +38130,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T10:49:34.964Z"
+                                default: "2025-11-22T21:11:58.472Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -37344,7 +38170,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-22T10:49:34.965Z"
+                                default: "2025-11-22T21:11:58.473Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -37380,7 +38206,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-22T10:49:21.595Z"
+                      default: "2025-11-22T21:11:48.435Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -37388,7 +38214,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-22T10:49:21.596Z"
+                          default: "2025-11-22T21:11:48.435Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -37802,7 +38628,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.948Z"
+                              default: "2025-11-22T21:11:58.463Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37842,7 +38668,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.957Z"
+                              default: "2025-11-22T21:11:58.464Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37882,7 +38708,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.958Z"
+                              default: "2025-11-22T21:11:58.464Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37918,7 +38744,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37926,7 +38752,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -38684,7 +39510,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.990Z"
+                              default: "2025-11-22T21:11:58.503Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38724,7 +39550,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.991Z"
+                              default: "2025-11-22T21:11:58.504Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38764,7 +39590,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-22T10:49:34.991Z"
+                              default: "2025-11-22T21:11:58.505Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38800,7 +39626,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-22T10:49:21.595Z"
+                    default: "2025-11-22T21:11:48.435Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -38808,7 +39634,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-22T10:49:21.596Z"
+                        default: "2025-11-22T21:11:48.435Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
