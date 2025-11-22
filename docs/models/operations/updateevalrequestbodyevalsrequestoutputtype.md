@@ -7,11 +7,11 @@ The type of output expected from the evaluator
 ```typescript
 import { UpdateEvalRequestBodyEvalsRequestOutputType } from "@orq-ai/node/models/operations";
 
-let value: UpdateEvalRequestBodyEvalsRequestOutputType = "number";
+let value: UpdateEvalRequestBodyEvalsRequestOutputType = "categorical";
 ```
 
 ## Values
 
 ```typescript
-"boolean" | "number" | "string"
+"boolean" | "categorical" | "number" | "string"
 ```

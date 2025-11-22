@@ -27,14 +27,14 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an agent
+ * Delete agent
  *
  * @remarks
- * Permanently deletes an agent and all its configuration, including primary and fallback model settings.
+ * Permanently removes an agent from the workspace. This operation is irreversible and will delete all associated configuration including model assignments, tools, knowledge bases, memory stores, and cached data. Active agent sessions will be terminated, and the agent key will become available for reuse.
  */
 export function agentsDelete(
   client: OrqCore,
-  request: operations.DeleteAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -52,14 +52,14 @@ export function agentsDelete(
 > {
   return new APIPromise($do(
     client,
-    request,
+    agentKey,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.DeleteAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,8 +78,12 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.DeleteAgentRequest = {
+    agentKey: agentKey,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.DeleteAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );

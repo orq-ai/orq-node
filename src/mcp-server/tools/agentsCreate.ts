@@ -7,14 +7,14 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.CreateAgentRequestBody$inboundSchema.optional(),
+  request: operations.CreateAgentRequestRequestBody$inboundSchema.optional(),
 };
 
 export const tool$agentsCreate: ToolDefinition<typeof args> = {
   name: "agents-create",
-  description: `Create a new agent
+  description: `Create agent
 
-Creates a new AI agent with specified configuration. Agents can be configured with a primary model and an optional fallback model that will be used automatically if the primary model fails.`,
+Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsCreate(

@@ -1,6 +1,6 @@
 # StreamRunAgentResponseBody
 
-SSE stream of agent events
+Server-Sent Event stream successfully established. Delivers real-time agent execution events including message fragments, tool invocations, intermediate results, and completion status. Stream terminates with [DONE] sentinel upon completion.
 
 ## Example Usage
 
@@ -8,12 +8,19 @@ SSE stream of agent events
 import { StreamRunAgentResponseBody } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentResponseBody = {
-  data: "<value>",
+  data: {
+    type: "event.agents.handed_off",
+    timestamp: "<value>",
+    data: {
+      agentId: "<id>",
+      input: "<value>",
+    },
+  },
 };
 ```
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `data`                  | *string*                | :heavy_check_mark:      | JSON-encoded event data |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `data`                          | *operations.StreamRunAgentData* | :heavy_check_mark:              | N/A                             |

@@ -1,5 +1,7 @@
 # GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
 
+The type must be "object"
+
 ## Example Usage
 
 ```typescript

@@ -10,26 +10,26 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export const StreamAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
- * Tool message
+ * Message containing tool execution results
  */
 export type StreamAgentRoleToolMessage = ClosedEnum<
   typeof StreamAgentRoleToolMessage
 >;
 
 /**
- * User message
+ * Message from the end user
  */
 export const StreamAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
- * User message
+ * Message from the end user
  */
 export type StreamAgentRoleUserMessage = ClosedEnum<
   typeof StreamAgentRoleUserMessage
@@ -138,7 +138,10 @@ export type StreamAgentPublicMessagePart =
   | StreamAgentPublicMessagePartFilePart
   | StreamAgentPublicMessagePartToolResultPart;
 
-export type StreamAgentMessage = {
+/**
+ * The A2A message to send to the agent (user input or tool results)
+ */
+export type StreamAgentA2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -216,7 +219,10 @@ export type StreamAgentRequestBody = {
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
    */
   taskId?: string | undefined;
-  message: StreamAgentMessage;
+  /**
+   * The A2A message to send to the agent (user input or tool results)
+   */
+  message: StreamAgentA2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -251,14 +257,1819 @@ export type StreamAgentRequest = {
   requestBody?: StreamAgentRequestBody | undefined;
 };
 
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type =
+  {
+    AgentsError: "agents.error",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data =
+  {
+    error: string;
+    code: string;
+  };
+
+export type Data17 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type =
+  {
+    AgentsTimeout: "agents.timeout",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data =
+  {
+    message: string;
+  };
+
+export type Data16 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type =
+  {
+    EventWorkflowEventsToolExecutionFailed:
+      "event.workflow_events.tool_execution_failed",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type
+  >;
+
+export type DataError = {
+  message: string;
+  stack?: string | undefined;
+};
+
 /**
- * SSE stream of agent events
+ * Orquesta product
+ */
+export const StreamAgentDataAgentsResponseProduct = {
+  Remoteconfigs: "remoteconfigs",
+  Deployments: "deployments",
+  Experiments: "experiments",
+  Playgrounds: "playgrounds",
+  Spreadsheets: "spreadsheets",
+  SpreadsheetRun: "spreadsheet_run",
+  LlmEvaluator: "llm_evaluator",
+  Knowledge: "knowledge",
+  Router: "router",
+  Workflows: "workflows",
+  ExternalEvents: "external_events",
+  Agents: "agents",
+  MemoryStores: "memory-stores",
+  Generic: "generic",
+  Evaluators: "evaluators",
+  Otel: "otel",
+} as const;
+/**
+ * Orquesta product
+ */
+export type StreamAgentDataAgentsResponseProduct = ClosedEnum<
+  typeof StreamAgentDataAgentsResponseProduct
+>;
+
+export type StreamAgentDataAgentsResponseMemory = {
+  entityId: string;
+};
+
+export type StreamAgentDataAgentsResponseToolExecutionContext = {
+  actionId: string;
+  agentToolCallId: string;
+  workspaceId: string;
+  agentManifestId: string;
+  agentExecutionId: string;
+  /**
+   * Orquesta product
+   */
+  product: StreamAgentDataAgentsResponseProduct;
+  memory?: StreamAgentDataAgentsResponseMemory | undefined;
+  parentId?: string | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data =
+  {
+    error: DataError;
+    actionType: string;
+    toolExecutionContext: StreamAgentDataAgentsResponseToolExecutionContext;
+    responseId?: string | undefined;
+  };
+
+export type Data15 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type =
+  {
+    EventWorkflowEventsToolExecutionFinished:
+      "event.workflow_events.tool_execution_finished",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type
+  >;
+
+/**
+ * Orquesta product
+ */
+export const StreamAgentDataAgentsProduct = {
+  Remoteconfigs: "remoteconfigs",
+  Deployments: "deployments",
+  Experiments: "experiments",
+  Playgrounds: "playgrounds",
+  Spreadsheets: "spreadsheets",
+  SpreadsheetRun: "spreadsheet_run",
+  LlmEvaluator: "llm_evaluator",
+  Knowledge: "knowledge",
+  Router: "router",
+  Workflows: "workflows",
+  ExternalEvents: "external_events",
+  Agents: "agents",
+  MemoryStores: "memory-stores",
+  Generic: "generic",
+  Evaluators: "evaluators",
+  Otel: "otel",
+} as const;
+/**
+ * Orquesta product
+ */
+export type StreamAgentDataAgentsProduct = ClosedEnum<
+  typeof StreamAgentDataAgentsProduct
+>;
+
+export type StreamAgentDataAgentsMemory = {
+  entityId: string;
+};
+
+export type StreamAgentDataAgentsToolExecutionContext = {
+  actionId: string;
+  agentToolCallId: string;
+  workspaceId: string;
+  agentManifestId: string;
+  agentExecutionId: string;
+  /**
+   * Orquesta product
+   */
+  product: StreamAgentDataAgentsProduct;
+  memory?: StreamAgentDataAgentsMemory | undefined;
+  parentId?: string | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data =
+  {
+    result?: any | undefined;
+    actionType: string;
+    toolExecutionContext: StreamAgentDataAgentsToolExecutionContext;
+    responseId?: string | undefined;
+  };
+
+export type Data14 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type =
+  {
+    EventWorkflowEventsToolExecutionStarted:
+      "event.workflow_events.tool_execution_started",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type
+  >;
+
+/**
+ * Orquesta product
+ */
+export const StreamAgentDataProduct = {
+  Remoteconfigs: "remoteconfigs",
+  Deployments: "deployments",
+  Experiments: "experiments",
+  Playgrounds: "playgrounds",
+  Spreadsheets: "spreadsheets",
+  SpreadsheetRun: "spreadsheet_run",
+  LlmEvaluator: "llm_evaluator",
+  Knowledge: "knowledge",
+  Router: "router",
+  Workflows: "workflows",
+  ExternalEvents: "external_events",
+  Agents: "agents",
+  MemoryStores: "memory-stores",
+  Generic: "generic",
+  Evaluators: "evaluators",
+  Otel: "otel",
+} as const;
+/**
+ * Orquesta product
+ */
+export type StreamAgentDataProduct = ClosedEnum<typeof StreamAgentDataProduct>;
+
+export type StreamAgentDataMemory = {
+  entityId: string;
+};
+
+export type StreamAgentDataToolExecutionContext = {
+  actionId: string;
+  agentToolCallId: string;
+  workspaceId: string;
+  agentManifestId: string;
+  agentExecutionId: string;
+  /**
+   * Orquesta product
+   */
+  product: StreamAgentDataProduct;
+  memory?: StreamAgentDataMemory | undefined;
+  parentId?: string | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data =
+  {
+    toolId: string;
+    toolKey?: string | undefined;
+    toolDisplayName?: string | undefined;
+    actionType: string;
+    toolArguments: { [k: string]: any };
+    toolExecutionContext: StreamAgentDataToolExecutionContext;
+    responseId?: string | undefined;
+  };
+
+export type Data13 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type =
+  {
+    EventAgentsMessageCreated: "event.agents.message-created",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type
+  >;
+
+export const StreamAgentDataAgentsResponse200Role = {
+  User: "user",
+  Tool: "tool",
+} as const;
+export type StreamAgentDataAgentsResponse200Role = ClosedEnum<
+  typeof StreamAgentDataAgentsResponse200Role
+>;
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind =
+  {
+    ToolResult: "tool_result",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind
+  >;
+
+/**
+ * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ */
+export type StreamAgentPartsAgentsResponse200ToolResultPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind;
+  toolCallId: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind =
+  {
+    ToolCall: "tool_call",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind
+  >;
+
+/**
+ * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
+ */
+export type StreamAgentPartsAgentsResponse200ToolCallPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind;
+  toolName: string;
+  toolCallId: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind =
+  {
+    File: "file",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind
+  >;
+
+/**
+ * File in URI format. Check in the model's documentation for the supported mime types for the URI format
+ */
+export type StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat = {
+  /**
+   * URL for the File content
+   */
+  uri: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+/**
+ * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
+ */
+export type StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat = {
+  /**
+   * base64 encoded content of the file
+   */
+  bytes: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+export type StreamAgentPartsAgentsResponse200File =
+  | StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat
+  | StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat;
+
+/**
+ * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+ */
+export type StreamAgentPartsAgentsResponse200FilePart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind;
+  file:
+    | StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat
+    | StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind =
+  {
+    Data: "data",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind
+  >;
+
+/**
+ * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
+ */
+export type StreamAgentPartsAgentsResponse200DataPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind =
+  {
+    Text: "text",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind
+  >;
+
+/**
+ * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
+ */
+export type StreamAgentPartsAgentsResponse200TextPart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind;
+  text: string;
+};
+
+export type StreamAgentDataAgentsResponse200Parts =
+  | StreamAgentPartsAgentsResponse200ToolCallPart
+  | StreamAgentPartsAgentsResponse200TextPart
+  | StreamAgentPartsAgentsResponse200DataPart
+  | StreamAgentPartsAgentsResponse200FilePart
+  | StreamAgentPartsAgentsResponse200ToolResultPart;
+
+export type StreamAgentDataMessage = {
+  messageId?: string | undefined;
+  role: StreamAgentDataAgentsResponse200Role;
+  parts: Array<
+    | StreamAgentPartsAgentsResponse200ToolCallPart
+    | StreamAgentPartsAgentsResponse200TextPart
+    | StreamAgentPartsAgentsResponse200DataPart
+    | StreamAgentPartsAgentsResponse200FilePart
+    | StreamAgentPartsAgentsResponse200ToolResultPart
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data =
+  {
+    workflowRunId: string;
+    spanId: string;
+    parentId: string;
+    message: Array<StreamAgentDataMessage>;
+  };
+
+export type Data12 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type =
+  {
+    EventAgentsHandedOff: "event.agents.handed_off",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data =
+  {
+    agentId: string;
+    input: string;
+  };
+
+export type Data11 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type =
+  {
+    EventAgentsExecutionNamed: "event.agents.execution_named",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data =
+  {
+    name: string;
+    agentManifestId: string;
+  };
+
+export type Data10 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type =
+  {
+    EventAgentsExecutionReviewed: "event.agents.execution_reviewed",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data =
+  {};
+
+export type Data9 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type =
+  {
+    EventAgentsExecutionReviewRequired:
+      "event.agents.execution_review_required",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type
+  >;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data =
+  {};
+
+export type Data8 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type =
+  {
+    EventAgentsActionReviewed: "event.agents.action_reviewed",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type
+  >;
+
+export const DataReview = {
+  Approved: "approved",
+  Rejected: "rejected",
+} as const;
+export type DataReview = ClosedEnum<typeof DataReview>;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data = {
+  agentId: string;
+  actionId: string;
+  agentToolCallId: string;
+  review: DataReview;
+  mockOutput?: { [k: string]: any } | undefined;
+  reviewSource?: string | undefined;
+  reviewedById?: string | undefined;
+};
+
+export type Data7 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType = {
+  EventAgentsActionReviewRequested: "event.agents.action_review_requested",
+} as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType
+  >;
+
+export type StreamAgentDataConditions = {
+  /**
+   * The argument of the tool call to evaluate
+   */
+  condition: string;
+  /**
+   * The operator to use
+   */
+  operator: string;
+  /**
+   * The value to compare against
+   */
+  value: string;
+};
+
+export type DataTool = {
+  /**
+   * The id of the resource
+   */
+  id: string;
+  /**
+   * Optional tool key for custom tools
+   */
+  key?: string | undefined;
+  actionType: string;
+  displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
+  requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
+  conditions?: Array<StreamAgentDataConditions> | undefined;
+  /**
+   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   */
+  timeout?: number | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData = {
+  agentId: string;
+  actionId: string;
+  requiresApproval: boolean;
+  tool: DataTool;
+  input: { [k: string]: any };
+  agentToolCallId: string;
+  responseId?: string | undefined;
+};
+
+export type Data6 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamType = {
+  EventAgentsErrored: "event.agents.errored",
+} as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamType = ClosedEnum<
+  typeof StreamAgentDataAgentsResponse200TextEventStreamType
+>;
+
+export type StreamAgentDataAgentsResponse200TextEventStreamData = {
+  error: string;
+  code: number;
+  /**
+   * ID of the response tracking this execution
+   */
+  responseId?: string | undefined;
+};
+
+export type Data5 = {
+  type: StreamAgentDataAgentsResponse200TextEventStreamType;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamData;
+};
+
+export const StreamAgentDataAgentsResponse200Type = {
+  EventAgentsInactive: "event.agents.inactive",
+} as const;
+export type StreamAgentDataAgentsResponse200Type = ClosedEnum<
+  typeof StreamAgentDataAgentsResponse200Type
+>;
+
+/**
+ * Extended A2A message role
+ */
+export const StreamAgentDataAgentsResponseRole = {
+  User: "user",
+  Agent: "agent",
+  Tool: "tool",
+  System: "system",
+} as const;
+/**
+ * Extended A2A message role
+ */
+export type StreamAgentDataAgentsResponseRole = ClosedEnum<
+  typeof StreamAgentDataAgentsResponseRole
+>;
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind =
+  {
+    ToolResult: "tool_result",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind
+  >;
+
+/**
+ * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ */
+export type StreamAgentPartsAgentsResponseToolResultPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind;
+  toolCallId: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind =
+  {
+    ToolCall: "tool_call",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind
+  >;
+
+/**
+ * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
+ */
+export type StreamAgentPartsAgentsResponseToolCallPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind;
+  toolName: string;
+  toolCallId: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind =
+  {
+    File: "file",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind
+  >;
+
+/**
+ * File in URI format. Check in the model's documentation for the supported mime types for the URI format
+ */
+export type StreamAgentFileAgentsResponse200FileInURIFormat = {
+  /**
+   * URL for the File content
+   */
+  uri: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+/**
+ * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
+ */
+export type StreamAgentFileAgentsResponse200BinaryFormat = {
+  /**
+   * base64 encoded content of the file
+   */
+  bytes: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+export type StreamAgentPartsAgentsResponseFile =
+  | StreamAgentFileAgentsResponse200BinaryFormat
+  | StreamAgentFileAgentsResponse200FileInURIFormat;
+
+/**
+ * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+ */
+export type StreamAgentPartsAgentsResponseFilePart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind;
+  file:
+    | StreamAgentFileAgentsResponse200BinaryFormat
+    | StreamAgentFileAgentsResponse200FileInURIFormat;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind =
+  {
+    Data: "data",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind
+  >;
+
+/**
+ * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
+ */
+export type StreamAgentPartsAgentsResponseDataPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind =
+  {
+    Text: "text",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind
+  >;
+
+/**
+ * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
+ */
+export type StreamAgentPartsAgentsResponseTextPart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind;
+  text: string;
+};
+
+export type StreamAgentDataAgentsResponseParts =
+  | StreamAgentPartsAgentsResponseToolCallPart
+  | StreamAgentPartsAgentsResponseTextPart
+  | StreamAgentPartsAgentsResponseDataPart
+  | StreamAgentPartsAgentsResponseFilePart
+  | StreamAgentPartsAgentsResponseToolResultPart;
+
+/**
+ * Full last message in A2A format (for backwards compatibility)
+ */
+export type DataLastMessageFull = {
+  messageId?: string | undefined;
+  /**
+   * Extended A2A message role
+   */
+  role: StreamAgentDataAgentsResponseRole;
+  parts: Array<
+    | StreamAgentPartsAgentsResponseToolCallPart
+    | StreamAgentPartsAgentsResponseTextPart
+    | StreamAgentPartsAgentsResponseDataPart
+    | StreamAgentPartsAgentsResponseFilePart
+    | StreamAgentPartsAgentsResponseToolResultPart
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/**
+ * The reason why the agent execution became inactive
+ */
+export const DataFinishReason = {
+  Stop: "stop",
+  Length: "length",
+  ToolCalls: "tool_calls",
+  ContentFilter: "content_filter",
+  FunctionCall: "function_call",
+  MaxIterations: "max_iterations",
+  MaxTime: "max_time",
+} as const;
+/**
+ * The reason why the agent execution became inactive
+ */
+export type DataFinishReason = ClosedEnum<typeof DataFinishReason>;
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type =
+  {
+    Function: "function",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type
+  >;
+
+export type StreamAgentDataFunction = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+export type DataPendingToolCalls = {
+  id: string;
+  type: StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type;
+  function: StreamAgentDataFunction;
+};
+
+export type StreamAgentDataAgentsPromptTokensDetails = {
+  cachedTokens?: number | null | undefined;
+  /**
+   * The number of audio input tokens consumed by the request.
+   */
+  audioTokens?: number | null | undefined;
+};
+
+export type StreamAgentDataAgentsCompletionTokensDetails = {
+  reasoningTokens?: number | null | undefined;
+  acceptedPredictionTokens?: number | null | undefined;
+  rejectedPredictionTokens?: number | null | undefined;
+  /**
+   * The number of audio output tokens produced by the response.
+   */
+  audioTokens?: number | null | undefined;
+};
+
+/**
+ * Token usage from the last agent message
+ */
+export type StreamAgentDataAgentsUsage = {
+  /**
+   * Number of tokens in the generated completion.
+   */
+  completionTokens?: number | undefined;
+  /**
+   * Number of tokens in the prompt.
+   */
+  promptTokens?: number | undefined;
+  /**
+   * Total number of tokens used in the request (prompt + completion).
+   */
+  totalTokens?: number | undefined;
+  promptTokensDetails?:
+    | StreamAgentDataAgentsPromptTokensDetails
+    | null
+    | undefined;
+  completionTokensDetails?:
+    | StreamAgentDataAgentsCompletionTokensDetails
+    | null
+    | undefined;
+};
+
+export type StreamAgentDataAgentsResponse200Data = {
+  lastMessage: string;
+  /**
+   * Full last message in A2A format (for backwards compatibility)
+   */
+  lastMessageFull?: DataLastMessageFull | undefined;
+  /**
+   * The reason why the agent execution became inactive
+   */
+  finishReason: DataFinishReason;
+  /**
+   * Tool calls that are pending user response (for function_call finish reason)
+   */
+  pendingToolCalls?: Array<DataPendingToolCalls> | undefined;
+  /**
+   * Token usage from the last agent message
+   */
+  usage?: StreamAgentDataAgentsUsage | undefined;
+  /**
+   * ID of the response tracking this execution
+   */
+  responseId?: string | undefined;
+};
+
+export type StreamAgentData4 = {
+  type: StreamAgentDataAgentsResponse200Type;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200Data;
+};
+
+export const StreamAgentDataAgentsResponseType = {
+  EventAgentsThought: "event.agents.thought",
+} as const;
+export type StreamAgentDataAgentsResponseType = ClosedEnum<
+  typeof StreamAgentDataAgentsResponseType
+>;
+
+export const StreamAgentDataAgentsRole = {
+  User: "user",
+  Agent: "agent",
+  Tool: "tool",
+  System: "system",
+} as const;
+export type StreamAgentDataAgentsRole = ClosedEnum<
+  typeof StreamAgentDataAgentsRole
+>;
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind =
+  {
+    ToolResult: "tool_result",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind
+  >;
+
+/**
+ * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ */
+export type StreamAgentPartsAgentsToolResultPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind;
+  toolCallId: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind =
+  {
+    ToolCall: "tool_call",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind
+  >;
+
+/**
+ * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
+ */
+export type StreamAgentPartsAgentsToolCallPart = {
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind;
+  toolName: string;
+  toolCallId: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind =
+  {
+    File: "file",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind
+  >;
+
+/**
+ * File in URI format. Check in the model's documentation for the supported mime types for the URI format
+ */
+export type StreamAgentFileAgentsResponseFileInURIFormat = {
+  /**
+   * URL for the File content
+   */
+  uri: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+/**
+ * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
+ */
+export type StreamAgentFileAgentsResponseBinaryFormat = {
+  /**
+   * base64 encoded content of the file
+   */
+  bytes: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+export type StreamAgentPartsAgentsFile =
+  | StreamAgentFileAgentsResponseBinaryFormat
+  | StreamAgentFileAgentsResponseFileInURIFormat;
+
+/**
+ * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+ */
+export type StreamAgentPartsAgentsFilePart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind;
+  file:
+    | StreamAgentFileAgentsResponseBinaryFormat
+    | StreamAgentFileAgentsResponseFileInURIFormat;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind =
+  {
+    Data: "data",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind
+  >;
+
+/**
+ * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
+ */
+export type StreamAgentPartsAgentsDataPart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind =
+  {
+    Text: "text",
+  } as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind =
+  ClosedEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind
+  >;
+
+/**
+ * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
+ */
+export type StreamAgentPartsAgentsTextPart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind;
+  text: string;
+};
+
+export type StreamAgentDataAgentsParts =
+  | StreamAgentPartsAgentsToolCallPart
+  | StreamAgentPartsAgentsTextPart
+  | StreamAgentPartsAgentsDataPart
+  | StreamAgentPartsAgentsFilePart
+  | StreamAgentPartsAgentsToolResultPart;
+
+export type DataMessageDifference = {
+  messageId: string;
+  role: StreamAgentDataAgentsRole;
+  parts: Array<
+    | StreamAgentPartsAgentsToolCallPart
+    | StreamAgentPartsAgentsTextPart
+    | StreamAgentPartsAgentsDataPart
+    | StreamAgentPartsAgentsFilePart
+    | StreamAgentPartsAgentsToolResultPart
+  >;
+  metadata?: { [k: string]: any } | undefined;
+  agentId: string;
+  agentExecutionId: string;
+  workspaceId: string;
+};
+
+/**
+ * The reason the model stopped generating tokens.
+ */
+export const StreamAgentDataFinishReason = {
+  Stop: "stop",
+  Length: "length",
+  ToolCalls: "tool_calls",
+  ContentFilter: "content_filter",
+  FunctionCall: "function_call",
+} as const;
+/**
+ * The reason the model stopped generating tokens.
+ */
+export type StreamAgentDataFinishReason = ClosedEnum<
+  typeof StreamAgentDataFinishReason
+>;
+
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type =
+  {
+    Function: "function",
+  } as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type =
+  ClosedEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type
+  >;
+
+export type StreamAgentDataAgentsFunction = {
+  /**
+   * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name?: string | undefined;
+  /**
+   * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+   */
+  arguments?: string | undefined;
+};
+
+export type StreamAgentDataToolCalls = {
+  id?: string | undefined;
+  type?:
+    | StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type
+    | undefined;
+  function?: StreamAgentDataAgentsFunction | undefined;
+};
+
+export const StreamAgentDataAgentsResponse200TextEventStreamRole = {
+  Assistant: "assistant",
+} as const;
+export type StreamAgentDataAgentsResponse200TextEventStreamRole = ClosedEnum<
+  typeof StreamAgentDataAgentsResponse200TextEventStreamRole
+>;
+
+/**
+ * If the audio output modality is requested, this object contains data about the audio response from the model.
+ */
+export type StreamAgentDataAudio = {
+  id: string;
+  expiresAt: number;
+  data: string;
+  transcript: string;
+};
+
+/**
+ * A chat completion message generated by the model.
+ */
+export type StreamAgentDataAgentsMessage = {
+  content?: string | null | undefined;
+  refusal?: string | null | undefined;
+  toolCalls?: Array<StreamAgentDataToolCalls> | undefined;
+  role?: StreamAgentDataAgentsResponse200TextEventStreamRole | undefined;
+  /**
+   * Internal thought process of the model
+   */
+  reasoning?: string | null | undefined;
+  /**
+   * The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`.
+   */
+  reasoningSignature?: string | null | undefined;
+  /**
+   * Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context.
+   */
+  redactedReasoning?: string | undefined;
+  /**
+   * If the audio output modality is requested, this object contains data about the audio response from the model.
+   */
+  audio?: StreamAgentDataAudio | null | undefined;
+};
+
+export type StreamAgentDataTopLogprobs = {
+  /**
+   * The token.
+   */
+  token: string;
+  /**
+   * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
+   */
+  logprob: number;
+  /**
+   * A list of integers representing the UTF-8 bytes representation of the token.
+   */
+  bytes: Array<number> | null;
+};
+
+export type StreamAgentDataContent = {
+  /**
+   * The token.
+   */
+  token: string;
+  /**
+   * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
+   */
+  logprob: number;
+  /**
+   * A list of integers representing the UTF-8 bytes representation of the token.
+   */
+  bytes: Array<number> | null;
+  /**
+   * List of the most likely tokens and their log probability, at this token position.
+   */
+  topLogprobs: Array<StreamAgentDataTopLogprobs>;
+};
+
+export type StreamAgentDataAgentsTopLogprobs = {
+  /**
+   * The token.
+   */
+  token: string;
+  /**
+   * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
+   */
+  logprob: number;
+  /**
+   * A list of integers representing the UTF-8 bytes representation of the token.
+   */
+  bytes: Array<number> | null;
+};
+
+export type DataRefusal = {
+  /**
+   * The token.
+   */
+  token: string;
+  /**
+   * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
+   */
+  logprob: number;
+  /**
+   * A list of integers representing the UTF-8 bytes representation of the token.
+   */
+  bytes: Array<number> | null;
+  /**
+   * List of the most likely tokens and their log probability, at this token position.
+   */
+  topLogprobs: Array<StreamAgentDataAgentsTopLogprobs>;
+};
+
+/**
+ * Log probability information for the choice.
+ */
+export type DataLogprobs = {
+  /**
+   * A list of message content tokens with log probability information.
+   */
+  content: Array<StreamAgentDataContent> | null;
+  /**
+   * A list of message refusal tokens with log probability information.
+   */
+  refusal: Array<DataRefusal> | null;
+};
+
+export type DataChoice = {
+  /**
+   * The reason the model stopped generating tokens.
+   */
+  finishReason: StreamAgentDataFinishReason | null;
+  /**
+   * The index of the choice in the list of choices.
+   */
+  index?: number | undefined;
+  /**
+   * A chat completion message generated by the model.
+   */
+  message: StreamAgentDataAgentsMessage;
+  /**
+   * Log probability information for the choice.
+   */
+  logprobs?: DataLogprobs | null | undefined;
+};
+
+export type StreamAgentDataPromptTokensDetails = {
+  cachedTokens?: number | null | undefined;
+  /**
+   * The number of audio input tokens consumed by the request.
+   */
+  audioTokens?: number | null | undefined;
+};
+
+export type StreamAgentDataCompletionTokensDetails = {
+  reasoningTokens?: number | null | undefined;
+  acceptedPredictionTokens?: number | null | undefined;
+  rejectedPredictionTokens?: number | null | undefined;
+  /**
+   * The number of audio output tokens produced by the response.
+   */
+  audioTokens?: number | null | undefined;
+};
+
+/**
+ * Usage statistics for the completion request.
+ */
+export type StreamAgentDataUsage = {
+  /**
+   * Number of tokens in the generated completion.
+   */
+  completionTokens?: number | undefined;
+  /**
+   * Number of tokens in the prompt.
+   */
+  promptTokens?: number | undefined;
+  /**
+   * Total number of tokens used in the request (prompt + completion).
+   */
+  totalTokens?: number | undefined;
+  promptTokensDetails?: StreamAgentDataPromptTokensDetails | null | undefined;
+  completionTokensDetails?:
+    | StreamAgentDataCompletionTokensDetails
+    | null
+    | undefined;
+};
+
+export type StreamAgentDataAgentsResponseData = {
+  agentId: string;
+  messageDifference: { [k: string]: DataMessageDifference };
+  choice?: DataChoice | undefined;
+  choiceIndex?: number | undefined;
+  iteration: number;
+  accumulatedExecutionTime: number;
+  responseId?: string | undefined;
+  /**
+   * Usage statistics for the completion request.
+   */
+  usage?: StreamAgentDataUsage | undefined;
+};
+
+export type StreamAgentData3 = {
+  type: StreamAgentDataAgentsResponseType;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsResponseData;
+};
+
+export const StreamAgentDataAgentsType = {
+  EventAgentsStarted: "event.agents.started",
+} as const;
+export type StreamAgentDataAgentsType = ClosedEnum<
+  typeof StreamAgentDataAgentsType
+>;
+
+/**
+ * Extended A2A message role
+ */
+export const StreamAgentDataRole = {
+  User: "user",
+  Agent: "agent",
+  Tool: "tool",
+  System: "system",
+} as const;
+/**
+ * Extended A2A message role
+ */
+export type StreamAgentDataRole = ClosedEnum<typeof StreamAgentDataRole>;
+
+export const StreamAgentPartsAgentsResponse200TextEventStreamKind = {
+  ToolResult: "tool_result",
+} as const;
+export type StreamAgentPartsAgentsResponse200TextEventStreamKind = ClosedEnum<
+  typeof StreamAgentPartsAgentsResponse200TextEventStreamKind
+>;
+
+/**
+ * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ */
+export type StreamAgentPartsToolResultPart = {
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamKind;
+  toolCallId: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponse200Kind = {
+  ToolCall: "tool_call",
+} as const;
+export type StreamAgentPartsAgentsResponse200Kind = ClosedEnum<
+  typeof StreamAgentPartsAgentsResponse200Kind
+>;
+
+/**
+ * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
+ */
+export type StreamAgentPartsToolCallPart = {
+  kind: StreamAgentPartsAgentsResponse200Kind;
+  toolName: string;
+  toolCallId: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsResponseKind = {
+  File: "file",
+} as const;
+export type StreamAgentPartsAgentsResponseKind = ClosedEnum<
+  typeof StreamAgentPartsAgentsResponseKind
+>;
+
+/**
+ * File in URI format. Check in the model's documentation for the supported mime types for the URI format
+ */
+export type StreamAgentFileAgentsFileInURIFormat = {
+  /**
+   * URL for the File content
+   */
+  uri: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+/**
+ * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
+ */
+export type StreamAgentFileAgentsBinaryFormat = {
+  /**
+   * base64 encoded content of the file
+   */
+  bytes: string;
+  /**
+   * Optional mimeType for the file
+   */
+  mimeType?: string | undefined;
+  /**
+   * Optional name for the file
+   */
+  name?: string | undefined;
+};
+
+export type StreamAgentPartsFile =
+  | StreamAgentFileAgentsBinaryFormat
+  | StreamAgentFileAgentsFileInURIFormat;
+
+/**
+ * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+ */
+export type StreamAgentPartsFilePart = {
+  kind: StreamAgentPartsAgentsResponseKind;
+  file:
+    | StreamAgentFileAgentsBinaryFormat
+    | StreamAgentFileAgentsFileInURIFormat;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsAgentsKind = {
+  Data: "data",
+} as const;
+export type StreamAgentPartsAgentsKind = ClosedEnum<
+  typeof StreamAgentPartsAgentsKind
+>;
+
+/**
+ * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
+ */
+export type StreamAgentPartsDataPart = {
+  kind: StreamAgentPartsAgentsKind;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+export const StreamAgentPartsKind = {
+  Text: "text",
+} as const;
+export type StreamAgentPartsKind = ClosedEnum<typeof StreamAgentPartsKind>;
+
+/**
+ * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
+ */
+export type StreamAgentPartsTextPart = {
+  kind: StreamAgentPartsKind;
+  text: string;
+};
+
+export type StreamAgentDataParts =
+  | StreamAgentPartsToolCallPart
+  | StreamAgentPartsTextPart
+  | StreamAgentPartsDataPart
+  | StreamAgentPartsFilePart
+  | StreamAgentPartsToolResultPart;
+
+export type DataInputMessage = {
+  messageId?: string | undefined;
+  /**
+   * Extended A2A message role
+   */
+  role: StreamAgentDataRole;
+  parts: Array<
+    | StreamAgentPartsToolCallPart
+    | StreamAgentPartsTextPart
+    | StreamAgentPartsDataPart
+    | StreamAgentPartsFilePart
+    | StreamAgentPartsToolResultPart
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/**
+ * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ */
+export const StreamAgentDataToolApprovalRequired = {
+  All: "all",
+  RespectTool: "respect_tool",
+  None: "none",
+} as const;
+/**
+ * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ */
+export type StreamAgentDataToolApprovalRequired = ClosedEnum<
+  typeof StreamAgentDataToolApprovalRequired
+>;
+
+export type StreamAgentDataAgentsConditions = {
+  /**
+   * The argument of the tool call to evaluate
+   */
+  condition: string;
+  /**
+   * The operator to use
+   */
+  operator: string;
+  /**
+   * The value to compare against
+   */
+  value: string;
+};
+
+export type StreamAgentDataTools = {
+  /**
+   * The id of the resource
+   */
+  id: string;
+  /**
+   * Optional tool key for custom tools
+   */
+  key?: string | undefined;
+  actionType: string;
+  displayName?: string | undefined;
+  /**
+   * Optional tool description
+   */
+  description?: string | undefined;
+  requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
+  conditions?: Array<StreamAgentDataAgentsConditions> | undefined;
+  /**
+   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   */
+  timeout?: number | undefined;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const StreamAgentDataExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type StreamAgentDataExecuteOn = ClosedEnum<
+  typeof StreamAgentDataExecuteOn
+>;
+
+export type StreamAgentDataEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: StreamAgentDataExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const StreamAgentDataAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type StreamAgentDataAgentsExecuteOn = ClosedEnum<
+  typeof StreamAgentDataAgentsExecuteOn
+>;
+
+export type StreamAgentDataGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: StreamAgentDataAgentsExecuteOn;
+};
+
+export type StreamAgentDataSettings = {
+  /**
+   * Maximum iterations(llm calls) before the agent will stop executing.
+   */
+  maxIterations?: number | undefined;
+  /**
+   * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
+   */
+  maxExecutionTime?: number | undefined;
+  /**
+   * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+   */
+  toolApprovalRequired?: StreamAgentDataToolApprovalRequired | undefined;
+  tools?: Array<StreamAgentDataTools> | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<StreamAgentDataEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<StreamAgentDataGuardrails> | undefined;
+};
+
+export type StreamAgentDataAgentsData = {
+  integrationId?: string | undefined;
+  inputMessage: DataInputMessage;
+  modelId: string;
+  instructions: string;
+  systemPrompt: string;
+  settings?: StreamAgentDataSettings | undefined;
+  agentManifestId: string;
+  agentKey: string;
+  variables?: { [k: string]: any } | undefined;
+  toolExecutionId?: string | undefined;
+  isContinuation?: boolean | undefined;
+  stream?: boolean | undefined;
+  responseId?: string | undefined;
+};
+
+export type StreamAgentData2 = {
+  type: StreamAgentDataAgentsType;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataAgentsData;
+};
+
+export const StreamAgentDataType = {
+  AgentsExecutionStarted: "agents.execution_started",
+} as const;
+export type StreamAgentDataType = ClosedEnum<typeof StreamAgentDataType>;
+
+export type StreamAgentDataData = {
+  /**
+   * Agent execution task ID (ULID)
+   */
+  agentTaskId: string;
+  /**
+   * Workspace ID
+   */
+  workspaceId: string;
+  /**
+   * Trace ID for the workflow run
+   */
+  traceId: string;
+};
+
+export type StreamAgentData1 = {
+  type: StreamAgentDataType;
+  /**
+   * ISO timestamp of the event
+   */
+  timestamp: string;
+  data: StreamAgentDataData;
+};
+
+export type StreamAgentData =
+  | StreamAgentData1
+  | StreamAgentData2
+  | StreamAgentData3
+  | StreamAgentData4
+  | Data5
+  | Data6
+  | Data7
+  | Data8
+  | Data9
+  | Data10
+  | Data11
+  | Data12
+  | Data13
+  | Data14
+  | Data15
+  | Data16
+  | Data17;
+
+/**
+ * Server-Sent Event stream successfully established. Returns real-time events including agent messages, tool calls, status updates, and completion signals. The stream ends with a [DONE] sentinel value.
  */
 export type StreamAgentResponseBody = {
-  /**
-   * JSON-encoded event data
-   */
-  data: string;
+  data:
+    | StreamAgentData1
+    | StreamAgentData2
+    | StreamAgentData3
+    | StreamAgentData4
+    | Data5
+    | Data6
+    | Data7
+    | Data8
+    | Data9
+    | Data10
+    | Data11
+    | Data12
+    | Data13
+    | Data14
+    | Data15
+    | Data16
+    | Data17;
 };
 
 /** @internal */
@@ -693,8 +2504,8 @@ export function streamAgentPublicMessagePartFromJSON(
 }
 
 /** @internal */
-export const StreamAgentMessage$inboundSchema: z.ZodType<
-  StreamAgentMessage,
+export const StreamAgentA2AMessage$inboundSchema: z.ZodType<
+  StreamAgentA2AMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -712,7 +2523,7 @@ export const StreamAgentMessage$inboundSchema: z.ZodType<
   ),
 });
 /** @internal */
-export type StreamAgentMessage$Outbound = {
+export type StreamAgentA2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
@@ -723,10 +2534,10 @@ export type StreamAgentMessage$Outbound = {
 };
 
 /** @internal */
-export const StreamAgentMessage$outboundSchema: z.ZodType<
-  StreamAgentMessage$Outbound,
+export const StreamAgentA2AMessage$outboundSchema: z.ZodType<
+  StreamAgentA2AMessage$Outbound,
   z.ZodTypeDef,
-  StreamAgentMessage
+  StreamAgentA2AMessage
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
@@ -742,20 +2553,20 @@ export const StreamAgentMessage$outboundSchema: z.ZodType<
   ),
 });
 
-export function streamAgentMessageToJSON(
-  streamAgentMessage: StreamAgentMessage,
+export function streamAgentA2AMessageToJSON(
+  streamAgentA2AMessage: StreamAgentA2AMessage,
 ): string {
   return JSON.stringify(
-    StreamAgentMessage$outboundSchema.parse(streamAgentMessage),
+    StreamAgentA2AMessage$outboundSchema.parse(streamAgentA2AMessage),
   );
 }
-export function streamAgentMessageFromJSON(
+export function streamAgentA2AMessageFromJSON(
   jsonString: string,
-): SafeParseResult<StreamAgentMessage, SDKValidationError> {
+): SafeParseResult<StreamAgentA2AMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StreamAgentMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StreamAgentMessage' from JSON`,
+    (x) => StreamAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentA2AMessage' from JSON`,
   );
 }
 
@@ -919,7 +2730,7 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   task_id: z.string().optional(),
-  message: z.lazy(() => StreamAgentMessage$inboundSchema),
+  message: z.lazy(() => StreamAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => StreamAgentThread$inboundSchema).optional(),
@@ -935,7 +2746,7 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type StreamAgentRequestBody$Outbound = {
   task_id?: string | undefined;
-  message: StreamAgentMessage$Outbound;
+  message: StreamAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: StreamAgentContact$Outbound | undefined;
   thread?: StreamAgentThread$Outbound | undefined;
@@ -951,7 +2762,7 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   StreamAgentRequestBody
 > = z.object({
   taskId: z.string().optional(),
-  message: z.lazy(() => StreamAgentMessage$outboundSchema),
+  message: z.lazy(() => StreamAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),
@@ -1033,16 +2844,6847 @@ export function streamAgentRequestFromJSON(
 }
 
 /** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: z.string(),
+    code: z.string(),
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$Outbound =
+  {
+    error: string;
+    code: string;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data
+  > = z.object({
+    error: z.string(),
+    code: z.string(),
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody17DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody17Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody17Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody17DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data17$inboundSchema: z.ZodType<Data17, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data17$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$Outbound;
+};
+
+/** @internal */
+export const Data17$outboundSchema: z.ZodType<
+  Data17$Outbound,
+  z.ZodTypeDef,
+  Data17
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Data$outboundSchema
+  ),
+});
+
+export function data17ToJSON(data17: Data17): string {
+  return JSON.stringify(Data17$outboundSchema.parse(data17));
+}
+export function data17FromJSON(
+  jsonString: string,
+): SafeParseResult<Data17, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data17$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data17' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    message: z.string(),
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$Outbound =
+  {
+    message: string;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data
+  > = z.object({
+    message: z.string(),
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody16DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody16Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody16Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody16DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data16$inboundSchema: z.ZodType<Data16, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data16$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$Outbound;
+};
+
+/** @internal */
+export const Data16$outboundSchema: z.ZodType<
+  Data16$Outbound,
+  z.ZodTypeDef,
+  Data16
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody16Data$outboundSchema
+  ),
+});
+
+export function data16ToJSON(data16: Data16): string {
+  return JSON.stringify(Data16$outboundSchema.parse(data16));
+}
+export function data16FromJSON(
+  jsonString: string,
+): SafeParseResult<Data16, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data16$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data16' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type$inboundSchema;
+
+/** @internal */
+export const DataError$inboundSchema: z.ZodType<
+  DataError,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  message: z.string(),
+  stack: z.string().optional(),
+});
+/** @internal */
+export type DataError$Outbound = {
+  message: string;
+  stack?: string | undefined;
+};
+
+/** @internal */
+export const DataError$outboundSchema: z.ZodType<
+  DataError$Outbound,
+  z.ZodTypeDef,
+  DataError
+> = z.object({
+  message: z.string(),
+  stack: z.string().optional(),
+});
+
+export function dataErrorToJSON(dataError: DataError): string {
+  return JSON.stringify(DataError$outboundSchema.parse(dataError));
+}
+export function dataErrorFromJSON(
+  jsonString: string,
+): SafeParseResult<DataError, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataError$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataError' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponseProduct$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponseProduct> = z.nativeEnum(
+    StreamAgentDataAgentsResponseProduct,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponseProduct$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponseProduct> =
+    StreamAgentDataAgentsResponseProduct$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponseMemory$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsResponseMemory$Outbound = {
+  entity_id: string;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsResponseMemory$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseMemory$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsResponseMemory
+> = z.object({
+  entityId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    entityId: "entity_id",
+  });
+});
+
+export function streamAgentDataAgentsResponseMemoryToJSON(
+  streamAgentDataAgentsResponseMemory: StreamAgentDataAgentsResponseMemory,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponseMemory$outboundSchema.parse(
+      streamAgentDataAgentsResponseMemory,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponseMemoryFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsResponseMemory, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponseMemory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponseMemory' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponseToolExecutionContext$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponseToolExecutionContext,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    action_id: z.string(),
+    agent_tool_call_id: z.string(),
+    workspace_id: z.string(),
+    agent_manifest_id: z.string(),
+    agent_execution_id: z.string(),
+    product: StreamAgentDataAgentsResponseProduct$inboundSchema,
+    memory: z.lazy(() => StreamAgentDataAgentsResponseMemory$inboundSchema)
+      .optional(),
+    parent_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_id": "actionId",
+      "agent_tool_call_id": "agentToolCallId",
+      "workspace_id": "workspaceId",
+      "agent_manifest_id": "agentManifestId",
+      "agent_execution_id": "agentExecutionId",
+      "parent_id": "parentId",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponseToolExecutionContext$Outbound = {
+  action_id: string;
+  agent_tool_call_id: string;
+  workspace_id: string;
+  agent_manifest_id: string;
+  agent_execution_id: string;
+  product: string;
+  memory?: StreamAgentDataAgentsResponseMemory$Outbound | undefined;
+  parent_id?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsResponseToolExecutionContext$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponseToolExecutionContext$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponseToolExecutionContext
+  > = z.object({
+    actionId: z.string(),
+    agentToolCallId: z.string(),
+    workspaceId: z.string(),
+    agentManifestId: z.string(),
+    agentExecutionId: z.string(),
+    product: StreamAgentDataAgentsResponseProduct$outboundSchema,
+    memory: z.lazy(() => StreamAgentDataAgentsResponseMemory$outboundSchema)
+      .optional(),
+    parentId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      actionId: "action_id",
+      agentToolCallId: "agent_tool_call_id",
+      workspaceId: "workspace_id",
+      agentManifestId: "agent_manifest_id",
+      agentExecutionId: "agent_execution_id",
+      parentId: "parent_id",
+    });
+  });
+
+export function streamAgentDataAgentsResponseToolExecutionContextToJSON(
+  streamAgentDataAgentsResponseToolExecutionContext:
+    StreamAgentDataAgentsResponseToolExecutionContext,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponseToolExecutionContext$outboundSchema.parse(
+      streamAgentDataAgentsResponseToolExecutionContext,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponseToolExecutionContextFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponseToolExecutionContext,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponseToolExecutionContext$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentDataAgentsResponseToolExecutionContext' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: z.lazy(() => DataError$inboundSchema),
+    action_type: z.string(),
+    tool_execution_context: z.lazy(() =>
+      StreamAgentDataAgentsResponseToolExecutionContext$inboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "tool_execution_context": "toolExecutionContext",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$Outbound =
+  {
+    error: DataError$Outbound;
+    action_type: string;
+    tool_execution_context:
+      StreamAgentDataAgentsResponseToolExecutionContext$Outbound;
+    responseId?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data
+  > = z.object({
+    error: z.lazy(() => DataError$outboundSchema),
+    actionType: z.string(),
+    toolExecutionContext: z.lazy(() =>
+      StreamAgentDataAgentsResponseToolExecutionContext$outboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      actionType: "action_type",
+      toolExecutionContext: "tool_execution_context",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody15DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody15Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody15Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody15DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data15$inboundSchema: z.ZodType<Data15, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data15$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$Outbound;
+};
+
+/** @internal */
+export const Data15$outboundSchema: z.ZodType<
+  Data15$Outbound,
+  z.ZodTypeDef,
+  Data15
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data$outboundSchema
+  ),
+});
+
+export function data15ToJSON(data15: Data15): string {
+  return JSON.stringify(Data15$outboundSchema.parse(data15));
+}
+export function data15FromJSON(
+  jsonString: string,
+): SafeParseResult<Data15, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data15$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data15' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsProduct$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsProduct
+> = z.nativeEnum(StreamAgentDataAgentsProduct);
+/** @internal */
+export const StreamAgentDataAgentsProduct$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsProduct
+> = StreamAgentDataAgentsProduct$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsMemory$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsMemory$Outbound = {
+  entity_id: string;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsMemory$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsMemory$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsMemory
+> = z.object({
+  entityId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    entityId: "entity_id",
+  });
+});
+
+export function streamAgentDataAgentsMemoryToJSON(
+  streamAgentDataAgentsMemory: StreamAgentDataAgentsMemory,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsMemory$outboundSchema.parse(
+      streamAgentDataAgentsMemory,
+    ),
+  );
+}
+export function streamAgentDataAgentsMemoryFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsMemory, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsMemory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsMemory' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsToolExecutionContext$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsToolExecutionContext,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  action_id: z.string(),
+  agent_tool_call_id: z.string(),
+  workspace_id: z.string(),
+  agent_manifest_id: z.string(),
+  agent_execution_id: z.string(),
+  product: StreamAgentDataAgentsProduct$inboundSchema,
+  memory: z.lazy(() => StreamAgentDataAgentsMemory$inboundSchema).optional(),
+  parent_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action_id": "actionId",
+    "agent_tool_call_id": "agentToolCallId",
+    "workspace_id": "workspaceId",
+    "agent_manifest_id": "agentManifestId",
+    "agent_execution_id": "agentExecutionId",
+    "parent_id": "parentId",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsToolExecutionContext$Outbound = {
+  action_id: string;
+  agent_tool_call_id: string;
+  workspace_id: string;
+  agent_manifest_id: string;
+  agent_execution_id: string;
+  product: string;
+  memory?: StreamAgentDataAgentsMemory$Outbound | undefined;
+  parent_id?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsToolExecutionContext$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsToolExecutionContext$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsToolExecutionContext
+  > = z.object({
+    actionId: z.string(),
+    agentToolCallId: z.string(),
+    workspaceId: z.string(),
+    agentManifestId: z.string(),
+    agentExecutionId: z.string(),
+    product: StreamAgentDataAgentsProduct$outboundSchema,
+    memory: z.lazy(() => StreamAgentDataAgentsMemory$outboundSchema).optional(),
+    parentId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      actionId: "action_id",
+      agentToolCallId: "agent_tool_call_id",
+      workspaceId: "workspace_id",
+      agentManifestId: "agent_manifest_id",
+      agentExecutionId: "agent_execution_id",
+      parentId: "parent_id",
+    });
+  });
+
+export function streamAgentDataAgentsToolExecutionContextToJSON(
+  streamAgentDataAgentsToolExecutionContext:
+    StreamAgentDataAgentsToolExecutionContext,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsToolExecutionContext$outboundSchema.parse(
+      streamAgentDataAgentsToolExecutionContext,
+    ),
+  );
+}
+export function streamAgentDataAgentsToolExecutionContextFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsToolExecutionContext,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsToolExecutionContext$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentDataAgentsToolExecutionContext' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    result: z.any().optional(),
+    action_type: z.string(),
+    tool_execution_context: z.lazy(() =>
+      StreamAgentDataAgentsToolExecutionContext$inboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "tool_execution_context": "toolExecutionContext",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$Outbound =
+  {
+    result?: any | undefined;
+    action_type: string;
+    tool_execution_context: StreamAgentDataAgentsToolExecutionContext$Outbound;
+    responseId?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data
+  > = z.object({
+    result: z.any().optional(),
+    actionType: z.string(),
+    toolExecutionContext: z.lazy(() =>
+      StreamAgentDataAgentsToolExecutionContext$outboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      actionType: "action_type",
+      toolExecutionContext: "tool_execution_context",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody14DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody14Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody14Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody14DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data14$inboundSchema: z.ZodType<Data14, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data14$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$Outbound;
+};
+
+/** @internal */
+export const Data14$outboundSchema: z.ZodType<
+  Data14$Outbound,
+  z.ZodTypeDef,
+  Data14
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data$outboundSchema
+  ),
+});
+
+export function data14ToJSON(data14: Data14): string {
+  return JSON.stringify(Data14$outboundSchema.parse(data14));
+}
+export function data14FromJSON(
+  jsonString: string,
+): SafeParseResult<Data14, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data14$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data14' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataProduct$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataProduct
+> = z.nativeEnum(StreamAgentDataProduct);
+/** @internal */
+export const StreamAgentDataProduct$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataProduct
+> = StreamAgentDataProduct$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataMemory$inboundSchema: z.ZodType<
+  StreamAgentDataMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
+  });
+});
+/** @internal */
+export type StreamAgentDataMemory$Outbound = {
+  entity_id: string;
+};
+
+/** @internal */
+export const StreamAgentDataMemory$outboundSchema: z.ZodType<
+  StreamAgentDataMemory$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataMemory
+> = z.object({
+  entityId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    entityId: "entity_id",
+  });
+});
+
+export function streamAgentDataMemoryToJSON(
+  streamAgentDataMemory: StreamAgentDataMemory,
+): string {
+  return JSON.stringify(
+    StreamAgentDataMemory$outboundSchema.parse(streamAgentDataMemory),
+  );
+}
+export function streamAgentDataMemoryFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataMemory, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataMemory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataMemory' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataToolExecutionContext$inboundSchema: z.ZodType<
+  StreamAgentDataToolExecutionContext,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  action_id: z.string(),
+  agent_tool_call_id: z.string(),
+  workspace_id: z.string(),
+  agent_manifest_id: z.string(),
+  agent_execution_id: z.string(),
+  product: StreamAgentDataProduct$inboundSchema,
+  memory: z.lazy(() => StreamAgentDataMemory$inboundSchema).optional(),
+  parent_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action_id": "actionId",
+    "agent_tool_call_id": "agentToolCallId",
+    "workspace_id": "workspaceId",
+    "agent_manifest_id": "agentManifestId",
+    "agent_execution_id": "agentExecutionId",
+    "parent_id": "parentId",
+  });
+});
+/** @internal */
+export type StreamAgentDataToolExecutionContext$Outbound = {
+  action_id: string;
+  agent_tool_call_id: string;
+  workspace_id: string;
+  agent_manifest_id: string;
+  agent_execution_id: string;
+  product: string;
+  memory?: StreamAgentDataMemory$Outbound | undefined;
+  parent_id?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataToolExecutionContext$outboundSchema: z.ZodType<
+  StreamAgentDataToolExecutionContext$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataToolExecutionContext
+> = z.object({
+  actionId: z.string(),
+  agentToolCallId: z.string(),
+  workspaceId: z.string(),
+  agentManifestId: z.string(),
+  agentExecutionId: z.string(),
+  product: StreamAgentDataProduct$outboundSchema,
+  memory: z.lazy(() => StreamAgentDataMemory$outboundSchema).optional(),
+  parentId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    actionId: "action_id",
+    agentToolCallId: "agent_tool_call_id",
+    workspaceId: "workspace_id",
+    agentManifestId: "agent_manifest_id",
+    agentExecutionId: "agent_execution_id",
+    parentId: "parent_id",
+  });
+});
+
+export function streamAgentDataToolExecutionContextToJSON(
+  streamAgentDataToolExecutionContext: StreamAgentDataToolExecutionContext,
+): string {
+  return JSON.stringify(
+    StreamAgentDataToolExecutionContext$outboundSchema.parse(
+      streamAgentDataToolExecutionContext,
+    ),
+  );
+}
+export function streamAgentDataToolExecutionContextFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataToolExecutionContext, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataToolExecutionContext$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataToolExecutionContext' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    tool_id: z.string(),
+    tool_key: z.string().optional(),
+    tool_display_name: z.string().optional(),
+    action_type: z.string(),
+    tool_arguments: z.record(z.any()),
+    tool_execution_context: z.lazy(() =>
+      StreamAgentDataToolExecutionContext$inboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_id": "toolId",
+      "tool_key": "toolKey",
+      "tool_display_name": "toolDisplayName",
+      "action_type": "actionType",
+      "tool_arguments": "toolArguments",
+      "tool_execution_context": "toolExecutionContext",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$Outbound =
+  {
+    tool_id: string;
+    tool_key?: string | undefined;
+    tool_display_name?: string | undefined;
+    action_type: string;
+    tool_arguments: { [k: string]: any };
+    tool_execution_context: StreamAgentDataToolExecutionContext$Outbound;
+    responseId?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data
+  > = z.object({
+    toolId: z.string(),
+    toolKey: z.string().optional(),
+    toolDisplayName: z.string().optional(),
+    actionType: z.string(),
+    toolArguments: z.record(z.any()),
+    toolExecutionContext: z.lazy(() =>
+      StreamAgentDataToolExecutionContext$outboundSchema
+    ),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      toolKey: "tool_key",
+      toolDisplayName: "tool_display_name",
+      actionType: "action_type",
+      toolArguments: "tool_arguments",
+      toolExecutionContext: "tool_execution_context",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody13DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody13Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody13Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody13DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data13$inboundSchema: z.ZodType<Data13, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data13$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$Outbound;
+};
+
+/** @internal */
+export const Data13$outboundSchema: z.ZodType<
+  Data13$Outbound,
+  z.ZodTypeDef,
+  Data13
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data$outboundSchema
+  ),
+});
+
+export function data13ToJSON(data13: Data13): string {
+  return JSON.stringify(Data13$outboundSchema.parse(data13));
+}
+export function data13FromJSON(
+  jsonString: string,
+): SafeParseResult<Data13, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data13' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Role$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200Role> = z.nativeEnum(
+    StreamAgentDataAgentsResponse200Role,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200Role$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200Role> =
+    StreamAgentDataAgentsResponse200Role$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200ToolResultPart$inboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200ToolResultPart,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind$inboundSchema,
+    tool_call_id: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+    });
+  });
+/** @internal */
+export type StreamAgentPartsAgentsResponse200ToolResultPart$Outbound = {
+  kind: string;
+  tool_call_id: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200ToolResultPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200ToolResultPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponse200ToolResultPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage5Kind$outboundSchema,
+    toolCallId: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+    });
+  });
+
+export function streamAgentPartsAgentsResponse200ToolResultPartToJSON(
+  streamAgentPartsAgentsResponse200ToolResultPart:
+    StreamAgentPartsAgentsResponse200ToolResultPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200ToolResultPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200ToolResultPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200ToolResultPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponse200ToolResultPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200ToolResultPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200ToolResultPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200ToolCallPart$inboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200ToolCallPart,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind$inboundSchema,
+    tool_name: z.string(),
+    tool_call_id: z.string(),
+    arguments: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_name": "toolName",
+      "tool_call_id": "toolCallId",
+    });
+  });
+/** @internal */
+export type StreamAgentPartsAgentsResponse200ToolCallPart$Outbound = {
+  kind: string;
+  tool_name: string;
+  tool_call_id: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200ToolCallPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200ToolCallPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponse200ToolCallPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessage4Kind$outboundSchema,
+    toolName: z.string(),
+    toolCallId: z.string(),
+    arguments: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolName: "tool_name",
+      toolCallId: "tool_call_id",
+    });
+  });
+
+export function streamAgentPartsAgentsResponse200ToolCallPartToJSON(
+  streamAgentPartsAgentsResponse200ToolCallPart:
+    StreamAgentPartsAgentsResponse200ToolCallPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200ToolCallPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200ToolCallPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200ToolCallPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponse200ToolCallPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200ToolCallPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200ToolCallPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$inboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$Outbound =
+  {
+    uri: string;
+    mimeType?: string | undefined;
+    name?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponse200TextEventStreamFileInURIFormatToJSON(
+  streamAgentFileAgentsResponse200TextEventStreamFileInURIFormat:
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$outboundSchema
+      .parse(streamAgentFileAgentsResponse200TextEventStreamFileInURIFormat),
+  );
+}
+export function streamAgentFileAgentsResponse200TextEventStreamFileInURIFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$inboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$Outbound =
+  {
+    bytes: string;
+    mimeType?: string | undefined;
+    name?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat
+  > = z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponse200TextEventStreamBinaryFormatToJSON(
+  streamAgentFileAgentsResponse200TextEventStreamBinaryFormat:
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$outboundSchema
+      .parse(streamAgentFileAgentsResponse200TextEventStreamBinaryFormat),
+  );
+}
+export function streamAgentFileAgentsResponse200TextEventStreamBinaryFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200File$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponse200File,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$inboundSchema
+  ),
+  z.lazy(() =>
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$inboundSchema
+  ),
+]);
+/** @internal */
+export type StreamAgentPartsAgentsResponse200File$Outbound =
+  | StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$Outbound
+  | StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$Outbound;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200File$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponse200File$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsResponse200File
+> = z.union([
+  z.lazy(() =>
+    StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$outboundSchema
+  ),
+  z.lazy(() =>
+    StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$outboundSchema
+  ),
+]);
+
+export function streamAgentPartsAgentsResponse200FileToJSON(
+  streamAgentPartsAgentsResponse200File: StreamAgentPartsAgentsResponse200File,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200File$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200File,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200FileFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsResponse200File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200File' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200FilePart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponse200FilePart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind$inboundSchema,
+  file: z.union([
+    z.lazy(() =>
+      StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$inboundSchema
+    ),
+    z.lazy(() =>
+      StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$inboundSchema
+    ),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponse200FilePart$Outbound = {
+  kind: string;
+  file:
+    | StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$Outbound
+    | StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$Outbound;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200FilePart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200FilePart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponse200FilePart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataMessageKind$outboundSchema,
+    file: z.union([
+      z.lazy(() =>
+        StreamAgentFileAgentsResponse200TextEventStreamBinaryFormat$outboundSchema
+      ),
+      z.lazy(() =>
+        StreamAgentFileAgentsResponse200TextEventStreamFileInURIFormat$outboundSchema
+      ),
+    ]),
+    metadata: z.record(z.any()).optional(),
+  });
+
+export function streamAgentPartsAgentsResponse200FilePartToJSON(
+  streamAgentPartsAgentsResponse200FilePart:
+    StreamAgentPartsAgentsResponse200FilePart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200FilePart$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200FilePart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200FilePartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponse200FilePart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200FilePart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200FilePart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200DataPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponse200DataPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind$inboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponse200DataPart$Outbound = {
+  kind: string;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200DataPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200DataPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponse200DataPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12DataKind$outboundSchema,
+    data: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+  });
+
+export function streamAgentPartsAgentsResponse200DataPartToJSON(
+  streamAgentPartsAgentsResponse200DataPart:
+    StreamAgentPartsAgentsResponse200DataPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200DataPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200DataPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200DataPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponse200DataPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200DataPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200DataPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponse200TextPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind$inboundSchema,
+  text: z.string(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponse200TextPart$Outbound = {
+  kind: string;
+  text: string;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponse200TextPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponse200TextPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData12Kind$outboundSchema,
+    text: z.string(),
+  });
+
+export function streamAgentPartsAgentsResponse200TextPartToJSON(
+  streamAgentPartsAgentsResponse200TextPart:
+    StreamAgentPartsAgentsResponse200TextPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponse200TextPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponse200TextPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponse200TextPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponse200TextPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponse200TextPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponse200TextPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Parts$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponse200Parts,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsResponse200ToolCallPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200TextPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200DataPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200FilePart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200ToolResultPart$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentDataAgentsResponse200Parts$Outbound =
+  | StreamAgentPartsAgentsResponse200ToolCallPart$Outbound
+  | StreamAgentPartsAgentsResponse200TextPart$Outbound
+  | StreamAgentPartsAgentsResponse200DataPart$Outbound
+  | StreamAgentPartsAgentsResponse200FilePart$Outbound
+  | StreamAgentPartsAgentsResponse200ToolResultPart$Outbound;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Parts$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponse200Parts$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsResponse200Parts
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsResponse200ToolCallPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200TextPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200DataPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200FilePart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponse200ToolResultPart$outboundSchema),
+]);
+
+export function streamAgentDataAgentsResponse200PartsToJSON(
+  streamAgentDataAgentsResponse200Parts: StreamAgentDataAgentsResponse200Parts,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200Parts$outboundSchema.parse(
+      streamAgentDataAgentsResponse200Parts,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponse200PartsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsResponse200Parts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200Parts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200Parts' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataMessage$inboundSchema: z.ZodType<
+  StreamAgentDataMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataAgentsResponse200Role$inboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsAgentsResponse200ToolCallPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponse200TextPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponse200DataPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponse200FilePart$inboundSchema),
+      z.lazy(() =>
+        StreamAgentPartsAgentsResponse200ToolResultPart$inboundSchema
+      ),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentDataMessage$Outbound = {
+  messageId?: string | undefined;
+  role: string;
+  parts: Array<
+    | StreamAgentPartsAgentsResponse200ToolCallPart$Outbound
+    | StreamAgentPartsAgentsResponse200TextPart$Outbound
+    | StreamAgentPartsAgentsResponse200DataPart$Outbound
+    | StreamAgentPartsAgentsResponse200FilePart$Outbound
+    | StreamAgentPartsAgentsResponse200ToolResultPart$Outbound
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataMessage$outboundSchema: z.ZodType<
+  StreamAgentDataMessage$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataMessage
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataAgentsResponse200Role$outboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() =>
+        StreamAgentPartsAgentsResponse200ToolCallPart$outboundSchema
+      ),
+      z.lazy(() => StreamAgentPartsAgentsResponse200TextPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponse200DataPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponse200FilePart$outboundSchema),
+      z.lazy(() =>
+        StreamAgentPartsAgentsResponse200ToolResultPart$outboundSchema
+      ),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentDataMessageToJSON(
+  streamAgentDataMessage: StreamAgentDataMessage,
+): string {
+  return JSON.stringify(
+    StreamAgentDataMessage$outboundSchema.parse(streamAgentDataMessage),
+  );
+}
+export function streamAgentDataMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    workflowRunId: z.string(),
+    spanId: z.string(),
+    parentId: z.string(),
+    message: z.array(z.lazy(() => StreamAgentDataMessage$inboundSchema)),
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$Outbound =
+  {
+    workflowRunId: string;
+    spanId: string;
+    parentId: string;
+    message: Array<StreamAgentDataMessage$Outbound>;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data
+  > = z.object({
+    workflowRunId: z.string(),
+    spanId: z.string(),
+    parentId: z.string(),
+    message: z.array(z.lazy(() => StreamAgentDataMessage$outboundSchema)),
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody12DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody12Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody12Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody12DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data12$inboundSchema: z.ZodType<Data12, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data12$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$Outbound;
+};
+
+/** @internal */
+export const Data12$outboundSchema: z.ZodType<
+  Data12$Outbound,
+  z.ZodTypeDef,
+  Data12
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data$outboundSchema
+  ),
+});
+
+export function data12ToJSON(data12: Data12): string {
+  return JSON.stringify(Data12$outboundSchema.parse(data12));
+}
+export function data12FromJSON(
+  jsonString: string,
+): SafeParseResult<Data12, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data12' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    agent_id: z.string(),
+    input: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$Outbound =
+  {
+    agent_id: string;
+    input: string;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data
+  > = z.object({
+    agentId: z.string(),
+    input: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody11DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody11Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody11Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody11DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data11$inboundSchema: z.ZodType<Data11, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data11$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$Outbound;
+};
+
+/** @internal */
+export const Data11$outboundSchema: z.ZodType<
+  Data11$Outbound,
+  z.ZodTypeDef,
+  Data11
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody11Data$outboundSchema
+  ),
+});
+
+export function data11ToJSON(data11: Data11): string {
+  return JSON.stringify(Data11$outboundSchema.parse(data11));
+}
+export function data11FromJSON(
+  jsonString: string,
+): SafeParseResult<Data11, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data11' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string(),
+    agent_manifest_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_manifest_id": "agentManifestId",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$Outbound =
+  {
+    name: string;
+    agent_manifest_id: string;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data
+  > = z.object({
+    name: z.string(),
+    agentManifestId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentManifestId: "agent_manifest_id",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody10DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody10Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody10Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody10DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data10$inboundSchema: z.ZodType<Data10, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data10$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$Outbound;
+};
+
+/** @internal */
+export const Data10$outboundSchema: z.ZodType<
+  Data10$Outbound,
+  z.ZodTypeDef,
+  Data10
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody10Data$outboundSchema
+  ),
+});
+
+export function data10ToJSON(data10: Data10): string {
+  return JSON.stringify(Data10$outboundSchema.parse(data10));
+}
+export function data10FromJSON(
+  jsonString: string,
+): SafeParseResult<Data10, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data10$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data10' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({});
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$Outbound =
+  {};
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data
+  > = z.object({});
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody9DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody9Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody9Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody9DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data9$inboundSchema: z.ZodType<Data9, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data9$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$Outbound;
+};
+
+/** @internal */
+export const Data9$outboundSchema: z.ZodType<
+  Data9$Outbound,
+  z.ZodTypeDef,
+  Data9
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody9Data$outboundSchema
+  ),
+});
+
+export function data9ToJSON(data9: Data9): string {
+  return JSON.stringify(Data9$outboundSchema.parse(data9));
+}
+export function data9FromJSON(
+  jsonString: string,
+): SafeParseResult<Data9, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data9$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data9' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({});
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$Outbound =
+  {};
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data
+  > = z.object({});
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody8DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody8Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody8Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody8DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data8$inboundSchema: z.ZodType<Data8, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data8$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$Outbound;
+};
+
+/** @internal */
+export const Data8$outboundSchema: z.ZodType<
+  Data8$Outbound,
+  z.ZodTypeDef,
+  Data8
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody8Data$outboundSchema
+  ),
+});
+
+export function data8ToJSON(data8: Data8): string {
+  return JSON.stringify(Data8$outboundSchema.parse(data8));
+}
+export function data8FromJSON(
+  jsonString: string,
+): SafeParseResult<Data8, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data8' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type$inboundSchema;
+
+/** @internal */
+export const DataReview$inboundSchema: z.ZodNativeEnum<typeof DataReview> = z
+  .nativeEnum(DataReview);
+/** @internal */
+export const DataReview$outboundSchema: z.ZodNativeEnum<typeof DataReview> =
+  DataReview$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    agent_id: z.string(),
+    action_id: z.string(),
+    agent_tool_call_id: z.string(),
+    review: DataReview$inboundSchema,
+    mock_output: z.record(z.any()).optional(),
+    review_source: z.string().optional(),
+    reviewed_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "action_id": "actionId",
+      "agent_tool_call_id": "agentToolCallId",
+      "mock_output": "mockOutput",
+      "review_source": "reviewSource",
+      "reviewed_by_id": "reviewedById",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$Outbound =
+  {
+    agent_id: string;
+    action_id: string;
+    agent_tool_call_id: string;
+    review: string;
+    mock_output?: { [k: string]: any } | undefined;
+    review_source?: string | undefined;
+    reviewed_by_id?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data
+  > = z.object({
+    agentId: z.string(),
+    actionId: z.string(),
+    agentToolCallId: z.string(),
+    review: DataReview$outboundSchema,
+    mockOutput: z.record(z.any()).optional(),
+    reviewSource: z.string().optional(),
+    reviewedById: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      actionId: "action_id",
+      agentToolCallId: "agent_tool_call_id",
+      mockOutput: "mock_output",
+      reviewSource: "review_source",
+      reviewedById: "reviewed_by_id",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody7DataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBody7Data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBody7Data),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBody7DataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data7$inboundSchema: z.ZodType<Data7, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data7$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$Outbound;
+};
+
+/** @internal */
+export const Data7$outboundSchema: z.ZodType<
+  Data7$Outbound,
+  z.ZodTypeDef,
+  Data7
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data$outboundSchema
+  ),
+});
+
+export function data7ToJSON(data7: Data7): string {
+  return JSON.stringify(Data7$outboundSchema.parse(data7));
+}
+export function data7FromJSON(
+  jsonString: string,
+): SafeParseResult<Data7, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data7' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataConditions$inboundSchema: z.ZodType<
+  StreamAgentDataConditions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  condition: z.string(),
+  operator: z.string(),
+  value: z.string(),
+});
+/** @internal */
+export type StreamAgentDataConditions$Outbound = {
+  condition: string;
+  operator: string;
+  value: string;
+};
+
+/** @internal */
+export const StreamAgentDataConditions$outboundSchema: z.ZodType<
+  StreamAgentDataConditions$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataConditions
+> = z.object({
+  condition: z.string(),
+  operator: z.string(),
+  value: z.string(),
+});
+
+export function streamAgentDataConditionsToJSON(
+  streamAgentDataConditions: StreamAgentDataConditions,
+): string {
+  return JSON.stringify(
+    StreamAgentDataConditions$outboundSchema.parse(streamAgentDataConditions),
+  );
+}
+export function streamAgentDataConditionsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataConditions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataConditions' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataTool$inboundSchema: z.ZodType<
+  DataTool,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  key: z.string().optional(),
+  action_type: z.string(),
+  display_name: z.string().optional(),
+  description: z.string().optional(),
+  requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
+  conditions: z.array(z.lazy(() => StreamAgentDataConditions$inboundSchema))
+    .optional(),
+  timeout: z.number().default(120),
+}).transform((v) => {
+  return remap$(v, {
+    "action_type": "actionType",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
+  });
+});
+/** @internal */
+export type DataTool$Outbound = {
+  id: string;
+  key?: string | undefined;
+  action_type: string;
+  display_name?: string | undefined;
+  description?: string | undefined;
+  requires_approval: boolean;
+  tool_id?: string | undefined;
+  conditions?: Array<StreamAgentDataConditions$Outbound> | undefined;
+  timeout: number;
+};
+
+/** @internal */
+export const DataTool$outboundSchema: z.ZodType<
+  DataTool$Outbound,
+  z.ZodTypeDef,
+  DataTool
+> = z.object({
+  id: z.string(),
+  key: z.string().optional(),
+  actionType: z.string(),
+  displayName: z.string().optional(),
+  description: z.string().optional(),
+  requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
+  conditions: z.array(z.lazy(() => StreamAgentDataConditions$outboundSchema))
+    .optional(),
+  timeout: z.number().default(120),
+}).transform((v) => {
+  return remap$(v, {
+    actionType: "action_type",
+    displayName: "display_name",
+    requiresApproval: "requires_approval",
+    toolId: "tool_id",
+  });
+});
+
+export function dataToolToJSON(dataTool: DataTool): string {
+  return JSON.stringify(DataTool$outboundSchema.parse(dataTool));
+}
+export function dataToolFromJSON(
+  jsonString: string,
+): SafeParseResult<DataTool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTool' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    agent_id: z.string(),
+    action_id: z.string(),
+    requires_approval: z.boolean(),
+    tool: z.lazy(() => DataTool$inboundSchema),
+    input: z.record(z.any()),
+    agent_tool_call_id: z.string(),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "action_id": "actionId",
+      "requires_approval": "requiresApproval",
+      "agent_tool_call_id": "agentToolCallId",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$Outbound =
+  {
+    agent_id: string;
+    action_id: string;
+    requires_approval: boolean;
+    tool: DataTool$Outbound;
+    input: { [k: string]: any };
+    agent_tool_call_id: string;
+    responseId?: string | undefined;
+  };
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData
+  > = z.object({
+    agentId: z.string(),
+    actionId: z.string(),
+    requiresApproval: z.boolean(),
+    tool: z.lazy(() => DataTool$outboundSchema),
+    input: z.record(z.any()),
+    agentToolCallId: z.string(),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      actionId: "action_id",
+      requiresApproval: "requires_approval",
+      agentToolCallId: "agent_tool_call_id",
+    });
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBodyDataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamResponseBodyData:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$outboundSchema
+      .parse(streamAgentDataAgentsResponse200TextEventStreamResponseBodyData),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamResponseBodyDataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data6$inboundSchema: z.ZodType<Data6, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data6$Outbound = {
+  type: string;
+  timestamp: string;
+  data:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$Outbound;
+};
+
+/** @internal */
+export const Data6$outboundSchema: z.ZodType<
+  Data6$Outbound,
+  z.ZodTypeDef,
+  Data6
+> = z.object({
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyType$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBodyData$outboundSchema
+  ),
+});
+
+export function data6ToJSON(data6: Data6): string {
+  return JSON.stringify(Data6$outboundSchema.parse(data6));
+}
+export function data6FromJSON(
+  jsonString: string,
+): SafeParseResult<Data6, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data6' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamType$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200TextEventStreamType> =
+    z.nativeEnum(StreamAgentDataAgentsResponse200TextEventStreamType);
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200TextEventStreamType> =
+    StreamAgentDataAgentsResponse200TextEventStreamType$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamData$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamData,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: z.string(),
+    code: z.number(),
+    responseId: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentDataAgentsResponse200TextEventStreamData$Outbound = {
+  error: string;
+  code: number;
+  responseId?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamData$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsResponse200TextEventStreamData$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsResponse200TextEventStreamData
+  > = z.object({
+    error: z.string(),
+    code: z.number(),
+    responseId: z.string().optional(),
+  });
+
+export function streamAgentDataAgentsResponse200TextEventStreamDataToJSON(
+  streamAgentDataAgentsResponse200TextEventStreamData:
+    StreamAgentDataAgentsResponse200TextEventStreamData,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200TextEventStreamData$outboundSchema.parse(
+      streamAgentDataAgentsResponse200TextEventStreamData,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponse200TextEventStreamDataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsResponse200TextEventStreamData,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200TextEventStreamData$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentDataAgentsResponse200TextEventStreamData' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
+  .object({
+    type: StreamAgentDataAgentsResponse200TextEventStreamType$inboundSchema,
+    timestamp: z.string(),
+    data: z.lazy(() =>
+      StreamAgentDataAgentsResponse200TextEventStreamData$inboundSchema
+    ),
+  });
+/** @internal */
+export type Data5$Outbound = {
+  type: string;
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200TextEventStreamData$Outbound;
+};
+
+/** @internal */
+export const Data5$outboundSchema: z.ZodType<
+  Data5$Outbound,
+  z.ZodTypeDef,
+  Data5
+> = z.object({
+  type: StreamAgentDataAgentsResponse200TextEventStreamType$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() =>
+    StreamAgentDataAgentsResponse200TextEventStreamData$outboundSchema
+  ),
+});
+
+export function data5ToJSON(data5: Data5): string {
+  return JSON.stringify(Data5$outboundSchema.parse(data5));
+}
+export function data5FromJSON(
+  jsonString: string,
+): SafeParseResult<Data5, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data5' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200Type> = z.nativeEnum(
+    StreamAgentDataAgentsResponse200Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200Type> =
+    StreamAgentDataAgentsResponse200Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponseRole$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsResponseRole
+> = z.nativeEnum(StreamAgentDataAgentsResponseRole);
+/** @internal */
+export const StreamAgentDataAgentsResponseRole$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsResponseRole
+> = StreamAgentDataAgentsResponseRole$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseToolResultPart$inboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponseToolResultPart,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind$inboundSchema,
+    tool_call_id: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+    });
+  });
+/** @internal */
+export type StreamAgentPartsAgentsResponseToolResultPart$Outbound = {
+  kind: string;
+  tool_call_id: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseToolResultPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponseToolResultPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponseToolResultPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull5Kind$outboundSchema,
+    toolCallId: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+    });
+  });
+
+export function streamAgentPartsAgentsResponseToolResultPartToJSON(
+  streamAgentPartsAgentsResponseToolResultPart:
+    StreamAgentPartsAgentsResponseToolResultPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseToolResultPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponseToolResultPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseToolResultPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponseToolResultPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseToolResultPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponseToolResultPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseToolCallPart$inboundSchema:
+  z.ZodType<StreamAgentPartsAgentsResponseToolCallPart, z.ZodTypeDef, unknown> =
+    z.object({
+      kind:
+        StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind$inboundSchema,
+      tool_name: z.string(),
+      tool_call_id: z.string(),
+      arguments: z.record(z.any()),
+      metadata: z.record(z.any()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "tool_name": "toolName",
+        "tool_call_id": "toolCallId",
+      });
+    });
+/** @internal */
+export type StreamAgentPartsAgentsResponseToolCallPart$Outbound = {
+  kind: string;
+  tool_name: string;
+  tool_call_id: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseToolCallPart$outboundSchema:
+  z.ZodType<
+    StreamAgentPartsAgentsResponseToolCallPart$Outbound,
+    z.ZodTypeDef,
+    StreamAgentPartsAgentsResponseToolCallPart
+  > = z.object({
+    kind:
+      StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFull4Kind$outboundSchema,
+    toolName: z.string(),
+    toolCallId: z.string(),
+    arguments: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolName: "tool_name",
+      toolCallId: "tool_call_id",
+    });
+  });
+
+export function streamAgentPartsAgentsResponseToolCallPartToJSON(
+  streamAgentPartsAgentsResponseToolCallPart:
+    StreamAgentPartsAgentsResponseToolCallPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseToolCallPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponseToolCallPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseToolCallPartFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentPartsAgentsResponseToolCallPart,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseToolCallPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentPartsAgentsResponseToolCallPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200FileInURIFormat$inboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200FileInURIFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentFileAgentsResponse200FileInURIFormat$Outbound = {
+  uri: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200FileInURIFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200FileInURIFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponse200FileInURIFormat
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponse200FileInURIFormatToJSON(
+  streamAgentFileAgentsResponse200FileInURIFormat:
+    StreamAgentFileAgentsResponse200FileInURIFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponse200FileInURIFormat$outboundSchema.parse(
+      streamAgentFileAgentsResponse200FileInURIFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsResponse200FileInURIFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponse200FileInURIFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponse200FileInURIFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentFileAgentsResponse200FileInURIFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200BinaryFormat$inboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200BinaryFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentFileAgentsResponse200BinaryFormat$Outbound = {
+  bytes: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsResponse200BinaryFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponse200BinaryFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponse200BinaryFormat
+  > = z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponse200BinaryFormatToJSON(
+  streamAgentFileAgentsResponse200BinaryFormat:
+    StreamAgentFileAgentsResponse200BinaryFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponse200BinaryFormat$outboundSchema.parse(
+      streamAgentFileAgentsResponse200BinaryFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsResponse200BinaryFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponse200BinaryFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponse200BinaryFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentFileAgentsResponse200BinaryFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseFile$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseFile,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsResponse200BinaryFormat$inboundSchema),
+  z.lazy(() => StreamAgentFileAgentsResponse200FileInURIFormat$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentPartsAgentsResponseFile$Outbound =
+  | StreamAgentFileAgentsResponse200BinaryFormat$Outbound
+  | StreamAgentFileAgentsResponse200FileInURIFormat$Outbound;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseFile$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseFile$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsResponseFile
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsResponse200BinaryFormat$outboundSchema),
+  z.lazy(() => StreamAgentFileAgentsResponse200FileInURIFormat$outboundSchema),
+]);
+
+export function streamAgentPartsAgentsResponseFileToJSON(
+  streamAgentPartsAgentsResponseFile: StreamAgentPartsAgentsResponseFile,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseFile$outboundSchema.parse(
+      streamAgentPartsAgentsResponseFile,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseFileFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsResponseFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsResponseFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseFilePart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseFilePart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind$inboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsResponse200BinaryFormat$inboundSchema),
+    z.lazy(() => StreamAgentFileAgentsResponse200FileInURIFormat$inboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponseFilePart$Outbound = {
+  kind: string;
+  file:
+    | StreamAgentFileAgentsResponse200BinaryFormat$Outbound
+    | StreamAgentFileAgentsResponse200FileInURIFormat$Outbound;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseFilePart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseFilePart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsResponseFilePart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataLastMessageFullKind$outboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsResponse200BinaryFormat$outboundSchema),
+    z.lazy(() =>
+      StreamAgentFileAgentsResponse200FileInURIFormat$outboundSchema
+    ),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsAgentsResponseFilePartToJSON(
+  streamAgentPartsAgentsResponseFilePart:
+    StreamAgentPartsAgentsResponseFilePart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseFilePart$outboundSchema.parse(
+      streamAgentPartsAgentsResponseFilePart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseFilePartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsResponseFilePart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsResponseFilePart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseDataPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseDataPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind$inboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponseDataPart$Outbound = {
+  kind: string;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseDataPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseDataPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsResponseDataPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4DataKind$outboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsAgentsResponseDataPartToJSON(
+  streamAgentPartsAgentsResponseDataPart:
+    StreamAgentPartsAgentsResponseDataPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseDataPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponseDataPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseDataPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsResponseDataPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseDataPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsResponseDataPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseTextPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseTextPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind$inboundSchema,
+  text: z.string(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsResponseTextPart$Outbound = {
+  kind: string;
+  text: string;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseTextPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsResponseTextPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsResponseTextPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData4Kind$outboundSchema,
+  text: z.string(),
+});
+
+export function streamAgentPartsAgentsResponseTextPartToJSON(
+  streamAgentPartsAgentsResponseTextPart:
+    StreamAgentPartsAgentsResponseTextPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsResponseTextPart$outboundSchema.parse(
+      streamAgentPartsAgentsResponseTextPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsResponseTextPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsResponseTextPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsResponseTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsResponseTextPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponseParts$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseParts,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsResponseToolCallPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseTextPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseDataPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseFilePart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseToolResultPart$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentDataAgentsResponseParts$Outbound =
+  | StreamAgentPartsAgentsResponseToolCallPart$Outbound
+  | StreamAgentPartsAgentsResponseTextPart$Outbound
+  | StreamAgentPartsAgentsResponseDataPart$Outbound
+  | StreamAgentPartsAgentsResponseFilePart$Outbound
+  | StreamAgentPartsAgentsResponseToolResultPart$Outbound;
+
+/** @internal */
+export const StreamAgentDataAgentsResponseParts$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseParts$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsResponseParts
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsResponseToolCallPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseTextPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseDataPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseFilePart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsResponseToolResultPart$outboundSchema),
+]);
+
+export function streamAgentDataAgentsResponsePartsToJSON(
+  streamAgentDataAgentsResponseParts: StreamAgentDataAgentsResponseParts,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponseParts$outboundSchema.parse(
+      streamAgentDataAgentsResponseParts,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponsePartsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsResponseParts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponseParts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponseParts' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataLastMessageFull$inboundSchema: z.ZodType<
+  DataLastMessageFull,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataAgentsResponseRole$inboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsAgentsResponseToolCallPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseTextPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseDataPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseFilePart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseToolResultPart$inboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type DataLastMessageFull$Outbound = {
+  messageId?: string | undefined;
+  role: string;
+  parts: Array<
+    | StreamAgentPartsAgentsResponseToolCallPart$Outbound
+    | StreamAgentPartsAgentsResponseTextPart$Outbound
+    | StreamAgentPartsAgentsResponseDataPart$Outbound
+    | StreamAgentPartsAgentsResponseFilePart$Outbound
+    | StreamAgentPartsAgentsResponseToolResultPart$Outbound
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const DataLastMessageFull$outboundSchema: z.ZodType<
+  DataLastMessageFull$Outbound,
+  z.ZodTypeDef,
+  DataLastMessageFull
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataAgentsResponseRole$outboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsAgentsResponseToolCallPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseTextPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseDataPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseFilePart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsResponseToolResultPart$outboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function dataLastMessageFullToJSON(
+  dataLastMessageFull: DataLastMessageFull,
+): string {
+  return JSON.stringify(
+    DataLastMessageFull$outboundSchema.parse(dataLastMessageFull),
+  );
+}
+export function dataLastMessageFullFromJSON(
+  jsonString: string,
+): SafeParseResult<DataLastMessageFull, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataLastMessageFull$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataLastMessageFull' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataFinishReason$inboundSchema: z.ZodNativeEnum<
+  typeof DataFinishReason
+> = z.nativeEnum(DataFinishReason);
+/** @internal */
+export const DataFinishReason$outboundSchema: z.ZodNativeEnum<
+  typeof DataFinishReason
+> = DataFinishReason$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataFunction$inboundSchema: z.ZodType<
+  StreamAgentDataFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+/** @internal */
+export type StreamAgentDataFunction$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataFunction$outboundSchema: z.ZodType<
+  StreamAgentDataFunction$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataFunction
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function streamAgentDataFunctionToJSON(
+  streamAgentDataFunction: StreamAgentDataFunction,
+): string {
+  return JSON.stringify(
+    StreamAgentDataFunction$outboundSchema.parse(streamAgentDataFunction),
+  );
+}
+export function streamAgentDataFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataPendingToolCalls$inboundSchema: z.ZodType<
+  DataPendingToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type$inboundSchema,
+  function: z.lazy(() => StreamAgentDataFunction$inboundSchema),
+});
+/** @internal */
+export type DataPendingToolCalls$Outbound = {
+  id: string;
+  type: string;
+  function: StreamAgentDataFunction$Outbound;
+};
+
+/** @internal */
+export const DataPendingToolCalls$outboundSchema: z.ZodType<
+  DataPendingToolCalls$Outbound,
+  z.ZodTypeDef,
+  DataPendingToolCalls
+> = z.object({
+  id: z.string(),
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody4Type$outboundSchema,
+  function: z.lazy(() => StreamAgentDataFunction$outboundSchema),
+});
+
+export function dataPendingToolCallsToJSON(
+  dataPendingToolCalls: DataPendingToolCalls,
+): string {
+  return JSON.stringify(
+    DataPendingToolCalls$outboundSchema.parse(dataPendingToolCalls),
+  );
+}
+export function dataPendingToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<DataPendingToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataPendingToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataPendingToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsPromptTokensDetails$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsPromptTokensDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  cached_tokens: z.nullable(z.number().int()).optional(),
+  audio_tokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cached_tokens": "cachedTokens",
+    "audio_tokens": "audioTokens",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsPromptTokensDetails$Outbound = {
+  cached_tokens?: number | null | undefined;
+  audio_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsPromptTokensDetails$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsPromptTokensDetails$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsPromptTokensDetails
+> = z.object({
+  cachedTokens: z.nullable(z.number().int()).optional(),
+  audioTokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cachedTokens: "cached_tokens",
+    audioTokens: "audio_tokens",
+  });
+});
+
+export function streamAgentDataAgentsPromptTokensDetailsToJSON(
+  streamAgentDataAgentsPromptTokensDetails:
+    StreamAgentDataAgentsPromptTokensDetails,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsPromptTokensDetails$outboundSchema.parse(
+      streamAgentDataAgentsPromptTokensDetails,
+    ),
+  );
+}
+export function streamAgentDataAgentsPromptTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsPromptTokensDetails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsPromptTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentDataAgentsPromptTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsCompletionTokensDetails$inboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsCompletionTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
+  });
+/** @internal */
+export type StreamAgentDataAgentsCompletionTokensDetails$Outbound = {
+  reasoning_tokens?: number | null | undefined;
+  accepted_prediction_tokens?: number | null | undefined;
+  rejected_prediction_tokens?: number | null | undefined;
+  audio_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsCompletionTokensDetails$outboundSchema:
+  z.ZodType<
+    StreamAgentDataAgentsCompletionTokensDetails$Outbound,
+    z.ZodTypeDef,
+    StreamAgentDataAgentsCompletionTokensDetails
+  > = z.object({
+    reasoningTokens: z.nullable(z.number()).optional(),
+    acceptedPredictionTokens: z.nullable(z.number()).optional(),
+    rejectedPredictionTokens: z.nullable(z.number()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningTokens: "reasoning_tokens",
+      acceptedPredictionTokens: "accepted_prediction_tokens",
+      rejectedPredictionTokens: "rejected_prediction_tokens",
+      audioTokens: "audio_tokens",
+    });
+  });
+
+export function streamAgentDataAgentsCompletionTokensDetailsToJSON(
+  streamAgentDataAgentsCompletionTokensDetails:
+    StreamAgentDataAgentsCompletionTokensDetails,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsCompletionTokensDetails$outboundSchema.parse(
+      streamAgentDataAgentsCompletionTokensDetails,
+    ),
+  );
+}
+export function streamAgentDataAgentsCompletionTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentDataAgentsCompletionTokensDetails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentDataAgentsCompletionTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsUsage$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsUsage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  completion_tokens: z.number().optional(),
+  prompt_tokens: z.number().optional(),
+  total_tokens: z.number().optional(),
+  prompt_tokens_details: z.nullable(
+    z.lazy(() => StreamAgentDataAgentsPromptTokensDetails$inboundSchema),
+  ).optional(),
+  completion_tokens_details: z.nullable(
+    z.lazy(() => StreamAgentDataAgentsCompletionTokensDetails$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_tokens": "completionTokens",
+    "prompt_tokens": "promptTokens",
+    "total_tokens": "totalTokens",
+    "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsUsage$Outbound = {
+  completion_tokens?: number | undefined;
+  prompt_tokens?: number | undefined;
+  total_tokens?: number | undefined;
+  prompt_tokens_details?:
+    | StreamAgentDataAgentsPromptTokensDetails$Outbound
+    | null
+    | undefined;
+  completion_tokens_details?:
+    | StreamAgentDataAgentsCompletionTokensDetails$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsUsage$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsUsage$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsUsage
+> = z.object({
+  completionTokens: z.number().optional(),
+  promptTokens: z.number().optional(),
+  totalTokens: z.number().optional(),
+  promptTokensDetails: z.nullable(
+    z.lazy(() => StreamAgentDataAgentsPromptTokensDetails$outboundSchema),
+  ).optional(),
+  completionTokensDetails: z.nullable(
+    z.lazy(() => StreamAgentDataAgentsCompletionTokensDetails$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    completionTokens: "completion_tokens",
+    promptTokens: "prompt_tokens",
+    totalTokens: "total_tokens",
+    promptTokensDetails: "prompt_tokens_details",
+    completionTokensDetails: "completion_tokens_details",
+  });
+});
+
+export function streamAgentDataAgentsUsageToJSON(
+  streamAgentDataAgentsUsage: StreamAgentDataAgentsUsage,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsUsage$outboundSchema.parse(streamAgentDataAgentsUsage),
+  );
+}
+export function streamAgentDataAgentsUsageFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsUsage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsUsage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsUsage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Data$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponse200Data,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  last_message: z.string(),
+  last_message_full: z.lazy(() => DataLastMessageFull$inboundSchema).optional(),
+  finish_reason: DataFinishReason$inboundSchema,
+  pending_tool_calls: z.array(z.lazy(() => DataPendingToolCalls$inboundSchema))
+    .optional(),
+  usage: z.lazy(() => StreamAgentDataAgentsUsage$inboundSchema).optional(),
+  responseId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "last_message": "lastMessage",
+    "last_message_full": "lastMessageFull",
+    "finish_reason": "finishReason",
+    "pending_tool_calls": "pendingToolCalls",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsResponse200Data$Outbound = {
+  last_message: string;
+  last_message_full?: DataLastMessageFull$Outbound | undefined;
+  finish_reason: string;
+  pending_tool_calls?: Array<DataPendingToolCalls$Outbound> | undefined;
+  usage?: StreamAgentDataAgentsUsage$Outbound | undefined;
+  responseId?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200Data$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponse200Data$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsResponse200Data
+> = z.object({
+  lastMessage: z.string(),
+  lastMessageFull: z.lazy(() => DataLastMessageFull$outboundSchema).optional(),
+  finishReason: DataFinishReason$outboundSchema,
+  pendingToolCalls: z.array(z.lazy(() => DataPendingToolCalls$outboundSchema))
+    .optional(),
+  usage: z.lazy(() => StreamAgentDataAgentsUsage$outboundSchema).optional(),
+  responseId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    lastMessage: "last_message",
+    lastMessageFull: "last_message_full",
+    finishReason: "finish_reason",
+    pendingToolCalls: "pending_tool_calls",
+  });
+});
+
+export function streamAgentDataAgentsResponse200DataToJSON(
+  streamAgentDataAgentsResponse200Data: StreamAgentDataAgentsResponse200Data,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponse200Data$outboundSchema.parse(
+      streamAgentDataAgentsResponse200Data,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponse200DataFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsResponse200Data, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataAgentsResponse200Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponse200Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentData4$inboundSchema: z.ZodType<
+  StreamAgentData4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamAgentDataAgentsResponse200Type$inboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsResponse200Data$inboundSchema),
+});
+/** @internal */
+export type StreamAgentData4$Outbound = {
+  type: string;
+  timestamp: string;
+  data: StreamAgentDataAgentsResponse200Data$Outbound;
+};
+
+/** @internal */
+export const StreamAgentData4$outboundSchema: z.ZodType<
+  StreamAgentData4$Outbound,
+  z.ZodTypeDef,
+  StreamAgentData4
+> = z.object({
+  type: StreamAgentDataAgentsResponse200Type$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsResponse200Data$outboundSchema),
+});
+
+export function streamAgentData4ToJSON(
+  streamAgentData4: StreamAgentData4,
+): string {
+  return JSON.stringify(
+    StreamAgentData4$outboundSchema.parse(streamAgentData4),
+  );
+}
+export function streamAgentData4FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentData4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentData4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentData4' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsResponseType
+> = z.nativeEnum(StreamAgentDataAgentsResponseType);
+/** @internal */
+export const StreamAgentDataAgentsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsResponseType
+> = StreamAgentDataAgentsResponseType$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsRole$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsRole
+> = z.nativeEnum(StreamAgentDataAgentsRole);
+/** @internal */
+export const StreamAgentDataAgentsRole$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsRole
+> = StreamAgentDataAgentsRole$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsToolResultPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsToolResultPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind$inboundSchema,
+  tool_call_id: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+  });
+});
+/** @internal */
+export type StreamAgentPartsAgentsToolResultPart$Outbound = {
+  kind: string;
+  tool_call_id: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsToolResultPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsToolResultPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsToolResultPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataMessageDifferenceKind$outboundSchema,
+  toolCallId: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+  });
+});
+
+export function streamAgentPartsAgentsToolResultPartToJSON(
+  streamAgentPartsAgentsToolResultPart: StreamAgentPartsAgentsToolResultPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsToolResultPart$outboundSchema.parse(
+      streamAgentPartsAgentsToolResultPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsToolResultPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsToolResultPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsToolResultPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsToolResultPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsToolCallPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsToolCallPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind$inboundSchema,
+  tool_name: z.string(),
+  tool_call_id: z.string(),
+  arguments: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_name": "toolName",
+    "tool_call_id": "toolCallId",
+  });
+});
+/** @internal */
+export type StreamAgentPartsAgentsToolCallPart$Outbound = {
+  kind: string;
+  tool_name: string;
+  tool_call_id: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsToolCallPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsToolCallPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsToolCallPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3DataKind$outboundSchema,
+  toolName: z.string(),
+  toolCallId: z.string(),
+  arguments: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolName: "tool_name",
+    toolCallId: "tool_call_id",
+  });
+});
+
+export function streamAgentPartsAgentsToolCallPartToJSON(
+  streamAgentPartsAgentsToolCallPart: StreamAgentPartsAgentsToolCallPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsToolCallPart$outboundSchema.parse(
+      streamAgentPartsAgentsToolCallPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsToolCallPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsToolCallPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentPartsAgentsToolCallPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsToolCallPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentFileAgentsResponseFileInURIFormat$inboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponseFileInURIFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+/** @internal */
+export type StreamAgentFileAgentsResponseFileInURIFormat$Outbound = {
+  uri: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsResponseFileInURIFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponseFileInURIFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponseFileInURIFormat
+  > = z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponseFileInURIFormatToJSON(
+  streamAgentFileAgentsResponseFileInURIFormat:
+    StreamAgentFileAgentsResponseFileInURIFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponseFileInURIFormat$outboundSchema.parse(
+      streamAgentFileAgentsResponseFileInURIFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsResponseFileInURIFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponseFileInURIFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponseFileInURIFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentFileAgentsResponseFileInURIFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentFileAgentsResponseBinaryFormat$inboundSchema: z.ZodType<
+  StreamAgentFileAgentsResponseBinaryFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+/** @internal */
+export type StreamAgentFileAgentsResponseBinaryFormat$Outbound = {
+  bytes: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsResponseBinaryFormat$outboundSchema:
+  z.ZodType<
+    StreamAgentFileAgentsResponseBinaryFormat$Outbound,
+    z.ZodTypeDef,
+    StreamAgentFileAgentsResponseBinaryFormat
+  > = z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  });
+
+export function streamAgentFileAgentsResponseBinaryFormatToJSON(
+  streamAgentFileAgentsResponseBinaryFormat:
+    StreamAgentFileAgentsResponseBinaryFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsResponseBinaryFormat$outboundSchema.parse(
+      streamAgentFileAgentsResponseBinaryFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsResponseBinaryFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamAgentFileAgentsResponseBinaryFormat,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsResponseBinaryFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamAgentFileAgentsResponseBinaryFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsFile$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsResponseBinaryFormat$inboundSchema),
+  z.lazy(() => StreamAgentFileAgentsResponseFileInURIFormat$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentPartsAgentsFile$Outbound =
+  | StreamAgentFileAgentsResponseBinaryFormat$Outbound
+  | StreamAgentFileAgentsResponseFileInURIFormat$Outbound;
+
+/** @internal */
+export const StreamAgentPartsAgentsFile$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsFile$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsFile
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsResponseBinaryFormat$outboundSchema),
+  z.lazy(() => StreamAgentFileAgentsResponseFileInURIFormat$outboundSchema),
+]);
+
+export function streamAgentPartsAgentsFileToJSON(
+  streamAgentPartsAgentsFile: StreamAgentPartsAgentsFile,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsFile$outboundSchema.parse(streamAgentPartsAgentsFile),
+  );
+}
+export function streamAgentPartsAgentsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsAgentsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsFilePart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsFilePart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind$inboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsResponseBinaryFormat$inboundSchema),
+    z.lazy(() => StreamAgentFileAgentsResponseFileInURIFormat$inboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsFilePart$Outbound = {
+  kind: string;
+  file:
+    | StreamAgentFileAgentsResponseBinaryFormat$Outbound
+    | StreamAgentFileAgentsResponseFileInURIFormat$Outbound;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsFilePart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsFilePart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsFilePart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyData3Kind$outboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsResponseBinaryFormat$outboundSchema),
+    z.lazy(() => StreamAgentFileAgentsResponseFileInURIFormat$outboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsAgentsFilePartToJSON(
+  streamAgentPartsAgentsFilePart: StreamAgentPartsAgentsFilePart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsFilePart$outboundSchema.parse(
+      streamAgentPartsAgentsFilePart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsFilePartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsFilePart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsAgentsFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsFilePart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsDataPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsDataPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind$inboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsDataPart$Outbound = {
+  kind: string;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsDataPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsDataPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsDataPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyDataKind$outboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsAgentsDataPartToJSON(
+  streamAgentPartsAgentsDataPart: StreamAgentPartsAgentsDataPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsDataPart$outboundSchema.parse(
+      streamAgentPartsAgentsDataPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsDataPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsDataPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsAgentsDataPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsDataPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind
+  > = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind
+  > =
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsTextPart$inboundSchema: z.ZodType<
+  StreamAgentPartsAgentsTextPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind$inboundSchema,
+  text: z.string(),
+});
+/** @internal */
+export type StreamAgentPartsAgentsTextPart$Outbound = {
+  kind: string;
+  text: string;
+};
+
+/** @internal */
+export const StreamAgentPartsAgentsTextPart$outboundSchema: z.ZodType<
+  StreamAgentPartsAgentsTextPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsAgentsTextPart
+> = z.object({
+  kind:
+    StreamAgentPartsAgentsResponse200TextEventStreamResponseBodyKind$outboundSchema,
+  text: z.string(),
+});
+
+export function streamAgentPartsAgentsTextPartToJSON(
+  streamAgentPartsAgentsTextPart: StreamAgentPartsAgentsTextPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsAgentsTextPart$outboundSchema.parse(
+      streamAgentPartsAgentsTextPart,
+    ),
+  );
+}
+export function streamAgentPartsAgentsTextPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsAgentsTextPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsAgentsTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsAgentsTextPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsParts$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsParts,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsToolCallPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsTextPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsDataPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsFilePart$inboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsToolResultPart$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentDataAgentsParts$Outbound =
+  | StreamAgentPartsAgentsToolCallPart$Outbound
+  | StreamAgentPartsAgentsTextPart$Outbound
+  | StreamAgentPartsAgentsDataPart$Outbound
+  | StreamAgentPartsAgentsFilePart$Outbound
+  | StreamAgentPartsAgentsToolResultPart$Outbound;
+
+/** @internal */
+export const StreamAgentDataAgentsParts$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsParts$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsParts
+> = z.union([
+  z.lazy(() => StreamAgentPartsAgentsToolCallPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsTextPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsDataPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsFilePart$outboundSchema),
+  z.lazy(() => StreamAgentPartsAgentsToolResultPart$outboundSchema),
+]);
+
+export function streamAgentDataAgentsPartsToJSON(
+  streamAgentDataAgentsParts: StreamAgentDataAgentsParts,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsParts$outboundSchema.parse(streamAgentDataAgentsParts),
+  );
+}
+export function streamAgentDataAgentsPartsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsParts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsParts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsParts' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataMessageDifference$inboundSchema: z.ZodType<
+  DataMessageDifference,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  messageId: z.string(),
+  role: StreamAgentDataAgentsRole$inboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsAgentsToolCallPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsTextPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsDataPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsFilePart$inboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsToolResultPart$inboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+  agent_id: z.string(),
+  agent_execution_id: z.string(),
+  workspace_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_id": "agentId",
+    "agent_execution_id": "agentExecutionId",
+    "workspace_id": "workspaceId",
+  });
+});
+/** @internal */
+export type DataMessageDifference$Outbound = {
+  messageId: string;
+  role: string;
+  parts: Array<
+    | StreamAgentPartsAgentsToolCallPart$Outbound
+    | StreamAgentPartsAgentsTextPart$Outbound
+    | StreamAgentPartsAgentsDataPart$Outbound
+    | StreamAgentPartsAgentsFilePart$Outbound
+    | StreamAgentPartsAgentsToolResultPart$Outbound
+  >;
+  metadata?: { [k: string]: any } | undefined;
+  agent_id: string;
+  agent_execution_id: string;
+  workspace_id: string;
+};
+
+/** @internal */
+export const DataMessageDifference$outboundSchema: z.ZodType<
+  DataMessageDifference$Outbound,
+  z.ZodTypeDef,
+  DataMessageDifference
+> = z.object({
+  messageId: z.string(),
+  role: StreamAgentDataAgentsRole$outboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsAgentsToolCallPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsTextPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsDataPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsFilePart$outboundSchema),
+      z.lazy(() => StreamAgentPartsAgentsToolResultPart$outboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+  agentId: z.string(),
+  agentExecutionId: z.string(),
+  workspaceId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    agentId: "agent_id",
+    agentExecutionId: "agent_execution_id",
+    workspaceId: "workspace_id",
+  });
+});
+
+export function dataMessageDifferenceToJSON(
+  dataMessageDifference: DataMessageDifference,
+): string {
+  return JSON.stringify(
+    DataMessageDifference$outboundSchema.parse(dataMessageDifference),
+  );
+}
+export function dataMessageDifferenceFromJSON(
+  jsonString: string,
+): SafeParseResult<DataMessageDifference, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataMessageDifference$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataMessageDifference' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataFinishReason$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataFinishReason
+> = z.nativeEnum(StreamAgentDataFinishReason);
+/** @internal */
+export const StreamAgentDataFinishReason$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataFinishReason
+> = StreamAgentDataFinishReason$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type
+  > = z.nativeEnum(
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type,
+  );
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type
+  > =
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsFunction$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+/** @internal */
+export type StreamAgentDataAgentsFunction$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsFunction$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsFunction$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsFunction
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function streamAgentDataAgentsFunctionToJSON(
+  streamAgentDataAgentsFunction: StreamAgentDataAgentsFunction,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsFunction$outboundSchema.parse(
+      streamAgentDataAgentsFunction,
+    ),
+  );
+}
+export function streamAgentDataAgentsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataToolCalls$inboundSchema: z.ZodType<
+  StreamAgentDataToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type$inboundSchema
+      .optional(),
+  function: z.lazy(() => StreamAgentDataAgentsFunction$inboundSchema)
+    .optional(),
+});
+/** @internal */
+export type StreamAgentDataToolCalls$Outbound = {
+  id?: string | undefined;
+  type?: string | undefined;
+  function?: StreamAgentDataAgentsFunction$Outbound | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataToolCalls$outboundSchema: z.ZodType<
+  StreamAgentDataToolCalls$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataToolCalls
+> = z.object({
+  id: z.string().optional(),
+  type:
+    StreamAgentDataAgentsResponse200TextEventStreamResponseBody3Type$outboundSchema
+      .optional(),
+  function: z.lazy(() => StreamAgentDataAgentsFunction$outboundSchema)
+    .optional(),
+});
+
+export function streamAgentDataToolCallsToJSON(
+  streamAgentDataToolCalls: StreamAgentDataToolCalls,
+): string {
+  return JSON.stringify(
+    StreamAgentDataToolCalls$outboundSchema.parse(streamAgentDataToolCalls),
+  );
+}
+export function streamAgentDataToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamRole$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200TextEventStreamRole> =
+    z.nativeEnum(StreamAgentDataAgentsResponse200TextEventStreamRole);
+/** @internal */
+export const StreamAgentDataAgentsResponse200TextEventStreamRole$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataAgentsResponse200TextEventStreamRole> =
+    StreamAgentDataAgentsResponse200TextEventStreamRole$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAudio$inboundSchema: z.ZodType<
+  StreamAgentDataAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  expires_at: z.number().int(),
+  data: z.string(),
+  transcript: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "expires_at": "expiresAt",
+  });
+});
+/** @internal */
+export type StreamAgentDataAudio$Outbound = {
+  id: string;
+  expires_at: number;
+  data: string;
+  transcript: string;
+};
+
+/** @internal */
+export const StreamAgentDataAudio$outboundSchema: z.ZodType<
+  StreamAgentDataAudio$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAudio
+> = z.object({
+  id: z.string(),
+  expiresAt: z.number().int(),
+  data: z.string(),
+  transcript: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    expiresAt: "expires_at",
+  });
+});
+
+export function streamAgentDataAudioToJSON(
+  streamAgentDataAudio: StreamAgentDataAudio,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAudio$outboundSchema.parse(streamAgentDataAudio),
+  );
+}
+export function streamAgentDataAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsMessage$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.nullable(z.string()).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  tool_calls: z.array(z.lazy(() => StreamAgentDataToolCalls$inboundSchema))
+    .optional(),
+  role: StreamAgentDataAgentsResponse200TextEventStreamRole$inboundSchema
+    .optional(),
+  reasoning: z.nullable(z.string()).optional(),
+  reasoning_signature: z.nullable(z.string()).optional(),
+  redacted_reasoning: z.string().optional(),
+  audio: z.nullable(z.lazy(() => StreamAgentDataAudio$inboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
+    "reasoning_signature": "reasoningSignature",
+    "redacted_reasoning": "redactedReasoning",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsMessage$Outbound = {
+  content?: string | null | undefined;
+  refusal?: string | null | undefined;
+  tool_calls?: Array<StreamAgentDataToolCalls$Outbound> | undefined;
+  role?: string | undefined;
+  reasoning?: string | null | undefined;
+  reasoning_signature?: string | null | undefined;
+  redacted_reasoning?: string | undefined;
+  audio?: StreamAgentDataAudio$Outbound | null | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsMessage$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsMessage$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsMessage
+> = z.object({
+  content: z.nullable(z.string()).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  toolCalls: z.array(z.lazy(() => StreamAgentDataToolCalls$outboundSchema))
+    .optional(),
+  role: StreamAgentDataAgentsResponse200TextEventStreamRole$outboundSchema
+    .optional(),
+  reasoning: z.nullable(z.string()).optional(),
+  reasoningSignature: z.nullable(z.string()).optional(),
+  redactedReasoning: z.string().optional(),
+  audio: z.nullable(z.lazy(() => StreamAgentDataAudio$outboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCalls: "tool_calls",
+    reasoningSignature: "reasoning_signature",
+    redactedReasoning: "redacted_reasoning",
+  });
+});
+
+export function streamAgentDataAgentsMessageToJSON(
+  streamAgentDataAgentsMessage: StreamAgentDataAgentsMessage,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsMessage$outboundSchema.parse(
+      streamAgentDataAgentsMessage,
+    ),
+  );
+}
+export function streamAgentDataAgentsMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataTopLogprobs$inboundSchema: z.ZodType<
+  StreamAgentDataTopLogprobs,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+});
+/** @internal */
+export type StreamAgentDataTopLogprobs$Outbound = {
+  token: string;
+  logprob: number;
+  bytes: Array<number> | null;
+};
+
+/** @internal */
+export const StreamAgentDataTopLogprobs$outboundSchema: z.ZodType<
+  StreamAgentDataTopLogprobs$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataTopLogprobs
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+});
+
+export function streamAgentDataTopLogprobsToJSON(
+  streamAgentDataTopLogprobs: StreamAgentDataTopLogprobs,
+): string {
+  return JSON.stringify(
+    StreamAgentDataTopLogprobs$outboundSchema.parse(streamAgentDataTopLogprobs),
+  );
+}
+export function streamAgentDataTopLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataTopLogprobs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataTopLogprobs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataTopLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataContent$inboundSchema: z.ZodType<
+  StreamAgentDataContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+  top_logprobs: z.array(z.lazy(() => StreamAgentDataTopLogprobs$inboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    "top_logprobs": "topLogprobs",
+  });
+});
+/** @internal */
+export type StreamAgentDataContent$Outbound = {
+  token: string;
+  logprob: number;
+  bytes: Array<number> | null;
+  top_logprobs: Array<StreamAgentDataTopLogprobs$Outbound>;
+};
+
+/** @internal */
+export const StreamAgentDataContent$outboundSchema: z.ZodType<
+  StreamAgentDataContent$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataContent
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+  topLogprobs: z.array(z.lazy(() => StreamAgentDataTopLogprobs$outboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    topLogprobs: "top_logprobs",
+  });
+});
+
+export function streamAgentDataContentToJSON(
+  streamAgentDataContent: StreamAgentDataContent,
+): string {
+  return JSON.stringify(
+    StreamAgentDataContent$outboundSchema.parse(streamAgentDataContent),
+  );
+}
+export function streamAgentDataContentFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsTopLogprobs$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsTopLogprobs,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+});
+/** @internal */
+export type StreamAgentDataAgentsTopLogprobs$Outbound = {
+  token: string;
+  logprob: number;
+  bytes: Array<number> | null;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsTopLogprobs$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsTopLogprobs$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsTopLogprobs
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+});
+
+export function streamAgentDataAgentsTopLogprobsToJSON(
+  streamAgentDataAgentsTopLogprobs: StreamAgentDataAgentsTopLogprobs,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsTopLogprobs$outboundSchema.parse(
+      streamAgentDataAgentsTopLogprobs,
+    ),
+  );
+}
+export function streamAgentDataAgentsTopLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsTopLogprobs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsTopLogprobs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsTopLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataRefusal$inboundSchema: z.ZodType<
+  DataRefusal,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+  top_logprobs: z.array(
+    z.lazy(() => StreamAgentDataAgentsTopLogprobs$inboundSchema),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "top_logprobs": "topLogprobs",
+  });
+});
+/** @internal */
+export type DataRefusal$Outbound = {
+  token: string;
+  logprob: number;
+  bytes: Array<number> | null;
+  top_logprobs: Array<StreamAgentDataAgentsTopLogprobs$Outbound>;
+};
+
+/** @internal */
+export const DataRefusal$outboundSchema: z.ZodType<
+  DataRefusal$Outbound,
+  z.ZodTypeDef,
+  DataRefusal
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+  topLogprobs: z.array(
+    z.lazy(() => StreamAgentDataAgentsTopLogprobs$outboundSchema),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    topLogprobs: "top_logprobs",
+  });
+});
+
+export function dataRefusalToJSON(dataRefusal: DataRefusal): string {
+  return JSON.stringify(DataRefusal$outboundSchema.parse(dataRefusal));
+}
+export function dataRefusalFromJSON(
+  jsonString: string,
+): SafeParseResult<DataRefusal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataRefusal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataRefusal' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataLogprobs$inboundSchema: z.ZodType<
+  DataLogprobs,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.nullable(
+    z.array(z.lazy(() => StreamAgentDataContent$inboundSchema)),
+  ),
+  refusal: z.nullable(z.array(z.lazy(() => DataRefusal$inboundSchema))),
+});
+/** @internal */
+export type DataLogprobs$Outbound = {
+  content: Array<StreamAgentDataContent$Outbound> | null;
+  refusal: Array<DataRefusal$Outbound> | null;
+};
+
+/** @internal */
+export const DataLogprobs$outboundSchema: z.ZodType<
+  DataLogprobs$Outbound,
+  z.ZodTypeDef,
+  DataLogprobs
+> = z.object({
+  content: z.nullable(
+    z.array(z.lazy(() => StreamAgentDataContent$outboundSchema)),
+  ),
+  refusal: z.nullable(z.array(z.lazy(() => DataRefusal$outboundSchema))),
+});
+
+export function dataLogprobsToJSON(dataLogprobs: DataLogprobs): string {
+  return JSON.stringify(DataLogprobs$outboundSchema.parse(dataLogprobs));
+}
+export function dataLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<DataLogprobs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataLogprobs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataChoice$inboundSchema: z.ZodType<
+  DataChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  finish_reason: z.nullable(StreamAgentDataFinishReason$inboundSchema),
+  index: z.number().default(0),
+  message: z.lazy(() => StreamAgentDataAgentsMessage$inboundSchema),
+  logprobs: z.nullable(z.lazy(() => DataLogprobs$inboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "finish_reason": "finishReason",
+  });
+});
+/** @internal */
+export type DataChoice$Outbound = {
+  finish_reason: string | null;
+  index: number;
+  message: StreamAgentDataAgentsMessage$Outbound;
+  logprobs?: DataLogprobs$Outbound | null | undefined;
+};
+
+/** @internal */
+export const DataChoice$outboundSchema: z.ZodType<
+  DataChoice$Outbound,
+  z.ZodTypeDef,
+  DataChoice
+> = z.object({
+  finishReason: z.nullable(StreamAgentDataFinishReason$outboundSchema),
+  index: z.number().default(0),
+  message: z.lazy(() => StreamAgentDataAgentsMessage$outboundSchema),
+  logprobs: z.nullable(z.lazy(() => DataLogprobs$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    finishReason: "finish_reason",
+  });
+});
+
+export function dataChoiceToJSON(dataChoice: DataChoice): string {
+  return JSON.stringify(DataChoice$outboundSchema.parse(dataChoice));
+}
+export function dataChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<DataChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataPromptTokensDetails$inboundSchema: z.ZodType<
+  StreamAgentDataPromptTokensDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  cached_tokens: z.nullable(z.number().int()).optional(),
+  audio_tokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cached_tokens": "cachedTokens",
+    "audio_tokens": "audioTokens",
+  });
+});
+/** @internal */
+export type StreamAgentDataPromptTokensDetails$Outbound = {
+  cached_tokens?: number | null | undefined;
+  audio_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataPromptTokensDetails$outboundSchema: z.ZodType<
+  StreamAgentDataPromptTokensDetails$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataPromptTokensDetails
+> = z.object({
+  cachedTokens: z.nullable(z.number().int()).optional(),
+  audioTokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cachedTokens: "cached_tokens",
+    audioTokens: "audio_tokens",
+  });
+});
+
+export function streamAgentDataPromptTokensDetailsToJSON(
+  streamAgentDataPromptTokensDetails: StreamAgentDataPromptTokensDetails,
+): string {
+  return JSON.stringify(
+    StreamAgentDataPromptTokensDetails$outboundSchema.parse(
+      streamAgentDataPromptTokensDetails,
+    ),
+  );
+}
+export function streamAgentDataPromptTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataPromptTokensDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataPromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataPromptTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataCompletionTokensDetails$inboundSchema: z.ZodType<
+  StreamAgentDataCompletionTokensDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  reasoning_tokens: z.nullable(z.number()).optional(),
+  accepted_prediction_tokens: z.nullable(z.number()).optional(),
+  rejected_prediction_tokens: z.nullable(z.number()).optional(),
+  audio_tokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "reasoning_tokens": "reasoningTokens",
+    "accepted_prediction_tokens": "acceptedPredictionTokens",
+    "rejected_prediction_tokens": "rejectedPredictionTokens",
+    "audio_tokens": "audioTokens",
+  });
+});
+/** @internal */
+export type StreamAgentDataCompletionTokensDetails$Outbound = {
+  reasoning_tokens?: number | null | undefined;
+  accepted_prediction_tokens?: number | null | undefined;
+  rejected_prediction_tokens?: number | null | undefined;
+  audio_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataCompletionTokensDetails$outboundSchema: z.ZodType<
+  StreamAgentDataCompletionTokensDetails$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataCompletionTokensDetails
+> = z.object({
+  reasoningTokens: z.nullable(z.number()).optional(),
+  acceptedPredictionTokens: z.nullable(z.number()).optional(),
+  rejectedPredictionTokens: z.nullable(z.number()).optional(),
+  audioTokens: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    reasoningTokens: "reasoning_tokens",
+    acceptedPredictionTokens: "accepted_prediction_tokens",
+    rejectedPredictionTokens: "rejected_prediction_tokens",
+    audioTokens: "audio_tokens",
+  });
+});
+
+export function streamAgentDataCompletionTokensDetailsToJSON(
+  streamAgentDataCompletionTokensDetails:
+    StreamAgentDataCompletionTokensDetails,
+): string {
+  return JSON.stringify(
+    StreamAgentDataCompletionTokensDetails$outboundSchema.parse(
+      streamAgentDataCompletionTokensDetails,
+    ),
+  );
+}
+export function streamAgentDataCompletionTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataCompletionTokensDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentDataCompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataCompletionTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataUsage$inboundSchema: z.ZodType<
+  StreamAgentDataUsage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  completion_tokens: z.number().optional(),
+  prompt_tokens: z.number().optional(),
+  total_tokens: z.number().optional(),
+  prompt_tokens_details: z.nullable(
+    z.lazy(() => StreamAgentDataPromptTokensDetails$inboundSchema),
+  ).optional(),
+  completion_tokens_details: z.nullable(
+    z.lazy(() => StreamAgentDataCompletionTokensDetails$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_tokens": "completionTokens",
+    "prompt_tokens": "promptTokens",
+    "total_tokens": "totalTokens",
+    "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
+  });
+});
+/** @internal */
+export type StreamAgentDataUsage$Outbound = {
+  completion_tokens?: number | undefined;
+  prompt_tokens?: number | undefined;
+  total_tokens?: number | undefined;
+  prompt_tokens_details?:
+    | StreamAgentDataPromptTokensDetails$Outbound
+    | null
+    | undefined;
+  completion_tokens_details?:
+    | StreamAgentDataCompletionTokensDetails$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataUsage$outboundSchema: z.ZodType<
+  StreamAgentDataUsage$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataUsage
+> = z.object({
+  completionTokens: z.number().optional(),
+  promptTokens: z.number().optional(),
+  totalTokens: z.number().optional(),
+  promptTokensDetails: z.nullable(
+    z.lazy(() => StreamAgentDataPromptTokensDetails$outboundSchema),
+  ).optional(),
+  completionTokensDetails: z.nullable(
+    z.lazy(() => StreamAgentDataCompletionTokensDetails$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    completionTokens: "completion_tokens",
+    promptTokens: "prompt_tokens",
+    totalTokens: "total_tokens",
+    promptTokensDetails: "prompt_tokens_details",
+    completionTokensDetails: "completion_tokens_details",
+  });
+});
+
+export function streamAgentDataUsageToJSON(
+  streamAgentDataUsage: StreamAgentDataUsage,
+): string {
+  return JSON.stringify(
+    StreamAgentDataUsage$outboundSchema.parse(streamAgentDataUsage),
+  );
+}
+export function streamAgentDataUsageFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataUsage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataUsage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataUsage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsResponseData$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  agent_id: z.string(),
+  message_difference: z.record(
+    z.lazy(() => DataMessageDifference$inboundSchema),
+  ),
+  choice: z.lazy(() => DataChoice$inboundSchema).optional(),
+  choiceIndex: z.number().optional(),
+  iteration: z.number(),
+  accumulated_execution_time: z.number(),
+  responseId: z.string().optional(),
+  usage: z.lazy(() => StreamAgentDataUsage$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_id": "agentId",
+    "message_difference": "messageDifference",
+    "accumulated_execution_time": "accumulatedExecutionTime",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsResponseData$Outbound = {
+  agent_id: string;
+  message_difference: { [k: string]: DataMessageDifference$Outbound };
+  choice?: DataChoice$Outbound | undefined;
+  choiceIndex?: number | undefined;
+  iteration: number;
+  accumulated_execution_time: number;
+  responseId?: string | undefined;
+  usage?: StreamAgentDataUsage$Outbound | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsResponseData$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsResponseData$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsResponseData
+> = z.object({
+  agentId: z.string(),
+  messageDifference: z.record(
+    z.lazy(() => DataMessageDifference$outboundSchema),
+  ),
+  choice: z.lazy(() => DataChoice$outboundSchema).optional(),
+  choiceIndex: z.number().optional(),
+  iteration: z.number(),
+  accumulatedExecutionTime: z.number(),
+  responseId: z.string().optional(),
+  usage: z.lazy(() => StreamAgentDataUsage$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    agentId: "agent_id",
+    messageDifference: "message_difference",
+    accumulatedExecutionTime: "accumulated_execution_time",
+  });
+});
+
+export function streamAgentDataAgentsResponseDataToJSON(
+  streamAgentDataAgentsResponseData: StreamAgentDataAgentsResponseData,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsResponseData$outboundSchema.parse(
+      streamAgentDataAgentsResponseData,
+    ),
+  );
+}
+export function streamAgentDataAgentsResponseDataFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsResponseData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsResponseData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsResponseData' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentData3$inboundSchema: z.ZodType<
+  StreamAgentData3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamAgentDataAgentsResponseType$inboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsResponseData$inboundSchema),
+});
+/** @internal */
+export type StreamAgentData3$Outbound = {
+  type: string;
+  timestamp: string;
+  data: StreamAgentDataAgentsResponseData$Outbound;
+};
+
+/** @internal */
+export const StreamAgentData3$outboundSchema: z.ZodType<
+  StreamAgentData3$Outbound,
+  z.ZodTypeDef,
+  StreamAgentData3
+> = z.object({
+  type: StreamAgentDataAgentsResponseType$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsResponseData$outboundSchema),
+});
+
+export function streamAgentData3ToJSON(
+  streamAgentData3: StreamAgentData3,
+): string {
+  return JSON.stringify(
+    StreamAgentData3$outboundSchema.parse(streamAgentData3),
+  );
+}
+export function streamAgentData3FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentData3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentData3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentData3' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsType
+> = z.nativeEnum(StreamAgentDataAgentsType);
+/** @internal */
+export const StreamAgentDataAgentsType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsType
+> = StreamAgentDataAgentsType$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataRole$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataRole
+> = z.nativeEnum(StreamAgentDataRole);
+/** @internal */
+export const StreamAgentDataRole$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataRole
+> = StreamAgentDataRole$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamKind$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentPartsAgentsResponse200TextEventStreamKind> =
+    z.nativeEnum(StreamAgentPartsAgentsResponse200TextEventStreamKind);
+/** @internal */
+export const StreamAgentPartsAgentsResponse200TextEventStreamKind$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentPartsAgentsResponse200TextEventStreamKind> =
+    StreamAgentPartsAgentsResponse200TextEventStreamKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsToolResultPart$inboundSchema: z.ZodType<
+  StreamAgentPartsToolResultPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamKind$inboundSchema,
+  tool_call_id: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+  });
+});
+/** @internal */
+export type StreamAgentPartsToolResultPart$Outbound = {
+  kind: string;
+  tool_call_id: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsToolResultPart$outboundSchema: z.ZodType<
+  StreamAgentPartsToolResultPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsToolResultPart
+> = z.object({
+  kind: StreamAgentPartsAgentsResponse200TextEventStreamKind$outboundSchema,
+  toolCallId: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+  });
+});
+
+export function streamAgentPartsToolResultPartToJSON(
+  streamAgentPartsToolResultPart: StreamAgentPartsToolResultPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsToolResultPart$outboundSchema.parse(
+      streamAgentPartsToolResultPart,
+    ),
+  );
+}
+export function streamAgentPartsToolResultPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsToolResultPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsToolResultPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsToolResultPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponse200Kind$inboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentPartsAgentsResponse200Kind> = z.nativeEnum(
+    StreamAgentPartsAgentsResponse200Kind,
+  );
+/** @internal */
+export const StreamAgentPartsAgentsResponse200Kind$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentPartsAgentsResponse200Kind> =
+    StreamAgentPartsAgentsResponse200Kind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsToolCallPart$inboundSchema: z.ZodType<
+  StreamAgentPartsToolCallPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: StreamAgentPartsAgentsResponse200Kind$inboundSchema,
+  tool_name: z.string(),
+  tool_call_id: z.string(),
+  arguments: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_name": "toolName",
+    "tool_call_id": "toolCallId",
+  });
+});
+/** @internal */
+export type StreamAgentPartsToolCallPart$Outbound = {
+  kind: string;
+  tool_name: string;
+  tool_call_id: string;
+  arguments: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsToolCallPart$outboundSchema: z.ZodType<
+  StreamAgentPartsToolCallPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsToolCallPart
+> = z.object({
+  kind: StreamAgentPartsAgentsResponse200Kind$outboundSchema,
+  toolName: z.string(),
+  toolCallId: z.string(),
+  arguments: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolName: "tool_name",
+    toolCallId: "tool_call_id",
+  });
+});
+
+export function streamAgentPartsToolCallPartToJSON(
+  streamAgentPartsToolCallPart: StreamAgentPartsToolCallPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsToolCallPart$outboundSchema.parse(
+      streamAgentPartsToolCallPart,
+    ),
+  );
+}
+export function streamAgentPartsToolCallPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsToolCallPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsToolCallPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsToolCallPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsResponseKind$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsAgentsResponseKind
+> = z.nativeEnum(StreamAgentPartsAgentsResponseKind);
+/** @internal */
+export const StreamAgentPartsAgentsResponseKind$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsAgentsResponseKind
+> = StreamAgentPartsAgentsResponseKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentFileAgentsFileInURIFormat$inboundSchema: z.ZodType<
+  StreamAgentFileAgentsFileInURIFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uri: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+/** @internal */
+export type StreamAgentFileAgentsFileInURIFormat$Outbound = {
+  uri: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsFileInURIFormat$outboundSchema: z.ZodType<
+  StreamAgentFileAgentsFileInURIFormat$Outbound,
+  z.ZodTypeDef,
+  StreamAgentFileAgentsFileInURIFormat
+> = z.object({
+  uri: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+export function streamAgentFileAgentsFileInURIFormatToJSON(
+  streamAgentFileAgentsFileInURIFormat: StreamAgentFileAgentsFileInURIFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsFileInURIFormat$outboundSchema.parse(
+      streamAgentFileAgentsFileInURIFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsFileInURIFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentFileAgentsFileInURIFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamAgentFileAgentsFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentFileAgentsFileInURIFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentFileAgentsBinaryFormat$inboundSchema: z.ZodType<
+  StreamAgentFileAgentsBinaryFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+/** @internal */
+export type StreamAgentFileAgentsBinaryFormat$Outbound = {
+  bytes: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentFileAgentsBinaryFormat$outboundSchema: z.ZodType<
+  StreamAgentFileAgentsBinaryFormat$Outbound,
+  z.ZodTypeDef,
+  StreamAgentFileAgentsBinaryFormat
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+export function streamAgentFileAgentsBinaryFormatToJSON(
+  streamAgentFileAgentsBinaryFormat: StreamAgentFileAgentsBinaryFormat,
+): string {
+  return JSON.stringify(
+    StreamAgentFileAgentsBinaryFormat$outboundSchema.parse(
+      streamAgentFileAgentsBinaryFormat,
+    ),
+  );
+}
+export function streamAgentFileAgentsBinaryFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentFileAgentsBinaryFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentFileAgentsBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentFileAgentsBinaryFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsFile$inboundSchema: z.ZodType<
+  StreamAgentPartsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsBinaryFormat$inboundSchema),
+  z.lazy(() => StreamAgentFileAgentsFileInURIFormat$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentPartsFile$Outbound =
+  | StreamAgentFileAgentsBinaryFormat$Outbound
+  | StreamAgentFileAgentsFileInURIFormat$Outbound;
+
+/** @internal */
+export const StreamAgentPartsFile$outboundSchema: z.ZodType<
+  StreamAgentPartsFile$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsFile
+> = z.union([
+  z.lazy(() => StreamAgentFileAgentsBinaryFormat$outboundSchema),
+  z.lazy(() => StreamAgentFileAgentsFileInURIFormat$outboundSchema),
+]);
+
+export function streamAgentPartsFileToJSON(
+  streamAgentPartsFile: StreamAgentPartsFile,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsFile$outboundSchema.parse(streamAgentPartsFile),
+  );
+}
+export function streamAgentPartsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsFilePart$inboundSchema: z.ZodType<
+  StreamAgentPartsFilePart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: StreamAgentPartsAgentsResponseKind$inboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsBinaryFormat$inboundSchema),
+    z.lazy(() => StreamAgentFileAgentsFileInURIFormat$inboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsFilePart$Outbound = {
+  kind: string;
+  file:
+    | StreamAgentFileAgentsBinaryFormat$Outbound
+    | StreamAgentFileAgentsFileInURIFormat$Outbound;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsFilePart$outboundSchema: z.ZodType<
+  StreamAgentPartsFilePart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsFilePart
+> = z.object({
+  kind: StreamAgentPartsAgentsResponseKind$outboundSchema,
+  file: z.union([
+    z.lazy(() => StreamAgentFileAgentsBinaryFormat$outboundSchema),
+    z.lazy(() => StreamAgentFileAgentsFileInURIFormat$outboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsFilePartToJSON(
+  streamAgentPartsFilePart: StreamAgentPartsFilePart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsFilePart$outboundSchema.parse(streamAgentPartsFilePart),
+  );
+}
+export function streamAgentPartsFilePartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsFilePart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsFilePart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsAgentsKind$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsAgentsKind
+> = z.nativeEnum(StreamAgentPartsAgentsKind);
+/** @internal */
+export const StreamAgentPartsAgentsKind$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsAgentsKind
+> = StreamAgentPartsAgentsKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsDataPart$inboundSchema: z.ZodType<
+  StreamAgentPartsDataPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: StreamAgentPartsAgentsKind$inboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type StreamAgentPartsDataPart$Outbound = {
+  kind: string;
+  data: { [k: string]: any };
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const StreamAgentPartsDataPart$outboundSchema: z.ZodType<
+  StreamAgentPartsDataPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsDataPart
+> = z.object({
+  kind: StreamAgentPartsAgentsKind$outboundSchema,
+  data: z.record(z.any()),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function streamAgentPartsDataPartToJSON(
+  streamAgentPartsDataPart: StreamAgentPartsDataPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsDataPart$outboundSchema.parse(streamAgentPartsDataPart),
+  );
+}
+export function streamAgentPartsDataPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsDataPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsDataPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsDataPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentPartsKind$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsKind
+> = z.nativeEnum(StreamAgentPartsKind);
+/** @internal */
+export const StreamAgentPartsKind$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentPartsKind
+> = StreamAgentPartsKind$inboundSchema;
+
+/** @internal */
+export const StreamAgentPartsTextPart$inboundSchema: z.ZodType<
+  StreamAgentPartsTextPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: StreamAgentPartsKind$inboundSchema,
+  text: z.string(),
+});
+/** @internal */
+export type StreamAgentPartsTextPart$Outbound = {
+  kind: string;
+  text: string;
+};
+
+/** @internal */
+export const StreamAgentPartsTextPart$outboundSchema: z.ZodType<
+  StreamAgentPartsTextPart$Outbound,
+  z.ZodTypeDef,
+  StreamAgentPartsTextPart
+> = z.object({
+  kind: StreamAgentPartsKind$outboundSchema,
+  text: z.string(),
+});
+
+export function streamAgentPartsTextPartToJSON(
+  streamAgentPartsTextPart: StreamAgentPartsTextPart,
+): string {
+  return JSON.stringify(
+    StreamAgentPartsTextPart$outboundSchema.parse(streamAgentPartsTextPart),
+  );
+}
+export function streamAgentPartsTextPartFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentPartsTextPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentPartsTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentPartsTextPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataParts$inboundSchema: z.ZodType<
+  StreamAgentDataParts,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentPartsToolCallPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsTextPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsDataPart$inboundSchema),
+  z.lazy(() => StreamAgentPartsFilePart$inboundSchema),
+  z.lazy(() => StreamAgentPartsToolResultPart$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentDataParts$Outbound =
+  | StreamAgentPartsToolCallPart$Outbound
+  | StreamAgentPartsTextPart$Outbound
+  | StreamAgentPartsDataPart$Outbound
+  | StreamAgentPartsFilePart$Outbound
+  | StreamAgentPartsToolResultPart$Outbound;
+
+/** @internal */
+export const StreamAgentDataParts$outboundSchema: z.ZodType<
+  StreamAgentDataParts$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataParts
+> = z.union([
+  z.lazy(() => StreamAgentPartsToolCallPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsTextPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsDataPart$outboundSchema),
+  z.lazy(() => StreamAgentPartsFilePart$outboundSchema),
+  z.lazy(() => StreamAgentPartsToolResultPart$outboundSchema),
+]);
+
+export function streamAgentDataPartsToJSON(
+  streamAgentDataParts: StreamAgentDataParts,
+): string {
+  return JSON.stringify(
+    StreamAgentDataParts$outboundSchema.parse(streamAgentDataParts),
+  );
+}
+export function streamAgentDataPartsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataParts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataParts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataParts' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataInputMessage$inboundSchema: z.ZodType<
+  DataInputMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataRole$inboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsToolCallPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsTextPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsDataPart$inboundSchema),
+      z.lazy(() => StreamAgentPartsFilePart$inboundSchema),
+      z.lazy(() => StreamAgentPartsToolResultPart$inboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+/** @internal */
+export type DataInputMessage$Outbound = {
+  messageId?: string | undefined;
+  role: string;
+  parts: Array<
+    | StreamAgentPartsToolCallPart$Outbound
+    | StreamAgentPartsTextPart$Outbound
+    | StreamAgentPartsDataPart$Outbound
+    | StreamAgentPartsFilePart$Outbound
+    | StreamAgentPartsToolResultPart$Outbound
+  >;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const DataInputMessage$outboundSchema: z.ZodType<
+  DataInputMessage$Outbound,
+  z.ZodTypeDef,
+  DataInputMessage
+> = z.object({
+  messageId: z.string().optional(),
+  role: StreamAgentDataRole$outboundSchema,
+  parts: z.array(
+    z.union([
+      z.lazy(() => StreamAgentPartsToolCallPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsTextPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsDataPart$outboundSchema),
+      z.lazy(() => StreamAgentPartsFilePart$outboundSchema),
+      z.lazy(() => StreamAgentPartsToolResultPart$outboundSchema),
+    ]),
+  ),
+  metadata: z.record(z.any()).optional(),
+});
+
+export function dataInputMessageToJSON(
+  dataInputMessage: DataInputMessage,
+): string {
+  return JSON.stringify(
+    DataInputMessage$outboundSchema.parse(dataInputMessage),
+  );
+}
+export function dataInputMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<DataInputMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataInputMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataInputMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataToolApprovalRequired
+> = z.nativeEnum(StreamAgentDataToolApprovalRequired);
+/** @internal */
+export const StreamAgentDataToolApprovalRequired$outboundSchema:
+  z.ZodNativeEnum<typeof StreamAgentDataToolApprovalRequired> =
+    StreamAgentDataToolApprovalRequired$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataAgentsConditions$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsConditions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  condition: z.string(),
+  operator: z.string(),
+  value: z.string(),
+});
+/** @internal */
+export type StreamAgentDataAgentsConditions$Outbound = {
+  condition: string;
+  operator: string;
+  value: string;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsConditions$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsConditions$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsConditions
+> = z.object({
+  condition: z.string(),
+  operator: z.string(),
+  value: z.string(),
+});
+
+export function streamAgentDataAgentsConditionsToJSON(
+  streamAgentDataAgentsConditions: StreamAgentDataAgentsConditions,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsConditions$outboundSchema.parse(
+      streamAgentDataAgentsConditions,
+    ),
+  );
+}
+export function streamAgentDataAgentsConditionsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsConditions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsConditions' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataTools$inboundSchema: z.ZodType<
+  StreamAgentDataTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  key: z.string().optional(),
+  action_type: z.string(),
+  display_name: z.string().optional(),
+  description: z.string().optional(),
+  requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
+  conditions: z.array(
+    z.lazy(() => StreamAgentDataAgentsConditions$inboundSchema),
+  ).optional(),
+  timeout: z.number().default(120),
+}).transform((v) => {
+  return remap$(v, {
+    "action_type": "actionType",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
+  });
+});
+/** @internal */
+export type StreamAgentDataTools$Outbound = {
+  id: string;
+  key?: string | undefined;
+  action_type: string;
+  display_name?: string | undefined;
+  description?: string | undefined;
+  requires_approval: boolean;
+  tool_id?: string | undefined;
+  conditions?: Array<StreamAgentDataAgentsConditions$Outbound> | undefined;
+  timeout: number;
+};
+
+/** @internal */
+export const StreamAgentDataTools$outboundSchema: z.ZodType<
+  StreamAgentDataTools$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataTools
+> = z.object({
+  id: z.string(),
+  key: z.string().optional(),
+  actionType: z.string(),
+  displayName: z.string().optional(),
+  description: z.string().optional(),
+  requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
+  conditions: z.array(
+    z.lazy(() => StreamAgentDataAgentsConditions$outboundSchema),
+  ).optional(),
+  timeout: z.number().default(120),
+}).transform((v) => {
+  return remap$(v, {
+    actionType: "action_type",
+    displayName: "display_name",
+    requiresApproval: "requires_approval",
+    toolId: "tool_id",
+  });
+});
+
+export function streamAgentDataToolsToJSON(
+  streamAgentDataTools: StreamAgentDataTools,
+): string {
+  return JSON.stringify(
+    StreamAgentDataTools$outboundSchema.parse(streamAgentDataTools),
+  );
+}
+export function streamAgentDataToolsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataTools, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataTools' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataExecuteOn
+> = z.nativeEnum(StreamAgentDataExecuteOn);
+/** @internal */
+export const StreamAgentDataExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataExecuteOn
+> = StreamAgentDataExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataEvaluators$inboundSchema: z.ZodType<
+  StreamAgentDataEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: StreamAgentDataExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type StreamAgentDataEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamAgentDataEvaluators$outboundSchema: z.ZodType<
+  StreamAgentDataEvaluators$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: StreamAgentDataExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function streamAgentDataEvaluatorsToJSON(
+  streamAgentDataEvaluators: StreamAgentDataEvaluators,
+): string {
+  return JSON.stringify(
+    StreamAgentDataEvaluators$outboundSchema.parse(streamAgentDataEvaluators),
+  );
+}
+export function streamAgentDataEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsExecuteOn
+> = z.nativeEnum(StreamAgentDataAgentsExecuteOn);
+/** @internal */
+export const StreamAgentDataAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataAgentsExecuteOn
+> = StreamAgentDataAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataGuardrails$inboundSchema: z.ZodType<
+  StreamAgentDataGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: StreamAgentDataAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type StreamAgentDataGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamAgentDataGuardrails$outboundSchema: z.ZodType<
+  StreamAgentDataGuardrails$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: StreamAgentDataAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function streamAgentDataGuardrailsToJSON(
+  streamAgentDataGuardrails: StreamAgentDataGuardrails,
+): string {
+  return JSON.stringify(
+    StreamAgentDataGuardrails$outboundSchema.parse(streamAgentDataGuardrails),
+  );
+}
+export function streamAgentDataGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataSettings$inboundSchema: z.ZodType<
+  StreamAgentDataSettings,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  max_iterations: z.number().int().default(100),
+  max_execution_time: z.number().int().default(300),
+  tool_approval_required: StreamAgentDataToolApprovalRequired$inboundSchema
+    .default("respect_tool"),
+  tools: z.array(z.lazy(() => StreamAgentDataTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => StreamAgentDataEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => StreamAgentDataGuardrails$inboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "max_iterations": "maxIterations",
+    "max_execution_time": "maxExecutionTime",
+    "tool_approval_required": "toolApprovalRequired",
+  });
+});
+/** @internal */
+export type StreamAgentDataSettings$Outbound = {
+  max_iterations: number;
+  max_execution_time: number;
+  tool_approval_required: string;
+  tools?: Array<StreamAgentDataTools$Outbound> | undefined;
+  evaluators?: Array<StreamAgentDataEvaluators$Outbound> | undefined;
+  guardrails?: Array<StreamAgentDataGuardrails$Outbound> | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataSettings$outboundSchema: z.ZodType<
+  StreamAgentDataSettings$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataSettings
+> = z.object({
+  maxIterations: z.number().int().default(100),
+  maxExecutionTime: z.number().int().default(300),
+  toolApprovalRequired: StreamAgentDataToolApprovalRequired$outboundSchema
+    .default("respect_tool"),
+  tools: z.array(z.lazy(() => StreamAgentDataTools$outboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => StreamAgentDataEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => StreamAgentDataGuardrails$outboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    maxIterations: "max_iterations",
+    maxExecutionTime: "max_execution_time",
+    toolApprovalRequired: "tool_approval_required",
+  });
+});
+
+export function streamAgentDataSettingsToJSON(
+  streamAgentDataSettings: StreamAgentDataSettings,
+): string {
+  return JSON.stringify(
+    StreamAgentDataSettings$outboundSchema.parse(streamAgentDataSettings),
+  );
+}
+export function streamAgentDataSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataSettings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataSettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataAgentsData$inboundSchema: z.ZodType<
+  StreamAgentDataAgentsData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  integration_id: z.string().optional(),
+  inputMessage: z.lazy(() => DataInputMessage$inboundSchema),
+  modelId: z.string(),
+  instructions: z.string(),
+  system_prompt: z.string(),
+  settings: z.lazy(() => StreamAgentDataSettings$inboundSchema).optional(),
+  agent_manifest_id: z.string(),
+  agent_key: z.string(),
+  variables: z.record(z.any()).optional(),
+  tool_execution_id: z.string().optional(),
+  is_continuation: z.boolean().optional(),
+  stream: z.boolean().optional(),
+  responseId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+    "system_prompt": "systemPrompt",
+    "agent_manifest_id": "agentManifestId",
+    "agent_key": "agentKey",
+    "tool_execution_id": "toolExecutionId",
+    "is_continuation": "isContinuation",
+  });
+});
+/** @internal */
+export type StreamAgentDataAgentsData$Outbound = {
+  integration_id?: string | undefined;
+  inputMessage: DataInputMessage$Outbound;
+  modelId: string;
+  instructions: string;
+  system_prompt: string;
+  settings?: StreamAgentDataSettings$Outbound | undefined;
+  agent_manifest_id: string;
+  agent_key: string;
+  variables?: { [k: string]: any } | undefined;
+  tool_execution_id?: string | undefined;
+  is_continuation?: boolean | undefined;
+  stream?: boolean | undefined;
+  responseId?: string | undefined;
+};
+
+/** @internal */
+export const StreamAgentDataAgentsData$outboundSchema: z.ZodType<
+  StreamAgentDataAgentsData$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataAgentsData
+> = z.object({
+  integrationId: z.string().optional(),
+  inputMessage: z.lazy(() => DataInputMessage$outboundSchema),
+  modelId: z.string(),
+  instructions: z.string(),
+  systemPrompt: z.string(),
+  settings: z.lazy(() => StreamAgentDataSettings$outboundSchema).optional(),
+  agentManifestId: z.string(),
+  agentKey: z.string(),
+  variables: z.record(z.any()).optional(),
+  toolExecutionId: z.string().optional(),
+  isContinuation: z.boolean().optional(),
+  stream: z.boolean().optional(),
+  responseId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    integrationId: "integration_id",
+    systemPrompt: "system_prompt",
+    agentManifestId: "agent_manifest_id",
+    agentKey: "agent_key",
+    toolExecutionId: "tool_execution_id",
+    isContinuation: "is_continuation",
+  });
+});
+
+export function streamAgentDataAgentsDataToJSON(
+  streamAgentDataAgentsData: StreamAgentDataAgentsData,
+): string {
+  return JSON.stringify(
+    StreamAgentDataAgentsData$outboundSchema.parse(streamAgentDataAgentsData),
+  );
+}
+export function streamAgentDataAgentsDataFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataAgentsData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataAgentsData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataAgentsData' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentData2$inboundSchema: z.ZodType<
+  StreamAgentData2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamAgentDataAgentsType$inboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsData$inboundSchema),
+});
+/** @internal */
+export type StreamAgentData2$Outbound = {
+  type: string;
+  timestamp: string;
+  data: StreamAgentDataAgentsData$Outbound;
+};
+
+/** @internal */
+export const StreamAgentData2$outboundSchema: z.ZodType<
+  StreamAgentData2$Outbound,
+  z.ZodTypeDef,
+  StreamAgentData2
+> = z.object({
+  type: StreamAgentDataAgentsType$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataAgentsData$outboundSchema),
+});
+
+export function streamAgentData2ToJSON(
+  streamAgentData2: StreamAgentData2,
+): string {
+  return JSON.stringify(
+    StreamAgentData2$outboundSchema.parse(streamAgentData2),
+  );
+}
+export function streamAgentData2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentData2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentDataType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataType
+> = z.nativeEnum(StreamAgentDataType);
+/** @internal */
+export const StreamAgentDataType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentDataType
+> = StreamAgentDataType$inboundSchema;
+
+/** @internal */
+export const StreamAgentDataData$inboundSchema: z.ZodType<
+  StreamAgentDataData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  agent_task_id: z.string(),
+  workspace_id: z.string(),
+  trace_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_task_id": "agentTaskId",
+    "workspace_id": "workspaceId",
+    "trace_id": "traceId",
+  });
+});
+/** @internal */
+export type StreamAgentDataData$Outbound = {
+  agent_task_id: string;
+  workspace_id: string;
+  trace_id: string;
+};
+
+/** @internal */
+export const StreamAgentDataData$outboundSchema: z.ZodType<
+  StreamAgentDataData$Outbound,
+  z.ZodTypeDef,
+  StreamAgentDataData
+> = z.object({
+  agentTaskId: z.string(),
+  workspaceId: z.string(),
+  traceId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    agentTaskId: "agent_task_id",
+    workspaceId: "workspace_id",
+    traceId: "trace_id",
+  });
+});
+
+export function streamAgentDataDataToJSON(
+  streamAgentDataData: StreamAgentDataData,
+): string {
+  return JSON.stringify(
+    StreamAgentDataData$outboundSchema.parse(streamAgentDataData),
+  );
+}
+export function streamAgentDataDataFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentDataData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentDataData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentDataData' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentData1$inboundSchema: z.ZodType<
+  StreamAgentData1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamAgentDataType$inboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataData$inboundSchema),
+});
+/** @internal */
+export type StreamAgentData1$Outbound = {
+  type: string;
+  timestamp: string;
+  data: StreamAgentDataData$Outbound;
+};
+
+/** @internal */
+export const StreamAgentData1$outboundSchema: z.ZodType<
+  StreamAgentData1$Outbound,
+  z.ZodTypeDef,
+  StreamAgentData1
+> = z.object({
+  type: StreamAgentDataType$outboundSchema,
+  timestamp: z.string(),
+  data: z.lazy(() => StreamAgentDataData$outboundSchema),
+});
+
+export function streamAgentData1ToJSON(
+  streamAgentData1: StreamAgentData1,
+): string {
+  return JSON.stringify(
+    StreamAgentData1$outboundSchema.parse(streamAgentData1),
+  );
+}
+export function streamAgentData1FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentData1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentData1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentData1' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamAgentData$inboundSchema: z.ZodType<
+  StreamAgentData,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamAgentData1$inboundSchema),
+  z.lazy(() => StreamAgentData2$inboundSchema),
+  z.lazy(() => StreamAgentData3$inboundSchema),
+  z.lazy(() => StreamAgentData4$inboundSchema),
+  z.lazy(() => Data5$inboundSchema),
+  z.lazy(() => Data6$inboundSchema),
+  z.lazy(() => Data7$inboundSchema),
+  z.lazy(() => Data8$inboundSchema),
+  z.lazy(() => Data9$inboundSchema),
+  z.lazy(() => Data10$inboundSchema),
+  z.lazy(() => Data11$inboundSchema),
+  z.lazy(() => Data12$inboundSchema),
+  z.lazy(() => Data13$inboundSchema),
+  z.lazy(() => Data14$inboundSchema),
+  z.lazy(() => Data15$inboundSchema),
+  z.lazy(() => Data16$inboundSchema),
+  z.lazy(() => Data17$inboundSchema),
+]);
+/** @internal */
+export type StreamAgentData$Outbound =
+  | StreamAgentData1$Outbound
+  | StreamAgentData2$Outbound
+  | StreamAgentData3$Outbound
+  | StreamAgentData4$Outbound
+  | Data5$Outbound
+  | Data6$Outbound
+  | Data7$Outbound
+  | Data8$Outbound
+  | Data9$Outbound
+  | Data10$Outbound
+  | Data11$Outbound
+  | Data12$Outbound
+  | Data13$Outbound
+  | Data14$Outbound
+  | Data15$Outbound
+  | Data16$Outbound
+  | Data17$Outbound;
+
+/** @internal */
+export const StreamAgentData$outboundSchema: z.ZodType<
+  StreamAgentData$Outbound,
+  z.ZodTypeDef,
+  StreamAgentData
+> = z.union([
+  z.lazy(() => StreamAgentData1$outboundSchema),
+  z.lazy(() => StreamAgentData2$outboundSchema),
+  z.lazy(() => StreamAgentData3$outboundSchema),
+  z.lazy(() => StreamAgentData4$outboundSchema),
+  z.lazy(() => Data5$outboundSchema),
+  z.lazy(() => Data6$outboundSchema),
+  z.lazy(() => Data7$outboundSchema),
+  z.lazy(() => Data8$outboundSchema),
+  z.lazy(() => Data9$outboundSchema),
+  z.lazy(() => Data10$outboundSchema),
+  z.lazy(() => Data11$outboundSchema),
+  z.lazy(() => Data12$outboundSchema),
+  z.lazy(() => Data13$outboundSchema),
+  z.lazy(() => Data14$outboundSchema),
+  z.lazy(() => Data15$outboundSchema),
+  z.lazy(() => Data16$outboundSchema),
+  z.lazy(() => Data17$outboundSchema),
+]);
+
+export function streamAgentDataToJSON(
+  streamAgentData: StreamAgentData,
+): string {
+  return JSON.stringify(StreamAgentData$outboundSchema.parse(streamAgentData));
+}
+export function streamAgentDataFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamAgentData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamAgentData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamAgentData' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamAgentResponseBody$inboundSchema: z.ZodType<
   StreamAgentResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.string(),
+  data: z.string().transform((v, ctx) => {
+    try {
+      return JSON.parse(v);
+    } catch (err) {
+      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      return z.NEVER;
+    }
+  }).pipe(
+    z.union([
+      z.lazy(() => StreamAgentData1$inboundSchema),
+      z.lazy(() => StreamAgentData2$inboundSchema),
+      z.lazy(() => StreamAgentData3$inboundSchema),
+      z.lazy(() => StreamAgentData4$inboundSchema),
+      z.lazy(() => Data5$inboundSchema),
+      z.lazy(() => Data6$inboundSchema),
+      z.lazy(() => Data7$inboundSchema),
+      z.lazy(() => Data8$inboundSchema),
+      z.lazy(() => Data9$inboundSchema),
+      z.lazy(() => Data10$inboundSchema),
+      z.lazy(() => Data11$inboundSchema),
+      z.lazy(() => Data12$inboundSchema),
+      z.lazy(() => Data13$inboundSchema),
+      z.lazy(() => Data14$inboundSchema),
+      z.lazy(() => Data15$inboundSchema),
+      z.lazy(() => Data16$inboundSchema),
+      z.lazy(() => Data17$inboundSchema),
+    ]),
+  ),
 });
 /** @internal */
 export type StreamAgentResponseBody$Outbound = {
-  data: string;
+  data:
+    | StreamAgentData1$Outbound
+    | StreamAgentData2$Outbound
+    | StreamAgentData3$Outbound
+    | StreamAgentData4$Outbound
+    | Data5$Outbound
+    | Data6$Outbound
+    | Data7$Outbound
+    | Data8$Outbound
+    | Data9$Outbound
+    | Data10$Outbound
+    | Data11$Outbound
+    | Data12$Outbound
+    | Data13$Outbound
+    | Data14$Outbound
+    | Data15$Outbound
+    | Data16$Outbound
+    | Data17$Outbound;
 };
 
 /** @internal */
@@ -1051,7 +9693,25 @@ export const StreamAgentResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamAgentResponseBody
 > = z.object({
-  data: z.string(),
+  data: z.union([
+    z.lazy(() => StreamAgentData1$outboundSchema),
+    z.lazy(() => StreamAgentData2$outboundSchema),
+    z.lazy(() => StreamAgentData3$outboundSchema),
+    z.lazy(() => StreamAgentData4$outboundSchema),
+    z.lazy(() => Data5$outboundSchema),
+    z.lazy(() => Data6$outboundSchema),
+    z.lazy(() => Data7$outboundSchema),
+    z.lazy(() => Data8$outboundSchema),
+    z.lazy(() => Data9$outboundSchema),
+    z.lazy(() => Data10$outboundSchema),
+    z.lazy(() => Data11$outboundSchema),
+    z.lazy(() => Data12$outboundSchema),
+    z.lazy(() => Data13$outboundSchema),
+    z.lazy(() => Data14$outboundSchema),
+    z.lazy(() => Data15$outboundSchema),
+    z.lazy(() => Data16$outboundSchema),
+    z.lazy(() => Data17$outboundSchema),
+  ]),
 });
 
 export function streamAgentResponseBodyToJSON(

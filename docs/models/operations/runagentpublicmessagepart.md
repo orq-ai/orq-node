@@ -5,30 +5,30 @@ Message part that can be provided by users. Use "text" for regular messages, "fi
 
 ## Supported Types
 
-### `operations.PublicMessagePartTextPart`
+### `operations.RunAgentPublicMessagePartTextPart`
 
 ```typescript
-const value: operations.PublicMessagePartTextPart = {
+const value: operations.RunAgentPublicMessagePartTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.PublicMessagePartFilePart`
+### `operations.RunAgentPublicMessagePartFilePart`
 
 ```typescript
-const value: operations.PublicMessagePartFilePart = {
+const value: operations.RunAgentPublicMessagePartFilePart = {
   kind: "file",
   file: {
-    bytes: "<value>",
+    uri: "https://admired-bowler.name/",
   },
 };
 ```
 
-### `operations.PublicMessagePartToolResultPart`
+### `operations.RunAgentPublicMessagePartToolResultPart`
 
 ```typescript
-const value: operations.PublicMessagePartToolResultPart = {
+const value: operations.RunAgentPublicMessagePartToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

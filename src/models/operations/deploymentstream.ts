@@ -8230,10 +8230,7 @@ export const DeploymentStreamResponseBody$inboundSchema: z.ZodType<
     try {
       return JSON.parse(v);
     } catch (err) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `malformed json: ${err}`,
-      });
+      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
       return z.NEVER;
     }
   }).pipe(z.lazy(() => DeploymentStreamData$inboundSchema).optional()),

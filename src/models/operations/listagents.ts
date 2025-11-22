@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAgentsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.
    */
   limit?: number | undefined;
   /**
@@ -84,16 +84,76 @@ export type ListAgentsTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
-  requiresApproval?: boolean | undefined;
-  conditions?: Array<ListAgentsConditions> | undefined;
   /**
-   * Optional MCP server reference for tools from MCP servers
+   * Optional tool description
    */
-  mcpServer?: string | undefined;
+  description?: string | undefined;
+  requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
+  conditions?: Array<ListAgentsConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
   timeout?: number | undefined;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const ListAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type ListAgentsExecuteOn = ClosedEnum<typeof ListAgentsExecuteOn>;
+
+export type ListAgentsEvaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: ListAgentsExecuteOn;
+};
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const ListAgentsAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type ListAgentsAgentsExecuteOn = ClosedEnum<
+  typeof ListAgentsAgentsExecuteOn
+>;
+
+export type ListAgentsGuardrails = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: ListAgentsAgentsExecuteOn;
 };
 
 export type ListAgentsSettings = {
@@ -110,6 +170,14 @@ export type ListAgentsSettings = {
    */
   toolApprovalRequired?: ListAgentsToolApprovalRequired | undefined;
   tools?: Array<ListAgentsTools> | undefined;
+  /**
+   * Configuration for an evaluator applied to the agent
+   */
+  evaluators?: Array<ListAgentsEvaluators> | undefined;
+  /**
+   * Configuration for a guardrail applied to the agent
+   */
+  guardrails?: Array<ListAgentsGuardrails> | undefined;
 };
 
 /**
@@ -183,7 +251,12 @@ export type ListAgentsResponseFormatJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type ListAgentsResponseFormat3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type ListAgentsResponseFormatAgentsJSONSchema = {
   type: ListAgentsResponseFormatAgentsResponseType;
   jsonSchema: ListAgentsResponseFormatJsonSchema;
 };
@@ -195,7 +268,12 @@ export type ListAgentsResponseFormatAgentsType = ClosedEnum<
   typeof ListAgentsResponseFormatAgentsType
 >;
 
-export type ListAgentsResponseFormat2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type ListAgentsResponseFormatJSONObject = {
   type: ListAgentsResponseFormatAgentsType;
 };
 
@@ -206,7 +284,12 @@ export type ListAgentsResponseFormatType = ClosedEnum<
   typeof ListAgentsResponseFormatType
 >;
 
-export type ListAgentsResponseFormat1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type ListAgentsResponseFormatText = {
   type: ListAgentsResponseFormatType;
 };
 
@@ -214,9 +297,9 @@ export type ListAgentsResponseFormat1 = {
  * An object specifying the format that the model must output
  */
 export type ListAgentsResponseFormat =
-  | ListAgentsResponseFormat3
-  | ListAgentsResponseFormat1
-  | ListAgentsResponseFormat2;
+  | ListAgentsResponseFormatAgentsJSONSchema
+  | ListAgentsResponseFormatText
+  | ListAgentsResponseFormatJSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -323,17 +406,7 @@ export const ListAgentsModalities = {
 export type ListAgentsModalities = ClosedEnum<typeof ListAgentsModalities>;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
- */
-export type ListAgentsWebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-/**
- * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type ListAgentsParameters = {
   /**
@@ -376,9 +449,9 @@ export type ListAgentsParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | ListAgentsResponseFormat3
-    | ListAgentsResponseFormat1
-    | ListAgentsResponseFormat2
+    | ListAgentsResponseFormatAgentsJSONSchema
+    | ListAgentsResponseFormatText
+    | ListAgentsResponseFormatJSONObject
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -425,16 +498,26 @@ export type ListAgentsParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<ListAgentsModalities> | null | undefined;
+};
+
+/**
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ */
+export type ListAgentsRetry = {
   /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+   * Number of retry attempts (1-5)
    */
-  webSearchOptions?: ListAgentsWebSearchOptions | undefined;
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
 };
 
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export const ListAgentsFallbackModelsVoice = {
+export const ListAgentsFallbackModelConfigurationVoice = {
   Alloy: "alloy",
   Echo: "echo",
   Fable: "fable",
@@ -445,14 +528,14 @@ export const ListAgentsFallbackModelsVoice = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export type ListAgentsFallbackModelsVoice = ClosedEnum<
-  typeof ListAgentsFallbackModelsVoice
+export type ListAgentsFallbackModelConfigurationVoice = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationVoice
 >;
 
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const ListAgentsFallbackModelsFormat = {
+export const ListAgentsFallbackModelConfigurationFormat = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -462,22 +545,22 @@ export const ListAgentsFallbackModelsFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type ListAgentsFallbackModelsFormat = ClosedEnum<
-  typeof ListAgentsFallbackModelsFormat
+export type ListAgentsFallbackModelConfigurationFormat = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationFormat
 >;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
  */
-export type ListAgentsFallbackModelsAudio = {
+export type ListAgentsFallbackModelConfigurationAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
-  voice: ListAgentsFallbackModelsVoice;
+  voice: ListAgentsFallbackModelConfigurationVoice;
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: ListAgentsFallbackModelsFormat;
+  format: ListAgentsFallbackModelConfigurationFormat;
 };
 
 export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
@@ -489,7 +572,7 @@ export type ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBody
     typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
   >;
 
-export type ListAgentsResponseFormatAgentsJsonSchema = {
+export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -508,10 +591,15 @@ export type ListAgentsResponseFormatAgentsJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type ListAgentsResponseFormatAgents3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type ListAgentsResponseFormatAgentsResponse200JSONSchema = {
   type:
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType;
-  jsonSchema: ListAgentsResponseFormatAgentsJsonSchema;
+  jsonSchema: ListAgentsResponseFormatAgentsResponseJsonSchema;
 };
 
 export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType = {
@@ -522,7 +610,12 @@ export type ListAgentsResponseFormatAgentsResponse200ApplicationJSONType =
     typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONType
   >;
 
-export type ListAgentsResponseFormatAgents2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type ListAgentsResponseFormatAgentsJSONObject = {
   type: ListAgentsResponseFormatAgentsResponse200ApplicationJSONType;
 };
 
@@ -533,27 +626,32 @@ export type ListAgentsResponseFormatAgentsResponse200Type = ClosedEnum<
   typeof ListAgentsResponseFormatAgentsResponse200Type
 >;
 
-export type ListAgentsResponseFormatAgents1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type ListAgentsResponseFormatAgentsText = {
   type: ListAgentsResponseFormatAgentsResponse200Type;
 };
 
 /**
  * An object specifying the format that the model must output
  */
-export type ListAgentsFallbackModelsResponseFormat =
-  | ListAgentsResponseFormatAgents3
-  | ListAgentsResponseFormatAgents1
-  | ListAgentsResponseFormatAgents2;
+export type ListAgentsFallbackModelConfigurationResponseFormat =
+  | ListAgentsResponseFormatAgentsResponse200JSONSchema
+  | ListAgentsResponseFormatAgentsText
+  | ListAgentsResponseFormatAgentsJSONObject;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type ListAgentsFallbackModelsStop = string | Array<string>;
+export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
 
 /**
  * Options for streaming response. Only set this when you set stream: true.
  */
-export type ListAgentsFallbackModelsStreamOptions = {
+export type ListAgentsFallbackModelConfigurationStreamOptions = {
   /**
    * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
    */
@@ -563,36 +661,36 @@ export type ListAgentsFallbackModelsStreamOptions = {
 /**
  * Enables or disables the thinking mode capability
  */
-export const ListAgentsFallbackModelsType = {
+export const ListAgentsFallbackModelConfigurationType = {
   Enabled: "enabled",
   Disabled: "disabled",
 } as const;
 /**
  * Enables or disables the thinking mode capability
  */
-export type ListAgentsFallbackModelsType = ClosedEnum<
-  typeof ListAgentsFallbackModelsType
+export type ListAgentsFallbackModelConfigurationType = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationType
 >;
 
 /**
  * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
  */
-export const ListAgentsFallbackModelsThinkingLevel = {
+export const ListAgentsFallbackModelConfigurationThinkingLevel = {
   Low: "low",
   High: "high",
 } as const;
 /**
  * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
  */
-export type ListAgentsFallbackModelsThinkingLevel = ClosedEnum<
-  typeof ListAgentsFallbackModelsThinkingLevel
+export type ListAgentsFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationThinkingLevel
 >;
 
-export type ListAgentsFallbackModelsThinking = {
+export type ListAgentsFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
    */
-  type: ListAgentsFallbackModelsType;
+  type: ListAgentsFallbackModelConfigurationType;
   /**
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
@@ -600,7 +698,7 @@ export type ListAgentsFallbackModelsThinking = {
   /**
    * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
    */
-  thinkingLevel?: ListAgentsFallbackModelsThinkingLevel | undefined;
+  thinkingLevel?: ListAgentsFallbackModelConfigurationThinkingLevel | undefined;
 };
 
 /**
@@ -643,33 +741,26 @@ export type ListAgentsToolChoiceAgents1 = ClosedEnum<
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type ListAgentsFallbackModelsToolChoice =
+export type ListAgentsFallbackModelConfigurationToolChoice =
   | ListAgentsToolChoiceAgents2
   | ListAgentsToolChoiceAgents1;
 
-export const ListAgentsFallbackModelsModalities = {
+export const ListAgentsFallbackModelConfigurationModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type ListAgentsFallbackModelsModalities = ClosedEnum<
-  typeof ListAgentsFallbackModelsModalities
+export type ListAgentsFallbackModelConfigurationModalities = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationModalities
 >;
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
-export type ListAgentsFallbackModelsWebSearchOptions = {
-  /**
-   * Whether to enable web search for this request.
-   */
-  enabled?: boolean | undefined;
-};
-
-export type ListAgentsFallbackModelsParameters = {
+export type ListAgentsFallbackModelConfigurationParameters = {
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
-  audio?: ListAgentsFallbackModelsAudio | null | undefined;
+  audio?: ListAgentsFallbackModelConfigurationAudio | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
@@ -706,9 +797,9 @@ export type ListAgentsFallbackModelsParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | ListAgentsResponseFormatAgents3
-    | ListAgentsResponseFormatAgents1
-    | ListAgentsResponseFormatAgents2
+    | ListAgentsResponseFormatAgentsResponse200JSONSchema
+    | ListAgentsResponseFormatAgentsText
+    | ListAgentsResponseFormatAgentsJSONObject
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -729,8 +820,11 @@ export type ListAgentsFallbackModelsParameters = {
   /**
    * Options for streaming response. Only set this when you set stream: true.
    */
-  streamOptions?: ListAgentsFallbackModelsStreamOptions | null | undefined;
-  thinking?: ListAgentsFallbackModelsThinking | undefined;
+  streamOptions?:
+    | ListAgentsFallbackModelConfigurationStreamOptions
+    | null
+    | undefined;
+  thinking?: ListAgentsFallbackModelConfigurationThinking | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -757,23 +851,32 @@ export type ListAgentsFallbackModelsParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<ListAgentsFallbackModelsModalities> | null | undefined;
-  /**
-   * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
-   */
-  webSearchOptions?: ListAgentsFallbackModelsWebSearchOptions | undefined;
+  modalities?:
+    | Array<ListAgentsFallbackModelConfigurationModalities>
+    | null
+    | undefined;
 };
 
-export type ListAgentsFallbackModels2 = {
+/**
+ * Fallback model configuration with optional parameters.
+ */
+export type ListAgentsFallbackModelConfiguration2 = {
   /**
-   * Fallback model ID
+   * A fallback model ID string. Must support tool calling.
    */
   id: string;
-  integrationId?: string | null | undefined;
-  parameters?: ListAgentsFallbackModelsParameters | undefined;
+  /**
+   * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
+   */
+  parameters?: ListAgentsFallbackModelConfigurationParameters | undefined;
 };
 
-export type ListAgentsFallbackModels = ListAgentsFallbackModels2 | string;
+/**
+ * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
+ */
+export type ListAgentsFallbackModelConfiguration =
+  | ListAgentsFallbackModelConfiguration2
+  | string;
 
 export type ListAgentsModel = {
   /**
@@ -785,13 +888,20 @@ export type ListAgentsModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model parameters to customize behavior (snake_case). Common: temperature (0-1, controls randomness), max_tokens (response length). Advanced: top_p, frequency_penalty, presence_penalty, response_format (JSON mode), reasoning_effort, seed (determinism). Model-specific support varies.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: ListAgentsParameters | undefined;
   /**
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   */
+  retry?: ListAgentsRetry | undefined;
+  /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
-  fallbackModels?: Array<ListAgentsFallbackModels2 | string> | null | undefined;
+  fallbackModels?:
+    | Array<ListAgentsFallbackModelConfiguration2 | string>
+    | null
+    | undefined;
 };
 
 export type ListAgentsTeamOfAgents = {
@@ -816,20 +926,10 @@ export type ListAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const ListAgentsHiddenPanels = {
-  Model: "model",
-  Tools: "tools",
-  KnowledgeBases: "knowledge_bases",
-  Variables: "variables",
-  RuntimeConstraints: "runtime_constraints",
-} as const;
-export type ListAgentsHiddenPanels = ClosedEnum<typeof ListAgentsHiddenPanels>;
-
 export type ListAgentsData = {
   id: string;
   key: string;
-  workspaceId: string;
-  projectId: string;
+  displayName: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
@@ -855,6 +955,9 @@ export type ListAgentsData = {
    * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
   memoryStores: Array<string>;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
@@ -869,14 +972,10 @@ export type ListAgentsData = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
-  /**
-   * List of hidden collapsed panels in configuration. Duplicates are not allowed.
-   */
-  hiddenPanels?: Array<ListAgentsHiddenPanels> | undefined;
 };
 
 /**
- * List of agents with their configurations including fallback models
+ * Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings.
  */
 export type ListAgentsResponseBody = {
   object: ListAgentsObject;
@@ -890,7 +989,7 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().optional(),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
 }).transform((v) => {
@@ -901,7 +1000,7 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ListAgentsRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
 };
@@ -912,7 +1011,7 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -1021,16 +1120,18 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
   });
 });
 /** @internal */
@@ -1039,9 +1140,10 @@ export type ListAgentsTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
+  tool_id?: string | undefined;
   conditions?: Array<ListAgentsConditions$Outbound> | undefined;
-  mcpServer?: string | undefined;
   timeout: number;
 };
 
@@ -1055,16 +1157,18 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
   conditions: z.array(z.lazy(() => ListAgentsConditions$outboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
     actionType: "action_type",
     displayName: "display_name",
     requiresApproval: "requires_approval",
+    toolId: "tool_id",
   });
 });
 
@@ -1084,17 +1188,149 @@ export function listAgentsToolsFromJSON(
 }
 
 /** @internal */
+export const ListAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsExecuteOn
+> = z.nativeEnum(ListAgentsExecuteOn);
+/** @internal */
+export const ListAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsExecuteOn
+> = ListAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const ListAgentsEvaluators$inboundSchema: z.ZodType<
+  ListAgentsEvaluators,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: ListAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type ListAgentsEvaluators$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const ListAgentsEvaluators$outboundSchema: z.ZodType<
+  ListAgentsEvaluators$Outbound,
+  z.ZodTypeDef,
+  ListAgentsEvaluators
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: ListAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function listAgentsEvaluatorsToJSON(
+  listAgentsEvaluators: ListAgentsEvaluators,
+): string {
+  return JSON.stringify(
+    ListAgentsEvaluators$outboundSchema.parse(listAgentsEvaluators),
+  );
+}
+export function listAgentsEvaluatorsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsEvaluators, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsEvaluators' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsAgentsExecuteOn
+> = z.nativeEnum(ListAgentsAgentsExecuteOn);
+/** @internal */
+export const ListAgentsAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsAgentsExecuteOn
+> = ListAgentsAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const ListAgentsGuardrails$inboundSchema: z.ZodType<
+  ListAgentsGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  sample_rate: z.number().default(50),
+  execute_on: ListAgentsAgentsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "sample_rate": "sampleRate",
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type ListAgentsGuardrails$Outbound = {
+  id: string;
+  sample_rate: number;
+  execute_on: string;
+};
+
+/** @internal */
+export const ListAgentsGuardrails$outboundSchema: z.ZodType<
+  ListAgentsGuardrails$Outbound,
+  z.ZodTypeDef,
+  ListAgentsGuardrails
+> = z.object({
+  id: z.string(),
+  sampleRate: z.number().default(50),
+  executeOn: ListAgentsAgentsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    sampleRate: "sample_rate",
+    executeOn: "execute_on",
+  });
+});
+
+export function listAgentsGuardrailsToJSON(
+  listAgentsGuardrails: ListAgentsGuardrails,
+): string {
+  return JSON.stringify(
+    ListAgentsGuardrails$outboundSchema.parse(listAgentsGuardrails),
+  );
+}
+export function listAgentsGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsSettings$inboundSchema: z.ZodType<
   ListAgentsSettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(15),
+  max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(300),
   tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => ListAgentsTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => ListAgentsEvaluators$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => ListAgentsGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -1108,6 +1344,8 @@ export type ListAgentsSettings$Outbound = {
   max_execution_time: number;
   tool_approval_required: string;
   tools?: Array<ListAgentsTools$Outbound> | undefined;
+  evaluators?: Array<ListAgentsEvaluators$Outbound> | undefined;
+  guardrails?: Array<ListAgentsGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -1116,12 +1354,16 @@ export const ListAgentsSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsSettings
 > = z.object({
-  maxIterations: z.number().int().default(15),
+  maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ListAgentsToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
   tools: z.array(z.lazy(() => ListAgentsTools$outboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => ListAgentsEvaluators$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => ListAgentsGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -1223,14 +1465,14 @@ export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.boolean().default(false),
 });
 /** @internal */
 export type ListAgentsResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -1242,7 +1484,7 @@ export const ListAgentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.boolean().default(false),
 });
 
 export function listAgentsResponseFormatJsonSchemaToJSON(
@@ -1266,8 +1508,8 @@ export function listAgentsResponseFormatJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormat3$inboundSchema: z.ZodType<
-  ListAgentsResponseFormat3,
+export const ListAgentsResponseFormatAgentsJSONSchema$inboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsJSONSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1279,16 +1521,16 @@ export const ListAgentsResponseFormat3$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type ListAgentsResponseFormat3$Outbound = {
+export type ListAgentsResponseFormatAgentsJSONSchema$Outbound = {
   type: string;
   json_schema: ListAgentsResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
-export const ListAgentsResponseFormat3$outboundSchema: z.ZodType<
-  ListAgentsResponseFormat3$Outbound,
+export const ListAgentsResponseFormatAgentsJSONSchema$outboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsJSONSchema$Outbound,
   z.ZodTypeDef,
-  ListAgentsResponseFormat3
+  ListAgentsResponseFormatAgentsJSONSchema
 > = z.object({
   type: ListAgentsResponseFormatAgentsResponseType$outboundSchema,
   jsonSchema: z.lazy(() => ListAgentsResponseFormatJsonSchema$outboundSchema),
@@ -1298,20 +1540,29 @@ export const ListAgentsResponseFormat3$outboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsResponseFormat3ToJSON(
-  listAgentsResponseFormat3: ListAgentsResponseFormat3,
+export function listAgentsResponseFormatAgentsJSONSchemaToJSON(
+  listAgentsResponseFormatAgentsJSONSchema:
+    ListAgentsResponseFormatAgentsJSONSchema,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormat3$outboundSchema.parse(listAgentsResponseFormat3),
+    ListAgentsResponseFormatAgentsJSONSchema$outboundSchema.parse(
+      listAgentsResponseFormatAgentsJSONSchema,
+    ),
   );
 }
-export function listAgentsResponseFormat3FromJSON(
+export function listAgentsResponseFormatAgentsJSONSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormat3, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsResponseFormatAgentsJSONSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormat3' from JSON`,
+    (x) =>
+      ListAgentsResponseFormatAgentsJSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsResponseFormatAgentsJSONSchema' from JSON`,
   );
 }
 
@@ -1325,41 +1576,44 @@ export const ListAgentsResponseFormatAgentsType$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsResponseFormatAgentsType$inboundSchema;
 
 /** @internal */
-export const ListAgentsResponseFormat2$inboundSchema: z.ZodType<
-  ListAgentsResponseFormat2,
+export const ListAgentsResponseFormatJSONObject$inboundSchema: z.ZodType<
+  ListAgentsResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListAgentsResponseFormatAgentsType$inboundSchema,
 });
 /** @internal */
-export type ListAgentsResponseFormat2$Outbound = {
+export type ListAgentsResponseFormatJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ListAgentsResponseFormat2$outboundSchema: z.ZodType<
-  ListAgentsResponseFormat2$Outbound,
+export const ListAgentsResponseFormatJSONObject$outboundSchema: z.ZodType<
+  ListAgentsResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
-  ListAgentsResponseFormat2
+  ListAgentsResponseFormatJSONObject
 > = z.object({
   type: ListAgentsResponseFormatAgentsType$outboundSchema,
 });
 
-export function listAgentsResponseFormat2ToJSON(
-  listAgentsResponseFormat2: ListAgentsResponseFormat2,
+export function listAgentsResponseFormatJSONObjectToJSON(
+  listAgentsResponseFormatJSONObject: ListAgentsResponseFormatJSONObject,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormat2$outboundSchema.parse(listAgentsResponseFormat2),
+    ListAgentsResponseFormatJSONObject$outboundSchema.parse(
+      listAgentsResponseFormatJSONObject,
+    ),
   );
 }
-export function listAgentsResponseFormat2FromJSON(
+export function listAgentsResponseFormatJSONObjectFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormat2, SDKValidationError> {
+): SafeParseResult<ListAgentsResponseFormatJSONObject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormat2' from JSON`,
+    (x) =>
+      ListAgentsResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsResponseFormatJSONObject' from JSON`,
   );
 }
 
@@ -1373,41 +1627,43 @@ export const ListAgentsResponseFormatType$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsResponseFormatType$inboundSchema;
 
 /** @internal */
-export const ListAgentsResponseFormat1$inboundSchema: z.ZodType<
-  ListAgentsResponseFormat1,
+export const ListAgentsResponseFormatText$inboundSchema: z.ZodType<
+  ListAgentsResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListAgentsResponseFormatType$inboundSchema,
 });
 /** @internal */
-export type ListAgentsResponseFormat1$Outbound = {
+export type ListAgentsResponseFormatText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ListAgentsResponseFormat1$outboundSchema: z.ZodType<
-  ListAgentsResponseFormat1$Outbound,
+export const ListAgentsResponseFormatText$outboundSchema: z.ZodType<
+  ListAgentsResponseFormatText$Outbound,
   z.ZodTypeDef,
-  ListAgentsResponseFormat1
+  ListAgentsResponseFormatText
 > = z.object({
   type: ListAgentsResponseFormatType$outboundSchema,
 });
 
-export function listAgentsResponseFormat1ToJSON(
-  listAgentsResponseFormat1: ListAgentsResponseFormat1,
+export function listAgentsResponseFormatTextToJSON(
+  listAgentsResponseFormatText: ListAgentsResponseFormatText,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormat1$outboundSchema.parse(listAgentsResponseFormat1),
+    ListAgentsResponseFormatText$outboundSchema.parse(
+      listAgentsResponseFormatText,
+    ),
   );
 }
-export function listAgentsResponseFormat1FromJSON(
+export function listAgentsResponseFormatTextFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormat1, SDKValidationError> {
+): SafeParseResult<ListAgentsResponseFormatText, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormat1' from JSON`,
+    (x) => ListAgentsResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsResponseFormatText' from JSON`,
   );
 }
 
@@ -1417,15 +1673,15 @@ export const ListAgentsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ListAgentsResponseFormat3$inboundSchema),
-  z.lazy(() => ListAgentsResponseFormat1$inboundSchema),
-  z.lazy(() => ListAgentsResponseFormat2$inboundSchema),
+  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
+  z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
+  z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
 ]);
 /** @internal */
 export type ListAgentsResponseFormat$Outbound =
-  | ListAgentsResponseFormat3$Outbound
-  | ListAgentsResponseFormat1$Outbound
-  | ListAgentsResponseFormat2$Outbound;
+  | ListAgentsResponseFormatAgentsJSONSchema$Outbound
+  | ListAgentsResponseFormatText$Outbound
+  | ListAgentsResponseFormatJSONObject$Outbound;
 
 /** @internal */
 export const ListAgentsResponseFormat$outboundSchema: z.ZodType<
@@ -1433,9 +1689,9 @@ export const ListAgentsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormat
 > = z.union([
-  z.lazy(() => ListAgentsResponseFormat3$outboundSchema),
-  z.lazy(() => ListAgentsResponseFormat1$outboundSchema),
-  z.lazy(() => ListAgentsResponseFormat2$outboundSchema),
+  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
+  z.lazy(() => ListAgentsResponseFormatText$outboundSchema),
+  z.lazy(() => ListAgentsResponseFormatJSONObject$outboundSchema),
 ]);
 
 export function listAgentsResponseFormatToJSON(
@@ -1756,45 +2012,6 @@ export const ListAgentsModalities$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsModalities$inboundSchema;
 
 /** @internal */
-export const ListAgentsWebSearchOptions$inboundSchema: z.ZodType<
-  ListAgentsWebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-/** @internal */
-export type ListAgentsWebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const ListAgentsWebSearchOptions$outboundSchema: z.ZodType<
-  ListAgentsWebSearchOptions$Outbound,
-  z.ZodTypeDef,
-  ListAgentsWebSearchOptions
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-export function listAgentsWebSearchOptionsToJSON(
-  listAgentsWebSearchOptions: ListAgentsWebSearchOptions,
-): string {
-  return JSON.stringify(
-    ListAgentsWebSearchOptions$outboundSchema.parse(listAgentsWebSearchOptions),
-  );
-}
-export function listAgentsWebSearchOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsWebSearchOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsWebSearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsWebSearchOptions' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsParameters$inboundSchema: z.ZodType<
   ListAgentsParameters,
   z.ZodTypeDef,
@@ -1809,9 +2026,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => ListAgentsResponseFormat3$inboundSchema),
-    z.lazy(() => ListAgentsResponseFormat1$inboundSchema),
-    z.lazy(() => ListAgentsResponseFormat2$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -1831,8 +2048,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(ListAgentsModalities$inboundSchema))
     .optional(),
-  web_search_options: z.lazy(() => ListAgentsWebSearchOptions$inboundSchema)
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -1847,7 +2062,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
   });
 });
 /** @internal */
@@ -1861,9 +2075,9 @@ export type ListAgentsParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | ListAgentsResponseFormat3$Outbound
-    | ListAgentsResponseFormat1$Outbound
-    | ListAgentsResponseFormat2$Outbound
+    | ListAgentsResponseFormatAgentsJSONSchema$Outbound
+    | ListAgentsResponseFormatText$Outbound
+    | ListAgentsResponseFormatJSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -1877,7 +2091,6 @@ export type ListAgentsParameters$Outbound = {
   tool_choice?: ListAgentsToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?: ListAgentsWebSearchOptions$Outbound | undefined;
 };
 
 /** @internal */
@@ -1895,9 +2108,9 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => ListAgentsResponseFormat3$outboundSchema),
-    z.lazy(() => ListAgentsResponseFormat1$outboundSchema),
-    z.lazy(() => ListAgentsResponseFormat2$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatText$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatJSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -1917,8 +2130,6 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(ListAgentsModalities$outboundSchema))
     .optional(),
-  webSearchOptions: z.lazy(() => ListAgentsWebSearchOptions$outboundSchema)
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -1933,7 +2144,6 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
   });
 });
 
@@ -1955,64 +2165,120 @@ export function listAgentsParametersFromJSON(
 }
 
 /** @internal */
-export const ListAgentsFallbackModelsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsVoice
-> = z.nativeEnum(ListAgentsFallbackModelsVoice);
-/** @internal */
-export const ListAgentsFallbackModelsVoice$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsVoice
-> = ListAgentsFallbackModelsVoice$inboundSchema;
-
-/** @internal */
-export const ListAgentsFallbackModelsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsFormat
-> = z.nativeEnum(ListAgentsFallbackModelsFormat);
-/** @internal */
-export const ListAgentsFallbackModelsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsFormat
-> = ListAgentsFallbackModelsFormat$inboundSchema;
-
-/** @internal */
-export const ListAgentsFallbackModelsAudio$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsAudio,
+export const ListAgentsRetry$inboundSchema: z.ZodType<
+  ListAgentsRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  voice: ListAgentsFallbackModelsVoice$inboundSchema,
-  format: ListAgentsFallbackModelsFormat$inboundSchema,
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
 });
 /** @internal */
-export type ListAgentsFallbackModelsAudio$Outbound = {
+export type ListAgentsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const ListAgentsRetry$outboundSchema: z.ZodType<
+  ListAgentsRetry$Outbound,
+  z.ZodTypeDef,
+  ListAgentsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function listAgentsRetryToJSON(
+  listAgentsRetry: ListAgentsRetry,
+): string {
+  return JSON.stringify(ListAgentsRetry$outboundSchema.parse(listAgentsRetry));
+}
+export function listAgentsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationVoice$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationVoice> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationVoice);
+/** @internal */
+export const ListAgentsFallbackModelConfigurationVoice$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationVoice> =
+    ListAgentsFallbackModelConfigurationVoice$inboundSchema;
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationFormat$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationFormat> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationFormat);
+/** @internal */
+export const ListAgentsFallbackModelConfigurationFormat$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationFormat> =
+    ListAgentsFallbackModelConfigurationFormat$inboundSchema;
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationAudio$inboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfigurationAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: ListAgentsFallbackModelConfigurationVoice$inboundSchema,
+  format: ListAgentsFallbackModelConfigurationFormat$inboundSchema,
+});
+/** @internal */
+export type ListAgentsFallbackModelConfigurationAudio$Outbound = {
   voice: string;
   format: string;
 };
 
 /** @internal */
-export const ListAgentsFallbackModelsAudio$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsAudio$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsAudio
-> = z.object({
-  voice: ListAgentsFallbackModelsVoice$outboundSchema,
-  format: ListAgentsFallbackModelsFormat$outboundSchema,
-});
+export const ListAgentsFallbackModelConfigurationAudio$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationAudio$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationAudio
+  > = z.object({
+    voice: ListAgentsFallbackModelConfigurationVoice$outboundSchema,
+    format: ListAgentsFallbackModelConfigurationFormat$outboundSchema,
+  });
 
-export function listAgentsFallbackModelsAudioToJSON(
-  listAgentsFallbackModelsAudio: ListAgentsFallbackModelsAudio,
+export function listAgentsFallbackModelConfigurationAudioToJSON(
+  listAgentsFallbackModelConfigurationAudio:
+    ListAgentsFallbackModelConfigurationAudio,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsAudio$outboundSchema.parse(
-      listAgentsFallbackModelsAudio,
+    ListAgentsFallbackModelConfigurationAudio$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationAudio,
     ),
   );
 }
-export function listAgentsFallbackModelsAudioFromJSON(
+export function listAgentsFallbackModelConfigurationAudioFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsAudio, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationAudio,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsFallbackModelsAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsAudio' from JSON`,
+    (x) =>
+      ListAgentsFallbackModelConfigurationAudio$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -2031,117 +2297,128 @@ export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBod
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgentsJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+export const ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    ListAgentsResponseFormatAgentsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().default(false),
+  });
 /** @internal */
-export type ListAgentsResponseFormatAgentsJsonSchema$Outbound = {
+export type ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsJsonSchema$outboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgentsJsonSchema$Outbound,
-  z.ZodTypeDef,
-  ListAgentsResponseFormatAgentsJsonSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+export const ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema:
+  z.ZodType<
+    ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound,
+    z.ZodTypeDef,
+    ListAgentsResponseFormatAgentsResponseJsonSchema
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().default(false),
+  });
 
-export function listAgentsResponseFormatAgentsJsonSchemaToJSON(
-  listAgentsResponseFormatAgentsJsonSchema:
-    ListAgentsResponseFormatAgentsJsonSchema,
+export function listAgentsResponseFormatAgentsResponseJsonSchemaToJSON(
+  listAgentsResponseFormatAgentsResponseJsonSchema:
+    ListAgentsResponseFormatAgentsResponseJsonSchema,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormatAgentsJsonSchema$outboundSchema.parse(
-      listAgentsResponseFormatAgentsJsonSchema,
+    ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema.parse(
+      listAgentsResponseFormatAgentsResponseJsonSchema,
     ),
   );
 }
-export function listAgentsResponseFormatAgentsJsonSchemaFromJSON(
+export function listAgentsResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  ListAgentsResponseFormatAgentsJsonSchema,
+  ListAgentsResponseFormatAgentsResponseJsonSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      ListAgentsResponseFormatAgentsJsonSchema$inboundSchema.parse(
+      ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'ListAgentsResponseFormatAgentsJsonSchema' from JSON`,
+    `Failed to parse 'ListAgentsResponseFormatAgentsResponseJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgents3$inboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  json_schema: z.lazy(() =>
-    ListAgentsResponseFormatAgentsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
+export const ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema:
+  z.ZodType<
+    ListAgentsResponseFormatAgentsResponse200JSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    json_schema: z.lazy(() =>
+      ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
   });
-});
 /** @internal */
-export type ListAgentsResponseFormatAgents3$Outbound = {
+export type ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound = {
   type: string;
-  json_schema: ListAgentsResponseFormatAgentsJsonSchema$Outbound;
+  json_schema: ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound;
 };
 
 /** @internal */
-export const ListAgentsResponseFormatAgents3$outboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents3$Outbound,
-  z.ZodTypeDef,
-  ListAgentsResponseFormatAgents3
-> = z.object({
-  type:
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    ListAgentsResponseFormatAgentsJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
+export const ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema:
+  z.ZodType<
+    ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound,
+    z.ZodTypeDef,
+    ListAgentsResponseFormatAgentsResponse200JSONSchema
+  > = z.object({
+    type:
+      ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    jsonSchema: z.lazy(() =>
+      ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
   });
-});
 
-export function listAgentsResponseFormatAgents3ToJSON(
-  listAgentsResponseFormatAgents3: ListAgentsResponseFormatAgents3,
+export function listAgentsResponseFormatAgentsResponse200JSONSchemaToJSON(
+  listAgentsResponseFormatAgentsResponse200JSONSchema:
+    ListAgentsResponseFormatAgentsResponse200JSONSchema,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormatAgents3$outboundSchema.parse(
-      listAgentsResponseFormatAgents3,
+    ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema.parse(
+      listAgentsResponseFormatAgentsResponse200JSONSchema,
     ),
   );
 }
-export function listAgentsResponseFormatAgents3FromJSON(
+export function listAgentsResponseFormatAgentsResponse200JSONSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormatAgents3, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsResponseFormatAgentsResponse200JSONSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormatAgents3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormatAgents3' from JSON`,
+    (x) =>
+      ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsResponseFormatAgentsResponse200JSONSchema' from JSON`,
   );
 }
 
@@ -2160,8 +2437,8 @@ export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outbou
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
-export const ListAgentsResponseFormatAgents2$inboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents2,
+export const ListAgentsResponseFormatAgentsJSONObject$inboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2169,36 +2446,43 @@ export const ListAgentsResponseFormatAgents2$inboundSchema: z.ZodType<
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema,
 });
 /** @internal */
-export type ListAgentsResponseFormatAgents2$Outbound = {
+export type ListAgentsResponseFormatAgentsJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ListAgentsResponseFormatAgents2$outboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents2$Outbound,
+export const ListAgentsResponseFormatAgentsJSONObject$outboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsJSONObject$Outbound,
   z.ZodTypeDef,
-  ListAgentsResponseFormatAgents2
+  ListAgentsResponseFormatAgentsJSONObject
 > = z.object({
   type:
     ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema,
 });
 
-export function listAgentsResponseFormatAgents2ToJSON(
-  listAgentsResponseFormatAgents2: ListAgentsResponseFormatAgents2,
+export function listAgentsResponseFormatAgentsJSONObjectToJSON(
+  listAgentsResponseFormatAgentsJSONObject:
+    ListAgentsResponseFormatAgentsJSONObject,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormatAgents2$outboundSchema.parse(
-      listAgentsResponseFormatAgents2,
+    ListAgentsResponseFormatAgentsJSONObject$outboundSchema.parse(
+      listAgentsResponseFormatAgentsJSONObject,
     ),
   );
 }
-export function listAgentsResponseFormatAgents2FromJSON(
+export function listAgentsResponseFormatAgentsJSONObjectFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormatAgents2, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsResponseFormatAgentsJSONObject,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormatAgents2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormatAgents2' from JSON`,
+    (x) =>
+      ListAgentsResponseFormatAgentsJSONObject$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsResponseFormatAgentsJSONObject' from JSON`,
   );
 }
 
@@ -2212,254 +2496,293 @@ export const ListAgentsResponseFormatAgentsResponse200Type$outboundSchema:
     ListAgentsResponseFormatAgentsResponse200Type$inboundSchema;
 
 /** @internal */
-export const ListAgentsResponseFormatAgents1$inboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents1,
+export const ListAgentsResponseFormatAgentsText$inboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListAgentsResponseFormatAgentsResponse200Type$inboundSchema,
 });
 /** @internal */
-export type ListAgentsResponseFormatAgents1$Outbound = {
+export type ListAgentsResponseFormatAgentsText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ListAgentsResponseFormatAgents1$outboundSchema: z.ZodType<
-  ListAgentsResponseFormatAgents1$Outbound,
+export const ListAgentsResponseFormatAgentsText$outboundSchema: z.ZodType<
+  ListAgentsResponseFormatAgentsText$Outbound,
   z.ZodTypeDef,
-  ListAgentsResponseFormatAgents1
+  ListAgentsResponseFormatAgentsText
 > = z.object({
   type: ListAgentsResponseFormatAgentsResponse200Type$outboundSchema,
 });
 
-export function listAgentsResponseFormatAgents1ToJSON(
-  listAgentsResponseFormatAgents1: ListAgentsResponseFormatAgents1,
+export function listAgentsResponseFormatAgentsTextToJSON(
+  listAgentsResponseFormatAgentsText: ListAgentsResponseFormatAgentsText,
 ): string {
   return JSON.stringify(
-    ListAgentsResponseFormatAgents1$outboundSchema.parse(
-      listAgentsResponseFormatAgents1,
+    ListAgentsResponseFormatAgentsText$outboundSchema.parse(
+      listAgentsResponseFormatAgentsText,
     ),
   );
 }
-export function listAgentsResponseFormatAgents1FromJSON(
+export function listAgentsResponseFormatAgentsTextFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormatAgents1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsResponseFormatAgents1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormatAgents1' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelsResponseFormat$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ListAgentsResponseFormatAgents3$inboundSchema),
-  z.lazy(() => ListAgentsResponseFormatAgents1$inboundSchema),
-  z.lazy(() => ListAgentsResponseFormatAgents2$inboundSchema),
-]);
-/** @internal */
-export type ListAgentsFallbackModelsResponseFormat$Outbound =
-  | ListAgentsResponseFormatAgents3$Outbound
-  | ListAgentsResponseFormatAgents1$Outbound
-  | ListAgentsResponseFormatAgents2$Outbound;
-
-/** @internal */
-export const ListAgentsFallbackModelsResponseFormat$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsResponseFormat$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsResponseFormat
-> = z.union([
-  z.lazy(() => ListAgentsResponseFormatAgents3$outboundSchema),
-  z.lazy(() => ListAgentsResponseFormatAgents1$outboundSchema),
-  z.lazy(() => ListAgentsResponseFormatAgents2$outboundSchema),
-]);
-
-export function listAgentsFallbackModelsResponseFormatToJSON(
-  listAgentsFallbackModelsResponseFormat:
-    ListAgentsFallbackModelsResponseFormat,
-): string {
-  return JSON.stringify(
-    ListAgentsFallbackModelsResponseFormat$outboundSchema.parse(
-      listAgentsFallbackModelsResponseFormat,
-    ),
-  );
-}
-export function listAgentsFallbackModelsResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsResponseFormat, SDKValidationError> {
+): SafeParseResult<ListAgentsResponseFormatAgentsText, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      ListAgentsFallbackModelsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsResponseFormat' from JSON`,
+      ListAgentsResponseFormatAgentsText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsResponseFormatAgentsText' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbackModelsStop$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
+export const ListAgentsFallbackModelConfigurationResponseFormat$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationResponseFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() =>
+      ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema
+    ),
+    z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
+  ]);
 /** @internal */
-export type ListAgentsFallbackModelsStop$Outbound = string | Array<string>;
+export type ListAgentsFallbackModelConfigurationResponseFormat$Outbound =
+  | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound
+  | ListAgentsResponseFormatAgentsText$Outbound
+  | ListAgentsResponseFormatAgentsJSONObject$Outbound;
 
 /** @internal */
-export const ListAgentsFallbackModelsStop$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsStop$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsStop
-> = z.union([z.string(), z.array(z.string())]);
+export const ListAgentsFallbackModelConfigurationResponseFormat$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationResponseFormat$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationResponseFormat
+  > = z.union([
+    z.lazy(() =>
+      ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema
+    ),
+    z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
+  ]);
 
-export function listAgentsFallbackModelsStopToJSON(
-  listAgentsFallbackModelsStop: ListAgentsFallbackModelsStop,
+export function listAgentsFallbackModelConfigurationResponseFormatToJSON(
+  listAgentsFallbackModelConfigurationResponseFormat:
+    ListAgentsFallbackModelConfigurationResponseFormat,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsStop$outboundSchema.parse(
-      listAgentsFallbackModelsStop,
+    ListAgentsFallbackModelConfigurationResponseFormat$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationResponseFormat,
     ),
   );
 }
-export function listAgentsFallbackModelsStopFromJSON(
+export function listAgentsFallbackModelConfigurationResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsStop, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationResponseFormat,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsFallbackModelsStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsStop' from JSON`,
+    (x) =>
+      ListAgentsFallbackModelConfigurationResponseFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbackModelsStreamOptions$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsStreamOptions,
+export const ListAgentsFallbackModelConfigurationStop$inboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfigurationStop,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
+> = z.union([z.string(), z.array(z.string())]);
 /** @internal */
-export type ListAgentsFallbackModelsStreamOptions$Outbound = {
+export type ListAgentsFallbackModelConfigurationStop$Outbound =
+  | string
+  | Array<string>;
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationStop$outboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfigurationStop$Outbound,
+  z.ZodTypeDef,
+  ListAgentsFallbackModelConfigurationStop
+> = z.union([z.string(), z.array(z.string())]);
+
+export function listAgentsFallbackModelConfigurationStopToJSON(
+  listAgentsFallbackModelConfigurationStop:
+    ListAgentsFallbackModelConfigurationStop,
+): string {
+  return JSON.stringify(
+    ListAgentsFallbackModelConfigurationStop$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationStop,
+    ),
+  );
+}
+export function listAgentsFallbackModelConfigurationStopFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationStop,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsFallbackModelConfigurationStop$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationStreamOptions,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    include_usage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+    });
+  });
+/** @internal */
+export type ListAgentsFallbackModelConfigurationStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
 };
 
 /** @internal */
-export const ListAgentsFallbackModelsStreamOptions$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsStreamOptions$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
+export const ListAgentsFallbackModelConfigurationStreamOptions$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationStreamOptions$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationStreamOptions
+  > = z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
   });
-});
 
-export function listAgentsFallbackModelsStreamOptionsToJSON(
-  listAgentsFallbackModelsStreamOptions: ListAgentsFallbackModelsStreamOptions,
+export function listAgentsFallbackModelConfigurationStreamOptionsToJSON(
+  listAgentsFallbackModelConfigurationStreamOptions:
+    ListAgentsFallbackModelConfigurationStreamOptions,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsStreamOptions$outboundSchema.parse(
-      listAgentsFallbackModelsStreamOptions,
+    ListAgentsFallbackModelConfigurationStreamOptions$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationStreamOptions,
     ),
   );
 }
-export function listAgentsFallbackModelsStreamOptionsFromJSON(
+export function listAgentsFallbackModelConfigurationStreamOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsStreamOptions, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationStreamOptions,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      ListAgentsFallbackModelsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsStreamOptions' from JSON`,
+      ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbackModelsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsType
-> = z.nativeEnum(ListAgentsFallbackModelsType);
+export const ListAgentsFallbackModelConfigurationType$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationType);
 /** @internal */
-export const ListAgentsFallbackModelsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsType
-> = ListAgentsFallbackModelsType$inboundSchema;
+export const ListAgentsFallbackModelConfigurationType$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> =
+    ListAgentsFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
-export const ListAgentsFallbackModelsThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelsThinkingLevel> = z.nativeEnum(
-    ListAgentsFallbackModelsThinkingLevel,
-  );
+export const ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationThinkingLevel);
 /** @internal */
-export const ListAgentsFallbackModelsThinkingLevel$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelsThinkingLevel> =
-    ListAgentsFallbackModelsThinkingLevel$inboundSchema;
+export const ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> =
+    ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema;
 
 /** @internal */
-export const ListAgentsFallbackModelsThinking$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsThinking,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ListAgentsFallbackModelsType$inboundSchema,
-  budget_tokens: z.number(),
-  thinking_level: ListAgentsFallbackModelsThinkingLevel$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-    "thinking_level": "thinkingLevel",
+export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationThinking,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: ListAgentsFallbackModelConfigurationType$inboundSchema,
+    budget_tokens: z.number(),
+    thinking_level:
+      ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema
+        .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
+    });
   });
-});
 /** @internal */
-export type ListAgentsFallbackModelsThinking$Outbound = {
+export type ListAgentsFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
   thinking_level?: string | undefined;
 };
 
 /** @internal */
-export const ListAgentsFallbackModelsThinking$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsThinking$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsThinking
-> = z.object({
-  type: ListAgentsFallbackModelsType$outboundSchema,
-  budgetTokens: z.number(),
-  thinkingLevel: ListAgentsFallbackModelsThinkingLevel$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
+export const ListAgentsFallbackModelConfigurationThinking$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationThinking$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationThinking
+  > = z.object({
+    type: ListAgentsFallbackModelConfigurationType$outboundSchema,
+    budgetTokens: z.number(),
+    thinkingLevel:
+      ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema
+        .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
+    });
   });
-});
 
-export function listAgentsFallbackModelsThinkingToJSON(
-  listAgentsFallbackModelsThinking: ListAgentsFallbackModelsThinking,
+export function listAgentsFallbackModelConfigurationThinkingToJSON(
+  listAgentsFallbackModelConfigurationThinking:
+    ListAgentsFallbackModelConfigurationThinking,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsThinking$outboundSchema.parse(
-      listAgentsFallbackModelsThinking,
+    ListAgentsFallbackModelConfigurationThinking$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationThinking,
     ),
   );
 }
-export function listAgentsFallbackModelsThinkingFromJSON(
+export function listAgentsFallbackModelConfigurationThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsThinking, SDKValidationError> {
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationThinking,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsFallbackModelsThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsThinking' from JSON`,
+    (x) =>
+      ListAgentsFallbackModelConfigurationThinking$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationThinking' from JSON`,
   );
 }
 
@@ -2568,169 +2891,132 @@ export const ListAgentsToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsToolChoiceAgents1$inboundSchema;
 
 /** @internal */
-export const ListAgentsFallbackModelsToolChoice$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ListAgentsToolChoiceAgents2$inboundSchema),
-  ListAgentsToolChoiceAgents1$inboundSchema,
-]);
+export const ListAgentsFallbackModelConfigurationToolChoice$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationToolChoice,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => ListAgentsToolChoiceAgents2$inboundSchema),
+    ListAgentsToolChoiceAgents1$inboundSchema,
+  ]);
 /** @internal */
-export type ListAgentsFallbackModelsToolChoice$Outbound =
+export type ListAgentsFallbackModelConfigurationToolChoice$Outbound =
   | ListAgentsToolChoiceAgents2$Outbound
   | string;
 
 /** @internal */
-export const ListAgentsFallbackModelsToolChoice$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsToolChoice$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsToolChoice
-> = z.union([
-  z.lazy(() => ListAgentsToolChoiceAgents2$outboundSchema),
-  ListAgentsToolChoiceAgents1$outboundSchema,
-]);
+export const ListAgentsFallbackModelConfigurationToolChoice$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationToolChoice$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationToolChoice
+  > = z.union([
+    z.lazy(() => ListAgentsToolChoiceAgents2$outboundSchema),
+    ListAgentsToolChoiceAgents1$outboundSchema,
+  ]);
 
-export function listAgentsFallbackModelsToolChoiceToJSON(
-  listAgentsFallbackModelsToolChoice: ListAgentsFallbackModelsToolChoice,
+export function listAgentsFallbackModelConfigurationToolChoiceToJSON(
+  listAgentsFallbackModelConfigurationToolChoice:
+    ListAgentsFallbackModelConfigurationToolChoice,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsToolChoice$outboundSchema.parse(
-      listAgentsFallbackModelsToolChoice,
+    ListAgentsFallbackModelConfigurationToolChoice$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationToolChoice,
     ),
   );
 }
-export function listAgentsFallbackModelsToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelsToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsToolChoice' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelsModalities$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsModalities
-> = z.nativeEnum(ListAgentsFallbackModelsModalities);
-/** @internal */
-export const ListAgentsFallbackModelsModalities$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFallbackModelsModalities
-> = ListAgentsFallbackModelsModalities$inboundSchema;
-
-/** @internal */
-export const ListAgentsFallbackModelsWebSearchOptions$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsWebSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-/** @internal */
-export type ListAgentsFallbackModelsWebSearchOptions$Outbound = {
-  enabled?: boolean | undefined;
-};
-
-/** @internal */
-export const ListAgentsFallbackModelsWebSearchOptions$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsWebSearchOptions$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModelsWebSearchOptions
-> = z.object({
-  enabled: z.boolean().optional(),
-});
-
-export function listAgentsFallbackModelsWebSearchOptionsToJSON(
-  listAgentsFallbackModelsWebSearchOptions:
-    ListAgentsFallbackModelsWebSearchOptions,
-): string {
-  return JSON.stringify(
-    ListAgentsFallbackModelsWebSearchOptions$outboundSchema.parse(
-      listAgentsFallbackModelsWebSearchOptions,
-    ),
-  );
-}
-export function listAgentsFallbackModelsWebSearchOptionsFromJSON(
+export function listAgentsFallbackModelConfigurationToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  ListAgentsFallbackModelsWebSearchOptions,
+  ListAgentsFallbackModelConfigurationToolChoice,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      ListAgentsFallbackModelsWebSearchOptions$inboundSchema.parse(
+      ListAgentsFallbackModelConfigurationToolChoice$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'ListAgentsFallbackModelsWebSearchOptions' from JSON`,
+    `Failed to parse 'ListAgentsFallbackModelConfigurationToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbackModelsParameters$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelsParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  audio: z.nullable(z.lazy(() => ListAgentsFallbackModelsAudio$inboundSchema))
-    .optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => ListAgentsResponseFormatAgents3$inboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgents1$inboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgents2$inboundSchema),
-  ]).optional(),
-  reasoning_effort: z.string().optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => ListAgentsFallbackModelsStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.lazy(() => ListAgentsFallbackModelsThinking$inboundSchema)
-    .optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => ListAgentsToolChoiceAgents2$inboundSchema),
-    ListAgentsToolChoiceAgents1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(
-    z.array(ListAgentsFallbackModelsModalities$inboundSchema),
-  ).optional(),
-  web_search_options: z.lazy(() =>
-    ListAgentsFallbackModelsWebSearchOptions$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "web_search_options": "webSearchOptions",
-  });
-});
+export const ListAgentsFallbackModelConfigurationModalities$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationModalities> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationModalities);
 /** @internal */
-export type ListAgentsFallbackModelsParameters$Outbound = {
-  audio?: ListAgentsFallbackModelsAudio$Outbound | null | undefined;
+export const ListAgentsFallbackModelConfigurationModalities$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationModalities> =
+    ListAgentsFallbackModelConfigurationModalities$inboundSchema;
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationParameters,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    audio: z.nullable(
+      z.lazy(() => ListAgentsFallbackModelConfigurationAudio$inboundSchema),
+    ).optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    top_logprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() =>
+        ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema
+      ),
+      z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
+      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
+    ]).optional(),
+    reasoning_effort: z.string().optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    stream_options: z.nullable(
+      z.lazy(() =>
+        ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema
+      ),
+    ).optional(),
+    thinking: z.lazy(() =>
+      ListAgentsFallbackModelConfigurationThinking$inboundSchema
+    ).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => ListAgentsToolChoiceAgents2$inboundSchema),
+      ListAgentsToolChoiceAgents1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(ListAgentsFallbackModelConfigurationModalities$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "top_logprobs": "topLogprobs",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "stream_options": "streamOptions",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+    });
+  });
+/** @internal */
+export type ListAgentsFallbackModelConfigurationParameters$Outbound = {
+  audio?: ListAgentsFallbackModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
@@ -2739,204 +3025,209 @@ export type ListAgentsFallbackModelsParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | ListAgentsResponseFormatAgents3$Outbound
-    | ListAgentsResponseFormatAgents1$Outbound
-    | ListAgentsResponseFormatAgents2$Outbound
+    | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound
+    | ListAgentsResponseFormatAgentsText$Outbound
+    | ListAgentsResponseFormatAgentsJSONObject$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
   stream_options?:
-    | ListAgentsFallbackModelsStreamOptions$Outbound
+    | ListAgentsFallbackModelConfigurationStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: ListAgentsFallbackModelsThinking$Outbound | undefined;
+  thinking?: ListAgentsFallbackModelConfigurationThinking$Outbound | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
   tool_choice?: ListAgentsToolChoiceAgents2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  web_search_options?:
-    | ListAgentsFallbackModelsWebSearchOptions$Outbound
+};
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationParameters$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationParameters$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationParameters
+  > = z.object({
+    audio: z.nullable(
+      z.lazy(() => ListAgentsFallbackModelConfigurationAudio$outboundSchema),
+    ).optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    topLogprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() =>
+        ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema
+      ),
+      z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
+      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
+    ]).optional(),
+    reasoningEffort: z.string().optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    streamOptions: z.nullable(
+      z.lazy(() =>
+        ListAgentsFallbackModelConfigurationStreamOptions$outboundSchema
+      ),
+    ).optional(),
+    thinking: z.lazy(() =>
+      ListAgentsFallbackModelConfigurationThinking$outboundSchema
+    ).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    toolChoice: z.union([
+      z.lazy(() => ListAgentsToolChoiceAgents2$outboundSchema),
+      ListAgentsToolChoiceAgents1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(ListAgentsFallbackModelConfigurationModalities$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      topLogprobs: "top_logprobs",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      streamOptions: "stream_options",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+    });
+  });
+
+export function listAgentsFallbackModelConfigurationParametersToJSON(
+  listAgentsFallbackModelConfigurationParameters:
+    ListAgentsFallbackModelConfigurationParameters,
+): string {
+  return JSON.stringify(
+    ListAgentsFallbackModelConfigurationParameters$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationParameters,
+    ),
+  );
+}
+export function listAgentsFallbackModelConfigurationParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsFallbackModelConfigurationParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsFallbackModelConfiguration2$inboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfiguration2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  parameters: z.lazy(() =>
+    ListAgentsFallbackModelConfigurationParameters$inboundSchema
+  ).optional(),
+});
+/** @internal */
+export type ListAgentsFallbackModelConfiguration2$Outbound = {
+  id: string;
+  parameters?:
+    | ListAgentsFallbackModelConfigurationParameters$Outbound
     | undefined;
 };
 
 /** @internal */
-export const ListAgentsFallbackModelsParameters$outboundSchema: z.ZodType<
-  ListAgentsFallbackModelsParameters$Outbound,
+export const ListAgentsFallbackModelConfiguration2$outboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfiguration2$Outbound,
   z.ZodTypeDef,
-  ListAgentsFallbackModelsParameters
+  ListAgentsFallbackModelConfiguration2
 > = z.object({
-  audio: z.nullable(z.lazy(() => ListAgentsFallbackModelsAudio$outboundSchema))
-    .optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => ListAgentsResponseFormatAgents3$outboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgents1$outboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgents2$outboundSchema),
-  ]).optional(),
-  reasoningEffort: z.string().optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => ListAgentsFallbackModelsStreamOptions$outboundSchema),
+  id: z.string(),
+  parameters: z.lazy(() =>
+    ListAgentsFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
-  thinking: z.lazy(() => ListAgentsFallbackModelsThinking$outboundSchema)
-    .optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => ListAgentsToolChoiceAgents2$outboundSchema),
-    ListAgentsToolChoiceAgents1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(
-    z.array(ListAgentsFallbackModelsModalities$outboundSchema),
-  ).optional(),
-  webSearchOptions: z.lazy(() =>
-    ListAgentsFallbackModelsWebSearchOptions$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    webSearchOptions: "web_search_options",
-  });
 });
 
-export function listAgentsFallbackModelsParametersToJSON(
-  listAgentsFallbackModelsParameters: ListAgentsFallbackModelsParameters,
+export function listAgentsFallbackModelConfiguration2ToJSON(
+  listAgentsFallbackModelConfiguration2: ListAgentsFallbackModelConfiguration2,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModelsParameters$outboundSchema.parse(
-      listAgentsFallbackModelsParameters,
+    ListAgentsFallbackModelConfiguration2$outboundSchema.parse(
+      listAgentsFallbackModelConfiguration2,
     ),
   );
 }
-export function listAgentsFallbackModelsParametersFromJSON(
+export function listAgentsFallbackModelConfiguration2FromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelsParameters, SDKValidationError> {
+): SafeParseResult<ListAgentsFallbackModelConfiguration2, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      ListAgentsFallbackModelsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelsParameters' from JSON`,
+      ListAgentsFallbackModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsFallbackModelConfiguration2' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbackModels2$inboundSchema: z.ZodType<
-  ListAgentsFallbackModels2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => ListAgentsFallbackModelsParameters$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-  });
-});
-/** @internal */
-export type ListAgentsFallbackModels2$Outbound = {
-  id: string;
-  integration_id?: string | null | undefined;
-  parameters?: ListAgentsFallbackModelsParameters$Outbound | undefined;
-};
-
-/** @internal */
-export const ListAgentsFallbackModels2$outboundSchema: z.ZodType<
-  ListAgentsFallbackModels2$Outbound,
-  z.ZodTypeDef,
-  ListAgentsFallbackModels2
-> = z.object({
-  id: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => ListAgentsFallbackModelsParameters$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-  });
-});
-
-export function listAgentsFallbackModels2ToJSON(
-  listAgentsFallbackModels2: ListAgentsFallbackModels2,
-): string {
-  return JSON.stringify(
-    ListAgentsFallbackModels2$outboundSchema.parse(listAgentsFallbackModels2),
-  );
-}
-export function listAgentsFallbackModels2FromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsFallbackModels2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsFallbackModels2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModels2' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModels$inboundSchema: z.ZodType<
-  ListAgentsFallbackModels,
+export const ListAgentsFallbackModelConfiguration$inboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ListAgentsFallbackModels2$inboundSchema),
+  z.lazy(() => ListAgentsFallbackModelConfiguration2$inboundSchema),
   z.string(),
 ]);
 /** @internal */
-export type ListAgentsFallbackModels$Outbound =
-  | ListAgentsFallbackModels2$Outbound
+export type ListAgentsFallbackModelConfiguration$Outbound =
+  | ListAgentsFallbackModelConfiguration2$Outbound
   | string;
 
 /** @internal */
-export const ListAgentsFallbackModels$outboundSchema: z.ZodType<
-  ListAgentsFallbackModels$Outbound,
+export const ListAgentsFallbackModelConfiguration$outboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfiguration$Outbound,
   z.ZodTypeDef,
-  ListAgentsFallbackModels
+  ListAgentsFallbackModelConfiguration
 > = z.union([
-  z.lazy(() => ListAgentsFallbackModels2$outboundSchema),
+  z.lazy(() => ListAgentsFallbackModelConfiguration2$outboundSchema),
   z.string(),
 ]);
 
-export function listAgentsFallbackModelsToJSON(
-  listAgentsFallbackModels: ListAgentsFallbackModels,
+export function listAgentsFallbackModelConfigurationToJSON(
+  listAgentsFallbackModelConfiguration: ListAgentsFallbackModelConfiguration,
 ): string {
   return JSON.stringify(
-    ListAgentsFallbackModels$outboundSchema.parse(listAgentsFallbackModels),
+    ListAgentsFallbackModelConfiguration$outboundSchema.parse(
+      listAgentsFallbackModelConfiguration,
+    ),
   );
 }
-export function listAgentsFallbackModelsFromJSON(
+export function listAgentsFallbackModelConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModels, SDKValidationError> {
+): SafeParseResult<ListAgentsFallbackModelConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsFallbackModels$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModels' from JSON`,
+    (x) =>
+      ListAgentsFallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsFallbackModelConfiguration' from JSON`,
   );
 }
 
@@ -2949,9 +3240,10 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => ListAgentsParameters$inboundSchema).optional(),
+  retry: z.lazy(() => ListAgentsRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
-      z.lazy(() => ListAgentsFallbackModels2$inboundSchema),
+      z.lazy(() => ListAgentsFallbackModelConfiguration2$inboundSchema),
       z.string(),
     ])),
   ).optional(),
@@ -2966,8 +3258,9 @@ export type ListAgentsModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: ListAgentsParameters$Outbound | undefined;
+  retry?: ListAgentsRetry$Outbound | undefined;
   fallback_models?:
-    | Array<ListAgentsFallbackModels2$Outbound | string>
+    | Array<ListAgentsFallbackModelConfiguration2$Outbound | string>
     | null
     | undefined;
 };
@@ -2981,9 +3274,10 @@ export const ListAgentsModel$outboundSchema: z.ZodType<
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => ListAgentsParameters$outboundSchema).optional(),
+  retry: z.lazy(() => ListAgentsRetry$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
-      z.lazy(() => ListAgentsFallbackModels2$outboundSchema),
+      z.lazy(() => ListAgentsFallbackModelConfiguration2$outboundSchema),
       z.string(),
     ])),
   ).optional(),
@@ -3146,15 +3440,6 @@ export function listAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const ListAgentsHiddenPanels$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsHiddenPanels
-> = z.nativeEnum(ListAgentsHiddenPanels);
-/** @internal */
-export const ListAgentsHiddenPanels$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsHiddenPanels
-> = ListAgentsHiddenPanels$inboundSchema;
-
-/** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
@@ -3162,8 +3447,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  workspace_id: z.string(),
-  project_id: z.string(),
+  display_name: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3183,12 +3467,10 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
-  hidden_panels: z.array(ListAgentsHiddenPanels$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "workspace_id": "workspaceId",
-    "project_id": "projectId",
+    "display_name": "displayName",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "system_prompt": "systemPrompt",
@@ -3196,15 +3478,13 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "hidden_panels": "hiddenPanels",
   });
 });
 /** @internal */
 export type ListAgentsData$Outbound = {
   _id: string;
   key: string;
-  workspace_id: string;
-  project_id: string;
+  display_name: string;
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   created?: string | undefined;
@@ -3223,7 +3503,6 @@ export type ListAgentsData$Outbound = {
   metrics?: ListAgentsMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<ListAgentsKnowledgeBases$Outbound> | undefined;
-  hidden_panels?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3234,8 +3513,7 @@ export const ListAgentsData$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
-  workspaceId: z.string(),
-  projectId: z.string(),
+  displayName: z.string(),
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3255,12 +3533,10 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => ListAgentsKnowledgeBases$outboundSchema))
     .optional(),
-  hiddenPanels: z.array(ListAgentsHiddenPanels$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    workspaceId: "workspace_id",
-    projectId: "project_id",
+    displayName: "display_name",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
     systemPrompt: "system_prompt",
@@ -3268,7 +3544,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    hiddenPanels: "hidden_panels",
   });
 });
 

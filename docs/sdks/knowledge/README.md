@@ -113,7 +113,6 @@ async function run() {
     type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
-    isPrivateModel: false,
     path: "Default",
   });
 
@@ -142,7 +141,6 @@ async function run() {
     type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
-    isPrivateModel: false,
     path: "Default",
   });
   if (res.ok) {

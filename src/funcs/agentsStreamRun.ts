@@ -28,10 +28,12 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run and stream agent execution
+ * Run agent with streaming response
  *
  * @remarks
- * Creates or updates an agent with the provided configuration, then streams execution events via Server-Sent Events (SSE). If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The stream will continue until the agent completes, errors, or reaches the configured timeout.
+ * Dynamically configures and executes an agent while streaming the interaction in real-time via Server-Sent Events (SSE). Intelligently manages agent versioning by reusing existing agents with matching configurations or creating new versions when configurations differ. Combines the flexibility of inline configuration with real-time streaming, making it ideal for dynamic agent interactions with live feedback. The stream provides continuous updates including message chunks, tool executions, and status changes until completion or timeout.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function agentsStreamRun(
   client: OrqCore,
@@ -168,6 +170,7 @@ async function $do(
       z.instanceof(ReadableStream<Uint8Array>)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
+            if (rawEvent.data === "[DONE]") return { done: true };
             return {
               value: operations.StreamRunAgentResponseBody$inboundSchema.parse(
                 rawEvent,

@@ -26,19 +26,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a new agent
+ * Create agent
  *
  * @remarks
- * Creates a new AI agent with specified configuration. Agents can be configured with a primary model and an optional fallback model that will be used automatically if the primary model fails.
+ * Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.
  */
 export function agentsCreate(
   client: OrqCore,
-  request?: operations.CreateAgentRequestBody | undefined,
+  request?: operations.CreateAgentRequestRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateAgentResponseBody,
-    | errors.CreateAgentResponseBody
+    operations.CreateAgentRequestResponseBody,
+    | errors.CreateAgentRequestResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -58,13 +58,13 @@ export function agentsCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreateAgentRequestBody | undefined,
+  request?: operations.CreateAgentRequestRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateAgentResponseBody,
-      | errors.CreateAgentResponseBody
+      operations.CreateAgentRequestResponseBody,
+      | errors.CreateAgentRequestResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -80,7 +80,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.CreateAgentRequestBody$outboundSchema.optional().parse(value),
+      operations.CreateAgentRequestRequestBody$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -105,7 +107,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "CreateAgent",
+    operationID: "CreateAgentRequest",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -148,8 +150,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CreateAgentResponseBody,
-    | errors.CreateAgentResponseBody
+    operations.CreateAgentRequestResponseBody,
+    | errors.CreateAgentRequestResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -159,8 +161,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, operations.CreateAgentResponseBody$inboundSchema),
-    M.jsonErr(409, errors.CreateAgentResponseBody$inboundSchema),
+    M.json(201, operations.CreateAgentRequestResponseBody$inboundSchema),
+    M.jsonErr(409, errors.CreateAgentRequestResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

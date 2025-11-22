@@ -4,7 +4,6 @@
 
 import { toolsCreate } from "../funcs/toolsCreate.js";
 import { toolsDelete } from "../funcs/toolsDelete.js";
-import { toolsDuplicate } from "../funcs/toolsDuplicate.js";
 import { toolsList } from "../funcs/toolsList.js";
 import { toolsRetrieve } from "../funcs/toolsRetrieve.js";
 import { toolsUpdate } from "../funcs/toolsUpdate.js";
@@ -92,23 +91,6 @@ export class Tools extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RetrieveToolResponseBody> {
     return unwrapAsync(toolsRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Duplicate tool
-   *
-   * @remarks
-   * Creates a copy of an existing tool with a new id and ID.
-   */
-  async duplicate(
-    request: operations.DuplicateToolRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DuplicateToolResponseBody> {
-    return unwrapAsync(toolsDuplicate(
       this,
       request,
       options,

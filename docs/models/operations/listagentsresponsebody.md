@@ -1,6 +1,6 @@
 # ListAgentsResponseBody
 
-List of agents with their configurations including fallback models
+Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings.
 
 ## Example Usage
 
@@ -13,18 +13,35 @@ let value: ListAgentsResponseBody = {
     {
       id: "<id>",
       key: "<key>",
-      workspaceId: "<id>",
-      projectId: "<id>",
+      displayName: "Fleta.Oberbrunner",
       role: "<value>",
-      description: "stock coincide ah agreement presume",
+      description:
+        "lasting functional into if excepting apprehensive tray thoughtfully wallop",
       instructions: "<value>",
-      status: "draft",
+      status: "published",
       model: {
         id: "<id>",
+        retry: {
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
       },
       path: "Default",
-      memoryStores: [],
-      teamOfAgents: [],
+      memoryStores: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+      teamOfAgents: [
+        {
+          key: "<key>",
+        },
+      ],
       knowledgeBases: [
         {
           knowledgeId: "customer-knowledge-base",

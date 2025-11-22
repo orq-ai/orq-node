@@ -134,6 +134,14 @@ export type SemanticChunkerStrategy = {
    */
   embeddingModel: string;
   /**
+   * Number of dimensions for the embedding output. Required for text-embedding-3 models. Supported range: 256-3072 for text-embedding-3-large, 256-1536 for text-embedding-3-small.
+   */
+  dimensions?: number | undefined;
+  /**
+   * Maximum number of tokens per embedding request. Default is 8191 for text-embedding-3 models.
+   */
+  maxTokens?: number | undefined;
+  /**
    * Chunking mode: window-based or sentence-based similarity
    */
   mode?: Mode | undefined;
@@ -494,6 +502,8 @@ export const SemanticChunkerStrategy$inboundSchema: z.ZodType<
   chunk_size: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$inboundSchema]).optional(),
   embedding_model: z.string(),
+  dimensions: z.number().int().optional(),
+  max_tokens: z.number().int().optional(),
   mode: Mode$inboundSchema.default("window"),
   similarity_window: z.number().int().default(1),
 }).transform((v) => {
@@ -501,6 +511,7 @@ export const SemanticChunkerStrategy$inboundSchema: z.ZodType<
     "return_type": "returnType",
     "chunk_size": "chunkSize",
     "embedding_model": "embeddingModel",
+    "max_tokens": "maxTokens",
     "similarity_window": "similarityWindow",
   });
 });
@@ -513,6 +524,8 @@ export type SemanticChunkerStrategy$Outbound = {
   chunk_size: number;
   threshold?: number | string | undefined;
   embedding_model: string;
+  dimensions?: number | undefined;
+  max_tokens?: number | undefined;
   mode: string;
   similarity_window: number;
 };
@@ -532,6 +545,8 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
   chunkSize: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$outboundSchema]).optional(),
   embeddingModel: z.string(),
+  dimensions: z.number().int().optional(),
+  maxTokens: z.number().int().optional(),
   mode: Mode$outboundSchema.default("window"),
   similarityWindow: z.number().int().default(1),
 }).transform((v) => {
@@ -539,6 +554,7 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
     returnType: "return_type",
     chunkSize: "chunk_size",
     embeddingModel: "embedding_model",
+    maxTokens: "max_tokens",
     similarityWindow: "similarity_window",
   });
 });

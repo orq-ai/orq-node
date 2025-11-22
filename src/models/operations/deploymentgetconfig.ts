@@ -1620,6 +1620,7 @@ export type DeploymentGetConfigResponseFormatJsonSchema = {
 
 export type DeploymentGetConfigResponseFormat1 = {
   type: DeploymentGetConfigResponseFormatDeploymentsResponseType;
+  displayName?: string | undefined;
   jsonSchema: DeploymentGetConfigResponseFormatJsonSchema;
 };
 
@@ -1847,7 +1848,7 @@ export type DeploymentGetConfigFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type Tools = {
+export type DeploymentGetConfigTools = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
@@ -1887,7 +1888,7 @@ export type DeploymentGetConfigResponseBody = {
   /**
    * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?: Array<Tools> | undefined;
+  tools?: Array<DeploymentGetConfigTools> | undefined;
 };
 
 /** @internal */
@@ -7605,17 +7606,20 @@ export const DeploymentGetConfigResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() =>
     DeploymentGetConfigResponseFormatJsonSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
 export type DeploymentGetConfigResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: DeploymentGetConfigResponseFormatJsonSchema$Outbound;
 };
 
@@ -7626,11 +7630,13 @@ export const DeploymentGetConfigResponseFormat1$outboundSchema: z.ZodType<
   DeploymentGetConfigResponseFormat1
 > = z.object({
   type: DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() =>
     DeploymentGetConfigResponseFormatJsonSchema$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });
@@ -7943,37 +7949,44 @@ export function deploymentGetConfigFunctionFromJSON(
 }
 
 /** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .object({
-    type: DeploymentGetConfigDeploymentsType$inboundSchema,
-    function: z.lazy(() => DeploymentGetConfigFunction$inboundSchema),
-  });
+export const DeploymentGetConfigTools$inboundSchema: z.ZodType<
+  DeploymentGetConfigTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfigDeploymentsType$inboundSchema,
+  function: z.lazy(() => DeploymentGetConfigFunction$inboundSchema),
+});
 /** @internal */
-export type Tools$Outbound = {
+export type DeploymentGetConfigTools$Outbound = {
   type: string;
   function: DeploymentGetConfigFunction$Outbound;
 };
 
 /** @internal */
-export const Tools$outboundSchema: z.ZodType<
-  Tools$Outbound,
+export const DeploymentGetConfigTools$outboundSchema: z.ZodType<
+  DeploymentGetConfigTools$Outbound,
   z.ZodTypeDef,
-  Tools
+  DeploymentGetConfigTools
 > = z.object({
   type: DeploymentGetConfigDeploymentsType$outboundSchema,
   function: z.lazy(() => DeploymentGetConfigFunction$outboundSchema),
 });
 
-export function toolsToJSON(tools: Tools): string {
-  return JSON.stringify(Tools$outboundSchema.parse(tools));
+export function deploymentGetConfigToolsToJSON(
+  deploymentGetConfigTools: DeploymentGetConfigTools,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigTools$outboundSchema.parse(deploymentGetConfigTools),
+  );
 }
-export function toolsFromJSON(
+export function deploymentGetConfigToolsFromJSON(
   jsonString: string,
-): SafeParseResult<Tools, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfigTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Tools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Tools' from JSON`,
+    (x) => DeploymentGetConfigTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigTools' from JSON`,
   );
 }
 
@@ -7990,7 +8003,8 @@ export const DeploymentGetConfigResponseBody$inboundSchema: z.ZodType<
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$inboundSchema)),
   parameters: z.lazy(() => DeploymentGetConfigParameters$inboundSchema),
-  tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
+  tools: z.array(z.lazy(() => DeploymentGetConfigTools$inboundSchema))
+    .optional(),
 });
 /** @internal */
 export type DeploymentGetConfigResponseBody$Outbound = {
@@ -8001,7 +8015,7 @@ export type DeploymentGetConfigResponseBody$Outbound = {
   version: string;
   messages: Array<DeploymentGetConfigMessages$Outbound>;
   parameters: DeploymentGetConfigParameters$Outbound;
-  tools?: Array<Tools$Outbound> | undefined;
+  tools?: Array<DeploymentGetConfigTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -8017,7 +8031,8 @@ export const DeploymentGetConfigResponseBody$outboundSchema: z.ZodType<
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$outboundSchema)),
   parameters: z.lazy(() => DeploymentGetConfigParameters$outboundSchema),
-  tools: z.array(z.lazy(() => Tools$outboundSchema)).optional(),
+  tools: z.array(z.lazy(() => DeploymentGetConfigTools$outboundSchema))
+    .optional(),
 });
 
 export function deploymentGetConfigResponseBodyToJSON(

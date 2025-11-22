@@ -1,6 +1,6 @@
 # RunAgentRoleUserMessage
 
-User message
+Message from the end user
 
 ## Example Usage
 

@@ -82,6 +82,7 @@ export type DeploymentsFunction = {
 };
 
 export type DeploymentsTools = {
+  displayName?: string | undefined;
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
@@ -192,6 +193,7 @@ export type DeploymentsResponseFormatJsonSchema = {
 
 export type DeploymentsResponseFormat1 = {
   type: DeploymentsResponseFormatDeploymentsResponseType;
+  displayName?: string | undefined;
   jsonSchema: DeploymentsResponseFormatJsonSchema;
 };
 
@@ -793,12 +795,18 @@ export const DeploymentsTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  display_name: z.string().optional(),
   type: DeploymentsType$inboundSchema,
   function: z.lazy(() => DeploymentsFunction$inboundSchema),
   id: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+  });
 });
 /** @internal */
 export type DeploymentsTools$Outbound = {
+  display_name?: string | undefined;
   type: string;
   function: DeploymentsFunction$Outbound;
   id?: number | undefined;
@@ -810,9 +818,14 @@ export const DeploymentsTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentsTools
 > = z.object({
+  displayName: z.string().optional(),
   type: DeploymentsType$outboundSchema,
   function: z.lazy(() => DeploymentsFunction$outboundSchema),
   id: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+  });
 });
 
 export function deploymentsToolsToJSON(
@@ -1040,15 +1053,18 @@ export const DeploymentsResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: DeploymentsResponseFormatDeploymentsResponseType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() => DeploymentsResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
 export type DeploymentsResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: DeploymentsResponseFormatJsonSchema$Outbound;
 };
 
@@ -1059,9 +1075,11 @@ export const DeploymentsResponseFormat1$outboundSchema: z.ZodType<
   DeploymentsResponseFormat1
 > = z.object({
   type: DeploymentsResponseFormatDeploymentsResponseType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() => DeploymentsResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });

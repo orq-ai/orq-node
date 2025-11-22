@@ -136,6 +136,7 @@ export type GetAllPromptsResponseFormatJsonSchema = {
 
 export type GetAllPromptsResponseFormat1 = {
   type: GetAllPromptsResponseFormatType;
+  displayName?: string | undefined;
   jsonSchema: GetAllPromptsResponseFormatJsonSchema;
 };
 
@@ -908,17 +909,20 @@ export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: GetAllPromptsResponseFormatType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() =>
     GetAllPromptsResponseFormatJsonSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
 export type GetAllPromptsResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
 };
 
@@ -929,11 +933,13 @@ export const GetAllPromptsResponseFormat1$outboundSchema: z.ZodType<
   GetAllPromptsResponseFormat1
 > = z.object({
   type: GetAllPromptsResponseFormatType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() =>
     GetAllPromptsResponseFormatJsonSchema$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });

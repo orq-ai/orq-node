@@ -252,7 +252,7 @@ export type CreatePromptResponseFormatPromptsRequestType = ClosedEnum<
   typeof CreatePromptResponseFormatPromptsRequestType
 >;
 
-export type CreatePromptResponseFormat3 = {
+export type ResponseFormat3 = {
   type: CreatePromptResponseFormatPromptsRequestType;
 };
 
@@ -263,7 +263,7 @@ export type CreatePromptResponseFormatPromptsType = ClosedEnum<
   typeof CreatePromptResponseFormatPromptsType
 >;
 
-export type CreatePromptResponseFormat2 = {
+export type ResponseFormat2 = {
   type: CreatePromptResponseFormatPromptsType;
 };
 
@@ -281,8 +281,9 @@ export type CreatePromptResponseFormatJsonSchema = {
   schema: { [k: string]: any };
 };
 
-export type CreatePromptResponseFormat1 = {
+export type ResponseFormat1 = {
   type: CreatePromptResponseFormatType;
+  displayName?: string | undefined;
   jsonSchema: CreatePromptResponseFormatJsonSchema;
 };
 
@@ -298,9 +299,9 @@ export type CreatePromptResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type CreatePromptResponseFormat =
-  | CreatePromptResponseFormat1
-  | CreatePromptResponseFormat2
-  | CreatePromptResponseFormat3
+  | ResponseFormat1
+  | ResponseFormat2
+  | ResponseFormat3
   | ResponseFormat4
   | Five
   | Six;
@@ -436,9 +437,9 @@ export type ModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | CreatePromptResponseFormat1
-    | CreatePromptResponseFormat2
-    | CreatePromptResponseFormat3
+    | ResponseFormat1
+    | ResponseFormat2
+    | ResponseFormat3
     | ResponseFormat4
     | Five
     | Six
@@ -956,7 +957,7 @@ export type CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type =
     typeof CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type
   >;
 
-export type CreatePromptResponseFormatPromptsJsonSchema = {
+export type CreatePromptResponseFormatPromptsRequestJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -975,9 +976,14 @@ export type CreatePromptResponseFormatPromptsJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export type CreatePromptResponseFormatPrompts3 = {
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type CreatePromptResponseFormatPromptsJSONSchema = {
   type: CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type;
-  jsonSchema: CreatePromptResponseFormatPromptsJsonSchema;
+  jsonSchema: CreatePromptResponseFormatPromptsRequestJsonSchema;
 };
 
 export const CreatePromptResponseFormatPromptsRequestRequestBodyPromptType = {
@@ -988,7 +994,12 @@ export type CreatePromptResponseFormatPromptsRequestRequestBodyPromptType =
     typeof CreatePromptResponseFormatPromptsRequestRequestBodyPromptType
   >;
 
-export type CreatePromptResponseFormatPrompts2 = {
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type CreatePromptResponseFormatJSONObject = {
   type: CreatePromptResponseFormatPromptsRequestRequestBodyPromptType;
 };
 
@@ -998,7 +1009,12 @@ export const CreatePromptResponseFormatPromptsRequestRequestBodyType = {
 export type CreatePromptResponseFormatPromptsRequestRequestBodyType =
   ClosedEnum<typeof CreatePromptResponseFormatPromptsRequestRequestBodyType>;
 
-export type CreatePromptResponseFormatPrompts1 = {
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type CreatePromptResponseFormatText = {
   type: CreatePromptResponseFormatPromptsRequestRequestBodyType;
 };
 
@@ -1006,9 +1022,9 @@ export type CreatePromptResponseFormatPrompts1 = {
  * An object specifying the format that the model must output
  */
 export type CreatePromptPromptsResponseFormat =
-  | CreatePromptResponseFormatPrompts3
-  | CreatePromptResponseFormatPrompts1
-  | CreatePromptResponseFormatPrompts2;
+  | CreatePromptResponseFormatPromptsJSONSchema
+  | CreatePromptResponseFormatText
+  | CreatePromptResponseFormatJSONObject;
 
 /**
  * Prompt configuration with model and messages. Either this field or `prompt_config` must be provided.
@@ -1043,9 +1059,9 @@ export type PromptInput = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreatePromptResponseFormatPrompts3
-    | CreatePromptResponseFormatPrompts1
-    | CreatePromptResponseFormatPrompts2
+    | CreatePromptResponseFormatPromptsJSONSchema
+    | CreatePromptResponseFormatText
+    | CreatePromptResponseFormatJSONObject
     | undefined;
 };
 
@@ -1162,7 +1178,7 @@ export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONType =
     typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
   >;
 
-export type CreatePromptResponseFormatPromptsResponse3 = {
+export type CreatePromptResponseFormat3 = {
   type: CreatePromptResponseFormatPromptsResponse200ApplicationJSONType;
 };
 
@@ -1173,7 +1189,7 @@ export type CreatePromptResponseFormatPromptsResponse200Type = ClosedEnum<
   typeof CreatePromptResponseFormatPromptsResponse200Type
 >;
 
-export type CreatePromptResponseFormatPromptsResponse2 = {
+export type CreatePromptResponseFormat2 = {
   type: CreatePromptResponseFormatPromptsResponse200Type;
 };
 
@@ -1191,8 +1207,9 @@ export type CreatePromptResponseFormatPromptsResponseJsonSchema = {
   schema: { [k: string]: any };
 };
 
-export type CreatePromptResponseFormatPromptsResponse1 = {
+export type CreatePromptResponseFormat1 = {
   type: CreatePromptResponseFormatPromptsResponseType;
+  displayName?: string | undefined;
   jsonSchema: CreatePromptResponseFormatPromptsResponseJsonSchema;
 };
 
@@ -1208,9 +1225,9 @@ export type CreatePromptResponseFormatPromptsResponse1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type CreatePromptPromptsResponseResponseFormat =
-  | CreatePromptResponseFormatPromptsResponse1
-  | CreatePromptResponseFormatPromptsResponse2
-  | CreatePromptResponseFormatPromptsResponse3
+  | CreatePromptResponseFormat1
+  | CreatePromptResponseFormat2
+  | CreatePromptResponseFormat3
   | CreatePromptResponseFormat4
   | CreatePromptResponseFormat5
   | CreatePromptResponseFormat6;
@@ -1352,9 +1369,9 @@ export type CreatePromptModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | CreatePromptResponseFormatPromptsResponse1
-    | CreatePromptResponseFormatPromptsResponse2
-    | CreatePromptResponseFormatPromptsResponse3
+    | CreatePromptResponseFormat1
+    | CreatePromptResponseFormat2
+    | CreatePromptResponseFormat3
     | CreatePromptResponseFormat4
     | CreatePromptResponseFormat5
     | CreatePromptResponseFormat6
@@ -2327,43 +2344,39 @@ export const CreatePromptResponseFormatPromptsRequestType$outboundSchema:
     CreatePromptResponseFormatPromptsRequestType$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormat3$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat3,
+export const ResponseFormat3$inboundSchema: z.ZodType<
+  ResponseFormat3,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreatePromptResponseFormatPromptsRequestType$inboundSchema,
 });
 /** @internal */
-export type CreatePromptResponseFormat3$Outbound = {
+export type ResponseFormat3$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormat3$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat3$Outbound,
+export const ResponseFormat3$outboundSchema: z.ZodType<
+  ResponseFormat3$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormat3
+  ResponseFormat3
 > = z.object({
   type: CreatePromptResponseFormatPromptsRequestType$outboundSchema,
 });
 
-export function createPromptResponseFormat3ToJSON(
-  createPromptResponseFormat3: CreatePromptResponseFormat3,
+export function responseFormat3ToJSON(
+  responseFormat3: ResponseFormat3,
 ): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat3$outboundSchema.parse(
-      createPromptResponseFormat3,
-    ),
-  );
+  return JSON.stringify(ResponseFormat3$outboundSchema.parse(responseFormat3));
 }
-export function createPromptResponseFormat3FromJSON(
+export function responseFormat3FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat3, SDKValidationError> {
+): SafeParseResult<ResponseFormat3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat3' from JSON`,
+    (x) => ResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat3' from JSON`,
   );
 }
 
@@ -2378,43 +2391,39 @@ export const CreatePromptResponseFormatPromptsType$outboundSchema:
     CreatePromptResponseFormatPromptsType$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat2,
+export const ResponseFormat2$inboundSchema: z.ZodType<
+  ResponseFormat2,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreatePromptResponseFormatPromptsType$inboundSchema,
 });
 /** @internal */
-export type CreatePromptResponseFormat2$Outbound = {
+export type ResponseFormat2$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat2$Outbound,
+export const ResponseFormat2$outboundSchema: z.ZodType<
+  ResponseFormat2$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormat2
+  ResponseFormat2
 > = z.object({
   type: CreatePromptResponseFormatPromptsType$outboundSchema,
 });
 
-export function createPromptResponseFormat2ToJSON(
-  createPromptResponseFormat2: CreatePromptResponseFormat2,
+export function responseFormat2ToJSON(
+  responseFormat2: ResponseFormat2,
 ): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat2$outboundSchema.parse(
-      createPromptResponseFormat2,
-    ),
-  );
+  return JSON.stringify(ResponseFormat2$outboundSchema.parse(responseFormat2));
 }
-export function createPromptResponseFormat2FromJSON(
+export function responseFormat2FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat2, SDKValidationError> {
+): SafeParseResult<ResponseFormat2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat2' from JSON`,
+    (x) => ResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat2' from JSON`,
   );
 }
 
@@ -2479,54 +2488,55 @@ export function createPromptResponseFormatJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat1,
+export const ResponseFormat1$inboundSchema: z.ZodType<
+  ResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreatePromptResponseFormatType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() => CreatePromptResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
-export type CreatePromptResponseFormat1$Outbound = {
+export type ResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: CreatePromptResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat1$Outbound,
+export const ResponseFormat1$outboundSchema: z.ZodType<
+  ResponseFormat1$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormat1
+  ResponseFormat1
 > = z.object({
   type: CreatePromptResponseFormatType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() => CreatePromptResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });
 
-export function createPromptResponseFormat1ToJSON(
-  createPromptResponseFormat1: CreatePromptResponseFormat1,
+export function responseFormat1ToJSON(
+  responseFormat1: ResponseFormat1,
 ): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat1$outboundSchema.parse(
-      createPromptResponseFormat1,
-    ),
-  );
+  return JSON.stringify(ResponseFormat1$outboundSchema.parse(responseFormat1));
 }
-export function createPromptResponseFormat1FromJSON(
+export function responseFormat1FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat1, SDKValidationError> {
+): SafeParseResult<ResponseFormat1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat1' from JSON`,
+    (x) => ResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat1' from JSON`,
   );
 }
 
@@ -2536,18 +2546,18 @@ export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
+  z.lazy(() => ResponseFormat1$inboundSchema),
+  z.lazy(() => ResponseFormat2$inboundSchema),
+  z.lazy(() => ResponseFormat3$inboundSchema),
   ResponseFormat4$inboundSchema,
   Five$inboundSchema,
   Six$inboundSchema,
 ]);
 /** @internal */
 export type CreatePromptResponseFormat$Outbound =
-  | CreatePromptResponseFormat1$Outbound
-  | CreatePromptResponseFormat2$Outbound
-  | CreatePromptResponseFormat3$Outbound
+  | ResponseFormat1$Outbound
+  | ResponseFormat2$Outbound
+  | ResponseFormat3$Outbound
   | string
   | string
   | string;
@@ -2558,9 +2568,9 @@ export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptResponseFormat
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
+  z.lazy(() => ResponseFormat1$outboundSchema),
+  z.lazy(() => ResponseFormat2$outboundSchema),
+  z.lazy(() => ResponseFormat3$outboundSchema),
   ResponseFormat4$outboundSchema,
   Five$outboundSchema,
   Six$outboundSchema,
@@ -2646,9 +2656,9 @@ export const ModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
+      z.lazy(() => ResponseFormat1$inboundSchema),
+      z.lazy(() => ResponseFormat2$inboundSchema),
+      z.lazy(() => ResponseFormat3$inboundSchema),
       ResponseFormat4$inboundSchema,
       Five$inboundSchema,
       Six$inboundSchema,
@@ -2680,9 +2690,9 @@ export type ModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | CreatePromptResponseFormat1$Outbound
-    | CreatePromptResponseFormat2$Outbound
-    | CreatePromptResponseFormat3$Outbound
+    | ResponseFormat1$Outbound
+    | ResponseFormat2$Outbound
+    | ResponseFormat3$Outbound
     | string
     | string
     | string
@@ -2716,9 +2726,9 @@ export const ModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
+      z.lazy(() => ResponseFormat1$outboundSchema),
+      z.lazy(() => ResponseFormat2$outboundSchema),
+      z.lazy(() => ResponseFormat3$outboundSchema),
       ResponseFormat4$outboundSchema,
       Five$outboundSchema,
       Six$outboundSchema,
@@ -4379,120 +4389,128 @@ export const CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outb
     CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJsonSchema$inboundSchema:
+export const CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema:
   z.ZodType<
-    CreatePromptResponseFormatPromptsJsonSchema,
+    CreatePromptResponseFormatPromptsRequestJsonSchema,
     z.ZodTypeDef,
     unknown
   > = z.object({
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
-export type CreatePromptResponseFormatPromptsJsonSchema$Outbound = {
+export type CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJsonSchema$outboundSchema:
+export const CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema:
   z.ZodType<
-    CreatePromptResponseFormatPromptsJsonSchema$Outbound,
+    CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound,
     z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsJsonSchema
+    CreatePromptResponseFormatPromptsRequestJsonSchema
   > = z.object({
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.boolean().default(false),
   });
 
-export function createPromptResponseFormatPromptsJsonSchemaToJSON(
-  createPromptResponseFormatPromptsJsonSchema:
-    CreatePromptResponseFormatPromptsJsonSchema,
+export function createPromptResponseFormatPromptsRequestJsonSchemaToJSON(
+  createPromptResponseFormatPromptsRequestJsonSchema:
+    CreatePromptResponseFormatPromptsRequestJsonSchema,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatPromptsJsonSchema,
+    CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema.parse(
+      createPromptResponseFormatPromptsRequestJsonSchema,
     ),
   );
 }
-export function createPromptResponseFormatPromptsJsonSchemaFromJSON(
+export function createPromptResponseFormatPromptsRequestJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreatePromptResponseFormatPromptsJsonSchema,
+  CreatePromptResponseFormatPromptsRequestJsonSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreatePromptResponseFormatPromptsJsonSchema$inboundSchema.parse(
+      CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsJsonSchema' from JSON`,
+    `Failed to parse 'CreatePromptResponseFormatPromptsRequestJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts3$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema,
-  json_schema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
+export const CreatePromptResponseFormatPromptsJSONSchema$inboundSchema:
+  z.ZodType<
+    CreatePromptResponseFormatPromptsJSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$inboundSchema,
+    json_schema: z.lazy(() =>
+      CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
   });
-});
 /** @internal */
-export type CreatePromptResponseFormatPrompts3$Outbound = {
+export type CreatePromptResponseFormatPromptsJSONSchema$Outbound = {
   type: string;
-  json_schema: CreatePromptResponseFormatPromptsJsonSchema$Outbound;
+  json_schema: CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts3$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts3$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormatPrompts3
-> = z.object({
-  type:
-    CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
+export const CreatePromptResponseFormatPromptsJSONSchema$outboundSchema:
+  z.ZodType<
+    CreatePromptResponseFormatPromptsJSONSchema$Outbound,
+    z.ZodTypeDef,
+    CreatePromptResponseFormatPromptsJSONSchema
+  > = z.object({
+    type:
+      CreatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type$outboundSchema,
+    jsonSchema: z.lazy(() =>
+      CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
   });
-});
 
-export function createPromptResponseFormatPrompts3ToJSON(
-  createPromptResponseFormatPrompts3: CreatePromptResponseFormatPrompts3,
+export function createPromptResponseFormatPromptsJSONSchemaToJSON(
+  createPromptResponseFormatPromptsJSONSchema:
+    CreatePromptResponseFormatPromptsJSONSchema,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPrompts3$outboundSchema.parse(
-      createPromptResponseFormatPrompts3,
+    CreatePromptResponseFormatPromptsJSONSchema$outboundSchema.parse(
+      createPromptResponseFormatPromptsJSONSchema,
     ),
   );
 }
-export function createPromptResponseFormatPrompts3FromJSON(
+export function createPromptResponseFormatPromptsJSONSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatPrompts3, SDKValidationError> {
+): SafeParseResult<
+  CreatePromptResponseFormatPromptsJSONSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreatePromptResponseFormatPrompts3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatPrompts3' from JSON`,
+      CreatePromptResponseFormatPromptsJSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptResponseFormatPromptsJSONSchema' from JSON`,
   );
 }
 
@@ -4511,8 +4529,8 @@ export const CreatePromptResponseFormatPromptsRequestRequestBodyPromptType$outbo
     CreatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts2$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts2,
+export const CreatePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
+  CreatePromptResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4520,37 +4538,37 @@ export const CreatePromptResponseFormatPrompts2$inboundSchema: z.ZodType<
     CreatePromptResponseFormatPromptsRequestRequestBodyPromptType$inboundSchema,
 });
 /** @internal */
-export type CreatePromptResponseFormatPrompts2$Outbound = {
+export type CreatePromptResponseFormatJSONObject$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts2$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts2$Outbound,
+export const CreatePromptResponseFormatJSONObject$outboundSchema: z.ZodType<
+  CreatePromptResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormatPrompts2
+  CreatePromptResponseFormatJSONObject
 > = z.object({
   type:
     CreatePromptResponseFormatPromptsRequestRequestBodyPromptType$outboundSchema,
 });
 
-export function createPromptResponseFormatPrompts2ToJSON(
-  createPromptResponseFormatPrompts2: CreatePromptResponseFormatPrompts2,
+export function createPromptResponseFormatJSONObjectToJSON(
+  createPromptResponseFormatJSONObject: CreatePromptResponseFormatJSONObject,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPrompts2$outboundSchema.parse(
-      createPromptResponseFormatPrompts2,
+    CreatePromptResponseFormatJSONObject$outboundSchema.parse(
+      createPromptResponseFormatJSONObject,
     ),
   );
 }
-export function createPromptResponseFormatPrompts2FromJSON(
+export function createPromptResponseFormatJSONObjectFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatPrompts2, SDKValidationError> {
+): SafeParseResult<CreatePromptResponseFormatJSONObject, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      CreatePromptResponseFormatPrompts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatPrompts2' from JSON`,
+      CreatePromptResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatJSONObject' from JSON`,
   );
 }
 
@@ -4566,44 +4584,43 @@ export const CreatePromptResponseFormatPromptsRequestRequestBodyType$outboundSch
   > = CreatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts1$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts1,
+export const CreatePromptResponseFormatText$inboundSchema: z.ZodType<
+  CreatePromptResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreatePromptResponseFormatPromptsRequestRequestBodyType$inboundSchema,
 });
 /** @internal */
-export type CreatePromptResponseFormatPrompts1$Outbound = {
+export type CreatePromptResponseFormatText$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts1$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts1$Outbound,
+export const CreatePromptResponseFormatText$outboundSchema: z.ZodType<
+  CreatePromptResponseFormatText$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormatPrompts1
+  CreatePromptResponseFormatText
 > = z.object({
   type: CreatePromptResponseFormatPromptsRequestRequestBodyType$outboundSchema,
 });
 
-export function createPromptResponseFormatPrompts1ToJSON(
-  createPromptResponseFormatPrompts1: CreatePromptResponseFormatPrompts1,
+export function createPromptResponseFormatTextToJSON(
+  createPromptResponseFormatText: CreatePromptResponseFormatText,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPrompts1$outboundSchema.parse(
-      createPromptResponseFormatPrompts1,
+    CreatePromptResponseFormatText$outboundSchema.parse(
+      createPromptResponseFormatText,
     ),
   );
 }
-export function createPromptResponseFormatPrompts1FromJSON(
+export function createPromptResponseFormatTextFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatPrompts1, SDKValidationError> {
+): SafeParseResult<CreatePromptResponseFormatText, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatPrompts1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatPrompts1' from JSON`,
+    (x) => CreatePromptResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatText' from JSON`,
   );
 }
 
@@ -4613,15 +4630,15 @@ export const CreatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormatPrompts3$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts1$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts2$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormatText$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormatJSONObject$inboundSchema),
 ]);
 /** @internal */
 export type CreatePromptPromptsResponseFormat$Outbound =
-  | CreatePromptResponseFormatPrompts3$Outbound
-  | CreatePromptResponseFormatPrompts1$Outbound
-  | CreatePromptResponseFormatPrompts2$Outbound;
+  | CreatePromptResponseFormatPromptsJSONSchema$Outbound
+  | CreatePromptResponseFormatText$Outbound
+  | CreatePromptResponseFormatJSONObject$Outbound;
 
 /** @internal */
 export const CreatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
@@ -4629,9 +4646,9 @@ export const CreatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptPromptsResponseFormat
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormatPrompts3$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts1$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts2$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormatText$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormatJSONObject$outboundSchema),
 ]);
 
 export function createPromptPromptsResponseFormatToJSON(
@@ -4671,9 +4688,9 @@ export const PromptInput$inboundSchema: z.ZodType<
   temperature: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   response_format: z.union([
-    z.lazy(() => CreatePromptResponseFormatPrompts3$inboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPrompts1$inboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPrompts2$inboundSchema),
+    z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$inboundSchema),
+    z.lazy(() => CreatePromptResponseFormatText$inboundSchema),
+    z.lazy(() => CreatePromptResponseFormatJSONObject$inboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4693,9 +4710,9 @@ export type PromptInput$Outbound = {
   temperature?: number | null | undefined;
   max_tokens?: number | null | undefined;
   response_format?:
-    | CreatePromptResponseFormatPrompts3$Outbound
-    | CreatePromptResponseFormatPrompts1$Outbound
-    | CreatePromptResponseFormatPrompts2$Outbound
+    | CreatePromptResponseFormatPromptsJSONSchema$Outbound
+    | CreatePromptResponseFormatText$Outbound
+    | CreatePromptResponseFormatJSONObject$Outbound
     | undefined;
 };
 
@@ -4717,9 +4734,9 @@ export const PromptInput$outboundSchema: z.ZodType<
   temperature: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   responseFormat: z.union([
-    z.lazy(() => CreatePromptResponseFormatPrompts3$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPrompts1$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPrompts2$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormatText$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormatJSONObject$outboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4874,51 +4891,45 @@ export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$out
     CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse3$inboundSchema:
-  z.ZodType<CreatePromptResponseFormatPromptsResponse3, z.ZodTypeDef, unknown> =
-    z.object({
-      type:
-        CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
-    });
+export const CreatePromptResponseFormat3$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
+});
 /** @internal */
-export type CreatePromptResponseFormatPromptsResponse3$Outbound = {
+export type CreatePromptResponseFormat3$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse3$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsResponse3$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsResponse3
-  > = z.object({
-    type:
-      CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
-  });
+export const CreatePromptResponseFormat3$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormat3
+> = z.object({
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
+});
 
-export function createPromptResponseFormatPromptsResponse3ToJSON(
-  createPromptResponseFormatPromptsResponse3:
-    CreatePromptResponseFormatPromptsResponse3,
+export function createPromptResponseFormat3ToJSON(
+  createPromptResponseFormat3: CreatePromptResponseFormat3,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsResponse3$outboundSchema.parse(
-      createPromptResponseFormatPromptsResponse3,
+    CreatePromptResponseFormat3$outboundSchema.parse(
+      createPromptResponseFormat3,
     ),
   );
 }
-export function createPromptResponseFormatPromptsResponse3FromJSON(
+export function createPromptResponseFormat3FromJSON(
   jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsResponse3,
-  SDKValidationError
-> {
+): SafeParseResult<CreatePromptResponseFormat3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatPromptsResponse3$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsResponse3' from JSON`,
+    (x) => CreatePromptResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat3' from JSON`,
   );
 }
 
@@ -4932,49 +4943,43 @@ export const CreatePromptResponseFormatPromptsResponse200Type$outboundSchema:
     CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse2$inboundSchema:
-  z.ZodType<CreatePromptResponseFormatPromptsResponse2, z.ZodTypeDef, unknown> =
-    z.object({
-      type: CreatePromptResponseFormatPromptsResponse200Type$inboundSchema,
-    });
+export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponse200Type$inboundSchema,
+});
 /** @internal */
-export type CreatePromptResponseFormatPromptsResponse2$Outbound = {
+export type CreatePromptResponseFormat2$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse2$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsResponse2$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsResponse2
-  > = z.object({
-    type: CreatePromptResponseFormatPromptsResponse200Type$outboundSchema,
-  });
+export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormat2
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponse200Type$outboundSchema,
+});
 
-export function createPromptResponseFormatPromptsResponse2ToJSON(
-  createPromptResponseFormatPromptsResponse2:
-    CreatePromptResponseFormatPromptsResponse2,
+export function createPromptResponseFormat2ToJSON(
+  createPromptResponseFormat2: CreatePromptResponseFormat2,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsResponse2$outboundSchema.parse(
-      createPromptResponseFormatPromptsResponse2,
+    CreatePromptResponseFormat2$outboundSchema.parse(
+      createPromptResponseFormat2,
     ),
   );
 }
-export function createPromptResponseFormatPromptsResponse2FromJSON(
+export function createPromptResponseFormat2FromJSON(
   jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsResponse2,
-  SDKValidationError
-> {
+): SafeParseResult<CreatePromptResponseFormat2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatPromptsResponse2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsResponse2' from JSON`,
+    (x) => CreatePromptResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat2' from JSON`,
   );
 }
 
@@ -5047,64 +5052,63 @@ export function createPromptResponseFormatPromptsResponseJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse1$inboundSchema:
-  z.ZodType<CreatePromptResponseFormatPromptsResponse1, z.ZodTypeDef, unknown> =
-    z.object({
-      type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
-      json_schema: z.lazy(() =>
-        CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
-      ),
-    }).transform((v) => {
-      return remap$(v, {
-        "json_schema": "jsonSchema",
-      });
-    });
+export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
+  display_name: z.string().optional(),
+  json_schema: z.lazy(() =>
+    CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "json_schema": "jsonSchema",
+  });
+});
 /** @internal */
-export type CreatePromptResponseFormatPromptsResponse1$Outbound = {
+export type CreatePromptResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: CreatePromptResponseFormatPromptsResponseJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse1$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsResponse1$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsResponse1
-  > = z.object({
-    type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
-    jsonSchema: z.lazy(() =>
-      CreatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
+export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat1$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormat1
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
+  displayName: z.string().optional(),
+  jsonSchema: z.lazy(() =>
+    CreatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    jsonSchema: "json_schema",
   });
+});
 
-export function createPromptResponseFormatPromptsResponse1ToJSON(
-  createPromptResponseFormatPromptsResponse1:
-    CreatePromptResponseFormatPromptsResponse1,
+export function createPromptResponseFormat1ToJSON(
+  createPromptResponseFormat1: CreatePromptResponseFormat1,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsResponse1$outboundSchema.parse(
-      createPromptResponseFormatPromptsResponse1,
+    CreatePromptResponseFormat1$outboundSchema.parse(
+      createPromptResponseFormat1,
     ),
   );
 }
-export function createPromptResponseFormatPromptsResponse1FromJSON(
+export function createPromptResponseFormat1FromJSON(
   jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsResponse1,
-  SDKValidationError
-> {
+): SafeParseResult<CreatePromptResponseFormat1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatPromptsResponse1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsResponse1' from JSON`,
+    (x) => CreatePromptResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat1' from JSON`,
   );
 }
 
@@ -5114,18 +5118,18 @@ export const CreatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormatPromptsResponse1$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPromptsResponse2$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPromptsResponse3$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
   CreatePromptResponseFormat4$inboundSchema,
   CreatePromptResponseFormat5$inboundSchema,
   CreatePromptResponseFormat6$inboundSchema,
 ]);
 /** @internal */
 export type CreatePromptPromptsResponseResponseFormat$Outbound =
-  | CreatePromptResponseFormatPromptsResponse1$Outbound
-  | CreatePromptResponseFormatPromptsResponse2$Outbound
-  | CreatePromptResponseFormatPromptsResponse3$Outbound
+  | CreatePromptResponseFormat1$Outbound
+  | CreatePromptResponseFormat2$Outbound
+  | CreatePromptResponseFormat3$Outbound
   | string
   | string
   | string;
@@ -5137,9 +5141,9 @@ export const CreatePromptPromptsResponseResponseFormat$outboundSchema:
     z.ZodTypeDef,
     CreatePromptPromptsResponseResponseFormat
   > = z.union([
-    z.lazy(() => CreatePromptResponseFormatPromptsResponse1$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPromptsResponse2$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPromptsResponse3$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
     CreatePromptResponseFormat4$outboundSchema,
     CreatePromptResponseFormat5$outboundSchema,
     CreatePromptResponseFormat6$outboundSchema,
@@ -5236,9 +5240,9 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse1$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse2$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse3$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
       CreatePromptResponseFormat4$inboundSchema,
       CreatePromptResponseFormat5$inboundSchema,
       CreatePromptResponseFormat6$inboundSchema,
@@ -5270,9 +5274,9 @@ export type CreatePromptModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | CreatePromptResponseFormatPromptsResponse1$Outbound
-    | CreatePromptResponseFormatPromptsResponse2$Outbound
-    | CreatePromptResponseFormatPromptsResponse3$Outbound
+    | CreatePromptResponseFormat1$Outbound
+    | CreatePromptResponseFormat2$Outbound
+    | CreatePromptResponseFormat3$Outbound
     | string
     | string
     | string
@@ -5306,9 +5310,9 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse1$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse2$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPromptsResponse3$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
       CreatePromptResponseFormat4$outboundSchema,
       CreatePromptResponseFormat5$outboundSchema,
       CreatePromptResponseFormat6$outboundSchema,

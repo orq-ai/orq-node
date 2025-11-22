@@ -123,6 +123,7 @@ export type GetOnePromptResponseFormatJsonSchema = {
 
 export type GetOnePromptResponseFormat1 = {
   type: GetOnePromptResponseFormatType;
+  displayName?: string | undefined;
   jsonSchema: GetOnePromptResponseFormatJsonSchema;
 };
 
@@ -861,15 +862,18 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: GetOnePromptResponseFormatType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
 export type GetOnePromptResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: GetOnePromptResponseFormatJsonSchema$Outbound;
 };
 
@@ -880,9 +884,11 @@ export const GetOnePromptResponseFormat1$outboundSchema: z.ZodType<
   GetOnePromptResponseFormat1
 > = z.object({
   type: GetOnePromptResponseFormatType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });
