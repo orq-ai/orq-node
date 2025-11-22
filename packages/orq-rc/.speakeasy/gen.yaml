@@ -25,7 +25,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 4.0.0-rc.66
+  version: 4.0.0-rc.67
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
