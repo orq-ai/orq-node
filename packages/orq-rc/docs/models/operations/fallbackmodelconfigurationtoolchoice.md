@@ -5,16 +5,16 @@ Controls which (if any) tool is called by the model.
 
 ## Supported Types
 
-### `operations.CreateAgentToolChoice1`
+### `operations.CreateAgentRequestToolChoice1`
 
 ```typescript
-const value: operations.CreateAgentToolChoice1 = "none";
+const value: operations.CreateAgentRequestToolChoice1 = "none";
 ```
 
-### `operations.CreateAgentToolChoice2`
+### `operations.CreateAgentRequestToolChoice2`
 
 ```typescript
-const value: operations.CreateAgentToolChoice2 = {
+const value: operations.CreateAgentRequestToolChoice2 = {
   function: {},
 };
 ```

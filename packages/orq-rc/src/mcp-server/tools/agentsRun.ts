@@ -12,9 +12,9 @@ const args = {
 
 export const tool$agentsRun: ToolDefinition<typeof args> = {
   name: "agents-run",
-  description: `Run an agent
+  description: `Run an agent with configuration
 
-Executes an agent with the provided configuration using A2A message format. If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The fallback model is configured at the agent level and will be used automatically if the primary model fails during execution.`,
+Executes an agent using inline configuration or references an existing agent. Supports dynamic agent creation where the system automatically manages agent versioning - reusing existing agents with matching configurations or creating new versions when configurations differ. Ideal for programmatic agent execution with flexible configuration management. The agent processes messages in A2A format with support for memory context, tool execution, and automatic model fallback on failure.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsRun(

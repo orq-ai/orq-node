@@ -25,18 +25,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create an agent response
+ * Create response
  *
  * @remarks
- * Creates a new response representing an agent interaction. A response tracks the conversation from the initial message until the agent becomes inactive or errors. Supports both synchronous (waiting) and asynchronous (background) execution modes.
+ * Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result.
  */
 export function agentsResponsesCreate(
   client: OrqCore,
-  request: operations.CreateAgentResponseRequest,
+  agentKey: string,
+  requestBody?: operations.CreateAgentResponseRequestRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateAgentResponseResponseBody,
+    operations.CreateAgentResponseRequestResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -49,19 +50,21 @@ export function agentsResponsesCreate(
 > {
   return new APIPromise($do(
     client,
-    request,
+    agentKey,
+    requestBody,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.CreateAgentResponseRequest,
+  agentKey: string,
+  requestBody?: operations.CreateAgentResponseRequestRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateAgentResponseResponseBody,
+      operations.CreateAgentResponseRequestResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -74,10 +77,15 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.CreateAgentResponseRequestRequest = {
+    agentKey: agentKey,
+    requestBody: requestBody,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) =>
-      operations.CreateAgentResponseRequest$outboundSchema.parse(value),
+      operations.CreateAgentResponseRequestRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,7 +115,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "CreateAgentResponse",
+    operationID: "CreateAgentResponseRequest",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -146,7 +154,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateAgentResponseResponseBody,
+    operations.CreateAgentResponseRequestResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -156,7 +164,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateAgentResponseResponseBody$inboundSchema),
+    M.json(
+      200,
+      operations.CreateAgentResponseRequestResponseBody$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

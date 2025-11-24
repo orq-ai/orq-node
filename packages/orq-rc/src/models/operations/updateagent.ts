@@ -81,7 +81,7 @@ export type UpdateAgentResponseFormatAgentsJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -452,7 +452,7 @@ export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -1548,7 +1548,7 @@ export type UpdateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -1894,7 +1894,7 @@ export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema 
     /**
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
      */
-    strict?: boolean | null | undefined;
+    strict?: boolean | undefined;
   };
 
 /**
@@ -2245,7 +2245,7 @@ export type UpdateAgentAgentsKnowledgeBases = {
 };
 
 /**
- * Agent updated successfully
+ * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
  */
 export type UpdateAgentResponseBody = {
   id: string;
@@ -2378,14 +2378,14 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.nullable(z.boolean()).optional(),
+  strict: z.boolean().default(false),
 });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -2398,7 +2398,7 @@ export const UpdateAgentResponseFormatAgentsJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function updateAgentResponseFormatAgentsJsonSchemaToJSON(
@@ -3332,7 +3332,7 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inbound
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound =
@@ -3340,7 +3340,7 @@ export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | null | undefined;
+    strict: boolean;
   };
 
 /** @internal */
@@ -3353,7 +3353,7 @@ export const UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outboun
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function updateAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSON(
@@ -6370,14 +6370,14 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -6390,7 +6390,7 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function updateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -7282,7 +7282,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$Outbound =
@@ -7290,7 +7290,7 @@ export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | null | undefined;
+    strict: boolean;
   };
 
 /** @internal */
@@ -7303,7 +7303,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchemaToJSON(

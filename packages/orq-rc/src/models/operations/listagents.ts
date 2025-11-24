@@ -248,7 +248,7 @@ export type ListAgentsResponseFormatJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -588,7 +588,7 @@ export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -930,8 +930,6 @@ export type ListAgentsData = {
   id: string;
   key: string;
   displayName: string;
-  workspaceId: string;
-  projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
@@ -977,7 +975,7 @@ export type ListAgentsData = {
 };
 
 /**
- * List of agents with their configurations including fallback models
+ * Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings.
  */
 export type ListAgentsResponseBody = {
   object: ListAgentsObject;
@@ -1467,14 +1465,14 @@ export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.nullable(z.boolean()).optional(),
+  strict: z.boolean().default(false),
 });
 /** @internal */
 export type ListAgentsResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -1486,7 +1484,7 @@ export const ListAgentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.nullable(z.boolean()).optional(),
+  strict: z.boolean().default(false),
 });
 
 export function listAgentsResponseFormatJsonSchemaToJSON(
@@ -2308,14 +2306,14 @@ export const ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -2328,7 +2326,7 @@ export const ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function listAgentsResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -3450,8 +3448,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   _id: z.string(),
   key: z.string(),
   display_name: z.string(),
-  workspace_id: z.string(),
-  project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3475,8 +3471,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "workspace_id": "workspaceId",
-    "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "system_prompt": "systemPrompt",
@@ -3491,8 +3485,6 @@ export type ListAgentsData$Outbound = {
   _id: string;
   key: string;
   display_name: string;
-  workspace_id: string;
-  project_id: string;
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   created?: string | undefined;
@@ -3522,8 +3514,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   id: z.string(),
   key: z.string(),
   displayName: z.string(),
-  workspaceId: z.string(),
-  projectId: z.string(),
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3547,8 +3537,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   return remap$(v, {
     id: "_id",
     displayName: "display_name",
-    workspaceId: "workspace_id",
-    projectId: "project_id",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
     systemPrompt: "system_prompt",

@@ -26,19 +26,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get an agent
+ * Retrieve agent
  *
  * @remarks
- * Retrieves a single agent by its unique key, including its full configuration with primary and fallback model settings.
+ * Retrieves detailed information about a specific agent identified by its unique key or identifier. Returns the complete agent manifest including configuration settings, model assignments (primary and fallback), tools, knowledge bases, memory stores, instructions, and execution parameters. Use this endpoint to fetch the current state and configuration of an individual agent.
  */
 export function agentsRetrieve(
   client: OrqCore,
-  request: operations.GetAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetAgentResponseBody,
-    | errors.GetAgentResponseBody
+    operations.RetrieveAgentRequestResponseBody,
+    | errors.RetrieveAgentRequestResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -51,20 +51,20 @@ export function agentsRetrieve(
 > {
   return new APIPromise($do(
     client,
-    request,
+    agentKey,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.GetAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetAgentResponseBody,
-      | errors.GetAgentResponseBody
+      operations.RetrieveAgentRequestResponseBody,
+      | errors.RetrieveAgentRequestResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,9 +77,14 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.RetrieveAgentRequestRequest = {
+    agentKey: agentKey,
+  };
+
   const parsed = safeParse(
-    request,
-    (value) => operations.GetAgentRequest$outboundSchema.parse(value),
+    input,
+    (value) =>
+      operations.RetrieveAgentRequestRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -108,7 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "GetAgent",
+    operationID: "RetrieveAgentRequest",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -151,8 +156,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetAgentResponseBody,
-    | errors.GetAgentResponseBody
+    operations.RetrieveAgentRequestResponseBody,
+    | errors.RetrieveAgentRequestResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -162,8 +167,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetAgentResponseBody$inboundSchema),
-    M.jsonErr(404, errors.GetAgentResponseBody$inboundSchema),
+    M.json(200, operations.RetrieveAgentRequestResponseBody$inboundSchema),
+    M.jsonErr(404, errors.RetrieveAgentRequestResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

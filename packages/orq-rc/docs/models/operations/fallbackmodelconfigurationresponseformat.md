@@ -21,10 +21,10 @@ const value: operations.ResponseFormatJSONObject = {
 };
 ```
 
-### `operations.CreateAgentResponseFormatJSONSchema`
+### `operations.CreateAgentRequestResponseFormatJSONSchema`
 
 ```typescript
-const value: operations.CreateAgentResponseFormatJSONSchema = {
+const value: operations.CreateAgentRequestResponseFormatJSONSchema = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",

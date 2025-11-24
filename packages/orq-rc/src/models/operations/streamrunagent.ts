@@ -84,7 +84,7 @@ export type StreamRunAgentResponseFormatAgentsJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -466,7 +466,7 @@ export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -2376,20 +2376,18 @@ export type StreamRunAgentDataAgentsResponse200TextEventStreamResponseBody7Type 
     typeof StreamRunAgentDataAgentsResponse200TextEventStreamResponseBody7Type
   >;
 
-export const StreamRunAgentDataReview = {
+export const Review = {
   Approved: "approved",
   Rejected: "rejected",
 } as const;
-export type StreamRunAgentDataReview = ClosedEnum<
-  typeof StreamRunAgentDataReview
->;
+export type Review = ClosedEnum<typeof Review>;
 
 export type StreamRunAgentDataAgentsResponse200TextEventStreamResponseBodyData =
   {
     agentId: string;
     actionId: string;
     agentToolCallId: string;
-    review: StreamRunAgentDataReview;
+    review: Review;
     mockOutput?: { [k: string]: any } | undefined;
     reviewSource?: string | undefined;
     reviewedById?: string | undefined;
@@ -2428,7 +2426,7 @@ export type DataConditions = {
   value: string;
 };
 
-export type StreamRunAgentDataTool = {
+export type Tool = {
   /**
    * The id of the resource
    */
@@ -2459,7 +2457,7 @@ export type StreamRunAgentDataAgentsResponse200TextEventStreamData = {
   agentId: string;
   actionId: string;
   requiresApproval: boolean;
-  tool: StreamRunAgentDataTool;
+  tool: Tool;
   input: { [k: string]: any };
   agentToolCallId: string;
   responseId?: string | undefined;
@@ -3604,7 +3602,7 @@ export type StreamRunAgentData =
   | Seventeen;
 
 /**
- * SSE stream of agent events
+ * Server-Sent Event stream successfully established. Delivers real-time agent execution events including message fragments, tool invocations, intermediate results, and completion status. Stream terminates with [DONE] sentinel upon completion.
  */
 export type StreamRunAgentResponseBody = {
   data:
@@ -3711,14 +3709,14 @@ export const StreamRunAgentResponseFormatAgentsJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type StreamRunAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -3731,7 +3729,7 @@ export const StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function streamRunAgentResponseFormatAgentsJsonSchemaToJSON(
@@ -4738,7 +4736,7 @@ export const StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inbo
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound =
@@ -4746,7 +4744,7 @@ export type StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbo
     description?: string | undefined;
     name: string;
     schema?: any | undefined;
-    strict?: boolean | null | undefined;
+    strict: boolean;
   };
 
 /** @internal */
@@ -4759,7 +4757,7 @@ export const StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outb
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function streamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSON(
@@ -6589,7 +6587,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KAPPHK7QM15CJG4A8SSCAAXJ"),
+  id: z.string().default("01KATB7EQGE05X8Y6R5Y5QNYRR"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -6608,7 +6606,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KAPPHK7QM15CJG4A8SSCAAXJ"),
+  id: z.string().default("01KATB7EQGE05X8Y6R5Y5QNYRR"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -11368,13 +11366,11 @@ export const StreamRunAgentDataAgentsResponse200TextEventStreamResponseBody7Type
     StreamRunAgentDataAgentsResponse200TextEventStreamResponseBody7Type$inboundSchema;
 
 /** @internal */
-export const StreamRunAgentDataReview$inboundSchema: z.ZodNativeEnum<
-  typeof StreamRunAgentDataReview
-> = z.nativeEnum(StreamRunAgentDataReview);
+export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
+  .nativeEnum(Review);
 /** @internal */
-export const StreamRunAgentDataReview$outboundSchema: z.ZodNativeEnum<
-  typeof StreamRunAgentDataReview
-> = StreamRunAgentDataReview$inboundSchema;
+export const Review$outboundSchema: z.ZodNativeEnum<typeof Review> =
+  Review$inboundSchema;
 
 /** @internal */
 export const StreamRunAgentDataAgentsResponse200TextEventStreamResponseBodyData$inboundSchema:
@@ -11386,7 +11382,7 @@ export const StreamRunAgentDataAgentsResponse200TextEventStreamResponseBodyData$
     agent_id: z.string(),
     action_id: z.string(),
     agent_tool_call_id: z.string(),
-    review: StreamRunAgentDataReview$inboundSchema,
+    review: Review$inboundSchema,
     mock_output: z.record(z.any()).optional(),
     review_source: z.string().optional(),
     reviewed_by_id: z.string().optional(),
@@ -11422,7 +11418,7 @@ export const StreamRunAgentDataAgentsResponse200TextEventStreamResponseBodyData$
     agentId: z.string(),
     actionId: z.string(),
     agentToolCallId: z.string(),
-    review: StreamRunAgentDataReview$outboundSchema,
+    review: Review$outboundSchema,
     mockOutput: z.record(z.any()).optional(),
     reviewSource: z.string().optional(),
     reviewedById: z.string().optional(),
@@ -11564,30 +11560,27 @@ export function dataConditionsFromJSON(
 }
 
 /** @internal */
-export const StreamRunAgentDataTool$inboundSchema: z.ZodType<
-  StreamRunAgentDataTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  action_type: z.string(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  requires_approval: z.boolean().default(false),
-  tool_id: z.string().optional(),
-  conditions: z.array(z.lazy(() => DataConditions$inboundSchema)).optional(),
-  timeout: z.number().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    "action_type": "actionType",
-    "display_name": "displayName",
-    "requires_approval": "requiresApproval",
-    "tool_id": "toolId",
+export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    key: z.string().optional(),
+    action_type: z.string(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    requires_approval: z.boolean().default(false),
+    tool_id: z.string().optional(),
+    conditions: z.array(z.lazy(() => DataConditions$inboundSchema)).optional(),
+    timeout: z.number().default(120),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "display_name": "displayName",
+      "requires_approval": "requiresApproval",
+      "tool_id": "toolId",
+    });
   });
-});
 /** @internal */
-export type StreamRunAgentDataTool$Outbound = {
+export type Tool$Outbound = {
   id: string;
   key?: string | undefined;
   action_type: string;
@@ -11600,43 +11593,36 @@ export type StreamRunAgentDataTool$Outbound = {
 };
 
 /** @internal */
-export const StreamRunAgentDataTool$outboundSchema: z.ZodType<
-  StreamRunAgentDataTool$Outbound,
-  z.ZodTypeDef,
-  StreamRunAgentDataTool
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  actionType: z.string(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-  toolId: z.string().optional(),
-  conditions: z.array(z.lazy(() => DataConditions$outboundSchema)).optional(),
-  timeout: z.number().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    actionType: "action_type",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-    toolId: "tool_id",
+export const Tool$outboundSchema: z.ZodType<Tool$Outbound, z.ZodTypeDef, Tool> =
+  z.object({
+    id: z.string(),
+    key: z.string().optional(),
+    actionType: z.string(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+    toolId: z.string().optional(),
+    conditions: z.array(z.lazy(() => DataConditions$outboundSchema)).optional(),
+    timeout: z.number().default(120),
+  }).transform((v) => {
+    return remap$(v, {
+      actionType: "action_type",
+      displayName: "display_name",
+      requiresApproval: "requires_approval",
+      toolId: "tool_id",
+    });
   });
-});
 
-export function streamRunAgentDataToolToJSON(
-  streamRunAgentDataTool: StreamRunAgentDataTool,
-): string {
-  return JSON.stringify(
-    StreamRunAgentDataTool$outboundSchema.parse(streamRunAgentDataTool),
-  );
+export function toolToJSON(tool: Tool): string {
+  return JSON.stringify(Tool$outboundSchema.parse(tool));
 }
-export function streamRunAgentDataToolFromJSON(
+export function toolFromJSON(
   jsonString: string,
-): SafeParseResult<StreamRunAgentDataTool, SDKValidationError> {
+): SafeParseResult<Tool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StreamRunAgentDataTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StreamRunAgentDataTool' from JSON`,
+    (x) => Tool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tool' from JSON`,
   );
 }
 
@@ -11650,7 +11636,7 @@ export const StreamRunAgentDataAgentsResponse200TextEventStreamData$inboundSchem
     agent_id: z.string(),
     action_id: z.string(),
     requires_approval: z.boolean(),
-    tool: z.lazy(() => StreamRunAgentDataTool$inboundSchema),
+    tool: z.lazy(() => Tool$inboundSchema),
     input: z.record(z.any()),
     agent_tool_call_id: z.string(),
     responseId: z.string().optional(),
@@ -11667,7 +11653,7 @@ export type StreamRunAgentDataAgentsResponse200TextEventStreamData$Outbound = {
   agent_id: string;
   action_id: string;
   requires_approval: boolean;
-  tool: StreamRunAgentDataTool$Outbound;
+  tool: Tool$Outbound;
   input: { [k: string]: any };
   agent_tool_call_id: string;
   responseId?: string | undefined;
@@ -11683,7 +11669,7 @@ export const StreamRunAgentDataAgentsResponse200TextEventStreamData$outboundSche
     agentId: z.string(),
     actionId: z.string(),
     requiresApproval: z.boolean(),
-    tool: z.lazy(() => StreamRunAgentDataTool$outboundSchema),
+    tool: z.lazy(() => Tool$outboundSchema),
     input: z.record(z.any()),
     agentToolCallId: z.string(),
     responseId: z.string().optional(),

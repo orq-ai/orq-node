@@ -1,6 +1,6 @@
 # UpdateAgentResponseBody
 
-Agent not found
+Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it.
 
 ## Example Usage
 

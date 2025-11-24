@@ -973,7 +973,7 @@ export type CreatePromptResponseFormatPromptsRequestJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /**
@@ -4398,14 +4398,14 @@ export const CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -4418,7 +4418,7 @@ export const CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.nullable(z.boolean()).optional(),
+    strict: z.boolean().default(false),
   });
 
 export function createPromptResponseFormatPromptsRequestJsonSchemaToJSON(

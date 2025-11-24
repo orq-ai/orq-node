@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [create](#create) - Create an agent response
+* [create](#create) - Create response
 
 ## create
 
-Creates a new response representing an agent interaction. A response tracks the conversation from the initial message until the agent becomes inactive or errors. Supports both synchronous (waiting) and asynchronous (background) execution modes.
+Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="CreateAgentResponse" method="post" path="/v2/agents/{agent_key}/responses" -->
+<!-- UsageSnippet language="typescript" operationID="CreateAgentResponseRequest" method="post" path="/v2/agents/{agent_key}/responses" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -22,36 +22,33 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.agents.responses.create({
-    agentKey: "<value>",
-    requestBody: {
-      message: {
-        role: "user",
-        parts: [],
-      },
-      contact: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
-      thread: {
-        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        tags: [
-          "customer-support",
-          "priority-high",
-        ],
-      },
+  const result = await orq.agents.responses.create("<value>", {
+    message: {
+      role: "tool",
+      parts: [],
+    },
+    contact: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
+    thread: {
+      id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      tags: [
+        "customer-support",
+        "priority-high",
+      ],
     },
   });
 
@@ -76,36 +73,33 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await agentsResponsesCreate(orq, {
-    agentKey: "<value>",
-    requestBody: {
-      message: {
-        role: "user",
-        parts: [],
-      },
-      contact: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
-      thread: {
-        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        tags: [
-          "customer-support",
-          "priority-high",
-        ],
-      },
+  const res = await agentsResponsesCreate(orq, "<value>", {
+    message: {
+      role: "tool",
+      parts: [],
+    },
+    contact: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
+    thread: {
+      id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      tags: [
+        "customer-support",
+        "priority-high",
+      ],
     },
   });
   if (res.ok) {
@@ -123,14 +117,15 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateAgentResponseRequest](../../models/operations/createagentresponserequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `agentKey`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The unique key of identifier of the agent to invoke                                                                                                                            |
+| `requestBody`                                                                                                                                                                  | [operations.CreateAgentResponseRequestRequestBody](../../models/operations/createagentresponserequestrequestbody.md)                                                           | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.CreateAgentResponseResponseBody](../../models/operations/createagentresponseresponsebody.md)\>**
+**Promise\<[operations.CreateAgentResponseRequestResponseBody](../../models/operations/createagentresponserequestresponsebody.md)\>**
 
 ### Errors
 

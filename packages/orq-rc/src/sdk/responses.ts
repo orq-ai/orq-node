@@ -9,18 +9,20 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Responses extends ClientSDK {
   /**
-   * Create an agent response
+   * Create response
    *
    * @remarks
-   * Creates a new response representing an agent interaction. A response tracks the conversation from the initial message until the agent becomes inactive or errors. Supports both synchronous (waiting) and asynchronous (background) execution modes.
+   * Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result.
    */
   async create(
-    request: operations.CreateAgentResponseRequest,
+    agentKey: string,
+    requestBody?: operations.CreateAgentResponseRequestRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.CreateAgentResponseResponseBody> {
+  ): Promise<operations.CreateAgentResponseRequestResponseBody> {
     return unwrapAsync(agentsResponsesCreate(
       this,
-      request,
+      agentKey,
+      requestBody,
       options,
     ));
   }

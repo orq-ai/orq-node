@@ -12,14 +12,15 @@ const value: operations.RunAgentPartsTextPart = {
 };
 ```
 
-### `operations.RunAgentPartsDataPart`
+### `operations.PartsDataPart`
 
 ```typescript
-const value: operations.RunAgentPartsDataPart = {
+const value: operations.PartsDataPart = {
   kind: "data",
   data: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
@@ -35,10 +36,10 @@ const value: operations.RunAgentPartsFilePart = {
 };
 ```
 
-### `operations.RunAgentPartsToolCallPart`
+### `operations.PartsToolCallPart`
 
 ```typescript
-const value: operations.RunAgentPartsToolCallPart = {
+const value: operations.PartsToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",

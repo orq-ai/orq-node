@@ -25,14 +25,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all agents
+ * List agents
  *
  * @remarks
- * Retrieves a list of all agents in your workspace. When no limit is provided, returns all agents without pagination. When a limit is specified, returns a paginated list. Each agent includes its configuration, primary model, and optional fallback model settings.
+ * Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
  */
 export function agentsList(
   client: OrqCore,
-  request?: operations.ListAgentsRequest | undefined,
+  limit?: number | undefined,
+  startingAfter?: string | undefined,
+  endingBefore?: string | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -49,14 +51,18 @@ export function agentsList(
 > {
   return new APIPromise($do(
     client,
-    request,
+    limit,
+    startingAfter,
+    endingBefore,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request?: operations.ListAgentsRequest | undefined,
+  limit?: number | undefined,
+  startingAfter?: string | undefined,
+  endingBefore?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -74,8 +80,14 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.ListAgentsRequest | undefined = {
+    limit: limit,
+    startingAfter: startingAfter,
+    endingBefore: endingBefore,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) =>
       operations.ListAgentsRequest$outboundSchema.optional().parse(value),
     "Input validation failed",

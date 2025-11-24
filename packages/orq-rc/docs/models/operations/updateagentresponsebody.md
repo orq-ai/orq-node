@@ -1,6 +1,6 @@
 # UpdateAgentResponseBody
 
-Agent updated successfully
+Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
 
 ## Example Usage
 

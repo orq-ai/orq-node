@@ -28,14 +28,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Stream agent execution events
+ * Stream agent execution in real-time
  *
  * @remarks
- * Executes an agent and streams events via Server-Sent Events (SSE). The stream will continue until the agent completes, errors, or reaches the configured timeout.
+ * Executes an agent and streams the interaction in real-time using Server-Sent Events (SSE). Provides live updates as the agent processes the request, including message chunks, tool calls, and execution status. Perfect for building responsive chat interfaces and monitoring agent progress. The stream continues until the agent completes its task, encounters an error, or reaches the configured timeout (default 30 minutes, configurable 1-3600 seconds).
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function agentsStream(
   client: OrqCore,
-  request: operations.StreamAgentRequest,
+  key: string,
+  requestBody?: operations.StreamAgentRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,14 +56,16 @@ export function agentsStream(
 > {
   return new APIPromise($do(
     client,
-    request,
+    key,
+    requestBody,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.StreamAgentRequest,
+  key: string,
+  requestBody?: operations.StreamAgentRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -79,8 +84,13 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.StreamAgentRequest = {
+    key: key,
+    requestBody: requestBody,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.StreamAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );

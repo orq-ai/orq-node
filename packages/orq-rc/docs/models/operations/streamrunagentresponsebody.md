@@ -1,6 +1,6 @@
 # StreamRunAgentResponseBody
 
-SSE stream of agent events
+Server-Sent Event stream successfully established. Delivers real-time agent execution events including message fragments, tool invocations, intermediate results, and completion status. Stream terminates with [DONE] sentinel upon completion.
 
 ## Example Usage
 

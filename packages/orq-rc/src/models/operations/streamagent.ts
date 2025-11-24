@@ -2049,7 +2049,7 @@ export type StreamAgentData =
   | Data17;
 
 /**
- * SSE stream of agent events
+ * Server-Sent Event stream successfully established. Returns real-time events including agent messages, tool calls, status updates, and completion signals. The stream ends with a [DONE] sentinel value.
  */
 export type StreamAgentResponseBody = {
   data:
