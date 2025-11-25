@@ -8,6 +8,7 @@ import { StreamAgentDataAgentsResponse200TextEventStreamData } from "@orq-ai/nod
 let value: StreamAgentDataAgentsResponse200TextEventStreamData = {
   error: "<value>",
   code: 8622.41,
+  workflowRunId: "<id>",
 };
 ```
 
@@ -18,3 +19,4 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamData = {
 | `error`                                    | *string*                                   | :heavy_check_mark:                         | N/A                                        |
 | `code`                                     | *number*                                   | :heavy_check_mark:                         | N/A                                        |
 | `responseId`                               | *string*                                   | :heavy_minus_sign:                         | ID of the response tracking this execution |
+| `workflowRunId`                            | *string*                                   | :heavy_check_mark:                         | N/A                                        |

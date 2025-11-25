@@ -5,11 +5,11 @@
 ```typescript
 import { StreamAgentPublicMessagePartAgentsKind } from "@orq-ai/node/models/operations";
 
-let value: StreamAgentPublicMessagePartAgentsKind = "file";
+let value: StreamAgentPublicMessagePartAgentsKind = "tool_result";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"tool_result"
 ```

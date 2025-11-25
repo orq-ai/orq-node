@@ -5,11 +5,11 @@
 ```typescript
 import { Kind } from "@orq-ai/node/models/operations";
 
-let value: Kind = "text";
+let value: Kind = "file";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"file"
 ```

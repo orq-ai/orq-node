@@ -13,6 +13,7 @@ let value: Seven = {
     actionId: "<id>",
     agentToolCallId: "<id>",
     review: "rejected",
+    workflowRunId: "<id>",
   },
 };
 ```

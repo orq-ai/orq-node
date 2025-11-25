@@ -5,11 +5,11 @@
 ```typescript
 import { RunAgentPublicMessagePartKind } from "@orq-ai/node/models/operations";
 
-let value: RunAgentPublicMessagePartKind = "text";
+let value: RunAgentPublicMessagePartKind = "file";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"file"
 ```

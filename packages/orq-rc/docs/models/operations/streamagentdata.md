@@ -24,6 +24,7 @@ const value: operations.StreamAgentData2 = {
   type: "event.agents.started",
   timestamp: "<value>",
   data: {
+    workflowRunId: "<id>",
     inputMessage: {
       role: "system",
       parts: [],
@@ -61,6 +62,7 @@ const value: operations.StreamAgentData4 = {
   data: {
     lastMessage: "<value>",
     finishReason: "content_filter",
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -74,6 +76,7 @@ const value: operations.Data5 = {
   data: {
     error: "<value>",
     code: 4606.68,
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -111,6 +114,7 @@ const value: operations.Data7 = {
     actionId: "<id>",
     agentToolCallId: "<id>",
     review: "approved",
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -177,9 +181,7 @@ const value: operations.Data12 = {
         parts: [
           {
             kind: "data",
-            data: {
-              "key": "<value>",
-            },
+            data: {},
           },
         ],
       },
@@ -209,6 +211,7 @@ const value: operations.Data13 = {
       agentExecutionId: "<id>",
       product: "external_events",
     },
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -229,6 +232,7 @@ const value: operations.Data14 = {
       agentExecutionId: "<id>",
       product: "otel",
     },
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -252,6 +256,7 @@ const value: operations.Data15 = {
       agentExecutionId: "<id>",
       product: "generic",
     },
+    workflowRunId: "<id>",
   },
 };
 ```

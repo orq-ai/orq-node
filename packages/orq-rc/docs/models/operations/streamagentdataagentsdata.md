@@ -6,6 +6,7 @@
 import { StreamAgentDataAgentsData } from "@orq-ai/node/models/operations";
 
 let value: StreamAgentDataAgentsData = {
+  workflowRunId: "<id>",
   inputMessage: {
     role: "system",
     parts: [],
@@ -22,6 +23,7 @@ let value: StreamAgentDataAgentsData = {
 
 | Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `workflowRunId`                                                                          | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
 | `integrationId`                                                                          | *string*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `inputMessage`                                                                           | [operations.DataInputMessage](../../models/operations/datainputmessage.md)               | :heavy_check_mark:                                                                       | N/A                                                                                      |
 | `modelId`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |

@@ -17,6 +17,7 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data = {
     agentExecutionId: "<id>",
     product: "external_events",
   },
+  workflowRunId: "<id>",
 };
 ```
 
@@ -31,3 +32,4 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody13Data = {
 | `toolArguments`                                                                                                  | Record<string, *any*>                                                                                            | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `toolExecutionContext`                                                                                           | [operations.StreamAgentDataToolExecutionContext](../../models/operations/streamagentdatatoolexecutioncontext.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `responseId`                                                                                                     | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `workflowRunId`                                                                                                  | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

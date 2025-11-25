@@ -18,6 +18,7 @@ let value: Data14 = {
       agentExecutionId: "<id>",
       product: "otel",
     },
+    workflowRunId: "<id>",
   },
 };
 ```

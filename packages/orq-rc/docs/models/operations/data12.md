@@ -18,9 +18,7 @@ let value: Data12 = {
         parts: [
           {
             kind: "data",
-            data: {
-              "key": "<value>",
-            },
+            data: {},
           },
         ],
       },

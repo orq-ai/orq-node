@@ -1,17 +1,15 @@
 # UpdateMemoryStoreProvider
 
-The provider of the AI service
-
 ## Example Usage
 
 ```typescript
 import { UpdateMemoryStoreProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdateMemoryStoreProvider = "google";
+let value: UpdateMemoryStoreProvider = "aws";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm" | "openailike" | "cerebras" | "bytedance" | "mistral"
+"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral"
 ```

@@ -9,6 +9,7 @@ let value: StreamAgentData2 = {
   type: "event.agents.started",
   timestamp: "<value>",
   data: {
+    workflowRunId: "<id>",
     inputMessage: {
       role: "system",
       parts: [],

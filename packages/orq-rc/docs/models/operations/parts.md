@@ -3,53 +3,57 @@
 
 ## Supported Types
 
-### `operations.PartsTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.PartsTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.DataPart = {
+const value: components.DataPart = {
   kind: "data",
-  data: {},
-};
-```
-
-### `operations.PartsFilePart`
-
-```typescript
-const value: operations.PartsFilePart = {
-  kind: "file",
-  file: {
-    uri: "https://grim-markup.com/",
-  },
-};
-```
-
-### `operations.ToolCallPart`
-
-```typescript
-const value: operations.ToolCallPart = {
-  kind: "tool_call",
-  toolName: "<value>",
-  toolCallId: "<id>",
-  arguments: {
+  data: {
     "key": "<value>",
     "key1": "<value>",
   },
 };
 ```
 
-### `operations.PartsToolResultPart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.PartsToolResultPart = {
+const value: components.FilePart = {
+  kind: "file",
+  file: {
+    bytes: "<value>",
+  },
+};
+```
+
+### `components.ToolCallPart`
+
+```typescript
+const value: components.ToolCallPart = {
+  kind: "tool_call",
+  toolName: "<value>",
+  toolCallId: "<id>",
+  arguments: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
+};
+```
+
+### `components.ToolResultPart`
+
+```typescript
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

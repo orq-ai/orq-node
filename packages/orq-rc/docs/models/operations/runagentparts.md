@@ -3,32 +3,31 @@
 
 ## Supported Types
 
-### `operations.RunAgentPartsTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.RunAgentPartsTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.PartsDataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.PartsDataPart = {
+const value: components.DataPart = {
   kind: "data",
   data: {
     "key": "<value>",
     "key1": "<value>",
-    "key2": "<value>",
   },
 };
 ```
 
-### `operations.RunAgentPartsFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.RunAgentPartsFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -36,24 +35,25 @@ const value: operations.RunAgentPartsFilePart = {
 };
 ```
 
-### `operations.PartsToolCallPart`
+### `components.ToolCallPart`
 
 ```typescript
-const value: operations.PartsToolCallPart = {
+const value: components.ToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
   arguments: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
 
-### `operations.RunAgentPartsToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.RunAgentPartsToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

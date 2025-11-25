@@ -11,6 +11,7 @@ let value: StreamAgentData4 = {
   data: {
     lastMessage: "<value>",
     finishReason: "content_filter",
+    workflowRunId: "<id>",
   },
 };
 ```

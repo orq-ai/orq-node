@@ -46,37 +46,29 @@ export type UpdateMemoryStoreRequest = {
   requestBody?: UpdateMemoryStoreRequestBody | undefined;
 };
 
-/**
- * The provider of the AI service
- */
 export const UpdateMemoryStoreProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
 } as const;
-/**
- * The provider of the AI service
- */
 export type UpdateMemoryStoreProvider = ClosedEnum<
   typeof UpdateMemoryStoreProvider
 >;
@@ -88,9 +80,6 @@ export type UpdateMemoryStoreMemoryStoresEmbeddingConfig = {
    * Number of results to return
    */
   topK?: number | undefined;
-  /**
-   * The provider of the AI service
-   */
   provider: UpdateMemoryStoreProvider;
 };
 

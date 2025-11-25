@@ -18,6 +18,7 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data = {
     agentExecutionId: "<id>",
     product: "generic",
   },
+  workflowRunId: "<id>",
 };
 ```
 
@@ -29,3 +30,4 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody15Data = {
 | `actionType`                                                                                                                                 | *string*                                                                                                                                     | :heavy_check_mark:                                                                                                                           | N/A                                                                                                                                          |
 | `toolExecutionContext`                                                                                                                       | [operations.StreamAgentDataAgentsResponseToolExecutionContext](../../models/operations/streamagentdataagentsresponsetoolexecutioncontext.md) | :heavy_check_mark:                                                                                                                           | N/A                                                                                                                                          |
 | `responseId`                                                                                                                                 | *string*                                                                                                                                     | :heavy_minus_sign:                                                                                                                           | N/A                                                                                                                                          |
+| `workflowRunId`                                                                                                                              | *string*                                                                                                                                     | :heavy_check_mark:                                                                                                                           | N/A                                                                                                                                          |

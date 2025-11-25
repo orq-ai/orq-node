@@ -21,6 +21,7 @@ let value: Fifteen = {
       agentExecutionId: "<id>",
       product: "remoteconfigs",
     },
+    workflowRunId: "<id>",
   },
 };
 ```

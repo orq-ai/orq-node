@@ -3,41 +3,42 @@
 
 ## Supported Types
 
-### `operations.StreamRunAgentPartsAgentsResponse200TextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponse200TextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponse200DataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponse200DataPart = {
+const value: components.DataPart = {
   kind: "data",
   data: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponse200FilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponse200FilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
-    uri: "https://jagged-ice-cream.com/",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponse200ToolCallPart`
+### `components.ToolCallPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponse200ToolCallPart = {
+const value: components.ToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
@@ -49,10 +50,10 @@ const value: operations.StreamRunAgentPartsAgentsResponse200ToolCallPart = {
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponse200ToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponse200ToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

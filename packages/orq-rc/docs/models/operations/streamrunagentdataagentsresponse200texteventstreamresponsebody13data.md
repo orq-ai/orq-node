@@ -21,6 +21,7 @@ let value:
       agentExecutionId: "<id>",
       product: "deployments",
     },
+    workflowRunId: "<id>",
   };
 ```
 
@@ -35,3 +36,4 @@ let value:
 | `toolArguments`                                                                    | Record<string, *any*>                                                              | :heavy_check_mark:                                                                 | N/A                                                                                |
 | `toolExecutionContext`                                                             | [operations.ToolExecutionContext](../../models/operations/toolexecutioncontext.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
 | `responseId`                                                                       | *string*                                                                           | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `workflowRunId`                                                                    | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |

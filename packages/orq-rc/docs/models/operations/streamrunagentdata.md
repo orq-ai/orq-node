@@ -24,6 +24,7 @@ const value: operations.Data2 = {
   type: "event.agents.started",
   timestamp: "<value>",
   data: {
+    workflowRunId: "<id>",
     inputMessage: {
       role: "agent",
       parts: [
@@ -66,6 +67,7 @@ const value: operations.Data4 = {
   data: {
     lastMessage: "<value>",
     finishReason: "tool_calls",
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -79,6 +81,7 @@ const value: operations.StreamRunAgentData5 = {
   data: {
     error: "<value>",
     code: 1241.14,
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -114,6 +117,7 @@ const value: operations.Seven = {
     actionId: "<id>",
     agentToolCallId: "<id>",
     review: "rejected",
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -197,6 +201,7 @@ const value: operations.Thirteen = {
       agentExecutionId: "<id>",
       product: "deployments",
     },
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -217,6 +222,7 @@ const value: operations.Fourteen = {
       agentExecutionId: "<id>",
       product: "spreadsheet_run",
     },
+    workflowRunId: "<id>",
   },
 };
 ```
@@ -240,6 +246,7 @@ const value: operations.Fifteen = {
       agentExecutionId: "<id>",
       product: "remoteconfigs",
     },
+    workflowRunId: "<id>",
   },
 };
 ```

@@ -16,6 +16,7 @@ let value:
       agentExecutionId: "<id>",
       product: "spreadsheet_run",
     },
+    workflowRunId: "<id>",
   };
 ```
 
@@ -27,3 +28,4 @@ let value:
 | `actionType`                                                                               | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `toolExecutionContext`                                                                     | [operations.DataToolExecutionContext](../../models/operations/datatoolexecutioncontext.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `responseId`                                                                               | *string*                                                                                   | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `workflowRunId`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |

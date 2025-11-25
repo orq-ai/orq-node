@@ -19,6 +19,7 @@ let value:
       agentExecutionId: "<id>",
       product: "remoteconfigs",
     },
+    workflowRunId: "<id>",
   };
 ```
 
@@ -30,3 +31,4 @@ let value:
 | `actionType`                                                                                                           | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `toolExecutionContext`                                                                                                 | [operations.StreamRunAgentDataToolExecutionContext](../../models/operations/streamrunagentdatatoolexecutioncontext.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `responseId`                                                                                                           | *string*                                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `workflowRunId`                                                                                                        | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

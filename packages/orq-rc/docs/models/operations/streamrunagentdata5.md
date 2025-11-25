@@ -11,6 +11,7 @@ let value: StreamRunAgentData5 = {
   data: {
     error: "<value>",
     code: 1241.14,
+    workflowRunId: "<id>",
   },
 };
 ```

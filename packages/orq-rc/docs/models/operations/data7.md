@@ -13,6 +13,7 @@ let value: Data7 = {
     actionId: "<id>",
     agentToolCallId: "<id>",
     review: "approved",
+    workflowRunId: "<id>",
   },
 };
 ```

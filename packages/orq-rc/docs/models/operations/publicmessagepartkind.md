@@ -5,11 +5,11 @@
 ```typescript
 import { PublicMessagePartKind } from "@orq-ai/node/models/operations";
 
-let value: PublicMessagePartKind = "file";
+let value: PublicMessagePartKind = "tool_result";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"tool_result"
 ```
