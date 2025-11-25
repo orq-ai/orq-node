@@ -1136,6 +1136,124 @@ components:
           description: "Error message"
       required:
         - "message"
+    "TextPart":
+      type: "object"
+      properties:
+        "kind":
+          type: "string"
+          enum:
+            - "text"
+        "text":
+          type: "string"
+      required:
+        - "kind"
+        - "text"
+      title: "Text Part"
+      description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
+    "DataPart":
+      type: "object"
+      properties:
+        "kind":
+          type: "string"
+          enum:
+            - "data"
+        "data":
+          type: "object"
+          additionalProperties: {}
+        "metadata":
+          type: "object"
+          additionalProperties: {}
+      required:
+        - "kind"
+        - "data"
+      description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
+    "FilePart":
+      type: "object"
+      properties:
+        "kind":
+          type: "string"
+          enum:
+            - "file"
+        "file":
+          anyOf:
+            - type: "object"
+              properties:
+                "bytes":
+                  type: "string"
+                  minLength: 1
+                  description: "base64 encoded content of the file"
+                "mimeType":
+                  type: "string"
+                  description: "Optional mimeType for the file"
+                "name":
+                  type: "string"
+                  description: "Optional name for the file"
+              required:
+                - "bytes"
+              title: "Binary format"
+              description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
+            - type: "object"
+              properties:
+                "uri":
+                  type: "string"
+                  description: "URL for the File content"
+                "mimeType":
+                  type: "string"
+                  description: "Optional mimeType for the file"
+                "name":
+                  type: "string"
+                  description: "Optional name for the file"
+              required:
+                - "uri"
+              title: "File in URI format"
+              description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
+        "metadata":
+          type: "object"
+          additionalProperties: {}
+      required:
+        - "kind"
+        - "file"
+      description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
+    "ToolCallPart":
+      type: "object"
+      properties:
+        "kind":
+          type: "string"
+          enum:
+            - "tool_call"
+        "tool_name":
+          type: "string"
+        "tool_call_id":
+          type: "string"
+        "arguments":
+          type: "object"
+          additionalProperties: {}
+        "metadata":
+          type: "object"
+          additionalProperties: {}
+      required:
+        - "kind"
+        - "tool_name"
+        - "tool_call_id"
+        - "arguments"
+      description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
+    "ToolResultPart":
+      type: "object"
+      properties:
+        "kind":
+          type: "string"
+          enum:
+            - "tool_result"
+        "tool_call_id":
+          type: "string"
+        "result": {}
+        "metadata":
+          type: "object"
+          additionalProperties: {}
+      required:
+        - "kind"
+        - "tool_call_id"
+      description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
 paths:
   "/v2/contacts":
     post:
@@ -1254,7 +1372,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1262,7 +1380,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1397,7 +1515,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-25T09:21:47.601Z"
+                          default: "2025-11-25T11:27:50.075Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1405,7 +1523,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:21:47.602Z"
+                              default: "2025-11-25T11:27:50.075Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1573,10 +1691,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1647,10 +1765,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1718,10 +1836,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1804,10 +1922,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1875,10 +1993,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2273,10 +2391,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2360,10 +2478,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-25T09:21:51.068Z"
+                              default: "2025-11-25T11:27:52.058Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2780,10 +2898,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2854,10 +2972,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2925,10 +3043,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3011,10 +3129,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3082,10 +3200,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3480,10 +3598,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3567,10 +3685,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3974,10 +4092,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4048,10 +4166,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4119,10 +4237,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4205,10 +4323,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4276,10 +4394,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4674,10 +4792,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4761,10 +4879,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-25T09:21:51.068Z"
+                        default: "2025-11-25T11:27:52.058Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4940,7 +5058,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4948,7 +5066,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -5084,7 +5202,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5092,7 +5210,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -11207,83 +11325,23 @@ paths:
                       type: "array"
                       items:
                         oneOf:
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "text"
-                              "text":
-                                type: "string"
-                            required:
-                              - "kind"
-                              - "text"
-                            title: "Text Part"
-                            description: "Text content part. Use this to send text messages to the agent."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "file"
-                              "file":
-                                anyOf:
-                                  - type: "object"
-                                    properties:
-                                      "bytes":
-                                        type: "string"
-                                        minLength: 1
-                                        description: "base64 encoded content of the file"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "bytes"
-                                    title: "Binary format"
-                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                  - type: "object"
-                                    properties:
-                                      "uri":
-                                        type: "string"
-                                        description: "URL for the File content"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "uri"
-                                    title: "File in URI format"
-                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "file"
-                            title: "File Part"
-                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "tool_result"
-                              "tool_call_id":
-                                type: "string"
-                              "result": {}
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "tool_call_id"
-                            title: "Tool Result Part"
-                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - description: "Text content part. Use this to send text messages to the agent."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                                title: "File Part"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                              - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                                title: "Tool Result Part"
+                        discriminator:
+                          propertyName: "kind"
+                          mapping:
+                            "text": "#/components/schemas/TextPart"
+                            "file": "#/components/schemas/FilePart"
+                            "tool_result": "#/components/schemas/ToolResultPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -11309,7 +11367,6 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
-                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -11397,7 +11454,21 @@ paths:
                             - "system"
                         "parts":
                           type: "array"
-                          items: {}
+                          items:
+                            oneOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - {"$ref": "#/components/schemas/DataPart"}
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - {"$ref": "#/components/schemas/ToolCallPart"}
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                            discriminator:
+                              propertyName: "kind"
+                              mapping:
+                                "text": "#/components/schemas/TextPart"
+                                "data": "#/components/schemas/DataPart"
+                                "file": "#/components/schemas/FilePart"
+                                "tool_call": "#/components/schemas/ToolCallPart"
+                                "tool_result": "#/components/schemas/ToolResultPart"
                         "metadata":
                           type: "object"
                           additionalProperties: {}
@@ -13969,83 +14040,23 @@ paths:
                       type: "array"
                       items:
                         oneOf:
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "text"
-                              "text":
-                                type: "string"
-                            required:
-                              - "kind"
-                              - "text"
-                            title: "Text Part"
-                            description: "Text content part. Use this to send text messages to the agent."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "file"
-                              "file":
-                                anyOf:
-                                  - type: "object"
-                                    properties:
-                                      "bytes":
-                                        type: "string"
-                                        minLength: 1
-                                        description: "base64 encoded content of the file"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "bytes"
-                                    title: "Binary format"
-                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                  - type: "object"
-                                    properties:
-                                      "uri":
-                                        type: "string"
-                                        description: "URL for the File content"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "uri"
-                                    title: "File in URI format"
-                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "file"
-                            title: "File Part"
-                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "tool_result"
-                              "tool_call_id":
-                                type: "string"
-                              "result": {}
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "tool_call_id"
-                            title: "Tool Result Part"
-                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - description: "Text content part. Use this to send text messages to the agent."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                                title: "File Part"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                              - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                                title: "Tool Result Part"
+                        discriminator:
+                          propertyName: "kind"
+                          mapping:
+                            "text": "#/components/schemas/TextPart"
+                            "file": "#/components/schemas/FilePart"
+                            "tool_result": "#/components/schemas/ToolResultPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -14071,7 +14082,6 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
-                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -14185,123 +14195,19 @@ paths:
                             type: "array"
                             items:
                               oneOf:
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "kind"
-                                    - "text"
-                                  title: "Text Part"
-                                  description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "data"
-                                    "data":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "data"
-                                  title: "Data Part"
-                                  description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "file"
-                                    "file":
-                                      anyOf:
-                                        - type: "object"
-                                          properties:
-                                            "bytes":
-                                              type: "string"
-                                              minLength: 1
-                                              description: "base64 encoded content of the file"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "bytes"
-                                          title: "Binary format"
-                                          description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                        - type: "object"
-                                          properties:
-                                            "uri":
-                                              type: "string"
-                                              description: "URL for the File content"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "uri"
-                                          title: "File in URI format"
-                                          description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "file"
-                                  title: "File Part"
-                                  description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_call"
-                                    "tool_name":
-                                      type: "string"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "arguments":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_name"
-                                    - "tool_call_id"
-                                    - "arguments"
-                                  title: "Tool Call Part"
-                                  description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_result"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "result": {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_call_id"
-                                  title: "Tool Result Part"
-                                  description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                - {"$ref": "#/components/schemas/TextPart"}
+                                - {"$ref": "#/components/schemas/DataPart"}
+                                - {"$ref": "#/components/schemas/FilePart"}
+                                - {"$ref": "#/components/schemas/ToolCallPart"}
+                                - {"$ref": "#/components/schemas/ToolResultPart"}
+                              discriminator:
+                                propertyName: "kind"
+                                mapping:
+                                  "text": "#/components/schemas/TextPart"
+                                  "data": "#/components/schemas/DataPart"
+                                  "file": "#/components/schemas/FilePart"
+                                  "tool_call": "#/components/schemas/ToolCallPart"
+                                  "tool_result": "#/components/schemas/ToolResultPart"
                         required:
                           - "kind"
                           - "messageId"
@@ -15664,83 +15570,23 @@ paths:
                       type: "array"
                       items:
                         oneOf:
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "text"
-                              "text":
-                                type: "string"
-                            required:
-                              - "kind"
-                              - "text"
-                            title: "Text Part"
-                            description: "Text content part. Use this to send text messages to the agent."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "file"
-                              "file":
-                                anyOf:
-                                  - type: "object"
-                                    properties:
-                                      "bytes":
-                                        type: "string"
-                                        minLength: 1
-                                        description: "base64 encoded content of the file"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "bytes"
-                                    title: "Binary format"
-                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                  - type: "object"
-                                    properties:
-                                      "uri":
-                                        type: "string"
-                                        description: "URL for the File content"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "uri"
-                                    title: "File in URI format"
-                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "file"
-                            title: "File Part"
-                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "tool_result"
-                              "tool_call_id":
-                                type: "string"
-                              "result": {}
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "tool_call_id"
-                            title: "Tool Result Part"
-                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - description: "Text content part. Use this to send text messages to the agent."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                                title: "File Part"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                              - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                                title: "Tool Result Part"
+                        discriminator:
+                          propertyName: "kind"
+                          mapping:
+                            "text": "#/components/schemas/TextPart"
+                            "file": "#/components/schemas/FilePart"
+                            "tool_result": "#/components/schemas/ToolResultPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -15766,7 +15612,6 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
-                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -16289,7 +16134,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAX53R7DBYC4CF2JA9H6QYS6"
+                                          default: "01KAXCAFW0E7JRSY8DK4YB9CKQ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -16480,123 +16325,19 @@ paths:
                             type: "array"
                             items:
                               oneOf:
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "kind"
-                                    - "text"
-                                  title: "Text Part"
-                                  description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "data"
-                                    "data":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "data"
-                                  title: "Data Part"
-                                  description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "file"
-                                    "file":
-                                      anyOf:
-                                        - type: "object"
-                                          properties:
-                                            "bytes":
-                                              type: "string"
-                                              minLength: 1
-                                              description: "base64 encoded content of the file"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "bytes"
-                                          title: "Binary format"
-                                          description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                        - type: "object"
-                                          properties:
-                                            "uri":
-                                              type: "string"
-                                              description: "URL for the File content"
-                                            "mimeType":
-                                              type: "string"
-                                              description: "Optional mimeType for the file"
-                                            "name":
-                                              type: "string"
-                                              description: "Optional name for the file"
-                                          required:
-                                            - "uri"
-                                          title: "File in URI format"
-                                          description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "file"
-                                  title: "File Part"
-                                  description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_call"
-                                    "tool_name":
-                                      type: "string"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "arguments":
-                                      type: "object"
-                                      additionalProperties: {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_name"
-                                    - "tool_call_id"
-                                    - "arguments"
-                                  title: "Tool Call Part"
-                                  description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                - type: "object"
-                                  properties:
-                                    "kind":
-                                      type: "string"
-                                      enum:
-                                        - "tool_result"
-                                    "tool_call_id":
-                                      type: "string"
-                                    "result": {}
-                                    "metadata":
-                                      type: "object"
-                                      additionalProperties: {}
-                                  required:
-                                    - "kind"
-                                    - "tool_call_id"
-                                  title: "Tool Result Part"
-                                  description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                - {"$ref": "#/components/schemas/TextPart"}
+                                - {"$ref": "#/components/schemas/DataPart"}
+                                - {"$ref": "#/components/schemas/FilePart"}
+                                - {"$ref": "#/components/schemas/ToolCallPart"}
+                                - {"$ref": "#/components/schemas/ToolResultPart"}
+                              discriminator:
+                                propertyName: "kind"
+                                mapping:
+                                  "text": "#/components/schemas/TextPart"
+                                  "data": "#/components/schemas/DataPart"
+                                  "file": "#/components/schemas/FilePart"
+                                  "tool_call": "#/components/schemas/ToolCallPart"
+                                  "tool_result": "#/components/schemas/ToolResultPart"
                         required:
                           - "kind"
                           - "messageId"
@@ -17175,83 +16916,23 @@ paths:
                       type: "array"
                       items:
                         oneOf:
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "text"
-                              "text":
-                                type: "string"
-                            required:
-                              - "kind"
-                              - "text"
-                            title: "Text Part"
-                            description: "Text content part. Use this to send text messages to the agent."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "file"
-                              "file":
-                                anyOf:
-                                  - type: "object"
-                                    properties:
-                                      "bytes":
-                                        type: "string"
-                                        minLength: 1
-                                        description: "base64 encoded content of the file"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "bytes"
-                                    title: "Binary format"
-                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                  - type: "object"
-                                    properties:
-                                      "uri":
-                                        type: "string"
-                                        description: "URL for the File content"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "uri"
-                                    title: "File in URI format"
-                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "file"
-                            title: "File Part"
-                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "tool_result"
-                              "tool_call_id":
-                                type: "string"
-                              "result": {}
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "tool_call_id"
-                            title: "Tool Result Part"
-                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - description: "Text content part. Use this to send text messages to the agent."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                                title: "File Part"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                              - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                                title: "Tool Result Part"
+                        discriminator:
+                          propertyName: "kind"
+                          mapping:
+                            "text": "#/components/schemas/TextPart"
+                            "file": "#/components/schemas/FilePart"
+                            "tool_result": "#/components/schemas/ToolResultPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -17277,7 +16958,6 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
-                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -17800,7 +17480,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KAX53RA0Z3WT1VGB2EA807G3"
+                                          default: "01KAXCAFXPAJH37DSJ4N3WQ00C"
                                         "name":
                                           type: "string"
                                         "description":
@@ -17987,6 +17667,8 @@ paths:
                           "data":
                             type: "object"
                             properties:
+                              "workflowRunId":
+                                type: "string"
                               "integration_id":
                                 type: "string"
                               "inputMessage":
@@ -18006,123 +17688,19 @@ paths:
                                     type: "array"
                                     items:
                                       oneOf:
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "text"
-                                            "text":
-                                              type: "string"
-                                          required:
-                                            - "kind"
-                                            - "text"
-                                          title: "Text Part"
-                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "data"
-                                            "data":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "data"
-                                          title: "Data Part"
-                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "file"
-                                            "file":
-                                              anyOf:
-                                                - type: "object"
-                                                  properties:
-                                                    "bytes":
-                                                      type: "string"
-                                                      minLength: 1
-                                                      description: "base64 encoded content of the file"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "bytes"
-                                                  title: "Binary format"
-                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                - type: "object"
-                                                  properties:
-                                                    "uri":
-                                                      type: "string"
-                                                      description: "URL for the File content"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "uri"
-                                                  title: "File in URI format"
-                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "file"
-                                          title: "File Part"
-                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_call"
-                                            "tool_name":
-                                              type: "string"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "arguments":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_name"
-                                            - "tool_call_id"
-                                            - "arguments"
-                                          title: "Tool Call Part"
-                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_result"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "result": {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_call_id"
-                                          title: "Tool Result Part"
-                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                        - {"$ref": "#/components/schemas/TextPart"}
+                                        - {"$ref": "#/components/schemas/DataPart"}
+                                        - {"$ref": "#/components/schemas/FilePart"}
+                                        - {"$ref": "#/components/schemas/ToolCallPart"}
+                                        - {"$ref": "#/components/schemas/ToolResultPart"}
+                                      discriminator:
+                                        propertyName: "kind"
+                                        mapping:
+                                          "text": "#/components/schemas/TextPart"
+                                          "data": "#/components/schemas/DataPart"
+                                          "file": "#/components/schemas/FilePart"
+                                          "tool_call": "#/components/schemas/ToolCallPart"
+                                          "tool_result": "#/components/schemas/ToolResultPart"
                                   "metadata":
                                     type: "object"
                                     additionalProperties: {}
@@ -18281,6 +17859,7 @@ paths:
                               "responseId":
                                 type: "string"
                             required:
+                              - "workflowRunId"
                               - "inputMessage"
                               - "modelId"
                               - "instructions"
@@ -18323,123 +17902,19 @@ paths:
                                       type: "array"
                                       items:
                                         oneOf:
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "text"
-                                              "text":
-                                                type: "string"
-                                            required:
-                                              - "kind"
-                                              - "text"
-                                            title: "Text Part"
-                                            description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "data"
-                                              "data":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "data"
-                                            title: "Data Part"
-                                            description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "file"
-                                              "file":
-                                                anyOf:
-                                                  - type: "object"
-                                                    properties:
-                                                      "bytes":
-                                                        type: "string"
-                                                        minLength: 1
-                                                        description: "base64 encoded content of the file"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "bytes"
-                                                    title: "Binary format"
-                                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                  - type: "object"
-                                                    properties:
-                                                      "uri":
-                                                        type: "string"
-                                                        description: "URL for the File content"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "uri"
-                                                    title: "File in URI format"
-                                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "file"
-                                            title: "File Part"
-                                            description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_call"
-                                              "tool_name":
-                                                type: "string"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "arguments":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_name"
-                                              - "tool_call_id"
-                                              - "arguments"
-                                            title: "Tool Call Part"
-                                            description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_result"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "result": {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_call_id"
-                                            title: "Tool Result Part"
-                                            description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                          - {"$ref": "#/components/schemas/TextPart"}
+                                          - {"$ref": "#/components/schemas/DataPart"}
+                                          - {"$ref": "#/components/schemas/FilePart"}
+                                          - {"$ref": "#/components/schemas/ToolCallPart"}
+                                          - {"$ref": "#/components/schemas/ToolResultPart"}
+                                        discriminator:
+                                          propertyName: "kind"
+                                          mapping:
+                                            "text": "#/components/schemas/TextPart"
+                                            "data": "#/components/schemas/DataPart"
+                                            "file": "#/components/schemas/FilePart"
+                                            "tool_call": "#/components/schemas/ToolCallPart"
+                                            "tool_result": "#/components/schemas/ToolResultPart"
                                     "metadata":
                                       type: "object"
                                       additionalProperties: {}
@@ -18749,123 +18224,19 @@ paths:
                                     type: "array"
                                     items:
                                       oneOf:
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "text"
-                                            "text":
-                                              type: "string"
-                                          required:
-                                            - "kind"
-                                            - "text"
-                                          title: "Text Part"
-                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "data"
-                                            "data":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "data"
-                                          title: "Data Part"
-                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "file"
-                                            "file":
-                                              anyOf:
-                                                - type: "object"
-                                                  properties:
-                                                    "bytes":
-                                                      type: "string"
-                                                      minLength: 1
-                                                      description: "base64 encoded content of the file"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "bytes"
-                                                  title: "Binary format"
-                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                - type: "object"
-                                                  properties:
-                                                    "uri":
-                                                      type: "string"
-                                                      description: "URL for the File content"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "uri"
-                                                  title: "File in URI format"
-                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "file"
-                                          title: "File Part"
-                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_call"
-                                            "tool_name":
-                                              type: "string"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "arguments":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_name"
-                                            - "tool_call_id"
-                                            - "arguments"
-                                          title: "Tool Call Part"
-                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_result"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "result": {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_call_id"
-                                          title: "Tool Result Part"
-                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                        - {"$ref": "#/components/schemas/TextPart"}
+                                        - {"$ref": "#/components/schemas/DataPart"}
+                                        - {"$ref": "#/components/schemas/FilePart"}
+                                        - {"$ref": "#/components/schemas/ToolCallPart"}
+                                        - {"$ref": "#/components/schemas/ToolResultPart"}
+                                      discriminator:
+                                        propertyName: "kind"
+                                        mapping:
+                                          "text": "#/components/schemas/TextPart"
+                                          "data": "#/components/schemas/DataPart"
+                                          "file": "#/components/schemas/FilePart"
+                                          "tool_call": "#/components/schemas/ToolCallPart"
+                                          "tool_result": "#/components/schemas/ToolResultPart"
                                   "metadata":
                                     type: "object"
                                     additionalProperties: {}
@@ -18956,12 +18327,15 @@ paths:
                                           - "null"
                                         description: "The number of audio output tokens produced by the response."
                                 description: "Token usage from the last agent message"
+                              "workflowRunId":
+                                type: "string"
                               "responseId":
                                 type: "string"
                                 description: "ID of the response tracking this execution"
                             required:
                               - "last_message"
                               - "finish_reason"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -18985,9 +18359,12 @@ paths:
                               "responseId":
                                 type: "string"
                                 description: "ID of the response tracking this execution"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "error"
                               - "code"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -19111,11 +18488,14 @@ paths:
                                 type: "string"
                               "reviewed_by_id":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "agent_id"
                               - "action_id"
                               - "agent_tool_call_id"
                               - "review"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -19230,123 +18610,19 @@ paths:
                                       type: "array"
                                       items:
                                         oneOf:
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "text"
-                                              "text":
-                                                type: "string"
-                                            required:
-                                              - "kind"
-                                              - "text"
-                                            title: "Text Part"
-                                            description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "data"
-                                              "data":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "data"
-                                            title: "Data Part"
-                                            description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "file"
-                                              "file":
-                                                anyOf:
-                                                  - type: "object"
-                                                    properties:
-                                                      "bytes":
-                                                        type: "string"
-                                                        minLength: 1
-                                                        description: "base64 encoded content of the file"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "bytes"
-                                                    title: "Binary format"
-                                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                  - type: "object"
-                                                    properties:
-                                                      "uri":
-                                                        type: "string"
-                                                        description: "URL for the File content"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "uri"
-                                                    title: "File in URI format"
-                                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "file"
-                                            title: "File Part"
-                                            description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_call"
-                                              "tool_name":
-                                                type: "string"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "arguments":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_name"
-                                              - "tool_call_id"
-                                              - "arguments"
-                                            title: "Tool Call Part"
-                                            description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_result"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "result": {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_call_id"
-                                            title: "Tool Result Part"
-                                            description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                          - {"$ref": "#/components/schemas/TextPart"}
+                                          - {"$ref": "#/components/schemas/DataPart"}
+                                          - {"$ref": "#/components/schemas/FilePart"}
+                                          - {"$ref": "#/components/schemas/ToolCallPart"}
+                                          - {"$ref": "#/components/schemas/ToolResultPart"}
+                                        discriminator:
+                                          propertyName: "kind"
+                                          mapping:
+                                            "text": "#/components/schemas/TextPart"
+                                            "data": "#/components/schemas/DataPart"
+                                            "file": "#/components/schemas/FilePart"
+                                            "tool_call": "#/components/schemas/ToolCallPart"
+                                            "tool_result": "#/components/schemas/ToolResultPart"
                                     "metadata":
                                       type: "object"
                                       additionalProperties: {}
@@ -19436,11 +18712,14 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "tool_id"
                               - "action_type"
                               - "tool_arguments"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -19511,9 +18790,12 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "action_type"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -19592,10 +18874,13 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "error"
                               - "action_type"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -19711,83 +18996,23 @@ paths:
                       type: "array"
                       items:
                         oneOf:
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "text"
-                              "text":
-                                type: "string"
-                            required:
-                              - "kind"
-                              - "text"
-                            title: "Text Part"
-                            description: "Text content part. Use this to send text messages to the agent."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "file"
-                              "file":
-                                anyOf:
-                                  - type: "object"
-                                    properties:
-                                      "bytes":
-                                        type: "string"
-                                        minLength: 1
-                                        description: "base64 encoded content of the file"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "bytes"
-                                    title: "Binary format"
-                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                  - type: "object"
-                                    properties:
-                                      "uri":
-                                        type: "string"
-                                        description: "URL for the File content"
-                                      "mimeType":
-                                        type: "string"
-                                        description: "Optional mimeType for the file"
-                                      "name":
-                                        type: "string"
-                                        description: "Optional name for the file"
-                                    required:
-                                      - "uri"
-                                    title: "File in URI format"
-                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "file"
-                            title: "File Part"
-                            description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-                          - type: "object"
-                            properties:
-                              "kind":
-                                type: "string"
-                                enum:
-                                  - "tool_result"
-                              "tool_call_id":
-                                type: "string"
-                              "result": {}
-                              "metadata":
-                                type: "object"
-                                additionalProperties: {}
-                            required:
-                              - "kind"
-                              - "tool_call_id"
-                            title: "Tool Result Part"
-                            description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/TextPart"}
+                              - description: "Text content part. Use this to send text messages to the agent."
+                          - allOf:
+                              - {"$ref": "#/components/schemas/FilePart"}
+                              - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
+                                title: "File Part"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/ToolResultPart"}
+                              - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
+                                title: "Tool Result Part"
+                        discriminator:
+                          propertyName: "kind"
+                          mapping:
+                            "text": "#/components/schemas/TextPart"
+                            "file": "#/components/schemas/FilePart"
+                            "tool_result": "#/components/schemas/ToolResultPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -19813,7 +19038,6 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
-                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -19923,6 +19147,8 @@ paths:
                           "data":
                             type: "object"
                             properties:
+                              "workflowRunId":
+                                type: "string"
                               "integration_id":
                                 type: "string"
                               "inputMessage":
@@ -19942,123 +19168,19 @@ paths:
                                     type: "array"
                                     items:
                                       oneOf:
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "text"
-                                            "text":
-                                              type: "string"
-                                          required:
-                                            - "kind"
-                                            - "text"
-                                          title: "Text Part"
-                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "data"
-                                            "data":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "data"
-                                          title: "Data Part"
-                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "file"
-                                            "file":
-                                              anyOf:
-                                                - type: "object"
-                                                  properties:
-                                                    "bytes":
-                                                      type: "string"
-                                                      minLength: 1
-                                                      description: "base64 encoded content of the file"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "bytes"
-                                                  title: "Binary format"
-                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                - type: "object"
-                                                  properties:
-                                                    "uri":
-                                                      type: "string"
-                                                      description: "URL for the File content"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "uri"
-                                                  title: "File in URI format"
-                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "file"
-                                          title: "File Part"
-                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_call"
-                                            "tool_name":
-                                              type: "string"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "arguments":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_name"
-                                            - "tool_call_id"
-                                            - "arguments"
-                                          title: "Tool Call Part"
-                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_result"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "result": {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_call_id"
-                                          title: "Tool Result Part"
-                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                        - {"$ref": "#/components/schemas/TextPart"}
+                                        - {"$ref": "#/components/schemas/DataPart"}
+                                        - {"$ref": "#/components/schemas/FilePart"}
+                                        - {"$ref": "#/components/schemas/ToolCallPart"}
+                                        - {"$ref": "#/components/schemas/ToolResultPart"}
+                                      discriminator:
+                                        propertyName: "kind"
+                                        mapping:
+                                          "text": "#/components/schemas/TextPart"
+                                          "data": "#/components/schemas/DataPart"
+                                          "file": "#/components/schemas/FilePart"
+                                          "tool_call": "#/components/schemas/ToolCallPart"
+                                          "tool_result": "#/components/schemas/ToolResultPart"
                                   "metadata":
                                     type: "object"
                                     additionalProperties: {}
@@ -20217,6 +19339,7 @@ paths:
                               "responseId":
                                 type: "string"
                             required:
+                              - "workflowRunId"
                               - "inputMessage"
                               - "modelId"
                               - "instructions"
@@ -20259,123 +19382,19 @@ paths:
                                       type: "array"
                                       items:
                                         oneOf:
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "text"
-                                              "text":
-                                                type: "string"
-                                            required:
-                                              - "kind"
-                                              - "text"
-                                            title: "Text Part"
-                                            description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "data"
-                                              "data":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "data"
-                                            title: "Data Part"
-                                            description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "file"
-                                              "file":
-                                                anyOf:
-                                                  - type: "object"
-                                                    properties:
-                                                      "bytes":
-                                                        type: "string"
-                                                        minLength: 1
-                                                        description: "base64 encoded content of the file"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "bytes"
-                                                    title: "Binary format"
-                                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                  - type: "object"
-                                                    properties:
-                                                      "uri":
-                                                        type: "string"
-                                                        description: "URL for the File content"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "uri"
-                                                    title: "File in URI format"
-                                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "file"
-                                            title: "File Part"
-                                            description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_call"
-                                              "tool_name":
-                                                type: "string"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "arguments":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_name"
-                                              - "tool_call_id"
-                                              - "arguments"
-                                            title: "Tool Call Part"
-                                            description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_result"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "result": {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_call_id"
-                                            title: "Tool Result Part"
-                                            description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                          - {"$ref": "#/components/schemas/TextPart"}
+                                          - {"$ref": "#/components/schemas/DataPart"}
+                                          - {"$ref": "#/components/schemas/FilePart"}
+                                          - {"$ref": "#/components/schemas/ToolCallPart"}
+                                          - {"$ref": "#/components/schemas/ToolResultPart"}
+                                        discriminator:
+                                          propertyName: "kind"
+                                          mapping:
+                                            "text": "#/components/schemas/TextPart"
+                                            "data": "#/components/schemas/DataPart"
+                                            "file": "#/components/schemas/FilePart"
+                                            "tool_call": "#/components/schemas/ToolCallPart"
+                                            "tool_result": "#/components/schemas/ToolResultPart"
                                     "metadata":
                                       type: "object"
                                       additionalProperties: {}
@@ -20685,123 +19704,19 @@ paths:
                                     type: "array"
                                     items:
                                       oneOf:
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "text"
-                                            "text":
-                                              type: "string"
-                                          required:
-                                            - "kind"
-                                            - "text"
-                                          title: "Text Part"
-                                          description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "data"
-                                            "data":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "data"
-                                          title: "Data Part"
-                                          description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "file"
-                                            "file":
-                                              anyOf:
-                                                - type: "object"
-                                                  properties:
-                                                    "bytes":
-                                                      type: "string"
-                                                      minLength: 1
-                                                      description: "base64 encoded content of the file"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "bytes"
-                                                  title: "Binary format"
-                                                  description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                - type: "object"
-                                                  properties:
-                                                    "uri":
-                                                      type: "string"
-                                                      description: "URL for the File content"
-                                                    "mimeType":
-                                                      type: "string"
-                                                      description: "Optional mimeType for the file"
-                                                    "name":
-                                                      type: "string"
-                                                      description: "Optional name for the file"
-                                                  required:
-                                                    - "uri"
-                                                  title: "File in URI format"
-                                                  description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "file"
-                                          title: "File Part"
-                                          description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_call"
-                                            "tool_name":
-                                              type: "string"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "arguments":
-                                              type: "object"
-                                              additionalProperties: {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_name"
-                                            - "tool_call_id"
-                                            - "arguments"
-                                          title: "Tool Call Part"
-                                          description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                        - type: "object"
-                                          properties:
-                                            "kind":
-                                              type: "string"
-                                              enum:
-                                                - "tool_result"
-                                            "tool_call_id":
-                                              type: "string"
-                                            "result": {}
-                                            "metadata":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "kind"
-                                            - "tool_call_id"
-                                          title: "Tool Result Part"
-                                          description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                        - {"$ref": "#/components/schemas/TextPart"}
+                                        - {"$ref": "#/components/schemas/DataPart"}
+                                        - {"$ref": "#/components/schemas/FilePart"}
+                                        - {"$ref": "#/components/schemas/ToolCallPart"}
+                                        - {"$ref": "#/components/schemas/ToolResultPart"}
+                                      discriminator:
+                                        propertyName: "kind"
+                                        mapping:
+                                          "text": "#/components/schemas/TextPart"
+                                          "data": "#/components/schemas/DataPart"
+                                          "file": "#/components/schemas/FilePart"
+                                          "tool_call": "#/components/schemas/ToolCallPart"
+                                          "tool_result": "#/components/schemas/ToolResultPart"
                                   "metadata":
                                     type: "object"
                                     additionalProperties: {}
@@ -20892,12 +19807,15 @@ paths:
                                           - "null"
                                         description: "The number of audio output tokens produced by the response."
                                 description: "Token usage from the last agent message"
+                              "workflowRunId":
+                                type: "string"
                               "responseId":
                                 type: "string"
                                 description: "ID of the response tracking this execution"
                             required:
                               - "last_message"
                               - "finish_reason"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -20921,9 +19839,12 @@ paths:
                               "responseId":
                                 type: "string"
                                 description: "ID of the response tracking this execution"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "error"
                               - "code"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -21047,11 +19968,14 @@ paths:
                                 type: "string"
                               "reviewed_by_id":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "agent_id"
                               - "action_id"
                               - "agent_tool_call_id"
                               - "review"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -21166,123 +20090,19 @@ paths:
                                       type: "array"
                                       items:
                                         oneOf:
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "text"
-                                              "text":
-                                                type: "string"
-                                            required:
-                                              - "kind"
-                                              - "text"
-                                            title: "Text Part"
-                                            description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "data"
-                                              "data":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "data"
-                                            title: "Data Part"
-                                            description: "A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "file"
-                                              "file":
-                                                anyOf:
-                                                  - type: "object"
-                                                    properties:
-                                                      "bytes":
-                                                        type: "string"
-                                                        minLength: 1
-                                                        description: "base64 encoded content of the file"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "bytes"
-                                                    title: "Binary format"
-                                                    description: "Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format."
-                                                  - type: "object"
-                                                    properties:
-                                                      "uri":
-                                                        type: "string"
-                                                        description: "URL for the File content"
-                                                      "mimeType":
-                                                        type: "string"
-                                                        description: "Optional mimeType for the file"
-                                                      "name":
-                                                        type: "string"
-                                                        description: "Optional name for the file"
-                                                    required:
-                                                      - "uri"
-                                                    title: "File in URI format"
-                                                    description: "File in URI format. Check in the model's documentation for the supported mime types for the URI format"
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "file"
-                                            title: "File Part"
-                                            description: "A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_call"
-                                              "tool_name":
-                                                type: "string"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "arguments":
-                                                type: "object"
-                                                additionalProperties: {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_name"
-                                              - "tool_call_id"
-                                              - "arguments"
-                                            title: "Tool Call Part"
-                                            description: "A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution."
-                                          - type: "object"
-                                            properties:
-                                              "kind":
-                                                type: "string"
-                                                enum:
-                                                  - "tool_result"
-                                              "tool_call_id":
-                                                type: "string"
-                                              "result": {}
-                                              "metadata":
-                                                type: "object"
-                                                additionalProperties: {}
-                                            required:
-                                              - "kind"
-                                              - "tool_call_id"
-                                            title: "Tool Result Part"
-                                            description: "The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation."
+                                          - {"$ref": "#/components/schemas/TextPart"}
+                                          - {"$ref": "#/components/schemas/DataPart"}
+                                          - {"$ref": "#/components/schemas/FilePart"}
+                                          - {"$ref": "#/components/schemas/ToolCallPart"}
+                                          - {"$ref": "#/components/schemas/ToolResultPart"}
+                                        discriminator:
+                                          propertyName: "kind"
+                                          mapping:
+                                            "text": "#/components/schemas/TextPart"
+                                            "data": "#/components/schemas/DataPart"
+                                            "file": "#/components/schemas/FilePart"
+                                            "tool_call": "#/components/schemas/ToolCallPart"
+                                            "tool_result": "#/components/schemas/ToolResultPart"
                                     "metadata":
                                       type: "object"
                                       additionalProperties: {}
@@ -21372,11 +20192,14 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "tool_id"
                               - "action_type"
                               - "tool_arguments"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -21447,9 +20270,12 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "action_type"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -21528,10 +20354,13 @@ paths:
                                   - "product"
                               "responseId":
                                 type: "string"
+                              "workflowRunId":
+                                type: "string"
                             required:
                               - "error"
                               - "action_type"
                               - "tool_execution_context"
+                              - "workflowRunId"
                         required:
                           - "type"
                           - "timestamp"
@@ -21658,7 +20487,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-25T09:21:52.071Z"
+                    default: "2025-11-25T11:27:53.047Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -21747,7 +20576,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-25T09:21:52.071Z"
+                          default: "2025-11-25T11:27:53.047Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -21815,7 +20644,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-25T09:21:52.071Z"
+                    default: "2025-11-25T11:27:53.047Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -26383,7 +25212,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAX53RFR09BV2D32G77Q1K41"
+                              default: "tool_01KAXCAG5Q52YGJMG7MATHTSAN"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26482,7 +25311,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAX53RFTKYZM82R390AKM6WZ"
+                              default: "tool_01KAXCAG5RZ89EWSPM8FPX0E5T"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26583,7 +25412,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAX53RFXV61BXSYQJS8ZKEMG"
+                              default: "tool_01KAXCAG5TZZNT2W0EPKS1KR5R"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26717,7 +25546,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAX53RG0FM24H8FEQ1FASBHZ"
+                              default: "tool_01KAXCAG5WFBBKAGDPF2M3XHNJ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26791,7 +25620,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KAX53RG1CKRRYM0CYHTZCQAN"
+                                        default: "01KAXCAG5XJ3KAM5WADRABCVC4"
                                       "name":
                                         type: "string"
                                       "description":
@@ -26842,7 +25671,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KAX53RG2J8261AE8QP063SW2"
+                              default: "tool_01KAXCAG5Y2ZT7Z1TZFA1AQZ2S"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27385,7 +26214,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RGJKXYF0J394FQ6V7AX"
+                        default: "tool_01KAXCAG6FMRGE96N1M2V03NTV"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27484,7 +26313,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RGK1YCJYJQB89EMM9M7"
+                        default: "tool_01KAXCAG6T74FJN6BKM33JCYAJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27585,7 +26414,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RGPYH42PKCWHWE7AMTY"
+                        default: "tool_01KAXCAG6XWSYRPRBJN5DTRTCE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27719,7 +26548,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RGRYMPTGF5E8XJKCFXP"
+                        default: "tool_01KAXCAG72YT1Q25498P8X00ZE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27793,7 +26622,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAX53RGTWMN173V88TJ1DSHX"
+                                  default: "01KAXCAG74EF5N3W77BKWVD86M"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27844,7 +26673,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RGV7DKXV2XSHT6Y9K9P"
+                        default: "tool_01KAXCAG76A5GTPJK2QKXG56V7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28284,7 +27113,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KAX53RHHBAFBBGTTWEF1DWSA"
+                                default: "01KAXCAG7T8KD5Y5GN8BWBE0Q8"
                               "name":
                                 type: "string"
                               "description":
@@ -28402,7 +27231,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RH39N413APQT8S3DEQ2"
+                        default: "tool_01KAXCAG7ESJSFA6T6Q6F0TG1T"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28501,7 +27330,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RH5XGKWAYMMKSYSZY5W"
+                        default: "tool_01KAXCAG7FBRR0Q50YPBQ1EYF9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28602,7 +27431,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RH7R6VST43Y1Y2QGD7R"
+                        default: "tool_01KAXCAG7H9242XWSVM5QSXFMA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28736,7 +27565,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RHAGNYHNEN1HX6WAF5V"
+                        default: "tool_01KAXCAG7KTCMAPT6REXPFJQX9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28810,7 +27639,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAX53RHB0F6CP1PQ1HS8RXFG"
+                                  default: "01KAXCAG7M90QW1MD5M1MP9GGQ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28861,7 +27690,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RHCCKY3H9DRD898XMTH"
+                        default: "tool_01KAXCAG7MPRF2X6AWG59HKH5H"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29015,7 +27844,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RHY9XDGSTZYMV3ZSJZF"
+                        default: "tool_01KAXCAG8P4429RGQNF9D7TDNF"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29114,7 +27943,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RJ0DCEQCST53GS05D5D"
+                        default: "tool_01KAXCAG8RCWDA59GAC8AW8B45"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29215,7 +28044,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RJ2TV9QB0D58TRCK1F7"
+                        default: "tool_01KAXCAG8VRZC3QRHW5D5YPBJE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29349,7 +28178,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RJ5J629B6F2R2DJM7ZY"
+                        default: "tool_01KAXCAG8YVPJVRZJS74ET259W"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29423,7 +28252,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KAX53RJ62VBF8JDBNS3TFFTM"
+                                  default: "01KAXCAG90YS1X0FY0C9H8W4JW"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29474,7 +28303,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KAX53RJ7HX90TRTQWG52800R"
+                        default: "tool_01KAXCAG911W6HRCEJ70GA37B2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29733,7 +28562,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-25T09:21:48.672Z"
+                          default: "2025-11-25T11:27:50.415Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -29741,7 +28570,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:21:48.673Z"
+                              default: "2025-11-25T11:27:50.415Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -29935,7 +28764,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:48.672Z"
+                    default: "2025-11-25T11:27:50.415Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -29943,7 +28772,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:48.673Z"
+                        default: "2025-11-25T11:27:50.415Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30077,7 +28906,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:48.672Z"
+                    default: "2025-11-25T11:27:50.415Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30085,7 +28914,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:48.673Z"
+                        default: "2025-11-25T11:27:50.415Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30245,7 +29074,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:48.672Z"
+                    default: "2025-11-25T11:27:50.415Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30253,7 +29082,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:48.673Z"
+                        default: "2025-11-25T11:27:50.415Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -32156,7 +30985,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KAX53RNKJC73HXJKPREST8NA"
+                          default: "01KAXCAGCFR82P3Z60S1NYBD8H"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -32322,7 +31151,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAX53RNQSPE60Q7Z8B74EH9E"
+                    default: "01KAXCAGCJWJ1MS8ABN7G183NT"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32418,7 +31247,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAX53RNNKBKARQ66D8J097DJ"
+                    default: "01KAXCAGCH00A73X3FR62KKC3V"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32550,7 +31379,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KAX53RNTXXHPYRCGH03KK2GC"
+                    default: "01KAXCAGCMPQ8GA7FBTW1ZQD54"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -35004,7 +33833,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-25T09:21:47.601Z"
+                          default: "2025-11-25T11:27:50.075Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35012,7 +33841,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:21:47.602Z"
+                              default: "2025-11-25T11:27:50.075Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35148,7 +33977,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35156,7 +33985,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35279,7 +34108,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35287,7 +34116,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35440,7 +34269,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35448,7 +34277,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35918,7 +34747,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-25T09:22:00.044Z"
+                                    default: "2025-11-25T11:28:00.975Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35958,7 +34787,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-25T09:22:00.045Z"
+                                    default: "2025-11-25T11:28:00.976Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35998,7 +34827,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-25T09:22:00.045Z"
+                                    default: "2025-11-25T11:28:00.976Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -36034,7 +34863,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-25T09:21:47.601Z"
+                          default: "2025-11-25T11:27:50.075Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -36042,7 +34871,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:21:47.602Z"
+                              default: "2025-11-25T11:27:50.075Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -36802,7 +35631,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-25T09:22:00.058Z"
+                                default: "2025-11-25T11:28:01.000Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36842,7 +35671,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-25T09:22:00.058Z"
+                                default: "2025-11-25T11:28:01.001Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36882,7 +35711,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-25T09:22:00.058Z"
+                                default: "2025-11-25T11:28:01.002Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36918,7 +35747,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-25T09:21:47.601Z"
+                      default: "2025-11-25T11:27:50.075Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -36926,7 +35755,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-25T09:21:47.602Z"
+                          default: "2025-11-25T11:27:50.075Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -37340,7 +36169,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.052Z"
+                              default: "2025-11-25T11:28:00.982Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37380,7 +36209,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.052Z"
+                              default: "2025-11-25T11:28:00.983Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37420,7 +36249,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.053Z"
+                              default: "2025-11-25T11:28:00.983Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37456,7 +36285,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37464,7 +36293,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -38222,7 +37051,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.087Z"
+                              default: "2025-11-25T11:28:01.031Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38262,7 +37091,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.088Z"
+                              default: "2025-11-25T11:28:01.032Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38302,7 +37131,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-25T09:22:00.089Z"
+                              default: "2025-11-25T11:28:01.033Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -38338,7 +37167,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-25T09:21:47.601Z"
+                    default: "2025-11-25T11:27:50.075Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -38346,7 +37175,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-25T09:21:47.602Z"
+                        default: "2025-11-25T11:27:50.075Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
