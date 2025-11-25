@@ -7,11 +7,11 @@ import { CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529T
 
 let value:
   CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type =
-    "gse_english_level";
+    "words_count";
 ```
 
 ## Values
 
 ```typescript
-"gse_english_level"
+"words_count"
 ```

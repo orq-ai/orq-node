@@ -6,7 +6,7 @@
 import { FunctionParams28 } from "@orq-ai/node/models/operations";
 
 let value: FunctionParams28 = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 

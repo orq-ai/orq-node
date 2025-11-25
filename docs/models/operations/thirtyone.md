@@ -6,7 +6,7 @@
 import { ThirtyOne } from "@orq-ai/node/models/operations";
 
 let value: ThirtyOne = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 

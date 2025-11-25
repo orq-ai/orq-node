@@ -217,8 +217,10 @@ const value: operations.TwentyFour = {
 
 ```typescript
 const value: operations.TwentyFive = {
-  type: "topic_match",
-  topic: "<value>",
+  type: "keywords_match",
+  keywords: [
+    "<value 1>",
+  ],
 };
 ```
 
@@ -226,8 +228,7 @@ const value: operations.TwentyFive = {
 
 ```typescript
 const value: operations.TwentySix = {
-  type: "keywords_match",
-  keywords: [],
+  type: "most_repeated_words",
 };
 ```
 
@@ -235,7 +236,7 @@ const value: operations.TwentySix = {
 
 ```typescript
 const value: operations.TwentySeven = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 
@@ -243,7 +244,7 @@ const value: operations.TwentySeven = {
 
 ```typescript
 const value: operations.TwentyEight = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 
@@ -251,7 +252,7 @@ const value: operations.TwentyEight = {
 
 ```typescript
 const value: operations.TwentyNine = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 
@@ -259,7 +260,7 @@ const value: operations.TwentyNine = {
 
 ```typescript
 const value: operations.Thirty = {
-  type: "words_count",
+  type: "sentences_count",
 };
 ```
 
@@ -267,7 +268,7 @@ const value: operations.Thirty = {
 
 ```typescript
 const value: operations.ThirtyOne = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 
@@ -275,31 +276,7 @@ const value: operations.ThirtyOne = {
 
 ```typescript
 const value: operations.ThirtyTwo = {
-  type: "lexical_repetition",
-};
-```
-
-### `operations.ThirtyThree`
-
-```typescript
-const value: operations.ThirtyThree = {
-  type: "semantic_repetition",
-};
-```
-
-### `operations.ThirtyFour`
-
-```typescript
-const value: operations.ThirtyFour = {
   type: "grammar_diversity",
-};
-```
-
-### `operations.ThirtyFive`
-
-```typescript
-const value: operations.ThirtyFive = {
-  type: "bert_coherence",
 };
 ```
 

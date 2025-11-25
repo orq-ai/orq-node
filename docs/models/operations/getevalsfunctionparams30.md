@@ -6,7 +6,7 @@
 import { GetEvalsFunctionParams30 } from "@orq-ai/node/models/operations";
 
 let value: GetEvalsFunctionParams30 = {
-  type: "words_count",
+  type: "sentences_count",
 };
 ```
 

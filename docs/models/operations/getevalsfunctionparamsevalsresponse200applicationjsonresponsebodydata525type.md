@@ -7,11 +7,11 @@ import { GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData52
 
 let value:
   GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type =
-    "topic_match";
+    "keywords_match";
 ```
 
 ## Values
 
 ```typescript
-"topic_match"
+"keywords_match"
 ```

@@ -7,11 +7,11 @@ import { UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531T
 
 let value:
   UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type =
-    "sentences_count";
+    "lexical_repetition";
 ```
 
 ## Values
 
 ```typescript
-"sentences_count"
+"lexical_repetition"
 ```

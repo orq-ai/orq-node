@@ -10,7 +10,7 @@ let value: DataFunction = {
   description: "down at for gee excitable huzzah acidic provided hmph",
   type: "function_eval",
   functionParams: {
-    type: "most_repeated_words",
+    type: "levenshtein_distance",
   },
   key: "<key>",
 };

@@ -6,7 +6,7 @@
 import { GetEvalsFunctionParams27 } from "@orq-ai/node/models/operations";
 
 let value: GetEvalsFunctionParams27 = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 

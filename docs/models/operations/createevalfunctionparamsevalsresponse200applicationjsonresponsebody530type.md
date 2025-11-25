@@ -7,11 +7,11 @@ import { CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530T
 
 let value:
   CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type =
-    "words_count";
+    "sentences_count";
 ```
 
 ## Values
 
 ```typescript
-"words_count"
+"sentences_count"
 ```

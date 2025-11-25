@@ -7,11 +7,11 @@ import { CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527T
 
 let value:
   CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type =
-    "most_repeated_words";
+    "flesch_reading_ease";
 ```
 
 ## Values
 
 ```typescript
-"most_repeated_words"
+"flesch_reading_ease"
 ```

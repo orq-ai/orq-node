@@ -215,8 +215,11 @@ const value: operations.GetEvalsFunctionParams24 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams25 = {
-  type: "topic_match",
-  topic: "<value>",
+  type: "keywords_match",
+  keywords: [
+    "<value 1>",
+    "<value 2>",
+  ],
 };
 ```
 
@@ -224,10 +227,7 @@ const value: operations.GetEvalsFunctionParams25 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams26 = {
-  type: "keywords_match",
-  keywords: [
-    "<value 1>",
-  ],
+  type: "most_repeated_words",
 };
 ```
 
@@ -235,7 +235,7 @@ const value: operations.GetEvalsFunctionParams26 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams27 = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 
@@ -243,7 +243,7 @@ const value: operations.GetEvalsFunctionParams27 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams28 = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 
@@ -251,7 +251,7 @@ const value: operations.GetEvalsFunctionParams28 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams29 = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 
@@ -259,7 +259,7 @@ const value: operations.GetEvalsFunctionParams29 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams30 = {
-  type: "words_count",
+  type: "sentences_count",
 };
 ```
 
@@ -267,7 +267,7 @@ const value: operations.GetEvalsFunctionParams30 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams31 = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 
@@ -275,31 +275,7 @@ const value: operations.GetEvalsFunctionParams31 = {
 
 ```typescript
 const value: operations.GetEvalsFunctionParams32 = {
-  type: "lexical_repetition",
-};
-```
-
-### `operations.GetEvalsFunctionParams33`
-
-```typescript
-const value: operations.GetEvalsFunctionParams33 = {
-  type: "semantic_repetition",
-};
-```
-
-### `operations.GetEvalsFunctionParams34`
-
-```typescript
-const value: operations.GetEvalsFunctionParams34 = {
   type: "grammar_diversity",
-};
-```
-
-### `operations.GetEvalsFunctionParams35`
-
-```typescript
-const value: operations.GetEvalsFunctionParams35 = {
-  type: "bert_coherence",
 };
 ```
 
