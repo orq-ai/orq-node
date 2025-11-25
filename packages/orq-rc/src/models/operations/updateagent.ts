@@ -1323,7 +1323,7 @@ export type UpdateAgentRequest = {
    * The unique key of the agent to update
    */
   agentKey: string;
-  requestBody?: UpdateAgentUpdateAgentRequest | undefined;
+  requestBody: UpdateAgentUpdateAgentRequest;
 };
 
 /**
@@ -5891,8 +5891,7 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   agent_key: z.string(),
-  RequestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "agent_key": "agentKey",
@@ -5902,7 +5901,7 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
-  RequestBody?: UpdateAgentUpdateAgentRequest$Outbound | undefined;
+  RequestBody: UpdateAgentUpdateAgentRequest$Outbound;
 };
 
 /** @internal */
@@ -5912,8 +5911,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest
 > = z.object({
   agentKey: z.string(),
-  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",

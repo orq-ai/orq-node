@@ -30,7 +30,7 @@ export class Agents extends ClientSDK {
    * Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.
    */
   async create(
-    request?: operations.CreateAgentRequestRequestBody | undefined,
+    request: operations.CreateAgentRequestRequestBody,
     options?: RequestOptions,
   ): Promise<operations.CreateAgentRequestResponseBody> {
     return unwrapAsync(agentsCreate(
@@ -81,14 +81,14 @@ export class Agents extends ClientSDK {
    * Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations.
    */
   async update(
+    requestBody: operations.UpdateAgentUpdateAgentRequest,
     agentKey: string,
-    requestBody?: operations.UpdateAgentUpdateAgentRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.UpdateAgentResponseBody> {
     return unwrapAsync(agentsUpdate(
       this,
-      agentKey,
       requestBody,
+      agentKey,
       options,
     ));
   }
@@ -144,7 +144,7 @@ export class Agents extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async run(
-    request?: operations.RunAgentRequestBody | undefined,
+    request: operations.RunAgentRequestBody,
     options?: RequestOptions,
   ): Promise<operations.RunAgentA2ATaskResponse> {
     return unwrapAsync(agentsRun(
@@ -163,7 +163,7 @@ export class Agents extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async streamRun(
-    request?: operations.StreamRunAgentRequestBody | undefined,
+    request: operations.StreamRunAgentRequestBody,
     options?: RequestOptions,
   ): Promise<EventStream<operations.StreamRunAgentResponseBody>> {
     return unwrapAsync(agentsStreamRun(
@@ -182,14 +182,14 @@ export class Agents extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async stream(
+    requestBody: operations.StreamAgentRequestBody,
     key: string,
-    requestBody?: operations.StreamAgentRequestBody | undefined,
     options?: RequestOptions,
   ): Promise<EventStream<operations.StreamAgentResponseBody>> {
     return unwrapAsync(agentsStream(
       this,
-      key,
       requestBody,
+      key,
       options,
     ));
   }

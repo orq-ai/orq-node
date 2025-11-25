@@ -33,7 +33,7 @@ import { Result } from "../types/fp.js";
  */
 export function agentsCreate(
   client: OrqCore,
-  request?: operations.CreateAgentRequestRequestBody | undefined,
+  request: operations.CreateAgentRequestRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function agentsCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreateAgentRequestRequestBody | undefined,
+  request: operations.CreateAgentRequestRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,18 +80,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.CreateAgentRequestRequestBody$outboundSchema.optional().parse(
-        value,
-      ),
+      operations.CreateAgentRequestRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/agents")();
 

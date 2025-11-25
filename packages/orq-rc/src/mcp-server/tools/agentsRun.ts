@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.RunAgentRequestBody$inboundSchema.optional(),
+  request: operations.RunAgentRequestBody$inboundSchema,
 };
 
 export const tool$agentsRun: ToolDefinition<typeof args> = {

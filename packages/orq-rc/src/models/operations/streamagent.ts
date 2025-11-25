@@ -254,7 +254,7 @@ export type StreamAgentRequest = {
    * The key or ID of the agent to invoke
    */
   key: string;
-  requestBody?: StreamAgentRequestBody | undefined;
+  requestBody: StreamAgentRequestBody;
 };
 
 export const StreamAgentDataAgentsResponse200TextEventStreamResponseBody17Type =
@@ -2800,7 +2800,7 @@ export const StreamAgentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
-  RequestBody: z.lazy(() => StreamAgentRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => StreamAgentRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -2809,7 +2809,7 @@ export const StreamAgentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type StreamAgentRequest$Outbound = {
   key: string;
-  RequestBody?: StreamAgentRequestBody$Outbound | undefined;
+  RequestBody: StreamAgentRequestBody$Outbound;
 };
 
 /** @internal */
@@ -2819,7 +2819,7 @@ export const StreamAgentRequest$outboundSchema: z.ZodType<
   StreamAgentRequest
 > = z.object({
   key: z.string(),
-  requestBody: z.lazy(() => StreamAgentRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => StreamAgentRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

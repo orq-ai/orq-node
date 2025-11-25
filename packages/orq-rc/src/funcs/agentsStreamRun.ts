@@ -37,7 +37,7 @@ import { Result } from "../types/fp.js";
  */
 export function agentsStreamRun(
   client: OrqCore,
-  request?: operations.StreamRunAgentRequestBody | undefined,
+  request: operations.StreamRunAgentRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function agentsStreamRun(
 
 async function $do(
   client: OrqCore,
-  request?: operations.StreamRunAgentRequestBody | undefined,
+  request: operations.StreamRunAgentRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,19 +83,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.StreamRunAgentRequestBody$outboundSchema.optional().parse(
-        value,
-      ),
+    (value) => operations.StreamRunAgentRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/agents/stream-run")();
 

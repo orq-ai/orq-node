@@ -22,7 +22,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.agents.responses.create("<value>", {
+  const result = await orq.agents.responses.create({
     message: {
       role: "tool",
       parts: [],
@@ -50,7 +50,7 @@ async function run() {
         "priority-high",
       ],
     },
-  });
+  }, "<value>");
 
   console.log(result);
 }
@@ -73,7 +73,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await agentsResponsesCreate(orq, "<value>", {
+  const res = await agentsResponsesCreate(orq, {
     message: {
       role: "tool",
       parts: [],
@@ -101,7 +101,7 @@ async function run() {
         "priority-high",
       ],
     },
-  });
+  }, "<value>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -118,7 +118,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `agentKey`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The unique key of identifier of the agent to invoke                                                                                                                            |
-| `requestBody`                                                                                                                                                                  | [operations.CreateAgentResponseRequestRequestBody](../../models/operations/createagentresponserequestrequestbody.md)                                                           | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `requestBody`                                                                                                                                                                  | [operations.CreateAgentResponseRequestRequestBody](../../models/operations/createagentresponserequestrequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

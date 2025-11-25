@@ -8,9 +8,8 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
+  requestBody: operations.CreateAgentResponseRequestRequestBody$inboundSchema,
   agentKey: z.string(),
-  requestBody: operations.CreateAgentResponseRequestRequestBody$inboundSchema
-    .optional(),
 };
 
 export const tool$agentsResponsesCreate: ToolDefinition<typeof args> = {
@@ -22,8 +21,8 @@ Initiates an agent conversation and returns a complete response. This endpoint m
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsResponsesCreate(
       client,
-      args.agentKey,
       args.requestBody,
+      args.agentKey,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
