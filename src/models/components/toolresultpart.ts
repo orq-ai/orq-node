@@ -15,7 +15,7 @@ export const ToolResultPartKind = {
 export type ToolResultPartKind = ClosedEnum<typeof ToolResultPartKind>;
 
 /**
- * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
+ * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
 export type ToolResultPart = {
   kind: ToolResultPartKind;

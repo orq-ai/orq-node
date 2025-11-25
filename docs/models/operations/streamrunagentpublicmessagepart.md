@@ -14,21 +14,21 @@ const value: components.TextPart = {
 };
 ```
 
-### `operations.StreamRunAgentPublicMessagePartFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamRunAgentPublicMessagePartFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
-    uri: "https://calculating-offset.net",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.StreamRunAgentPublicMessagePartToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamRunAgentPublicMessagePartToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

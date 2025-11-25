@@ -796,7 +796,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type
   >;
 
-export type CreateEvalFunctionParams17 = {
+export type Seventeen = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type;
 };
@@ -810,7 +810,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type
   >;
 
-export type CreateEvalFunctionParams16 = {
+export type Sixteen = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type;
 };
@@ -824,7 +824,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type
   >;
 
-export type CreateEvalFunctionParams15 = {
+export type Fifteen = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type;
   pattern: string;
@@ -839,7 +839,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type
   >;
 
-export type CreateEvalFunctionParams14 = {
+export type Fourteen = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type;
 };
@@ -853,7 +853,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type
   >;
 
-export type CreateEvalFunctionParams13 = {
+export type Thirteen = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type;
   value: number;
@@ -868,7 +868,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type
   >;
 
-export type CreateEvalFunctionParams12 = {
+export type Twelve = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type;
   min: number;
@@ -884,7 +884,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type
   >;
 
-export type CreateEvalFunctionParams11 = {
+export type Eleven = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type;
   value: number;
@@ -899,7 +899,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type
   >;
 
-export type CreateEvalFunctionParams10 = {
+export type Ten = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type;
 };
@@ -913,7 +913,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type
   >;
 
-export type CreateEvalFunctionParams9 = {
+export type Nine = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type;
   value: string;
@@ -928,7 +928,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type
   >;
 
-export type CreateEvalFunctionParams8 = {
+export type Eight = {
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type;
   value: string;
@@ -943,7 +943,7 @@ export type CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyT
     typeof CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
   >;
 
-export type CreateEvalFunctionParams7 = {
+export type Seven = {
   type: CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType;
 };
 
@@ -1017,24 +1017,24 @@ export type CreateEvalFunctionParams1 = {
 };
 
 export type FunctionParams =
-  | CreateEvalFunctionParams12
+  | Twelve
   | CreateEvalFunctionParams1
   | CreateEvalFunctionParams2
   | CreateEvalFunctionParams3
   | CreateEvalFunctionParams4
-  | CreateEvalFunctionParams8
-  | CreateEvalFunctionParams9
-  | CreateEvalFunctionParams11
-  | CreateEvalFunctionParams13
-  | CreateEvalFunctionParams15
+  | Eight
+  | Nine
+  | Eleven
+  | Thirteen
+  | Fifteen
   | TwentyFive
   | CreateEvalFunctionParams5
   | CreateEvalFunctionParams6
-  | CreateEvalFunctionParams7
-  | CreateEvalFunctionParams10
-  | CreateEvalFunctionParams14
-  | CreateEvalFunctionParams16
-  | CreateEvalFunctionParams17
+  | Seven
+  | Ten
+  | Fourteen
+  | Sixteen
+  | Seventeen
   | Eighteen
   | Nineteen
   | Twenty
@@ -1061,24 +1061,24 @@ export type CreateEvalResponseBodyFunction = {
     | undefined;
   type: CreateEvalResponseBodyEvalsResponse200Type;
   functionParams:
-    | CreateEvalFunctionParams12
+    | Twelve
     | CreateEvalFunctionParams1
     | CreateEvalFunctionParams2
     | CreateEvalFunctionParams3
     | CreateEvalFunctionParams4
-    | CreateEvalFunctionParams8
-    | CreateEvalFunctionParams9
-    | CreateEvalFunctionParams11
-    | CreateEvalFunctionParams13
-    | CreateEvalFunctionParams15
+    | Eight
+    | Nine
+    | Eleven
+    | Thirteen
+    | Fifteen
     | TwentyFive
     | CreateEvalFunctionParams5
     | CreateEvalFunctionParams6
-    | CreateEvalFunctionParams7
-    | CreateEvalFunctionParams10
-    | CreateEvalFunctionParams14
-    | CreateEvalFunctionParams16
-    | CreateEvalFunctionParams17
+    | Seven
+    | Ten
+    | Fourteen
+    | Sixteen
+    | Seventeen
     | Eighteen
     | Nineteen
     | Twenty
@@ -2707,8 +2707,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -2750,8 +2750,8 @@ export const Typescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -3032,8 +3032,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-11-25T16:24:25.370Z"),
-    updated: z.string().default("2025-11-25T16:24:25.370Z"),
+    created: z.string().default("2025-11-25T17:17:29.469Z"),
+    updated: z.string().default("2025-11-25T17:17:29.469Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -3078,8 +3078,8 @@ export const Ragas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -4125,8 +4125,8 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams17$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams17,
+export const Seventeen$inboundSchema: z.ZodType<
+  Seventeen,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4134,34 +4134,30 @@ export const CreateEvalFunctionParams17$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$inboundSchema,
 });
 /** @internal */
-export type CreateEvalFunctionParams17$Outbound = {
+export type Seventeen$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams17$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams17$Outbound,
+export const Seventeen$outboundSchema: z.ZodType<
+  Seventeen$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams17
+  Seventeen
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema,
 });
 
-export function createEvalFunctionParams17ToJSON(
-  createEvalFunctionParams17: CreateEvalFunctionParams17,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams17$outboundSchema.parse(createEvalFunctionParams17),
-  );
+export function seventeenToJSON(seventeen: Seventeen): string {
+  return JSON.stringify(Seventeen$outboundSchema.parse(seventeen));
 }
-export function createEvalFunctionParams17FromJSON(
+export function seventeenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams17, SDKValidationError> {
+): SafeParseResult<Seventeen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams17$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams17' from JSON`,
+    (x) => Seventeen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Seventeen' from JSON`,
   );
 }
 
@@ -4180,43 +4176,36 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams16$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams16,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema,
-});
+export const Sixteen$inboundSchema: z.ZodType<Sixteen, z.ZodTypeDef, unknown> =
+  z.object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$inboundSchema,
+  });
 /** @internal */
-export type CreateEvalFunctionParams16$Outbound = {
+export type Sixteen$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams16$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams16$Outbound,
+export const Sixteen$outboundSchema: z.ZodType<
+  Sixteen$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams16
+  Sixteen
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema,
 });
 
-export function createEvalFunctionParams16ToJSON(
-  createEvalFunctionParams16: CreateEvalFunctionParams16,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams16$outboundSchema.parse(createEvalFunctionParams16),
-  );
+export function sixteenToJSON(sixteen: Sixteen): string {
+  return JSON.stringify(Sixteen$outboundSchema.parse(sixteen));
 }
-export function createEvalFunctionParams16FromJSON(
+export function sixteenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams16, SDKValidationError> {
+): SafeParseResult<Sixteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams16$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams16' from JSON`,
+    (x) => Sixteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Sixteen' from JSON`,
   );
 }
 
@@ -4235,46 +4224,39 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams15$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams15,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema,
-  pattern: z.string(),
-});
+export const Fifteen$inboundSchema: z.ZodType<Fifteen, z.ZodTypeDef, unknown> =
+  z.object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$inboundSchema,
+    pattern: z.string(),
+  });
 /** @internal */
-export type CreateEvalFunctionParams15$Outbound = {
+export type Fifteen$Outbound = {
   type: string;
   pattern: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams15$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams15$Outbound,
+export const Fifteen$outboundSchema: z.ZodType<
+  Fifteen$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams15
+  Fifteen
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$outboundSchema,
   pattern: z.string(),
 });
 
-export function createEvalFunctionParams15ToJSON(
-  createEvalFunctionParams15: CreateEvalFunctionParams15,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams15$outboundSchema.parse(createEvalFunctionParams15),
-  );
+export function fifteenToJSON(fifteen: Fifteen): string {
+  return JSON.stringify(Fifteen$outboundSchema.parse(fifteen));
 }
-export function createEvalFunctionParams15FromJSON(
+export function fifteenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams15, SDKValidationError> {
+): SafeParseResult<Fifteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams15$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams15' from JSON`,
+    (x) => Fifteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Fifteen' from JSON`,
   );
 }
 
@@ -4293,8 +4275,8 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams14$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams14,
+export const Fourteen$inboundSchema: z.ZodType<
+  Fourteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4302,34 +4284,30 @@ export const CreateEvalFunctionParams14$inboundSchema: z.ZodType<
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$inboundSchema,
 });
 /** @internal */
-export type CreateEvalFunctionParams14$Outbound = {
+export type Fourteen$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams14$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams14$Outbound,
+export const Fourteen$outboundSchema: z.ZodType<
+  Fourteen$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams14
+  Fourteen
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema,
 });
 
-export function createEvalFunctionParams14ToJSON(
-  createEvalFunctionParams14: CreateEvalFunctionParams14,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams14$outboundSchema.parse(createEvalFunctionParams14),
-  );
+export function fourteenToJSON(fourteen: Fourteen): string {
+  return JSON.stringify(Fourteen$outboundSchema.parse(fourteen));
 }
-export function createEvalFunctionParams14FromJSON(
+export function fourteenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams14, SDKValidationError> {
+): SafeParseResult<Fourteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams14$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams14' from JSON`,
+    (x) => Fourteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Fourteen' from JSON`,
   );
 }
 
@@ -4348,8 +4326,8 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams13$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams13,
+export const Thirteen$inboundSchema: z.ZodType<
+  Thirteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4358,36 +4336,32 @@ export const CreateEvalFunctionParams13$inboundSchema: z.ZodType<
   value: z.number(),
 });
 /** @internal */
-export type CreateEvalFunctionParams13$Outbound = {
+export type Thirteen$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams13$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams13$Outbound,
+export const Thirteen$outboundSchema: z.ZodType<
+  Thirteen$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams13
+  Thirteen
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$outboundSchema,
   value: z.number(),
 });
 
-export function createEvalFunctionParams13ToJSON(
-  createEvalFunctionParams13: CreateEvalFunctionParams13,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams13$outboundSchema.parse(createEvalFunctionParams13),
-  );
+export function thirteenToJSON(thirteen: Thirteen): string {
+  return JSON.stringify(Thirteen$outboundSchema.parse(thirteen));
 }
-export function createEvalFunctionParams13FromJSON(
+export function thirteenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams13, SDKValidationError> {
+): SafeParseResult<Thirteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams13$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams13' from JSON`,
+    (x) => Thirteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Thirteen' from JSON`,
   );
 }
 
@@ -4406,28 +4380,25 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams12$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams12,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema,
-  min: z.number(),
-  max: z.number(),
-});
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$inboundSchema,
+    min: z.number(),
+    max: z.number(),
+  });
 /** @internal */
-export type CreateEvalFunctionParams12$Outbound = {
+export type Twelve$Outbound = {
   type: string;
   min: number;
   max: number;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams12$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams12$Outbound,
+export const Twelve$outboundSchema: z.ZodType<
+  Twelve$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams12
+  Twelve
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$outboundSchema,
@@ -4435,20 +4406,16 @@ export const CreateEvalFunctionParams12$outboundSchema: z.ZodType<
   max: z.number(),
 });
 
-export function createEvalFunctionParams12ToJSON(
-  createEvalFunctionParams12: CreateEvalFunctionParams12,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams12$outboundSchema.parse(createEvalFunctionParams12),
-  );
+export function twelveToJSON(twelve: Twelve): string {
+  return JSON.stringify(Twelve$outboundSchema.parse(twelve));
 }
-export function createEvalFunctionParams12FromJSON(
+export function twelveFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams12, SDKValidationError> {
+): SafeParseResult<Twelve, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams12$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams12' from JSON`,
+    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Twelve' from JSON`,
   );
 }
 
@@ -4467,46 +4434,39 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams11$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams11,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema,
-  value: z.number(),
-});
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$inboundSchema,
+    value: z.number(),
+  });
 /** @internal */
-export type CreateEvalFunctionParams11$Outbound = {
+export type Eleven$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams11$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams11$Outbound,
+export const Eleven$outboundSchema: z.ZodType<
+  Eleven$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams11
+  Eleven
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$outboundSchema,
   value: z.number(),
 });
 
-export function createEvalFunctionParams11ToJSON(
-  createEvalFunctionParams11: CreateEvalFunctionParams11,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams11$outboundSchema.parse(createEvalFunctionParams11),
-  );
+export function elevenToJSON(eleven: Eleven): string {
+  return JSON.stringify(Eleven$outboundSchema.parse(eleven));
 }
-export function createEvalFunctionParams11FromJSON(
+export function elevenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams11, SDKValidationError> {
+): SafeParseResult<Eleven, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams11$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams11' from JSON`,
+    (x) => Eleven$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eleven' from JSON`,
   );
 }
 
@@ -4525,43 +4485,33 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams10$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams10,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema,
-});
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$inboundSchema,
+  });
 /** @internal */
-export type CreateEvalFunctionParams10$Outbound = {
+export type Ten$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams10$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams10$Outbound,
-  z.ZodTypeDef,
-  CreateEvalFunctionParams10
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema,
-});
+export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema,
+  });
 
-export function createEvalFunctionParams10ToJSON(
-  createEvalFunctionParams10: CreateEvalFunctionParams10,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams10$outboundSchema.parse(createEvalFunctionParams10),
-  );
+export function tenToJSON(ten: Ten): string {
+  return JSON.stringify(Ten$outboundSchema.parse(ten));
 }
-export function createEvalFunctionParams10FromJSON(
+export function tenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams10, SDKValidationError> {
+): SafeParseResult<Ten, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams10$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams10' from JSON`,
+    (x) => Ten$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ten' from JSON`,
   );
 }
 
@@ -4580,46 +4530,36 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams9$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams9,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema,
-  value: z.string(),
-});
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$inboundSchema,
+    value: z.string(),
+  });
 /** @internal */
-export type CreateEvalFunctionParams9$Outbound = {
+export type Nine$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams9$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams9$Outbound,
-  z.ZodTypeDef,
-  CreateEvalFunctionParams9
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema,
-  value: z.string(),
-});
+export const Nine$outboundSchema: z.ZodType<Nine$Outbound, z.ZodTypeDef, Nine> =
+  z.object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema,
+    value: z.string(),
+  });
 
-export function createEvalFunctionParams9ToJSON(
-  createEvalFunctionParams9: CreateEvalFunctionParams9,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams9$outboundSchema.parse(createEvalFunctionParams9),
-  );
+export function nineToJSON(nine: Nine): string {
+  return JSON.stringify(Nine$outboundSchema.parse(nine));
 }
-export function createEvalFunctionParams9FromJSON(
+export function nineFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams9, SDKValidationError> {
+): SafeParseResult<Nine, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams9$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams9' from JSON`,
+    (x) => Nine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Nine' from JSON`,
   );
 }
 
@@ -4638,46 +4578,39 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams8$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams8,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
-  value: z.string(),
-});
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
+    value: z.string(),
+  });
 /** @internal */
-export type CreateEvalFunctionParams8$Outbound = {
+export type Eight$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams8$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams8$Outbound,
+export const Eight$outboundSchema: z.ZodType<
+  Eight$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams8
+  Eight
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema,
   value: z.string(),
 });
 
-export function createEvalFunctionParams8ToJSON(
-  createEvalFunctionParams8: CreateEvalFunctionParams8,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams8$outboundSchema.parse(createEvalFunctionParams8),
-  );
+export function eightToJSON(eight: Eight): string {
+  return JSON.stringify(Eight$outboundSchema.parse(eight));
 }
-export function createEvalFunctionParams8FromJSON(
+export function eightFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams8, SDKValidationError> {
+): SafeParseResult<Eight, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams8$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams8' from JSON`,
+    (x) => Eight$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eight' from JSON`,
   );
 }
 
@@ -4696,43 +4629,36 @@ export const CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
-export const CreateEvalFunctionParams7$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams7,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-});
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  });
 /** @internal */
-export type CreateEvalFunctionParams7$Outbound = {
+export type Seven$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateEvalFunctionParams7$outboundSchema: z.ZodType<
-  CreateEvalFunctionParams7$Outbound,
+export const Seven$outboundSchema: z.ZodType<
+  Seven$Outbound,
   z.ZodTypeDef,
-  CreateEvalFunctionParams7
+  Seven
 > = z.object({
   type:
     CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
 });
 
-export function createEvalFunctionParams7ToJSON(
-  createEvalFunctionParams7: CreateEvalFunctionParams7,
-): string {
-  return JSON.stringify(
-    CreateEvalFunctionParams7$outboundSchema.parse(createEvalFunctionParams7),
-  );
+export function sevenToJSON(seven: Seven): string {
+  return JSON.stringify(Seven$outboundSchema.parse(seven));
 }
-export function createEvalFunctionParams7FromJSON(
+export function sevenFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams7, SDKValidationError> {
+): SafeParseResult<Seven, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams7$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams7' from JSON`,
+    (x) => Seven$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Seven' from JSON`,
   );
 }
 
@@ -5046,24 +4972,24 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateEvalFunctionParams12$inboundSchema),
+  z.lazy(() => Twelve$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams1$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams2$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams8$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams9$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams11$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams13$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams15$inboundSchema),
+  z.lazy(() => Eight$inboundSchema),
+  z.lazy(() => Nine$inboundSchema),
+  z.lazy(() => Eleven$inboundSchema),
+  z.lazy(() => Thirteen$inboundSchema),
+  z.lazy(() => Fifteen$inboundSchema),
   z.lazy(() => TwentyFive$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams5$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams6$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams7$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams10$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams14$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams16$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams17$inboundSchema),
+  z.lazy(() => Seven$inboundSchema),
+  z.lazy(() => Ten$inboundSchema),
+  z.lazy(() => Fourteen$inboundSchema),
+  z.lazy(() => Sixteen$inboundSchema),
+  z.lazy(() => Seventeen$inboundSchema),
   z.lazy(() => Eighteen$inboundSchema),
   z.lazy(() => Nineteen$inboundSchema),
   z.lazy(() => Twenty$inboundSchema),
@@ -5081,24 +5007,24 @@ export const FunctionParams$inboundSchema: z.ZodType<
 ]);
 /** @internal */
 export type FunctionParams$Outbound =
-  | CreateEvalFunctionParams12$Outbound
+  | Twelve$Outbound
   | CreateEvalFunctionParams1$Outbound
   | CreateEvalFunctionParams2$Outbound
   | CreateEvalFunctionParams3$Outbound
   | CreateEvalFunctionParams4$Outbound
-  | CreateEvalFunctionParams8$Outbound
-  | CreateEvalFunctionParams9$Outbound
-  | CreateEvalFunctionParams11$Outbound
-  | CreateEvalFunctionParams13$Outbound
-  | CreateEvalFunctionParams15$Outbound
+  | Eight$Outbound
+  | Nine$Outbound
+  | Eleven$Outbound
+  | Thirteen$Outbound
+  | Fifteen$Outbound
   | TwentyFive$Outbound
   | CreateEvalFunctionParams5$Outbound
   | CreateEvalFunctionParams6$Outbound
-  | CreateEvalFunctionParams7$Outbound
-  | CreateEvalFunctionParams10$Outbound
-  | CreateEvalFunctionParams14$Outbound
-  | CreateEvalFunctionParams16$Outbound
-  | CreateEvalFunctionParams17$Outbound
+  | Seven$Outbound
+  | Ten$Outbound
+  | Fourteen$Outbound
+  | Sixteen$Outbound
+  | Seventeen$Outbound
   | Eighteen$Outbound
   | Nineteen$Outbound
   | Twenty$Outbound
@@ -5120,24 +5046,24 @@ export const FunctionParams$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionParams
 > = z.union([
-  z.lazy(() => CreateEvalFunctionParams12$outboundSchema),
+  z.lazy(() => Twelve$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams1$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams2$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams3$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams4$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams8$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams9$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams11$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams13$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams15$outboundSchema),
+  z.lazy(() => Eight$outboundSchema),
+  z.lazy(() => Nine$outboundSchema),
+  z.lazy(() => Eleven$outboundSchema),
+  z.lazy(() => Thirteen$outboundSchema),
+  z.lazy(() => Fifteen$outboundSchema),
   z.lazy(() => TwentyFive$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams5$outboundSchema),
   z.lazy(() => CreateEvalFunctionParams6$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams7$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams10$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams14$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams16$outboundSchema),
-  z.lazy(() => CreateEvalFunctionParams17$outboundSchema),
+  z.lazy(() => Seven$outboundSchema),
+  z.lazy(() => Ten$outboundSchema),
+  z.lazy(() => Fourteen$outboundSchema),
+  z.lazy(() => Sixteen$outboundSchema),
+  z.lazy(() => Seventeen$outboundSchema),
   z.lazy(() => Eighteen$outboundSchema),
   z.lazy(() => Nineteen$outboundSchema),
   z.lazy(() => Twenty$outboundSchema),
@@ -5175,8 +5101,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -5187,24 +5113,24 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
   ]).optional(),
   type: CreateEvalResponseBodyEvalsResponse200Type$inboundSchema,
   function_params: z.union([
-    z.lazy(() => CreateEvalFunctionParams12$inboundSchema),
+    z.lazy(() => Twelve$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams1$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams2$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams8$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams9$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams11$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams13$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams15$inboundSchema),
+    z.lazy(() => Eight$inboundSchema),
+    z.lazy(() => Nine$inboundSchema),
+    z.lazy(() => Eleven$inboundSchema),
+    z.lazy(() => Thirteen$inboundSchema),
+    z.lazy(() => Fifteen$inboundSchema),
     z.lazy(() => TwentyFive$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams5$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams6$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams7$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams10$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams14$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams16$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams17$inboundSchema),
+    z.lazy(() => Seven$inboundSchema),
+    z.lazy(() => Ten$inboundSchema),
+    z.lazy(() => Fourteen$inboundSchema),
+    z.lazy(() => Sixteen$inboundSchema),
+    z.lazy(() => Seventeen$inboundSchema),
     z.lazy(() => Eighteen$inboundSchema),
     z.lazy(() => Nineteen$inboundSchema),
     z.lazy(() => Twenty$inboundSchema),
@@ -5240,24 +5166,24 @@ export type CreateEvalResponseBodyFunction$Outbound = {
     | undefined;
   type: string;
   function_params:
-    | CreateEvalFunctionParams12$Outbound
+    | Twelve$Outbound
     | CreateEvalFunctionParams1$Outbound
     | CreateEvalFunctionParams2$Outbound
     | CreateEvalFunctionParams3$Outbound
     | CreateEvalFunctionParams4$Outbound
-    | CreateEvalFunctionParams8$Outbound
-    | CreateEvalFunctionParams9$Outbound
-    | CreateEvalFunctionParams11$Outbound
-    | CreateEvalFunctionParams13$Outbound
-    | CreateEvalFunctionParams15$Outbound
+    | Eight$Outbound
+    | Nine$Outbound
+    | Eleven$Outbound
+    | Thirteen$Outbound
+    | Fifteen$Outbound
     | TwentyFive$Outbound
     | CreateEvalFunctionParams5$Outbound
     | CreateEvalFunctionParams6$Outbound
-    | CreateEvalFunctionParams7$Outbound
-    | CreateEvalFunctionParams10$Outbound
-    | CreateEvalFunctionParams14$Outbound
-    | CreateEvalFunctionParams16$Outbound
-    | CreateEvalFunctionParams17$Outbound
+    | Seven$Outbound
+    | Ten$Outbound
+    | Fourteen$Outbound
+    | Sixteen$Outbound
+    | Seventeen$Outbound
     | Eighteen$Outbound
     | Nineteen$Outbound
     | Twenty$Outbound
@@ -5283,8 +5209,8 @@ export const CreateEvalResponseBodyFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -5295,24 +5221,24 @@ export const CreateEvalResponseBodyFunction$outboundSchema: z.ZodType<
   ]).optional(),
   type: CreateEvalResponseBodyEvalsResponse200Type$outboundSchema,
   functionParams: z.union([
-    z.lazy(() => CreateEvalFunctionParams12$outboundSchema),
+    z.lazy(() => Twelve$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams1$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams2$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams3$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams4$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams8$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams9$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams11$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams13$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams15$outboundSchema),
+    z.lazy(() => Eight$outboundSchema),
+    z.lazy(() => Nine$outboundSchema),
+    z.lazy(() => Eleven$outboundSchema),
+    z.lazy(() => Thirteen$outboundSchema),
+    z.lazy(() => Fifteen$outboundSchema),
     z.lazy(() => TwentyFive$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams5$outboundSchema),
     z.lazy(() => CreateEvalFunctionParams6$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams7$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams10$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams14$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams16$outboundSchema),
-    z.lazy(() => CreateEvalFunctionParams17$outboundSchema),
+    z.lazy(() => Seven$outboundSchema),
+    z.lazy(() => Ten$outboundSchema),
+    z.lazy(() => Fourteen$outboundSchema),
+    z.lazy(() => Sixteen$outboundSchema),
+    z.lazy(() => Seventeen$outboundSchema),
     z.lazy(() => Eighteen$outboundSchema),
     z.lazy(() => Nineteen$outboundSchema),
     z.lazy(() => Twenty$outboundSchema),
@@ -5598,8 +5524,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -5640,8 +5566,8 @@ export const ResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -5921,8 +5847,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -5969,8 +5895,8 @@ export const ResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -6226,8 +6152,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -6266,8 +6192,8 @@ export const ResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -6505,8 +6431,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -6545,8 +6471,8 @@ export const ResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T16:24:25.370Z"),
-  updated: z.string().default("2025-11-25T16:24:25.370Z"),
+  created: z.string().default("2025-11-25T17:17:29.469Z"),
+  updated: z.string().default("2025-11-25T17:17:29.469Z"),
   guardrailConfig: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),

@@ -14,21 +14,21 @@ const value: components.TextPart = {
 };
 ```
 
-### `operations.RunAgentPublicMessagePartFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.RunAgentPublicMessagePartFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
-    uri: "https://admired-bowler.name/",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.RunAgentPublicMessagePartToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.RunAgentPublicMessagePartToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };
