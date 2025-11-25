@@ -7,11 +7,11 @@ import { CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525T
 
 let value:
   CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type =
-    "topic_match";
+    "keywords_match";
 ```
 
 ## Values
 
 ```typescript
-"topic_match"
+"keywords_match"
 ```

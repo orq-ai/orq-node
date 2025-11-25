@@ -170,15 +170,15 @@ export type Audio = {
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export const Type = {
+export const PrefixMessagesType = {
   Function: "function",
 } as const;
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export type Type = ClosedEnum<typeof Type>;
+export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
 
-export type FunctionT = {
+export type PrefixMessagesFunction = {
   /**
    * The name of the function to call.
    */
@@ -197,8 +197,8 @@ export type ToolCalls = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
-  type: Type;
-  function: FunctionT;
+  type: PrefixMessagesType;
+  function: PrefixMessagesFunction;
 };
 
 export type AssistantMessage = {
@@ -1954,16 +1954,17 @@ export function audioFromJSON(
 }
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const PrefixMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesType
+> = z.nativeEnum(PrefixMessagesType);
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
+export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesType
+> = PrefixMessagesType$inboundSchema;
 
 /** @internal */
-export const FunctionT$inboundSchema: z.ZodType<
-  FunctionT,
+export const PrefixMessagesFunction$inboundSchema: z.ZodType<
+  PrefixMessagesFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1971,31 +1972,35 @@ export const FunctionT$inboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 /** @internal */
-export type FunctionT$Outbound = {
+export type PrefixMessagesFunction$Outbound = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
 /** @internal */
-export const FunctionT$outboundSchema: z.ZodType<
-  FunctionT$Outbound,
+export const PrefixMessagesFunction$outboundSchema: z.ZodType<
+  PrefixMessagesFunction$Outbound,
   z.ZodTypeDef,
-  FunctionT
+  PrefixMessagesFunction
 > = z.object({
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
 
-export function functionToJSON(functionT: FunctionT): string {
-  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
+export function prefixMessagesFunctionToJSON(
+  prefixMessagesFunction: PrefixMessagesFunction,
+): string {
+  return JSON.stringify(
+    PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
+  );
 }
-export function functionFromJSON(
+export function prefixMessagesFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionT, SDKValidationError> {
+): SafeParseResult<PrefixMessagesFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionT' from JSON`,
+    (x) => PrefixMessagesFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrefixMessagesFunction' from JSON`,
   );
 }
 
@@ -2006,14 +2011,14 @@ export const ToolCalls$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: Type$inboundSchema,
-  function: z.lazy(() => FunctionT$inboundSchema),
+  type: PrefixMessagesType$inboundSchema,
+  function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
 });
 /** @internal */
 export type ToolCalls$Outbound = {
   id: string;
   type: string;
-  function: FunctionT$Outbound;
+  function: PrefixMessagesFunction$Outbound;
 };
 
 /** @internal */
@@ -2023,8 +2028,8 @@ export const ToolCalls$outboundSchema: z.ZodType<
   ToolCalls
 > = z.object({
   id: z.string(),
-  type: Type$outboundSchema,
-  function: z.lazy(() => FunctionT$outboundSchema),
+  type: PrefixMessagesType$outboundSchema,
+  function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
 });
 
 export function toolCallsToJSON(toolCalls: ToolCalls): string {

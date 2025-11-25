@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.Data1`
+### `components.AgentExecutionStartedStreamingEvent`
 
 ```typescript
-const value: operations.Data1 = {
+const value: components.AgentExecutionStartedStreamingEvent = {
   type: "agents.execution_started",
   timestamp: "<value>",
   data: {
@@ -17,22 +17,17 @@ const value: operations.Data1 = {
 };
 ```
 
-### `operations.Data2`
+### `components.AgentStartedStreamingEvent`
 
 ```typescript
-const value: operations.Data2 = {
+const value: components.AgentStartedStreamingEvent = {
   type: "event.agents.started",
   timestamp: "<value>",
   data: {
     workflowRunId: "<id>",
     inputMessage: {
-      role: "agent",
-      parts: [
-        {
-          kind: "tool_result",
-          toolCallId: "<id>",
-        },
-      ],
+      role: "system",
+      parts: [],
     },
     modelId: "<id>",
     instructions: "<value>",
@@ -43,53 +38,53 @@ const value: operations.Data2 = {
 };
 ```
 
-### `operations.Data3`
+### `components.AgentThoughtStreamingEvent`
 
 ```typescript
-const value: operations.Data3 = {
+const value: components.AgentThoughtStreamingEvent = {
   type: "event.agents.thought",
   timestamp: "<value>",
   data: {
     agentId: "<id>",
     messageDifference: {},
-    iteration: 7554.34,
-    accumulatedExecutionTime: 6180.18,
+    iteration: 8683.49,
+    accumulatedExecutionTime: 1876.58,
   },
 };
 ```
 
-### `operations.Data4`
+### `components.AgentInactiveStreamingEvent`
 
 ```typescript
-const value: operations.Data4 = {
+const value: components.AgentInactiveStreamingEvent = {
   type: "event.agents.inactive",
   timestamp: "<value>",
   data: {
     lastMessage: "<value>",
-    finishReason: "tool_calls",
+    finishReason: "stop",
     workflowRunId: "<id>",
   },
 };
 ```
 
-### `operations.StreamRunAgentData5`
+### `components.AgentErroredStreamingEvent`
 
 ```typescript
-const value: operations.StreamRunAgentData5 = {
+const value: components.AgentErroredStreamingEvent = {
   type: "event.agents.errored",
   timestamp: "<value>",
   data: {
     error: "<value>",
-    code: 1241.14,
+    code: 8483.2,
     workflowRunId: "<id>",
   },
 };
 ```
 
-### `operations.StreamRunAgentData6`
+### `components.ActionReviewRequestedStreamingEvent`
 
 ```typescript
-const value: operations.StreamRunAgentData6 = {
+const value: components.ActionReviewRequestedStreamingEvent = {
   type: "event.agents.action_review_requested",
   timestamp: "<value>",
   data: {
@@ -100,16 +95,18 @@ const value: operations.StreamRunAgentData6 = {
       id: "<id>",
       actionType: "<value>",
     },
-    input: {},
+    input: {
+      "key": "<value>",
+    },
     agentToolCallId: "<id>",
   },
 };
 ```
 
-### `operations.Seven`
+### `components.ActionReviewedStreamingEvent`
 
 ```typescript
-const value: operations.Seven = {
+const value: components.ActionReviewedStreamingEvent = {
   type: "event.agents.action_reviewed",
   timestamp: "<value>",
   data: {
@@ -122,30 +119,30 @@ const value: operations.Seven = {
 };
 ```
 
-### `operations.Eight`
+### `components.ExecutionReviewRequiredStreamingEvent`
 
 ```typescript
-const value: operations.Eight = {
+const value: components.ExecutionReviewRequiredStreamingEvent = {
   type: "event.agents.execution_review_required",
   timestamp: "<value>",
   data: {},
 };
 ```
 
-### `operations.Nine`
+### `components.ExecutionReviewedStreamingEvent`
 
 ```typescript
-const value: operations.Nine = {
+const value: components.ExecutionReviewedStreamingEvent = {
   type: "event.agents.execution_reviewed",
   timestamp: "<value>",
   data: {},
 };
 ```
 
-### `operations.Ten`
+### `components.ExecutionNamedStreamingEvent`
 
 ```typescript
-const value: operations.Ten = {
+const value: components.ExecutionNamedStreamingEvent = {
   type: "event.agents.execution_named",
   timestamp: "<value>",
   data: {
@@ -155,10 +152,10 @@ const value: operations.Ten = {
 };
 ```
 
-### `operations.Eleven`
+### `components.AgentHandedOffStreamingEvent`
 
 ```typescript
-const value: operations.Eleven = {
+const value: components.AgentHandedOffStreamingEvent = {
   type: "event.agents.handed_off",
   timestamp: "<value>",
   data: {
@@ -168,10 +165,10 @@ const value: operations.Eleven = {
 };
 ```
 
-### `operations.Twelve`
+### `components.AgentMessageCreatedStreamingEvent`
 
 ```typescript
-const value: operations.Twelve = {
+const value: components.AgentMessageCreatedStreamingEvent = {
   type: "event.agents.message-created",
   timestamp: "<value>",
   data: {
@@ -183,33 +180,37 @@ const value: operations.Twelve = {
 };
 ```
 
-### `operations.Thirteen`
+### `components.ToolExecutionStartedStreamingEvent`
 
 ```typescript
-const value: operations.Thirteen = {
+const value: components.ToolExecutionStartedStreamingEvent = {
   type: "event.workflow_events.tool_execution_started",
   timestamp: "<value>",
   data: {
     toolId: "<id>",
     actionType: "<value>",
-    toolArguments: {},
+    toolArguments: {
+      "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
+    },
     toolExecutionContext: {
       actionId: "<id>",
       agentToolCallId: "<id>",
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "deployments",
+      product: "generic",
     },
     workflowRunId: "<id>",
   },
 };
 ```
 
-### `operations.Fourteen`
+### `components.ToolExecutionFinishedStreamingEvent`
 
 ```typescript
-const value: operations.Fourteen = {
+const value: components.ToolExecutionFinishedStreamingEvent = {
   type: "event.workflow_events.tool_execution_finished",
   timestamp: "<value>",
   data: {
@@ -220,17 +221,17 @@ const value: operations.Fourteen = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "spreadsheet_run",
+      product: "experiments",
     },
     workflowRunId: "<id>",
   },
 };
 ```
 
-### `operations.Fifteen`
+### `components.ToolExecutionFailedStreamingEvent`
 
 ```typescript
-const value: operations.Fifteen = {
+const value: components.ToolExecutionFailedStreamingEvent = {
   type: "event.workflow_events.tool_execution_failed",
   timestamp: "<value>",
   data: {
@@ -244,17 +245,17 @@ const value: operations.Fifteen = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "remoteconfigs",
+      product: "agents",
     },
     workflowRunId: "<id>",
   },
 };
 ```
 
-### `operations.Sixteen`
+### `components.TimeoutStreamingEvent`
 
 ```typescript
-const value: operations.Sixteen = {
+const value: components.TimeoutStreamingEvent = {
   type: "agents.timeout",
   timestamp: "<value>",
   data: {
@@ -263,10 +264,10 @@ const value: operations.Sixteen = {
 };
 ```
 
-### `operations.Seventeen`
+### `components.ErrorStreamingEvent`
 
 ```typescript
-const value: operations.Seventeen = {
+const value: components.ErrorStreamingEvent = {
   type: "agents.error",
   timestamp: "<value>",
   data: {

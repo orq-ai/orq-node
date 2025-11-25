@@ -37,77 +37,13 @@ export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
  */
 export type CreateAgentResponseRequestRole = RoleUserMessage | RoleToolMessage;
 
-export const PublicMessagePartKind = {
-  ToolResult: "tool_result",
-} as const;
-export type PublicMessagePartKind = ClosedEnum<typeof PublicMessagePartKind>;
-
-/**
- * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
- */
-export type ToolResultPart = {
-  kind: PublicMessagePartKind;
-  toolCallId: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const Kind = {
-  File: "file",
-} as const;
-export type Kind = ClosedEnum<typeof Kind>;
-
-/**
- * File in URI format. Check in the model's documentation for the supported mime types for the URI format
- */
-export type FileInURIFormat = {
-  /**
-   * URL for the File content
-   */
-  uri: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-/**
- * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
- */
-export type BinaryFormat = {
-  /**
-   * base64 encoded content of the file
-   */
-  bytes: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-export type PublicMessagePartFile = BinaryFormat | FileInURIFormat;
-
-/**
- * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
- */
-export type FilePart = {
-  kind: Kind;
-  file: BinaryFormat | FileInURIFormat;
-  metadata?: { [k: string]: any } | undefined;
-};
-
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
-export type PublicMessagePart = components.TextPart | FilePart | ToolResultPart;
+export type PublicMessagePart =
+  | components.TextPart
+  | components.FilePart
+  | components.ToolResultPart;
 
 /**
  * The A2A message to send to the agent (user input or tool results)
@@ -124,7 +60,9 @@ export type A2AMessage = {
   /**
    * A2A message parts (text, file, or tool_result only)
    */
-  parts: Array<components.TextPart | FilePart | ToolResultPart>;
+  parts: Array<
+    components.TextPart | components.FilePart | components.ToolResultPart
+  >;
 };
 
 /**
@@ -376,261 +314,20 @@ export function createAgentResponseRequestRoleFromJSON(
 }
 
 /** @internal */
-export const PublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = z.nativeEnum(PublicMessagePartKind);
-/** @internal */
-export const PublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = PublicMessagePartKind$inboundSchema;
-
-/** @internal */
-export const ToolResultPart$inboundSchema: z.ZodType<
-  ToolResultPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: PublicMessagePartKind$inboundSchema,
-  tool_call_id: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-  });
-});
-/** @internal */
-export type ToolResultPart$Outbound = {
-  kind: string;
-  tool_call_id: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const ToolResultPart$outboundSchema: z.ZodType<
-  ToolResultPart$Outbound,
-  z.ZodTypeDef,
-  ToolResultPart
-> = z.object({
-  kind: PublicMessagePartKind$outboundSchema,
-  toolCallId: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function toolResultPartToJSON(toolResultPart: ToolResultPart): string {
-  return JSON.stringify(ToolResultPart$outboundSchema.parse(toolResultPart));
-}
-export function toolResultPartFromJSON(
-  jsonString: string,
-): SafeParseResult<ToolResultPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolResultPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
-/** @internal */
-export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
-  Kind$inboundSchema;
-
-/** @internal */
-export const FileInURIFormat$inboundSchema: z.ZodType<
-  FileInURIFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type FileInURIFormat$Outbound = {
-  uri: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const FileInURIFormat$outboundSchema: z.ZodType<
-  FileInURIFormat$Outbound,
-  z.ZodTypeDef,
-  FileInURIFormat
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function fileInURIFormatToJSON(
-  fileInURIFormat: FileInURIFormat,
-): string {
-  return JSON.stringify(FileInURIFormat$outboundSchema.parse(fileInURIFormat));
-}
-export function fileInURIFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<FileInURIFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileInURIFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const BinaryFormat$inboundSchema: z.ZodType<
-  BinaryFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type BinaryFormat$Outbound = {
-  bytes: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const BinaryFormat$outboundSchema: z.ZodType<
-  BinaryFormat$Outbound,
-  z.ZodTypeDef,
-  BinaryFormat
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
-  return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
-}
-export function binaryFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<BinaryFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => BinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BinaryFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const PublicMessagePartFile$inboundSchema: z.ZodType<
-  PublicMessagePartFile,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => BinaryFormat$inboundSchema),
-  z.lazy(() => FileInURIFormat$inboundSchema),
-]);
-/** @internal */
-export type PublicMessagePartFile$Outbound =
-  | BinaryFormat$Outbound
-  | FileInURIFormat$Outbound;
-
-/** @internal */
-export const PublicMessagePartFile$outboundSchema: z.ZodType<
-  PublicMessagePartFile$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePartFile
-> = z.union([
-  z.lazy(() => BinaryFormat$outboundSchema),
-  z.lazy(() => FileInURIFormat$outboundSchema),
-]);
-
-export function publicMessagePartFileToJSON(
-  publicMessagePartFile: PublicMessagePartFile,
-): string {
-  return JSON.stringify(
-    PublicMessagePartFile$outboundSchema.parse(publicMessagePartFile),
-  );
-}
-export function publicMessagePartFileFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicMessagePartFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartFile' from JSON`,
-  );
-}
-
-/** @internal */
-export const FilePart$inboundSchema: z.ZodType<
-  FilePart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: Kind$inboundSchema,
-  file: z.union([
-    z.lazy(() => BinaryFormat$inboundSchema),
-    z.lazy(() => FileInURIFormat$inboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-/** @internal */
-export type FilePart$Outbound = {
-  kind: string;
-  file: BinaryFormat$Outbound | FileInURIFormat$Outbound;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const FilePart$outboundSchema: z.ZodType<
-  FilePart$Outbound,
-  z.ZodTypeDef,
-  FilePart
-> = z.object({
-  kind: Kind$outboundSchema,
-  file: z.union([
-    z.lazy(() => BinaryFormat$outboundSchema),
-    z.lazy(() => FileInURIFormat$outboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function filePartToJSON(filePart: FilePart): string {
-  return JSON.stringify(FilePart$outboundSchema.parse(filePart));
-}
-export function filePartFromJSON(
-  jsonString: string,
-): SafeParseResult<FilePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilePart' from JSON`,
-  );
-}
-
-/** @internal */
 export const PublicMessagePart$inboundSchema: z.ZodType<
   PublicMessagePart,
   z.ZodTypeDef,
   unknown
 > = z.union([
   components.TextPart$inboundSchema,
-  z.lazy(() => FilePart$inboundSchema),
-  z.lazy(() => ToolResultPart$inboundSchema),
+  components.FilePart$inboundSchema,
+  components.ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type PublicMessagePart$Outbound =
   | components.TextPart$Outbound
-  | FilePart$Outbound
-  | ToolResultPart$Outbound;
+  | components.FilePart$Outbound
+  | components.ToolResultPart$Outbound;
 
 /** @internal */
 export const PublicMessagePart$outboundSchema: z.ZodType<
@@ -639,8 +336,8 @@ export const PublicMessagePart$outboundSchema: z.ZodType<
   PublicMessagePart
 > = z.union([
   components.TextPart$outboundSchema,
-  z.lazy(() => FilePart$outboundSchema),
-  z.lazy(() => ToolResultPart$outboundSchema),
+  components.FilePart$outboundSchema,
+  components.ToolResultPart$outboundSchema,
 ]);
 
 export function publicMessagePartToJSON(
@@ -671,8 +368,8 @@ export const A2AMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$inboundSchema,
-      z.lazy(() => FilePart$inboundSchema),
-      z.lazy(() => ToolResultPart$inboundSchema),
+      components.FilePart$inboundSchema,
+      components.ToolResultPart$inboundSchema,
     ]),
   ),
 });
@@ -681,7 +378,9 @@ export type A2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
-    components.TextPart$Outbound | FilePart$Outbound | ToolResultPart$Outbound
+    | components.TextPart$Outbound
+    | components.FilePart$Outbound
+    | components.ToolResultPart$Outbound
   >;
 };
 
@@ -699,8 +398,8 @@ export const A2AMessage$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$outboundSchema,
-      z.lazy(() => FilePart$outboundSchema),
-      z.lazy(() => ToolResultPart$outboundSchema),
+      components.FilePart$outboundSchema,
+      components.ToolResultPart$outboundSchema,
     ]),
   ),
 });

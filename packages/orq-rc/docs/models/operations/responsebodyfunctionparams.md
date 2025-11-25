@@ -217,8 +217,8 @@ const value: operations.FunctionParams24 = {
 
 ```typescript
 const value: operations.FunctionParams25 = {
-  type: "topic_match",
-  topic: "<value>",
+  type: "keywords_match",
+  keywords: [],
 };
 ```
 
@@ -226,11 +226,7 @@ const value: operations.FunctionParams25 = {
 
 ```typescript
 const value: operations.FunctionParams26 = {
-  type: "keywords_match",
-  keywords: [
-    "<value 1>",
-    "<value 2>",
-  ],
+  type: "most_repeated_words",
 };
 ```
 
@@ -238,7 +234,7 @@ const value: operations.FunctionParams26 = {
 
 ```typescript
 const value: operations.FunctionParams27 = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 
@@ -246,7 +242,7 @@ const value: operations.FunctionParams27 = {
 
 ```typescript
 const value: operations.FunctionParams28 = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 
@@ -254,7 +250,7 @@ const value: operations.FunctionParams28 = {
 
 ```typescript
 const value: operations.FunctionParams29 = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 
@@ -262,7 +258,7 @@ const value: operations.FunctionParams29 = {
 
 ```typescript
 const value: operations.FunctionParams30 = {
-  type: "words_count",
+  type: "sentences_count",
 };
 ```
 
@@ -270,7 +266,7 @@ const value: operations.FunctionParams30 = {
 
 ```typescript
 const value: operations.FunctionParams31 = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 
@@ -278,31 +274,7 @@ const value: operations.FunctionParams31 = {
 
 ```typescript
 const value: operations.FunctionParams32 = {
-  type: "lexical_repetition",
-};
-```
-
-### `operations.FunctionParams33`
-
-```typescript
-const value: operations.FunctionParams33 = {
-  type: "semantic_repetition",
-};
-```
-
-### `operations.FunctionParams34`
-
-```typescript
-const value: operations.FunctionParams34 = {
   type: "grammar_diversity",
-};
-```
-
-### `operations.FunctionParams35`
-
-```typescript
-const value: operations.FunctionParams35 = {
-  type: "bert_coherence",
 };
 ```
 

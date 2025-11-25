@@ -6,7 +6,7 @@
 import { TwentyNine } from "@orq-ai/node/models/operations";
 
 let value: TwentyNine = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 

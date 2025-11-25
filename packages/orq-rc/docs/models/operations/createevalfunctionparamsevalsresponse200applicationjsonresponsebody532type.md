@@ -7,11 +7,11 @@ import { CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532T
 
 let value:
   CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type =
-    "lexical_repetition";
+    "grammar_diversity";
 ```
 
 ## Values
 
 ```typescript
-"lexical_repetition"
+"grammar_diversity"
 ```

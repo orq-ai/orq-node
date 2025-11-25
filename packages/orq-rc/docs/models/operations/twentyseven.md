@@ -6,7 +6,7 @@
 import { TwentySeven } from "@orq-ai/node/models/operations";
 
 let value: TwentySeven = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 

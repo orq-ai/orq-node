@@ -14,10 +14,10 @@ const value: components.TextPart = {
 };
 ```
 
-### `operations.FilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.FilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -25,10 +25,10 @@ const value: operations.FilePart = {
 };
 ```
 
-### `operations.ToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.ToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

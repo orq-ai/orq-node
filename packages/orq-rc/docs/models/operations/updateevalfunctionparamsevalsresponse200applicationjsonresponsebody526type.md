@@ -7,11 +7,11 @@ import { UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526T
 
 let value:
   UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type =
-    "keywords_match";
+    "most_repeated_words";
 ```
 
 ## Values
 
 ```typescript
-"keywords_match"
+"most_repeated_words"
 ```

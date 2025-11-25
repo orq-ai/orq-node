@@ -6,7 +6,7 @@
 import { ThirtyTwo } from "@orq-ai/node/models/operations";
 
 let value: ThirtyTwo = {
-  type: "lexical_repetition",
+  type: "grammar_diversity",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { TwentyEight } from "@orq-ai/node/models/operations";
 
 let value: TwentyEight = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 

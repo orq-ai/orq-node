@@ -6,7 +6,7 @@
 import { FunctionParams31 } from "@orq-ai/node/models/operations";
 
 let value: FunctionParams31 = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 

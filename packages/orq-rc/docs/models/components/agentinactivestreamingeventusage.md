@@ -1,0 +1,21 @@
+# AgentInactiveStreamingEventUsage
+
+Token usage from the last agent message
+
+## Example Usage
+
+```typescript
+import { AgentInactiveStreamingEventUsage } from "@orq-ai/node/models/components";
+
+let value: AgentInactiveStreamingEventUsage = {};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `completionTokens`                                                                                                                             | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | Number of tokens in the generated completion.                                                                                                  |
+| `promptTokens`                                                                                                                                 | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | Number of tokens in the prompt.                                                                                                                |
+| `totalTokens`                                                                                                                                  | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | Total number of tokens used in the request (prompt + completion).                                                                              |
+| `promptTokensDetails`                                                                                                                          | [components.AgentInactiveStreamingEventPromptTokensDetails](../../models/components/agentinactivestreamingeventprompttokensdetails.md)         | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+| `completionTokensDetails`                                                                                                                      | [components.AgentInactiveStreamingEventCompletionTokensDetails](../../models/components/agentinactivestreamingeventcompletiontokensdetails.md) | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |

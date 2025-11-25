@@ -602,51 +602,9 @@ export const UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType = {
 export type UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType =
   ClosedEnum<typeof UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType>;
 
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type =
-  {
-    BertCoherence: "bert_coherence",
-  } as const;
-export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type =
-  ClosedEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type
-  >;
-
-export type FunctionParams35 = {
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type;
-};
-
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type =
-  {
-    GrammarDiversity: "grammar_diversity",
-  } as const;
-export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type =
-  ClosedEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type
-  >;
-
-export type FunctionParams34 = {
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type;
-};
-
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type =
-  {
-    SemanticRepetition: "semantic_repetition",
-  } as const;
-export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type =
-  ClosedEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type
-  >;
-
-export type FunctionParams33 = {
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type;
-};
-
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type =
   {
-    LexicalRepetition: "lexical_repetition",
+    GrammarDiversity: "grammar_diversity",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type =
   ClosedEnum<
@@ -660,7 +618,7 @@ export type FunctionParams32 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type =
   {
-    SentencesCount: "sentences_count",
+    LexicalRepetition: "lexical_repetition",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody531Type =
   ClosedEnum<
@@ -674,7 +632,7 @@ export type FunctionParams31 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type =
   {
-    WordsCount: "words_count",
+    SentencesCount: "sentences_count",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody530Type =
   ClosedEnum<
@@ -688,7 +646,7 @@ export type FunctionParams30 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type =
   {
-    GseEnglishLevel: "gse_english_level",
+    WordsCount: "words_count",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody529Type =
   ClosedEnum<
@@ -702,7 +660,7 @@ export type FunctionParams29 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type =
   {
-    FleschReadingEase: "flesch_reading_ease",
+    GseEnglishLevel: "gse_english_level",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody528Type =
   ClosedEnum<
@@ -716,7 +674,7 @@ export type FunctionParams28 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type =
   {
-    MostRepeatedWords: "most_repeated_words",
+    FleschReadingEase: "flesch_reading_ease",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody527Type =
   ClosedEnum<
@@ -730,7 +688,7 @@ export type FunctionParams27 = {
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type =
   {
-    KeywordsMatch: "keywords_match",
+    MostRepeatedWords: "most_repeated_words",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type =
   ClosedEnum<
@@ -740,12 +698,11 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
 export type FunctionParams26 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type;
-  keywords: Array<string>;
 };
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type =
   {
-    TopicMatch: "topic_match",
+    KeywordsMatch: "keywords_match",
   } as const;
 export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type =
   ClosedEnum<
@@ -755,7 +712,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
 export type FunctionParams25 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type;
-  topic: string;
+  keywords: Array<string>;
 };
 
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody524Type =
@@ -1102,7 +1059,6 @@ export type ResponseBodyFunctionParams =
   | FunctionParams13
   | FunctionParams15
   | FunctionParams25
-  | FunctionParams26
   | FunctionParams5
   | FunctionParams6
   | FunctionParams7
@@ -1117,15 +1073,13 @@ export type ResponseBodyFunctionParams =
   | FunctionParams22
   | FunctionParams23
   | FunctionParams24
+  | FunctionParams26
   | FunctionParams27
   | FunctionParams28
   | FunctionParams29
   | FunctionParams30
   | FunctionParams31
-  | FunctionParams32
-  | FunctionParams33
-  | FunctionParams34
-  | FunctionParams35;
+  | FunctionParams32;
 
 export type ResponseBodyFunction = {
   id: string;
@@ -1149,7 +1103,6 @@ export type ResponseBodyFunction = {
     | FunctionParams13
     | FunctionParams15
     | FunctionParams25
-    | FunctionParams26
     | FunctionParams5
     | FunctionParams6
     | FunctionParams7
@@ -1164,15 +1117,13 @@ export type ResponseBodyFunction = {
     | FunctionParams22
     | FunctionParams23
     | FunctionParams24
+    | FunctionParams26
     | FunctionParams27
     | FunctionParams28
     | FunctionParams29
     | FunctionParams30
     | FunctionParams31
-    | FunctionParams32
-    | FunctionParams33
-    | FunctionParams34
-    | FunctionParams35;
+    | FunctionParams32;
   key: string;
 };
 
@@ -2990,8 +2941,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -3033,8 +2984,8 @@ export const ResponseBodyTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -3324,8 +3275,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -3370,8 +3321,8 @@ export const ResponseBodyRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -3645,171 +3596,6 @@ export const UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundS
   z.ZodNativeEnum<
     typeof UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType
   > = UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type
-  > = z.nativeEnum(
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type,
-  );
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type
-  > =
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema;
-
-/** @internal */
-export const FunctionParams35$inboundSchema: z.ZodType<
-  FunctionParams35,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$inboundSchema,
-});
-/** @internal */
-export type FunctionParams35$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const FunctionParams35$outboundSchema: z.ZodType<
-  FunctionParams35$Outbound,
-  z.ZodTypeDef,
-  FunctionParams35
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody535Type$outboundSchema,
-});
-
-export function functionParams35ToJSON(
-  functionParams35: FunctionParams35,
-): string {
-  return JSON.stringify(
-    FunctionParams35$outboundSchema.parse(functionParams35),
-  );
-}
-export function functionParams35FromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionParams35, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionParams35$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams35' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type
-  > = z.nativeEnum(
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type,
-  );
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type
-  > =
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema;
-
-/** @internal */
-export const FunctionParams34$inboundSchema: z.ZodType<
-  FunctionParams34,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$inboundSchema,
-});
-/** @internal */
-export type FunctionParams34$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const FunctionParams34$outboundSchema: z.ZodType<
-  FunctionParams34$Outbound,
-  z.ZodTypeDef,
-  FunctionParams34
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody534Type$outboundSchema,
-});
-
-export function functionParams34ToJSON(
-  functionParams34: FunctionParams34,
-): string {
-  return JSON.stringify(
-    FunctionParams34$outboundSchema.parse(functionParams34),
-  );
-}
-export function functionParams34FromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionParams34, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionParams34$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams34' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type
-  > = z.nativeEnum(
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type,
-  );
-/** @internal */
-export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type
-  > =
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema;
-
-/** @internal */
-export const FunctionParams33$inboundSchema: z.ZodType<
-  FunctionParams33,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$inboundSchema,
-});
-/** @internal */
-export type FunctionParams33$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const FunctionParams33$outboundSchema: z.ZodType<
-  FunctionParams33$Outbound,
-  z.ZodTypeDef,
-  FunctionParams33
-> = z.object({
-  type:
-    UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody533Type$outboundSchema,
-});
-
-export function functionParams33ToJSON(
-  functionParams33: FunctionParams33,
-): string {
-  return JSON.stringify(
-    FunctionParams33$outboundSchema.parse(functionParams33),
-  );
-}
-export function functionParams33FromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionParams33, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionParams33$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams33' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody532Type$inboundSchema:
@@ -4163,12 +3949,10 @@ export const FunctionParams26$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$inboundSchema,
-  keywords: z.array(z.string()),
 });
 /** @internal */
 export type FunctionParams26$Outbound = {
   type: string;
-  keywords: Array<string>;
 };
 
 /** @internal */
@@ -4179,7 +3963,6 @@ export const FunctionParams26$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody526Type$outboundSchema,
-  keywords: z.array(z.string()),
 });
 
 export function functionParams26ToJSON(
@@ -4221,12 +4004,12 @@ export const FunctionParams25$inboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$inboundSchema,
-  topic: z.string(),
+  keywords: z.array(z.string()),
 });
 /** @internal */
 export type FunctionParams25$Outbound = {
   type: string;
-  topic: string;
+  keywords: Array<string>;
 };
 
 /** @internal */
@@ -4237,7 +4020,7 @@ export const FunctionParams25$outboundSchema: z.ZodType<
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody525Type$outboundSchema,
-  topic: z.string(),
+  keywords: z.array(z.string()),
 });
 
 export function functionParams25ToJSON(
@@ -5578,7 +5361,6 @@ export const ResponseBodyFunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => FunctionParams13$inboundSchema),
   z.lazy(() => FunctionParams15$inboundSchema),
   z.lazy(() => FunctionParams25$inboundSchema),
-  z.lazy(() => FunctionParams26$inboundSchema),
   z.lazy(() => FunctionParams5$inboundSchema),
   z.lazy(() => FunctionParams6$inboundSchema),
   z.lazy(() => FunctionParams7$inboundSchema),
@@ -5593,15 +5375,13 @@ export const ResponseBodyFunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => FunctionParams22$inboundSchema),
   z.lazy(() => FunctionParams23$inboundSchema),
   z.lazy(() => FunctionParams24$inboundSchema),
+  z.lazy(() => FunctionParams26$inboundSchema),
   z.lazy(() => FunctionParams27$inboundSchema),
   z.lazy(() => FunctionParams28$inboundSchema),
   z.lazy(() => FunctionParams29$inboundSchema),
   z.lazy(() => FunctionParams30$inboundSchema),
   z.lazy(() => FunctionParams31$inboundSchema),
   z.lazy(() => FunctionParams32$inboundSchema),
-  z.lazy(() => FunctionParams33$inboundSchema),
-  z.lazy(() => FunctionParams34$inboundSchema),
-  z.lazy(() => FunctionParams35$inboundSchema),
 ]);
 /** @internal */
 export type ResponseBodyFunctionParams$Outbound =
@@ -5616,7 +5396,6 @@ export type ResponseBodyFunctionParams$Outbound =
   | FunctionParams13$Outbound
   | FunctionParams15$Outbound
   | FunctionParams25$Outbound
-  | FunctionParams26$Outbound
   | FunctionParams5$Outbound
   | FunctionParams6$Outbound
   | FunctionParams7$Outbound
@@ -5631,15 +5410,13 @@ export type ResponseBodyFunctionParams$Outbound =
   | FunctionParams22$Outbound
   | FunctionParams23$Outbound
   | FunctionParams24$Outbound
+  | FunctionParams26$Outbound
   | FunctionParams27$Outbound
   | FunctionParams28$Outbound
   | FunctionParams29$Outbound
   | FunctionParams30$Outbound
   | FunctionParams31$Outbound
-  | FunctionParams32$Outbound
-  | FunctionParams33$Outbound
-  | FunctionParams34$Outbound
-  | FunctionParams35$Outbound;
+  | FunctionParams32$Outbound;
 
 /** @internal */
 export const ResponseBodyFunctionParams$outboundSchema: z.ZodType<
@@ -5658,7 +5435,6 @@ export const ResponseBodyFunctionParams$outboundSchema: z.ZodType<
   z.lazy(() => FunctionParams13$outboundSchema),
   z.lazy(() => FunctionParams15$outboundSchema),
   z.lazy(() => FunctionParams25$outboundSchema),
-  z.lazy(() => FunctionParams26$outboundSchema),
   z.lazy(() => FunctionParams5$outboundSchema),
   z.lazy(() => FunctionParams6$outboundSchema),
   z.lazy(() => FunctionParams7$outboundSchema),
@@ -5673,15 +5449,13 @@ export const ResponseBodyFunctionParams$outboundSchema: z.ZodType<
   z.lazy(() => FunctionParams22$outboundSchema),
   z.lazy(() => FunctionParams23$outboundSchema),
   z.lazy(() => FunctionParams24$outboundSchema),
+  z.lazy(() => FunctionParams26$outboundSchema),
   z.lazy(() => FunctionParams27$outboundSchema),
   z.lazy(() => FunctionParams28$outboundSchema),
   z.lazy(() => FunctionParams29$outboundSchema),
   z.lazy(() => FunctionParams30$outboundSchema),
   z.lazy(() => FunctionParams31$outboundSchema),
   z.lazy(() => FunctionParams32$outboundSchema),
-  z.lazy(() => FunctionParams33$outboundSchema),
-  z.lazy(() => FunctionParams34$outboundSchema),
-  z.lazy(() => FunctionParams35$outboundSchema),
 ]);
 
 export function responseBodyFunctionParamsToJSON(
@@ -5709,8 +5483,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -5732,7 +5506,6 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => FunctionParams13$inboundSchema),
     z.lazy(() => FunctionParams15$inboundSchema),
     z.lazy(() => FunctionParams25$inboundSchema),
-    z.lazy(() => FunctionParams26$inboundSchema),
     z.lazy(() => FunctionParams5$inboundSchema),
     z.lazy(() => FunctionParams6$inboundSchema),
     z.lazy(() => FunctionParams7$inboundSchema),
@@ -5747,15 +5520,13 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => FunctionParams22$inboundSchema),
     z.lazy(() => FunctionParams23$inboundSchema),
     z.lazy(() => FunctionParams24$inboundSchema),
+    z.lazy(() => FunctionParams26$inboundSchema),
     z.lazy(() => FunctionParams27$inboundSchema),
     z.lazy(() => FunctionParams28$inboundSchema),
     z.lazy(() => FunctionParams29$inboundSchema),
     z.lazy(() => FunctionParams30$inboundSchema),
     z.lazy(() => FunctionParams31$inboundSchema),
     z.lazy(() => FunctionParams32$inboundSchema),
-    z.lazy(() => FunctionParams33$inboundSchema),
-    z.lazy(() => FunctionParams34$inboundSchema),
-    z.lazy(() => FunctionParams35$inboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -5788,7 +5559,6 @@ export type ResponseBodyFunction$Outbound = {
     | FunctionParams13$Outbound
     | FunctionParams15$Outbound
     | FunctionParams25$Outbound
-    | FunctionParams26$Outbound
     | FunctionParams5$Outbound
     | FunctionParams6$Outbound
     | FunctionParams7$Outbound
@@ -5803,15 +5573,13 @@ export type ResponseBodyFunction$Outbound = {
     | FunctionParams22$Outbound
     | FunctionParams23$Outbound
     | FunctionParams24$Outbound
+    | FunctionParams26$Outbound
     | FunctionParams27$Outbound
     | FunctionParams28$Outbound
     | FunctionParams29$Outbound
     | FunctionParams30$Outbound
     | FunctionParams31$Outbound
-    | FunctionParams32$Outbound
-    | FunctionParams33$Outbound
-    | FunctionParams34$Outbound
-    | FunctionParams35$Outbound;
+    | FunctionParams32$Outbound;
   key: string;
 };
 
@@ -5823,8 +5591,8 @@ export const ResponseBodyFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -5847,7 +5615,6 @@ export const ResponseBodyFunction$outboundSchema: z.ZodType<
     z.lazy(() => FunctionParams13$outboundSchema),
     z.lazy(() => FunctionParams15$outboundSchema),
     z.lazy(() => FunctionParams25$outboundSchema),
-    z.lazy(() => FunctionParams26$outboundSchema),
     z.lazy(() => FunctionParams5$outboundSchema),
     z.lazy(() => FunctionParams6$outboundSchema),
     z.lazy(() => FunctionParams7$outboundSchema),
@@ -5862,15 +5629,13 @@ export const ResponseBodyFunction$outboundSchema: z.ZodType<
     z.lazy(() => FunctionParams22$outboundSchema),
     z.lazy(() => FunctionParams23$outboundSchema),
     z.lazy(() => FunctionParams24$outboundSchema),
+    z.lazy(() => FunctionParams26$outboundSchema),
     z.lazy(() => FunctionParams27$outboundSchema),
     z.lazy(() => FunctionParams28$outboundSchema),
     z.lazy(() => FunctionParams29$outboundSchema),
     z.lazy(() => FunctionParams30$outboundSchema),
     z.lazy(() => FunctionParams31$outboundSchema),
     z.lazy(() => FunctionParams32$outboundSchema),
-    z.lazy(() => FunctionParams33$outboundSchema),
-    z.lazy(() => FunctionParams34$outboundSchema),
-    z.lazy(() => FunctionParams35$outboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -6140,8 +5905,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -6182,8 +5947,8 @@ export const UpdateEvalResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -6468,8 +6233,8 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -6516,8 +6281,8 @@ export const UpdateEvalResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -6786,8 +6551,8 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -6826,8 +6591,8 @@ export const UpdateEvalResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -7066,8 +6831,8 @@ export const UpdateEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -7106,8 +6871,8 @@ export const UpdateEvalResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-25T12:44:29.770Z"),
-  updated: z.string().default("2025-11-25T12:44:29.770Z"),
+  created: z.string().default("2025-11-25T16:34:42.062Z"),
+  updated: z.string().default("2025-11-25T16:34:42.062Z"),
   guardrailConfig: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),

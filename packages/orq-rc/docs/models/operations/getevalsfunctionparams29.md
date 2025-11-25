@@ -6,7 +6,7 @@
 import { GetEvalsFunctionParams29 } from "@orq-ai/node/models/operations";
 
 let value: GetEvalsFunctionParams29 = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 

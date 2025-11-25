@@ -1,6 +1,6 @@
 # FilePart
 
-A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
+File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
 
 ## Example Usage
 

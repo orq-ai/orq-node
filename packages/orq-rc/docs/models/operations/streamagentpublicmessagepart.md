@@ -14,10 +14,10 @@ const value: components.TextPart = {
 };
 ```
 
-### `operations.StreamAgentPublicMessagePartFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamAgentPublicMessagePartFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -25,10 +25,10 @@ const value: operations.StreamAgentPublicMessagePartFilePart = {
 };
 ```
 
-### `operations.StreamAgentPublicMessagePartToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamAgentPublicMessagePartToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

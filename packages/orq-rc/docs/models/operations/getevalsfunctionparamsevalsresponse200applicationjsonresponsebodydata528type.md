@@ -7,11 +7,11 @@ import { GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData52
 
 let value:
   GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type =
-    "flesch_reading_ease";
+    "gse_english_level";
 ```
 
 ## Values
 
 ```typescript
-"flesch_reading_ease"
+"gse_english_level"
 ```

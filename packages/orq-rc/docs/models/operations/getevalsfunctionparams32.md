@@ -6,7 +6,7 @@
 import { GetEvalsFunctionParams32 } from "@orq-ai/node/models/operations";
 
 let value: GetEvalsFunctionParams32 = {
-  type: "lexical_repetition",
+  type: "grammar_diversity",
 };
 ```
 

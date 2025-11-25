@@ -43,86 +43,13 @@ export type InvokeAgentRole =
   | InvokeAgentRoleUserMessage
   | InvokeAgentRoleToolMessage;
 
-export const InvokeAgentPublicMessagePartAgentsKind = {
-  ToolResult: "tool_result",
-} as const;
-export type InvokeAgentPublicMessagePartAgentsKind = ClosedEnum<
-  typeof InvokeAgentPublicMessagePartAgentsKind
->;
-
-/**
- * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
- */
-export type PublicMessagePartToolResultPart = {
-  kind: InvokeAgentPublicMessagePartAgentsKind;
-  toolCallId: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const InvokeAgentPublicMessagePartKind = {
-  File: "file",
-} as const;
-export type InvokeAgentPublicMessagePartKind = ClosedEnum<
-  typeof InvokeAgentPublicMessagePartKind
->;
-
-/**
- * File in URI format. Check in the model's documentation for the supported mime types for the URI format
- */
-export type FileFileInURIFormat = {
-  /**
-   * URL for the File content
-   */
-  uri: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-/**
- * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
- */
-export type FileBinaryFormat = {
-  /**
-   * base64 encoded content of the file
-   */
-  bytes: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-export type InvokeAgentPublicMessagePartFile =
-  | FileBinaryFormat
-  | FileFileInURIFormat;
-
-/**
- * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
- */
-export type PublicMessagePartFilePart = {
-  kind: InvokeAgentPublicMessagePartKind;
-  file: FileBinaryFormat | FileFileInURIFormat;
-  metadata?: { [k: string]: any } | undefined;
-};
-
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
 export type InvokeAgentPublicMessagePart =
   | components.TextPart
-  | PublicMessagePartFilePart
-  | PublicMessagePartToolResultPart;
+  | components.FilePart
+  | components.ToolResultPart;
 
 /**
  * The A2A message to send to the agent (user input or tool results)
@@ -140,9 +67,7 @@ export type InvokeAgentA2AMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    | components.TextPart
-    | PublicMessagePartFilePart
-    | PublicMessagePartToolResultPart
+    components.TextPart | components.FilePart | components.ToolResultPart
   >;
 };
 
@@ -242,13 +167,13 @@ export type InvokeAgentRequest = {
 /**
  * A2A entity type identifier
  */
-export const InvokeAgentKind = {
+export const Kind = {
   Task: "task",
 } as const;
 /**
  * A2A entity type identifier
  */
-export type InvokeAgentKind = ClosedEnum<typeof InvokeAgentKind>;
+export type Kind = ClosedEnum<typeof Kind>;
 
 /**
  * Current state of the agent task execution. Values: submitted (queued), working (executing), input-required (awaiting user input), completed (finished successfully), failed (error occurred). Note: auth-required, canceled, and rejected statuses are defined for A2A protocol compatibility but are not currently supported in task execution.
@@ -268,10 +193,10 @@ export const TaskState = {
  */
 export type TaskState = ClosedEnum<typeof TaskState>;
 
-export const InvokeAgentAgentsKind = {
+export const InvokeAgentKind = {
   Message: "message",
 } as const;
-export type InvokeAgentAgentsKind = ClosedEnum<typeof InvokeAgentAgentsKind>;
+export type InvokeAgentKind = ClosedEnum<typeof InvokeAgentKind>;
 
 /**
  * Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts).
@@ -298,7 +223,7 @@ export type InvokeAgentParts =
  * Optional A2A message providing additional context about the current status
  */
 export type TaskStatusMessage = {
-  kind: InvokeAgentAgentsKind;
+  kind: InvokeAgentKind;
   messageId: string;
   /**
    * Role of the message sender in the A2A protocol. Values: user (end user), agent (AI agent), tool (tool execution result), system (system instructions/prompts).
@@ -346,7 +271,7 @@ export type InvokeAgentA2ATaskResponse = {
   /**
    * A2A entity type identifier
    */
-  kind: InvokeAgentKind;
+  kind: Kind;
   /**
    * Current task status information
    */
@@ -413,281 +338,20 @@ export function invokeAgentRoleFromJSON(
 }
 
 /** @internal */
-export const InvokeAgentPublicMessagePartAgentsKind$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsKind> = z.nativeEnum(
-    InvokeAgentPublicMessagePartAgentsKind,
-  );
-/** @internal */
-export const InvokeAgentPublicMessagePartAgentsKind$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeAgentPublicMessagePartAgentsKind> =
-    InvokeAgentPublicMessagePartAgentsKind$inboundSchema;
-
-/** @internal */
-export const PublicMessagePartToolResultPart$inboundSchema: z.ZodType<
-  PublicMessagePartToolResultPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: InvokeAgentPublicMessagePartAgentsKind$inboundSchema,
-  tool_call_id: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-  });
-});
-/** @internal */
-export type PublicMessagePartToolResultPart$Outbound = {
-  kind: string;
-  tool_call_id: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const PublicMessagePartToolResultPart$outboundSchema: z.ZodType<
-  PublicMessagePartToolResultPart$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePartToolResultPart
-> = z.object({
-  kind: InvokeAgentPublicMessagePartAgentsKind$outboundSchema,
-  toolCallId: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function publicMessagePartToolResultPartToJSON(
-  publicMessagePartToolResultPart: PublicMessagePartToolResultPart,
-): string {
-  return JSON.stringify(
-    PublicMessagePartToolResultPart$outboundSchema.parse(
-      publicMessagePartToolResultPart,
-    ),
-  );
-}
-export function publicMessagePartToolResultPartFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicMessagePartToolResultPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicMessagePartToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartToolResultPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentPublicMessagePartKind
-> = z.nativeEnum(InvokeAgentPublicMessagePartKind);
-/** @internal */
-export const InvokeAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentPublicMessagePartKind
-> = InvokeAgentPublicMessagePartKind$inboundSchema;
-
-/** @internal */
-export const FileFileInURIFormat$inboundSchema: z.ZodType<
-  FileFileInURIFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type FileFileInURIFormat$Outbound = {
-  uri: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const FileFileInURIFormat$outboundSchema: z.ZodType<
-  FileFileInURIFormat$Outbound,
-  z.ZodTypeDef,
-  FileFileInURIFormat
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function fileFileInURIFormatToJSON(
-  fileFileInURIFormat: FileFileInURIFormat,
-): string {
-  return JSON.stringify(
-    FileFileInURIFormat$outboundSchema.parse(fileFileInURIFormat),
-  );
-}
-export function fileFileInURIFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<FileFileInURIFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileFileInURIFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const FileBinaryFormat$inboundSchema: z.ZodType<
-  FileBinaryFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type FileBinaryFormat$Outbound = {
-  bytes: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const FileBinaryFormat$outboundSchema: z.ZodType<
-  FileBinaryFormat$Outbound,
-  z.ZodTypeDef,
-  FileBinaryFormat
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function fileBinaryFormatToJSON(
-  fileBinaryFormat: FileBinaryFormat,
-): string {
-  return JSON.stringify(
-    FileBinaryFormat$outboundSchema.parse(fileBinaryFormat),
-  );
-}
-export function fileBinaryFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<FileBinaryFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileBinaryFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeAgentPublicMessagePartFile$inboundSchema: z.ZodType<
-  InvokeAgentPublicMessagePartFile,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => FileBinaryFormat$inboundSchema),
-  z.lazy(() => FileFileInURIFormat$inboundSchema),
-]);
-/** @internal */
-export type InvokeAgentPublicMessagePartFile$Outbound =
-  | FileBinaryFormat$Outbound
-  | FileFileInURIFormat$Outbound;
-
-/** @internal */
-export const InvokeAgentPublicMessagePartFile$outboundSchema: z.ZodType<
-  InvokeAgentPublicMessagePartFile$Outbound,
-  z.ZodTypeDef,
-  InvokeAgentPublicMessagePartFile
-> = z.union([
-  z.lazy(() => FileBinaryFormat$outboundSchema),
-  z.lazy(() => FileFileInURIFormat$outboundSchema),
-]);
-
-export function invokeAgentPublicMessagePartFileToJSON(
-  invokeAgentPublicMessagePartFile: InvokeAgentPublicMessagePartFile,
-): string {
-  return JSON.stringify(
-    InvokeAgentPublicMessagePartFile$outboundSchema.parse(
-      invokeAgentPublicMessagePartFile,
-    ),
-  );
-}
-export function invokeAgentPublicMessagePartFileFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeAgentPublicMessagePartFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeAgentPublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeAgentPublicMessagePartFile' from JSON`,
-  );
-}
-
-/** @internal */
-export const PublicMessagePartFilePart$inboundSchema: z.ZodType<
-  PublicMessagePartFilePart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: InvokeAgentPublicMessagePartKind$inboundSchema,
-  file: z.union([
-    z.lazy(() => FileBinaryFormat$inboundSchema),
-    z.lazy(() => FileFileInURIFormat$inboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-/** @internal */
-export type PublicMessagePartFilePart$Outbound = {
-  kind: string;
-  file: FileBinaryFormat$Outbound | FileFileInURIFormat$Outbound;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const PublicMessagePartFilePart$outboundSchema: z.ZodType<
-  PublicMessagePartFilePart$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePartFilePart
-> = z.object({
-  kind: InvokeAgentPublicMessagePartKind$outboundSchema,
-  file: z.union([
-    z.lazy(() => FileBinaryFormat$outboundSchema),
-    z.lazy(() => FileFileInURIFormat$outboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function publicMessagePartFilePartToJSON(
-  publicMessagePartFilePart: PublicMessagePartFilePart,
-): string {
-  return JSON.stringify(
-    PublicMessagePartFilePart$outboundSchema.parse(publicMessagePartFilePart),
-  );
-}
-export function publicMessagePartFilePartFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicMessagePartFilePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicMessagePartFilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartFilePart' from JSON`,
-  );
-}
-
-/** @internal */
 export const InvokeAgentPublicMessagePart$inboundSchema: z.ZodType<
   InvokeAgentPublicMessagePart,
   z.ZodTypeDef,
   unknown
 > = z.union([
   components.TextPart$inboundSchema,
-  z.lazy(() => PublicMessagePartFilePart$inboundSchema),
-  z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+  components.FilePart$inboundSchema,
+  components.ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type InvokeAgentPublicMessagePart$Outbound =
   | components.TextPart$Outbound
-  | PublicMessagePartFilePart$Outbound
-  | PublicMessagePartToolResultPart$Outbound;
+  | components.FilePart$Outbound
+  | components.ToolResultPart$Outbound;
 
 /** @internal */
 export const InvokeAgentPublicMessagePart$outboundSchema: z.ZodType<
@@ -696,8 +360,8 @@ export const InvokeAgentPublicMessagePart$outboundSchema: z.ZodType<
   InvokeAgentPublicMessagePart
 > = z.union([
   components.TextPart$outboundSchema,
-  z.lazy(() => PublicMessagePartFilePart$outboundSchema),
-  z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
+  components.FilePart$outboundSchema,
+  components.ToolResultPart$outboundSchema,
 ]);
 
 export function invokeAgentPublicMessagePartToJSON(
@@ -733,8 +397,8 @@ export const InvokeAgentA2AMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$inboundSchema,
-      z.lazy(() => PublicMessagePartFilePart$inboundSchema),
-      z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+      components.FilePart$inboundSchema,
+      components.ToolResultPart$inboundSchema,
     ]),
   ),
 });
@@ -744,8 +408,8 @@ export type InvokeAgentA2AMessage$Outbound = {
   role: string | string;
   parts: Array<
     | components.TextPart$Outbound
-    | PublicMessagePartFilePart$Outbound
-    | PublicMessagePartToolResultPart$Outbound
+    | components.FilePart$Outbound
+    | components.ToolResultPart$Outbound
   >;
 };
 
@@ -763,8 +427,8 @@ export const InvokeAgentA2AMessage$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$outboundSchema,
-      z.lazy(() => PublicMessagePartFilePart$outboundSchema),
-      z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
+      components.FilePart$outboundSchema,
+      components.ToolResultPart$outboundSchema,
     ]),
   ),
 });
@@ -1055,13 +719,12 @@ export function invokeAgentRequestFromJSON(
 }
 
 /** @internal */
-export const InvokeAgentKind$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentKind
-> = z.nativeEnum(InvokeAgentKind);
+export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
+  Kind,
+);
 /** @internal */
-export const InvokeAgentKind$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentKind
-> = InvokeAgentKind$inboundSchema;
+export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
+  Kind$inboundSchema;
 
 /** @internal */
 export const TaskState$inboundSchema: z.ZodNativeEnum<typeof TaskState> = z
@@ -1071,13 +734,13 @@ export const TaskState$outboundSchema: z.ZodNativeEnum<typeof TaskState> =
   TaskState$inboundSchema;
 
 /** @internal */
-export const InvokeAgentAgentsKind$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentAgentsKind
-> = z.nativeEnum(InvokeAgentAgentsKind);
+export const InvokeAgentKind$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentKind
+> = z.nativeEnum(InvokeAgentKind);
 /** @internal */
-export const InvokeAgentAgentsKind$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentAgentsKind
-> = InvokeAgentAgentsKind$inboundSchema;
+export const InvokeAgentKind$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeAgentKind
+> = InvokeAgentKind$inboundSchema;
 
 /** @internal */
 export const ExtendedMessageRole$inboundSchema: z.ZodNativeEnum<
@@ -1172,7 +835,7 @@ export const TaskStatusMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: InvokeAgentAgentsKind$inboundSchema,
+  kind: InvokeAgentKind$inboundSchema,
   messageId: z.string(),
   role: ExtendedMessageRole$inboundSchema,
   parts: z.array(
@@ -1225,7 +888,7 @@ export const TaskStatusMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskStatusMessage
 > = z.object({
-  kind: InvokeAgentAgentsKind$outboundSchema,
+  kind: InvokeAgentKind$outboundSchema,
   messageId: z.string(),
   role: ExtendedMessageRole$outboundSchema,
   parts: z.array(
@@ -1325,7 +988,7 @@ export const InvokeAgentA2ATaskResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   contextId: z.string(),
-  kind: InvokeAgentKind$inboundSchema,
+  kind: Kind$inboundSchema,
   status: z.lazy(() => TaskStatus$inboundSchema),
   metadata: z.record(z.any()).optional(),
 });
@@ -1346,7 +1009,7 @@ export const InvokeAgentA2ATaskResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   contextId: z.string(),
-  kind: InvokeAgentKind$outboundSchema,
+  kind: Kind$outboundSchema,
   status: z.lazy(() => TaskStatus$outboundSchema),
   metadata: z.record(z.any()).optional(),
 });

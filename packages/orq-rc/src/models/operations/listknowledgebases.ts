@@ -99,7 +99,7 @@ export type DataExternalConfig = {
   apiUrl: string;
 };
 
-export type ListKnowledgeBasesData2 = {
+export type Data2 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -218,7 +218,7 @@ export type ListKnowledgeBasesDataRetrievalSettings = {
   agenticRagConfig?: ListKnowledgeBasesDataAgenticRagConfig | null | undefined;
 };
 
-export type ListKnowledgeBasesData1 = {
+export type Data1 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -266,16 +266,14 @@ export type ListKnowledgeBasesData1 = {
   model: string;
 };
 
-export type ListKnowledgeBasesData =
-  | ListKnowledgeBasesData1
-  | ListKnowledgeBasesData2;
+export type ListKnowledgeBasesData = Data1 | Data2;
 
 /**
  * Knowledge bases retrieved
  */
 export type ListKnowledgeBasesResponseBody = {
   object: ListKnowledgeBasesObject;
-  data: Array<ListKnowledgeBasesData1 | ListKnowledgeBasesData2>;
+  data: Array<Data1 | Data2>;
   hasMore: boolean;
 };
 
@@ -565,36 +563,33 @@ export function dataExternalConfigFromJSON(
 }
 
 /** @internal */
-export const ListKnowledgeBasesData2$inboundSchema: z.ZodType<
-  ListKnowledgeBasesData2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: ListKnowledgeBasesDataKnowledgeType$inboundSchema.default("external"),
-  retrieval_settings: z.lazy(() => DataRetrievalSettings$inboundSchema)
-    .optional(),
-  external_config: z.lazy(() => DataExternalConfig$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "retrieval_settings": "retrievalSettings",
-    "external_config": "externalConfig",
+export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    created: z.string(),
+    description: z.string().optional(),
+    key: z.string(),
+    domain_id: z.string(),
+    path: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    updated: z.string(),
+    type: ListKnowledgeBasesDataKnowledgeType$inboundSchema.default("external"),
+    retrieval_settings: z.lazy(() => DataRetrievalSettings$inboundSchema)
+      .optional(),
+    external_config: z.lazy(() => DataExternalConfig$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "retrieval_settings": "retrievalSettings",
+      "external_config": "externalConfig",
+    });
   });
-});
 /** @internal */
-export type ListKnowledgeBasesData2$Outbound = {
+export type Data2$Outbound = {
   _id: string;
   created: string;
   description?: string | undefined;
@@ -610,10 +605,10 @@ export type ListKnowledgeBasesData2$Outbound = {
 };
 
 /** @internal */
-export const ListKnowledgeBasesData2$outboundSchema: z.ZodType<
-  ListKnowledgeBasesData2$Outbound,
+export const Data2$outboundSchema: z.ZodType<
+  Data2$Outbound,
   z.ZodTypeDef,
-  ListKnowledgeBasesData2
+  Data2
 > = z.object({
   id: z.string(),
   created: z.string(),
@@ -639,20 +634,16 @@ export const ListKnowledgeBasesData2$outboundSchema: z.ZodType<
   });
 });
 
-export function listKnowledgeBasesData2ToJSON(
-  listKnowledgeBasesData2: ListKnowledgeBasesData2,
-): string {
-  return JSON.stringify(
-    ListKnowledgeBasesData2$outboundSchema.parse(listKnowledgeBasesData2),
-  );
+export function data2ToJSON(data2: Data2): string {
+  return JSON.stringify(Data2$outboundSchema.parse(data2));
 }
-export function listKnowledgeBasesData2FromJSON(
+export function data2FromJSON(
   jsonString: string,
-): SafeParseResult<ListKnowledgeBasesData2, SDKValidationError> {
+): SafeParseResult<Data2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListKnowledgeBasesData2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListKnowledgeBasesData2' from JSON`,
+    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data2' from JSON`,
   );
 }
 
@@ -866,36 +857,33 @@ export function listKnowledgeBasesDataRetrievalSettingsFromJSON(
 }
 
 /** @internal */
-export const ListKnowledgeBasesData1$inboundSchema: z.ZodType<
-  ListKnowledgeBasesData1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: ListKnowledgeBasesDataType$inboundSchema.default("internal"),
-  retrieval_settings: z.lazy(() =>
-    ListKnowledgeBasesDataRetrievalSettings$inboundSchema
-  ).optional(),
-  model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "retrieval_settings": "retrievalSettings",
+export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    created: z.string(),
+    description: z.string().optional(),
+    key: z.string(),
+    domain_id: z.string(),
+    path: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    updated: z.string(),
+    type: ListKnowledgeBasesDataType$inboundSchema.default("internal"),
+    retrieval_settings: z.lazy(() =>
+      ListKnowledgeBasesDataRetrievalSettings$inboundSchema
+    ).optional(),
+    model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "retrieval_settings": "retrievalSettings",
+    });
   });
-});
 /** @internal */
-export type ListKnowledgeBasesData1$Outbound = {
+export type Data1$Outbound = {
   _id: string;
   created: string;
   description?: string | undefined;
@@ -913,10 +901,10 @@ export type ListKnowledgeBasesData1$Outbound = {
 };
 
 /** @internal */
-export const ListKnowledgeBasesData1$outboundSchema: z.ZodType<
-  ListKnowledgeBasesData1$Outbound,
+export const Data1$outboundSchema: z.ZodType<
+  Data1$Outbound,
   z.ZodTypeDef,
-  ListKnowledgeBasesData1
+  Data1
 > = z.object({
   id: z.string(),
   created: z.string(),
@@ -942,20 +930,16 @@ export const ListKnowledgeBasesData1$outboundSchema: z.ZodType<
   });
 });
 
-export function listKnowledgeBasesData1ToJSON(
-  listKnowledgeBasesData1: ListKnowledgeBasesData1,
-): string {
-  return JSON.stringify(
-    ListKnowledgeBasesData1$outboundSchema.parse(listKnowledgeBasesData1),
-  );
+export function data1ToJSON(data1: Data1): string {
+  return JSON.stringify(Data1$outboundSchema.parse(data1));
 }
-export function listKnowledgeBasesData1FromJSON(
+export function data1FromJSON(
   jsonString: string,
-): SafeParseResult<ListKnowledgeBasesData1, SDKValidationError> {
+): SafeParseResult<Data1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListKnowledgeBasesData1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListKnowledgeBasesData1' from JSON`,
+    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data1' from JSON`,
   );
 }
 
@@ -965,13 +949,11 @@ export const ListKnowledgeBasesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ListKnowledgeBasesData1$inboundSchema),
-  z.lazy(() => ListKnowledgeBasesData2$inboundSchema),
+  z.lazy(() => Data1$inboundSchema),
+  z.lazy(() => Data2$inboundSchema),
 ]);
 /** @internal */
-export type ListKnowledgeBasesData$Outbound =
-  | ListKnowledgeBasesData1$Outbound
-  | ListKnowledgeBasesData2$Outbound;
+export type ListKnowledgeBasesData$Outbound = Data1$Outbound | Data2$Outbound;
 
 /** @internal */
 export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
@@ -979,8 +961,8 @@ export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListKnowledgeBasesData
 > = z.union([
-  z.lazy(() => ListKnowledgeBasesData1$outboundSchema),
-  z.lazy(() => ListKnowledgeBasesData2$outboundSchema),
+  z.lazy(() => Data1$outboundSchema),
+  z.lazy(() => Data2$outboundSchema),
 ]);
 
 export function listKnowledgeBasesDataToJSON(
@@ -1009,8 +991,8 @@ export const ListKnowledgeBasesResponseBody$inboundSchema: z.ZodType<
   object: ListKnowledgeBasesObject$inboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => ListKnowledgeBasesData1$inboundSchema),
-      z.lazy(() => ListKnowledgeBasesData2$inboundSchema),
+      z.lazy(() => Data1$inboundSchema),
+      z.lazy(() => Data2$inboundSchema),
     ]),
   ),
   has_more: z.boolean(),
@@ -1022,9 +1004,7 @@ export const ListKnowledgeBasesResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type ListKnowledgeBasesResponseBody$Outbound = {
   object: string;
-  data: Array<
-    ListKnowledgeBasesData1$Outbound | ListKnowledgeBasesData2$Outbound
-  >;
+  data: Array<Data1$Outbound | Data2$Outbound>;
   has_more: boolean;
 };
 
@@ -1037,8 +1017,8 @@ export const ListKnowledgeBasesResponseBody$outboundSchema: z.ZodType<
   object: ListKnowledgeBasesObject$outboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => ListKnowledgeBasesData1$outboundSchema),
-      z.lazy(() => ListKnowledgeBasesData2$outboundSchema),
+      z.lazy(() => Data1$outboundSchema),
+      z.lazy(() => Data2$outboundSchema),
     ]),
   ),
   hasMore: z.boolean(),

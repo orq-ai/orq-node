@@ -6,7 +6,7 @@
 import { FunctionParams32 } from "@orq-ai/node/models/operations";
 
 let value: FunctionParams32 = {
-  type: "lexical_repetition",
+  type: "grammar_diversity",
 };
 ```
 

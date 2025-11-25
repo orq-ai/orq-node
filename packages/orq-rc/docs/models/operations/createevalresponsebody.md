@@ -68,7 +68,7 @@ const value: operations.CreateEvalResponseBodyFunction = {
   description: "worst than stale eek finally",
   type: "function_eval",
   functionParams: {
-    type: "bert_coherence",
+    type: "grammar_diversity",
   },
   key: "<key>",
 };
