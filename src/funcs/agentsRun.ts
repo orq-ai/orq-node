@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function agentsRun(
   client: OrqCore,
-  request?: operations.RunAgentRequestBody | undefined,
+  request: operations.RunAgentRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function agentsRun(
 
 async function $do(
   client: OrqCore,
-  request?: operations.RunAgentRequestBody | undefined,
+  request: operations.RunAgentRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,17 +78,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.RunAgentRequestBody$outboundSchema.optional().parse(value),
+    (value) => operations.RunAgentRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/agents/run")();
 

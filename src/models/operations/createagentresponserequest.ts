@@ -235,7 +235,7 @@ export type CreateAgentResponseRequestRequest = {
    * The unique key of identifier of the agent to invoke
    */
   agentKey: string;
-  requestBody?: CreateAgentResponseRequestRequestBody | undefined;
+  requestBody: CreateAgentResponseRequestRequestBody;
 };
 
 export const CreateAgentResponseRequestAgentsResponsesRole = {
@@ -985,8 +985,9 @@ export const CreateAgentResponseRequestRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   agent_key: z.string(),
-  RequestBody: z.lazy(() => CreateAgentResponseRequestRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() =>
+    CreateAgentResponseRequestRequestBody$inboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     "agent_key": "agentKey",
@@ -996,7 +997,7 @@ export const CreateAgentResponseRequestRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateAgentResponseRequestRequest$Outbound = {
   agent_key: string;
-  RequestBody?: CreateAgentResponseRequestRequestBody$Outbound | undefined;
+  RequestBody: CreateAgentResponseRequestRequestBody$Outbound;
 };
 
 /** @internal */
@@ -1008,7 +1009,7 @@ export const CreateAgentResponseRequestRequest$outboundSchema: z.ZodType<
   agentKey: z.string(),
   requestBody: z.lazy(() =>
     CreateAgentResponseRequestRequestBody$outboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",

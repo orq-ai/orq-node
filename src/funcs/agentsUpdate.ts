@@ -33,8 +33,8 @@ import { Result } from "../types/fp.js";
  */
 export function agentsUpdate(
   client: OrqCore,
+  requestBody: operations.UpdateAgentUpdateAgentRequest,
   agentKey: string,
-  requestBody?: operations.UpdateAgentUpdateAgentRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -52,16 +52,16 @@ export function agentsUpdate(
 > {
   return new APIPromise($do(
     client,
-    agentKey,
     requestBody,
+    agentKey,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
+  requestBody: operations.UpdateAgentUpdateAgentRequest,
   agentKey: string,
-  requestBody?: operations.UpdateAgentUpdateAgentRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,8 +81,8 @@ async function $do(
   ]
 > {
   const input: operations.UpdateAgentRequest = {
-    agentKey: agentKey,
     requestBody: requestBody,
+    agentKey: agentKey,
   };
 
   const parsed = safeParse(

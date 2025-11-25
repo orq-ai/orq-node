@@ -8,9 +8,8 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
+  requestBody: operations.UpdateAgentUpdateAgentRequest$inboundSchema,
   agentKey: z.string(),
-  requestBody: operations.UpdateAgentUpdateAgentRequest$inboundSchema
-    .optional(),
 };
 
 export const tool$agentsUpdate: ToolDefinition<typeof args> = {
@@ -22,8 +21,8 @@ Modifies an existing agent's configuration with partial updates. Supports updati
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsUpdate(
       client,
-      args.agentKey,
       args.requestBody,
+      args.agentKey,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 

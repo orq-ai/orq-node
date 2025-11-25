@@ -8,8 +8,8 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
+  requestBody: operations.StreamAgentRequestBody$inboundSchema,
   key: z.string(),
-  requestBody: operations.StreamAgentRequestBody$inboundSchema.optional(),
 };
 
 export const tool$agentsStream: ToolDefinition<typeof args> = {
@@ -21,8 +21,8 @@ Executes an agent and streams the interaction in real-time using Server-Sent Eve
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsStream(
       client,
-      args.key,
       args.requestBody,
+      args.key,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
