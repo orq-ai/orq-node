@@ -15,6 +15,7 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data = {
     agentExecutionId: "<id>",
     product: "otel",
   },
+  workflowRunId: "<id>",
 };
 ```
 
@@ -26,3 +27,4 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody14Data = {
 | `actionType`                                                                                                                 | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `toolExecutionContext`                                                                                                       | [operations.StreamAgentDataAgentsToolExecutionContext](../../models/operations/streamagentdataagentstoolexecutioncontext.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `responseId`                                                                                                                 | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `workflowRunId`                                                                                                              | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

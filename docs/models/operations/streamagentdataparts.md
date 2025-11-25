@@ -3,43 +3,42 @@
 
 ## Supported Types
 
-### `operations.StreamAgentPartsTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.StreamAgentPartsTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.StreamAgentPartsDataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.StreamAgentPartsDataPart = {
+const value: components.DataPart = {
   kind: "data",
   data: {
     "key": "<value>",
     "key1": "<value>",
-    "key2": "<value>",
   },
 };
 ```
 
-### `operations.StreamAgentPartsFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamAgentPartsFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
-    uri: "https://red-halt.org/",
+    bytes: "<value>",
   },
 };
 ```
 
-### `operations.StreamAgentPartsToolCallPart`
+### `components.ToolCallPart`
 
 ```typescript
-const value: operations.StreamAgentPartsToolCallPart = {
+const value: components.ToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
@@ -51,10 +50,10 @@ const value: operations.StreamAgentPartsToolCallPart = {
 };
 ```
 
-### `operations.StreamAgentPartsToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamAgentPartsToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

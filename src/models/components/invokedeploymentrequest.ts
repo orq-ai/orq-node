@@ -273,7 +273,7 @@ export type InvokeDeploymentRequest2PrefixMessagesType = ClosedEnum<
 /**
  * File data for the content part. Must contain either file_data or uri, but not both.
  */
-export type FileT = {
+export type InvokeDeploymentRequest2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
@@ -300,7 +300,7 @@ export type Four = {
   /**
    * File data for the content part. Must contain either file_data or uri, but not both.
    */
-  file: FileT;
+  file: InvokeDeploymentRequest2File;
 };
 
 export const InvokeDeploymentRequest2Type = {
@@ -2156,19 +2156,22 @@ export const InvokeDeploymentRequest2PrefixMessagesType$outboundSchema:
     InvokeDeploymentRequest2PrefixMessagesType$inboundSchema;
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    file_data: z.string().optional(),
-    uri: z.string().optional(),
-    mimeType: z.string().optional(),
-    filename: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_data": "fileData",
-    });
+export const InvokeDeploymentRequest2File$inboundSchema: z.ZodType<
+  InvokeDeploymentRequest2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
   });
+});
 /** @internal */
-export type FileT$Outbound = {
+export type InvokeDeploymentRequest2File$Outbound = {
   file_data?: string | undefined;
   uri?: string | undefined;
   mimeType?: string | undefined;
@@ -2176,10 +2179,10 @@ export type FileT$Outbound = {
 };
 
 /** @internal */
-export const FileT$outboundSchema: z.ZodType<
-  FileT$Outbound,
+export const InvokeDeploymentRequest2File$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest2File$Outbound,
   z.ZodTypeDef,
-  FileT
+  InvokeDeploymentRequest2File
 > = z.object({
   fileData: z.string().optional(),
   uri: z.string().optional(),
@@ -2191,16 +2194,22 @@ export const FileT$outboundSchema: z.ZodType<
   });
 });
 
-export function fileToJSON(fileT: FileT): string {
-  return JSON.stringify(FileT$outboundSchema.parse(fileT));
+export function invokeDeploymentRequest2FileToJSON(
+  invokeDeploymentRequest2File: InvokeDeploymentRequest2File,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest2File$outboundSchema.parse(
+      invokeDeploymentRequest2File,
+    ),
+  );
 }
-export function fileFromJSON(
+export function invokeDeploymentRequest2FileFromJSON(
   jsonString: string,
-): SafeParseResult<FileT, SDKValidationError> {
+): SafeParseResult<InvokeDeploymentRequest2File, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileT' from JSON`,
+    (x) => InvokeDeploymentRequest2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeDeploymentRequest2File' from JSON`,
   );
 }
 
@@ -2208,19 +2217,19 @@ export function fileFromJSON(
 export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
   .object({
     type: InvokeDeploymentRequest2PrefixMessagesType$inboundSchema,
-    file: z.lazy(() => FileT$inboundSchema),
+    file: z.lazy(() => InvokeDeploymentRequest2File$inboundSchema),
   });
 /** @internal */
 export type Four$Outbound = {
   type: string;
-  file: FileT$Outbound;
+  file: InvokeDeploymentRequest2File$Outbound;
 };
 
 /** @internal */
 export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
   z.object({
     type: InvokeDeploymentRequest2PrefixMessagesType$outboundSchema,
-    file: z.lazy(() => FileT$outboundSchema),
+    file: z.lazy(() => InvokeDeploymentRequest2File$outboundSchema),
   });
 
 export function fourToJSON(four: Four): string {

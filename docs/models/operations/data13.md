@@ -23,6 +23,7 @@ let value: Data13 = {
       agentExecutionId: "<id>",
       product: "external_events",
     },
+    workflowRunId: "<id>",
   },
 };
 ```

@@ -10,6 +10,7 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data = {
   actionId: "<id>",
   agentToolCallId: "<id>",
   review: "rejected",
+  workflowRunId: "<id>",
 };
 ```
 
@@ -24,3 +25,4 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody7Data = {
 | `mockOutput`                                                   | Record<string, *any*>                                          | :heavy_minus_sign:                                             | N/A                                                            |
 | `reviewSource`                                                 | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
 | `reviewedById`                                                 | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
+| `workflowRunId`                                                | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |

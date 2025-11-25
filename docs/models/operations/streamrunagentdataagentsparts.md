@@ -3,32 +3,31 @@
 
 ## Supported Types
 
-### `operations.StreamRunAgentPartsAgentsResponseTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponseTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponseDataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponseDataPart = {
+const value: components.DataPart = {
   kind: "data",
   data: {
     "key": "<value>",
     "key1": "<value>",
-    "key2": "<value>",
   },
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponseFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponseFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -36,21 +35,25 @@ const value: operations.StreamRunAgentPartsAgentsResponseFilePart = {
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponseToolCallPart`
+### `components.ToolCallPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponseToolCallPart = {
+const value: components.ToolCallPart = {
   kind: "tool_call",
   toolName: "<value>",
   toolCallId: "<id>",
-  arguments: {},
+  arguments: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
 };
 ```
 
-### `operations.StreamRunAgentPartsAgentsResponseToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamRunAgentPartsAgentsResponseToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

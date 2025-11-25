@@ -11,6 +11,7 @@ let value: Data4 = {
   data: {
     lastMessage: "<value>",
     finishReason: "tool_calls",
+    workflowRunId: "<id>",
   },
 };
 ```

@@ -10,6 +10,7 @@ import {
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -773,28 +774,28 @@ export type RunAgentRoleUserMessage = ClosedEnum<
  */
 export type RunAgentRole = RunAgentRoleUserMessage | RunAgentRoleToolMessage;
 
-export const RunAgentPublicMessagePartAgentsRequestKind = {
+export const RunAgentPublicMessagePartAgentsKind = {
   ToolResult: "tool_result",
 } as const;
-export type RunAgentPublicMessagePartAgentsRequestKind = ClosedEnum<
-  typeof RunAgentPublicMessagePartAgentsRequestKind
+export type RunAgentPublicMessagePartAgentsKind = ClosedEnum<
+  typeof RunAgentPublicMessagePartAgentsKind
 >;
 
 /**
  * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
 export type RunAgentPublicMessagePartToolResultPart = {
-  kind: RunAgentPublicMessagePartAgentsRequestKind;
+  kind: RunAgentPublicMessagePartAgentsKind;
   toolCallId: string;
   result?: any | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
-export const RunAgentPublicMessagePartAgentsKind = {
+export const RunAgentPublicMessagePartKind = {
   File: "file",
 } as const;
-export type RunAgentPublicMessagePartAgentsKind = ClosedEnum<
-  typeof RunAgentPublicMessagePartAgentsKind
+export type RunAgentPublicMessagePartKind = ClosedEnum<
+  typeof RunAgentPublicMessagePartKind
 >;
 
 /**
@@ -841,31 +842,16 @@ export type RunAgentPublicMessagePartFile =
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
 export type RunAgentPublicMessagePartFilePart = {
-  kind: RunAgentPublicMessagePartAgentsKind;
+  kind: RunAgentPublicMessagePartKind;
   file: RunAgentFileBinaryFormat | RunAgentFileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
-};
-
-export const RunAgentPublicMessagePartKind = {
-  Text: "text",
-} as const;
-export type RunAgentPublicMessagePartKind = ClosedEnum<
-  typeof RunAgentPublicMessagePartKind
->;
-
-/**
- * Text content part. Use this to send text messages to the agent.
- */
-export type RunAgentPublicMessagePartTextPart = {
-  kind: RunAgentPublicMessagePartKind;
-  text: string;
 };
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
 export type RunAgentPublicMessagePart =
-  | RunAgentPublicMessagePartTextPart
+  | components.TextPart
   | RunAgentPublicMessagePartFilePart
   | RunAgentPublicMessagePartToolResultPart;
 
@@ -885,7 +871,7 @@ export type RunAgentA2AMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    | RunAgentPublicMessagePartTextPart
+    | components.TextPart
     | RunAgentPublicMessagePartFilePart
     | RunAgentPublicMessagePartToolResultPart
   >;
@@ -1809,132 +1795,12 @@ export type RunAgentExtendedMessageRole = ClosedEnum<
   typeof RunAgentExtendedMessageRole
 >;
 
-export const RunAgentPartsAgentsResponse200ApplicationJSONKind = {
-  ToolResult: "tool_result",
-} as const;
-export type RunAgentPartsAgentsResponse200ApplicationJSONKind = ClosedEnum<
-  typeof RunAgentPartsAgentsResponse200ApplicationJSONKind
->;
-
-/**
- * The result of a tool execution. Contains the tool call ID for correlation and the result data from the tool invocation.
- */
-export type RunAgentPartsToolResultPart = {
-  kind: RunAgentPartsAgentsResponse200ApplicationJSONKind;
-  toolCallId: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const RunAgentPartsAgentsResponse200Kind = {
-  ToolCall: "tool_call",
-} as const;
-export type RunAgentPartsAgentsResponse200Kind = ClosedEnum<
-  typeof RunAgentPartsAgentsResponse200Kind
->;
-
-/**
- * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
- */
-export type PartsToolCallPart = {
-  kind: RunAgentPartsAgentsResponse200Kind;
-  toolName: string;
-  toolCallId: string;
-  arguments: { [k: string]: any };
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const RunAgentPartsAgentsResponseKind = {
-  File: "file",
-} as const;
-export type RunAgentPartsAgentsResponseKind = ClosedEnum<
-  typeof RunAgentPartsAgentsResponseKind
->;
-
-/**
- * File in URI format. Check in the model's documentation for the supported mime types for the URI format
- */
-export type RunAgentFileAgentsFileInURIFormat = {
-  /**
-   * URL for the File content
-   */
-  uri: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-/**
- * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
- */
-export type RunAgentFileAgentsBinaryFormat = {
-  /**
-   * base64 encoded content of the file
-   */
-  bytes: string;
-  /**
-   * Optional mimeType for the file
-   */
-  mimeType?: string | undefined;
-  /**
-   * Optional name for the file
-   */
-  name?: string | undefined;
-};
-
-export type RunAgentPartsFile =
-  | RunAgentFileAgentsBinaryFormat
-  | RunAgentFileAgentsFileInURIFormat;
-
-/**
- * A file content part that can contain either base64-encoded bytes or a URI reference. Used for images, documents, and other binary content in agent communications.
- */
-export type RunAgentPartsFilePart = {
-  kind: RunAgentPartsAgentsResponseKind;
-  file: RunAgentFileAgentsBinaryFormat | RunAgentFileAgentsFileInURIFormat;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const RunAgentPartsAgentsKind = {
-  Data: "data",
-} as const;
-export type RunAgentPartsAgentsKind = ClosedEnum<
-  typeof RunAgentPartsAgentsKind
->;
-
-/**
- * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
- */
-export type PartsDataPart = {
-  kind: RunAgentPartsAgentsKind;
-  data: { [k: string]: any };
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export const RunAgentPartsKind = {
-  Text: "text",
-} as const;
-export type RunAgentPartsKind = ClosedEnum<typeof RunAgentPartsKind>;
-
-/**
- * A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses.
- */
-export type RunAgentPartsTextPart = {
-  kind: RunAgentPartsKind;
-  text: string;
-};
-
 export type RunAgentParts =
-  | PartsToolCallPart
-  | RunAgentPartsTextPart
-  | PartsDataPart
-  | RunAgentPartsFilePart
-  | RunAgentPartsToolResultPart;
+  | (components.ToolCallPart & { kind: "tool_call" })
+  | (components.TextPart & { kind: "text" })
+  | (components.DataPart & { kind: "data" })
+  | (components.FilePart & { kind: "file" })
+  | (components.ToolResultPart & { kind: "tool_result" });
 
 /**
  * Optional A2A message providing additional context about the current status
@@ -1947,11 +1813,11 @@ export type RunAgentTaskStatusMessage = {
    */
   role: RunAgentExtendedMessageRole;
   parts: Array<
-    | PartsToolCallPart
-    | RunAgentPartsTextPart
-    | PartsDataPart
-    | RunAgentPartsFilePart
-    | RunAgentPartsToolResultPart
+    | (components.ToolCallPart & { kind: "tool_call" })
+    | (components.TextPart & { kind: "text" })
+    | (components.DataPart & { kind: "data" })
+    | (components.FilePart & { kind: "file" })
+    | (components.ToolResultPart & { kind: "tool_result" })
   >;
 };
 
@@ -4009,13 +3875,13 @@ export function runAgentRoleFromJSON(
 }
 
 /** @internal */
-export const RunAgentPublicMessagePartAgentsRequestKind$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsRequestKind> = z
-    .nativeEnum(RunAgentPublicMessagePartAgentsRequestKind);
+export const RunAgentPublicMessagePartAgentsKind$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentPublicMessagePartAgentsKind
+> = z.nativeEnum(RunAgentPublicMessagePartAgentsKind);
 /** @internal */
-export const RunAgentPublicMessagePartAgentsRequestKind$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsRequestKind> =
-    RunAgentPublicMessagePartAgentsRequestKind$inboundSchema;
+export const RunAgentPublicMessagePartAgentsKind$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsKind> =
+    RunAgentPublicMessagePartAgentsKind$inboundSchema;
 
 /** @internal */
 export const RunAgentPublicMessagePartToolResultPart$inboundSchema: z.ZodType<
@@ -4023,7 +3889,7 @@ export const RunAgentPublicMessagePartToolResultPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: RunAgentPublicMessagePartAgentsRequestKind$inboundSchema,
+  kind: RunAgentPublicMessagePartAgentsKind$inboundSchema,
   tool_call_id: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),
@@ -4046,7 +3912,7 @@ export const RunAgentPublicMessagePartToolResultPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentPublicMessagePartToolResultPart
 > = z.object({
-  kind: RunAgentPublicMessagePartAgentsRequestKind$outboundSchema,
+  kind: RunAgentPublicMessagePartAgentsKind$outboundSchema,
   toolCallId: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),
@@ -4083,13 +3949,13 @@ export function runAgentPublicMessagePartToolResultPartFromJSON(
 }
 
 /** @internal */
-export const RunAgentPublicMessagePartAgentsKind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPublicMessagePartAgentsKind
-> = z.nativeEnum(RunAgentPublicMessagePartAgentsKind);
+export const RunAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentPublicMessagePartKind
+> = z.nativeEnum(RunAgentPublicMessagePartKind);
 /** @internal */
-export const RunAgentPublicMessagePartAgentsKind$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsKind> =
-    RunAgentPublicMessagePartAgentsKind$inboundSchema;
+export const RunAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentPublicMessagePartKind
+> = RunAgentPublicMessagePartKind$inboundSchema;
 
 /** @internal */
 export const RunAgentFileFileInURIFormat$inboundSchema: z.ZodType<
@@ -4232,7 +4098,7 @@ export const RunAgentPublicMessagePartFilePart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: RunAgentPublicMessagePartAgentsKind$inboundSchema,
+  kind: RunAgentPublicMessagePartKind$inboundSchema,
   file: z.union([
     z.lazy(() => RunAgentFileBinaryFormat$inboundSchema),
     z.lazy(() => RunAgentFileFileInURIFormat$inboundSchema),
@@ -4254,7 +4120,7 @@ export const RunAgentPublicMessagePartFilePart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentPublicMessagePartFilePart
 > = z.object({
-  kind: RunAgentPublicMessagePartAgentsKind$outboundSchema,
+  kind: RunAgentPublicMessagePartKind$outboundSchema,
   file: z.union([
     z.lazy(() => RunAgentFileBinaryFormat$outboundSchema),
     z.lazy(() => RunAgentFileFileInURIFormat$outboundSchema),
@@ -4282,71 +4148,18 @@ export function runAgentPublicMessagePartFilePartFromJSON(
 }
 
 /** @internal */
-export const RunAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPublicMessagePartKind
-> = z.nativeEnum(RunAgentPublicMessagePartKind);
-/** @internal */
-export const RunAgentPublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPublicMessagePartKind
-> = RunAgentPublicMessagePartKind$inboundSchema;
-
-/** @internal */
-export const RunAgentPublicMessagePartTextPart$inboundSchema: z.ZodType<
-  RunAgentPublicMessagePartTextPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPublicMessagePartKind$inboundSchema,
-  text: z.string(),
-});
-/** @internal */
-export type RunAgentPublicMessagePartTextPart$Outbound = {
-  kind: string;
-  text: string;
-};
-
-/** @internal */
-export const RunAgentPublicMessagePartTextPart$outboundSchema: z.ZodType<
-  RunAgentPublicMessagePartTextPart$Outbound,
-  z.ZodTypeDef,
-  RunAgentPublicMessagePartTextPart
-> = z.object({
-  kind: RunAgentPublicMessagePartKind$outboundSchema,
-  text: z.string(),
-});
-
-export function runAgentPublicMessagePartTextPartToJSON(
-  runAgentPublicMessagePartTextPart: RunAgentPublicMessagePartTextPart,
-): string {
-  return JSON.stringify(
-    RunAgentPublicMessagePartTextPart$outboundSchema.parse(
-      runAgentPublicMessagePartTextPart,
-    ),
-  );
-}
-export function runAgentPublicMessagePartTextPartFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentPublicMessagePartTextPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentPublicMessagePartTextPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentPublicMessagePartTextPart' from JSON`,
-  );
-}
-
-/** @internal */
 export const RunAgentPublicMessagePart$inboundSchema: z.ZodType<
   RunAgentPublicMessagePart,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RunAgentPublicMessagePartTextPart$inboundSchema),
+  components.TextPart$inboundSchema,
   z.lazy(() => RunAgentPublicMessagePartFilePart$inboundSchema),
   z.lazy(() => RunAgentPublicMessagePartToolResultPart$inboundSchema),
 ]);
 /** @internal */
 export type RunAgentPublicMessagePart$Outbound =
-  | RunAgentPublicMessagePartTextPart$Outbound
+  | components.TextPart$Outbound
   | RunAgentPublicMessagePartFilePart$Outbound
   | RunAgentPublicMessagePartToolResultPart$Outbound;
 
@@ -4356,7 +4169,7 @@ export const RunAgentPublicMessagePart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentPublicMessagePart
 > = z.union([
-  z.lazy(() => RunAgentPublicMessagePartTextPart$outboundSchema),
+  components.TextPart$outboundSchema,
   z.lazy(() => RunAgentPublicMessagePartFilePart$outboundSchema),
   z.lazy(() => RunAgentPublicMessagePartToolResultPart$outboundSchema),
 ]);
@@ -4391,7 +4204,7 @@ export const RunAgentA2AMessage$inboundSchema: z.ZodType<
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => RunAgentPublicMessagePartTextPart$inboundSchema),
+      components.TextPart$inboundSchema,
       z.lazy(() => RunAgentPublicMessagePartFilePart$inboundSchema),
       z.lazy(() => RunAgentPublicMessagePartToolResultPart$inboundSchema),
     ]),
@@ -4402,7 +4215,7 @@ export type RunAgentA2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
-    | RunAgentPublicMessagePartTextPart$Outbound
+    | components.TextPart$Outbound
     | RunAgentPublicMessagePartFilePart$Outbound
     | RunAgentPublicMessagePartToolResultPart$Outbound
   >;
@@ -4421,7 +4234,7 @@ export const RunAgentA2AMessage$outboundSchema: z.ZodType<
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => RunAgentPublicMessagePartTextPart$outboundSchema),
+      components.TextPart$outboundSchema,
       z.lazy(() => RunAgentPublicMessagePartFilePart$outboundSchema),
       z.lazy(() => RunAgentPublicMessagePartToolResultPart$outboundSchema),
     ]),
@@ -4790,7 +4603,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KAX3BPXMVS2F5443BCXXJ4PA"),
+    id: z.string().default("01KAXCAFW0E7JRSY8DK4YB9CKQ"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4809,7 +4622,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KAX3BPXMVS2F5443BCXXJ4PA"),
+  id: z.string().default("01KAXCAFW0E7JRSY8DK4YB9CKQ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -6966,459 +6779,38 @@ export const RunAgentExtendedMessageRole$outboundSchema: z.ZodNativeEnum<
 > = RunAgentExtendedMessageRole$inboundSchema;
 
 /** @internal */
-export const RunAgentPartsAgentsResponse200ApplicationJSONKind$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentPartsAgentsResponse200ApplicationJSONKind> = z
-    .nativeEnum(RunAgentPartsAgentsResponse200ApplicationJSONKind);
-/** @internal */
-export const RunAgentPartsAgentsResponse200ApplicationJSONKind$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentPartsAgentsResponse200ApplicationJSONKind> =
-    RunAgentPartsAgentsResponse200ApplicationJSONKind$inboundSchema;
-
-/** @internal */
-export const RunAgentPartsToolResultPart$inboundSchema: z.ZodType<
-  RunAgentPartsToolResultPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPartsAgentsResponse200ApplicationJSONKind$inboundSchema,
-  tool_call_id: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-  });
-});
-/** @internal */
-export type RunAgentPartsToolResultPart$Outbound = {
-  kind: string;
-  tool_call_id: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const RunAgentPartsToolResultPart$outboundSchema: z.ZodType<
-  RunAgentPartsToolResultPart$Outbound,
-  z.ZodTypeDef,
-  RunAgentPartsToolResultPart
-> = z.object({
-  kind: RunAgentPartsAgentsResponse200ApplicationJSONKind$outboundSchema,
-  toolCallId: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function runAgentPartsToolResultPartToJSON(
-  runAgentPartsToolResultPart: RunAgentPartsToolResultPart,
-): string {
-  return JSON.stringify(
-    RunAgentPartsToolResultPart$outboundSchema.parse(
-      runAgentPartsToolResultPart,
-    ),
-  );
-}
-export function runAgentPartsToolResultPartFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentPartsToolResultPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentPartsToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentPartsToolResultPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsAgentsResponse200Kind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsResponse200Kind
-> = z.nativeEnum(RunAgentPartsAgentsResponse200Kind);
-/** @internal */
-export const RunAgentPartsAgentsResponse200Kind$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsResponse200Kind
-> = RunAgentPartsAgentsResponse200Kind$inboundSchema;
-
-/** @internal */
-export const PartsToolCallPart$inboundSchema: z.ZodType<
-  PartsToolCallPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPartsAgentsResponse200Kind$inboundSchema,
-  tool_name: z.string(),
-  tool_call_id: z.string(),
-  arguments: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_name": "toolName",
-    "tool_call_id": "toolCallId",
-  });
-});
-/** @internal */
-export type PartsToolCallPart$Outbound = {
-  kind: string;
-  tool_name: string;
-  tool_call_id: string;
-  arguments: { [k: string]: any };
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const PartsToolCallPart$outboundSchema: z.ZodType<
-  PartsToolCallPart$Outbound,
-  z.ZodTypeDef,
-  PartsToolCallPart
-> = z.object({
-  kind: RunAgentPartsAgentsResponse200Kind$outboundSchema,
-  toolName: z.string(),
-  toolCallId: z.string(),
-  arguments: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolName: "tool_name",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function partsToolCallPartToJSON(
-  partsToolCallPart: PartsToolCallPart,
-): string {
-  return JSON.stringify(
-    PartsToolCallPart$outboundSchema.parse(partsToolCallPart),
-  );
-}
-export function partsToolCallPartFromJSON(
-  jsonString: string,
-): SafeParseResult<PartsToolCallPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PartsToolCallPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PartsToolCallPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsAgentsResponseKind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsResponseKind
-> = z.nativeEnum(RunAgentPartsAgentsResponseKind);
-/** @internal */
-export const RunAgentPartsAgentsResponseKind$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsResponseKind
-> = RunAgentPartsAgentsResponseKind$inboundSchema;
-
-/** @internal */
-export const RunAgentFileAgentsFileInURIFormat$inboundSchema: z.ZodType<
-  RunAgentFileAgentsFileInURIFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type RunAgentFileAgentsFileInURIFormat$Outbound = {
-  uri: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const RunAgentFileAgentsFileInURIFormat$outboundSchema: z.ZodType<
-  RunAgentFileAgentsFileInURIFormat$Outbound,
-  z.ZodTypeDef,
-  RunAgentFileAgentsFileInURIFormat
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function runAgentFileAgentsFileInURIFormatToJSON(
-  runAgentFileAgentsFileInURIFormat: RunAgentFileAgentsFileInURIFormat,
-): string {
-  return JSON.stringify(
-    RunAgentFileAgentsFileInURIFormat$outboundSchema.parse(
-      runAgentFileAgentsFileInURIFormat,
-    ),
-  );
-}
-export function runAgentFileAgentsFileInURIFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentFileAgentsFileInURIFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentFileAgentsFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentFileAgentsFileInURIFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentFileAgentsBinaryFormat$inboundSchema: z.ZodType<
-  RunAgentFileAgentsBinaryFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type RunAgentFileAgentsBinaryFormat$Outbound = {
-  bytes: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const RunAgentFileAgentsBinaryFormat$outboundSchema: z.ZodType<
-  RunAgentFileAgentsBinaryFormat$Outbound,
-  z.ZodTypeDef,
-  RunAgentFileAgentsBinaryFormat
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function runAgentFileAgentsBinaryFormatToJSON(
-  runAgentFileAgentsBinaryFormat: RunAgentFileAgentsBinaryFormat,
-): string {
-  return JSON.stringify(
-    RunAgentFileAgentsBinaryFormat$outboundSchema.parse(
-      runAgentFileAgentsBinaryFormat,
-    ),
-  );
-}
-export function runAgentFileAgentsBinaryFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentFileAgentsBinaryFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentFileAgentsBinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentFileAgentsBinaryFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsFile$inboundSchema: z.ZodType<
-  RunAgentPartsFile,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => RunAgentFileAgentsBinaryFormat$inboundSchema),
-  z.lazy(() => RunAgentFileAgentsFileInURIFormat$inboundSchema),
-]);
-/** @internal */
-export type RunAgentPartsFile$Outbound =
-  | RunAgentFileAgentsBinaryFormat$Outbound
-  | RunAgentFileAgentsFileInURIFormat$Outbound;
-
-/** @internal */
-export const RunAgentPartsFile$outboundSchema: z.ZodType<
-  RunAgentPartsFile$Outbound,
-  z.ZodTypeDef,
-  RunAgentPartsFile
-> = z.union([
-  z.lazy(() => RunAgentFileAgentsBinaryFormat$outboundSchema),
-  z.lazy(() => RunAgentFileAgentsFileInURIFormat$outboundSchema),
-]);
-
-export function runAgentPartsFileToJSON(
-  runAgentPartsFile: RunAgentPartsFile,
-): string {
-  return JSON.stringify(
-    RunAgentPartsFile$outboundSchema.parse(runAgentPartsFile),
-  );
-}
-export function runAgentPartsFileFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentPartsFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentPartsFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentPartsFile' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsFilePart$inboundSchema: z.ZodType<
-  RunAgentPartsFilePart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPartsAgentsResponseKind$inboundSchema,
-  file: z.union([
-    z.lazy(() => RunAgentFileAgentsBinaryFormat$inboundSchema),
-    z.lazy(() => RunAgentFileAgentsFileInURIFormat$inboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-/** @internal */
-export type RunAgentPartsFilePart$Outbound = {
-  kind: string;
-  file:
-    | RunAgentFileAgentsBinaryFormat$Outbound
-    | RunAgentFileAgentsFileInURIFormat$Outbound;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const RunAgentPartsFilePart$outboundSchema: z.ZodType<
-  RunAgentPartsFilePart$Outbound,
-  z.ZodTypeDef,
-  RunAgentPartsFilePart
-> = z.object({
-  kind: RunAgentPartsAgentsResponseKind$outboundSchema,
-  file: z.union([
-    z.lazy(() => RunAgentFileAgentsBinaryFormat$outboundSchema),
-    z.lazy(() => RunAgentFileAgentsFileInURIFormat$outboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function runAgentPartsFilePartToJSON(
-  runAgentPartsFilePart: RunAgentPartsFilePart,
-): string {
-  return JSON.stringify(
-    RunAgentPartsFilePart$outboundSchema.parse(runAgentPartsFilePart),
-  );
-}
-export function runAgentPartsFilePartFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentPartsFilePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentPartsFilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentPartsFilePart' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsAgentsKind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsKind
-> = z.nativeEnum(RunAgentPartsAgentsKind);
-/** @internal */
-export const RunAgentPartsAgentsKind$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsAgentsKind
-> = RunAgentPartsAgentsKind$inboundSchema;
-
-/** @internal */
-export const PartsDataPart$inboundSchema: z.ZodType<
-  PartsDataPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPartsAgentsKind$inboundSchema,
-  data: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-});
-/** @internal */
-export type PartsDataPart$Outbound = {
-  kind: string;
-  data: { [k: string]: any };
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const PartsDataPart$outboundSchema: z.ZodType<
-  PartsDataPart$Outbound,
-  z.ZodTypeDef,
-  PartsDataPart
-> = z.object({
-  kind: RunAgentPartsAgentsKind$outboundSchema,
-  data: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function partsDataPartToJSON(partsDataPart: PartsDataPart): string {
-  return JSON.stringify(PartsDataPart$outboundSchema.parse(partsDataPart));
-}
-export function partsDataPartFromJSON(
-  jsonString: string,
-): SafeParseResult<PartsDataPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PartsDataPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PartsDataPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const RunAgentPartsKind$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsKind
-> = z.nativeEnum(RunAgentPartsKind);
-/** @internal */
-export const RunAgentPartsKind$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentPartsKind
-> = RunAgentPartsKind$inboundSchema;
-
-/** @internal */
-export const RunAgentPartsTextPart$inboundSchema: z.ZodType<
-  RunAgentPartsTextPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: RunAgentPartsKind$inboundSchema,
-  text: z.string(),
-});
-/** @internal */
-export type RunAgentPartsTextPart$Outbound = {
-  kind: string;
-  text: string;
-};
-
-/** @internal */
-export const RunAgentPartsTextPart$outboundSchema: z.ZodType<
-  RunAgentPartsTextPart$Outbound,
-  z.ZodTypeDef,
-  RunAgentPartsTextPart
-> = z.object({
-  kind: RunAgentPartsKind$outboundSchema,
-  text: z.string(),
-});
-
-export function runAgentPartsTextPartToJSON(
-  runAgentPartsTextPart: RunAgentPartsTextPart,
-): string {
-  return JSON.stringify(
-    RunAgentPartsTextPart$outboundSchema.parse(runAgentPartsTextPart),
-  );
-}
-export function runAgentPartsTextPartFromJSON(
-  jsonString: string,
-): SafeParseResult<RunAgentPartsTextPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RunAgentPartsTextPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentPartsTextPart' from JSON`,
-  );
-}
-
-/** @internal */
 export const RunAgentParts$inboundSchema: z.ZodType<
   RunAgentParts,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => PartsToolCallPart$inboundSchema),
-  z.lazy(() => RunAgentPartsTextPart$inboundSchema),
-  z.lazy(() => PartsDataPart$inboundSchema),
-  z.lazy(() => RunAgentPartsFilePart$inboundSchema),
-  z.lazy(() => RunAgentPartsToolResultPart$inboundSchema),
+  components.ToolCallPart$inboundSchema.and(
+    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
+      kind: v.kind,
+    })),
+  ),
+  components.TextPart$inboundSchema.and(
+    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.DataPart$inboundSchema.and(
+    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.FilePart$inboundSchema.and(
+    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.ToolResultPart$inboundSchema.and(
+    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
+      kind: v.kind,
+    })),
+  ),
 ]);
 /** @internal */
 export type RunAgentParts$Outbound =
-  | PartsToolCallPart$Outbound
-  | RunAgentPartsTextPart$Outbound
-  | PartsDataPart$Outbound
-  | RunAgentPartsFilePart$Outbound
-  | RunAgentPartsToolResultPart$Outbound;
+  | (components.ToolCallPart$Outbound & { kind: "tool_call" })
+  | (components.TextPart$Outbound & { kind: "text" })
+  | (components.DataPart$Outbound & { kind: "data" })
+  | (components.FilePart$Outbound & { kind: "file" })
+  | (components.ToolResultPart$Outbound & { kind: "tool_result" });
 
 /** @internal */
 export const RunAgentParts$outboundSchema: z.ZodType<
@@ -7426,11 +6818,25 @@ export const RunAgentParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentParts
 > = z.union([
-  z.lazy(() => PartsToolCallPart$outboundSchema),
-  z.lazy(() => RunAgentPartsTextPart$outboundSchema),
-  z.lazy(() => PartsDataPart$outboundSchema),
-  z.lazy(() => RunAgentPartsFilePart$outboundSchema),
-  z.lazy(() => RunAgentPartsToolResultPart$outboundSchema),
+  components.ToolCallPart$outboundSchema.and(
+    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
+      kind: v.kind,
+    })),
+  ),
+  components.TextPart$outboundSchema.and(
+    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.DataPart$outboundSchema.and(
+    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.FilePart$outboundSchema.and(
+    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
+  ),
+  components.ToolResultPart$outboundSchema.and(
+    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
+      kind: v.kind,
+    })),
+  ),
 ]);
 
 export function runAgentPartsToJSON(runAgentParts: RunAgentParts): string {
@@ -7457,11 +6863,31 @@ export const RunAgentTaskStatusMessage$inboundSchema: z.ZodType<
   role: RunAgentExtendedMessageRole$inboundSchema,
   parts: z.array(
     z.union([
-      z.lazy(() => PartsToolCallPart$inboundSchema),
-      z.lazy(() => RunAgentPartsTextPart$inboundSchema),
-      z.lazy(() => PartsDataPart$inboundSchema),
-      z.lazy(() => RunAgentPartsFilePart$inboundSchema),
-      z.lazy(() => RunAgentPartsToolResultPart$inboundSchema),
+      components.ToolCallPart$inboundSchema.and(
+        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.TextPart$inboundSchema.and(
+        z.object({ kind: z.literal("text") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.DataPart$inboundSchema.and(
+        z.object({ kind: z.literal("data") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.FilePart$inboundSchema.and(
+        z.object({ kind: z.literal("file") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.ToolResultPart$inboundSchema.and(
+        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
     ]),
   ),
 });
@@ -7471,11 +6897,11 @@ export type RunAgentTaskStatusMessage$Outbound = {
   messageId: string;
   role: string;
   parts: Array<
-    | PartsToolCallPart$Outbound
-    | RunAgentPartsTextPart$Outbound
-    | PartsDataPart$Outbound
-    | RunAgentPartsFilePart$Outbound
-    | RunAgentPartsToolResultPart$Outbound
+    | (components.ToolCallPart$Outbound & { kind: "tool_call" })
+    | (components.TextPart$Outbound & { kind: "text" })
+    | (components.DataPart$Outbound & { kind: "data" })
+    | (components.FilePart$Outbound & { kind: "file" })
+    | (components.ToolResultPart$Outbound & { kind: "tool_result" })
   >;
 };
 
@@ -7490,11 +6916,31 @@ export const RunAgentTaskStatusMessage$outboundSchema: z.ZodType<
   role: RunAgentExtendedMessageRole$outboundSchema,
   parts: z.array(
     z.union([
-      z.lazy(() => PartsToolCallPart$outboundSchema),
-      z.lazy(() => RunAgentPartsTextPart$outboundSchema),
-      z.lazy(() => PartsDataPart$outboundSchema),
-      z.lazy(() => RunAgentPartsFilePart$outboundSchema),
-      z.lazy(() => RunAgentPartsToolResultPart$outboundSchema),
+      components.ToolCallPart$outboundSchema.and(
+        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.TextPart$outboundSchema.and(
+        z.object({ kind: z.literal("text") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.DataPart$outboundSchema.and(
+        z.object({ kind: z.literal("data") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.FilePart$outboundSchema.and(
+        z.object({ kind: z.literal("file") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
+      components.ToolResultPart$outboundSchema.and(
+        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
+          kind: v.kind,
+        })),
+      ),
     ]),
   ),
 });

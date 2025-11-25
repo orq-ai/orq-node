@@ -8,6 +8,7 @@ import { StreamRunAgentDataAgentsResponse200Data } from "@orq-ai/node/models/ope
 let value: StreamRunAgentDataAgentsResponse200Data = {
   error: "<value>",
   code: 485.59,
+  workflowRunId: "<id>",
 };
 ```
 
@@ -18,3 +19,4 @@ let value: StreamRunAgentDataAgentsResponse200Data = {
 | `error`                                    | *string*                                   | :heavy_check_mark:                         | N/A                                        |
 | `code`                                     | *number*                                   | :heavy_check_mark:                         | N/A                                        |
 | `responseId`                               | *string*                                   | :heavy_minus_sign:                         | ID of the response tracking this execution |
+| `workflowRunId`                            | *string*                                   | :heavy_check_mark:                         | N/A                                        |

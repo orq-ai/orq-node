@@ -5,11 +5,11 @@
 ```typescript
 import { InvokeAgentPublicMessagePartKind } from "@orq-ai/node/models/operations";
 
-let value: InvokeAgentPublicMessagePartKind = "text";
+let value: InvokeAgentPublicMessagePartKind = "file";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"file"
 ```

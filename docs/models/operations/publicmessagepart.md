@@ -5,10 +5,10 @@ Message part that can be provided by users. Use "text" for regular messages, "fi
 
 ## Supported Types
 
-### `operations.TextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.TextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };

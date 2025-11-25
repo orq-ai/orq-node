@@ -6,6 +6,7 @@
 import { StreamRunAgentDataData } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentDataData = {
+  workflowRunId: "<id>",
   inputMessage: {
     role: "agent",
     parts: [
@@ -27,6 +28,7 @@ let value: StreamRunAgentDataData = {
 
 | Field                                                              | Type                                                               | Required                                                           | Description                                                        |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `workflowRunId`                                                    | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `integrationId`                                                    | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
 | `inputMessage`                                                     | [operations.InputMessage](../../models/operations/inputmessage.md) | :heavy_check_mark:                                                 | N/A                                                                |
 | `modelId`                                                          | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |

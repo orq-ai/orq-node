@@ -3,21 +3,46 @@
 
 ## Supported Types
 
-### `operations.StreamAgentPartsAgentsResponseTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.StreamAgentPartsAgentsResponseTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.StreamAgentPartsAgentsResponseDataPart`
+### `components.DataPart`
 
 ```typescript
-const value: operations.StreamAgentPartsAgentsResponseDataPart = {
+const value: components.DataPart = {
   kind: "data",
   data: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
+};
+```
+
+### `components.FilePart`
+
+```typescript
+const value: components.FilePart = {
+  kind: "file",
+  file: {
+    bytes: "<value>",
+  },
+};
+```
+
+### `components.ToolCallPart`
+
+```typescript
+const value: components.ToolCallPart = {
+  kind: "tool_call",
+  toolName: "<value>",
+  toolCallId: "<id>",
+  arguments: {
     "key": "<value>",
     "key1": "<value>",
     "key2": "<value>",
@@ -25,35 +50,10 @@ const value: operations.StreamAgentPartsAgentsResponseDataPart = {
 };
 ```
 
-### `operations.StreamAgentPartsAgentsResponseFilePart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamAgentPartsAgentsResponseFilePart = {
-  kind: "file",
-  file: {
-    uri: "https://earnest-sediment.org/",
-  },
-};
-```
-
-### `operations.StreamAgentPartsAgentsResponseToolCallPart`
-
-```typescript
-const value: operations.StreamAgentPartsAgentsResponseToolCallPart = {
-  kind: "tool_call",
-  toolName: "<value>",
-  toolCallId: "<id>",
-  arguments: {
-    "key": "<value>",
-    "key1": "<value>",
-  },
-};
-```
-
-### `operations.StreamAgentPartsAgentsResponseToolResultPart`
-
-```typescript
-const value: operations.StreamAgentPartsAgentsResponseToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

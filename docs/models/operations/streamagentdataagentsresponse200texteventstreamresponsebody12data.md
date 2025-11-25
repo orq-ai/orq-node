@@ -15,9 +15,7 @@ let value: StreamAgentDataAgentsResponse200TextEventStreamResponseBody12Data = {
       parts: [
         {
           kind: "data",
-          data: {
-            "key": "<value>",
-          },
+          data: {},
         },
       ],
     },

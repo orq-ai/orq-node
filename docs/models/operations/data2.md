@@ -9,6 +9,7 @@ let value: Data2 = {
   type: "event.agents.started",
   timestamp: "<value>",
   data: {
+    workflowRunId: "<id>",
     inputMessage: {
       role: "agent",
       parts: [
