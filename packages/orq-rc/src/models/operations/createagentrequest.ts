@@ -2230,6 +2230,9 @@ export type CreateAgentRequestKnowledgeBases = {
  */
 export type CreateAgentRequestResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   projectId: string;

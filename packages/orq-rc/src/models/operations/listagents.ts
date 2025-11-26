@@ -928,6 +928,9 @@ export type ListAgentsKnowledgeBases = {
 
 export type ListAgentsData = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   createdById?: string | null | undefined;

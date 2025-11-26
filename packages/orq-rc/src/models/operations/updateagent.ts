@@ -2249,6 +2249,9 @@ export type UpdateAgentAgentsKnowledgeBases = {
  */
 export type UpdateAgentResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   workspaceId: string;
