@@ -56,6 +56,7 @@ export * from "./getoneknowledge.js";
 export * from "./getoneprompt.js";
 export * from "./getpromptversion.js";
 export * from "./invokeagent.js";
+export * from "./invokeeval.js";
 export * from "./listagents.js";
 export * from "./listbudgets.js";
 export * from "./listchunks.js";

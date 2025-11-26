@@ -1,6 +1,6 @@
 # PrefixMessagesContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the user message.
 
 
 ## Supported Types

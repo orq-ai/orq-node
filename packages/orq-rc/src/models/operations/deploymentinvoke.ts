@@ -107,6 +107,42 @@ export type DeploymentInvokeMessageDeploymentsType = ClosedEnum<
 /**
  * The role of the prompt message
  */
+export const DeploymentInvokeMessageDeploymentsRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentInvokeMessageDeploymentsRole = ClosedEnum<
+  typeof DeploymentInvokeMessageDeploymentsRole
+>;
+
+export type Message3 = {
+  type: DeploymentInvokeMessageDeploymentsType;
+  /**
+   * The role of the prompt message
+   */
+  role: DeploymentInvokeMessageDeploymentsRole;
+  url: string;
+};
+
+export const DeploymentInvokeMessageType = {
+  Content: "content",
+} as const;
+export type DeploymentInvokeMessageType = ClosedEnum<
+  typeof DeploymentInvokeMessageType
+>;
+
+/**
+ * The role of the prompt message
+ */
 export const DeploymentInvokeMessageRole = {
   System: "system",
   Assistant: "assistant",
@@ -124,46 +160,12 @@ export type DeploymentInvokeMessageRole = ClosedEnum<
   typeof DeploymentInvokeMessageRole
 >;
 
-export type Message3 = {
-  type: DeploymentInvokeMessageDeploymentsType;
-  /**
-   * The role of the prompt message
-   */
-  role: DeploymentInvokeMessageRole;
-  url: string;
-};
-
-export const DeploymentInvokeMessageType = {
-  Content: "content",
-} as const;
-export type DeploymentInvokeMessageType = ClosedEnum<
-  typeof DeploymentInvokeMessageType
->;
-
-/**
- * The role of the prompt message
- */
-export const MessageRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type MessageRole = ClosedEnum<typeof MessageRole>;
-
 export type Message2 = {
   type: DeploymentInvokeMessageType;
   /**
    * The role of the prompt message
    */
-  role: MessageRole;
+  role: DeploymentInvokeMessageRole;
   content: string | null;
   /**
    * Internal thought process of the model
@@ -187,7 +189,7 @@ export type MessageType = ClosedEnum<typeof MessageType>;
 /**
  * The role of the prompt message
  */
-export const DeploymentInvokeMessageDeploymentsRole = {
+export const MessageRole = {
   System: "system",
   Assistant: "assistant",
   User: "user",
@@ -200,9 +202,7 @@ export const DeploymentInvokeMessageDeploymentsRole = {
 /**
  * The role of the prompt message
  */
-export type DeploymentInvokeMessageDeploymentsRole = ClosedEnum<
-  typeof DeploymentInvokeMessageDeploymentsRole
->;
+export type MessageRole = ClosedEnum<typeof MessageRole>;
 
 export const DeploymentInvokeMessageDeploymentsResponseType = {
   Function: "function",
@@ -231,7 +231,7 @@ export type Message1 = {
   /**
    * The role of the prompt message
    */
-  role: DeploymentInvokeMessageDeploymentsRole;
+  role: MessageRole;
   content?: string | null | undefined;
   toolCalls: Array<MessageToolCalls>;
   /**
@@ -486,13 +486,14 @@ export const DeploymentInvokeMessageDeploymentsType$outboundSchema:
     DeploymentInvokeMessageDeploymentsType$inboundSchema;
 
 /** @internal */
-export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeMessageRole
-> = z.nativeEnum(DeploymentInvokeMessageRole);
+export const DeploymentInvokeMessageDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> = z.nativeEnum(
+    DeploymentInvokeMessageDeploymentsRole,
+  );
 /** @internal */
-export const DeploymentInvokeMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeMessageRole
-> = DeploymentInvokeMessageRole$inboundSchema;
+export const DeploymentInvokeMessageDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> =
+    DeploymentInvokeMessageDeploymentsRole$inboundSchema;
 
 /** @internal */
 export const Message3$inboundSchema: z.ZodType<
@@ -501,7 +502,7 @@ export const Message3$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: DeploymentInvokeMessageDeploymentsType$inboundSchema,
-  role: DeploymentInvokeMessageRole$inboundSchema,
+  role: DeploymentInvokeMessageDeploymentsRole$inboundSchema,
   url: z.string(),
 });
 /** @internal */
@@ -518,7 +519,7 @@ export const Message3$outboundSchema: z.ZodType<
   Message3
 > = z.object({
   type: DeploymentInvokeMessageDeploymentsType$outboundSchema,
-  role: DeploymentInvokeMessageRole$outboundSchema,
+  role: DeploymentInvokeMessageDeploymentsRole$outboundSchema,
   url: z.string(),
 });
 
@@ -545,11 +546,13 @@ export const DeploymentInvokeMessageType$outboundSchema: z.ZodNativeEnum<
 > = DeploymentInvokeMessageType$inboundSchema;
 
 /** @internal */
-export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> = z
-  .nativeEnum(MessageRole);
+export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeMessageRole
+> = z.nativeEnum(DeploymentInvokeMessageRole);
 /** @internal */
-export const MessageRole$outboundSchema: z.ZodNativeEnum<typeof MessageRole> =
-  MessageRole$inboundSchema;
+export const DeploymentInvokeMessageRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeMessageRole
+> = DeploymentInvokeMessageRole$inboundSchema;
 
 /** @internal */
 export const Message2$inboundSchema: z.ZodType<
@@ -558,7 +561,7 @@ export const Message2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: DeploymentInvokeMessageType$inboundSchema,
-  role: MessageRole$inboundSchema,
+  role: DeploymentInvokeMessageRole$inboundSchema,
   content: z.nullable(z.string()),
   reasoning: z.string().optional(),
   reasoning_signature: z.string().optional(),
@@ -586,7 +589,7 @@ export const Message2$outboundSchema: z.ZodType<
   Message2
 > = z.object({
   type: DeploymentInvokeMessageType$outboundSchema,
-  role: MessageRole$outboundSchema,
+  role: DeploymentInvokeMessageRole$outboundSchema,
   content: z.nullable(z.string()),
   reasoning: z.string().optional(),
   reasoningSignature: z.string().optional(),
@@ -619,14 +622,11 @@ export const MessageType$outboundSchema: z.ZodNativeEnum<typeof MessageType> =
   MessageType$inboundSchema;
 
 /** @internal */
-export const DeploymentInvokeMessageDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> = z.nativeEnum(
-    DeploymentInvokeMessageDeploymentsRole,
-  );
+export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> = z
+  .nativeEnum(MessageRole);
 /** @internal */
-export const DeploymentInvokeMessageDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> =
-    DeploymentInvokeMessageDeploymentsRole$inboundSchema;
+export const MessageRole$outboundSchema: z.ZodNativeEnum<typeof MessageRole> =
+  MessageRole$inboundSchema;
 
 /** @internal */
 export const DeploymentInvokeMessageDeploymentsResponseType$inboundSchema:
@@ -732,7 +732,7 @@ export const Message1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: MessageType$inboundSchema,
-  role: DeploymentInvokeMessageDeploymentsRole$inboundSchema,
+  role: MessageRole$inboundSchema,
   content: z.nullable(z.string()).optional(),
   tool_calls: z.array(z.lazy(() => MessageToolCalls$inboundSchema)),
   reasoning: z.string().optional(),
@@ -763,7 +763,7 @@ export const Message1$outboundSchema: z.ZodType<
   Message1
 > = z.object({
   type: MessageType$outboundSchema,
-  role: DeploymentInvokeMessageDeploymentsRole$outboundSchema,
+  role: MessageRole$outboundSchema,
   content: z.nullable(z.string()).optional(),
   toolCalls: z.array(z.lazy(() => MessageToolCalls$outboundSchema)),
   reasoning: z.string().optional(),

@@ -3,44 +3,21 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `operations.TextContentPart`
 
 ```typescript
-const value: operations.Two1 = {
+const value: operations.TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig22`
+### `operations.RefusalContentPart`
 
 ```typescript
-const value: operations.DeploymentGetConfig22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://downright-ownership.name/",
-  },
-};
-```
-
-### `operations.Two3`
-
-```typescript
-const value: operations.Two3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.Two4`
-
-```typescript
-const value: operations.Two4 = {
-  type: "file",
-  file: {},
+const value: operations.RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

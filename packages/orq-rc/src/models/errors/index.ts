@@ -12,6 +12,7 @@ export * from "./getevals.js";
 export * from "./getpromptversion.js";
 export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
+export * from "./invokeeval.js";
 export * from "./orqerror.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrieveagentrequest.js";
