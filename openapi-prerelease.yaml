@@ -2729,7 +2729,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -2737,7 +2737,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -2872,7 +2872,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-28T11:36:01.098Z"
+                          default: "2025-11-28T12:16:10.263Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -2880,7 +2880,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:01.098Z"
+                              default: "2025-11-28T12:16:10.264Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -3048,10 +3048,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3122,10 +3122,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3193,10 +3193,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3279,10 +3279,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3350,10 +3350,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3721,10 +3721,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3808,10 +3808,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "updated":
                               type: "string"
-                              default: "2025-11-28T11:36:03.271Z"
+                              default: "2025-11-28T12:16:12.523Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4228,10 +4228,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4302,10 +4302,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4373,10 +4373,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4459,10 +4459,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4530,10 +4530,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4901,10 +4901,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4988,10 +4988,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5395,10 +5395,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5469,10 +5469,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5540,10 +5540,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5626,10 +5626,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5697,10 +5697,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6068,10 +6068,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6155,10 +6155,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "updated":
                         type: "string"
-                        default: "2025-11-28T11:36:03.271Z"
+                        default: "2025-11-28T12:16:12.523Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6260,6 +6260,427 @@ paths:
                   - "message"
       security:
         - ApiKey: []
+  "/v2/evaluators/{id}/invoke":
+    post:
+      tags:
+        - "Evaluators"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "invoke"
+      operationId: "InvokeEval"
+      summary: "Invoke a Custom Evaluator"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Evaluator ID"
+          required: true
+          description: "Evaluator ID"
+          name: "id"
+          in: "path"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                  description: "Latest user message"
+                "output":
+                  type: "string"
+                  description: "The generated response from the model"
+                "reference":
+                  type: "string"
+                  description: "The reference used to compare the output"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals"
+                "messages":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "role":
+                        type: "string"
+                        enum:
+                          - "system"
+                          - "assistant"
+                          - "user"
+                          - "exception"
+                          - "tool"
+                          - "prompt"
+                          - "correction"
+                          - "expected_output"
+                        description: "The role of the prompt message"
+                      "content":
+                        anyOf:
+                          - type: "string"
+                          - type: "array"
+                            items:
+                              oneOf:
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "text"
+                                    "text":
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                    - "text"
+                                  description: "Text content part of a prompt message"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "image_url"
+                                    "image_url":
+                                      type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                          format: "ulid"
+                                          pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                                          readOnly: true
+                                          description: "The orq.ai id of the image"
+                                        "url":
+                                          type: "string"
+                                          description: "Either a URL of the image or the base64 encoded data URI."
+                                          examples:
+                                            - "https://picsum.photos/id/1/200/300"
+                                            - "data:image/jpeg;base64,/9j/4QDcRXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABIAAAAAQAAAEgAAAABAAAABwAAkAcABAAAADAyMTABkQcABAAAAAECAwCGkgcAFAAAAMAAAAAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAQAAQAAADIAAAADoAQAAQAAADIAAAAAAAAAQVNDSUkAAABQaWNzdW0gSUQ6IDH/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAAyADIDASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAAUGBAMCAf/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/9oADAMBAAIQAxAAAAGJ8VqTNw8a3ojTukdLSJLgZZlZdd6TV3CHYj9EWPM6bhUaNGKXfClLIL11F7/cfh02i8CpWBzWy5A6I+PgAAB//8QAIhAAAQQCAgIDAQAAAAAAAAAAAQACAwQSEwURFDIgISIj/9oACAEBAAEFAnQPYtaw6HSrfpk1Zpi6U1uqwOvALjX+aJeJ6RjdEYR/LS1X2a7q4WGdtkqbVqFlkbfMcrVEWn16sDBsmY+e+GQvsPmOYWSF47i5rI4ZjhycvcuZWX1sTao2TGJsBsvCL8iSs12nk4D2se/w/8QAHhEAAgIBBQEAAAAAAAAAAAAAAAECESEQEhMgMUH/2gAIAQMBAT8BErRHKo4is0RwSk2b5CT+lrWXnT//xAAbEQACAgMBAAAAAAAAAAAAAAAAAQIREiExIP/aAAgBAgEBPwEbpj1szFtWTVkYJGMRyiuFMssh3x//xAAqEAABAwIEBQMFAAAAAAAAAAABAAIRAxIQITFREyAiI2EyQXEEQlJigf/aAAgBAQAGPwLqGGYOeDmbqWDMYFjiah2aF2aFNnk9RVVv1HcjMSrqOmzlDha7D0hVNjnhfw3WFuqzU1Yt+FbTogjdxXoCFVz7Q0Q5TRYC78no3hwj3jpVwDS8+VLzOIMRC4tIxP27fHhERcVaCMtYHJ+moVmU+wC1IKnm/nL/AP/EACIQAAICAgEEAwEAAAAAAAAAAAERACExQVEQYXGBobHB0f/aAAgBAQABPyEgQjvByg05hUo2LiFjFYI7W43EDiVaHswr6T+yviNWy8EGiuNR40cj6MPOzDuOGmTHfziwMq+76EShwYJ8LmPkvUA0DK7y8RUIwU4Wf1moJxadQT0/YfMYyGLPkJiCZ6Rw+gHEOyLDRUgnkkfo7QoEZmabf4SsxCxwB3gBm9QgAYBbhGy6dySFOwYVeIcGHyxFUUo4LJ6JIxoBUkQiSuY4Ooc9f//aAAwDAQACAAMAAAAQK/6xMJVNTaRAi9cA/8QAHBEBAQEAAgMBAAAAAAAAAAAAAQARECExQVFh/9oACAEDAQE/ENJdCAjLX2X0Wzsr5v0mqx7MJOb3z//EAB0RAQEBAAAHAAAAAAAAAAAAAAEAERAgITFhcaH/2gAIAQIBAT8QxhwZqxessJqwhet4oA+Y0FeQTtx//8QAIxABAAICAQUAAgMAAAAAAAAAAQARITFBUWFxgZEQobHB0f/aAAgBAQABPxB2tTC0xLVUH7haUN2g1vP+RNGh8gq4UTGuGBUZ4MHv3iLSr8RIRqqi6Yv1carl4onc0eoWxjg8RD1aVFzk6f6b9/Y70zAti+Kx71GvjJeYuVsc6QwgBr5D/a/xfW1rFYoOcjjrK7p8CjoUUGXu5eMk0ZEmr6iVhzq4Hhj0LyLoGUvPiDGiXFOoUx6C6YKtA/EOTpu4FoAQGnL1SFVoWNDsQt27RtZg8GOQ6mm5/hiDjAW62BbV23sLxFbn20oMclu8B8lPIPaU4y+1hNDrowVllngQ2LIsGVq3iXxdrsPZu+8NsVhdHaO+tLVdwQ3CKME80BZTdNRSUt7WbPXP6zm5YlVv5//Z"
+                                        "detail":
+                                          type: "string"
+                                          description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                      required:
+                                        - "url"
+                                  required:
+                                    - "type"
+                                    - "image_url"
+                                  description: "The image part of the prompt message. Only supported with vision models."
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "file"
+                                      description: "The type of the content part. Always `file`."
+                                    "file":
+                                      type: "object"
+                                      properties:
+                                        "file_data":
+                                          type: "string"
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
+                                        "uri":
+                                          type: "string"
+                                          description: "URL to the file. Only supported by Anthropic Claude models for PDF files."
+                                        "mimeType":
+                                          type: "string"
+                                          description: "MIME type of the file (e.g., application/pdf, image/png)"
+                                        "filename":
+                                          type: "string"
+                                          description: "The name of the file, used when passing the file to the model as a string."
+                                  required:
+                                    - "type"
+                                    - "file"
+                          - type: "null"
+                        description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios."
+                      "tool_calls":
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            "id":
+                              type: "string"
+                            "index":
+                              type: "number"
+                            "type":
+                              type: "string"
+                              enum:
+                                - "function"
+                            "function":
+                              type: "object"
+                              properties:
+                                "name":
+                                  type: "string"
+                                "arguments":
+                                  type: "string"
+                                  description: "JSON string arguments for the functions"
+                              required:
+                                - "name"
+                                - "arguments"
+                          required:
+                            - "type"
+                            - "function"
+                      "tool_call_id":
+                        type: "string"
+                    required:
+                      - "role"
+                      - "content"
+                  description: "The messages used to generate the output, without the last user message"
+      responses:
+        "200":
+          description: "Returns the result of the evaluator run"
+          content:
+            "application/json":
+              schema:
+                oneOf:
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "string"
+                      "original_value":
+                        type:
+                          - "string"
+                          - "null"
+                      "value":
+                        type:
+                          - "string"
+                          - "null"
+                    required:
+                      - "type"
+                    title: "String"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "number"
+                      "original_value":
+                        type:
+                          - "number"
+                          - "null"
+                      "value":
+                        type:
+                          - "number"
+                          - "null"
+                      "format_options":
+                        anyOf:
+                          - type: "object"
+                            properties:
+                              "significant_digits":
+                                type: "number"
+                            required:
+                              - "significant_digits"
+                          - type: "object"
+                            properties:
+                              "style":
+                                type: "string"
+                                enum:
+                                  - "currency"
+                              "currency":
+                                type: "string"
+                                enum:
+                                  - "USD"
+                            required:
+                              - "style"
+                              - "currency"
+                    required:
+                      - "type"
+                      - "value"
+                    title: "Number"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "boolean"
+                      "value":
+                        anyOf:
+                          - type: "boolean"
+                          - type: "string"
+                          - type: "number"
+                          - type: "null"
+                    required:
+                      - "type"
+                      - "value"
+                    title: "Boolean"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "string_array"
+                      "values":
+                        type: "array"
+                        items:
+                          type:
+                            - "string"
+                            - "null"
+                    required:
+                      - "type"
+                      - "values"
+                    title: "String Array"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "rouge_n"
+                      "value":
+                        type: "object"
+                        properties:
+                          "rouge_1":
+                            type: "object"
+                            properties:
+                              "f1":
+                                type: "number"
+                              "precision":
+                                type: "number"
+                              "recall":
+                                type: "number"
+                            required:
+                              - "f1"
+                              - "precision"
+                              - "recall"
+                          "rouge_2":
+                            type: "object"
+                            properties:
+                              "f1":
+                                type: "number"
+                              "precision":
+                                type: "number"
+                              "recall":
+                                type: "number"
+                            required:
+                              - "f1"
+                              - "precision"
+                              - "recall"
+                          "rouge_l":
+                            type: "object"
+                            properties:
+                              "f1":
+                                type: "number"
+                              "precision":
+                                type: "number"
+                              "recall":
+                                type: "number"
+                            required:
+                              - "f1"
+                              - "precision"
+                              - "recall"
+                        required:
+                          - "rouge_1"
+                          - "rouge_2"
+                          - "rouge_l"
+                    required:
+                      - "type"
+                      - "value"
+                    title: "Rouge N"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "bert_score"
+                      "value":
+                        type: "object"
+                        properties:
+                          "f1":
+                            type: "number"
+                          "precision":
+                            type: "number"
+                          "recall":
+                            type: "number"
+                        required:
+                          - "f1"
+                          - "precision"
+                          - "recall"
+                    required:
+                      - "type"
+                      - "value"
+                    title: "BERT Score"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "llm_evaluator"
+                      "value":
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          "workflow_run_id":
+                            type: "string"
+                          "value":
+                            anyOf:
+                              - type: "number"
+                              - type: "boolean"
+                              - type: "string"
+                          "explanation":
+                            type:
+                              - "string"
+                              - "null"
+                          "original_value":
+                            anyOf:
+                              - type: "number"
+                              - type: "boolean"
+                              - type: "string"
+                              - type: "null"
+                          "original_explanation":
+                            type:
+                              - "string"
+                              - "null"
+                        required:
+                          - "workflow_run_id"
+                          - "value"
+                    required:
+                      - "type"
+                      - "value"
+                    title: "LLM"
+                  - type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        enum:
+                          - "http_eval"
+                      "value":
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          "type":
+                            type: "string"
+                          "value":
+                            anyOf:
+                              - type: "number"
+                              - type: "boolean"
+                        required:
+                          - "type"
+                          - "value"
+                    required:
+                      - "type"
+                    title: "HTTP"
+        "404":
+          description: "Workspace ID is not found on the request"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Error running the evaluator"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
   "/v2/contacts/{id}":
     get:
       tags:
@@ -6334,7 +6755,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -6342,7 +6763,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -6478,7 +6899,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -6486,7 +6907,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -6590,27 +7011,25 @@ paths:
                   "provider":
                     type: "string"
                     enum:
-                      - "cohere"
                       - "openai"
-                      - "anthropic"
-                      - "huggingface"
-                      - "replicate"
-                      - "google"
-                      - "google-ai"
+                      - "groq"
+                      - "cohere"
                       - "azure"
                       - "aws"
-                      - "anyscale"
+                      - "google"
+                      - "google-ai"
+                      - "huggingface"
+                      - "togetherai"
                       - "perplexity"
-                      - "groq"
-                      - "fal"
+                      - "anthropic"
                       - "leonardoai"
+                      - "fal"
                       - "nvidia"
                       - "jina"
-                      - "togetherai"
                       - "elevenlabs"
                       - "litellm"
-                      - "openailike"
                       - "cerebras"
+                      - "openailike"
                       - "bytedance"
                       - "mistral"
                     description: "The provider used to generate the response"
@@ -7120,27 +7539,25 @@ paths:
                             "provider":
                               type: "string"
                               enum:
-                                - "cohere"
                                 - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
+                                - "groq"
+                                - "cohere"
                                 - "azure"
                                 - "aws"
-                                - "anyscale"
+                                - "google"
+                                - "google-ai"
+                                - "huggingface"
+                                - "togetherai"
                                 - "perplexity"
-                                - "groq"
-                                - "fal"
+                                - "anthropic"
                                 - "leonardoai"
+                                - "fal"
                                 - "nvidia"
                                 - "jina"
-                                - "togetherai"
                                 - "elevenlabs"
                                 - "litellm"
-                                - "openailike"
                                 - "cerebras"
+                                - "openailike"
                                 - "bytedance"
                                 - "mistral"
                             "messages":
@@ -10652,27 +11069,25 @@ paths:
                       "provider":
                         type: "string"
                         enum:
-                          - "cohere"
                           - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
+                          - "groq"
+                          - "cohere"
                           - "azure"
                           - "aws"
-                          - "anyscale"
+                          - "google"
+                          - "google-ai"
+                          - "huggingface"
+                          - "togetherai"
                           - "perplexity"
-                          - "groq"
-                          - "fal"
+                          - "anthropic"
                           - "leonardoai"
+                          - "fal"
                           - "nvidia"
                           - "jina"
-                          - "togetherai"
                           - "elevenlabs"
                           - "litellm"
-                          - "openailike"
                           - "cerebras"
+                          - "openailike"
                           - "bytedance"
                           - "mistral"
                         description: "The provider used to generate the response"
@@ -11812,6 +12227,8 @@ paths:
                     type: "string"
                   "key":
                     type: "string"
+                    pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
+                    description: "Unique identifier for the agent within the workspace"
                   "display_name":
                     type: "string"
                   "project_id":
@@ -12641,6 +13058,7 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
+                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -12879,6 +13297,8 @@ paths:
                     type: "string"
                   "key":
                     type: "string"
+                    pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
+                    description: "Unique identifier for the agent within the workspace"
                   "display_name":
                     type: "string"
                   "workspace_id":
@@ -13645,6 +14065,7 @@ paths:
               properties:
                 "key":
                   type: "string"
+                  pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
                 "display_name":
                   type: "string"
                 "project_id":
@@ -14523,6 +14944,8 @@ paths:
                     type: "string"
                   "key":
                     type: "string"
+                    pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
+                    description: "Unique identifier for the agent within the workspace"
                   "display_name":
                     type: "string"
                   "workspace_id":
@@ -15354,6 +15777,7 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
+                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -15559,6 +15983,8 @@ paths:
                           type: "string"
                         "key":
                           type: "string"
+                          pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
+                          description: "Unique identifier for the agent within the workspace"
                         "display_name":
                           type: "string"
                         "created_by_id":
@@ -16882,6 +17308,7 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
+                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -17404,7 +17831,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KB53ZN6PXYX49WCX39VNPZMG"
+                                          default: "01KB5696M5X8MBPQWD6CCPYPD0"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18226,6 +18653,7 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
+                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -18748,7 +19176,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KB53ZN8C07CSXCBV1BY9FWNJ"
+                                          default: "01KB5696P7YAXT9SFP27NC92A3"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19039,6 +19467,7 @@ paths:
                       example: "Jane Doe"
                     "email":
                       type: "string"
+                      format: "email"
                       description: "Email address of the contact"
                       example: "jane.doe@example.com"
                     "metadata":
@@ -19223,7 +19652,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-28T11:36:04.328Z"
+                    default: "2025-11-28T12:16:13.624Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -19312,7 +19741,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-11-28T11:36:04.328Z"
+                          default: "2025-11-28T12:16:13.624Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -19380,7 +19809,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-11-28T11:36:04.328Z"
+                    default: "2025-11-28T12:16:13.624Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -19682,27 +20111,25 @@ paths:
                             "provider":
                               type: "string"
                               enum:
-                                - "cohere"
                                 - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
+                                - "groq"
+                                - "cohere"
                                 - "azure"
                                 - "aws"
-                                - "anyscale"
+                                - "google"
+                                - "google-ai"
+                                - "huggingface"
+                                - "togetherai"
                                 - "perplexity"
-                                - "groq"
-                                - "fal"
+                                - "anthropic"
                                 - "leonardoai"
+                                - "fal"
                                 - "nvidia"
                                 - "jina"
-                                - "togetherai"
                                 - "elevenlabs"
                                 - "litellm"
-                                - "openailike"
                                 - "cerebras"
+                                - "openailike"
                                 - "bytedance"
                                 - "mistral"
                             "integration_id":
@@ -20873,27 +21300,25 @@ paths:
                       "provider":
                         type: "string"
                         enum:
-                          - "cohere"
                           - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
+                          - "groq"
+                          - "cohere"
                           - "azure"
                           - "aws"
-                          - "anyscale"
+                          - "google"
+                          - "google-ai"
+                          - "huggingface"
+                          - "togetherai"
                           - "perplexity"
-                          - "groq"
-                          - "fal"
+                          - "anthropic"
                           - "leonardoai"
+                          - "fal"
                           - "nvidia"
                           - "jina"
-                          - "togetherai"
                           - "elevenlabs"
                           - "litellm"
-                          - "openailike"
                           - "cerebras"
+                          - "openailike"
                           - "bytedance"
                           - "mistral"
                       "integration_id":
@@ -21329,27 +21754,25 @@ paths:
                       "provider":
                         type: "string"
                         enum:
-                          - "cohere"
                           - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
+                          - "groq"
+                          - "cohere"
                           - "azure"
                           - "aws"
-                          - "anyscale"
+                          - "google"
+                          - "google-ai"
+                          - "huggingface"
+                          - "togetherai"
                           - "perplexity"
-                          - "groq"
-                          - "fal"
+                          - "anthropic"
                           - "leonardoai"
+                          - "fal"
                           - "nvidia"
                           - "jina"
-                          - "togetherai"
                           - "elevenlabs"
                           - "litellm"
-                          - "openailike"
                           - "cerebras"
+                          - "openailike"
                           - "bytedance"
                           - "mistral"
                       "integration_id":
@@ -21752,27 +22175,25 @@ paths:
                     "provider":
                       type: "string"
                       enum:
-                        - "cohere"
                         - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
+                        - "groq"
+                        - "cohere"
                         - "azure"
                         - "aws"
-                        - "anyscale"
+                        - "google"
+                        - "google-ai"
+                        - "huggingface"
+                        - "togetherai"
                         - "perplexity"
-                        - "groq"
-                        - "fal"
+                        - "anthropic"
                         - "leonardoai"
+                        - "fal"
                         - "nvidia"
                         - "jina"
-                        - "togetherai"
                         - "elevenlabs"
                         - "litellm"
-                        - "openailike"
                         - "cerebras"
+                        - "openailike"
                         - "bytedance"
                         - "mistral"
                     "integration_id":
@@ -22594,27 +23015,25 @@ paths:
                       "provider":
                         type: "string"
                         enum:
-                          - "cohere"
                           - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
+                          - "groq"
+                          - "cohere"
                           - "azure"
                           - "aws"
-                          - "anyscale"
+                          - "google"
+                          - "google-ai"
+                          - "huggingface"
+                          - "togetherai"
                           - "perplexity"
-                          - "groq"
-                          - "fal"
+                          - "anthropic"
                           - "leonardoai"
+                          - "fal"
                           - "nvidia"
                           - "jina"
-                          - "togetherai"
                           - "elevenlabs"
                           - "litellm"
-                          - "openailike"
                           - "cerebras"
+                          - "openailike"
                           - "bytedance"
                           - "mistral"
                       "integration_id":
@@ -23096,27 +23515,25 @@ paths:
                                 "provider":
                                   type: "string"
                                   enum:
-                                    - "cohere"
                                     - "openai"
-                                    - "anthropic"
-                                    - "huggingface"
-                                    - "replicate"
-                                    - "google"
-                                    - "google-ai"
+                                    - "groq"
+                                    - "cohere"
                                     - "azure"
                                     - "aws"
-                                    - "anyscale"
+                                    - "google"
+                                    - "google-ai"
+                                    - "huggingface"
+                                    - "togetherai"
                                     - "perplexity"
-                                    - "groq"
-                                    - "fal"
+                                    - "anthropic"
                                     - "leonardoai"
+                                    - "fal"
                                     - "nvidia"
                                     - "jina"
-                                    - "togetherai"
                                     - "elevenlabs"
                                     - "litellm"
-                                    - "openailike"
                                     - "cerebras"
+                                    - "openailike"
                                     - "bytedance"
                                     - "mistral"
                                 "integration_id":
@@ -23547,27 +23964,25 @@ paths:
                           "provider":
                             type: "string"
                             enum:
-                              - "cohere"
                               - "openai"
-                              - "anthropic"
-                              - "huggingface"
-                              - "replicate"
-                              - "google"
-                              - "google-ai"
+                              - "groq"
+                              - "cohere"
                               - "azure"
                               - "aws"
-                              - "anyscale"
+                              - "google"
+                              - "google-ai"
+                              - "huggingface"
+                              - "togetherai"
                               - "perplexity"
-                              - "groq"
-                              - "fal"
+                              - "anthropic"
                               - "leonardoai"
+                              - "fal"
                               - "nvidia"
                               - "jina"
-                              - "togetherai"
                               - "elevenlabs"
                               - "litellm"
-                              - "openailike"
                               - "cerebras"
+                              - "openailike"
                               - "bytedance"
                               - "mistral"
                           "integration_id":
@@ -23948,7 +24363,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KB53ZNGG7N72S1NN2590V470"
+                              default: "tool_01KB5696YWXYXYFX0SEJAKX402"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24047,7 +24462,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KB53ZNGJQZ6WF9NTG6V88WCM"
+                              default: "tool_01KB5696YXPGVYK0WKRQVF9M7Q"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24148,7 +24563,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KB53ZNGKK5JSCQFGWZHRPH1A"
+                              default: "tool_01KB5696YZPG6N7B7J5P8MS89H"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24282,7 +24697,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KB53ZNGNP1S4AW4MEFS1SCJX"
+                              default: "tool_01KB5696Z13G7ZC6E2NQX414SR"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24356,7 +24771,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KB53ZNGQ1FE7JDKGXTGTRCHY"
+                                        default: "01KB5696Z25E150AKD90TX7QAZ"
                                       "name":
                                         type: "string"
                                       "description":
@@ -24407,7 +24822,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KB53ZNGQBYFH7RYN6520J381"
+                              default: "tool_01KB5696Z3TSJXQD5216R6AX29"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24950,7 +25365,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNHBCP4VPQB39S1BD5D9"
+                        default: "tool_01KB5696ZK012AB97PXXBJ7R2X"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25049,7 +25464,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNHDXYZK1DMQETWTQNN6"
+                        default: "tool_01KB5696ZNPCSTEHPG6C6W255D"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25150,7 +25565,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNHG7SC62880K5QZDHQB"
+                        default: "tool_01KB5696ZRHF90GCGH9KQW4W9M"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25284,7 +25699,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNHVZHREYZ6AG78QH9MF"
+                        default: "tool_01KB5696ZV76P39CW9PKRWCRGN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25358,7 +25773,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KB53ZNHW054YTGGS3A7PKVTX"
+                                  default: "01KB569705H3AXQBP91PR5PTT9"
                                 "name":
                                   type: "string"
                                 "description":
@@ -25409,7 +25824,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNHWTKCM02E76472B3TN"
+                        default: "tool_01KB569706EWACCRS7SJMG9W0S"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25849,7 +26264,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KB53ZNJFME71GTSB8C45E5X1"
+                                default: "01KB569710CJKTR3Z877523MVS"
                               "name":
                                 type: "string"
                               "description":
@@ -25967,7 +26382,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNJ3ESZE8SB5QMDY37SX"
+                        default: "tool_01KB56970GM48Q3QFP72AJVN9J"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26066,7 +26481,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNJ4FFBP9KRMF2JB9BJN"
+                        default: "tool_01KB56970HG8H41TCSMTEETE4Z"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26167,7 +26582,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNJ6XJ7MDHSTX7SQH53X"
+                        default: "tool_01KB56970KA308F69AS6GTNYXW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26301,7 +26716,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNJ89878B681T6PMGM1R"
+                        default: "tool_01KB56970PP6M8EMXFXAVXR3TX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26375,7 +26790,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KB53ZNJ9VSEM4NH272XATRG3"
+                                  default: "01KB56970RNCZ9THQHGR04TJMQ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -26426,7 +26841,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNJ9F8PJ0DX110SGZM14"
+                        default: "tool_01KB56970S4NH4CV6MFA2SE06B"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26580,7 +26995,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNK1SVZXG7FJS7FG0C42"
+                        default: "tool_01KB56971G2KZPQV26WEP9H0Z9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26679,7 +27094,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNK3WKZ65SKDDK44HZHT"
+                        default: "tool_01KB56971KPXT5PMNERBGVN4RR"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26780,7 +27195,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNK5GW98468RKV669F8A"
+                        default: "tool_01KB56971NFPF4K82EQK2RQJK8"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26914,7 +27329,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNKFFD6V0A9987TWYKZH"
+                        default: "tool_01KB56971R69Y0A2PSV71PEE8P"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26988,7 +27403,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KB53ZNKH91JSA5ZTNS30M6SC"
+                                  default: "01KB569722DR85G9FRR1WM9T6J"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27039,7 +27454,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KB53ZNKJ97QWYY5P7D8V12BG"
+                        default: "tool_01KB5697234ZS1B14AKREDR9EH"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27298,7 +27713,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-28T11:36:01.485Z"
+                          default: "2025-11-28T12:16:10.680Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -27306,7 +27721,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:01.485Z"
+                              default: "2025-11-28T12:16:10.680Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -27500,7 +27915,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.485Z"
+                    default: "2025-11-28T12:16:10.680Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -27508,7 +27923,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.485Z"
+                        default: "2025-11-28T12:16:10.680Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -27642,7 +28057,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.485Z"
+                    default: "2025-11-28T12:16:10.680Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -27650,7 +28065,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.485Z"
+                        default: "2025-11-28T12:16:10.680Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -27810,7 +28225,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.485Z"
+                    default: "2025-11-28T12:16:10.680Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -27818,7 +28233,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.485Z"
+                        default: "2025-11-28T12:16:10.680Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -29721,7 +30136,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KB53ZNQ6VTVEK5VNE0MH5F1K"
+                          default: "01KB56975X3KVDDYSQ9AESZSAM"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -29887,7 +30302,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KB53ZNQ9K0RS8YEDMGYJDHSY"
+                    default: "01KB56975Z6NEQ9EGRCKEDGQFA"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -29983,7 +30398,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KB53ZNQ8X0HJ2BQ0WFA5XDVD"
+                    default: "01KB56975YYJ91NMHWCTQC7AF1"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -30115,7 +30530,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KB53ZNQD64918T45DR9ENTHH"
+                    default: "01KB569762XADAVT62XVPPE4ES"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31074,7 +31489,7 @@ paths:
                       description: "Similarity threshold for grouping (0-1) or \"auto\" for automatic detection"
                     "embedding_model":
                       type: "string"
-                      description: "Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy#embedding-models]"
+                      description: "Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy/supported-models#embedding-models]"
                     "dimensions":
                       type: "integer"
                       exclusiveMinimum: 0
@@ -31124,7 +31539,7 @@ paths:
                       title: "Agentic Chunker"
                     "model":
                       type: "string"
-                      description: "Chat model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy#chat-models]"
+                      description: "Model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy/supported-models#chat-models]"
                       example: "openai/gpt-4.1"
                     "chunk_size":
                       type: "integer"
@@ -31490,14 +31905,6 @@ paths:
             schema:
               type: "object"
               properties:
-                "embedding_config":
-                  type: "object"
-                  properties:
-                    "model":
-                      type: "string"
-                      description: "The embeddings model to use for the knowledge base in the format \"provider/model\" for public models or \"workspaceKey@provider/model\" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models."
-                  required:
-                    - "model"
                 "description":
                   type: "string"
                   description: "The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store."
@@ -31506,12 +31913,6 @@ paths:
                   description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                 "path":
                   type: "string"
-                  description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
-                  example: "Default"
-              required:
-                - "embedding_config"
-                - "description"
-                - "path"
       responses:
         "200":
           description: "Memory store successfully updated."
@@ -31561,30 +31962,27 @@ paths:
                       "provider":
                         type: "string"
                         enum:
-                          - "cohere"
                           - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
+                          - "groq"
+                          - "cohere"
                           - "azure"
                           - "aws"
-                          - "anyscale"
+                          - "google"
+                          - "google-ai"
+                          - "huggingface"
+                          - "togetherai"
                           - "perplexity"
-                          - "groq"
-                          - "fal"
+                          - "anthropic"
                           - "leonardoai"
+                          - "fal"
                           - "nvidia"
                           - "jina"
-                          - "togetherai"
                           - "elevenlabs"
                           - "litellm"
-                          - "openailike"
                           - "cerebras"
+                          - "openailike"
                           - "bytedance"
                           - "mistral"
-                        description: "The provider of the AI service"
                     required:
                       - "model_id"
                       - "provider"
@@ -31694,7 +32092,17 @@ paths:
                         "_id":
                           type: "string"
                         "entity_id":
-                          type: "string"
+                          anyOf:
+                            - type: "string"
+                              format: "uuid"
+                              pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                              readOnly: true
+                              description: "The id of the resource"
+                            - type: "string"
+                              format: "ulid"
+                              pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              readOnly: true
+                              description: "The id of the resource"
                         "created":
                           type: "string"
                         "updated":
@@ -31759,16 +32167,26 @@ paths:
               type: "object"
               properties:
                 "entity_id":
-                  type: "string"
-                  description: "Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID)"
+                  anyOf:
+                    - type: "string"
+                      format: "uuid"
+                      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                      readOnly: true
+                      description: "The id of the resource"
+                    - type: "string"
+                      format: "ulid"
+                      pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      readOnly: true
+                      description: "The id of the resource"
+                  description: "Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID). Must be a valid UUID or ULID."
                 "metadata":
                   type: "object"
                   additionalProperties:
                     type: "string"
+                  default: {}
                   description: "Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy)."
               required:
                 - "entity_id"
-                - "metadata"
       responses:
         "201":
           description: "Memory successfully created."
@@ -31780,7 +32198,17 @@ paths:
                   "_id":
                     type: "string"
                   "entity_id":
-                    type: "string"
+                    anyOf:
+                      - type: "string"
+                        format: "uuid"
+                        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                        readOnly: true
+                        description: "The id of the resource"
+                      - type: "string"
+                        format: "ulid"
+                        pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        readOnly: true
+                        description: "The id of the resource"
                   "created":
                     type: "string"
                   "updated":
@@ -31853,7 +32281,17 @@ paths:
                   "_id":
                     type: "string"
                   "entity_id":
-                    type: "string"
+                    anyOf:
+                      - type: "string"
+                        format: "uuid"
+                        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                        readOnly: true
+                        description: "The id of the resource"
+                      - type: "string"
+                        format: "ulid"
+                        pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        readOnly: true
+                        description: "The id of the resource"
                   "created":
                     type: "string"
                   "updated":
@@ -31921,16 +32359,26 @@ paths:
               type: "object"
               properties:
                 "entity_id":
-                  type: "string"
-                  description: "Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID)"
+                  anyOf:
+                    - type: "string"
+                      format: "uuid"
+                      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                      readOnly: true
+                      description: "The id of the resource"
+                    - type: "string"
+                      format: "ulid"
+                      pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      readOnly: true
+                      description: "The id of the resource"
+                  description: "Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID). Must be a valid UUID or ULID."
                 "metadata":
                   type: "object"
                   additionalProperties:
                     type: "string"
+                  default: {}
                   description: "Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy)."
               required:
                 - "entity_id"
-                - "metadata"
       responses:
         "200":
           description: "Memory successfully updated."
@@ -31942,7 +32390,17 @@ paths:
                   "_id":
                     type: "string"
                   "entity_id":
-                    type: "string"
+                    anyOf:
+                      - type: "string"
+                        format: "uuid"
+                        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                        readOnly: true
+                        description: "The id of the resource"
+                      - type: "string"
+                        format: "ulid"
+                        pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        readOnly: true
+                        description: "The id of the resource"
                   "created":
                     type: "string"
                   "updated":
@@ -32163,10 +32621,10 @@ paths:
                   type: "object"
                   additionalProperties:
                     type: "string"
+                  default: {}
                   description: "Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies."
               required:
                 - "text"
-                - "metadata"
       responses:
         "201":
           description: "Memory document successfully created."
@@ -32339,10 +32797,10 @@ paths:
                   type: "object"
                   additionalProperties:
                     type: "string"
+                  default: {}
                   description: "Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies."
               required:
                 - "text"
-                - "metadata"
       responses:
         "200":
           description: "Memory document successfully updated."
@@ -32569,7 +33027,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-28T11:36:01.098Z"
+                          default: "2025-11-28T12:16:10.263Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -32577,7 +33035,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:01.098Z"
+                              default: "2025-11-28T12:16:10.264Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -32713,7 +33171,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -32721,7 +33179,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -32844,7 +33302,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -32852,7 +33310,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33005,7 +33463,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33013,7 +33471,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33483,7 +33941,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-28T11:36:12.839Z"
+                                    default: "2025-11-28T12:16:22.784Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -33523,7 +33981,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-28T11:36:12.840Z"
+                                    default: "2025-11-28T12:16:22.784Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -33563,7 +34021,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-11-28T11:36:12.840Z"
+                                    default: "2025-11-28T12:16:22.785Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -33599,7 +34057,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-11-28T11:36:01.098Z"
+                          default: "2025-11-28T12:16:10.263Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -33607,7 +34065,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:01.098Z"
+                              default: "2025-11-28T12:16:10.264Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34367,7 +34825,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-28T11:36:12.863Z"
+                                default: "2025-11-28T12:16:22.808Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -34407,7 +34865,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-28T11:36:12.864Z"
+                                default: "2025-11-28T12:16:22.808Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -34447,7 +34905,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-11-28T11:36:12.865Z"
+                                default: "2025-11-28T12:16:22.809Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -34483,7 +34941,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-11-28T11:36:01.098Z"
+                      default: "2025-11-28T12:16:10.263Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -34491,7 +34949,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-11-28T11:36:01.098Z"
+                          default: "2025-11-28T12:16:10.264Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -34905,7 +35363,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.846Z"
+                              default: "2025-11-28T12:16:22.791Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -34945,7 +35403,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.847Z"
+                              default: "2025-11-28T12:16:22.792Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -34985,7 +35443,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.847Z"
+                              default: "2025-11-28T12:16:22.792Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35021,7 +35479,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35029,7 +35487,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35787,7 +36245,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.899Z"
+                              default: "2025-11-28T12:16:22.839Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35827,7 +36285,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.899Z"
+                              default: "2025-11-28T12:16:22.840Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35867,7 +36325,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-11-28T11:36:12.902Z"
+                              default: "2025-11-28T12:16:22.840Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35903,7 +36361,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-11-28T11:36:01.098Z"
+                    default: "2025-11-28T12:16:10.263Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35911,7 +36369,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-11-28T11:36:01.098Z"
+                        default: "2025-11-28T12:16:10.264Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
