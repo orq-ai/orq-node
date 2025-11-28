@@ -7,13 +7,14 @@ import { GetAllMemoriesData } from "@orq-ai/node/models/operations";
 
 let value: GetAllMemoriesData = {
   id: "<id>",
-  entityId: "<id>",
+  entityId: "871a2ab6-ed1c-4b2f-92ae-45a72473338e",
   created: "<value>",
   updated: "<value>",
   storeId: "<id>",
   metadata: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
   },
   workspaceId: "<id>",
 };

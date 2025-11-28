@@ -10,13 +10,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryRequestBody = {
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID)
+   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID). Must be a valid UUID or ULID.
    */
   entityId: string;
   /**
    * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
    */
-  metadata: { [k: string]: string };
+  metadata?: { [k: string]: string } | undefined;
 };
 
 export type UpdateMemoryRequest = {
@@ -56,7 +56,7 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   entity_id: z.string(),
-  metadata: z.record(z.string()),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "entity_id": "entityId",
@@ -65,7 +65,7 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateMemoryRequestBody$Outbound = {
   entity_id: string;
-  metadata: { [k: string]: string };
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -75,7 +75,7 @@ export const UpdateMemoryRequestBody$outboundSchema: z.ZodType<
   UpdateMemoryRequestBody
 > = z.object({
   entityId: z.string(),
-  metadata: z.record(z.string()),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     entityId: "entity_id",

@@ -9,14 +9,12 @@ import { UpdateMemoryResponseBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateMemoryResponseBody = {
   id: "<id>",
-  entityId: "<id>",
+  entityId: "d3df766e-9d83-4bf0-a0f6-0ba6130980b5",
   created: "<value>",
   updated: "<value>",
   storeId: "<id>",
   metadata: {
     "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
   },
   workspaceId: "<id>",
 };
