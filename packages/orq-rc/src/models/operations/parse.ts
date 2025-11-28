@@ -46,7 +46,7 @@ export type AgenticChunkerStrategy = {
   returnType?: ParseChunkingRequestChunkingRequestReturnType | undefined;
   strategy: AgenticChunker;
   /**
-   * Chat model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy#chat-models]
+   * Model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy/supported-models#chat-models]
    */
   model: string;
   /**
@@ -130,7 +130,7 @@ export type SemanticChunkerStrategy = {
    */
   threshold?: number | Threshold2 | undefined;
   /**
-   * Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy#embedding-models]
+   * Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy/supported-models#embedding-models]
    */
   embeddingModel: string;
   /**
