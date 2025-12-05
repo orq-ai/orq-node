@@ -1,5 +1,4 @@
 # Remoteconfigs
-(*remoteconfigs*)
 
 ## Overview
 

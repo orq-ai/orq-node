@@ -1,5 +1,4 @@
 # Chunking
-(*chunking*)
 
 ## Overview
 

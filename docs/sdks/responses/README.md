@@ -1,5 +1,4 @@
-# Responses
-(*agents.responses*)
+# Agents.Responses
 
 ## Overview
 

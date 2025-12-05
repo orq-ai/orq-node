@@ -256,7 +256,7 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [agents](docs/sdks/agents/README.md)
+### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create agent
 * [delete](docs/sdks/agents/README.md#delete) - Delete agent
@@ -268,11 +268,11 @@ run();
 * [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
 
-#### [agents.responses](docs/sdks/responses/README.md)
+#### [Agents.Responses](docs/sdks/responses/README.md)
 
 * [create](docs/sdks/responses/README.md#create) - Create response
 
-### [budgets](docs/sdks/budgets/README.md)
+### [Budgets](docs/sdks/budgets/README.md)
 
 * [list](docs/sdks/budgets/README.md#list) - List budget configurations
 * [create](docs/sdks/budgets/README.md#create) - Create budget configuration
@@ -280,11 +280,11 @@ run();
 * [update](docs/sdks/budgets/README.md#update) - Update budget configuration
 * [delete](docs/sdks/budgets/README.md#delete) - Delete budget configuration
 
-### [chunking](docs/sdks/chunking/README.md)
+### [Chunking](docs/sdks/chunking/README.md)
 
 * [parse](docs/sdks/chunking/README.md#parse) - Parse text
 
-### [contacts](docs/sdks/contacts/README.md)
+### [Contacts](docs/sdks/contacts/README.md)
 
 * [create](docs/sdks/contacts/README.md#create) - Create a contact
 * [list](docs/sdks/contacts/README.md#list) - List contacts
@@ -292,7 +292,7 @@ run();
 * [update](docs/sdks/contacts/README.md#update) - Update a contact
 * [delete](docs/sdks/contacts/README.md#delete) - Delete a contact
 
-### [datasets](docs/sdks/datasets/README.md)
+### [Datasets](docs/sdks/datasets/README.md)
 
 * [list](docs/sdks/datasets/README.md#list) - List datasets
 * [create](docs/sdks/datasets/README.md#create) - Create a dataset
@@ -306,36 +306,36 @@ run();
 * [deleteDatapoint](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
 * [clear](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 
-### [deployments](docs/sdks/deployments/README.md)
+### [Deployments](docs/sdks/deployments/README.md)
 
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
 
-#### [deployments.metrics](docs/sdks/metrics/README.md)
+#### [Deployments.Metrics](docs/sdks/metrics/README.md)
 
 * [create](docs/sdks/metrics/README.md#create) - Add metrics
 
-### [evals](docs/sdks/evals/README.md)
+### [Evals](docs/sdks/evals/README.md)
 
 * [all](docs/sdks/evals/README.md#all) - Get all Evaluators
 * [create](docs/sdks/evals/README.md#create) - Create an Evaluator
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 
-### [feedback](docs/sdks/feedback/README.md)
+### [Feedback](docs/sdks/feedback/README.md)
 
 * [create](docs/sdks/feedback/README.md#create) - Submit feedback
 
-### [files](docs/sdks/files/README.md)
+### [Files](docs/sdks/files/README.md)
 
 * [create](docs/sdks/files/README.md#create) - Create file
 * [list](docs/sdks/files/README.md#list) - List all files
 * [get](docs/sdks/files/README.md#get) - Retrieve a file
 * [delete](docs/sdks/files/README.md#delete) - Delete file
 
-### [knowledge](docs/sdks/knowledge/README.md)
+### [Knowledge](docs/sdks/knowledge/README.md)
 
 * [list](docs/sdks/knowledge/README.md#list) - List all knowledge bases
 * [create](docs/sdks/knowledge/README.md#create) - Create a knowledge
@@ -357,7 +357,7 @@ run();
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 
-### [memoryStores](docs/sdks/memorystores/README.md)
+### [MemoryStores](docs/sdks/memorystores/README.md)
 
 * [list](docs/sdks/memorystores/README.md#list) - List memory stores
 * [create](docs/sdks/memorystores/README.md#create) - Create memory store
@@ -375,11 +375,11 @@ run();
 * [updateDocument](docs/sdks/memorystores/README.md#updatedocument) - Update a specific memory document
 * [deleteDocument](docs/sdks/memorystores/README.md#deletedocument) - Delete a specific memory document
 
-### [models](docs/sdks/models/README.md)
+### [Models](docs/sdks/models/README.md)
 
 * [list](docs/sdks/models/README.md#list) - List models
 
-### [prompts](docs/sdks/prompts/README.md)
+### [Prompts](docs/sdks/prompts/README.md)
 
 * [list](docs/sdks/prompts/README.md#list) - List all prompts
 * [create](docs/sdks/prompts/README.md#create) - Create a prompt
@@ -389,11 +389,11 @@ run();
 * [listVersions](docs/sdks/prompts/README.md#listversions) - List all prompt versions
 * [getVersion](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 
-### [remoteconfigs](docs/sdks/remoteconfigs/README.md)
+### [Remoteconfigs](docs/sdks/remoteconfigs/README.md)
 
 * [retrieve](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
 
-### [tools](docs/sdks/tools/README.md)
+### [Tools](docs/sdks/tools/README.md)
 
 * [list](docs/sdks/tools/README.md#list) - List tools
 * [create](docs/sdks/tools/README.md#create) - Create tool

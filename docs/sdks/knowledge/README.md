@@ -1,5 +1,4 @@
 # Knowledge
-(*knowledge*)
 
 ## Overview
 
