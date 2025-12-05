@@ -1,5 +1,7 @@
 # DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
 
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+
 ## Example Usage
 
 ```typescript
@@ -7,11 +9,11 @@ import { DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
 
 let value:
   DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type =
-    "image_url";
+    "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"image_url"
+"ephemeral"
 ```

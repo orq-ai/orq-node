@@ -23,11 +23,6 @@ export type ParseChunkingRequestChunkingRequestReturnType = ClosedEnum<
   typeof ParseChunkingRequestChunkingRequestReturnType
 >;
 
-export const AgenticChunker = {
-  Agentic: "agentic",
-} as const;
-export type AgenticChunker = ClosedEnum<typeof AgenticChunker>;
-
 /**
  * Agentic LLM-powered chunker that uses AI to determine optimal split points. Best for complex documents requiring intelligent segmentation.
  */
@@ -44,7 +39,7 @@ export type AgenticChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?: ParseChunkingRequestChunkingRequestReturnType | undefined;
-  strategy: AgenticChunker;
+  strategy: "agentic";
   /**
    * Model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy/supported-models#chat-models]
    */
@@ -76,11 +71,6 @@ export const ParseChunkingRequestChunkingReturnType = {
 export type ParseChunkingRequestChunkingReturnType = ClosedEnum<
   typeof ParseChunkingRequestChunkingReturnType
 >;
-
-export const SemanticChunker = {
-  Semantic: "semantic",
-} as const;
-export type SemanticChunker = ClosedEnum<typeof SemanticChunker>;
 
 export const Threshold2 = {
   Auto: "auto",
@@ -120,7 +110,7 @@ export type SemanticChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?: ParseChunkingRequestChunkingReturnType | undefined;
-  strategy: SemanticChunker;
+  strategy: "semantic";
   /**
    * Maximum tokens per chunk
    */
@@ -165,11 +155,6 @@ export type ParseChunkingRequestReturnType = ClosedEnum<
   typeof ParseChunkingRequestReturnType
 >;
 
-export const RecursiveChunker = {
-  Recursive: "recursive",
-} as const;
-export type RecursiveChunker = ClosedEnum<typeof RecursiveChunker>;
-
 /**
  * Recursively splits text using a hierarchy of separators (paragraphs, sentences, words). Versatile general-purpose chunker that preserves document structure.
  */
@@ -186,7 +171,7 @@ export type RecursiveChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?: ParseChunkingRequestReturnType | undefined;
-  strategy: RecursiveChunker;
+  strategy: "recursive";
   /**
    * Maximum tokens per chunk
    */
@@ -215,11 +200,6 @@ export type ChunkingRequestReturnType = ClosedEnum<
   typeof ChunkingRequestReturnType
 >;
 
-export const SentenceChunker = {
-  Sentence: "sentence",
-} as const;
-export type SentenceChunker = ClosedEnum<typeof SentenceChunker>;
-
 /**
  * Splits text at sentence boundaries while respecting token limits. Ideal for maintaining semantic coherence and readability.
  */
@@ -236,7 +216,7 @@ export type SentenceChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?: ChunkingRequestReturnType | undefined;
-  strategy: SentenceChunker;
+  strategy: "sentence";
   /**
    * Maximum tokens per chunk
    */
@@ -263,11 +243,6 @@ export const ReturnTypeT = {
  */
 export type ReturnTypeT = ClosedEnum<typeof ReturnTypeT>;
 
-export const TokenChunker = {
-  Token: "token",
-} as const;
-export type TokenChunker = ClosedEnum<typeof TokenChunker>;
-
 /**
  * Splits text based on token count. Best for ensuring chunks fit within LLM context windows and maintaining consistent chunk sizes for embedding models.
  */
@@ -284,7 +259,7 @@ export type TokenChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?: ReturnTypeT | undefined;
-  strategy: TokenChunker;
+  strategy: "token";
   /**
    * Maximum tokens per chunk
    */
@@ -299,11 +274,11 @@ export type TokenChunkerStrategy = {
  * Request payload for text chunking with strategy-specific configuration
  */
 export type ParseChunkingRequest =
-  | SemanticChunkerStrategy
-  | AgenticChunkerStrategy
   | TokenChunkerStrategy
   | SentenceChunkerStrategy
-  | RecursiveChunkerStrategy;
+  | RecursiveChunkerStrategy
+  | SemanticChunkerStrategy
+  | AgenticChunkerStrategy;
 
 export type ParseMetadata = {
   startIndex: number | null;
@@ -340,15 +315,6 @@ export const ParseChunkingRequestChunkingRequestReturnType$outboundSchema:
     ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
 
 /** @internal */
-export const AgenticChunker$inboundSchema: z.ZodNativeEnum<
-  typeof AgenticChunker
-> = z.nativeEnum(AgenticChunker);
-/** @internal */
-export const AgenticChunker$outboundSchema: z.ZodNativeEnum<
-  typeof AgenticChunker
-> = AgenticChunker$inboundSchema;
-
-/** @internal */
 export const AgenticChunkerStrategy$inboundSchema: z.ZodType<
   AgenticChunkerStrategy,
   z.ZodTypeDef,
@@ -358,7 +324,7 @@ export const AgenticChunkerStrategy$inboundSchema: z.ZodType<
   metadata: z.boolean().default(true),
   return_type: ParseChunkingRequestChunkingRequestReturnType$inboundSchema
     .default("chunks"),
-  strategy: AgenticChunker$inboundSchema,
+  strategy: z.literal("agentic"),
   model: z.string(),
   chunk_size: z.number().int().default(1024),
   candidate_size: z.number().int().default(128),
@@ -376,7 +342,7 @@ export type AgenticChunkerStrategy$Outbound = {
   text: string;
   metadata: boolean;
   return_type: string;
-  strategy: string;
+  strategy: "agentic";
   model: string;
   chunk_size: number;
   candidate_size: number;
@@ -393,7 +359,7 @@ export const AgenticChunkerStrategy$outboundSchema: z.ZodType<
   metadata: z.boolean().default(true),
   returnType: ParseChunkingRequestChunkingRequestReturnType$outboundSchema
     .default("chunks"),
-  strategy: AgenticChunker$outboundSchema,
+  strategy: z.literal("agentic"),
   model: z.string(),
   chunkSize: z.number().int().default(1024),
   candidateSize: z.number().int().default(128),
@@ -433,15 +399,6 @@ export const ParseChunkingRequestChunkingReturnType$inboundSchema:
 export const ParseChunkingRequestChunkingReturnType$outboundSchema:
   z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> =
     ParseChunkingRequestChunkingReturnType$inboundSchema;
-
-/** @internal */
-export const SemanticChunker$inboundSchema: z.ZodNativeEnum<
-  typeof SemanticChunker
-> = z.nativeEnum(SemanticChunker);
-/** @internal */
-export const SemanticChunker$outboundSchema: z.ZodNativeEnum<
-  typeof SemanticChunker
-> = SemanticChunker$inboundSchema;
 
 /** @internal */
 export const Threshold2$inboundSchema: z.ZodNativeEnum<typeof Threshold2> = z
@@ -498,7 +455,7 @@ export const SemanticChunkerStrategy$inboundSchema: z.ZodType<
   return_type: ParseChunkingRequestChunkingReturnType$inboundSchema.default(
     "chunks",
   ),
-  strategy: SemanticChunker$inboundSchema,
+  strategy: z.literal("semantic"),
   chunk_size: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$inboundSchema]).optional(),
   embedding_model: z.string(),
@@ -520,7 +477,7 @@ export type SemanticChunkerStrategy$Outbound = {
   text: string;
   metadata: boolean;
   return_type: string;
-  strategy: string;
+  strategy: "semantic";
   chunk_size: number;
   threshold?: number | string | undefined;
   embedding_model: string;
@@ -541,7 +498,7 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
   returnType: ParseChunkingRequestChunkingReturnType$outboundSchema.default(
     "chunks",
   ),
-  strategy: SemanticChunker$outboundSchema,
+  strategy: z.literal("semantic"),
   chunkSize: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$outboundSchema]).optional(),
   embeddingModel: z.string(),
@@ -586,15 +543,6 @@ export const ParseChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
 > = ParseChunkingRequestReturnType$inboundSchema;
 
 /** @internal */
-export const RecursiveChunker$inboundSchema: z.ZodNativeEnum<
-  typeof RecursiveChunker
-> = z.nativeEnum(RecursiveChunker);
-/** @internal */
-export const RecursiveChunker$outboundSchema: z.ZodNativeEnum<
-  typeof RecursiveChunker
-> = RecursiveChunker$inboundSchema;
-
-/** @internal */
 export const RecursiveChunkerStrategy$inboundSchema: z.ZodType<
   RecursiveChunkerStrategy,
   z.ZodTypeDef,
@@ -603,7 +551,7 @@ export const RecursiveChunkerStrategy$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   return_type: ParseChunkingRequestReturnType$inboundSchema.default("chunks"),
-  strategy: RecursiveChunker$inboundSchema,
+  strategy: z.literal("recursive"),
   chunk_size: z.number().int().default(512),
   separators: z.array(z.string()).optional(),
   min_characters_per_chunk: z.number().int().default(24),
@@ -619,7 +567,7 @@ export type RecursiveChunkerStrategy$Outbound = {
   text: string;
   metadata: boolean;
   return_type: string;
-  strategy: string;
+  strategy: "recursive";
   chunk_size: number;
   separators?: Array<string> | undefined;
   min_characters_per_chunk: number;
@@ -634,7 +582,7 @@ export const RecursiveChunkerStrategy$outboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   returnType: ParseChunkingRequestReturnType$outboundSchema.default("chunks"),
-  strategy: RecursiveChunker$outboundSchema,
+  strategy: z.literal("recursive"),
   chunkSize: z.number().int().default(512),
   separators: z.array(z.string()).optional(),
   minCharactersPerChunk: z.number().int().default(24),
@@ -673,15 +621,6 @@ export const ChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
 > = ChunkingRequestReturnType$inboundSchema;
 
 /** @internal */
-export const SentenceChunker$inboundSchema: z.ZodNativeEnum<
-  typeof SentenceChunker
-> = z.nativeEnum(SentenceChunker);
-/** @internal */
-export const SentenceChunker$outboundSchema: z.ZodNativeEnum<
-  typeof SentenceChunker
-> = SentenceChunker$inboundSchema;
-
-/** @internal */
 export const SentenceChunkerStrategy$inboundSchema: z.ZodType<
   SentenceChunkerStrategy,
   z.ZodTypeDef,
@@ -690,7 +629,7 @@ export const SentenceChunkerStrategy$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   return_type: ChunkingRequestReturnType$inboundSchema.default("chunks"),
-  strategy: SentenceChunker$inboundSchema,
+  strategy: z.literal("sentence"),
   chunk_size: z.number().int().default(512),
   chunk_overlap: z.number().int().default(0),
   min_sentences_per_chunk: z.number().int().default(1),
@@ -707,7 +646,7 @@ export type SentenceChunkerStrategy$Outbound = {
   text: string;
   metadata: boolean;
   return_type: string;
-  strategy: string;
+  strategy: "sentence";
   chunk_size: number;
   chunk_overlap: number;
   min_sentences_per_chunk: number;
@@ -722,7 +661,7 @@ export const SentenceChunkerStrategy$outboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   returnType: ChunkingRequestReturnType$outboundSchema.default("chunks"),
-  strategy: SentenceChunker$outboundSchema,
+  strategy: z.literal("sentence"),
   chunkSize: z.number().int().default(512),
   chunkOverlap: z.number().int().default(0),
   minSentencesPerChunk: z.number().int().default(1),
@@ -760,13 +699,6 @@ export const ReturnTypeT$outboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> =
   ReturnTypeT$inboundSchema;
 
 /** @internal */
-export const TokenChunker$inboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
-  z.nativeEnum(TokenChunker);
-/** @internal */
-export const TokenChunker$outboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
-  TokenChunker$inboundSchema;
-
-/** @internal */
 export const TokenChunkerStrategy$inboundSchema: z.ZodType<
   TokenChunkerStrategy,
   z.ZodTypeDef,
@@ -775,7 +707,7 @@ export const TokenChunkerStrategy$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   return_type: ReturnTypeT$inboundSchema.default("chunks"),
-  strategy: TokenChunker$inboundSchema,
+  strategy: z.literal("token"),
   chunk_size: z.number().int().default(512),
   chunk_overlap: z.number().int().default(0),
 }).transform((v) => {
@@ -790,7 +722,7 @@ export type TokenChunkerStrategy$Outbound = {
   text: string;
   metadata: boolean;
   return_type: string;
-  strategy: string;
+  strategy: "token";
   chunk_size: number;
   chunk_overlap: number;
 };
@@ -804,7 +736,7 @@ export const TokenChunkerStrategy$outboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   returnType: ReturnTypeT$outboundSchema.default("chunks"),
-  strategy: TokenChunker$outboundSchema,
+  strategy: z.literal("token"),
   chunkSize: z.number().int().default(512),
   chunkOverlap: z.number().int().default(0),
 }).transform((v) => {
@@ -838,19 +770,19 @@ export const ParseChunkingRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => SemanticChunkerStrategy$inboundSchema),
-  z.lazy(() => AgenticChunkerStrategy$inboundSchema),
   z.lazy(() => TokenChunkerStrategy$inboundSchema),
   z.lazy(() => SentenceChunkerStrategy$inboundSchema),
   z.lazy(() => RecursiveChunkerStrategy$inboundSchema),
+  z.lazy(() => SemanticChunkerStrategy$inboundSchema),
+  z.lazy(() => AgenticChunkerStrategy$inboundSchema),
 ]);
 /** @internal */
 export type ParseChunkingRequest$Outbound =
-  | SemanticChunkerStrategy$Outbound
-  | AgenticChunkerStrategy$Outbound
   | TokenChunkerStrategy$Outbound
   | SentenceChunkerStrategy$Outbound
-  | RecursiveChunkerStrategy$Outbound;
+  | RecursiveChunkerStrategy$Outbound
+  | SemanticChunkerStrategy$Outbound
+  | AgenticChunkerStrategy$Outbound;
 
 /** @internal */
 export const ParseChunkingRequest$outboundSchema: z.ZodType<
@@ -858,11 +790,11 @@ export const ParseChunkingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ParseChunkingRequest
 > = z.union([
-  z.lazy(() => SemanticChunkerStrategy$outboundSchema),
-  z.lazy(() => AgenticChunkerStrategy$outboundSchema),
   z.lazy(() => TokenChunkerStrategy$outboundSchema),
   z.lazy(() => SentenceChunkerStrategy$outboundSchema),
   z.lazy(() => RecursiveChunkerStrategy$outboundSchema),
+  z.lazy(() => SemanticChunkerStrategy$outboundSchema),
+  z.lazy(() => AgenticChunkerStrategy$outboundSchema),
 ]);
 
 export function parseChunkingRequestToJSON(

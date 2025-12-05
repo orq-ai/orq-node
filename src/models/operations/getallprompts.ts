@@ -375,19 +375,6 @@ export const GetAllPromptsRole = {
  */
 export type GetAllPromptsRole = ClosedEnum<typeof GetAllPromptsRole>;
 
-/**
- * The type of the content part. Always `file`.
- */
-export const GetAllPrompts2PromptsResponseType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type GetAllPrompts2PromptsResponseType = ClosedEnum<
-  typeof GetAllPrompts2PromptsResponseType
->;
-
 export type GetAllPrompts2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -411,16 +398,9 @@ export type GetAllPrompts23 = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: GetAllPrompts2PromptsResponseType;
+  type: "file";
   file: GetAllPrompts2File;
 };
-
-export const GetAllPrompts2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type GetAllPrompts2PromptsType = ClosedEnum<
-  typeof GetAllPrompts2PromptsType
->;
 
 export type GetAllPrompts2ImageUrl = {
   /**
@@ -441,20 +421,15 @@ export type GetAllPrompts2ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type GetAllPrompts22 = {
-  type: GetAllPrompts2PromptsType;
+  type: "image_url";
   imageUrl: GetAllPrompts2ImageUrl;
 };
-
-export const GetAllPrompts2Type = {
-  Text: "text",
-} as const;
-export type GetAllPrompts2Type = ClosedEnum<typeof GetAllPrompts2Type>;
 
 /**
  * Text content part of a prompt message
  */
 export type GetAllPrompts21 = {
-  type: GetAllPrompts2Type;
+  type: "text";
   text: string;
 };
 
@@ -1211,15 +1186,6 @@ export const GetAllPromptsRole$outboundSchema: z.ZodNativeEnum<
 > = GetAllPromptsRole$inboundSchema;
 
 /** @internal */
-export const GetAllPrompts2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsResponseType
-> = z.nativeEnum(GetAllPrompts2PromptsResponseType);
-/** @internal */
-export const GetAllPrompts2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsResponseType
-> = GetAllPrompts2PromptsResponseType$inboundSchema;
-
-/** @internal */
 export const GetAllPrompts2File$inboundSchema: z.ZodType<
   GetAllPrompts2File,
   z.ZodTypeDef,
@@ -1281,12 +1247,12 @@ export const GetAllPrompts23$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPrompts2PromptsResponseType$inboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetAllPrompts2File$inboundSchema),
 });
 /** @internal */
 export type GetAllPrompts23$Outbound = {
-  type: string;
+  type: "file";
   file: GetAllPrompts2File$Outbound;
 };
 
@@ -1296,7 +1262,7 @@ export const GetAllPrompts23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPrompts23
 > = z.object({
-  type: GetAllPrompts2PromptsResponseType$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetAllPrompts2File$outboundSchema),
 });
 
@@ -1314,15 +1280,6 @@ export function getAllPrompts23FromJSON(
     `Failed to parse 'GetAllPrompts23' from JSON`,
   );
 }
-
-/** @internal */
-export const GetAllPrompts2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsType
-> = z.nativeEnum(GetAllPrompts2PromptsType);
-/** @internal */
-export const GetAllPrompts2PromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsType
-> = GetAllPrompts2PromptsType$inboundSchema;
 
 /** @internal */
 export const GetAllPrompts2ImageUrl$inboundSchema: z.ZodType<
@@ -1375,7 +1332,7 @@ export const GetAllPrompts22$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPrompts2PromptsType$inboundSchema,
+  type: z.literal("image_url"),
   image_url: z.lazy(() => GetAllPrompts2ImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1384,7 +1341,7 @@ export const GetAllPrompts22$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetAllPrompts22$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: GetAllPrompts2ImageUrl$Outbound;
 };
 
@@ -1394,7 +1351,7 @@ export const GetAllPrompts22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPrompts22
 > = z.object({
-  type: GetAllPrompts2PromptsType$outboundSchema,
+  type: z.literal("image_url"),
   imageUrl: z.lazy(() => GetAllPrompts2ImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1418,26 +1375,17 @@ export function getAllPrompts22FromJSON(
 }
 
 /** @internal */
-export const GetAllPrompts2Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2Type
-> = z.nativeEnum(GetAllPrompts2Type);
-/** @internal */
-export const GetAllPrompts2Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2Type
-> = GetAllPrompts2Type$inboundSchema;
-
-/** @internal */
 export const GetAllPrompts21$inboundSchema: z.ZodType<
   GetAllPrompts21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPrompts2Type$inboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type GetAllPrompts21$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
@@ -1447,7 +1395,7 @@ export const GetAllPrompts21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPrompts21
 > = z.object({
-  type: GetAllPrompts2Type$outboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 

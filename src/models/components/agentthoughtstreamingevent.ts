@@ -39,13 +39,6 @@ import {
   ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
-export const AgentThoughtStreamingEventType = {
-  EventAgentsThought: "event.agents.thought",
-} as const;
-export type AgentThoughtStreamingEventType = ClosedEnum<
-  typeof AgentThoughtStreamingEventType
->;
-
 export const AgentThoughtStreamingEventRole = {
   User: "user",
   Agent: "agent",
@@ -57,22 +50,16 @@ export type AgentThoughtStreamingEventRole = ClosedEnum<
 >;
 
 export type AgentThoughtStreamingEventParts =
-  | (ToolCallPart & { kind: "tool_call" })
-  | (TextPart & { kind: "text" })
-  | (DataPart & { kind: "data" })
-  | (FilePart & { kind: "file" })
-  | (ToolResultPart & { kind: "tool_result" });
+  | TextPart
+  | DataPart
+  | FilePart
+  | ToolCallPart
+  | ToolResultPart;
 
 export type MessageDifference = {
   messageId: string;
   role: AgentThoughtStreamingEventRole;
-  parts: Array<
-    | (ToolCallPart & { kind: "tool_call" })
-    | (TextPart & { kind: "text" })
-    | (DataPart & { kind: "data" })
-    | (FilePart & { kind: "file" })
-    | (ToolResultPart & { kind: "tool_result" })
-  >;
+  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
   metadata?: { [k: string]: any } | undefined;
   agentId: string;
   agentExecutionId: string;
@@ -266,6 +253,7 @@ export type Choice = {
 
 export type PromptTokensDetails = {
   cachedTokens?: number | null | undefined;
+  cacheCreationTokens?: number | null | undefined;
   /**
    * The number of audio input tokens consumed by the request.
    */
@@ -320,22 +308,13 @@ export type AgentThoughtStreamingEventData = {
  * Emitted during agent reasoning. Contains the incremental message changes, model choices, iteration count, and token usage for this processing step.
  */
 export type AgentThoughtStreamingEvent = {
-  type: AgentThoughtStreamingEventType;
+  type: "event.agents.thought";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentThoughtStreamingEventData;
 };
-
-/** @internal */
-export const AgentThoughtStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentThoughtStreamingEventType
-> = z.nativeEnum(AgentThoughtStreamingEventType);
-/** @internal */
-export const AgentThoughtStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentThoughtStreamingEventType
-> = AgentThoughtStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentThoughtStreamingEventRole$inboundSchema: z.ZodNativeEnum<
@@ -352,33 +331,19 @@ export const AgentThoughtStreamingEventParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  ToolCallPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$inboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$inboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$inboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$inboundSchema,
+  DataPart$inboundSchema,
+  FilePart$inboundSchema,
+  ToolCallPart$inboundSchema,
+  ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type AgentThoughtStreamingEventParts$Outbound =
-  | (ToolCallPart$Outbound & { kind: "tool_call" })
-  | (TextPart$Outbound & { kind: "text" })
-  | (DataPart$Outbound & { kind: "data" })
-  | (FilePart$Outbound & { kind: "file" })
-  | (ToolResultPart$Outbound & { kind: "tool_result" });
+  | TextPart$Outbound
+  | DataPart$Outbound
+  | FilePart$Outbound
+  | ToolCallPart$Outbound
+  | ToolResultPart$Outbound;
 
 /** @internal */
 export const AgentThoughtStreamingEventParts$outboundSchema: z.ZodType<
@@ -386,25 +351,11 @@ export const AgentThoughtStreamingEventParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentThoughtStreamingEventParts
 > = z.union([
-  ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$outboundSchema,
+  DataPart$outboundSchema,
+  FilePart$outboundSchema,
+  ToolCallPart$outboundSchema,
+  ToolResultPart$outboundSchema,
 ]);
 
 export function agentThoughtStreamingEventPartsToJSON(
@@ -436,31 +387,11 @@ export const MessageDifference$inboundSchema: z.ZodType<
   role: AgentThoughtStreamingEventRole$inboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$inboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$inboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$inboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$inboundSchema,
+      DataPart$inboundSchema,
+      FilePart$inboundSchema,
+      ToolCallPart$inboundSchema,
+      ToolResultPart$inboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -479,11 +410,11 @@ export type MessageDifference$Outbound = {
   messageId: string;
   role: string;
   parts: Array<
-    | (ToolCallPart$Outbound & { kind: "tool_call" })
-    | (TextPart$Outbound & { kind: "text" })
-    | (DataPart$Outbound & { kind: "data" })
-    | (FilePart$Outbound & { kind: "file" })
-    | (ToolResultPart$Outbound & { kind: "tool_result" })
+    | TextPart$Outbound
+    | DataPart$Outbound
+    | FilePart$Outbound
+    | ToolCallPart$Outbound
+    | ToolResultPart$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
   agent_id: string;
@@ -501,31 +432,11 @@ export const MessageDifference$outboundSchema: z.ZodType<
   role: AgentThoughtStreamingEventRole$outboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$outboundSchema,
+      DataPart$outboundSchema,
+      FilePart$outboundSchema,
+      ToolCallPart$outboundSchema,
+      ToolResultPart$outboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -1121,16 +1032,19 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cached_tokens: z.nullable(z.number().int()).optional(),
+  cache_creation_tokens: z.nullable(z.number().int()).optional(),
   audio_tokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "cached_tokens": "cachedTokens",
+    "cache_creation_tokens": "cacheCreationTokens",
     "audio_tokens": "audioTokens",
   });
 });
 /** @internal */
 export type PromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
+  cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
@@ -1141,10 +1055,12 @@ export const PromptTokensDetails$outboundSchema: z.ZodType<
   PromptTokensDetails
 > = z.object({
   cachedTokens: z.nullable(z.number().int()).optional(),
+  cacheCreationTokens: z.nullable(z.number().int()).optional(),
   audioTokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     cachedTokens: "cached_tokens",
+    cacheCreationTokens: "cache_creation_tokens",
     audioTokens: "audio_tokens",
   });
 });
@@ -1379,13 +1295,13 @@ export const AgentThoughtStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentThoughtStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.thought"),
   timestamp: z.string(),
   data: z.lazy(() => AgentThoughtStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentThoughtStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.thought";
   timestamp: string;
   data: AgentThoughtStreamingEventData$Outbound;
 };
@@ -1396,7 +1312,7 @@ export const AgentThoughtStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentThoughtStreamingEvent
 > = z.object({
-  type: AgentThoughtStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.thought"),
   timestamp: z.string(),
   data: z.lazy(() => AgentThoughtStreamingEventData$outboundSchema),
 });

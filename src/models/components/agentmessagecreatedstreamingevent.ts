@@ -38,13 +38,6 @@ import {
   ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
-export const AgentMessageCreatedStreamingEventType = {
-  EventAgentsMessageCreated: "event.agents.message-created",
-} as const;
-export type AgentMessageCreatedStreamingEventType = ClosedEnum<
-  typeof AgentMessageCreatedStreamingEventType
->;
-
 export const AgentMessageCreatedStreamingEventRole = {
   User: "user",
   Tool: "tool",
@@ -54,22 +47,16 @@ export type AgentMessageCreatedStreamingEventRole = ClosedEnum<
 >;
 
 export type AgentMessageCreatedStreamingEventParts =
-  | (ToolCallPart & { kind: "tool_call" })
-  | (TextPart & { kind: "text" })
-  | (DataPart & { kind: "data" })
-  | (FilePart & { kind: "file" })
-  | (ToolResultPart & { kind: "tool_result" });
+  | TextPart
+  | DataPart
+  | FilePart
+  | ToolCallPart
+  | ToolResultPart;
 
 export type Message = {
   messageId?: string | undefined;
   role: AgentMessageCreatedStreamingEventRole;
-  parts: Array<
-    | (ToolCallPart & { kind: "tool_call" })
-    | (TextPart & { kind: "text" })
-    | (DataPart & { kind: "data" })
-    | (FilePart & { kind: "file" })
-    | (ToolResultPart & { kind: "tool_result" })
-  >;
+  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -84,23 +71,13 @@ export type AgentMessageCreatedStreamingEventData = {
  * Emitted when a new message is added to the conversation. Contains the message content, workflow run ID, and span context for tracing.
  */
 export type AgentMessageCreatedStreamingEvent = {
-  type: AgentMessageCreatedStreamingEventType;
+  type: "event.agents.message-created";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentMessageCreatedStreamingEventData;
 };
-
-/** @internal */
-export const AgentMessageCreatedStreamingEventType$inboundSchema:
-  z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventType> = z.nativeEnum(
-    AgentMessageCreatedStreamingEventType,
-  );
-/** @internal */
-export const AgentMessageCreatedStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventType> =
-    AgentMessageCreatedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentMessageCreatedStreamingEventRole$inboundSchema:
@@ -118,33 +95,19 @@ export const AgentMessageCreatedStreamingEventParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  ToolCallPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$inboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$inboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$inboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$inboundSchema,
+  DataPart$inboundSchema,
+  FilePart$inboundSchema,
+  ToolCallPart$inboundSchema,
+  ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type AgentMessageCreatedStreamingEventParts$Outbound =
-  | (ToolCallPart$Outbound & { kind: "tool_call" })
-  | (TextPart$Outbound & { kind: "text" })
-  | (DataPart$Outbound & { kind: "data" })
-  | (FilePart$Outbound & { kind: "file" })
-  | (ToolResultPart$Outbound & { kind: "tool_result" });
+  | TextPart$Outbound
+  | DataPart$Outbound
+  | FilePart$Outbound
+  | ToolCallPart$Outbound
+  | ToolResultPart$Outbound;
 
 /** @internal */
 export const AgentMessageCreatedStreamingEventParts$outboundSchema: z.ZodType<
@@ -152,25 +115,11 @@ export const AgentMessageCreatedStreamingEventParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentMessageCreatedStreamingEventParts
 > = z.union([
-  ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$outboundSchema,
+  DataPart$outboundSchema,
+  FilePart$outboundSchema,
+  ToolCallPart$outboundSchema,
+  ToolResultPart$outboundSchema,
 ]);
 
 export function agentMessageCreatedStreamingEventPartsToJSON(
@@ -201,31 +150,11 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
     role: AgentMessageCreatedStreamingEventRole$inboundSchema,
     parts: z.array(
       z.union([
-        ToolCallPart$inboundSchema.and(
-          z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        TextPart$inboundSchema.and(
-          z.object({ kind: z.literal("text") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        DataPart$inboundSchema.and(
-          z.object({ kind: z.literal("data") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        FilePart$inboundSchema.and(
-          z.object({ kind: z.literal("file") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        ToolResultPart$inboundSchema.and(
-          z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
+        TextPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
       ]),
     ),
     metadata: z.record(z.any()).optional(),
@@ -235,11 +164,11 @@ export type Message$Outbound = {
   messageId?: string | undefined;
   role: string;
   parts: Array<
-    | (ToolCallPart$Outbound & { kind: "tool_call" })
-    | (TextPart$Outbound & { kind: "text" })
-    | (DataPart$Outbound & { kind: "data" })
-    | (FilePart$Outbound & { kind: "file" })
-    | (ToolResultPart$Outbound & { kind: "tool_result" })
+    | TextPart$Outbound
+    | DataPart$Outbound
+    | FilePart$Outbound
+    | ToolCallPart$Outbound
+    | ToolResultPart$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -254,31 +183,11 @@ export const Message$outboundSchema: z.ZodType<
   role: AgentMessageCreatedStreamingEventRole$outboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$outboundSchema,
+      DataPart$outboundSchema,
+      FilePart$outboundSchema,
+      ToolCallPart$outboundSchema,
+      ToolResultPart$outboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -354,13 +263,13 @@ export const AgentMessageCreatedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentMessageCreatedStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.message-created"),
   timestamp: z.string(),
   data: z.lazy(() => AgentMessageCreatedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentMessageCreatedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.message-created";
   timestamp: string;
   data: AgentMessageCreatedStreamingEventData$Outbound;
 };
@@ -371,7 +280,7 @@ export const AgentMessageCreatedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentMessageCreatedStreamingEvent
 > = z.object({
-  type: AgentMessageCreatedStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.message-created"),
   timestamp: z.string(),
   data: z.lazy(() => AgentMessageCreatedStreamingEventData$outboundSchema),
 });

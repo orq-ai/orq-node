@@ -4,30 +4,16 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const Kind = {
-  Text: "text",
-} as const;
-export type Kind = ClosedEnum<typeof Kind>;
 
 /**
  * Text content part. Use this to send text messages to the agent.
  */
 export type TextPart = {
-  kind: Kind;
+  kind: "text";
   text: string;
 };
-
-/** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
-/** @internal */
-export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
-  Kind$inboundSchema;
 
 /** @internal */
 export const TextPart$inboundSchema: z.ZodType<
@@ -35,12 +21,12 @@ export const TextPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: Kind$inboundSchema,
+  kind: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type TextPart$Outbound = {
-  kind: string;
+  kind: "text";
   text: string;
 };
 
@@ -50,7 +36,7 @@ export const TextPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TextPart
 > = z.object({
-  kind: Kind$outboundSchema,
+  kind: z.literal("text"),
   text: z.string(),
 });
 

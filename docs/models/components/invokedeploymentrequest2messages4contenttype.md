@@ -1,17 +1,17 @@
 # InvokeDeploymentRequest2Messages4ContentType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { InvokeDeploymentRequest2Messages4ContentType } from "@orq-ai/node/models/components";
 
-let value: InvokeDeploymentRequest2Messages4ContentType = "refusal";
+let value: InvokeDeploymentRequest2Messages4ContentType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

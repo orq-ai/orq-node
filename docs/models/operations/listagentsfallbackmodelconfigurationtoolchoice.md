@@ -15,7 +15,9 @@ const value: operations.ListAgentsToolChoiceAgents1 = "auto";
 
 ```typescript
 const value: operations.ListAgentsToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

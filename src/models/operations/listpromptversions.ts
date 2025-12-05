@@ -381,19 +381,6 @@ export const ListPromptVersionsRole = {
  */
 export type ListPromptVersionsRole = ClosedEnum<typeof ListPromptVersionsRole>;
 
-/**
- * The type of the content part. Always `file`.
- */
-export const ListPromptVersions2PromptsResponseType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type ListPromptVersions2PromptsResponseType = ClosedEnum<
-  typeof ListPromptVersions2PromptsResponseType
->;
-
 export type ListPromptVersions2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -417,16 +404,9 @@ export type ListPromptVersions23 = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: ListPromptVersions2PromptsResponseType;
+  type: "file";
   file: ListPromptVersions2File;
 };
-
-export const ListPromptVersions2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type ListPromptVersions2PromptsType = ClosedEnum<
-  typeof ListPromptVersions2PromptsType
->;
 
 export type ListPromptVersions2ImageUrl = {
   /**
@@ -447,22 +427,15 @@ export type ListPromptVersions2ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type ListPromptVersions22 = {
-  type: ListPromptVersions2PromptsType;
+  type: "image_url";
   imageUrl: ListPromptVersions2ImageUrl;
 };
-
-export const ListPromptVersions2Type = {
-  Text: "text",
-} as const;
-export type ListPromptVersions2Type = ClosedEnum<
-  typeof ListPromptVersions2Type
->;
 
 /**
  * Text content part of a prompt message
  */
 export type ListPromptVersions21 = {
-  type: ListPromptVersions2Type;
+  type: "text";
   text: string;
 };
 
@@ -1212,16 +1185,6 @@ export const ListPromptVersionsRole$outboundSchema: z.ZodNativeEnum<
 > = ListPromptVersionsRole$inboundSchema;
 
 /** @internal */
-export const ListPromptVersions2PromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof ListPromptVersions2PromptsResponseType> = z.nativeEnum(
-    ListPromptVersions2PromptsResponseType,
-  );
-/** @internal */
-export const ListPromptVersions2PromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof ListPromptVersions2PromptsResponseType> =
-    ListPromptVersions2PromptsResponseType$inboundSchema;
-
-/** @internal */
 export const ListPromptVersions2File$inboundSchema: z.ZodType<
   ListPromptVersions2File,
   z.ZodTypeDef,
@@ -1283,12 +1246,12 @@ export const ListPromptVersions23$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListPromptVersions2PromptsResponseType$inboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => ListPromptVersions2File$inboundSchema),
 });
 /** @internal */
 export type ListPromptVersions23$Outbound = {
-  type: string;
+  type: "file";
   file: ListPromptVersions2File$Outbound;
 };
 
@@ -1298,7 +1261,7 @@ export const ListPromptVersions23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListPromptVersions23
 > = z.object({
-  type: ListPromptVersions2PromptsResponseType$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => ListPromptVersions2File$outboundSchema),
 });
 
@@ -1318,15 +1281,6 @@ export function listPromptVersions23FromJSON(
     `Failed to parse 'ListPromptVersions23' from JSON`,
   );
 }
-
-/** @internal */
-export const ListPromptVersions2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersions2PromptsType
-> = z.nativeEnum(ListPromptVersions2PromptsType);
-/** @internal */
-export const ListPromptVersions2PromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersions2PromptsType
-> = ListPromptVersions2PromptsType$inboundSchema;
 
 /** @internal */
 export const ListPromptVersions2ImageUrl$inboundSchema: z.ZodType<
@@ -1381,7 +1335,7 @@ export const ListPromptVersions22$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListPromptVersions2PromptsType$inboundSchema,
+  type: z.literal("image_url"),
   image_url: z.lazy(() => ListPromptVersions2ImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1390,7 +1344,7 @@ export const ListPromptVersions22$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ListPromptVersions22$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: ListPromptVersions2ImageUrl$Outbound;
 };
 
@@ -1400,7 +1354,7 @@ export const ListPromptVersions22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListPromptVersions22
 > = z.object({
-  type: ListPromptVersions2PromptsType$outboundSchema,
+  type: z.literal("image_url"),
   imageUrl: z.lazy(() => ListPromptVersions2ImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1426,26 +1380,17 @@ export function listPromptVersions22FromJSON(
 }
 
 /** @internal */
-export const ListPromptVersions2Type$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersions2Type
-> = z.nativeEnum(ListPromptVersions2Type);
-/** @internal */
-export const ListPromptVersions2Type$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersions2Type
-> = ListPromptVersions2Type$inboundSchema;
-
-/** @internal */
 export const ListPromptVersions21$inboundSchema: z.ZodType<
   ListPromptVersions21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListPromptVersions2Type$inboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type ListPromptVersions21$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
@@ -1455,7 +1400,7 @@ export const ListPromptVersions21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListPromptVersions21
 > = z.object({
-  type: ListPromptVersions2Type$outboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 

@@ -12,10 +12,10 @@ const value: operations.UpdatePrompt2PromptsResponse1 = {
 };
 ```
 
-### `operations.UpdatePrompt2PromptsResponse2`
+### `operations.UpdatePrompt2Prompts2`
 
 ```typescript
-const value: operations.UpdatePrompt2PromptsResponse2 = {
+const value: operations.UpdatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
     url: "https://picsum.photos/id/1/200/300",
@@ -23,10 +23,10 @@ const value: operations.UpdatePrompt2PromptsResponse2 = {
 };
 ```
 
-### `operations.UpdatePrompt2PromptsResponse3`
+### `operations.UpdatePrompt23`
 
 ```typescript
-const value: operations.UpdatePrompt2PromptsResponse3 = {
+const value: operations.UpdatePrompt23 = {
   type: "file",
   file: {},
 };

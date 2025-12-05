@@ -1,6 +1,6 @@
 # ChoicesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,10 +11,11 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2[]`
 
 ```typescript
 const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [];
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2[] =
+    [];
 ```
 

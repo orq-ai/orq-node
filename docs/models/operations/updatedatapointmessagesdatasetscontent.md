@@ -1,6 +1,6 @@
 # UpdateDatapointMessagesDatasetsContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the developer message.
 
 
 ## Supported Types

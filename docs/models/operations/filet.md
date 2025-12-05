@@ -1,20 +1,16 @@
 # FileT
 
-File data for the content part. Must contain either file_data or uri, but not both.
-
 ## Example Usage
 
 ```typescript
 import { FileT } from "@orq-ai/node/models/operations";
 
-let value: FileT = {};
+// No examples available for this model
 ```
 
 ## Fields
 
-| Field                                                                                                                                                   | Type                                                                                                                                                    | Required                                                                                                                                                | Description                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fileData`                                                                                                                                              | *string*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...' |
-| `uri`                                                                                                                                                   | *string*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | URL to the file. Only supported by Anthropic Claude models for PDF files.                                                                               |
-| `mimeType`                                                                                                                                              | *string*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | MIME type of the file (e.g., application/pdf, image/png)                                                                                                |
-| `filename`                                                                                                                                              | *string*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | The name of the file, used when passing the file to the model as a string.                                                                              |
+| Field                        | Type                         | Required                     | Description                  |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `fileName`                   | *string*                     | :heavy_check_mark:           | N/A                          |
+| `content`                    | *ReadableStream<Uint8Array>* | :heavy_check_mark:           | N/A                          |

@@ -1,46 +1,20 @@
 # UpdateDatapointContentDatasetsResponse2
 
-
-## Supported Types
-
-### `operations.UpdateDatapoint2Datasets1`
+## Example Usage
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets1 = {
+import { UpdateDatapointContentDatasetsResponse2 } from "@orq-ai/node/models/operations";
+
+let value: UpdateDatapointContentDatasetsResponse2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdateDatapoint2Datasets2`
+## Fields
 
-```typescript
-const value: operations.UpdateDatapoint2Datasets2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://shameful-knight.org/",
-  },
-};
-```
-
-### `operations.UpdateDatapoint2Datasets3`
-
-```typescript
-const value: operations.UpdateDatapoint2Datasets3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
-};
-```
-
-### `operations.UpdateDatapoint2Datasets4`
-
-```typescript
-const value: operations.UpdateDatapoint2Datasets4 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                         | [operations.UpdateDatapointContentDatasetsResponseType](../../models/operations/updatedatapointcontentdatasetsresponsetype.md)                 | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `text`                                                                                                                                         | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `cacheControl`                                                                                                                                 | [operations.UpdateDatapointContentDatasetsResponseCacheControl](../../models/operations/updatedatapointcontentdatasetsresponsecachecontrol.md) | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |

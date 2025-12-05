@@ -1,6 +1,6 @@
 # CreatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the content part.
 import { CreatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType } from "@orq-ai/node/models/operations";
 
 let value: CreatePrompt2PromptsRequestRequestBodyPromptMessages3ContentType =
-  "refusal";
+  "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

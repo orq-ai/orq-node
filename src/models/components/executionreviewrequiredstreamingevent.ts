@@ -4,16 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ExecutionReviewRequiredStreamingEventType = {
-  EventAgentsExecutionReviewRequired: "event.agents.execution_review_required",
-} as const;
-export type ExecutionReviewRequiredStreamingEventType = ClosedEnum<
-  typeof ExecutionReviewRequiredStreamingEventType
->;
 
 export type ExecutionReviewRequiredStreamingEventData = {};
 
@@ -21,22 +13,13 @@ export type ExecutionReviewRequiredStreamingEventData = {};
  * Emitted when the entire agent execution requires human review before proceeding. The execution will pause until reviewed.
  */
 export type ExecutionReviewRequiredStreamingEvent = {
-  type: ExecutionReviewRequiredStreamingEventType;
+  type: "event.agents.execution_review_required";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ExecutionReviewRequiredStreamingEventData;
 };
-
-/** @internal */
-export const ExecutionReviewRequiredStreamingEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ExecutionReviewRequiredStreamingEventType> = z
-    .nativeEnum(ExecutionReviewRequiredStreamingEventType);
-/** @internal */
-export const ExecutionReviewRequiredStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof ExecutionReviewRequiredStreamingEventType> =
-    ExecutionReviewRequiredStreamingEventType$inboundSchema;
 
 /** @internal */
 export const ExecutionReviewRequiredStreamingEventData$inboundSchema: z.ZodType<
@@ -87,13 +70,13 @@ export const ExecutionReviewRequiredStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ExecutionReviewRequiredStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.execution_review_required"),
   timestamp: z.string(),
   data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ExecutionReviewRequiredStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.execution_review_required";
   timestamp: string;
   data: ExecutionReviewRequiredStreamingEventData$Outbound;
 };
@@ -104,7 +87,7 @@ export const ExecutionReviewRequiredStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExecutionReviewRequiredStreamingEvent
 > = z.object({
-  type: ExecutionReviewRequiredStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.execution_review_required"),
   timestamp: z.string(),
   data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$outboundSchema),
 });

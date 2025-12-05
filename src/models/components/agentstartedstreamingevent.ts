@@ -39,13 +39,6 @@ import {
   ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
-export const AgentStartedStreamingEventType = {
-  EventAgentsStarted: "event.agents.started",
-} as const;
-export type AgentStartedStreamingEventType = ClosedEnum<
-  typeof AgentStartedStreamingEventType
->;
-
 /**
  * Extended A2A message role
  */
@@ -63,11 +56,11 @@ export type AgentStartedStreamingEventRole = ClosedEnum<
 >;
 
 export type Parts =
-  | (ToolCallPart & { kind: "tool_call" })
-  | (TextPart & { kind: "text" })
-  | (DataPart & { kind: "data" })
-  | (FilePart & { kind: "file" })
-  | (ToolResultPart & { kind: "tool_result" });
+  | TextPart
+  | DataPart
+  | FilePart
+  | ToolCallPart
+  | ToolResultPart;
 
 export type InputMessage = {
   messageId?: string | undefined;
@@ -75,13 +68,7 @@ export type InputMessage = {
    * Extended A2A message role
    */
   role: AgentStartedStreamingEventRole;
-  parts: Array<
-    | (ToolCallPart & { kind: "tool_call" })
-    | (TextPart & { kind: "text" })
-    | (DataPart & { kind: "data" })
-    | (FilePart & { kind: "file" })
-    | (ToolResultPart & { kind: "tool_result" })
-  >;
+  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -241,22 +228,13 @@ export type AgentStartedStreamingEventData = {
  * Emitted when the agent begins processing. Contains configuration details including the model, instructions, system prompt, and input message.
  */
 export type AgentStartedStreamingEvent = {
-  type: AgentStartedStreamingEventType;
+  type: "event.agents.started";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentStartedStreamingEventData;
 };
-
-/** @internal */
-export const AgentStartedStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentStartedStreamingEventType
-> = z.nativeEnum(AgentStartedStreamingEventType);
-/** @internal */
-export const AgentStartedStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentStartedStreamingEventType
-> = AgentStartedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentStartedStreamingEventRole$inboundSchema: z.ZodNativeEnum<
@@ -270,39 +248,19 @@ export const AgentStartedStreamingEventRole$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
   .union([
-    ToolCallPart$inboundSchema.and(
-      z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    TextPart$inboundSchema.and(
-      z.object({ kind: z.literal("text") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    DataPart$inboundSchema.and(
-      z.object({ kind: z.literal("data") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    FilePart$inboundSchema.and(
-      z.object({ kind: z.literal("file") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    ToolResultPart$inboundSchema.and(
-      z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
+    TextPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
   ]);
 /** @internal */
 export type Parts$Outbound =
-  | (ToolCallPart$Outbound & { kind: "tool_call" })
-  | (TextPart$Outbound & { kind: "text" })
-  | (DataPart$Outbound & { kind: "data" })
-  | (FilePart$Outbound & { kind: "file" })
-  | (ToolResultPart$Outbound & { kind: "tool_result" });
+  | TextPart$Outbound
+  | DataPart$Outbound
+  | FilePart$Outbound
+  | ToolCallPart$Outbound
+  | ToolResultPart$Outbound;
 
 /** @internal */
 export const Parts$outboundSchema: z.ZodType<
@@ -310,25 +268,11 @@ export const Parts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Parts
 > = z.union([
-  ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$outboundSchema,
+  DataPart$outboundSchema,
+  FilePart$outboundSchema,
+  ToolCallPart$outboundSchema,
+  ToolResultPart$outboundSchema,
 ]);
 
 export function partsToJSON(parts: Parts): string {
@@ -354,31 +298,11 @@ export const InputMessage$inboundSchema: z.ZodType<
   role: AgentStartedStreamingEventRole$inboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$inboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$inboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$inboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$inboundSchema,
+      DataPart$inboundSchema,
+      FilePart$inboundSchema,
+      ToolCallPart$inboundSchema,
+      ToolResultPart$inboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -388,11 +312,11 @@ export type InputMessage$Outbound = {
   messageId?: string | undefined;
   role: string;
   parts: Array<
-    | (ToolCallPart$Outbound & { kind: "tool_call" })
-    | (TextPart$Outbound & { kind: "text" })
-    | (DataPart$Outbound & { kind: "data" })
-    | (FilePart$Outbound & { kind: "file" })
-    | (ToolResultPart$Outbound & { kind: "tool_result" })
+    | TextPart$Outbound
+    | DataPart$Outbound
+    | FilePart$Outbound
+    | ToolCallPart$Outbound
+    | ToolResultPart$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -407,31 +331,11 @@ export const InputMessage$outboundSchema: z.ZodType<
   role: AgentStartedStreamingEventRole$outboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$outboundSchema,
+      DataPart$outboundSchema,
+      FilePart$outboundSchema,
+      ToolCallPart$outboundSchema,
+      ToolResultPart$outboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -869,13 +773,13 @@ export const AgentStartedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentStartedStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.started"),
   timestamp: z.string(),
   data: z.lazy(() => AgentStartedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentStartedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.started";
   timestamp: string;
   data: AgentStartedStreamingEventData$Outbound;
 };
@@ -886,7 +790,7 @@ export const AgentStartedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentStartedStreamingEvent
 > = z.object({
-  type: AgentStartedStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.started"),
   timestamp: z.string(),
   data: z.lazy(() => AgentStartedStreamingEventData$outboundSchema),
 });

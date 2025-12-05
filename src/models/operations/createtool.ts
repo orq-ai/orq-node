@@ -28,13 +28,6 @@ export type CreateToolRequestBodyToolsRequestStatus = ClosedEnum<
   typeof CreateToolRequestBodyToolsRequestStatus
 >;
 
-export const CreateToolRequestBodyToolsRequest5Type = {
-  Code: "code",
-} as const;
-export type CreateToolRequestBodyToolsRequest5Type = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequest5Type
->;
-
 /**
  * The type must be "object"
  */
@@ -114,7 +107,7 @@ export type RequestBodyCodeExecutionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: CreateToolRequestBodyToolsRequestStatus | undefined;
-  type: CreateToolRequestBodyToolsRequest5Type;
+  type: "code";
   codeTool: RequestBodyCodeTool;
 };
 
@@ -132,13 +125,6 @@ export const CreateToolRequestBodyToolsStatus = {
  */
 export type CreateToolRequestBodyToolsStatus = ClosedEnum<
   typeof CreateToolRequestBodyToolsStatus
->;
-
-export const CreateToolRequestBodyToolsRequest4Type = {
-  Mcp: "mcp",
-} as const;
-export type CreateToolRequestBodyToolsRequest4Type = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequest4Type
 >;
 
 export type RequestBodyHeaders = {
@@ -205,7 +191,7 @@ export type RequestBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: CreateToolRequestBodyToolsStatus | undefined;
-  type: CreateToolRequestBodyToolsRequest4Type;
+  type: "mcp";
   mcp: RequestBodyMcp;
 };
 
@@ -223,13 +209,6 @@ export const CreateToolRequestBodyStatus = {
  */
 export type CreateToolRequestBodyStatus = ClosedEnum<
   typeof CreateToolRequestBodyStatus
->;
-
-export const CreateToolRequestBodyToolsRequestType = {
-  Http: "http",
-} as const;
-export type CreateToolRequestBodyToolsRequestType = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequestType
 >;
 
 /**
@@ -357,7 +336,7 @@ export type RequestBodyHTTPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: CreateToolRequestBodyStatus | undefined;
-  type: CreateToolRequestBodyToolsRequestType;
+  type: "http";
   http: CreateToolRequestBodyHttp;
 };
 
@@ -374,13 +353,6 @@ export const RequestBodyStatus = {
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type RequestBodyStatus = ClosedEnum<typeof RequestBodyStatus>;
-
-export const CreateToolRequestBodyToolsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreateToolRequestBodyToolsType = ClosedEnum<
-  typeof CreateToolRequestBodyToolsType
->;
 
 /**
  * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -450,7 +422,7 @@ export type JSONSchemaTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: RequestBodyStatus | undefined;
-  type: CreateToolRequestBodyToolsType;
+  type: "json_schema";
   jsonSchema: RequestBodyJsonSchema;
 };
 
@@ -468,13 +440,6 @@ export const CreateToolRequestBodyToolsRequest1Status = {
  */
 export type CreateToolRequestBodyToolsRequest1Status = ClosedEnum<
   typeof CreateToolRequestBodyToolsRequest1Status
->;
-
-export const CreateToolRequestBodyType = {
-  Function: "function",
-} as const;
-export type CreateToolRequestBodyType = ClosedEnum<
-  typeof CreateToolRequestBodyType
 >;
 
 /**
@@ -558,7 +523,7 @@ export type RequestBodyFunctionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: CreateToolRequestBodyToolsRequest1Status | undefined;
-  type: CreateToolRequestBodyType;
+  type: "function";
   function: RequestBodyFunction;
 };
 
@@ -587,12 +552,6 @@ export const CreateToolResponseBodyToolsResponse200Status = {
 export type CreateToolResponseBodyToolsResponse200Status = ClosedEnum<
   typeof CreateToolResponseBodyToolsResponse200Status
 >;
-
-export const CreateToolResponseBodyToolsResponse200ApplicationJSONType = {
-  Code: "code",
-} as const;
-export type CreateToolResponseBodyToolsResponse200ApplicationJSONType =
-  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType>;
 
 /**
  * The type must be "object"
@@ -686,7 +645,7 @@ export type ResponseBodyCodeExecutionTool = {
    */
   status?: CreateToolResponseBodyToolsResponse200Status | undefined;
   versionHash?: string | undefined;
-  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType;
+  type: "code";
   codeTool: ResponseBodyCodeTool;
 };
 
@@ -704,13 +663,6 @@ export const CreateToolResponseBodyToolsResponseStatus = {
  */
 export type CreateToolResponseBodyToolsResponseStatus = ClosedEnum<
   typeof CreateToolResponseBodyToolsResponseStatus
->;
-
-export const CreateToolResponseBodyToolsResponse200Type = {
-  Mcp: "mcp",
-} as const;
-export type CreateToolResponseBodyToolsResponse200Type = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponse200Type
 >;
 
 export type ResponseBodyHeaders = {
@@ -814,7 +766,7 @@ export type ResponseBodyMCPTool = {
    */
   status?: CreateToolResponseBodyToolsResponseStatus | undefined;
   versionHash?: string | undefined;
-  type: CreateToolResponseBodyToolsResponse200Type;
+  type: "mcp";
   mcp: ResponseBodyMcp;
 };
 
@@ -832,13 +784,6 @@ export const CreateToolResponseBodyToolsStatus = {
  */
 export type CreateToolResponseBodyToolsStatus = ClosedEnum<
   typeof CreateToolResponseBodyToolsStatus
->;
-
-export const CreateToolResponseBodyToolsResponseType = {
-  Http: "http",
-} as const;
-export type CreateToolResponseBodyToolsResponseType = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponseType
 >;
 
 /**
@@ -979,7 +924,7 @@ export type ResponseBodyHTTPTool = {
    */
   status?: CreateToolResponseBodyToolsStatus | undefined;
   versionHash?: string | undefined;
-  type: CreateToolResponseBodyToolsResponseType;
+  type: "http";
   http: CreateToolResponseBodyHttp;
 };
 
@@ -997,13 +942,6 @@ export const CreateToolResponseBodyStatus = {
  */
 export type CreateToolResponseBodyStatus = ClosedEnum<
   typeof CreateToolResponseBodyStatus
->;
-
-export const CreateToolResponseBodyToolsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreateToolResponseBodyToolsType = ClosedEnum<
-  typeof CreateToolResponseBodyToolsType
 >;
 
 /**
@@ -1088,7 +1026,7 @@ export type ResponseBodyJSONSchemaTool = {
    */
   status?: CreateToolResponseBodyStatus | undefined;
   versionHash?: string | undefined;
-  type: CreateToolResponseBodyToolsType;
+  type: "json_schema";
   jsonSchema: ResponseBodyJsonSchema;
 };
 
@@ -1105,13 +1043,6 @@ export const ResponseBodyStatus = {
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type ResponseBodyStatus = ClosedEnum<typeof ResponseBodyStatus>;
-
-export const CreateToolResponseBodyType = {
-  Function: "function",
-} as const;
-export type CreateToolResponseBodyType = ClosedEnum<
-  typeof CreateToolResponseBodyType
->;
 
 /**
  * The type must be "object"
@@ -1207,7 +1138,7 @@ export type ResponseBodyFunctionTool = {
    */
   status?: ResponseBodyStatus | undefined;
   versionHash?: string | undefined;
-  type: CreateToolResponseBodyType;
+  type: "function";
   function: CreateToolResponseBodyFunction;
 };
 
@@ -1229,16 +1160,6 @@ export const CreateToolRequestBodyToolsRequestStatus$inboundSchema:
 export const CreateToolRequestBodyToolsRequestStatus$outboundSchema:
   z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestStatus> =
     CreateToolRequestBodyToolsRequestStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolRequestBodyToolsRequest5Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest5Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest5Type,
-  );
-/** @internal */
-export const CreateToolRequestBodyToolsRequest5Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest5Type> =
-    CreateToolRequestBodyToolsRequest5Type$inboundSchema;
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest5CodeToolType$inboundSchema:
@@ -1376,7 +1297,7 @@ export const RequestBodyCodeExecutionTool$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string(),
   status: CreateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequest5Type$inboundSchema,
+  type: z.literal("code"),
   code_tool: z.lazy(() => RequestBodyCodeTool$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1391,7 +1312,7 @@ export type RequestBodyCodeExecutionTool$Outbound = {
   display_name?: string | undefined;
   description: string;
   status: string;
-  type: string;
+  type: "code";
   code_tool: RequestBodyCodeTool$Outbound;
 };
 
@@ -1408,7 +1329,7 @@ export const RequestBodyCodeExecutionTool$outboundSchema: z.ZodType<
   status: CreateToolRequestBodyToolsRequestStatus$outboundSchema.default(
     "live",
   ),
-  type: CreateToolRequestBodyToolsRequest5Type$outboundSchema,
+  type: z.literal("code"),
   codeTool: z.lazy(() => RequestBodyCodeTool$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1444,16 +1365,6 @@ export const CreateToolRequestBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
 export const CreateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolRequestBodyToolsStatus
 > = CreateToolRequestBodyToolsStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolRequestBodyToolsRequest4Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest4Type,
-  );
-/** @internal */
-export const CreateToolRequestBodyToolsRequest4Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4Type> =
-    CreateToolRequestBodyToolsRequest4Type$inboundSchema;
 
 /** @internal */
 export const RequestBodyHeaders$inboundSchema: z.ZodType<
@@ -1568,7 +1479,7 @@ export const RequestBodyMCPTool$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string(),
   status: CreateToolRequestBodyToolsStatus$inboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequest4Type$inboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => RequestBodyMcp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1582,7 +1493,7 @@ export type RequestBodyMCPTool$Outbound = {
   display_name?: string | undefined;
   description: string;
   status: string;
-  type: string;
+  type: "mcp";
   mcp: RequestBodyMcp$Outbound;
 };
 
@@ -1597,7 +1508,7 @@ export const RequestBodyMCPTool$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string(),
   status: CreateToolRequestBodyToolsStatus$outboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequest4Type$outboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => RequestBodyMcp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1630,16 +1541,6 @@ export const CreateToolRequestBodyStatus$inboundSchema: z.ZodNativeEnum<
 export const CreateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolRequestBodyStatus
 > = CreateToolRequestBodyStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolRequestBodyToolsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestType> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequestType,
-  );
-/** @internal */
-export const CreateToolRequestBodyToolsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestType> =
-    CreateToolRequestBodyToolsRequestType$inboundSchema;
 
 /** @internal */
 export const CreateToolRequestBodyMethod$inboundSchema: z.ZodNativeEnum<
@@ -1937,7 +1838,7 @@ export const RequestBodyHTTPTool$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string(),
   status: CreateToolRequestBodyStatus$inboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequestType$inboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => CreateToolRequestBodyHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1951,7 +1852,7 @@ export type RequestBodyHTTPTool$Outbound = {
   display_name?: string | undefined;
   description: string;
   status: string;
-  type: string;
+  type: "http";
   http: CreateToolRequestBodyHttp$Outbound;
 };
 
@@ -1966,7 +1867,7 @@ export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string(),
   status: CreateToolRequestBodyStatus$outboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequestType$outboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => CreateToolRequestBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1999,15 +1900,6 @@ export const RequestBodyStatus$inboundSchema: z.ZodNativeEnum<
 export const RequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyStatus
 > = RequestBodyStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolRequestBodyToolsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyToolsType
-> = z.nativeEnum(CreateToolRequestBodyToolsType);
-/** @internal */
-export const CreateToolRequestBodyToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyToolsType
-> = CreateToolRequestBodyToolsType$inboundSchema;
 
 /** @internal */
 export const RequestBodySchema$inboundSchema: z.ZodType<
@@ -2126,7 +2018,7 @@ export const JSONSchemaTool$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string(),
   status: RequestBodyStatus$inboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => RequestBodyJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2141,7 +2033,7 @@ export type JSONSchemaTool$Outbound = {
   display_name?: string | undefined;
   description: string;
   status: string;
-  type: string;
+  type: "json_schema";
   json_schema: RequestBodyJsonSchema$Outbound;
 };
 
@@ -2156,7 +2048,7 @@ export const JSONSchemaTool$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string(),
   status: RequestBodyStatus$outboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => RequestBodyJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2186,15 +2078,6 @@ export const CreateToolRequestBodyToolsRequest1Status$inboundSchema:
 export const CreateToolRequestBodyToolsRequest1Status$outboundSchema:
   z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest1Status> =
     CreateToolRequestBodyToolsRequest1Status$inboundSchema;
-
-/** @internal */
-export const CreateToolRequestBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyType
-> = z.nativeEnum(CreateToolRequestBodyType);
-/** @internal */
-export const CreateToolRequestBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyType
-> = CreateToolRequestBodyType$inboundSchema;
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest1Type$inboundSchema:
@@ -2325,7 +2208,7 @@ export const RequestBodyFunctionTool$inboundSchema: z.ZodType<
   status: CreateToolRequestBodyToolsRequest1Status$inboundSchema.default(
     "live",
   ),
-  type: CreateToolRequestBodyType$inboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => RequestBodyFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2339,7 +2222,7 @@ export type RequestBodyFunctionTool$Outbound = {
   display_name?: string | undefined;
   description: string;
   status: string;
-  type: string;
+  type: "function";
   function: RequestBodyFunction$Outbound;
 };
 
@@ -2356,7 +2239,7 @@ export const RequestBodyFunctionTool$outboundSchema: z.ZodType<
   status: CreateToolRequestBodyToolsRequest1Status$outboundSchema.default(
     "live",
   ),
-  type: CreateToolRequestBodyType$outboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => RequestBodyFunction$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2439,17 +2322,6 @@ export const CreateToolResponseBodyToolsResponse200Status$inboundSchema:
 export const CreateToolResponseBodyToolsResponse200Status$outboundSchema:
   z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Status> =
     CreateToolResponseBodyToolsResponse200Status$inboundSchema;
-
-/** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType);
-/** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
-  > = CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
@@ -2586,7 +2458,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWWQVHR2VX6J1A7S7BQA"),
+  _id: z.string().default("tool_01KBQA7B1F8BKHW42CEPHN7NYM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2601,7 +2473,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
     "live",
   ),
   version_hash: z.string().optional(),
-  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("code"),
   code_tool: z.lazy(() => ResponseBodyCodeTool$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2630,7 +2502,7 @@ export type ResponseBodyCodeExecutionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "code";
   code_tool: ResponseBodyCodeTool$Outbound;
 };
 
@@ -2640,7 +2512,7 @@ export const ResponseBodyCodeExecutionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyCodeExecutionTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWWQVHR2VX6J1A7S7BQA"),
+  id: z.string().default("tool_01KBQA7B1F8BKHW42CEPHN7NYM"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2655,8 +2527,7 @@ export const ResponseBodyCodeExecutionTool$outboundSchema: z.ZodType<
     "live",
   ),
   versionHash: z.string().optional(),
-  type:
-    CreateToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("code"),
   codeTool: z.lazy(() => ResponseBodyCodeTool$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2698,15 +2569,6 @@ export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
 export const CreateToolResponseBodyToolsResponseStatus$outboundSchema:
   z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> =
     CreateToolResponseBodyToolsResponseStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolResponseBodyToolsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Type> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponse200Type);
-/** @internal */
-export const CreateToolResponseBodyToolsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Type> =
-    CreateToolResponseBodyToolsResponse200Type$inboundSchema;
 
 /** @internal */
 export const ResponseBodyHeaders$inboundSchema: z.ZodType<
@@ -2816,7 +2678,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KB5ATWWQS3E33BQQ8F5Q5GQ4"),
+  id: z.string().default("01KBQA7B1DKY8TXTM0BRPM8RCJ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2835,7 +2697,7 @@ export const ResponseBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyTools
 > = z.object({
-  id: z.string().default("01KB5ATWWQS3E33BQQ8F5Q5GQ4"),
+  id: z.string().default("01KBQA7B1DKY8TXTM0BRPM8RCJ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$outboundSchema),
@@ -2930,7 +2792,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWWN5Z28PPCT0SMAXCAB"),
+  _id: z.string().default("tool_01KBQA7B1CQY0T0DWS0QPMWQG3"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2945,7 +2807,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
     "live",
   ),
   version_hash: z.string().optional(),
-  type: CreateToolResponseBodyToolsResponse200Type$inboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => ResponseBodyMcp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2973,7 +2835,7 @@ export type ResponseBodyMCPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "mcp";
   mcp: ResponseBodyMcp$Outbound;
 };
 
@@ -2983,7 +2845,7 @@ export const ResponseBodyMCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyMCPTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWWN5Z28PPCT0SMAXCAB"),
+  id: z.string().default("tool_01KBQA7B1CQY0T0DWS0QPMWQG3"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2998,7 +2860,7 @@ export const ResponseBodyMCPTool$outboundSchema: z.ZodType<
     "live",
   ),
   versionHash: z.string().optional(),
-  type: CreateToolResponseBodyToolsResponse200Type$outboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => ResponseBodyMcp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3037,15 +2899,6 @@ export const CreateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
 export const CreateToolResponseBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolResponseBodyToolsStatus
 > = CreateToolResponseBodyToolsStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolResponseBodyToolsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseType> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponseType);
-/** @internal */
-export const CreateToolResponseBodyToolsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseType> =
-    CreateToolResponseBodyToolsResponseType$inboundSchema;
 
 /** @internal */
 export const CreateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
@@ -3343,7 +3196,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWWKNCJF562E36567AW6"),
+  _id: z.string().default("tool_01KBQA7B188FQ96SQ6YPQQ2WXM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3356,7 +3209,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: CreateToolResponseBodyToolsResponseType$inboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => CreateToolResponseBodyHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3384,7 +3237,7 @@ export type ResponseBodyHTTPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "http";
   http: CreateToolResponseBodyHttp$Outbound;
 };
 
@@ -3394,7 +3247,7 @@ export const ResponseBodyHTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyHTTPTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWWKNCJF562E36567AW6"),
+  id: z.string().default("tool_01KBQA7B188FQ96SQ6YPQQ2WXM"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3407,7 +3260,7 @@ export const ResponseBodyHTTPTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: CreateToolResponseBodyToolsStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: CreateToolResponseBodyToolsResponseType$outboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => CreateToolResponseBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3446,15 +3299,6 @@ export const CreateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
 export const CreateToolResponseBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolResponseBodyStatus
 > = CreateToolResponseBodyStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolResponseBodyToolsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyToolsType
-> = z.nativeEnum(CreateToolResponseBodyToolsType);
-/** @internal */
-export const CreateToolResponseBodyToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyToolsType
-> = CreateToolResponseBodyToolsType$inboundSchema;
 
 /** @internal */
 export const ResponseBodySchema$inboundSchema: z.ZodType<
@@ -3568,7 +3412,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWW9MBS534MZ278WCAZS"),
+  _id: z.string().default("tool_01KBQA7B16CC2EXF8RQKR2F46F"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3581,7 +3425,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: CreateToolResponseBodyToolsType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => ResponseBodyJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3610,7 +3454,7 @@ export type ResponseBodyJSONSchemaTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "json_schema";
   json_schema: ResponseBodyJsonSchema$Outbound;
 };
 
@@ -3620,7 +3464,7 @@ export const ResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyJSONSchemaTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWW9MBS534MZ278WCAZS"),
+  id: z.string().default("tool_01KBQA7B16CC2EXF8RQKR2F46F"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3633,7 +3477,7 @@ export const ResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: CreateToolResponseBodyStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: CreateToolResponseBodyToolsType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => ResponseBodyJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3673,15 +3517,6 @@ export const ResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
 export const ResponseBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyStatus
 > = ResponseBodyStatus$inboundSchema;
-
-/** @internal */
-export const CreateToolResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyType
-> = z.nativeEnum(CreateToolResponseBodyType);
-/** @internal */
-export const CreateToolResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyType
-> = CreateToolResponseBodyType$inboundSchema;
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
@@ -3810,7 +3645,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWW7M7XQM099JAHV20NB"),
+  _id: z.string().default("tool_01KBQA7B13SRRMDNR8ZFT62CHS"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3823,7 +3658,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: ResponseBodyStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: CreateToolResponseBodyType$inboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => CreateToolResponseBodyFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -3851,7 +3686,7 @@ export type ResponseBodyFunctionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "function";
   function: CreateToolResponseBodyFunction$Outbound;
 };
 
@@ -3861,7 +3696,7 @@ export const ResponseBodyFunctionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyFunctionTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWW7M7XQM099JAHV20NB"),
+  id: z.string().default("tool_01KBQA7B13SRRMDNR8ZFT62CHS"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3874,7 +3709,7 @@ export const ResponseBodyFunctionTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: ResponseBodyStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: CreateToolResponseBodyType$outboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => CreateToolResponseBodyFunction$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

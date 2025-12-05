@@ -3,30 +3,30 @@
 
 ## Supported Types
 
-### `operations.DeploymentStream2Deployments1`
+### `operations.DeploymentStream21`
 
 ```typescript
-const value: operations.DeploymentStream2Deployments1 = {
+const value: operations.DeploymentStream21 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentStream2Deployments2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2Deployments2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://mad-tomb.net",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.DeploymentStream2Deployments3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2Deployments3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
@@ -35,10 +35,10 @@ const value: operations.DeploymentStream2Deployments3 = {
 };
 ```
 
-### `operations.DeploymentStream2Deployments4`
+### `operations.DeploymentStream24`
 
 ```typescript
-const value: operations.DeploymentStream2Deployments4 = {
+const value: operations.DeploymentStream24 = {
   type: "file",
   file: {},
 };

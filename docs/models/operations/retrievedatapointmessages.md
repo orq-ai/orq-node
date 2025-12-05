@@ -3,21 +3,26 @@
 
 ## Supported Types
 
-### `operations.RetrieveDatapointMessagesDeveloperMessage`
-
-```typescript
-const value: operations.RetrieveDatapointMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.RetrieveDatapointMessagesSystemMessage`
 
 ```typescript
 const value: operations.RetrieveDatapointMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
+};
+```
+
+### `operations.RetrieveDatapointMessagesDeveloperMessage`
+
+```typescript
+const value: operations.RetrieveDatapointMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 
@@ -44,9 +49,10 @@ const value: operations.RetrieveDatapointMessagesAssistantMessage = {
 const value: operations.RetrieveDatapointMessagesToolMessage = {
   role: "tool",
   content: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      type: "text",
+      text: "<value>",
+    },
   ],
   toolCallId: "<id>",
 };

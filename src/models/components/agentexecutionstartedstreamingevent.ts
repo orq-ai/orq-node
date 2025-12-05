@@ -5,14 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const Type = {
-  AgentsExecutionStarted: "agents.execution_started",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
 
 export type Data = {
   /**
@@ -33,21 +27,13 @@ export type Data = {
  * Initial event emitted when an agent stream begins. Contains the task ID for tracking, workspace context, and trace ID for observability.
  */
 export type AgentExecutionStartedStreamingEvent = {
-  type: Type;
+  type: "agents.execution_started";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: Data;
 };
-
-/** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
 
 /** @internal */
 export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
@@ -102,13 +88,13 @@ export const AgentExecutionStartedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Type$inboundSchema,
+  type: z.literal("agents.execution_started"),
   timestamp: z.string(),
   data: z.lazy(() => Data$inboundSchema),
 });
 /** @internal */
 export type AgentExecutionStartedStreamingEvent$Outbound = {
-  type: string;
+  type: "agents.execution_started";
   timestamp: string;
   data: Data$Outbound;
 };
@@ -119,7 +105,7 @@ export const AgentExecutionStartedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentExecutionStartedStreamingEvent
 > = z.object({
-  type: Type$outboundSchema,
+  type: z.literal("agents.execution_started"),
   timestamp: z.string(),
   data: z.lazy(() => Data$outboundSchema),
 });

@@ -15,7 +15,9 @@ const value: operations.RunAgentToolChoice1 = "none";
 
 ```typescript
 const value: operations.RunAgentToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

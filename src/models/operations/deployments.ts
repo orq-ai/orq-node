@@ -432,19 +432,6 @@ export const DeploymentsRole = {
  */
 export type DeploymentsRole = ClosedEnum<typeof DeploymentsRole>;
 
-/**
- * The type of the content part. Always `file`.
- */
-export const Deployments2DeploymentsType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type Deployments2DeploymentsType = ClosedEnum<
-  typeof Deployments2DeploymentsType
->;
-
 export type Deployments2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -468,14 +455,9 @@ export type Deployments23 = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: Deployments2DeploymentsType;
+  type: "file";
   file: Deployments2File;
 };
-
-export const Deployments2Type = {
-  ImageUrl: "image_url",
-} as const;
-export type Deployments2Type = ClosedEnum<typeof Deployments2Type>;
 
 export type Deployments2ImageUrl = {
   /**
@@ -496,22 +478,15 @@ export type Deployments2ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type Deployments22 = {
-  type: Deployments2Type;
+  type: "image_url";
   imageUrl: Deployments2ImageUrl;
 };
-
-export const Deployments2DeploymentsResponseType = {
-  Text: "text",
-} as const;
-export type Deployments2DeploymentsResponseType = ClosedEnum<
-  typeof Deployments2DeploymentsResponseType
->;
 
 /**
  * Text content part of a prompt message
  */
 export type Deployments21 = {
-  type: Deployments2DeploymentsResponseType;
+  type: "text";
   text: string;
 };
 
@@ -1345,15 +1320,6 @@ export const DeploymentsRole$outboundSchema: z.ZodNativeEnum<
 > = DeploymentsRole$inboundSchema;
 
 /** @internal */
-export const Deployments2DeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof Deployments2DeploymentsType
-> = z.nativeEnum(Deployments2DeploymentsType);
-/** @internal */
-export const Deployments2DeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof Deployments2DeploymentsType
-> = Deployments2DeploymentsType$inboundSchema;
-
-/** @internal */
 export const Deployments2File$inboundSchema: z.ZodType<
   Deployments2File,
   z.ZodTypeDef,
@@ -1415,12 +1381,12 @@ export const Deployments23$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Deployments2DeploymentsType$inboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => Deployments2File$inboundSchema),
 });
 /** @internal */
 export type Deployments23$Outbound = {
-  type: string;
+  type: "file";
   file: Deployments2File$Outbound;
 };
 
@@ -1430,7 +1396,7 @@ export const Deployments23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Deployments23
 > = z.object({
-  type: Deployments2DeploymentsType$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => Deployments2File$outboundSchema),
 });
 
@@ -1446,15 +1412,6 @@ export function deployments23FromJSON(
     `Failed to parse 'Deployments23' from JSON`,
   );
 }
-
-/** @internal */
-export const Deployments2Type$inboundSchema: z.ZodNativeEnum<
-  typeof Deployments2Type
-> = z.nativeEnum(Deployments2Type);
-/** @internal */
-export const Deployments2Type$outboundSchema: z.ZodNativeEnum<
-  typeof Deployments2Type
-> = Deployments2Type$inboundSchema;
 
 /** @internal */
 export const Deployments2ImageUrl$inboundSchema: z.ZodType<
@@ -1507,7 +1464,7 @@ export const Deployments22$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Deployments2Type$inboundSchema,
+  type: z.literal("image_url"),
   image_url: z.lazy(() => Deployments2ImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1516,7 +1473,7 @@ export const Deployments22$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type Deployments22$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: Deployments2ImageUrl$Outbound;
 };
 
@@ -1526,7 +1483,7 @@ export const Deployments22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Deployments22
 > = z.object({
-  type: Deployments2Type$outboundSchema,
+  type: z.literal("image_url"),
   imageUrl: z.lazy(() => Deployments2ImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1548,26 +1505,17 @@ export function deployments22FromJSON(
 }
 
 /** @internal */
-export const Deployments2DeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof Deployments2DeploymentsResponseType
-> = z.nativeEnum(Deployments2DeploymentsResponseType);
-/** @internal */
-export const Deployments2DeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof Deployments2DeploymentsResponseType> =
-    Deployments2DeploymentsResponseType$inboundSchema;
-
-/** @internal */
 export const Deployments21$inboundSchema: z.ZodType<
   Deployments21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Deployments2DeploymentsResponseType$inboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type Deployments21$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
@@ -1577,7 +1525,7 @@ export const Deployments21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Deployments21
 > = z.object({
-  type: Deployments2DeploymentsResponseType$outboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 

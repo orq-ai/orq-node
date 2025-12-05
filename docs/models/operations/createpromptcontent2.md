@@ -12,10 +12,10 @@ const value: operations.CreatePrompt21 = {
 };
 ```
 
-### `operations.CreatePrompt22`
+### `operations.Two2`
 
 ```typescript
-const value: operations.CreatePrompt22 = {
+const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
     url: "https://picsum.photos/id/1/200/300",
@@ -23,10 +23,10 @@ const value: operations.CreatePrompt22 = {
 };
 ```
 
-### `operations.CreatePrompt23`
+### `operations.Three`
 
 ```typescript
-const value: operations.CreatePrompt23 = {
+const value: operations.Three = {
   type: "file",
   file: {},
 };

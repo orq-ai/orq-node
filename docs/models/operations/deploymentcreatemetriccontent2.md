@@ -1,46 +1,20 @@
 # DeploymentCreateMetricContent2
 
-
-## Supported Types
-
-### `operations.DeploymentCreateMetric21`
+## Example Usage
 
 ```typescript
-const value: operations.DeploymentCreateMetric21 = {
+import { DeploymentCreateMetricContent2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentCreateMetricContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetric22`
+## Fields
 
-```typescript
-const value: operations.DeploymentCreateMetric22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://decent-inspection.info/",
-  },
-};
-```
-
-### `operations.DeploymentCreateMetric23`
-
-```typescript
-const value: operations.DeploymentCreateMetric23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.DeploymentCreateMetric24`
-
-```typescript
-const value: operations.DeploymentCreateMetric24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                       | [operations.DeploymentCreateMetricContentType](../../models/operations/deploymentcreatemetriccontenttype.md)                 | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `text`                                                                                                                       | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `cacheControl`                                                                                                               | [operations.DeploymentCreateMetricContentCacheControl](../../models/operations/deploymentcreatemetriccontentcachecontrol.md) | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |

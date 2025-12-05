@@ -1,23 +1,20 @@
 # InvokeDeploymentRequestContentMessages2
 
-
-## Supported Types
-
-### `components.TwoTextContentPart`
+## Example Usage
 
 ```typescript
-const value: components.TwoTextContentPart = {
+import { InvokeDeploymentRequestContentMessages2 } from "@orq-ai/node/models/components";
+
+let value: InvokeDeploymentRequestContentMessages2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.TwoRefusalContentPart`
+## Fields
 
-```typescript
-const value: components.TwoRefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                         | [components.InvokeDeploymentRequestContentMessagesType](../../models/components/invokedeploymentrequestcontentmessagestype.md)                 | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `text`                                                                                                                                         | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `cacheControl`                                                                                                                                 | [components.InvokeDeploymentRequestContentMessagesCacheControl](../../models/components/invokedeploymentrequestcontentmessagescachecontrol.md) | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |

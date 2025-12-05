@@ -17,8 +17,8 @@ let value: FilePart = {
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `kind`                                                             | [components.FilePartKind](../../models/components/filepartkind.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `file`                                                             | *components.FileT*                                                 | :heavy_check_mark:                                                 | N/A                                                                |
-| `metadata`                                                         | Record<string, *any*>                                              | :heavy_minus_sign:                                                 | N/A                                                                |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `kind`                | *"file"*              | :heavy_check_mark:    | N/A                   |
+| `file`                | *components.FileT*    | :heavy_check_mark:    | N/A                   |
+| `metadata`            | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |

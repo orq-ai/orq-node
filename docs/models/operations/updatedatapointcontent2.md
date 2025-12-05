@@ -1,46 +1,20 @@
 # UpdateDatapointContent2
 
-
-## Supported Types
-
-### `operations.UpdateDatapoint21`
+## Example Usage
 
 ```typescript
-const value: operations.UpdateDatapoint21 = {
+import { UpdateDatapointContent2 } from "@orq-ai/node/models/operations";
+
+let value: UpdateDatapointContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdateDatapoint22`
+## Fields
 
-```typescript
-const value: operations.UpdateDatapoint22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://competent-singing.net/",
-  },
-};
-```
-
-### `operations.UpdateDatapoint23`
-
-```typescript
-const value: operations.UpdateDatapoint23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.UpdateDatapoint24`
-
-```typescript
-const value: operations.UpdateDatapoint24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                         | [operations.UpdateDatapointContentType](../../models/operations/updatedatapointcontenttype.md)                 | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `text`                                                                                                         | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `cacheControl`                                                                                                 | [operations.UpdateDatapointContentCacheControl](../../models/operations/updatedatapointcontentcachecontrol.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |

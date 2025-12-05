@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### `operations.PrefixMessagesDeveloperMessage`
-
-```typescript
-const value: operations.PrefixMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.PrefixMessagesSystemMessage`
 
 ```typescript
 const value: operations.PrefixMessagesSystemMessage = {
   role: "system",
   content: "<value>",
+};
+```
+
+### `operations.PrefixMessagesDeveloperMessage`
+
+```typescript
+const value: operations.PrefixMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 

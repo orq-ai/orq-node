@@ -1,6 +1,6 @@
 # UpdatePromptMessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types

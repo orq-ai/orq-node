@@ -6,7 +6,9 @@
 import { ToolChoice2 } from "@orq-ai/node/models/operations";
 
 let value: ToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

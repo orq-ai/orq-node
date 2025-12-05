@@ -4,14 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const FilePartKind = {
-  File: "file",
-} as const;
-export type FilePartKind = ClosedEnum<typeof FilePartKind>;
 
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
@@ -55,17 +49,10 @@ export type FileT = BinaryFormat | FileInURIFormat;
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
 export type FilePart = {
-  kind: FilePartKind;
+  kind: "file";
   file: BinaryFormat | FileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const FilePartKind$inboundSchema: z.ZodNativeEnum<typeof FilePartKind> =
-  z.nativeEnum(FilePartKind);
-/** @internal */
-export const FilePartKind$outboundSchema: z.ZodNativeEnum<typeof FilePartKind> =
-  FilePartKind$inboundSchema;
 
 /** @internal */
 export const FileInURIFormat$inboundSchema: z.ZodType<
@@ -189,7 +176,7 @@ export const FilePart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: FilePartKind$inboundSchema,
+  kind: z.literal("file"),
   file: z.union([
     z.lazy(() => BinaryFormat$inboundSchema),
     z.lazy(() => FileInURIFormat$inboundSchema),
@@ -198,7 +185,7 @@ export const FilePart$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type FilePart$Outbound = {
-  kind: string;
+  kind: "file";
   file: BinaryFormat$Outbound | FileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -209,7 +196,7 @@ export const FilePart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FilePart
 > = z.object({
-  kind: FilePartKind$outboundSchema,
+  kind: z.literal("file"),
   file: z.union([
     z.lazy(() => BinaryFormat$outboundSchema),
     z.lazy(() => FileInURIFormat$outboundSchema),

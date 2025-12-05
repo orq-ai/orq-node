@@ -1,17 +1,17 @@
 # UpdateDatapoint2DatasetsRequestRequestBodyType
 
-The type of the content part. Always `file`.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { UpdateDatapoint2DatasetsRequestRequestBodyType } from "@orq-ai/node/models/operations";
 
-let value: UpdateDatapoint2DatasetsRequestRequestBodyType = "file";
+let value: UpdateDatapoint2DatasetsRequestRequestBodyType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"ephemeral"
 ```

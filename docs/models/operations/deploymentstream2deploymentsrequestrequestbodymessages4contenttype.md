@@ -1,6 +1,6 @@
 # DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the content part.
 import { DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
-  "refusal";
+  "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

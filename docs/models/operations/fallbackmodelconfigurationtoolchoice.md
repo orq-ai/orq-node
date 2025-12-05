@@ -15,7 +15,9 @@ const value: operations.CreateAgentRequestToolChoice1 = "none";
 
 ```typescript
 const value: operations.CreateAgentRequestToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

@@ -22,6 +22,6 @@ let value: AgentExecutionStartedStreamingEvent = {
 
 | Field                                              | Type                                               | Required                                           | Description                                        |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `type`                                             | [components.Type](../../models/components/type.md) | :heavy_check_mark:                                 | N/A                                                |
+| `type`                                             | *"agents.execution_started"*                       | :heavy_check_mark:                                 | N/A                                                |
 | `timestamp`                                        | *string*                                           | :heavy_check_mark:                                 | ISO timestamp of the event                         |
 | `data`                                             | [components.Data](../../models/components/data.md) | :heavy_check_mark:                                 | N/A                                                |

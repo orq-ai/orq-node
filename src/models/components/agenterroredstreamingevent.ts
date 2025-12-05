@@ -4,16 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const AgentErroredStreamingEventType = {
-  EventAgentsErrored: "event.agents.errored",
-} as const;
-export type AgentErroredStreamingEventType = ClosedEnum<
-  typeof AgentErroredStreamingEventType
->;
 
 export type AgentErroredStreamingEventData = {
   error: string;
@@ -29,22 +21,13 @@ export type AgentErroredStreamingEventData = {
  * Emitted when an error occurs during agent execution. Contains the error message and HTTP status code indicating the failure type.
  */
 export type AgentErroredStreamingEvent = {
-  type: AgentErroredStreamingEventType;
+  type: "event.agents.errored";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentErroredStreamingEventData;
 };
-
-/** @internal */
-export const AgentErroredStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentErroredStreamingEventType
-> = z.nativeEnum(AgentErroredStreamingEventType);
-/** @internal */
-export const AgentErroredStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentErroredStreamingEventType
-> = AgentErroredStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentErroredStreamingEventData$inboundSchema: z.ZodType<
@@ -102,13 +85,13 @@ export const AgentErroredStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentErroredStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.errored"),
   timestamp: z.string(),
   data: z.lazy(() => AgentErroredStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentErroredStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.errored";
   timestamp: string;
   data: AgentErroredStreamingEventData$Outbound;
 };
@@ -119,7 +102,7 @@ export const AgentErroredStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentErroredStreamingEvent
 > = z.object({
-  type: AgentErroredStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.errored"),
   timestamp: z.string(),
   data: z.lazy(() => AgentErroredStreamingEventData$outboundSchema),
 });

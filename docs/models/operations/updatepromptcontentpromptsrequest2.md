@@ -3,21 +3,44 @@
 
 ## Supported Types
 
-### `operations.UpdatePrompt2TextContentPart`
+### `operations.UpdatePrompt2Prompts1`
 
 ```typescript
-const value: operations.UpdatePrompt2TextContentPart = {
+const value: operations.UpdatePrompt2Prompts1 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdatePrompt2RefusalContentPart`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt2RefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.UpdatePrompt24`
+
+```typescript
+const value: operations.UpdatePrompt24 = {
+  type: "file",
+  file: {},
 };
 ```
 

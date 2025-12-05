@@ -9,14 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ToolExecutionFinishedStreamingEventType = {
-  EventWorkflowEventsToolExecutionFinished:
-    "event.workflow_events.tool_execution_finished",
-} as const;
-export type ToolExecutionFinishedStreamingEventType = ClosedEnum<
-  typeof ToolExecutionFinishedStreamingEventType
->;
-
 /**
  * Orquesta product
  */
@@ -75,22 +67,13 @@ export type ToolExecutionFinishedStreamingEventData = {
  * Emitted when a tool completes execution successfully. Contains the result data, action type, and execution context.
  */
 export type ToolExecutionFinishedStreamingEvent = {
-  type: ToolExecutionFinishedStreamingEventType;
+  type: "event.workflow_events.tool_execution_finished";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ToolExecutionFinishedStreamingEventData;
 };
-
-/** @internal */
-export const ToolExecutionFinishedStreamingEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventType> = z
-    .nativeEnum(ToolExecutionFinishedStreamingEventType);
-/** @internal */
-export const ToolExecutionFinishedStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventType> =
-    ToolExecutionFinishedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const ToolExecutionFinishedStreamingEventProduct$inboundSchema:
@@ -330,13 +313,13 @@ export const ToolExecutionFinishedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionFinishedStreamingEventType$inboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_finished"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionFinishedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ToolExecutionFinishedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.workflow_events.tool_execution_finished";
   timestamp: string;
   data: ToolExecutionFinishedStreamingEventData$Outbound;
 };
@@ -347,7 +330,7 @@ export const ToolExecutionFinishedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolExecutionFinishedStreamingEvent
 > = z.object({
-  type: ToolExecutionFinishedStreamingEventType$outboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_finished"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionFinishedStreamingEventData$outboundSchema),
 });

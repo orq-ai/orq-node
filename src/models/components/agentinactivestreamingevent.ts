@@ -39,13 +39,6 @@ import {
   ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
-export const AgentInactiveStreamingEventType = {
-  EventAgentsInactive: "event.agents.inactive",
-} as const;
-export type AgentInactiveStreamingEventType = ClosedEnum<
-  typeof AgentInactiveStreamingEventType
->;
-
 /**
  * Extended A2A message role
  */
@@ -63,11 +56,11 @@ export type AgentInactiveStreamingEventRole = ClosedEnum<
 >;
 
 export type AgentInactiveStreamingEventParts =
-  | (ToolCallPart & { kind: "tool_call" })
-  | (TextPart & { kind: "text" })
-  | (DataPart & { kind: "data" })
-  | (FilePart & { kind: "file" })
-  | (ToolResultPart & { kind: "tool_result" });
+  | TextPart
+  | DataPart
+  | FilePart
+  | ToolCallPart
+  | ToolResultPart;
 
 /**
  * Full last message in A2A format (for backwards compatibility)
@@ -78,13 +71,7 @@ export type LastMessageFull = {
    * Extended A2A message role
    */
   role: AgentInactiveStreamingEventRole;
-  parts: Array<
-    | (ToolCallPart & { kind: "tool_call" })
-    | (TextPart & { kind: "text" })
-    | (DataPart & { kind: "data" })
-    | (FilePart & { kind: "file" })
-    | (ToolResultPart & { kind: "tool_result" })
-  >;
+  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -125,6 +112,7 @@ export type PendingToolCalls = {
 
 export type AgentInactiveStreamingEventPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
+  cacheCreationTokens?: number | null | undefined;
   /**
    * The number of audio input tokens consumed by the request.
    */
@@ -196,22 +184,13 @@ export type AgentInactiveStreamingEventData = {
  * Emitted when the agent completes processing or pauses for input. Contains the final message, finish reason (stop, tool_calls, max_iterations, etc.), and any pending tool calls awaiting user response.
  */
 export type AgentInactiveStreamingEvent = {
-  type: AgentInactiveStreamingEventType;
+  type: "event.agents.inactive";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentInactiveStreamingEventData;
 };
-
-/** @internal */
-export const AgentInactiveStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentInactiveStreamingEventType
-> = z.nativeEnum(AgentInactiveStreamingEventType);
-/** @internal */
-export const AgentInactiveStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentInactiveStreamingEventType
-> = AgentInactiveStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentInactiveStreamingEventRole$inboundSchema: z.ZodNativeEnum<
@@ -228,33 +207,19 @@ export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  ToolCallPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$inboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$inboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$inboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$inboundSchema,
+  DataPart$inboundSchema,
+  FilePart$inboundSchema,
+  ToolCallPart$inboundSchema,
+  ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type AgentInactiveStreamingEventParts$Outbound =
-  | (ToolCallPart$Outbound & { kind: "tool_call" })
-  | (TextPart$Outbound & { kind: "text" })
-  | (DataPart$Outbound & { kind: "data" })
-  | (FilePart$Outbound & { kind: "file" })
-  | (ToolResultPart$Outbound & { kind: "tool_result" });
+  | TextPart$Outbound
+  | DataPart$Outbound
+  | FilePart$Outbound
+  | ToolCallPart$Outbound
+  | ToolResultPart$Outbound;
 
 /** @internal */
 export const AgentInactiveStreamingEventParts$outboundSchema: z.ZodType<
@@ -262,25 +227,11 @@ export const AgentInactiveStreamingEventParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentInactiveStreamingEventParts
 > = z.union([
-  ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  TextPart$outboundSchema,
+  DataPart$outboundSchema,
+  FilePart$outboundSchema,
+  ToolCallPart$outboundSchema,
+  ToolResultPart$outboundSchema,
 ]);
 
 export function agentInactiveStreamingEventPartsToJSON(
@@ -312,31 +263,11 @@ export const LastMessageFull$inboundSchema: z.ZodType<
   role: AgentInactiveStreamingEventRole$inboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$inboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$inboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$inboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$inboundSchema,
+      DataPart$inboundSchema,
+      FilePart$inboundSchema,
+      ToolCallPart$inboundSchema,
+      ToolResultPart$inboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -346,11 +277,11 @@ export type LastMessageFull$Outbound = {
   messageId?: string | undefined;
   role: string;
   parts: Array<
-    | (ToolCallPart$Outbound & { kind: "tool_call" })
-    | (TextPart$Outbound & { kind: "text" })
-    | (DataPart$Outbound & { kind: "data" })
-    | (FilePart$Outbound & { kind: "file" })
-    | (ToolResultPart$Outbound & { kind: "tool_result" })
+    | TextPart$Outbound
+    | DataPart$Outbound
+    | FilePart$Outbound
+    | ToolCallPart$Outbound
+    | ToolResultPart$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -365,31 +296,11 @@ export const LastMessageFull$outboundSchema: z.ZodType<
   role: AgentInactiveStreamingEventRole$outboundSchema,
   parts: z.array(
     z.union([
-      ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      TextPart$outboundSchema,
+      DataPart$outboundSchema,
+      FilePart$outboundSchema,
+      ToolCallPart$outboundSchema,
+      ToolResultPart$outboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -517,16 +428,19 @@ export const AgentInactiveStreamingEventPromptTokensDetails$inboundSchema:
     unknown
   > = z.object({
     cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
     audio_tokens: z.nullable(z.number().int()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
       "audio_tokens": "audioTokens",
     });
   });
 /** @internal */
 export type AgentInactiveStreamingEventPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
+  cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
@@ -538,10 +452,12 @@ export const AgentInactiveStreamingEventPromptTokensDetails$outboundSchema:
     AgentInactiveStreamingEventPromptTokensDetails
   > = z.object({
     cachedTokens: z.nullable(z.number().int()).optional(),
+    cacheCreationTokens: z.nullable(z.number().int()).optional(),
     audioTokens: z.nullable(z.number().int()).optional(),
   }).transform((v) => {
     return remap$(v, {
       cachedTokens: "cached_tokens",
+      cacheCreationTokens: "cache_creation_tokens",
       audioTokens: "audio_tokens",
     });
   });
@@ -815,13 +731,13 @@ export const AgentInactiveStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentInactiveStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.inactive"),
   timestamp: z.string(),
   data: z.lazy(() => AgentInactiveStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentInactiveStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.inactive";
   timestamp: string;
   data: AgentInactiveStreamingEventData$Outbound;
 };
@@ -832,7 +748,7 @@ export const AgentInactiveStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentInactiveStreamingEvent
 > = z.object({
-  type: AgentInactiveStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.inactive"),
   timestamp: z.string(),
   data: z.lazy(() => AgentInactiveStreamingEventData$outboundSchema),
 });

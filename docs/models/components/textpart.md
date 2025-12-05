@@ -15,7 +15,7 @@ let value: TextPart = {
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `kind`                                             | [components.Kind](../../models/components/kind.md) | :heavy_check_mark:                                 | N/A                                                |
-| `text`                                             | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `kind`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

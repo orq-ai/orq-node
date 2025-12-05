@@ -1,23 +1,20 @@
 # Content2
 
-
-## Supported Types
-
-### `components.TextContentPart`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPart = {
+import { Content2 } from "@orq-ai/node/models/components";
+
+let value: Content2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.RefusalContentPart`
+## Fields
 
-```typescript
-const value: components.RefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `type`                                                                           | [components.ContentType](../../models/components/contenttype.md)                 | :heavy_check_mark:                                                               | N/A                                                                              |
+| `text`                                                                           | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `cacheControl`                                                                   | [components.ContentCacheControl](../../models/components/contentcachecontrol.md) | :heavy_minus_sign:                                                               | N/A                                                                              |

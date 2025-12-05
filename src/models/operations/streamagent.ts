@@ -169,92 +169,46 @@ export type StreamAgentRequest = {
 };
 
 export type StreamAgentData =
-  | (components.AgentExecutionStartedStreamingEvent & {
-    type: "agents.execution_started";
-  })
-  | (components.AgentStartedStreamingEvent & { type: "event.agents.started" })
-  | (components.AgentThoughtStreamingEvent & { type: "event.agents.thought" })
-  | (components.AgentInactiveStreamingEvent & { type: "event.agents.inactive" })
-  | (components.AgentErroredStreamingEvent & { type: "event.agents.errored" })
-  | (components.ActionReviewRequestedStreamingEvent & {
-    type: "event.agents.action_review_requested";
-  })
-  | (components.ActionReviewedStreamingEvent & {
-    type: "event.agents.action_reviewed";
-  })
-  | (components.ExecutionReviewRequiredStreamingEvent & {
-    type: "event.agents.execution_review_required";
-  })
-  | (components.ExecutionReviewedStreamingEvent & {
-    type: "event.agents.execution_reviewed";
-  })
-  | (components.ExecutionNamedStreamingEvent & {
-    type: "event.agents.execution_named";
-  })
-  | (components.AgentHandedOffStreamingEvent & {
-    type: "event.agents.handed_off";
-  })
-  | (components.AgentMessageCreatedStreamingEvent & {
-    type: "event.agents.message-created";
-  })
-  | (components.ToolExecutionStartedStreamingEvent & {
-    type: "event.workflow_events.tool_execution_started";
-  })
-  | (components.ToolExecutionFinishedStreamingEvent & {
-    type: "event.workflow_events.tool_execution_finished";
-  })
-  | (components.ToolExecutionFailedStreamingEvent & {
-    type: "event.workflow_events.tool_execution_failed";
-  })
-  | (components.TimeoutStreamingEvent & { type: "agents.timeout" })
-  | (components.ErrorStreamingEvent & { type: "agents.error" });
+  | components.AgentExecutionStartedStreamingEvent
+  | components.AgentStartedStreamingEvent
+  | components.AgentThoughtStreamingEvent
+  | components.AgentInactiveStreamingEvent
+  | components.AgentErroredStreamingEvent
+  | components.ActionReviewRequestedStreamingEvent
+  | components.ActionReviewedStreamingEvent
+  | components.ExecutionReviewRequiredStreamingEvent
+  | components.ExecutionReviewedStreamingEvent
+  | components.ExecutionNamedStreamingEvent
+  | components.AgentHandedOffStreamingEvent
+  | components.AgentMessageCreatedStreamingEvent
+  | components.ToolExecutionStartedStreamingEvent
+  | components.ToolExecutionFinishedStreamingEvent
+  | components.ToolExecutionFailedStreamingEvent
+  | components.TimeoutStreamingEvent
+  | components.ErrorStreamingEvent;
 
 /**
  * Server-Sent Event stream successfully established. Returns real-time events including agent messages, tool calls, status updates, and completion signals. The stream ends with a [DONE] sentinel value.
  */
 export type StreamAgentResponseBody = {
   data:
-    | (components.AgentExecutionStartedStreamingEvent & {
-      type: "agents.execution_started";
-    })
-    | (components.AgentStartedStreamingEvent & { type: "event.agents.started" })
-    | (components.AgentThoughtStreamingEvent & { type: "event.agents.thought" })
-    | (components.AgentInactiveStreamingEvent & {
-      type: "event.agents.inactive";
-    })
-    | (components.AgentErroredStreamingEvent & { type: "event.agents.errored" })
-    | (components.ActionReviewRequestedStreamingEvent & {
-      type: "event.agents.action_review_requested";
-    })
-    | (components.ActionReviewedStreamingEvent & {
-      type: "event.agents.action_reviewed";
-    })
-    | (components.ExecutionReviewRequiredStreamingEvent & {
-      type: "event.agents.execution_review_required";
-    })
-    | (components.ExecutionReviewedStreamingEvent & {
-      type: "event.agents.execution_reviewed";
-    })
-    | (components.ExecutionNamedStreamingEvent & {
-      type: "event.agents.execution_named";
-    })
-    | (components.AgentHandedOffStreamingEvent & {
-      type: "event.agents.handed_off";
-    })
-    | (components.AgentMessageCreatedStreamingEvent & {
-      type: "event.agents.message-created";
-    })
-    | (components.ToolExecutionStartedStreamingEvent & {
-      type: "event.workflow_events.tool_execution_started";
-    })
-    | (components.ToolExecutionFinishedStreamingEvent & {
-      type: "event.workflow_events.tool_execution_finished";
-    })
-    | (components.ToolExecutionFailedStreamingEvent & {
-      type: "event.workflow_events.tool_execution_failed";
-    })
-    | (components.TimeoutStreamingEvent & { type: "agents.timeout" })
-    | (components.ErrorStreamingEvent & { type: "agents.error" });
+    | components.AgentExecutionStartedStreamingEvent
+    | components.AgentStartedStreamingEvent
+    | components.AgentThoughtStreamingEvent
+    | components.AgentInactiveStreamingEvent
+    | components.AgentErroredStreamingEvent
+    | components.ActionReviewRequestedStreamingEvent
+    | components.ActionReviewedStreamingEvent
+    | components.ExecutionReviewRequiredStreamingEvent
+    | components.ExecutionReviewedStreamingEvent
+    | components.ExecutionNamedStreamingEvent
+    | components.AgentHandedOffStreamingEvent
+    | components.AgentMessageCreatedStreamingEvent
+    | components.ToolExecutionStartedStreamingEvent
+    | components.ToolExecutionFinishedStreamingEvent
+    | components.ToolExecutionFailedStreamingEvent
+    | components.TimeoutStreamingEvent
+    | components.ErrorStreamingEvent;
 };
 
 /** @internal */
@@ -704,138 +658,43 @@ export const StreamAgentData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.AgentExecutionStartedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("agents.execution_started") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.AgentStartedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.started") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentThoughtStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.thought") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentInactiveStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.inactive") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentErroredStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.errored") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.ActionReviewRequestedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.action_review_requested") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.ActionReviewedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.action_reviewed") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ExecutionReviewRequiredStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_review_required") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.ExecutionReviewedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_reviewed") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ExecutionNamedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_named") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.AgentHandedOffStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.handed_off") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentMessageCreatedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.agents.message-created") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ToolExecutionStartedStreamingEvent$inboundSchema.and(
-    z.object({
-      type: z.literal("event.workflow_events.tool_execution_started"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  components.ToolExecutionFinishedStreamingEvent$inboundSchema.and(
-    z.object({
-      type: z.literal("event.workflow_events.tool_execution_finished"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  components.ToolExecutionFailedStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("event.workflow_events.tool_execution_failed") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.TimeoutStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("agents.timeout") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.ErrorStreamingEvent$inboundSchema.and(
-    z.object({ type: z.literal("agents.error") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
+  components.AgentExecutionStartedStreamingEvent$inboundSchema,
+  components.AgentStartedStreamingEvent$inboundSchema,
+  components.AgentThoughtStreamingEvent$inboundSchema,
+  components.AgentInactiveStreamingEvent$inboundSchema,
+  components.AgentErroredStreamingEvent$inboundSchema,
+  components.ActionReviewRequestedStreamingEvent$inboundSchema,
+  components.ActionReviewedStreamingEvent$inboundSchema,
+  components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+  components.ExecutionReviewedStreamingEvent$inboundSchema,
+  components.ExecutionNamedStreamingEvent$inboundSchema,
+  components.AgentHandedOffStreamingEvent$inboundSchema,
+  components.AgentMessageCreatedStreamingEvent$inboundSchema,
+  components.ToolExecutionStartedStreamingEvent$inboundSchema,
+  components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+  components.ToolExecutionFailedStreamingEvent$inboundSchema,
+  components.TimeoutStreamingEvent$inboundSchema,
+  components.ErrorStreamingEvent$inboundSchema,
 ]);
 /** @internal */
 export type StreamAgentData$Outbound =
-  | (components.AgentExecutionStartedStreamingEvent$Outbound & {
-    type: "agents.execution_started";
-  })
-  | (components.AgentStartedStreamingEvent$Outbound & {
-    type: "event.agents.started";
-  })
-  | (components.AgentThoughtStreamingEvent$Outbound & {
-    type: "event.agents.thought";
-  })
-  | (components.AgentInactiveStreamingEvent$Outbound & {
-    type: "event.agents.inactive";
-  })
-  | (components.AgentErroredStreamingEvent$Outbound & {
-    type: "event.agents.errored";
-  })
-  | (components.ActionReviewRequestedStreamingEvent$Outbound & {
-    type: "event.agents.action_review_requested";
-  })
-  | (components.ActionReviewedStreamingEvent$Outbound & {
-    type: "event.agents.action_reviewed";
-  })
-  | (components.ExecutionReviewRequiredStreamingEvent$Outbound & {
-    type: "event.agents.execution_review_required";
-  })
-  | (components.ExecutionReviewedStreamingEvent$Outbound & {
-    type: "event.agents.execution_reviewed";
-  })
-  | (components.ExecutionNamedStreamingEvent$Outbound & {
-    type: "event.agents.execution_named";
-  })
-  | (components.AgentHandedOffStreamingEvent$Outbound & {
-    type: "event.agents.handed_off";
-  })
-  | (components.AgentMessageCreatedStreamingEvent$Outbound & {
-    type: "event.agents.message-created";
-  })
-  | (components.ToolExecutionStartedStreamingEvent$Outbound & {
-    type: "event.workflow_events.tool_execution_started";
-  })
-  | (components.ToolExecutionFinishedStreamingEvent$Outbound & {
-    type: "event.workflow_events.tool_execution_finished";
-  })
-  | (components.ToolExecutionFailedStreamingEvent$Outbound & {
-    type: "event.workflow_events.tool_execution_failed";
-  })
-  | (components.TimeoutStreamingEvent$Outbound & { type: "agents.timeout" })
-  | (components.ErrorStreamingEvent$Outbound & { type: "agents.error" });
+  | components.AgentExecutionStartedStreamingEvent$Outbound
+  | components.AgentStartedStreamingEvent$Outbound
+  | components.AgentThoughtStreamingEvent$Outbound
+  | components.AgentInactiveStreamingEvent$Outbound
+  | components.AgentErroredStreamingEvent$Outbound
+  | components.ActionReviewRequestedStreamingEvent$Outbound
+  | components.ActionReviewedStreamingEvent$Outbound
+  | components.ExecutionReviewRequiredStreamingEvent$Outbound
+  | components.ExecutionReviewedStreamingEvent$Outbound
+  | components.ExecutionNamedStreamingEvent$Outbound
+  | components.AgentHandedOffStreamingEvent$Outbound
+  | components.AgentMessageCreatedStreamingEvent$Outbound
+  | components.ToolExecutionStartedStreamingEvent$Outbound
+  | components.ToolExecutionFinishedStreamingEvent$Outbound
+  | components.ToolExecutionFailedStreamingEvent$Outbound
+  | components.TimeoutStreamingEvent$Outbound
+  | components.ErrorStreamingEvent$Outbound;
 
 /** @internal */
 export const StreamAgentData$outboundSchema: z.ZodType<
@@ -843,88 +702,23 @@ export const StreamAgentData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamAgentData
 > = z.union([
-  components.AgentExecutionStartedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("agents.execution_started") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.AgentStartedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.started") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentThoughtStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.thought") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentInactiveStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.inactive") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentErroredStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.errored") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.ActionReviewRequestedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.action_review_requested") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.ActionReviewedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.action_reviewed") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ExecutionReviewRequiredStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_review_required") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.ExecutionReviewedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_reviewed") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ExecutionNamedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.execution_named") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.AgentHandedOffStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.handed_off") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.AgentMessageCreatedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.agents.message-created") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  components.ToolExecutionStartedStreamingEvent$outboundSchema.and(
-    z.object({
-      type: z.literal("event.workflow_events.tool_execution_started"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  components.ToolExecutionFinishedStreamingEvent$outboundSchema.and(
-    z.object({
-      type: z.literal("event.workflow_events.tool_execution_finished"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  components.ToolExecutionFailedStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("event.workflow_events.tool_execution_failed") })
-      .transform((v) => ({ type: v.type })),
-  ),
-  components.TimeoutStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("agents.timeout") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  components.ErrorStreamingEvent$outboundSchema.and(
-    z.object({ type: z.literal("agents.error") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
+  components.AgentExecutionStartedStreamingEvent$outboundSchema,
+  components.AgentStartedStreamingEvent$outboundSchema,
+  components.AgentThoughtStreamingEvent$outboundSchema,
+  components.AgentInactiveStreamingEvent$outboundSchema,
+  components.AgentErroredStreamingEvent$outboundSchema,
+  components.ActionReviewRequestedStreamingEvent$outboundSchema,
+  components.ActionReviewedStreamingEvent$outboundSchema,
+  components.ExecutionReviewRequiredStreamingEvent$outboundSchema,
+  components.ExecutionReviewedStreamingEvent$outboundSchema,
+  components.ExecutionNamedStreamingEvent$outboundSchema,
+  components.AgentHandedOffStreamingEvent$outboundSchema,
+  components.AgentMessageCreatedStreamingEvent$outboundSchema,
+  components.ToolExecutionStartedStreamingEvent$outboundSchema,
+  components.ToolExecutionFinishedStreamingEvent$outboundSchema,
+  components.ToolExecutionFailedStreamingEvent$outboundSchema,
+  components.TimeoutStreamingEvent$outboundSchema,
+  components.ErrorStreamingEvent$outboundSchema,
 ]);
 
 export function streamAgentDataToJSON(
@@ -957,141 +751,46 @@ export const StreamAgentResponseBody$inboundSchema: z.ZodType<
     }
   }).pipe(
     z.union([
-      components.AgentExecutionStartedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("agents.execution_started") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.AgentStartedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.started") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.AgentThoughtStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.thought") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.AgentInactiveStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.inactive") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.AgentErroredStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.errored") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.ActionReviewRequestedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.action_review_requested") })
-          .transform((v) => ({ type: v.type })),
-      ),
-      components.ActionReviewedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.action_reviewed") }).transform(
-          (v) => ({ type: v.type })
-        ),
-      ),
-      components.ExecutionReviewRequiredStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.execution_review_required") })
-          .transform((v) => ({ type: v.type })),
-      ),
-      components.ExecutionReviewedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.execution_reviewed") })
-          .transform((v) => ({ type: v.type })),
-      ),
-      components.ExecutionNamedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.execution_named") }).transform(
-          (v) => ({ type: v.type })
-        ),
-      ),
-      components.AgentHandedOffStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.handed_off") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      components.AgentMessageCreatedStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("event.agents.message-created") }).transform(
-          (v) => ({ type: v.type })
-        ),
-      ),
-      components.ToolExecutionStartedStreamingEvent$inboundSchema.and(
-        z.object({
-          type: z.literal("event.workflow_events.tool_execution_started"),
-        }).transform((v) => ({ type: v.type })),
-      ),
-      components.ToolExecutionFinishedStreamingEvent$inboundSchema.and(
-        z.object({
-          type: z.literal("event.workflow_events.tool_execution_finished"),
-        }).transform((v) => ({ type: v.type })),
-      ),
-      components.ToolExecutionFailedStreamingEvent$inboundSchema.and(
-        z.object({
-          type: z.literal("event.workflow_events.tool_execution_failed"),
-        }).transform((v) => ({ type: v.type })),
-      ),
-      components.TimeoutStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("agents.timeout") }).transform((v) => ({
-          type: v.type,
-        })),
-      ),
-      components.ErrorStreamingEvent$inboundSchema.and(
-        z.object({ type: z.literal("agents.error") }).transform((v) => ({
-          type: v.type,
-        })),
-      ),
+      components.AgentExecutionStartedStreamingEvent$inboundSchema,
+      components.AgentStartedStreamingEvent$inboundSchema,
+      components.AgentThoughtStreamingEvent$inboundSchema,
+      components.AgentInactiveStreamingEvent$inboundSchema,
+      components.AgentErroredStreamingEvent$inboundSchema,
+      components.ActionReviewRequestedStreamingEvent$inboundSchema,
+      components.ActionReviewedStreamingEvent$inboundSchema,
+      components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+      components.ExecutionReviewedStreamingEvent$inboundSchema,
+      components.ExecutionNamedStreamingEvent$inboundSchema,
+      components.AgentHandedOffStreamingEvent$inboundSchema,
+      components.AgentMessageCreatedStreamingEvent$inboundSchema,
+      components.ToolExecutionStartedStreamingEvent$inboundSchema,
+      components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+      components.ToolExecutionFailedStreamingEvent$inboundSchema,
+      components.TimeoutStreamingEvent$inboundSchema,
+      components.ErrorStreamingEvent$inboundSchema,
     ]),
   ),
 });
 /** @internal */
 export type StreamAgentResponseBody$Outbound = {
   data:
-    | (components.AgentExecutionStartedStreamingEvent$Outbound & {
-      type: "agents.execution_started";
-    })
-    | (components.AgentStartedStreamingEvent$Outbound & {
-      type: "event.agents.started";
-    })
-    | (components.AgentThoughtStreamingEvent$Outbound & {
-      type: "event.agents.thought";
-    })
-    | (components.AgentInactiveStreamingEvent$Outbound & {
-      type: "event.agents.inactive";
-    })
-    | (components.AgentErroredStreamingEvent$Outbound & {
-      type: "event.agents.errored";
-    })
-    | (components.ActionReviewRequestedStreamingEvent$Outbound & {
-      type: "event.agents.action_review_requested";
-    })
-    | (components.ActionReviewedStreamingEvent$Outbound & {
-      type: "event.agents.action_reviewed";
-    })
-    | (components.ExecutionReviewRequiredStreamingEvent$Outbound & {
-      type: "event.agents.execution_review_required";
-    })
-    | (components.ExecutionReviewedStreamingEvent$Outbound & {
-      type: "event.agents.execution_reviewed";
-    })
-    | (components.ExecutionNamedStreamingEvent$Outbound & {
-      type: "event.agents.execution_named";
-    })
-    | (components.AgentHandedOffStreamingEvent$Outbound & {
-      type: "event.agents.handed_off";
-    })
-    | (components.AgentMessageCreatedStreamingEvent$Outbound & {
-      type: "event.agents.message-created";
-    })
-    | (components.ToolExecutionStartedStreamingEvent$Outbound & {
-      type: "event.workflow_events.tool_execution_started";
-    })
-    | (components.ToolExecutionFinishedStreamingEvent$Outbound & {
-      type: "event.workflow_events.tool_execution_finished";
-    })
-    | (components.ToolExecutionFailedStreamingEvent$Outbound & {
-      type: "event.workflow_events.tool_execution_failed";
-    })
-    | (components.TimeoutStreamingEvent$Outbound & { type: "agents.timeout" })
-    | (components.ErrorStreamingEvent$Outbound & { type: "agents.error" });
+    | components.AgentExecutionStartedStreamingEvent$Outbound
+    | components.AgentStartedStreamingEvent$Outbound
+    | components.AgentThoughtStreamingEvent$Outbound
+    | components.AgentInactiveStreamingEvent$Outbound
+    | components.AgentErroredStreamingEvent$Outbound
+    | components.ActionReviewRequestedStreamingEvent$Outbound
+    | components.ActionReviewedStreamingEvent$Outbound
+    | components.ExecutionReviewRequiredStreamingEvent$Outbound
+    | components.ExecutionReviewedStreamingEvent$Outbound
+    | components.ExecutionNamedStreamingEvent$Outbound
+    | components.AgentHandedOffStreamingEvent$Outbound
+    | components.AgentMessageCreatedStreamingEvent$Outbound
+    | components.ToolExecutionStartedStreamingEvent$Outbound
+    | components.ToolExecutionFinishedStreamingEvent$Outbound
+    | components.ToolExecutionFailedStreamingEvent$Outbound
+    | components.TimeoutStreamingEvent$Outbound
+    | components.ErrorStreamingEvent$Outbound;
 };
 
 /** @internal */
@@ -1101,88 +800,23 @@ export const StreamAgentResponseBody$outboundSchema: z.ZodType<
   StreamAgentResponseBody
 > = z.object({
   data: z.union([
-    components.AgentExecutionStartedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("agents.execution_started") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    components.AgentStartedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.started") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    components.AgentThoughtStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.thought") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    components.AgentInactiveStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.inactive") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    components.AgentErroredStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.errored") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    components.ActionReviewRequestedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.action_review_requested") })
-        .transform((v) => ({ type: v.type })),
-    ),
-    components.ActionReviewedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.action_reviewed") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    components.ExecutionReviewRequiredStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.execution_review_required") })
-        .transform((v) => ({ type: v.type })),
-    ),
-    components.ExecutionReviewedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.execution_reviewed") })
-        .transform((v) => ({ type: v.type })),
-    ),
-    components.ExecutionNamedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.execution_named") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    components.AgentHandedOffStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.handed_off") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    components.AgentMessageCreatedStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("event.agents.message-created") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    components.ToolExecutionStartedStreamingEvent$outboundSchema.and(
-      z.object({
-        type: z.literal("event.workflow_events.tool_execution_started"),
-      }).transform((v) => ({ type: v.type })),
-    ),
-    components.ToolExecutionFinishedStreamingEvent$outboundSchema.and(
-      z.object({
-        type: z.literal("event.workflow_events.tool_execution_finished"),
-      }).transform((v) => ({ type: v.type })),
-    ),
-    components.ToolExecutionFailedStreamingEvent$outboundSchema.and(
-      z.object({
-        type: z.literal("event.workflow_events.tool_execution_failed"),
-      }).transform((v) => ({ type: v.type })),
-    ),
-    components.TimeoutStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("agents.timeout") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    components.ErrorStreamingEvent$outboundSchema.and(
-      z.object({ type: z.literal("agents.error") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
+    components.AgentExecutionStartedStreamingEvent$outboundSchema,
+    components.AgentStartedStreamingEvent$outboundSchema,
+    components.AgentThoughtStreamingEvent$outboundSchema,
+    components.AgentInactiveStreamingEvent$outboundSchema,
+    components.AgentErroredStreamingEvent$outboundSchema,
+    components.ActionReviewRequestedStreamingEvent$outboundSchema,
+    components.ActionReviewedStreamingEvent$outboundSchema,
+    components.ExecutionReviewRequiredStreamingEvent$outboundSchema,
+    components.ExecutionReviewedStreamingEvent$outboundSchema,
+    components.ExecutionNamedStreamingEvent$outboundSchema,
+    components.AgentHandedOffStreamingEvent$outboundSchema,
+    components.AgentMessageCreatedStreamingEvent$outboundSchema,
+    components.ToolExecutionStartedStreamingEvent$outboundSchema,
+    components.ToolExecutionFinishedStreamingEvent$outboundSchema,
+    components.ToolExecutionFailedStreamingEvent$outboundSchema,
+    components.TimeoutStreamingEvent$outboundSchema,
+    components.ErrorStreamingEvent$outboundSchema,
   ]),
 });
 

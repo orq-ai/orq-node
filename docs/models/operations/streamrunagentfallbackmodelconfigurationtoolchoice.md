@@ -15,7 +15,9 @@ const value: operations.StreamRunAgentToolChoiceAgents1 = "auto";
 
 ```typescript
 const value: operations.StreamRunAgentToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

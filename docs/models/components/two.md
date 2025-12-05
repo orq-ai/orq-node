@@ -1,46 +1,20 @@
 # Two
 
-
-## Supported Types
-
-### `components.InvokeDeploymentRequest21`
+## Example Usage
 
 ```typescript
-const value: components.InvokeDeploymentRequest21 = {
+import { Two } from "@orq-ai/node/models/components";
+
+let value: Two = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.Two2`
+## Fields
 
-```typescript
-const value: components.Two2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://frequent-passport.com",
-  },
-};
-```
-
-### `components.Three`
-
-```typescript
-const value: components.Three = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `components.Four`
-
-```typescript
-const value: components.Four = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                         | [components.InvokeDeploymentRequestContentType](../../models/components/invokedeploymentrequestcontenttype.md)                 | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `text`                                                                                                                         | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `cacheControl`                                                                                                                 | [components.InvokeDeploymentRequestContentCacheControl](../../models/components/invokedeploymentrequestcontentcachecontrol.md) | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |

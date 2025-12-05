@@ -9,14 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ToolExecutionFailedStreamingEventType = {
-  EventWorkflowEventsToolExecutionFailed:
-    "event.workflow_events.tool_execution_failed",
-} as const;
-export type ToolExecutionFailedStreamingEventType = ClosedEnum<
-  typeof ToolExecutionFailedStreamingEventType
->;
-
 export type ErrorT = {
   message: string;
   stack?: string | undefined;
@@ -80,23 +72,13 @@ export type ToolExecutionFailedStreamingEventData = {
  * Emitted when a tool execution fails. Contains the error details, action type, and execution context.
  */
 export type ToolExecutionFailedStreamingEvent = {
-  type: ToolExecutionFailedStreamingEventType;
+  type: "event.workflow_events.tool_execution_failed";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ToolExecutionFailedStreamingEventData;
 };
-
-/** @internal */
-export const ToolExecutionFailedStreamingEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFailedStreamingEventType> = z.nativeEnum(
-    ToolExecutionFailedStreamingEventType,
-  );
-/** @internal */
-export const ToolExecutionFailedStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFailedStreamingEventType> =
-    ToolExecutionFailedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
@@ -364,13 +346,13 @@ export const ToolExecutionFailedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionFailedStreamingEventType$inboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_failed"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionFailedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ToolExecutionFailedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.workflow_events.tool_execution_failed";
   timestamp: string;
   data: ToolExecutionFailedStreamingEventData$Outbound;
 };
@@ -381,7 +363,7 @@ export const ToolExecutionFailedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolExecutionFailedStreamingEvent
 > = z.object({
-  type: ToolExecutionFailedStreamingEventType$outboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_failed"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionFailedStreamingEventData$outboundSchema),
 });

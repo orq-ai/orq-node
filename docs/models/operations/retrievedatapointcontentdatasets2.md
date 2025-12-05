@@ -1,23 +1,20 @@
 # RetrieveDatapointContentDatasets2
 
-
-## Supported Types
-
-### `operations.RetrieveDatapoint2TextContentPart`
+## Example Usage
 
 ```typescript
-const value: operations.RetrieveDatapoint2TextContentPart = {
+import { RetrieveDatapointContentDatasets2 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveDatapointContentDatasets2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.RetrieveDatapoint2RefusalContentPart`
+## Fields
 
-```typescript
-const value: operations.RetrieveDatapoint2RefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                             | [operations.RetrieveDatapointContentDatasetsType](../../models/operations/retrievedatapointcontentdatasetstype.md)                 | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
+| `text`                                                                                                                             | *string*                                                                                                                           | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
+| `cacheControl`                                                                                                                     | [operations.RetrieveDatapointContentDatasetsCacheControl](../../models/operations/retrievedatapointcontentdatasetscachecontrol.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |

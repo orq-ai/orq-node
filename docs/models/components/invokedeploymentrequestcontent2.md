@@ -3,42 +3,42 @@
 
 ## Supported Types
 
-### `components.Two1`
+### `components.InvokeDeploymentRequest2PrefixMessages1`
 
 ```typescript
-const value: components.Two1 = {
+const value: components.InvokeDeploymentRequest2PrefixMessages1 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.InvokeDeploymentRequest22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: components.InvokeDeploymentRequest22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://firsthand-castanet.com",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `components.Two3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: components.Two3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```
 
-### `components.Two4`
+### `components.Four`
 
 ```typescript
-const value: components.Two4 = {
+const value: components.Four = {
   type: "file",
   file: {},
 };

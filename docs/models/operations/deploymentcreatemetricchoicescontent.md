@@ -1,6 +1,6 @@
 # DeploymentCreateMetricChoicesContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the developer message.
 
 
 ## Supported Types
@@ -11,16 +11,11 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices22[]`
 
 ```typescript
 const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[] =
-    [
-      {
-        type: "refusal",
-        refusal: "<value>",
-      },
-    ];
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices22[] =
+    [];
 ```
 

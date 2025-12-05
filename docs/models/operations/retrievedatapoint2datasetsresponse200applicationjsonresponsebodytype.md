@@ -1,6 +1,6 @@
 # RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType } 
 
 let value:
   RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
-    "refusal";
+    "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

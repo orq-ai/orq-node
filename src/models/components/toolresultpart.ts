@@ -5,33 +5,18 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ToolResultPartKind = {
-  ToolResult: "tool_result",
-} as const;
-export type ToolResultPartKind = ClosedEnum<typeof ToolResultPartKind>;
 
 /**
  * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
 export type ToolResultPart = {
-  kind: ToolResultPartKind;
+  kind: "tool_result";
   toolCallId: string;
   result?: any | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const ToolResultPartKind$inboundSchema: z.ZodNativeEnum<
-  typeof ToolResultPartKind
-> = z.nativeEnum(ToolResultPartKind);
-/** @internal */
-export const ToolResultPartKind$outboundSchema: z.ZodNativeEnum<
-  typeof ToolResultPartKind
-> = ToolResultPartKind$inboundSchema;
 
 /** @internal */
 export const ToolResultPart$inboundSchema: z.ZodType<
@@ -39,7 +24,7 @@ export const ToolResultPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: ToolResultPartKind$inboundSchema,
+  kind: z.literal("tool_result"),
   tool_call_id: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),
@@ -50,7 +35,7 @@ export const ToolResultPart$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ToolResultPart$Outbound = {
-  kind: string;
+  kind: "tool_result";
   tool_call_id: string;
   result?: any | undefined;
   metadata?: { [k: string]: any } | undefined;
@@ -62,7 +47,7 @@ export const ToolResultPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolResultPart
 > = z.object({
-  kind: ToolResultPartKind$outboundSchema,
+  kind: z.literal("tool_result"),
   toolCallId: z.string(),
   result: z.any().optional(),
   metadata: z.record(z.any()).optional(),

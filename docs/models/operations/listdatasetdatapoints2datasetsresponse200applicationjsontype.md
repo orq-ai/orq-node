@@ -1,6 +1,6 @@
 # ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the content part.
 import { ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapoints2DatasetsResponse200ApplicationJSONType =
-  "text";
+  "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"ephemeral"
 ```

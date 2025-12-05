@@ -1,46 +1,20 @@
 # RetrieveDatapointContent2
 
-
-## Supported Types
-
-### `operations.RetrieveDatapoint21`
+## Example Usage
 
 ```typescript
-const value: operations.RetrieveDatapoint21 = {
+import { RetrieveDatapointContent2 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveDatapointContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.RetrieveDatapoint22`
+## Fields
 
-```typescript
-const value: operations.RetrieveDatapoint22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://long-term-eggplant.net",
-  },
-};
-```
-
-### `operations.RetrieveDatapoint23`
-
-```typescript
-const value: operations.RetrieveDatapoint23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.RetrieveDatapoint24`
-
-```typescript
-const value: operations.RetrieveDatapoint24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                             | [operations.RetrieveDatapointContentType](../../models/operations/retrievedatapointcontenttype.md)                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `text`                                                                                                             | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `cacheControl`                                                                                                     | [operations.RetrieveDatapointContentCacheControl](../../models/operations/retrievedatapointcontentcachecontrol.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

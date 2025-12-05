@@ -33,14 +33,6 @@ export type RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus =
     typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus
   >;
 
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType = {
-  Code: "code",
-} as const;
-export type RetrieveToolResponseBodyToolsResponse200ApplicationJSONType =
-  ClosedEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
-  >;
-
 /**
  * The type must be "object"
  */
@@ -139,7 +131,7 @@ export type RetrieveToolResponseBodyCodeExecutionTool = {
     | RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus
     | undefined;
   versionHash?: string | undefined;
-  type: RetrieveToolResponseBodyToolsResponse200ApplicationJSONType;
+  type: "code";
   codeTool: RetrieveToolResponseBodyCodeTool;
 };
 
@@ -157,13 +149,6 @@ export const RetrieveToolResponseBodyToolsResponse200Status = {
  */
 export type RetrieveToolResponseBodyToolsResponse200Status = ClosedEnum<
   typeof RetrieveToolResponseBodyToolsResponse200Status
->;
-
-export const RetrieveToolResponseBodyToolsResponse200Type = {
-  Mcp: "mcp",
-} as const;
-export type RetrieveToolResponseBodyToolsResponse200Type = ClosedEnum<
-  typeof RetrieveToolResponseBodyToolsResponse200Type
 >;
 
 export type RetrieveToolResponseBodyHeaders = {
@@ -269,7 +254,7 @@ export type RetrieveToolResponseBodyMCPTool = {
    */
   status?: RetrieveToolResponseBodyToolsResponse200Status | undefined;
   versionHash?: string | undefined;
-  type: RetrieveToolResponseBodyToolsResponse200Type;
+  type: "mcp";
   mcp: RetrieveToolResponseBodyMcp;
 };
 
@@ -287,13 +272,6 @@ export const RetrieveToolResponseBodyToolsResponseStatus = {
  */
 export type RetrieveToolResponseBodyToolsResponseStatus = ClosedEnum<
   typeof RetrieveToolResponseBodyToolsResponseStatus
->;
-
-export const RetrieveToolResponseBodyToolsResponseType = {
-  Http: "http",
-} as const;
-export type RetrieveToolResponseBodyToolsResponseType = ClosedEnum<
-  typeof RetrieveToolResponseBodyToolsResponseType
 >;
 
 /**
@@ -438,7 +416,7 @@ export type RetrieveToolResponseBodyHTTPTool = {
    */
   status?: RetrieveToolResponseBodyToolsResponseStatus | undefined;
   versionHash?: string | undefined;
-  type: RetrieveToolResponseBodyToolsResponseType;
+  type: "http";
   http: RetrieveToolResponseBodyHttp;
 };
 
@@ -456,13 +434,6 @@ export const RetrieveToolResponseBodyToolsStatus = {
  */
 export type RetrieveToolResponseBodyToolsStatus = ClosedEnum<
   typeof RetrieveToolResponseBodyToolsStatus
->;
-
-export const RetrieveToolResponseBodyToolsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type RetrieveToolResponseBodyToolsType = ClosedEnum<
-  typeof RetrieveToolResponseBodyToolsType
 >;
 
 /**
@@ -547,7 +518,7 @@ export type RetrieveToolResponseBodyJSONSchemaTool = {
    */
   status?: RetrieveToolResponseBodyToolsStatus | undefined;
   versionHash?: string | undefined;
-  type: RetrieveToolResponseBodyToolsType;
+  type: "json_schema";
   jsonSchema: RetrieveToolResponseBodyJsonSchema;
 };
 
@@ -565,13 +536,6 @@ export const RetrieveToolResponseBodyStatus = {
  */
 export type RetrieveToolResponseBodyStatus = ClosedEnum<
   typeof RetrieveToolResponseBodyStatus
->;
-
-export const RetrieveToolResponseBodyType = {
-  Function: "function",
-} as const;
-export type RetrieveToolResponseBodyType = ClosedEnum<
-  typeof RetrieveToolResponseBodyType
 >;
 
 /**
@@ -670,7 +634,7 @@ export type RetrieveToolResponseBodyFunctionTool = {
    */
   status?: RetrieveToolResponseBodyStatus | undefined;
   versionHash?: string | undefined;
-  type: RetrieveToolResponseBodyType;
+  type: "function";
   function: RetrieveToolResponseBodyFunction;
 };
 
@@ -744,17 +708,6 @@ export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$outbo
     typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus
   > =
     RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema;
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
-  > = z.nativeEnum(RetrieveToolResponseBodyToolsResponse200ApplicationJSONType);
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
-  > = RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
@@ -905,7 +858,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWYA5EDVR7K72BXY8CVJ"),
+  _id: z.string().default("tool_01KBQA7B3B4F7A6EJHCMNA1QQ8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -920,8 +873,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
     RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema
       .default("live"),
   version_hash: z.string().optional(),
-  type:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("code"),
   code_tool: z.lazy(() => RetrieveToolResponseBodyCodeTool$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -950,7 +902,7 @@ export type RetrieveToolResponseBodyCodeExecutionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "code";
   code_tool: RetrieveToolResponseBodyCodeTool$Outbound;
 };
 
@@ -961,7 +913,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$outboundSchema:
     z.ZodTypeDef,
     RetrieveToolResponseBodyCodeExecutionTool
   > = z.object({
-    id: z.string().default("tool_01KB5ATWYA5EDVR7K72BXY8CVJ"),
+    id: z.string().default("tool_01KBQA7B3B4F7A6EJHCMNA1QQ8"),
     path: z.string(),
     key: z.string(),
     displayName: z.string().optional(),
@@ -976,8 +928,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$outboundSchema:
       RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema
         .default("live"),
     versionHash: z.string().optional(),
-    type:
-      RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$outboundSchema,
+    type: z.literal("code"),
     codeTool: z.lazy(() => RetrieveToolResponseBodyCodeTool$outboundSchema),
   }).transform((v) => {
     return remap$(v, {
@@ -1026,15 +977,6 @@ export const RetrieveToolResponseBodyToolsResponse200Status$inboundSchema:
 export const RetrieveToolResponseBodyToolsResponse200Status$outboundSchema:
   z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponse200Status> =
     RetrieveToolResponseBodyToolsResponse200Status$inboundSchema;
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponse200Type> = z
-    .nativeEnum(RetrieveToolResponseBodyToolsResponse200Type);
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponse200Type> =
-    RetrieveToolResponseBodyToolsResponse200Type$inboundSchema;
 
 /** @internal */
 export const RetrieveToolResponseBodyHeaders$inboundSchema: z.ZodType<
@@ -1150,7 +1092,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KB5ATWY9Y44KEQP53HFPY6KN"),
+  id: z.string().default("01KBQA7B3AJR9B4WZRX81DH3HT"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -1169,7 +1111,7 @@ export const RetrieveToolResponseBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyTools
 > = z.object({
-  id: z.string().default("01KB5ATWY9Y44KEQP53HFPY6KN"),
+  id: z.string().default("01KBQA7B3AJR9B4WZRX81DH3HT"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$outboundSchema),
@@ -1275,7 +1217,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWY8A6507R30WSY0EDNR"),
+  _id: z.string().default("tool_01KBQA7B39VRPBF290TVCSD2TZ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1290,7 +1232,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
     "live",
   ),
   version_hash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsResponse200Type$inboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => RetrieveToolResponseBodyMcp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1318,7 +1260,7 @@ export type RetrieveToolResponseBodyMCPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "mcp";
   mcp: RetrieveToolResponseBodyMcp$Outbound;
 };
 
@@ -1328,7 +1270,7 @@ export const RetrieveToolResponseBodyMCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyMCPTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWY8A6507R30WSY0EDNR"),
+  id: z.string().default("tool_01KBQA7B39VRPBF290TVCSD2TZ"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1343,7 +1285,7 @@ export const RetrieveToolResponseBodyMCPTool$outboundSchema: z.ZodType<
     "live",
   ),
   versionHash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsResponse200Type$outboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => RetrieveToolResponseBodyMcp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1384,15 +1326,6 @@ export const RetrieveToolResponseBodyToolsResponseStatus$inboundSchema:
 export const RetrieveToolResponseBodyToolsResponseStatus$outboundSchema:
   z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponseStatus> =
     RetrieveToolResponseBodyToolsResponseStatus$inboundSchema;
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponseType> = z
-    .nativeEnum(RetrieveToolResponseBodyToolsResponseType);
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponseType> =
-    RetrieveToolResponseBodyToolsResponseType$inboundSchema;
 
 /** @internal */
 export const RetrieveToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
@@ -1708,7 +1641,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWY6DYP801MVN5W0SP37"),
+  _id: z.string().default("tool_01KBQA7B363V0Q1S68D43JMJ79"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1723,7 +1656,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
     "live",
   ),
   version_hash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsResponseType$inboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => RetrieveToolResponseBodyHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1751,7 +1684,7 @@ export type RetrieveToolResponseBodyHTTPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "http";
   http: RetrieveToolResponseBodyHttp$Outbound;
 };
 
@@ -1761,7 +1694,7 @@ export const RetrieveToolResponseBodyHTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyHTTPTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWY6DYP801MVN5W0SP37"),
+  id: z.string().default("tool_01KBQA7B363V0Q1S68D43JMJ79"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1776,7 +1709,7 @@ export const RetrieveToolResponseBodyHTTPTool$outboundSchema: z.ZodType<
     "live",
   ),
   versionHash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsResponseType$outboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => RetrieveToolResponseBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1817,15 +1750,6 @@ export const RetrieveToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
 export const RetrieveToolResponseBodyToolsStatus$outboundSchema:
   z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsStatus> =
     RetrieveToolResponseBodyToolsStatus$inboundSchema;
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveToolResponseBodyToolsType
-> = z.nativeEnum(RetrieveToolResponseBodyToolsType);
-/** @internal */
-export const RetrieveToolResponseBodyToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveToolResponseBodyToolsType
-> = RetrieveToolResponseBodyToolsType$inboundSchema;
 
 /** @internal */
 export const RetrieveToolResponseBodySchema$inboundSchema: z.ZodType<
@@ -1944,7 +1868,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWXXEQPBBMXA2XMM063C"),
+  _id: z.string().default("tool_01KBQA7B33284FH3Y5GSP5399Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1957,7 +1881,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: RetrieveToolResponseBodyToolsStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => RetrieveToolResponseBodyJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1986,7 +1910,7 @@ export type RetrieveToolResponseBodyJSONSchemaTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "json_schema";
   json_schema: RetrieveToolResponseBodyJsonSchema$Outbound;
 };
 
@@ -1996,7 +1920,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyJSONSchemaTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWXXEQPBBMXA2XMM063C"),
+  id: z.string().default("tool_01KBQA7B33284FH3Y5GSP5399Z"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2009,7 +1933,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: RetrieveToolResponseBodyToolsStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: RetrieveToolResponseBodyToolsType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => RetrieveToolResponseBodyJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2053,15 +1977,6 @@ export const RetrieveToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
 export const RetrieveToolResponseBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof RetrieveToolResponseBodyStatus
 > = RetrieveToolResponseBodyStatus$inboundSchema;
-
-/** @internal */
-export const RetrieveToolResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveToolResponseBodyType
-> = z.nativeEnum(RetrieveToolResponseBodyType);
-/** @internal */
-export const RetrieveToolResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveToolResponseBodyType
-> = RetrieveToolResponseBodyType$inboundSchema;
 
 /** @internal */
 export const RetrieveToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
@@ -2198,7 +2113,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5ATWXTGWMJ8JGEJD3B8WSK"),
+  _id: z.string().default("tool_01KBQA7B3142B9TNZXJQNPQGZM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2211,7 +2126,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: RetrieveToolResponseBodyStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: RetrieveToolResponseBodyType$inboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => RetrieveToolResponseBodyFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2239,7 +2154,7 @@ export type RetrieveToolResponseBodyFunctionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "function";
   function: RetrieveToolResponseBodyFunction$Outbound;
 };
 
@@ -2249,7 +2164,7 @@ export const RetrieveToolResponseBodyFunctionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBodyFunctionTool
 > = z.object({
-  id: z.string().default("tool_01KB5ATWXTGWMJ8JGEJD3B8WSK"),
+  id: z.string().default("tool_01KBQA7B3142B9TNZXJQNPQGZM"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2262,7 +2177,7 @@ export const RetrieveToolResponseBodyFunctionTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: RetrieveToolResponseBodyStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: RetrieveToolResponseBodyType$outboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => RetrieveToolResponseBodyFunction$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
