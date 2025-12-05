@@ -8,7 +8,12 @@
 ```typescript
 const value: operations.CreatePromptMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -40,8 +45,10 @@ const value: operations.CreatePromptMessagesAssistantMessage = {
 const value: operations.CreatePromptMessagesToolMessage = {
   role: "tool",
   content: [
-    "<value 1>",
-    "<value 2>",
+    {
+      type: "text",
+      text: "<value>",
+    },
   ],
   toolCallId: "<id>",
 };

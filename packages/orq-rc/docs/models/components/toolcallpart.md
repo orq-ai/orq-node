@@ -21,10 +21,10 @@ let value: ToolCallPart = {
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `kind`                                                                     | [components.ToolCallPartKind](../../models/components/toolcallpartkind.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `toolName`                                                                 | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
-| `toolCallId`                                                               | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
-| `arguments`                                                                | Record<string, *any*>                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
-| `metadata`                                                                 | Record<string, *any*>                                                      | :heavy_minus_sign:                                                         | N/A                                                                        |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `kind`                | *"tool_call"*         | :heavy_check_mark:    | N/A                   |
+| `toolName`            | *string*              | :heavy_check_mark:    | N/A                   |
+| `toolCallId`          | *string*              | :heavy_check_mark:    | N/A                   |
+| `arguments`           | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| `metadata`            | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |

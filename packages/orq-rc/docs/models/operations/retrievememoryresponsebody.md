@@ -9,15 +9,15 @@ import { RetrieveMemoryResponseBody } from "@orq-ai/node/models/operations";
 
 let value: RetrieveMemoryResponseBody = {
   id: "<id>",
-  entityId: "45400047-57db-454f-80f2-dda11de58ebe",
+  entityId: "<id>",
   created: "<value>",
   updated: "<value>",
   storeId: "<id>",
   metadata: {
     "key": "<value>",
-    "key1": "<value>",
   },
   workspaceId: "<id>",
+  documentsCount: 3306.77,
 };
 ```
 
@@ -34,3 +34,4 @@ let value: RetrieveMemoryResponseBody = {
 | `storeId`                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |
 | `metadata`                                                                                                                                                                                                                                             | Record<string, *string*>                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy). |
 | `workspaceId`                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |
+| `documentsCount`                                                                                                                                                                                                                                       | *number*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | The number of memories in the entity                                                                                                                                                                                                                   |

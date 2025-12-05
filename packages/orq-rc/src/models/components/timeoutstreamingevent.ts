@@ -4,16 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const TimeoutStreamingEventType = {
-  AgentsTimeout: "agents.timeout",
-} as const;
-export type TimeoutStreamingEventType = ClosedEnum<
-  typeof TimeoutStreamingEventType
->;
 
 export type TimeoutStreamingEventData = {
   message: string;
@@ -23,22 +15,13 @@ export type TimeoutStreamingEventData = {
  * Emitted when the agent stream exceeds the configured timeout duration. Contains a message describing the timeout condition.
  */
 export type TimeoutStreamingEvent = {
-  type: TimeoutStreamingEventType;
+  type: "agents.timeout";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: TimeoutStreamingEventData;
 };
-
-/** @internal */
-export const TimeoutStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof TimeoutStreamingEventType
-> = z.nativeEnum(TimeoutStreamingEventType);
-/** @internal */
-export const TimeoutStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof TimeoutStreamingEventType
-> = TimeoutStreamingEventType$inboundSchema;
 
 /** @internal */
 export const TimeoutStreamingEventData$inboundSchema: z.ZodType<
@@ -85,13 +68,13 @@ export const TimeoutStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TimeoutStreamingEventType$inboundSchema,
+  type: z.literal("agents.timeout"),
   timestamp: z.string(),
   data: z.lazy(() => TimeoutStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type TimeoutStreamingEvent$Outbound = {
-  type: string;
+  type: "agents.timeout";
   timestamp: string;
   data: TimeoutStreamingEventData$Outbound;
 };
@@ -102,7 +85,7 @@ export const TimeoutStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TimeoutStreamingEvent
 > = z.object({
-  type: TimeoutStreamingEventType$outboundSchema,
+  type: z.literal("agents.timeout"),
   timestamp: z.string(),
   data: z.lazy(() => TimeoutStreamingEventData$outboundSchema),
 });

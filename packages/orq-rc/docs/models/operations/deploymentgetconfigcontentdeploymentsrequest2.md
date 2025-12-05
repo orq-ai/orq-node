@@ -3,21 +3,44 @@
 
 ## Supported Types
 
-### `operations.TwoTextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.TwoTextContentPart = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.TwoRefusalContentPart`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.TwoRefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.Two4`
+
+```typescript
+const value: operations.Two4 = {
+  type: "file",
+  file: {},
 };
 ```
 

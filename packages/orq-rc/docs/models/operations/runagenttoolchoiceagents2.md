@@ -6,7 +6,9 @@
 import { RunAgentToolChoiceAgents2 } from "@orq-ai/node/models/operations";
 
 let value: RunAgentToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

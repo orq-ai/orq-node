@@ -15,7 +15,7 @@ let value: One = {
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `type`                                             | [operations.Type](../../models/operations/type.md) | :heavy_check_mark:                                 | N/A                                                |
-| `text`                                             | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

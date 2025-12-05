@@ -6,17 +6,14 @@
 import { Two3 } from "@orq-ai/node/models/operations";
 
 let value: Two3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
+  type: "file",
+  file: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [operations.DeploymentGetConfig2DeploymentsRequestType](../../models/operations/deploymentgetconfig2deploymentsrequesttype.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `inputAudio`                                                                                                                   | [operations.InputAudio](../../models/operations/inputaudio.md)                                                                 | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `type`                                                   | *"file"*                                                 | :heavy_check_mark:                                       | The type of the content part. Always `file`.             |
+| `file`                                                   | [operations.TwoFile](../../models/operations/twofile.md) | :heavy_check_mark:                                       | N/A                                                      |

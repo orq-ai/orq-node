@@ -15,7 +15,9 @@ const value: operations.CreateAgentRequestToolChoiceAgents1 = "required";
 
 ```typescript
 const value: operations.CreateAgentRequestToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

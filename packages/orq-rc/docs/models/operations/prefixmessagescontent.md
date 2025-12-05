@@ -1,6 +1,6 @@
 # PrefixMessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,9 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.Content2[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: operations.Content2[] = [];
+const value: components.TextContentPartSchema[] = [];
 ```
 

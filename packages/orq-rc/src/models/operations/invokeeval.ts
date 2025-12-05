@@ -27,17 +27,6 @@ export const Role = {
  */
 export type Role = ClosedEnum<typeof Role>;
 
-/**
- * The type of the content part. Always `file`.
- */
-export const InvokeEval2Type = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type InvokeEval2Type = ClosedEnum<typeof InvokeEval2Type>;
-
 export type FileT = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -61,14 +50,9 @@ export type Three = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: InvokeEval2Type;
+  type: "file";
   file: FileT;
 };
-
-export const TwoType = {
-  ImageUrl: "image_url",
-} as const;
-export type TwoType = ClosedEnum<typeof TwoType>;
 
 export type ImageUrl = {
   /**
@@ -85,20 +69,15 @@ export type ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type Two2 = {
-  type: TwoType;
+  type: "image_url";
   imageUrl: ImageUrl;
 };
-
-export const Type = {
-  Text: "text",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
 
 /**
  * Text content part of a prompt message
  */
 export type One = {
-  type: Type;
+  type: "text";
   text: string;
 };
 
@@ -173,12 +152,6 @@ export type InvokeEvalRequest = {
   requestBody?: InvokeEvalRequestBody | undefined;
 };
 
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type = {
-  HttpEval: "http_eval",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type>;
-
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
   | number
   | boolean;
@@ -189,15 +162,9 @@ export type InvokeEvalResponseBodyEvalsResponse200Value = {
 };
 
 export type InvokeEvalResponseBodyHTTP = {
-  type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type;
+  type: "http_eval";
   value?: InvokeEvalResponseBodyEvalsResponse200Value | null | undefined;
 };
-
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type = {
-  LlmEvaluator: "llm_evaluator",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type>;
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
   | number
@@ -215,15 +182,9 @@ export type InvokeEvalResponseBodyEvalsResponseValue = {
 };
 
 export type InvokeEvalResponseBodyLLM = {
-  type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type;
+  type: "llm_evaluator";
   value: InvokeEvalResponseBodyEvalsResponseValue | null;
 };
-
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type = {
-  BertScore: "bert_score",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type>;
 
 export type InvokeEvalResponseBodyEvalsValue = {
   f1: number;
@@ -232,15 +193,9 @@ export type InvokeEvalResponseBodyEvalsValue = {
 };
 
 export type BERTScore = {
-  type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type;
+  type: "bert_score";
   value: InvokeEvalResponseBodyEvalsValue;
 };
-
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType = {
-  RougeN: "rouge_n",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType>;
 
 export type Rouge1 = {
   f1: number;
@@ -267,42 +222,21 @@ export type InvokeEvalResponseBodyValue = {
 };
 
 export type RougeN = {
-  type: InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType;
+  type: "rouge_n";
   value: InvokeEvalResponseBodyValue;
 };
 
-export const InvokeEvalResponseBodyEvalsResponse200Type = {
-  StringArray: "string_array",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200Type = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsResponse200Type
->;
-
 export type StringArray = {
-  type: InvokeEvalResponseBodyEvalsResponse200Type;
+  type: "string_array";
   values: Array<string | null>;
 };
-
-export const InvokeEvalResponseBodyEvalsResponseType = {
-  Boolean: "boolean",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponseType = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsResponseType
->;
 
 export type ResponseBodyValue = boolean | string | number;
 
 export type ResponseBodyBoolean = {
-  type: InvokeEvalResponseBodyEvalsResponseType;
+  type: "boolean";
   value: boolean | string | number | null;
 };
-
-export const InvokeEvalResponseBodyEvalsType = {
-  Number: "number",
-} as const;
-export type InvokeEvalResponseBodyEvalsType = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsType
->;
 
 export const Style = {
   Currency: "currency",
@@ -326,21 +260,14 @@ export type FormatOptions1 = {
 export type FormatOptions = FormatOptions2 | FormatOptions1;
 
 export type ResponseBodyNumber = {
-  type: InvokeEvalResponseBodyEvalsType;
+  type: "number";
   originalValue?: number | null | undefined;
   value: number | null;
   formatOptions?: FormatOptions2 | FormatOptions1 | undefined;
 };
 
-export const InvokeEvalResponseBodyType = {
-  String: "string",
-} as const;
-export type InvokeEvalResponseBodyType = ClosedEnum<
-  typeof InvokeEvalResponseBodyType
->;
-
 export type String = {
-  type: InvokeEvalResponseBodyType;
+  type: "string";
   originalValue?: string | null | undefined;
   value?: string | null | undefined;
 };
@@ -349,13 +276,13 @@ export type String = {
  * Returns the result of the evaluator run
  */
 export type InvokeEvalResponseBody =
+  | String
   | ResponseBodyNumber
   | ResponseBodyBoolean
   | StringArray
   | RougeN
   | BERTScore
   | InvokeEvalResponseBodyLLM
-  | String
   | InvokeEvalResponseBodyHTTP;
 
 /** @internal */
@@ -365,15 +292,6 @@ export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
   Role$inboundSchema;
-
-/** @internal */
-export const InvokeEval2Type$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2Type
-> = z.nativeEnum(InvokeEval2Type);
-/** @internal */
-export const InvokeEval2Type$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2Type
-> = InvokeEval2Type$inboundSchema;
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
@@ -427,12 +345,12 @@ export function fileFromJSON(
 /** @internal */
 export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
   .object({
-    type: InvokeEval2Type$inboundSchema,
+    type: z.literal("file"),
     file: z.lazy(() => FileT$inboundSchema),
   });
 /** @internal */
 export type Three$Outbound = {
-  type: string;
+  type: "file";
   file: FileT$Outbound;
 };
 
@@ -442,7 +360,7 @@ export const Three$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Three
 > = z.object({
-  type: InvokeEval2Type$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => FileT$outboundSchema),
 });
 
@@ -458,13 +376,6 @@ export function threeFromJSON(
     `Failed to parse 'Three' from JSON`,
   );
 }
-
-/** @internal */
-export const TwoType$inboundSchema: z.ZodNativeEnum<typeof TwoType> = z
-  .nativeEnum(TwoType);
-/** @internal */
-export const TwoType$outboundSchema: z.ZodNativeEnum<typeof TwoType> =
-  TwoType$inboundSchema;
 
 /** @internal */
 export const ImageUrl$inboundSchema: z.ZodType<
@@ -507,7 +418,7 @@ export function imageUrlFromJSON(
 /** @internal */
 export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> = z
   .object({
-    type: TwoType$inboundSchema,
+    type: z.literal("image_url"),
     image_url: z.lazy(() => ImageUrl$inboundSchema),
   }).transform((v) => {
     return remap$(v, {
@@ -516,14 +427,14 @@ export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type Two2$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: ImageUrl$Outbound;
 };
 
 /** @internal */
 export const Two2$outboundSchema: z.ZodType<Two2$Outbound, z.ZodTypeDef, Two2> =
   z.object({
-    type: TwoType$outboundSchema,
+    type: z.literal("image_url"),
     imageUrl: z.lazy(() => ImageUrl$outboundSchema),
   }).transform((v) => {
     return remap$(v, {
@@ -545,29 +456,21 @@ export function two2FromJSON(
 }
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
-
-/** @internal */
 export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
   .object({
-    type: Type$inboundSchema,
+    type: z.literal("text"),
     text: z.string(),
   });
 /** @internal */
 export type One$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
 /** @internal */
 export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
   .object({
-    type: Type$outboundSchema,
+    type: z.literal("text"),
     text: z.string(),
   });
 
@@ -923,17 +826,6 @@ export function invokeEvalRequestFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema;
-
-/** @internal */
 export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue$inboundSchema:
   z.ZodType<
     InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue,
@@ -1036,15 +928,14 @@ export const InvokeEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema,
+  type: z.literal("http_eval"),
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema),
   ).optional(),
 });
 /** @internal */
 export type InvokeEvalResponseBodyHTTP$Outbound = {
-  type: string;
+  type: "http_eval";
   value?:
     | InvokeEvalResponseBodyEvalsResponse200Value$Outbound
     | null
@@ -1057,8 +948,7 @@ export const InvokeEvalResponseBodyHTTP$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalResponseBodyHTTP
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema,
+  type: z.literal("http_eval"),
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponse200Value$outboundSchema),
   ).optional(),
@@ -1080,17 +970,6 @@ export function invokeEvalResponseBodyHTTPFromJSON(
     `Failed to parse 'InvokeEvalResponseBodyHTTP' from JSON`,
   );
 }
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
 
 /** @internal */
 export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value$inboundSchema:
@@ -1246,15 +1125,14 @@ export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema,
+  type: z.literal("llm_evaluator"),
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
   ),
 });
 /** @internal */
 export type InvokeEvalResponseBodyLLM$Outbound = {
-  type: string;
+  type: "llm_evaluator";
   value: InvokeEvalResponseBodyEvalsResponseValue$Outbound | null;
 };
 
@@ -1264,8 +1142,7 @@ export const InvokeEvalResponseBodyLLM$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalResponseBodyLLM
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema,
+  type: z.literal("llm_evaluator"),
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$outboundSchema),
   ),
@@ -1287,17 +1164,6 @@ export function invokeEvalResponseBodyLLMFromJSON(
     `Failed to parse 'InvokeEvalResponseBodyLLM' from JSON`,
   );
 }
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema;
 
 /** @internal */
 export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
@@ -1352,13 +1218,12 @@ export const BERTScore$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema,
+  type: z.literal("bert_score"),
   value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$inboundSchema),
 });
 /** @internal */
 export type BERTScore$Outbound = {
-  type: string;
+  type: "bert_score";
   value: InvokeEvalResponseBodyEvalsValue$Outbound;
 };
 
@@ -1368,8 +1233,7 @@ export const BERTScore$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BERTScore
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema,
+  type: z.literal("bert_score"),
   value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$outboundSchema),
 });
 
@@ -1385,17 +1249,6 @@ export function bertScoreFromJSON(
     `Failed to parse 'BERTScore' from JSON`,
   );
 }
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const Rouge1$inboundSchema: z.ZodType<Rouge1, z.ZodTypeDef, unknown> = z
@@ -1573,13 +1426,12 @@ export function invokeEvalResponseBodyValueFromJSON(
 /** @internal */
 export const RougeN$inboundSchema: z.ZodType<RougeN, z.ZodTypeDef, unknown> = z
   .object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema,
+    type: z.literal("rouge_n"),
     value: z.lazy(() => InvokeEvalResponseBodyValue$inboundSchema),
   });
 /** @internal */
 export type RougeN$Outbound = {
-  type: string;
+  type: "rouge_n";
   value: InvokeEvalResponseBodyValue$Outbound;
 };
 
@@ -1589,8 +1441,7 @@ export const RougeN$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RougeN
 > = z.object({
-  type:
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("rouge_n"),
   value: z.lazy(() => InvokeEvalResponseBodyValue$outboundSchema),
 });
 
@@ -1608,26 +1459,17 @@ export function rougeNFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> = z
-    .nativeEnum(InvokeEvalResponseBodyEvalsResponse200Type);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> =
-    InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema;
-
-/** @internal */
 export const StringArray$inboundSchema: z.ZodType<
   StringArray,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema,
+  type: z.literal("string_array"),
   values: z.array(z.nullable(z.string())),
 });
 /** @internal */
 export type StringArray$Outbound = {
-  type: string;
+  type: "string_array";
   values: Array<string | null>;
 };
 
@@ -1637,7 +1479,7 @@ export const StringArray$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StringArray
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema,
+  type: z.literal("string_array"),
   values: z.array(z.nullable(z.string())),
 });
 
@@ -1653,15 +1495,6 @@ export function stringArrayFromJSON(
     `Failed to parse 'StringArray' from JSON`,
   );
 }
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> = z
-    .nativeEnum(InvokeEvalResponseBodyEvalsResponseType);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> =
-    InvokeEvalResponseBodyEvalsResponseType$inboundSchema;
 
 /** @internal */
 export const ResponseBodyValue$inboundSchema: z.ZodType<
@@ -1702,12 +1535,12 @@ export const ResponseBodyBoolean$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsResponseType$inboundSchema,
+  type: z.literal("boolean"),
   value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
 });
 /** @internal */
 export type ResponseBodyBoolean$Outbound = {
-  type: string;
+  type: "boolean";
   value: boolean | string | number | null;
 };
 
@@ -1717,7 +1550,7 @@ export const ResponseBodyBoolean$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyBoolean
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsResponseType$outboundSchema,
+  type: z.literal("boolean"),
   value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
 });
 
@@ -1737,15 +1570,6 @@ export function responseBodyBooleanFromJSON(
     `Failed to parse 'ResponseBodyBoolean' from JSON`,
   );
 }
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyEvalsType
-> = z.nativeEnum(InvokeEvalResponseBodyEvalsType);
-/** @internal */
-export const InvokeEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyEvalsType
-> = InvokeEvalResponseBodyEvalsType$inboundSchema;
 
 /** @internal */
 export const Style$inboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
@@ -1886,7 +1710,7 @@ export const ResponseBodyNumber$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsType$inboundSchema,
+  type: z.literal("number"),
   original_value: z.nullable(z.number()).optional(),
   value: z.nullable(z.number()),
   format_options: z.union([
@@ -1901,7 +1725,7 @@ export const ResponseBodyNumber$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ResponseBodyNumber$Outbound = {
-  type: string;
+  type: "number";
   original_value?: number | null | undefined;
   value: number | null;
   format_options?:
@@ -1916,7 +1740,7 @@ export const ResponseBodyNumber$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyNumber
 > = z.object({
-  type: InvokeEvalResponseBodyEvalsType$outboundSchema,
+  type: z.literal("number"),
   originalValue: z.nullable(z.number()).optional(),
   value: z.nullable(z.number()),
   formatOptions: z.union([
@@ -1948,18 +1772,9 @@ export function responseBodyNumberFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyType
-> = z.nativeEnum(InvokeEvalResponseBodyType);
-/** @internal */
-export const InvokeEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyType
-> = InvokeEvalResponseBodyType$inboundSchema;
-
-/** @internal */
 export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
   .object({
-    type: InvokeEvalResponseBodyType$inboundSchema,
+    type: z.literal("string"),
     original_value: z.nullable(z.string()).optional(),
     value: z.nullable(z.string()).optional(),
   }).transform((v) => {
@@ -1969,7 +1784,7 @@ export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type String$Outbound = {
-  type: string;
+  type: "string";
   original_value?: string | null | undefined;
   value?: string | null | undefined;
 };
@@ -1980,7 +1795,7 @@ export const String$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   String
 > = z.object({
-  type: InvokeEvalResponseBodyType$outboundSchema,
+  type: z.literal("string"),
   originalValue: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -2008,24 +1823,24 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => String$inboundSchema),
   z.lazy(() => ResponseBodyNumber$inboundSchema),
   z.lazy(() => ResponseBodyBoolean$inboundSchema),
   z.lazy(() => StringArray$inboundSchema),
   z.lazy(() => RougeN$inboundSchema),
   z.lazy(() => BERTScore$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
-  z.lazy(() => String$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$inboundSchema),
 ]);
 /** @internal */
 export type InvokeEvalResponseBody$Outbound =
+  | String$Outbound
   | ResponseBodyNumber$Outbound
   | ResponseBodyBoolean$Outbound
   | StringArray$Outbound
   | RougeN$Outbound
   | BERTScore$Outbound
   | InvokeEvalResponseBodyLLM$Outbound
-  | String$Outbound
   | InvokeEvalResponseBodyHTTP$Outbound;
 
 /** @internal */
@@ -2034,13 +1849,13 @@ export const InvokeEvalResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalResponseBody
 > = z.union([
+  z.lazy(() => String$outboundSchema),
   z.lazy(() => ResponseBodyNumber$outboundSchema),
   z.lazy(() => ResponseBodyBoolean$outboundSchema),
   z.lazy(() => StringArray$outboundSchema),
   z.lazy(() => RougeN$outboundSchema),
   z.lazy(() => BERTScore$outboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$outboundSchema),
-  z.lazy(() => String$outboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$outboundSchema),
 ]);
 

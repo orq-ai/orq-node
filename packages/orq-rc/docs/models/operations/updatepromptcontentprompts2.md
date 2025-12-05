@@ -3,30 +3,30 @@
 
 ## Supported Types
 
-### `operations.UpdatePrompt2Prompts1`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts1 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdatePrompt2Prompts2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://clumsy-hippodrome.info/",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.UpdatePrompt2Prompts3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",

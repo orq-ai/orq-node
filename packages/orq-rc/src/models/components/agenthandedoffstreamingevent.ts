@@ -5,16 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const AgentHandedOffStreamingEventType = {
-  EventAgentsHandedOff: "event.agents.handed_off",
-} as const;
-export type AgentHandedOffStreamingEventType = ClosedEnum<
-  typeof AgentHandedOffStreamingEventType
->;
 
 export type AgentHandedOffStreamingEventData = {
   agentId: string;
@@ -25,22 +17,13 @@ export type AgentHandedOffStreamingEventData = {
  * Emitted when control is transferred to a sub-agent. Contains the target agent ID and the input message for the handoff.
  */
 export type AgentHandedOffStreamingEvent = {
-  type: AgentHandedOffStreamingEventType;
+  type: "event.agents.handed_off";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: AgentHandedOffStreamingEventData;
 };
-
-/** @internal */
-export const AgentHandedOffStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentHandedOffStreamingEventType
-> = z.nativeEnum(AgentHandedOffStreamingEventType);
-/** @internal */
-export const AgentHandedOffStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentHandedOffStreamingEventType
-> = AgentHandedOffStreamingEventType$inboundSchema;
 
 /** @internal */
 export const AgentHandedOffStreamingEventData$inboundSchema: z.ZodType<
@@ -100,13 +83,13 @@ export const AgentHandedOffStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentHandedOffStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.handed_off"),
   timestamp: z.string(),
   data: z.lazy(() => AgentHandedOffStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type AgentHandedOffStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.handed_off";
   timestamp: string;
   data: AgentHandedOffStreamingEventData$Outbound;
 };
@@ -117,7 +100,7 @@ export const AgentHandedOffStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentHandedOffStreamingEvent
 > = z.object({
-  type: AgentHandedOffStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.handed_off"),
   timestamp: z.string(),
   data: z.lazy(() => AgentHandedOffStreamingEventData$outboundSchema),
 });

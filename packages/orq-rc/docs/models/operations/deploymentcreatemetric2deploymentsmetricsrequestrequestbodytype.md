@@ -1,6 +1,6 @@
 # DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
 
-The type of the content part. Always `file`.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the content part. Always `file`.
 import { DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
-  "file";
+  "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"ephemeral"
 ```

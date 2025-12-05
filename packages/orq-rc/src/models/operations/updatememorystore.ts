@@ -51,6 +51,8 @@ export const UpdateMemoryStoreProvider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
 } as const;
 export type UpdateMemoryStoreProvider = ClosedEnum<
   typeof UpdateMemoryStoreProvider

@@ -3,30 +3,30 @@
 
 ## Supported Types
 
-### `operations.CreateDatasetItem21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreateDatasetItem22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://earnest-baseboard.com",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.CreateDatasetItem23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem23 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",

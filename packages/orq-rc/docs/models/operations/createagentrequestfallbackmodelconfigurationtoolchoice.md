@@ -16,7 +16,9 @@ const value: operations.CreateAgentRequestToolChoiceAgentsResponse1 =
 
 ```typescript
 const value: operations.CreateAgentRequestToolChoiceAgentsResponse2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

@@ -7,7 +7,12 @@ import { MessagesDeveloperMessage } from "@orq-ai/node/models/operations";
 
 let value: MessagesDeveloperMessage = {
   role: "developer",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -15,6 +20,6 @@ let value: MessagesDeveloperMessage = {
 
 | Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `role`                                                                                                                       | [operations.MessagesRole](../../models/operations/messagesrole.md)                                                           | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case  `developer`.                                                                  |
-| `content`                                                                                                                    | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | The contents of the developer message.                                                                                       |
+| `role`                                                                                                                       | *"developer"*                                                                                                                | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case  `developer`.                                                                  |
+| `content`                                                                                                                    | *operations.DeploymentGetConfigMessagesContent*                                                                              | :heavy_check_mark:                                                                                                           | The contents of the developer message.                                                                                       |
 | `name`                                                                                                                       | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | An optional name for the participant. Provides the model information to differentiate between participants of the same role. |

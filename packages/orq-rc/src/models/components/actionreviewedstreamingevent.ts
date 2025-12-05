@@ -9,13 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ActionReviewedStreamingEventType = {
-  EventAgentsActionReviewed: "event.agents.action_reviewed",
-} as const;
-export type ActionReviewedStreamingEventType = ClosedEnum<
-  typeof ActionReviewedStreamingEventType
->;
-
 export const Review = {
   Approved: "approved",
   Rejected: "rejected",
@@ -37,22 +30,13 @@ export type ActionReviewedStreamingEventData = {
  * Emitted after a tool action has been reviewed. Contains the review decision (approved/rejected), optional mock output for rejected actions, and reviewer information.
  */
 export type ActionReviewedStreamingEvent = {
-  type: ActionReviewedStreamingEventType;
+  type: "event.agents.action_reviewed";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ActionReviewedStreamingEventData;
 };
-
-/** @internal */
-export const ActionReviewedStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ActionReviewedStreamingEventType
-> = z.nativeEnum(ActionReviewedStreamingEventType);
-/** @internal */
-export const ActionReviewedStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof ActionReviewedStreamingEventType
-> = ActionReviewedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
@@ -147,13 +131,13 @@ export const ActionReviewedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ActionReviewedStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.action_reviewed"),
   timestamp: z.string(),
   data: z.lazy(() => ActionReviewedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ActionReviewedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.action_reviewed";
   timestamp: string;
   data: ActionReviewedStreamingEventData$Outbound;
 };
@@ -164,7 +148,7 @@ export const ActionReviewedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionReviewedStreamingEvent
 > = z.object({
-  type: ActionReviewedStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.action_reviewed"),
   timestamp: z.string(),
   data: z.lazy(() => ActionReviewedStreamingEventData$outboundSchema),
 });

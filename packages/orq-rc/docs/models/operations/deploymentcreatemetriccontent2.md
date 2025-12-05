@@ -3,34 +3,34 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetric21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetric22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://decent-inspection.info/",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.DeploymentCreateMetric23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric23 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

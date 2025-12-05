@@ -15,7 +15,9 @@ const value: operations.UpdateAgentToolChoiceAgents1 = "none";
 
 ```typescript
 const value: operations.UpdateAgentToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

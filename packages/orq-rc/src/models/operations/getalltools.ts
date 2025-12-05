@@ -48,13 +48,6 @@ export type GetAllToolsDataToolsResponse200Status = ClosedEnum<
   typeof GetAllToolsDataToolsResponse200Status
 >;
 
-export const GetAllToolsDataToolsResponse200ApplicationJSONType = {
-  Code: "code",
-} as const;
-export type GetAllToolsDataToolsResponse200ApplicationJSONType = ClosedEnum<
-  typeof GetAllToolsDataToolsResponse200ApplicationJSONType
->;
-
 /**
  * The type must be "object"
  */
@@ -149,7 +142,7 @@ export type DataCodeExecutionTool = {
    */
   status?: GetAllToolsDataToolsResponse200Status | undefined;
   versionHash?: string | undefined;
-  type: GetAllToolsDataToolsResponse200ApplicationJSONType;
+  type: "code";
   codeTool: DataCodeTool;
 };
 
@@ -167,13 +160,6 @@ export const GetAllToolsDataToolsResponseStatus = {
  */
 export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
   typeof GetAllToolsDataToolsResponseStatus
->;
-
-export const GetAllToolsDataToolsResponse200Type = {
-  Mcp: "mcp",
-} as const;
-export type GetAllToolsDataToolsResponse200Type = ClosedEnum<
-  typeof GetAllToolsDataToolsResponse200Type
 >;
 
 export type DataHeaders = {
@@ -277,7 +263,7 @@ export type DataMCPTool = {
    */
   status?: GetAllToolsDataToolsResponseStatus | undefined;
   versionHash?: string | undefined;
-  type: GetAllToolsDataToolsResponse200Type;
+  type: "mcp";
   mcp: DataMcp;
 };
 
@@ -295,13 +281,6 @@ export const GetAllToolsDataToolsStatus = {
  */
 export type GetAllToolsDataToolsStatus = ClosedEnum<
   typeof GetAllToolsDataToolsStatus
->;
-
-export const GetAllToolsDataToolsResponseType = {
-  Http: "http",
-} as const;
-export type GetAllToolsDataToolsResponseType = ClosedEnum<
-  typeof GetAllToolsDataToolsResponseType
 >;
 
 /**
@@ -442,7 +421,7 @@ export type DataHTTPTool = {
    */
   status?: GetAllToolsDataToolsStatus | undefined;
   versionHash?: string | undefined;
-  type: GetAllToolsDataToolsResponseType;
+  type: "http";
   http: GetAllToolsDataHttp;
 };
 
@@ -459,13 +438,6 @@ export const GetAllToolsDataStatus = {
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type GetAllToolsDataStatus = ClosedEnum<typeof GetAllToolsDataStatus>;
-
-export const GetAllToolsDataToolsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type GetAllToolsDataToolsType = ClosedEnum<
-  typeof GetAllToolsDataToolsType
->;
 
 /**
  * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -549,7 +521,7 @@ export type DataJSONSchemaTool = {
    */
   status?: GetAllToolsDataStatus | undefined;
   versionHash?: string | undefined;
-  type: GetAllToolsDataToolsType;
+  type: "json_schema";
   jsonSchema: DataJsonSchema;
 };
 
@@ -566,11 +538,6 @@ export const DataStatus = {
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type DataStatus = ClosedEnum<typeof DataStatus>;
-
-export const GetAllToolsDataType = {
-  Function: "function",
-} as const;
-export type GetAllToolsDataType = ClosedEnum<typeof GetAllToolsDataType>;
 
 /**
  * The type must be "object"
@@ -668,7 +635,7 @@ export type DataFunctionTool = {
    */
   status?: DataStatus | undefined;
   versionHash?: string | undefined;
-  type: GetAllToolsDataType;
+  type: "function";
   function: GetAllToolsDataFunction;
 };
 
@@ -767,15 +734,6 @@ export const GetAllToolsDataToolsResponse200Status$inboundSchema:
 export const GetAllToolsDataToolsResponse200Status$outboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> =
     GetAllToolsDataToolsResponse200Status$inboundSchema;
-
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONType);
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> =
-    GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema:
@@ -905,7 +863,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5696Z3TSJXQD5216R6AX29"),
+  _id: z.string().default("tool_01KBQ991DA6T472569ZAD51TAH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -918,7 +876,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsResponse200Status$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("code"),
   code_tool: z.lazy(() => DataCodeTool$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -947,7 +905,7 @@ export type DataCodeExecutionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "code";
   code_tool: DataCodeTool$Outbound;
 };
 
@@ -957,7 +915,7 @@ export const DataCodeExecutionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataCodeExecutionTool
 > = z.object({
-  id: z.string().default("tool_01KB5696Z3TSJXQD5216R6AX29"),
+  id: z.string().default("tool_01KBQ991DA6T472569ZAD51TAH"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -970,7 +928,7 @@ export const DataCodeExecutionTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsResponse200Status$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: GetAllToolsDataToolsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("code"),
   codeTool: z.lazy(() => DataCodeTool$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1010,15 +968,6 @@ export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
 export const GetAllToolsDataToolsResponseStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseStatus
 > = GetAllToolsDataToolsResponseStatus$inboundSchema;
-
-/** @internal */
-export const GetAllToolsDataToolsResponse200Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponse200Type
-> = z.nativeEnum(GetAllToolsDataToolsResponse200Type);
-/** @internal */
-export const GetAllToolsDataToolsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Type> =
-    GetAllToolsDataToolsResponse200Type$inboundSchema;
 
 /** @internal */
 export const DataHeaders$inboundSchema: z.ZodType<
@@ -1125,7 +1074,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KB5696Z25E150AKD90TX7QAZ"),
+  id: z.string().default("01KBQ991D9TBR2F9NR0K8GYF6C"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -1144,7 +1093,7 @@ export const DataTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataTools
 > = z.object({
-  id: z.string().default("01KB5696Z25E150AKD90TX7QAZ"),
+  id: z.string().default("01KBQ991D9TBR2F9NR0K8GYF6C"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$outboundSchema),
@@ -1229,7 +1178,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5696Z13G7ZC6E2NQX414SR"),
+  _id: z.string().default("tool_01KBQ991D7MNA0261CZNSDZHCB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1242,7 +1191,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: GetAllToolsDataToolsResponse200Type$inboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => DataMcp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1270,7 +1219,7 @@ export type DataMCPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "mcp";
   mcp: DataMcp$Outbound;
 };
 
@@ -1280,7 +1229,7 @@ export const DataMCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataMCPTool
 > = z.object({
-  id: z.string().default("tool_01KB5696Z13G7ZC6E2NQX414SR"),
+  id: z.string().default("tool_01KBQ991D7MNA0261CZNSDZHCB"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1293,7 +1242,7 @@ export const DataMCPTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsResponseStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: GetAllToolsDataToolsResponse200Type$outboundSchema,
+  type: z.literal("mcp"),
   mcp: z.lazy(() => DataMcp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1328,15 +1277,6 @@ export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
 export const GetAllToolsDataToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsStatus
 > = GetAllToolsDataToolsStatus$inboundSchema;
-
-/** @internal */
-export const GetAllToolsDataToolsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponseType
-> = z.nativeEnum(GetAllToolsDataToolsResponseType);
-/** @internal */
-export const GetAllToolsDataToolsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponseType
-> = GetAllToolsDataToolsResponseType$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataMethod$inboundSchema: z.ZodNativeEnum<
@@ -1623,7 +1563,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5696YZPG6N7B7J5P8MS89H"),
+  _id: z.string().default("tool_01KBQ991D468MKMXSSSRQJ8CTB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1636,7 +1576,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: GetAllToolsDataToolsResponseType$inboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => GetAllToolsDataHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1664,7 +1604,7 @@ export type DataHTTPTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "http";
   http: GetAllToolsDataHttp$Outbound;
 };
 
@@ -1674,7 +1614,7 @@ export const DataHTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataHTTPTool
 > = z.object({
-  id: z.string().default("tool_01KB5696YZPG6N7B7J5P8MS89H"),
+  id: z.string().default("tool_01KBQ991D468MKMXSSSRQJ8CTB"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1687,7 +1627,7 @@ export const DataHTTPTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: GetAllToolsDataToolsResponseType$outboundSchema,
+  type: z.literal("http"),
   http: z.lazy(() => GetAllToolsDataHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1722,15 +1662,6 @@ export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
 export const GetAllToolsDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataStatus
 > = GetAllToolsDataStatus$inboundSchema;
-
-/** @internal */
-export const GetAllToolsDataToolsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsType
-> = z.nativeEnum(GetAllToolsDataToolsType);
-/** @internal */
-export const GetAllToolsDataToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsType
-> = GetAllToolsDataToolsType$inboundSchema;
 
 /** @internal */
 export const DataSchema$inboundSchema: z.ZodType<
@@ -1836,7 +1767,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5696YXPGVYK0WKRQVF9M7Q"),
+  _id: z.string().default("tool_01KBQ991D1WYZG42ANF3GJFGMN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1849,7 +1780,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: GetAllToolsDataToolsType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1878,7 +1809,7 @@ export type DataJSONSchemaTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "json_schema";
   json_schema: DataJsonSchema$Outbound;
 };
 
@@ -1888,7 +1819,7 @@ export const DataJSONSchemaTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataJSONSchemaTool
 > = z.object({
-  id: z.string().default("tool_01KB5696YXPGVYK0WKRQVF9M7Q"),
+  id: z.string().default("tool_01KBQ991D1WYZG42ANF3GJFGMN"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1901,7 +1832,7 @@ export const DataJSONSchemaTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: GetAllToolsDataToolsType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => DataJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1939,15 +1870,6 @@ export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
 /** @internal */
 export const DataStatus$outboundSchema: z.ZodNativeEnum<typeof DataStatus> =
   DataStatus$inboundSchema;
-
-/** @internal */
-export const GetAllToolsDataType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataType
-> = z.nativeEnum(GetAllToolsDataType);
-/** @internal */
-export const GetAllToolsDataType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataType
-> = GetAllToolsDataType$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
@@ -2073,7 +1995,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KB5696YWXYXYFX0SEJAKX402"),
+  _id: z.string().default("tool_01KBQ991CZD8J7PVPACZ5R5Y3Y"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2086,7 +2008,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: DataStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
-  type: GetAllToolsDataType$inboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2114,7 +2036,7 @@ export type DataFunctionTool$Outbound = {
   updated: string;
   status: string;
   version_hash?: string | undefined;
-  type: string;
+  type: "function";
   function: GetAllToolsDataFunction$Outbound;
 };
 
@@ -2124,7 +2046,7 @@ export const DataFunctionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataFunctionTool
 > = z.object({
-  id: z.string().default("tool_01KB5696YWXYXYFX0SEJAKX402"),
+  id: z.string().default("tool_01KBQ991CZD8J7PVPACZ5R5Y3Y"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2137,7 +2059,7 @@ export const DataFunctionTool$outboundSchema: z.ZodType<
   updated: z.string(),
   status: DataStatus$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: GetAllToolsDataType$outboundSchema,
+  type: z.literal("function"),
   function: z.lazy(() => GetAllToolsDataFunction$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

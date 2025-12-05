@@ -1,15 +1,17 @@
 # Type
 
+The type of the content part.
+
 ## Example Usage
 
 ```typescript
 import { Type } from "@orq-ai/node/models/components";
 
-let value: Type = "agents.execution_started";
+let value: Type = "text";
 ```
 
 ## Values
 
 ```typescript
-"agents.execution_started"
+"text"
 ```

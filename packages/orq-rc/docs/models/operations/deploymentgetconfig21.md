@@ -1,5 +1,7 @@
 # DeploymentGetConfig21
 
+Text content part of a prompt message
+
 ## Example Usage
 
 ```typescript
@@ -13,7 +15,7 @@ let value: DeploymentGetConfig21 = {
 
 ## Fields
 
-| Field                                                                                                                                                                | Type                                                                                                                                                                 | Required                                                                                                                                                             | Description                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                               | [operations.DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType](../../models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessagestype.md) | :heavy_check_mark:                                                                                                                                                   | N/A                                                                                                                                                                  |
-| `text`                                                                                                                                                               | *string*                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                   | N/A                                                                                                                                                                  |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

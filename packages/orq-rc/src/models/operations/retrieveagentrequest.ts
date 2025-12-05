@@ -220,13 +220,6 @@ export type RetrieveAgentRequestAudio = {
   format: RetrieveAgentRequestFormat;
 };
 
-export const RetrieveAgentRequestResponseFormatAgentsResponseType = {
-  JsonSchema: "json_schema",
-} as const;
-export type RetrieveAgentRequestResponseFormatAgentsResponseType = ClosedEnum<
-  typeof RetrieveAgentRequestResponseFormatAgentsResponseType
->;
-
 export type RetrieveAgentRequestResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -252,16 +245,9 @@ export type RetrieveAgentRequestResponseFormatJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type RetrieveAgentRequestResponseFormatAgentsJSONSchema = {
-  type: RetrieveAgentRequestResponseFormatAgentsResponseType;
+  type: "json_schema";
   jsonSchema: RetrieveAgentRequestResponseFormatJsonSchema;
 };
-
-export const RetrieveAgentRequestResponseFormatAgentsType = {
-  JsonObject: "json_object",
-} as const;
-export type RetrieveAgentRequestResponseFormatAgentsType = ClosedEnum<
-  typeof RetrieveAgentRequestResponseFormatAgentsType
->;
 
 /**
  * @remarks
@@ -269,15 +255,8 @@ export type RetrieveAgentRequestResponseFormatAgentsType = ClosedEnum<
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type RetrieveAgentRequestResponseFormatJSONObject = {
-  type: RetrieveAgentRequestResponseFormatAgentsType;
+  type: "json_object";
 };
-
-export const RetrieveAgentRequestResponseFormatType = {
-  Text: "text",
-} as const;
-export type RetrieveAgentRequestResponseFormatType = ClosedEnum<
-  typeof RetrieveAgentRequestResponseFormatType
->;
 
 /**
  * @remarks
@@ -285,16 +264,16 @@ export type RetrieveAgentRequestResponseFormatType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type RetrieveAgentRequestResponseFormatText = {
-  type: RetrieveAgentRequestResponseFormatType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type RetrieveAgentRequestResponseFormat =
-  | RetrieveAgentRequestResponseFormatAgentsJSONSchema
   | RetrieveAgentRequestResponseFormatText
-  | RetrieveAgentRequestResponseFormatJSONObject;
+  | RetrieveAgentRequestResponseFormatJSONObject
+  | RetrieveAgentRequestResponseFormatAgentsJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -371,7 +350,7 @@ export type RetrieveAgentRequestToolChoiceFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type RetrieveAgentRequestToolChoice2 = {
@@ -450,9 +429,9 @@ export type RetrieveAgentRequestParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | RetrieveAgentRequestResponseFormatAgentsJSONSchema
     | RetrieveAgentRequestResponseFormatText
     | RetrieveAgentRequestResponseFormatJSONObject
+    | RetrieveAgentRequestResponseFormatAgentsJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -567,15 +546,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationAudio = {
   format: RetrieveAgentRequestFallbackModelConfigurationFormat;
 };
 
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -601,19 +571,9 @@ export type RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema = {
-  type:
-    RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType;
+  type: "json_schema";
   jsonSchema: RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema;
 };
-
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType =
-  {
-    JsonObject: "json_object",
-  } as const;
-export type RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType =
-  ClosedEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType
-  >;
 
 /**
  * @remarks
@@ -621,14 +581,8 @@ export type RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONTy
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type RetrieveAgentRequestResponseFormatAgentsJSONObject = {
-  type: RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType;
+  type: "json_object";
 };
-
-export const RetrieveAgentRequestResponseFormatAgentsResponse200Type = {
-  Text: "text",
-} as const;
-export type RetrieveAgentRequestResponseFormatAgentsResponse200Type =
-  ClosedEnum<typeof RetrieveAgentRequestResponseFormatAgentsResponse200Type>;
 
 /**
  * @remarks
@@ -636,16 +590,16 @@ export type RetrieveAgentRequestResponseFormatAgentsResponse200Type =
  * Default response format. Used to generate text responses
  */
 export type RetrieveAgentRequestResponseFormatAgentsText = {
-  type: RetrieveAgentRequestResponseFormatAgentsResponse200Type;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type RetrieveAgentRequestFallbackModelConfigurationResponseFormat =
-  | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
   | RetrieveAgentRequestResponseFormatAgentsText
-  | RetrieveAgentRequestResponseFormatAgentsJSONObject;
+  | RetrieveAgentRequestResponseFormatAgentsJSONObject
+  | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -727,7 +681,7 @@ export type RetrieveAgentRequestToolChoiceAgentsFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type RetrieveAgentRequestToolChoiceAgents2 = {
@@ -808,9 +762,9 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
     | RetrieveAgentRequestResponseFormatAgentsText
     | RetrieveAgentRequestResponseFormatAgentsJSONObject
+    | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1463,15 +1417,6 @@ export function retrieveAgentRequestAudioFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatAgentsResponseType> =
-    z.nativeEnum(RetrieveAgentRequestResponseFormatAgentsResponseType);
-/** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatAgentsResponseType> =
-    RetrieveAgentRequestResponseFormatAgentsResponseType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatJsonSchema,
@@ -1537,7 +1482,7 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: RetrieveAgentRequestResponseFormatAgentsResponseType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema
     ),
@@ -1548,7 +1493,7 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema:
   });
 /** @internal */
 export type RetrieveAgentRequestResponseFormatAgentsJSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: RetrieveAgentRequestResponseFormatJsonSchema$Outbound;
 };
 
@@ -1559,7 +1504,7 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONSchema$outboundSchema:
     z.ZodTypeDef,
     RetrieveAgentRequestResponseFormatAgentsJSONSchema
   > = z.object({
-    type: RetrieveAgentRequestResponseFormatAgentsResponseType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       RetrieveAgentRequestResponseFormatJsonSchema$outboundSchema
     ),
@@ -1596,26 +1541,17 @@ export function retrieveAgentRequestResponseFormatAgentsJSONSchemaFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatAgentsType> = z
-    .nativeEnum(RetrieveAgentRequestResponseFormatAgentsType);
-/** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatAgentsType> =
-    RetrieveAgentRequestResponseFormatAgentsType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatJSONObject$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatJSONObject,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: RetrieveAgentRequestResponseFormatAgentsType$inboundSchema,
+    type: z.literal("json_object"),
   });
 /** @internal */
 export type RetrieveAgentRequestResponseFormatJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -1625,7 +1561,7 @@ export const RetrieveAgentRequestResponseFormatJSONObject$outboundSchema:
     z.ZodTypeDef,
     RetrieveAgentRequestResponseFormatJSONObject
   > = z.object({
-    type: RetrieveAgentRequestResponseFormatAgentsType$outboundSchema,
+    type: z.literal("json_object"),
   });
 
 export function retrieveAgentRequestResponseFormatJSONObjectToJSON(
@@ -1655,26 +1591,16 @@ export function retrieveAgentRequestResponseFormatJSONObjectFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatType> = z.nativeEnum(
-    RetrieveAgentRequestResponseFormatType,
-  );
-/** @internal */
-export const RetrieveAgentRequestResponseFormatType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseFormatType> =
-    RetrieveAgentRequestResponseFormatType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatText$inboundSchema: z.ZodType<
   RetrieveAgentRequestResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RetrieveAgentRequestResponseFormatType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type RetrieveAgentRequestResponseFormatText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -1683,7 +1609,7 @@ export const RetrieveAgentRequestResponseFormatText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveAgentRequestResponseFormatText
 > = z.object({
-  type: RetrieveAgentRequestResponseFormatType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function retrieveAgentRequestResponseFormatTextToJSON(
@@ -1713,17 +1639,17 @@ export const RetrieveAgentRequestResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
   z.lazy(() =>
     RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
   ),
-  z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
 ]);
 /** @internal */
 export type RetrieveAgentRequestResponseFormat$Outbound =
-  | RetrieveAgentRequestResponseFormatAgentsJSONSchema$Outbound
   | RetrieveAgentRequestResponseFormatText$Outbound
-  | RetrieveAgentRequestResponseFormatJSONObject$Outbound;
+  | RetrieveAgentRequestResponseFormatJSONObject$Outbound
+  | RetrieveAgentRequestResponseFormatAgentsJSONSchema$Outbound;
 
 /** @internal */
 export const RetrieveAgentRequestResponseFormat$outboundSchema: z.ZodType<
@@ -1731,11 +1657,11 @@ export const RetrieveAgentRequestResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveAgentRequestResponseFormat
 > = z.union([
+  z.lazy(() => RetrieveAgentRequestResponseFormatText$outboundSchema),
+  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$outboundSchema),
   z.lazy(() =>
     RetrieveAgentRequestResponseFormatAgentsJSONSchema$outboundSchema
   ),
-  z.lazy(() => RetrieveAgentRequestResponseFormatText$outboundSchema),
-  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$outboundSchema),
 ]);
 
 export function retrieveAgentRequestResponseFormatToJSON(
@@ -1930,11 +1856,11 @@ export const RetrieveAgentRequestToolChoiceFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type RetrieveAgentRequestToolChoiceFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -1943,7 +1869,7 @@ export const RetrieveAgentRequestToolChoiceFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveAgentRequestToolChoiceFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function retrieveAgentRequestToolChoiceFunctionToJSON(
@@ -2088,11 +2014,11 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
+    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
     z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
     ),
-    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2139,9 +2065,9 @@ export type RetrieveAgentRequestParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | RetrieveAgentRequestResponseFormatAgentsJSONSchema$Outbound
     | RetrieveAgentRequestResponseFormatText$Outbound
     | RetrieveAgentRequestResponseFormatJSONObject$Outbound
+    | RetrieveAgentRequestResponseFormatAgentsJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2176,11 +2102,11 @@ export const RetrieveAgentRequestParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
+    z.lazy(() => RetrieveAgentRequestResponseFormatText$outboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$outboundSchema),
     z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsJSONSchema$outboundSchema
     ),
-    z.lazy(() => RetrieveAgentRequestResponseFormatText$outboundSchema),
-    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2359,20 +2285,6 @@ export function retrieveAgentRequestFallbackModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType,
-  );
-/** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  > =
-    RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema,
@@ -2437,8 +2349,7 @@ export const RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inbou
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
     ),
@@ -2450,7 +2361,7 @@ export const RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inbou
 /** @internal */
 export type RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$Outbound =
   {
-    type: string;
+    type: "json_schema";
     json_schema:
       RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$Outbound;
   };
@@ -2462,8 +2373,7 @@ export const RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outbo
     z.ZodTypeDef,
     RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
   > = z.object({
-    type:
-      RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$outboundSchema
     ),
@@ -2498,32 +2408,17 @@ export function retrieveAgentRequestResponseFormatAgentsResponse200JSONSchemaFro
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType,
-  );
-/** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType
-  > =
-    RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatAgentsJSONObject,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema,
+    type: z.literal("json_object"),
   });
 /** @internal */
 export type RetrieveAgentRequestResponseFormatAgentsJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -2533,8 +2428,7 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONObject$outboundSchema:
     z.ZodTypeDef,
     RetrieveAgentRequestResponseFormatAgentsJSONObject
   > = z.object({
-    type:
-      RetrieveAgentRequestResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema,
+    type: z.literal("json_object"),
   });
 
 export function retrieveAgentRequestResponseFormatAgentsJSONObjectToJSON(
@@ -2564,28 +2458,17 @@ export function retrieveAgentRequestResponseFormatAgentsJSONObjectFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200Type
-  > = z.nativeEnum(RetrieveAgentRequestResponseFormatAgentsResponse200Type);
-/** @internal */
-export const RetrieveAgentRequestResponseFormatAgentsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestResponseFormatAgentsResponse200Type
-  > = RetrieveAgentRequestResponseFormatAgentsResponse200Type$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatAgentsText$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatAgentsText,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: RetrieveAgentRequestResponseFormatAgentsResponse200Type$inboundSchema,
+    type: z.literal("text"),
   });
 /** @internal */
 export type RetrieveAgentRequestResponseFormatAgentsText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -2595,8 +2478,7 @@ export const RetrieveAgentRequestResponseFormatAgentsText$outboundSchema:
     z.ZodTypeDef,
     RetrieveAgentRequestResponseFormatAgentsText
   > = z.object({
-    type:
-      RetrieveAgentRequestResponseFormatAgentsResponse200Type$outboundSchema,
+    type: z.literal("text"),
   });
 
 export function retrieveAgentRequestResponseFormatAgentsTextToJSON(
@@ -2632,19 +2514,19 @@ export const RetrieveAgentRequestFallbackModelConfigurationResponseFormat$inboun
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
-    ),
     z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
     z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
     ),
+    z.lazy(() =>
+      RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
+    ),
   ]);
 /** @internal */
 export type RetrieveAgentRequestFallbackModelConfigurationResponseFormat$Outbound =
-  | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$Outbound
   | RetrieveAgentRequestResponseFormatAgentsText$Outbound
-  | RetrieveAgentRequestResponseFormatAgentsJSONObject$Outbound;
+  | RetrieveAgentRequestResponseFormatAgentsJSONObject$Outbound
+  | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$Outbound;
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationResponseFormat$outboundSchema:
@@ -2653,12 +2535,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationResponseFormat$outbou
     z.ZodTypeDef,
     RetrieveAgentRequestFallbackModelConfigurationResponseFormat
   > = z.union([
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outboundSchema
-    ),
     z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$outboundSchema),
     z.lazy(() =>
       RetrieveAgentRequestResponseFormatAgentsJSONObject$outboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outboundSchema
     ),
   ]);
 
@@ -2894,11 +2776,11 @@ export const RetrieveAgentRequestToolChoiceAgentsFunction$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    name: z.string().optional(),
+    name: z.string(),
   });
 /** @internal */
 export type RetrieveAgentRequestToolChoiceAgentsFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -2908,7 +2790,7 @@ export const RetrieveAgentRequestToolChoiceAgentsFunction$outboundSchema:
     z.ZodTypeDef,
     RetrieveAgentRequestToolChoiceAgentsFunction
   > = z.object({
-    name: z.string().optional(),
+    name: z.string(),
   });
 
 export function retrieveAgentRequestToolChoiceAgentsFunctionToJSON(
@@ -3077,12 +2959,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
-      z.lazy(() =>
-        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
-      ),
       z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
       z.lazy(() =>
         RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
       ),
     ]).optional(),
     reasoning_effort: z.string().optional(),
@@ -3141,9 +3023,9 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters$Outbound =
     n?: number | null | undefined;
     presence_penalty?: number | null | undefined;
     response_format?:
-      | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$Outbound
       | RetrieveAgentRequestResponseFormatAgentsText$Outbound
       | RetrieveAgentRequestResponseFormatAgentsJSONObject$Outbound
+      | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$Outbound
       | undefined;
     reasoning_effort?: string | undefined;
     verbosity?: string | undefined;
@@ -3187,12 +3069,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$outboundSc
     n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
-      z.lazy(() =>
-        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outboundSchema
-      ),
       z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$outboundSchema),
       z.lazy(() =>
         RetrieveAgentRequestResponseFormatAgentsJSONObject$outboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outboundSchema
       ),
     ]).optional(),
     reasoningEffort: z.string().optional(),

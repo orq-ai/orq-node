@@ -5,16 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ExecutionNamedStreamingEventType = {
-  EventAgentsExecutionNamed: "event.agents.execution_named",
-} as const;
-export type ExecutionNamedStreamingEventType = ClosedEnum<
-  typeof ExecutionNamedStreamingEventType
->;
 
 export type ExecutionNamedStreamingEventData = {
   name: string;
@@ -25,22 +17,13 @@ export type ExecutionNamedStreamingEventData = {
  * Emitted when the agent execution is assigned a human-readable name, typically generated based on the conversation content.
  */
 export type ExecutionNamedStreamingEvent = {
-  type: ExecutionNamedStreamingEventType;
+  type: "event.agents.execution_named";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ExecutionNamedStreamingEventData;
 };
-
-/** @internal */
-export const ExecutionNamedStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ExecutionNamedStreamingEventType
-> = z.nativeEnum(ExecutionNamedStreamingEventType);
-/** @internal */
-export const ExecutionNamedStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof ExecutionNamedStreamingEventType
-> = ExecutionNamedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const ExecutionNamedStreamingEventData$inboundSchema: z.ZodType<
@@ -100,13 +83,13 @@ export const ExecutionNamedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ExecutionNamedStreamingEventType$inboundSchema,
+  type: z.literal("event.agents.execution_named"),
   timestamp: z.string(),
   data: z.lazy(() => ExecutionNamedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ExecutionNamedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.agents.execution_named";
   timestamp: string;
   data: ExecutionNamedStreamingEventData$Outbound;
 };
@@ -117,7 +100,7 @@ export const ExecutionNamedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExecutionNamedStreamingEvent
 > = z.object({
-  type: ExecutionNamedStreamingEventType$outboundSchema,
+  type: z.literal("event.agents.execution_named"),
   timestamp: z.string(),
   data: z.lazy(() => ExecutionNamedStreamingEventData$outboundSchema),
 });

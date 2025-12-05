@@ -4,30 +4,17 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const DataPartKind = {
-  Data: "data",
-} as const;
-export type DataPartKind = ClosedEnum<typeof DataPartKind>;
 
 /**
  * A structured data part containing JSON-serializable key-value pairs. Used for passing structured information between agents and tools.
  */
 export type DataPart = {
-  kind: DataPartKind;
+  kind: "data";
   data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const DataPartKind$inboundSchema: z.ZodNativeEnum<typeof DataPartKind> =
-  z.nativeEnum(DataPartKind);
-/** @internal */
-export const DataPartKind$outboundSchema: z.ZodNativeEnum<typeof DataPartKind> =
-  DataPartKind$inboundSchema;
 
 /** @internal */
 export const DataPart$inboundSchema: z.ZodType<
@@ -35,13 +22,13 @@ export const DataPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: DataPartKind$inboundSchema,
+  kind: z.literal("data"),
   data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
 /** @internal */
 export type DataPart$Outbound = {
-  kind: string;
+  kind: "data";
   data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
@@ -52,7 +39,7 @@ export const DataPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataPart
 > = z.object({
-  kind: DataPartKind$outboundSchema,
+  kind: z.literal("data"),
   data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });

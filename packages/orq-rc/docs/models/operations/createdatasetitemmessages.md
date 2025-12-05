@@ -3,21 +3,26 @@
 
 ## Supported Types
 
-### `operations.CreateDatasetItemMessagesDeveloperMessage`
-
-```typescript
-const value: operations.CreateDatasetItemMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.CreateDatasetItemMessagesSystemMessage`
 
 ```typescript
 const value: operations.CreateDatasetItemMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
+};
+```
+
+### `operations.CreateDatasetItemMessagesDeveloperMessage`
+
+```typescript
+const value: operations.CreateDatasetItemMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 
@@ -30,7 +35,7 @@ const value: operations.CreateDatasetItemMessagesUserMessage = {
     {
       type: "image_url",
       imageUrl: {
-        url: "https://earnest-baseboard.com",
+        url: "https://fatal-overload.name/",
       },
     },
   ],
@@ -50,9 +55,7 @@ const value: operations.CreateDatasetItemMessagesAssistantMessage = {
 ```typescript
 const value: operations.CreateDatasetItemMessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value 1>",
-  ],
+  content: [],
   toolCallId: "<id>",
 };
 ```

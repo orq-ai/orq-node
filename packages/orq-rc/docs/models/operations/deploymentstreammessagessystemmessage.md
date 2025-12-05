@@ -1,5 +1,7 @@
 # DeploymentStreamMessagesSystemMessage
 
+Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+
 ## Example Usage
 
 ```typescript
@@ -7,7 +9,7 @@ import { DeploymentStreamMessagesSystemMessage } from "@orq-ai/node/models/opera
 
 let value: DeploymentStreamMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [],
 };
 ```
 
@@ -15,6 +17,6 @@ let value: DeploymentStreamMessagesSystemMessage = {
 
 | Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `role`                                                                                                                       | [operations.DeploymentStreamMessagesDeploymentsRole](../../models/operations/deploymentstreammessagesdeploymentsrole.md)     | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case `system`.                                                                      |
-| `content`                                                                                                                    | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | The contents of the system message.                                                                                          |
+| `role`                                                                                                                       | *"system"*                                                                                                                   | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case `system`.                                                                      |
+| `content`                                                                                                                    | *operations.DeploymentStreamMessagesContent*                                                                                 | :heavy_check_mark:                                                                                                           | The contents of the system message.                                                                                          |
 | `name`                                                                                                                       | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | An optional name for the participant. Provides the model information to differentiate between participants of the same role. |

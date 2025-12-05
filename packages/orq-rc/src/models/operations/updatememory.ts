@@ -47,6 +47,10 @@ export type UpdateMemoryResponseBody = {
    */
   metadata: { [k: string]: string };
   workspaceId: string;
+  /**
+   * The number of memories in the entity
+   */
+  documentsCount: number;
 };
 
 /** @internal */
@@ -171,6 +175,7 @@ export const UpdateMemoryResponseBody$inboundSchema: z.ZodType<
   store_id: z.string(),
   metadata: z.record(z.string()),
   workspace_id: z.string(),
+  documents_count: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -179,6 +184,7 @@ export const UpdateMemoryResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "store_id": "storeId",
     "workspace_id": "workspaceId",
+    "documents_count": "documentsCount",
   });
 });
 /** @internal */
@@ -192,6 +198,7 @@ export type UpdateMemoryResponseBody$Outbound = {
   store_id: string;
   metadata: { [k: string]: string };
   workspace_id: string;
+  documents_count: number;
 };
 
 /** @internal */
@@ -209,6 +216,7 @@ export const UpdateMemoryResponseBody$outboundSchema: z.ZodType<
   storeId: z.string(),
   metadata: z.record(z.string()),
   workspaceId: z.string(),
+  documentsCount: z.number(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -217,6 +225,7 @@ export const UpdateMemoryResponseBody$outboundSchema: z.ZodType<
     updatedById: "updated_by_id",
     storeId: "store_id",
     workspaceId: "workspace_id",
+    documentsCount: "documents_count",
   });
 });
 

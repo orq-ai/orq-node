@@ -28,7 +28,7 @@ export type Voice = ClosedEnum<typeof Voice>;
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const ModelConfigurationFormat = {
+export const Format = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -38,9 +38,7 @@ export const ModelConfigurationFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type ModelConfigurationFormat = ClosedEnum<
-  typeof ModelConfigurationFormat
->;
+export type Format = ClosedEnum<typeof Format>;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
@@ -53,15 +51,8 @@ export type ModelConfigurationAudio = {
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: ModelConfigurationFormat;
+  format: Format;
 };
-
-export const CreateAgentRequestResponseFormatAgentsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreateAgentRequestResponseFormatAgentsType = ClosedEnum<
-  typeof CreateAgentRequestResponseFormatAgentsType
->;
 
 export type ResponseFormatJsonSchema = {
   /**
@@ -88,16 +79,9 @@ export type ResponseFormatJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type JSONSchema = {
-  type: CreateAgentRequestResponseFormatAgentsType;
+  type: "json_schema";
   jsonSchema: ResponseFormatJsonSchema;
 };
-
-export const CreateAgentRequestResponseFormatType = {
-  JsonObject: "json_object",
-} as const;
-export type CreateAgentRequestResponseFormatType = ClosedEnum<
-  typeof CreateAgentRequestResponseFormatType
->;
 
 /**
  * @remarks
@@ -105,13 +89,8 @@ export type CreateAgentRequestResponseFormatType = ClosedEnum<
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type JSONObject = {
-  type: CreateAgentRequestResponseFormatType;
+  type: "json_object";
 };
-
-export const ResponseFormatType = {
-  Text: "text",
-} as const;
-export type ResponseFormatType = ClosedEnum<typeof ResponseFormatType>;
 
 /**
  * @remarks
@@ -119,13 +98,13 @@ export type ResponseFormatType = ClosedEnum<typeof ResponseFormatType>;
  * Default response format. Used to generate text responses
  */
 export type Text = {
-  type: ResponseFormatType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
-export type ResponseFormat = JSONSchema | Text | JSONObject;
+export type ResponseFormat = Text | JSONObject | JSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -196,7 +175,7 @@ export type ToolChoiceFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type ToolChoice2 = {
@@ -268,7 +247,7 @@ export type ParametersT = {
   /**
    * An object specifying the format that the model must output
    */
-  responseFormat?: JSONSchema | Text | JSONObject | undefined;
+  responseFormat?: Text | JSONObject | JSONSchema | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
@@ -404,15 +383,6 @@ export type FallbackModelConfigurationAudio = {
   format: FallbackModelConfigurationFormat;
 };
 
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  >;
-
 export type CreateAgentRequestResponseFormatAgentsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -438,18 +408,9 @@ export type CreateAgentRequestResponseFormatAgentsJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type CreateAgentRequestResponseFormatJSONSchema = {
-  type:
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType;
+  type: "json_schema";
   jsonSchema: CreateAgentRequestResponseFormatAgentsJsonSchema;
 };
-
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyType = {
-  JsonObject: "json_object",
-} as const;
-export type CreateAgentRequestResponseFormatAgentsRequestRequestBodyType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyType
-  >;
 
 /**
  * @remarks
@@ -457,15 +418,8 @@ export type CreateAgentRequestResponseFormatAgentsRequestRequestBodyType =
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type ResponseFormatJSONObject = {
-  type: CreateAgentRequestResponseFormatAgentsRequestRequestBodyType;
+  type: "json_object";
 };
-
-export const CreateAgentRequestResponseFormatAgentsRequestType = {
-  Text: "text",
-} as const;
-export type CreateAgentRequestResponseFormatAgentsRequestType = ClosedEnum<
-  typeof CreateAgentRequestResponseFormatAgentsRequestType
->;
 
 /**
  * @remarks
@@ -473,16 +427,16 @@ export type CreateAgentRequestResponseFormatAgentsRequestType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type ResponseFormatText = {
-  type: CreateAgentRequestResponseFormatAgentsRequestType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type FallbackModelConfigurationResponseFormat =
-  | CreateAgentRequestResponseFormatJSONSchema
   | ResponseFormatText
-  | ResponseFormatJSONObject;
+  | ResponseFormatJSONObject
+  | CreateAgentRequestResponseFormatJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -559,7 +513,7 @@ export type CreateAgentRequestToolChoiceFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type CreateAgentRequestToolChoice2 = {
@@ -638,9 +592,9 @@ export type FallbackModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentRequestResponseFormatJSONSchema
     | ResponseFormatText
     | ResponseFormatJSONObject
+    | CreateAgentRequestResponseFormatJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -725,29 +679,13 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
- * MCP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  {
-    Mcp: "mcp",
-  } as const;
-/**
- * MCP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  >;
-
-/**
  * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
  */
 export type MCPTool = {
   /**
    * MCP tool type
    */
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type;
+  type: "mcp";
   /**
    * The key of the parent MCP tool
    */
@@ -767,29 +705,13 @@ export type MCPTool = {
 };
 
 /**
- * Function tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  {
-    Function: "function",
-  } as const;
-/**
- * Function tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  >;
-
-/**
  * Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id.
  */
 export type FunctionTool = {
   /**
    * Function tool type
    */
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type;
+  type: "function";
   /**
    * The key of the pre-created function tool
    */
@@ -805,29 +727,13 @@ export type FunctionTool = {
 };
 
 /**
- * Code execution tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  {
-    Code: "code",
-  } as const;
-/**
- * Code execution tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  >;
-
-/**
  * Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id.
  */
 export type CodeExecutionTool = {
   /**
    * Code execution tool type
    */
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type;
+  type: "code";
   /**
    * The key of the pre-created code tool
    */
@@ -843,29 +749,13 @@ export type CodeExecutionTool = {
 };
 
 /**
- * HTTP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  {
-    Http: "http",
-  } as const;
-/**
- * HTTP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  >;
-
-/**
  * Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id.
  */
 export type HTTPTool = {
   /**
    * HTTP tool type
    */
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type;
+  type: "http";
   /**
    * The key of the pre-created HTTP tool
    */
@@ -880,216 +770,121 @@ export type HTTPTool = {
   requiresApproval?: boolean | undefined;
 };
 
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  {
-    CurrentDate: "current_date",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  >;
-
 /**
  * Returns the current date and time
  */
 export type CurrentDateTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type;
+  type: "current_date";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  {
-    QueryKnowledgeBase: "query_knowledge_base",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  >;
 
 /**
  * Queries knowledge bases for information
  */
 export type QueryKnowledgeBaseTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type;
+  type: "query_knowledge_base";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  {
-    RetrieveKnowledgeBases: "retrieve_knowledge_bases",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  >;
 
 /**
  * Lists available knowledge bases
  */
 export type RetrieveKnowledgeBasesTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type;
+  type: "retrieve_knowledge_bases";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  {
-    DeleteMemoryDocument: "delete_memory_document",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  >;
 
 /**
  * Deletes documents from memory stores
  */
 export type DeleteMemoryDocumentTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type;
+  type: "delete_memory_document";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  {
-    RetrieveMemoryStores: "retrieve_memory_stores",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  >;
 
 /**
  * Lists available memory stores
  */
 export type RetrieveMemoryStoresTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType;
+  type: "retrieve_memory_stores";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  {
-    WriteMemoryStore: "write_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  >;
 
 /**
  * Writes information to agent memory stores
  */
 export type WriteMemoryStoreTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType;
+  type: "write_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  {
-    QueryMemoryStore: "query_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  >;
 
 /**
  * Queries agent memory stores for context
  */
 export type QueryMemoryStoreTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType;
+  type: "query_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType = {
-  RetrieveAgents: "retrieve_agents",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
->;
 
 /**
  * Retrieves available agents in the system
  */
 export type RetrieveAgentsTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType;
+  type: "retrieve_agents";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsType = {
-  CallSubAgent: "call_sub_agent",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsType
->;
 
 /**
  * Delegates tasks to specialized sub-agents
  */
 export type CallSubAgentTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType;
+  type: "call_sub_agent";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDType = {
-  WebScraper: "web_scraper",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDType
->;
 
 /**
  * Scrapes and extracts content from web pages
  */
 export type WebScraperTool = {
-  type: CreateAgentRequestAgentToolInputCRUDType;
+  type: "web_scraper";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
 
-export const AgentToolInputCRUDType = {
-  GoogleSearch: "google_search",
-} as const;
-export type AgentToolInputCRUDType = ClosedEnum<typeof AgentToolInputCRUDType>;
-
 /**
  * Performs Google searches to retrieve web content
  */
 export type GoogleSearchTool = {
-  type: AgentToolInputCRUDType;
+  type: "google_search";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1100,7 +895,6 @@ export type GoogleSearchTool = {
  * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
-  | MCPTool
   | GoogleSearchTool
   | WebScraperTool
   | CallSubAgentTool
@@ -1114,7 +908,8 @@ export type AgentToolInputCRUD =
   | CurrentDateTool
   | HTTPTool
   | CodeExecutionTool
-  | FunctionTool;
+  | FunctionTool
+  | MCPTool;
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1193,7 +988,6 @@ export type Settings = {
    */
   tools?:
     | Array<
-      | MCPTool
       | GoogleSearchTool
       | WebScraperTool
       | CallSubAgentTool
@@ -1208,6 +1002,7 @@ export type Settings = {
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
+      | MCPTool
     >
     | undefined;
   /**
@@ -1502,15 +1297,6 @@ export type CreateAgentRequestAudio = {
   format: CreateAgentRequestFormat;
 };
 
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType
-  >;
-
 export type CreateAgentRequestResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -1536,16 +1322,9 @@ export type CreateAgentRequestResponseFormatAgentsResponseJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type CreateAgentRequestResponseFormatAgentsResponse201JSONSchema = {
-  type: CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType;
+  type: "json_schema";
   jsonSchema: CreateAgentRequestResponseFormatAgentsResponseJsonSchema;
 };
-
-export const CreateAgentRequestResponseFormatAgentsResponse201Type = {
-  JsonObject: "json_object",
-} as const;
-export type CreateAgentRequestResponseFormatAgentsResponse201Type = ClosedEnum<
-  typeof CreateAgentRequestResponseFormatAgentsResponse201Type
->;
 
 /**
  * @remarks
@@ -1553,15 +1332,8 @@ export type CreateAgentRequestResponseFormatAgentsResponse201Type = ClosedEnum<
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type CreateAgentRequestResponseFormatJSONObject = {
-  type: CreateAgentRequestResponseFormatAgentsResponse201Type;
+  type: "json_object";
 };
-
-export const CreateAgentRequestResponseFormatAgentsResponseType = {
-  Text: "text",
-} as const;
-export type CreateAgentRequestResponseFormatAgentsResponseType = ClosedEnum<
-  typeof CreateAgentRequestResponseFormatAgentsResponseType
->;
 
 /**
  * @remarks
@@ -1569,16 +1341,16 @@ export type CreateAgentRequestResponseFormatAgentsResponseType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type CreateAgentRequestResponseFormatText = {
-  type: CreateAgentRequestResponseFormatAgentsResponseType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type CreateAgentRequestResponseFormat =
-  | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema
   | CreateAgentRequestResponseFormatText
-  | CreateAgentRequestResponseFormatJSONObject;
+  | CreateAgentRequestResponseFormatJSONObject
+  | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -1653,7 +1425,7 @@ export type CreateAgentRequestToolChoiceAgentsFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type CreateAgentRequestToolChoiceAgents2 = {
@@ -1732,9 +1504,9 @@ export type CreateAgentRequestParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema
     | CreateAgentRequestResponseFormatText
     | CreateAgentRequestResponseFormatJSONObject
+    | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1849,15 +1621,6 @@ export type CreateAgentRequestFallbackModelConfigurationAudio = {
   format: CreateAgentRequestFallbackModelConfigurationFormat;
 };
 
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType
-  >;
-
 export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema =
   {
     /**
@@ -1885,20 +1648,10 @@ export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSON
  */
 export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema =
   {
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType;
+    type: "json_schema";
     jsonSchema:
       CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema;
   };
-
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType =
-  {
-    JsonObject: "json_object",
-  } as const;
-export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType
-  >;
 
 /**
  * @remarks
@@ -1906,18 +1659,8 @@ export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResp
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type CreateAgentRequestResponseFormatAgentsJSONObject = {
-  type:
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType;
+  type: "json_object";
 };
-
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType =
-  {
-    Text: "text",
-  } as const;
-export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType
-  >;
 
 /**
  * @remarks
@@ -1925,17 +1668,16 @@ export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResp
  * Default response format. Used to generate text responses
  */
 export type CreateAgentRequestResponseFormatAgentsText = {
-  type:
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type CreateAgentRequestFallbackModelConfigurationResponseFormat =
-  | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
   | CreateAgentRequestResponseFormatAgentsText
-  | CreateAgentRequestResponseFormatAgentsJSONObject;
+  | CreateAgentRequestResponseFormatAgentsJSONObject
+  | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -2015,7 +1757,7 @@ export type CreateAgentRequestToolChoiceAgentsResponseFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type CreateAgentRequestToolChoiceAgentsResponse2 = {
@@ -2094,9 +1836,9 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
     | CreateAgentRequestResponseFormatAgentsText
     | CreateAgentRequestResponseFormatAgentsJSONObject
+    | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -2289,13 +2031,11 @@ export const Voice$outboundSchema: z.ZodNativeEnum<typeof Voice> =
   Voice$inboundSchema;
 
 /** @internal */
-export const ModelConfigurationFormat$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationFormat
-> = z.nativeEnum(ModelConfigurationFormat);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
+  .nativeEnum(Format);
 /** @internal */
-export const ModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationFormat
-> = ModelConfigurationFormat$inboundSchema;
+export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
+  Format$inboundSchema;
 
 /** @internal */
 export const ModelConfigurationAudio$inboundSchema: z.ZodType<
@@ -2304,7 +2044,7 @@ export const ModelConfigurationAudio$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   voice: Voice$inboundSchema,
-  format: ModelConfigurationFormat$inboundSchema,
+  format: Format$inboundSchema,
 });
 /** @internal */
 export type ModelConfigurationAudio$Outbound = {
@@ -2319,7 +2059,7 @@ export const ModelConfigurationAudio$outboundSchema: z.ZodType<
   ModelConfigurationAudio
 > = z.object({
   voice: Voice$outboundSchema,
-  format: ModelConfigurationFormat$outboundSchema,
+  format: Format$outboundSchema,
 });
 
 export function modelConfigurationAudioToJSON(
@@ -2338,15 +2078,6 @@ export function modelConfigurationAudioFromJSON(
     `Failed to parse 'ModelConfigurationAudio' from JSON`,
   );
 }
-
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsType> = z
-    .nativeEnum(CreateAgentRequestResponseFormatAgentsType);
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsType> =
-    CreateAgentRequestResponseFormatAgentsType$inboundSchema;
 
 /** @internal */
 export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -2402,7 +2133,7 @@ export const JSONSchema$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => ResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2411,7 +2142,7 @@ export const JSONSchema$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type JSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: ResponseFormatJsonSchema$Outbound;
 };
 
@@ -2421,7 +2152,7 @@ export const JSONSchema$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   JSONSchema
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => ResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2443,26 +2174,16 @@ export function jsonSchemaFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatType> = z.nativeEnum(
-    CreateAgentRequestResponseFormatType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatType> =
-    CreateAgentRequestResponseFormatType$inboundSchema;
-
-/** @internal */
 export const JSONObject$inboundSchema: z.ZodType<
   JSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestResponseFormatType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type JSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -2471,7 +2192,7 @@ export const JSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   JSONObject
 > = z.object({
-  type: CreateAgentRequestResponseFormatType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function jsonObjectToJSON(jsonObject: JSONObject): string {
@@ -2488,28 +2209,19 @@ export function jsonObjectFromJSON(
 }
 
 /** @internal */
-export const ResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormatType
-> = z.nativeEnum(ResponseFormatType);
-/** @internal */
-export const ResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormatType
-> = ResponseFormatType$inboundSchema;
-
-/** @internal */
 export const Text$inboundSchema: z.ZodType<Text, z.ZodTypeDef, unknown> = z
   .object({
-    type: ResponseFormatType$inboundSchema,
+    type: z.literal("text"),
   });
 /** @internal */
 export type Text$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
 export const Text$outboundSchema: z.ZodType<Text$Outbound, z.ZodTypeDef, Text> =
   z.object({
-    type: ResponseFormatType$outboundSchema,
+    type: z.literal("text"),
   });
 
 export function textToJSON(text: Text): string {
@@ -2531,15 +2243,15 @@ export const ResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => JSONSchema$inboundSchema),
   z.lazy(() => Text$inboundSchema),
   z.lazy(() => JSONObject$inboundSchema),
+  z.lazy(() => JSONSchema$inboundSchema),
 ]);
 /** @internal */
 export type ResponseFormat$Outbound =
-  | JSONSchema$Outbound
   | Text$Outbound
-  | JSONObject$Outbound;
+  | JSONObject$Outbound
+  | JSONSchema$Outbound;
 
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
@@ -2547,9 +2259,9 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseFormat
 > = z.union([
-  z.lazy(() => JSONSchema$outboundSchema),
   z.lazy(() => Text$outboundSchema),
   z.lazy(() => JSONObject$outboundSchema),
+  z.lazy(() => JSONSchema$outboundSchema),
 ]);
 
 export function responseFormatToJSON(responseFormat: ResponseFormat): string {
@@ -2715,11 +2427,11 @@ export const ToolChoiceFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type ToolChoiceFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -2728,7 +2440,7 @@ export const ToolChoiceFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolChoiceFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function toolChoiceFunctionToJSON(
@@ -2851,9 +2563,9 @@ export const ParametersT$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => JSONSchema$inboundSchema),
     z.lazy(() => Text$inboundSchema),
     z.lazy(() => JSONObject$inboundSchema),
+    z.lazy(() => JSONSchema$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2898,9 +2610,9 @@ export type ParametersT$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | JSONSchema$Outbound
     | Text$Outbound
     | JSONObject$Outbound
+    | JSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2932,9 +2644,9 @@ export const ParametersT$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => JSONSchema$outboundSchema),
     z.lazy(() => Text$outboundSchema),
     z.lazy(() => JSONObject$outboundSchema),
+    z.lazy(() => JSONSchema$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -3166,20 +2878,6 @@ export function fallbackModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  > =
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsJsonSchema$inboundSchema:
   z.ZodType<
     CreateAgentRequestResponseFormatAgentsJsonSchema,
@@ -3242,8 +2940,7 @@ export function createAgentRequestResponseFormatAgentsJsonSchemaFromJSON(
 export const CreateAgentRequestResponseFormatJSONSchema$inboundSchema:
   z.ZodType<CreateAgentRequestResponseFormatJSONSchema, z.ZodTypeDef, unknown> =
     z.object({
-      type:
-        CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema,
+      type: z.literal("json_schema"),
       json_schema: z.lazy(() =>
         CreateAgentRequestResponseFormatAgentsJsonSchema$inboundSchema
       ),
@@ -3254,7 +2951,7 @@ export const CreateAgentRequestResponseFormatJSONSchema$inboundSchema:
     });
 /** @internal */
 export type CreateAgentRequestResponseFormatJSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: CreateAgentRequestResponseFormatAgentsJsonSchema$Outbound;
 };
 
@@ -3265,8 +2962,7 @@ export const CreateAgentRequestResponseFormatJSONSchema$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatJSONSchema
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsJsonSchema$outboundSchema
     ),
@@ -3303,31 +2999,16 @@ export function createAgentRequestResponseFormatJSONSchemaFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsRequestRequestBodyType
-  > =
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
 export const ResponseFormatJSONObject$inboundSchema: z.ZodType<
   ResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type ResponseFormatJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -3336,8 +3017,7 @@ export const ResponseFormatJSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseFormatJSONObject
 > = z.object({
-  type:
-    CreateAgentRequestResponseFormatAgentsRequestRequestBodyType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function responseFormatJSONObjectToJSON(
@@ -3358,25 +3038,16 @@ export function responseFormatJSONObjectFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsRequestType> = z
-    .nativeEnum(CreateAgentRequestResponseFormatAgentsRequestType);
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsRequestType> =
-    CreateAgentRequestResponseFormatAgentsRequestType$inboundSchema;
-
-/** @internal */
 export const ResponseFormatText$inboundSchema: z.ZodType<
   ResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsRequestType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type ResponseFormatText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -3385,7 +3056,7 @@ export const ResponseFormatText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseFormatText
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsRequestType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function responseFormatTextToJSON(
@@ -3411,15 +3082,15 @@ export const FallbackModelConfigurationResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$inboundSchema),
   z.lazy(() => ResponseFormatText$inboundSchema),
   z.lazy(() => ResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$inboundSchema),
 ]);
 /** @internal */
 export type FallbackModelConfigurationResponseFormat$Outbound =
-  | CreateAgentRequestResponseFormatJSONSchema$Outbound
   | ResponseFormatText$Outbound
-  | ResponseFormatJSONObject$Outbound;
+  | ResponseFormatJSONObject$Outbound
+  | CreateAgentRequestResponseFormatJSONSchema$Outbound;
 
 /** @internal */
 export const FallbackModelConfigurationResponseFormat$outboundSchema: z.ZodType<
@@ -3427,9 +3098,9 @@ export const FallbackModelConfigurationResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FallbackModelConfigurationResponseFormat
 > = z.union([
-  z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
   z.lazy(() => ResponseFormatText$outboundSchema),
   z.lazy(() => ResponseFormatJSONObject$outboundSchema),
+  z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
 ]);
 
 export function fallbackModelConfigurationResponseFormatToJSON(
@@ -3642,11 +3313,11 @@ export const CreateAgentRequestToolChoiceFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type CreateAgentRequestToolChoiceFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -3655,7 +3326,7 @@ export const CreateAgentRequestToolChoiceFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentRequestToolChoiceFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function createAgentRequestToolChoiceFunctionToJSON(
@@ -3801,9 +3472,9 @@ export const FallbackModelConfigurationParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$inboundSchema),
     z.lazy(() => ResponseFormatText$inboundSchema),
     z.lazy(() => ResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -3852,9 +3523,9 @@ export type FallbackModelConfigurationParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentRequestResponseFormatJSONSchema$Outbound
     | ResponseFormatText$Outbound
     | ResponseFormatJSONObject$Outbound
+    | CreateAgentRequestResponseFormatJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -3890,9 +3561,9 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
     z.lazy(() => ResponseFormatText$outboundSchema),
     z.lazy(() => ResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -4048,24 +3719,9 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = ToolApprovalRequired$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
-
-/** @internal */
 export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   z.object({
-    type:
-      CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
+    type: z.literal("mcp"),
     key: z.string().optional(),
     id: z.string().optional(),
     tool_id: z.string(),
@@ -4078,7 +3734,7 @@ export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   });
 /** @internal */
 export type MCPTool$Outbound = {
-  type: string;
+  type: "mcp";
   key?: string | undefined;
   id?: string | undefined;
   tool_id: string;
@@ -4091,8 +3747,7 @@ export const MCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
+  type: z.literal("mcp"),
   key: z.string().optional(),
   id: z.string().optional(),
   toolId: z.string(),
@@ -4118,27 +3773,12 @@ export function mcpToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-
-/** @internal */
 export const FunctionTool$inboundSchema: z.ZodType<
   FunctionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema,
+  type: z.literal("function"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4149,7 +3789,7 @@ export const FunctionTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type FunctionTool$Outbound = {
-  type: string;
+  type: "function";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4161,8 +3801,7 @@ export const FunctionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema,
+  type: z.literal("function"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4186,27 +3825,12 @@ export function functionToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-
-/** @internal */
 export const CodeExecutionTool$inboundSchema: z.ZodType<
   CodeExecutionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema,
+  type: z.literal("code"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4217,7 +3841,7 @@ export const CodeExecutionTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CodeExecutionTool$Outbound = {
-  type: string;
+  type: "code";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4229,8 +3853,7 @@ export const CodeExecutionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CodeExecutionTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema,
+  type: z.literal("code"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4258,27 +3881,12 @@ export function codeExecutionToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-
-/** @internal */
 export const HTTPTool$inboundSchema: z.ZodType<
   HTTPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema,
+  type: z.literal("http"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4289,7 +3897,7 @@ export const HTTPTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type HTTPTool$Outbound = {
-  type: string;
+  type: "http";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4301,8 +3909,7 @@ export const HTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema,
+  type: z.literal("http"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4326,27 +3933,12 @@ export function httpToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-
-/** @internal */
 export const CurrentDateTool$inboundSchema: z.ZodType<
   CurrentDateTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
+  type: z.literal("current_date"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4355,7 +3947,7 @@ export const CurrentDateTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CurrentDateTool$Outbound = {
-  type: string;
+  type: "current_date";
   requires_approval?: boolean | undefined;
 };
 
@@ -4365,8 +3957,7 @@ export const CurrentDateTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CurrentDateTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
+  type: z.literal("current_date"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4390,27 +3981,12 @@ export function currentDateToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-
-/** @internal */
 export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
   QueryKnowledgeBaseTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
+  type: z.literal("query_knowledge_base"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4419,7 +3995,7 @@ export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type QueryKnowledgeBaseTool$Outbound = {
-  type: string;
+  type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
 };
 
@@ -4429,8 +4005,7 @@ export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QueryKnowledgeBaseTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
+  type: z.literal("query_knowledge_base"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4456,27 +4031,12 @@ export function queryKnowledgeBaseToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-
-/** @internal */
 export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
   RetrieveKnowledgeBasesTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
+  type: z.literal("retrieve_knowledge_bases"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4485,7 +4045,7 @@ export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveKnowledgeBasesTool$Outbound = {
-  type: string;
+  type: "retrieve_knowledge_bases";
   requires_approval?: boolean | undefined;
 };
 
@@ -4495,8 +4055,7 @@ export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveKnowledgeBasesTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
+  type: z.literal("retrieve_knowledge_bases"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4522,27 +4081,12 @@ export function retrieveKnowledgeBasesToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-
-/** @internal */
 export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
   DeleteMemoryDocumentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
+  type: z.literal("delete_memory_document"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4551,7 +4095,7 @@ export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type DeleteMemoryDocumentTool$Outbound = {
-  type: string;
+  type: "delete_memory_document";
   requires_approval?: boolean | undefined;
 };
 
@@ -4561,8 +4105,7 @@ export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteMemoryDocumentTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
+  type: z.literal("delete_memory_document"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4588,27 +4131,12 @@ export function deleteMemoryDocumentToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-
-/** @internal */
 export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
   RetrieveMemoryStoresTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema,
+  type: z.literal("retrieve_memory_stores"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4617,7 +4145,7 @@ export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveMemoryStoresTool$Outbound = {
-  type: string;
+  type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
 };
 
@@ -4627,8 +4155,7 @@ export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveMemoryStoresTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema,
+  type: z.literal("retrieve_memory_stores"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4654,27 +4181,12 @@ export function retrieveMemoryStoresToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-
-/** @internal */
 export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
   WriteMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema,
+  type: z.literal("write_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4683,7 +4195,7 @@ export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type WriteMemoryStoreTool$Outbound = {
-  type: string;
+  type: "write_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -4693,8 +4205,7 @@ export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WriteMemoryStoreTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema,
+  type: z.literal("write_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4720,27 +4231,12 @@ export function writeMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
 export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
   QueryMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema,
+  type: z.literal("query_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4749,7 +4245,7 @@ export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type QueryMemoryStoreTool$Outbound = {
-  type: string;
+  type: "query_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -4759,8 +4255,7 @@ export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QueryMemoryStoreTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema,
+  type: z.literal("query_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4786,23 +4281,12 @@ export function queryMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
-  > = z.nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsRequestType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
-  > = CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentsTool$inboundSchema: z.ZodType<
   RetrieveAgentsTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema,
+  type: z.literal("retrieve_agents"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4811,7 +4295,7 @@ export const RetrieveAgentsTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveAgentsTool$Outbound = {
-  type: string;
+  type: "retrieve_agents";
   requires_approval?: boolean | undefined;
 };
 
@@ -4821,7 +4305,7 @@ export const RetrieveAgentsTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveAgentsTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema,
+  type: z.literal("retrieve_agents"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4847,21 +4331,12 @@ export function retrieveAgentsToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDAgentsType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDAgentsType> =
-    CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema;
-
-/** @internal */
 export const CallSubAgentTool$inboundSchema: z.ZodType<
   CallSubAgentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema,
+  type: z.literal("call_sub_agent"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4870,7 +4345,7 @@ export const CallSubAgentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CallSubAgentTool$Outbound = {
-  type: string;
+  type: "call_sub_agent";
   requires_approval?: boolean | undefined;
 };
 
@@ -4880,7 +4355,7 @@ export const CallSubAgentTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CallSubAgentTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema,
+  type: z.literal("call_sub_agent"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4906,21 +4381,12 @@ export function callSubAgentToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDType> =
-    CreateAgentRequestAgentToolInputCRUDType$inboundSchema;
-
-/** @internal */
 export const WebScraperTool$inboundSchema: z.ZodType<
   WebScraperTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDType$inboundSchema,
+  type: z.literal("web_scraper"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4929,7 +4395,7 @@ export const WebScraperTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type WebScraperTool$Outbound = {
-  type: string;
+  type: "web_scraper";
   requires_approval?: boolean | undefined;
 };
 
@@ -4939,7 +4405,7 @@ export const WebScraperTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebScraperTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDType$outboundSchema,
+  type: z.literal("web_scraper"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4961,21 +4427,12 @@ export function webScraperToolFromJSON(
 }
 
 /** @internal */
-export const AgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCRUDType
-> = z.nativeEnum(AgentToolInputCRUDType);
-/** @internal */
-export const AgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCRUDType
-> = AgentToolInputCRUDType$inboundSchema;
-
-/** @internal */
 export const GoogleSearchTool$inboundSchema: z.ZodType<
   GoogleSearchTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentToolInputCRUDType$inboundSchema,
+  type: z.literal("google_search"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4984,7 +4441,7 @@ export const GoogleSearchTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GoogleSearchTool$Outbound = {
-  type: string;
+  type: "google_search";
   requires_approval?: boolean | undefined;
 };
 
@@ -4994,7 +4451,7 @@ export const GoogleSearchTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GoogleSearchTool
 > = z.object({
-  type: AgentToolInputCRUDType$outboundSchema,
+  type: z.literal("google_search"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5025,7 +4482,6 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => MCPTool$inboundSchema),
   z.lazy(() => GoogleSearchTool$inboundSchema),
   z.lazy(() => WebScraperTool$inboundSchema),
   z.lazy(() => CallSubAgentTool$inboundSchema),
@@ -5040,10 +4496,10 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$inboundSchema),
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
+  z.lazy(() => MCPTool$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
-  | MCPTool$Outbound
   | GoogleSearchTool$Outbound
   | WebScraperTool$Outbound
   | CallSubAgentTool$Outbound
@@ -5057,7 +4513,8 @@ export type AgentToolInputCRUD$Outbound =
   | CurrentDateTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound;
+  | FunctionTool$Outbound
+  | MCPTool$Outbound;
 
 /** @internal */
 export const AgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -5065,7 +4522,6 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputCRUD
 > = z.union([
-  z.lazy(() => MCPTool$outboundSchema),
   z.lazy(() => GoogleSearchTool$outboundSchema),
   z.lazy(() => WebScraperTool$outboundSchema),
   z.lazy(() => CallSubAgentTool$outboundSchema),
@@ -5080,6 +4536,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function agentToolInputCRUDToJSON(
@@ -5230,7 +4687,6 @@ export const Settings$inboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
-      z.lazy(() => MCPTool$inboundSchema),
       z.lazy(() => GoogleSearchTool$inboundSchema),
       z.lazy(() => WebScraperTool$inboundSchema),
       z.lazy(() => CallSubAgentTool$inboundSchema),
@@ -5245,6 +4701,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$inboundSchema),
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
+      z.lazy(() => MCPTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
@@ -5263,7 +4720,6 @@ export type Settings$Outbound = {
   tool_approval_required: string;
   tools?:
     | Array<
-      | MCPTool$Outbound
       | GoogleSearchTool$Outbound
       | WebScraperTool$Outbound
       | CallSubAgentTool$Outbound
@@ -5278,6 +4734,7 @@ export type Settings$Outbound = {
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
+      | MCPTool$Outbound
     >
     | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
@@ -5297,7 +4754,6 @@ export const Settings$outboundSchema: z.ZodType<
   ),
   tools: z.array(
     z.union([
-      z.lazy(() => MCPTool$outboundSchema),
       z.lazy(() => GoogleSearchTool$outboundSchema),
       z.lazy(() => WebScraperTool$outboundSchema),
       z.lazy(() => CallSubAgentTool$outboundSchema),
@@ -5312,6 +4768,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
+      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
@@ -5937,20 +5394,6 @@ export function createAgentRequestAudioFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType
-  > =
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema:
   z.ZodType<
     CreateAgentRequestResponseFormatAgentsResponseJsonSchema,
@@ -6015,8 +5458,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inbound
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
     ),
@@ -6028,7 +5470,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inbound
 /** @internal */
 export type CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$Outbound =
   {
-    type: string;
+    type: "json_schema";
     json_schema:
       CreateAgentRequestResponseFormatAgentsResponseJsonSchema$Outbound;
   };
@@ -6040,8 +5482,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$outboun
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatAgentsResponse201JSONSchema
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponseJsonSchema$outboundSchema
     ),
@@ -6076,25 +5517,14 @@ export function createAgentRequestResponseFormatAgentsResponse201JSONSchemaFromJ
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201Type
-  > = z.nativeEnum(CreateAgentRequestResponseFormatAgentsResponse201Type);
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201Type
-  > = CreateAgentRequestResponseFormatAgentsResponse201Type$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatJSONObject$inboundSchema:
   z.ZodType<CreateAgentRequestResponseFormatJSONObject, z.ZodTypeDef, unknown> =
     z.object({
-      type: CreateAgentRequestResponseFormatAgentsResponse201Type$inboundSchema,
+      type: z.literal("json_object"),
     });
 /** @internal */
 export type CreateAgentRequestResponseFormatJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -6104,7 +5534,7 @@ export const CreateAgentRequestResponseFormatJSONObject$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatJSONObject
   > = z.object({
-    type: CreateAgentRequestResponseFormatAgentsResponse201Type$outboundSchema,
+    type: z.literal("json_object"),
   });
 
 export function createAgentRequestResponseFormatJSONObjectToJSON(
@@ -6134,25 +5564,16 @@ export function createAgentRequestResponseFormatJSONObjectFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsResponseType> = z
-    .nativeEnum(CreateAgentRequestResponseFormatAgentsResponseType);
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestResponseFormatAgentsResponseType> =
-    CreateAgentRequestResponseFormatAgentsResponseType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatText$inboundSchema: z.ZodType<
   CreateAgentRequestResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsResponseType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type CreateAgentRequestResponseFormatText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -6161,7 +5582,7 @@ export const CreateAgentRequestResponseFormatText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentRequestResponseFormatText
 > = z.object({
-  type: CreateAgentRequestResponseFormatAgentsResponseType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function createAgentRequestResponseFormatTextToJSON(
@@ -6190,17 +5611,17 @@ export const CreateAgentRequestResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
+  z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
   z.lazy(() =>
     CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
   ),
-  z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
-  z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
 ]);
 /** @internal */
 export type CreateAgentRequestResponseFormat$Outbound =
-  | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$Outbound
   | CreateAgentRequestResponseFormatText$Outbound
-  | CreateAgentRequestResponseFormatJSONObject$Outbound;
+  | CreateAgentRequestResponseFormatJSONObject$Outbound
+  | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$Outbound;
 
 /** @internal */
 export const CreateAgentRequestResponseFormat$outboundSchema: z.ZodType<
@@ -6208,11 +5629,11 @@ export const CreateAgentRequestResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentRequestResponseFormat
 > = z.union([
+  z.lazy(() => CreateAgentRequestResponseFormatText$outboundSchema),
+  z.lazy(() => CreateAgentRequestResponseFormatJSONObject$outboundSchema),
   z.lazy(() =>
     CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$outboundSchema
   ),
-  z.lazy(() => CreateAgentRequestResponseFormatText$outboundSchema),
-  z.lazy(() => CreateAgentRequestResponseFormatJSONObject$outboundSchema),
 ]);
 
 export function createAgentRequestResponseFormatToJSON(
@@ -6403,11 +5824,11 @@ export const CreateAgentRequestToolChoiceAgentsType$outboundSchema:
 export const CreateAgentRequestToolChoiceAgentsFunction$inboundSchema:
   z.ZodType<CreateAgentRequestToolChoiceAgentsFunction, z.ZodTypeDef, unknown> =
     z.object({
-      name: z.string().optional(),
+      name: z.string(),
     });
 /** @internal */
 export type CreateAgentRequestToolChoiceAgentsFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -6417,7 +5838,7 @@ export const CreateAgentRequestToolChoiceAgentsFunction$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestToolChoiceAgentsFunction
   > = z.object({
-    name: z.string().optional(),
+    name: z.string(),
   });
 
 export function createAgentRequestToolChoiceAgentsFunctionToJSON(
@@ -6572,11 +5993,11 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
+    z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
     z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
     ),
-    z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
-    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -6623,9 +6044,9 @@ export type CreateAgentRequestParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$Outbound
     | CreateAgentRequestResponseFormatText$Outbound
     | CreateAgentRequestResponseFormatJSONObject$Outbound
+    | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -6660,11 +6081,11 @@ export const CreateAgentRequestParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
+    z.lazy(() => CreateAgentRequestResponseFormatText$outboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$outboundSchema),
     z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$outboundSchema
     ),
-    z.lazy(() => CreateAgentRequestResponseFormatText$outboundSchema),
-    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -6842,20 +6263,6 @@ export function createAgentRequestFallbackModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType
-  > =
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema:
   z.ZodType<
     CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
@@ -6922,8 +6329,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONRes
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema
     ),
@@ -6935,7 +6341,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONRes
 /** @internal */
 export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound =
   {
-    type: string;
+    type: "json_schema";
     json_schema:
       CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$Outbound;
   };
@@ -6947,8 +6353,7 @@ export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONRes
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelFallbackModelsType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$outboundSchema
     ),
@@ -6985,32 +6390,17 @@ export function createAgentRequestResponseFormatAgentsResponse201ApplicationJSON
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType
-  > =
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema:
   z.ZodType<
     CreateAgentRequestResponseFormatAgentsJSONObject,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$inboundSchema,
+    type: z.literal("json_object"),
   });
 /** @internal */
 export type CreateAgentRequestResponseFormatAgentsJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -7020,8 +6410,7 @@ export const CreateAgentRequestResponseFormatAgentsJSONObject$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatAgentsJSONObject
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyModelType$outboundSchema,
+    type: z.literal("json_object"),
   });
 
 export function createAgentRequestResponseFormatAgentsJSONObjectToJSON(
@@ -7051,29 +6440,14 @@ export function createAgentRequestResponseFormatAgentsJSONObjectFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType,
-  );
-/** @internal */
-export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType
-  > =
-    CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsText$inboundSchema:
   z.ZodType<CreateAgentRequestResponseFormatAgentsText, z.ZodTypeDef, unknown> =
     z.object({
-      type:
-        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$inboundSchema,
+      type: z.literal("text"),
     });
 /** @internal */
 export type CreateAgentRequestResponseFormatAgentsText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -7083,8 +6457,7 @@ export const CreateAgentRequestResponseFormatAgentsText$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatAgentsText
   > = z.object({
-    type:
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyType$outboundSchema,
+    type: z.literal("text"),
   });
 
 export function createAgentRequestResponseFormatAgentsTextToJSON(
@@ -7120,19 +6493,19 @@ export const CreateAgentRequestFallbackModelConfigurationResponseFormat$inboundS
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
-    ),
     z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
     z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
     ),
+    z.lazy(() =>
+      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+    ),
   ]);
 /** @internal */
 export type CreateAgentRequestFallbackModelConfigurationResponseFormat$Outbound =
-  | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound
   | CreateAgentRequestResponseFormatAgentsText$Outbound
-  | CreateAgentRequestResponseFormatAgentsJSONObject$Outbound;
+  | CreateAgentRequestResponseFormatAgentsJSONObject$Outbound
+  | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound;
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationResponseFormat$outboundSchema:
@@ -7141,12 +6514,12 @@ export const CreateAgentRequestFallbackModelConfigurationResponseFormat$outbound
     z.ZodTypeDef,
     CreateAgentRequestFallbackModelConfigurationResponseFormat
   > = z.union([
-    z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
-    ),
     z.lazy(() => CreateAgentRequestResponseFormatAgentsText$outboundSchema),
     z.lazy(() =>
       CreateAgentRequestResponseFormatAgentsJSONObject$outboundSchema
+    ),
+    z.lazy(() =>
+      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
     ),
   ]);
 
@@ -7383,11 +6756,11 @@ export const CreateAgentRequestToolChoiceAgentsResponseFunction$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    name: z.string().optional(),
+    name: z.string(),
   });
 /** @internal */
 export type CreateAgentRequestToolChoiceAgentsResponseFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -7397,7 +6770,7 @@ export const CreateAgentRequestToolChoiceAgentsResponseFunction$outboundSchema:
     z.ZodTypeDef,
     CreateAgentRequestToolChoiceAgentsResponseFunction
   > = z.object({
-    name: z.string().optional(),
+    name: z.string(),
   });
 
 export function createAgentRequestToolChoiceAgentsResponseFunctionToJSON(
@@ -7576,12 +6949,12 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
-      z.lazy(() =>
-        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
-      ),
       z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
       z.lazy(() =>
         CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
+      ),
+      z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
       ),
     ]).optional(),
     reasoning_effort: z.string().optional(),
@@ -7639,9 +7012,9 @@ export type CreateAgentRequestFallbackModelConfigurationParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound
     | CreateAgentRequestResponseFormatAgentsText$Outbound
     | CreateAgentRequestResponseFormatAgentsJSONObject$Outbound
+    | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -7685,12 +7058,12 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$outboundSche
     n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
-      z.lazy(() =>
-        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
-      ),
       z.lazy(() => CreateAgentRequestResponseFormatAgentsText$outboundSchema),
       z.lazy(() =>
         CreateAgentRequestResponseFormatAgentsJSONObject$outboundSchema
+      ),
+      z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
       ),
     ]).optional(),
     reasoningEffort: z.string().optional(),

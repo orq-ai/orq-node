@@ -15,8 +15,8 @@ let value:
 
 ## Fields
 
-| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `enabled`                                                                                        | *boolean*                                                                                        | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `type`                                                                                           | [operations.GetEvalsGuardrailConfigType](../../models/operations/getevalsguardrailconfigtype.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `value`                                                                                          | *boolean*                                                                                        | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
+| `type`             | *"boolean"*        | :heavy_check_mark: | N/A                |
+| `value`            | *boolean*          | :heavy_check_mark: | N/A                |

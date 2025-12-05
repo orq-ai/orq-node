@@ -12,8 +12,8 @@ let value: String = {
 
 ## Fields
 
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `type`                                                                                         | [operations.InvokeEvalResponseBodyType](../../models/operations/invokeevalresponsebodytype.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `originalValue`                                                                                | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `value`                                                                                        | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"string"*         | :heavy_check_mark: | N/A                |
+| `originalValue`    | *string*           | :heavy_minus_sign: | N/A                |
+| `value`            | *string*           | :heavy_minus_sign: | N/A                |

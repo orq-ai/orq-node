@@ -3,23 +3,44 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetric2DeploymentsMetricsTextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value:
-  operations.DeploymentCreateMetric2DeploymentsMetricsTextContentPart = {
-    type: "text",
-    text: "<value>",
-  };
+const value: components.TextContentPartSchema = {
+  type: "text",
+  text: "<value>",
+};
 ```
 
-### `operations.DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value:
-  operations.DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart = {
-    type: "refusal",
-    refusal: "<value>",
-  };
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.DeploymentCreateMetric2DeploymentsMetrics4`
+
+```typescript
+const value: operations.DeploymentCreateMetric2DeploymentsMetrics4 = {
+  type: "file",
+  file: {},
+};
 ```
 

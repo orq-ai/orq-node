@@ -1,5 +1,7 @@
 # CreatePrompt2Prompts2
 
+The image part of the prompt message. Only supported with vision models.
+
 ## Example Usage
 
 ```typescript
@@ -8,14 +10,14 @@ import { CreatePrompt2Prompts2 } from "@orq-ai/node/models/operations";
 let value: CreatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://intrepid-swordfish.name/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                     | [operations.CreatePrompt2PromptsRequestRequestBodyPromptType](../../models/operations/createprompt2promptsrequestrequestbodyprompttype.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
-| `imageUrl`                                                                                                                                 | [operations.CreatePrompt2PromptsImageUrl](../../models/operations/createprompt2promptsimageurl.md)                                         | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `type`                                                                               | *"image_url"*                                                                        | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `imageUrl`                                                                           | [operations.CreatePrompt2ImageUrl](../../models/operations/createprompt2imageurl.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |

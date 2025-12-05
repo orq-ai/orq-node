@@ -127,6 +127,10 @@ export type ListBudgetsData = {
    */
   type: ListBudgetsType;
   /**
+   * API Key identifier (present when type is "api_key")
+   */
+  apiKeyId?: string | undefined;
+  /**
    * Contact external identifier (present when type is "contact")
    */
   contactId?: string | undefined;
@@ -374,6 +378,7 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   type: ListBudgetsType$inboundSchema,
+  api_key_id: z.string().optional(),
   contact_id: z.string().optional(),
   budget: z.lazy(() => ListBudgetsBudget$inboundSchema),
   is_active: z.boolean(),
@@ -381,11 +386,12 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-11-28T12:16:10.680Z",
+    "2025-12-05T12:54:50.860Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "api_key_id": "apiKeyId",
     "contact_id": "contactId",
     "is_active": "isActive",
   });
@@ -394,6 +400,7 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
 export type ListBudgetsData$Outbound = {
   _id: string;
   type: string;
+  api_key_id?: string | undefined;
   contact_id?: string | undefined;
   budget: ListBudgetsBudget$Outbound;
   is_active: boolean;
@@ -410,16 +417,18 @@ export const ListBudgetsData$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   type: ListBudgetsType$outboundSchema,
+  apiKeyId: z.string().optional(),
   contactId: z.string().optional(),
   budget: z.lazy(() => ListBudgetsBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => ListBudgetsConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-11-28T12:16:10.680Z"))
+  updated: z.date().default(() => new Date("2025-12-05T12:54:50.860Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    apiKeyId: "api_key_id",
     contactId: "contact_id",
     isActive: "is_active",
   });

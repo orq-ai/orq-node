@@ -62,13 +62,6 @@ export type RunAgentModelConfigurationAudio = {
   format: RunAgentModelConfigurationFormat;
 };
 
-export const RunAgentResponseFormatAgentsRequestType = {
-  JsonSchema: "json_schema",
-} as const;
-export type RunAgentResponseFormatAgentsRequestType = ClosedEnum<
-  typeof RunAgentResponseFormatAgentsRequestType
->;
-
 export type RunAgentResponseFormatAgentsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -94,16 +87,9 @@ export type RunAgentResponseFormatAgentsJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type RunAgentResponseFormatJSONSchema = {
-  type: RunAgentResponseFormatAgentsRequestType;
+  type: "json_schema";
   jsonSchema: RunAgentResponseFormatAgentsJsonSchema;
 };
-
-export const RunAgentResponseFormatAgentsType = {
-  JsonObject: "json_object",
-} as const;
-export type RunAgentResponseFormatAgentsType = ClosedEnum<
-  typeof RunAgentResponseFormatAgentsType
->;
 
 /**
  * @remarks
@@ -111,15 +97,8 @@ export type RunAgentResponseFormatAgentsType = ClosedEnum<
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type RunAgentResponseFormatJSONObject = {
-  type: RunAgentResponseFormatAgentsType;
+  type: "json_object";
 };
-
-export const RunAgentResponseFormatType = {
-  Text: "text",
-} as const;
-export type RunAgentResponseFormatType = ClosedEnum<
-  typeof RunAgentResponseFormatType
->;
 
 /**
  * @remarks
@@ -127,16 +106,16 @@ export type RunAgentResponseFormatType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type RunAgentResponseFormatText = {
-  type: RunAgentResponseFormatType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type RunAgentModelConfigurationResponseFormat =
-  | RunAgentResponseFormatJSONSchema
   | RunAgentResponseFormatText
-  | RunAgentResponseFormatJSONObject;
+  | RunAgentResponseFormatJSONObject
+  | RunAgentResponseFormatJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -211,7 +190,7 @@ export type RunAgentToolChoiceFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type RunAgentToolChoice2 = {
@@ -288,9 +267,9 @@ export type RunAgentModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | RunAgentResponseFormatJSONSchema
     | RunAgentResponseFormatText
     | RunAgentResponseFormatJSONObject
+    | RunAgentResponseFormatJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -427,15 +406,6 @@ export type RunAgentFallbackModelConfigurationAudio = {
   format: RunAgentFallbackModelConfigurationFormat;
 };
 
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType =
-  ClosedEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType
-  >;
-
 export type RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -461,19 +431,9 @@ export type RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type RunAgentResponseFormatAgentsRequestJSONSchema = {
-  type:
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType;
+  type: "json_schema";
   jsonSchema: RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema;
 };
-
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
-  {
-    JsonObject: "json_object",
-  } as const;
-export type RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
-  ClosedEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  >;
 
 /**
  * @remarks
@@ -481,15 +441,8 @@ export type RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType =
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type RunAgentResponseFormatAgentsJSONObject = {
-  type: RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType;
+  type: "json_object";
 };
-
-export const RunAgentResponseFormatAgentsRequestRequestBodyType = {
-  Text: "text",
-} as const;
-export type RunAgentResponseFormatAgentsRequestRequestBodyType = ClosedEnum<
-  typeof RunAgentResponseFormatAgentsRequestRequestBodyType
->;
 
 /**
  * @remarks
@@ -497,16 +450,16 @@ export type RunAgentResponseFormatAgentsRequestRequestBodyType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type RunAgentResponseFormatAgentsText = {
-  type: RunAgentResponseFormatAgentsRequestRequestBodyType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type RunAgentFallbackModelConfigurationResponseFormat =
-  | RunAgentResponseFormatAgentsRequestJSONSchema
   | RunAgentResponseFormatAgentsText
-  | RunAgentResponseFormatAgentsJSONObject;
+  | RunAgentResponseFormatAgentsJSONObject
+  | RunAgentResponseFormatAgentsRequestJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -583,7 +536,7 @@ export type RunAgentToolChoiceAgentsFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type RunAgentToolChoiceAgents2 = {
@@ -662,9 +615,9 @@ export type RunAgentFallbackModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | RunAgentResponseFormatAgentsRequestJSONSchema
     | RunAgentResponseFormatAgentsText
     | RunAgentResponseFormatAgentsJSONObject
+    | RunAgentResponseFormatAgentsRequestJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -874,15 +827,6 @@ export type RunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
-  {
-    Mcp: "mcp",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
-  >;
-
 export type AgentToolInputRunHeaders = {
   value: string;
   encrypted?: boolean | undefined;
@@ -945,7 +889,7 @@ export type Mcp = {
  * MCP tool with inline definition for on-the-fly creation in run endpoint
  */
 export type MCPToolRun = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type;
+  type: "mcp";
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -959,15 +903,6 @@ export type MCPToolRun = {
   mcp: Mcp;
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type =
-  {
-    Function: "function",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
-  >;
 
 /**
  * The type must be "object"
@@ -1027,7 +962,7 @@ export type AgentToolInputRunFunction = {
  * Function tool with inline definition for on-the-fly creation in run endpoint
  */
 export type FunctionToolRun = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type;
+  type: "function";
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -1038,15 +973,6 @@ export type FunctionToolRun = {
   function: AgentToolInputRunFunction;
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type =
-  {
-    Code: "code",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
-  >;
 
 /**
  * The type must be "object"
@@ -1104,7 +1030,7 @@ export type CodeTool = {
  * Code execution tool with inline definition for on-the-fly creation in run endpoint
  */
 export type CodeToolRun = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type;
+  type: "code";
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -1118,15 +1044,6 @@ export type CodeToolRun = {
   codeTool: CodeTool;
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type =
-  {
-    Http: "http",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type
-  >;
 
 /**
  * The HTTP method to use.
@@ -1228,7 +1145,7 @@ export type Http = {
  * HTTP tool with inline definition for on-the-fly creation in run endpoint
  */
 export type HTTPToolRun = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type;
+  type: "http";
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -1243,207 +1160,121 @@ export type HTTPToolRun = {
   requiresApproval?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type =
-  {
-    CurrentDate: "current_date",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type
-  >;
-
 /**
  * Returns the current date and time
  */
 export type AgentToolInputRunCurrentDateTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type;
+  type: "current_date";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type =
-  {
-    QueryKnowledgeBase: "query_knowledge_base",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type
-  >;
 
 /**
  * Queries knowledge bases for information
  */
 export type AgentToolInputRunQueryKnowledgeBaseTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type;
+  type: "query_knowledge_base";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type =
-  {
-    RetrieveKnowledgeBases: "retrieve_knowledge_bases",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type
-  >;
 
 /**
  * Lists available knowledge bases
  */
 export type AgentToolInputRunRetrieveKnowledgeBasesTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type;
+  type: "retrieve_knowledge_bases";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type =
-  {
-    DeleteMemoryDocument: "delete_memory_document",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type
-  >;
 
 /**
  * Deletes documents from memory stores
  */
 export type AgentToolInputRunDeleteMemoryDocumentTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type;
+  type: "delete_memory_document";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType =
-  {
-    RetrieveMemoryStores: "retrieve_memory_stores",
-  } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType
-  >;
 
 /**
  * Lists available memory stores
  */
 export type AgentToolInputRunRetrieveMemoryStoresTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType;
+  type: "retrieve_memory_stores";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType = {
-  WriteMemoryStore: "write_memory_store",
-} as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType
-  >;
 
 /**
  * Writes information to agent memory stores
  */
 export type AgentToolInputRunWriteMemoryStoreTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType;
+  type: "write_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodyType = {
-  QueryMemoryStore: "query_memory_store",
-} as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodyType = ClosedEnum<
-  typeof RunAgentAgentToolInputRunAgentsRequestRequestBodyType
->;
 
 /**
  * Queries agent memory stores for context
  */
 export type AgentToolInputRunQueryMemoryStoreTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodyType;
+  type: "query_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsRequestType = {
-  RetrieveAgents: "retrieve_agents",
-} as const;
-export type RunAgentAgentToolInputRunAgentsRequestType = ClosedEnum<
-  typeof RunAgentAgentToolInputRunAgentsRequestType
->;
 
 /**
  * Retrieves available agents in the system
  */
 export type AgentToolInputRunRetrieveAgentsTool = {
-  type: RunAgentAgentToolInputRunAgentsRequestType;
+  type: "retrieve_agents";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunAgentsType = {
-  CallSubAgent: "call_sub_agent",
-} as const;
-export type RunAgentAgentToolInputRunAgentsType = ClosedEnum<
-  typeof RunAgentAgentToolInputRunAgentsType
->;
 
 /**
  * Delegates tasks to specialized sub-agents
  */
 export type AgentToolInputRunCallSubAgentTool = {
-  type: RunAgentAgentToolInputRunAgentsType;
+  type: "call_sub_agent";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const RunAgentAgentToolInputRunType = {
-  WebScraper: "web_scraper",
-} as const;
-export type RunAgentAgentToolInputRunType = ClosedEnum<
-  typeof RunAgentAgentToolInputRunType
->;
 
 /**
  * Scrapes and extracts content from web pages
  */
 export type AgentToolInputRunWebScraperTool = {
-  type: RunAgentAgentToolInputRunType;
+  type: "web_scraper";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
 
-export const AgentToolInputRunType = {
-  GoogleSearch: "google_search",
-} as const;
-export type AgentToolInputRunType = ClosedEnum<typeof AgentToolInputRunType>;
-
 /**
  * Performs Google searches to retrieve web content
  */
 export type AgentToolInputRunGoogleSearchTool = {
-  type: AgentToolInputRunType;
+  type: "google_search";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1454,10 +1285,6 @@ export type AgentToolInputRunGoogleSearchTool = {
  * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
-  | HTTPToolRun
-  | CodeToolRun
-  | MCPToolRun
-  | FunctionToolRun
   | AgentToolInputRunGoogleSearchTool
   | AgentToolInputRunWebScraperTool
   | AgentToolInputRunCallSubAgentTool
@@ -1468,7 +1295,11 @@ export type AgentToolInputRun =
   | AgentToolInputRunDeleteMemoryDocumentTool
   | AgentToolInputRunRetrieveKnowledgeBasesTool
   | AgentToolInputRunQueryKnowledgeBaseTool
-  | AgentToolInputRunCurrentDateTool;
+  | AgentToolInputRunCurrentDateTool
+  | HTTPToolRun
+  | CodeToolRun
+  | FunctionToolRun
+  | MCPToolRun;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -1547,10 +1378,6 @@ export type RunAgentSettings = {
    */
   tools?:
     | Array<
-      | HTTPToolRun
-      | CodeToolRun
-      | MCPToolRun
-      | FunctionToolRun
       | AgentToolInputRunGoogleSearchTool
       | AgentToolInputRunWebScraperTool
       | AgentToolInputRunCallSubAgentTool
@@ -1562,6 +1389,10 @@ export type RunAgentSettings = {
       | AgentToolInputRunRetrieveKnowledgeBasesTool
       | AgentToolInputRunQueryKnowledgeBaseTool
       | AgentToolInputRunCurrentDateTool
+      | HTTPToolRun
+      | CodeToolRun
+      | FunctionToolRun
+      | MCPToolRun
     >
     | undefined;
   /**
@@ -1721,11 +1552,11 @@ export type RunAgentExtendedMessageRole = ClosedEnum<
 >;
 
 export type RunAgentParts =
-  | (components.ToolCallPart & { kind: "tool_call" })
-  | (components.TextPart & { kind: "text" })
-  | (components.DataPart & { kind: "data" })
-  | (components.FilePart & { kind: "file" })
-  | (components.ToolResultPart & { kind: "tool_result" });
+  | components.TextPart
+  | components.DataPart
+  | components.FilePart
+  | components.ToolCallPart
+  | components.ToolResultPart;
 
 /**
  * Optional A2A message providing additional context about the current status
@@ -1738,11 +1569,11 @@ export type RunAgentTaskStatusMessage = {
    */
   role: RunAgentExtendedMessageRole;
   parts: Array<
-    | (components.ToolCallPart & { kind: "tool_call" })
-    | (components.TextPart & { kind: "text" })
-    | (components.DataPart & { kind: "data" })
-    | (components.FilePart & { kind: "file" })
-    | (components.ToolResultPart & { kind: "tool_result" })
+    | components.TextPart
+    | components.DataPart
+    | components.FilePart
+    | components.ToolCallPart
+    | components.ToolResultPart
   >;
 };
 
@@ -1853,15 +1684,6 @@ export function runAgentModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentResponseFormatAgentsRequestType> = z
-    .nativeEnum(RunAgentResponseFormatAgentsRequestType);
-/** @internal */
-export const RunAgentResponseFormatAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentResponseFormatAgentsRequestType> =
-    RunAgentResponseFormatAgentsRequestType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
   RunAgentResponseFormatAgentsJsonSchema,
   z.ZodTypeDef,
@@ -1919,7 +1741,7 @@ export const RunAgentResponseFormatJSONSchema$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentResponseFormatAgentsRequestType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() =>
     RunAgentResponseFormatAgentsJsonSchema$inboundSchema
   ),
@@ -1930,7 +1752,7 @@ export const RunAgentResponseFormatJSONSchema$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RunAgentResponseFormatJSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: RunAgentResponseFormatAgentsJsonSchema$Outbound;
 };
 
@@ -1940,7 +1762,7 @@ export const RunAgentResponseFormatJSONSchema$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentResponseFormatJSONSchema
 > = z.object({
-  type: RunAgentResponseFormatAgentsRequestType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() =>
     RunAgentResponseFormatAgentsJsonSchema$outboundSchema
   ),
@@ -1970,25 +1792,16 @@ export function runAgentResponseFormatJSONSchemaFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentResponseFormatAgentsType
-> = z.nativeEnum(RunAgentResponseFormatAgentsType);
-/** @internal */
-export const RunAgentResponseFormatAgentsType$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentResponseFormatAgentsType
-> = RunAgentResponseFormatAgentsType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatJSONObject$inboundSchema: z.ZodType<
   RunAgentResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentResponseFormatAgentsType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type RunAgentResponseFormatJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -1997,7 +1810,7 @@ export const RunAgentResponseFormatJSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentResponseFormatJSONObject
 > = z.object({
-  type: RunAgentResponseFormatAgentsType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function runAgentResponseFormatJSONObjectToJSON(
@@ -2020,25 +1833,16 @@ export function runAgentResponseFormatJSONObjectFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentResponseFormatType
-> = z.nativeEnum(RunAgentResponseFormatType);
-/** @internal */
-export const RunAgentResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentResponseFormatType
-> = RunAgentResponseFormatType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatText$inboundSchema: z.ZodType<
   RunAgentResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentResponseFormatType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type RunAgentResponseFormatText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -2047,7 +1851,7 @@ export const RunAgentResponseFormatText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentResponseFormatText
 > = z.object({
-  type: RunAgentResponseFormatType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function runAgentResponseFormatTextToJSON(
@@ -2073,15 +1877,15 @@ export const RunAgentModelConfigurationResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RunAgentResponseFormatJSONSchema$inboundSchema),
   z.lazy(() => RunAgentResponseFormatText$inboundSchema),
   z.lazy(() => RunAgentResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => RunAgentResponseFormatJSONSchema$inboundSchema),
 ]);
 /** @internal */
 export type RunAgentModelConfigurationResponseFormat$Outbound =
-  | RunAgentResponseFormatJSONSchema$Outbound
   | RunAgentResponseFormatText$Outbound
-  | RunAgentResponseFormatJSONObject$Outbound;
+  | RunAgentResponseFormatJSONObject$Outbound
+  | RunAgentResponseFormatJSONSchema$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationResponseFormat$outboundSchema: z.ZodType<
@@ -2089,9 +1893,9 @@ export const RunAgentModelConfigurationResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentModelConfigurationResponseFormat
 > = z.union([
-  z.lazy(() => RunAgentResponseFormatJSONSchema$outboundSchema),
   z.lazy(() => RunAgentResponseFormatText$outboundSchema),
   z.lazy(() => RunAgentResponseFormatJSONObject$outboundSchema),
+  z.lazy(() => RunAgentResponseFormatJSONSchema$outboundSchema),
 ]);
 
 export function runAgentModelConfigurationResponseFormatToJSON(
@@ -2304,11 +2108,11 @@ export const RunAgentToolChoiceFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type RunAgentToolChoiceFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -2317,7 +2121,7 @@ export const RunAgentToolChoiceFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentToolChoiceFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function runAgentToolChoiceFunctionToJSON(
@@ -2458,9 +2262,9 @@ export const RunAgentModelConfigurationParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => RunAgentResponseFormatJSONSchema$inboundSchema),
     z.lazy(() => RunAgentResponseFormatText$inboundSchema),
     z.lazy(() => RunAgentResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => RunAgentResponseFormatJSONSchema$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2509,9 +2313,9 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | RunAgentResponseFormatJSONSchema$Outbound
     | RunAgentResponseFormatText$Outbound
     | RunAgentResponseFormatJSONObject$Outbound
+    | RunAgentResponseFormatJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2547,9 +2351,9 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => RunAgentResponseFormatJSONSchema$outboundSchema),
     z.lazy(() => RunAgentResponseFormatText$outboundSchema),
     z.lazy(() => RunAgentResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => RunAgentResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2821,20 +2625,6 @@ export function runAgentFallbackModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType
-  > = z.nativeEnum(
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType,
-  );
-/** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType
-  > =
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inboundSchema:
   z.ZodType<
     RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema,
@@ -2899,8 +2689,7 @@ export const RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inboundSchema
     ),
@@ -2911,7 +2700,7 @@ export const RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema:
   });
 /** @internal */
 export type RunAgentResponseFormatAgentsRequestJSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema:
     RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound;
 };
@@ -2923,8 +2712,7 @@ export const RunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema:
     z.ZodTypeDef,
     RunAgentResponseFormatAgentsRequestJSONSchema
   > = z.object({
-    type:
-      RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsFallbackModelConfigurationType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outboundSchema
     ),
@@ -2961,31 +2749,16 @@ export function runAgentResponseFormatAgentsRequestJSONSchemaFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  > = z.nativeEnum(
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType,
-  );
-/** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType
-  > =
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatAgentsJSONObject$inboundSchema: z.ZodType<
   RunAgentResponseFormatAgentsJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type RunAgentResponseFormatAgentsJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -2994,8 +2767,7 @@ export const RunAgentResponseFormatAgentsJSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentResponseFormatAgentsJSONObject
 > = z.object({
-  type:
-    RunAgentResponseFormatAgentsRequestRequestBodyFallbackModelsType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function runAgentResponseFormatAgentsJSONObjectToJSON(
@@ -3020,25 +2792,16 @@ export function runAgentResponseFormatAgentsJSONObjectFromJSON(
 }
 
 /** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentResponseFormatAgentsRequestRequestBodyType> = z
-    .nativeEnum(RunAgentResponseFormatAgentsRequestRequestBodyType);
-/** @internal */
-export const RunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentResponseFormatAgentsRequestRequestBodyType> =
-    RunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
 export const RunAgentResponseFormatAgentsText$inboundSchema: z.ZodType<
   RunAgentResponseFormatAgentsText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentResponseFormatAgentsRequestRequestBodyType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type RunAgentResponseFormatAgentsText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -3047,7 +2810,7 @@ export const RunAgentResponseFormatAgentsText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentResponseFormatAgentsText
 > = z.object({
-  type: RunAgentResponseFormatAgentsRequestRequestBodyType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function runAgentResponseFormatAgentsTextToJSON(
@@ -3076,15 +2839,15 @@ export const RunAgentFallbackModelConfigurationResponseFormat$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema),
     z.lazy(() => RunAgentResponseFormatAgentsText$inboundSchema),
     z.lazy(() => RunAgentResponseFormatAgentsJSONObject$inboundSchema),
+    z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema),
   ]);
 /** @internal */
 export type RunAgentFallbackModelConfigurationResponseFormat$Outbound =
-  | RunAgentResponseFormatAgentsRequestJSONSchema$Outbound
   | RunAgentResponseFormatAgentsText$Outbound
-  | RunAgentResponseFormatAgentsJSONObject$Outbound;
+  | RunAgentResponseFormatAgentsJSONObject$Outbound
+  | RunAgentResponseFormatAgentsRequestJSONSchema$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationResponseFormat$outboundSchema:
@@ -3093,9 +2856,9 @@ export const RunAgentFallbackModelConfigurationResponseFormat$outboundSchema:
     z.ZodTypeDef,
     RunAgentFallbackModelConfigurationResponseFormat
   > = z.union([
-    z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema),
     z.lazy(() => RunAgentResponseFormatAgentsText$outboundSchema),
     z.lazy(() => RunAgentResponseFormatAgentsJSONObject$outboundSchema),
+    z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema),
   ]);
 
 export function runAgentFallbackModelConfigurationResponseFormatToJSON(
@@ -3321,11 +3084,11 @@ export const RunAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type RunAgentToolChoiceAgentsFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -3334,7 +3097,7 @@ export const RunAgentToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentToolChoiceAgentsFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function runAgentToolChoiceAgentsFunctionToJSON(
@@ -3486,9 +3249,9 @@ export const RunAgentFallbackModelConfigurationParameters$inboundSchema:
     n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
-      z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema),
       z.lazy(() => RunAgentResponseFormatAgentsText$inboundSchema),
       z.lazy(() => RunAgentResponseFormatAgentsJSONObject$inboundSchema),
+      z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema),
     ]).optional(),
     reasoning_effort: z.string().optional(),
     verbosity: z.string().optional(),
@@ -3540,9 +3303,9 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | RunAgentResponseFormatAgentsRequestJSONSchema$Outbound
     | RunAgentResponseFormatAgentsText$Outbound
     | RunAgentResponseFormatAgentsJSONObject$Outbound
+    | RunAgentResponseFormatAgentsRequestJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -3579,11 +3342,11 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
+      z.lazy(() => RunAgentResponseFormatAgentsText$outboundSchema),
+      z.lazy(() => RunAgentResponseFormatAgentsJSONObject$outboundSchema),
       z.lazy(() =>
         RunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
       ),
-      z.lazy(() => RunAgentResponseFormatAgentsText$outboundSchema),
-      z.lazy(() => RunAgentResponseFormatAgentsJSONObject$outboundSchema),
     ]).optional(),
     reasoningEffort: z.string().optional(),
     verbosity: z.string().optional(),
@@ -4143,20 +3906,6 @@ export function runAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunHeaders$inboundSchema: z.ZodType<
   AgentToolInputRunHeaders,
   z.ZodTypeDef,
@@ -4255,7 +4004,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KB5696M5X8MBPQWD6CCPYPD0"),
+    id: z.string().default("01KBQ9912QAYBWVEVW4STRJZHP"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4274,7 +4023,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KB5696M5X8MBPQWD6CCPYPD0"),
+  id: z.string().default("01KBQ9912QAYBWVEVW4STRJZHP"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -4358,8 +4107,7 @@ export const MCPToolRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$inboundSchema,
+  type: z.literal("mcp"),
   key: z.string(),
   _id: z.string().optional(),
   display_name: z.string().optional(),
@@ -4375,7 +4123,7 @@ export const MCPToolRun$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type MCPToolRun$Outbound = {
-  type: string;
+  type: "mcp";
   key: string;
   _id?: string | undefined;
   display_name?: string | undefined;
@@ -4390,8 +4138,7 @@ export const MCPToolRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPToolRun
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Type$outboundSchema,
+  type: z.literal("mcp"),
   key: z.string(),
   id: z.string().optional(),
   displayName: z.string().optional(),
@@ -4418,20 +4165,6 @@ export function mcpToolRunFromJSON(
     `Failed to parse 'MCPToolRun' from JSON`,
   );
 }
-
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
 
 /** @internal */
 export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$inboundSchema:
@@ -4566,8 +4299,7 @@ export const FunctionToolRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$inboundSchema,
+  type: z.literal("function"),
   key: z.string(),
   _id: z.string().optional(),
   display_name: z.string().optional(),
@@ -4583,7 +4315,7 @@ export const FunctionToolRun$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type FunctionToolRun$Outbound = {
-  type: string;
+  type: "function";
   key: string;
   _id?: string | undefined;
   display_name?: string | undefined;
@@ -4598,8 +4330,7 @@ export const FunctionToolRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionToolRun
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14Type$outboundSchema,
+  type: z.literal("function"),
   key: z.string(),
   id: z.string().optional(),
   displayName: z.string().optional(),
@@ -4628,20 +4359,6 @@ export function functionToolRunFromJSON(
     `Failed to parse 'FunctionToolRun' from JSON`,
   );
 }
-
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
 
 /** @internal */
 export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$inboundSchema:
@@ -4775,8 +4492,7 @@ export const CodeToolRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$inboundSchema,
+  type: z.literal("code"),
   key: z.string(),
   _id: z.string().optional(),
   display_name: z.string().optional(),
@@ -4793,7 +4509,7 @@ export const CodeToolRun$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CodeToolRun$Outbound = {
-  type: string;
+  type: "code";
   key: string;
   _id?: string | undefined;
   display_name?: string | undefined;
@@ -4808,8 +4524,7 @@ export const CodeToolRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CodeToolRun
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Type$outboundSchema,
+  type: z.literal("code"),
   key: z.string(),
   id: z.string().optional(),
   displayName: z.string().optional(),
@@ -4837,20 +4552,6 @@ export function codeToolRunFromJSON(
     `Failed to parse 'CodeToolRun' from JSON`,
   );
 }
-
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
 
 /** @internal */
 export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
@@ -5107,8 +4808,7 @@ export const HTTPToolRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type$inboundSchema,
+  type: z.literal("http"),
   key: z.string(),
   _id: z.string().optional(),
   display_name: z.string().optional(),
@@ -5124,7 +4824,7 @@ export const HTTPToolRun$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type HTTPToolRun$Outbound = {
-  type: string;
+  type: "http";
   key: string;
   _id?: string | undefined;
   display_name?: string | undefined;
@@ -5139,8 +4839,7 @@ export const HTTPToolRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPToolRun
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Type$outboundSchema,
+  type: z.literal("http"),
   key: z.string(),
   id: z.string().optional(),
   displayName: z.string().optional(),
@@ -5169,27 +4868,12 @@ export function httpToolRunFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunCurrentDateTool$inboundSchema: z.ZodType<
   AgentToolInputRunCurrentDateTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
+  type: z.literal("current_date"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5198,7 +4882,7 @@ export const AgentToolInputRunCurrentDateTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunCurrentDateTool$Outbound = {
-  type: string;
+  type: "current_date";
   requires_approval?: boolean | undefined;
 };
 
@@ -5208,8 +4892,7 @@ export const AgentToolInputRunCurrentDateTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunCurrentDateTool
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
+  type: z.literal("current_date"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5237,27 +4920,12 @@ export function agentToolInputRunCurrentDateToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
   AgentToolInputRunQueryKnowledgeBaseTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
+  type: z.literal("query_knowledge_base"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5266,7 +4934,7 @@ export const AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunQueryKnowledgeBaseTool$Outbound = {
-  type: string;
+  type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
 };
 
@@ -5276,8 +4944,7 @@ export const AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunQueryKnowledgeBaseTool
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
+  type: z.literal("query_knowledge_base"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5312,28 +4979,13 @@ export function agentToolInputRunQueryKnowledgeBaseToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunRetrieveKnowledgeBasesTool$inboundSchema:
   z.ZodType<
     AgentToolInputRunRetrieveKnowledgeBasesTool,
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
+    type: z.literal("retrieve_knowledge_bases"),
     requires_approval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -5342,7 +4994,7 @@ export const AgentToolInputRunRetrieveKnowledgeBasesTool$inboundSchema:
   });
 /** @internal */
 export type AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound = {
-  type: string;
+  type: "retrieve_knowledge_bases";
   requires_approval?: boolean | undefined;
 };
 
@@ -5353,8 +5005,7 @@ export const AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema:
     z.ZodTypeDef,
     AgentToolInputRunRetrieveKnowledgeBasesTool
   > = z.object({
-    type:
-      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
+    type: z.literal("retrieve_knowledge_bases"),
     requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -5389,27 +5040,12 @@ export function agentToolInputRunRetrieveKnowledgeBasesToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunDeleteMemoryDocumentTool$inboundSchema: z.ZodType<
   AgentToolInputRunDeleteMemoryDocumentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
+  type: z.literal("delete_memory_document"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5418,7 +5054,7 @@ export const AgentToolInputRunDeleteMemoryDocumentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunDeleteMemoryDocumentTool$Outbound = {
-  type: string;
+  type: "delete_memory_document";
   requires_approval?: boolean | undefined;
 };
 
@@ -5429,8 +5065,7 @@ export const AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema:
     z.ZodTypeDef,
     AgentToolInputRunDeleteMemoryDocumentTool
   > = z.object({
-    type:
-      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
+    type: z.literal("delete_memory_document"),
     requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -5465,27 +5100,12 @@ export function agentToolInputRunDeleteMemoryDocumentToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunRetrieveMemoryStoresTool$inboundSchema: z.ZodType<
   AgentToolInputRunRetrieveMemoryStoresTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$inboundSchema,
+  type: z.literal("retrieve_memory_stores"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5494,7 +5114,7 @@ export const AgentToolInputRunRetrieveMemoryStoresTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunRetrieveMemoryStoresTool$Outbound = {
-  type: string;
+  type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
 };
 
@@ -5505,8 +5125,7 @@ export const AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema:
     z.ZodTypeDef,
     AgentToolInputRunRetrieveMemoryStoresTool
   > = z.object({
-    type:
-      RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema,
+    type: z.literal("retrieve_memory_stores"),
     requiresApproval: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -5541,27 +5160,12 @@ export function agentToolInputRunRetrieveMemoryStoresToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType,
-  );
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType
-  > =
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunWriteMemoryStoreTool$inboundSchema: z.ZodType<
   AgentToolInputRunWriteMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$inboundSchema,
+  type: z.literal("write_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5570,7 +5174,7 @@ export const AgentToolInputRunWriteMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunWriteMemoryStoreTool$Outbound = {
-  type: string;
+  type: "write_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -5580,8 +5184,7 @@ export const AgentToolInputRunWriteMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunWriteMemoryStoreTool
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$outboundSchema,
+  type: z.literal("write_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5610,23 +5213,12 @@ export function agentToolInputRunWriteMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodyType
-  > = z.nativeEnum(RunAgentAgentToolInputRunAgentsRequestRequestBodyType);
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodyType
-  > = RunAgentAgentToolInputRunAgentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunQueryMemoryStoreTool$inboundSchema: z.ZodType<
   AgentToolInputRunQueryMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodyType$inboundSchema,
+  type: z.literal("query_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5635,7 +5227,7 @@ export const AgentToolInputRunQueryMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunQueryMemoryStoreTool$Outbound = {
-  type: string;
+  type: "query_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -5645,7 +5237,7 @@ export const AgentToolInputRunQueryMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunQueryMemoryStoreTool
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema,
+  type: z.literal("query_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5674,21 +5266,12 @@ export function agentToolInputRunQueryMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentAgentToolInputRunAgentsRequestType> = z
-    .nativeEnum(RunAgentAgentToolInputRunAgentsRequestType);
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentAgentToolInputRunAgentsRequestType> =
-    RunAgentAgentToolInputRunAgentsRequestType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunRetrieveAgentsTool$inboundSchema: z.ZodType<
   AgentToolInputRunRetrieveAgentsTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsRequestType$inboundSchema,
+  type: z.literal("retrieve_agents"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5697,7 +5280,7 @@ export const AgentToolInputRunRetrieveAgentsTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunRetrieveAgentsTool$Outbound = {
-  type: string;
+  type: "retrieve_agents";
   requires_approval?: boolean | undefined;
 };
 
@@ -5707,7 +5290,7 @@ export const AgentToolInputRunRetrieveAgentsTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunRetrieveAgentsTool
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsRequestType$outboundSchema,
+  type: z.literal("retrieve_agents"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5736,21 +5319,12 @@ export function agentToolInputRunRetrieveAgentsToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentAgentToolInputRunAgentsType
-> = z.nativeEnum(RunAgentAgentToolInputRunAgentsType);
-/** @internal */
-export const RunAgentAgentToolInputRunAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentAgentToolInputRunAgentsType> =
-    RunAgentAgentToolInputRunAgentsType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunCallSubAgentTool$inboundSchema: z.ZodType<
   AgentToolInputRunCallSubAgentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsType$inboundSchema,
+  type: z.literal("call_sub_agent"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5759,7 +5333,7 @@ export const AgentToolInputRunCallSubAgentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunCallSubAgentTool$Outbound = {
-  type: string;
+  type: "call_sub_agent";
   requires_approval?: boolean | undefined;
 };
 
@@ -5769,7 +5343,7 @@ export const AgentToolInputRunCallSubAgentTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunCallSubAgentTool
 > = z.object({
-  type: RunAgentAgentToolInputRunAgentsType$outboundSchema,
+  type: z.literal("call_sub_agent"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5797,21 +5371,12 @@ export function agentToolInputRunCallSubAgentToolFromJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentAgentToolInputRunType
-> = z.nativeEnum(RunAgentAgentToolInputRunType);
-/** @internal */
-export const RunAgentAgentToolInputRunType$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentAgentToolInputRunType
-> = RunAgentAgentToolInputRunType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunWebScraperTool$inboundSchema: z.ZodType<
   AgentToolInputRunWebScraperTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentAgentToolInputRunType$inboundSchema,
+  type: z.literal("web_scraper"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5820,7 +5385,7 @@ export const AgentToolInputRunWebScraperTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunWebScraperTool$Outbound = {
-  type: string;
+  type: "web_scraper";
   requires_approval?: boolean | undefined;
 };
 
@@ -5830,7 +5395,7 @@ export const AgentToolInputRunWebScraperTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunWebScraperTool
 > = z.object({
-  type: RunAgentAgentToolInputRunType$outboundSchema,
+  type: z.literal("web_scraper"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5858,21 +5423,12 @@ export function agentToolInputRunWebScraperToolFromJSON(
 }
 
 /** @internal */
-export const AgentToolInputRunType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputRunType
-> = z.nativeEnum(AgentToolInputRunType);
-/** @internal */
-export const AgentToolInputRunType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputRunType
-> = AgentToolInputRunType$inboundSchema;
-
-/** @internal */
 export const AgentToolInputRunGoogleSearchTool$inboundSchema: z.ZodType<
   AgentToolInputRunGoogleSearchTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentToolInputRunType$inboundSchema,
+  type: z.literal("google_search"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5881,7 +5437,7 @@ export const AgentToolInputRunGoogleSearchTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentToolInputRunGoogleSearchTool$Outbound = {
-  type: string;
+  type: "google_search";
   requires_approval?: boolean | undefined;
 };
 
@@ -5891,7 +5447,7 @@ export const AgentToolInputRunGoogleSearchTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunGoogleSearchTool
 > = z.object({
-  type: AgentToolInputRunType$outboundSchema,
+  type: z.literal("google_search"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5924,10 +5480,6 @@ export const AgentToolInputRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => HTTPToolRun$inboundSchema),
-  z.lazy(() => CodeToolRun$inboundSchema),
-  z.lazy(() => MCPToolRun$inboundSchema),
-  z.lazy(() => FunctionToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunGoogleSearchTool$inboundSchema),
   z.lazy(() => AgentToolInputRunWebScraperTool$inboundSchema),
   z.lazy(() => AgentToolInputRunCallSubAgentTool$inboundSchema),
@@ -5939,13 +5491,13 @@ export const AgentToolInputRun$inboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$inboundSchema),
   z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema),
   z.lazy(() => AgentToolInputRunCurrentDateTool$inboundSchema),
+  z.lazy(() => HTTPToolRun$inboundSchema),
+  z.lazy(() => CodeToolRun$inboundSchema),
+  z.lazy(() => FunctionToolRun$inboundSchema),
+  z.lazy(() => MCPToolRun$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputRun$Outbound =
-  | HTTPToolRun$Outbound
-  | CodeToolRun$Outbound
-  | MCPToolRun$Outbound
-  | FunctionToolRun$Outbound
   | AgentToolInputRunGoogleSearchTool$Outbound
   | AgentToolInputRunWebScraperTool$Outbound
   | AgentToolInputRunCallSubAgentTool$Outbound
@@ -5956,7 +5508,11 @@ export type AgentToolInputRun$Outbound =
   | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
   | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
   | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-  | AgentToolInputRunCurrentDateTool$Outbound;
+  | AgentToolInputRunCurrentDateTool$Outbound
+  | HTTPToolRun$Outbound
+  | CodeToolRun$Outbound
+  | FunctionToolRun$Outbound
+  | MCPToolRun$Outbound;
 
 /** @internal */
 export const AgentToolInputRun$outboundSchema: z.ZodType<
@@ -5964,10 +5520,6 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRun
 > = z.union([
-  z.lazy(() => HTTPToolRun$outboundSchema),
-  z.lazy(() => CodeToolRun$outboundSchema),
-  z.lazy(() => MCPToolRun$outboundSchema),
-  z.lazy(() => FunctionToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
   z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
   z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
@@ -5979,6 +5531,10 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+  z.lazy(() => HTTPToolRun$outboundSchema),
+  z.lazy(() => CodeToolRun$outboundSchema),
+  z.lazy(() => FunctionToolRun$outboundSchema),
+  z.lazy(() => MCPToolRun$outboundSchema),
 ]);
 
 export function agentToolInputRunToJSON(
@@ -6143,10 +5699,6 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => HTTPToolRun$inboundSchema),
-      z.lazy(() => CodeToolRun$inboundSchema),
-      z.lazy(() => MCPToolRun$inboundSchema),
-      z.lazy(() => FunctionToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunGoogleSearchTool$inboundSchema),
       z.lazy(() => AgentToolInputRunWebScraperTool$inboundSchema),
       z.lazy(() => AgentToolInputRunCallSubAgentTool$inboundSchema),
@@ -6158,6 +5710,10 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$inboundSchema),
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$inboundSchema),
+      z.lazy(() => HTTPToolRun$inboundSchema),
+      z.lazy(() => CodeToolRun$inboundSchema),
+      z.lazy(() => FunctionToolRun$inboundSchema),
+      z.lazy(() => MCPToolRun$inboundSchema),
     ]),
   ).optional(),
   tool_approval_required: RunAgentToolApprovalRequired$inboundSchema.default(
@@ -6180,10 +5736,6 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
 export type RunAgentSettings$Outbound = {
   tools?:
     | Array<
-      | HTTPToolRun$Outbound
-      | CodeToolRun$Outbound
-      | MCPToolRun$Outbound
-      | FunctionToolRun$Outbound
       | AgentToolInputRunGoogleSearchTool$Outbound
       | AgentToolInputRunWebScraperTool$Outbound
       | AgentToolInputRunCallSubAgentTool$Outbound
@@ -6195,6 +5747,10 @@ export type RunAgentSettings$Outbound = {
       | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
       | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
       | AgentToolInputRunCurrentDateTool$Outbound
+      | HTTPToolRun$Outbound
+      | CodeToolRun$Outbound
+      | FunctionToolRun$Outbound
+      | MCPToolRun$Outbound
     >
     | undefined;
   tool_approval_required: string;
@@ -6212,10 +5768,6 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => HTTPToolRun$outboundSchema),
-      z.lazy(() => CodeToolRun$outboundSchema),
-      z.lazy(() => MCPToolRun$outboundSchema),
-      z.lazy(() => FunctionToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
       z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
@@ -6227,6 +5779,10 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+      z.lazy(() => HTTPToolRun$outboundSchema),
+      z.lazy(() => CodeToolRun$outboundSchema),
+      z.lazy(() => FunctionToolRun$outboundSchema),
+      z.lazy(() => MCPToolRun$outboundSchema),
     ]),
   ).optional(),
   toolApprovalRequired: RunAgentToolApprovalRequired$outboundSchema.default(
@@ -6436,33 +5992,19 @@ export const RunAgentParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.ToolCallPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  components.TextPart$inboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.DataPart$inboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.FilePart$inboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.ToolResultPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  components.TextPart$inboundSchema,
+  components.DataPart$inboundSchema,
+  components.FilePart$inboundSchema,
+  components.ToolCallPart$inboundSchema,
+  components.ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type RunAgentParts$Outbound =
-  | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-  | (components.TextPart$Outbound & { kind: "text" })
-  | (components.DataPart$Outbound & { kind: "data" })
-  | (components.FilePart$Outbound & { kind: "file" })
-  | (components.ToolResultPart$Outbound & { kind: "tool_result" });
+  | components.TextPart$Outbound
+  | components.DataPart$Outbound
+  | components.FilePart$Outbound
+  | components.ToolCallPart$Outbound
+  | components.ToolResultPart$Outbound;
 
 /** @internal */
 export const RunAgentParts$outboundSchema: z.ZodType<
@@ -6470,25 +6012,11 @@ export const RunAgentParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentParts
 > = z.union([
-  components.ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  components.TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  components.TextPart$outboundSchema,
+  components.DataPart$outboundSchema,
+  components.FilePart$outboundSchema,
+  components.ToolCallPart$outboundSchema,
+  components.ToolResultPart$outboundSchema,
 ]);
 
 export function runAgentPartsToJSON(runAgentParts: RunAgentParts): string {
@@ -6515,31 +6043,11 @@ export const RunAgentTaskStatusMessage$inboundSchema: z.ZodType<
   role: RunAgentExtendedMessageRole$inboundSchema,
   parts: z.array(
     z.union([
-      components.ToolCallPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.TextPart$inboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.DataPart$inboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.FilePart$inboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.ToolResultPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      components.TextPart$inboundSchema,
+      components.DataPart$inboundSchema,
+      components.FilePart$inboundSchema,
+      components.ToolCallPart$inboundSchema,
+      components.ToolResultPart$inboundSchema,
     ]),
   ),
 });
@@ -6549,11 +6057,11 @@ export type RunAgentTaskStatusMessage$Outbound = {
   messageId: string;
   role: string;
   parts: Array<
-    | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-    | (components.TextPart$Outbound & { kind: "text" })
-    | (components.DataPart$Outbound & { kind: "data" })
-    | (components.FilePart$Outbound & { kind: "file" })
-    | (components.ToolResultPart$Outbound & { kind: "tool_result" })
+    | components.TextPart$Outbound
+    | components.DataPart$Outbound
+    | components.FilePart$Outbound
+    | components.ToolCallPart$Outbound
+    | components.ToolResultPart$Outbound
   >;
 };
 
@@ -6568,31 +6076,11 @@ export const RunAgentTaskStatusMessage$outboundSchema: z.ZodType<
   role: RunAgentExtendedMessageRole$outboundSchema,
   parts: z.array(
     z.union([
-      components.ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      components.TextPart$outboundSchema,
+      components.DataPart$outboundSchema,
+      components.FilePart$outboundSchema,
+      components.ToolCallPart$outboundSchema,
+      components.ToolResultPart$outboundSchema,
     ]),
   ),
 });

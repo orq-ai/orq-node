@@ -15,7 +15,7 @@ let value: CreatePrompt21 = {
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `type`                                                                       | [operations.CreatePrompt2Type](../../models/operations/createprompt2type.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `text`                                                                       | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

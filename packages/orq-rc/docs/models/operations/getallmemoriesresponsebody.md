@@ -12,7 +12,7 @@ let value: GetAllMemoriesResponseBody = {
   data: [
     {
       id: "<id>",
-      entityId: "4bfa9eea-c8c9-4910-96ef-775d69eafa96",
+      entityId: "<id>",
       created: "<value>",
       updated: "<value>",
       storeId: "<id>",
@@ -20,9 +20,10 @@ let value: GetAllMemoriesResponseBody = {
         "key": "<value>",
       },
       workspaceId: "<id>",
+      documentsCount: 7217.29,
     },
   ],
-  hasMore: true,
+  hasMore: false,
 };
 ```
 

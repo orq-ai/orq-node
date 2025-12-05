@@ -9,14 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ToolExecutionStartedStreamingEventType = {
-  EventWorkflowEventsToolExecutionStarted:
-    "event.workflow_events.tool_execution_started",
-} as const;
-export type ToolExecutionStartedStreamingEventType = ClosedEnum<
-  typeof ToolExecutionStartedStreamingEventType
->;
-
 /**
  * Orquesta product
  */
@@ -76,23 +68,13 @@ export type ToolExecutionStartedStreamingEventData = {
  * Emitted when a tool begins execution. Contains the tool ID, name, action type, input arguments, and execution context.
  */
 export type ToolExecutionStartedStreamingEvent = {
-  type: ToolExecutionStartedStreamingEventType;
+  type: "event.workflow_events.tool_execution_started";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ToolExecutionStartedStreamingEventData;
 };
-
-/** @internal */
-export const ToolExecutionStartedStreamingEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionStartedStreamingEventType> = z.nativeEnum(
-    ToolExecutionStartedStreamingEventType,
-  );
-/** @internal */
-export const ToolExecutionStartedStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionStartedStreamingEventType> =
-    ToolExecutionStartedStreamingEventType$inboundSchema;
 
 /** @internal */
 export const Product$inboundSchema: z.ZodNativeEnum<typeof Product> = z
@@ -307,13 +289,13 @@ export const ToolExecutionStartedStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionStartedStreamingEventType$inboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_started"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionStartedStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ToolExecutionStartedStreamingEvent$Outbound = {
-  type: string;
+  type: "event.workflow_events.tool_execution_started";
   timestamp: string;
   data: ToolExecutionStartedStreamingEventData$Outbound;
 };
@@ -324,7 +306,7 @@ export const ToolExecutionStartedStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolExecutionStartedStreamingEvent
 > = z.object({
-  type: ToolExecutionStartedStreamingEventType$outboundSchema,
+  type: z.literal("event.workflow_events.tool_execution_started"),
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionStartedStreamingEventData$outboundSchema),
 });

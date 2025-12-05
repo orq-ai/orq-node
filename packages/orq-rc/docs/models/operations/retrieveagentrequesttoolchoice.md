@@ -15,7 +15,9 @@ const value: operations.RetrieveAgentRequestToolChoice1 = "auto";
 
 ```typescript
 const value: operations.RetrieveAgentRequestToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

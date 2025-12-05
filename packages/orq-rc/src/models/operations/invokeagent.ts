@@ -213,11 +213,11 @@ export const ExtendedMessageRole = {
 export type ExtendedMessageRole = ClosedEnum<typeof ExtendedMessageRole>;
 
 export type InvokeAgentParts =
-  | (components.ToolCallPart & { kind: "tool_call" })
-  | (components.TextPart & { kind: "text" })
-  | (components.DataPart & { kind: "data" })
-  | (components.FilePart & { kind: "file" })
-  | (components.ToolResultPart & { kind: "tool_result" });
+  | components.TextPart
+  | components.DataPart
+  | components.FilePart
+  | components.ToolCallPart
+  | components.ToolResultPart;
 
 /**
  * Optional A2A message providing additional context about the current status
@@ -230,11 +230,11 @@ export type TaskStatusMessage = {
    */
   role: ExtendedMessageRole;
   parts: Array<
-    | (components.ToolCallPart & { kind: "tool_call" })
-    | (components.TextPart & { kind: "text" })
-    | (components.DataPart & { kind: "data" })
-    | (components.FilePart & { kind: "file" })
-    | (components.ToolResultPart & { kind: "tool_result" })
+    | components.TextPart
+    | components.DataPart
+    | components.FilePart
+    | components.ToolCallPart
+    | components.ToolResultPart
   >;
 };
 
@@ -757,33 +757,19 @@ export const InvokeAgentParts$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.ToolCallPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  components.TextPart$inboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.DataPart$inboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.FilePart$inboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.ToolResultPart$inboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  components.TextPart$inboundSchema,
+  components.DataPart$inboundSchema,
+  components.FilePart$inboundSchema,
+  components.ToolCallPart$inboundSchema,
+  components.ToolResultPart$inboundSchema,
 ]);
 /** @internal */
 export type InvokeAgentParts$Outbound =
-  | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-  | (components.TextPart$Outbound & { kind: "text" })
-  | (components.DataPart$Outbound & { kind: "data" })
-  | (components.FilePart$Outbound & { kind: "file" })
-  | (components.ToolResultPart$Outbound & { kind: "tool_result" });
+  | components.TextPart$Outbound
+  | components.DataPart$Outbound
+  | components.FilePart$Outbound
+  | components.ToolCallPart$Outbound
+  | components.ToolResultPart$Outbound;
 
 /** @internal */
 export const InvokeAgentParts$outboundSchema: z.ZodType<
@@ -791,25 +777,11 @@ export const InvokeAgentParts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeAgentParts
 > = z.union([
-  components.ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  components.TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  components.TextPart$outboundSchema,
+  components.DataPart$outboundSchema,
+  components.FilePart$outboundSchema,
+  components.ToolCallPart$outboundSchema,
+  components.ToolResultPart$outboundSchema,
 ]);
 
 export function invokeAgentPartsToJSON(
@@ -840,31 +812,11 @@ export const TaskStatusMessage$inboundSchema: z.ZodType<
   role: ExtendedMessageRole$inboundSchema,
   parts: z.array(
     z.union([
-      components.ToolCallPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.TextPart$inboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.DataPart$inboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.FilePart$inboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.ToolResultPart$inboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      components.TextPart$inboundSchema,
+      components.DataPart$inboundSchema,
+      components.FilePart$inboundSchema,
+      components.ToolCallPart$inboundSchema,
+      components.ToolResultPart$inboundSchema,
     ]),
   ),
 });
@@ -874,11 +826,11 @@ export type TaskStatusMessage$Outbound = {
   messageId: string;
   role: string;
   parts: Array<
-    | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-    | (components.TextPart$Outbound & { kind: "text" })
-    | (components.DataPart$Outbound & { kind: "data" })
-    | (components.FilePart$Outbound & { kind: "file" })
-    | (components.ToolResultPart$Outbound & { kind: "tool_result" })
+    | components.TextPart$Outbound
+    | components.DataPart$Outbound
+    | components.FilePart$Outbound
+    | components.ToolCallPart$Outbound
+    | components.ToolResultPart$Outbound
   >;
 };
 
@@ -893,31 +845,11 @@ export const TaskStatusMessage$outboundSchema: z.ZodType<
   role: ExtendedMessageRole$outboundSchema,
   parts: z.array(
     z.union([
-      components.ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      components.TextPart$outboundSchema,
+      components.DataPart$outboundSchema,
+      components.FilePart$outboundSchema,
+      components.ToolCallPart$outboundSchema,
+      components.ToolResultPart$outboundSchema,
     ]),
   ),
 });

@@ -173,27 +173,28 @@ export type CreateAgentResponseRequestAgentsResponsesRole = ClosedEnum<
 >;
 
 export type Parts =
-  | (components.ToolCallPart & { kind: "tool_call" })
-  | (components.TextPart & { kind: "text" })
-  | (components.DataPart & { kind: "data" })
-  | (components.FilePart & { kind: "file" })
-  | (components.ToolResultPart & { kind: "tool_result" });
+  | components.TextPart
+  | components.DataPart
+  | components.FilePart
+  | components.ToolCallPart
+  | components.ToolResultPart;
 
 export type Output = {
   messageId: string;
   role: CreateAgentResponseRequestAgentsResponsesRole;
   parts: Array<
-    | (components.ToolCallPart & { kind: "tool_call" })
-    | (components.TextPart & { kind: "text" })
-    | (components.DataPart & { kind: "data" })
-    | (components.FilePart & { kind: "file" })
-    | (components.ToolResultPart & { kind: "tool_result" })
+    | components.TextPart
+    | components.DataPart
+    | components.FilePart
+    | components.ToolCallPart
+    | components.ToolResultPart
   >;
   metadata?: { [k: string]: any } | undefined;
 };
 
 export type PromptTokensDetails = {
   cachedTokens?: number | null | undefined;
+  cacheCreationTokens?: number | null | undefined;
   /**
    * The number of audio input tokens consumed by the request.
    */
@@ -701,39 +702,19 @@ export const CreateAgentResponseRequestAgentsResponsesRole$outboundSchema:
 /** @internal */
 export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
   .union([
-    components.ToolCallPart$inboundSchema.and(
-      z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    components.TextPart$inboundSchema.and(
-      z.object({ kind: z.literal("text") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    components.DataPart$inboundSchema.and(
-      z.object({ kind: z.literal("data") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    components.FilePart$inboundSchema.and(
-      z.object({ kind: z.literal("file") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
-    components.ToolResultPart$inboundSchema.and(
-      z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-        kind: v.kind,
-      })),
-    ),
+    components.TextPart$inboundSchema,
+    components.DataPart$inboundSchema,
+    components.FilePart$inboundSchema,
+    components.ToolCallPart$inboundSchema,
+    components.ToolResultPart$inboundSchema,
   ]);
 /** @internal */
 export type Parts$Outbound =
-  | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-  | (components.TextPart$Outbound & { kind: "text" })
-  | (components.DataPart$Outbound & { kind: "data" })
-  | (components.FilePart$Outbound & { kind: "file" })
-  | (components.ToolResultPart$Outbound & { kind: "tool_result" });
+  | components.TextPart$Outbound
+  | components.DataPart$Outbound
+  | components.FilePart$Outbound
+  | components.ToolCallPart$Outbound
+  | components.ToolResultPart$Outbound;
 
 /** @internal */
 export const Parts$outboundSchema: z.ZodType<
@@ -741,25 +722,11 @@ export const Parts$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Parts
 > = z.union([
-  components.ToolCallPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
-  components.TextPart$outboundSchema.and(
-    z.object({ kind: z.literal("text") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.DataPart$outboundSchema.and(
-    z.object({ kind: z.literal("data") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.FilePart$outboundSchema.and(
-    z.object({ kind: z.literal("file") }).transform((v) => ({ kind: v.kind })),
-  ),
-  components.ToolResultPart$outboundSchema.and(
-    z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-      kind: v.kind,
-    })),
-  ),
+  components.TextPart$outboundSchema,
+  components.DataPart$outboundSchema,
+  components.FilePart$outboundSchema,
+  components.ToolCallPart$outboundSchema,
+  components.ToolResultPart$outboundSchema,
 ]);
 
 export function partsToJSON(parts: Parts): string {
@@ -782,31 +749,11 @@ export const Output$inboundSchema: z.ZodType<Output, z.ZodTypeDef, unknown> = z
     role: CreateAgentResponseRequestAgentsResponsesRole$inboundSchema,
     parts: z.array(
       z.union([
-        components.ToolCallPart$inboundSchema.and(
-          z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        components.TextPart$inboundSchema.and(
-          z.object({ kind: z.literal("text") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        components.DataPart$inboundSchema.and(
-          z.object({ kind: z.literal("data") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        components.FilePart$inboundSchema.and(
-          z.object({ kind: z.literal("file") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
-        components.ToolResultPart$inboundSchema.and(
-          z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-            kind: v.kind,
-          })),
-        ),
+        components.TextPart$inboundSchema,
+        components.DataPart$inboundSchema,
+        components.FilePart$inboundSchema,
+        components.ToolCallPart$inboundSchema,
+        components.ToolResultPart$inboundSchema,
       ]),
     ),
     metadata: z.record(z.any()).optional(),
@@ -816,11 +763,11 @@ export type Output$Outbound = {
   messageId: string;
   role: string;
   parts: Array<
-    | (components.ToolCallPart$Outbound & { kind: "tool_call" })
-    | (components.TextPart$Outbound & { kind: "text" })
-    | (components.DataPart$Outbound & { kind: "data" })
-    | (components.FilePart$Outbound & { kind: "file" })
-    | (components.ToolResultPart$Outbound & { kind: "tool_result" })
+    | components.TextPart$Outbound
+    | components.DataPart$Outbound
+    | components.FilePart$Outbound
+    | components.ToolCallPart$Outbound
+    | components.ToolResultPart$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -835,31 +782,11 @@ export const Output$outboundSchema: z.ZodType<
   role: CreateAgentResponseRequestAgentsResponsesRole$outboundSchema,
   parts: z.array(
     z.union([
-      components.ToolCallPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_call") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.TextPart$outboundSchema.and(
-        z.object({ kind: z.literal("text") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.DataPart$outboundSchema.and(
-        z.object({ kind: z.literal("data") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.FilePart$outboundSchema.and(
-        z.object({ kind: z.literal("file") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
-      components.ToolResultPart$outboundSchema.and(
-        z.object({ kind: z.literal("tool_result") }).transform((v) => ({
-          kind: v.kind,
-        })),
-      ),
+      components.TextPart$outboundSchema,
+      components.DataPart$outboundSchema,
+      components.FilePart$outboundSchema,
+      components.ToolCallPart$outboundSchema,
+      components.ToolResultPart$outboundSchema,
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -885,16 +812,19 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cached_tokens: z.nullable(z.number().int()).optional(),
+  cache_creation_tokens: z.nullable(z.number().int()).optional(),
   audio_tokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "cached_tokens": "cachedTokens",
+    "cache_creation_tokens": "cacheCreationTokens",
     "audio_tokens": "audioTokens",
   });
 });
 /** @internal */
 export type PromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
+  cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
@@ -905,10 +835,12 @@ export const PromptTokensDetails$outboundSchema: z.ZodType<
   PromptTokensDetails
 > = z.object({
   cachedTokens: z.nullable(z.number().int()).optional(),
+  cacheCreationTokens: z.nullable(z.number().int()).optional(),
   audioTokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     cachedTokens: "cached_tokens",
+    cacheCreationTokens: "cache_creation_tokens",
     audioTokens: "audio_tokens",
   });
 });

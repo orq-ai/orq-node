@@ -1,6 +1,6 @@
 # DeploymentStreamPrefixMessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,17 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentStreamContent2[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: operations.DeploymentStreamContent2[] = [
-  {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "wav",
-    },
-  },
-];
+const value: components.TextContentPartSchema[] = [];
 ```
 

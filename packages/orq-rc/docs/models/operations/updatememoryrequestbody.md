@@ -6,7 +6,7 @@
 import { UpdateMemoryRequestBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateMemoryRequestBody = {
-  entityId: "da43609e-fbc4-4415-9f55-7783d92fc842",
+  entityId: "<id>",
 };
 ```
 

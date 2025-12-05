@@ -6,7 +6,9 @@
 import { CreateAgentRequestToolChoiceAgents2 } from "@orq-ai/node/models/operations";
 
 let value: CreateAgentRequestToolChoiceAgents2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

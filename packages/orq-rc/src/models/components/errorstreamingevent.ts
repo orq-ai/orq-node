@@ -4,16 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ErrorStreamingEventType = {
-  AgentsError: "agents.error",
-} as const;
-export type ErrorStreamingEventType = ClosedEnum<
-  typeof ErrorStreamingEventType
->;
 
 export type ErrorStreamingEventData = {
   error: string;
@@ -24,22 +16,13 @@ export type ErrorStreamingEventData = {
  * Emitted when a streaming error occurs outside of normal agent execution. Contains the error message and error code for debugging.
  */
 export type ErrorStreamingEvent = {
-  type: ErrorStreamingEventType;
+  type: "agents.error";
   /**
    * ISO timestamp of the event
    */
   timestamp: string;
   data: ErrorStreamingEventData;
 };
-
-/** @internal */
-export const ErrorStreamingEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ErrorStreamingEventType
-> = z.nativeEnum(ErrorStreamingEventType);
-/** @internal */
-export const ErrorStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof ErrorStreamingEventType
-> = ErrorStreamingEventType$inboundSchema;
 
 /** @internal */
 export const ErrorStreamingEventData$inboundSchema: z.ZodType<
@@ -89,13 +72,13 @@ export const ErrorStreamingEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ErrorStreamingEventType$inboundSchema,
+  type: z.literal("agents.error"),
   timestamp: z.string(),
   data: z.lazy(() => ErrorStreamingEventData$inboundSchema),
 });
 /** @internal */
 export type ErrorStreamingEvent$Outbound = {
-  type: string;
+  type: "agents.error";
   timestamp: string;
   data: ErrorStreamingEventData$Outbound;
 };
@@ -106,7 +89,7 @@ export const ErrorStreamingEvent$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ErrorStreamingEvent
 > = z.object({
-  type: ErrorStreamingEventType$outboundSchema,
+  type: z.literal("agents.error"),
   timestamp: z.string(),
   data: z.lazy(() => ErrorStreamingEventData$outboundSchema),
 });

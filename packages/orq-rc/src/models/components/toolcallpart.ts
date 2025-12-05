@@ -5,20 +5,14 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const ToolCallPartKind = {
-  ToolCall: "tool_call",
-} as const;
-export type ToolCallPartKind = ClosedEnum<typeof ToolCallPartKind>;
 
 /**
  * A tool invocation request from an agent. Contains the tool name, unique call ID, and arguments for the tool execution.
  */
 export type ToolCallPart = {
-  kind: ToolCallPartKind;
+  kind: "tool_call";
   toolName: string;
   toolCallId: string;
   arguments: { [k: string]: any };
@@ -26,21 +20,12 @@ export type ToolCallPart = {
 };
 
 /** @internal */
-export const ToolCallPartKind$inboundSchema: z.ZodNativeEnum<
-  typeof ToolCallPartKind
-> = z.nativeEnum(ToolCallPartKind);
-/** @internal */
-export const ToolCallPartKind$outboundSchema: z.ZodNativeEnum<
-  typeof ToolCallPartKind
-> = ToolCallPartKind$inboundSchema;
-
-/** @internal */
 export const ToolCallPart$inboundSchema: z.ZodType<
   ToolCallPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: ToolCallPartKind$inboundSchema,
+  kind: z.literal("tool_call"),
   tool_name: z.string(),
   tool_call_id: z.string(),
   arguments: z.record(z.any()),
@@ -53,7 +38,7 @@ export const ToolCallPart$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ToolCallPart$Outbound = {
-  kind: string;
+  kind: "tool_call";
   tool_name: string;
   tool_call_id: string;
   arguments: { [k: string]: any };
@@ -66,7 +51,7 @@ export const ToolCallPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolCallPart
 > = z.object({
-  kind: ToolCallPartKind$outboundSchema,
+  kind: z.literal("tool_call"),
   toolName: z.string(),
   toolCallId: z.string(),
   arguments: z.record(z.any()),

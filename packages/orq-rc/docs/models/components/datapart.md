@@ -18,8 +18,8 @@ let value: DataPart = {
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `kind`                                                             | [components.DataPartKind](../../models/components/datapartkind.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `data`                                                             | Record<string, *any*>                                              | :heavy_check_mark:                                                 | N/A                                                                |
-| `metadata`                                                         | Record<string, *any*>                                              | :heavy_minus_sign:                                                 | N/A                                                                |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `kind`                | *"data"*              | :heavy_check_mark:    | N/A                   |
+| `data`                | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| `metadata`            | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |

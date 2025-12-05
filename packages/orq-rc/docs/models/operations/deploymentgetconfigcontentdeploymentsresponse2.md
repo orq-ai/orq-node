@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig2Deployments1`
+### `operations.DeploymentGetConfig21`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments1 = {
+const value: operations.DeploymentGetConfig21 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig2DeploymentsResponse2`
+### `operations.DeploymentGetConfig22`
 
 ```typescript
-const value: operations.DeploymentGetConfig2DeploymentsResponse2 = {
+const value: operations.DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
     url: "https://picsum.photos/id/1/200/300",
@@ -23,10 +23,10 @@ const value: operations.DeploymentGetConfig2DeploymentsResponse2 = {
 };
 ```
 
-### `operations.DeploymentGetConfig2Deployments3`
+### `operations.DeploymentGetConfig23`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments3 = {
+const value: operations.DeploymentGetConfig23 = {
   type: "file",
   file: {},
 };
