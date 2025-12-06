@@ -16,6 +16,7 @@ export type ToolCallPart = {
   toolName: string;
   toolCallId: string;
   arguments: { [k: string]: any };
+  thoughtSignature?: string | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -29,11 +30,13 @@ export const ToolCallPart$inboundSchema: z.ZodType<
   tool_name: z.string(),
   tool_call_id: z.string(),
   arguments: z.record(z.any()),
+  thought_signature: z.string().optional(),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_name": "toolName",
     "tool_call_id": "toolCallId",
+    "thought_signature": "thoughtSignature",
   });
 });
 /** @internal */
@@ -42,6 +45,7 @@ export type ToolCallPart$Outbound = {
   tool_name: string;
   tool_call_id: string;
   arguments: { [k: string]: any };
+  thought_signature?: string | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -55,11 +59,13 @@ export const ToolCallPart$outboundSchema: z.ZodType<
   toolName: z.string(),
   toolCallId: z.string(),
   arguments: z.record(z.any()),
+  thoughtSignature: z.string().optional(),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolName: "tool_name",
     toolCallId: "tool_call_id",
+    thoughtSignature: "thought_signature",
   });
 });
 

@@ -328,6 +328,10 @@ export type ListDatasetDatapointsMessagesToolCalls = {
    */
   type: ListDatasetDatapointsMessagesType;
   function: ListDatasetDatapointsMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type ListDatasetDatapointsMessagesAssistantMessage = {
@@ -1812,12 +1816,18 @@ export const ListDatasetDatapointsMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: ListDatasetDatapointsMessagesType$inboundSchema,
   function: z.lazy(() => ListDatasetDatapointsMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type ListDatasetDatapointsMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: ListDatasetDatapointsMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -1829,6 +1839,11 @@ export const ListDatasetDatapointsMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: ListDatasetDatapointsMessagesType$outboundSchema,
   function: z.lazy(() => ListDatasetDatapointsMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function listDatasetDatapointsMessagesToolCallsToJSON(
@@ -3012,7 +3027,7 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T15:18:51.541Z",
+    "2025-12-06T20:32:50.013Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3047,7 +3062,7 @@ export const ListDatasetDatapointsEvaluations3$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: ListDatasetDatapointsEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T15:18:51.541Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-06T20:32:50.013Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3118,7 +3133,7 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T15:18:51.540Z",
+    "2025-12-06T20:32:50.013Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3155,7 +3170,7 @@ export const ListDatasetDatapointsEvaluations2$outboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T15:18:51.540Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-06T20:32:50.013Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -3222,7 +3237,7 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T15:18:51.539Z",
+    "2025-12-06T20:32:50.012Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3260,7 +3275,7 @@ export const ListDatasetDatapointsEvaluations1$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T15:18:51.539Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-06T20:32:50.012Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -3373,7 +3388,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-05T15:18:39.353Z",
+    "2025-12-06T20:32:38.119Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3451,7 +3466,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-05T15:18:39.353Z"))
+  updated: z.date().default(() => new Date("2025-12-06T20:32:38.119Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

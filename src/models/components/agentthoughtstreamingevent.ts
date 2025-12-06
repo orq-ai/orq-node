@@ -105,6 +105,10 @@ export type AgentThoughtStreamingEventToolCalls = {
   id?: string | undefined;
   type?: AgentThoughtStreamingEventDataType | undefined;
   function?: AgentThoughtStreamingEventFunction | undefined;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export const AgentThoughtStreamingEventDataRole = {
@@ -542,12 +546,18 @@ export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   type: AgentThoughtStreamingEventDataType$inboundSchema.optional(),
   function: z.lazy(() => AgentThoughtStreamingEventFunction$inboundSchema)
     .optional(),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type AgentThoughtStreamingEventToolCalls$Outbound = {
   id?: string | undefined;
   type?: string | undefined;
   function?: AgentThoughtStreamingEventFunction$Outbound | undefined;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -560,6 +570,11 @@ export const AgentThoughtStreamingEventToolCalls$outboundSchema: z.ZodType<
   type: AgentThoughtStreamingEventDataType$outboundSchema.optional(),
   function: z.lazy(() => AgentThoughtStreamingEventFunction$outboundSchema)
     .optional(),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function agentThoughtStreamingEventToolCallsToJSON(

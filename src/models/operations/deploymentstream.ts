@@ -308,6 +308,10 @@ export type PrefixMessagesToolCalls = {
    */
   type: DeploymentStreamPrefixMessagesType;
   function: PrefixMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type PrefixMessagesAssistantMessage = {
@@ -1016,6 +1020,10 @@ export type DeploymentStreamMessagesToolCalls = {
    */
   type: DeploymentStreamMessagesType;
   function: DeploymentStreamMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type DeploymentStreamMessagesAssistantMessage = {
@@ -2990,12 +2998,18 @@ export const PrefixMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentStreamPrefixMessagesType$inboundSchema,
   function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type PrefixMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: PrefixMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -3007,6 +3021,11 @@ export const PrefixMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentStreamPrefixMessagesType$outboundSchema,
   function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function prefixMessagesToolCallsToJSON(
@@ -4879,12 +4898,18 @@ export const DeploymentStreamMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentStreamMessagesType$inboundSchema,
   function: z.lazy(() => DeploymentStreamMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type DeploymentStreamMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: DeploymentStreamMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -4896,6 +4921,11 @@ export const DeploymentStreamMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentStreamMessagesType$outboundSchema,
   function: z.lazy(() => DeploymentStreamMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function deploymentStreamMessagesToolCallsToJSON(

@@ -805,6 +805,10 @@ export type UpdatePromptMessagesToolCalls = {
    */
   type: UpdatePromptMessagesType;
   function: UpdatePromptMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type UpdatePromptMessagesAssistantMessage = {
@@ -3720,12 +3724,18 @@ export const UpdatePromptMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: UpdatePromptMessagesType$inboundSchema,
   function: z.lazy(() => UpdatePromptMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type UpdatePromptMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: UpdatePromptMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -3737,6 +3747,11 @@ export const UpdatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: UpdatePromptMessagesType$outboundSchema,
   function: z.lazy(() => UpdatePromptMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function updatePromptMessagesToolCallsToJSON(

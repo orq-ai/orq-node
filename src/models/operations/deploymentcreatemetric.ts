@@ -340,6 +340,10 @@ export type DeploymentCreateMetricMessagesToolCalls = {
    */
   type: DeploymentCreateMetricMessagesType;
   function: DeploymentCreateMetricMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type DeploymentCreateMetricMessagesAssistantMessage = {
@@ -1067,6 +1071,10 @@ export type ChoicesToolCalls = {
    */
   type: ChoicesType;
   function: ChoicesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type ChoicesAssistantMessage = {
@@ -2514,12 +2522,18 @@ export const DeploymentCreateMetricMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentCreateMetricMessagesType$inboundSchema,
   function: z.lazy(() => DeploymentCreateMetricMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type DeploymentCreateMetricMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: DeploymentCreateMetricMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -2531,6 +2545,11 @@ export const DeploymentCreateMetricMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: DeploymentCreateMetricMessagesType$outboundSchema,
   function: z.lazy(() => DeploymentCreateMetricMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function deploymentCreateMetricMessagesToolCallsToJSON(
@@ -4512,12 +4531,18 @@ export const ChoicesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: ChoicesType$inboundSchema,
   function: z.lazy(() => ChoicesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type ChoicesToolCalls$Outbound = {
   id: string;
   type: string;
   function: ChoicesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -4529,6 +4554,11 @@ export const ChoicesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: ChoicesType$outboundSchema,
   function: z.lazy(() => ChoicesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function choicesToolCallsToJSON(
