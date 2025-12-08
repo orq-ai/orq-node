@@ -24,7 +24,7 @@ permissions:
   contents: write
   pull-requests: write
   statuses: write
-  id-token: write
+  id-token: write # Required for OpenID Connect (OIDC)
 
 jobs:
   generate:
