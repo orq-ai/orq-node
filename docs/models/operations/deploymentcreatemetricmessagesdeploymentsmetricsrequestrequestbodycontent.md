@@ -11,16 +11,13 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetrics2[]`
 
 ```typescript
-const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[] =
-    [
-      {
-        type: "redacted_reasoning",
-        data: "<value>",
-      },
-    ];
+const value: operations.DeploymentCreateMetricContentDeploymentsMetrics2[] = [
+  {
+    type: "refusal",
+  },
+];
 ```
 

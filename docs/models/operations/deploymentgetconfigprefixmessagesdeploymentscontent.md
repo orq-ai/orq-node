@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesDeploymentsContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,9 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeployments2[]`
+### `operations.Content2[]`
 
 ```typescript
-const value: operations.DeploymentGetConfigContentDeployments2[] = [];
+const value: operations.Content2[] = [];
 ```
 

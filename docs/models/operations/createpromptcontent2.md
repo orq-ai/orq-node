@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.CreatePrompt21`
+### `operations.Two1`
 
 ```typescript
-const value: operations.CreatePrompt21 = {
+const value: operations.Two1 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.Two2`
+### `operations.CreatePrompt22`
 
 ```typescript
-const value: operations.Two2 = {
+const value: operations.CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
     url: "https://picsum.photos/id/1/200/300",
@@ -23,10 +23,10 @@ const value: operations.Two2 = {
 };
 ```
 
-### `operations.Three`
+### `operations.Two3`
 
 ```typescript
-const value: operations.Three = {
+const value: operations.Two3 = {
   type: "file",
   file: {},
 };

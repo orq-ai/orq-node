@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -152,6 +153,10 @@ export type CreateAgentResponseRequestRequestBody = {
    * If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors.
    */
   background?: boolean | undefined;
+  /**
+   * If true, returns Server-Sent Events (SSE) streaming response with real-time events. If false (default), returns standard JSON response.
+   */
+  stream?: boolean | undefined;
 };
 
 export type CreateAgentResponseRequestRequest = {
@@ -160,6 +165,16 @@ export type CreateAgentResponseRequestRequest = {
    */
   agentKey: string;
   requestBody: CreateAgentResponseRequestRequestBody;
+};
+
+/**
+ * Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details. In streaming mode, returns Server-Sent Events (SSE) with real-time events.
+ */
+export type CreateAgentResponseRequestAgentsResponsesResponseBody = {
+  /**
+   * Union of all possible streaming events. Each event has a type field for discrimination.
+   */
+  data?: components.ResponseStreamingEvent | undefined;
 };
 
 export const CreateAgentResponseRequestAgentsResponsesRole = {
@@ -232,7 +247,7 @@ export type CreateAgentResponseRequestUsage = {
 };
 
 /**
- * Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details.
+ * Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details. In streaming mode, returns Server-Sent Events (SSE) with real-time events.
  */
 export type CreateAgentResponseRequestResponseBody = {
   /**
@@ -260,6 +275,10 @@ export type CreateAgentResponseRequestResponseBody = {
    */
   usage?: CreateAgentResponseRequestUsage | null | undefined;
 };
+
+export type CreateAgentResponseRequestResponse =
+  | CreateAgentResponseRequestResponseBody
+  | EventStream<CreateAgentResponseRequestAgentsResponsesResponseBody>;
 
 /** @internal */
 export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
@@ -574,6 +593,7 @@ export const CreateAgentResponseRequestRequestBody$inboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   background: z.boolean().default(false),
+  stream: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "task_id": "taskId",
@@ -589,6 +609,7 @@ export type CreateAgentResponseRequestRequestBody$Outbound = {
   memory?: Memory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   background: boolean;
+  stream: boolean;
 };
 
 /** @internal */
@@ -606,6 +627,7 @@ export const CreateAgentResponseRequestRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   background: z.boolean().default(false),
+  stream: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",
@@ -687,6 +709,63 @@ export function createAgentResponseRequestRequestFromJSON(
     jsonString,
     (x) => CreateAgentResponseRequestRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateAgentResponseRequestRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentResponseRequestAgentsResponsesResponseBody$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestAgentsResponsesResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    data: z.string().transform((v, ctx) => {
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.ResponseStreamingEvent$inboundSchema.optional()),
+  });
+/** @internal */
+export type CreateAgentResponseRequestAgentsResponsesResponseBody$Outbound = {
+  data?: components.ResponseStreamingEvent$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateAgentResponseRequestAgentsResponsesResponseBody$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestAgentsResponsesResponseBody$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseRequestAgentsResponsesResponseBody
+  > = z.object({
+    data: components.ResponseStreamingEvent$outboundSchema.optional(),
+  });
+
+export function createAgentResponseRequestAgentsResponsesResponseBodyToJSON(
+  createAgentResponseRequestAgentsResponsesResponseBody:
+    CreateAgentResponseRequestAgentsResponsesResponseBody,
+): string {
+  return JSON.stringify(
+    CreateAgentResponseRequestAgentsResponsesResponseBody$outboundSchema.parse(
+      createAgentResponseRequestAgentsResponsesResponseBody,
+    ),
+  );
+}
+export function createAgentResponseRequestAgentsResponsesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateAgentResponseRequestAgentsResponsesResponseBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentResponseRequestAgentsResponsesResponseBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseRequestAgentsResponsesResponseBody' from JSON`,
   );
 }
 
@@ -1074,5 +1153,59 @@ export function createAgentResponseRequestResponseBodyFromJSON(
     (x) =>
       CreateAgentResponseRequestResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateAgentResponseRequestResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentResponseRequestResponse$inboundSchema: z.ZodType<
+  CreateAgentResponseRequestResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateAgentResponseRequestResponseBody$inboundSchema),
+  z.instanceof(ReadableStream<Uint8Array>)
+    .transform(stream => {
+      return new EventStream(stream, rawEvent => {
+        if (rawEvent.data === "[DONE]") return { done: true };
+        return {
+          value: z.lazy(() =>
+            CreateAgentResponseRequestAgentsResponsesResponseBody$inboundSchema
+          ).parse(rawEvent),
+        };
+      });
+    }),
+]);
+/** @internal */
+export type CreateAgentResponseRequestResponse$Outbound =
+  | CreateAgentResponseRequestResponseBody$Outbound
+  | never;
+
+/** @internal */
+export const CreateAgentResponseRequestResponse$outboundSchema: z.ZodType<
+  CreateAgentResponseRequestResponse$Outbound,
+  z.ZodTypeDef,
+  CreateAgentResponseRequestResponse
+> = z.union([
+  z.lazy(() => CreateAgentResponseRequestResponseBody$outboundSchema),
+  z.never(),
+]);
+
+export function createAgentResponseRequestResponseToJSON(
+  createAgentResponseRequestResponse: CreateAgentResponseRequestResponse,
+): string {
+  return JSON.stringify(
+    CreateAgentResponseRequestResponse$outboundSchema.parse(
+      createAgentResponseRequestResponse,
+    ),
+  );
+}
+export function createAgentResponseRequestResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentResponseRequestResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentResponseRequestResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseRequestResponse' from JSON`,
   );
 }

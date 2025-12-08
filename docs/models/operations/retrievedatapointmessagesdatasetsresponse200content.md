@@ -11,10 +11,10 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.RetrieveDatapointContentDatasetsResponse2002[]`
+### `operations.RetrieveDatapointContentDatasets2[]`
 
 ```typescript
-const value: operations.RetrieveDatapointContentDatasetsResponse2002[] = [
+const value: operations.RetrieveDatapointContentDatasets2[] = [
   {
     type: "text",
     text: "<value>",

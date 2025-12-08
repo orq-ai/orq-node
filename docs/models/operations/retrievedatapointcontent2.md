@@ -1,20 +1,46 @@
 # RetrieveDatapointContent2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { RetrieveDatapointContent2 } from "@orq-ai/node/models/operations";
-
-let value: RetrieveDatapointContent2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                             | [operations.RetrieveDatapointContentType](../../models/operations/retrievedatapointcontenttype.md)                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
-| `text`                                                                                                             | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
-| `cacheControl`                                                                                                     | [operations.RetrieveDatapointContentCacheControl](../../models/operations/retrievedatapointcontentcachecontrol.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.RetrieveDatapoint24`
+
+```typescript
+const value: operations.RetrieveDatapoint24 = {
+  type: "file",
+  file: {},
+};
+```
+

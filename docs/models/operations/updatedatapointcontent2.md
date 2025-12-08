@@ -1,20 +1,46 @@
 # UpdateDatapointContent2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { UpdateDatapointContent2 } from "@orq-ai/node/models/operations";
-
-let value: UpdateDatapointContent2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                         | [operations.UpdateDatapointContentType](../../models/operations/updatedatapointcontenttype.md)                 | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `text`                                                                                                         | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `cacheControl`                                                                                                 | [operations.UpdateDatapointContentCacheControl](../../models/operations/updatedatapointcontentcachecontrol.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.UpdateDatapoint24`
+
+```typescript
+const value: operations.UpdateDatapoint24 = {
+  type: "file",
+  file: {},
+};
+```
+

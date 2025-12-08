@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig2DeploymentsResponse1`
+### `operations.DeploymentGetConfig21`
 
 ```typescript
-const value: operations.DeploymentGetConfig2DeploymentsResponse1 = {
+const value: operations.DeploymentGetConfig21 = {
   type: "text",
   text: "<value>",
 };

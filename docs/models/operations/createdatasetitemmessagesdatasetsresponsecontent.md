@@ -11,9 +11,9 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `operations.CreateDatasetItemContentDatasetsResponse2[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: operations.CreateDatasetItemContentDatasetsResponse2[] = [];
+const value: components.TextContentPartSchema[] = [];
 ```
 

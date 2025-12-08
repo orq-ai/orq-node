@@ -61,6 +61,7 @@ export type ToolExecutionFinishedStreamingEventData = {
   toolExecutionContext: ToolExecutionFinishedStreamingEventToolExecutionContext;
   responseId?: string | undefined;
   workflowRunId: string;
+  stream?: boolean | undefined;
 };
 
 /**
@@ -245,6 +246,7 @@ export const ToolExecutionFinishedStreamingEventData$inboundSchema: z.ZodType<
   ),
   responseId: z.string().optional(),
   workflowRunId: z.string(),
+  stream: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
@@ -259,6 +261,7 @@ export type ToolExecutionFinishedStreamingEventData$Outbound = {
     ToolExecutionFinishedStreamingEventToolExecutionContext$Outbound;
   responseId?: string | undefined;
   workflowRunId: string;
+  stream?: boolean | undefined;
 };
 
 /** @internal */
@@ -274,6 +277,7 @@ export const ToolExecutionFinishedStreamingEventData$outboundSchema: z.ZodType<
   ),
   responseId: z.string().optional(),
   workflowRunId: z.string(),
+  stream: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     actionType: "action_type",

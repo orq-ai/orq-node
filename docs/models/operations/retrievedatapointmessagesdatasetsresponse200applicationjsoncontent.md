@@ -11,10 +11,9 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.RetrieveDatapointContentDatasetsResponse200ApplicationJson2[]`
+### `operations.RetrieveDatapointContentDatasetsResponse2[]`
 
 ```typescript
-const value:
-  operations.RetrieveDatapointContentDatasetsResponse200ApplicationJson2[] = [];
+const value: operations.RetrieveDatapointContentDatasetsResponse2[] = [];
 ```
 

@@ -898,6 +898,9 @@ export type RetrieveAgentRequestKnowledgeBases = {
  */
 export type RetrieveAgentRequestResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   workspaceId: string;

@@ -1,20 +1,46 @@
 # UpdateDatapointContentDatasetsResponse2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { UpdateDatapointContentDatasetsResponse2 } from "@orq-ai/node/models/operations";
-
-let value: UpdateDatapointContentDatasetsResponse2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                         | [operations.UpdateDatapointContentDatasetsResponseType](../../models/operations/updatedatapointcontentdatasetsresponsetype.md)                 | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
-| `text`                                                                                                                                         | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
-| `cacheControl`                                                                                                                                 | [operations.UpdateDatapointContentDatasetsResponseCacheControl](../../models/operations/updatedatapointcontentdatasetsresponsecachecontrol.md) | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.UpdateDatapoint2Datasets4`
+
+```typescript
+const value: operations.UpdateDatapoint2Datasets4 = {
+  type: "file",
+  file: {},
+};
+```
+

@@ -34,6 +34,11 @@ import { tool$contactsDelete } from "./tools/contactsDelete.js";
 import { tool$contactsList } from "./tools/contactsList.js";
 import { tool$contactsRetrieve } from "./tools/contactsRetrieve.js";
 import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
+import { tool$conversationsCreate } from "./tools/conversationsCreate.js";
+import { tool$conversationsDelete } from "./tools/conversationsDelete.js";
+import { tool$conversationsList } from "./tools/conversationsList.js";
+import { tool$conversationsRetrieve } from "./tools/conversationsRetrieve.js";
+import { tool$conversationsUpdate } from "./tools/conversationsUpdate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
@@ -53,6 +58,7 @@ import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
 import { tool$evalsAll } from "./tools/evalsAll.js";
 import { tool$evalsCreate } from "./tools/evalsCreate.js";
 import { tool$evalsDelete } from "./tools/evalsDelete.js";
+import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
 import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
@@ -120,7 +126,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.26",
+    version: "4.1.0",
   });
 
   const client = new OrqCore({
@@ -162,6 +168,7 @@ export function createMCPServer(deps: {
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);
   tool(tool$evalsDelete);
+  tool(tool$evalsInvoke);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
@@ -175,6 +182,11 @@ export function createMCPServer(deps: {
   tool(tool$agentsRun);
   tool(tool$agentsStreamRun);
   tool(tool$agentsStream);
+  tool(tool$conversationsList);
+  tool(tool$conversationsCreate);
+  tool(tool$conversationsRetrieve);
+  tool(tool$conversationsUpdate);
+  tool(tool$conversationsDelete);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);

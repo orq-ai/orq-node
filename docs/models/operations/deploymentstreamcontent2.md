@@ -1,20 +1,46 @@
 # DeploymentStreamContent2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { DeploymentStreamContent2 } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamContent2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                           | [operations.DeploymentStreamContentType](../../models/operations/deploymentstreamcontenttype.md)                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `text`                                                                                                           | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `cacheControl`                                                                                                   | [operations.DeploymentStreamContentCacheControl](../../models/operations/deploymentstreamcontentcachecontrol.md) | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.DeploymentStream24`
+
+```typescript
+const value: operations.DeploymentStream24 = {
+  type: "file",
+  file: {},
+};
+```
+
