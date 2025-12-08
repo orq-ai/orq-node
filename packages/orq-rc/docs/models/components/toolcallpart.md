@@ -27,4 +27,5 @@ let value: ToolCallPart = {
 | `toolName`            | *string*              | :heavy_check_mark:    | N/A                   |
 | `toolCallId`          | *string*              | :heavy_check_mark:    | N/A                   |
 | `arguments`           | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| `thoughtSignature`    | *string*              | :heavy_minus_sign:    | N/A                   |
 | `metadata`            | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |

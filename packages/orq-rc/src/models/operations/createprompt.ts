@@ -171,7 +171,7 @@ export type CreatePromptMessages = {
    */
   content: string | Array<Two1 | CreatePrompt22 | Two3> | null;
   toolCalls?: Array<CreatePromptToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -606,6 +606,10 @@ export type CreatePromptMessagesToolCalls = {
    */
   type: CreatePromptMessagesType;
   function: CreatePromptMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type CreatePromptMessagesAssistantMessage = {
@@ -1238,6 +1242,7 @@ export const CreatePromptProvider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
 } as const;
@@ -1368,7 +1373,7 @@ export type CreatePromptPromptsResponseMessages = {
     | Array<CreatePrompt21 | CreatePrompt2Prompts2 | CreatePrompt23>
     | null;
   toolCalls?: Array<CreatePromptPromptsToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -1962,7 +1967,7 @@ export const CreatePromptMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => CreatePromptToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -1977,7 +1982,7 @@ export type CreatePromptMessages$Outbound = {
     | Array<Two1$Outbound | CreatePrompt22$Outbound | Two3$Outbound>
     | null;
   tool_calls?: Array<CreatePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -1999,7 +2004,7 @@ export const CreatePromptMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => CreatePromptToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
@@ -2992,12 +2997,18 @@ export const CreatePromptMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: CreatePromptMessagesType$inboundSchema,
   function: z.lazy(() => CreatePromptMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type CreatePromptMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: CreatePromptMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -3009,6 +3020,11 @@ export const CreatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: CreatePromptMessagesType$outboundSchema,
   function: z.lazy(() => CreatePromptMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function createPromptMessagesToolCallsToJSON(
@@ -4989,7 +5005,7 @@ export const CreatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -5008,7 +5024,7 @@ export type CreatePromptPromptsResponseMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<CreatePromptPromptsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -5030,7 +5046,7 @@ export const CreatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

@@ -1,5 +1,4 @@
 # Contacts
-(*contacts*)
 
 ## Overview
 

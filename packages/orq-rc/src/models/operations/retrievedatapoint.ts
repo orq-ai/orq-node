@@ -168,6 +168,10 @@ export type RetrieveDatapointMessagesToolCalls = {
    */
   type: RetrieveDatapointMessagesType;
   function: RetrieveDatapointMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type RetrieveDatapointMessagesAssistantMessage = {
@@ -1093,12 +1097,18 @@ export const RetrieveDatapointMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: RetrieveDatapointMessagesType$inboundSchema,
   function: z.lazy(() => RetrieveDatapointMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type RetrieveDatapointMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: RetrieveDatapointMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -1110,6 +1120,11 @@ export const RetrieveDatapointMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: RetrieveDatapointMessagesType$outboundSchema,
   function: z.lazy(() => RetrieveDatapointMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function retrieveDatapointMessagesToolCallsToJSON(
@@ -1863,7 +1878,7 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T12:55:02.598Z",
+    "2025-12-08T12:58:42.251Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1900,7 +1915,7 @@ export const RetrieveDatapointEvaluations3$outboundSchema: z.ZodType<
   source: RetrieveDatapointEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T12:55:02.598Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.251Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1965,7 +1980,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T12:55:02.598Z",
+    "2025-12-08T12:58:42.250Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2003,7 +2018,7 @@ export const RetrieveDatapointEvaluations2$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T12:55:02.598Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.250Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -2065,7 +2080,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   source: RetrieveDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-05T12:55:02.595Z",
+    "2025-12-08T12:58:42.249Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2100,7 +2115,7 @@ export const RetrieveDatapointEvaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: RetrieveDatapointEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-05T12:55:02.595Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.249Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -2211,7 +2226,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-05T12:54:50.174Z",
+    "2025-12-08T12:58:30.471Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2285,7 +2300,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-05T12:54:50.174Z"))
+  updated: z.date().default(() => new Date("2025-12-08T12:58:30.471Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

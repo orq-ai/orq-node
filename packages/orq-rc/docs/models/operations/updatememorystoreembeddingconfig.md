@@ -7,7 +7,7 @@ import { UpdateMemoryStoreEmbeddingConfig } from "@orq-ai/node/models/operations
 
 let value: UpdateMemoryStoreEmbeddingConfig = {
   modelId: "1035cf17-495b-47e6-b678-5d8e8b0ef180",
-  provider: "azure",
+  provider: "aws",
 };
 ```
 

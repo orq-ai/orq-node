@@ -342,6 +342,7 @@ export const GetPromptVersionProvider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
 } as const;
@@ -470,7 +471,7 @@ export type GetPromptVersionMessages = {
     | Array<GetPromptVersion21 | GetPromptVersion22 | GetPromptVersion23>
     | null;
   toolCalls?: Array<GetPromptVersionToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -1598,7 +1599,7 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => GetPromptVersionToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -1617,7 +1618,7 @@ export type GetPromptVersionMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<GetPromptVersionToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -1641,7 +1642,7 @@ export const GetPromptVersionMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => GetPromptVersionToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

@@ -102,9 +102,14 @@ export type AgentThoughtStreamingEventFunction = {
 };
 
 export type AgentThoughtStreamingEventToolCalls = {
+  index?: number | undefined;
   id?: string | undefined;
   type?: AgentThoughtStreamingEventDataType | undefined;
   function?: AgentThoughtStreamingEventFunction | undefined;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export const AgentThoughtStreamingEventDataRole = {
@@ -251,7 +256,7 @@ export type Choice = {
   logprobs?: Logprobs | null | undefined;
 };
 
-export type PromptTokensDetails = {
+export type AgentThoughtStreamingEventPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -260,7 +265,7 @@ export type PromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CompletionTokensDetails = {
+export type AgentThoughtStreamingEventCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -273,7 +278,7 @@ export type CompletionTokensDetails = {
 /**
  * Usage statistics for the completion request.
  */
-export type Usage = {
+export type AgentThoughtStreamingEventUsage = {
   /**
    * Number of tokens in the generated completion.
    */
@@ -286,8 +291,14 @@ export type Usage = {
    * Total number of tokens used in the request (prompt + completion).
    */
   totalTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | null | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  promptTokensDetails?:
+    | AgentThoughtStreamingEventPromptTokensDetails
+    | null
+    | undefined;
+  completionTokensDetails?:
+    | AgentThoughtStreamingEventCompletionTokensDetails
+    | null
+    | undefined;
 };
 
 export type AgentThoughtStreamingEventData = {
@@ -301,7 +312,7 @@ export type AgentThoughtStreamingEventData = {
   /**
    * Usage statistics for the completion request.
    */
-  usage?: Usage | undefined;
+  usage?: AgentThoughtStreamingEventUsage | undefined;
 };
 
 /**
@@ -538,16 +549,24 @@ export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  index: z.number().optional(),
   id: z.string().optional(),
   type: AgentThoughtStreamingEventDataType$inboundSchema.optional(),
   function: z.lazy(() => AgentThoughtStreamingEventFunction$inboundSchema)
     .optional(),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type AgentThoughtStreamingEventToolCalls$Outbound = {
+  index?: number | undefined;
   id?: string | undefined;
   type?: string | undefined;
   function?: AgentThoughtStreamingEventFunction$Outbound | undefined;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -556,10 +575,16 @@ export const AgentThoughtStreamingEventToolCalls$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentThoughtStreamingEventToolCalls
 > = z.object({
+  index: z.number().optional(),
   id: z.string().optional(),
   type: AgentThoughtStreamingEventDataType$outboundSchema.optional(),
   function: z.lazy(() => AgentThoughtStreamingEventFunction$outboundSchema)
     .optional(),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function agentThoughtStreamingEventToolCallsToJSON(
@@ -1026,82 +1051,94 @@ export function choiceFromJSON(
 }
 
 /** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
+export const AgentThoughtStreamingEventPromptTokensDetails$inboundSchema:
+  z.ZodType<
+    AgentThoughtStreamingEventPromptTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type PromptTokensDetails$Outbound = {
+export type AgentThoughtStreamingEventPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
   cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
 /** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
+export const AgentThoughtStreamingEventPromptTokensDetails$outboundSchema:
+  z.ZodType<
+    AgentThoughtStreamingEventPromptTokensDetails$Outbound,
+    z.ZodTypeDef,
+    AgentThoughtStreamingEventPromptTokensDetails
+  > = z.object({
+    cachedTokens: z.nullable(z.number().int()).optional(),
+    cacheCreationTokens: z.nullable(z.number().int()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cachedTokens: "cached_tokens",
+      cacheCreationTokens: "cache_creation_tokens",
+      audioTokens: "audio_tokens",
+    });
   });
-});
 
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
+export function agentThoughtStreamingEventPromptTokensDetailsToJSON(
+  agentThoughtStreamingEventPromptTokensDetails:
+    AgentThoughtStreamingEventPromptTokensDetails,
 ): string {
   return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
+    AgentThoughtStreamingEventPromptTokensDetails$outboundSchema.parse(
+      agentThoughtStreamingEventPromptTokensDetails,
+    ),
   );
 }
-export function promptTokensDetailsFromJSON(
+export function agentThoughtStreamingEventPromptTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  AgentThoughtStreamingEventPromptTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
+    (x) =>
+      AgentThoughtStreamingEventPromptTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'AgentThoughtStreamingEventPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
+export const AgentThoughtStreamingEventCompletionTokensDetails$inboundSchema:
+  z.ZodType<
+    AgentThoughtStreamingEventCompletionTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type CompletionTokensDetails$Outbound = {
+export type AgentThoughtStreamingEventCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | null | undefined;
   accepted_prediction_tokens?: number | null | undefined;
   rejected_prediction_tokens?: number | null | undefined;
@@ -1109,88 +1146,108 @@ export type CompletionTokensDetails$Outbound = {
 };
 
 /** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
-  );
-}
-export function completionTokensDetailsFromJSON(
-  jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
-export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
-  .object({
-    completion_tokens: z.number().optional(),
-    prompt_tokens: z.number().optional(),
-    total_tokens: z.number().optional(),
-    prompt_tokens_details: z.nullable(
-      z.lazy(() => PromptTokensDetails$inboundSchema),
-    ).optional(),
-    completion_tokens_details: z.nullable(
-      z.lazy(() => CompletionTokensDetails$inboundSchema),
-    ).optional(),
+export const AgentThoughtStreamingEventCompletionTokensDetails$outboundSchema:
+  z.ZodType<
+    AgentThoughtStreamingEventCompletionTokensDetails$Outbound,
+    z.ZodTypeDef,
+    AgentThoughtStreamingEventCompletionTokensDetails
+  > = z.object({
+    reasoningTokens: z.nullable(z.number()).optional(),
+    acceptedPredictionTokens: z.nullable(z.number()).optional(),
+    rejectedPredictionTokens: z.nullable(z.number()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "completion_tokens": "completionTokens",
-      "prompt_tokens": "promptTokens",
-      "total_tokens": "totalTokens",
-      "prompt_tokens_details": "promptTokensDetails",
-      "completion_tokens_details": "completionTokensDetails",
+      reasoningTokens: "reasoning_tokens",
+      acceptedPredictionTokens: "accepted_prediction_tokens",
+      rejectedPredictionTokens: "rejected_prediction_tokens",
+      audioTokens: "audio_tokens",
     });
   });
+
+export function agentThoughtStreamingEventCompletionTokensDetailsToJSON(
+  agentThoughtStreamingEventCompletionTokensDetails:
+    AgentThoughtStreamingEventCompletionTokensDetails,
+): string {
+  return JSON.stringify(
+    AgentThoughtStreamingEventCompletionTokensDetails$outboundSchema.parse(
+      agentThoughtStreamingEventCompletionTokensDetails,
+    ),
+  );
+}
+export function agentThoughtStreamingEventCompletionTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  AgentThoughtStreamingEventCompletionTokensDetails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AgentThoughtStreamingEventCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'AgentThoughtStreamingEventCompletionTokensDetails' from JSON`,
+  );
+}
+
 /** @internal */
-export type Usage$Outbound = {
+export const AgentThoughtStreamingEventUsage$inboundSchema: z.ZodType<
+  AgentThoughtStreamingEventUsage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  completion_tokens: z.number().optional(),
+  prompt_tokens: z.number().optional(),
+  total_tokens: z.number().optional(),
+  prompt_tokens_details: z.nullable(
+    z.lazy(() => AgentThoughtStreamingEventPromptTokensDetails$inboundSchema),
+  ).optional(),
+  completion_tokens_details: z.nullable(
+    z.lazy(() =>
+      AgentThoughtStreamingEventCompletionTokensDetails$inboundSchema
+    ),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_tokens": "completionTokens",
+    "prompt_tokens": "promptTokens",
+    "total_tokens": "totalTokens",
+    "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
+  });
+});
+/** @internal */
+export type AgentThoughtStreamingEventUsage$Outbound = {
   completion_tokens?: number | undefined;
   prompt_tokens?: number | undefined;
   total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
+  prompt_tokens_details?:
+    | AgentThoughtStreamingEventPromptTokensDetails$Outbound
+    | null
+    | undefined;
   completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
+    | AgentThoughtStreamingEventCompletionTokensDetails$Outbound
     | null
     | undefined;
 };
 
 /** @internal */
-export const Usage$outboundSchema: z.ZodType<
-  Usage$Outbound,
+export const AgentThoughtStreamingEventUsage$outboundSchema: z.ZodType<
+  AgentThoughtStreamingEventUsage$Outbound,
   z.ZodTypeDef,
-  Usage
+  AgentThoughtStreamingEventUsage
 > = z.object({
   completionTokens: z.number().optional(),
   promptTokens: z.number().optional(),
   totalTokens: z.number().optional(),
   promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
+    z.lazy(() => AgentThoughtStreamingEventPromptTokensDetails$outboundSchema),
   ).optional(),
   completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
+    z.lazy(() =>
+      AgentThoughtStreamingEventCompletionTokensDetails$outboundSchema
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1202,16 +1259,22 @@ export const Usage$outboundSchema: z.ZodType<
   });
 });
 
-export function usageToJSON(usage: Usage): string {
-  return JSON.stringify(Usage$outboundSchema.parse(usage));
+export function agentThoughtStreamingEventUsageToJSON(
+  agentThoughtStreamingEventUsage: AgentThoughtStreamingEventUsage,
+): string {
+  return JSON.stringify(
+    AgentThoughtStreamingEventUsage$outboundSchema.parse(
+      agentThoughtStreamingEventUsage,
+    ),
+  );
 }
-export function usageFromJSON(
+export function agentThoughtStreamingEventUsageFromJSON(
   jsonString: string,
-): SafeParseResult<Usage, SDKValidationError> {
+): SafeParseResult<AgentThoughtStreamingEventUsage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Usage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Usage' from JSON`,
+    (x) => AgentThoughtStreamingEventUsage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentThoughtStreamingEventUsage' from JSON`,
   );
 }
 
@@ -1228,7 +1291,7 @@ export const AgentThoughtStreamingEventData$inboundSchema: z.ZodType<
   iteration: z.number(),
   accumulated_execution_time: z.number(),
   responseId: z.string().optional(),
-  usage: z.lazy(() => Usage$inboundSchema).optional(),
+  usage: z.lazy(() => AgentThoughtStreamingEventUsage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "agent_id": "agentId",
@@ -1245,7 +1308,7 @@ export type AgentThoughtStreamingEventData$Outbound = {
   iteration: number;
   accumulated_execution_time: number;
   responseId?: string | undefined;
-  usage?: Usage$Outbound | undefined;
+  usage?: AgentThoughtStreamingEventUsage$Outbound | undefined;
 };
 
 /** @internal */
@@ -1261,7 +1324,8 @@ export const AgentThoughtStreamingEventData$outboundSchema: z.ZodType<
   iteration: z.number(),
   accumulatedExecutionTime: z.number(),
   responseId: z.string().optional(),
-  usage: z.lazy(() => Usage$outboundSchema).optional(),
+  usage: z.lazy(() => AgentThoughtStreamingEventUsage$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

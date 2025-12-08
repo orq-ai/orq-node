@@ -52,6 +52,7 @@ export const DeploymentInvokeProvider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
 } as const;

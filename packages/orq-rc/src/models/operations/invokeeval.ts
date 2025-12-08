@@ -118,7 +118,7 @@ export type Messages = {
    */
   content: string | Array<One | Two2 | Three> | null;
   toolCalls?: Array<ToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 export type InvokeEvalRequestBody = {
@@ -670,7 +670,7 @@ export const Messages$inboundSchema: z.ZodType<
     ]),
   ),
   tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -682,7 +682,7 @@ export type Messages$Outbound = {
   role: string;
   content: string | Array<One$Outbound | Two2$Outbound | Three$Outbound> | null;
   tool_calls?: Array<ToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -703,7 +703,7 @@ export const Messages$outboundSchema: z.ZodType<
     ]),
   ),
   toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

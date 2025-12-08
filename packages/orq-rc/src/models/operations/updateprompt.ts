@@ -305,6 +305,7 @@ export const Provider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
 } as const;
@@ -427,7 +428,7 @@ export type UpdatePromptMessages = {
     | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>
     | null;
   toolCalls?: Array<UpdatePromptToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -675,6 +676,10 @@ export type UpdatePromptMessagesToolCalls = {
    */
   type: UpdatePromptMessagesType;
   function: UpdatePromptMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
 };
 
 export type UpdatePromptMessagesAssistantMessage = {
@@ -1326,6 +1331,7 @@ export const UpdatePromptProvider = {
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
 } as const;
@@ -1460,7 +1466,7 @@ export type UpdatePromptPromptsResponseMessages = {
     >
     | null;
   toolCalls?: Array<UpdatePromptPromptsToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -2503,7 +2509,7 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => UpdatePromptToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -2522,7 +2528,7 @@ export type UpdatePromptMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<UpdatePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -2544,7 +2550,7 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => UpdatePromptToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
@@ -3180,12 +3186,18 @@ export const UpdatePromptMessagesToolCalls$inboundSchema: z.ZodType<
   id: z.string(),
   type: UpdatePromptMessagesType$inboundSchema,
   function: z.lazy(() => UpdatePromptMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
 });
 /** @internal */
 export type UpdatePromptMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: UpdatePromptMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
 };
 
 /** @internal */
@@ -3197,6 +3209,11 @@ export const UpdatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   id: z.string(),
   type: UpdatePromptMessagesType$outboundSchema,
   function: z.lazy(() => UpdatePromptMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
 });
 
 export function updatePromptMessagesToolCallsToJSON(
@@ -5280,7 +5297,7 @@ export const UpdatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -5299,7 +5316,7 @@ export type UpdatePromptPromptsResponseMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<UpdatePromptPromptsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -5323,7 +5340,7 @@ export const UpdatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

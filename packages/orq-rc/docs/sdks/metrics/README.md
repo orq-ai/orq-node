@@ -1,5 +1,4 @@
-# Metrics
-(*deployments.metrics*)
+# Deployments.Metrics
 
 ## Overview
 
