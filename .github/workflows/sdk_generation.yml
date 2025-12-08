@@ -6,9 +6,11 @@ on:
       target:
         type: string
         default: false
-      npm_publish_tag_name:
+      force:
+        description: "Force the generation of the SDKs"
+        default: "false"
+        required: false
         type: string
-        required: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,15 +24,15 @@ permissions:
   contents: write
   pull-requests: write
   statuses: write
-  id-token: write
+  id-token: write # Required for OpenID Connect (OIDC)
 
 jobs:
   generate:
-    uses: ./.github/workflows/workflow-executor.yml
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
     with:
       mode: direct
       target: ${{ inputs.target }}
-      npm_publish_tag_name: ${{ inputs.npm_publish_tag_name }}
+      force: ${{ inputs.force }}
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       npm_token: ${{ secrets.NPM_TOKEN }}

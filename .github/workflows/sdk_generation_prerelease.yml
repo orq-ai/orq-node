@@ -6,6 +6,13 @@ on:
       - main
     paths:
       - packages/orq-rc/.speakeasy/gen.yaml
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force the generation of the SDKs"
+        default: "false"
+        required: false
+        type: string
 
 jobs:
   publish:
@@ -14,4 +21,4 @@ jobs:
     secrets: inherit
     with:
       target: orq-ai-prerelease-node
-      npm_publish_tag_name: next
+      force: ${{ inputs.force }}
