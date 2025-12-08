@@ -3,20 +3,25 @@
 
 ## Supported Types
 
-### `operations.CreateDatasetItemMessagesDatasetsDeveloperMessage`
-
-```typescript
-const value: operations.CreateDatasetItemMessagesDatasetsDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.CreateDatasetItemMessagesDatasetsSystemMessage`
 
 ```typescript
 const value: operations.CreateDatasetItemMessagesDatasetsSystemMessage = {
   role: "system",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
+};
+```
+
+### `operations.CreateDatasetItemMessagesDatasetsDeveloperMessage`
+
+```typescript
+const value: operations.CreateDatasetItemMessagesDatasetsDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```

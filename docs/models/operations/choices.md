@@ -3,21 +3,31 @@
 
 ## Supported Types
 
-### `operations.ChoicesDeveloperMessage`
-
-```typescript
-const value: operations.ChoicesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.ChoicesSystemMessage`
 
 ```typescript
 const value: operations.ChoicesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
+};
+```
+
+### `operations.ChoicesDeveloperMessage`
+
+```typescript
+const value: operations.ChoicesDeveloperMessage = {
+  role: "developer",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

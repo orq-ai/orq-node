@@ -5,7 +5,16 @@
 ```typescript
 import { UpdateAgentSettings } from "@orq-ai/node/models/operations";
 
-let value: UpdateAgentSettings = {};
+let value: UpdateAgentSettings = {
+  tools: [
+    {
+      type: "mcp",
+      id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+      toolId: "01KXYZ123456789",
+      requiresApproval: false,
+    },
+  ],
+};
 ```
 
 ## Fields

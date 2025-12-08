@@ -1,6 +1,6 @@
 # DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Cont
 
 let value:
   DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType =
-    "refusal";
+    "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

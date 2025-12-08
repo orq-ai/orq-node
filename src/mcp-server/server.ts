@@ -17,11 +17,8 @@ import { tool$agentsCreate } from "./tools/agentsCreate.js";
 import { tool$agentsDelete } from "./tools/agentsDelete.js";
 import { tool$agentsInvoke } from "./tools/agentsInvoke.js";
 import { tool$agentsList } from "./tools/agentsList.js";
-import { tool$agentsListActions } from "./tools/agentsListActions.js";
-import { tool$agentsListTasks } from "./tools/agentsListTasks.js";
+import { tool$agentsResponsesCreate } from "./tools/agentsResponsesCreate.js";
 import { tool$agentsRetrieve } from "./tools/agentsRetrieve.js";
-import { tool$agentsRetrieveAction } from "./tools/agentsRetrieveAction.js";
-import { tool$agentsRetrieveTask } from "./tools/agentsRetrieveTask.js";
 import { tool$agentsRun } from "./tools/agentsRun.js";
 import { tool$agentsStream } from "./tools/agentsStream.js";
 import { tool$agentsStreamRun } from "./tools/agentsStreamRun.js";
@@ -107,7 +104,6 @@ import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
 import { tool$toolsCreate } from "./tools/toolsCreate.js";
 import { tool$toolsDelete } from "./tools/toolsDelete.js";
-import { tool$toolsDuplicate } from "./tools/toolsDuplicate.js";
 import { tool$toolsList } from "./tools/toolsList.js";
 import { tool$toolsRetrieve } from "./tools/toolsRetrieve.js";
 import { tool$toolsUpdate } from "./tools/toolsUpdate.js";
@@ -124,7 +120,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.14.34",
+    version: "4.0.26",
   });
 
   const client = new OrqCore({
@@ -166,23 +162,19 @@ export function createMCPServer(deps: {
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);
   tool(tool$evalsDelete);
+  tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
-  tool(tool$deploymentsInvoke);
   tool(tool$deploymentsStream);
-  tool(tool$agentsRetrieveTask);
   tool(tool$agentsCreate);
-  tool(tool$agentsList);
   tool(tool$agentsDelete);
   tool(tool$agentsRetrieve);
   tool(tool$agentsUpdate);
   tool(tool$agentsInvoke);
-  tool(tool$agentsListTasks);
+  tool(tool$agentsList);
   tool(tool$agentsRun);
   tool(tool$agentsStreamRun);
   tool(tool$agentsStream);
-  tool(tool$agentsListActions);
-  tool(tool$agentsRetrieveAction);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -201,7 +193,6 @@ export function createMCPServer(deps: {
   tool(tool$toolsUpdate);
   tool(tool$toolsDelete);
   tool(tool$toolsRetrieve);
-  tool(tool$toolsDuplicate);
   tool(tool$budgetsList);
   tool(tool$budgetsCreate);
   tool(tool$budgetsGet);
@@ -254,6 +245,7 @@ export function createMCPServer(deps: {
   tool(tool$datasetsDeleteDatapoint);
   tool(tool$datasetsClear);
   tool(tool$deploymentsMetricsCreate);
+  tool(tool$agentsResponsesCreate);
 
   return server;
 }

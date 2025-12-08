@@ -258,20 +258,19 @@ run();
 
 ### [agents](docs/sdks/agents/README.md)
 
-* [retrieveTask](docs/sdks/agents/README.md#retrievetask) - Retrieve a specific agent task
-* [create](docs/sdks/agents/README.md#create) - Create a new agent
-* [list](docs/sdks/agents/README.md#list) - List all agents
-* [delete](docs/sdks/agents/README.md#delete) - Delete an agent
-* [retrieve](docs/sdks/agents/README.md#retrieve) - Get an agent
-* [update](docs/sdks/agents/README.md#update) - Update an agent
-* [duplicate](docs/sdks/agents/README.md#duplicate) - Duplicate an existing agent
-* [invoke](docs/sdks/agents/README.md#invoke) - Invoke an agent
-* [listTasks](docs/sdks/agents/README.md#listtasks) - List all tasks for an agent
-* [run](docs/sdks/agents/README.md#run) - Run an agent
-* [streamRun](docs/sdks/agents/README.md#streamrun) - Run and stream agent execution
-* [stream](docs/sdks/agents/README.md#stream) - Stream agent execution events
-* [listActions](docs/sdks/agents/README.md#listactions) - List all actions
-* [retrieveAction](docs/sdks/agents/README.md#retrieveaction) - Retrieve an action executed by an agent task.
+* [create](docs/sdks/agents/README.md#create) - Create agent
+* [delete](docs/sdks/agents/README.md#delete) - Delete agent
+* [retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve agent
+* [update](docs/sdks/agents/README.md#update) - Update agent
+* [~~invoke~~](docs/sdks/agents/README.md#invoke) - Execute an agent task :warning: **Deprecated**
+* [list](docs/sdks/agents/README.md#list) - List agents
+* [~~run~~](docs/sdks/agents/README.md#run) - Run an agent with configuration :warning: **Deprecated**
+* [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
+* [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
+
+#### [agents.responses](docs/sdks/responses/README.md)
+
+* [create](docs/sdks/responses/README.md#create) - Create response
 
 ### [budgets](docs/sdks/budgets/README.md)
 
@@ -293,6 +292,14 @@ run();
 * [update](docs/sdks/contacts/README.md#update) - Update a contact
 * [delete](docs/sdks/contacts/README.md#delete) - Delete a contact
 
+### [conversations](docs/sdks/conversations/README.md)
+
+* [list](docs/sdks/conversations/README.md#list) - List conversations
+* [create](docs/sdks/conversations/README.md#create) - Create conversation
+* [retrieve](docs/sdks/conversations/README.md#retrieve) - Retrieve conversation
+* [update](docs/sdks/conversations/README.md#update) - Update conversation
+* [delete](docs/sdks/conversations/README.md#delete) - Delete conversation
+
 ### [datasets](docs/sdks/datasets/README.md)
 
 * [list](docs/sdks/datasets/README.md#list) - List datasets
@@ -309,9 +316,9 @@ run();
 
 ### [deployments](docs/sdks/deployments/README.md)
 
+* [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
-* [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
@@ -324,6 +331,7 @@ run();
 * [create](docs/sdks/evals/README.md#create) - Create an Evaluator
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
+* [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 
 ### [feedback](docs/sdks/feedback/README.md)
 
@@ -401,7 +409,6 @@ run();
 * [update](docs/sdks/tools/README.md#update) - Update tool
 * [delete](docs/sdks/tools/README.md#delete) - Delete tool
 * [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
-* [duplicate](docs/sdks/tools/README.md#duplicate) - Duplicate tool
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -421,20 +428,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`agentsCreate`](docs/sdks/agents/README.md#create) - Create a new agent
-- [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete an agent
-- [`agentsDuplicate`](docs/sdks/agents/README.md#duplicate) - Duplicate an existing agent
-- [`agentsInvoke`](docs/sdks/agents/README.md#invoke) - Invoke an agent
-- [`agentsList`](docs/sdks/agents/README.md#list) - List all agents
-- [`agentsListActions`](docs/sdks/agents/README.md#listactions) - List all actions
-- [`agentsListTasks`](docs/sdks/agents/README.md#listtasks) - List all tasks for an agent
-- [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Get an agent
-- [`agentsRetrieveAction`](docs/sdks/agents/README.md#retrieveaction) - Retrieve an action executed by an agent task.
-- [`agentsRetrieveTask`](docs/sdks/agents/README.md#retrievetask) - Retrieve a specific agent task
-- [`agentsRun`](docs/sdks/agents/README.md#run) - Run an agent
-- [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream agent execution events
-- [`agentsStreamRun`](docs/sdks/agents/README.md#streamrun) - Run and stream agent execution
-- [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update an agent
+- [`agentsCreate`](docs/sdks/agents/README.md#create) - Create agent
+- [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete agent
+- [`agentsList`](docs/sdks/agents/README.md#list) - List agents
+- [`agentsResponsesCreate`](docs/sdks/responses/README.md#create) - Create response
+- [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
+- [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
 - [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create budget configuration
 - [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete budget configuration
 - [`budgetsGet`](docs/sdks/budgets/README.md#get) - Get budget configuration
@@ -446,6 +445,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contactsList`](docs/sdks/contacts/README.md#list) - List contacts
 - [`contactsRetrieve`](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact
 - [`contactsUpdate`](docs/sdks/contacts/README.md#update) - Update a contact
+- [`conversationsCreate`](docs/sdks/conversations/README.md#create) - Create conversation
+- [`conversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete conversation
+- [`conversationsList`](docs/sdks/conversations/README.md#list) - List conversations
+- [`conversationsRetrieve`](docs/sdks/conversations/README.md#retrieve) - Retrieve conversation
+- [`conversationsUpdate`](docs/sdks/conversations/README.md#update) - Update conversation
 - [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
 - [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
@@ -465,6 +469,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
+- [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
@@ -516,10 +521,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`remoteconfigsRetrieve`](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
-- [`toolsDuplicate`](docs/sdks/tools/README.md#duplicate) - Duplicate tool
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
 - [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 - [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
+- ~~[`agentsInvoke`](docs/sdks/agents/README.md#invoke)~~ - Execute an agent task :warning: **Deprecated**
+- ~~[`agentsRun`](docs/sdks/agents/README.md#run)~~ - Run an agent with configuration :warning: **Deprecated**
+- ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
+- ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -757,28 +765,28 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 99 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetAgentTaskResponseBody`](./src/models/errors/getagenttaskresponsebody.ts): Agent task not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetAgentResponseBody`](./src/models/errors/getagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DuplicateAgentResponseBody`](./src/models/errors/duplicateagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`ListAgentTasksResponseBody`](./src/models/errors/listagenttasksresponsebody.ts): No agent tasks found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 99 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`DuplicateToolResponseBody`](./src/models/errors/duplicatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 99 methods.*
-* [`CreateAgentResponseBody`](./src/models/errors/createagentresponsebody.ts): Agent with this key already exists in the workspace. Status code `409`. Applicable to 1 of 99 methods.*
-* [`DuplicateAgentAgentsResponseBody`](./src/models/errors/duplicateagentagentsresponsebody.ts): Agent with generated key already exists. Status code `409`. Applicable to 1 of 99 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 100 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 100 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 100 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 100 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`CreateAgentRequestResponseBody`](./src/models/errors/createagentrequestresponsebody.ts): Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management. Status code `409`. Applicable to 1 of 100 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 100 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

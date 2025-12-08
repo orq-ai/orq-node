@@ -1,6 +1,6 @@
 # DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType }
 
 let value:
   DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
-    "refusal";
+    "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"ephemeral"
 ```

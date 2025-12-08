@@ -1,6 +1,6 @@
 # RetrieveDatapointMessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.RetrieveDatapointContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://long-term-eggplant.net",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

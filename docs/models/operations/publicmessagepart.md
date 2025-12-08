@@ -5,19 +5,19 @@ Message part that can be provided by users. Use "text" for regular messages, "fi
 
 ## Supported Types
 
-### `operations.TextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.TextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.FilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.FilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -25,10 +25,10 @@ const value: operations.FilePart = {
 };
 ```
 
-### `operations.ToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.ToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

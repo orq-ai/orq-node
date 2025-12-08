@@ -5,11 +5,13 @@
 ```typescript
 import { TwentyThree } from "@orq-ai/node/models/operations";
 
-let value: TwentyThree = "jina/jina-embeddings-v3";
+let value: TwentyThree = {
+  type: "cosine_similarity",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"jina/jina-embeddings-v3"
-```
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `type`                | *"cosine_similarity"* | :heavy_check_mark:    | N/A                   |

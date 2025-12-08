@@ -1,5 +1,4 @@
 # Prompts
-(*prompts*)
 
 ## Overview
 

@@ -15,7 +15,7 @@ let value: RetrieveMemoryStoreResponseBody = {
   created: "<value>",
   updated: "<value>",
   embeddingConfig: {
-    model: "jina/jina-embeddings-v2-base-zh",
+    model: "PT Cruiser",
   },
 };
 ```

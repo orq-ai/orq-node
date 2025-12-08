@@ -6,14 +6,14 @@ import * as z from "zod/v3";
 import { OrqError } from "./orqerror.js";
 
 /**
- * Agent not found
+ * Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it.
  */
 export type UpdateAgentResponseBodyData = {
   message: string;
 };
 
 /**
- * Agent not found
+ * Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it.
  */
 export class UpdateAgentResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */

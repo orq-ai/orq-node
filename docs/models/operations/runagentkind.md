@@ -1,6 +1,6 @@
 # RunAgentKind
 
-A2A entity type
+A2A entity type identifier
 
 ## Example Usage
 

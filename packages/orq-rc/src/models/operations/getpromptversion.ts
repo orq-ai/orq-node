@@ -179,6 +179,7 @@ export type GetPromptVersionEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const GetPromptVersionReasoningEffort = {
+  None: "none",
   Disable: "disable",
   Minimal: "minimal",
   Low: "low",
@@ -205,6 +206,20 @@ export const GetPromptVersionVerbosity = {
  */
 export type GetPromptVersionVerbosity = ClosedEnum<
   typeof GetPromptVersionVerbosity
+>;
+
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const GetPromptVersionThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type GetPromptVersionThinkingLevel = ClosedEnum<
+  typeof GetPromptVersionThinkingLevel
 >;
 
 /**
@@ -299,32 +314,36 @@ export type GetPromptVersionModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: GetPromptVersionVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: GetPromptVersionThinkingLevel | undefined;
 };
 
 export const GetPromptVersionProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
 } as const;
 export type GetPromptVersionProvider = ClosedEnum<
   typeof GetPromptVersionProvider
@@ -347,19 +366,6 @@ export const GetPromptVersionRole = {
  * The role of the prompt message
  */
 export type GetPromptVersionRole = ClosedEnum<typeof GetPromptVersionRole>;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const GetPromptVersion2PromptsResponseType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type GetPromptVersion2PromptsResponseType = ClosedEnum<
-  typeof GetPromptVersion2PromptsResponseType
->;
 
 export type GetPromptVersion2File = {
   /**
@@ -384,16 +390,9 @@ export type GetPromptVersion23 = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: GetPromptVersion2PromptsResponseType;
+  type: "file";
   file: GetPromptVersion2File;
 };
-
-export const GetPromptVersion2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type GetPromptVersion2PromptsType = ClosedEnum<
-  typeof GetPromptVersion2PromptsType
->;
 
 export type GetPromptVersion2ImageUrl = {
   /**
@@ -414,20 +413,15 @@ export type GetPromptVersion2ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type GetPromptVersion22 = {
-  type: GetPromptVersion2PromptsType;
+  type: "image_url";
   imageUrl: GetPromptVersion2ImageUrl;
 };
-
-export const GetPromptVersion2Type = {
-  Text: "text",
-} as const;
-export type GetPromptVersion2Type = ClosedEnum<typeof GetPromptVersion2Type>;
 
 /**
  * Text content part of a prompt message
  */
 export type GetPromptVersion21 = {
-  type: GetPromptVersion2Type;
+  type: "text";
   text: string;
 };
 
@@ -997,6 +991,15 @@ export const GetPromptVersionVerbosity$outboundSchema: z.ZodNativeEnum<
 > = GetPromptVersionVerbosity$inboundSchema;
 
 /** @internal */
+export const GetPromptVersionThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionThinkingLevel
+> = z.nativeEnum(GetPromptVersionThinkingLevel);
+/** @internal */
+export const GetPromptVersionThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionThinkingLevel
+> = GetPromptVersionThinkingLevel$inboundSchema;
+
+/** @internal */
 export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   GetPromptVersionModelParameters,
   z.ZodTypeDef,
@@ -1029,6 +1032,7 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: GetPromptVersionReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetPromptVersionVerbosity$inboundSchema.optional(),
+  thinkingLevel: GetPromptVersionThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1062,6 +1066,7 @@ export type GetPromptVersionModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -1097,6 +1102,7 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: GetPromptVersionReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetPromptVersionVerbosity$outboundSchema.optional(),
+  thinkingLevel: GetPromptVersionThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -1139,16 +1145,6 @@ export const GetPromptVersionRole$inboundSchema: z.ZodNativeEnum<
 export const GetPromptVersionRole$outboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionRole
 > = GetPromptVersionRole$inboundSchema;
-
-/** @internal */
-export const GetPromptVersion2PromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> = z.nativeEnum(
-    GetPromptVersion2PromptsResponseType,
-  );
-/** @internal */
-export const GetPromptVersion2PromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> =
-    GetPromptVersion2PromptsResponseType$inboundSchema;
 
 /** @internal */
 export const GetPromptVersion2File$inboundSchema: z.ZodType<
@@ -1212,12 +1208,12 @@ export const GetPromptVersion23$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersion2PromptsResponseType$inboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetPromptVersion2File$inboundSchema),
 });
 /** @internal */
 export type GetPromptVersion23$Outbound = {
-  type: string;
+  type: "file";
   file: GetPromptVersion2File$Outbound;
 };
 
@@ -1227,7 +1223,7 @@ export const GetPromptVersion23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetPromptVersion23
 > = z.object({
-  type: GetPromptVersion2PromptsResponseType$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetPromptVersion2File$outboundSchema),
 });
 
@@ -1247,15 +1243,6 @@ export function getPromptVersion23FromJSON(
     `Failed to parse 'GetPromptVersion23' from JSON`,
   );
 }
-
-/** @internal */
-export const GetPromptVersion2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersion2PromptsType
-> = z.nativeEnum(GetPromptVersion2PromptsType);
-/** @internal */
-export const GetPromptVersion2PromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersion2PromptsType
-> = GetPromptVersion2PromptsType$inboundSchema;
 
 /** @internal */
 export const GetPromptVersion2ImageUrl$inboundSchema: z.ZodType<
@@ -1308,7 +1295,7 @@ export const GetPromptVersion22$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersion2PromptsType$inboundSchema,
+  type: z.literal("image_url"),
   image_url: z.lazy(() => GetPromptVersion2ImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1317,7 +1304,7 @@ export const GetPromptVersion22$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetPromptVersion22$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: GetPromptVersion2ImageUrl$Outbound;
 };
 
@@ -1327,7 +1314,7 @@ export const GetPromptVersion22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetPromptVersion22
 > = z.object({
-  type: GetPromptVersion2PromptsType$outboundSchema,
+  type: z.literal("image_url"),
   imageUrl: z.lazy(() => GetPromptVersion2ImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1353,26 +1340,17 @@ export function getPromptVersion22FromJSON(
 }
 
 /** @internal */
-export const GetPromptVersion2Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersion2Type
-> = z.nativeEnum(GetPromptVersion2Type);
-/** @internal */
-export const GetPromptVersion2Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersion2Type
-> = GetPromptVersion2Type$inboundSchema;
-
-/** @internal */
 export const GetPromptVersion21$inboundSchema: z.ZodType<
   GetPromptVersion21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersion2Type$inboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type GetPromptVersion21$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
@@ -1382,7 +1360,7 @@ export const GetPromptVersion21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetPromptVersion21
 > = z.object({
-  type: GetPromptVersion2Type$outboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 

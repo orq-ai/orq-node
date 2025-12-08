@@ -1,23 +1,20 @@
 # Content2
 
-
-## Supported Types
-
-### `operations.TextContentPart`
+## Example Usage
 
 ```typescript
-const value: operations.TextContentPart = {
+import { Content2 } from "@orq-ai/node/models/operations";
+
+let value: Content2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.RefusalContentPart`
+## Fields
 
-```typescript
-const value: operations.RefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | [operations.DeploymentGetConfigContentType](../../models/operations/deploymentgetconfigcontenttype.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `text`                                                                                                 | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `cacheControl`                                                                                         | [operations.ContentCacheControl](../../models/operations/contentcachecontrol.md)                       | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

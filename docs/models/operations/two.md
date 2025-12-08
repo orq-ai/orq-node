@@ -1,46 +1,20 @@
 # Two
 
-
-## Supported Types
-
-### `operations.One`
+## Example Usage
 
 ```typescript
-const value: operations.One = {
+import { Two } from "@orq-ai/node/models/operations";
+
+let value: Two = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.Two2`
+## Fields
 
-```typescript
-const value: operations.Two2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://frequent-passport.com",
-  },
-};
-```
-
-### `operations.Three`
-
-```typescript
-const value: operations.Three = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.Four`
-
-```typescript
-const value: operations.Four = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `type`                                                             | [operations.Type](../../models/operations/type.md)                 | :heavy_check_mark:                                                 | N/A                                                                |
+| `text`                                                             | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `cacheControl`                                                     | [operations.CacheControl](../../models/operations/cachecontrol.md) | :heavy_minus_sign:                                                 | N/A                                                                |

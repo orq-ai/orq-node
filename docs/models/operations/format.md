@@ -1,17 +1,17 @@
 # Format
 
-The format of the encoded audio data. Currently supports `wav` and `mp3`.
+Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
 
 ## Example Usage
 
 ```typescript
 import { Format } from "@orq-ai/node/models/operations";
 
-let value: Format = "mp3";
+let value: Format = "wav";
 ```
 
 ## Values
 
 ```typescript
-"mp3" | "wav"
+"wav" | "mp3" | "flac" | "opus" | "pcm16"
 ```

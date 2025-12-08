@@ -6,16 +6,12 @@
 import { ResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: ResponseFormat3 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-  },
+  type: "text",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                           | [operations.CreateAgentResponseFormatAgentsType](../../models/operations/createagentresponseformatagentstype.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `jsonSchema`                                                                                                     | [operations.JsonSchema](../../models/operations/jsonschema.md)                                                   | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                             | [operations.CreatePromptResponseFormatPromptsRequestType](../../models/operations/createpromptresponseformatpromptsrequesttype.md) | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |

@@ -5,19 +5,19 @@ Message part that can be provided by users. Use "text" for regular messages, "fi
 
 ## Supported Types
 
-### `operations.StreamAgentPublicMessagePartTextPart`
+### `components.TextPart`
 
 ```typescript
-const value: operations.StreamAgentPublicMessagePartTextPart = {
+const value: components.TextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.StreamAgentPublicMessagePartFilePart`
+### `components.FilePart`
 
 ```typescript
-const value: operations.StreamAgentPublicMessagePartFilePart = {
+const value: components.FilePart = {
   kind: "file",
   file: {
     bytes: "<value>",
@@ -25,10 +25,10 @@ const value: operations.StreamAgentPublicMessagePartFilePart = {
 };
 ```
 
-### `operations.StreamAgentPublicMessagePartToolResultPart`
+### `components.ToolResultPart`
 
 ```typescript
-const value: operations.StreamAgentPublicMessagePartToolResultPart = {
+const value: components.ToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

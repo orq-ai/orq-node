@@ -15,7 +15,9 @@ const value: operations.ToolChoice1 = "none";
 
 ```typescript
 const value: operations.ToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

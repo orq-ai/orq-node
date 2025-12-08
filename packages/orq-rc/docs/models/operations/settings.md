@@ -7,7 +7,16 @@ Configuration settings for the agent's behavior
 ```typescript
 import { Settings } from "@orq-ai/node/models/operations";
 
-let value: Settings = {};
+let value: Settings = {
+  tools: [
+    {
+      type: "mcp",
+      id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+      toolId: "01KXYZ123456789",
+      requiresApproval: false,
+    },
+  ],
+};
 ```
 
 ## Fields

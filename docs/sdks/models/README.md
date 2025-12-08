@@ -1,5 +1,4 @@
 # Models
-(*models*)
 
 ## Overview
 
@@ -13,7 +12,7 @@ Lists the currently available models, and provides basic information about each 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ListModels" method="get" path="/v2/models" -->
+<!-- UsageSnippet language="typescript" operationID="listModels" method="get" path="/v2/models" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

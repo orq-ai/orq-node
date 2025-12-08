@@ -29,15 +29,6 @@ export const GetEvalsObject = {
 } as const;
 export type GetEvalsObject = ClosedEnum<typeof GetEvalsObject>;
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type =
-  {
-    Number: "number",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type
-  >;
-
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator = {
   Eq: "eq",
   Ne: "ne",
@@ -53,38 +44,20 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator =
 
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type;
+  type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator;
 };
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type =
-  {
-    Boolean: "boolean",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type
-  >;
-
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type;
+  type: "boolean";
   value: boolean;
 };
 
 export type GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean;
-
-export const GetEvalsDataEvalsResponse200ApplicationJSONType = {
-  TypescriptEval: "typescript_eval",
-} as const;
-export type GetEvalsDataEvalsResponse200ApplicationJSONType = ClosedEnum<
-  typeof GetEvalsDataEvalsResponse200ApplicationJSONType
->;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber;
 
 export type DataTypescript = {
   id: string;
@@ -92,22 +65,13 @@ export type DataTypescript = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
     | undefined;
   code: string;
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType;
+  type: "typescript_eval";
   key: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type =
-  {
-    Number: "number",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type
-  >;
 
 export const GetEvalsGuardrailConfigEvalsResponse200Operator = {
   Eq: "eq",
@@ -123,38 +87,20 @@ export type GetEvalsGuardrailConfigEvalsResponse200Operator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsResponse200Number = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type;
+  type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponse200Operator;
 };
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type =
-  {
-    Boolean: "boolean",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type
-  >;
-
 export type GetEvalsGuardrailConfigEvalsResponse200Boolean = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type;
+  type: "boolean";
   value: boolean;
 };
 
 export type GetEvalsDataEvalsResponse200GuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsResponse200Number
-  | GetEvalsGuardrailConfigEvalsResponse200Boolean;
-
-export const GetEvalsDataEvalsResponse200Type = {
-  Ragas: "ragas",
-} as const;
-export type GetEvalsDataEvalsResponse200Type = ClosedEnum<
-  typeof GetEvalsDataEvalsResponse200Type
->;
+  | GetEvalsGuardrailConfigEvalsResponse200Boolean
+  | GetEvalsGuardrailConfigEvalsResponse200Number;
 
 export const DataRagasMetric = {
   ContextPrecision: "context_precision",
@@ -178,23 +124,14 @@ export type DataRagas = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsResponse200Number
     | GetEvalsGuardrailConfigEvalsResponse200Boolean
+    | GetEvalsGuardrailConfigEvalsResponse200Number
     | undefined;
-  type: GetEvalsDataEvalsResponse200Type;
+  type: "ragas";
   ragasMetric: DataRagasMetric;
   key: string;
   model: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type =
-  {
-    Number: "number",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type
-  >;
 
 export const GetEvalsGuardrailConfigEvalsResponseOperator = {
   Eq: "eq",
@@ -210,543 +147,177 @@ export type GetEvalsGuardrailConfigEvalsResponseOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsResponseNumber = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type;
+  type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponseOperator;
 };
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type =
-  {
-    Boolean: "boolean",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type
-  >;
-
 export type GetEvalsGuardrailConfigEvalsResponseBoolean = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type;
+  type: "boolean";
   value: boolean;
 };
 
 export type GetEvalsDataEvalsResponseGuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsResponseNumber
-  | GetEvalsGuardrailConfigEvalsResponseBoolean;
-
-export const GetEvalsDataEvalsResponseType = {
-  FunctionEval: "function_eval",
-} as const;
-export type GetEvalsDataEvalsResponseType = ClosedEnum<
-  typeof GetEvalsDataEvalsResponseType
->;
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type =
-  {
-    BertCoherence: "bert_coherence",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type
-  >;
-
-export type GetEvalsFunctionParams35 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type;
-};
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type =
-  {
-    GrammarDiversity: "grammar_diversity",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type
-  >;
-
-export type GetEvalsFunctionParams34 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type;
-};
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type =
-  {
-    SemanticRepetition: "semantic_repetition",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type
-  >;
-
-export type GetEvalsFunctionParams33 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type;
-};
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type =
-  {
-    LexicalRepetition: "lexical_repetition",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type
-  >;
+  | GetEvalsGuardrailConfigEvalsResponseBoolean
+  | GetEvalsGuardrailConfigEvalsResponseNumber;
 
 export type GetEvalsFunctionParams32 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type;
+  type: "grammar_diversity";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type =
-  {
-    SentencesCount: "sentences_count",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type
-  >;
 
 export type GetEvalsFunctionParams31 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type;
+  type: "lexical_repetition";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type =
-  {
-    WordsCount: "words_count",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type
-  >;
 
 export type GetEvalsFunctionParams30 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type;
+  type: "sentences_count";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type =
-  {
-    GseEnglishLevel: "gse_english_level",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type
-  >;
 
 export type GetEvalsFunctionParams29 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type;
+  type: "words_count";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type =
-  {
-    FleschReadingEase: "flesch_reading_ease",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type
-  >;
 
 export type GetEvalsFunctionParams28 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type;
+  type: "gse_english_level";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type =
-  {
-    MostRepeatedWords: "most_repeated_words",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type
-  >;
 
 export type GetEvalsFunctionParams27 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type;
+  type: "flesch_reading_ease";
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type =
-  {
-    KeywordsMatch: "keywords_match",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type
-  >;
-
 export type GetEvalsFunctionParams26 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type;
+  type: "most_repeated_words";
+};
+
+export type GetEvalsFunctionParams25 = {
+  type: "keywords_match";
   keywords: Array<string>;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type =
-  {
-    TopicMatch: "topic_match",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type
-  >;
-
-export type GetEvalsFunctionParams25 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type;
-  topic: string;
-};
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type =
-  {
-    LevenshteinDistance: "levenshtein_distance",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type
-  >;
-
 export type GetEvalsFunctionParams24 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type;
+  type: "levenshtein_distance";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type =
-  {
-    CosineSimilarity: "cosine_similarity",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type
-  >;
 
 export type GetEvalsFunctionParams23 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type;
+  type: "cosine_similarity";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type =
-  {
-    MeteorScore: "meteor_score",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type
-  >;
 
 export type GetEvalsFunctionParams22 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type;
+  type: "meteor_score";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type =
-  {
-    RougeN: "rouge_n",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type
-  >;
 
 export type GetEvalsFunctionParams21 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type;
+  type: "rouge_n";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type =
-  {
-    BleuScore: "bleu_score",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type
-  >;
 
 export type GetEvalsFunctionParams20 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type;
+  type: "bleu_score";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type =
-  {
-    BertScore: "bert_score",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type
-  >;
 
 export type GetEvalsFunctionParams19 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type;
+  type: "bert_score";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type =
-  {
-    ModerationsGoogle: "moderations_google",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type
-  >;
 
 export type GetEvalsFunctionParams18 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type;
+  type: "moderations_google";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type =
-  {
-    ModerationsOpenai: "moderations_openai",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type
-  >;
 
 export type GetEvalsFunctionParams17 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type;
+  type: "moderations_openai";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type =
-  {
-    IsValidJson: "is_valid_json",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type
-  >;
 
 export type GetEvalsFunctionParams16 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type;
+  type: "is_valid_json";
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type =
-  {
-    Regex: "regex",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type
-  >;
-
 export type GetEvalsFunctionParams15 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type;
+  type: "regex";
   pattern: string;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type =
-  {
-    OneLine: "one_line",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type
-  >;
-
 export type GetEvalsFunctionParams14 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type;
+  type: "one_line";
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type =
-  {
-    LengthGreaterThan: "length_greater_than",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type
-  >;
-
 export type GetEvalsFunctionParams13 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type;
+  type: "length_greater_than";
   value: number;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type =
-  {
-    LengthBetween: "length_between",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type
-  >;
-
 export type GetEvalsFunctionParams12 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type;
+  type: "length_between";
   min: number;
   max: number;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type =
-  {
-    LengthLessThan: "length_less_than",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type
-  >;
-
 export type GetEvalsFunctionParams11 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type;
+  type: "length_less_than";
   value: number;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type =
-  {
-    ExactMatch: "exact_match",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type
-  >;
-
 export type GetEvalsFunctionParams10 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type;
+  type: "exact_match";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type =
-  {
-    EndsWith: "ends_with",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type
-  >;
 
 export type GetEvalsFunctionParams9 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type;
+  type: "ends_with";
   value: string;
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType =
-  {
-    StartWith: "start_with",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType
-  >;
 
 export type GetEvalsFunctionParams8 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType;
+  type: "start_with";
   value: string;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType =
-  {
-    ContainsValidLink: "contains_valid_link",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type GetEvalsFunctionParams7 = {
-  type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType;
+  type: "contains_valid_link";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType = {
-  ContainsUrl: "contains_url",
-} as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType =
-  ClosedEnum<typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType>;
 
 export type GetEvalsFunctionParams6 = {
-  type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType;
+  type: "contains_url";
 };
-
-export const GetEvalsFunctionParamsEvalsResponse200Type = {
-  ContainsEmail: "contains_email",
-} as const;
-export type GetEvalsFunctionParamsEvalsResponse200Type = ClosedEnum<
-  typeof GetEvalsFunctionParamsEvalsResponse200Type
->;
 
 export type GetEvalsFunctionParams5 = {
-  type: GetEvalsFunctionParamsEvalsResponse200Type;
+  type: "contains_email";
 };
-
-export const GetEvalsFunctionParamsEvalsResponseType = {
-  ContainsAny: "contains_any",
-} as const;
-export type GetEvalsFunctionParamsEvalsResponseType = ClosedEnum<
-  typeof GetEvalsFunctionParamsEvalsResponseType
->;
 
 export type GetEvalsFunctionParams4 = {
-  type: GetEvalsFunctionParamsEvalsResponseType;
+  type: "contains_any";
   keywords: Array<string>;
 };
-
-export const GetEvalsFunctionParamsEvalsType = {
-  ContainsAll: "contains_all",
-} as const;
-export type GetEvalsFunctionParamsEvalsType = ClosedEnum<
-  typeof GetEvalsFunctionParamsEvalsType
->;
 
 export type GetEvalsFunctionParams3 = {
-  type: GetEvalsFunctionParamsEvalsType;
+  type: "contains_all";
   keywords: Array<string>;
 };
-
-export const GetEvalsFunctionParamsType = {
-  ContainsNone: "contains_none",
-} as const;
-export type GetEvalsFunctionParamsType = ClosedEnum<
-  typeof GetEvalsFunctionParamsType
->;
 
 export type GetEvalsFunctionParams2 = {
-  type: GetEvalsFunctionParamsType;
+  type: "contains_none";
   keywords: Array<string>;
 };
 
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type =
-  {
-    Contains: "contains",
-  } as const;
-export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type =
-  ClosedEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
-  >;
-
 export type GetEvalsFunctionParams1 = {
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type;
+  type: "contains";
   value: string;
 };
 
 export type DataFunctionParams =
-  | GetEvalsFunctionParams12
   | GetEvalsFunctionParams1
   | GetEvalsFunctionParams2
   | GetEvalsFunctionParams3
   | GetEvalsFunctionParams4
-  | GetEvalsFunctionParams8
-  | GetEvalsFunctionParams9
-  | GetEvalsFunctionParams11
-  | GetEvalsFunctionParams13
-  | GetEvalsFunctionParams15
-  | GetEvalsFunctionParams25
-  | GetEvalsFunctionParams26
   | GetEvalsFunctionParams5
   | GetEvalsFunctionParams6
   | GetEvalsFunctionParams7
+  | GetEvalsFunctionParams8
+  | GetEvalsFunctionParams9
   | GetEvalsFunctionParams10
+  | GetEvalsFunctionParams11
+  | GetEvalsFunctionParams12
+  | GetEvalsFunctionParams13
   | GetEvalsFunctionParams14
+  | GetEvalsFunctionParams15
   | GetEvalsFunctionParams16
   | GetEvalsFunctionParams17
   | GetEvalsFunctionParams18
@@ -756,15 +327,14 @@ export type DataFunctionParams =
   | GetEvalsFunctionParams22
   | GetEvalsFunctionParams23
   | GetEvalsFunctionParams24
+  | GetEvalsFunctionParams25
+  | GetEvalsFunctionParams26
   | GetEvalsFunctionParams27
   | GetEvalsFunctionParams28
   | GetEvalsFunctionParams29
   | GetEvalsFunctionParams30
   | GetEvalsFunctionParams31
-  | GetEvalsFunctionParams32
-  | GetEvalsFunctionParams33
-  | GetEvalsFunctionParams34
-  | GetEvalsFunctionParams35;
+  | GetEvalsFunctionParams32;
 
 export type DataFunction = {
   id: string;
@@ -772,28 +342,26 @@ export type DataFunction = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsResponseNumber
     | GetEvalsGuardrailConfigEvalsResponseBoolean
+    | GetEvalsGuardrailConfigEvalsResponseNumber
     | undefined;
-  type: GetEvalsDataEvalsResponseType;
+  type: "function_eval";
   functionParams:
-    | GetEvalsFunctionParams12
     | GetEvalsFunctionParams1
     | GetEvalsFunctionParams2
     | GetEvalsFunctionParams3
     | GetEvalsFunctionParams4
-    | GetEvalsFunctionParams8
-    | GetEvalsFunctionParams9
-    | GetEvalsFunctionParams11
-    | GetEvalsFunctionParams13
-    | GetEvalsFunctionParams15
-    | GetEvalsFunctionParams25
-    | GetEvalsFunctionParams26
     | GetEvalsFunctionParams5
     | GetEvalsFunctionParams6
     | GetEvalsFunctionParams7
+    | GetEvalsFunctionParams8
+    | GetEvalsFunctionParams9
     | GetEvalsFunctionParams10
+    | GetEvalsFunctionParams11
+    | GetEvalsFunctionParams12
+    | GetEvalsFunctionParams13
     | GetEvalsFunctionParams14
+    | GetEvalsFunctionParams15
     | GetEvalsFunctionParams16
     | GetEvalsFunctionParams17
     | GetEvalsFunctionParams18
@@ -803,26 +371,16 @@ export type DataFunction = {
     | GetEvalsFunctionParams22
     | GetEvalsFunctionParams23
     | GetEvalsFunctionParams24
+    | GetEvalsFunctionParams25
+    | GetEvalsFunctionParams26
     | GetEvalsFunctionParams27
     | GetEvalsFunctionParams28
     | GetEvalsFunctionParams29
     | GetEvalsFunctionParams30
     | GetEvalsFunctionParams31
-    | GetEvalsFunctionParams32
-    | GetEvalsFunctionParams33
-    | GetEvalsFunctionParams34
-    | GetEvalsFunctionParams35;
+    | GetEvalsFunctionParams32;
   key: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType =
-  {
-    Number: "number",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType
-  >;
 
 export const GetEvalsGuardrailConfigEvalsOperator = {
   Eq: "eq",
@@ -838,35 +396,20 @@ export type GetEvalsGuardrailConfigEvalsOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsNumber = {
   enabled: boolean;
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType;
+  type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsOperator;
 };
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType =
-  {
-    Boolean: "boolean",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type GetEvalsGuardrailConfigEvalsBoolean = {
   enabled: boolean;
-  type: GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType;
+  type: "boolean";
   value: boolean;
 };
 
 export type GetEvalsDataEvalsGuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsNumber
-  | GetEvalsGuardrailConfigEvalsBoolean;
-
-export const GetEvalsDataEvalsType = {
-  PythonEval: "python_eval",
-} as const;
-export type GetEvalsDataEvalsType = ClosedEnum<typeof GetEvalsDataEvalsType>;
+  | GetEvalsGuardrailConfigEvalsBoolean
+  | GetEvalsGuardrailConfigEvalsNumber;
 
 export type DataPython = {
   id: string;
@@ -874,19 +417,13 @@ export type DataPython = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsNumber
     | GetEvalsGuardrailConfigEvalsBoolean
+    | GetEvalsGuardrailConfigEvalsNumber
     | undefined;
   code: string;
-  type: GetEvalsDataEvalsType;
+  type: "python_eval";
   key: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType = {
-  Number: "number",
-} as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType =
-  ClosedEnum<typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType>;
 
 export const GetEvalsGuardrailConfigOperator = {
   Eq: "eq",
@@ -902,32 +439,20 @@ export type GetEvalsGuardrailConfigOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigNumber = {
   enabled: boolean;
-  type: GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType;
+  type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigOperator;
 };
 
-export const GetEvalsGuardrailConfigEvalsResponse200Type = {
-  Boolean: "boolean",
-} as const;
-export type GetEvalsGuardrailConfigEvalsResponse200Type = ClosedEnum<
-  typeof GetEvalsGuardrailConfigEvalsResponse200Type
->;
-
 export type GetEvalsGuardrailConfigBoolean = {
   enabled: boolean;
-  type: GetEvalsGuardrailConfigEvalsResponse200Type;
+  type: "boolean";
   value: boolean;
 };
 
 export type GetEvalsDataGuardrailConfig =
-  | GetEvalsGuardrailConfigNumber
-  | GetEvalsGuardrailConfigBoolean;
-
-export const GetEvalsDataType = {
-  HttpEval: "http_eval",
-} as const;
-export type GetEvalsDataType = ClosedEnum<typeof GetEvalsDataType>;
+  | GetEvalsGuardrailConfigBoolean
+  | GetEvalsGuardrailConfigNumber;
 
 export const DataMethod = {
   Get: "GET",
@@ -941,23 +466,16 @@ export type DataHTTP = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigNumber
     | GetEvalsGuardrailConfigBoolean
+    | GetEvalsGuardrailConfigNumber
     | undefined;
-  type: GetEvalsDataType;
+  type: "http_eval";
   url: string;
   method: DataMethod;
   headers: { [k: string]: string };
   payload: { [k: string]: any };
   key: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponseType = {
-  Number: "number",
-} as const;
-export type GetEvalsGuardrailConfigEvalsResponseType = ClosedEnum<
-  typeof GetEvalsGuardrailConfigEvalsResponseType
->;
 
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator =
   {
@@ -976,34 +494,22 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDa
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber =
   {
     enabled: boolean;
-    type: GetEvalsGuardrailConfigEvalsResponseType;
+    type: "number";
     value: number;
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator;
   };
 
-export const GetEvalsGuardrailConfigEvalsType = {
-  Boolean: "boolean",
-} as const;
-export type GetEvalsGuardrailConfigEvalsType = ClosedEnum<
-  typeof GetEvalsGuardrailConfigEvalsType
->;
-
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean =
   {
     enabled: boolean;
-    type: GetEvalsGuardrailConfigEvalsType;
+    type: "boolean";
     value: boolean;
   };
 
 export type DataGuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean;
-
-export const DataType = {
-  JsonSchema: "json_schema",
-} as const;
-export type DataType = ClosedEnum<typeof DataType>;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber;
 
 export type DataJSON = {
   id: string;
@@ -1011,22 +517,13 @@ export type DataJSON = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
     | undefined;
-  type: DataType;
+  type: "json_schema";
   schema: string;
   key: string;
 };
-
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
-  {
-    Number: "number",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  >;
 
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
   {
@@ -1045,38 +542,22 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOp
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
   {
     enabled: boolean;
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type;
+    type: "number";
     value: number;
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
   };
 
-export const GetEvalsGuardrailConfigType = {
-  Boolean: "boolean",
-} as const;
-export type GetEvalsGuardrailConfigType = ClosedEnum<
-  typeof GetEvalsGuardrailConfigType
->;
-
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
   {
     enabled: boolean;
-    type: GetEvalsGuardrailConfigType;
+    type: "boolean";
     value: boolean;
   };
 
 export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConfig =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean;
-
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType = {
-  LlmEval: "llm_eval",
-} as const;
-export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  >;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber;
 
 export type DataLLM = {
   id: string;
@@ -1084,22 +565,22 @@ export type DataLLM = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
     | undefined;
-  type: GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType;
+  type: "llm_eval";
   prompt: string;
   key: string;
   model: string;
 };
 
 export type GetEvalsData =
-  | DataHTTP
   | DataLLM
-  | DataRagas
   | DataJSON
+  | DataHTTP
   | DataPython
   | DataFunction
+  | DataRagas
   | DataTypescript;
 
 /**
@@ -1108,12 +589,12 @@ export type GetEvalsData =
 export type GetEvalsResponseBody = {
   object: GetEvalsObject;
   data: Array<
-    | DataHTTP
     | DataLLM
-    | DataRagas
     | DataJSON
+    | DataHTTP
     | DataPython
     | DataFunction
+    | DataRagas
     | DataTypescript
   >;
   hasMore: boolean;
@@ -1182,20 +663,6 @@ export const GetEvalsObject$outboundSchema: z.ZodNativeEnum<
 > = GetEvalsObject$inboundSchema;
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator
@@ -1217,8 +684,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboun
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type$inboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema,
@@ -1227,7 +693,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboun
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "number";
     value: number;
     operator: string;
   };
@@ -1240,8 +706,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outbou
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData72Type$outboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema,
@@ -1272,20 +737,6 @@ export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumberFrom
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema:
   z.ZodType<
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean,
@@ -1293,15 +744,14 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inbou
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type$inboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "boolean";
     value: boolean;
   };
 
@@ -1313,8 +763,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outbo
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type$outboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 
@@ -1350,16 +799,16 @@ export const GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig$inboundS
     unknown
   > = z.union([
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
     ),
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
     ),
   ]);
 /** @internal */
 export type GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound;
 
 /** @internal */
 export const GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig$outboundSchema:
@@ -1369,10 +818,10 @@ export const GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig$outbound
     GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig
   > = z.union([
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
     ),
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
     ),
   ]);
 
@@ -1401,15 +850,6 @@ export function getEvalsDataEvalsResponse200ApplicationJSONGuardrailConfigFromJS
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONType);
-/** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> =
-    GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const DataTypescript$inboundSchema: z.ZodType<
   DataTypescript,
   z.ZodTypeDef,
@@ -1417,18 +857,18 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
-    ),
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
     ),
+    z.lazy(() =>
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
+    ),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("typescript_eval"),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -1443,11 +883,11 @@ export type DataTypescript$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
     | undefined;
   code: string;
-  type: string;
+  type: "typescript_eval";
   key: string;
 };
 
@@ -1459,18 +899,18 @@ export const DataTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
-    ),
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
     ),
+    z.lazy(() =>
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
+    ),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("typescript_eval"),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -1493,20 +933,6 @@ export function dataTypescriptFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200Operator$inboundSchema:
   z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponse200Operator> = z
     .nativeEnum(GetEvalsGuardrailConfigEvalsResponse200Operator);
@@ -1523,15 +949,14 @@ export const GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type$inboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponse200Operator$inboundSchema,
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200Number$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "number";
   value: number;
   operator: string;
 };
@@ -1544,8 +969,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponse200Number
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData62Type$outboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponse200Operator$outboundSchema,
   });
@@ -1577,20 +1001,6 @@ export function getEvalsGuardrailConfigEvalsResponse200NumberFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema:
   z.ZodType<
     GetEvalsGuardrailConfigEvalsResponse200Boolean,
@@ -1598,14 +1008,13 @@ export const GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type$inboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200Boolean$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "boolean";
   value: boolean;
 };
 
@@ -1617,8 +1026,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponse200Boolean
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData6Type$outboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 
@@ -1655,13 +1063,13 @@ export const GetEvalsDataEvalsResponse200GuardrailConfig$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
   ]);
 /** @internal */
 export type GetEvalsDataEvalsResponse200GuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsResponse200Number$Outbound
-  | GetEvalsGuardrailConfigEvalsResponse200Boolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsResponse200Boolean$Outbound
+  | GetEvalsGuardrailConfigEvalsResponse200Number$Outbound;
 
 /** @internal */
 export const GetEvalsDataEvalsResponse200GuardrailConfig$outboundSchema:
@@ -1670,8 +1078,8 @@ export const GetEvalsDataEvalsResponse200GuardrailConfig$outboundSchema:
     z.ZodTypeDef,
     GetEvalsDataEvalsResponse200GuardrailConfig
   > = z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
   ]);
 
 export function getEvalsDataEvalsResponse200GuardrailConfigToJSON(
@@ -1701,15 +1109,6 @@ export function getEvalsDataEvalsResponse200GuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponse200Type
-> = z.nativeEnum(GetEvalsDataEvalsResponse200Type);
-/** @internal */
-export const GetEvalsDataEvalsResponse200Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponse200Type
-> = GetEvalsDataEvalsResponse200Type$inboundSchema;
-
-/** @internal */
 export const DataRagasMetric$inboundSchema: z.ZodNativeEnum<
   typeof DataRagasMetric
 > = z.nativeEnum(DataRagasMetric);
@@ -1726,13 +1125,13 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponse200Type$inboundSchema,
+  type: z.literal("ragas"),
   ragas_metric: DataRagasMetric$inboundSchema,
   key: z.string(),
   model: z.string(),
@@ -1750,10 +1149,10 @@ export type DataRagas$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsResponse200Number$Outbound
     | GetEvalsGuardrailConfigEvalsResponse200Boolean$Outbound
+    | GetEvalsGuardrailConfigEvalsResponse200Number$Outbound
     | undefined;
-  type: string;
+  type: "ragas";
   ragas_metric: string;
   key: string;
   model: string;
@@ -1767,13 +1166,13 @@ export const DataRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponse200Type$outboundSchema,
+  type: z.literal("ragas"),
   ragasMetric: DataRagasMetric$outboundSchema,
   key: z.string(),
   model: z.string(),
@@ -1799,20 +1198,6 @@ export function dataRagasFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponseOperator$inboundSchema:
   z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponseOperator> = z
     .nativeEnum(GetEvalsGuardrailConfigEvalsResponseOperator);
@@ -1826,15 +1211,14 @@ export const GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema:
   z.ZodType<GetEvalsGuardrailConfigEvalsResponseNumber, z.ZodTypeDef, unknown> =
     z.object({
       enabled: z.boolean(),
-      type:
-        GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type$inboundSchema,
+      type: z.literal("number"),
       value: z.number(),
       operator: GetEvalsGuardrailConfigEvalsResponseOperator$inboundSchema,
     });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponseNumber$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "number";
   value: number;
   operator: string;
 };
@@ -1847,8 +1231,7 @@ export const GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponseNumber
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData52Type$outboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponseOperator$outboundSchema,
   });
@@ -1880,20 +1263,6 @@ export function getEvalsGuardrailConfigEvalsResponseNumberFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema:
   z.ZodType<
     GetEvalsGuardrailConfigEvalsResponseBoolean,
@@ -1901,14 +1270,13 @@ export const GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponseBoolean$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "boolean";
   value: boolean;
 };
 
@@ -1920,8 +1288,7 @@ export const GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponseBoolean
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 
@@ -1957,13 +1324,13 @@ export const GetEvalsDataEvalsResponseGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
 ]);
 /** @internal */
 export type GetEvalsDataEvalsResponseGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsResponseNumber$Outbound
-  | GetEvalsGuardrailConfigEvalsResponseBoolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsResponseBoolean$Outbound
+  | GetEvalsGuardrailConfigEvalsResponseNumber$Outbound;
 
 /** @internal */
 export const GetEvalsDataEvalsResponseGuardrailConfig$outboundSchema: z.ZodType<
@@ -1971,8 +1338,8 @@ export const GetEvalsDataEvalsResponseGuardrailConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsDataEvalsResponseGuardrailConfig
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
 ]);
 
 export function getEvalsDataEvalsResponseGuardrailConfigToJSON(
@@ -2002,205 +1369,16 @@ export function getEvalsDataEvalsResponseGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponseType
-> = z.nativeEnum(GetEvalsDataEvalsResponseType);
-/** @internal */
-export const GetEvalsDataEvalsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponseType
-> = GetEvalsDataEvalsResponseType$inboundSchema;
-
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$inboundSchema;
-
-/** @internal */
-export const GetEvalsFunctionParams35$inboundSchema: z.ZodType<
-  GetEvalsFunctionParams35,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$inboundSchema,
-});
-/** @internal */
-export type GetEvalsFunctionParams35$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetEvalsFunctionParams35$outboundSchema: z.ZodType<
-  GetEvalsFunctionParams35$Outbound,
-  z.ZodTypeDef,
-  GetEvalsFunctionParams35
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$outboundSchema,
-});
-
-export function getEvalsFunctionParams35ToJSON(
-  getEvalsFunctionParams35: GetEvalsFunctionParams35,
-): string {
-  return JSON.stringify(
-    GetEvalsFunctionParams35$outboundSchema.parse(getEvalsFunctionParams35),
-  );
-}
-export function getEvalsFunctionParams35FromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalsFunctionParams35, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEvalsFunctionParams35$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalsFunctionParams35' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$inboundSchema;
-
-/** @internal */
-export const GetEvalsFunctionParams34$inboundSchema: z.ZodType<
-  GetEvalsFunctionParams34,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$inboundSchema,
-});
-/** @internal */
-export type GetEvalsFunctionParams34$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetEvalsFunctionParams34$outboundSchema: z.ZodType<
-  GetEvalsFunctionParams34$Outbound,
-  z.ZodTypeDef,
-  GetEvalsFunctionParams34
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$outboundSchema,
-});
-
-export function getEvalsFunctionParams34ToJSON(
-  getEvalsFunctionParams34: GetEvalsFunctionParams34,
-): string {
-  return JSON.stringify(
-    GetEvalsFunctionParams34$outboundSchema.parse(getEvalsFunctionParams34),
-  );
-}
-export function getEvalsFunctionParams34FromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalsFunctionParams34, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEvalsFunctionParams34$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalsFunctionParams34' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$inboundSchema;
-
-/** @internal */
-export const GetEvalsFunctionParams33$inboundSchema: z.ZodType<
-  GetEvalsFunctionParams33,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$inboundSchema,
-});
-/** @internal */
-export type GetEvalsFunctionParams33$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetEvalsFunctionParams33$outboundSchema: z.ZodType<
-  GetEvalsFunctionParams33$Outbound,
-  z.ZodTypeDef,
-  GetEvalsFunctionParams33
-> = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$outboundSchema,
-});
-
-export function getEvalsFunctionParams33ToJSON(
-  getEvalsFunctionParams33: GetEvalsFunctionParams33,
-): string {
-  return JSON.stringify(
-    GetEvalsFunctionParams33$outboundSchema.parse(getEvalsFunctionParams33),
-  );
-}
-export function getEvalsFunctionParams33FromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalsFunctionParams33, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEvalsFunctionParams33$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalsFunctionParams33' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams32$inboundSchema: z.ZodType<
   GetEvalsFunctionParams32,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$inboundSchema,
+  type: z.literal("grammar_diversity"),
 });
 /** @internal */
 export type GetEvalsFunctionParams32$Outbound = {
-  type: string;
+  type: "grammar_diversity";
 };
 
 /** @internal */
@@ -2209,8 +1387,7 @@ export const GetEvalsFunctionParams32$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams32
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$outboundSchema,
+  type: z.literal("grammar_diversity"),
 });
 
 export function getEvalsFunctionParams32ToJSON(
@@ -2231,31 +1408,16 @@ export function getEvalsFunctionParams32FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams31$inboundSchema: z.ZodType<
   GetEvalsFunctionParams31,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$inboundSchema,
+  type: z.literal("lexical_repetition"),
 });
 /** @internal */
 export type GetEvalsFunctionParams31$Outbound = {
-  type: string;
+  type: "lexical_repetition";
 };
 
 /** @internal */
@@ -2264,8 +1426,7 @@ export const GetEvalsFunctionParams31$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams31
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$outboundSchema,
+  type: z.literal("lexical_repetition"),
 });
 
 export function getEvalsFunctionParams31ToJSON(
@@ -2286,31 +1447,16 @@ export function getEvalsFunctionParams31FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams30$inboundSchema: z.ZodType<
   GetEvalsFunctionParams30,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$inboundSchema,
+  type: z.literal("sentences_count"),
 });
 /** @internal */
 export type GetEvalsFunctionParams30$Outbound = {
-  type: string;
+  type: "sentences_count";
 };
 
 /** @internal */
@@ -2319,8 +1465,7 @@ export const GetEvalsFunctionParams30$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams30
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$outboundSchema,
+  type: z.literal("sentences_count"),
 });
 
 export function getEvalsFunctionParams30ToJSON(
@@ -2341,31 +1486,16 @@ export function getEvalsFunctionParams30FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams29$inboundSchema: z.ZodType<
   GetEvalsFunctionParams29,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$inboundSchema,
+  type: z.literal("words_count"),
 });
 /** @internal */
 export type GetEvalsFunctionParams29$Outbound = {
-  type: string;
+  type: "words_count";
 };
 
 /** @internal */
@@ -2374,8 +1504,7 @@ export const GetEvalsFunctionParams29$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams29
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$outboundSchema,
+  type: z.literal("words_count"),
 });
 
 export function getEvalsFunctionParams29ToJSON(
@@ -2396,31 +1525,16 @@ export function getEvalsFunctionParams29FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams28$inboundSchema: z.ZodType<
   GetEvalsFunctionParams28,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$inboundSchema,
+  type: z.literal("gse_english_level"),
 });
 /** @internal */
 export type GetEvalsFunctionParams28$Outbound = {
-  type: string;
+  type: "gse_english_level";
 };
 
 /** @internal */
@@ -2429,8 +1543,7 @@ export const GetEvalsFunctionParams28$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams28
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$outboundSchema,
+  type: z.literal("gse_english_level"),
 });
 
 export function getEvalsFunctionParams28ToJSON(
@@ -2451,31 +1564,16 @@ export function getEvalsFunctionParams28FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams27$inboundSchema: z.ZodType<
   GetEvalsFunctionParams27,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$inboundSchema,
+  type: z.literal("flesch_reading_ease"),
 });
 /** @internal */
 export type GetEvalsFunctionParams27$Outbound = {
-  type: string;
+  type: "flesch_reading_ease";
 };
 
 /** @internal */
@@ -2484,8 +1582,7 @@ export const GetEvalsFunctionParams27$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams27
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$outboundSchema,
+  type: z.literal("flesch_reading_ease"),
 });
 
 export function getEvalsFunctionParams27ToJSON(
@@ -2506,33 +1603,16 @@ export function getEvalsFunctionParams27FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams26$inboundSchema: z.ZodType<
   GetEvalsFunctionParams26,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$inboundSchema,
-  keywords: z.array(z.string()),
+  type: z.literal("most_repeated_words"),
 });
 /** @internal */
 export type GetEvalsFunctionParams26$Outbound = {
-  type: string;
-  keywords: Array<string>;
+  type: "most_repeated_words";
 };
 
 /** @internal */
@@ -2541,9 +1621,7 @@ export const GetEvalsFunctionParams26$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams26
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$outboundSchema,
-  keywords: z.array(z.string()),
+  type: z.literal("most_repeated_words"),
 });
 
 export function getEvalsFunctionParams26ToJSON(
@@ -2564,33 +1642,18 @@ export function getEvalsFunctionParams26FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams25$inboundSchema: z.ZodType<
   GetEvalsFunctionParams25,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$inboundSchema,
-  topic: z.string(),
+  type: z.literal("keywords_match"),
+  keywords: z.array(z.string()),
 });
 /** @internal */
 export type GetEvalsFunctionParams25$Outbound = {
-  type: string;
-  topic: string;
+  type: "keywords_match";
+  keywords: Array<string>;
 };
 
 /** @internal */
@@ -2599,9 +1662,8 @@ export const GetEvalsFunctionParams25$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams25
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$outboundSchema,
-  topic: z.string(),
+  type: z.literal("keywords_match"),
+  keywords: z.array(z.string()),
 });
 
 export function getEvalsFunctionParams25ToJSON(
@@ -2622,31 +1684,16 @@ export function getEvalsFunctionParams25FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams24$inboundSchema: z.ZodType<
   GetEvalsFunctionParams24,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$inboundSchema,
+  type: z.literal("levenshtein_distance"),
 });
 /** @internal */
 export type GetEvalsFunctionParams24$Outbound = {
-  type: string;
+  type: "levenshtein_distance";
 };
 
 /** @internal */
@@ -2655,8 +1702,7 @@ export const GetEvalsFunctionParams24$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams24
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$outboundSchema,
+  type: z.literal("levenshtein_distance"),
 });
 
 export function getEvalsFunctionParams24ToJSON(
@@ -2677,31 +1723,16 @@ export function getEvalsFunctionParams24FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams23$inboundSchema: z.ZodType<
   GetEvalsFunctionParams23,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$inboundSchema,
+  type: z.literal("cosine_similarity"),
 });
 /** @internal */
 export type GetEvalsFunctionParams23$Outbound = {
-  type: string;
+  type: "cosine_similarity";
 };
 
 /** @internal */
@@ -2710,8 +1741,7 @@ export const GetEvalsFunctionParams23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams23
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$outboundSchema,
+  type: z.literal("cosine_similarity"),
 });
 
 export function getEvalsFunctionParams23ToJSON(
@@ -2732,31 +1762,16 @@ export function getEvalsFunctionParams23FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams22$inboundSchema: z.ZodType<
   GetEvalsFunctionParams22,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$inboundSchema,
+  type: z.literal("meteor_score"),
 });
 /** @internal */
 export type GetEvalsFunctionParams22$Outbound = {
-  type: string;
+  type: "meteor_score";
 };
 
 /** @internal */
@@ -2765,8 +1780,7 @@ export const GetEvalsFunctionParams22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams22
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$outboundSchema,
+  type: z.literal("meteor_score"),
 });
 
 export function getEvalsFunctionParams22ToJSON(
@@ -2787,31 +1801,16 @@ export function getEvalsFunctionParams22FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams21$inboundSchema: z.ZodType<
   GetEvalsFunctionParams21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$inboundSchema,
+  type: z.literal("rouge_n"),
 });
 /** @internal */
 export type GetEvalsFunctionParams21$Outbound = {
-  type: string;
+  type: "rouge_n";
 };
 
 /** @internal */
@@ -2820,8 +1819,7 @@ export const GetEvalsFunctionParams21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams21
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$outboundSchema,
+  type: z.literal("rouge_n"),
 });
 
 export function getEvalsFunctionParams21ToJSON(
@@ -2842,31 +1840,16 @@ export function getEvalsFunctionParams21FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams20$inboundSchema: z.ZodType<
   GetEvalsFunctionParams20,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$inboundSchema,
+  type: z.literal("bleu_score"),
 });
 /** @internal */
 export type GetEvalsFunctionParams20$Outbound = {
-  type: string;
+  type: "bleu_score";
 };
 
 /** @internal */
@@ -2875,8 +1858,7 @@ export const GetEvalsFunctionParams20$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams20
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$outboundSchema,
+  type: z.literal("bleu_score"),
 });
 
 export function getEvalsFunctionParams20ToJSON(
@@ -2897,31 +1879,16 @@ export function getEvalsFunctionParams20FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams19$inboundSchema: z.ZodType<
   GetEvalsFunctionParams19,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$inboundSchema,
+  type: z.literal("bert_score"),
 });
 /** @internal */
 export type GetEvalsFunctionParams19$Outbound = {
-  type: string;
+  type: "bert_score";
 };
 
 /** @internal */
@@ -2930,8 +1897,7 @@ export const GetEvalsFunctionParams19$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams19
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$outboundSchema,
+  type: z.literal("bert_score"),
 });
 
 export function getEvalsFunctionParams19ToJSON(
@@ -2952,31 +1918,16 @@ export function getEvalsFunctionParams19FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams18$inboundSchema: z.ZodType<
   GetEvalsFunctionParams18,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$inboundSchema,
+  type: z.literal("moderations_google"),
 });
 /** @internal */
 export type GetEvalsFunctionParams18$Outbound = {
-  type: string;
+  type: "moderations_google";
 };
 
 /** @internal */
@@ -2985,8 +1936,7 @@ export const GetEvalsFunctionParams18$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams18
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$outboundSchema,
+  type: z.literal("moderations_google"),
 });
 
 export function getEvalsFunctionParams18ToJSON(
@@ -3007,31 +1957,16 @@ export function getEvalsFunctionParams18FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams17$inboundSchema: z.ZodType<
   GetEvalsFunctionParams17,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$inboundSchema,
+  type: z.literal("moderations_openai"),
 });
 /** @internal */
 export type GetEvalsFunctionParams17$Outbound = {
-  type: string;
+  type: "moderations_openai";
 };
 
 /** @internal */
@@ -3040,8 +1975,7 @@ export const GetEvalsFunctionParams17$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams17
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$outboundSchema,
+  type: z.literal("moderations_openai"),
 });
 
 export function getEvalsFunctionParams17ToJSON(
@@ -3062,31 +1996,16 @@ export function getEvalsFunctionParams17FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams16$inboundSchema: z.ZodType<
   GetEvalsFunctionParams16,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$inboundSchema,
+  type: z.literal("is_valid_json"),
 });
 /** @internal */
 export type GetEvalsFunctionParams16$Outbound = {
-  type: string;
+  type: "is_valid_json";
 };
 
 /** @internal */
@@ -3095,8 +2014,7 @@ export const GetEvalsFunctionParams16$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams16
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$outboundSchema,
+  type: z.literal("is_valid_json"),
 });
 
 export function getEvalsFunctionParams16ToJSON(
@@ -3117,32 +2035,17 @@ export function getEvalsFunctionParams16FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams15$inboundSchema: z.ZodType<
   GetEvalsFunctionParams15,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$inboundSchema,
+  type: z.literal("regex"),
   pattern: z.string(),
 });
 /** @internal */
 export type GetEvalsFunctionParams15$Outbound = {
-  type: string;
+  type: "regex";
   pattern: string;
 };
 
@@ -3152,8 +2055,7 @@ export const GetEvalsFunctionParams15$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams15
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$outboundSchema,
+  type: z.literal("regex"),
   pattern: z.string(),
 });
 
@@ -3175,31 +2077,16 @@ export function getEvalsFunctionParams15FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams14$inboundSchema: z.ZodType<
   GetEvalsFunctionParams14,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$inboundSchema,
+  type: z.literal("one_line"),
 });
 /** @internal */
 export type GetEvalsFunctionParams14$Outbound = {
-  type: string;
+  type: "one_line";
 };
 
 /** @internal */
@@ -3208,8 +2095,7 @@ export const GetEvalsFunctionParams14$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams14
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$outboundSchema,
+  type: z.literal("one_line"),
 });
 
 export function getEvalsFunctionParams14ToJSON(
@@ -3230,32 +2116,17 @@ export function getEvalsFunctionParams14FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams13$inboundSchema: z.ZodType<
   GetEvalsFunctionParams13,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$inboundSchema,
+  type: z.literal("length_greater_than"),
   value: z.number(),
 });
 /** @internal */
 export type GetEvalsFunctionParams13$Outbound = {
-  type: string;
+  type: "length_greater_than";
   value: number;
 };
 
@@ -3265,8 +2136,7 @@ export const GetEvalsFunctionParams13$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams13
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$outboundSchema,
+  type: z.literal("length_greater_than"),
   value: z.number(),
 });
 
@@ -3288,33 +2158,18 @@ export function getEvalsFunctionParams13FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams12$inboundSchema: z.ZodType<
   GetEvalsFunctionParams12,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$inboundSchema,
+  type: z.literal("length_between"),
   min: z.number(),
   max: z.number(),
 });
 /** @internal */
 export type GetEvalsFunctionParams12$Outbound = {
-  type: string;
+  type: "length_between";
   min: number;
   max: number;
 };
@@ -3325,8 +2180,7 @@ export const GetEvalsFunctionParams12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams12
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$outboundSchema,
+  type: z.literal("length_between"),
   min: z.number(),
   max: z.number(),
 });
@@ -3349,32 +2203,17 @@ export function getEvalsFunctionParams12FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams11$inboundSchema: z.ZodType<
   GetEvalsFunctionParams11,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$inboundSchema,
+  type: z.literal("length_less_than"),
   value: z.number(),
 });
 /** @internal */
 export type GetEvalsFunctionParams11$Outbound = {
-  type: string;
+  type: "length_less_than";
   value: number;
 };
 
@@ -3384,8 +2223,7 @@ export const GetEvalsFunctionParams11$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams11
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$outboundSchema,
+  type: z.literal("length_less_than"),
   value: z.number(),
 });
 
@@ -3407,31 +2245,16 @@ export function getEvalsFunctionParams11FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams10$inboundSchema: z.ZodType<
   GetEvalsFunctionParams10,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$inboundSchema,
+  type: z.literal("exact_match"),
 });
 /** @internal */
 export type GetEvalsFunctionParams10$Outbound = {
-  type: string;
+  type: "exact_match";
 };
 
 /** @internal */
@@ -3440,8 +2263,7 @@ export const GetEvalsFunctionParams10$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams10
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$outboundSchema,
+  type: z.literal("exact_match"),
 });
 
 export function getEvalsFunctionParams10ToJSON(
@@ -3462,32 +2284,17 @@ export function getEvalsFunctionParams10FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams9$inboundSchema: z.ZodType<
   GetEvalsFunctionParams9,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema,
+  type: z.literal("ends_with"),
   value: z.string(),
 });
 /** @internal */
 export type GetEvalsFunctionParams9$Outbound = {
-  type: string;
+  type: "ends_with";
   value: string;
 };
 
@@ -3497,8 +2304,7 @@ export const GetEvalsFunctionParams9$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams9
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema,
+  type: z.literal("ends_with"),
   value: z.string(),
 });
 
@@ -3520,32 +2326,17 @@ export function getEvalsFunctionParams9FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams8$inboundSchema: z.ZodType<
   GetEvalsFunctionParams8,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema,
+  type: z.literal("start_with"),
   value: z.string(),
 });
 /** @internal */
 export type GetEvalsFunctionParams8$Outbound = {
-  type: string;
+  type: "start_with";
   value: string;
 };
 
@@ -3555,8 +2346,7 @@ export const GetEvalsFunctionParams8$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams8
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$outboundSchema,
+  type: z.literal("start_with"),
   value: z.string(),
 });
 
@@ -3578,31 +2368,16 @@ export function getEvalsFunctionParams8FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams7$inboundSchema: z.ZodType<
   GetEvalsFunctionParams7,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  type: z.literal("contains_valid_link"),
 });
 /** @internal */
 export type GetEvalsFunctionParams7$Outbound = {
-  type: string;
+  type: "contains_valid_link";
 };
 
 /** @internal */
@@ -3611,8 +2386,7 @@ export const GetEvalsFunctionParams7$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams7
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  type: z.literal("contains_valid_link"),
 });
 
 export function getEvalsFunctionParams7ToJSON(
@@ -3633,27 +2407,16 @@ export function getEvalsFunctionParams7FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType
-  > = z.nativeEnum(GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType);
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType
-  > = GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams6$inboundSchema: z.ZodType<
   GetEvalsFunctionParams6,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("contains_url"),
 });
 /** @internal */
 export type GetEvalsFunctionParams6$Outbound = {
-  type: string;
+  type: "contains_url";
 };
 
 /** @internal */
@@ -3662,8 +2425,7 @@ export const GetEvalsFunctionParams6$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams6
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("contains_url"),
 });
 
 export function getEvalsFunctionParams6ToJSON(
@@ -3684,25 +2446,16 @@ export function getEvalsFunctionParams6FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsFunctionParamsEvalsResponse200Type> = z
-    .nativeEnum(GetEvalsFunctionParamsEvalsResponse200Type);
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsFunctionParamsEvalsResponse200Type> =
-    GetEvalsFunctionParamsEvalsResponse200Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams5$inboundSchema: z.ZodType<
   GetEvalsFunctionParams5,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsResponse200Type$inboundSchema,
+  type: z.literal("contains_email"),
 });
 /** @internal */
 export type GetEvalsFunctionParams5$Outbound = {
-  type: string;
+  type: "contains_email";
 };
 
 /** @internal */
@@ -3711,7 +2464,7 @@ export const GetEvalsFunctionParams5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams5
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsResponse200Type$outboundSchema,
+  type: z.literal("contains_email"),
 });
 
 export function getEvalsFunctionParams5ToJSON(
@@ -3732,26 +2485,17 @@ export function getEvalsFunctionParams5FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsFunctionParamsEvalsResponseType> = z
-    .nativeEnum(GetEvalsFunctionParamsEvalsResponseType);
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsFunctionParamsEvalsResponseType> =
-    GetEvalsFunctionParamsEvalsResponseType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams4$inboundSchema: z.ZodType<
   GetEvalsFunctionParams4,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsResponseType$inboundSchema,
+  type: z.literal("contains_any"),
   keywords: z.array(z.string()),
 });
 /** @internal */
 export type GetEvalsFunctionParams4$Outbound = {
-  type: string;
+  type: "contains_any";
   keywords: Array<string>;
 };
 
@@ -3761,7 +2505,7 @@ export const GetEvalsFunctionParams4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams4
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsResponseType$outboundSchema,
+  type: z.literal("contains_any"),
   keywords: z.array(z.string()),
 });
 
@@ -3783,26 +2527,17 @@ export function getEvalsFunctionParams4FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsFunctionParamsEvalsType
-> = z.nativeEnum(GetEvalsFunctionParamsEvalsType);
-/** @internal */
-export const GetEvalsFunctionParamsEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsFunctionParamsEvalsType
-> = GetEvalsFunctionParamsEvalsType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams3$inboundSchema: z.ZodType<
   GetEvalsFunctionParams3,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsType$inboundSchema,
+  type: z.literal("contains_all"),
   keywords: z.array(z.string()),
 });
 /** @internal */
 export type GetEvalsFunctionParams3$Outbound = {
-  type: string;
+  type: "contains_all";
   keywords: Array<string>;
 };
 
@@ -3812,7 +2547,7 @@ export const GetEvalsFunctionParams3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams3
 > = z.object({
-  type: GetEvalsFunctionParamsEvalsType$outboundSchema,
+  type: z.literal("contains_all"),
   keywords: z.array(z.string()),
 });
 
@@ -3834,26 +2569,17 @@ export function getEvalsFunctionParams3FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsFunctionParamsType
-> = z.nativeEnum(GetEvalsFunctionParamsType);
-/** @internal */
-export const GetEvalsFunctionParamsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsFunctionParamsType
-> = GetEvalsFunctionParamsType$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams2$inboundSchema: z.ZodType<
   GetEvalsFunctionParams2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetEvalsFunctionParamsType$inboundSchema,
+  type: z.literal("contains_none"),
   keywords: z.array(z.string()),
 });
 /** @internal */
 export type GetEvalsFunctionParams2$Outbound = {
-  type: string;
+  type: "contains_none";
   keywords: Array<string>;
 };
 
@@ -3863,7 +2589,7 @@ export const GetEvalsFunctionParams2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams2
 > = z.object({
-  type: GetEvalsFunctionParamsType$outboundSchema,
+  type: z.literal("contains_none"),
   keywords: z.array(z.string()),
 });
 
@@ -3885,32 +2611,17 @@ export function getEvalsFunctionParams2FromJSON(
 }
 
 /** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
-  > = z.nativeEnum(
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type,
-  );
-/** @internal */
-export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
-  > =
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsFunctionParams1$inboundSchema: z.ZodType<
   GetEvalsFunctionParams1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema,
+  type: z.literal("contains"),
   value: z.string(),
 });
 /** @internal */
 export type GetEvalsFunctionParams1$Outbound = {
-  type: string;
+  type: "contains";
   value: string;
 };
 
@@ -3920,8 +2631,7 @@ export const GetEvalsFunctionParams1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsFunctionParams1
 > = z.object({
-  type:
-    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema,
+  type: z.literal("contains"),
   value: z.string(),
 });
 
@@ -3948,23 +2658,21 @@ export const DataFunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams1$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams2$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams3$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams4$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams5$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams6$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams7$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams10$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams14$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams16$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams17$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams18$inboundSchema),
@@ -3974,35 +2682,32 @@ export const DataFunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => GetEvalsFunctionParams22$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams23$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams24$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams27$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams28$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams29$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams30$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams31$inboundSchema),
   z.lazy(() => GetEvalsFunctionParams32$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams33$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams34$inboundSchema),
-  z.lazy(() => GetEvalsFunctionParams35$inboundSchema),
 ]);
 /** @internal */
 export type DataFunctionParams$Outbound =
-  | GetEvalsFunctionParams12$Outbound
   | GetEvalsFunctionParams1$Outbound
   | GetEvalsFunctionParams2$Outbound
   | GetEvalsFunctionParams3$Outbound
   | GetEvalsFunctionParams4$Outbound
-  | GetEvalsFunctionParams8$Outbound
-  | GetEvalsFunctionParams9$Outbound
-  | GetEvalsFunctionParams11$Outbound
-  | GetEvalsFunctionParams13$Outbound
-  | GetEvalsFunctionParams15$Outbound
-  | GetEvalsFunctionParams25$Outbound
-  | GetEvalsFunctionParams26$Outbound
   | GetEvalsFunctionParams5$Outbound
   | GetEvalsFunctionParams6$Outbound
   | GetEvalsFunctionParams7$Outbound
+  | GetEvalsFunctionParams8$Outbound
+  | GetEvalsFunctionParams9$Outbound
   | GetEvalsFunctionParams10$Outbound
+  | GetEvalsFunctionParams11$Outbound
+  | GetEvalsFunctionParams12$Outbound
+  | GetEvalsFunctionParams13$Outbound
   | GetEvalsFunctionParams14$Outbound
+  | GetEvalsFunctionParams15$Outbound
   | GetEvalsFunctionParams16$Outbound
   | GetEvalsFunctionParams17$Outbound
   | GetEvalsFunctionParams18$Outbound
@@ -4012,15 +2717,14 @@ export type DataFunctionParams$Outbound =
   | GetEvalsFunctionParams22$Outbound
   | GetEvalsFunctionParams23$Outbound
   | GetEvalsFunctionParams24$Outbound
+  | GetEvalsFunctionParams25$Outbound
+  | GetEvalsFunctionParams26$Outbound
   | GetEvalsFunctionParams27$Outbound
   | GetEvalsFunctionParams28$Outbound
   | GetEvalsFunctionParams29$Outbound
   | GetEvalsFunctionParams30$Outbound
   | GetEvalsFunctionParams31$Outbound
-  | GetEvalsFunctionParams32$Outbound
-  | GetEvalsFunctionParams33$Outbound
-  | GetEvalsFunctionParams34$Outbound
-  | GetEvalsFunctionParams35$Outbound;
+  | GetEvalsFunctionParams32$Outbound;
 
 /** @internal */
 export const DataFunctionParams$outboundSchema: z.ZodType<
@@ -4028,23 +2732,21 @@ export const DataFunctionParams$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataFunctionParams
 > = z.union([
-  z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams1$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams2$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams3$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams4$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams5$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams6$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams7$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams10$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams14$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams16$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams17$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams18$outboundSchema),
@@ -4054,15 +2756,14 @@ export const DataFunctionParams$outboundSchema: z.ZodType<
   z.lazy(() => GetEvalsFunctionParams22$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams23$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams24$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams27$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams28$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams29$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams30$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams31$outboundSchema),
   z.lazy(() => GetEvalsFunctionParams32$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams33$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams34$outboundSchema),
-  z.lazy(() => GetEvalsFunctionParams35$outboundSchema),
 ]);
 
 export function dataFunctionParamsToJSON(
@@ -4090,31 +2791,29 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponseType$inboundSchema,
+  type: z.literal("function_eval"),
   function_params: z.union([
-    z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams1$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams2$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams3$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams4$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams5$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams6$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams7$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams10$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams14$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams16$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams17$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams18$inboundSchema),
@@ -4124,15 +2823,14 @@ export const DataFunction$inboundSchema: z.ZodType<
     z.lazy(() => GetEvalsFunctionParams22$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams23$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams24$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams27$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams28$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams29$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams30$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams31$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams32$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams33$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams34$inboundSchema),
-    z.lazy(() => GetEvalsFunctionParams35$inboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -4149,28 +2847,26 @@ export type DataFunction$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsResponseNumber$Outbound
     | GetEvalsGuardrailConfigEvalsResponseBoolean$Outbound
+    | GetEvalsGuardrailConfigEvalsResponseNumber$Outbound
     | undefined;
-  type: string;
+  type: "function_eval";
   function_params:
-    | GetEvalsFunctionParams12$Outbound
     | GetEvalsFunctionParams1$Outbound
     | GetEvalsFunctionParams2$Outbound
     | GetEvalsFunctionParams3$Outbound
     | GetEvalsFunctionParams4$Outbound
-    | GetEvalsFunctionParams8$Outbound
-    | GetEvalsFunctionParams9$Outbound
-    | GetEvalsFunctionParams11$Outbound
-    | GetEvalsFunctionParams13$Outbound
-    | GetEvalsFunctionParams15$Outbound
-    | GetEvalsFunctionParams25$Outbound
-    | GetEvalsFunctionParams26$Outbound
     | GetEvalsFunctionParams5$Outbound
     | GetEvalsFunctionParams6$Outbound
     | GetEvalsFunctionParams7$Outbound
+    | GetEvalsFunctionParams8$Outbound
+    | GetEvalsFunctionParams9$Outbound
     | GetEvalsFunctionParams10$Outbound
+    | GetEvalsFunctionParams11$Outbound
+    | GetEvalsFunctionParams12$Outbound
+    | GetEvalsFunctionParams13$Outbound
     | GetEvalsFunctionParams14$Outbound
+    | GetEvalsFunctionParams15$Outbound
     | GetEvalsFunctionParams16$Outbound
     | GetEvalsFunctionParams17$Outbound
     | GetEvalsFunctionParams18$Outbound
@@ -4180,15 +2876,14 @@ export type DataFunction$Outbound = {
     | GetEvalsFunctionParams22$Outbound
     | GetEvalsFunctionParams23$Outbound
     | GetEvalsFunctionParams24$Outbound
+    | GetEvalsFunctionParams25$Outbound
+    | GetEvalsFunctionParams26$Outbound
     | GetEvalsFunctionParams27$Outbound
     | GetEvalsFunctionParams28$Outbound
     | GetEvalsFunctionParams29$Outbound
     | GetEvalsFunctionParams30$Outbound
     | GetEvalsFunctionParams31$Outbound
-    | GetEvalsFunctionParams32$Outbound
-    | GetEvalsFunctionParams33$Outbound
-    | GetEvalsFunctionParams34$Outbound
-    | GetEvalsFunctionParams35$Outbound;
+    | GetEvalsFunctionParams32$Outbound;
   key: string;
 };
 
@@ -4200,31 +2895,29 @@ export const DataFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponseType$outboundSchema,
+  type: z.literal("function_eval"),
   functionParams: z.union([
-    z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams1$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams2$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams3$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams4$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams5$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams6$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams7$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams10$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams14$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams16$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams17$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams18$outboundSchema),
@@ -4234,15 +2927,14 @@ export const DataFunction$outboundSchema: z.ZodType<
     z.lazy(() => GetEvalsFunctionParams22$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams23$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams24$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams27$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams28$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams29$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams30$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams31$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams32$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams33$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams34$outboundSchema),
-    z.lazy(() => GetEvalsFunctionParams35$outboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -4267,20 +2959,6 @@ export function dataFunctionFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsOperator$inboundSchema:
   z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsOperator> = z.nativeEnum(
     GetEvalsGuardrailConfigEvalsOperator,
@@ -4297,15 +2975,14 @@ export const GetEvalsGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema,
+  type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigEvalsOperator$inboundSchema,
 });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsNumber$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "number";
   value: number;
   operator: string;
 };
@@ -4317,8 +2994,7 @@ export const GetEvalsGuardrailConfigEvalsNumber$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigEvalsNumber
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataType$outboundSchema,
+  type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigEvalsOperator$outboundSchema,
 });
@@ -4344,34 +3020,19 @@ export function getEvalsGuardrailConfigEvalsNumberFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsBoolean$inboundSchema: z.ZodType<
   GetEvalsGuardrailConfigEvalsBoolean,
   z.ZodTypeDef,
   unknown
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  type: z.literal("boolean"),
   value: z.boolean(),
 });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsBoolean$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "boolean";
   value: boolean;
 };
 
@@ -4382,8 +3043,7 @@ export const GetEvalsGuardrailConfigEvalsBoolean$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigEvalsBoolean
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  type: z.literal("boolean"),
   value: z.boolean(),
 });
 
@@ -4413,13 +3073,13 @@ export const GetEvalsDataEvalsGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
 ]);
 /** @internal */
 export type GetEvalsDataEvalsGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsNumber$Outbound
-  | GetEvalsGuardrailConfigEvalsBoolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsBoolean$Outbound
+  | GetEvalsGuardrailConfigEvalsNumber$Outbound;
 
 /** @internal */
 export const GetEvalsDataEvalsGuardrailConfig$outboundSchema: z.ZodType<
@@ -4427,8 +3087,8 @@ export const GetEvalsDataEvalsGuardrailConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsDataEvalsGuardrailConfig
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$outboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
 ]);
 
 export function getEvalsDataEvalsGuardrailConfigToJSON(
@@ -4451,15 +3111,6 @@ export function getEvalsDataEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsType
-> = z.nativeEnum(GetEvalsDataEvalsType);
-/** @internal */
-export const GetEvalsDataEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsType
-> = GetEvalsDataEvalsType$inboundSchema;
-
-/** @internal */
 export const DataPython$inboundSchema: z.ZodType<
   DataPython,
   z.ZodTypeDef,
@@ -4467,14 +3118,14 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsType$inboundSchema,
+  type: z.literal("python_eval"),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -4489,11 +3140,11 @@ export type DataPython$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsNumber$Outbound
     | GetEvalsGuardrailConfigEvalsBoolean$Outbound
+    | GetEvalsGuardrailConfigEvalsNumber$Outbound
     | undefined;
   code: string;
-  type: string;
+  type: "python_eval";
   key: string;
 };
 
@@ -4505,14 +3156,14 @@ export const DataPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$outboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsType$outboundSchema,
+  type: z.literal("python_eval"),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -4535,17 +3186,6 @@ export function dataPythonFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType
-  > = z.nativeEnum(GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType);
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType
-  > = GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
   typeof GetEvalsGuardrailConfigOperator
 > = z.nativeEnum(GetEvalsGuardrailConfigOperator);
@@ -4561,15 +3201,14 @@ export const GetEvalsGuardrailConfigNumber$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigOperator$inboundSchema,
 });
 /** @internal */
 export type GetEvalsGuardrailConfigNumber$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "number";
   value: number;
   operator: string;
 };
@@ -4581,8 +3220,7 @@ export const GetEvalsGuardrailConfigNumber$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigNumber
 > = z.object({
   enabled: z.boolean(),
-  type:
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigOperator$outboundSchema,
 });
@@ -4607,28 +3245,19 @@ export function getEvalsGuardrailConfigNumberFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponse200Type> = z
-    .nativeEnum(GetEvalsGuardrailConfigEvalsResponse200Type);
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponse200Type> =
-    GetEvalsGuardrailConfigEvalsResponse200Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigBoolean$inboundSchema: z.ZodType<
   GetEvalsGuardrailConfigBoolean,
   z.ZodTypeDef,
   unknown
 > = z.object({
   enabled: z.boolean(),
-  type: GetEvalsGuardrailConfigEvalsResponse200Type$inboundSchema,
+  type: z.literal("boolean"),
   value: z.boolean(),
 });
 /** @internal */
 export type GetEvalsGuardrailConfigBoolean$Outbound = {
   enabled: boolean;
-  type: string;
+  type: "boolean";
   value: boolean;
 };
 
@@ -4639,7 +3268,7 @@ export const GetEvalsGuardrailConfigBoolean$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigBoolean
 > = z.object({
   enabled: z.boolean(),
-  type: GetEvalsGuardrailConfigEvalsResponse200Type$outboundSchema,
+  type: z.literal("boolean"),
   value: z.boolean(),
 });
 
@@ -4668,13 +3297,13 @@ export const GetEvalsDataGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
 ]);
 /** @internal */
 export type GetEvalsDataGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigNumber$Outbound
-  | GetEvalsGuardrailConfigBoolean$Outbound;
+  | GetEvalsGuardrailConfigBoolean$Outbound
+  | GetEvalsGuardrailConfigNumber$Outbound;
 
 /** @internal */
 export const GetEvalsDataGuardrailConfig$outboundSchema: z.ZodType<
@@ -4682,8 +3311,8 @@ export const GetEvalsDataGuardrailConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsDataGuardrailConfig
 > = z.union([
-  z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
   z.lazy(() => GetEvalsGuardrailConfigBoolean$outboundSchema),
+  z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
 ]);
 
 export function getEvalsDataGuardrailConfigToJSON(
@@ -4706,15 +3335,6 @@ export function getEvalsDataGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataType
-> = z.nativeEnum(GetEvalsDataType);
-/** @internal */
-export const GetEvalsDataType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataType
-> = GetEvalsDataType$inboundSchema;
-
-/** @internal */
 export const DataMethod$inboundSchema: z.ZodNativeEnum<typeof DataMethod> = z
   .nativeEnum(DataMethod);
 /** @internal */
@@ -4729,13 +3349,13 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
   ]).optional(),
-  type: GetEvalsDataType$inboundSchema,
+  type: z.literal("http_eval"),
   url: z.string(),
   method: DataMethod$inboundSchema,
   headers: z.record(z.string()),
@@ -4754,10 +3374,10 @@ export type DataHTTP$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigNumber$Outbound
     | GetEvalsGuardrailConfigBoolean$Outbound
+    | GetEvalsGuardrailConfigNumber$Outbound
     | undefined;
-  type: string;
+  type: "http_eval";
   url: string;
   method: string;
   headers: { [k: string]: string };
@@ -4773,13 +3393,13 @@ export const DataHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$outboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
   ]).optional(),
-  type: GetEvalsDataType$outboundSchema,
+  type: z.literal("http_eval"),
   url: z.string(),
   method: DataMethod$outboundSchema,
   headers: z.record(z.string()),
@@ -4806,15 +3426,6 @@ export function dataHTTPFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponseType> = z
-    .nativeEnum(GetEvalsGuardrailConfigEvalsResponseType);
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsGuardrailConfigEvalsResponseType> =
-    GetEvalsGuardrailConfigEvalsResponseType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator
@@ -4836,7 +3447,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigEvalsResponseType$inboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator$inboundSchema,
@@ -4845,7 +3456,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "number";
     value: number;
     operator: string;
   };
@@ -4858,7 +3469,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigEvalsResponseType$outboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator$outboundSchema,
@@ -4891,15 +3502,6 @@ export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigEvalsType
-> = z.nativeEnum(GetEvalsGuardrailConfigEvalsType);
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigEvalsType
-> = GetEvalsGuardrailConfigEvalsType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema:
   z.ZodType<
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean,
@@ -4907,14 +3509,14 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigEvalsType$inboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "boolean";
     value: boolean;
   };
 
@@ -4926,7 +3528,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigEvalsType$outboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 
@@ -4963,16 +3565,16 @@ export const DataGuardrailConfig$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() =>
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
   ),
   z.lazy(() =>
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
   ),
 ]);
 /** @internal */
 export type DataGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$Outbound
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound;
 
 /** @internal */
 export const DataGuardrailConfig$outboundSchema: z.ZodType<
@@ -4981,10 +3583,10 @@ export const DataGuardrailConfig$outboundSchema: z.ZodType<
   DataGuardrailConfig
 > = z.union([
   z.lazy(() =>
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$outboundSchema
   ),
   z.lazy(() =>
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$outboundSchema
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
   ),
 ]);
 
@@ -5006,13 +3608,6 @@ export function dataGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const DataType$inboundSchema: z.ZodNativeEnum<typeof DataType> = z
-  .nativeEnum(DataType);
-/** @internal */
-export const DataType$outboundSchema: z.ZodNativeEnum<typeof DataType> =
-  DataType$inboundSchema;
-
-/** @internal */
 export const DataJSON$inboundSchema: z.ZodType<
   DataJSON,
   z.ZodTypeDef,
@@ -5020,17 +3615,17 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrail_config: z.union([
-    z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
-    ),
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
     ),
+    z.lazy(() =>
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
+    ),
   ]).optional(),
-  type: DataType$inboundSchema,
+  type: z.literal("json_schema"),
   schema: z.string(),
   key: z.string(),
 }).transform((v) => {
@@ -5046,10 +3641,10 @@ export type DataJSON$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$Outbound
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound
     | undefined;
-  type: string;
+  type: "json_schema";
   schema: string;
   key: string;
 };
@@ -5062,17 +3657,17 @@ export const DataJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
-    ),
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$outboundSchema
     ),
+    z.lazy(() =>
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
+    ),
   ]).optional(),
-  type: DataType$outboundSchema,
+  type: z.literal("json_schema"),
   schema: z.string(),
   key: z.string(),
 }).transform((v) => {
@@ -5096,20 +3691,6 @@ export function dataJSONFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type,
-  );
-/** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
@@ -5131,8 +3712,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
@@ -5141,7 +3721,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "number";
     value: number;
     operator: string;
   };
@@ -5154,8 +3734,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema,
+    type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema,
@@ -5188,15 +3767,6 @@ export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigType
-> = z.nativeEnum(GetEvalsGuardrailConfigType);
-/** @internal */
-export const GetEvalsGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigType
-> = GetEvalsGuardrailConfigType$inboundSchema;
-
-/** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema:
   z.ZodType<
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
@@ -5204,14 +3774,14 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigType$inboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound =
   {
     enabled: boolean;
-    type: string;
+    type: "boolean";
     value: boolean;
   };
 
@@ -5223,7 +3793,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigType$outboundSchema,
+    type: z.literal("boolean"),
     value: z.boolean(),
   });
 
@@ -5261,16 +3831,16 @@ export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailCon
     unknown
   > = z.union([
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
     ),
   ]);
 /** @internal */
 export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConfig$Outbound =
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
-  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound;
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound
+  | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound;
 
 /** @internal */
 export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConfig$outboundSchema:
@@ -5280,10 +3850,10 @@ export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailCon
     GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConfig
   > = z.union([
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
     ),
     z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
     ),
   ]);
 
@@ -5314,33 +3884,21 @@ export function getEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrail
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType);
-/** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  > = GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
   z.object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-11-13T11:08:19.837Z"),
-    updated: z.string().default("2025-11-13T11:08:19.837Z"),
+    created: z.string().default("2025-12-05T12:54:52.561Z"),
+    updated: z.string().default("2025-12-05T12:54:52.561Z"),
     guardrail_config: z.union([
-      z.lazy(() =>
-        GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
-      ),
       z.lazy(() =>
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
       ),
+      z.lazy(() =>
+        GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
+      ),
     ]).optional(),
-    type:
-      GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    type: z.literal("llm_eval"),
     prompt: z.string(),
     key: z.string(),
     model: z.string(),
@@ -5357,10 +3915,10 @@ export type DataLLM$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound
+    | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
     | undefined;
-  type: string;
+  type: "llm_eval";
   prompt: string;
   key: string;
   model: string;
@@ -5374,18 +3932,17 @@ export const DataLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-11-13T11:08:19.837Z"),
-  updated: z.string().default("2025-11-13T11:08:19.837Z"),
+  created: z.string().default("2025-12-05T12:54:52.561Z"),
+  updated: z.string().default("2025-12-05T12:54:52.561Z"),
   guardrailConfig: z.union([
-    z.lazy(() =>
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
-    ),
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
     ),
+    z.lazy(() =>
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
+    ),
   ]).optional(),
-  type:
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  type: z.literal("llm_eval"),
   prompt: z.string(),
   key: z.string(),
   model: z.string(),
@@ -5415,22 +3972,22 @@ export const GetEvalsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DataHTTP$inboundSchema),
   z.lazy(() => DataLLM$inboundSchema),
-  z.lazy(() => DataRagas$inboundSchema),
   z.lazy(() => DataJSON$inboundSchema),
+  z.lazy(() => DataHTTP$inboundSchema),
   z.lazy(() => DataPython$inboundSchema),
   z.lazy(() => DataFunction$inboundSchema),
+  z.lazy(() => DataRagas$inboundSchema),
   z.lazy(() => DataTypescript$inboundSchema),
 ]);
 /** @internal */
 export type GetEvalsData$Outbound =
-  | DataHTTP$Outbound
   | DataLLM$Outbound
-  | DataRagas$Outbound
   | DataJSON$Outbound
+  | DataHTTP$Outbound
   | DataPython$Outbound
   | DataFunction$Outbound
+  | DataRagas$Outbound
   | DataTypescript$Outbound;
 
 /** @internal */
@@ -5439,12 +3996,12 @@ export const GetEvalsData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsData
 > = z.union([
-  z.lazy(() => DataHTTP$outboundSchema),
   z.lazy(() => DataLLM$outboundSchema),
-  z.lazy(() => DataRagas$outboundSchema),
   z.lazy(() => DataJSON$outboundSchema),
+  z.lazy(() => DataHTTP$outboundSchema),
   z.lazy(() => DataPython$outboundSchema),
   z.lazy(() => DataFunction$outboundSchema),
+  z.lazy(() => DataRagas$outboundSchema),
   z.lazy(() => DataTypescript$outboundSchema),
 ]);
 
@@ -5470,12 +4027,12 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
   object: GetEvalsObject$inboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => DataHTTP$inboundSchema),
       z.lazy(() => DataLLM$inboundSchema),
-      z.lazy(() => DataRagas$inboundSchema),
       z.lazy(() => DataJSON$inboundSchema),
+      z.lazy(() => DataHTTP$inboundSchema),
       z.lazy(() => DataPython$inboundSchema),
       z.lazy(() => DataFunction$inboundSchema),
+      z.lazy(() => DataRagas$inboundSchema),
       z.lazy(() => DataTypescript$inboundSchema),
     ]),
   ),
@@ -5489,12 +4046,12 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
 export type GetEvalsResponseBody$Outbound = {
   object: string;
   data: Array<
-    | DataHTTP$Outbound
     | DataLLM$Outbound
-    | DataRagas$Outbound
     | DataJSON$Outbound
+    | DataHTTP$Outbound
     | DataPython$Outbound
     | DataFunction$Outbound
+    | DataRagas$Outbound
     | DataTypescript$Outbound
   >;
   has_more: boolean;
@@ -5509,12 +4066,12 @@ export const GetEvalsResponseBody$outboundSchema: z.ZodType<
   object: GetEvalsObject$outboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => DataHTTP$outboundSchema),
       z.lazy(() => DataLLM$outboundSchema),
-      z.lazy(() => DataRagas$outboundSchema),
       z.lazy(() => DataJSON$outboundSchema),
+      z.lazy(() => DataHTTP$outboundSchema),
       z.lazy(() => DataPython$outboundSchema),
       z.lazy(() => DataFunction$outboundSchema),
+      z.lazy(() => DataRagas$outboundSchema),
       z.lazy(() => DataTypescript$outboundSchema),
     ]),
   ),

@@ -5,11 +5,15 @@
 ```typescript
 import { Fifteen } from "@orq-ai/node/models/operations";
 
-let value: Fifteen = "mistral/mistral-embed";
+let value: Fifteen = {
+  type: "regex",
+  pattern: "<value>",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"mistral/mistral-embed"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"regex"*          | :heavy_check_mark: | N/A                |
+| `pattern`          | *string*           | :heavy_check_mark: | N/A                |

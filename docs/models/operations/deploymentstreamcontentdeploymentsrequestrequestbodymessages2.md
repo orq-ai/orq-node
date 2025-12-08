@@ -1,0 +1,20 @@
+# DeploymentStreamContentDeploymentsRequestRequestBodyMessages2
+
+## Example Usage
+
+```typescript
+import { DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 = {
+  type: "text",
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                      | Type                                                                                                                                                                       | Required                                                                                                                                                                   | Description                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                     | [operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType](../../models/operations/deploymentstreamcontentdeploymentsrequestrequestbodymessagestype.md) | :heavy_check_mark:                                                                                                                                                         | N/A                                                                                                                                                                        |
+| `text`                                                                                                                                                                     | *string*                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                         | N/A                                                                                                                                                                        |
+| `cacheControl`                                                                                                                                                             | [operations.DeploymentStreamContentDeploymentsRequestCacheControl](../../models/operations/deploymentstreamcontentdeploymentsrequestcachecontrol.md)                       | :heavy_minus_sign:                                                                                                                                                         | N/A                                                                                                                                                                        |

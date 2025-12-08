@@ -3,21 +3,39 @@
 
 ## Supported Types
 
-### `operations.DeploymentStream2TextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2TextContentPart = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentStream2RefusalContentPart`
+### `components.RefusalPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2RefusalContentPart = {
+const value: components.RefusalPartSchema = {
   type: "refusal",
-  refusal: "<value>",
+};
+```
+
+### `components.ReasoningPartSchema`
+
+```typescript
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
+};
+```
+
+### `components.RedactedReasoningPartSchema`
+
+```typescript
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
 };
 ```
 

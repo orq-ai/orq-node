@@ -9,18 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const CreateDatasourceChunkingConfigurationType = {
-  Advanced: "advanced",
-} as const;
-export type CreateDatasourceChunkingConfigurationType = ClosedEnum<
-  typeof CreateDatasourceChunkingConfigurationType
->;
-
 /**
  * Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs.
  */
 export type ChunkingConfiguration2 = {
-  type: CreateDatasourceChunkingConfigurationType;
+  type: "advanced";
   /**
    * Defines the absolute maximum character length per chunk. Text elements exceeding this size will be automatically split into multiple chunks.
    */
@@ -31,18 +24,11 @@ export type ChunkingConfiguration2 = {
   chunkOverlap?: number | undefined;
 };
 
-export const ChunkingConfigurationType = {
-  Default: "default",
-} as const;
-export type ChunkingConfigurationType = ClosedEnum<
-  typeof ChunkingConfigurationType
->;
-
 /**
  * Optimized chunking strategy focusing on speed and avoiding duplication of content chunks.
  */
 export type ChunkingConfiguration1 = {
-  type: ChunkingConfigurationType;
+  type: "default";
 };
 
 /**
@@ -187,21 +173,12 @@ export type CreateDatasourceResponseBody = {
 };
 
 /** @internal */
-export const CreateDatasourceChunkingConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> = z
-    .nativeEnum(CreateDatasourceChunkingConfigurationType);
-/** @internal */
-export const CreateDatasourceChunkingConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> =
-    CreateDatasourceChunkingConfigurationType$inboundSchema;
-
-/** @internal */
 export const ChunkingConfiguration2$inboundSchema: z.ZodType<
   ChunkingConfiguration2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateDatasourceChunkingConfigurationType$inboundSchema,
+  type: z.literal("advanced"),
   chunk_max_characters: z.number().default(500),
   chunk_overlap: z.number().default(0),
 }).transform((v) => {
@@ -212,7 +189,7 @@ export const ChunkingConfiguration2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ChunkingConfiguration2$Outbound = {
-  type: string;
+  type: "advanced";
   chunk_max_characters: number;
   chunk_overlap: number;
 };
@@ -223,7 +200,7 @@ export const ChunkingConfiguration2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChunkingConfiguration2
 > = z.object({
-  type: CreateDatasourceChunkingConfigurationType$outboundSchema,
+  type: z.literal("advanced"),
   chunkMaxCharacters: z.number().default(500),
   chunkOverlap: z.number().default(0),
 }).transform((v) => {
@@ -251,25 +228,16 @@ export function chunkingConfiguration2FromJSON(
 }
 
 /** @internal */
-export const ChunkingConfigurationType$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkingConfigurationType
-> = z.nativeEnum(ChunkingConfigurationType);
-/** @internal */
-export const ChunkingConfigurationType$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkingConfigurationType
-> = ChunkingConfigurationType$inboundSchema;
-
-/** @internal */
 export const ChunkingConfiguration1$inboundSchema: z.ZodType<
   ChunkingConfiguration1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ChunkingConfigurationType$inboundSchema,
+  type: z.literal("default"),
 });
 /** @internal */
 export type ChunkingConfiguration1$Outbound = {
-  type: string;
+  type: "default";
 };
 
 /** @internal */
@@ -278,7 +246,7 @@ export const ChunkingConfiguration1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChunkingConfiguration1
 > = z.object({
-  type: ChunkingConfigurationType$outboundSchema,
+  type: z.literal("default"),
 });
 
 export function chunkingConfiguration1ToJSON(
@@ -608,7 +576,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YFNAVQV8KKAQJAKNXCTST5"),
+  _id: z.string().default("01KBTNW08KG7P93N4Y049WDDVY"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -651,7 +619,7 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K9YFNAVQV8KKAQJAKNXCTST5"),
+  id: z.string().default("01KBTNW08KG7P93N4Y049WDDVY"),
   displayName: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$outboundSchema,

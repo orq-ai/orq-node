@@ -1,0 +1,46 @@
+# UpdateDatapointContentDatasetsResponse200ApplicationJson2
+
+
+## Supported Types
+
+### `operations.UpdateDatapoint2DatasetsResponse1`
+
+```typescript
+const value: operations.UpdateDatapoint2DatasetsResponse1 = {
+  type: "text",
+  text: "<value>",
+};
+```
+
+### `components.ImageContentPartSchema`
+
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.UpdateDatapoint2Datasets4`
+
+```typescript
+const value: operations.UpdateDatapoint2Datasets4 = {
+  type: "file",
+  file: {},
+};
+```
+

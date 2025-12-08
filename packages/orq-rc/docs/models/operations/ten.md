@@ -5,11 +5,13 @@
 ```typescript
 import { Ten } from "@orq-ai/node/models/operations";
 
-let value: Ten = "openai/text-embedding-ada-002";
+let value: Ten = {
+  type: "exact_match",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"openai/text-embedding-ada-002"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"exact_match"*    | :heavy_check_mark: | N/A                |

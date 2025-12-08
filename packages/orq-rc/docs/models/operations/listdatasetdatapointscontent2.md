@@ -3,34 +3,34 @@
 
 ## Supported Types
 
-### `operations.ListDatasetDatapoints21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.ListDatasetDatapoints21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.ListDatasetDatapoints22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.ListDatasetDatapoints22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://gruesome-godfather.com",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.ListDatasetDatapoints23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.ListDatasetDatapoints23 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

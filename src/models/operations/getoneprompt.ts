@@ -123,6 +123,7 @@ export type GetOnePromptResponseFormatJsonSchema = {
 
 export type GetOnePromptResponseFormat1 = {
   type: GetOnePromptResponseFormatType;
+  displayName?: string | undefined;
   jsonSchema: GetOnePromptResponseFormatJsonSchema;
 };
 
@@ -177,6 +178,7 @@ export type GetOnePromptEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const GetOnePromptReasoningEffort = {
+  None: "none",
   Disable: "disable",
   Minimal: "minimal",
   Low: "low",
@@ -202,6 +204,20 @@ export const GetOnePromptVerbosity = {
  * Controls the verbosity of the model output.
  */
 export type GetOnePromptVerbosity = ClosedEnum<typeof GetOnePromptVerbosity>;
+
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export const GetOnePromptThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of thinking to use for the model. Only supported by `Google AI`
+ */
+export type GetOnePromptThinkingLevel = ClosedEnum<
+  typeof GetOnePromptThinkingLevel
+>;
 
 /**
  * Model Parameters: Not all parameters apply to every model
@@ -295,6 +311,10 @@ export type GetOnePromptModelParameters = {
    * Controls the verbosity of the model output.
    */
   verbosity?: GetOnePromptVerbosity | undefined;
+  /**
+   * The level of thinking to use for the model. Only supported by `Google AI`
+   */
+  thinkingLevel?: GetOnePromptThinkingLevel | undefined;
 };
 
 export const GetOnePromptProvider = {
@@ -342,19 +362,6 @@ export const GetOnePromptRole = {
  */
 export type GetOnePromptRole = ClosedEnum<typeof GetOnePromptRole>;
 
-/**
- * The type of the content part. Always `file`.
- */
-export const GetOnePrompt2PromptsResponseType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type GetOnePrompt2PromptsResponseType = ClosedEnum<
-  typeof GetOnePrompt2PromptsResponseType
->;
-
 export type GetOnePrompt2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -378,16 +385,9 @@ export type GetOnePrompt23 = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: GetOnePrompt2PromptsResponseType;
+  type: "file";
   file: GetOnePrompt2File;
 };
-
-export const GetOnePrompt2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type GetOnePrompt2PromptsType = ClosedEnum<
-  typeof GetOnePrompt2PromptsType
->;
 
 export type GetOnePrompt2ImageUrl = {
   /**
@@ -408,20 +408,15 @@ export type GetOnePrompt2ImageUrl = {
  * The image part of the prompt message. Only supported with vision models.
  */
 export type GetOnePrompt22 = {
-  type: GetOnePrompt2PromptsType;
+  type: "image_url";
   imageUrl: GetOnePrompt2ImageUrl;
 };
-
-export const GetOnePrompt2Type = {
-  Text: "text",
-} as const;
-export type GetOnePrompt2Type = ClosedEnum<typeof GetOnePrompt2Type>;
 
 /**
  * Text content part of a prompt message
  */
 export type GetOnePrompt21 = {
-  type: GetOnePrompt2Type;
+  type: "text";
   text: string;
 };
 
@@ -842,15 +837,18 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: GetOnePromptResponseFormatType$inboundSchema,
+  display_name: z.string().optional(),
   json_schema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 /** @internal */
 export type GetOnePromptResponseFormat1$Outbound = {
   type: string;
+  display_name?: string | undefined;
   json_schema: GetOnePromptResponseFormatJsonSchema$Outbound;
 };
 
@@ -861,9 +859,11 @@ export const GetOnePromptResponseFormat1$outboundSchema: z.ZodType<
   GetOnePromptResponseFormat1
 > = z.object({
   type: GetOnePromptResponseFormatType$outboundSchema,
+  displayName: z.string().optional(),
   jsonSchema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    displayName: "display_name",
     jsonSchema: "json_schema",
   });
 });
@@ -977,6 +977,15 @@ export const GetOnePromptVerbosity$outboundSchema: z.ZodNativeEnum<
 > = GetOnePromptVerbosity$inboundSchema;
 
 /** @internal */
+export const GetOnePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptThinkingLevel
+> = z.nativeEnum(GetOnePromptThinkingLevel);
+/** @internal */
+export const GetOnePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptThinkingLevel
+> = GetOnePromptThinkingLevel$inboundSchema;
+
+/** @internal */
 export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   GetOnePromptModelParameters,
   z.ZodTypeDef,
@@ -1009,6 +1018,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   reasoningEffort: GetOnePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
+  thinkingLevel: GetOnePromptThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1042,6 +1052,7 @@ export type GetOnePromptModelParameters$Outbound = {
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
   verbosity?: string | undefined;
+  thinkingLevel?: string | undefined;
 };
 
 /** @internal */
@@ -1077,6 +1088,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$outboundSchema.optional(),
+  thinkingLevel: GetOnePromptThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -1119,15 +1131,6 @@ export const GetOnePromptRole$inboundSchema: z.ZodNativeEnum<
 export const GetOnePromptRole$outboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptRole
 > = GetOnePromptRole$inboundSchema;
-
-/** @internal */
-export const GetOnePrompt2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2PromptsResponseType
-> = z.nativeEnum(GetOnePrompt2PromptsResponseType);
-/** @internal */
-export const GetOnePrompt2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2PromptsResponseType
-> = GetOnePrompt2PromptsResponseType$inboundSchema;
 
 /** @internal */
 export const GetOnePrompt2File$inboundSchema: z.ZodType<
@@ -1191,12 +1194,12 @@ export const GetOnePrompt23$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePrompt2PromptsResponseType$inboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetOnePrompt2File$inboundSchema),
 });
 /** @internal */
 export type GetOnePrompt23$Outbound = {
-  type: string;
+  type: "file";
   file: GetOnePrompt2File$Outbound;
 };
 
@@ -1206,7 +1209,7 @@ export const GetOnePrompt23$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePrompt23
 > = z.object({
-  type: GetOnePrompt2PromptsResponseType$outboundSchema,
+  type: z.literal("file"),
   file: z.lazy(() => GetOnePrompt2File$outboundSchema),
 });
 
@@ -1222,15 +1225,6 @@ export function getOnePrompt23FromJSON(
     `Failed to parse 'GetOnePrompt23' from JSON`,
   );
 }
-
-/** @internal */
-export const GetOnePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2PromptsType
-> = z.nativeEnum(GetOnePrompt2PromptsType);
-/** @internal */
-export const GetOnePrompt2PromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2PromptsType
-> = GetOnePrompt2PromptsType$inboundSchema;
 
 /** @internal */
 export const GetOnePrompt2ImageUrl$inboundSchema: z.ZodType<
@@ -1283,7 +1277,7 @@ export const GetOnePrompt22$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePrompt2PromptsType$inboundSchema,
+  type: z.literal("image_url"),
   image_url: z.lazy(() => GetOnePrompt2ImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1292,7 +1286,7 @@ export const GetOnePrompt22$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetOnePrompt22$Outbound = {
-  type: string;
+  type: "image_url";
   image_url: GetOnePrompt2ImageUrl$Outbound;
 };
 
@@ -1302,7 +1296,7 @@ export const GetOnePrompt22$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePrompt22
 > = z.object({
-  type: GetOnePrompt2PromptsType$outboundSchema,
+  type: z.literal("image_url"),
   imageUrl: z.lazy(() => GetOnePrompt2ImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1324,26 +1318,17 @@ export function getOnePrompt22FromJSON(
 }
 
 /** @internal */
-export const GetOnePrompt2Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2Type
-> = z.nativeEnum(GetOnePrompt2Type);
-/** @internal */
-export const GetOnePrompt2Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2Type
-> = GetOnePrompt2Type$inboundSchema;
-
-/** @internal */
 export const GetOnePrompt21$inboundSchema: z.ZodType<
   GetOnePrompt21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePrompt2Type$inboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 /** @internal */
 export type GetOnePrompt21$Outbound = {
-  type: string;
+  type: "text";
   text: string;
 };
 
@@ -1353,7 +1338,7 @@ export const GetOnePrompt21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePrompt21
 > = z.object({
-  type: GetOnePrompt2Type$outboundSchema,
+  type: z.literal("text"),
   text: z.string(),
 });
 

@@ -170,10 +170,9 @@ run();
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| errors.HonoApiError | 400                 | application/json    |
-| errors.APIError     | 4XX, 5XX            | \*/\*               |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## retrieve
 
@@ -267,9 +266,6 @@ async function run() {
   const result = await orq.memoryStores.update({
     memoryStoreKey: "<value>",
     requestBody: {
-      embeddingConfig: {
-        model: "google/text-multilingual-embedding-002",
-      },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",
     },
@@ -299,9 +295,6 @@ async function run() {
   const res = await memoryStoresUpdate(orq, {
     memoryStoreKey: "<value>",
     requestBody: {
-      embeddingConfig: {
-        model: "google/text-multilingual-embedding-002",
-      },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",
     },

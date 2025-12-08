@@ -3,21 +3,39 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetric2TextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2TextContentPart = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetric2RefusalContentPart`
+### `components.RefusalPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2RefusalContentPart = {
+const value: components.RefusalPartSchema = {
   type: "refusal",
-  refusal: "<value>",
+};
+```
+
+### `components.ReasoningPartSchema`
+
+```typescript
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
+};
+```
+
+### `components.RedactedReasoningPartSchema`
+
+```typescript
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
 };
 ```
 

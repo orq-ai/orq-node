@@ -33,7 +33,7 @@ import { Result } from "../types/fp.js";
  */
 export function deploymentsInvoke(
   client: OrqCore,
-  request: components.Deployments,
+  request: components.InvokeDeploymentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +57,7 @@ export function deploymentsInvoke(
 
 async function $do(
   client: OrqCore,
-  request: components.Deployments,
+  request: components.InvokeDeploymentRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.Deployments$outboundSchema.parse(value),
+    (value) => components.InvokeDeploymentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

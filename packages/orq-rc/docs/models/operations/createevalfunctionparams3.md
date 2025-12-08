@@ -16,7 +16,7 @@ let value: CreateEvalFunctionParams3 = {
 
 ## Fields
 
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                       | [operations.CreateEvalFunctionParamsEvalsType](../../models/operations/createevalfunctionparamsevalstype.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
-| `keywords`                                                                                                   | *string*[]                                                                                                   | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains_all"*   | :heavy_check_mark: | N/A                |
+| `keywords`         | *string*[]         | :heavy_check_mark: | N/A                |

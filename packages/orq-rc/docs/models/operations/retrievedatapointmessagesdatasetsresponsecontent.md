@@ -1,6 +1,6 @@
 # RetrieveDatapointMessagesDatasetsResponseContent
 
-The contents of the tool message.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,12 +11,16 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `operations.RetrieveDatapointContent2[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
+const value: operations.RetrieveDatapointContent2[] = [
+  {
+    type: "image_url",
+    imageUrl: {
+      url: "https://fatal-overload.name/",
+    },
+  },
 ];
 ```
 

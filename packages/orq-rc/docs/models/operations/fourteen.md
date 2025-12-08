@@ -5,11 +5,13 @@
 ```typescript
 import { Fourteen } from "@orq-ai/node/models/operations";
 
-let value: Fourteen = "google-ai/text-embedding-004";
+let value: Fourteen = {
+  type: "one_line",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"google-ai/text-embedding-004"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"one_line"*       | :heavy_check_mark: | N/A                |

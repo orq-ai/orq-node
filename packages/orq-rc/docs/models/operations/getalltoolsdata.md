@@ -3,14 +3,13 @@
 
 ## Supported Types
 
-### `operations.Data1`
+### `operations.DataFunctionTool`
 
 ```typescript
-const value: operations.Data1 = {
+const value: operations.DataFunctionTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "mispronounce sedately twin hospitable jovially now council yogurt yuck worth",
+  description: "mid via yum reluctantly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -22,13 +21,13 @@ const value: operations.Data1 = {
 };
 ```
 
-### `operations.Data2`
+### `operations.DataJSONSchemaTool`
 
 ```typescript
-const value: operations.Data2 = {
+const value: operations.DataJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "not circulate now drab",
+  description: "after intrigue distinct fluffy even off um",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -36,21 +35,32 @@ const value: operations.Data2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description:
+      "crushing worth obediently ouch kaleidoscopic blah unimpressively oh",
     schema: {
-      "key": "<value>",
-      "key1": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   },
 };
 ```
 
-### `operations.Data3`
+### `operations.DataHTTPTool`
 
 ```typescript
-const value: operations.Data3 = {
+const value: operations.DataHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "noteworthy limply whoa proper delightfully",
+  description: "ceramic pfft where mortally gosh or co-producer for",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -65,37 +75,40 @@ const value: operations.Data3 = {
 };
 ```
 
-### `operations.Data4`
+### `operations.DataMCPTool`
 
 ```typescript
-const value: operations.Data4 = {
+const value: operations.DataMCPTool = {
   path: "Default",
   key: "<key>",
-  description: "why meanwhile but important exactly",
+  description: "reboot aw without webbed lasting",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
   updated: "<value>",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
-    serverUrl: "https://lawful-disclosure.com",
-    inputSchema: {
-      type: "object",
-    },
+    serverUrl: "https://stable-bran.net",
+    tools: [
+      {
+        name: "<value>",
+        schema: {
+          type: "object",
+        },
+      },
+    ],
     connectionType: "http",
   },
 };
 ```
 
-### `operations.Data5`
+### `operations.DataCodeExecutionTool`
 
 ```typescript
-const value: operations.Data5 = {
+const value: operations.DataCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description: "and furthermore bravely midst finally enhance",
+  description: "fervently pace but blah upon charm quarterly on neglect",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

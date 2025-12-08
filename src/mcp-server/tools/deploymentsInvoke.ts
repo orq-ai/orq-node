@@ -7,7 +7,7 @@ import * as components from "../../models/components/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: components.Deployments$inboundSchema,
+  request: components.InvokeDeploymentRequest$inboundSchema,
 };
 
 export const tool$deploymentsInvoke: ToolDefinition<typeof args> = {

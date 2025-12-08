@@ -7,7 +7,7 @@ import { UpdateMemoryStoreRequestBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateMemoryStoreRequestBody = {
   embeddingConfig: {
-    model: "jina/jina-embeddings-v2-base-code",
+    model: "Sentra",
   },
   description: "so specific anenst ack council an yum",
   path: "Default",

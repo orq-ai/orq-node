@@ -69,7 +69,7 @@ const value: operations.ResponseBodyFunction = {
   description: "pish mortally likely legitimize awareness easily zowie",
   type: "function_eval",
   functionParams: {
-    type: "cosine_similarity",
+    type: "rouge_n",
   },
   key: "<key>",
 };

@@ -19,11 +19,11 @@ const value: operations.DeploymentStream1Ne = {
 };
 ```
 
-### `operations.DeploymentStream13`
+### `operations.OneGt`
 
 ```typescript
-const value: operations.DeploymentStream13 = {
-  gt: 3168.95,
+const value: operations.OneGt = {
+  gt: 7862.95,
 };
 ```
 

@@ -3,34 +3,34 @@
 
 ## Supported Types
 
-### `operations.RetrieveDatapoint21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.RetrieveDatapoint21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.RetrieveDatapoint22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.RetrieveDatapoint22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://long-term-eggplant.net",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.RetrieveDatapoint23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.RetrieveDatapoint23 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

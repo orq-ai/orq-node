@@ -3,44 +3,39 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.Two1 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig22`
+### `components.RefusalPartSchema`
 
 ```typescript
-const value: operations.DeploymentGetConfig22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://downright-ownership.name/",
-  },
+const value: components.RefusalPartSchema = {
+  type: "refusal",
 };
 ```
 
-### `operations.Two3`
+### `components.ReasoningPartSchema`
 
 ```typescript
-const value: operations.Two3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
 };
 ```
 
-### `operations.Two4`
+### `components.RedactedReasoningPartSchema`
 
 ```typescript
-const value: operations.Two4 = {
-  type: "file",
-  file: {},
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
 };
 ```
 

@@ -1,0 +1,19 @@
+# GetAllToolsDataSchema
+
+## Example Usage
+
+```typescript
+import { GetAllToolsDataSchema } from "@orq-ai/node/models/operations";
+
+let value: GetAllToolsDataSchema = {
+  type: "object",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                    | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                   | [operations.GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type](../../models/operations/getalltoolsdatatoolsresponse200applicationjsonresponsebody4type.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |
+| `properties`                                                                                                                                                             | Record<string, *any*>                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                       | N/A                                                                                                                                                                      |
+| `required`                                                                                                                                                               | *string*[]                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                       | N/A                                                                                                                                                                      |

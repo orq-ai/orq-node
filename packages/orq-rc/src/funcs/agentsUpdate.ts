@@ -26,14 +26,15 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update an agent
+ * Update agent
  *
  * @remarks
- * Updates an existing agent's configuration. You can update various fields including the model configuration and fallback model settings.
+ * Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations.
  */
 export function agentsUpdate(
   client: OrqCore,
-  request: operations.UpdateAgentRequest,
+  requestBody: operations.UpdateAgentUpdateAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -51,14 +52,16 @@ export function agentsUpdate(
 > {
   return new APIPromise($do(
     client,
-    request,
+    requestBody,
+    agentKey,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.UpdateAgentRequest,
+  requestBody: operations.UpdateAgentUpdateAgentRequest,
+  agentKey: string,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,8 +80,13 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.UpdateAgentRequest = {
+    requestBody: requestBody,
+    agentKey: agentKey,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.UpdateAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );

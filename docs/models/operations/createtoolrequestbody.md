@@ -29,9 +29,13 @@ const value: operations.JSONSchemaTool = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
+    description: "barring climb usefully however ouch yuck bicycle",
     schema: {
-      "key": "<value>",
-      "key1": "<value>",
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+      },
+      required: [],
     },
   },
 };
@@ -54,23 +58,17 @@ const value: operations.RequestBodyHTTPTool = {
 };
 ```
 
-### `operations.MCPTool`
+### `operations.RequestBodyMCPTool`
 
 ```typescript
-const value: operations.MCPTool = {
+const value: operations.RequestBodyMCPTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "yuppify unless overload phooey obnoxiously ribbon beard wriggler off",
+  description: "ah along runny",
   type: "mcp",
   mcp: {
-    serverId: "<id>",
-    toolName: "<value>",
-    serverUrl: "https://simple-airman.org/",
-    inputSchema: {
-      type: "object",
-    },
-    connectionType: "http",
+    serverUrl: "https://prime-backburn.info",
+    connectionType: "sse",
   },
 };
 ```

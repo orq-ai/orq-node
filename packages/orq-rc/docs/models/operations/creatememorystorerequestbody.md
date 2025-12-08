@@ -8,7 +8,7 @@ import { CreateMemoryStoreRequestBody } from "@orq-ai/node/models/operations";
 let value: CreateMemoryStoreRequestBody = {
   key: "<key>",
   embeddingConfig: {
-    model: "jina/jina-embeddings-v3",
+    model: "XC90",
   },
   description:
     "westernise often amongst misappropriate duh zesty what shampoo cross",

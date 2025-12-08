@@ -12,17 +12,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type QueryParamStatus = Array<string> | string;
+export type Status = Array<string> | string;
 
 export type ListDatasourcesRequest = {
   /**
    * Unique identifier of the knowledge base
    */
   knowledgeId: string;
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
   /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
@@ -35,6 +31,10 @@ export type ListDatasourcesRequest = {
    * Search query to find datasources by name.
    */
   q?: string | undefined;
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
+  limit?: number | undefined;
   /**
    * Filter datasources by status.
    */
@@ -109,35 +109,28 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
-export const QueryParamStatus$inboundSchema: z.ZodType<
-  QueryParamStatus,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.array(z.string()), z.string()]);
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
+  .union([z.array(z.string()), z.string()]);
 /** @internal */
-export type QueryParamStatus$Outbound = Array<string> | string;
+export type Status$Outbound = Array<string> | string;
 
 /** @internal */
-export const QueryParamStatus$outboundSchema: z.ZodType<
-  QueryParamStatus$Outbound,
+export const Status$outboundSchema: z.ZodType<
+  Status$Outbound,
   z.ZodTypeDef,
-  QueryParamStatus
+  Status
 > = z.union([z.array(z.string()), z.string()]);
 
-export function queryParamStatusToJSON(
-  queryParamStatus: QueryParamStatus,
-): string {
-  return JSON.stringify(
-    QueryParamStatus$outboundSchema.parse(queryParamStatus),
-  );
+export function statusToJSON(status: Status): string {
+  return JSON.stringify(Status$outboundSchema.parse(status));
 }
-export function queryParamStatusFromJSON(
+export function statusFromJSON(
   jsonString: string,
-): SafeParseResult<QueryParamStatus, SDKValidationError> {
+): SafeParseResult<Status, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamStatus' from JSON`,
+    (x) => Status$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Status' from JSON`,
   );
 }
 
@@ -148,10 +141,10 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   knowledge_id: z.string(),
-  limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
   q: z.string().optional(),
+  limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -163,10 +156,10 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
-  limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   q?: string | undefined;
+  limit: number;
   status?: Array<string> | string | undefined;
 };
 
@@ -177,10 +170,10 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   ListDatasourcesRequest
 > = z.object({
   knowledgeId: z.string(),
-  limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   q: z.string().optional(),
+  limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -231,7 +224,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K9YFNAVNBWT38Q0C8WZ8JWSC"),
+  _id: z.string().default("01KBTNW08HQ7A7AS4CR107ZFFC"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -274,7 +267,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K9YFNAVNBWT38Q0C8WZ8JWSC"),
+  id: z.string().default("01KBTNW08HQ7A7AS4CR107ZFFC"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

@@ -25,18 +25,21 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Invoke an agent
+ * Execute an agent task
  *
  * @remarks
- * Executes an existing agent with the provided input. The agent uses its pre-configured primary model and will automatically fall back to its configured fallback model if the primary model fails. Fallback models are configured at the agent level, not during execution.
+ * Invokes an agent to perform a task with the provided input message. The agent will process the request using its configured model and tools, maintaining context through memory stores if configured. Supports automatic model fallback on primary model failure, tool execution, knowledge base retrieval, and continuation of previous conversations. Returns a task response that can be used to track execution status and retrieve results.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function agentsInvoke(
   client: OrqCore,
-  request: operations.InvokeAgentRequest,
+  key: string,
+  requestBody?: operations.InvokeAgentRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.InvokeAgentResponseBody,
+    operations.InvokeAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -49,19 +52,21 @@ export function agentsInvoke(
 > {
   return new APIPromise($do(
     client,
-    request,
+    key,
+    requestBody,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.InvokeAgentRequest,
+  key: string,
+  requestBody?: operations.InvokeAgentRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.InvokeAgentResponseBody,
+      operations.InvokeAgentA2ATaskResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -74,8 +79,13 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.InvokeAgentRequest = {
+    key: key,
+    requestBody: requestBody,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.InvokeAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
@@ -145,7 +155,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.InvokeAgentResponseBody,
+    operations.InvokeAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -155,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.InvokeAgentResponseBody$inboundSchema),
+    M.json(200, operations.InvokeAgentA2ATaskResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

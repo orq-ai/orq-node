@@ -1,15 +1,17 @@
 # Kind
 
+A2A entity type identifier
+
 ## Example Usage
 
 ```typescript
 import { Kind } from "@orq-ai/node/models/operations";
 
-let value: Kind = "text";
+let value: Kind = "task";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"task"
 ```

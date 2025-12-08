@@ -5,11 +5,13 @@
 ```typescript
 import { ListAgentsToolChoiceFunction } from "@orq-ai/node/models/operations";
 
-let value: ListAgentsToolChoiceFunction = {};
+let value: ListAgentsToolChoiceFunction = {
+  name: "<value>",
+};
 ```
 
 ## Fields
 
 | Field                             | Type                              | Required                          | Description                       |
 | --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `name`                            | *string*                          | :heavy_minus_sign:                | The name of the function to call. |
+| `name`                            | *string*                          | :heavy_check_mark:                | The name of the function to call. |

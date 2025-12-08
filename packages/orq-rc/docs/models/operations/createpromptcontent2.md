@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.CreatePrompt21`
+### `operations.Two1`
 
 ```typescript
-const value: operations.CreatePrompt21 = {
+const value: operations.Two1 = {
   type: "text",
   text: "<value>",
 };
@@ -23,10 +23,10 @@ const value: operations.CreatePrompt22 = {
 };
 ```
 
-### `operations.CreatePrompt23`
+### `operations.Two3`
 
 ```typescript
-const value: operations.CreatePrompt23 = {
+const value: operations.Two3 = {
   type: "file",
   file: {},
 };

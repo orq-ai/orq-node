@@ -6,7 +6,9 @@
 import { UpdateAgentToolChoiceAgentsResponse2002 } from "@orq-ai/node/models/operations";
 
 let value: UpdateAgentToolChoiceAgentsResponse2002 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

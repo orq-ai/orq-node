@@ -1,46 +1,20 @@
 # DeploymentStreamContent2
 
-
-## Supported Types
-
-### `operations.DeploymentStream21`
+## Example Usage
 
 ```typescript
-const value: operations.DeploymentStream21 = {
+import { DeploymentStreamContent2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentStream22`
+## Fields
 
-```typescript
-const value: operations.DeploymentStream22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://unhappy-toothpick.com/",
-  },
-};
-```
-
-### `operations.DeploymentStream23`
-
-```typescript
-const value: operations.DeploymentStream23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "wav",
-  },
-};
-```
-
-### `operations.DeploymentStream24`
-
-```typescript
-const value: operations.DeploymentStream24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                           | [operations.DeploymentStreamContentType](../../models/operations/deploymentstreamcontenttype.md)                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `text`                                                                                                           | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `cacheControl`                                                                                                   | [operations.DeploymentStreamContentCacheControl](../../models/operations/deploymentstreamcontentcachecontrol.md) | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

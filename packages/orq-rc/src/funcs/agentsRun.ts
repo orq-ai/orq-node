@@ -25,18 +25,20 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run an agent
+ * Run an agent with configuration
  *
  * @remarks
- * Executes an agent with the provided configuration using A2A message format. If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The fallback model is configured at the agent level and will be used automatically if the primary model fails during execution.
+ * Executes an agent using inline configuration or references an existing agent. Supports dynamic agent creation where the system automatically manages agent versioning - reusing existing agents with matching configurations or creating new versions when configurations differ. Ideal for programmatic agent execution with flexible configuration management. The agent processes messages in A2A format with support for memory context, tool execution, and automatic model fallback on failure.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function agentsRun(
   client: OrqCore,
-  request?: operations.RunAgentRequestBody | undefined,
+  request: operations.RunAgentRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RunAgentResponseBody,
+    operations.RunAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -56,12 +58,12 @@ export function agentsRun(
 
 async function $do(
   client: OrqCore,
-  request?: operations.RunAgentRequestBody | undefined,
+  request: operations.RunAgentRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RunAgentResponseBody,
+      operations.RunAgentA2ATaskResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -76,17 +78,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.RunAgentRequestBody$outboundSchema.optional().parse(value),
+    (value) => operations.RunAgentRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/agents/run")();
 
@@ -141,7 +140,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RunAgentResponseBody,
+    operations.RunAgentA2ATaskResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -151,7 +150,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RunAgentResponseBody$inboundSchema),
+    M.json(200, operations.RunAgentA2ATaskResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

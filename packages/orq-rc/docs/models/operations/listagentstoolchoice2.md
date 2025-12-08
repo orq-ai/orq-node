@@ -6,7 +6,9 @@
 import { ListAgentsToolChoice2 } from "@orq-ai/node/models/operations";
 
 let value: ListAgentsToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

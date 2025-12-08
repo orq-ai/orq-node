@@ -15,7 +15,9 @@ const value: operations.ListAgentsToolChoice1 = "required";
 
 ```typescript
 const value: operations.ListAgentsToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

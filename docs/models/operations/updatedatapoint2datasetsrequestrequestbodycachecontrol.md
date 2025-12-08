@@ -1,0 +1,18 @@
+# UpdateDatapoint2DatasetsRequestRequestBodyCacheControl
+
+## Example Usage
+
+```typescript
+import { UpdateDatapoint2DatasetsRequestRequestBodyCacheControl } from "@orq-ai/node/models/operations";
+
+let value: UpdateDatapoint2DatasetsRequestRequestBodyCacheControl = {
+  type: "ephemeral",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                         | Type                                                                                                                                                                                          | Required                                                                                                                                                                                      | Description                                                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                        | [operations.UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType](../../models/operations/updatedatapoint2datasetsrequestrequestbodymessages5contenttype.md)                        | :heavy_check_mark:                                                                                                                                                                            | Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".                                                                                                  |
+| `ttl`                                                                                                                                                                                         | [operations.UpdateDatapoint2DatasetsRequestRequestBodyTtl](../../models/operations/updatedatapoint2datasetsrequestrequestbodyttl.md)                                                          | :heavy_minus_sign:                                                                                                                                                                            | The time-to-live for the cache control breakpoint. This may be one of the following values:<br/><br/>- `5m`: 5 minutes<br/>- `1h`: 1 hour<br/><br/>Defaults to `5m`. Only supported by `Anthropic` Claude models. |

@@ -2159,3 +2159,323 @@ Based on:
 - [typescript v3.14.34] .
 ### Releases
 - [NPM v3.14.34] https://www.npmjs.com/package/@orq-ai/node/v/3.14.34 - .
+
+## 2025-11-13 15:11:37
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.656.1 (2.753.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.35] .
+### Releases
+- [NPM v3.14.35] https://www.npmjs.com/package/@orq-ai/node/v/3.14.35 - .
+
+## 2025-11-14 09:35:07
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.656.2 (2.753.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.36] .
+### Releases
+- [NPM v3.14.36] https://www.npmjs.com/package/@orq-ai/node/v/3.14.36 - .
+
+## 2025-11-14 13:10:07
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.656.3 (2.753.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.37] .
+### Releases
+- [NPM v3.14.37] https://www.npmjs.com/package/@orq-ai/node/v/3.14.37 - .
+
+## 2025-11-15 20:03:24
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.1 (2.755.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.38] .
+### Releases
+- [NPM v3.14.38] https://www.npmjs.com/package/@orq-ai/node/v/3.14.38 - .
+
+## 2025-11-15 21:29:32
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.1 (2.755.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.39] .
+### Releases
+- [NPM v3.14.39] https://www.npmjs.com/package/@orq-ai/node/v/3.14.39 - .
+
+## 2025-11-16 16:13:08
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.1 (2.755.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.40] .
+### Releases
+- [NPM v3.14.40] https://www.npmjs.com/package/@orq-ai/node/v/3.14.40 - .
+
+## 2025-11-18 22:08:17
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.2 (2.755.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.41] .
+### Releases
+- [NPM v3.14.41] https://www.npmjs.com/package/@orq-ai/node/v/3.14.41 - .
+
+## 2025-11-19 08:06:36
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.2 (2.755.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.42] .
+### Releases
+- [NPM v3.14.42] https://www.npmjs.com/package/@orq-ai/node/v/3.14.42 - .
+
+## 2025-11-19 08:27:36
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.2 (2.755.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.43] .
+### Releases
+- [NPM v3.14.43] https://www.npmjs.com/package/@orq-ai/node/v/3.14.43 - .
+
+## 2025-11-19 18:01:28
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.658.2 (2.755.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.44] .
+### Releases
+- [NPM v3.14.44] https://www.npmjs.com/package/@orq-ai/node/v/3.14.44 - .
+
+## 2025-11-21 08:37:15
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.659.0 (2.755.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.14.45] .
+### Releases
+- [NPM v3.14.45] https://www.npmjs.com/package/@orq-ai/node/v/3.14.45 - .
+
+## 2025-11-22 22:57:40
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.0] .
+### Releases
+- [NPM v4.0.0] https://www.npmjs.com/package/@orq-ai/node/v/4.0.0 - .
+
+## 2025-11-23 18:21:04
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.1] .
+### Releases
+- [NPM v4.0.1] https://www.npmjs.com/package/@orq-ai/node/v/4.0.1 - .
+
+## 2025-11-23 18:47:37
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.2] .
+### Releases
+- [NPM v4.0.2] https://www.npmjs.com/package/@orq-ai/node/v/4.0.2 - .
+
+## 2025-11-23 22:34:26
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.4] .
+### Releases
+- [NPM v4.0.4] https://www.npmjs.com/package/@orq-ai/node/v/4.0.4 - .
+
+## 2025-11-24 12:59:15
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.5] .
+### Releases
+- [NPM v4.0.5] https://www.npmjs.com/package/@orq-ai/node/v/4.0.5 - .
+
+## 2025-11-24 14:05:22
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.6] .
+### Releases
+- [NPM v4.0.6] https://www.npmjs.com/package/@orq-ai/node/v/4.0.6 - .
+
+## 2025-11-24 15:19:38
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.7] .
+### Releases
+- [NPM v4.0.7] https://www.npmjs.com/package/@orq-ai/node/v/4.0.7 - .
+
+## 2025-11-25 08:38:09
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.8] .
+### Releases
+- [NPM v4.0.8] https://www.npmjs.com/package/@orq-ai/node/v/4.0.8 - .
+
+## 2025-11-25 08:52:58
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.9] .
+### Releases
+- [NPM v4.0.9] https://www.npmjs.com/package/@orq-ai/node/v/4.0.9 - .
+
+## 2025-11-25 11:29:29
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.10] .
+### Releases
+- [NPM v4.0.10] https://www.npmjs.com/package/@orq-ai/node/v/4.0.10 - .
+
+## 2025-11-25 13:17:37
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.11] .
+### Releases
+- [NPM v4.0.11] https://www.npmjs.com/package/@orq-ai/node/v/4.0.11 - .
+
+## 2025-11-25 14:00:48
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.660.0 (2.760.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.12] .
+### Releases
+- [NPM v4.0.12] https://www.npmjs.com/package/@orq-ai/node/v/4.0.12 - .
+
+## 2025-11-25 16:26:18
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.13] .
+### Releases
+- [NPM v4.0.13] https://www.npmjs.com/package/@orq-ai/node/v/4.0.13 - .
+
+## 2025-11-25 17:19:23
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.14] .
+### Releases
+- [NPM v4.0.14] https://www.npmjs.com/package/@orq-ai/node/v/4.0.14 - .
+
+## 2025-11-25 21:20:01
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.16] .
+### Releases
+- [NPM v4.0.16] https://www.npmjs.com/package/@orq-ai/node/v/4.0.16 - .
+
+## 2025-11-26 15:31:20
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.18] .
+### Releases
+- [NPM v4.0.18] https://www.npmjs.com/package/@orq-ai/node/v/4.0.18 - .
+
+## 2025-11-27 11:12:30
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.20] .
+### Releases
+- [NPM v4.0.20] https://www.npmjs.com/package/@orq-ai/node/v/4.0.20 - .
+
+## 2025-11-28 13:37:29
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.661.0 (2.762.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.22] .
+### Releases
+- [NPM v4.0.22] https://www.npmjs.com/package/@orq-ai/node/v/4.0.22 - .
+
+## 2025-12-05 13:13:32
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.668.1 (2.770.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.24] .
+### Releases
+- [NPM v4.0.24] https://www.npmjs.com/package/@orq-ai/node/v/4.0.24 - .
+
+## 2025-12-05 15:20:45
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.669.1 (2.772.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.25] .
+### Releases
+- [NPM v4.0.25] https://www.npmjs.com/package/@orq-ai/node/v/4.0.25 - .
+
+## 2025-12-06 20:34:41
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.669.1 (2.772.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.0.26] .
+### Releases
+- [NPM v4.0.26] https://www.npmjs.com/package/@orq-ai/node/v/4.0.26 - .

@@ -5,11 +5,13 @@
 ```typescript
 import { Sixteen } from "@orq-ai/node/models/operations";
 
-let value: Sixteen = "jina/jina-clip-v1";
+let value: Sixteen = {
+  type: "is_valid_json",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"jina/jina-clip-v1"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"is_valid_json"*  | :heavy_check_mark: | N/A                |

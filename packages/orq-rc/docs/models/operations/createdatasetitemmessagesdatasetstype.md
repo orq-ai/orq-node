@@ -1,17 +1,17 @@
 # CreateDatasetItemMessagesDatasetsType
 
-The type of the tool. Currently, only `function` is supported.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { CreateDatasetItemMessagesDatasetsType } from "@orq-ai/node/models/operations";
 
-let value: CreateDatasetItemMessagesDatasetsType = "function";
+let value: CreateDatasetItemMessagesDatasetsType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"ephemeral"
 ```

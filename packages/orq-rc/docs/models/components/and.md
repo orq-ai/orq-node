@@ -3,27 +3,27 @@
 
 ## Supported Types
 
-### `components.DeploymentsAndEq`
+### `components.InvokeDeploymentRequestAndEq`
 
 ```typescript
-const value: components.DeploymentsAndEq = {
-  eq: "<value>",
+const value: components.InvokeDeploymentRequestAndEq = {
+  eq: true,
 };
 ```
 
-### `components.DeploymentsAndNe`
+### `components.InvokeDeploymentRequestAndNe`
 
 ```typescript
-const value: components.DeploymentsAndNe = {
-  ne: false,
+const value: components.InvokeDeploymentRequestAndNe = {
+  ne: "<value>",
 };
 ```
 
-### `components.And3`
+### `components.AndGt`
 
 ```typescript
-const value: components.And3 = {
-  gt: 71.84,
+const value: components.AndGt = {
+  gt: 339.87,
 };
 ```
 
@@ -51,21 +51,21 @@ const value: components.AndLte = {
 };
 ```
 
-### `components.DeploymentsAndIn`
+### `components.InvokeDeploymentRequestAndIn`
 
 ```typescript
-const value: components.DeploymentsAndIn = {
-  in: [
-    false,
-  ],
+const value: components.InvokeDeploymentRequestAndIn = {
+  in: [],
 };
 ```
 
-### `components.DeploymentsAndNin`
+### `components.InvokeDeploymentRequestAndNin`
 
 ```typescript
-const value: components.DeploymentsAndNin = {
-  nin: [],
+const value: components.InvokeDeploymentRequestAndNin = {
+  nin: [
+    "<value>",
+  ],
 };
 ```
 

@@ -84,12 +84,16 @@ export type ListAgentsTools = {
   key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
-  requiresApproval?: boolean | undefined;
-  conditions?: Array<ListAgentsConditions> | undefined;
   /**
-   * Optional MCP server reference for tools from MCP servers
+   * Optional tool description
    */
-  mcpServer?: string | undefined;
+  description?: string | undefined;
+  requiresApproval?: boolean | undefined;
+  /**
+   * Nested tool ID for MCP tools (identifies specific tool within MCP server)
+   */
+  toolId?: string | undefined;
+  conditions?: Array<ListAgentsConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
@@ -221,13 +225,6 @@ export type ListAgentsAudio = {
   format: ListAgentsFormat;
 };
 
-export const ListAgentsResponseFormatAgentsResponseType = {
-  JsonSchema: "json_schema",
-} as const;
-export type ListAgentsResponseFormatAgentsResponseType = ClosedEnum<
-  typeof ListAgentsResponseFormatAgentsResponseType
->;
-
 export type ListAgentsResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -253,16 +250,9 @@ export type ListAgentsResponseFormatJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type ListAgentsResponseFormatAgentsJSONSchema = {
-  type: ListAgentsResponseFormatAgentsResponseType;
+  type: "json_schema";
   jsonSchema: ListAgentsResponseFormatJsonSchema;
 };
-
-export const ListAgentsResponseFormatAgentsType = {
-  JsonObject: "json_object",
-} as const;
-export type ListAgentsResponseFormatAgentsType = ClosedEnum<
-  typeof ListAgentsResponseFormatAgentsType
->;
 
 /**
  * @remarks
@@ -270,15 +260,8 @@ export type ListAgentsResponseFormatAgentsType = ClosedEnum<
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type ListAgentsResponseFormatJSONObject = {
-  type: ListAgentsResponseFormatAgentsType;
+  type: "json_object";
 };
-
-export const ListAgentsResponseFormatType = {
-  Text: "text",
-} as const;
-export type ListAgentsResponseFormatType = ClosedEnum<
-  typeof ListAgentsResponseFormatType
->;
 
 /**
  * @remarks
@@ -286,16 +269,16 @@ export type ListAgentsResponseFormatType = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type ListAgentsResponseFormatText = {
-  type: ListAgentsResponseFormatType;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type ListAgentsResponseFormat =
-  | ListAgentsResponseFormatAgentsJSONSchema
   | ListAgentsResponseFormatText
-  | ListAgentsResponseFormatJSONObject;
+  | ListAgentsResponseFormatJSONObject
+  | ListAgentsResponseFormatAgentsJSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -324,6 +307,20 @@ export const ListAgentsType = {
  */
 export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ListAgentsThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ListAgentsThinkingLevel = ClosedEnum<
+  typeof ListAgentsThinkingLevel
+>;
+
 export type ListAgentsThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -333,6 +330,10 @@ export type ListAgentsThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ListAgentsThinkingLevel | undefined;
 };
 
 /**
@@ -352,7 +353,7 @@ export type ListAgentsToolChoiceFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type ListAgentsToolChoice2 = {
@@ -427,9 +428,9 @@ export type ListAgentsParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | ListAgentsResponseFormatAgentsJSONSchema
     | ListAgentsResponseFormatText
     | ListAgentsResponseFormatJSONObject
+    | ListAgentsResponseFormatAgentsJSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -476,6 +477,20 @@ export type ListAgentsParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<ListAgentsModalities> | null | undefined;
+};
+
+/**
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ */
+export type ListAgentsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
 };
 
 /**
@@ -527,15 +542,6 @@ export type ListAgentsFallbackModelConfigurationAudio = {
   format: ListAgentsFallbackModelConfigurationFormat;
 };
 
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-export type ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -561,18 +567,9 @@ export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
  * JSON Schema response format. Used to generate structured JSON responses
  */
 export type ListAgentsResponseFormatAgentsResponse200JSONSchema = {
-  type:
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType;
+  type: "json_schema";
   jsonSchema: ListAgentsResponseFormatAgentsResponseJsonSchema;
 };
-
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType = {
-  JsonObject: "json_object",
-} as const;
-export type ListAgentsResponseFormatAgentsResponse200ApplicationJSONType =
-  ClosedEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONType
-  >;
 
 /**
  * @remarks
@@ -580,15 +577,8 @@ export type ListAgentsResponseFormatAgentsResponse200ApplicationJSONType =
  * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 export type ListAgentsResponseFormatAgentsJSONObject = {
-  type: ListAgentsResponseFormatAgentsResponse200ApplicationJSONType;
+  type: "json_object";
 };
-
-export const ListAgentsResponseFormatAgentsResponse200Type = {
-  Text: "text",
-} as const;
-export type ListAgentsResponseFormatAgentsResponse200Type = ClosedEnum<
-  typeof ListAgentsResponseFormatAgentsResponse200Type
->;
 
 /**
  * @remarks
@@ -596,16 +586,16 @@ export type ListAgentsResponseFormatAgentsResponse200Type = ClosedEnum<
  * Default response format. Used to generate text responses
  */
 export type ListAgentsResponseFormatAgentsText = {
-  type: ListAgentsResponseFormatAgentsResponse200Type;
+  type: "text";
 };
 
 /**
  * An object specifying the format that the model must output
  */
 export type ListAgentsFallbackModelConfigurationResponseFormat =
-  | ListAgentsResponseFormatAgentsResponse200JSONSchema
   | ListAgentsResponseFormatAgentsText
-  | ListAgentsResponseFormatAgentsJSONObject;
+  | ListAgentsResponseFormatAgentsJSONObject
+  | ListAgentsResponseFormatAgentsResponse200JSONSchema;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
@@ -636,6 +626,20 @@ export type ListAgentsFallbackModelConfigurationType = ClosedEnum<
   typeof ListAgentsFallbackModelConfigurationType
 >;
 
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export const ListAgentsFallbackModelConfigurationThinkingLevel = {
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+ */
+export type ListAgentsFallbackModelConfigurationThinkingLevel = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationThinkingLevel
+>;
+
 export type ListAgentsFallbackModelConfigurationThinking = {
   /**
    * Enables or disables the thinking mode capability
@@ -645,6 +649,10 @@ export type ListAgentsFallbackModelConfigurationThinking = {
    * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
    */
   budgetTokens: number;
+  /**
+   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+   */
+  thinkingLevel?: ListAgentsFallbackModelConfigurationThinkingLevel | undefined;
 };
 
 /**
@@ -664,7 +672,7 @@ export type ListAgentsToolChoiceAgentsFunction = {
   /**
    * The name of the function to call.
    */
-  name?: string | undefined;
+  name: string;
 };
 
 export type ListAgentsToolChoiceAgents2 = {
@@ -743,9 +751,9 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * An object specifying the format that the model must output
    */
   responseFormat?:
-    | ListAgentsResponseFormatAgentsResponse200JSONSchema
     | ListAgentsResponseFormatAgentsText
     | ListAgentsResponseFormatAgentsJSONObject
+    | ListAgentsResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -838,6 +846,10 @@ export type ListAgentsModel = {
    */
   parameters?: ListAgentsParameters | undefined;
   /**
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   */
+  retry?: ListAgentsRetry | undefined;
+  /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
   fallbackModels?:
@@ -868,24 +880,13 @@ export type ListAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
-export const ListAgentsCollapsedConfigurationSections = {
-  Information: "information",
-  Model: "model",
-  Tools: "tools",
-  Context: "context",
-  RuntimeConstraints: "runtime_constraints",
-  Evaluators: "evaluators",
-  Guardrails: "guardrails",
-} as const;
-export type ListAgentsCollapsedConfigurationSections = ClosedEnum<
-  typeof ListAgentsCollapsedConfigurationSections
->;
-
 export type ListAgentsData = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
-  workspaceId: string;
-  projectId: string;
+  displayName: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
@@ -928,16 +929,10 @@ export type ListAgentsData = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
-  /**
-   * List of collapsed sections in configuration. Duplicates are not allowed.
-   */
-  collapsedConfigurationSections?:
-    | Array<ListAgentsCollapsedConfigurationSections>
-    | undefined;
 };
 
 /**
- * List of agents with their configurations including fallback models
+ * Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings.
  */
 export type ListAgentsResponseBody = {
   object: ListAgentsObject;
@@ -1082,16 +1077,18 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
+  description: z.string().optional(),
   requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
   });
 });
 /** @internal */
@@ -1100,9 +1097,10 @@ export type ListAgentsTools$Outbound = {
   key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
+  description?: string | undefined;
   requires_approval: boolean;
+  tool_id?: string | undefined;
   conditions?: Array<ListAgentsConditions$Outbound> | undefined;
-  mcpServer?: string | undefined;
   timeout: number;
 };
 
@@ -1116,16 +1114,18 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
+  description: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  toolId: z.string().optional(),
   conditions: z.array(z.lazy(() => ListAgentsConditions$outboundSchema))
     .optional(),
-  mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
     actionType: "action_type",
     displayName: "display_name",
     requiresApproval: "requires_approval",
+    toolId: "tool_id",
   });
 });
 
@@ -1278,7 +1278,7 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(15),
+  max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(300),
   tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
     "respect_tool",
@@ -1311,7 +1311,7 @@ export const ListAgentsSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsSettings
 > = z.object({
-  maxIterations: z.number().int().default(15),
+  maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ListAgentsToolApprovalRequired$outboundSchema.default(
     "respect_tool",
@@ -1405,15 +1405,6 @@ export function listAgentsAudioFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponseType> = z
-    .nativeEnum(ListAgentsResponseFormatAgentsResponseType);
-/** @internal */
-export const ListAgentsResponseFormatAgentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponseType> =
-    ListAgentsResponseFormatAgentsResponseType$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   ListAgentsResponseFormatJsonSchema,
   z.ZodTypeDef,
@@ -1422,14 +1413,14 @@ export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.boolean().default(false),
 });
 /** @internal */
 export type ListAgentsResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -1441,7 +1432,7 @@ export const ListAgentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.boolean().optional(),
+  strict: z.boolean().default(false),
 });
 
 export function listAgentsResponseFormatJsonSchemaToJSON(
@@ -1470,7 +1461,7 @@ export const ListAgentsResponseFormatAgentsJSONSchema$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListAgentsResponseFormatAgentsResponseType$inboundSchema,
+  type: z.literal("json_schema"),
   json_schema: z.lazy(() => ListAgentsResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1479,7 +1470,7 @@ export const ListAgentsResponseFormatAgentsJSONSchema$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ListAgentsResponseFormatAgentsJSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: ListAgentsResponseFormatJsonSchema$Outbound;
 };
 
@@ -1489,7 +1480,7 @@ export const ListAgentsResponseFormatAgentsJSONSchema$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormatAgentsJSONSchema
 > = z.object({
-  type: ListAgentsResponseFormatAgentsResponseType$outboundSchema,
+  type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => ListAgentsResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1524,25 +1515,16 @@ export function listAgentsResponseFormatAgentsJSONSchemaFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsResponseFormatAgentsType
-> = z.nativeEnum(ListAgentsResponseFormatAgentsType);
-/** @internal */
-export const ListAgentsResponseFormatAgentsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsResponseFormatAgentsType
-> = ListAgentsResponseFormatAgentsType$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatJSONObject$inboundSchema: z.ZodType<
   ListAgentsResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListAgentsResponseFormatAgentsType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type ListAgentsResponseFormatJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -1551,7 +1533,7 @@ export const ListAgentsResponseFormatJSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormatJSONObject
 > = z.object({
-  type: ListAgentsResponseFormatAgentsType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function listAgentsResponseFormatJSONObjectToJSON(
@@ -1575,25 +1557,16 @@ export function listAgentsResponseFormatJSONObjectFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsResponseFormatType
-> = z.nativeEnum(ListAgentsResponseFormatType);
-/** @internal */
-export const ListAgentsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsResponseFormatType
-> = ListAgentsResponseFormatType$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatText$inboundSchema: z.ZodType<
   ListAgentsResponseFormatText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListAgentsResponseFormatType$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type ListAgentsResponseFormatText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -1602,7 +1575,7 @@ export const ListAgentsResponseFormatText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormatText
 > = z.object({
-  type: ListAgentsResponseFormatType$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function listAgentsResponseFormatTextToJSON(
@@ -1630,15 +1603,15 @@ export const ListAgentsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
   z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
   z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
 ]);
 /** @internal */
 export type ListAgentsResponseFormat$Outbound =
-  | ListAgentsResponseFormatAgentsJSONSchema$Outbound
   | ListAgentsResponseFormatText$Outbound
-  | ListAgentsResponseFormatJSONObject$Outbound;
+  | ListAgentsResponseFormatJSONObject$Outbound
+  | ListAgentsResponseFormatAgentsJSONSchema$Outbound;
 
 /** @internal */
 export const ListAgentsResponseFormat$outboundSchema: z.ZodType<
@@ -1646,9 +1619,9 @@ export const ListAgentsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormat
 > = z.union([
-  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
   z.lazy(() => ListAgentsResponseFormatText$outboundSchema),
   z.lazy(() => ListAgentsResponseFormatJSONObject$outboundSchema),
+  z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
 ]);
 
 export function listAgentsResponseFormatToJSON(
@@ -1754,6 +1727,15 @@ export const ListAgentsType$outboundSchema: z.ZodNativeEnum<
 > = ListAgentsType$inboundSchema;
 
 /** @internal */
+export const ListAgentsThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsThinkingLevel
+> = z.nativeEnum(ListAgentsThinkingLevel);
+/** @internal */
+export const ListAgentsThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsThinkingLevel
+> = ListAgentsThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ListAgentsThinking$inboundSchema: z.ZodType<
   ListAgentsThinking,
   z.ZodTypeDef,
@@ -1761,15 +1743,18 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsType$inboundSchema,
   budget_tokens: z.number(),
+  thinking_level: ListAgentsThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
+    "thinking_level": "thinkingLevel",
   });
 });
 /** @internal */
 export type ListAgentsThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -1780,9 +1765,11 @@ export const ListAgentsThinking$outboundSchema: z.ZodType<
 > = z.object({
   type: ListAgentsType$outboundSchema,
   budgetTokens: z.number(),
+  thinkingLevel: ListAgentsThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",
+    thinkingLevel: "thinking_level",
   });
 });
 
@@ -1818,11 +1805,11 @@ export const ListAgentsToolChoiceFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type ListAgentsToolChoiceFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -1831,7 +1818,7 @@ export const ListAgentsToolChoiceFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsToolChoiceFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function listAgentsToolChoiceFunctionToJSON(
@@ -1969,9 +1956,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
-    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
     z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
     z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
   ]).optional(),
   reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2018,9 +2005,9 @@ export type ListAgentsParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | ListAgentsResponseFormatAgentsJSONSchema$Outbound
     | ListAgentsResponseFormatText$Outbound
     | ListAgentsResponseFormatJSONObject$Outbound
+    | ListAgentsResponseFormatAgentsJSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2051,9 +2038,9 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
-    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
     z.lazy(() => ListAgentsResponseFormatText$outboundSchema),
     z.lazy(() => ListAgentsResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
   ]).optional(),
   reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
@@ -2104,6 +2091,54 @@ export function listAgentsParametersFromJSON(
     jsonString,
     (x) => ListAgentsParameters$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsRetry$inboundSchema: z.ZodType<
+  ListAgentsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type ListAgentsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const ListAgentsRetry$outboundSchema: z.ZodType<
+  ListAgentsRetry$Outbound,
+  z.ZodTypeDef,
+  ListAgentsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function listAgentsRetryToJSON(
+  listAgentsRetry: ListAgentsRetry,
+): string {
+  return JSON.stringify(ListAgentsRetry$outboundSchema.parse(listAgentsRetry));
+}
+export function listAgentsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsRetry' from JSON`,
   );
 }
 
@@ -2178,20 +2213,6 @@ export function listAgentsFallbackModelConfigurationAudioFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType,
-  );
-/** @internal */
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType
-  > =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema:
   z.ZodType<
     ListAgentsResponseFormatAgentsResponseJsonSchema,
@@ -2201,14 +2222,14 @@ export const ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.boolean().default(false),
   });
 /** @internal */
 export type ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /** @internal */
@@ -2221,7 +2242,7 @@ export const ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema:
     description: z.string().optional(),
     name: z.string(),
     schema: z.any().optional(),
-    strict: z.boolean().optional(),
+    strict: z.boolean().default(false),
   });
 
 export function listAgentsResponseFormatAgentsResponseJsonSchemaToJSON(
@@ -2257,8 +2278,7 @@ export const ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type:
-      ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    type: z.literal("json_schema"),
     json_schema: z.lazy(() =>
       ListAgentsResponseFormatAgentsResponseJsonSchema$inboundSchema
     ),
@@ -2269,7 +2289,7 @@ export const ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema:
   });
 /** @internal */
 export type ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound = {
-  type: string;
+  type: "json_schema";
   json_schema: ListAgentsResponseFormatAgentsResponseJsonSchema$Outbound;
 };
 
@@ -2280,8 +2300,7 @@ export const ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema:
     z.ZodTypeDef,
     ListAgentsResponseFormatAgentsResponse200JSONSchema
   > = z.object({
-    type:
-      ListAgentsResponseFormatAgentsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
       ListAgentsResponseFormatAgentsResponseJsonSchema$outboundSchema
     ),
@@ -2318,31 +2337,16 @@ export function listAgentsResponseFormatAgentsResponse200JSONSchemaFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType,
-  );
-/** @internal */
-export const ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ListAgentsResponseFormatAgentsResponse200ApplicationJSONType
-  > =
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatAgentsJSONObject$inboundSchema: z.ZodType<
   ListAgentsResponseFormatAgentsJSONObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$inboundSchema,
+  type: z.literal("json_object"),
 });
 /** @internal */
 export type ListAgentsResponseFormatAgentsJSONObject$Outbound = {
-  type: string;
+  type: "json_object";
 };
 
 /** @internal */
@@ -2351,8 +2355,7 @@ export const ListAgentsResponseFormatAgentsJSONObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormatAgentsJSONObject
 > = z.object({
-  type:
-    ListAgentsResponseFormatAgentsResponse200ApplicationJSONType$outboundSchema,
+  type: z.literal("json_object"),
 });
 
 export function listAgentsResponseFormatAgentsJSONObjectToJSON(
@@ -2382,25 +2385,16 @@ export function listAgentsResponseFormatAgentsJSONObjectFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormatAgentsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponse200Type> = z
-    .nativeEnum(ListAgentsResponseFormatAgentsResponse200Type);
-/** @internal */
-export const ListAgentsResponseFormatAgentsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsResponseFormatAgentsResponse200Type> =
-    ListAgentsResponseFormatAgentsResponse200Type$inboundSchema;
-
-/** @internal */
 export const ListAgentsResponseFormatAgentsText$inboundSchema: z.ZodType<
   ListAgentsResponseFormatAgentsText,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ListAgentsResponseFormatAgentsResponse200Type$inboundSchema,
+  type: z.literal("text"),
 });
 /** @internal */
 export type ListAgentsResponseFormatAgentsText$Outbound = {
-  type: string;
+  type: "text";
 };
 
 /** @internal */
@@ -2409,7 +2403,7 @@ export const ListAgentsResponseFormatAgentsText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsResponseFormatAgentsText
 > = z.object({
-  type: ListAgentsResponseFormatAgentsResponse200Type$outboundSchema,
+  type: z.literal("text"),
 });
 
 export function listAgentsResponseFormatAgentsTextToJSON(
@@ -2439,17 +2433,17 @@ export const ListAgentsFallbackModelConfigurationResponseFormat$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
+    z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
     z.lazy(() =>
       ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema
     ),
-    z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
   ]);
 /** @internal */
 export type ListAgentsFallbackModelConfigurationResponseFormat$Outbound =
-  | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound
   | ListAgentsResponseFormatAgentsText$Outbound
-  | ListAgentsResponseFormatAgentsJSONObject$Outbound;
+  | ListAgentsResponseFormatAgentsJSONObject$Outbound
+  | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound;
 
 /** @internal */
 export const ListAgentsFallbackModelConfigurationResponseFormat$outboundSchema:
@@ -2458,11 +2452,11 @@ export const ListAgentsFallbackModelConfigurationResponseFormat$outboundSchema:
     z.ZodTypeDef,
     ListAgentsFallbackModelConfigurationResponseFormat
   > = z.union([
+    z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
+    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
     z.lazy(() =>
       ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema
     ),
-    z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
-    z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
   ]);
 
 export function listAgentsFallbackModelConfigurationResponseFormatToJSON(
@@ -2603,6 +2597,15 @@ export const ListAgentsFallbackModelConfigurationType$outboundSchema:
     ListAgentsFallbackModelConfigurationType$inboundSchema;
 
 /** @internal */
+export const ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationThinkingLevel);
+/** @internal */
+export const ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> =
+    ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema;
+
+/** @internal */
 export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     ListAgentsFallbackModelConfigurationThinking,
@@ -2611,15 +2614,20 @@ export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
   > = z.object({
     type: ListAgentsFallbackModelConfigurationType$inboundSchema,
     budget_tokens: z.number(),
+    thinking_level:
+      ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
     });
   });
 /** @internal */
 export type ListAgentsFallbackModelConfigurationThinking$Outbound = {
   type: string;
   budget_tokens: number;
+  thinking_level?: string | undefined;
 };
 
 /** @internal */
@@ -2631,9 +2639,13 @@ export const ListAgentsFallbackModelConfigurationThinking$outboundSchema:
   > = z.object({
     type: ListAgentsFallbackModelConfigurationType$outboundSchema,
     budgetTokens: z.number(),
+    thinkingLevel:
+      ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
     });
   });
 
@@ -2678,11 +2690,11 @@ export const ListAgentsToolChoiceAgentsFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 /** @internal */
 export type ListAgentsToolChoiceAgentsFunction$Outbound = {
-  name?: string | undefined;
+  name: string;
 };
 
 /** @internal */
@@ -2691,7 +2703,7 @@ export const ListAgentsToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsToolChoiceAgentsFunction
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
 });
 
 export function listAgentsToolChoiceAgentsFunctionToJSON(
@@ -2846,11 +2858,11 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
+      z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
+      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
       z.lazy(() =>
         ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema
       ),
-      z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
-      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$inboundSchema),
     ]).optional(),
     reasoning_effort: z.string().optional(),
     verbosity: z.string().optional(),
@@ -2902,9 +2914,9 @@ export type ListAgentsFallbackModelConfigurationParameters$Outbound = {
   n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
-    | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound
     | ListAgentsResponseFormatAgentsText$Outbound
     | ListAgentsResponseFormatAgentsJSONObject$Outbound
+    | ListAgentsResponseFormatAgentsResponse200JSONSchema$Outbound
     | undefined;
   reasoning_effort?: string | undefined;
   verbosity?: string | undefined;
@@ -2941,11 +2953,11 @@ export const ListAgentsFallbackModelConfigurationParameters$outboundSchema:
     n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
+      z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
+      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
       z.lazy(() =>
         ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema
       ),
-      z.lazy(() => ListAgentsResponseFormatAgentsText$outboundSchema),
-      z.lazy(() => ListAgentsResponseFormatAgentsJSONObject$outboundSchema),
     ]).optional(),
     reasoningEffort: z.string().optional(),
     verbosity: z.string().optional(),
@@ -3117,6 +3129,7 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => ListAgentsParameters$inboundSchema).optional(),
+  retry: z.lazy(() => ListAgentsRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => ListAgentsFallbackModelConfiguration2$inboundSchema),
@@ -3134,6 +3147,7 @@ export type ListAgentsModel$Outbound = {
   id: string;
   integration_id?: string | null | undefined;
   parameters?: ListAgentsParameters$Outbound | undefined;
+  retry?: ListAgentsRetry$Outbound | undefined;
   fallback_models?:
     | Array<ListAgentsFallbackModelConfiguration2$Outbound | string>
     | null
@@ -3149,6 +3163,7 @@ export const ListAgentsModel$outboundSchema: z.ZodType<
   id: z.string(),
   integrationId: z.nullable(z.string()).optional(),
   parameters: z.lazy(() => ListAgentsParameters$outboundSchema).optional(),
+  retry: z.lazy(() => ListAgentsRetry$outboundSchema).optional(),
   fallbackModels: z.nullable(
     z.array(z.union([
       z.lazy(() => ListAgentsFallbackModelConfiguration2$outboundSchema),
@@ -3314,15 +3329,6 @@ export function listAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const ListAgentsCollapsedConfigurationSections$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> = z
-    .nativeEnum(ListAgentsCollapsedConfigurationSections);
-/** @internal */
-export const ListAgentsCollapsedConfigurationSections$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsCollapsedConfigurationSections> =
-    ListAgentsCollapsedConfigurationSections$inboundSchema;
-
-/** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
@@ -3330,8 +3336,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  workspace_id: z.string(),
-  project_id: z.string(),
+  display_name: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3351,14 +3356,10 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
-  collapsed_configuration_sections: z.array(
-    ListAgentsCollapsedConfigurationSections$inboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "workspace_id": "workspaceId",
-    "project_id": "projectId",
+    "display_name": "displayName",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "system_prompt": "systemPrompt",
@@ -3366,15 +3367,13 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
-    "collapsed_configuration_sections": "collapsedConfigurationSections",
   });
 });
 /** @internal */
 export type ListAgentsData$Outbound = {
   _id: string;
   key: string;
-  workspace_id: string;
-  project_id: string;
+  display_name: string;
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   created?: string | undefined;
@@ -3393,7 +3392,6 @@ export type ListAgentsData$Outbound = {
   metrics?: ListAgentsMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<ListAgentsKnowledgeBases$Outbound> | undefined;
-  collapsed_configuration_sections?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -3404,8 +3402,7 @@ export const ListAgentsData$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   key: z.string(),
-  workspaceId: z.string(),
-  projectId: z.string(),
+  displayName: z.string(),
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   created: z.string().optional(),
@@ -3425,14 +3422,10 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => ListAgentsKnowledgeBases$outboundSchema))
     .optional(),
-  collapsedConfigurationSections: z.array(
-    ListAgentsCollapsedConfigurationSections$outboundSchema,
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    workspaceId: "workspace_id",
-    projectId: "project_id",
+    displayName: "display_name",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
     systemPrompt: "system_prompt",
@@ -3440,7 +3433,6 @@ export const ListAgentsData$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     teamOfAgents: "team_of_agents",
     knowledgeBases: "knowledge_bases",
-    collapsedConfigurationSections: "collapsed_configuration_sections",
   });
 });
 

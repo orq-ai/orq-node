@@ -1,6 +1,6 @@
 # Content
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,17 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `components.Two[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: components.Two[] = [
-  {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "wav",
-    },
-  },
-];
+const value: components.TextContentPartSchema[] = [];
 ```
 

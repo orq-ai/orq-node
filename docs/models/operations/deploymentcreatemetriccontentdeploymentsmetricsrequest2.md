@@ -3,42 +3,42 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics1`
+### `operations.DeploymentCreateMetric21`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics1 = {
+const value: operations.DeploymentCreateMetric21 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://frail-roundabout.com",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics4`
+### `operations.DeploymentCreateMetric24`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics4 = {
+const value: operations.DeploymentCreateMetric24 = {
   type: "file",
   file: {},
 };

@@ -1,6 +1,6 @@
 # UpdateDatapointMessagesDatasetsRequestContent
 
-The contents of the tool message.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,12 +11,9 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `operations.UpdateDatapointContentDatasetsRequest2[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
-];
+const value: operations.UpdateDatapointContentDatasetsRequest2[] = [];
 ```
 

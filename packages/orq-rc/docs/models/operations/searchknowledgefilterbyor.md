@@ -19,11 +19,11 @@ const value: operations.SearchKnowledgeOrNe = {
 };
 ```
 
-### `operations.SearchKnowledgeOr3`
+### `operations.SearchKnowledgeOrGt`
 
 ```typescript
-const value: operations.SearchKnowledgeOr3 = {
-  gt: 4734.64,
+const value: operations.SearchKnowledgeOrGt = {
+  gt: 3220.21,
 };
 ```
 

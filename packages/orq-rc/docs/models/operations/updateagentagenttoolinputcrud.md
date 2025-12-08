@@ -1,6 +1,6 @@
 # UpdateAgentAgentToolInputCRUD
 
-Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id.
+Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
 
 
 ## Supported Types
@@ -114,6 +114,16 @@ const value: operations.AgentToolInputCRUDCodeExecutionTool = {
 ```typescript
 const value: operations.AgentToolInputCRUDFunctionTool = {
   type: "function",
+};
+```
+
+### `operations.AgentToolInputCRUDMCPTool`
+
+```typescript
+const value: operations.AgentToolInputCRUDMCPTool = {
+  type: "mcp",
+  id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+  toolId: "01KXYZ123456789",
 };
 ```
 

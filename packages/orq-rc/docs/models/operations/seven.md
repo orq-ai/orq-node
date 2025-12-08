@@ -5,11 +5,13 @@
 ```typescript
 import { Seven } from "@orq-ai/node/models/operations";
 
-let value: Seven = "azure/text-embedding-3-small";
+let value: Seven = {
+  type: "contains_valid_link",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"azure/text-embedding-3-small"
-```
+| Field                   | Type                    | Required                | Description             |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| `type`                  | *"contains_valid_link"* | :heavy_check_mark:      | N/A                     |

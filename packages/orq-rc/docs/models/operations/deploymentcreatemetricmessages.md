@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetricMessagesDeveloperMessage`
-
-```typescript
-const value: operations.DeploymentCreateMetricMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.DeploymentCreateMetricMessagesSystemMessage`
 
 ```typescript
 const value: operations.DeploymentCreateMetricMessagesSystemMessage = {
   role: "system",
   content: "<value>",
+};
+```
+
+### `operations.DeploymentCreateMetricMessagesDeveloperMessage`
+
+```typescript
+const value: operations.DeploymentCreateMetricMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 

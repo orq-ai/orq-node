@@ -3,20 +3,20 @@
 
 ## Supported Types
 
-### `operations.UpdateDatapointMessagesDeveloperMessage`
-
-```typescript
-const value: operations.UpdateDatapointMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.UpdateDatapointMessagesSystemMessage`
 
 ```typescript
 const value: operations.UpdateDatapointMessagesSystemMessage = {
   role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.UpdateDatapointMessagesDeveloperMessage`
+
+```typescript
+const value: operations.UpdateDatapointMessagesDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```

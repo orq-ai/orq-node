@@ -1,17 +1,15 @@
 # InvokeAgentKind
 
-A2A entity type
-
 ## Example Usage
 
 ```typescript
 import { InvokeAgentKind } from "@orq-ai/node/models/operations";
 
-let value: InvokeAgentKind = "task";
+let value: InvokeAgentKind = "message";
 ```
 
 ## Values
 
 ```typescript
-"task"
+"message"
 ```

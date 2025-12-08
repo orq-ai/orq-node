@@ -1,6 +1,6 @@
 # DeleteAgentResponseBody
 
-Agent not found
+Agent not found. The specified agent key does not exist in the workspace or has already been deleted.
 
 ## Example Usage
 

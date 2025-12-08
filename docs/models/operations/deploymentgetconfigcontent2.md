@@ -3,42 +3,42 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `operations.One`
 
 ```typescript
-const value: operations.Two1 = {
+const value: operations.One = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentGetConfig22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://downright-ownership.name/",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.Two3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.Two3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```
 
-### `operations.Two4`
+### `operations.Four`
 
 ```typescript
-const value: operations.Two4 = {
+const value: operations.Four = {
   type: "file",
   file: {},
 };

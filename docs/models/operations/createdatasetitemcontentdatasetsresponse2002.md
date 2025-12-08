@@ -1,23 +1,20 @@
 # CreateDatasetItemContentDatasetsResponse2002
 
-
-## Supported Types
-
-### `operations.CreateDatasetItem2DatasetsTextContentPart`
+## Example Usage
 
 ```typescript
-const value: operations.CreateDatasetItem2DatasetsTextContentPart = {
+import { CreateDatasetItemContentDatasetsResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: CreateDatasetItemContentDatasetsResponse2002 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreateDatasetItem2DatasetsRefusalContentPart`
+## Fields
 
-```typescript
-const value: operations.CreateDatasetItem2DatasetsRefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                                                                                                    | Type                                                                                                                                                     | Required                                                                                                                                                 | Description                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                   | [operations.CreateDatasetItemContentDatasetsResponse200Type](../../models/operations/createdatasetitemcontentdatasetsresponse200type.md)                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
+| `text`                                                                                                                                                   | *string*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
+| `cacheControl`                                                                                                                                           | [operations.CreateDatasetItemContentDatasetsResponse200CacheControl](../../models/operations/createdatasetitemcontentdatasetsresponse200cachecontrol.md) | :heavy_minus_sign:                                                                                                                                       | N/A                                                                                                                                                      |

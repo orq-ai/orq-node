@@ -6,17 +6,14 @@
 import { UpdatePrompt2Prompts3 } from "@orq-ai/node/models/operations";
 
 let value: UpdatePrompt2Prompts3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
+  type: "file",
+  file: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                     | [operations.UpdatePrompt2PromptsRequestRequestBodyPromptMessagesType](../../models/operations/updateprompt2promptsrequestrequestbodypromptmessagestype.md) | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
-| `inputAudio`                                                                                                                                               | [operations.UpdatePrompt2InputAudio](../../models/operations/updateprompt2inputaudio.md)                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `type`                                                                                     | *"file"*                                                                                   | :heavy_check_mark:                                                                         | The type of the content part. Always `file`.                                               |
+| `file`                                                                                     | [operations.UpdatePrompt2PromptsFile](../../models/operations/updateprompt2promptsfile.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

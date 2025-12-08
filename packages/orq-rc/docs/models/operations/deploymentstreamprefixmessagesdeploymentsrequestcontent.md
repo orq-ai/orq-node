@@ -1,6 +1,6 @@
 # DeploymentStreamPrefixMessagesDeploymentsRequestContent
 
-The contents of the tool message.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,12 +11,17 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `operations.DeploymentStreamContent2[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
+const value: operations.DeploymentStreamContent2[] = [
+  {
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
+    },
+  },
 ];
 ```
 

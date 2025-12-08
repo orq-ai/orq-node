@@ -5,11 +5,15 @@
 ```typescript
 import { Nine } from "@orq-ai/node/models/operations";
 
-let value: Nine = "openai/text-embedding-3-small";
+let value: Nine = {
+  type: "ends_with",
+  value: "<value>",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"openai/text-embedding-3-small"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"ends_with"*      | :heavy_check_mark: | N/A                |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |

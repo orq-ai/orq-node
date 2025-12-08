@@ -7,14 +7,14 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.StreamRunAgentRequestBody$inboundSchema.optional(),
+  request: operations.StreamRunAgentRequestBody$inboundSchema,
 };
 
 export const tool$agentsStreamRun: ToolDefinition<typeof args> = {
   name: "agents-stream-run",
-  description: `Run and stream agent execution
+  description: `Run agent with streaming response
 
-Creates or updates an agent with the provided configuration, then streams execution events via Server-Sent Events (SSE). If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The stream will continue until the agent completes, errors, or reaches the configured timeout.`,
+Dynamically configures and executes an agent while streaming the interaction in real-time via Server-Sent Events (SSE). Intelligently manages agent versioning by reusing existing agents with matching configurations or creating new versions when configurations differ. Combines the flexibility of inline configuration with real-time streaming, making it ideal for dynamic agent interactions with live feedback. The stream provides continuous updates including message chunks, tool executions, and status changes until completion or timeout.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsStreamRun(

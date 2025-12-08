@@ -3,21 +3,44 @@
 
 ## Supported Types
 
-### `operations.DeploymentStream2DeploymentsTextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2DeploymentsTextContentPart = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentStream2DeploymentsRefusalContentPart`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.DeploymentStream2DeploymentsRefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.DeploymentStream2Deployments4`
+
+```typescript
+const value: operations.DeploymentStream2Deployments4 = {
+  type: "file",
+  file: {},
 };
 ```
 

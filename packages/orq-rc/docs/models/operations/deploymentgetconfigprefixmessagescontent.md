@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesContent
 
-The contents of the tool message.
+The contents of the developer message.
 
 
 ## Supported Types
@@ -11,12 +11,9 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
-];
+const value: components.TextContentPartSchema[] = [];
 ```
 

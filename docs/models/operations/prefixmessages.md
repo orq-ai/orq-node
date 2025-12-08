@@ -3,20 +3,20 @@
 
 ## Supported Types
 
-### `operations.DeveloperMessage`
-
-```typescript
-const value: operations.DeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.SystemMessage`
 
 ```typescript
 const value: operations.SystemMessage = {
   role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.DeveloperMessage`
+
+```typescript
+const value: operations.DeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```

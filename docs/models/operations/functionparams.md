@@ -62,145 +62,145 @@ const value: operations.CreateEvalFunctionParams6 = {
 };
 ```
 
-### `operations.CreateEvalFunctionParams7`
+### `operations.Seven`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams7 = {
+const value: operations.Seven = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.CreateEvalFunctionParams8`
+### `operations.Eight`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams8 = {
+const value: operations.Eight = {
   type: "start_with",
   value: "<value>",
 };
 ```
 
-### `operations.CreateEvalFunctionParams9`
+### `operations.Nine`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams9 = {
+const value: operations.Nine = {
   type: "ends_with",
   value: "<value>",
 };
 ```
 
-### `operations.CreateEvalFunctionParams10`
+### `operations.Ten`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams10 = {
+const value: operations.Ten = {
   type: "exact_match",
 };
 ```
 
-### `operations.CreateEvalFunctionParams11`
+### `operations.Eleven`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams11 = {
+const value: operations.Eleven = {
   type: "length_less_than",
-  value: 3529.79,
+  value: 1493.93,
 };
 ```
 
-### `operations.CreateEvalFunctionParams12`
+### `operations.Twelve`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams12 = {
+const value: operations.Twelve = {
   type: "length_between",
-  min: 9290.81,
-  max: 1247.95,
+  min: 4530.84,
+  max: 1705.51,
 };
 ```
 
-### `operations.CreateEvalFunctionParams13`
+### `operations.Thirteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams13 = {
+const value: operations.Thirteen = {
   type: "length_greater_than",
-  value: 1582.59,
+  value: 1177.11,
 };
 ```
 
-### `operations.CreateEvalFunctionParams14`
+### `operations.Fourteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams14 = {
+const value: operations.Fourteen = {
   type: "one_line",
 };
 ```
 
-### `operations.CreateEvalFunctionParams15`
+### `operations.Fifteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams15 = {
+const value: operations.Fifteen = {
   type: "regex",
   pattern: "<value>",
 };
 ```
 
-### `operations.CreateEvalFunctionParams16`
+### `operations.Sixteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams16 = {
+const value: operations.Sixteen = {
   type: "is_valid_json",
 };
 ```
 
-### `operations.CreateEvalFunctionParams17`
+### `operations.Seventeen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams17 = {
+const value: operations.Seventeen = {
   type: "moderations_openai",
 };
 ```
 
-### `operations.CreateEvalFunctionParams18`
+### `operations.Eighteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams18 = {
+const value: operations.Eighteen = {
   type: "moderations_google",
 };
 ```
 
-### `operations.CreateEvalFunctionParams19`
+### `operations.Nineteen`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams19 = {
+const value: operations.Nineteen = {
   type: "bert_score",
 };
 ```
 
-### `operations.CreateEvalFunctionParams20`
+### `operations.Twenty`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams20 = {
+const value: operations.Twenty = {
   type: "bleu_score",
 };
 ```
 
-### `operations.CreateEvalFunctionParams21`
+### `operations.TwentyOne`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams21 = {
+const value: operations.TwentyOne = {
   type: "rouge_n",
 };
 ```
 
-### `operations.CreateEvalFunctionParams22`
+### `operations.TwentyTwo`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams22 = {
+const value: operations.TwentyTwo = {
   type: "meteor_score",
 };
 ```
 
-### `operations.CreateEvalFunctionParams23`
+### `operations.TwentyThree`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams23 = {
+const value: operations.TwentyThree = {
   type: "cosine_similarity",
 };
 ```
@@ -217,8 +217,10 @@ const value: operations.TwentyFour = {
 
 ```typescript
 const value: operations.TwentyFive = {
-  type: "topic_match",
-  topic: "<value>",
+  type: "keywords_match",
+  keywords: [
+    "<value 1>",
+  ],
 };
 ```
 
@@ -226,8 +228,7 @@ const value: operations.TwentyFive = {
 
 ```typescript
 const value: operations.TwentySix = {
-  type: "keywords_match",
-  keywords: [],
+  type: "most_repeated_words",
 };
 ```
 
@@ -235,7 +236,7 @@ const value: operations.TwentySix = {
 
 ```typescript
 const value: operations.TwentySeven = {
-  type: "most_repeated_words",
+  type: "flesch_reading_ease",
 };
 ```
 
@@ -243,7 +244,7 @@ const value: operations.TwentySeven = {
 
 ```typescript
 const value: operations.TwentyEight = {
-  type: "flesch_reading_ease",
+  type: "gse_english_level",
 };
 ```
 
@@ -251,7 +252,7 @@ const value: operations.TwentyEight = {
 
 ```typescript
 const value: operations.TwentyNine = {
-  type: "gse_english_level",
+  type: "words_count",
 };
 ```
 
@@ -259,7 +260,7 @@ const value: operations.TwentyNine = {
 
 ```typescript
 const value: operations.Thirty = {
-  type: "words_count",
+  type: "sentences_count",
 };
 ```
 
@@ -267,7 +268,7 @@ const value: operations.Thirty = {
 
 ```typescript
 const value: operations.ThirtyOne = {
-  type: "sentences_count",
+  type: "lexical_repetition",
 };
 ```
 
@@ -275,31 +276,7 @@ const value: operations.ThirtyOne = {
 
 ```typescript
 const value: operations.ThirtyTwo = {
-  type: "lexical_repetition",
-};
-```
-
-### `operations.ThirtyThree`
-
-```typescript
-const value: operations.ThirtyThree = {
-  type: "semantic_repetition",
-};
-```
-
-### `operations.ThirtyFour`
-
-```typescript
-const value: operations.ThirtyFour = {
   type: "grammar_diversity",
-};
-```
-
-### `operations.ThirtyFive`
-
-```typescript
-const value: operations.ThirtyFive = {
-  type: "bert_coherence",
 };
 ```
 

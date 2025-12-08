@@ -1,5 +1,4 @@
 # Chunking
-(*chunking*)
 
 ## Overview
 
@@ -29,6 +28,7 @@ async function run() {
     chunkSize: 256,
     threshold: 0.8,
     embeddingModel: "openai/text-embedding-3-small",
+    dimensions: 512,
     mode: "window",
     similarityWindow: 1,
   });
@@ -61,6 +61,7 @@ async function run() {
     chunkSize: 256,
     threshold: 0.8,
     embeddingModel: "openai/text-embedding-3-small",
+    dimensions: 512,
     mode: "window",
     similarityWindow: 1,
   });

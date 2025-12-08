@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### `operations.DeploymentStreamMessagesDeveloperMessage`
-
-```typescript
-const value: operations.DeploymentStreamMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.DeploymentStreamMessagesSystemMessage`
 
 ```typescript
 const value: operations.DeploymentStreamMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [],
+};
+```
+
+### `operations.DeploymentStreamMessagesDeveloperMessage`
+
+```typescript
+const value: operations.DeploymentStreamMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 

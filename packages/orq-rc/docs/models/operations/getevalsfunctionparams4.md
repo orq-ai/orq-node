@@ -16,7 +16,7 @@ let value: GetEvalsFunctionParams4 = {
 
 ## Fields
 
-| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                   | [operations.GetEvalsFunctionParamsEvalsResponseType](../../models/operations/getevalsfunctionparamsevalsresponsetype.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
-| `keywords`                                                                                                               | *string*[]                                                                                                               | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains_any"*   | :heavy_check_mark: | N/A                |
+| `keywords`         | *string*[]         | :heavy_check_mark: | N/A                |

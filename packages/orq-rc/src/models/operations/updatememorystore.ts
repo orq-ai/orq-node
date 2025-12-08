@@ -9,205 +9,16 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Model23 = {
-  JinaJinaEmbeddingsV3: "jina/jina-embeddings-v3",
-} as const;
-export type Model23 = ClosedEnum<typeof Model23>;
-
-export const Model22 = {
-  JinaJinaClipV2: "jina/jina-clip-v2",
-} as const;
-export type Model22 = ClosedEnum<typeof Model22>;
-
-export const Model21 = {
-  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
-} as const;
-export type Model21 = ClosedEnum<typeof Model21>;
-
-export const Model20 = {
-  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
-} as const;
-export type Model20 = ClosedEnum<typeof Model20>;
-
-export const Model19 = {
-  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
-} as const;
-export type Model19 = ClosedEnum<typeof Model19>;
-
-export const Model18 = {
-  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
-} as const;
-export type Model18 = ClosedEnum<typeof Model18>;
-
-export const Model17 = {
-  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
-} as const;
-export type Model17 = ClosedEnum<typeof Model17>;
-
-export const Model16 = {
-  JinaJinaClipV1: "jina/jina-clip-v1",
-} as const;
-export type Model16 = ClosedEnum<typeof Model16>;
-
-export const Model15 = {
-  MistralMistralEmbed: "mistral/mistral-embed",
-} as const;
-export type Model15 = ClosedEnum<typeof Model15>;
-
-export const Model14 = {
-  GoogleAiTextEmbedding004: "google-ai/text-embedding-004",
-} as const;
-export type Model14 = ClosedEnum<typeof Model14>;
-
-export const Model13 = {
-  GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
-} as const;
-export type Model13 = ClosedEnum<typeof Model13>;
-
-export const Model12 = {
-  GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
-} as const;
-export type Model12 = ClosedEnum<typeof Model12>;
-
-export const Model11 = {
-  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
-} as const;
-export type Model11 = ClosedEnum<typeof Model11>;
-
-export const Model10 = {
-  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
-} as const;
-export type Model10 = ClosedEnum<typeof Model10>;
-
-export const Model9 = {
-  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
-} as const;
-export type Model9 = ClosedEnum<typeof Model9>;
-
-export const Model8 = {
-  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
-} as const;
-export type Model8 = ClosedEnum<typeof Model8>;
-
-export const Model7 = {
-  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
-} as const;
-export type Model7 = ClosedEnum<typeof Model7>;
-
-export const UpdateMemoryStoreModel6 = {
-  AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
-} as const;
-export type UpdateMemoryStoreModel6 = ClosedEnum<
-  typeof UpdateMemoryStoreModel6
->;
-
-export const UpdateMemoryStoreModel5 = {
-  CohereEmbedV40: "cohere/embed-v4.0",
-} as const;
-export type UpdateMemoryStoreModel5 = ClosedEnum<
-  typeof UpdateMemoryStoreModel5
->;
-
-export const UpdateMemoryStoreModel4 = {
-  CohereEmbedEnglishV30: "cohere/embed-english-v3.0",
-} as const;
-export type UpdateMemoryStoreModel4 = ClosedEnum<
-  typeof UpdateMemoryStoreModel4
->;
-
-export const UpdateMemoryStoreModel3 = {
-  CohereEmbedEnglishLightV30: "cohere/embed-english-light-v3.0",
-} as const;
-export type UpdateMemoryStoreModel3 = ClosedEnum<
-  typeof UpdateMemoryStoreModel3
->;
-
-export const UpdateMemoryStoreModel2 = {
-  CohereEmbedMultilingualLightV30: "cohere/embed-multilingual-light-v3.0",
-} as const;
-export type UpdateMemoryStoreModel2 = ClosedEnum<
-  typeof UpdateMemoryStoreModel2
->;
-
-export const UpdateMemoryStoreModel1 = {
-  CohereEmbedMultilingualV30: "cohere/embed-multilingual-v3.0",
-} as const;
-export type UpdateMemoryStoreModel1 = ClosedEnum<
-  typeof UpdateMemoryStoreModel1
->;
-
-export type UpdateMemoryStoreModel =
-  | UpdateMemoryStoreModel1
-  | UpdateMemoryStoreModel2
-  | UpdateMemoryStoreModel3
-  | UpdateMemoryStoreModel4
-  | UpdateMemoryStoreModel5
-  | UpdateMemoryStoreModel6
-  | Model7
-  | Model8
-  | Model9
-  | Model10
-  | Model11
-  | Model12
-  | Model13
-  | Model14
-  | Model15
-  | Model16
-  | Model17
-  | Model18
-  | Model19
-  | Model20
-  | Model21
-  | Model22
-  | Model23;
-
-export type UpdateMemoryStoreEmbeddingConfig = {
-  model:
-    | UpdateMemoryStoreModel1
-    | UpdateMemoryStoreModel2
-    | UpdateMemoryStoreModel3
-    | UpdateMemoryStoreModel4
-    | UpdateMemoryStoreModel5
-    | UpdateMemoryStoreModel6
-    | Model7
-    | Model8
-    | Model9
-    | Model10
-    | Model11
-    | Model12
-    | Model13
-    | Model14
-    | Model15
-    | Model16
-    | Model17
-    | Model18
-    | Model19
-    | Model20
-    | Model21
-    | Model22
-    | Model23;
-};
-
 export type UpdateMemoryStoreRequestBody = {
-  embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
   /**
    * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
    */
-  description: string;
+  description?: string | undefined;
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
   ttl?: number | undefined;
-  /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
-   *
-   * @remarks
-   *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
-   *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
-   */
-  path: string;
+  path?: string | undefined;
 };
 
 export type UpdateMemoryStoreRequest = {
@@ -218,51 +29,42 @@ export type UpdateMemoryStoreRequest = {
   requestBody?: UpdateMemoryStoreRequestBody | undefined;
 };
 
-/**
- * The provider of the AI service
- */
 export const UpdateMemoryStoreProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
 } as const;
-/**
- * The provider of the AI service
- */
 export type UpdateMemoryStoreProvider = ClosedEnum<
   typeof UpdateMemoryStoreProvider
 >;
 
-export type UpdateMemoryStoreMemoryStoresEmbeddingConfig = {
+export type UpdateMemoryStoreEmbeddingConfig = {
   modelId: string;
   integrationId?: string | undefined;
   /**
    * Number of results to return
    */
   topK?: number | undefined;
-  /**
-   * The provider of the AI service
-   */
   provider: UpdateMemoryStoreProvider;
 };
 
@@ -306,397 +108,8 @@ export type UpdateMemoryStoreResponseBody = {
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
   ttl?: number | undefined;
-  embeddingConfig: UpdateMemoryStoreMemoryStoresEmbeddingConfig;
+  embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
 };
-
-/** @internal */
-export const Model23$inboundSchema: z.ZodNativeEnum<typeof Model23> = z
-  .nativeEnum(Model23);
-/** @internal */
-export const Model23$outboundSchema: z.ZodNativeEnum<typeof Model23> =
-  Model23$inboundSchema;
-
-/** @internal */
-export const Model22$inboundSchema: z.ZodNativeEnum<typeof Model22> = z
-  .nativeEnum(Model22);
-/** @internal */
-export const Model22$outboundSchema: z.ZodNativeEnum<typeof Model22> =
-  Model22$inboundSchema;
-
-/** @internal */
-export const Model21$inboundSchema: z.ZodNativeEnum<typeof Model21> = z
-  .nativeEnum(Model21);
-/** @internal */
-export const Model21$outboundSchema: z.ZodNativeEnum<typeof Model21> =
-  Model21$inboundSchema;
-
-/** @internal */
-export const Model20$inboundSchema: z.ZodNativeEnum<typeof Model20> = z
-  .nativeEnum(Model20);
-/** @internal */
-export const Model20$outboundSchema: z.ZodNativeEnum<typeof Model20> =
-  Model20$inboundSchema;
-
-/** @internal */
-export const Model19$inboundSchema: z.ZodNativeEnum<typeof Model19> = z
-  .nativeEnum(Model19);
-/** @internal */
-export const Model19$outboundSchema: z.ZodNativeEnum<typeof Model19> =
-  Model19$inboundSchema;
-
-/** @internal */
-export const Model18$inboundSchema: z.ZodNativeEnum<typeof Model18> = z
-  .nativeEnum(Model18);
-/** @internal */
-export const Model18$outboundSchema: z.ZodNativeEnum<typeof Model18> =
-  Model18$inboundSchema;
-
-/** @internal */
-export const Model17$inboundSchema: z.ZodNativeEnum<typeof Model17> = z
-  .nativeEnum(Model17);
-/** @internal */
-export const Model17$outboundSchema: z.ZodNativeEnum<typeof Model17> =
-  Model17$inboundSchema;
-
-/** @internal */
-export const Model16$inboundSchema: z.ZodNativeEnum<typeof Model16> = z
-  .nativeEnum(Model16);
-/** @internal */
-export const Model16$outboundSchema: z.ZodNativeEnum<typeof Model16> =
-  Model16$inboundSchema;
-
-/** @internal */
-export const Model15$inboundSchema: z.ZodNativeEnum<typeof Model15> = z
-  .nativeEnum(Model15);
-/** @internal */
-export const Model15$outboundSchema: z.ZodNativeEnum<typeof Model15> =
-  Model15$inboundSchema;
-
-/** @internal */
-export const Model14$inboundSchema: z.ZodNativeEnum<typeof Model14> = z
-  .nativeEnum(Model14);
-/** @internal */
-export const Model14$outboundSchema: z.ZodNativeEnum<typeof Model14> =
-  Model14$inboundSchema;
-
-/** @internal */
-export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
-  .nativeEnum(Model13);
-/** @internal */
-export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
-  Model13$inboundSchema;
-
-/** @internal */
-export const Model12$inboundSchema: z.ZodNativeEnum<typeof Model12> = z
-  .nativeEnum(Model12);
-/** @internal */
-export const Model12$outboundSchema: z.ZodNativeEnum<typeof Model12> =
-  Model12$inboundSchema;
-
-/** @internal */
-export const Model11$inboundSchema: z.ZodNativeEnum<typeof Model11> = z
-  .nativeEnum(Model11);
-/** @internal */
-export const Model11$outboundSchema: z.ZodNativeEnum<typeof Model11> =
-  Model11$inboundSchema;
-
-/** @internal */
-export const Model10$inboundSchema: z.ZodNativeEnum<typeof Model10> = z
-  .nativeEnum(Model10);
-/** @internal */
-export const Model10$outboundSchema: z.ZodNativeEnum<typeof Model10> =
-  Model10$inboundSchema;
-
-/** @internal */
-export const Model9$inboundSchema: z.ZodNativeEnum<typeof Model9> = z
-  .nativeEnum(Model9);
-/** @internal */
-export const Model9$outboundSchema: z.ZodNativeEnum<typeof Model9> =
-  Model9$inboundSchema;
-
-/** @internal */
-export const Model8$inboundSchema: z.ZodNativeEnum<typeof Model8> = z
-  .nativeEnum(Model8);
-/** @internal */
-export const Model8$outboundSchema: z.ZodNativeEnum<typeof Model8> =
-  Model8$inboundSchema;
-
-/** @internal */
-export const Model7$inboundSchema: z.ZodNativeEnum<typeof Model7> = z
-  .nativeEnum(Model7);
-/** @internal */
-export const Model7$outboundSchema: z.ZodNativeEnum<typeof Model7> =
-  Model7$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel6$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel6
-> = z.nativeEnum(UpdateMemoryStoreModel6);
-/** @internal */
-export const UpdateMemoryStoreModel6$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel6
-> = UpdateMemoryStoreModel6$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel5$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel5
-> = z.nativeEnum(UpdateMemoryStoreModel5);
-/** @internal */
-export const UpdateMemoryStoreModel5$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel5
-> = UpdateMemoryStoreModel5$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel4$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel4
-> = z.nativeEnum(UpdateMemoryStoreModel4);
-/** @internal */
-export const UpdateMemoryStoreModel4$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel4
-> = UpdateMemoryStoreModel4$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel3$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel3
-> = z.nativeEnum(UpdateMemoryStoreModel3);
-/** @internal */
-export const UpdateMemoryStoreModel3$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel3
-> = UpdateMemoryStoreModel3$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel2$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel2
-> = z.nativeEnum(UpdateMemoryStoreModel2);
-/** @internal */
-export const UpdateMemoryStoreModel2$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel2
-> = UpdateMemoryStoreModel2$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel1
-> = z.nativeEnum(UpdateMemoryStoreModel1);
-/** @internal */
-export const UpdateMemoryStoreModel1$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel1
-> = UpdateMemoryStoreModel1$inboundSchema;
-
-/** @internal */
-export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
-  UpdateMemoryStoreModel,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  UpdateMemoryStoreModel1$inboundSchema,
-  UpdateMemoryStoreModel2$inboundSchema,
-  UpdateMemoryStoreModel3$inboundSchema,
-  UpdateMemoryStoreModel4$inboundSchema,
-  UpdateMemoryStoreModel5$inboundSchema,
-  UpdateMemoryStoreModel6$inboundSchema,
-  Model7$inboundSchema,
-  Model8$inboundSchema,
-  Model9$inboundSchema,
-  Model10$inboundSchema,
-  Model11$inboundSchema,
-  Model12$inboundSchema,
-  Model13$inboundSchema,
-  Model14$inboundSchema,
-  Model15$inboundSchema,
-  Model16$inboundSchema,
-  Model17$inboundSchema,
-  Model18$inboundSchema,
-  Model19$inboundSchema,
-  Model20$inboundSchema,
-  Model21$inboundSchema,
-  Model22$inboundSchema,
-  Model23$inboundSchema,
-]);
-/** @internal */
-export type UpdateMemoryStoreModel$Outbound =
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string
-  | string;
-
-/** @internal */
-export const UpdateMemoryStoreModel$outboundSchema: z.ZodType<
-  UpdateMemoryStoreModel$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreModel
-> = z.union([
-  UpdateMemoryStoreModel1$outboundSchema,
-  UpdateMemoryStoreModel2$outboundSchema,
-  UpdateMemoryStoreModel3$outboundSchema,
-  UpdateMemoryStoreModel4$outboundSchema,
-  UpdateMemoryStoreModel5$outboundSchema,
-  UpdateMemoryStoreModel6$outboundSchema,
-  Model7$outboundSchema,
-  Model8$outboundSchema,
-  Model9$outboundSchema,
-  Model10$outboundSchema,
-  Model11$outboundSchema,
-  Model12$outboundSchema,
-  Model13$outboundSchema,
-  Model14$outboundSchema,
-  Model15$outboundSchema,
-  Model16$outboundSchema,
-  Model17$outboundSchema,
-  Model18$outboundSchema,
-  Model19$outboundSchema,
-  Model20$outboundSchema,
-  Model21$outboundSchema,
-  Model22$outboundSchema,
-  Model23$outboundSchema,
-]);
-
-export function updateMemoryStoreModelToJSON(
-  updateMemoryStoreModel: UpdateMemoryStoreModel,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreModel$outboundSchema.parse(updateMemoryStoreModel),
-  );
-}
-export function updateMemoryStoreModelFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreModel, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.union([
-    UpdateMemoryStoreModel1$inboundSchema,
-    UpdateMemoryStoreModel2$inboundSchema,
-    UpdateMemoryStoreModel3$inboundSchema,
-    UpdateMemoryStoreModel4$inboundSchema,
-    UpdateMemoryStoreModel5$inboundSchema,
-    UpdateMemoryStoreModel6$inboundSchema,
-    Model7$inboundSchema,
-    Model8$inboundSchema,
-    Model9$inboundSchema,
-    Model10$inboundSchema,
-    Model11$inboundSchema,
-    Model12$inboundSchema,
-    Model13$inboundSchema,
-    Model14$inboundSchema,
-    Model15$inboundSchema,
-    Model16$inboundSchema,
-    Model17$inboundSchema,
-    Model18$inboundSchema,
-    Model19$inboundSchema,
-    Model20$inboundSchema,
-    Model21$inboundSchema,
-    Model22$inboundSchema,
-    Model23$inboundSchema,
-  ]),
-});
-/** @internal */
-export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
-  model:
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string
-    | string;
-};
-
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreEmbeddingConfig
-> = z.object({
-  model: z.union([
-    UpdateMemoryStoreModel1$outboundSchema,
-    UpdateMemoryStoreModel2$outboundSchema,
-    UpdateMemoryStoreModel3$outboundSchema,
-    UpdateMemoryStoreModel4$outboundSchema,
-    UpdateMemoryStoreModel5$outboundSchema,
-    UpdateMemoryStoreModel6$outboundSchema,
-    Model7$outboundSchema,
-    Model8$outboundSchema,
-    Model9$outboundSchema,
-    Model10$outboundSchema,
-    Model11$outboundSchema,
-    Model12$outboundSchema,
-    Model13$outboundSchema,
-    Model14$outboundSchema,
-    Model15$outboundSchema,
-    Model16$outboundSchema,
-    Model17$outboundSchema,
-    Model18$outboundSchema,
-    Model19$outboundSchema,
-    Model20$outboundSchema,
-    Model21$outboundSchema,
-    Model22$outboundSchema,
-    Model23$outboundSchema,
-  ]),
-});
-
-export function updateMemoryStoreEmbeddingConfigToJSON(
-  updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema.parse(
-      updateMemoryStoreEmbeddingConfig,
-    ),
-  );
-}
-export function updateMemoryStoreEmbeddingConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreEmbeddingConfig' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
@@ -704,23 +117,15 @@ export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  embedding_config: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$inboundSchema
-  ),
-  description: z.string(),
+  description: z.string().optional(),
   ttl: z.number().optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "embedding_config": "embeddingConfig",
-  });
+  path: z.string().optional(),
 });
 /** @internal */
 export type UpdateMemoryStoreRequestBody$Outbound = {
-  embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
-  description: string;
+  description?: string | undefined;
   ttl?: number | undefined;
-  path: string;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -729,16 +134,9 @@ export const UpdateMemoryStoreRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateMemoryStoreRequestBody
 > = z.object({
-  embeddingConfig: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema
-  ),
-  description: z.string(),
+  description: z.string().optional(),
   ttl: z.number().optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingConfig: "embedding_config",
-  });
+  path: z.string().optional(),
 });
 
 export function updateMemoryStoreRequestBodyToJSON(
@@ -824,25 +222,24 @@ export const UpdateMemoryStoreProvider$outboundSchema: z.ZodNativeEnum<
 > = UpdateMemoryStoreProvider$inboundSchema;
 
 /** @internal */
-export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema:
-  z.ZodType<
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    model_id: z.string(),
-    integration_id: z.string().optional(),
-    top_k: z.number().optional(),
-    provider: UpdateMemoryStoreProvider$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "model_id": "modelId",
-      "integration_id": "integrationId",
-      "top_k": "topK",
-    });
+export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
+  UpdateMemoryStoreEmbeddingConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model_id: z.string(),
+  integration_id: z.string().optional(),
+  top_k: z.number().optional(),
+  provider: UpdateMemoryStoreProvider$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "model_id": "modelId",
+    "integration_id": "integrationId",
+    "top_k": "topK",
   });
+});
 /** @internal */
-export type UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound = {
+export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
   model_id: string;
   integration_id?: string | undefined;
   top_k?: number | undefined;
@@ -850,47 +247,39 @@ export type UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound = {
 };
 
 /** @internal */
-export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema:
-  z.ZodType<
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound,
-    z.ZodTypeDef,
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig
-  > = z.object({
-    modelId: z.string(),
-    integrationId: z.string().optional(),
-    topK: z.number().optional(),
-    provider: UpdateMemoryStoreProvider$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      modelId: "model_id",
-      integrationId: "integration_id",
-      topK: "top_k",
-    });
+export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
+  UpdateMemoryStoreEmbeddingConfig$Outbound,
+  z.ZodTypeDef,
+  UpdateMemoryStoreEmbeddingConfig
+> = z.object({
+  modelId: z.string(),
+  integrationId: z.string().optional(),
+  topK: z.number().optional(),
+  provider: UpdateMemoryStoreProvider$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    modelId: "model_id",
+    integrationId: "integration_id",
+    topK: "top_k",
   });
+});
 
-export function updateMemoryStoreMemoryStoresEmbeddingConfigToJSON(
-  updateMemoryStoreMemoryStoresEmbeddingConfig:
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig,
+export function updateMemoryStoreEmbeddingConfigToJSON(
+  updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
 ): string {
   return JSON.stringify(
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema.parse(
-      updateMemoryStoreMemoryStoresEmbeddingConfig,
+    UpdateMemoryStoreEmbeddingConfig$outboundSchema.parse(
+      updateMemoryStoreEmbeddingConfig,
     ),
   );
 }
-export function updateMemoryStoreMemoryStoresEmbeddingConfigFromJSON(
+export function updateMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
-): SafeParseResult<
-  UpdateMemoryStoreMemoryStoresEmbeddingConfig,
-  SDKValidationError
-> {
+): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateMemoryStoreMemoryStoresEmbeddingConfig' from JSON`,
+    (x) => UpdateMemoryStoreEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMemoryStoreEmbeddingConfig' from JSON`,
   );
 }
 
@@ -910,7 +299,7 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
   updated: z.string(),
   ttl: z.number().optional(),
   embedding_config: z.lazy(() =>
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema
+    UpdateMemoryStoreEmbeddingConfig$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -932,7 +321,7 @@ export type UpdateMemoryStoreResponseBody$Outbound = {
   created: string;
   updated: string;
   ttl?: number | undefined;
-  embedding_config: UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound;
+  embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
 };
 
 /** @internal */
@@ -951,7 +340,7 @@ export const UpdateMemoryStoreResponseBody$outboundSchema: z.ZodType<
   updated: z.string(),
   ttl: z.number().optional(),
   embeddingConfig: z.lazy(() =>
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema
+    UpdateMemoryStoreEmbeddingConfig$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {

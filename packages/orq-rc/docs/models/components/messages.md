@@ -3,21 +3,26 @@
 
 ## Supported Types
 
-### `components.MessagesDeveloperMessage`
-
-```typescript
-const value: components.MessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `components.MessagesSystemMessage`
 
 ```typescript
 const value: components.MessagesSystemMessage = {
   role: "system",
   content: "<value>",
+};
+```
+
+### `components.MessagesDeveloperMessage`
+
+```typescript
+const value: components.MessagesDeveloperMessage = {
+  role: "developer",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

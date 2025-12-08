@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.CreatePrompt2PromptsResponse1`
+### `operations.CreatePrompt21`
 
 ```typescript
-const value: operations.CreatePrompt2PromptsResponse1 = {
+const value: operations.CreatePrompt21 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreatePrompt2PromptsResponse2`
+### `operations.CreatePrompt2Prompts2`
 
 ```typescript
-const value: operations.CreatePrompt2PromptsResponse2 = {
+const value: operations.CreatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
     url: "https://picsum.photos/id/1/200/300",
@@ -23,10 +23,10 @@ const value: operations.CreatePrompt2PromptsResponse2 = {
 };
 ```
 
-### `operations.CreatePrompt2PromptsResponse3`
+### `operations.CreatePrompt23`
 
 ```typescript
-const value: operations.CreatePrompt2PromptsResponse3 = {
+const value: operations.CreatePrompt23 = {
   type: "file",
   file: {},
 };

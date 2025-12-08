@@ -5,24 +5,24 @@ Knowledge successfully created
 
 ## Supported Types
 
-### `operations.CreateKnowledgeResponseBody1`
+### `operations.ResponseBody1`
 
 ```typescript
-const value: operations.CreateKnowledgeResponseBody1 = {
+const value: operations.ResponseBody1 = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
   path: "Default",
   updated: "<value>",
-  model: "CX-9",
+  model: "Altima",
 };
 ```
 
-### `operations.CreateKnowledgeResponseBody2`
+### `operations.ResponseBody2`
 
 ```typescript
-const value: operations.CreateKnowledgeResponseBody2 = {
+const value: operations.ResponseBody2 = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
@@ -31,7 +31,7 @@ const value: operations.CreateKnowledgeResponseBody2 = {
   updated: "<value>",
   externalConfig: {
     name: "<value>",
-    apiUrl: "https://neighboring-fork.org/",
+    apiUrl: "https://reasonable-extent.name/",
   },
 };
 ```

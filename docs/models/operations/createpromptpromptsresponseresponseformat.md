@@ -11,33 +11,32 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ## Supported Types
 
-### `operations.CreatePromptResponseFormatPromptsResponse1`
+### `operations.CreatePromptResponseFormat1`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatPromptsResponse1 = {
+const value: operations.CreatePromptResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
     },
   },
 };
 ```
 
-### `operations.CreatePromptResponseFormatPromptsResponse2`
+### `operations.CreatePromptResponseFormat2`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatPromptsResponse2 = {
+const value: operations.CreatePromptResponseFormat2 = {
   type: "json_object",
 };
 ```
 
-### `operations.CreatePromptResponseFormatPromptsResponse3`
+### `operations.CreatePromptResponseFormat3`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatPromptsResponse3 = {
+const value: operations.CreatePromptResponseFormat3 = {
   type: "text",
 };
 ```

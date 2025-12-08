@@ -15,7 +15,9 @@ const value: operations.UpdateAgentToolChoiceAgentsResponse1 = "required";
 
 ```typescript
 const value: operations.UpdateAgentToolChoiceAgentsResponse2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

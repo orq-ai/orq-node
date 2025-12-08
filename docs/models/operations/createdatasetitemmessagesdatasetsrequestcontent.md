@@ -1,6 +1,6 @@
 # CreateDatasetItemMessagesDatasetsRequestContent
 
-The contents of the tool message.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,12 +11,14 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `operations.CreateDatasetItemContentDatasetsRequest2[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
+const value: operations.CreateDatasetItemContentDatasetsRequest2[] = [
+  {
+    type: "file",
+    file: {},
+  },
 ];
 ```
 

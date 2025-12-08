@@ -1,20 +1,43 @@
 # Message
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Message1`
 
 ```typescript
-import { Message } from "@orq-ai/node/models/operations";
-
-let value: Message = {
-  role: "tool",
-  parts: [],
+const value: operations.Message1 = {
+  type: "tool_calls",
+  role: "user",
+  toolCalls: [
+    {
+      type: "function",
+      function: {
+        name: "<value>",
+        arguments: "<value>",
+      },
+    },
+  ],
 };
 ```
 
-## Fields
+### `operations.Message2`
 
-| Field                                                 | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `messageId`                                           | *string*                                              | :heavy_minus_sign:                                    | Optional A2A message ID in ULID format                |
-| `role`                                                | *operations.InvokeAgentRole*                          | :heavy_check_mark:                                    | Message role (user or tool for continuing executions) |
-| `parts`                                               | *operations.PublicMessagePart*[]                      | :heavy_check_mark:                                    | A2A message parts (text, file, or tool_result only)   |
+```typescript
+const value: operations.Message2 = {
+  type: "content",
+  role: "expected_output",
+  content: "<value>",
+};
+```
+
+### `operations.Message3`
+
+```typescript
+const value: operations.Message3 = {
+  type: "image",
+  role: "user",
+  url: "https://massive-hunt.biz",
+};
+```
+

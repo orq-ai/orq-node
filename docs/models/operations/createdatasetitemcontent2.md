@@ -1,46 +1,20 @@
 # CreateDatasetItemContent2
 
-
-## Supported Types
-
-### `operations.CreateDatasetItem21`
+## Example Usage
 
 ```typescript
-const value: operations.CreateDatasetItem21 = {
+import { CreateDatasetItemContent2 } from "@orq-ai/node/models/operations";
+
+let value: CreateDatasetItemContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreateDatasetItem22`
+## Fields
 
-```typescript
-const value: operations.CreateDatasetItem22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://earnest-baseboard.com",
-  },
-};
-```
-
-### `operations.CreateDatasetItem23`
-
-```typescript
-const value: operations.CreateDatasetItem23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
-};
-```
-
-### `operations.CreateDatasetItem24`
-
-```typescript
-const value: operations.CreateDatasetItem24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                             | [operations.CreateDatasetItemContentType](../../models/operations/createdatasetitemcontenttype.md)                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `text`                                                                                                             | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `cacheControl`                                                                                                     | [operations.CreateDatasetItemContentCacheControl](../../models/operations/createdatasetitemcontentcachecontrol.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

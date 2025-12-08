@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type ListChunksQueryParamStatus = Array<string> | string;
+export type QueryParamStatus = Array<string> | string;
 
 export type ListChunksRequest = {
   /**
@@ -116,35 +116,35 @@ export type ListChunksResponseBody = {
 };
 
 /** @internal */
-export const ListChunksQueryParamStatus$inboundSchema: z.ZodType<
-  ListChunksQueryParamStatus,
+export const QueryParamStatus$inboundSchema: z.ZodType<
+  QueryParamStatus,
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), z.string()]);
 /** @internal */
-export type ListChunksQueryParamStatus$Outbound = Array<string> | string;
+export type QueryParamStatus$Outbound = Array<string> | string;
 
 /** @internal */
-export const ListChunksQueryParamStatus$outboundSchema: z.ZodType<
-  ListChunksQueryParamStatus$Outbound,
+export const QueryParamStatus$outboundSchema: z.ZodType<
+  QueryParamStatus$Outbound,
   z.ZodTypeDef,
-  ListChunksQueryParamStatus
+  QueryParamStatus
 > = z.union([z.array(z.string()), z.string()]);
 
-export function listChunksQueryParamStatusToJSON(
-  listChunksQueryParamStatus: ListChunksQueryParamStatus,
+export function queryParamStatusToJSON(
+  queryParamStatus: QueryParamStatus,
 ): string {
   return JSON.stringify(
-    ListChunksQueryParamStatus$outboundSchema.parse(listChunksQueryParamStatus),
+    QueryParamStatus$outboundSchema.parse(queryParamStatus),
   );
 }
-export function listChunksQueryParamStatusFromJSON(
+export function queryParamStatusFromJSON(
   jsonString: string,
-): SafeParseResult<ListChunksQueryParamStatus, SDKValidationError> {
+): SafeParseResult<QueryParamStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListChunksQueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksQueryParamStatus' from JSON`,
+    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryParamStatus' from JSON`,
   );
 }
 

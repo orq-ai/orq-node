@@ -3,30 +3,30 @@
 
 ## Supported Types
 
-### `operations.UpdateDatapoint2Datasets1`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets1 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdateDatapoint2Datasets2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://shameful-knight.org/",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.UpdateDatapoint2Datasets3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",

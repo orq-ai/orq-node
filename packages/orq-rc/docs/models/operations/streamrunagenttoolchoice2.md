@@ -6,7 +6,9 @@
 import { StreamRunAgentToolChoice2 } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentToolChoice2 = {
-  function: {},
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

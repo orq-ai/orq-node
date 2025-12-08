@@ -3,21 +3,12 @@
 
 ## Supported Types
 
-### `operations.TwoTextContentPart`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.TwoTextContentPart = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
-};
-```
-
-### `operations.TwoRefusalContentPart`
-
-```typescript
-const value: operations.TwoRefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
 };
 ```
 

@@ -5,11 +5,15 @@
 ```typescript
 import { Eight } from "@orq-ai/node/models/operations";
 
-let value: Eight = "openai/text-embedding-3-large";
+let value: Eight = {
+  type: "start_with",
+  value: "<value>",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"openai/text-embedding-3-large"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"start_with"*     | :heavy_check_mark: | N/A                |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |

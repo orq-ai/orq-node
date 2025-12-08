@@ -3,34 +3,34 @@
 
 ## Supported Types
 
-### `operations.CreateDatasetItem2Datasets1`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem2Datasets1 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreateDatasetItem2Datasets2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem2Datasets2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://these-league.net",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.CreateDatasetItem2Datasets3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.CreateDatasetItem2Datasets3 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

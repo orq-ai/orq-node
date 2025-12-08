@@ -3,34 +3,34 @@
 
 ## Supported Types
 
-### `components.Deployments21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: components.Deployments21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.Two2`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: components.Two2 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://frequent-passport.com",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `components.Deployments23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: components.Deployments23 = {
+const value: components.AudioContentPartSchema = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

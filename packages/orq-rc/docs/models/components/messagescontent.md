@@ -1,6 +1,6 @@
 # MessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,14 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `components.DeploymentsContent2[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: components.DeploymentsContent2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: components.TextContentPartSchema[] = [];
 ```
 

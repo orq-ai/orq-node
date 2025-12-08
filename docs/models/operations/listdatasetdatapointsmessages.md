@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### `operations.ListDatasetDatapointsMessagesDeveloperMessage`
-
-```typescript
-const value: operations.ListDatasetDatapointsMessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
-
 ### `operations.ListDatasetDatapointsMessagesSystemMessage`
 
 ```typescript
 const value: operations.ListDatasetDatapointsMessagesSystemMessage = {
   role: "system",
   content: "<value>",
+};
+```
+
+### `operations.ListDatasetDatapointsMessagesDeveloperMessage`
+
+```typescript
+const value: operations.ListDatasetDatapointsMessagesDeveloperMessage = {
+  role: "developer",
+  content: [],
 };
 ```
 

@@ -1,17 +1,17 @@
 # DeploymentGetConfig2DeploymentsRequestType
 
-The type of the content part.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { DeploymentGetConfig2DeploymentsRequestType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfig2DeploymentsRequestType = "text";
+let value: DeploymentGetConfig2DeploymentsRequestType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"ephemeral"
 ```

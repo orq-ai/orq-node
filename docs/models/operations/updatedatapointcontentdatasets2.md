@@ -1,23 +1,20 @@
 # UpdateDatapointContentDatasets2
 
-
-## Supported Types
-
-### `operations.UpdateDatapoint2TextContentPart`
+## Example Usage
 
 ```typescript
-const value: operations.UpdateDatapoint2TextContentPart = {
+import { UpdateDatapointContentDatasets2 } from "@orq-ai/node/models/operations";
+
+let value: UpdateDatapointContentDatasets2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdateDatapoint2RefusalContentPart`
+## Fields
 
-```typescript
-const value: operations.UpdateDatapoint2RefusalContentPart = {
-  type: "refusal",
-  refusal: "<value>",
-};
-```
-
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                         | [operations.UpdateDatapointContentDatasetsRequestType](../../models/operations/updatedatapointcontentdatasetsrequesttype.md)   | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `text`                                                                                                                         | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `cacheControl`                                                                                                                 | [operations.UpdateDatapointContentDatasetsCacheControl](../../models/operations/updatedatapointcontentdatasetscachecontrol.md) | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |

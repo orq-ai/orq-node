@@ -5,11 +5,13 @@
 ```typescript
 import { Twenty } from "@orq-ai/node/models/operations";
 
-let value: Twenty = "jina/jina-embeddings-v2-base-code";
+let value: Twenty = {
+  type: "bleu_score",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"jina/jina-embeddings-v2-base-code"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"bleu_score"*     | :heavy_check_mark: | N/A                |

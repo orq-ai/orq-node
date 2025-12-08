@@ -15,7 +15,7 @@ let value: GetEvalsFunctionParams2 = {
 
 ## Fields
 
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `type`                                                                                         | [operations.GetEvalsFunctionParamsType](../../models/operations/getevalsfunctionparamstype.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `keywords`                                                                                     | *string*[]                                                                                     | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains_none"*  | :heavy_check_mark: | N/A                |
+| `keywords`         | *string*[]         | :heavy_check_mark: | N/A                |

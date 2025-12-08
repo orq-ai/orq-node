@@ -1,0 +1,21 @@
+# DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2
+
+## Example Usage
+
+```typescript
+import { DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2 } from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2 = {
+    type: "text",
+    text: "<value>",
+  };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                             | [operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoicesType](../../models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestrequestbodychoicestype.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+| `text`                                                                                                                                                                                             | *string*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+| `cacheControl`                                                                                                                                                                                     | [operations.DeploymentCreateMetricContentDeploymentsMetricsRequestCacheControl](../../models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestcachecontrol.md)                     | :heavy_minus_sign:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |

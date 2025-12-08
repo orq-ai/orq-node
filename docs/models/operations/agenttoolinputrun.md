@@ -1,6 +1,6 @@
 # AgentToolInputRun
 
-Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation.
+Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
 
 
 ## Supported Types
@@ -132,6 +132,22 @@ const value: operations.FunctionToolRun = {
   key: "<key>",
   function: {
     name: "<value>",
+  },
+};
+```
+
+### `operations.MCPToolRun`
+
+```typescript
+const value: operations.MCPToolRun = {
+  type: "mcp",
+  key: "<key>",
+  description:
+    "whenever immaculate atop regal clamor excepting brightly coal gulp",
+  mcp: {
+    serverUrl: "https://sleepy-version.biz/",
+    tools: [],
+    connectionType: "http",
   },
 };
 ```
