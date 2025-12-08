@@ -1332,6 +1332,40 @@ components:
           description: "Error message"
       required:
         - "message"
+    "ThinkingConfigDisabledSchema":
+      type: "object"
+      properties:
+        "type":
+          type: "string"
+          enum:
+            - "disabled"
+          description: "Disables the thinking mode capability"
+      required:
+        - "type"
+      title: "Thinking config disabled"
+      description: "Disables the thinking mode capability"
+    "ThinkingConfigEnabledSchema":
+      type: "object"
+      properties:
+        "type":
+          type: "string"
+          enum:
+            - "enabled"
+          description: "Enables or disables the thinking mode capability"
+        "budget_tokens":
+          type: "number"
+          description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
+        "thinking_level":
+          type: "string"
+          enum:
+            - "low"
+            - "high"
+          description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
+      required:
+        - "type"
+        - "budget_tokens"
+      title: "Thinking config enabled"
+      description: "Enables the thinking mode capability"
     "TextPart":
       type: "object"
       properties:
@@ -2973,7 +3007,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -2981,7 +3015,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -3116,7 +3150,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-08T15:06:07.937Z"
+                          default: "2025-12-08T21:56:22.758Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -3124,7 +3158,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:07.938Z"
+                              default: "2025-12-08T21:56:22.759Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -3292,10 +3326,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3366,10 +3400,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3437,10 +3471,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3523,10 +3557,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3594,10 +3628,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -3965,10 +3999,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4052,10 +4086,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-08T15:06:10.076Z"
+                              default: "2025-12-08T21:56:27.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4472,10 +4506,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4546,10 +4580,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4617,10 +4651,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4703,10 +4737,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4774,10 +4808,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5145,10 +5179,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5232,10 +5266,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5639,10 +5673,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5713,10 +5747,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5784,10 +5818,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5870,10 +5904,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5941,10 +5975,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6312,10 +6346,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6399,10 +6433,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-08T15:06:10.076Z"
+                        default: "2025-12-08T21:56:27.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6578,7 +6612,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -6586,7 +6620,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -6722,7 +6756,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -6730,7 +6764,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -11548,26 +11582,14 @@ paths:
                                   description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                               description: "Options for streaming response. Only set this when you set stream: true."
                             "thinking":
-                              type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "enabled"
-                                    - "disabled"
-                                  description: "Enables or disables the thinking mode capability"
-                                "budget_tokens":
-                                  type: "number"
-                                  description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                "thinking_level":
-                                  type: "string"
-                                  enum:
-                                    - "low"
-                                    - "high"
-                                  description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                              required:
-                                - "type"
-                                - "budget_tokens"
+                              oneOf:
+                                - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                              discriminator:
+                                propertyName: "type"
+                                mapping:
+                                  "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                  "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                             "temperature":
                               type:
                                 - "number"
@@ -11808,26 +11830,14 @@ paths:
                                     description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                 description: "Options for streaming response. Only set this when you set stream: true."
                               "thinking":
-                                type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "enabled"
-                                      - "disabled"
-                                    description: "Enables or disables the thinking mode capability"
-                                  "budget_tokens":
-                                    type: "number"
-                                    description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                  "thinking_level":
-                                    type: "string"
-                                    enum:
-                                      - "low"
-                                      - "high"
-                                    description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                required:
-                                  - "type"
-                                  - "budget_tokens"
+                                oneOf:
+                                  - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                  - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                discriminator:
+                                  propertyName: "type"
+                                  mapping:
+                                    "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                    "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                               "temperature":
                                 type:
                                   - "number"
@@ -12587,26 +12597,14 @@ paths:
                                 description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                             description: "Options for streaming response. Only set this when you set stream: true."
                           "thinking":
-                            type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "enabled"
-                                  - "disabled"
-                                description: "Enables or disables the thinking mode capability"
-                              "budget_tokens":
-                                type: "number"
-                                description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                              "thinking_level":
-                                type: "string"
-                                enum:
-                                  - "low"
-                                  - "high"
-                                description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                            required:
-                              - "type"
-                              - "budget_tokens"
+                            oneOf:
+                              - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                              - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                            discriminator:
+                              propertyName: "type"
+                              mapping:
+                                "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                           "temperature":
                             type:
                               - "number"
@@ -12844,26 +12842,14 @@ paths:
                                           description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                       description: "Options for streaming response. Only set this when you set stream: true."
                                     "thinking":
-                                      type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "enabled"
-                                            - "disabled"
-                                          description: "Enables or disables the thinking mode capability"
-                                        "budget_tokens":
-                                          type: "number"
-                                          description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                        "thinking_level":
-                                          type: "string"
-                                          enum:
-                                            - "low"
-                                            - "high"
-                                          description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                      required:
-                                        - "type"
-                                        - "budget_tokens"
+                                      oneOf:
+                                        - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                        - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                      discriminator:
+                                        propertyName: "type"
+                                        mapping:
+                                          "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                          "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                                     "temperature":
                                       type:
                                         - "number"
@@ -13664,26 +13650,14 @@ paths:
                                 description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                             description: "Options for streaming response. Only set this when you set stream: true."
                           "thinking":
-                            type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "enabled"
-                                  - "disabled"
-                                description: "Enables or disables the thinking mode capability"
-                              "budget_tokens":
-                                type: "number"
-                                description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                              "thinking_level":
-                                type: "string"
-                                enum:
-                                  - "low"
-                                  - "high"
-                                description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                            required:
-                              - "type"
-                              - "budget_tokens"
+                            oneOf:
+                              - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                              - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                            discriminator:
+                              propertyName: "type"
+                              mapping:
+                                "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                           "temperature":
                             type:
                               - "number"
@@ -13921,26 +13895,14 @@ paths:
                                           description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                       description: "Options for streaming response. Only set this when you set stream: true."
                                     "thinking":
-                                      type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "enabled"
-                                            - "disabled"
-                                          description: "Enables or disables the thinking mode capability"
-                                        "budget_tokens":
-                                          type: "number"
-                                          description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                        "thinking_level":
-                                          type: "string"
-                                          enum:
-                                            - "low"
-                                            - "high"
-                                          description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                      required:
-                                        - "type"
-                                        - "budget_tokens"
+                                      oneOf:
+                                        - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                        - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                      discriminator:
+                                        propertyName: "type"
+                                        mapping:
+                                          "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                          "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                                     "temperature":
                                       type:
                                         - "number"
@@ -14281,26 +14243,14 @@ paths:
                                   description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                               description: "Options for streaming response. Only set this when you set stream: true."
                             "thinking":
-                              type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "enabled"
-                                    - "disabled"
-                                  description: "Enables or disables the thinking mode capability"
-                                "budget_tokens":
-                                  type: "number"
-                                  description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                "thinking_level":
-                                  type: "string"
-                                  enum:
-                                    - "low"
-                                    - "high"
-                                  description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                              required:
-                                - "type"
-                                - "budget_tokens"
+                              oneOf:
+                                - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                              discriminator:
+                                propertyName: "type"
+                                mapping:
+                                  "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                  "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                             "temperature":
                               type:
                                 - "number"
@@ -14541,26 +14491,14 @@ paths:
                                     description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                 description: "Options for streaming response. Only set this when you set stream: true."
                               "thinking":
-                                type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "enabled"
-                                      - "disabled"
-                                    description: "Enables or disables the thinking mode capability"
-                                  "budget_tokens":
-                                    type: "number"
-                                    description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                  "thinking_level":
-                                    type: "string"
-                                    enum:
-                                      - "low"
-                                      - "high"
-                                    description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                required:
-                                  - "type"
-                                  - "budget_tokens"
+                                oneOf:
+                                  - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                  - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                discriminator:
+                                  propertyName: "type"
+                                  mapping:
+                                    "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                    "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                               "temperature":
                                 type:
                                   - "number"
@@ -15316,26 +15254,14 @@ paths:
                                 description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                             description: "Options for streaming response. Only set this when you set stream: true."
                           "thinking":
-                            type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "enabled"
-                                  - "disabled"
-                                description: "Enables or disables the thinking mode capability"
-                              "budget_tokens":
-                                type: "number"
-                                description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                              "thinking_level":
-                                type: "string"
-                                enum:
-                                  - "low"
-                                  - "high"
-                                description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                            required:
-                              - "type"
-                              - "budget_tokens"
+                            oneOf:
+                              - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                              - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                            discriminator:
+                              propertyName: "type"
+                              mapping:
+                                "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                           "temperature":
                             type:
                               - "number"
@@ -15573,26 +15499,14 @@ paths:
                                           description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                       description: "Options for streaming response. Only set this when you set stream: true."
                                     "thinking":
-                                      type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "enabled"
-                                            - "disabled"
-                                          description: "Enables or disables the thinking mode capability"
-                                        "budget_tokens":
-                                          type: "number"
-                                          description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                        "thinking_level":
-                                          type: "string"
-                                          enum:
-                                            - "low"
-                                            - "high"
-                                          description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                      required:
-                                        - "type"
-                                        - "budget_tokens"
+                                      oneOf:
+                                        - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                        - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                      discriminator:
+                                        propertyName: "type"
+                                        mapping:
+                                          "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                          "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                                     "temperature":
                                       type:
                                         - "number"
@@ -16352,26 +16266,14 @@ paths:
                                       description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                   description: "Options for streaming response. Only set this when you set stream: true."
                                 "thinking":
-                                  type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
-                                        - "enabled"
-                                        - "disabled"
-                                      description: "Enables or disables the thinking mode capability"
-                                    "budget_tokens":
-                                      type: "number"
-                                      description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                    "thinking_level":
-                                      type: "string"
-                                      enum:
-                                        - "low"
-                                        - "high"
-                                      description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                  required:
-                                    - "type"
-                                    - "budget_tokens"
+                                  oneOf:
+                                    - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                    - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                  discriminator:
+                                    propertyName: "type"
+                                    mapping:
+                                      "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                      "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                                 "temperature":
                                   type:
                                     - "number"
@@ -16609,26 +16511,14 @@ paths:
                                                 description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                             description: "Options for streaming response. Only set this when you set stream: true."
                                           "thinking":
-                                            type: "object"
-                                            properties:
-                                              "type":
-                                                type: "string"
-                                                enum:
-                                                  - "enabled"
-                                                  - "disabled"
-                                                description: "Enables or disables the thinking mode capability"
-                                              "budget_tokens":
-                                                type: "number"
-                                                description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                              "thinking_level":
-                                                type: "string"
-                                                enum:
-                                                  - "low"
-                                                  - "high"
-                                                description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                            required:
-                                              - "type"
-                                              - "budget_tokens"
+                                            oneOf:
+                                              - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                              - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                            discriminator:
+                                              propertyName: "type"
+                                              mapping:
+                                                "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                                "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                                           "temperature":
                                             type:
                                               - "number"
@@ -16947,26 +16837,14 @@ paths:
                                   description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                               description: "Options for streaming response. Only set this when you set stream: true."
                             "thinking":
-                              type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "enabled"
-                                    - "disabled"
-                                  description: "Enables or disables the thinking mode capability"
-                                "budget_tokens":
-                                  type: "number"
-                                  description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                "thinking_level":
-                                  type: "string"
-                                  enum:
-                                    - "low"
-                                    - "high"
-                                  description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                              required:
-                                - "type"
-                                - "budget_tokens"
+                              oneOf:
+                                - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                              discriminator:
+                                propertyName: "type"
+                                mapping:
+                                  "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                  "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                             "temperature":
                               type:
                                 - "number"
@@ -17207,26 +17085,14 @@ paths:
                                     description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                 description: "Options for streaming response. Only set this when you set stream: true."
                               "thinking":
-                                type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "enabled"
-                                      - "disabled"
-                                    description: "Enables or disables the thinking mode capability"
-                                  "budget_tokens":
-                                    type: "number"
-                                    description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                  "thinking_level":
-                                    type: "string"
-                                    enum:
-                                      - "low"
-                                      - "high"
-                                    description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                required:
-                                  - "type"
-                                  - "budget_tokens"
+                                oneOf:
+                                  - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                  - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                discriminator:
+                                  propertyName: "type"
+                                  mapping:
+                                    "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                    "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                               "temperature":
                                 type:
                                   - "number"
@@ -17882,7 +17748,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KBZ7ZJQ7B1H2ZCTJQVHZ0QSB"
+                                          default: "01KBZZEV6DF7APJRTFM1RTJ3FJ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18295,26 +18161,14 @@ paths:
                                   description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                               description: "Options for streaming response. Only set this when you set stream: true."
                             "thinking":
-                              type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "enabled"
-                                    - "disabled"
-                                  description: "Enables or disables the thinking mode capability"
-                                "budget_tokens":
-                                  type: "number"
-                                  description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                "thinking_level":
-                                  type: "string"
-                                  enum:
-                                    - "low"
-                                    - "high"
-                                  description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                              required:
-                                - "type"
-                                - "budget_tokens"
+                              oneOf:
+                                - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                              discriminator:
+                                propertyName: "type"
+                                mapping:
+                                  "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                  "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                             "temperature":
                               type:
                                 - "number"
@@ -18555,26 +18409,14 @@ paths:
                                     description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                                 description: "Options for streaming response. Only set this when you set stream: true."
                               "thinking":
-                                type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "enabled"
-                                      - "disabled"
-                                    description: "Enables or disables the thinking mode capability"
-                                  "budget_tokens":
-                                    type: "number"
-                                    description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                                  "thinking_level":
-                                    type: "string"
-                                    enum:
-                                      - "low"
-                                      - "high"
-                                    description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                                required:
-                                  - "type"
-                                  - "budget_tokens"
+                                oneOf:
+                                  - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                                  - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                                discriminator:
+                                  propertyName: "type"
+                                  mapping:
+                                    "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                                    "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                               "temperature":
                                 type:
                                   - "number"
@@ -19230,7 +19072,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KBZ7ZJS0CEC52ZNHB9C7FS4Z"
+                                          default: "01KBZZEV8H650RKD106NSZKRRZ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19705,7 +19547,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-12-08T15:06:11.176Z"
+                    default: "2025-12-08T21:56:28.357Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -19794,7 +19636,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-12-08T15:06:11.176Z"
+                          default: "2025-12-08T21:56:28.357Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -19862,7 +19704,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-12-08T15:06:11.176Z"
+                    default: "2025-12-08T21:56:28.357Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -24416,7 +24258,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KBZ7ZK0TSFMYPDVPYMRV968C"
+                              default: "tool_01KBZZEVFJD3KE1CHJNWE19G6E"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24515,7 +24357,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KBZ7ZK0WD3V59R7HWNK3S9J2"
+                              default: "tool_01KBZZEVFMP0BGJHY3ZFTE62JS"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24616,7 +24458,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KBZ7ZK0YQ5TM5ZA3NSHQGDXQ"
+                              default: "tool_01KBZZEVFP1PWAF2MBQKPDT2BJ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24750,7 +24592,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KBZ7ZK12P4GZ520TY0405H4H"
+                              default: "tool_01KBZZEVFSPR2DM3CRMBBPZPCA"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24824,7 +24666,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KBZ7ZK1367X98YG50FG32SZY"
+                                        default: "01KBZZEVFVAPRT01K6XYQPPSQ2"
                                       "name":
                                         type: "string"
                                       "description":
@@ -24875,7 +24717,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KBZ7ZK149KNK33KB5A38493R"
+                              default: "tool_01KBZZEVFW2V5S0JNEEFCKB6DJ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25418,7 +25260,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK1G59B6PM7AN0QZHWMQ"
+                        default: "tool_01KBZZEVG9EKJV14TAR1GM8C25"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25517,7 +25359,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK1JCWG9KM5X2HXDTNR0"
+                        default: "tool_01KBZZEVGBZ2NK61NWYY3Y9BZG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25618,7 +25460,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK1P0C16QZT7F1S4ARXJ"
+                        default: "tool_01KBZZEVGD88KN7HH1J8NJ71JA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25752,7 +25594,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK23A7HMD64DZY13WFFC"
+                        default: "tool_01KBZZEVGS019Z9NAHW6XWRKJ7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25826,7 +25668,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KBZ7ZK25F6K07ZFNYGC18RJW"
+                                  default: "01KBZZEVGTCXXKJRDD5M45178K"
                                 "name":
                                   type: "string"
                                 "description":
@@ -25877,7 +25719,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK263H63X8Z88KMKE7EZ"
+                        default: "tool_01KBZZEVGW1XRHV2XTE6ZKS1B5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26317,7 +26159,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KBZ7ZK2ZSMZY4G4G64F3SS2D"
+                                default: "01KBZZEVHR6Y38CX771MZKS1BJ"
                               "name":
                                 type: "string"
                               "description":
@@ -26435,7 +26277,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK2ETDWCA5WQMNWJ6M94"
+                        default: "tool_01KBZZEVH68GWRSS9NRDYCRP90"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26534,7 +26376,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK2G5T9B49TWDBGFJXFQ"
+                        default: "tool_01KBZZEVH8F03N9QBMGA141KPQ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26635,7 +26477,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK2JY26THYX0CBF215DJ"
+                        default: "tool_01KBZZEVHAWCAC4FJR9BTZ0TNP"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26769,7 +26611,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK2NBQTTWXP1J21CZMW4"
+                        default: "tool_01KBZZEVHDW0SVHFT0ZE493T01"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26843,7 +26685,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KBZ7ZK2Q0314306ME8CQS5Q2"
+                                  default: "01KBZZEVHFXXC5QA80G56756WN"
                                 "name":
                                   type: "string"
                                 "description":
@@ -26894,7 +26736,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK2R46R8SJRTT615RR59"
+                        default: "tool_01KBZZEVHG7K3FDPFT8DRZDV9K"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27048,7 +26890,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK3KNTK4A8ZTWMVJM6Z4"
+                        default: "tool_01KBZZEVJ8PD2M1T8HWVQ66EDY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27147,7 +26989,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK3MS6HR6ESA4X9Z9A4J"
+                        default: "tool_01KBZZEVJAWGHP0GWM67W0XTP7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27248,7 +27090,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK3NBEFJK5J8Y50FWEY7"
+                        default: "tool_01KBZZEVJCN1VYQAKTN95DJ0WK"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27382,7 +27224,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK3YQE22XWPFFENED6WT"
+                        default: "tool_01KBZZEVJJRC3AK07DHXQGTW3S"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27456,7 +27298,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KBZ7ZK3Z7W772VG0X3C1PW3E"
+                                  default: "01KBZZEVJM7E383Z0DX1Z479S4"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27507,7 +27349,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KBZ7ZK40B2D8TW90G29M0J5Q"
+                        default: "tool_01KBZZEVJWZ9GZPVJSP1EPN6CJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27766,7 +27608,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-08T15:06:08.338Z"
+                          default: "2025-12-08T21:56:23.893Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -27774,7 +27616,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:08.338Z"
+                              default: "2025-12-08T21:56:23.893Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -27968,7 +27810,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:08.338Z"
+                    default: "2025-12-08T21:56:23.893Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -27976,7 +27818,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:08.338Z"
+                        default: "2025-12-08T21:56:23.893Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28110,7 +27952,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:08.338Z"
+                    default: "2025-12-08T21:56:23.893Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28118,7 +27960,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:08.338Z"
+                        default: "2025-12-08T21:56:23.893Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28278,7 +28120,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:08.338Z"
+                    default: "2025-12-08T21:56:23.893Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28286,7 +28128,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:08.338Z"
+                        default: "2025-12-08T21:56:23.893Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30189,7 +30031,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KBZ7ZK720JEPKTC6ADXFEY5B"
+                          default: "01KBZZEVNP84ZBR00JKWE4E8B1"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -30355,7 +30197,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KBZ7ZK74SZBTA9ZYP94YJA80"
+                    default: "01KBZZEVNRB19G86J3D7VJ31FK"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -30451,7 +30293,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KBZ7ZK73DZFJXR0EFHMHNR3Z"
+                    default: "01KBZZEVNQZE0K7NQ3BKDAKRNC"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -30583,7 +30425,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KBZ7ZK76DPC8VKE87Y8SXSYJ"
+                    default: "01KBZZEVNVW0SBB5HD9K5QQ6KX"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33037,7 +32879,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-08T15:06:07.937Z"
+                          default: "2025-12-08T21:56:22.758Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -33045,7 +32887,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:07.938Z"
+                              default: "2025-12-08T21:56:22.759Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -33181,7 +33023,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33189,7 +33031,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33312,7 +33154,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33320,7 +33162,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33473,7 +33315,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33481,7 +33323,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33978,7 +33820,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-08T15:06:19.806Z"
+                                    default: "2025-12-08T21:56:37.255Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34018,7 +33860,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-08T15:06:19.807Z"
+                                    default: "2025-12-08T21:56:37.255Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34058,7 +33900,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-08T15:06:19.807Z"
+                                    default: "2025-12-08T21:56:37.256Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34094,7 +33936,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-08T15:06:07.937Z"
+                          default: "2025-12-08T21:56:22.758Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34102,7 +33944,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:07.938Z"
+                              default: "2025-12-08T21:56:22.759Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34916,7 +34758,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-08T15:06:19.839Z"
+                                default: "2025-12-08T21:56:37.280Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -34956,7 +34798,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-08T15:06:19.839Z"
+                                default: "2025-12-08T21:56:37.280Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -34996,7 +34838,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-08T15:06:19.840Z"
+                                default: "2025-12-08T21:56:37.280Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35032,7 +34874,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-12-08T15:06:07.937Z"
+                      default: "2025-12-08T21:56:22.758Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -35040,7 +34882,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-12-08T15:06:07.938Z"
+                          default: "2025-12-08T21:56:22.759Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -35481,7 +35323,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.818Z"
+                              default: "2025-12-08T21:56:37.269Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35521,7 +35363,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.819Z"
+                              default: "2025-12-08T21:56:37.270Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35561,7 +35403,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.820Z"
+                              default: "2025-12-08T21:56:37.270Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35597,7 +35439,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35605,7 +35447,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36417,7 +36259,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.872Z"
+                              default: "2025-12-08T21:56:37.316Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36457,7 +36299,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.880Z"
+                              default: "2025-12-08T21:56:37.316Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36497,7 +36339,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-08T15:06:19.880Z"
+                              default: "2025-12-08T21:56:37.316Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36533,7 +36375,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-08T15:06:07.937Z"
+                    default: "2025-12-08T21:56:22.758Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36541,7 +36383,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-08T15:06:07.938Z"
+                        default: "2025-12-08T21:56:22.759Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37144,26 +36986,14 @@ paths:
                           description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
                       description: "Options for streaming response. Only set this when you set stream: true."
                     "thinking":
-                      type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
-                            - "enabled"
-                            - "disabled"
-                          description: "Enables or disables the thinking mode capability"
-                        "budget_tokens":
-                          type: "number"
-                          description: "Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`."
-                        "thinking_level":
-                          type: "string"
-                          enum:
-                            - "low"
-                            - "high"
-                          description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-                      required:
-                        - "type"
-                        - "budget_tokens"
+                      oneOf:
+                        - {"$ref": "#/components/schemas/ThinkingConfigDisabledSchema"}
+                        - {"$ref": "#/components/schemas/ThinkingConfigEnabledSchema"}
+                      discriminator:
+                        propertyName: "type"
+                        mapping:
+                          "disabled": "#/components/schemas/ThinkingConfigDisabledSchema"
+                          "enabled": "#/components/schemas/ThinkingConfigEnabledSchema"
                     "temperature":
                       type:
                         - "number"
