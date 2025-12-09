@@ -11,10 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.CreateDatasetItemContentDatasetsRequestRequestBody2[]`
+### `operations.CreateDatasetItemContentDatasets2[]`
 
 ```typescript
-const value: operations.CreateDatasetItemContentDatasetsRequestRequestBody2[] =
-  [];
+const value: operations.CreateDatasetItemContentDatasets2[] = [];
 ```
 

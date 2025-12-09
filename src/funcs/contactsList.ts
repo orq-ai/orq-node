@@ -93,6 +93,7 @@ async function $do(
     "filter_by": payload?.filter_by,
     "include_metrics": payload?.include_metrics,
     "limit": payload?.limit,
+    "search": payload?.search,
     "starting_after": payload?.starting_after,
   });
 

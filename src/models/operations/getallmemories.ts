@@ -26,6 +26,10 @@ export type GetAllMemoriesRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Search query to filter memories by entity_id
+   */
+  q?: string | undefined;
 };
 
 export const GetAllMemoriesObject = {
@@ -46,6 +50,10 @@ export type GetAllMemoriesData = {
    */
   metadata: { [k: string]: string };
   workspaceId: string;
+  /**
+   * The number of memories in the entity
+   */
+  documentsCount: number;
 };
 
 /**
@@ -67,6 +75,7 @@ export const GetAllMemoriesRequest$inboundSchema: z.ZodType<
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
+  q: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
@@ -80,6 +89,7 @@ export type GetAllMemoriesRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  q?: string | undefined;
 };
 
 /** @internal */
@@ -92,6 +102,7 @@ export const GetAllMemoriesRequest$outboundSchema: z.ZodType<
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  q: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
@@ -141,6 +152,7 @@ export const GetAllMemoriesData$inboundSchema: z.ZodType<
   store_id: z.string(),
   metadata: z.record(z.string()),
   workspace_id: z.string(),
+  documents_count: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -149,6 +161,7 @@ export const GetAllMemoriesData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "store_id": "storeId",
     "workspace_id": "workspaceId",
+    "documents_count": "documentsCount",
   });
 });
 /** @internal */
@@ -162,6 +175,7 @@ export type GetAllMemoriesData$Outbound = {
   store_id: string;
   metadata: { [k: string]: string };
   workspace_id: string;
+  documents_count: number;
 };
 
 /** @internal */
@@ -179,6 +193,7 @@ export const GetAllMemoriesData$outboundSchema: z.ZodType<
   storeId: z.string(),
   metadata: z.record(z.string()),
   workspaceId: z.string(),
+  documentsCount: z.number(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -187,6 +202,7 @@ export const GetAllMemoriesData$outboundSchema: z.ZodType<
     updatedById: "updated_by_id",
     storeId: "store_id",
     workspaceId: "workspace_id",
+    documentsCount: "documents_count",
   });
 });
 

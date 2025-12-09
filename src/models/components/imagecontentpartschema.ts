@@ -36,14 +36,14 @@ export type ImageUrl = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const ImageContentPartSchemaType = {
+export const ImageContentPartSchemaCacheControlType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type ImageContentPartSchemaType = ClosedEnum<
-  typeof ImageContentPartSchemaType
+export type ImageContentPartSchemaCacheControlType = ClosedEnum<
+  typeof ImageContentPartSchemaCacheControlType
 >;
 
 /**
@@ -56,7 +56,7 @@ export type ImageContentPartSchemaType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const Ttl = {
+export const ImageContentPartSchemaTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -70,13 +70,15 @@ export const Ttl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type Ttl = ClosedEnum<typeof Ttl>;
+export type ImageContentPartSchemaTtl = ClosedEnum<
+  typeof ImageContentPartSchemaTtl
+>;
 
-export type CacheControl = {
+export type ImageContentPartSchemaCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: ImageContentPartSchemaType;
+  type: ImageContentPartSchemaCacheControlType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -87,7 +89,7 @@ export type CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: Ttl | undefined;
+  ttl?: ImageContentPartSchemaTtl | undefined;
 };
 
 /**
@@ -96,7 +98,7 @@ export type CacheControl = {
 export type ImageContentPartSchema = {
   type: "image_url";
   imageUrl: ImageUrl;
-  cacheControl?: CacheControl | undefined;
+  cacheControl?: ImageContentPartSchemaCacheControl | undefined;
 };
 
 /** @internal */
@@ -145,55 +147,66 @@ export function imageUrlFromJSON(
 }
 
 /** @internal */
-export const ImageContentPartSchemaType$inboundSchema: z.ZodNativeEnum<
-  typeof ImageContentPartSchemaType
-> = z.nativeEnum(ImageContentPartSchemaType);
+export const ImageContentPartSchemaCacheControlType$inboundSchema:
+  z.ZodNativeEnum<typeof ImageContentPartSchemaCacheControlType> = z.nativeEnum(
+    ImageContentPartSchemaCacheControlType,
+  );
 /** @internal */
-export const ImageContentPartSchemaType$outboundSchema: z.ZodNativeEnum<
-  typeof ImageContentPartSchemaType
-> = ImageContentPartSchemaType$inboundSchema;
+export const ImageContentPartSchemaCacheControlType$outboundSchema:
+  z.ZodNativeEnum<typeof ImageContentPartSchemaCacheControlType> =
+    ImageContentPartSchemaCacheControlType$inboundSchema;
 
 /** @internal */
-export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
+export const ImageContentPartSchemaTtl$inboundSchema: z.ZodNativeEnum<
+  typeof ImageContentPartSchemaTtl
+> = z.nativeEnum(ImageContentPartSchemaTtl);
 /** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
-  Ttl$inboundSchema;
+export const ImageContentPartSchemaTtl$outboundSchema: z.ZodNativeEnum<
+  typeof ImageContentPartSchemaTtl
+> = ImageContentPartSchemaTtl$inboundSchema;
 
 /** @internal */
-export const CacheControl$inboundSchema: z.ZodType<
-  CacheControl,
+export const ImageContentPartSchemaCacheControl$inboundSchema: z.ZodType<
+  ImageContentPartSchemaCacheControl,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ImageContentPartSchemaType$inboundSchema,
-  ttl: Ttl$inboundSchema.default("5m"),
+  type: ImageContentPartSchemaCacheControlType$inboundSchema,
+  ttl: ImageContentPartSchemaTtl$inboundSchema.default("5m"),
 });
 /** @internal */
-export type CacheControl$Outbound = {
+export type ImageContentPartSchemaCacheControl$Outbound = {
   type: string;
   ttl: string;
 };
 
 /** @internal */
-export const CacheControl$outboundSchema: z.ZodType<
-  CacheControl$Outbound,
+export const ImageContentPartSchemaCacheControl$outboundSchema: z.ZodType<
+  ImageContentPartSchemaCacheControl$Outbound,
   z.ZodTypeDef,
-  CacheControl
+  ImageContentPartSchemaCacheControl
 > = z.object({
-  type: ImageContentPartSchemaType$outboundSchema,
-  ttl: Ttl$outboundSchema.default("5m"),
+  type: ImageContentPartSchemaCacheControlType$outboundSchema,
+  ttl: ImageContentPartSchemaTtl$outboundSchema.default("5m"),
 });
 
-export function cacheControlToJSON(cacheControl: CacheControl): string {
-  return JSON.stringify(CacheControl$outboundSchema.parse(cacheControl));
+export function imageContentPartSchemaCacheControlToJSON(
+  imageContentPartSchemaCacheControl: ImageContentPartSchemaCacheControl,
+): string {
+  return JSON.stringify(
+    ImageContentPartSchemaCacheControl$outboundSchema.parse(
+      imageContentPartSchemaCacheControl,
+    ),
+  );
 }
-export function cacheControlFromJSON(
+export function imageContentPartSchemaCacheControlFromJSON(
   jsonString: string,
-): SafeParseResult<CacheControl, SDKValidationError> {
+): SafeParseResult<ImageContentPartSchemaCacheControl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CacheControl' from JSON`,
+    (x) =>
+      ImageContentPartSchemaCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageContentPartSchemaCacheControl' from JSON`,
   );
 }
 
@@ -205,7 +218,8 @@ export const ImageContentPartSchema$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("image_url"),
   image_url: z.lazy(() => ImageUrl$inboundSchema),
-  cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
+  cache_control: z.lazy(() => ImageContentPartSchemaCacheControl$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "image_url": "imageUrl",
@@ -216,7 +230,7 @@ export const ImageContentPartSchema$inboundSchema: z.ZodType<
 export type ImageContentPartSchema$Outbound = {
   type: "image_url";
   image_url: ImageUrl$Outbound;
-  cache_control?: CacheControl$Outbound | undefined;
+  cache_control?: ImageContentPartSchemaCacheControl$Outbound | undefined;
 };
 
 /** @internal */
@@ -227,7 +241,8 @@ export const ImageContentPartSchema$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("image_url"),
   imageUrl: z.lazy(() => ImageUrl$outboundSchema),
-  cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
+  cacheControl: z.lazy(() => ImageContentPartSchemaCacheControl$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     imageUrl: "image_url",

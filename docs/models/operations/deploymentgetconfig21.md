@@ -1,5 +1,7 @@
 # DeploymentGetConfig21
 
+Text content part of a prompt message
+
 ## Example Usage
 
 ```typescript
@@ -13,8 +15,7 @@ let value: DeploymentGetConfig21 = {
 
 ## Fields
 
-| Field                                                                                                                                                                              | Type                                                                                                                                                                               | Required                                                                                                                                                                           | Description                                                                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                             | [operations.DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type](../../models/operations/deploymentgetconfig2deploymentsrequestrequestbodyprefixmessages5type.md) | :heavy_check_mark:                                                                                                                                                                 | N/A                                                                                                                                                                                |
-| `text`                                                                                                                                                                             | *string*                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                 | N/A                                                                                                                                                                                |
-| `cacheControl`                                                                                                                                                                     | [operations.DeploymentGetConfig2DeploymentsRequestCacheControl](../../models/operations/deploymentgetconfig2deploymentsrequestcachecontrol.md)                                     | :heavy_minus_sign:                                                                                                                                                                 | N/A                                                                                                                                                                                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

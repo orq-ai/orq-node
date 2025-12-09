@@ -1,20 +1,46 @@
 # CreatePromptContentPrompts2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { CreatePromptContentPrompts2 } from "@orq-ai/node/models/operations";
-
-let value: CreatePromptContentPrompts2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                   | [operations.CreatePromptContentType](../../models/operations/createpromptcontenttype.md)                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `text`                                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `cacheControl`                                                                                           | [operations.CreatePromptContentCacheControl](../../models/operations/createpromptcontentcachecontrol.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.CreatePrompt24`
+
+```typescript
+const value: operations.CreatePrompt24 = {
+  type: "file",
+  file: {},
+};
+```
+

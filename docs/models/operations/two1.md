@@ -1,5 +1,7 @@
 # Two1
 
+Text content part of a prompt message
+
 ## Example Usage
 
 ```typescript
@@ -13,8 +15,7 @@ let value: Two1 = {
 
 ## Fields
 
-| Field                                                                                                                            | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
-| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                           | *"text"*                                                                                                                         | :heavy_check_mark:                                                                                                               | N/A                                                                                                                              |
-| `text`                                                                                                                           | *string*                                                                                                                         | :heavy_check_mark:                                                                                                               | N/A                                                                                                                              |
-| `cacheControl`                                                                                                                   | [operations.DeploymentGetConfig2DeploymentsCacheControl](../../models/operations/deploymentgetconfig2deploymentscachecontrol.md) | :heavy_minus_sign:                                                                                                               | N/A                                                                                                                              |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

@@ -11,14 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.UpdatePromptContentPromptsRequest2[]`
+### `operations.UpdatePromptContentPrompts2[]`
 
 ```typescript
-const value: operations.UpdatePromptContentPromptsRequest2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.UpdatePromptContentPrompts2[] = [];
 ```
 

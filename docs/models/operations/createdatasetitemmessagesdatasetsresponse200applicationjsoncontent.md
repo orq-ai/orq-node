@@ -11,18 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.CreateDatasetItemContentDatasetsResponse200ApplicationJson2[]`
+### `operations.CreateDatasetItemContentDatasetsResponse2[]`
 
 ```typescript
-const value:
-  operations.CreateDatasetItemContentDatasetsResponse200ApplicationJson2[] = [
-    {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "mp3",
-      },
-    },
-  ];
+const value: operations.CreateDatasetItemContentDatasetsResponse2[] = [];
 ```
 
