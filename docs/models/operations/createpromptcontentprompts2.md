@@ -1,46 +1,20 @@
 # CreatePromptContentPrompts2
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { CreatePromptContentPrompts2 } from "@orq-ai/node/models/operations";
+
+let value: CreatePromptContentPrompts2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.ImageContentPartSchema`
+## Fields
 
-```typescript
-const value: components.ImageContentPartSchema = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://fatal-overload.name/",
-  },
-};
-```
-
-### `components.AudioContentPartSchema`
-
-```typescript
-const value: components.AudioContentPartSchema = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
-};
-```
-
-### `operations.CreatePrompt24`
-
-```typescript
-const value: operations.CreatePrompt24 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                   | [operations.CreatePromptContentType](../../models/operations/createpromptcontenttype.md)                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `text`                                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `cacheControl`                                                                                           | [operations.CreatePromptContentCacheControl](../../models/operations/createpromptcontentcachecontrol.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

@@ -7,7 +7,6 @@ import { Agents } from "./agents.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
-import { Conversations } from "./conversations.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
@@ -44,11 +43,6 @@ export class Orq extends ClientSDK {
   private _agents?: Agents;
   get agents(): Agents {
     return (this._agents ??= new Agents(this._options));
-  }
-
-  private _conversations?: Conversations;
-  get conversations(): Conversations {
-    return (this._conversations ??= new Conversations(this._options));
   }
 
   private _files?: Files;

@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesDeploymentsRequestContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the tool message.
 
 
 ## Supported Types
@@ -11,15 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContent2[]`
+### `operations.DeploymentGetConfigContentDeploymentsRequest2[]`
 
 ```typescript
-const value: operations.DeploymentGetConfigContent2[] = [
-  {
-    type: "reasoning",
-    reasoning: "<value>",
-    signature: "<value>",
-  },
-];
+const value: operations.DeploymentGetConfigContentDeploymentsRequest2[] = [];
 ```
 

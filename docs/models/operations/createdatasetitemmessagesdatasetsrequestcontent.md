@@ -11,9 +11,14 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.CreateDatasetItemContent2[]`
+### `operations.CreateDatasetItemContentDatasetsRequest2[]`
 
 ```typescript
-const value: operations.CreateDatasetItemContent2[] = [];
+const value: operations.CreateDatasetItemContentDatasetsRequest2[] = [
+  {
+    type: "file",
+    file: {},
+  },
+];
 ```
 

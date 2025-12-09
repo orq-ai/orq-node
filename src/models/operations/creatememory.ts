@@ -10,13 +10,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateMemoryRequestBody = {
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID). Must be a valid UUID or ULID.
+   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID)
    */
   entityId: string;
   /**
    * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata: { [k: string]: string };
 };
 
 export type CreateMemoryRequest = {
@@ -43,10 +43,6 @@ export type CreateMemoryResponseBody = {
    */
   metadata: { [k: string]: string };
   workspaceId: string;
-  /**
-   * The number of memories in the entity
-   */
-  documentsCount: number;
 };
 
 /** @internal */
@@ -56,7 +52,7 @@ export const CreateMemoryRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   entity_id: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "entity_id": "entityId",
@@ -65,7 +61,7 @@ export const CreateMemoryRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateMemoryRequestBody$Outbound = {
   entity_id: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata: { [k: string]: string };
 };
 
 /** @internal */
@@ -75,7 +71,7 @@ export const CreateMemoryRequestBody$outboundSchema: z.ZodType<
   CreateMemoryRequestBody
 > = z.object({
   entityId: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string()),
 }).transform((v) => {
   return remap$(v, {
     entityId: "entity_id",
@@ -166,7 +162,6 @@ export const CreateMemoryResponseBody$inboundSchema: z.ZodType<
   store_id: z.string(),
   metadata: z.record(z.string()),
   workspace_id: z.string(),
-  documents_count: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -175,7 +170,6 @@ export const CreateMemoryResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "store_id": "storeId",
     "workspace_id": "workspaceId",
-    "documents_count": "documentsCount",
   });
 });
 /** @internal */
@@ -189,7 +183,6 @@ export type CreateMemoryResponseBody$Outbound = {
   store_id: string;
   metadata: { [k: string]: string };
   workspace_id: string;
-  documents_count: number;
 };
 
 /** @internal */
@@ -207,7 +200,6 @@ export const CreateMemoryResponseBody$outboundSchema: z.ZodType<
   storeId: z.string(),
   metadata: z.record(z.string()),
   workspaceId: z.string(),
-  documentsCount: z.number(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -216,7 +208,6 @@ export const CreateMemoryResponseBody$outboundSchema: z.ZodType<
     updatedById: "updated_by_id",
     storeId: "store_id",
     workspaceId: "workspace_id",
-    documentsCount: "documents_count",
   });
 });
 

@@ -1,14 +1,20 @@
 # DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
+## Fields
+
+| Field                                                                                                                                                                            | Type                                                                                                                                                                             | Required                                                                                                                                                                         | Description                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                           | [operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType](../../models/operations/deploymentgetconfigcontentdeploymentsrequestrequestbodymessagestype.md) | :heavy_check_mark:                                                                                                                                                               | N/A                                                                                                                                                                              |
+| `text`                                                                                                                                                                           | *string*                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                               | N/A                                                                                                                                                                              |
+| `cacheControl`                                                                                                                                                                   | [operations.DeploymentGetConfigContentDeploymentsCacheControl](../../models/operations/deploymentgetconfigcontentdeploymentscachecontrol.md)                                     | :heavy_minus_sign:                                                                                                                                                               | N/A                                                                                                                                                                              |

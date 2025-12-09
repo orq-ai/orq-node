@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAgentsRequest = {
@@ -295,46 +296,9 @@ export type ListAgentsStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const ListAgentsType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const ListAgentsThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type ListAgentsThinkingLevel = ClosedEnum<
-  typeof ListAgentsThinkingLevel
->;
-
-export type ListAgentsThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: ListAgentsType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?: ListAgentsThinkingLevel | undefined;
-};
+export type ListAgentsThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -452,7 +416,10 @@ export type ListAgentsParameters = {
    * Options for streaming response. Only set this when you set stream: true.
    */
   streamOptions?: ListAgentsStreamOptions | null | undefined;
-  thinking?: ListAgentsThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -612,48 +579,9 @@ export type ListAgentsFallbackModelConfigurationStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const ListAgentsFallbackModelConfigurationType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type ListAgentsFallbackModelConfigurationType = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationType
->;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const ListAgentsFallbackModelConfigurationThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type ListAgentsFallbackModelConfigurationThinkingLevel = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationThinkingLevel
->;
-
-export type ListAgentsFallbackModelConfigurationThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: ListAgentsFallbackModelConfigurationType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?: ListAgentsFallbackModelConfigurationThinkingLevel | undefined;
-};
+export type ListAgentsFallbackModelConfigurationThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -778,7 +706,10 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | ListAgentsFallbackModelConfigurationStreamOptions
     | null
     | undefined;
-  thinking?: ListAgentsFallbackModelConfigurationThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -882,9 +813,6 @@ export type ListAgentsKnowledgeBases = {
 
 export type ListAgentsData = {
   id: string;
-  /**
-   * Unique identifier for the agent within the workspace
-   */
   key: string;
   displayName: string;
   createdById?: string | null | undefined;
@@ -1718,60 +1646,28 @@ export function listAgentsStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsType
-> = z.nativeEnum(ListAgentsType);
-/** @internal */
-export const ListAgentsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsType
-> = ListAgentsType$inboundSchema;
-
-/** @internal */
-export const ListAgentsThinkingLevel$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsThinkingLevel
-> = z.nativeEnum(ListAgentsThinkingLevel);
-/** @internal */
-export const ListAgentsThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsThinkingLevel
-> = ListAgentsThinkingLevel$inboundSchema;
-
-/** @internal */
 export const ListAgentsThinking$inboundSchema: z.ZodType<
   ListAgentsThinking,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ListAgentsType$inboundSchema,
-  budget_tokens: z.number(),
-  thinking_level: ListAgentsThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-    "thinking_level": "thinkingLevel",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
 /** @internal */
-export type ListAgentsThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type ListAgentsThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const ListAgentsThinking$outboundSchema: z.ZodType<
   ListAgentsThinking$Outbound,
   z.ZodTypeDef,
   ListAgentsThinking
-> = z.object({
-  type: ListAgentsType$outboundSchema,
-  budgetTokens: z.number(),
-  thinkingLevel: ListAgentsThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
 
 export function listAgentsThinkingToJSON(
   listAgentsThinking: ListAgentsThinking,
@@ -1967,7 +1863,10 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   stream_options: z.nullable(
     z.lazy(() => ListAgentsStreamOptions$inboundSchema),
   ).optional(),
-  thinking: z.lazy(() => ListAgentsThinking$inboundSchema).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
   top_k: z.nullable(z.number()).optional(),
@@ -2014,7 +1913,10 @@ export type ListAgentsParameters$Outbound = {
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
   stream_options?: ListAgentsStreamOptions$Outbound | null | undefined;
-  thinking?: ListAgentsThinking$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -2049,7 +1951,10 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
   streamOptions: z.nullable(
     z.lazy(() => ListAgentsStreamOptions$outboundSchema),
   ).optional(),
-  thinking: z.lazy(() => ListAgentsThinking$outboundSchema).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
   topK: z.nullable(z.number()).optional(),
@@ -2588,47 +2493,19 @@ export function listAgentsFallbackModelConfigurationStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const ListAgentsFallbackModelConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationType);
-/** @internal */
-export const ListAgentsFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> =
-    ListAgentsFallbackModelConfigurationType$inboundSchema;
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationThinkingLevel);
-/** @internal */
-export const ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationThinkingLevel> =
-    ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema;
-
-/** @internal */
 export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     ListAgentsFallbackModelConfigurationThinking,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: ListAgentsFallbackModelConfigurationType$inboundSchema,
-    budget_tokens: z.number(),
-    thinking_level:
-      ListAgentsFallbackModelConfigurationThinkingLevel$inboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "budget_tokens": "budgetTokens",
-      "thinking_level": "thinkingLevel",
-    });
-  });
+  > = z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]);
 /** @internal */
-export type ListAgentsFallbackModelConfigurationThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type ListAgentsFallbackModelConfigurationThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const ListAgentsFallbackModelConfigurationThinking$outboundSchema:
@@ -2636,18 +2513,10 @@ export const ListAgentsFallbackModelConfigurationThinking$outboundSchema:
     ListAgentsFallbackModelConfigurationThinking$Outbound,
     z.ZodTypeDef,
     ListAgentsFallbackModelConfigurationThinking
-  > = z.object({
-    type: ListAgentsFallbackModelConfigurationType$outboundSchema,
-    budgetTokens: z.number(),
-    thinkingLevel:
-      ListAgentsFallbackModelConfigurationThinkingLevel$outboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      budgetTokens: "budget_tokens",
-      thinkingLevel: "thinking_level",
-    });
-  });
+  > = z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]);
 
 export function listAgentsFallbackModelConfigurationThinkingToJSON(
   listAgentsFallbackModelConfigurationThinking:
@@ -2873,9 +2742,10 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
         ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      ListAgentsFallbackModelConfigurationThinking$inboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),
     top_k: z.nullable(z.number()).optional(),
@@ -2926,7 +2796,10 @@ export type ListAgentsFallbackModelConfigurationParameters$Outbound = {
     | ListAgentsFallbackModelConfigurationStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: ListAgentsFallbackModelConfigurationThinking$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -2968,9 +2841,10 @@ export const ListAgentsFallbackModelConfigurationParameters$outboundSchema:
         ListAgentsFallbackModelConfigurationStreamOptions$outboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      ListAgentsFallbackModelConfigurationThinking$outboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
     topK: z.nullable(z.number()).optional(),

@@ -32,7 +32,7 @@ let value: DeploymentsResponseBody = {
         model: "LeBaron",
         modelType: "rerank",
         modelParameters: {},
-        provider: "aws",
+        provider: "huggingface",
         messages: [],
       },
       version: "<value>",

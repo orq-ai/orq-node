@@ -11,9 +11,11 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value:
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2[] =
+    [];
 ```
 

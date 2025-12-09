@@ -11,10 +11,11 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentStreamContentDeploymentsRequestRequestBody2[]`
+### `operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages32[]`
 
 ```typescript
 const value:
-  operations.DeploymentStreamContentDeploymentsRequestRequestBody2[] = [];
+  operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages32[] =
+    [];
 ```
 

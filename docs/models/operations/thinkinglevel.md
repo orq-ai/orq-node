@@ -1,6 +1,6 @@
 # ThinkingLevel
 
-The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
+The level of thinking to use for the model. Only supported by `Google AI`
 
 ## Example Usage
 

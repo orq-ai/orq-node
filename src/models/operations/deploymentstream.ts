@@ -15,15 +15,94 @@ export type DeploymentStreamGlobals = {
   contactId?: string | undefined;
 };
 
-export type DeploymentStreamContentDeploymentsRequest2 =
-  components.TextContentPartSchema;
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type =
+  {
+    Text: "text",
+  } as const;
+export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type
+  >;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyTtl = ClosedEnum<
+  typeof DeploymentStream2DeploymentsRequestRequestBodyTtl
+>;
+
+export type DeploymentStream2DeploymentsRequestRequestBodyCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type:
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStream2DeploymentsRequestRequestBodyTtl | undefined;
+};
+
+export type DeploymentStream2DeploymentsRequest1 = {
+  type: DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type;
+  text: string;
+  cacheControl?:
+    | DeploymentStream2DeploymentsRequestRequestBodyCacheControl
+    | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2 =
+  DeploymentStream2DeploymentsRequest1;
 
 /**
  * The contents of the tool message.
  */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStream2DeploymentsRequest1>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -92,7 +171,7 @@ export type PrefixMessagesToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<DeploymentStream2DeploymentsRequest1>;
   /**
    * Tool call that this message is responding to.
    */
@@ -100,8 +179,75 @@ export type PrefixMessagesToolMessage = {
   cacheControl?: DeploymentStreamPrefixMessagesCacheControl | undefined;
 };
 
-export type DeploymentStreamContentDeployments2 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsRequestTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsRequestTtl = ClosedEnum<
+  typeof DeploymentStream2DeploymentsRequestTtl
+>;
+
+export type DeploymentStream2DeploymentsRequestCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStream2DeploymentsRequestTtl | undefined;
+};
+
+export type DeploymentStream2Deployments1 = {
+  type: "text";
+  text: string;
+  cacheControl?: DeploymentStream2DeploymentsRequestCacheControl | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBody2 =
+  | DeploymentStream2Deployments1
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -112,7 +258,7 @@ export type DeploymentStreamContentDeployments2 =
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | DeploymentStream2Deployments1
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -141,7 +287,7 @@ export type DeploymentStreamPrefixMessagesType = ClosedEnum<
   typeof DeploymentStreamPrefixMessagesType
 >;
 
-export type DeploymentStreamPrefixMessagesFunction = {
+export type PrefixMessagesFunction = {
   /**
    * The name of the function to call.
    */
@@ -152,7 +298,7 @@ export type DeploymentStreamPrefixMessagesFunction = {
   arguments?: string | undefined;
 };
 
-export type DeploymentStreamPrefixMessagesToolCalls = {
+export type PrefixMessagesToolCalls = {
   /**
    * The ID of the tool call.
    */
@@ -161,7 +307,7 @@ export type DeploymentStreamPrefixMessagesToolCalls = {
    * The type of the tool. Currently, only `function` is supported.
    */
   type: DeploymentStreamPrefixMessagesType;
-  function: DeploymentStreamPrefixMessagesFunction;
+  function: PrefixMessagesFunction;
   /**
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
@@ -175,7 +321,7 @@ export type PrefixMessagesAssistantMessage = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | DeploymentStream2Deployments1
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -201,7 +347,78 @@ export type PrefixMessagesAssistantMessage = {
   /**
    * The tool calls generated by the model, such as function calls.
    */
-  toolCalls?: Array<DeploymentStreamPrefixMessagesToolCalls> | undefined;
+  toolCalls?: Array<PrefixMessagesToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
+  typeof DeploymentStream2DeploymentsRequestRequestBodyType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsTtl = ClosedEnum<
+  typeof DeploymentStream2DeploymentsTtl
+>;
+
+export type DeploymentStream2DeploymentsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStream2DeploymentsRequestRequestBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStream2DeploymentsTtl | undefined;
+};
+
+export type DeploymentStream24 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: DeploymentStream2DeploymentsCacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
 };
 
 /**
@@ -261,20 +478,14 @@ export type DeploymentStream2CacheControl = {
   ttl?: DeploymentStream2Ttl | undefined;
 };
 
-export type DeploymentStream24 = {
-  /**
-   * The type of the content part. Always `file`.
-   */
-  type: "file";
+export type DeploymentStream21 = {
+  type: "text";
+  text: string;
   cacheControl?: DeploymentStream2CacheControl | undefined;
-  /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
-   */
-  file: components.FileContentPartSchema;
 };
 
-export type DeploymentStreamContent2 =
-  | (components.TextContentPartSchema & { type: "text" })
+export type DeploymentStreamContentDeploymentsRequest2 =
+  | DeploymentStream21
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
   | DeploymentStream24;
@@ -285,7 +496,7 @@ export type DeploymentStreamContent2 =
 export type DeploymentStreamPrefixMessagesDeploymentsRequestContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | DeploymentStream21
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
     | DeploymentStream24
@@ -306,11 +517,82 @@ export type PrefixMessagesUserMessage = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | DeploymentStream21
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
       | DeploymentStream24
     >;
+};
+
+export const DeploymentStreamContentDeploymentsRequestType = {
+  Text: "text",
+} as const;
+export type DeploymentStreamContentDeploymentsRequestType = ClosedEnum<
+  typeof DeploymentStreamContentDeploymentsRequestType
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyType =
+  ClosedEnum<typeof DeploymentStreamContentDeploymentsRequestRequestBodyType>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStreamContentDeploymentsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStreamContentDeploymentsTtl = ClosedEnum<
+  typeof DeploymentStreamContentDeploymentsTtl
+>;
+
+export type DeploymentStreamContentDeploymentsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStreamContentDeploymentsRequestRequestBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStreamContentDeploymentsTtl | undefined;
+};
+
+export type DeploymentStreamContentDeployments2 = {
+  type: DeploymentStreamContentDeploymentsRequestType;
+  text: string;
+  cacheControl?: DeploymentStreamContentDeploymentsCacheControl | undefined;
 };
 
 /**
@@ -318,7 +600,7 @@ export type PrefixMessagesUserMessage = {
  */
 export type DeploymentStreamPrefixMessagesDeploymentsContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStreamContentDeployments2>;
 
 export type PrefixMessagesDeveloperMessage = {
   /**
@@ -328,11 +610,83 @@ export type PrefixMessagesDeveloperMessage = {
   /**
    * The contents of the developer message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<DeploymentStreamContentDeployments2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
   name?: string | undefined;
+};
+
+export const DeploymentStreamContentType = {
+  Text: "text",
+} as const;
+export type DeploymentStreamContentType = ClosedEnum<
+  typeof DeploymentStreamContentType
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStreamContentDeploymentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStreamContentDeploymentsType = ClosedEnum<
+  typeof DeploymentStreamContentDeploymentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStreamContentTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStreamContentTtl = ClosedEnum<
+  typeof DeploymentStreamContentTtl
+>;
+
+export type DeploymentStreamContentCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStreamContentDeploymentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStreamContentTtl | undefined;
+};
+
+export type DeploymentStreamContent2 = {
+  type: DeploymentStreamContentType;
+  text: string;
+  cacheControl?: DeploymentStreamContentCacheControl | undefined;
 };
 
 /**
@@ -340,7 +694,7 @@ export type PrefixMessagesDeveloperMessage = {
  */
 export type DeploymentStreamPrefixMessagesContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStreamContent2>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -353,7 +707,7 @@ export type PrefixMessagesSystemMessage = {
   /**
    * The contents of the system message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<DeploymentStreamContent2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -367,15 +721,94 @@ export type DeploymentStreamPrefixMessages =
   | PrefixMessagesAssistantMessage
   | PrefixMessagesToolMessage;
 
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Type = {
+  Text: "text",
+} as const;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages5Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Type
+  >;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl =
+  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl>;
+
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl =
+  {
+    /**
+     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+     */
+    type: DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType;
+    /**
+     * The time-to-live for the cache control breakpoint. This may be one of the following values:
+     *
+     * @remarks
+     *
+     * - `5m`: 5 minutes
+     * - `1h`: 1 hour
+     *
+     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+     */
+    ttl?:
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl
+      | undefined;
+  };
+
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages51 = {
+  type: DeploymentStream2DeploymentsRequestRequestBodyMessages5Type;
+  text: string;
+  cacheControl?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl
+    | undefined;
+};
+
 export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages52 =
-  components.TextContentPartSchema;
+  DeploymentStream2DeploymentsRequestRequestBodyMessages51;
 
 /**
  * The contents of the tool message.
  */
 export type DeploymentStreamMessagesDeploymentsRequestRequestBody5Content =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStream2DeploymentsRequestRequestBodyMessages51>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -444,7 +877,9 @@ export type DeploymentStreamMessagesToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content:
+    | string
+    | Array<DeploymentStream2DeploymentsRequestRequestBodyMessages51>;
   /**
    * Tool call that this message is responding to.
    */
@@ -452,8 +887,79 @@ export type DeploymentStreamMessagesToolMessage = {
   cacheControl?: DeploymentStreamMessagesCacheControl | undefined;
 };
 
-export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl =
+  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl>;
+
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl =
+  {
+    /**
+     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+     */
+    type: DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType;
+    /**
+     * The time-to-live for the cache control breakpoint. This may be one of the following values:
+     *
+     * @remarks
+     *
+     * - `5m`: 5 minutes
+     * - `1h`: 1 hour
+     *
+     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+     */
+    ttl?:
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl
+      | undefined;
+  };
+
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages1 = {
+  type: "text";
+  text: string;
+  cacheControl?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl
+    | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages42 =
+  | DeploymentStream2DeploymentsRequestRequestBodyMessages1
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -464,7 +970,7 @@ export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 =
 export type DeploymentStreamMessagesDeploymentsRequestRequestBodyContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages1
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -527,7 +1033,7 @@ export type DeploymentStreamMessagesAssistantMessage = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages1
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -559,15 +1065,17 @@ export type DeploymentStreamMessagesAssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const DeploymentStream2DeploymentsRequestRequestBodyType = {
-  Ephemeral: "ephemeral",
-} as const;
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
-  typeof DeploymentStream2DeploymentsRequestRequestBodyType
->;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  >;
 
 /**
  * The time-to-live for the cache control breakpoint. This may be one of the following values:
@@ -579,7 +1087,7 @@ export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const DeploymentStream2DeploymentsTtl = {
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -593,42 +1101,114 @@ export const DeploymentStream2DeploymentsTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type DeploymentStream2DeploymentsTtl = ClosedEnum<
-  typeof DeploymentStream2DeploymentsTtl
->;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl =
+  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl>;
 
-export type DeploymentStream2DeploymentsCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentStream2DeploymentsRequestRequestBodyType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentStream2DeploymentsTtl | undefined;
-};
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl =
+  {
+    /**
+     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+     */
+    type: DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type;
+    /**
+     * The time-to-live for the cache control breakpoint. This may be one of the following values:
+     *
+     * @remarks
+     *
+     * - `5m`: 5 minutes
+     * - `1h`: 1 hour
+     *
+     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+     */
+    ttl?:
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl
+      | undefined;
+  };
 
 export type DeploymentStream2Deployments4 = {
   /**
    * The type of the content part. Always `file`.
    */
   type: "file";
-  cacheControl?: DeploymentStream2DeploymentsCacheControl | undefined;
+  cacheControl?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl
+    | undefined;
   /**
    * File data for the content part. Must contain either file_data or uri, but not both.
    */
   file: components.FileContentPartSchema;
 };
 
-export type DeploymentStreamContentDeploymentsRequestRequestBody2 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl =
+  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl>;
+
+export type DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl =
+  {
+    /**
+     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+     */
+    type: DeploymentStream2DeploymentsRequestRequestBodyMessages3Type;
+    /**
+     * The time-to-live for the cache control breakpoint. This may be one of the following values:
+     *
+     * @remarks
+     *
+     * - `5m`: 5 minutes
+     * - `1h`: 1 hour
+     *
+     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+     */
+    ttl?: DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl | undefined;
+  };
+
+export type DeploymentStream2DeploymentsRequestRequestBody1 = {
+  type: "text";
+  text: string;
+  cacheControl?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl
+    | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages32 =
+  | DeploymentStream2DeploymentsRequestRequestBody1
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
   | DeploymentStream2Deployments4;
@@ -639,7 +1219,7 @@ export type DeploymentStreamContentDeploymentsRequestRequestBody2 =
 export type DeploymentStreamMessagesDeploymentsRequestContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | DeploymentStream2DeploymentsRequestRequestBody1
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
     | DeploymentStream2Deployments4
@@ -660,11 +1240,88 @@ export type DeploymentStreamMessagesUserMessage = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | DeploymentStream2DeploymentsRequestRequestBody1
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
       | DeploymentStream2Deployments4
     >;
+};
+
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type =
+  {
+    Text: "text",
+  } as const;
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type =
+  ClosedEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type
+  >;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type =
+  ClosedEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyTtl =
+  ClosedEnum<typeof DeploymentStreamContentDeploymentsRequestRequestBodyTtl>;
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStreamContentDeploymentsRequestRequestBodyTtl | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages22 = {
+  type: DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type;
+  text: string;
+  cacheControl?:
+    | DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl
+    | undefined;
 };
 
 /**
@@ -672,7 +1329,7 @@ export type DeploymentStreamMessagesUserMessage = {
  */
 export type DeploymentStreamMessagesDeploymentsContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStreamContentDeploymentsRequestRequestBodyMessages22>;
 
 export type DeploymentStreamMessagesDeveloperMessage = {
   /**
@@ -682,11 +1339,91 @@ export type DeploymentStreamMessagesDeveloperMessage = {
   /**
    * The contents of the developer message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content:
+    | string
+    | Array<DeploymentStreamContentDeploymentsRequestRequestBodyMessages22>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
   name?: string | undefined;
+};
+
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType =
+  {
+    Text: "text",
+  } as const;
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType =
+  ClosedEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType
+  >;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type =
+  ClosedEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentStreamContentDeploymentsRequestTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentStreamContentDeploymentsRequestTtl = ClosedEnum<
+  typeof DeploymentStreamContentDeploymentsRequestTtl
+>;
+
+export type DeploymentStreamContentDeploymentsRequestCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: DeploymentStreamContentDeploymentsRequestTtl | undefined;
+};
+
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 = {
+  type: DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType;
+  text: string;
+  cacheControl?:
+    | DeploymentStreamContentDeploymentsRequestCacheControl
+    | undefined;
 };
 
 /**
@@ -694,7 +1431,7 @@ export type DeploymentStreamMessagesDeveloperMessage = {
  */
 export type DeploymentStreamMessagesContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<DeploymentStreamContentDeploymentsRequestRequestBodyMessages2>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -707,7 +1444,9 @@ export type DeploymentStreamMessagesSystemMessage = {
   /**
    * The contents of the system message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content:
+    | string
+    | Array<DeploymentStreamContentDeploymentsRequestRequestBodyMessages2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -1174,30 +1913,29 @@ export type DeploymentStreamObject = ClosedEnum<typeof DeploymentStreamObject>;
  * The provider used to generate the response
  */
 export const DeploymentStreamProvider = {
-  Openai: "openai",
-  Groq: "groq",
   Cohere: "cohere",
-  Azure: "azure",
-  Aws: "aws",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
   Google: "google",
   GoogleAi: "google-ai",
-  Huggingface: "huggingface",
-  Togetherai: "togetherai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
   Perplexity: "perplexity",
-  Anthropic: "anthropic",
-  Leonardoai: "leonardoai",
+  Groq: "groq",
   Fal: "fal",
+  Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Cerebras: "cerebras",
   Openailike: "openailike",
+  Cerebras: "cerebras",
   Bytedance: "bytedance",
   Mistral: "mistral",
-  Deepseek: "deepseek",
-  Contextualai: "contextualai",
-  Moonshotai: "moonshotai",
 } as const;
 /**
  * The provider used to generate the response
@@ -1505,44 +2243,204 @@ export function deploymentStreamGlobalsFromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequest2$inboundSchema:
-  z.ZodType<DeploymentStreamContentDeploymentsRequest2, z.ZodTypeDef, unknown> =
-    components.TextContentPartSchema$inboundSchema;
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type,
+  );
 /** @internal */
-export type DeploymentStreamContentDeploymentsRequest2$Outbound =
-  components.TextContentPartSchema$Outbound;
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema;
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequest2$outboundSchema:
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType,
+  );
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyTtl$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyTtl> = z
+    .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyTtl);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyTtl> =
+    DeploymentStream2DeploymentsRequestRequestBodyTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyCacheControl$inboundSchema:
   z.ZodType<
-    DeploymentStreamContentDeploymentsRequest2$Outbound,
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl,
     z.ZodTypeDef,
-    DeploymentStreamContentDeploymentsRequest2
-  > = components.TextContentPartSchema$outboundSchema;
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema,
+    ttl: DeploymentStream2DeploymentsRequestRequestBodyTtl$inboundSchema
+      .default("5m"),
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyCacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
 
-export function deploymentStreamContentDeploymentsRequest2ToJSON(
-  deploymentStreamContentDeploymentsRequest2:
-    DeploymentStreamContentDeploymentsRequest2,
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5ContentType$outboundSchema,
+    ttl: DeploymentStream2DeploymentsRequestRequestBodyTtl$outboundSchema
+      .default("5m"),
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyCacheControlToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyCacheControl:
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl,
 ): string {
   return JSON.stringify(
-    DeploymentStreamContentDeploymentsRequest2$outboundSchema.parse(
-      deploymentStreamContentDeploymentsRequest2,
-    ),
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl$outboundSchema
+      .parse(deploymentStream2DeploymentsRequestRequestBodyCacheControl),
   );
 }
-export function deploymentStreamContentDeploymentsRequest2FromJSON(
+export function deploymentStream2DeploymentsRequestRequestBodyCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentStreamContentDeploymentsRequest2,
+  DeploymentStream2DeploymentsRequestRequestBodyCacheControl,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentStreamContentDeploymentsRequest2$inboundSchema.parse(
-        JSON.parse(x),
+      DeploymentStream2DeploymentsRequestRequestBodyCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequest1$inboundSchema: z.ZodType<
+  DeploymentStream2DeploymentsRequest1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type DeploymentStream2DeploymentsRequest1$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | DeploymentStream2DeploymentsRequestRequestBodyCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequest1$outboundSchema: z.ZodType<
+  DeploymentStream2DeploymentsRequest1$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream2DeploymentsRequest1
+> = z.object({
+  type:
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages5Type$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    DeploymentStream2DeploymentsRequestRequestBodyCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentStream2DeploymentsRequest1ToJSON(
+  deploymentStream2DeploymentsRequest1: DeploymentStream2DeploymentsRequest1,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequest1$outboundSchema.parse(
+      deploymentStream2DeploymentsRequest1,
+    ),
+  );
+}
+export function deploymentStream2DeploymentsRequest1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream2DeploymentsRequest1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequest1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequest1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2,
+    z.ZodTypeDef,
+    unknown
+  > = z.lazy(() => DeploymentStream2DeploymentsRequest1$inboundSchema);
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$Outbound =
+  DeploymentStream2DeploymentsRequest1$Outbound;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2
+  > = z.lazy(() => DeploymentStream2DeploymentsRequest1$outboundSchema);
+
+export function deploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2:
+    DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$outboundSchema
+      .parse(
+        deploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2,
       ),
-    `Failed to parse 'DeploymentStreamContentDeploymentsRequest2' from JSON`,
+  );
+}
+export function deploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2' from JSON`,
   );
 }
 
@@ -1554,12 +2452,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => DeploymentStream2DeploymentsRequest1$inboundSchema)),
   ]);
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<DeploymentStream2DeploymentsRequest1$Outbound>;
 
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content$outboundSchema:
@@ -1569,7 +2467,7 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Content
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => DeploymentStream2DeploymentsRequest1$outboundSchema)),
   ]);
 
 export function deploymentStreamPrefixMessagesDeploymentsRequestRequestBody5ContentToJSON(
@@ -1675,7 +2573,7 @@ export const PrefixMessagesToolMessage$inboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => DeploymentStream2DeploymentsRequest1$inboundSchema)),
   ]),
   tool_call_id: z.string(),
   cache_control: z.lazy(() =>
@@ -1690,7 +2588,7 @@ export const PrefixMessagesToolMessage$inboundSchema: z.ZodType<
 /** @internal */
 export type PrefixMessagesToolMessage$Outbound = {
   role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<DeploymentStream2DeploymentsRequest1$Outbound>;
   tool_call_id: string;
   cache_control?:
     | DeploymentStreamPrefixMessagesCacheControl$Outbound
@@ -1706,7 +2604,7 @@ export const PrefixMessagesToolMessage$outboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => DeploymentStream2DeploymentsRequest1$outboundSchema)),
   ]),
   toolCallId: z.string(),
   cacheControl: z.lazy(() =>
@@ -1737,56 +2635,200 @@ export function prefixMessagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamContentDeployments2$inboundSchema: z.ZodType<
-  DeploymentStreamContentDeployments2,
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type,
+  );
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestTtl$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestTtl> = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestTtl,
+  );
+/** @internal */
+export const DeploymentStream2DeploymentsRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestTtl> =
+    DeploymentStream2DeploymentsRequestTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestCacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema,
+    ttl: DeploymentStream2DeploymentsRequestTtl$inboundSchema.default("5m"),
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestCacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema,
+    ttl: DeploymentStream2DeploymentsRequestTtl$outboundSchema.default("5m"),
+  });
+
+export function deploymentStream2DeploymentsRequestCacheControlToJSON(
+  deploymentStream2DeploymentsRequestCacheControl:
+    DeploymentStream2DeploymentsRequestCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestCacheControl$outboundSchema.parse(
+      deploymentStream2DeploymentsRequestCacheControl,
+    ),
+  );
+}
+export function deploymentStream2DeploymentsRequestCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2Deployments1$inboundSchema: z.ZodType<
+  DeploymentStream2Deployments1,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    DeploymentStream2DeploymentsRequestCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
 /** @internal */
-export type DeploymentStreamContentDeployments2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type DeploymentStream2Deployments1$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | DeploymentStream2DeploymentsRequestCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const DeploymentStream2Deployments1$outboundSchema: z.ZodType<
+  DeploymentStream2Deployments1$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream2Deployments1
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    DeploymentStream2DeploymentsRequestCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentStream2Deployments1ToJSON(
+  deploymentStream2Deployments1: DeploymentStream2Deployments1,
+): string {
+  return JSON.stringify(
+    DeploymentStream2Deployments1$outboundSchema.parse(
+      deploymentStream2Deployments1,
+    ),
+  );
+}
+export function deploymentStream2Deployments1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream2Deployments1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream2Deployments1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2Deployments1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBody2,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => DeploymentStream2Deployments1$inboundSchema),
+    components.RefusalPartSchema$inboundSchema,
+    components.ReasoningPartSchema$inboundSchema,
+    components.RedactedReasoningPartSchema$inboundSchema,
+  ]);
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound =
+  | DeploymentStream2Deployments1$Outbound
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentStreamContentDeployments2$outboundSchema: z.ZodType<
-  DeploymentStreamContentDeployments2$Outbound,
-  z.ZodTypeDef,
-  DeploymentStreamContentDeployments2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
+export const DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestRequestBody2
+  > = z.union([
+    z.lazy(() => DeploymentStream2Deployments1$outboundSchema),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ]);
 
-export function deploymentStreamContentDeployments2ToJSON(
-  deploymentStreamContentDeployments2: DeploymentStreamContentDeployments2,
+export function deploymentStreamContentDeploymentsRequestRequestBody2ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBody2:
+    DeploymentStreamContentDeploymentsRequestRequestBody2,
 ): string {
   return JSON.stringify(
-    DeploymentStreamContentDeployments2$outboundSchema.parse(
-      deploymentStreamContentDeployments2,
+    DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema.parse(
+      deploymentStreamContentDeploymentsRequestRequestBody2,
     ),
   );
 }
-export function deploymentStreamContentDeployments2FromJSON(
+export function deploymentStreamContentDeploymentsRequestRequestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStreamContentDeployments2, SDKValidationError> {
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestRequestBody2,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentStreamContentDeployments2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamContentDeployments2' from JSON`,
+      DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBody2' from JSON`,
   );
 }
 
@@ -1798,22 +2840,18 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContent$
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream2Deployments1$inboundSchema),
+      components.RefusalPartSchema$inboundSchema,
+      components.ReasoningPartSchema$inboundSchema,
+      components.RedactedReasoningPartSchema$inboundSchema,
+    ])),
   ]);
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | DeploymentStream2Deployments1$Outbound
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -1827,16 +2865,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContent$
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream2Deployments1$outboundSchema),
+      components.RefusalPartSchema$outboundSchema,
+      components.ReasoningPartSchema$outboundSchema,
+      components.RedactedReasoningPartSchema$outboundSchema,
+    ])),
   ]);
 
 export function deploymentStreamPrefixMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -1914,8 +2948,8 @@ export const DeploymentStreamPrefixMessagesType$outboundSchema: z.ZodNativeEnum<
 > = DeploymentStreamPrefixMessagesType$inboundSchema;
 
 /** @internal */
-export const DeploymentStreamPrefixMessagesFunction$inboundSchema: z.ZodType<
-  DeploymentStreamPrefixMessagesFunction,
+export const PrefixMessagesFunction$inboundSchema: z.ZodType<
+  PrefixMessagesFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1923,51 +2957,47 @@ export const DeploymentStreamPrefixMessagesFunction$inboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 /** @internal */
-export type DeploymentStreamPrefixMessagesFunction$Outbound = {
+export type PrefixMessagesFunction$Outbound = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
 /** @internal */
-export const DeploymentStreamPrefixMessagesFunction$outboundSchema: z.ZodType<
-  DeploymentStreamPrefixMessagesFunction$Outbound,
+export const PrefixMessagesFunction$outboundSchema: z.ZodType<
+  PrefixMessagesFunction$Outbound,
   z.ZodTypeDef,
-  DeploymentStreamPrefixMessagesFunction
+  PrefixMessagesFunction
 > = z.object({
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
 
-export function deploymentStreamPrefixMessagesFunctionToJSON(
-  deploymentStreamPrefixMessagesFunction:
-    DeploymentStreamPrefixMessagesFunction,
+export function prefixMessagesFunctionToJSON(
+  prefixMessagesFunction: PrefixMessagesFunction,
 ): string {
   return JSON.stringify(
-    DeploymentStreamPrefixMessagesFunction$outboundSchema.parse(
-      deploymentStreamPrefixMessagesFunction,
-    ),
+    PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
   );
 }
-export function deploymentStreamPrefixMessagesFunctionFromJSON(
+export function prefixMessagesFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStreamPrefixMessagesFunction, SDKValidationError> {
+): SafeParseResult<PrefixMessagesFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentStreamPrefixMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamPrefixMessagesFunction' from JSON`,
+    (x) => PrefixMessagesFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrefixMessagesFunction' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentStreamPrefixMessagesToolCalls$inboundSchema: z.ZodType<
-  DeploymentStreamPrefixMessagesToolCalls,
+export const PrefixMessagesToolCalls$inboundSchema: z.ZodType<
+  PrefixMessagesToolCalls,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   type: DeploymentStreamPrefixMessagesType$inboundSchema,
-  function: z.lazy(() => DeploymentStreamPrefixMessagesFunction$inboundSchema),
+  function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1975,22 +3005,22 @@ export const DeploymentStreamPrefixMessagesToolCalls$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type DeploymentStreamPrefixMessagesToolCalls$Outbound = {
+export type PrefixMessagesToolCalls$Outbound = {
   id: string;
   type: string;
-  function: DeploymentStreamPrefixMessagesFunction$Outbound;
+  function: PrefixMessagesFunction$Outbound;
   thought_signature?: string | undefined;
 };
 
 /** @internal */
-export const DeploymentStreamPrefixMessagesToolCalls$outboundSchema: z.ZodType<
-  DeploymentStreamPrefixMessagesToolCalls$Outbound,
+export const PrefixMessagesToolCalls$outboundSchema: z.ZodType<
+  PrefixMessagesToolCalls$Outbound,
   z.ZodTypeDef,
-  DeploymentStreamPrefixMessagesToolCalls
+  PrefixMessagesToolCalls
 > = z.object({
   id: z.string(),
   type: DeploymentStreamPrefixMessagesType$outboundSchema,
-  function: z.lazy(() => DeploymentStreamPrefixMessagesFunction$outboundSchema),
+  function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1998,29 +3028,20 @@ export const DeploymentStreamPrefixMessagesToolCalls$outboundSchema: z.ZodType<
   });
 });
 
-export function deploymentStreamPrefixMessagesToolCallsToJSON(
-  deploymentStreamPrefixMessagesToolCalls:
-    DeploymentStreamPrefixMessagesToolCalls,
+export function prefixMessagesToolCallsToJSON(
+  prefixMessagesToolCalls: PrefixMessagesToolCalls,
 ): string {
   return JSON.stringify(
-    DeploymentStreamPrefixMessagesToolCalls$outboundSchema.parse(
-      deploymentStreamPrefixMessagesToolCalls,
-    ),
+    PrefixMessagesToolCalls$outboundSchema.parse(prefixMessagesToolCalls),
   );
 }
-export function deploymentStreamPrefixMessagesToolCallsFromJSON(
+export function prefixMessagesToolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentStreamPrefixMessagesToolCalls,
-  SDKValidationError
-> {
+): SafeParseResult<PrefixMessagesToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentStreamPrefixMessagesToolCalls$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentStreamPrefixMessagesToolCalls' from JSON`,
+    (x) => PrefixMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrefixMessagesToolCalls' from JSON`,
   );
 }
 
@@ -2035,9 +3056,7 @@ export const PrefixMessagesAssistantMessage$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
+          z.lazy(() => DeploymentStream2Deployments1$inboundSchema),
           components.RefusalPartSchema$inboundSchema,
           components.ReasoningPartSchema$inboundSchema,
           components.RedactedReasoningPartSchema$inboundSchema,
@@ -2049,9 +3068,8 @@ export const PrefixMessagesAssistantMessage$inboundSchema: z.ZodType<
   role: z.literal("assistant"),
   name: z.string().optional(),
   audio: z.nullable(z.lazy(() => PrefixMessagesAudio$inboundSchema)).optional(),
-  tool_calls: z.array(
-    z.lazy(() => DeploymentStreamPrefixMessagesToolCalls$inboundSchema),
-  ).optional(),
+  tool_calls: z.array(z.lazy(() => PrefixMessagesToolCalls$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -2062,7 +3080,7 @@ export type PrefixMessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | DeploymentStream2Deployments1$Outbound
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -2073,9 +3091,7 @@ export type PrefixMessagesAssistantMessage$Outbound = {
   role: "assistant";
   name?: string | undefined;
   audio?: PrefixMessagesAudio$Outbound | null | undefined;
-  tool_calls?:
-    | Array<DeploymentStreamPrefixMessagesToolCalls$Outbound>
-    | undefined;
+  tool_calls?: Array<PrefixMessagesToolCalls$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2089,9 +3105,7 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
+          z.lazy(() => DeploymentStream2Deployments1$outboundSchema),
           components.RefusalPartSchema$outboundSchema,
           components.ReasoningPartSchema$outboundSchema,
           components.RedactedReasoningPartSchema$outboundSchema,
@@ -2104,9 +3118,8 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   audio: z.nullable(z.lazy(() => PrefixMessagesAudio$outboundSchema))
     .optional(),
-  toolCalls: z.array(
-    z.lazy(() => DeploymentStreamPrefixMessagesToolCalls$outboundSchema),
-  ).optional(),
+  toolCalls: z.array(z.lazy(() => PrefixMessagesToolCalls$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
@@ -2129,6 +3142,132 @@ export function prefixMessagesAssistantMessageFromJSON(
     jsonString,
     (x) => PrefixMessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PrefixMessagesAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> = z
+    .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyType);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> =
+    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsTtl
+> = z.nativeEnum(DeploymentStream2DeploymentsTtl);
+/** @internal */
+export const DeploymentStream2DeploymentsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsTtl
+> = DeploymentStream2DeploymentsTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsCacheControl$inboundSchema: z.ZodType<
+  DeploymentStream2DeploymentsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema,
+  ttl: DeploymentStream2DeploymentsTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type DeploymentStream2DeploymentsCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentStream2DeploymentsCacheControl$outboundSchema: z.ZodType<
+  DeploymentStream2DeploymentsCacheControl$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream2DeploymentsCacheControl
+> = z.object({
+  type: DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema,
+  ttl: DeploymentStream2DeploymentsTtl$outboundSchema.default("5m"),
+});
+
+export function deploymentStream2DeploymentsCacheControlToJSON(
+  deploymentStream2DeploymentsCacheControl:
+    DeploymentStream2DeploymentsCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsCacheControl$outboundSchema.parse(
+      deploymentStream2DeploymentsCacheControl,
+    ),
+  );
+}
+export function deploymentStream2DeploymentsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStream2DeploymentsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream24$inboundSchema: z.ZodType<
+  DeploymentStream24,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() =>
+    DeploymentStream2DeploymentsCacheControl$inboundSchema
+  ).optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type DeploymentStream24$Outbound = {
+  type: "file";
+  cache_control?: DeploymentStream2DeploymentsCacheControl$Outbound | undefined;
+  file: components.FileContentPartSchema$Outbound;
+};
+
+/** @internal */
+export const DeploymentStream24$outboundSchema: z.ZodType<
+  DeploymentStream24$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() =>
+    DeploymentStream2DeploymentsCacheControl$outboundSchema
+  ).optional(),
+  file: components.FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentStream24ToJSON(
+  deploymentStream24: DeploymentStream24,
+): string {
+  return JSON.stringify(
+    DeploymentStream24$outboundSchema.parse(deploymentStream24),
+  );
+}
+export function deploymentStream24FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream24, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream24' from JSON`,
   );
 }
 
@@ -2195,108 +3334,112 @@ export function deploymentStream2CacheControlFromJSON(
 }
 
 /** @internal */
-export const DeploymentStream24$inboundSchema: z.ZodType<
-  DeploymentStream24,
+export const DeploymentStream21$inboundSchema: z.ZodType<
+  DeploymentStream21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("file"),
+  type: z.literal("text"),
+  text: z.string(),
   cache_control: z.lazy(() => DeploymentStream2CacheControl$inboundSchema)
     .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "cache_control": "cacheControl",
   });
 });
 /** @internal */
-export type DeploymentStream24$Outbound = {
-  type: "file";
+export type DeploymentStream21$Outbound = {
+  type: "text";
+  text: string;
   cache_control?: DeploymentStream2CacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const DeploymentStream24$outboundSchema: z.ZodType<
-  DeploymentStream24$Outbound,
+export const DeploymentStream21$outboundSchema: z.ZodType<
+  DeploymentStream21$Outbound,
   z.ZodTypeDef,
-  DeploymentStream24
+  DeploymentStream21
 > = z.object({
-  type: z.literal("file"),
+  type: z.literal("text"),
+  text: z.string(),
   cacheControl: z.lazy(() => DeploymentStream2CacheControl$outboundSchema)
     .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
   });
 });
 
-export function deploymentStream24ToJSON(
-  deploymentStream24: DeploymentStream24,
+export function deploymentStream21ToJSON(
+  deploymentStream21: DeploymentStream21,
 ): string {
   return JSON.stringify(
-    DeploymentStream24$outboundSchema.parse(deploymentStream24),
+    DeploymentStream21$outboundSchema.parse(deploymentStream21),
   );
 }
-export function deploymentStream24FromJSON(
+export function deploymentStream21FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStream24, SDKValidationError> {
+): SafeParseResult<DeploymentStream21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentStream24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStream24' from JSON`,
+    (x) => DeploymentStream21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream21' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentStreamContent2$inboundSchema: z.ZodType<
-  DeploymentStreamContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => DeploymentStream24$inboundSchema),
-]);
+export const DeploymentStreamContentDeploymentsRequest2$inboundSchema:
+  z.ZodType<DeploymentStreamContentDeploymentsRequest2, z.ZodTypeDef, unknown> =
+    z.union([
+      z.lazy(() => DeploymentStream21$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => DeploymentStream24$inboundSchema),
+    ]);
 /** @internal */
-export type DeploymentStreamContent2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type DeploymentStreamContentDeploymentsRequest2$Outbound =
+  | DeploymentStream21$Outbound
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | DeploymentStream24$Outbound;
 
 /** @internal */
-export const DeploymentStreamContent2$outboundSchema: z.ZodType<
-  DeploymentStreamContent2$Outbound,
-  z.ZodTypeDef,
-  DeploymentStreamContent2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => DeploymentStream24$outboundSchema),
-]);
+export const DeploymentStreamContentDeploymentsRequest2$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequest2$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequest2
+  > = z.union([
+    z.lazy(() => DeploymentStream21$outboundSchema),
+    components.ImageContentPartSchema$outboundSchema,
+    components.AudioContentPartSchema$outboundSchema,
+    z.lazy(() => DeploymentStream24$outboundSchema),
+  ]);
 
-export function deploymentStreamContent2ToJSON(
-  deploymentStreamContent2: DeploymentStreamContent2,
+export function deploymentStreamContentDeploymentsRequest2ToJSON(
+  deploymentStreamContentDeploymentsRequest2:
+    DeploymentStreamContentDeploymentsRequest2,
 ): string {
   return JSON.stringify(
-    DeploymentStreamContent2$outboundSchema.parse(deploymentStreamContent2),
+    DeploymentStreamContentDeploymentsRequest2$outboundSchema.parse(
+      deploymentStreamContentDeploymentsRequest2,
+    ),
   );
 }
-export function deploymentStreamContent2FromJSON(
+export function deploymentStreamContentDeploymentsRequest2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentStreamContent2, SDKValidationError> {
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequest2,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentStreamContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamContent2' from JSON`,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequest2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequest2' from JSON`,
   );
 }
 
@@ -2308,22 +3451,18 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSche
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentStream24$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream21$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => DeploymentStream24$inboundSchema),
+    ])),
   ]);
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | DeploymentStream21$Outbound
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | DeploymentStream24$Outbound
@@ -2337,16 +3476,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$outboundSch
     DeploymentStreamPrefixMessagesDeploymentsRequestContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => DeploymentStream24$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream21$outboundSchema),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => DeploymentStream24$outboundSchema),
+    ])),
   ]);
 
 export function deploymentStreamPrefixMessagesDeploymentsRequestContentToJSON(
@@ -2383,16 +3518,12 @@ export const PrefixMessagesUserMessage$inboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentStream24$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream21$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => DeploymentStream24$inboundSchema),
+    ])),
   ]),
 });
 /** @internal */
@@ -2402,7 +3533,7 @@ export type PrefixMessagesUserMessage$Outbound = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | DeploymentStream21$Outbound
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | DeploymentStream24$Outbound
@@ -2419,16 +3550,12 @@ export const PrefixMessagesUserMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => DeploymentStream24$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => DeploymentStream21$outboundSchema),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => DeploymentStream24$outboundSchema),
+    ])),
   ]),
 });
 
@@ -2450,6 +3577,153 @@ export function prefixMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamContentDeploymentsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsRequestType> = z
+    .nativeEnum(DeploymentStreamContentDeploymentsRequestType);
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsRequestType> =
+    DeploymentStreamContentDeploymentsRequestType$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyType
+  > = z.nativeEnum(DeploymentStreamContentDeploymentsRequestRequestBodyType);
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyType
+  > = DeploymentStreamContentDeploymentsRequestRequestBodyType$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsTtl$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsTtl> = z.nativeEnum(
+    DeploymentStreamContentDeploymentsTtl,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsTtl$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsTtl> =
+    DeploymentStreamContentDeploymentsTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsCacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyType$inboundSchema,
+    ttl: DeploymentStreamContentDeploymentsTtl$inboundSchema.default("5m"),
+  });
+/** @internal */
+export type DeploymentStreamContentDeploymentsCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsCacheControl
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyType$outboundSchema,
+    ttl: DeploymentStreamContentDeploymentsTtl$outboundSchema.default("5m"),
+  });
+
+export function deploymentStreamContentDeploymentsCacheControlToJSON(
+  deploymentStreamContentDeploymentsCacheControl:
+    DeploymentStreamContentDeploymentsCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsCacheControl$outboundSchema.parse(
+      deploymentStreamContentDeploymentsCacheControl,
+    ),
+  );
+}
+export function deploymentStreamContentDeploymentsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamContentDeploymentsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeployments2$inboundSchema: z.ZodType<
+  DeploymentStreamContentDeployments2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentStreamContentDeploymentsRequestType$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    DeploymentStreamContentDeploymentsCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type DeploymentStreamContentDeployments2$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | DeploymentStreamContentDeploymentsCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const DeploymentStreamContentDeployments2$outboundSchema: z.ZodType<
+  DeploymentStreamContentDeployments2$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamContentDeployments2
+> = z.object({
+  type: DeploymentStreamContentDeploymentsRequestType$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    DeploymentStreamContentDeploymentsCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentStreamContentDeployments2ToJSON(
+  deploymentStreamContentDeployments2: DeploymentStreamContentDeployments2,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeployments2$outboundSchema.parse(
+      deploymentStreamContentDeployments2,
+    ),
+  );
+}
+export function deploymentStreamContentDeployments2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamContentDeployments2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeployments2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeployments2' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsContent$inboundSchema:
   z.ZodType<
     DeploymentStreamPrefixMessagesDeploymentsContent,
@@ -2457,12 +3731,12 @@ export const DeploymentStreamPrefixMessagesDeploymentsContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContentDeployments2$inboundSchema)),
   ]);
 /** @internal */
 export type DeploymentStreamPrefixMessagesDeploymentsContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<DeploymentStreamContentDeployments2$Outbound>;
 
 /** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsContent$outboundSchema:
@@ -2472,7 +3746,7 @@ export const DeploymentStreamPrefixMessagesDeploymentsContent$outboundSchema:
     DeploymentStreamPrefixMessagesDeploymentsContent
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContentDeployments2$outboundSchema)),
   ]);
 
 export function deploymentStreamPrefixMessagesDeploymentsContentToJSON(
@@ -2510,14 +3784,14 @@ export const PrefixMessagesDeveloperMessage$inboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContentDeployments2$inboundSchema)),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type PrefixMessagesDeveloperMessage$Outbound = {
   role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<DeploymentStreamContentDeployments2$Outbound>;
   name?: string | undefined;
 };
 
@@ -2530,7 +3804,7 @@ export const PrefixMessagesDeveloperMessage$outboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContentDeployments2$outboundSchema)),
   ]),
   name: z.string().optional(),
 });
@@ -2555,18 +3829,146 @@ export function prefixMessagesDeveloperMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamContentType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamContentType
+> = z.nativeEnum(DeploymentStreamContentType);
+/** @internal */
+export const DeploymentStreamContentType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamContentType
+> = DeploymentStreamContentType$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsType> = z.nativeEnum(
+    DeploymentStreamContentDeploymentsType,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsType> =
+    DeploymentStreamContentDeploymentsType$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentTtl$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamContentTtl
+> = z.nativeEnum(DeploymentStreamContentTtl);
+/** @internal */
+export const DeploymentStreamContentTtl$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamContentTtl
+> = DeploymentStreamContentTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentCacheControl$inboundSchema: z.ZodType<
+  DeploymentStreamContentCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentStreamContentDeploymentsType$inboundSchema,
+  ttl: DeploymentStreamContentTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type DeploymentStreamContentCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentStreamContentCacheControl$outboundSchema: z.ZodType<
+  DeploymentStreamContentCacheControl$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamContentCacheControl
+> = z.object({
+  type: DeploymentStreamContentDeploymentsType$outboundSchema,
+  ttl: DeploymentStreamContentTtl$outboundSchema.default("5m"),
+});
+
+export function deploymentStreamContentCacheControlToJSON(
+  deploymentStreamContentCacheControl: DeploymentStreamContentCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentCacheControl$outboundSchema.parse(
+      deploymentStreamContentCacheControl,
+    ),
+  );
+}
+export function deploymentStreamContentCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamContentCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContent2$inboundSchema: z.ZodType<
+  DeploymentStreamContent2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentStreamContentType$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() => DeploymentStreamContentCacheControl$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type DeploymentStreamContent2$Outbound = {
+  type: string;
+  text: string;
+  cache_control?: DeploymentStreamContentCacheControl$Outbound | undefined;
+};
+
+/** @internal */
+export const DeploymentStreamContent2$outboundSchema: z.ZodType<
+  DeploymentStreamContent2$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamContent2
+> = z.object({
+  type: DeploymentStreamContentType$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() => DeploymentStreamContentCacheControl$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentStreamContent2ToJSON(
+  deploymentStreamContent2: DeploymentStreamContent2,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContent2$outboundSchema.parse(deploymentStreamContent2),
+  );
+}
+export function deploymentStreamContent2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamContent2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamContent2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContent2' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamPrefixMessagesContent$inboundSchema: z.ZodType<
   DeploymentStreamPrefixMessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
+  z.array(z.lazy(() => DeploymentStreamContent2$inboundSchema)),
 ]);
 /** @internal */
 export type DeploymentStreamPrefixMessagesContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<DeploymentStreamContent2$Outbound>;
 
 /** @internal */
 export const DeploymentStreamPrefixMessagesContent$outboundSchema: z.ZodType<
@@ -2575,7 +3977,7 @@ export const DeploymentStreamPrefixMessagesContent$outboundSchema: z.ZodType<
   DeploymentStreamPrefixMessagesContent
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
+  z.array(z.lazy(() => DeploymentStreamContent2$outboundSchema)),
 ]);
 
 export function deploymentStreamPrefixMessagesContentToJSON(
@@ -2607,14 +4009,14 @@ export const PrefixMessagesSystemMessage$inboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContent2$inboundSchema)),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type PrefixMessagesSystemMessage$Outbound = {
   role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<DeploymentStreamContent2$Outbound>;
   name?: string | undefined;
 };
 
@@ -2627,7 +4029,7 @@ export const PrefixMessagesSystemMessage$outboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => DeploymentStreamContent2$outboundSchema)),
   ]),
   name: z.string().optional(),
 });
@@ -2704,15 +4106,184 @@ export function deploymentStreamPrefixMessagesFromJSON(
 }
 
 /** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Type
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages5Type);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Type
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages5Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType,
+  );
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema
+        .default("5m"),
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5ContentType$outboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5Ttl$outboundSchema
+        .default("5m"),
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyMessages5CacheControlToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl:
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema
+      .parse(
+        deploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl,
+      ),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBodyMessages5CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages51$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5Type$inboundSchema,
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages51$Outbound =
+  {
+    type: string;
+    text: string;
+    cache_control?:
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages51$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5Type$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyMessages51ToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessages51:
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51$outboundSchema
+      .parse(deploymentStream2DeploymentsRequestRequestBodyMessages51),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBodyMessages51FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBodyMessages51,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages51$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessages51' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages52$inboundSchema:
   z.ZodType<
     DeploymentStreamContentDeploymentsRequestRequestBodyMessages52,
     z.ZodTypeDef,
     unknown
-  > = components.TextContentPartSchema$inboundSchema;
+  > = z.lazy(() =>
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51$inboundSchema
+  );
 /** @internal */
 export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages52$Outbound =
-  components.TextContentPartSchema$Outbound;
+  DeploymentStream2DeploymentsRequestRequestBodyMessages51$Outbound;
 
 /** @internal */
 export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages52$outboundSchema:
@@ -2720,7 +4291,9 @@ export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages52$outb
     DeploymentStreamContentDeploymentsRequestRequestBodyMessages52$Outbound,
     z.ZodTypeDef,
     DeploymentStreamContentDeploymentsRequestRequestBodyMessages52
-  > = components.TextContentPartSchema$outboundSchema;
+  > = z.lazy(() =>
+    DeploymentStream2DeploymentsRequestRequestBodyMessages51$outboundSchema
+  );
 
 export function deploymentStreamContentDeploymentsRequestRequestBodyMessages52ToJSON(
   deploymentStreamContentDeploymentsRequestRequestBodyMessages52:
@@ -2754,12 +4327,14 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Content$inbou
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages51$inboundSchema
+    )),
   ]);
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsRequestRequestBody5Content$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<DeploymentStream2DeploymentsRequestRequestBodyMessages51$Outbound>;
 
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Content$outboundSchema:
@@ -2769,7 +4344,9 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Content$outbo
     DeploymentStreamMessagesDeploymentsRequestRequestBody5Content
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages51$outboundSchema
+    )),
   ]);
 
 export function deploymentStreamMessagesDeploymentsRequestRequestBody5ContentToJSON(
@@ -2868,7 +4445,9 @@ export const DeploymentStreamMessagesToolMessage$inboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages51$inboundSchema
+    )),
   ]),
   tool_call_id: z.string(),
   cache_control: z.lazy(() =>
@@ -2883,7 +4462,9 @@ export const DeploymentStreamMessagesToolMessage$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentStreamMessagesToolMessage$Outbound = {
   role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content:
+    | string
+    | Array<DeploymentStream2DeploymentsRequestRequestBodyMessages51$Outbound>;
   tool_call_id: string;
   cache_control?: DeploymentStreamMessagesCacheControl$Outbound | undefined;
 };
@@ -2897,7 +4478,9 @@ export const DeploymentStreamMessagesToolMessage$outboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages51$outboundSchema
+    )),
   ]),
   toolCallId: z.string(),
   cacheControl: z.lazy(() =>
@@ -2931,62 +4514,215 @@ export function deploymentStreamMessagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema:
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType,
+  );
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema:
   z.ZodType<
-    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema
+        .default("5m"),
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4Ttl$outboundSchema
+        .default("5m"),
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyMessages4CacheControlToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl:
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema
+      .parse(
+        deploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl,
+      ),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBodyMessages4CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages1$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("text"),
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages1$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages1$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages1$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages1
+  > = z.object({
+    type: z.literal("text"),
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyMessages1ToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessages1:
+    DeploymentStream2DeploymentsRequestRequestBodyMessages1,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages1$outboundSchema
+      .parse(deploymentStream2DeploymentsRequestRequestBodyMessages1),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBodyMessages1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBodyMessages1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages1$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessages1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages42,
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
+    z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages1$inboundSchema
     ),
     components.RefusalPartSchema$inboundSchema,
     components.ReasoningPartSchema$inboundSchema,
     components.RedactedReasoningPartSchema$inboundSchema,
   ]);
 /** @internal */
-export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$Outbound =
+  | DeploymentStream2DeploymentsRequestRequestBodyMessages1$Outbound
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema:
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$outboundSchema:
   z.ZodType<
-    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound,
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$Outbound,
     z.ZodTypeDef,
-    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages42
   > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
+    z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessages1$outboundSchema
     ),
     components.RefusalPartSchema$outboundSchema,
     components.ReasoningPartSchema$outboundSchema,
     components.RedactedReasoningPartSchema$outboundSchema,
   ]);
 
-export function deploymentStreamContentDeploymentsRequestRequestBodyMessages2ToJSON(
-  deploymentStreamContentDeploymentsRequestRequestBodyMessages2:
-    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages42ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyMessages42:
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages42,
 ): string {
   return JSON.stringify(
-    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema
-      .parse(deploymentStreamContentDeploymentsRequestRequestBodyMessages2),
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$outboundSchema
+      .parse(deploymentStreamContentDeploymentsRequestRequestBodyMessages42),
   );
 }
-export function deploymentStreamContentDeploymentsRequestRequestBodyMessages2FromJSON(
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages42FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+  DeploymentStreamContentDeploymentsRequestRequestBodyMessages42,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages42$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyMessages2' from JSON`,
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyMessages42' from JSON`,
   );
 }
 
@@ -2998,22 +4734,20 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBodyContent$inboun
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBodyMessages1$inboundSchema
+      ),
+      components.RefusalPartSchema$inboundSchema,
+      components.ReasoningPartSchema$inboundSchema,
+      components.RedactedReasoningPartSchema$inboundSchema,
+    ])),
   ]);
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages1$Outbound
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -3027,16 +4761,14 @@ export const DeploymentStreamMessagesDeploymentsRequestRequestBodyContent$outbou
     DeploymentStreamMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBodyMessages1$outboundSchema
+      ),
+      components.RefusalPartSchema$outboundSchema,
+      components.ReasoningPartSchema$outboundSchema,
+      components.RedactedReasoningPartSchema$outboundSchema,
+    ])),
   ]);
 
 export function deploymentStreamMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -3226,8 +4958,8 @@ export const DeploymentStreamMessagesAssistantMessage$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
+          z.lazy(() =>
+            DeploymentStream2DeploymentsRequestRequestBodyMessages1$inboundSchema
           ),
           components.RefusalPartSchema$inboundSchema,
           components.ReasoningPartSchema$inboundSchema,
@@ -3254,7 +4986,7 @@ export type DeploymentStreamMessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | DeploymentStream2DeploymentsRequestRequestBodyMessages1$Outbound
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -3279,8 +5011,8 @@ export const DeploymentStreamMessagesAssistantMessage$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
+          z.lazy(() =>
+            DeploymentStream2DeploymentsRequestRequestBodyMessages1$outboundSchema
           ),
           components.RefusalPartSchema$outboundSchema,
           components.ReasoningPartSchema$outboundSchema,
@@ -3330,71 +5062,87 @@ export function deploymentStreamMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> = z
-    .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyType);
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type,
+  );
 /** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> =
-    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
 
 /** @internal */
-export const DeploymentStream2DeploymentsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsTtl
-> = z.nativeEnum(DeploymentStream2DeploymentsTtl);
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl);
 /** @internal */
-export const DeploymentStream2DeploymentsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsTtl
-> = DeploymentStream2DeploymentsTtl$inboundSchema;
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl$inboundSchema;
 
 /** @internal */
-export const DeploymentStream2DeploymentsCacheControl$inboundSchema: z.ZodType<
-  DeploymentStream2DeploymentsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema,
-  ttl: DeploymentStream2DeploymentsTtl$inboundSchema.default("5m"),
-});
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl$inboundSchema
+        .default("5m"),
+  });
 /** @internal */
-export type DeploymentStream2DeploymentsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
 
 /** @internal */
-export const DeploymentStream2DeploymentsCacheControl$outboundSchema: z.ZodType<
-  DeploymentStream2DeploymentsCacheControl$Outbound,
-  z.ZodTypeDef,
-  DeploymentStream2DeploymentsCacheControl
-> = z.object({
-  type: DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema,
-  ttl: DeploymentStream2DeploymentsTtl$outboundSchema.default("5m"),
-});
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Ttl$outboundSchema
+        .default("5m"),
+  });
 
-export function deploymentStream2DeploymentsCacheControlToJSON(
-  deploymentStream2DeploymentsCacheControl:
-    DeploymentStream2DeploymentsCacheControl,
+export function deploymentStream2DeploymentsRequestRequestBodyMessages3CacheControlToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl:
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl,
 ): string {
   return JSON.stringify(
-    DeploymentStream2DeploymentsCacheControl$outboundSchema.parse(
-      deploymentStream2DeploymentsCacheControl,
-    ),
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$outboundSchema
+      .parse(
+        deploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl,
+      ),
   );
 }
-export function deploymentStream2DeploymentsCacheControlFromJSON(
+export function deploymentStream2DeploymentsRequestRequestBodyMessages3CacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentStream2DeploymentsCacheControl,
+  DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentStream2DeploymentsCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentStream2DeploymentsCacheControl' from JSON`,
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl' from JSON`,
   );
 }
 
@@ -3406,7 +5154,7 @@ export const DeploymentStream2Deployments4$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file"),
   cache_control: z.lazy(() =>
-    DeploymentStream2DeploymentsCacheControl$inboundSchema
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$inboundSchema
   ).optional(),
   file: components.FileContentPartSchema$inboundSchema,
 }).transform((v) => {
@@ -3417,7 +5165,9 @@ export const DeploymentStream2Deployments4$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentStream2Deployments4$Outbound = {
   type: "file";
-  cache_control?: DeploymentStream2DeploymentsCacheControl$Outbound | undefined;
+  cache_control?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$Outbound
+    | undefined;
   file: components.FileContentPartSchema$Outbound;
 };
 
@@ -3429,7 +5179,7 @@ export const DeploymentStream2Deployments4$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file"),
   cacheControl: z.lazy(() =>
-    DeploymentStream2DeploymentsCacheControl$outboundSchema
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3CacheControl$outboundSchema
   ).optional(),
   file: components.FileContentPartSchema$outboundSchema,
 }).transform((v) => {
@@ -3458,64 +5208,211 @@ export function deploymentStream2Deployments4FromJSON(
 }
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema:
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages3Type);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl);
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema:
   z.ZodType<
-    DeploymentStreamContentDeploymentsRequestRequestBody2,
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema,
+    ttl: DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema
+      .default("5m"),
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl
+  > = z.object({
+    type:
+      DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema,
+    ttl:
+      DeploymentStream2DeploymentsRequestRequestBodyMessagesTtl$outboundSchema
+        .default("5m"),
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBodyMessagesCacheControlToJSON(
+  deploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl:
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema
+      .parse(
+        deploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl,
+      ),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBodyMessagesCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBody1$inboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBody1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("text"),
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type DeploymentStream2DeploymentsRequestRequestBody1$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBody1$outboundSchema:
+  z.ZodType<
+    DeploymentStream2DeploymentsRequestRequestBody1$Outbound,
+    z.ZodTypeDef,
+    DeploymentStream2DeploymentsRequestRequestBody1
+  > = z.object({
+    type: z.literal("text"),
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function deploymentStream2DeploymentsRequestRequestBody1ToJSON(
+  deploymentStream2DeploymentsRequestRequestBody1:
+    DeploymentStream2DeploymentsRequestRequestBody1,
+): string {
+  return JSON.stringify(
+    DeploymentStream2DeploymentsRequestRequestBody1$outboundSchema.parse(
+      deploymentStream2DeploymentsRequestRequestBody1,
+    ),
+  );
+}
+export function deploymentStream2DeploymentsRequestRequestBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStream2DeploymentsRequestRequestBody1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream2DeploymentsRequestRequestBody1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStream2DeploymentsRequestRequestBody1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages32,
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
+    z.lazy(() => DeploymentStream2DeploymentsRequestRequestBody1$inboundSchema),
     components.ImageContentPartSchema$inboundSchema,
     components.AudioContentPartSchema$inboundSchema,
     z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
   ]);
 /** @internal */
-export type DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$Outbound =
+  | DeploymentStream2DeploymentsRequestRequestBody1$Outbound
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | DeploymentStream2Deployments4$Outbound;
 
 /** @internal */
-export const DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema:
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$outboundSchema:
   z.ZodType<
-    DeploymentStreamContentDeploymentsRequestRequestBody2$Outbound,
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$Outbound,
     z.ZodTypeDef,
-    DeploymentStreamContentDeploymentsRequestRequestBody2
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages32
   > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
+    z.lazy(() =>
+      DeploymentStream2DeploymentsRequestRequestBody1$outboundSchema
     ),
     components.ImageContentPartSchema$outboundSchema,
     components.AudioContentPartSchema$outboundSchema,
     z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
   ]);
 
-export function deploymentStreamContentDeploymentsRequestRequestBody2ToJSON(
-  deploymentStreamContentDeploymentsRequestRequestBody2:
-    DeploymentStreamContentDeploymentsRequestRequestBody2,
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages32ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyMessages32:
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages32,
 ): string {
   return JSON.stringify(
-    DeploymentStreamContentDeploymentsRequestRequestBody2$outboundSchema.parse(
-      deploymentStreamContentDeploymentsRequestRequestBody2,
-    ),
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$outboundSchema
+      .parse(deploymentStreamContentDeploymentsRequestRequestBodyMessages32),
   );
 }
-export function deploymentStreamContentDeploymentsRequestRequestBody2FromJSON(
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages32FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentStreamContentDeploymentsRequestRequestBody2,
+  DeploymentStreamContentDeploymentsRequestRequestBodyMessages32,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentStreamContentDeploymentsRequestRequestBody2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBody2' from JSON`,
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages32$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyMessages32' from JSON`,
   );
 }
 
@@ -3527,22 +5424,20 @@ export const DeploymentStreamMessagesDeploymentsRequestContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBody1$inboundSchema
+      ),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
+    ])),
   ]);
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | DeploymentStream2DeploymentsRequestRequestBody1$Outbound
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | DeploymentStream2Deployments4$Outbound
@@ -3556,16 +5451,14 @@ export const DeploymentStreamMessagesDeploymentsRequestContent$outboundSchema:
     DeploymentStreamMessagesDeploymentsRequestContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBody1$outboundSchema
+      ),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
+    ])),
   ]);
 
 export function deploymentStreamMessagesDeploymentsRequestContentToJSON(
@@ -3604,16 +5497,14 @@ export const DeploymentStreamMessagesUserMessage$inboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBody1$inboundSchema
+      ),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => DeploymentStream2Deployments4$inboundSchema),
+    ])),
   ]),
 });
 /** @internal */
@@ -3623,7 +5514,7 @@ export type DeploymentStreamMessagesUserMessage$Outbound = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | DeploymentStream2DeploymentsRequestRequestBody1$Outbound
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | DeploymentStream2Deployments4$Outbound
@@ -3640,16 +5531,14 @@ export const DeploymentStreamMessagesUserMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() =>
+        DeploymentStream2DeploymentsRequestRequestBody1$outboundSchema
+      ),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => DeploymentStream2Deployments4$outboundSchema),
+    ])),
   ]),
 });
 
@@ -3674,16 +5563,186 @@ export function deploymentStreamMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type
+  > = z.nativeEnum(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type
+  > =
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type
+  > = z.nativeEnum(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type
+  > =
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyTtl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyTtl
+  > = z.nativeEnum(DeploymentStreamContentDeploymentsRequestRequestBodyTtl);
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyTtl
+  > = DeploymentStreamContentDeploymentsRequestRequestBodyTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema,
+    ttl: DeploymentStreamContentDeploymentsRequestRequestBodyTtl$inboundSchema
+      .default("5m"),
+  });
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22Type$outboundSchema,
+    ttl: DeploymentStreamContentDeploymentsRequestRequestBodyTtl$outboundSchema
+      .default("5m"),
+  });
+
+export function deploymentStreamContentDeploymentsRequestRequestBodyCacheControlToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyCacheControl:
+    DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$outboundSchema
+      .parse(deploymentStreamContentDeploymentsRequestRequestBodyCacheControl),
+  );
+}
+export function deploymentStreamContentDeploymentsRequestRequestBodyCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema,
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$Outbound =
+  {
+    type: string;
+    text: string;
+    cache_control?:
+      | DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2Type$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages22ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyMessages22:
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$outboundSchema
+      .parse(deploymentStreamContentDeploymentsRequestRequestBodyMessages22),
+  );
+}
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages22FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestRequestBodyMessages22,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyMessages22' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamMessagesDeploymentsContent$inboundSchema:
   z.ZodType<DeploymentStreamMessagesDeploymentsContent, z.ZodTypeDef, unknown> =
     z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
+      z.array(z.lazy(() =>
+        DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$inboundSchema
+      )),
     ]);
 /** @internal */
 export type DeploymentStreamMessagesDeploymentsContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$Outbound
+  >;
 
 /** @internal */
 export const DeploymentStreamMessagesDeploymentsContent$outboundSchema:
@@ -3693,7 +5752,9 @@ export const DeploymentStreamMessagesDeploymentsContent$outboundSchema:
     DeploymentStreamMessagesDeploymentsContent
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$outboundSchema
+    )),
   ]);
 
 export function deploymentStreamMessagesDeploymentsContentToJSON(
@@ -3731,14 +5792,20 @@ export const DeploymentStreamMessagesDeveloperMessage$inboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$inboundSchema
+    )),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type DeploymentStreamMessagesDeveloperMessage$Outbound = {
   role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content:
+    | string
+    | Array<
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$Outbound
+    >;
   name?: string | undefined;
 };
 
@@ -3751,7 +5818,9 @@ export const DeploymentStreamMessagesDeveloperMessage$outboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages22$outboundSchema
+    )),
   ]),
   name: z.string().optional(),
 });
@@ -3783,18 +5852,189 @@ export function deploymentStreamMessagesDeveloperMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType
+  > = z.nativeEnum(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType
+  > =
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type
+  > = z.nativeEnum(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type,
+  );
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type
+  > =
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestTtl$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsRequestTtl> = z
+    .nativeEnum(DeploymentStreamContentDeploymentsRequestTtl);
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamContentDeploymentsRequestTtl> =
+    DeploymentStreamContentDeploymentsRequestTtl$inboundSchema;
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestCacheControl$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type$inboundSchema,
+    ttl: DeploymentStreamContentDeploymentsRequestTtl$inboundSchema.default(
+      "5m",
+    ),
+  });
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestCacheControl
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages1Type$outboundSchema,
+    ttl: DeploymentStreamContentDeploymentsRequestTtl$outboundSchema.default(
+      "5m",
+    ),
+  });
+
+export function deploymentStreamContentDeploymentsRequestCacheControlToJSON(
+  deploymentStreamContentDeploymentsRequestCacheControl:
+    DeploymentStreamContentDeploymentsRequestCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsRequestCacheControl$outboundSchema.parse(
+      deploymentStreamContentDeploymentsRequestCacheControl,
+    ),
+  );
+}
+export function deploymentStreamContentDeploymentsRequestCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequestCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType$inboundSchema,
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound =
+  {
+    type: string;
+    text: string;
+    cache_control?:
+      | DeploymentStreamContentDeploymentsRequestCacheControl$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema:
+  z.ZodType<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2
+  > = z.object({
+    type:
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages2ToJSON(
+  deploymentStreamContentDeploymentsRequestRequestBodyMessages2:
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+): string {
+  return JSON.stringify(
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema
+      .parse(deploymentStreamContentDeploymentsRequestRequestBodyMessages2),
+  );
+}
+export function deploymentStreamContentDeploymentsRequestRequestBodyMessages2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamContentDeploymentsRequestRequestBodyMessages2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamContentDeploymentsRequestRequestBodyMessages2' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamMessagesContent$inboundSchema: z.ZodType<
   DeploymentStreamMessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
+  z.array(z.lazy(() =>
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema
+  )),
 ]);
 /** @internal */
 export type DeploymentStreamMessagesContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound
+  >;
 
 /** @internal */
 export const DeploymentStreamMessagesContent$outboundSchema: z.ZodType<
@@ -3803,7 +6043,9 @@ export const DeploymentStreamMessagesContent$outboundSchema: z.ZodType<
   DeploymentStreamMessagesContent
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
+  z.array(z.lazy(() =>
+    DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema
+  )),
 ]);
 
 export function deploymentStreamMessagesContentToJSON(
@@ -3834,14 +6076,20 @@ export const DeploymentStreamMessagesSystemMessage$inboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$inboundSchema
+    )),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type DeploymentStreamMessagesSystemMessage$Outbound = {
   role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content:
+    | string
+    | Array<
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$Outbound
+    >;
   name?: string | undefined;
 };
 
@@ -3854,7 +6102,9 @@ export const DeploymentStreamMessagesSystemMessage$outboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      DeploymentStreamContentDeploymentsRequestRequestBodyMessages2$outboundSchema
+    )),
   ]),
   name: z.string().optional(),
 });

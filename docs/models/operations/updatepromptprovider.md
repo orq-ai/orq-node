@@ -5,11 +5,11 @@
 ```typescript
 import { UpdatePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptProvider = "mistral";
+let value: UpdatePromptProvider = "openailike";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm" | "openailike" | "cerebras" | "bytedance" | "mistral"
 ```

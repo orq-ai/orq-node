@@ -388,30 +388,29 @@ export type DeploymentsModelParameters = {
 };
 
 export const DeploymentsProvider = {
-  Openai: "openai",
-  Groq: "groq",
   Cohere: "cohere",
-  Azure: "azure",
-  Aws: "aws",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
   Google: "google",
   GoogleAi: "google-ai",
-  Huggingface: "huggingface",
-  Togetherai: "togetherai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
   Perplexity: "perplexity",
-  Anthropic: "anthropic",
-  Leonardoai: "leonardoai",
+  Groq: "groq",
   Fal: "fal",
+  Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Cerebras: "cerebras",
   Openailike: "openailike",
+  Cerebras: "cerebras",
   Bytedance: "bytedance",
   Mistral: "mistral",
-  Deepseek: "deepseek",
-  Contextualai: "contextualai",
-  Moonshotai: "moonshotai",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 
@@ -532,7 +531,7 @@ export type DeploymentsMessages = {
    */
   content: string | Array<Deployments21 | Deployments22 | Deployments23> | null;
   toolCalls?: Array<DeploymentsToolCalls> | undefined;
-  toolCallId?: string | null | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type DeploymentsPromptConfig = {
@@ -1758,7 +1757,7 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => DeploymentsToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.nullable(z.string()).optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -1775,7 +1774,7 @@ export type DeploymentsMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<DeploymentsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1797,7 +1796,7 @@ export const DeploymentsMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => DeploymentsToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

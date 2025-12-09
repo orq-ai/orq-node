@@ -62,7 +62,6 @@ export type ToolExecutionStartedStreamingEventData = {
   toolExecutionContext: ToolExecutionContext;
   responseId?: string | undefined;
   workflowRunId: string;
-  stream?: boolean | undefined;
 };
 
 /**
@@ -216,7 +215,6 @@ export const ToolExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
   tool_execution_context: z.lazy(() => ToolExecutionContext$inboundSchema),
   responseId: z.string().optional(),
   workflowRunId: z.string(),
-  stream: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_id": "toolId",
@@ -237,7 +235,6 @@ export type ToolExecutionStartedStreamingEventData$Outbound = {
   tool_execution_context: ToolExecutionContext$Outbound;
   responseId?: string | undefined;
   workflowRunId: string;
-  stream?: boolean | undefined;
 };
 
 /** @internal */
@@ -254,7 +251,6 @@ export const ToolExecutionStartedStreamingEventData$outboundSchema: z.ZodType<
   toolExecutionContext: z.lazy(() => ToolExecutionContext$outboundSchema),
   responseId: z.string().optional(),
   workflowRunId: z.string(),
-  stream: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolId: "tool_id",

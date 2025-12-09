@@ -11,9 +11,9 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.UpdatePromptContentPrompts2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: operations.UpdatePromptContentPrompts2[] = [];
 ```
 

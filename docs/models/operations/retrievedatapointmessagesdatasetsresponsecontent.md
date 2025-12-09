@@ -11,16 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.RetrieveDatapointContent2[]`
+### `operations.RetrieveDatapointContentDatasetsResponse2[]`
 
 ```typescript
-const value: operations.RetrieveDatapointContent2[] = [
-  {
-    type: "image_url",
-    imageUrl: {
-      url: "https://fatal-overload.name/",
-    },
-  },
-];
+const value: operations.RetrieveDatapointContentDatasetsResponse2[] = [];
 ```
 

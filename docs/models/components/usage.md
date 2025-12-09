@@ -1,6 +1,6 @@
 # Usage
 
-Token usage statistics for the complete response
+Usage statistics for the completion request.
 
 ## Example Usage
 

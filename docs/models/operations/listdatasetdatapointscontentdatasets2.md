@@ -1,41 +1,20 @@
 # ListDatasetDatapointsContentDatasets2
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { ListDatasetDatapointsContentDatasets2 } from "@orq-ai/node/models/operations";
+
+let value: ListDatasetDatapointsContentDatasets2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.RefusalPartSchema`
+## Fields
 
-```typescript
-const value: components.RefusalPartSchema = {
-  type: "refusal",
-};
-```
-
-### `components.ReasoningPartSchema`
-
-```typescript
-const value: components.ReasoningPartSchema = {
-  type: "reasoning",
-  reasoning: "<value>",
-  signature: "<value>",
-};
-```
-
-### `components.RedactedReasoningPartSchema`
-
-```typescript
-const value: components.RedactedReasoningPartSchema = {
-  type: "redacted_reasoning",
-  data: "<value>",
-};
-```
-
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                     | [operations.ListDatasetDatapointsContentDatasetsType](../../models/operations/listdatasetdatapointscontentdatasetstype.md)                 | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `text`                                                                                                                                     | *string*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `cacheControl`                                                                                                                             | [operations.ListDatasetDatapointsContentDatasetsCacheControl](../../models/operations/listdatasetdatapointscontentdatasetscachecontrol.md) | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |
