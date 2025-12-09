@@ -132,48 +132,9 @@ export type RunAgentModelConfigurationStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const RunAgentModelConfigurationType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type RunAgentModelConfigurationType = ClosedEnum<
-  typeof RunAgentModelConfigurationType
->;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const RunAgentModelConfigurationThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type RunAgentModelConfigurationThinkingLevel = ClosedEnum<
-  typeof RunAgentModelConfigurationThinkingLevel
->;
-
-export type RunAgentModelConfigurationThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: RunAgentModelConfigurationType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?: RunAgentModelConfigurationThinkingLevel | undefined;
-};
+export type RunAgentModelConfigurationThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -291,7 +252,10 @@ export type RunAgentModelConfigurationParameters = {
    * Options for streaming response. Only set this when you set stream: true.
    */
   streamOptions?: RunAgentModelConfigurationStreamOptions | null | undefined;
-  thinking?: RunAgentModelConfigurationThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -476,48 +440,9 @@ export type RunAgentFallbackModelConfigurationStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const RunAgentFallbackModelConfigurationType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type RunAgentFallbackModelConfigurationType = ClosedEnum<
-  typeof RunAgentFallbackModelConfigurationType
->;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const RunAgentFallbackModelConfigurationThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type RunAgentFallbackModelConfigurationThinkingLevel = ClosedEnum<
-  typeof RunAgentFallbackModelConfigurationThinkingLevel
->;
-
-export type RunAgentFallbackModelConfigurationThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: RunAgentFallbackModelConfigurationType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?: RunAgentFallbackModelConfigurationThinkingLevel | undefined;
-};
+export type RunAgentFallbackModelConfigurationThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -642,7 +567,10 @@ export type RunAgentFallbackModelConfigurationParameters = {
     | RunAgentFallbackModelConfigurationStreamOptions
     | null
     | undefined;
-  thinking?: RunAgentFallbackModelConfigurationThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -2016,62 +1944,28 @@ export function runAgentModelConfigurationStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const RunAgentModelConfigurationType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentModelConfigurationType
-> = z.nativeEnum(RunAgentModelConfigurationType);
-/** @internal */
-export const RunAgentModelConfigurationType$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentModelConfigurationType
-> = RunAgentModelConfigurationType$inboundSchema;
-
-/** @internal */
-export const RunAgentModelConfigurationThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentModelConfigurationThinkingLevel> = z
-    .nativeEnum(RunAgentModelConfigurationThinkingLevel);
-/** @internal */
-export const RunAgentModelConfigurationThinkingLevel$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentModelConfigurationThinkingLevel> =
-    RunAgentModelConfigurationThinkingLevel$inboundSchema;
-
-/** @internal */
 export const RunAgentModelConfigurationThinking$inboundSchema: z.ZodType<
   RunAgentModelConfigurationThinking,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RunAgentModelConfigurationType$inboundSchema,
-  budget_tokens: z.number(),
-  thinking_level: RunAgentModelConfigurationThinkingLevel$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-    "thinking_level": "thinkingLevel",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
 /** @internal */
-export type RunAgentModelConfigurationThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type RunAgentModelConfigurationThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
   RunAgentModelConfigurationThinking$Outbound,
   z.ZodTypeDef,
   RunAgentModelConfigurationThinking
-> = z.object({
-  type: RunAgentModelConfigurationType$outboundSchema,
-  budgetTokens: z.number(),
-  thinkingLevel: RunAgentModelConfigurationThinkingLevel$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
 
 export function runAgentModelConfigurationThinkingToJSON(
   runAgentModelConfigurationThinking: RunAgentModelConfigurationThinking,
@@ -2273,8 +2167,10 @@ export const RunAgentModelConfigurationParameters$inboundSchema: z.ZodType<
   stream_options: z.nullable(
     z.lazy(() => RunAgentModelConfigurationStreamOptions$inboundSchema),
   ).optional(),
-  thinking: z.lazy(() => RunAgentModelConfigurationThinking$inboundSchema)
-    .optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
   top_k: z.nullable(z.number()).optional(),
@@ -2325,7 +2221,10 @@ export type RunAgentModelConfigurationParameters$Outbound = {
     | RunAgentModelConfigurationStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: RunAgentModelConfigurationThinking$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -2362,8 +2261,10 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   streamOptions: z.nullable(
     z.lazy(() => RunAgentModelConfigurationStreamOptions$outboundSchema),
   ).optional(),
-  thinking: z.lazy(() => RunAgentModelConfigurationThinking$outboundSchema)
-    .optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
   topK: z.nullable(z.number()).optional(),
@@ -2985,45 +2886,16 @@ export function runAgentFallbackModelConfigurationStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const RunAgentFallbackModelConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationType> = z.nativeEnum(
-    RunAgentFallbackModelConfigurationType,
-  );
-/** @internal */
-export const RunAgentFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationType> =
-    RunAgentFallbackModelConfigurationType$inboundSchema;
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationThinkingLevel> = z
-    .nativeEnum(RunAgentFallbackModelConfigurationThinkingLevel);
-/** @internal */
-export const RunAgentFallbackModelConfigurationThinkingLevel$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationThinkingLevel> =
-    RunAgentFallbackModelConfigurationThinkingLevel$inboundSchema;
-
-/** @internal */
 export const RunAgentFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<RunAgentFallbackModelConfigurationThinking, z.ZodTypeDef, unknown> =
-    z.object({
-      type: RunAgentFallbackModelConfigurationType$inboundSchema,
-      budget_tokens: z.number(),
-      thinking_level:
-        RunAgentFallbackModelConfigurationThinkingLevel$inboundSchema
-          .optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "budget_tokens": "budgetTokens",
-        "thinking_level": "thinkingLevel",
-      });
-    });
+    z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+    ]);
 /** @internal */
-export type RunAgentFallbackModelConfigurationThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type RunAgentFallbackModelConfigurationThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationThinking$outboundSchema:
@@ -3031,17 +2903,10 @@ export const RunAgentFallbackModelConfigurationThinking$outboundSchema:
     RunAgentFallbackModelConfigurationThinking$Outbound,
     z.ZodTypeDef,
     RunAgentFallbackModelConfigurationThinking
-  > = z.object({
-    type: RunAgentFallbackModelConfigurationType$outboundSchema,
-    budgetTokens: z.number(),
-    thinkingLevel:
-      RunAgentFallbackModelConfigurationThinkingLevel$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      budgetTokens: "budget_tokens",
-      thinkingLevel: "thinking_level",
-    });
-  });
+  > = z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]);
 
 export function runAgentFallbackModelConfigurationThinkingToJSON(
   runAgentFallbackModelConfigurationThinking:
@@ -3262,9 +3127,10 @@ export const RunAgentFallbackModelConfigurationParameters$inboundSchema:
         RunAgentFallbackModelConfigurationStreamOptions$inboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      RunAgentFallbackModelConfigurationThinking$inboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),
     top_k: z.nullable(z.number()).optional(),
@@ -3315,7 +3181,10 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | RunAgentFallbackModelConfigurationStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: RunAgentFallbackModelConfigurationThinking$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -3357,9 +3226,10 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
         RunAgentFallbackModelConfigurationStreamOptions$outboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      RunAgentFallbackModelConfigurationThinking$outboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
     topK: z.nullable(z.number()).optional(),
@@ -4004,7 +3874,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KBZ0NWKVJ280ZVT2TNR34K3G"),
+    id: z.string().default("01KC03208GAGNPAQTBB2DXMY8W"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4023,7 +3893,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KBZ0NWKVJ280ZVT2TNR34K3G"),
+  id: z.string().default("01KC03208GAGNPAQTBB2DXMY8W"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),

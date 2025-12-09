@@ -1,20 +1,22 @@
 # UpdateAgentThinking
 
-## Example Usage
+
+## Supported Types
+
+### `components.ThinkingConfigDisabledSchema`
 
 ```typescript
-import { UpdateAgentThinking } from "@orq-ai/node/models/operations";
-
-let value: UpdateAgentThinking = {
-  type: "enabled",
-  budgetTokens: 5701.81,
+const value: components.ThinkingConfigDisabledSchema = {
+  type: "disabled",
 };
 ```
 
-## Fields
+### `components.ThinkingConfigEnabledSchema`
 
-| Field                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                                                        | [operations.UpdateAgentType](../../models/operations/updateagenttype.md)                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Enables or disables the thinking mode capability                                                                                                                                                                              |
-| `budgetTokens`                                                                                                                                                                                                                | *number*                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                            | Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`. |
-| `thinkingLevel`                                                                                                                                                                                                               | [operations.UpdateAgentThinkingLevel](../../models/operations/updateagentthinkinglevel.md)                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                            | The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.                           |
+```typescript
+const value: components.ThinkingConfigEnabledSchema = {
+  type: "enabled",
+  budgetTokens: 4958.21,
+};
+```
+

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveAgentRequestRequest = {
@@ -290,48 +291,9 @@ export type RetrieveAgentRequestStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const RetrieveAgentRequestType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type RetrieveAgentRequestType = ClosedEnum<
-  typeof RetrieveAgentRequestType
->;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const RetrieveAgentRequestThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type RetrieveAgentRequestThinkingLevel = ClosedEnum<
-  typeof RetrieveAgentRequestThinkingLevel
->;
-
-export type RetrieveAgentRequestThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: RetrieveAgentRequestType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?: RetrieveAgentRequestThinkingLevel | undefined;
-};
+export type RetrieveAgentRequestThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -453,7 +415,10 @@ export type RetrieveAgentRequestParameters = {
    * Options for streaming response. Only set this when you set stream: true.
    */
   streamOptions?: RetrieveAgentRequestStreamOptions | null | undefined;
-  thinking?: RetrieveAgentRequestThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -618,51 +583,9 @@ export type RetrieveAgentRequestFallbackModelConfigurationStreamOptions = {
   includeUsage?: boolean | undefined;
 };
 
-/**
- * Enables or disables the thinking mode capability
- */
-export const RetrieveAgentRequestFallbackModelConfigurationType = {
-  Enabled: "enabled",
-  Disabled: "disabled",
-} as const;
-/**
- * Enables or disables the thinking mode capability
- */
-export type RetrieveAgentRequestFallbackModelConfigurationType = ClosedEnum<
-  typeof RetrieveAgentRequestFallbackModelConfigurationType
->;
-
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export const RetrieveAgentRequestFallbackModelConfigurationThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
- */
-export type RetrieveAgentRequestFallbackModelConfigurationThinkingLevel =
-  ClosedEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationThinkingLevel
-  >;
-
-export type RetrieveAgentRequestFallbackModelConfigurationThinking = {
-  /**
-   * Enables or disables the thinking mode capability
-   */
-  type: RetrieveAgentRequestFallbackModelConfigurationType;
-  /**
-   * Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be ≥1024 and less than `max_tokens`.
-   */
-  budgetTokens: number;
-  /**
-   * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
-   */
-  thinkingLevel?:
-    | RetrieveAgentRequestFallbackModelConfigurationThinkingLevel
-    | undefined;
-};
+export type RetrieveAgentRequestFallbackModelConfigurationThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -789,7 +712,10 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
     | RetrieveAgentRequestFallbackModelConfigurationStreamOptions
     | null
     | undefined;
-  thinking?: RetrieveAgentRequestFallbackModelConfigurationThinking | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -898,9 +824,6 @@ export type RetrieveAgentRequestKnowledgeBases = {
  */
 export type RetrieveAgentRequestResponseBody = {
   id: string;
-  /**
-   * Unique identifier for the agent within the workspace
-   */
   key: string;
   displayName: string;
   workspaceId: string;
@@ -1767,60 +1690,28 @@ export function retrieveAgentRequestStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestType
-> = z.nativeEnum(RetrieveAgentRequestType);
-/** @internal */
-export const RetrieveAgentRequestType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestType
-> = RetrieveAgentRequestType$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestThinkingLevel$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestThinkingLevel
-> = z.nativeEnum(RetrieveAgentRequestThinkingLevel);
-/** @internal */
-export const RetrieveAgentRequestThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestThinkingLevel
-> = RetrieveAgentRequestThinkingLevel$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestThinking$inboundSchema: z.ZodType<
   RetrieveAgentRequestThinking,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestType$inboundSchema,
-  budget_tokens: z.number(),
-  thinking_level: RetrieveAgentRequestThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-    "thinking_level": "thinkingLevel",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
 /** @internal */
-export type RetrieveAgentRequestThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type RetrieveAgentRequestThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const RetrieveAgentRequestThinking$outboundSchema: z.ZodType<
   RetrieveAgentRequestThinking$Outbound,
   z.ZodTypeDef,
   RetrieveAgentRequestThinking
-> = z.object({
-  type: RetrieveAgentRequestType$outboundSchema,
-  budgetTokens: z.number(),
-  thinkingLevel: RetrieveAgentRequestThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
-  });
-});
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
 
 export function retrieveAgentRequestThinkingToJSON(
   retrieveAgentRequestThinking: RetrieveAgentRequestThinking,
@@ -2027,7 +1918,10 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   stream_options: z.nullable(
     z.lazy(() => RetrieveAgentRequestStreamOptions$inboundSchema),
   ).optional(),
-  thinking: z.lazy(() => RetrieveAgentRequestThinking$inboundSchema).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
   top_k: z.nullable(z.number()).optional(),
@@ -2077,7 +1971,10 @@ export type RetrieveAgentRequestParameters$Outbound = {
     | RetrieveAgentRequestStreamOptions$Outbound
     | null
     | undefined;
-  thinking?: RetrieveAgentRequestThinking$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   top_k?: number | null | undefined;
@@ -2115,8 +2012,10 @@ export const RetrieveAgentRequestParameters$outboundSchema: z.ZodType<
   streamOptions: z.nullable(
     z.lazy(() => RetrieveAgentRequestStreamOptions$outboundSchema),
   ).optional(),
-  thinking: z.lazy(() => RetrieveAgentRequestThinking$outboundSchema)
-    .optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
   topK: z.nullable(z.number()).optional(),
@@ -2672,49 +2571,19 @@ export function retrieveAgentRequestFallbackModelConfigurationStreamOptionsFromJ
 }
 
 /** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationType> = z
-    .nativeEnum(RetrieveAgentRequestFallbackModelConfigurationType);
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationType> =
-    RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationThinkingLevel
-  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationThinkingLevel);
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationThinkingLevel$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationThinkingLevel
-  > = RetrieveAgentRequestFallbackModelConfigurationThinkingLevel$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationThinking$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfigurationThinking,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema,
-    budget_tokens: z.number(),
-    thinking_level:
-      RetrieveAgentRequestFallbackModelConfigurationThinkingLevel$inboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "budget_tokens": "budgetTokens",
-      "thinking_level": "thinkingLevel",
-    });
-  });
+  > = z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]);
 /** @internal */
-export type RetrieveAgentRequestFallbackModelConfigurationThinking$Outbound = {
-  type: string;
-  budget_tokens: number;
-  thinking_level?: string | undefined;
-};
+export type RetrieveAgentRequestFallbackModelConfigurationThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationThinking$outboundSchema:
@@ -2722,18 +2591,10 @@ export const RetrieveAgentRequestFallbackModelConfigurationThinking$outboundSche
     RetrieveAgentRequestFallbackModelConfigurationThinking$Outbound,
     z.ZodTypeDef,
     RetrieveAgentRequestFallbackModelConfigurationThinking
-  > = z.object({
-    type: RetrieveAgentRequestFallbackModelConfigurationType$outboundSchema,
-    budgetTokens: z.number(),
-    thinkingLevel:
-      RetrieveAgentRequestFallbackModelConfigurationThinkingLevel$outboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      budgetTokens: "budget_tokens",
-      thinkingLevel: "thinking_level",
-    });
-  });
+  > = z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]);
 
 export function retrieveAgentRequestFallbackModelConfigurationThinkingToJSON(
   retrieveAgentRequestFallbackModelConfigurationThinking:
@@ -2976,9 +2837,10 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
         RetrieveAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationThinking$inboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),
     top_k: z.nullable(z.number()).optional(),
@@ -3036,7 +2898,8 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters$Outbound =
       | null
       | undefined;
     thinking?:
-      | RetrieveAgentRequestFallbackModelConfigurationThinking$Outbound
+      | components.ThinkingConfigDisabledSchema$Outbound
+      | components.ThinkingConfigEnabledSchema$Outbound
       | undefined;
     temperature?: number | null | undefined;
     top_p?: number | null | undefined;
@@ -3086,9 +2949,10 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$outboundSc
         RetrieveAgentRequestFallbackModelConfigurationStreamOptions$outboundSchema
       ),
     ).optional(),
-    thinking: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationThinking$outboundSchema
-    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+    ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
     topK: z.nullable(z.number()).optional(),

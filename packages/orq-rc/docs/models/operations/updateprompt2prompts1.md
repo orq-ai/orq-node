@@ -1,7 +1,5 @@
 # UpdatePrompt2Prompts1
 
-Text content part of a prompt message
-
 ## Example Usage
 
 ```typescript
@@ -15,7 +13,8 @@ let value: UpdatePrompt2Prompts1 = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
-| `text`             | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `type`                                                                                       | *"text"*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `text`                                                                                       | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `cacheControl`                                                                               | [operations.UpdatePrompt2CacheControl](../../models/operations/updateprompt2cachecontrol.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

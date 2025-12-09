@@ -1,6 +1,6 @@
 # PrefixMessagesContent
 
-The contents of the system message.
+The contents of the developer message.
 
 
 ## Supported Types
@@ -11,9 +11,9 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.Content2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: operations.Content2[] = [];
 ```
 

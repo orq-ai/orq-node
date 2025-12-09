@@ -11,12 +11,13 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.ListDatasetDatapointsContentDatasets2[]`
+### `operations.ListDatasetDatapointsContentDatasetsResponse2002[]`
 
 ```typescript
-const value: operations.ListDatasetDatapointsContentDatasets2[] = [
+const value: operations.ListDatasetDatapointsContentDatasetsResponse2002[] = [
   {
-    type: "refusal",
+    type: "redacted_reasoning",
+    data: "<value>",
   },
 ];
 ```

@@ -1,41 +1,20 @@
 # DeploymentStreamContentDeploymentsRequestRequestBodyMessages2
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamContentDeploymentsRequestRequestBodyMessages2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.RefusalPartSchema`
+## Fields
 
-```typescript
-const value: components.RefusalPartSchema = {
-  type: "refusal",
-};
-```
-
-### `components.ReasoningPartSchema`
-
-```typescript
-const value: components.ReasoningPartSchema = {
-  type: "reasoning",
-  reasoning: "<value>",
-  signature: "<value>",
-};
-```
-
-### `components.RedactedReasoningPartSchema`
-
-```typescript
-const value: components.RedactedReasoningPartSchema = {
-  type: "redacted_reasoning",
-  data: "<value>",
-};
-```
-
+| Field                                                                                                                                                                      | Type                                                                                                                                                                       | Required                                                                                                                                                                   | Description                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                     | [operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessagesType](../../models/operations/deploymentstreamcontentdeploymentsrequestrequestbodymessagestype.md) | :heavy_check_mark:                                                                                                                                                         | N/A                                                                                                                                                                        |
+| `text`                                                                                                                                                                     | *string*                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                         | N/A                                                                                                                                                                        |
+| `cacheControl`                                                                                                                                                             | [operations.DeploymentStreamContentDeploymentsRequestCacheControl](../../models/operations/deploymentstreamcontentdeploymentsrequestcachecontrol.md)                       | :heavy_minus_sign:                                                                                                                                                         | N/A                                                                                                                                                                        |

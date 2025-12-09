@@ -11,11 +11,16 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2[]`
+### `operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52[]`
 
 ```typescript
 const value:
-  operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2[] =
-    [];
+  operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52[] =
+    [
+      {
+        type: "text",
+        text: "<value>",
+      },
+    ];
 ```
 

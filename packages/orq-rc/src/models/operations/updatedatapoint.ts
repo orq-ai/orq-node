@@ -10,15 +10,89 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UpdateDatapointContentDatasetsRequest2 =
-  components.TextContentPartSchema;
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type = {
+  Text: "text",
+} as const;
+export type UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type =
+  ClosedEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsRequestRequestBodyTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsRequestRequestBodyTtl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsRequestRequestBodyTtl
+>;
+
+export type UpdateDatapoint2DatasetsRequestRequestBodyCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapoint2DatasetsRequestRequestBodyTtl | undefined;
+};
+
+export type UpdateDatapoint2DatasetsRequest1 = {
+  type: UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type;
+  text: string;
+  cacheControl?:
+    | UpdateDatapoint2DatasetsRequestRequestBodyCacheControl
+    | undefined;
+};
+
+export type UpdateDatapointContentDatasetsRequestRequestBodyMessages2 =
+  UpdateDatapoint2DatasetsRequest1;
 
 /**
  * The contents of the tool message.
  */
 export type UpdateDatapointMessagesDatasetsRequestRequestBody5Content =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapoint2DatasetsRequest1>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -87,7 +161,7 @@ export type UpdateDatapointMessagesToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapoint2DatasetsRequest1>;
   /**
    * Tool call that this message is responding to.
    */
@@ -95,8 +169,72 @@ export type UpdateDatapointMessagesToolMessage = {
   cacheControl?: UpdateDatapointMessagesCacheControl | undefined;
 };
 
-export type UpdateDatapointContentDatasets2 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type =
+  ClosedEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsRequestTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsRequestTtl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsRequestTtl
+>;
+
+export type UpdateDatapoint2DatasetsRequestCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapoint2DatasetsRequestTtl | undefined;
+};
+
+export type UpdateDatapoint2Datasets1 = {
+  type: "text";
+  text: string;
+  cacheControl?: UpdateDatapoint2DatasetsRequestCacheControl | undefined;
+};
+
+export type UpdateDatapointContentDatasetsRequestRequestBody2 =
+  | UpdateDatapoint2Datasets1
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -107,7 +245,7 @@ export type UpdateDatapointContentDatasets2 =
 export type UpdateDatapointMessagesDatasetsRequestRequestBodyContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | UpdateDatapoint2Datasets1
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -170,7 +308,7 @@ export type UpdateDatapointMessagesAssistantMessage = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | UpdateDatapoint2Datasets1
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -197,6 +335,77 @@ export type UpdateDatapointMessagesAssistantMessage = {
    * The tool calls generated by the model, such as function calls.
    */
   toolCalls?: Array<UpdateDatapointMessagesToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsRequestRequestBodyType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsRequestRequestBodyType = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsRequestRequestBodyType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsTtl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsTtl
+>;
+
+export type UpdateDatapoint2DatasetsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapoint2DatasetsRequestRequestBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapoint2DatasetsTtl | undefined;
+};
+
+export type UpdateDatapoint24 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: UpdateDatapoint2DatasetsCacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
 };
 
 /**
@@ -256,20 +465,14 @@ export type UpdateDatapoint2CacheControl = {
   ttl?: UpdateDatapoint2Ttl | undefined;
 };
 
-export type UpdateDatapoint24 = {
-  /**
-   * The type of the content part. Always `file`.
-   */
-  type: "file";
+export type UpdateDatapoint21 = {
+  type: "text";
+  text: string;
   cacheControl?: UpdateDatapoint2CacheControl | undefined;
-  /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
-   */
-  file: components.FileContentPartSchema;
 };
 
-export type UpdateDatapointContent2 =
-  | (components.TextContentPartSchema & { type: "text" })
+export type UpdateDatapointContentDatasetsRequest2 =
+  | UpdateDatapoint21
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
   | UpdateDatapoint24;
@@ -280,7 +483,7 @@ export type UpdateDatapointContent2 =
 export type UpdateDatapointMessagesDatasetsRequestContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | UpdateDatapoint21
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
     | UpdateDatapoint24
@@ -301,11 +504,83 @@ export type UpdateDatapointMessagesUserMessage = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | UpdateDatapoint21
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
       | UpdateDatapoint24
     >;
+};
+
+export const UpdateDatapointContentDatasetsRequestType = {
+  Text: "text",
+} as const;
+export type UpdateDatapointContentDatasetsRequestType = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsRequestType
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapointContentDatasetsRequestRequestBodyType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapointContentDatasetsRequestRequestBodyType = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsRequestRequestBodyType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapointContentDatasetsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapointContentDatasetsTtl = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsTtl
+>;
+
+export type UpdateDatapointContentDatasetsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapointContentDatasetsRequestRequestBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapointContentDatasetsTtl | undefined;
+};
+
+export type UpdateDatapointContentDatasets2 = {
+  type: UpdateDatapointContentDatasetsRequestType;
+  text: string;
+  cacheControl?: UpdateDatapointContentDatasetsCacheControl | undefined;
 };
 
 /**
@@ -313,7 +588,7 @@ export type UpdateDatapointMessagesUserMessage = {
  */
 export type UpdateDatapointMessagesDatasetsContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapointContentDatasets2>;
 
 export type UpdateDatapointMessagesDeveloperMessage = {
   /**
@@ -323,11 +598,83 @@ export type UpdateDatapointMessagesDeveloperMessage = {
   /**
    * The contents of the developer message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapointContentDatasets2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
   name?: string | undefined;
+};
+
+export const UpdateDatapointContentType = {
+  Text: "text",
+} as const;
+export type UpdateDatapointContentType = ClosedEnum<
+  typeof UpdateDatapointContentType
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapointContentDatasetsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapointContentDatasetsType = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapointContentTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapointContentTtl = ClosedEnum<
+  typeof UpdateDatapointContentTtl
+>;
+
+export type UpdateDatapointContentCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapointContentDatasetsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapointContentTtl | undefined;
+};
+
+export type UpdateDatapointContent2 = {
+  type: UpdateDatapointContentType;
+  text: string;
+  cacheControl?: UpdateDatapointContentCacheControl | undefined;
 };
 
 /**
@@ -335,7 +682,7 @@ export type UpdateDatapointMessagesDeveloperMessage = {
  */
 export type UpdateDatapointMessagesContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapointContent2>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -348,7 +695,7 @@ export type UpdateDatapointMessagesSystemMessage = {
   /**
    * The contents of the system message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapointContent2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -394,15 +741,99 @@ export type UpdateDatapointRequest = {
   requestBody?: UpdateDatapointRequestBody | undefined;
 };
 
-export type UpdateDatapointContentDatasetsResponse200ApplicationJson2 =
-  components.TextContentPartSchema;
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
+  {
+    Text: "text",
+  } as const;
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  >;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl =
+  {
+    Fivem: "5m",
+    Oneh: "1h",
+  } as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl
+  >;
+
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl =
+  {
+    /**
+     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+     */
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type;
+    /**
+     * The time-to-live for the cache control breakpoint. This may be one of the following values:
+     *
+     * @remarks
+     *
+     * - `5m`: 5 minutes
+     * - `1h`: 1 hour
+     *
+     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+     */
+    ttl?:
+      | UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl
+      | undefined;
+  };
+
+export type UpdateDatapoint2DatasetsResponse200ApplicationJson1 = {
+  type: UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType;
+  text: string;
+  cacheControl?:
+    | UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl
+    | undefined;
+};
+
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2 =
+  UpdateDatapoint2DatasetsResponse200ApplicationJson1;
 
 /**
  * The contents of the tool message.
  */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBody5Content =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapoint2DatasetsResponse200ApplicationJson1>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -471,7 +902,7 @@ export type UpdateDatapointMessagesDatasetsToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapoint2DatasetsResponse200ApplicationJson1>;
   /**
    * Tool call that this message is responding to.
    */
@@ -479,8 +910,78 @@ export type UpdateDatapointMessagesDatasetsToolMessage = {
   cacheControl?: UpdateDatapointMessagesDatasetsCacheControl | undefined;
 };
 
-export type UpdateDatapointContentDatasetsResponse2002 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl
+>;
+
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type:
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl | undefined;
+};
+
+export type UpdateDatapoint2DatasetsResponse2001 = {
+  type: "text";
+  text: string;
+  cacheControl?:
+    | UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl
+    | undefined;
+};
+
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2 =
+  | UpdateDatapoint2DatasetsResponse2001
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -491,7 +992,7 @@ export type UpdateDatapointContentDatasetsResponse2002 =
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | UpdateDatapoint2DatasetsResponse2001
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -554,7 +1055,7 @@ export type UpdateDatapointMessagesDatasetsAssistantMessage = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | UpdateDatapoint2DatasetsResponse2001
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -586,15 +1087,17 @@ export type UpdateDatapointMessagesDatasetsAssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const UpdateDatapoint2DatasetsResponse200Type = {
-  Ephemeral: "ephemeral",
-} as const;
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type UpdateDatapoint2DatasetsResponse200Type = ClosedEnum<
-  typeof UpdateDatapoint2DatasetsResponse200Type
->;
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type
+  >;
 
 /**
  * The time-to-live for the cache control breakpoint. This may be one of the following values:
@@ -606,7 +1109,7 @@ export type UpdateDatapoint2DatasetsResponse200Type = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const UpdateDatapoint2DatasetsTtl = {
+export const UpdateDatapoint2DatasetsResponse200Ttl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -620,15 +1123,16 @@ export const UpdateDatapoint2DatasetsTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type UpdateDatapoint2DatasetsTtl = ClosedEnum<
-  typeof UpdateDatapoint2DatasetsTtl
+export type UpdateDatapoint2DatasetsResponse200Ttl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsResponse200Ttl
 >;
 
-export type UpdateDatapoint2DatasetsCacheControl = {
+export type UpdateDatapoint2DatasetsResponse200CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: UpdateDatapoint2DatasetsResponse200Type;
+  type:
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -639,7 +1143,7 @@ export type UpdateDatapoint2DatasetsCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: UpdateDatapoint2DatasetsTtl | undefined;
+  ttl?: UpdateDatapoint2DatasetsResponse200Ttl | undefined;
 };
 
 export type UpdateDatapoint2Datasets4 = {
@@ -647,15 +1151,83 @@ export type UpdateDatapoint2Datasets4 = {
    * The type of the content part. Always `file`.
    */
   type: "file";
-  cacheControl?: UpdateDatapoint2DatasetsCacheControl | undefined;
+  cacheControl?: UpdateDatapoint2DatasetsResponse200CacheControl | undefined;
   /**
    * File data for the content part. Must contain either file_data or uri, but not both.
    */
   file: components.FileContentPartSchema;
 };
 
-export type UpdateDatapointContentDatasetsResponse2 =
-  | (components.TextContentPartSchema & { type: "text" })
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
+  ClosedEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapoint2DatasetsResponseTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapoint2DatasetsResponseTtl = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsResponseTtl
+>;
+
+export type UpdateDatapoint2DatasetsResponseCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type:
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapoint2DatasetsResponseTtl | undefined;
+};
+
+export type UpdateDatapoint2DatasetsResponse1 = {
+  type: "text";
+  text: string;
+  cacheControl?: UpdateDatapoint2DatasetsResponseCacheControl | undefined;
+};
+
+export type UpdateDatapointContentDatasetsResponse200ApplicationJson2 =
+  | UpdateDatapoint2DatasetsResponse1
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
   | UpdateDatapoint2Datasets4;
@@ -666,7 +1238,7 @@ export type UpdateDatapointContentDatasetsResponse2 =
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONContent =
   | string
   | Array<
-    | (components.TextContentPartSchema & { type: "text" })
+    | UpdateDatapoint2DatasetsResponse1
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
     | UpdateDatapoint2Datasets4
@@ -687,11 +1259,88 @@ export type UpdateDatapointMessagesDatasetsUserMessage = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema & { type: "text" })
+      | UpdateDatapoint2DatasetsResponse1
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
       | UpdateDatapoint2Datasets4
     >;
+};
+
+export const UpdateDatapointContentDatasetsResponse200Type = {
+  Text: "text",
+} as const;
+export type UpdateDatapointContentDatasetsResponse200Type = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsResponse200Type
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapointContentDatasetsResponse200Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapointContentDatasetsResponse200Ttl = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsResponse200Ttl
+>;
+
+export type UpdateDatapointContentDatasetsResponse200CacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type:
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapointContentDatasetsResponse200Ttl | undefined;
+};
+
+export type UpdateDatapointContentDatasetsResponse2002 = {
+  type: UpdateDatapointContentDatasetsResponse200Type;
+  text: string;
+  cacheControl?:
+    | UpdateDatapointContentDatasetsResponse200CacheControl
+    | undefined;
 };
 
 /**
@@ -699,7 +1348,7 @@ export type UpdateDatapointMessagesDatasetsUserMessage = {
  */
 export type UpdateDatapointMessagesDatasetsResponse200Content =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapointContentDatasetsResponse2002>;
 
 export type UpdateDatapointMessagesDatasetsDeveloperMessage = {
   /**
@@ -709,11 +1358,84 @@ export type UpdateDatapointMessagesDatasetsDeveloperMessage = {
   /**
    * The contents of the developer message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapointContentDatasetsResponse2002>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
   name?: string | undefined;
+};
+
+export const UpdateDatapointContentDatasetsResponseType = {
+  Text: "text",
+} as const;
+export type UpdateDatapointContentDatasetsResponseType = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsResponseType
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const UpdateDatapointContentDatasetsResponseTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type UpdateDatapointContentDatasetsResponseTtl = ClosedEnum<
+  typeof UpdateDatapointContentDatasetsResponseTtl
+>;
+
+export type UpdateDatapointContentDatasetsResponseCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: UpdateDatapointContentDatasetsResponse200ApplicationJSONType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: UpdateDatapointContentDatasetsResponseTtl | undefined;
+};
+
+export type UpdateDatapointContentDatasetsResponse2 = {
+  type: UpdateDatapointContentDatasetsResponseType;
+  text: string;
+  cacheControl?: UpdateDatapointContentDatasetsResponseCacheControl | undefined;
 };
 
 /**
@@ -721,7 +1443,7 @@ export type UpdateDatapointMessagesDatasetsDeveloperMessage = {
  */
 export type UpdateDatapointMessagesDatasetsResponseContent =
   | string
-  | Array<components.TextContentPartSchema>;
+  | Array<UpdateDatapointContentDatasetsResponse2>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -734,7 +1456,7 @@ export type UpdateDatapointMessagesDatasetsSystemMessage = {
   /**
    * The contents of the system message.
    */
-  content: string | Array<components.TextContentPartSchema>;
+  content: string | Array<UpdateDatapointContentDatasetsResponse2>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -959,40 +1681,198 @@ export type UpdateDatapointResponseBody = {
 };
 
 /** @internal */
-export const UpdateDatapointContentDatasetsRequest2$inboundSchema: z.ZodType<
-  UpdateDatapointContentDatasetsRequest2,
-  z.ZodTypeDef,
-  unknown
-> = components.TextContentPartSchema$inboundSchema;
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type
+  > = z.nativeEnum(UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type);
 /** @internal */
-export type UpdateDatapointContentDatasetsRequest2$Outbound =
-  components.TextContentPartSchema$Outbound;
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type
+  > = UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type$inboundSchema;
 
 /** @internal */
-export const UpdateDatapointContentDatasetsRequest2$outboundSchema: z.ZodType<
-  UpdateDatapointContentDatasetsRequest2$Outbound,
-  z.ZodTypeDef,
-  UpdateDatapointContentDatasetsRequest2
-> = components.TextContentPartSchema$outboundSchema;
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType,
+  );
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType
+  > =
+    UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType$inboundSchema;
 
-export function updateDatapointContentDatasetsRequest2ToJSON(
-  updateDatapointContentDatasetsRequest2:
-    UpdateDatapointContentDatasetsRequest2,
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyTtl$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyTtl> = z
+    .nativeEnum(UpdateDatapoint2DatasetsRequestRequestBodyTtl);
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyTtl> =
+    UpdateDatapoint2DatasetsRequestRequestBodyTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType$inboundSchema,
+    ttl: UpdateDatapoint2DatasetsRequestRequestBodyTtl$inboundSchema.default(
+      "5m",
+    ),
+  });
+/** @internal */
+export type UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsRequestRequestBodyMessages5ContentType$outboundSchema,
+    ttl: UpdateDatapoint2DatasetsRequestRequestBodyTtl$outboundSchema.default(
+      "5m",
+    ),
+  });
+
+export function updateDatapoint2DatasetsRequestRequestBodyCacheControlToJSON(
+  updateDatapoint2DatasetsRequestRequestBodyCacheControl:
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContentDatasetsRequest2$outboundSchema.parse(
-      updateDatapointContentDatasetsRequest2,
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$outboundSchema.parse(
+      updateDatapoint2DatasetsRequestRequestBodyCacheControl,
     ),
   );
 }
-export function updateDatapointContentDatasetsRequest2FromJSON(
+export function updateDatapoint2DatasetsRequestRequestBodyCacheControlFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDatapointContentDatasetsRequest2, SDKValidationError> {
+): SafeParseResult<
+  UpdateDatapoint2DatasetsRequestRequestBodyCacheControl,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateDatapointContentDatasetsRequest2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapointContentDatasetsRequest2' from JSON`,
+      UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsRequestRequestBodyCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequest1$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsRequest1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapoint2DatasetsRequest1$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequest1$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsRequest1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsRequest1
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestRequestBodyMessages5Type$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapoint2DatasetsRequestRequestBodyCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapoint2DatasetsRequest1ToJSON(
+  updateDatapoint2DatasetsRequest1: UpdateDatapoint2DatasetsRequest1,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsRequest1$outboundSchema.parse(
+      updateDatapoint2DatasetsRequest1,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsRequest1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsRequest1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2DatasetsRequest1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsRequest1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestRequestBodyMessages2$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsRequestRequestBodyMessages2,
+    z.ZodTypeDef,
+    unknown
+  > = z.lazy(() => UpdateDatapoint2DatasetsRequest1$inboundSchema);
+/** @internal */
+export type UpdateDatapointContentDatasetsRequestRequestBodyMessages2$Outbound =
+  UpdateDatapoint2DatasetsRequest1$Outbound;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestRequestBodyMessages2$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsRequestRequestBodyMessages2$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsRequestRequestBodyMessages2
+  > = z.lazy(() => UpdateDatapoint2DatasetsRequest1$outboundSchema);
+
+export function updateDatapointContentDatasetsRequestRequestBodyMessages2ToJSON(
+  updateDatapointContentDatasetsRequestRequestBodyMessages2:
+    UpdateDatapointContentDatasetsRequestRequestBodyMessages2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsRequestRequestBodyMessages2$outboundSchema
+      .parse(updateDatapointContentDatasetsRequestRequestBodyMessages2),
+  );
+}
+export function updateDatapointContentDatasetsRequestRequestBodyMessages2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsRequestRequestBodyMessages2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsRequestRequestBodyMessages2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasetsRequestRequestBodyMessages2' from JSON`,
   );
 }
 
@@ -1004,12 +1884,12 @@ export const UpdateDatapointMessagesDatasetsRequestRequestBody5Content$inboundSc
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => UpdateDatapoint2DatasetsRequest1$inboundSchema)),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsRequestRequestBody5Content$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapoint2DatasetsRequest1$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesDatasetsRequestRequestBody5Content$outboundSchema:
@@ -1019,7 +1899,7 @@ export const UpdateDatapointMessagesDatasetsRequestRequestBody5Content$outboundS
     UpdateDatapointMessagesDatasetsRequestRequestBody5Content
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => UpdateDatapoint2DatasetsRequest1$outboundSchema)),
   ]);
 
 export function updateDatapointMessagesDatasetsRequestRequestBody5ContentToJSON(
@@ -1118,7 +1998,7 @@ export const UpdateDatapointMessagesToolMessage$inboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => UpdateDatapoint2DatasetsRequest1$inboundSchema)),
   ]),
   tool_call_id: z.string(),
   cache_control: z.lazy(() => UpdateDatapointMessagesCacheControl$inboundSchema)
@@ -1132,7 +2012,7 @@ export const UpdateDatapointMessagesToolMessage$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateDatapointMessagesToolMessage$Outbound = {
   role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<UpdateDatapoint2DatasetsRequest1$Outbound>;
   tool_call_id: string;
   cache_control?: UpdateDatapointMessagesCacheControl$Outbound | undefined;
 };
@@ -1146,7 +2026,7 @@ export const UpdateDatapointMessagesToolMessage$outboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => UpdateDatapoint2DatasetsRequest1$outboundSchema)),
   ]),
   toolCallId: z.string(),
   cacheControl: z.lazy(() => UpdateDatapointMessagesCacheControl$outboundSchema)
@@ -1179,55 +2059,193 @@ export function updateDatapointMessagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const UpdateDatapointContentDatasets2$inboundSchema: z.ZodType<
-  UpdateDatapointContentDatasets2,
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type
+  > = z.nativeEnum(UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type);
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type
+  > = UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestTtl$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsRequestTtl
+> = z.nativeEnum(UpdateDatapoint2DatasetsRequestTtl);
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestTtl$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsRequestTtl
+> = UpdateDatapoint2DatasetsRequestTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestCacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsRequestCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type$inboundSchema,
+    ttl: UpdateDatapoint2DatasetsRequestTtl$inboundSchema.default("5m"),
+  });
+/** @internal */
+export type UpdateDatapoint2DatasetsRequestCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsRequestCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsRequestCacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsRequestRequestBodyMessages4Type$outboundSchema,
+    ttl: UpdateDatapoint2DatasetsRequestTtl$outboundSchema.default("5m"),
+  });
+
+export function updateDatapoint2DatasetsRequestCacheControlToJSON(
+  updateDatapoint2DatasetsRequestCacheControl:
+    UpdateDatapoint2DatasetsRequestCacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsRequestCacheControl$outboundSchema.parse(
+      updateDatapoint2DatasetsRequestCacheControl,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsRequestCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapoint2DatasetsRequestCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapoint2DatasetsRequestCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapoint2DatasetsRequestCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2Datasets1$inboundSchema: z.ZodType<
+  UpdateDatapoint2Datasets1,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapoint2DatasetsRequestCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
 /** @internal */
-export type UpdateDatapointContentDatasets2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type UpdateDatapoint2Datasets1$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | UpdateDatapoint2DatasetsRequestCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2Datasets1$outboundSchema: z.ZodType<
+  UpdateDatapoint2Datasets1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2Datasets1
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapoint2DatasetsRequestCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapoint2Datasets1ToJSON(
+  updateDatapoint2Datasets1: UpdateDatapoint2Datasets1,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2Datasets1$outboundSchema.parse(updateDatapoint2Datasets1),
+  );
+}
+export function updateDatapoint2Datasets1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2Datasets1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2Datasets1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2Datasets1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestRequestBody2$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsRequestRequestBody2,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
+    components.RefusalPartSchema$inboundSchema,
+    components.ReasoningPartSchema$inboundSchema,
+    components.RedactedReasoningPartSchema$inboundSchema,
+  ]);
+/** @internal */
+export type UpdateDatapointContentDatasetsRequestRequestBody2$Outbound =
+  | UpdateDatapoint2Datasets1$Outbound
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const UpdateDatapointContentDatasets2$outboundSchema: z.ZodType<
-  UpdateDatapointContentDatasets2$Outbound,
-  z.ZodTypeDef,
-  UpdateDatapointContentDatasets2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
+export const UpdateDatapointContentDatasetsRequestRequestBody2$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsRequestRequestBody2$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsRequestRequestBody2
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ]);
 
-export function updateDatapointContentDatasets2ToJSON(
-  updateDatapointContentDatasets2: UpdateDatapointContentDatasets2,
+export function updateDatapointContentDatasetsRequestRequestBody2ToJSON(
+  updateDatapointContentDatasetsRequestRequestBody2:
+    UpdateDatapointContentDatasetsRequestRequestBody2,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContentDatasets2$outboundSchema.parse(
-      updateDatapointContentDatasets2,
+    UpdateDatapointContentDatasetsRequestRequestBody2$outboundSchema.parse(
+      updateDatapointContentDatasetsRequestRequestBody2,
     ),
   );
 }
-export function updateDatapointContentDatasets2FromJSON(
+export function updateDatapointContentDatasetsRequestRequestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDatapointContentDatasets2, SDKValidationError> {
+): SafeParseResult<
+  UpdateDatapointContentDatasetsRequestRequestBody2,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => UpdateDatapointContentDatasets2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapointContentDatasets2' from JSON`,
+    (x) =>
+      UpdateDatapointContentDatasetsRequestRequestBody2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsRequestRequestBody2' from JSON`,
   );
 }
 
@@ -1239,22 +2257,18 @@ export const UpdateDatapointMessagesDatasetsRequestRequestBodyContent$inboundSch
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
+      components.RefusalPartSchema$inboundSchema,
+      components.ReasoningPartSchema$inboundSchema,
+      components.RedactedReasoningPartSchema$inboundSchema,
+    ])),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsRequestRequestBodyContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | UpdateDatapoint2Datasets1$Outbound
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -1268,16 +2282,12 @@ export const UpdateDatapointMessagesDatasetsRequestRequestBodyContent$outboundSc
     UpdateDatapointMessagesDatasetsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
+      components.RefusalPartSchema$outboundSchema,
+      components.ReasoningPartSchema$outboundSchema,
+      components.RedactedReasoningPartSchema$outboundSchema,
+    ])),
   ]);
 
 export function updateDatapointMessagesDatasetsRequestRequestBodyContentToJSON(
@@ -1467,9 +2477,7 @@ export const UpdateDatapointMessagesAssistantMessage$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
+          z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
           components.RefusalPartSchema$inboundSchema,
           components.ReasoningPartSchema$inboundSchema,
           components.RedactedReasoningPartSchema$inboundSchema,
@@ -1495,7 +2503,7 @@ export type UpdateDatapointMessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | UpdateDatapoint2Datasets1$Outbound
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -1520,9 +2528,7 @@ export const UpdateDatapointMessagesAssistantMessage$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
+          z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
           components.RefusalPartSchema$outboundSchema,
           components.ReasoningPartSchema$outboundSchema,
           components.RedactedReasoningPartSchema$outboundSchema,
@@ -1567,6 +2573,126 @@ export function updateDatapointMessagesAssistantMessageFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'UpdateDatapointMessagesAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyType> = z
+    .nativeEnum(UpdateDatapoint2DatasetsRequestRequestBodyType);
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsRequestRequestBodyType> =
+    UpdateDatapoint2DatasetsRequestRequestBodyType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsTtl
+> = z.nativeEnum(UpdateDatapoint2DatasetsTtl);
+/** @internal */
+export const UpdateDatapoint2DatasetsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsTtl
+> = UpdateDatapoint2DatasetsTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsCacheControl$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestRequestBodyType$inboundSchema,
+  ttl: UpdateDatapoint2DatasetsTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type UpdateDatapoint2DatasetsCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsCacheControl$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsCacheControl$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsCacheControl
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestRequestBodyType$outboundSchema,
+  ttl: UpdateDatapoint2DatasetsTtl$outboundSchema.default("5m"),
+});
+
+export function updateDatapoint2DatasetsCacheControlToJSON(
+  updateDatapoint2DatasetsCacheControl: UpdateDatapoint2DatasetsCacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsCacheControl$outboundSchema.parse(
+      updateDatapoint2DatasetsCacheControl,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapoint2DatasetsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint24$inboundSchema: z.ZodType<
+  UpdateDatapoint24,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() =>
+    UpdateDatapoint2DatasetsCacheControl$inboundSchema
+  ).optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapoint24$Outbound = {
+  type: "file";
+  cache_control?: UpdateDatapoint2DatasetsCacheControl$Outbound | undefined;
+  file: components.FileContentPartSchema$Outbound;
+};
+
+/** @internal */
+export const UpdateDatapoint24$outboundSchema: z.ZodType<
+  UpdateDatapoint24$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() =>
+    UpdateDatapoint2DatasetsCacheControl$outboundSchema
+  ).optional(),
+  file: components.FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapoint24ToJSON(
+  updateDatapoint24: UpdateDatapoint24,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint24$outboundSchema.parse(updateDatapoint24),
+  );
+}
+export function updateDatapoint24FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint24, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint24' from JSON`,
   );
 }
 
@@ -1633,108 +2759,108 @@ export function updateDatapoint2CacheControlFromJSON(
 }
 
 /** @internal */
-export const UpdateDatapoint24$inboundSchema: z.ZodType<
-  UpdateDatapoint24,
+export const UpdateDatapoint21$inboundSchema: z.ZodType<
+  UpdateDatapoint21,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("file"),
+  type: z.literal("text"),
+  text: z.string(),
   cache_control: z.lazy(() => UpdateDatapoint2CacheControl$inboundSchema)
     .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "cache_control": "cacheControl",
   });
 });
 /** @internal */
-export type UpdateDatapoint24$Outbound = {
-  type: "file";
+export type UpdateDatapoint21$Outbound = {
+  type: "text";
+  text: string;
   cache_control?: UpdateDatapoint2CacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const UpdateDatapoint24$outboundSchema: z.ZodType<
-  UpdateDatapoint24$Outbound,
+export const UpdateDatapoint21$outboundSchema: z.ZodType<
+  UpdateDatapoint21$Outbound,
   z.ZodTypeDef,
-  UpdateDatapoint24
+  UpdateDatapoint21
 > = z.object({
-  type: z.literal("file"),
+  type: z.literal("text"),
+  text: z.string(),
   cacheControl: z.lazy(() => UpdateDatapoint2CacheControl$outboundSchema)
     .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
   });
 });
 
-export function updateDatapoint24ToJSON(
-  updateDatapoint24: UpdateDatapoint24,
+export function updateDatapoint21ToJSON(
+  updateDatapoint21: UpdateDatapoint21,
 ): string {
   return JSON.stringify(
-    UpdateDatapoint24$outboundSchema.parse(updateDatapoint24),
+    UpdateDatapoint21$outboundSchema.parse(updateDatapoint21),
   );
 }
-export function updateDatapoint24FromJSON(
+export function updateDatapoint21FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDatapoint24, SDKValidationError> {
+): SafeParseResult<UpdateDatapoint21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateDatapoint24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapoint24' from JSON`,
+    (x) => UpdateDatapoint21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint21' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateDatapointContent2$inboundSchema: z.ZodType<
-  UpdateDatapointContent2,
+export const UpdateDatapointContentDatasetsRequest2$inboundSchema: z.ZodType<
+  UpdateDatapointContentDatasetsRequest2,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
+  z.lazy(() => UpdateDatapoint21$inboundSchema),
   components.ImageContentPartSchema$inboundSchema,
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => UpdateDatapoint24$inboundSchema),
 ]);
 /** @internal */
-export type UpdateDatapointContent2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
+export type UpdateDatapointContentDatasetsRequest2$Outbound =
+  | UpdateDatapoint21$Outbound
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | UpdateDatapoint24$Outbound;
 
 /** @internal */
-export const UpdateDatapointContent2$outboundSchema: z.ZodType<
-  UpdateDatapointContent2$Outbound,
+export const UpdateDatapointContentDatasetsRequest2$outboundSchema: z.ZodType<
+  UpdateDatapointContentDatasetsRequest2$Outbound,
   z.ZodTypeDef,
-  UpdateDatapointContent2
+  UpdateDatapointContentDatasetsRequest2
 > = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
+  z.lazy(() => UpdateDatapoint21$outboundSchema),
   components.ImageContentPartSchema$outboundSchema,
   components.AudioContentPartSchema$outboundSchema,
   z.lazy(() => UpdateDatapoint24$outboundSchema),
 ]);
 
-export function updateDatapointContent2ToJSON(
-  updateDatapointContent2: UpdateDatapointContent2,
+export function updateDatapointContentDatasetsRequest2ToJSON(
+  updateDatapointContentDatasetsRequest2:
+    UpdateDatapointContentDatasetsRequest2,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContent2$outboundSchema.parse(updateDatapointContent2),
+    UpdateDatapointContentDatasetsRequest2$outboundSchema.parse(
+      updateDatapointContentDatasetsRequest2,
+    ),
   );
 }
-export function updateDatapointContent2FromJSON(
+export function updateDatapointContentDatasetsRequest2FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDatapointContent2, SDKValidationError> {
+): SafeParseResult<UpdateDatapointContentDatasetsRequest2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateDatapointContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapointContent2' from JSON`,
+    (x) =>
+      UpdateDatapointContentDatasetsRequest2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasetsRequest2' from JSON`,
   );
 }
 
@@ -1746,22 +2872,18 @@ export const UpdateDatapointMessagesDatasetsRequestContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdateDatapoint24$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint21$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => UpdateDatapoint24$inboundSchema),
+    ])),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsRequestContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | UpdateDatapoint21$Outbound
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | UpdateDatapoint24$Outbound
@@ -1775,16 +2897,12 @@ export const UpdateDatapointMessagesDatasetsRequestContent$outboundSchema:
     UpdateDatapointMessagesDatasetsRequestContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdateDatapoint24$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint21$outboundSchema),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => UpdateDatapoint24$outboundSchema),
+    ])),
   ]);
 
 export function updateDatapointMessagesDatasetsRequestContentToJSON(
@@ -1823,16 +2941,12 @@ export const UpdateDatapointMessagesUserMessage$inboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdateDatapoint24$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint21$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => UpdateDatapoint24$inboundSchema),
+    ])),
   ]),
 });
 /** @internal */
@@ -1842,7 +2956,7 @@ export type UpdateDatapointMessagesUserMessage$Outbound = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | UpdateDatapoint21$Outbound
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | UpdateDatapoint24$Outbound
@@ -1859,16 +2973,12 @@ export const UpdateDatapointMessagesUserMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdateDatapoint24$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint21$outboundSchema),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => UpdateDatapoint24$outboundSchema),
+    ])),
   ]),
 });
 
@@ -1893,18 +3003,156 @@ export function updateDatapointMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointContentDatasetsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsRequestType> = z
+    .nativeEnum(UpdateDatapointContentDatasetsRequestType);
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsRequestType> =
+    UpdateDatapointContentDatasetsRequestType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsRequestRequestBodyType> =
+    z.nativeEnum(UpdateDatapointContentDatasetsRequestRequestBodyType);
+/** @internal */
+export const UpdateDatapointContentDatasetsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsRequestRequestBodyType> =
+    UpdateDatapointContentDatasetsRequestRequestBodyType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentDatasetsTtl
+> = z.nativeEnum(UpdateDatapointContentDatasetsTtl);
+/** @internal */
+export const UpdateDatapointContentDatasetsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentDatasetsTtl
+> = UpdateDatapointContentDatasetsTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsCacheControl$inboundSchema:
+  z.ZodType<UpdateDatapointContentDatasetsCacheControl, z.ZodTypeDef, unknown> =
+    z.object({
+      type: UpdateDatapointContentDatasetsRequestRequestBodyType$inboundSchema,
+      ttl: UpdateDatapointContentDatasetsTtl$inboundSchema.default("5m"),
+    });
+/** @internal */
+export type UpdateDatapointContentDatasetsCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasetsCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsCacheControl
+  > = z.object({
+    type: UpdateDatapointContentDatasetsRequestRequestBodyType$outboundSchema,
+    ttl: UpdateDatapointContentDatasetsTtl$outboundSchema.default("5m"),
+  });
+
+export function updateDatapointContentDatasetsCacheControlToJSON(
+  updateDatapointContentDatasetsCacheControl:
+    UpdateDatapointContentDatasetsCacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsCacheControl$outboundSchema.parse(
+      updateDatapointContentDatasetsCacheControl,
+    ),
+  );
+}
+export function updateDatapointContentDatasetsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasets2$inboundSchema: z.ZodType<
+  UpdateDatapointContentDatasets2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointContentDatasetsRequestType$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapointContentDatasetsCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapointContentDatasets2$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | UpdateDatapointContentDatasetsCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasets2$outboundSchema: z.ZodType<
+  UpdateDatapointContentDatasets2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointContentDatasets2
+> = z.object({
+  type: UpdateDatapointContentDatasetsRequestType$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapointContentDatasetsCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapointContentDatasets2ToJSON(
+  updateDatapointContentDatasets2: UpdateDatapointContentDatasets2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasets2$outboundSchema.parse(
+      updateDatapointContentDatasets2,
+    ),
+  );
+}
+export function updateDatapointContentDatasets2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointContentDatasets2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointContentDatasets2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasets2' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointMessagesDatasetsContent$inboundSchema: z.ZodType<
   UpdateDatapointMessagesDatasetsContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
+  z.array(z.lazy(() => UpdateDatapointContentDatasets2$inboundSchema)),
 ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapointContentDatasets2$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesDatasetsContent$outboundSchema: z.ZodType<
@@ -1913,7 +3161,7 @@ export const UpdateDatapointMessagesDatasetsContent$outboundSchema: z.ZodType<
   UpdateDatapointMessagesDatasetsContent
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
+  z.array(z.lazy(() => UpdateDatapointContentDatasets2$outboundSchema)),
 ]);
 
 export function updateDatapointMessagesDatasetsContentToJSON(
@@ -1946,14 +3194,14 @@ export const UpdateDatapointMessagesDeveloperMessage$inboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => UpdateDatapointContentDatasets2$inboundSchema)),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type UpdateDatapointMessagesDeveloperMessage$Outbound = {
   role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<UpdateDatapointContentDatasets2$Outbound>;
   name?: string | undefined;
 };
 
@@ -1966,7 +3214,7 @@ export const UpdateDatapointMessagesDeveloperMessage$outboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => UpdateDatapointContentDatasets2$outboundSchema)),
   ]),
   name: z.string().optional(),
 });
@@ -1998,18 +3246,145 @@ export function updateDatapointMessagesDeveloperMessageFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointContentType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentType
+> = z.nativeEnum(UpdateDatapointContentType);
+/** @internal */
+export const UpdateDatapointContentType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentType
+> = UpdateDatapointContentType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentDatasetsType
+> = z.nativeEnum(UpdateDatapointContentDatasetsType);
+/** @internal */
+export const UpdateDatapointContentDatasetsType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentDatasetsType
+> = UpdateDatapointContentDatasetsType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentTtl$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentTtl
+> = z.nativeEnum(UpdateDatapointContentTtl);
+/** @internal */
+export const UpdateDatapointContentTtl$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointContentTtl
+> = UpdateDatapointContentTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentCacheControl$inboundSchema: z.ZodType<
+  UpdateDatapointContentCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointContentDatasetsType$inboundSchema,
+  ttl: UpdateDatapointContentTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type UpdateDatapointContentCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapointContentCacheControl$outboundSchema: z.ZodType<
+  UpdateDatapointContentCacheControl$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointContentCacheControl
+> = z.object({
+  type: UpdateDatapointContentDatasetsType$outboundSchema,
+  ttl: UpdateDatapointContentTtl$outboundSchema.default("5m"),
+});
+
+export function updateDatapointContentCacheControlToJSON(
+  updateDatapointContentCacheControl: UpdateDatapointContentCacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentCacheControl$outboundSchema.parse(
+      updateDatapointContentCacheControl,
+    ),
+  );
+}
+export function updateDatapointContentCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointContentCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContent2$inboundSchema: z.ZodType<
+  UpdateDatapointContent2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointContentType$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() => UpdateDatapointContentCacheControl$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapointContent2$Outbound = {
+  type: string;
+  text: string;
+  cache_control?: UpdateDatapointContentCacheControl$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointContent2$outboundSchema: z.ZodType<
+  UpdateDatapointContent2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointContent2
+> = z.object({
+  type: UpdateDatapointContentType$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() => UpdateDatapointContentCacheControl$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapointContent2ToJSON(
+  updateDatapointContent2: UpdateDatapointContent2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContent2$outboundSchema.parse(updateDatapointContent2),
+  );
+}
+export function updateDatapointContent2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointContent2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointContent2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContent2' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointMessagesContent$inboundSchema: z.ZodType<
   UpdateDatapointMessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
+  z.array(z.lazy(() => UpdateDatapointContent2$inboundSchema)),
 ]);
 /** @internal */
 export type UpdateDatapointMessagesContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapointContent2$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesContent$outboundSchema: z.ZodType<
@@ -2018,7 +3393,7 @@ export const UpdateDatapointMessagesContent$outboundSchema: z.ZodType<
   UpdateDatapointMessagesContent
 > = z.union([
   z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
+  z.array(z.lazy(() => UpdateDatapointContent2$outboundSchema)),
 ]);
 
 export function updateDatapointMessagesContentToJSON(
@@ -2049,14 +3424,14 @@ export const UpdateDatapointMessagesSystemMessage$inboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() => UpdateDatapointContent2$inboundSchema)),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type UpdateDatapointMessagesSystemMessage$Outbound = {
   role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<UpdateDatapointContent2$Outbound>;
   name?: string | undefined;
 };
 
@@ -2069,7 +3444,7 @@ export const UpdateDatapointMessagesSystemMessage$outboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() => UpdateDatapointContent2$outboundSchema)),
   ]),
   name: z.string().optional(),
 });
@@ -2281,45 +3656,225 @@ export function updateDatapointRequestFromJSON(
 }
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse200ApplicationJson2$inboundSchema:
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType,
+  );
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type,
+  );
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl,
+  );
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$inboundSchema:
   z.ZodType<
-    UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl,
     z.ZodTypeDef,
     unknown
-  > = components.TextContentPartSchema$inboundSchema;
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type$inboundSchema,
+    ttl:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl$inboundSchema
+        .default("5m"),
+  });
 /** @internal */
-export type UpdateDatapointContentDatasetsResponse200ApplicationJson2$Outbound =
-  components.TextContentPartSchema$Outbound;
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse200ApplicationJson2$outboundSchema:
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$outboundSchema:
   z.ZodType<
-    UpdateDatapointContentDatasetsResponse200ApplicationJson2$Outbound,
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$Outbound,
     z.ZodTypeDef,
-    UpdateDatapointContentDatasetsResponse200ApplicationJson2
-  > = components.TextContentPartSchema$outboundSchema;
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages5Type$outboundSchema,
+    ttl:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyTtl$outboundSchema
+        .default("5m"),
+  });
 
-export function updateDatapointContentDatasetsResponse200ApplicationJSON2ToJSON(
-  updateDatapointContentDatasetsResponse200ApplicationJson2:
-    UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+export function updateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControlToJSON(
+  updateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl:
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContentDatasetsResponse200ApplicationJson2$outboundSchema
-      .parse(updateDatapointContentDatasetsResponse200ApplicationJson2),
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$outboundSchema
+      .parse(
+        updateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl,
+      ),
   );
 }
-export function updateDatapointContentDatasetsResponse200ApplicationJSON2FromJSON(
+export function updateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+  UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateDatapointContentDatasetsResponse200ApplicationJson2$inboundSchema
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapointContentDatasetsResponse200ApplicationJson2' from JSON`,
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJson1$inboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    text: z.string(),
+    cache_control: z.lazy(() =>
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  });
+/** @internal */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJson1$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJson1$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function updateDatapoint2DatasetsResponse200ApplicationJSON1ToJSON(
+  updateDatapoint2DatasetsResponse200ApplicationJson1:
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1$outboundSchema.parse(
+      updateDatapoint2DatasetsResponse200ApplicationJson1,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsResponse200ApplicationJSON1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapoint2DatasetsResponse200ApplicationJson1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapoint2DatasetsResponse200ApplicationJson1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse200ApplicationJson1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2,
+    z.ZodTypeDef,
+    unknown
+  > = z.lazy(() =>
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1$inboundSchema
+  );
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$Outbound =
+  UpdateDatapoint2DatasetsResponse200ApplicationJson1$Outbound;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2
+  > = z.lazy(() =>
+    UpdateDatapoint2DatasetsResponse200ApplicationJson1$outboundSchema
+  );
+
+export function updateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2ToJSON(
+  updateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2:
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$outboundSchema
+      .parse(
+        updateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2,
+      ),
+  );
+}
+export function updateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyMessages2' from JSON`,
   );
 }
 
@@ -2331,12 +3886,14 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBo
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(z.lazy(() =>
+      UpdateDatapoint2DatasetsResponse200ApplicationJson1$inboundSchema
+    )),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapoint2DatasetsResponse200ApplicationJson1$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$outboundSchema:
@@ -2346,7 +3903,9 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBo
     UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBody5Content
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(z.lazy(() =>
+      UpdateDatapoint2DatasetsResponse200ApplicationJson1$outboundSchema
+    )),
   ]);
 
 export function updateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBody5ContentToJSON(
@@ -2453,7 +4012,9 @@ export const UpdateDatapointMessagesDatasetsToolMessage$inboundSchema:
       role: z.literal("tool"),
       content: z.union([
         z.string(),
-        z.array(components.TextContentPartSchema$inboundSchema),
+        z.array(z.lazy(() =>
+          UpdateDatapoint2DatasetsResponse200ApplicationJson1$inboundSchema
+        )),
       ]),
       tool_call_id: z.string(),
       cache_control: z.lazy(() =>
@@ -2468,7 +4029,9 @@ export const UpdateDatapointMessagesDatasetsToolMessage$inboundSchema:
 /** @internal */
 export type UpdateDatapointMessagesDatasetsToolMessage$Outbound = {
   role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content:
+    | string
+    | Array<UpdateDatapoint2DatasetsResponse200ApplicationJson1$Outbound>;
   tool_call_id: string;
   cache_control?:
     | UpdateDatapointMessagesDatasetsCacheControl$Outbound
@@ -2485,7 +4048,9 @@ export const UpdateDatapointMessagesDatasetsToolMessage$outboundSchema:
     role: z.literal("tool"),
     content: z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
+      z.array(z.lazy(() =>
+        UpdateDatapoint2DatasetsResponse200ApplicationJson1$outboundSchema
+      )),
     ]),
     toolCallId: z.string(),
     cacheControl: z.lazy(() =>
@@ -2525,61 +4090,203 @@ export function updateDatapointMessagesDatasetsToolMessageFromJSON(
 }
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse2002$inboundSchema:
-  z.ZodType<UpdateDatapointContentDatasetsResponse2002, z.ZodTypeDef, unknown> =
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.RefusalPartSchema$inboundSchema,
-      components.ReasoningPartSchema$inboundSchema,
-      components.RedactedReasoningPartSchema$inboundSchema,
-    ]);
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type,
+  );
 /** @internal */
-export type UpdateDatapointContentDatasetsResponse2002$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse2002$outboundSchema:
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl
+  > = z.nativeEnum(UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl);
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl
+  > = UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$inboundSchema:
   z.ZodType<
-    UpdateDatapointContentDatasetsResponse2002$Outbound,
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl,
     z.ZodTypeDef,
-    UpdateDatapointContentDatasetsResponse2002
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
-  ]);
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl$inboundSchema
+      .default("5m"),
+  });
+/** @internal */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$Outbound =
+  {
+    type: string;
+    ttl: string;
+  };
 
-export function updateDatapointContentDatasetsResponse2002ToJSON(
-  updateDatapointContentDatasetsResponse2002:
-    UpdateDatapointContentDatasetsResponse2002,
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponse200ApplicationJSONTtl$outboundSchema
+      .default("5m"),
+  });
+
+export function updateDatapoint2DatasetsResponse200ApplicationJSONCacheControlToJSON(
+  updateDatapoint2DatasetsResponse200ApplicationJSONCacheControl:
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContentDatasetsResponse2002$outboundSchema.parse(
-      updateDatapointContentDatasetsResponse2002,
-    ),
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$outboundSchema
+      .parse(updateDatapoint2DatasetsResponse200ApplicationJSONCacheControl),
   );
 }
-export function updateDatapointContentDatasetsResponse2002FromJSON(
+export function updateDatapoint2DatasetsResponse200ApplicationJSONCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateDatapointContentDatasetsResponse2002,
+  UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateDatapointContentDatasetsResponse2002$inboundSchema.parse(
-        JSON.parse(x),
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse2001$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsResponse2001,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapoint2DatasetsResponse2001$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse2001$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsResponse2001$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsResponse2001
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapoint2DatasetsResponse2001ToJSON(
+  updateDatapoint2DatasetsResponse2001: UpdateDatapoint2DatasetsResponse2001,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsResponse2001$outboundSchema.parse(
+      updateDatapoint2DatasetsResponse2001,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsResponse2001FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsResponse2001, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapoint2DatasetsResponse2001$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse2001' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2DatasetsResponse2001$inboundSchema),
+    components.RefusalPartSchema$inboundSchema,
+    components.ReasoningPartSchema$inboundSchema,
+    components.RedactedReasoningPartSchema$inboundSchema,
+  ]);
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$Outbound =
+  | UpdateDatapoint2DatasetsResponse2001$Outbound
+  | components.RefusalPartSchema$Outbound
+  | components.ReasoningPartSchema$Outbound
+  | components.RedactedReasoningPartSchema$Outbound;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2DatasetsResponse2001$outboundSchema),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ]);
+
+export function updateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2ToJSON(
+  updateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2:
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$outboundSchema
+      .parse(
+        updateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2,
       ),
-    `Failed to parse 'UpdateDatapointContentDatasetsResponse2002' from JSON`,
+  );
+}
+export function updateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2' from JSON`,
   );
 }
 
@@ -2591,22 +4298,18 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBo
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2DatasetsResponse2001$inboundSchema),
+      components.RefusalPartSchema$inboundSchema,
+      components.ReasoningPartSchema$inboundSchema,
+      components.RedactedReasoningPartSchema$inboundSchema,
+    ])),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | UpdateDatapoint2DatasetsResponse2001$Outbound
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -2620,16 +4323,12 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBo
     UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2DatasetsResponse2001$outboundSchema),
+      components.RefusalPartSchema$outboundSchema,
+      components.ReasoningPartSchema$outboundSchema,
+      components.RedactedReasoningPartSchema$outboundSchema,
+    ])),
   ]);
 
 export function updateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyContentToJSON(
@@ -2839,9 +4538,7 @@ export const UpdateDatapointMessagesDatasetsAssistantMessage$inboundSchema:
         z.string(),
         z.array(
           z.union([
-            components.TextContentPartSchema$inboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
+            z.lazy(() => UpdateDatapoint2DatasetsResponse2001$inboundSchema),
             components.RefusalPartSchema$inboundSchema,
             components.ReasoningPartSchema$inboundSchema,
             components.RedactedReasoningPartSchema$inboundSchema,
@@ -2868,7 +4565,7 @@ export type UpdateDatapointMessagesDatasetsAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | UpdateDatapoint2DatasetsResponse2001$Outbound
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -2896,9 +4593,7 @@ export const UpdateDatapointMessagesDatasetsAssistantMessage$outboundSchema:
         z.string(),
         z.array(
           z.union([
-            components.TextContentPartSchema$outboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
+            z.lazy(() => UpdateDatapoint2DatasetsResponse2001$outboundSchema),
             components.RefusalPartSchema$outboundSchema,
             components.ReasoningPartSchema$outboundSchema,
             components.RedactedReasoningPartSchema$outboundSchema,
@@ -2948,65 +4643,81 @@ export function updateDatapointMessagesDatasetsAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const UpdateDatapoint2DatasetsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsResponse200Type> = z
-    .nativeEnum(UpdateDatapoint2DatasetsResponse200Type);
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type,
+  );
 /** @internal */
-export const UpdateDatapoint2DatasetsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsResponse200Type> =
-    UpdateDatapoint2DatasetsResponse200Type$inboundSchema;
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type$inboundSchema;
 
 /** @internal */
-export const UpdateDatapoint2DatasetsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatapoint2DatasetsTtl
-> = z.nativeEnum(UpdateDatapoint2DatasetsTtl);
+export const UpdateDatapoint2DatasetsResponse200Ttl$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsResponse200Ttl> = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200Ttl,
+  );
 /** @internal */
-export const UpdateDatapoint2DatasetsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatapoint2DatasetsTtl
-> = UpdateDatapoint2DatasetsTtl$inboundSchema;
+export const UpdateDatapoint2DatasetsResponse200Ttl$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsResponse200Ttl> =
+    UpdateDatapoint2DatasetsResponse200Ttl$inboundSchema;
 
 /** @internal */
-export const UpdateDatapoint2DatasetsCacheControl$inboundSchema: z.ZodType<
-  UpdateDatapoint2DatasetsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateDatapoint2DatasetsResponse200Type$inboundSchema,
-  ttl: UpdateDatapoint2DatasetsTtl$inboundSchema.default("5m"),
-});
+export const UpdateDatapoint2DatasetsResponse200CacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponse200CacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type$inboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponse200Ttl$inboundSchema.default("5m"),
+  });
 /** @internal */
-export type UpdateDatapoint2DatasetsCacheControl$Outbound = {
+export type UpdateDatapoint2DatasetsResponse200CacheControl$Outbound = {
   type: string;
   ttl: string;
 };
 
 /** @internal */
-export const UpdateDatapoint2DatasetsCacheControl$outboundSchema: z.ZodType<
-  UpdateDatapoint2DatasetsCacheControl$Outbound,
-  z.ZodTypeDef,
-  UpdateDatapoint2DatasetsCacheControl
-> = z.object({
-  type: UpdateDatapoint2DatasetsResponse200Type$outboundSchema,
-  ttl: UpdateDatapoint2DatasetsTtl$outboundSchema.default("5m"),
-});
+export const UpdateDatapoint2DatasetsResponse200CacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponse200CacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsResponse200CacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessages3Type$outboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponse200Ttl$outboundSchema.default("5m"),
+  });
 
-export function updateDatapoint2DatasetsCacheControlToJSON(
-  updateDatapoint2DatasetsCacheControl: UpdateDatapoint2DatasetsCacheControl,
+export function updateDatapoint2DatasetsResponse200CacheControlToJSON(
+  updateDatapoint2DatasetsResponse200CacheControl:
+    UpdateDatapoint2DatasetsResponse200CacheControl,
 ): string {
   return JSON.stringify(
-    UpdateDatapoint2DatasetsCacheControl$outboundSchema.parse(
-      updateDatapoint2DatasetsCacheControl,
+    UpdateDatapoint2DatasetsResponse200CacheControl$outboundSchema.parse(
+      updateDatapoint2DatasetsResponse200CacheControl,
     ),
   );
 }
-export function updateDatapoint2DatasetsCacheControlFromJSON(
+export function updateDatapoint2DatasetsResponse200CacheControlFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDatapoint2DatasetsCacheControl, SDKValidationError> {
+): SafeParseResult<
+  UpdateDatapoint2DatasetsResponse200CacheControl,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateDatapoint2DatasetsCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatapoint2DatasetsCacheControl' from JSON`,
+      UpdateDatapoint2DatasetsResponse200CacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse200CacheControl' from JSON`,
   );
 }
 
@@ -3018,7 +4729,7 @@ export const UpdateDatapoint2Datasets4$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file"),
   cache_control: z.lazy(() =>
-    UpdateDatapoint2DatasetsCacheControl$inboundSchema
+    UpdateDatapoint2DatasetsResponse200CacheControl$inboundSchema
   ).optional(),
   file: components.FileContentPartSchema$inboundSchema,
 }).transform((v) => {
@@ -3029,7 +4740,9 @@ export const UpdateDatapoint2Datasets4$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateDatapoint2Datasets4$Outbound = {
   type: "file";
-  cache_control?: UpdateDatapoint2DatasetsCacheControl$Outbound | undefined;
+  cache_control?:
+    | UpdateDatapoint2DatasetsResponse200CacheControl$Outbound
+    | undefined;
   file: components.FileContentPartSchema$Outbound;
 };
 
@@ -3041,7 +4754,7 @@ export const UpdateDatapoint2Datasets4$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file"),
   cacheControl: z.lazy(() =>
-    UpdateDatapoint2DatasetsCacheControl$outboundSchema
+    UpdateDatapoint2DatasetsResponse200CacheControl$outboundSchema
   ).optional(),
   file: components.FileContentPartSchema$outboundSchema,
 }).transform((v) => {
@@ -3068,62 +4781,197 @@ export function updateDatapoint2Datasets4FromJSON(
 }
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse2$inboundSchema: z.ZodType<
-  UpdateDatapointContentDatasetsResponse2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
-]);
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  > = z.nativeEnum(
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType,
+  );
 /** @internal */
-export type UpdateDatapointContentDatasetsResponse2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | UpdateDatapoint2Datasets4$Outbound;
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  > =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
 
 /** @internal */
-export const UpdateDatapointContentDatasetsResponse2$outboundSchema: z.ZodType<
-  UpdateDatapointContentDatasetsResponse2$Outbound,
-  z.ZodTypeDef,
-  UpdateDatapointContentDatasetsResponse2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
-]);
+export const UpdateDatapoint2DatasetsResponseTtl$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsResponseTtl
+> = z.nativeEnum(UpdateDatapoint2DatasetsResponseTtl);
+/** @internal */
+export const UpdateDatapoint2DatasetsResponseTtl$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsResponseTtl> =
+    UpdateDatapoint2DatasetsResponseTtl$inboundSchema;
 
-export function updateDatapointContentDatasetsResponse2ToJSON(
-  updateDatapointContentDatasetsResponse2:
-    UpdateDatapointContentDatasetsResponse2,
+/** @internal */
+export const UpdateDatapoint2DatasetsResponseCacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponseCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponseTtl$inboundSchema.default("5m"),
+  });
+/** @internal */
+export type UpdateDatapoint2DatasetsResponseCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponseCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapoint2DatasetsResponseCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapoint2DatasetsResponseCacheControl
+  > = z.object({
+    type:
+      UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema,
+    ttl: UpdateDatapoint2DatasetsResponseTtl$outboundSchema.default("5m"),
+  });
+
+export function updateDatapoint2DatasetsResponseCacheControlToJSON(
+  updateDatapoint2DatasetsResponseCacheControl:
+    UpdateDatapoint2DatasetsResponseCacheControl,
 ): string {
   return JSON.stringify(
-    UpdateDatapointContentDatasetsResponse2$outboundSchema.parse(
-      updateDatapointContentDatasetsResponse2,
+    UpdateDatapoint2DatasetsResponseCacheControl$outboundSchema.parse(
+      updateDatapoint2DatasetsResponseCacheControl,
     ),
   );
 }
-export function updateDatapointContentDatasetsResponse2FromJSON(
+export function updateDatapoint2DatasetsResponseCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateDatapointContentDatasetsResponse2,
+  UpdateDatapoint2DatasetsResponseCacheControl,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateDatapointContentDatasetsResponse2$inboundSchema.parse(
+      UpdateDatapoint2DatasetsResponseCacheControl$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'UpdateDatapointContentDatasetsResponse2' from JSON`,
+    `Failed to parse 'UpdateDatapoint2DatasetsResponseCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse1$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsResponse1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapoint2DatasetsResponseCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapoint2DatasetsResponse1$Outbound = {
+  type: "text";
+  text: string;
+  cache_control?:
+    | UpdateDatapoint2DatasetsResponseCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse1$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsResponse1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsResponse1
+> = z.object({
+  type: z.literal("text"),
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapoint2DatasetsResponseCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapoint2DatasetsResponse1ToJSON(
+  updateDatapoint2DatasetsResponse1: UpdateDatapoint2DatasetsResponse1,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsResponse1$outboundSchema.parse(
+      updateDatapoint2DatasetsResponse1,
+    ),
+  );
+}
+export function updateDatapoint2DatasetsResponse1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsResponse1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2DatasetsResponse1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsResponse1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJson2$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2DatasetsResponse1$inboundSchema),
+    components.ImageContentPartSchema$inboundSchema,
+    components.AudioContentPartSchema$inboundSchema,
+    z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
+  ]);
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse200ApplicationJson2$Outbound =
+  | UpdateDatapoint2DatasetsResponse1$Outbound
+  | components.ImageContentPartSchema$Outbound
+  | components.AudioContentPartSchema$Outbound
+  | UpdateDatapoint2Datasets4$Outbound;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJson2$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200ApplicationJson2$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponse200ApplicationJson2
+  > = z.union([
+    z.lazy(() => UpdateDatapoint2DatasetsResponse1$outboundSchema),
+    components.ImageContentPartSchema$outboundSchema,
+    components.AudioContentPartSchema$outboundSchema,
+    z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
+  ]);
+
+export function updateDatapointContentDatasetsResponse200ApplicationJSON2ToJSON(
+  updateDatapointContentDatasetsResponse200ApplicationJson2:
+    UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse200ApplicationJson2$outboundSchema
+      .parse(updateDatapointContentDatasetsResponse200ApplicationJson2),
+  );
+}
+export function updateDatapointContentDatasetsResponse200ApplicationJSON2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse200ApplicationJson2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse200ApplicationJson2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse200ApplicationJson2' from JSON`,
   );
 }
 
@@ -3135,22 +4983,18 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONContent$in
     unknown
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2DatasetsResponse1$inboundSchema),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
+    ])),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONContent$Outbound =
   | string
   | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | UpdateDatapoint2DatasetsResponse1$Outbound
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | UpdateDatapoint2Datasets4$Outbound
@@ -3164,16 +5008,12 @@ export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONContent$ou
     UpdateDatapointMessagesDatasetsResponse200ApplicationJSONContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
-      ]),
-    ),
+    z.array(z.union([
+      z.lazy(() => UpdateDatapoint2DatasetsResponse1$outboundSchema),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
+    ])),
   ]);
 
 export function updateDatapointMessagesDatasetsResponse200ApplicationJSONContentToJSON(
@@ -3208,16 +5048,12 @@ export const UpdateDatapointMessagesDatasetsUserMessage$inboundSchema:
       name: z.string().optional(),
       content: z.union([
         z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$inboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.ImageContentPartSchema$inboundSchema,
-            components.AudioContentPartSchema$inboundSchema,
-            z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
-          ]),
-        ),
+        z.array(z.union([
+          z.lazy(() => UpdateDatapoint2DatasetsResponse1$inboundSchema),
+          components.ImageContentPartSchema$inboundSchema,
+          components.AudioContentPartSchema$inboundSchema,
+          z.lazy(() => UpdateDatapoint2Datasets4$inboundSchema),
+        ])),
       ]),
     });
 /** @internal */
@@ -3227,7 +5063,7 @@ export type UpdateDatapointMessagesDatasetsUserMessage$Outbound = {
   content:
     | string
     | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | UpdateDatapoint2DatasetsResponse1$Outbound
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | UpdateDatapoint2Datasets4$Outbound
@@ -3245,16 +5081,12 @@ export const UpdateDatapointMessagesDatasetsUserMessage$outboundSchema:
     name: z.string().optional(),
     content: z.union([
       z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.ImageContentPartSchema$outboundSchema,
-          components.AudioContentPartSchema$outboundSchema,
-          z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
-        ]),
-      ),
+      z.array(z.union([
+        z.lazy(() => UpdateDatapoint2DatasetsResponse1$outboundSchema),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => UpdateDatapoint2Datasets4$outboundSchema),
+      ])),
     ]),
   });
 
@@ -3285,6 +5117,164 @@ export function updateDatapointMessagesDatasetsUserMessageFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointContentDatasetsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponse200Type> = z
+    .nativeEnum(UpdateDatapointContentDatasetsResponse200Type);
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponse200Type> =
+    UpdateDatapointContentDatasetsResponse200Type$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType,
+  );
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType
+  > =
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200Ttl$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponse200Ttl> = z
+    .nativeEnum(UpdateDatapointContentDatasetsResponse200Ttl);
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200Ttl$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponse200Ttl> =
+    UpdateDatapointContentDatasetsResponse200Ttl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200CacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200CacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    ttl: UpdateDatapointContentDatasetsResponse200Ttl$inboundSchema.default(
+      "5m",
+    ),
+  });
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse200CacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200CacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse200CacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponse200CacheControl
+  > = z.object({
+    type:
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+    ttl: UpdateDatapointContentDatasetsResponse200Ttl$outboundSchema.default(
+      "5m",
+    ),
+  });
+
+export function updateDatapointContentDatasetsResponse200CacheControlToJSON(
+  updateDatapointContentDatasetsResponse200CacheControl:
+    UpdateDatapointContentDatasetsResponse200CacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse200CacheControl$outboundSchema.parse(
+      updateDatapointContentDatasetsResponse200CacheControl,
+    ),
+  );
+}
+export function updateDatapointContentDatasetsResponse200CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse200CacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse200CacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse200CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse2002$inboundSchema:
+  z.ZodType<UpdateDatapointContentDatasetsResponse2002, z.ZodTypeDef, unknown> =
+    z.object({
+      type: UpdateDatapointContentDatasetsResponse200Type$inboundSchema,
+      text: z.string(),
+      cache_control: z.lazy(() =>
+        UpdateDatapointContentDatasetsResponse200CacheControl$inboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cache_control": "cacheControl",
+      });
+    });
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse2002$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | UpdateDatapointContentDatasetsResponse200CacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse2002$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponse2002$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponse2002
+  > = z.object({
+    type: UpdateDatapointContentDatasetsResponse200Type$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() =>
+      UpdateDatapointContentDatasetsResponse200CacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  });
+
+export function updateDatapointContentDatasetsResponse2002ToJSON(
+  updateDatapointContentDatasetsResponse2002:
+    UpdateDatapointContentDatasetsResponse2002,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse2002$outboundSchema.parse(
+      updateDatapointContentDatasetsResponse2002,
+    ),
+  );
+}
+export function updateDatapointContentDatasetsResponse2002FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse2002,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse2002$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse2002' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointMessagesDatasetsResponse200Content$inboundSchema:
   z.ZodType<
     UpdateDatapointMessagesDatasetsResponse200Content,
@@ -3292,12 +5282,14 @@ export const UpdateDatapointMessagesDatasetsResponse200Content$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(
+      z.lazy(() => UpdateDatapointContentDatasetsResponse2002$inboundSchema),
+    ),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsResponse200Content$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapointContentDatasetsResponse2002$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesDatasetsResponse200Content$outboundSchema:
@@ -3307,7 +5299,9 @@ export const UpdateDatapointMessagesDatasetsResponse200Content$outboundSchema:
     UpdateDatapointMessagesDatasetsResponse200Content
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(
+      z.lazy(() => UpdateDatapointContentDatasetsResponse2002$outboundSchema),
+    ),
   ]);
 
 export function updateDatapointMessagesDatasetsResponse200ContentToJSON(
@@ -3346,14 +5340,16 @@ export const UpdateDatapointMessagesDatasetsDeveloperMessage$inboundSchema:
     role: z.literal("developer"),
     content: z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
+      z.array(
+        z.lazy(() => UpdateDatapointContentDatasetsResponse2002$inboundSchema),
+      ),
     ]),
     name: z.string().optional(),
   });
 /** @internal */
 export type UpdateDatapointMessagesDatasetsDeveloperMessage$Outbound = {
   role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<UpdateDatapointContentDatasetsResponse2002$Outbound>;
   name?: string | undefined;
 };
 
@@ -3367,7 +5363,9 @@ export const UpdateDatapointMessagesDatasetsDeveloperMessage$outboundSchema:
     role: z.literal("developer"),
     content: z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
+      z.array(
+        z.lazy(() => UpdateDatapointContentDatasetsResponse2002$outboundSchema),
+      ),
     ]),
     name: z.string().optional(),
   });
@@ -3399,6 +5397,161 @@ export function updateDatapointMessagesDatasetsDeveloperMessageFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointContentDatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponseType> = z
+    .nativeEnum(UpdateDatapointContentDatasetsResponseType);
+/** @internal */
+export const UpdateDatapointContentDatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponseType> =
+    UpdateDatapointContentDatasetsResponseType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONType,
+  );
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointContentDatasetsResponse200ApplicationJSONType
+  > =
+    UpdateDatapointContentDatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponseTtl$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponseTtl> = z
+    .nativeEnum(UpdateDatapointContentDatasetsResponseTtl);
+/** @internal */
+export const UpdateDatapointContentDatasetsResponseTtl$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointContentDatasetsResponseTtl> =
+    UpdateDatapointContentDatasetsResponseTtl$inboundSchema;
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponseCacheControl$inboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponseCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONType$inboundSchema,
+    ttl: UpdateDatapointContentDatasetsResponseTtl$inboundSchema.default("5m"),
+  });
+/** @internal */
+export type UpdateDatapointContentDatasetsResponseCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponseCacheControl$outboundSchema:
+  z.ZodType<
+    UpdateDatapointContentDatasetsResponseCacheControl$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointContentDatasetsResponseCacheControl
+  > = z.object({
+    type:
+      UpdateDatapointContentDatasetsResponse200ApplicationJSONType$outboundSchema,
+    ttl: UpdateDatapointContentDatasetsResponseTtl$outboundSchema.default("5m"),
+  });
+
+export function updateDatapointContentDatasetsResponseCacheControlToJSON(
+  updateDatapointContentDatasetsResponseCacheControl:
+    UpdateDatapointContentDatasetsResponseCacheControl,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponseCacheControl$outboundSchema.parse(
+      updateDatapointContentDatasetsResponseCacheControl,
+    ),
+  );
+}
+export function updateDatapointContentDatasetsResponseCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponseCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponseCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponseCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse2$inboundSchema: z.ZodType<
+  UpdateDatapointContentDatasetsResponse2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointContentDatasetsResponseType$inboundSchema,
+  text: z.string(),
+  cache_control: z.lazy(() =>
+    UpdateDatapointContentDatasetsResponseCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type UpdateDatapointContentDatasetsResponse2$Outbound = {
+  type: string;
+  text: string;
+  cache_control?:
+    | UpdateDatapointContentDatasetsResponseCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointContentDatasetsResponse2$outboundSchema: z.ZodType<
+  UpdateDatapointContentDatasetsResponse2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointContentDatasetsResponse2
+> = z.object({
+  type: UpdateDatapointContentDatasetsResponseType$outboundSchema,
+  text: z.string(),
+  cacheControl: z.lazy(() =>
+    UpdateDatapointContentDatasetsResponseCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function updateDatapointContentDatasetsResponse2ToJSON(
+  updateDatapointContentDatasetsResponse2:
+    UpdateDatapointContentDatasetsResponse2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointContentDatasetsResponse2$outboundSchema.parse(
+      updateDatapointContentDatasetsResponse2,
+    ),
+  );
+}
+export function updateDatapointContentDatasetsResponse2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointContentDatasetsResponse2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointContentDatasetsResponse2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointContentDatasetsResponse2' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointMessagesDatasetsResponseContent$inboundSchema:
   z.ZodType<
     UpdateDatapointMessagesDatasetsResponseContent,
@@ -3406,12 +5559,14 @@ export const UpdateDatapointMessagesDatasetsResponseContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
+    z.array(
+      z.lazy(() => UpdateDatapointContentDatasetsResponse2$inboundSchema),
+    ),
   ]);
 /** @internal */
 export type UpdateDatapointMessagesDatasetsResponseContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<UpdateDatapointContentDatasetsResponse2$Outbound>;
 
 /** @internal */
 export const UpdateDatapointMessagesDatasetsResponseContent$outboundSchema:
@@ -3421,7 +5576,9 @@ export const UpdateDatapointMessagesDatasetsResponseContent$outboundSchema:
     UpdateDatapointMessagesDatasetsResponseContent
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(
+      z.lazy(() => UpdateDatapointContentDatasetsResponse2$outboundSchema),
+    ),
   ]);
 
 export function updateDatapointMessagesDatasetsResponseContentToJSON(
@@ -3460,14 +5617,16 @@ export const UpdateDatapointMessagesDatasetsSystemMessage$inboundSchema:
     role: z.literal("system"),
     content: z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
+      z.array(
+        z.lazy(() => UpdateDatapointContentDatasetsResponse2$inboundSchema),
+      ),
     ]),
     name: z.string().optional(),
   });
 /** @internal */
 export type UpdateDatapointMessagesDatasetsSystemMessage$Outbound = {
   role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
+  content: string | Array<UpdateDatapointContentDatasetsResponse2$Outbound>;
   name?: string | undefined;
 };
 
@@ -3481,7 +5640,9 @@ export const UpdateDatapointMessagesDatasetsSystemMessage$outboundSchema:
     role: z.literal("system"),
     content: z.union([
       z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
+      z.array(
+        z.lazy(() => UpdateDatapointContentDatasetsResponse2$outboundSchema),
+      ),
     ]),
     name: z.string().optional(),
   });
@@ -3598,7 +5759,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-08T12:58:42.308Z",
+    "2025-12-08T22:59:30.860Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3635,7 +5796,7 @@ export const UpdateDatapointEvaluations3$outboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.308Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T22:59:30.860Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3698,7 +5859,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-08T12:58:42.307Z",
+    "2025-12-08T22:59:30.859Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3736,7 +5897,7 @@ export const UpdateDatapointEvaluations2$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.307Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T22:59:30.859Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -3798,7 +5959,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-08T12:58:42.306Z",
+    "2025-12-08T22:59:30.859Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3833,7 +5994,7 @@ export const UpdateDatapointEvaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: UpdateDatapointEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-08T12:58:42.306Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-08T22:59:30.859Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -3946,7 +6107,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-08T12:58:30.471Z",
+    "2025-12-08T22:59:16.300Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -4024,7 +6185,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-08T12:58:30.471Z"))
+  updated: z.date().default(() => new Date("2025-12-08T22:59:16.300Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

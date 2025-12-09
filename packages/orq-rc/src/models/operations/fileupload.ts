@@ -10,7 +10,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileUploadFile = {
+export type FileT = {
   fileName: string;
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
 };
@@ -32,7 +32,7 @@ export type FileUploadRequestBody = {
   /**
    * The file to be uploaded.
    */
-  file: FileUploadFile | Blob;
+  file: FileT | Blob;
   /**
    * The intended purpose of the uploaded file.
    */
@@ -78,30 +78,27 @@ export type FileUploadResponseBody = {
 };
 
 /** @internal */
-export const FileUploadFile$inboundSchema: z.ZodType<
-  FileUploadFile,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
+  .object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  });
 /** @internal */
-export type FileUploadFile$Outbound = {
+export type FileT$Outbound = {
   fileName: string;
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
 };
 
 /** @internal */
-export const FileUploadFile$outboundSchema: z.ZodType<
-  FileUploadFile$Outbound,
+export const FileT$outboundSchema: z.ZodType<
+  FileT$Outbound,
   z.ZodTypeDef,
-  FileUploadFile
+  FileT
 > = z.object({
   fileName: z.string(),
   content: z.union([
@@ -112,16 +109,16 @@ export const FileUploadFile$outboundSchema: z.ZodType<
   ]),
 });
 
-export function fileUploadFileToJSON(fileUploadFile: FileUploadFile): string {
-  return JSON.stringify(FileUploadFile$outboundSchema.parse(fileUploadFile));
+export function fileToJSON(fileT: FileT): string {
+  return JSON.stringify(FileT$outboundSchema.parse(fileT));
 }
-export function fileUploadFileFromJSON(
+export function fileFromJSON(
   jsonString: string,
-): SafeParseResult<FileUploadFile, SDKValidationError> {
+): SafeParseResult<FileT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileUploadFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileUploadFile' from JSON`,
+    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileT' from JSON`,
   );
 }
 
@@ -138,12 +135,12 @@ export const FileUploadRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file: z.lazy(() => FileUploadFile$inboundSchema),
+  file: z.lazy(() => FileT$inboundSchema),
   purpose: Purpose$inboundSchema.default("retrieval"),
 });
 /** @internal */
 export type FileUploadRequestBody$Outbound = {
-  file: FileUploadFile$Outbound | Blob;
+  file: FileT$Outbound | Blob;
   purpose: string;
 };
 
@@ -153,7 +150,7 @@ export const FileUploadRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileUploadRequestBody
 > = z.object({
-  file: z.lazy(() => FileUploadFile$outboundSchema).or(blobLikeSchema),
+  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
   purpose: Purpose$outboundSchema.default("retrieval"),
 });
 
@@ -196,7 +193,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-12-08T12:58:33.638Z",
+    "2025-12-08T22:59:19.629Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -229,7 +226,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-12-08T12:58:33.638Z"))
+  created: z.date().default(() => new Date("2025-12-08T22:59:19.629Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

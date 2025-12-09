@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `components.TextContentPartSchema`
+### `components.InvokeDeploymentRequest2Messages41`
 
 ```typescript
-const value: components.TextContentPartSchema = {
+const value: components.InvokeDeploymentRequest2Messages41 = {
   type: "text",
   text: "<value>",
 };

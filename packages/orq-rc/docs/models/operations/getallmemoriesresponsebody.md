@@ -20,7 +20,6 @@ let value: GetAllMemoriesResponseBody = {
         "key": "<value>",
       },
       workspaceId: "<id>",
-      documentsCount: 7217.29,
     },
   ],
   hasMore: false,

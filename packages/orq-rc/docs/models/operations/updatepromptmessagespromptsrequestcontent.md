@@ -11,14 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.UpdatePromptContentPromptsRequest2[]`
+### `operations.UpdatePromptContentPromptsRequestRequestBody2[]`
 
 ```typescript
-const value: operations.UpdatePromptContentPromptsRequest2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.UpdatePromptContentPromptsRequestRequestBody2[] = [];
 ```
 

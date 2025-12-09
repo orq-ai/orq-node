@@ -3,12 +3,13 @@
 
 ## Supported Types
 
-### `components.TextContentPartSchema`
+### `operations.DeploymentStream2DeploymentsRequestRequestBodyMessages51`
 
 ```typescript
-const value: components.TextContentPartSchema = {
-  type: "text",
-  text: "<value>",
-};
+const value:
+  operations.DeploymentStream2DeploymentsRequestRequestBodyMessages51 = {
+    type: "text",
+    text: "<value>",
+  };
 ```
 

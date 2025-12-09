@@ -11,14 +11,16 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentStreamContentDeploymentsRequest2[]`
+### `operations.DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2[]`
 
 ```typescript
-const value: operations.DeploymentStreamContentDeploymentsRequest2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value:
+  operations.DeploymentStreamContentDeploymentsRequestRequestBodyPrefixMessages2[] =
+    [
+      {
+        type: "text",
+        text: "<value>",
+      },
+    ];
 ```
 

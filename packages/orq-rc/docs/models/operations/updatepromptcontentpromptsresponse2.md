@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.UpdatePrompt2Prompts1`
+### `operations.UpdatePrompt2PromptsResponse1`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts1 = {
+const value: operations.UpdatePrompt2PromptsResponse1 = {
   type: "text",
   text: "<value>",
 };
@@ -23,10 +23,10 @@ const value: operations.UpdatePrompt2Prompts2 = {
 };
 ```
 
-### `operations.UpdatePrompt2Prompts3`
+### `operations.UpdatePrompt23`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts3 = {
+const value: operations.UpdatePrompt23 = {
   type: "file",
   file: {},
 };

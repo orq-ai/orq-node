@@ -11,15 +11,17 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices32[]`
 
 ```typescript
 const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[] =
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices32[] =
     [
       {
-        type: "file",
-        file: {},
+        type: "image_url",
+        imageUrl: {
+          url: "https://fatal-overload.name/",
+        },
       },
     ];
 ```

@@ -1,41 +1,20 @@
 # CreateDatasetItemContentDatasetsResponse2002
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { CreateDatasetItemContentDatasetsResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: CreateDatasetItemContentDatasetsResponse2002 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.RefusalPartSchema`
+## Fields
 
-```typescript
-const value: components.RefusalPartSchema = {
-  type: "refusal",
-};
-```
-
-### `components.ReasoningPartSchema`
-
-```typescript
-const value: components.ReasoningPartSchema = {
-  type: "reasoning",
-  reasoning: "<value>",
-  signature: "<value>",
-};
-```
-
-### `components.RedactedReasoningPartSchema`
-
-```typescript
-const value: components.RedactedReasoningPartSchema = {
-  type: "redacted_reasoning",
-  data: "<value>",
-};
-```
-
+| Field                                                                                                                                                    | Type                                                                                                                                                     | Required                                                                                                                                                 | Description                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                   | [operations.CreateDatasetItemContentDatasetsResponse200Type](../../models/operations/createdatasetitemcontentdatasetsresponse200type.md)                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
+| `text`                                                                                                                                                   | *string*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
+| `cacheControl`                                                                                                                                           | [operations.CreateDatasetItemContentDatasetsResponse200CacheControl](../../models/operations/createdatasetitemcontentdatasetsresponse200cachecontrol.md) | :heavy_minus_sign:                                                                                                                                       | N/A                                                                                                                                                      |

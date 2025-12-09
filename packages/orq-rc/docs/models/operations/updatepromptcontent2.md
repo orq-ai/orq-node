@@ -23,10 +23,10 @@ const value: operations.UpdatePrompt22 = {
 };
 ```
 
-### `operations.UpdatePrompt23`
+### `operations.Two3`
 
 ```typescript
-const value: operations.UpdatePrompt23 = {
+const value: operations.Two3 = {
   type: "file",
   file: {},
 };
