@@ -1,0 +1,91 @@
+name: Generate SDK
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .speakeasy/gen.yaml
+      - packages/orq-rc/.speakeasy/gen.yaml
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force the generation of the SDKs"
+        default: "false"
+        required: false
+        type: string
+      target:
+        description: "Which SDK to generate"
+        required: true
+        type: choice
+        options:
+          - stable
+          - prerelease
+          - both
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      stable: ${{ steps.changes.outputs.stable }}
+      prerelease: ${{ steps.changes.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed files
+        id: changes
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            # Manual trigger - use input
+            case "${{ inputs.target }}" in
+              stable)
+                echo "stable=true" >> $GITHUB_OUTPUT
+                echo "prerelease=false" >> $GITHUB_OUTPUT
+                ;;
+              prerelease)
+                echo "stable=false" >> $GITHUB_OUTPUT
+                echo "prerelease=true" >> $GITHUB_OUTPUT
+                ;;
+              both)
+                echo "stable=true" >> $GITHUB_OUTPUT
+                echo "prerelease=true" >> $GITHUB_OUTPUT
+                ;;
+            esac
+          else
+            # Push event - detect from changed files
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+
+            if echo "$CHANGED" | grep -q "^\.speakeasy/gen\.yaml$"; then
+              echo "stable=true" >> $GITHUB_OUTPUT
+            else
+              echo "stable=false" >> $GITHUB_OUTPUT
+            fi
+
+            if echo "$CHANGED" | grep -q "^packages/orq-rc/\.speakeasy/gen\.yaml$"; then
+              echo "prerelease=true" >> $GITHUB_OUTPUT
+            else
+              echo "prerelease=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+  publish-stable:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.stable == 'true'
+    uses: ./.github/workflows/sdk_generation.yml
+    name: Stable
+    secrets: inherit
+    with:
+      target: orq-ai-node
+      force: ${{ inputs.force || 'false' }}
+
+  publish-prerelease:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.prerelease == 'true'
+    uses: ./.github/workflows/sdk_generation.yml
+    name: Pre-release
+    secrets: inherit
+    with:
+      target: orq-ai-prerelease-node
+      force: ${{ inputs.force || 'false' }}
