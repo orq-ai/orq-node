@@ -1850,6 +1850,9 @@ export type UpdateAgentAgentsKnowledgeBases = {
  */
 export type UpdateAgentResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   workspaceId: string;
@@ -4809,7 +4812,7 @@ export const UpdateAgentSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: UpdateAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -4878,7 +4881,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
   UpdateAgentSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: UpdateAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -5481,7 +5484,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: UpdateAgentAgentsToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)).optional(),
@@ -5513,7 +5516,7 @@ export const UpdateAgentAgentsSettings$outboundSchema: z.ZodType<
   UpdateAgentAgentsSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)).optional(),

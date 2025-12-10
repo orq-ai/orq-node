@@ -124,7 +124,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateAgentResponseRequestResponseBody](../../models/operations/createagentresponserequestresponsebody.md)\>**
+**Promise\<[operations.CreateAgentResponseRequestResponse](../../models/operations/createagentresponserequestresponse.md)\>**
 
 ### Errors
 

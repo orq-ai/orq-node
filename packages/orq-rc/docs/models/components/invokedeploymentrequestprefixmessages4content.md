@@ -11,14 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `components.InvokeDeploymentRequestContentPrefixMessages2[]`
+### `components.Content2[]`
 
 ```typescript
-const value: components.InvokeDeploymentRequestContentPrefixMessages2[] = [
-  {
-    type: "redacted_reasoning",
-    data: "<value>",
-  },
-];
+const value: components.Content2[] = [];
 ```
 

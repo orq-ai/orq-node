@@ -9,33 +9,16 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UpdateMemoryStoreEmbeddingConfig = {
-  /**
-   * The embeddings model to use for the knowledge base in the format "provider/model" for public models or "workspaceKey@provider/model" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
-   */
-  model: string;
-};
-
 export type UpdateMemoryStoreRequestBody = {
-  embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
   /**
    * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
    */
-  description: string;
+  description?: string | undefined;
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
   ttl?: number | undefined;
-  /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
-   *
-   * @remarks
-   *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
-   *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
-   */
-  path: string;
+  path?: string | undefined;
 };
 
 export type UpdateMemoryStoreRequest = {
@@ -46,51 +29,43 @@ export type UpdateMemoryStoreRequest = {
   requestBody?: UpdateMemoryStoreRequestBody | undefined;
 };
 
-/**
- * The provider of the AI service
- */
 export const UpdateMemoryStoreProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
 } as const;
-/**
- * The provider of the AI service
- */
 export type UpdateMemoryStoreProvider = ClosedEnum<
   typeof UpdateMemoryStoreProvider
 >;
 
-export type UpdateMemoryStoreMemoryStoresEmbeddingConfig = {
+export type UpdateMemoryStoreEmbeddingConfig = {
   modelId: string;
   integrationId?: string | undefined;
   /**
    * Number of results to return
    */
   topK?: number | undefined;
-  /**
-   * The provider of the AI service
-   */
   provider: UpdateMemoryStoreProvider;
 };
 
@@ -134,49 +109,8 @@ export type UpdateMemoryStoreResponseBody = {
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
   ttl?: number | undefined;
-  embeddingConfig: UpdateMemoryStoreMemoryStoresEmbeddingConfig;
+  embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
 };
-
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
-/** @internal */
-export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreEmbeddingConfig
-> = z.object({
-  model: z.string(),
-});
-
-export function updateMemoryStoreEmbeddingConfigToJSON(
-  updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema.parse(
-      updateMemoryStoreEmbeddingConfig,
-    ),
-  );
-}
-export function updateMemoryStoreEmbeddingConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreEmbeddingConfig' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
@@ -184,23 +118,15 @@ export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  embedding_config: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$inboundSchema
-  ),
-  description: z.string(),
+  description: z.string().optional(),
   ttl: z.number().optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "embedding_config": "embeddingConfig",
-  });
+  path: z.string().optional(),
 });
 /** @internal */
 export type UpdateMemoryStoreRequestBody$Outbound = {
-  embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
-  description: string;
+  description?: string | undefined;
   ttl?: number | undefined;
-  path: string;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -209,16 +135,9 @@ export const UpdateMemoryStoreRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateMemoryStoreRequestBody
 > = z.object({
-  embeddingConfig: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema
-  ),
-  description: z.string(),
+  description: z.string().optional(),
   ttl: z.number().optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingConfig: "embedding_config",
-  });
+  path: z.string().optional(),
 });
 
 export function updateMemoryStoreRequestBodyToJSON(
@@ -304,25 +223,24 @@ export const UpdateMemoryStoreProvider$outboundSchema: z.ZodNativeEnum<
 > = UpdateMemoryStoreProvider$inboundSchema;
 
 /** @internal */
-export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema:
-  z.ZodType<
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    model_id: z.string(),
-    integration_id: z.string().optional(),
-    top_k: z.number().optional(),
-    provider: UpdateMemoryStoreProvider$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "model_id": "modelId",
-      "integration_id": "integrationId",
-      "top_k": "topK",
-    });
+export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
+  UpdateMemoryStoreEmbeddingConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model_id: z.string(),
+  integration_id: z.string().optional(),
+  top_k: z.number().optional(),
+  provider: UpdateMemoryStoreProvider$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "model_id": "modelId",
+    "integration_id": "integrationId",
+    "top_k": "topK",
   });
+});
 /** @internal */
-export type UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound = {
+export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
   model_id: string;
   integration_id?: string | undefined;
   top_k?: number | undefined;
@@ -330,47 +248,39 @@ export type UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound = {
 };
 
 /** @internal */
-export const UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema:
-  z.ZodType<
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound,
-    z.ZodTypeDef,
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig
-  > = z.object({
-    modelId: z.string(),
-    integrationId: z.string().optional(),
-    topK: z.number().optional(),
-    provider: UpdateMemoryStoreProvider$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      modelId: "model_id",
-      integrationId: "integration_id",
-      topK: "top_k",
-    });
+export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
+  UpdateMemoryStoreEmbeddingConfig$Outbound,
+  z.ZodTypeDef,
+  UpdateMemoryStoreEmbeddingConfig
+> = z.object({
+  modelId: z.string(),
+  integrationId: z.string().optional(),
+  topK: z.number().optional(),
+  provider: UpdateMemoryStoreProvider$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    modelId: "model_id",
+    integrationId: "integration_id",
+    topK: "top_k",
   });
+});
 
-export function updateMemoryStoreMemoryStoresEmbeddingConfigToJSON(
-  updateMemoryStoreMemoryStoresEmbeddingConfig:
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig,
+export function updateMemoryStoreEmbeddingConfigToJSON(
+  updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
 ): string {
   return JSON.stringify(
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema.parse(
-      updateMemoryStoreMemoryStoresEmbeddingConfig,
+    UpdateMemoryStoreEmbeddingConfig$outboundSchema.parse(
+      updateMemoryStoreEmbeddingConfig,
     ),
   );
 }
-export function updateMemoryStoreMemoryStoresEmbeddingConfigFromJSON(
+export function updateMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
-): SafeParseResult<
-  UpdateMemoryStoreMemoryStoresEmbeddingConfig,
-  SDKValidationError
-> {
+): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateMemoryStoreMemoryStoresEmbeddingConfig' from JSON`,
+    (x) => UpdateMemoryStoreEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMemoryStoreEmbeddingConfig' from JSON`,
   );
 }
 
@@ -390,7 +300,7 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
   updated: z.string(),
   ttl: z.number().optional(),
   embedding_config: z.lazy(() =>
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$inboundSchema
+    UpdateMemoryStoreEmbeddingConfig$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -412,7 +322,7 @@ export type UpdateMemoryStoreResponseBody$Outbound = {
   created: string;
   updated: string;
   ttl?: number | undefined;
-  embedding_config: UpdateMemoryStoreMemoryStoresEmbeddingConfig$Outbound;
+  embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
 };
 
 /** @internal */
@@ -431,7 +341,7 @@ export const UpdateMemoryStoreResponseBody$outboundSchema: z.ZodType<
   updated: z.string(),
   ttl: z.number().optional(),
   embeddingConfig: z.lazy(() =>
-    UpdateMemoryStoreMemoryStoresEmbeddingConfig$outboundSchema
+    UpdateMemoryStoreEmbeddingConfig$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {

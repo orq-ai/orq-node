@@ -3,23 +3,17 @@
 
 ## Supported Types
 
-### `operations.CreateAgentResponseRequestResponseBody`
+### `components.CreateAgentResponse`
 
 ```typescript
-const value: operations.CreateAgentResponseRequestResponseBody = {
+const value: components.CreateAgentResponse = {
   id: "<id>",
   taskId: "<id>",
-  output: [
-    {
-      messageId: "<id>",
-      role: "system",
-      parts: [],
-    },
-  ],
-  createdAt: "1723593465246",
-  model: "Colorado",
+  output: [],
+  createdAt: "1723656581139",
+  model: "XC90",
 };
 ```
 
-### `EventStream<operations.CreateAgentResponseRequestAgentsResponsesResponseBody>`
+### `EventStream<operations.CreateAgentResponseRequestResponseBody>`
 

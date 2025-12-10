@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -119,6 +120,13 @@ export type Memory = {
   entityId: string;
 };
 
+export type Conversation = {
+  /**
+   * Unique ULID identifier for the conversation, prefixed with "conv_". Used to link agent executions to a specific conversation thread.
+   */
+  id: string;
+};
+
 export type CreateAgentResponseRequestRequestBody = {
   /**
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
@@ -152,6 +160,11 @@ export type CreateAgentResponseRequestRequestBody = {
    * If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors.
    */
   background?: boolean | undefined;
+  /**
+   * If true, returns Server-Sent Events (SSE) streaming response with real-time events. If false (default), returns standard JSON response.
+   */
+  stream?: boolean | undefined;
+  conversation?: Conversation | undefined;
 };
 
 export type CreateAgentResponseRequestRequest = {
@@ -162,104 +175,19 @@ export type CreateAgentResponseRequestRequest = {
   requestBody: CreateAgentResponseRequestRequestBody;
 };
 
-export const CreateAgentResponseRequestAgentsResponsesRole = {
-  User: "user",
-  Agent: "agent",
-  Tool: "tool",
-  System: "system",
-} as const;
-export type CreateAgentResponseRequestAgentsResponsesRole = ClosedEnum<
-  typeof CreateAgentResponseRequestAgentsResponsesRole
->;
-
-export type Parts =
-  | components.TextPart
-  | components.DataPart
-  | components.FilePart
-  | components.ToolCallPart
-  | components.ToolResultPart;
-
-export type Output = {
-  messageId: string;
-  role: CreateAgentResponseRequestAgentsResponsesRole;
-  parts: Array<
-    | components.TextPart
-    | components.DataPart
-    | components.FilePart
-    | components.ToolCallPart
-    | components.ToolResultPart
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-export type PromptTokensDetails = {
-  cachedTokens?: number | null | undefined;
-  cacheCreationTokens?: number | null | undefined;
-  /**
-   * The number of audio input tokens consumed by the request.
-   */
-  audioTokens?: number | null | undefined;
-};
-
-export type CompletionTokensDetails = {
-  reasoningTokens?: number | null | undefined;
-  acceptedPredictionTokens?: number | null | undefined;
-  rejectedPredictionTokens?: number | null | undefined;
-  /**
-   * The number of audio output tokens produced by the response.
-   */
-  audioTokens?: number | null | undefined;
-};
-
 /**
- * Token usage from the agent execution
- */
-export type CreateAgentResponseRequestUsage = {
-  /**
-   * Number of tokens in the generated completion.
-   */
-  completionTokens?: number | undefined;
-  /**
-   * Number of tokens in the prompt.
-   */
-  promptTokens?: number | undefined;
-  /**
-   * Total number of tokens used in the request (prompt + completion).
-   */
-  totalTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | null | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
-};
-
-/**
- * Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details.
+ * Agent response successfully created and completed. Returns the full conversation including all messages, tool interactions, model used, and token usage statistics. In background mode, returns immediately with initial task details. In streaming mode, returns Server-Sent Events (SSE) with real-time events.
  */
 export type CreateAgentResponseRequestResponseBody = {
   /**
-   * The unique response ID
+   * Union of all possible streaming events. Each event has a type field for discrimination.
    */
-  id: string;
-  /**
-   * The agent execution task ID
-   */
-  taskId: string;
-  /**
-   * Array of messages from the agent execution
-   */
-  output: Array<Output>;
-  /**
-   * ISO timestamp of response creation
-   */
-  createdAt: string;
-  /**
-   * Model used in provider/model format
-   */
-  model: string;
-  /**
-   * Token usage from the agent execution
-   */
-  usage?: CreateAgentResponseRequestUsage | null | undefined;
+  data?: components.ResponseStreamingEvent | undefined;
 };
+
+export type CreateAgentResponseRequestResponse =
+  | components.CreateAgentResponse
+  | EventStream<CreateAgentResponseRequestResponseBody>;
 
 /** @internal */
 export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
@@ -560,6 +488,49 @@ export function memoryFromJSON(
 }
 
 /** @internal */
+export const Conversation$inboundSchema: z.ZodType<
+  Conversation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+  });
+});
+/** @internal */
+export type Conversation$Outbound = {
+  _id: string;
+};
+
+/** @internal */
+export const Conversation$outboundSchema: z.ZodType<
+  Conversation$Outbound,
+  z.ZodTypeDef,
+  Conversation
+> = z.object({
+  id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+  });
+});
+
+export function conversationToJSON(conversation: Conversation): string {
+  return JSON.stringify(Conversation$outboundSchema.parse(conversation));
+}
+export function conversationFromJSON(
+  jsonString: string,
+): SafeParseResult<Conversation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Conversation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Conversation' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentResponseRequestRequestBody$inboundSchema: z.ZodType<
   CreateAgentResponseRequestRequestBody,
   z.ZodTypeDef,
@@ -574,6 +545,8 @@ export const CreateAgentResponseRequestRequestBody$inboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   background: z.boolean().default(false),
+  stream: z.boolean().default(false),
+  conversation: z.lazy(() => Conversation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "task_id": "taskId",
@@ -589,6 +562,8 @@ export type CreateAgentResponseRequestRequestBody$Outbound = {
   memory?: Memory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   background: boolean;
+  stream: boolean;
+  conversation?: Conversation$Outbound | undefined;
 };
 
 /** @internal */
@@ -606,6 +581,8 @@ export const CreateAgentResponseRequestRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   background: z.boolean().default(false),
+  stream: z.boolean().default(false),
+  conversation: z.lazy(() => Conversation$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",
@@ -691,347 +668,23 @@ export function createAgentResponseRequestRequestFromJSON(
 }
 
 /** @internal */
-export const CreateAgentResponseRequestAgentsResponsesRole$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentResponseRequestAgentsResponsesRole> = z
-    .nativeEnum(CreateAgentResponseRequestAgentsResponsesRole);
-/** @internal */
-export const CreateAgentResponseRequestAgentsResponsesRole$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentResponseRequestAgentsResponsesRole> =
-    CreateAgentResponseRequestAgentsResponsesRole$inboundSchema;
-
-/** @internal */
-export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
-  .union([
-    components.TextPart$inboundSchema,
-    components.DataPart$inboundSchema,
-    components.FilePart$inboundSchema,
-    components.ToolCallPart$inboundSchema,
-    components.ToolResultPart$inboundSchema,
-  ]);
-/** @internal */
-export type Parts$Outbound =
-  | components.TextPart$Outbound
-  | components.DataPart$Outbound
-  | components.FilePart$Outbound
-  | components.ToolCallPart$Outbound
-  | components.ToolResultPart$Outbound;
-
-/** @internal */
-export const Parts$outboundSchema: z.ZodType<
-  Parts$Outbound,
-  z.ZodTypeDef,
-  Parts
-> = z.union([
-  components.TextPart$outboundSchema,
-  components.DataPart$outboundSchema,
-  components.FilePart$outboundSchema,
-  components.ToolCallPart$outboundSchema,
-  components.ToolResultPart$outboundSchema,
-]);
-
-export function partsToJSON(parts: Parts): string {
-  return JSON.stringify(Parts$outboundSchema.parse(parts));
-}
-export function partsFromJSON(
-  jsonString: string,
-): SafeParseResult<Parts, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Parts$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Parts' from JSON`,
-  );
-}
-
-/** @internal */
-export const Output$inboundSchema: z.ZodType<Output, z.ZodTypeDef, unknown> = z
-  .object({
-    messageId: z.string(),
-    role: CreateAgentResponseRequestAgentsResponsesRole$inboundSchema,
-    parts: z.array(
-      z.union([
-        components.TextPart$inboundSchema,
-        components.DataPart$inboundSchema,
-        components.FilePart$inboundSchema,
-        components.ToolCallPart$inboundSchema,
-        components.ToolResultPart$inboundSchema,
-      ]),
-    ),
-    metadata: z.record(z.any()).optional(),
-  });
-/** @internal */
-export type Output$Outbound = {
-  messageId: string;
-  role: string;
-  parts: Array<
-    | components.TextPart$Outbound
-    | components.DataPart$Outbound
-    | components.FilePart$Outbound
-    | components.ToolCallPart$Outbound
-    | components.ToolResultPart$Outbound
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const Output$outboundSchema: z.ZodType<
-  Output$Outbound,
-  z.ZodTypeDef,
-  Output
-> = z.object({
-  messageId: z.string(),
-  role: CreateAgentResponseRequestAgentsResponsesRole$outboundSchema,
-  parts: z.array(
-    z.union([
-      components.TextPart$outboundSchema,
-      components.DataPart$outboundSchema,
-      components.FilePart$outboundSchema,
-      components.ToolCallPart$outboundSchema,
-      components.ToolResultPart$outboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function outputToJSON(output: Output): string {
-  return JSON.stringify(Output$outboundSchema.parse(output));
-}
-export function outputFromJSON(
-  jsonString: string,
-): SafeParseResult<Output, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Output$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Output' from JSON`,
-  );
-}
-
-/** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
-/** @internal */
-export type PromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
-
-/** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
-): string {
-  return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
-  );
-}
-export function promptTokensDetailsFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
-/** @internal */
-export type CompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
-
-/** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
-  );
-}
-export function completionTokensDetailsFromJSON(
-  jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentResponseRequestUsage$inboundSchema: z.ZodType<
-  CreateAgentResponseRequestUsage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => PromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => CompletionTokensDetails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
-/** @internal */
-export type CreateAgentResponseRequestUsage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
-  completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateAgentResponseRequestUsage$outboundSchema: z.ZodType<
-  CreateAgentResponseRequestUsage$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseRequestUsage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function createAgentResponseRequestUsageToJSON(
-  createAgentResponseRequestUsage: CreateAgentResponseRequestUsage,
-): string {
-  return JSON.stringify(
-    CreateAgentResponseRequestUsage$outboundSchema.parse(
-      createAgentResponseRequestUsage,
-    ),
-  );
-}
-export function createAgentResponseRequestUsageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentResponseRequestUsage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentResponseRequestUsage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseRequestUsage' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentResponseRequestResponseBody$inboundSchema: z.ZodType<
   CreateAgentResponseRequestResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string(),
-  task_id: z.string(),
-  output: z.array(z.lazy(() => Output$inboundSchema)),
-  created_at: z.string(),
-  model: z.string(),
-  usage: z.nullable(z.lazy(() => CreateAgentResponseRequestUsage$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "task_id": "taskId",
-    "created_at": "createdAt",
-  });
+  data: z.string().transform((v, ctx) => {
+    try {
+      return JSON.parse(v);
+    } catch (err) {
+      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      return z.NEVER;
+    }
+  }).pipe(components.ResponseStreamingEvent$inboundSchema.optional()),
 });
 /** @internal */
 export type CreateAgentResponseRequestResponseBody$Outbound = {
-  _id: string;
-  task_id: string;
-  output: Array<Output$Outbound>;
-  created_at: string;
-  model: string;
-  usage?: CreateAgentResponseRequestUsage$Outbound | null | undefined;
+  data?: components.ResponseStreamingEvent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1040,20 +693,7 @@ export const CreateAgentResponseRequestResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAgentResponseRequestResponseBody
 > = z.object({
-  id: z.string(),
-  taskId: z.string(),
-  output: z.array(z.lazy(() => Output$outboundSchema)),
-  createdAt: z.string(),
-  model: z.string(),
-  usage: z.nullable(
-    z.lazy(() => CreateAgentResponseRequestUsage$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    taskId: "task_id",
-    createdAt: "created_at",
-  });
+  data: components.ResponseStreamingEvent$outboundSchema.optional(),
 });
 
 export function createAgentResponseRequestResponseBodyToJSON(
@@ -1074,5 +714,56 @@ export function createAgentResponseRequestResponseBodyFromJSON(
     (x) =>
       CreateAgentResponseRequestResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateAgentResponseRequestResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentResponseRequestResponse$inboundSchema: z.ZodType<
+  CreateAgentResponseRequestResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.CreateAgentResponse$inboundSchema,
+  z.instanceof(ReadableStream<Uint8Array>)
+    .transform(stream => {
+      return new EventStream(stream, rawEvent => {
+        if (rawEvent.data === "[DONE]") return { done: true };
+        return {
+          value: z.lazy(() =>
+            CreateAgentResponseRequestResponseBody$inboundSchema
+          ).parse(rawEvent),
+        };
+      });
+    }),
+]);
+/** @internal */
+export type CreateAgentResponseRequestResponse$Outbound =
+  | components.CreateAgentResponse$Outbound
+  | never;
+
+/** @internal */
+export const CreateAgentResponseRequestResponse$outboundSchema: z.ZodType<
+  CreateAgentResponseRequestResponse$Outbound,
+  z.ZodTypeDef,
+  CreateAgentResponseRequestResponse
+> = z.union([components.CreateAgentResponse$outboundSchema, z.never()]);
+
+export function createAgentResponseRequestResponseToJSON(
+  createAgentResponseRequestResponse: CreateAgentResponseRequestResponse,
+): string {
+  return JSON.stringify(
+    CreateAgentResponseRequestResponse$outboundSchema.parse(
+      createAgentResponseRequestResponse,
+    ),
+  );
+}
+export function createAgentResponseRequestResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentResponseRequestResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentResponseRequestResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentResponseRequestResponse' from JSON`,
   );
 }

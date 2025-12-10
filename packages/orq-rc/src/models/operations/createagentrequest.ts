@@ -1834,6 +1834,9 @@ export type CreateAgentRequestKnowledgeBases = {
  */
 export type CreateAgentRequestResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   projectId: string;
@@ -4490,7 +4493,7 @@ export const Settings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -4557,7 +4560,7 @@ export const Settings$outboundSchema: z.ZodType<
   Settings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -5075,7 +5078,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
@@ -5108,7 +5111,7 @@ export const CreateAgentRequestSettings$outboundSchema: z.ZodType<
   CreateAgentRequestSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: CreateAgentRequestToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$outboundSchema))

@@ -11,6 +11,7 @@ let value: ListConversationsResponseBody = {
   object: "list",
   data: [
     {
+      entityId: "<id>",
       kind: "conversation",
       displayName: "Nasir98",
       createdAt: 7869.27,

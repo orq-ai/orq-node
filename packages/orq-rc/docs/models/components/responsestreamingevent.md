@@ -57,6 +57,7 @@ const value: components.ToolStartedEvent = {
     arguments: {
       "key": "<value>",
       "key1": "<value>",
+      "key2": "<value>",
     },
   },
 };
@@ -98,8 +99,11 @@ const value: components.ToolReviewRequestedEvent = {
   data: {
     toolId: "<id>",
     toolCallId: "<id>",
-    arguments: {},
-    requiresApproval: false,
+    arguments: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
+    requiresApproval: true,
   },
 };
 ```

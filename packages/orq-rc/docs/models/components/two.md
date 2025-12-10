@@ -1,20 +1,46 @@
 # Two
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { Two } from "@orq-ai/node/models/components";
-
-let value: Two = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [components.InvokeDeploymentRequestContentType](../../models/components/invokedeploymentrequestcontenttype.md)                 | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `text`                                                                                                                         | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `cacheControl`                                                                                                                 | [components.InvokeDeploymentRequestContentCacheControl](../../models/components/invokedeploymentrequestcontentcachecontrol.md) | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `components.Four`
+
+```typescript
+const value: components.Four = {
+  type: "file",
+  file: {},
+};
+```
+

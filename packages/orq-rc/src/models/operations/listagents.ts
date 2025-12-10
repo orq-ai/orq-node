@@ -813,6 +813,9 @@ export type ListAgentsKnowledgeBases = {
 
 export type ListAgentsData = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   createdById?: string | null | undefined;
@@ -1207,7 +1210,7 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -1240,7 +1243,7 @@ export const ListAgentsSettings$outboundSchema: z.ZodType<
   ListAgentsSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: ListAgentsToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),

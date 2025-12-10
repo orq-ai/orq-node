@@ -3973,7 +3973,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KC0320AGWE18VJ6GMW8G8SCM"),
+  id: z.string().default("01KC3CE24ZEZA6JDSGQ6V52ZJ4"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -3992,7 +3992,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KC0320AGWE18VJ6GMW8G8SCM"),
+  id: z.string().default("01KC3CE24ZEZA6JDSGQ6V52ZJ4"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -5922,7 +5922,7 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
   tool_approval_required: StreamRunAgentToolApprovalRequired$inboundSchema
     .default("none"),
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$inboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$inboundSchema))
@@ -6012,7 +6012,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
   toolApprovalRequired: StreamRunAgentToolApprovalRequired$outboundSchema
     .default("none"),
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$outboundSchema))

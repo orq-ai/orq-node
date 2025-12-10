@@ -26,7 +26,7 @@ export const FinishReason = {
  */
 export type FinishReason = ClosedEnum<typeof FinishReason>;
 
-export type PromptTokensDetails = {
+export type ResponseDoneEventPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -35,7 +35,7 @@ export type PromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CompletionTokensDetails = {
+export type ResponseDoneEventCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -48,7 +48,7 @@ export type CompletionTokensDetails = {
 /**
  * Token usage statistics for the complete response
  */
-export type Usage = {
+export type ResponseDoneEventUsage = {
   /**
    * Number of tokens in the generated completion.
    */
@@ -61,8 +61,11 @@ export type Usage = {
    * Total number of tokens used in the request (prompt + completion).
    */
   totalTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | null | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  promptTokensDetails?: ResponseDoneEventPromptTokensDetails | null | undefined;
+  completionTokensDetails?:
+    | ResponseDoneEventCompletionTokensDetails
+    | null
+    | undefined;
 };
 
 export const ResponseDoneEventDataType = {
@@ -100,7 +103,7 @@ export type ResponseDoneEventData = {
   /**
    * Token usage statistics for the complete response
    */
-  usage?: Usage | undefined;
+  usage?: ResponseDoneEventUsage | undefined;
   /**
    * Tool calls awaiting user response (when finishReason is function_call)
    */
@@ -127,8 +130,8 @@ export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
   FinishReason$inboundSchema;
 
 /** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
+export const ResponseDoneEventPromptTokensDetails$inboundSchema: z.ZodType<
+  ResponseDoneEventPromptTokensDetails,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -143,17 +146,17 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type PromptTokensDetails$Outbound = {
+export type ResponseDoneEventPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
   cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
 /** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
+export const ResponseDoneEventPromptTokensDetails$outboundSchema: z.ZodType<
+  ResponseDoneEventPromptTokensDetails$Outbound,
   z.ZodTypeDef,
-  PromptTokensDetails
+  ResponseDoneEventPromptTokensDetails
 > = z.object({
   cachedTokens: z.nullable(z.number().int()).optional(),
   cacheCreationTokens: z.nullable(z.number().int()).optional(),
@@ -166,26 +169,29 @@ export const PromptTokensDetails$outboundSchema: z.ZodType<
   });
 });
 
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
+export function responseDoneEventPromptTokensDetailsToJSON(
+  responseDoneEventPromptTokensDetails: ResponseDoneEventPromptTokensDetails,
 ): string {
   return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
+    ResponseDoneEventPromptTokensDetails$outboundSchema.parse(
+      responseDoneEventPromptTokensDetails,
+    ),
   );
 }
-export function promptTokensDetailsFromJSON(
+export function responseDoneEventPromptTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
+): SafeParseResult<ResponseDoneEventPromptTokensDetails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
+    (x) =>
+      ResponseDoneEventPromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseDoneEventPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
+export const ResponseDoneEventCompletionTokensDetails$inboundSchema: z.ZodType<
+  ResponseDoneEventCompletionTokensDetails,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -202,7 +208,7 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type CompletionTokensDetails$Outbound = {
+export type ResponseDoneEventCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | null | undefined;
   accepted_prediction_tokens?: number | null | undefined;
   rejected_prediction_tokens?: number | null | undefined;
@@ -210,10 +216,10 @@ export type CompletionTokensDetails$Outbound = {
 };
 
 /** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
+export const ResponseDoneEventCompletionTokensDetails$outboundSchema: z.ZodType<
+  ResponseDoneEventCompletionTokensDetails$Outbound,
   z.ZodTypeDef,
-  CompletionTokensDetails
+  ResponseDoneEventCompletionTokensDetails
 > = z.object({
   reasoningTokens: z.nullable(z.number()).optional(),
   acceptedPredictionTokens: z.nullable(z.number()).optional(),
@@ -228,70 +234,85 @@ export const CompletionTokensDetails$outboundSchema: z.ZodType<
   });
 });
 
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
+export function responseDoneEventCompletionTokensDetailsToJSON(
+  responseDoneEventCompletionTokensDetails:
+    ResponseDoneEventCompletionTokensDetails,
 ): string {
   return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
+    ResponseDoneEventCompletionTokensDetails$outboundSchema.parse(
+      responseDoneEventCompletionTokensDetails,
+    ),
   );
 }
-export function completionTokensDetailsFromJSON(
+export function responseDoneEventCompletionTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  ResponseDoneEventCompletionTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
+    (x) =>
+      ResponseDoneEventCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ResponseDoneEventCompletionTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
-  .object({
-    completion_tokens: z.number().optional(),
-    prompt_tokens: z.number().optional(),
-    total_tokens: z.number().optional(),
-    prompt_tokens_details: z.nullable(
-      z.lazy(() => PromptTokensDetails$inboundSchema),
-    ).optional(),
-    completion_tokens_details: z.nullable(
-      z.lazy(() => CompletionTokensDetails$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "completion_tokens": "completionTokens",
-      "prompt_tokens": "promptTokens",
-      "total_tokens": "totalTokens",
-      "prompt_tokens_details": "promptTokensDetails",
-      "completion_tokens_details": "completionTokensDetails",
-    });
+export const ResponseDoneEventUsage$inboundSchema: z.ZodType<
+  ResponseDoneEventUsage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  completion_tokens: z.number().optional(),
+  prompt_tokens: z.number().optional(),
+  total_tokens: z.number().optional(),
+  prompt_tokens_details: z.nullable(
+    z.lazy(() => ResponseDoneEventPromptTokensDetails$inboundSchema),
+  ).optional(),
+  completion_tokens_details: z.nullable(
+    z.lazy(() => ResponseDoneEventCompletionTokensDetails$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_tokens": "completionTokens",
+    "prompt_tokens": "promptTokens",
+    "total_tokens": "totalTokens",
+    "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
   });
+});
 /** @internal */
-export type Usage$Outbound = {
+export type ResponseDoneEventUsage$Outbound = {
   completion_tokens?: number | undefined;
   prompt_tokens?: number | undefined;
   total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
+  prompt_tokens_details?:
+    | ResponseDoneEventPromptTokensDetails$Outbound
+    | null
+    | undefined;
   completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
+    | ResponseDoneEventCompletionTokensDetails$Outbound
     | null
     | undefined;
 };
 
 /** @internal */
-export const Usage$outboundSchema: z.ZodType<
-  Usage$Outbound,
+export const ResponseDoneEventUsage$outboundSchema: z.ZodType<
+  ResponseDoneEventUsage$Outbound,
   z.ZodTypeDef,
-  Usage
+  ResponseDoneEventUsage
 > = z.object({
   completionTokens: z.number().optional(),
   promptTokens: z.number().optional(),
   totalTokens: z.number().optional(),
   promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
+    z.lazy(() => ResponseDoneEventPromptTokensDetails$outboundSchema),
   ).optional(),
   completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
+    z.lazy(() => ResponseDoneEventCompletionTokensDetails$outboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -303,16 +324,20 @@ export const Usage$outboundSchema: z.ZodType<
   });
 });
 
-export function usageToJSON(usage: Usage): string {
-  return JSON.stringify(Usage$outboundSchema.parse(usage));
+export function responseDoneEventUsageToJSON(
+  responseDoneEventUsage: ResponseDoneEventUsage,
+): string {
+  return JSON.stringify(
+    ResponseDoneEventUsage$outboundSchema.parse(responseDoneEventUsage),
+  );
 }
-export function usageFromJSON(
+export function responseDoneEventUsageFromJSON(
   jsonString: string,
-): SafeParseResult<Usage, SDKValidationError> {
+): SafeParseResult<ResponseDoneEventUsage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Usage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Usage' from JSON`,
+    (x) => ResponseDoneEventUsage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseDoneEventUsage' from JSON`,
   );
 }
 
@@ -415,14 +440,14 @@ export const ResponseDoneEventData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   finishReason: FinishReason$inboundSchema,
-  usage: z.lazy(() => Usage$inboundSchema).optional(),
+  usage: z.lazy(() => ResponseDoneEventUsage$inboundSchema).optional(),
   pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
     .optional(),
 });
 /** @internal */
 export type ResponseDoneEventData$Outbound = {
   finishReason: string;
-  usage?: Usage$Outbound | undefined;
+  usage?: ResponseDoneEventUsage$Outbound | undefined;
   pendingToolCalls?: Array<PendingToolCalls$Outbound> | undefined;
 };
 
@@ -433,7 +458,7 @@ export const ResponseDoneEventData$outboundSchema: z.ZodType<
   ResponseDoneEventData
 > = z.object({
   finishReason: FinishReason$outboundSchema,
-  usage: z.lazy(() => Usage$outboundSchema).optional(),
+  usage: z.lazy(() => ResponseDoneEventUsage$outboundSchema).optional(),
   pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$outboundSchema))
     .optional(),
 });

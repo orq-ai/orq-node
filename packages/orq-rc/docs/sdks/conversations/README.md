@@ -6,6 +6,7 @@
 
 * [list](#list) - List conversations
 * [create](#create) - Create conversation
+* [generateName](#generatename) - Generate conversation name
 * [retrieve](#retrieve) - Retrieve conversation
 * [update](#update) - Update conversation
 * [delete](#delete) - Delete conversation
@@ -98,6 +99,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.conversations.create({
     displayName: "Support Chat #1234",
+    metadata: {
+      entityId: "<id>",
+    },
   });
 
   console.log(result);
@@ -123,6 +127,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await conversationsCreate(orq, {
     displayName: "Support Chat #1234",
+    metadata: {
+      entityId: "<id>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -153,6 +160,82 @@ run();
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## generateName
+
+Generates a display name for a conversation using AI based on the provided context. Updates the conversation with the generated name and sets generating_title to false.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GenerateConversationName" method="post" path="/v2/conversations/{conversation_id}/generate-name" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.conversations.generateName({
+    context: "What is the weather in San Francisco?",
+  }, "conv_01jj1hdhn79xas7a01wb3hysdb");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { conversationsGenerateName } from "@orq-ai/node/funcs/conversationsGenerateName.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await conversationsGenerateName(orq, {
+    context: "What is the weather in San Francisco?",
+  }, "conv_01jj1hdhn79xas7a01wb3hysdb");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("conversationsGenerateName failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `conversationId`                                                                                                                                                               | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The unique identifier of the conversation to generate a name for                                                                                                               | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.GenerateConversationNameRequestBody](../../models/operations/generateconversationnamerequestbody.md)                                                               | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |                                                                                                                                                                                |
+
+### Response
+
+**Promise\<[operations.GenerateConversationNameResponseBody](../../models/operations/generateconversationnameresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                               | Status Code                                              | Content Type                                             |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| errors.GenerateConversationNameResponseBody              | 400                                                      | application/json                                         |
+| errors.GenerateConversationNameConversationsResponseBody | 404                                                      | application/json                                         |
+| errors.APIError                                          | 4XX, 5XX                                                 | \*/\*                                                    |
 
 ## retrieve
 

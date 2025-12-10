@@ -11,11 +11,10 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyMessages2[]`
+### `operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[]`
 
 ```typescript
 const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyMessages2[] =
-    [];
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [];
 ```
 

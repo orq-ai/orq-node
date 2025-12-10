@@ -13,8 +13,11 @@ let value: ToolReviewRequestedEvent = {
   data: {
     toolId: "<id>",
     toolCallId: "<id>",
-    arguments: {},
-    requiresApproval: false,
+    arguments: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
+    requiresApproval: true,
   },
 };
 ```

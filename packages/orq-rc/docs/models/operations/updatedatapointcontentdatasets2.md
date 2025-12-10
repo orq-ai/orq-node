@@ -1,20 +1,41 @@
 # UpdateDatapointContentDatasets2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { UpdateDatapointContentDatasets2 } from "@orq-ai/node/models/operations";
-
-let value: UpdateDatapointContentDatasets2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.RefusalPartSchema`
 
-| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [operations.UpdateDatapointContentDatasetsRequestType](../../models/operations/updatedatapointcontentdatasetsrequesttype.md)   | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `text`                                                                                                                         | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `cacheControl`                                                                                                                 | [operations.UpdateDatapointContentDatasetsCacheControl](../../models/operations/updatedatapointcontentdatasetscachecontrol.md) | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+```typescript
+const value: components.RefusalPartSchema = {
+  type: "refusal",
+};
+```
+
+### `components.ReasoningPartSchema`
+
+```typescript
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
+};
+```
+
+### `components.RedactedReasoningPartSchema`
+
+```typescript
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
+};
+```
+

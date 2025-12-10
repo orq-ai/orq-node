@@ -1,20 +1,46 @@
 # InvokeDeploymentRequestContentMessages2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { InvokeDeploymentRequestContentMessages2 } from "@orq-ai/node/models/components";
-
-let value: InvokeDeploymentRequestContentMessages2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.ImageContentPartSchema`
 
-| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                         | [components.InvokeDeploymentRequestContentMessagesType](../../models/components/invokedeploymentrequestcontentmessagestype.md)                 | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
-| `text`                                                                                                                                         | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
-| `cacheControl`                                                                                                                                 | [components.InvokeDeploymentRequestContentMessagesCacheControl](../../models/components/invokedeploymentrequestcontentmessagescachecontrol.md) | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+```typescript
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
+};
+```
+
+### `components.AudioContentPartSchema`
+
+```typescript
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `components.Two4`
+
+```typescript
+const value: components.Two4 = {
+  type: "file",
+  file: {},
+};
+```
+

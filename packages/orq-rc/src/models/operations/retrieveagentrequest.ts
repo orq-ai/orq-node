@@ -824,6 +824,9 @@ export type RetrieveAgentRequestKnowledgeBases = {
  */
 export type RetrieveAgentRequestResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
   key: string;
   displayName: string;
   workspaceId: string;
@@ -1206,7 +1209,7 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   tool_approval_required: RetrieveAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
@@ -1241,7 +1244,7 @@ export const RetrieveAgentRequestSettings$outboundSchema: z.ZodType<
   RetrieveAgentRequestSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   toolApprovalRequired: RetrieveAgentRequestToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => RetrieveAgentRequestTools$outboundSchema))

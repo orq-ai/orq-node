@@ -16,6 +16,7 @@ let value: ToolStartedEvent = {
     arguments: {
       "key": "<value>",
       "key1": "<value>",
+      "key2": "<value>",
     },
   },
 };

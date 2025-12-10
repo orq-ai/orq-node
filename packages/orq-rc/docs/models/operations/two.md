@@ -1,20 +1,34 @@
 # Two
 
-## Example Usage
+
+## Supported Types
+
+### `operations.One`
 
 ```typescript
-import { Two } from "@orq-ai/node/models/operations";
-
-let value: Two = {
+const value: operations.One = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `operations.Two2`
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `type`                                                             | [operations.Type](../../models/operations/type.md)                 | :heavy_check_mark:                                                 | N/A                                                                |
-| `text`                                                             | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `cacheControl`                                                     | [operations.CacheControl](../../models/operations/cachecontrol.md) | :heavy_minus_sign:                                                 | N/A                                                                |
+```typescript
+const value: operations.Two2 = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://picsum.photos/id/1/200/300",
+  },
+};
+```
+
+### `operations.Three`
+
+```typescript
+const value: operations.Three = {
+  type: "file",
+  file: {},
+};
+```
+

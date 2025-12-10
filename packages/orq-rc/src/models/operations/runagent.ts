@@ -3874,7 +3874,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KC03208GAGNPAQTBB2DXMY8W"),
+    id: z.string().default("01KC3CE23C1WG4ACM482CRY1P4"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -3893,7 +3893,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KC03208GAGNPAQTBB2DXMY8W"),
+  id: z.string().default("01KC3CE23C1WG4ACM482CRY1P4"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -5590,7 +5590,7 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
     "none",
   ),
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$inboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$inboundSchema))
@@ -5659,7 +5659,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
     "none",
   ),
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$outboundSchema))
