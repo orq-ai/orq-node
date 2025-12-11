@@ -16,7 +16,7 @@ export class Budgets extends ClientSDK {
    * List budget configurations
    *
    * @remarks
-   * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
+   * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (api_key, contact or workspace). For workspace budgets, only one budget can exist per workspace.
    */
   async list(
     request?: operations.ListBudgetsRequest | undefined,

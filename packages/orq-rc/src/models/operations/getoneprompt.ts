@@ -342,6 +342,7 @@ export const GetOnePromptProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
 

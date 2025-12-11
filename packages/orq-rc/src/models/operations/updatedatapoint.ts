@@ -91,7 +91,7 @@ export type UpdateDatapointMessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: UpdateDatapointMessagesCacheControl | undefined;
 };
 
@@ -475,7 +475,7 @@ export type UpdateDatapointMessagesDatasetsToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: UpdateDatapointMessagesDatasetsCacheControl | undefined;
 };
 
@@ -1120,7 +1120,7 @@ export const UpdateDatapointMessagesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => UpdateDatapointMessagesCacheControl$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -1133,7 +1133,7 @@ export const UpdateDatapointMessagesToolMessage$inboundSchema: z.ZodType<
 export type UpdateDatapointMessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: UpdateDatapointMessagesCacheControl$Outbound | undefined;
 };
 
@@ -1148,7 +1148,7 @@ export const UpdateDatapointMessagesToolMessage$outboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => UpdateDatapointMessagesCacheControl$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -2455,7 +2455,7 @@ export const UpdateDatapointMessagesDatasetsToolMessage$inboundSchema:
         z.string(),
         z.array(components.TextContentPartSchema$inboundSchema),
       ]),
-      tool_call_id: z.string(),
+      tool_call_id: z.nullable(z.string()),
       cache_control: z.lazy(() =>
         UpdateDatapointMessagesDatasetsCacheControl$inboundSchema
       ).optional(),
@@ -2469,7 +2469,7 @@ export const UpdateDatapointMessagesDatasetsToolMessage$inboundSchema:
 export type UpdateDatapointMessagesDatasetsToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?:
     | UpdateDatapointMessagesDatasetsCacheControl$Outbound
     | undefined;
@@ -2487,7 +2487,7 @@ export const UpdateDatapointMessagesDatasetsToolMessage$outboundSchema:
       z.string(),
       z.array(components.TextContentPartSchema$outboundSchema),
     ]),
-    toolCallId: z.string(),
+    toolCallId: z.nullable(z.string()),
     cacheControl: z.lazy(() =>
       UpdateDatapointMessagesDatasetsCacheControl$outboundSchema
     ).optional(),
@@ -3598,7 +3598,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-10T08:38:47.278Z",
+    "2025-12-11T05:01:44.239Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3635,7 +3635,7 @@ export const UpdateDatapointEvaluations3$outboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-10T08:38:47.278Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-11T05:01:44.239Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3698,7 +3698,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-10T08:38:47.278Z",
+    "2025-12-11T05:01:44.238Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3736,7 +3736,7 @@ export const UpdateDatapointEvaluations2$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-10T08:38:47.278Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-11T05:01:44.238Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -3798,7 +3798,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-12-10T08:38:47.277Z",
+    "2025-12-11T05:01:44.238Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3833,7 +3833,7 @@ export const UpdateDatapointEvaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: UpdateDatapointEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-12-10T08:38:47.277Z"))
+  reviewedAt: z.date().default(() => new Date("2025-12-11T05:01:44.238Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -3946,7 +3946,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-10T08:38:35.196Z",
+    "2025-12-11T05:01:28.270Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -4024,7 +4024,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-10T08:38:35.196Z"))
+  updated: z.date().default(() => new Date("2025-12-11T05:01:28.270Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

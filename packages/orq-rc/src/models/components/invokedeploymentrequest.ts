@@ -129,7 +129,7 @@ export type ToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: PrefixMessagesCacheControl | undefined;
 };
 
@@ -472,7 +472,7 @@ export type MessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: MessagesCacheControl | undefined;
 };
 
@@ -1300,7 +1300,7 @@ export const ToolMessage$inboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("tool"),
   content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => PrefixMessagesCacheControl$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -1313,7 +1313,7 @@ export const ToolMessage$inboundSchema: z.ZodType<
 export type ToolMessage$Outbound = {
   role: "tool";
   content: string | Array<TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: PrefixMessagesCacheControl$Outbound | undefined;
 };
 
@@ -1325,7 +1325,7 @@ export const ToolMessage$outboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("tool"),
   content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => PrefixMessagesCacheControl$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -2338,7 +2338,7 @@ export const MessagesToolMessage$inboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("tool"),
   content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => MessagesCacheControl$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2350,7 +2350,7 @@ export const MessagesToolMessage$inboundSchema: z.ZodType<
 export type MessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: MessagesCacheControl$Outbound | undefined;
 };
 
@@ -2362,7 +2362,7 @@ export const MessagesToolMessage$outboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("tool"),
   content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => MessagesCacheControl$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

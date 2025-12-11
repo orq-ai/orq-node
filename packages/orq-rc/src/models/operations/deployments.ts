@@ -412,6 +412,7 @@ export const DeploymentsProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 

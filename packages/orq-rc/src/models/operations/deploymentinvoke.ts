@@ -55,6 +55,7 @@ export const DeploymentInvokeProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 /**
  * The provider used to generate the response

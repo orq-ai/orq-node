@@ -96,7 +96,7 @@ export type PrefixMessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: DeploymentStreamPrefixMessagesCacheControl | undefined;
 };
 
@@ -448,7 +448,7 @@ export type DeploymentStreamMessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: DeploymentStreamMessagesCacheControl | undefined;
 };
 
@@ -1198,6 +1198,7 @@ export const DeploymentStreamProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 /**
  * The provider used to generate the response
@@ -1677,7 +1678,7 @@ export const PrefixMessagesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() =>
     DeploymentStreamPrefixMessagesCacheControl$inboundSchema
   ).optional(),
@@ -1691,7 +1692,7 @@ export const PrefixMessagesToolMessage$inboundSchema: z.ZodType<
 export type PrefixMessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?:
     | DeploymentStreamPrefixMessagesCacheControl$Outbound
     | undefined;
@@ -1708,7 +1709,7 @@ export const PrefixMessagesToolMessage$outboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() =>
     DeploymentStreamPrefixMessagesCacheControl$outboundSchema
   ).optional(),
@@ -2870,7 +2871,7 @@ export const DeploymentStreamMessagesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() =>
     DeploymentStreamMessagesCacheControl$inboundSchema
   ).optional(),
@@ -2884,7 +2885,7 @@ export const DeploymentStreamMessagesToolMessage$inboundSchema: z.ZodType<
 export type DeploymentStreamMessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: DeploymentStreamMessagesCacheControl$Outbound | undefined;
 };
 
@@ -2899,7 +2900,7 @@ export const DeploymentStreamMessagesToolMessage$outboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() =>
     DeploymentStreamMessagesCacheControl$outboundSchema
   ).optional(),

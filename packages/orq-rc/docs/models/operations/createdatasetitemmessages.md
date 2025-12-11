@@ -56,7 +56,7 @@ const value: operations.CreateDatasetItemMessagesAssistantMessage = {
 const value: operations.CreateDatasetItemMessagesToolMessage = {
   role: "tool",
   content: [],
-  toolCallId: "<id>",
+  toolCallId: null,
 };
 ```
 

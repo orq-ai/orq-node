@@ -12,7 +12,7 @@
 
 ## list
 
-Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
+Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (api_key, contact or workspace). For workspace budgets, only one budget can exist per workspace.
 
 ### Example Usage
 

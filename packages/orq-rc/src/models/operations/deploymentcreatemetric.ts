@@ -120,7 +120,7 @@ export type DeploymentCreateMetricMessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: DeploymentCreateMetricMessagesCacheControl | undefined;
 };
 
@@ -472,7 +472,7 @@ export type ChoicesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: ChoicesCacheControl | undefined;
 };
 
@@ -1088,7 +1088,7 @@ export const DeploymentCreateMetricMessagesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() =>
     DeploymentCreateMetricMessagesCacheControl$inboundSchema
   ).optional(),
@@ -1102,7 +1102,7 @@ export const DeploymentCreateMetricMessagesToolMessage$inboundSchema: z.ZodType<
 export type DeploymentCreateMetricMessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?:
     | DeploymentCreateMetricMessagesCacheControl$Outbound
     | undefined;
@@ -1120,7 +1120,7 @@ export const DeploymentCreateMetricMessagesToolMessage$outboundSchema:
       z.string(),
       z.array(components.TextContentPartSchema$outboundSchema),
     ]),
-    toolCallId: z.string(),
+    toolCallId: z.nullable(z.string()),
     cacheControl: z.lazy(() =>
       DeploymentCreateMetricMessagesCacheControl$outboundSchema
     ).optional(),
@@ -2342,7 +2342,7 @@ export const ChoicesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => ChoicesCacheControl$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2354,7 +2354,7 @@ export const ChoicesToolMessage$inboundSchema: z.ZodType<
 export type ChoicesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: ChoicesCacheControl$Outbound | undefined;
 };
 
@@ -2369,7 +2369,7 @@ export const ChoicesToolMessage$outboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => ChoicesCacheControl$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -359,6 +359,7 @@ export const ListPromptVersionsProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type ListPromptVersionsProvider = ClosedEnum<
   typeof ListPromptVersionsProvider

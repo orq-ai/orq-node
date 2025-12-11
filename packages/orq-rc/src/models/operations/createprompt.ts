@@ -538,7 +538,7 @@ export type CreatePromptMessagesToolMessage = {
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: CreatePromptMessagesCacheControl | undefined;
 };
 
@@ -1243,6 +1243,7 @@ export const CreatePromptProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 
@@ -2709,7 +2710,7 @@ export const CreatePromptMessagesToolMessage$inboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => CreatePromptMessagesCacheControl$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -2722,7 +2723,7 @@ export const CreatePromptMessagesToolMessage$inboundSchema: z.ZodType<
 export type CreatePromptMessagesToolMessage$Outbound = {
   role: "tool";
   content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string;
+  tool_call_id: string | null;
   cache_control?: CreatePromptMessagesCacheControl$Outbound | undefined;
 };
 
@@ -2737,7 +2738,7 @@ export const CreatePromptMessagesToolMessage$outboundSchema: z.ZodType<
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => CreatePromptMessagesCacheControl$outboundSchema)
     .optional(),
 }).transform((v) => {

@@ -355,6 +355,7 @@ export const GetAllPromptsProvider = {
   Deepseek: "deepseek",
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
 
