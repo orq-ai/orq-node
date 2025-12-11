@@ -13,5 +13,5 @@ let value: GetBudgetType = "contact";
 ## Values
 
 ```typescript
-"api_key" | "contact" | "workspace"
+"api_key" | "contact"
 ```

@@ -11,15 +11,14 @@ import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Filter by budget entity type (api_key, contact or workspace)
+ * Filter by budget entity type (contact or api_key)
  */
 export const QueryParamType = {
-  ApiKey: "api_key",
   Contact: "contact",
-  Workspace: "workspace",
+  ApiKey: "api_key",
 } as const;
 /**
- * Filter by budget entity type (api_key, contact or workspace)
+ * Filter by budget entity type (contact or api_key)
  */
 export type QueryParamType = ClosedEnum<typeof QueryParamType>;
 
@@ -37,7 +36,7 @@ export type ListBudgetsRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * Filter by budget entity type (api_key, contact or workspace)
+   * Filter by budget entity type (contact or api_key)
    */
   type?: QueryParamType | undefined;
   /**
@@ -61,7 +60,6 @@ export type ListBudgetsObject = ClosedEnum<typeof ListBudgetsObject>;
 export const ListBudgetsType = {
   ApiKey: "api_key",
   Contact: "contact",
-  Workspace: "workspace",
 } as const;
 /**
  * Budget entity type
@@ -387,7 +385,7 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-11T05:01:28.677Z",
+    "2025-12-11T11:32:34.996Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -424,7 +422,7 @@ export const ListBudgetsData$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => ListBudgetsConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-11T05:01:28.677Z"))
+  updated: z.date().default(() => new Date("2025-12-11T11:32:34.996Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

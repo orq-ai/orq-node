@@ -13,40 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Budget period type
  */
-export const CreateBudgetRequestBodyPeriod = {
-  Daily: "daily",
-  Weekly: "weekly",
-  Monthly: "monthly",
-  Yearly: "yearly",
-} as const;
-/**
- * Budget period type
- */
-export type CreateBudgetRequestBodyPeriod = ClosedEnum<
-  typeof CreateBudgetRequestBodyPeriod
->;
-
-/**
- * Budget configuration for the entire workspace
- */
-export type WorkspaceBudget = {
-  /**
-   * Workspace budget type
-   */
-  type: "workspace";
-  /**
-   * Budget period type
-   */
-  period: CreateBudgetRequestBodyPeriod;
-  /**
-   * Budget amount in USD for the specified period
-   */
-  amount: number;
-};
-
-/**
- * Budget period type
- */
 export const RequestBodyPeriod = {
   Daily: "daily",
   Weekly: "weekly",
@@ -83,7 +49,7 @@ export type ContactBudget = {
 /**
  * Budget period type
  */
-export const CreateBudgetRequestBodyBudgetsPeriod = {
+export const CreateBudgetRequestBodyPeriod = {
   Daily: "daily",
   Weekly: "weekly",
   Monthly: "monthly",
@@ -92,8 +58,8 @@ export const CreateBudgetRequestBodyBudgetsPeriod = {
 /**
  * Budget period type
  */
-export type CreateBudgetRequestBodyBudgetsPeriod = ClosedEnum<
-  typeof CreateBudgetRequestBodyBudgetsPeriod
+export type CreateBudgetRequestBodyPeriod = ClosedEnum<
+  typeof CreateBudgetRequestBodyPeriod
 >;
 
 /**
@@ -111,7 +77,7 @@ export type APIKeyBudget = {
   /**
    * Budget period type
    */
-  period: CreateBudgetRequestBodyBudgetsPeriod;
+  period: CreateBudgetRequestBodyPeriod;
   /**
    * Budget amount in USD for the specified period
    */
@@ -119,12 +85,9 @@ export type APIKeyBudget = {
 };
 
 /**
- * Create budget configuration for API key, contact, or workspace
+ * Create budget configuration for API key or contact
  */
-export type CreateBudgetRequestBody =
-  | APIKeyBudget
-  | ContactBudget
-  | WorkspaceBudget;
+export type CreateBudgetRequestBody = APIKeyBudget | ContactBudget;
 
 /**
  * Budget entity type
@@ -132,7 +95,6 @@ export type CreateBudgetRequestBody =
 export const CreateBudgetType = {
   ApiKey: "api_key",
   Contact: "contact",
-  Workspace: "workspace",
 } as const;
 /**
  * Budget entity type
@@ -230,58 +192,6 @@ export type CreateBudgetResponseBody = {
 };
 
 /** @internal */
-export const CreateBudgetRequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof CreateBudgetRequestBodyPeriod
-> = z.nativeEnum(CreateBudgetRequestBodyPeriod);
-/** @internal */
-export const CreateBudgetRequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof CreateBudgetRequestBodyPeriod
-> = CreateBudgetRequestBodyPeriod$inboundSchema;
-
-/** @internal */
-export const WorkspaceBudget$inboundSchema: z.ZodType<
-  WorkspaceBudget,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("workspace"),
-  period: CreateBudgetRequestBodyPeriod$inboundSchema,
-  amount: z.number(),
-});
-/** @internal */
-export type WorkspaceBudget$Outbound = {
-  type: "workspace";
-  period: string;
-  amount: number;
-};
-
-/** @internal */
-export const WorkspaceBudget$outboundSchema: z.ZodType<
-  WorkspaceBudget$Outbound,
-  z.ZodTypeDef,
-  WorkspaceBudget
-> = z.object({
-  type: z.literal("workspace"),
-  period: CreateBudgetRequestBodyPeriod$outboundSchema,
-  amount: z.number(),
-});
-
-export function workspaceBudgetToJSON(
-  workspaceBudget: WorkspaceBudget,
-): string {
-  return JSON.stringify(WorkspaceBudget$outboundSchema.parse(workspaceBudget));
-}
-export function workspaceBudgetFromJSON(
-  jsonString: string,
-): SafeParseResult<WorkspaceBudget, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WorkspaceBudget$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WorkspaceBudget' from JSON`,
-  );
-}
-
-/** @internal */
 export const RequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyPeriod
 > = z.nativeEnum(RequestBodyPeriod);
@@ -343,14 +253,13 @@ export function contactBudgetFromJSON(
 }
 
 /** @internal */
-export const CreateBudgetRequestBodyBudgetsPeriod$inboundSchema:
-  z.ZodNativeEnum<typeof CreateBudgetRequestBodyBudgetsPeriod> = z.nativeEnum(
-    CreateBudgetRequestBodyBudgetsPeriod,
-  );
+export const CreateBudgetRequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
+  typeof CreateBudgetRequestBodyPeriod
+> = z.nativeEnum(CreateBudgetRequestBodyPeriod);
 /** @internal */
-export const CreateBudgetRequestBodyBudgetsPeriod$outboundSchema:
-  z.ZodNativeEnum<typeof CreateBudgetRequestBodyBudgetsPeriod> =
-    CreateBudgetRequestBodyBudgetsPeriod$inboundSchema;
+export const CreateBudgetRequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
+  typeof CreateBudgetRequestBodyPeriod
+> = CreateBudgetRequestBodyPeriod$inboundSchema;
 
 /** @internal */
 export const APIKeyBudget$inboundSchema: z.ZodType<
@@ -360,7 +269,7 @@ export const APIKeyBudget$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("api_key"),
   entity_id: z.string(),
-  period: CreateBudgetRequestBodyBudgetsPeriod$inboundSchema,
+  period: CreateBudgetRequestBodyPeriod$inboundSchema,
   amount: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -383,7 +292,7 @@ export const APIKeyBudget$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("api_key"),
   entityId: z.string(),
-  period: CreateBudgetRequestBodyBudgetsPeriod$outboundSchema,
+  period: CreateBudgetRequestBodyPeriod$outboundSchema,
   amount: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -412,13 +321,11 @@ export const CreateBudgetRequestBody$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => APIKeyBudget$inboundSchema),
   z.lazy(() => ContactBudget$inboundSchema),
-  z.lazy(() => WorkspaceBudget$inboundSchema),
 ]);
 /** @internal */
 export type CreateBudgetRequestBody$Outbound =
   | APIKeyBudget$Outbound
-  | ContactBudget$Outbound
-  | WorkspaceBudget$Outbound;
+  | ContactBudget$Outbound;
 
 /** @internal */
 export const CreateBudgetRequestBody$outboundSchema: z.ZodType<
@@ -428,7 +335,6 @@ export const CreateBudgetRequestBody$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => APIKeyBudget$outboundSchema),
   z.lazy(() => ContactBudget$outboundSchema),
-  z.lazy(() => WorkspaceBudget$outboundSchema),
 ]);
 
 export function createBudgetRequestBodyToJSON(
@@ -583,7 +489,7 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-11T05:01:28.677Z",
+    "2025-12-11T11:32:34.996Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -623,7 +529,7 @@ export const CreateBudgetResponseBody$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => Consumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-11T05:01:28.677Z"))
+  updated: z.date().default(() => new Date("2025-12-11T11:32:34.996Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

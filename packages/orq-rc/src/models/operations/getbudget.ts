@@ -23,7 +23,6 @@ export type GetBudgetRequest = {
 export const GetBudgetType = {
   ApiKey: "api_key",
   Contact: "contact",
-  Workspace: "workspace",
 } as const;
 /**
  * Budget entity type
@@ -296,7 +295,7 @@ export const GetBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-11T05:01:28.677Z",
+    "2025-12-11T11:32:34.996Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -336,7 +335,7 @@ export const GetBudgetResponseBody$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => GetBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-11T05:01:28.677Z"))
+  updated: z.date().default(() => new Date("2025-12-11T11:32:34.996Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

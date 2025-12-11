@@ -16,7 +16,7 @@ export class Budgets extends ClientSDK {
    * List budget configurations
    *
    * @remarks
-   * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (api_key, contact or workspace). For workspace budgets, only one budget can exist per workspace.
+   * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact).
    */
   async list(
     request?: operations.ListBudgetsRequest | undefined,
@@ -33,7 +33,7 @@ export class Budgets extends ClientSDK {
    * Create budget configuration
    *
    * @remarks
-   * Create a new budget configuration for an API key, contact, or workspace. For API keys, provide the API key value (e.g., sk_live_xxx) in entity_id field. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.
+   * Create a new budget configuration for an API key or contact. For API keys, provide the API key value (e.g., sk_live_xxx) in entity_id field. For contacts, provide the external ID in entity_id field.
    */
   async create(
     request: operations.CreateBudgetRequestBody,
