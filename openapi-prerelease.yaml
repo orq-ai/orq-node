@@ -1770,7 +1770,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kc8fgre1adjf755q2cfn9p5b"
+              default: "reasoning_01kc8y899n2wg4e0xb77zst6gv"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1854,7 +1854,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kc8fgrdztnwzm65vzqnwntgh"
+                      default: "text_01kc8y899mq0h5n6jt5731tkae"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1880,7 +1880,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kc8fgre2v7h1kgb37d6bg95n"
+                      default: "file_01kc8y899q788grk6qtnts4zex"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -1911,7 +1911,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kc8fgre52bdezs0cbkhe9vxb"
+                      default: "data_01kc8y899sas3nmzr185pmdswk"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -1993,7 +1993,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kc8fgre72hzxj7k2r39n9a9s"
+                                  default: "text_01kc8y899vyhwc1m3yy0ge4k1w"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2018,7 +2018,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kc8fgre81xm47e9gtsfya1ex"
+                                  default: "reasoning_01kc8y899wb3qzs0mtdyrbjn63"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2046,7 +2046,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kc8fgrea7cqd6483ws3scjpe"
+                                  default: "file_01kc8y899ysxr00h2wf0eya23j"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2077,7 +2077,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kc8fgrecd9m82psada9zbgce"
+                                  default: "data_01kc8y89a0zc34tww5kr2tsqtr"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -3511,7 +3511,7 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kc8fgrpqxga0yrhvqv9jjhw3"
+          default: "conv_01kc8y89hp31vvv97sg7v848jc"
           description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
         "entity_id":
           type: "string"
@@ -3707,7 +3707,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3715,7 +3715,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -3858,7 +3858,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-12T05:10:58.091Z"
+                          default: "2025-12-12T09:28:31.444Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -3866,7 +3866,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:10:58.091Z"
+                              default: "2025-12-12T09:28:31.444Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -4034,10 +4034,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4108,10 +4108,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4179,10 +4179,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4265,10 +4265,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4336,10 +4336,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4707,10 +4707,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4794,10 +4794,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "updated":
                               type: "string"
-                              default: "2025-12-12T05:11:01.439Z"
+                              default: "2025-12-12T09:28:33.660Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5214,10 +5214,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5288,10 +5288,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5359,10 +5359,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5445,10 +5445,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5516,10 +5516,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5887,10 +5887,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5974,10 +5974,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6381,10 +6381,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6455,10 +6455,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6526,10 +6526,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6612,10 +6612,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6683,10 +6683,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7054,10 +7054,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7141,10 +7141,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "updated":
                         type: "string"
-                        default: "2025-12-12T05:11:01.439Z"
+                        default: "2025-12-12T09:28:33.660Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7743,7 +7743,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -7751,7 +7751,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -7887,7 +7887,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -7895,7 +7895,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -11952,7 +11952,14 @@ paths:
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
-                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              enum:
+                                - "none"
+                                - "minimal"
+                                - "low"
+                                - "medium"
+                                - "high"
+                                - "xhigh"
+                              description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                             "verbosity":
                               type: "string"
                               description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -12206,7 +12213,14 @@ paths:
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
-                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                enum:
+                                  - "none"
+                                  - "minimal"
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                  - "xhigh"
+                                description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                               "verbosity":
                                 type: "string"
                                 description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -12484,6 +12498,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "http"
+                                default: "http"
                                 description: "HTTP tool type"
                               "key":
                                 type: "string"
@@ -12495,8 +12510,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "HTTP Tool"
                             description: "Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id."
                           - type: "object"
@@ -12505,6 +12518,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "code"
+                                default: "code"
                                 description: "Code execution tool type"
                               "key":
                                 type: "string"
@@ -12516,8 +12530,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "Code Execution Tool"
                             description: "Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id."
                           - type: "object"
@@ -12526,6 +12538,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "function"
+                                default: "function"
                                 description: "Function tool type"
                               "key":
                                 type: "string"
@@ -12537,8 +12550,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "Function Tool"
                             description: "Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id."
                           - type: "object"
@@ -12547,6 +12558,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "mcp"
+                                default: "mcp"
                                 description: "MCP tool type"
                               "key":
                                 type: "string"
@@ -12562,7 +12574,6 @@ paths:
                                 default: false
                                 description: "Whether this tool requires approval before execution"
                             required:
-                              - "type"
                               - "tool_id"
                             title: "MCP Tool"
                             description: "Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using \"key\" or \"id\", and the specific nested tool using \"tool_id\"."
@@ -12982,7 +12993,14 @@ paths:
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
-                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                            enum:
+                              - "none"
+                              - "minimal"
+                              - "low"
+                              - "medium"
+                              - "high"
+                              - "xhigh"
+                            description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                           "verbosity":
                             type: "string"
                             description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -13233,7 +13251,14 @@ paths:
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
-                                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                      enum:
+                                        - "none"
+                                        - "minimal"
+                                        - "low"
+                                        - "medium"
+                                        - "high"
+                                        - "xhigh"
+                                      description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                                     "verbosity":
                                       type: "string"
                                       description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -13954,7 +13979,14 @@ paths:
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
-                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                            enum:
+                              - "none"
+                              - "minimal"
+                              - "low"
+                              - "medium"
+                              - "high"
+                              - "xhigh"
+                            description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                           "verbosity":
                             type: "string"
                             description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -14205,7 +14237,14 @@ paths:
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
-                                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                      enum:
+                                        - "none"
+                                        - "minimal"
+                                        - "low"
+                                        - "medium"
+                                        - "high"
+                                        - "xhigh"
+                                      description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                                     "verbosity":
                                       type: "string"
                                       description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -14559,7 +14598,14 @@ paths:
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
-                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              enum:
+                                - "none"
+                                - "minimal"
+                                - "low"
+                                - "medium"
+                                - "high"
+                                - "xhigh"
+                              description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                             "verbosity":
                               type: "string"
                               description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -14813,7 +14859,14 @@ paths:
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
-                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                enum:
+                                  - "none"
+                                  - "minimal"
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                  - "xhigh"
+                                description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                               "verbosity":
                                 type: "string"
                                 description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -15091,6 +15144,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "http"
+                                default: "http"
                                 description: "HTTP tool type"
                               "key":
                                 type: "string"
@@ -15102,8 +15156,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "HTTP Tool"
                             description: "Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id."
                           - type: "object"
@@ -15112,6 +15164,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "code"
+                                default: "code"
                                 description: "Code execution tool type"
                               "key":
                                 type: "string"
@@ -15123,8 +15176,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "Code Execution Tool"
                             description: "Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id."
                           - type: "object"
@@ -15133,6 +15184,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "function"
+                                default: "function"
                                 description: "Function tool type"
                               "key":
                                 type: "string"
@@ -15144,8 +15196,6 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
-                            required:
-                              - "type"
                             title: "Function Tool"
                             description: "Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id."
                           - type: "object"
@@ -15154,6 +15204,7 @@ paths:
                                 type: "string"
                                 enum:
                                   - "mcp"
+                                default: "mcp"
                                 description: "MCP tool type"
                               "key":
                                 type: "string"
@@ -15169,7 +15220,6 @@ paths:
                                 default: false
                                 description: "Whether this tool requires approval before execution"
                             required:
-                              - "type"
                               - "tool_id"
                             title: "MCP Tool"
                             description: "Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using \"key\" or \"id\", and the specific nested tool using \"tool_id\"."
@@ -15585,7 +15635,14 @@ paths:
                             description: "An object specifying the format that the model must output"
                           "reasoning_effort":
                             type: "string"
-                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                            enum:
+                              - "none"
+                              - "minimal"
+                              - "low"
+                              - "medium"
+                              - "high"
+                              - "xhigh"
+                            description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                           "verbosity":
                             type: "string"
                             description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -15836,7 +15893,14 @@ paths:
                                       description: "An object specifying the format that the model must output"
                                     "reasoning_effort":
                                       type: "string"
-                                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                      enum:
+                                        - "none"
+                                        - "minimal"
+                                        - "low"
+                                        - "medium"
+                                        - "high"
+                                        - "xhigh"
+                                      description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                                     "verbosity":
                                       type: "string"
                                       description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -16611,7 +16675,14 @@ paths:
                                   description: "An object specifying the format that the model must output"
                                 "reasoning_effort":
                                   type: "string"
-                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                  enum:
+                                    - "none"
+                                    - "minimal"
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                    - "xhigh"
+                                  description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                                 "verbosity":
                                   type: "string"
                                   description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -16862,7 +16933,14 @@ paths:
                                             description: "An object specifying the format that the model must output"
                                           "reasoning_effort":
                                             type: "string"
-                                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                            enum:
+                                              - "none"
+                                              - "minimal"
+                                              - "low"
+                                              - "medium"
+                                              - "high"
+                                              - "xhigh"
+                                            description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                                           "verbosity":
                                             type: "string"
                                             description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -17191,7 +17269,14 @@ paths:
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
-                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              enum:
+                                - "none"
+                                - "minimal"
+                                - "low"
+                                - "medium"
+                                - "high"
+                                - "xhigh"
+                              description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                             "verbosity":
                               type: "string"
                               description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -17445,7 +17530,14 @@ paths:
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
-                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                enum:
+                                  - "none"
+                                  - "minimal"
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                  - "xhigh"
+                                description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                               "verbosity":
                                 type: "string"
                                 description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -18139,7 +18231,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KC8FGRK1CMK8G1B9P7JRFYJD"
+                                          default: "01KC8Y89E2V63MW10QZ0FDS8J0"
                                         "name":
                                           type: "string"
                                         "description":
@@ -18527,7 +18619,14 @@ paths:
                               description: "An object specifying the format that the model must output"
                             "reasoning_effort":
                               type: "string"
-                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              enum:
+                                - "none"
+                                - "minimal"
+                                - "low"
+                                - "medium"
+                                - "high"
+                                - "xhigh"
+                              description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                             "verbosity":
                               type: "string"
                               description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -18781,7 +18880,14 @@ paths:
                                 description: "An object specifying the format that the model must output"
                               "reasoning_effort":
                                 type: "string"
-                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                enum:
+                                  - "none"
+                                  - "minimal"
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                  - "xhigh"
+                                description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                               "verbosity":
                                 type: "string"
                                 description: "Adjusts response verbosity. Lower levels yield shorter answers."
@@ -19475,7 +19581,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KC8FGRMYM3VJ9EZZQGSV5TXA"
+                                          default: "01KC8Y89FWNY82P5TAEYJ320V5"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19998,7 +20104,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kc8fgrptex8cfp31hg88q6ym"
+                        default: "conv_01kc8y89hrxwrw5h0c13vy02nr"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entity_id":
                         type: "string"
@@ -20080,7 +20186,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kc8fgrpv6ajxhm1ph2918j31"
+                        default: "conv_01kc8y89htktfvg44ptdfeqtky"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entity_id":
                         type: "string"
@@ -20171,7 +20277,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kc8fgrpxstfzd0pjestxetvh"
+                        default: "conv_01kc8y89hws2pjs5e0zfttefck"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entity_id":
                         type: "string"
@@ -20270,7 +20376,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kc8fgrpzpkv1yesxr9j73gfm"
+                        default: "conv_01kc8y89j5m2s07h5p326k3y8f"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entity_id":
                         type: "string"
@@ -20417,7 +20523,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-12-12T05:11:03.686Z"
+                    default: "2025-12-12T09:28:34.701Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -20506,7 +20612,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-12-12T05:11:03.686Z"
+                          default: "2025-12-12T09:28:34.701Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -20574,7 +20680,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-12-12T05:11:03.686Z"
+                    default: "2025-12-12T09:28:34.701Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -25008,7 +25114,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KC8FGRXV63FBZDY0RA000QFF"
+                              default: "tool_01KC8Y89T2WVF9036JDYDBMZEK"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25107,7 +25213,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KC8FGRXXQC88P3CDN52ZNEFD"
+                              default: "tool_01KC8Y89T32NAK36SCECJXWX6A"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25208,7 +25314,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KC8FGRXYZYW4FX7PR2ZFV1PF"
+                              default: "tool_01KC8Y89T52V9FXTP1AH6GZ7SF"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25342,7 +25448,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KC8FGRY01GQ1TZ5SQD6W3Y6R"
+                              default: "tool_01KC8Y89T7XM0S44A55KGSB8KW"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -25416,7 +25522,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KC8FGRY1REDS9MNTK7T4PQP9"
+                                        default: "01KC8Y89T84YRW9HDWN238T7C5"
                                       "name":
                                         type: "string"
                                       "description":
@@ -25467,7 +25573,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KC8FGRY2E14W9H7AV97AKTFK"
+                              default: "tool_01KC8Y89T9AW83F4W8AJKA0AEE"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26010,7 +26116,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRYG62QNJ11CAEQ3R1FP"
+                        default: "tool_01KC8Y89TPP43T53TGDP8S47YK"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26109,7 +26215,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRYKRME216BT5FNDTA93"
+                        default: "tool_01KC8Y89TZRVK1SJ4MTZXBKVTZ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26210,7 +26316,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRYX0ERM97Z6APP8S415"
+                        default: "tool_01KC8Y89V4DGBHND5874M3A7E4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26344,7 +26450,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZ1H7BH9YZD3KQB2G28"
+                        default: "tool_01KC8Y89VBGB5JD0MFAP2GYHH0"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26418,7 +26524,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KC8FGRZ3Q3XQ0S9P2NY8T0NZ"
+                                  default: "01KC8Y89VCYKV8F0WXB748D6DZ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -26469,7 +26575,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZ46CX1MR3K9DEMVKCP"
+                        default: "tool_01KC8Y89VD1K16PC3GBHSWQQHJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26909,7 +27015,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KC8FGS0673B6NJS95JW82172"
+                                default: "01KC8Y89W6793QBZMVMZADGM0K"
                               "name":
                                 type: "string"
                               "description":
@@ -27027,7 +27133,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZHE3MCTAFRET9WEK82"
+                        default: "tool_01KC8Y89VNTJ0FB5FQC6ND4DAS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27126,7 +27232,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZKD95M6CERRFBV9CCE"
+                        default: "tool_01KC8Y89VQCSBANGBB552PBBWR"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27227,7 +27333,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZPXCPXPREWCSGX979Q"
+                        default: "tool_01KC8Y89VSCK9XXEH3R1H6GXH9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27361,7 +27467,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZSEDCJ2P3H9APXS6NF"
+                        default: "tool_01KC8Y89VWZ7X711R85TT14JMT"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27435,7 +27541,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KC8FGRZV0BRWQJ0RBJCXPMV5"
+                                  default: "01KC8Y89VY087PYT9R2VV67PAX"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27486,7 +27592,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGRZWNNT8D4B99MR0ZQEY"
+                        default: "tool_01KC8Y89VZ4JR5ACWQDPN5179J"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27640,7 +27746,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGS0RP3CYQKW546V706AF"
+                        default: "tool_01KC8Y89WPJSQ118M9YM1S4P5Q"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27739,7 +27845,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGS0TJFTHQB2DBSE1SAQE"
+                        default: "tool_01KC8Y89X0JCZ4VPNX1YGF5YKG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27840,7 +27946,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGS14SK7741BTBVB52CRK"
+                        default: "tool_01KC8Y89X2M8EK22A7JCFCYP9P"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27974,7 +28080,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGS166YKRBEPCPYB1GYYK"
+                        default: "tool_01KC8Y89X4H72WT43ED999KRK0"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28048,7 +28154,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KC8FGS17V69EEWH8C7XH2QHF"
+                                  default: "01KC8Y89X66YFE2MBXJBC33V5W"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28099,7 +28205,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KC8FGS18T92BGJ9KN6QZQ087"
+                        default: "tool_01KC8Y89X6CZGPAQRCV0NNHD8Y"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28364,7 +28470,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-12T05:10:58.476Z"
+                          default: "2025-12-12T09:28:31.861Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -28372,7 +28478,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:10:58.477Z"
+                              default: "2025-12-12T09:28:31.861Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -28577,7 +28683,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.476Z"
+                    default: "2025-12-12T09:28:31.861Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28585,7 +28691,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.477Z"
+                        default: "2025-12-12T09:28:31.861Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28725,7 +28831,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.476Z"
+                    default: "2025-12-12T09:28:31.861Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28733,7 +28839,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.477Z"
+                        default: "2025-12-12T09:28:31.861Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -28899,7 +29005,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.476Z"
+                    default: "2025-12-12T09:28:31.861Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -28907,7 +29013,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.477Z"
+                        default: "2025-12-12T09:28:31.861Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30810,7 +30916,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KC8FGS4EHE235GYKQTF9HZ4K"
+                          default: "01KC8Y8A08VH0W72P3W35N3S08"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -30976,7 +31082,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KC8FGS4JY7BSFBRYZXMP4HWY"
+                    default: "01KC8Y8A0BNH5AA82KKWVS67PZ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31072,7 +31178,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KC8FGS4GZM7SJ5ST3BNY609R"
+                    default: "01KC8Y8A0A0XEK80JX974MSA6K"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31204,7 +31310,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KC8FGS4MPP1D9WN1XB9B9YB6"
+                    default: "01KC8Y8A0DNWDA7VA1K19SBTYY"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -33684,7 +33790,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-12T05:10:58.091Z"
+                          default: "2025-12-12T09:28:31.444Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -33692,7 +33798,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:10:58.091Z"
+                              default: "2025-12-12T09:28:31.444Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -33828,7 +33934,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33836,7 +33942,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33959,7 +34065,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33967,7 +34073,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34120,7 +34226,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34128,7 +34234,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34501,7 +34607,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-12T05:11:12.862Z"
+                                    default: "2025-12-12T09:28:43.857Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34541,7 +34647,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-12T05:11:12.863Z"
+                                    default: "2025-12-12T09:28:43.857Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34581,7 +34687,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-12-12T05:11:12.863Z"
+                                    default: "2025-12-12T09:28:43.857Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34617,7 +34723,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-12-12T05:10:58.091Z"
+                          default: "2025-12-12T09:28:31.444Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34625,7 +34731,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:10:58.091Z"
+                              default: "2025-12-12T09:28:31.444Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35191,7 +35297,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-12T05:11:12.891Z"
+                                default: "2025-12-12T09:28:43.883Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35231,7 +35337,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-12T05:11:12.891Z"
+                                default: "2025-12-12T09:28:43.883Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35271,7 +35377,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-12-12T05:11:12.892Z"
+                                default: "2025-12-12T09:28:43.884Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35307,7 +35413,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-12-12T05:10:58.091Z"
+                      default: "2025-12-12T09:28:31.444Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -35315,7 +35421,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-12-12T05:10:58.091Z"
+                          default: "2025-12-12T09:28:31.444Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -35632,7 +35738,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.879Z"
+                              default: "2025-12-12T09:28:43.872Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35672,7 +35778,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.880Z"
+                              default: "2025-12-12T09:28:43.872Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35712,7 +35818,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.880Z"
+                              default: "2025-12-12T09:28:43.873Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -35748,7 +35854,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35756,7 +35862,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36320,7 +36426,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.949Z"
+                              default: "2025-12-12T09:28:43.929Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36360,7 +36466,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.950Z"
+                              default: "2025-12-12T09:28:43.930Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36400,7 +36506,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-12-12T05:11:12.951Z"
+                              default: "2025-12-12T09:28:43.931Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36436,7 +36542,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-12-12T05:10:58.091Z"
+                    default: "2025-12-12T09:28:31.444Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36444,7 +36550,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-12-12T05:10:58.091Z"
+                        default: "2025-12-12T09:28:31.444Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36896,7 +37002,14 @@ paths:
                       description: "An object specifying the format that the model must output"
                     "reasoning_effort":
                       type: "string"
-                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                      enum:
+                        - "none"
+                        - "minimal"
+                        - "low"
+                        - "medium"
+                        - "high"
+                        - "xhigh"
+                      description: "Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is currently only supported for `gpt-5.1-codex-max`.\n\nAny of \"none\", \"minimal\", \"low\", \"medium\", \"high\", \"xhigh\"."
                     "verbosity":
                       type: "string"
                       description: "Adjusts response verbosity. Lower levels yield shorter answers."
