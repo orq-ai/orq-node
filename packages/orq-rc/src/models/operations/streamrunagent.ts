@@ -118,6 +118,42 @@ export type StreamRunAgentModelConfigurationResponseFormat =
   | StreamRunAgentResponseFormatJSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const StreamRunAgentModelConfigurationReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type StreamRunAgentModelConfigurationReasoningEffort = ClosedEnum<
+  typeof StreamRunAgentModelConfigurationReasoningEffort
+>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type StreamRunAgentModelConfigurationStop = string | Array<string>;
@@ -237,9 +273,18 @@ export type StreamRunAgentModelConfigurationParameters = {
     | StreamRunAgentResponseFormatJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?: StreamRunAgentModelConfigurationReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -441,6 +486,41 @@ export type StreamRunAgentFallbackModelConfigurationResponseFormat =
   | StreamRunAgentResponseFormatAgentsRequestJSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const StreamRunAgentFallbackModelConfigurationReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type StreamRunAgentFallbackModelConfigurationReasoningEffort =
+  ClosedEnum<typeof StreamRunAgentFallbackModelConfigurationReasoningEffort>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type StreamRunAgentFallbackModelConfigurationStop =
@@ -562,9 +642,20 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | StreamRunAgentResponseFormatAgentsRequestJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?:
+    | StreamRunAgentFallbackModelConfigurationReasoningEffort
+    | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -1830,6 +1921,15 @@ export function streamRunAgentModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentModelConfigurationReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationReasoningEffort> = z
+    .nativeEnum(StreamRunAgentModelConfigurationReasoningEffort);
+/** @internal */
+export const StreamRunAgentModelConfigurationReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationReasoningEffort> =
+    StreamRunAgentModelConfigurationReasoningEffort$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentModelConfigurationStop$inboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationStop,
   z.ZodTypeDef,
@@ -2153,7 +2253,9 @@ export const StreamRunAgentModelConfigurationParameters$inboundSchema:
         z.lazy(() => StreamRunAgentResponseFormatJSONObject$inboundSchema),
         z.lazy(() => StreamRunAgentResponseFormatJSONSchema$inboundSchema),
       ]).optional(),
-      reasoning_effort: z.string().optional(),
+      reasoning_effort:
+        StreamRunAgentModelConfigurationReasoningEffort$inboundSchema
+          .optional(),
       verbosity: z.string().optional(),
       seed: z.nullable(z.number()).optional(),
       stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2250,7 +2352,8 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       z.lazy(() => StreamRunAgentResponseFormatJSONObject$outboundSchema),
       z.lazy(() => StreamRunAgentResponseFormatJSONSchema$outboundSchema),
     ]).optional(),
-    reasoningEffort: z.string().optional(),
+    reasoningEffort:
+      StreamRunAgentModelConfigurationReasoningEffort$outboundSchema.optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2813,6 +2916,17 @@ export function streamRunAgentFallbackModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentFallbackModelConfigurationReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentFallbackModelConfigurationReasoningEffort
+  > = z.nativeEnum(StreamRunAgentFallbackModelConfigurationReasoningEffort);
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<
+    typeof StreamRunAgentFallbackModelConfigurationReasoningEffort
+  > = StreamRunAgentFallbackModelConfigurationReasoningEffort$inboundSchema;
+
+/** @internal */
 export const StreamRunAgentFallbackModelConfigurationStop$inboundSchema:
   z.ZodType<
     StreamRunAgentFallbackModelConfigurationStop,
@@ -3158,7 +3272,9 @@ export const StreamRunAgentFallbackModelConfigurationParameters$inboundSchema:
         StreamRunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema
       ),
     ]).optional(),
-    reasoning_effort: z.string().optional(),
+    reasoning_effort:
+      StreamRunAgentFallbackModelConfigurationReasoningEffort$inboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3262,7 +3378,9 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
         StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
       ),
     ]).optional(),
-    reasoningEffort: z.string().optional(),
+    reasoningEffort:
+      StreamRunAgentFallbackModelConfigurationReasoningEffort$outboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3973,7 +4091,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KC8FGRMYM3VJ9EZZQGSV5TXA"),
+  id: z.string().default("01KC8Y89FWNY82P5TAEYJ320V5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -3992,7 +4110,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KC8FGRMYM3VJ9EZZQGSV5TXA"),
+  id: z.string().default("01KC8Y89FWNY82P5TAEYJ320V5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

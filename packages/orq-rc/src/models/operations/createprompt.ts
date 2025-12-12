@@ -301,7 +301,7 @@ export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const ReasoningEffort = {
+export const CreatePromptReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -312,7 +312,9 @@ export const ReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
+export type CreatePromptReasoningEffort = ClosedEnum<
+  typeof CreatePromptReasoningEffort
+>;
 
 /**
  * Controls the verbosity of the model output.
@@ -422,7 +424,7 @@ export type ModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: ReasoningEffort | undefined;
+  reasoningEffort?: CreatePromptReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -1078,7 +1080,7 @@ export type CreatePromptEncodingFormat = ClosedEnum<
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const CreatePromptReasoningEffort = {
+export const CreatePromptPromptsReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -1089,8 +1091,8 @@ export const CreatePromptReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type CreatePromptReasoningEffort = ClosedEnum<
-  typeof CreatePromptReasoningEffort
+export type CreatePromptPromptsReasoningEffort = ClosedEnum<
+  typeof CreatePromptPromptsReasoningEffort
 >;
 
 /**
@@ -1203,7 +1205,7 @@ export type CreatePromptModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: CreatePromptReasoningEffort | undefined;
+  reasoningEffort?: CreatePromptPromptsReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -2338,13 +2340,13 @@ export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
 > = EncodingFormat$inboundSchema;
 
 /** @internal */
-export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof ReasoningEffort
-> = z.nativeEnum(ReasoningEffort);
+export const CreatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptReasoningEffort
+> = z.nativeEnum(CreatePromptReasoningEffort);
 /** @internal */
-export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof ReasoningEffort
-> = ReasoningEffort$inboundSchema;
+export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptReasoningEffort
+> = CreatePromptReasoningEffort$inboundSchema;
 
 /** @internal */
 export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
@@ -2392,7 +2394,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
   encoding_format: EncodingFormat$inboundSchema.optional(),
-  reasoningEffort: ReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: Verbosity$inboundSchema.optional(),
   thinkingLevel: ThinkingLevel$inboundSchema.optional(),
@@ -2462,7 +2464,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),
-  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: Verbosity$outboundSchema.optional(),
   thinkingLevel: ThinkingLevel$outboundSchema.optional(),
@@ -4382,13 +4384,13 @@ export const CreatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
 > = CreatePromptEncodingFormat$inboundSchema;
 
 /** @internal */
-export const CreatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = z.nativeEnum(CreatePromptReasoningEffort);
+export const CreatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsReasoningEffort
+> = z.nativeEnum(CreatePromptPromptsReasoningEffort);
 /** @internal */
-export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = CreatePromptReasoningEffort$inboundSchema;
+export const CreatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsReasoningEffort
+> = CreatePromptPromptsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const CreatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
@@ -4438,7 +4440,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: CreatePromptPromptsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: CreatePromptVerbosity$inboundSchema.optional(),
   thinkingLevel: CreatePromptThinkingLevel$inboundSchema.optional(),
@@ -4508,7 +4510,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: CreatePromptPromptsReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: CreatePromptVerbosity$outboundSchema.optional(),
   thinkingLevel: CreatePromptThinkingLevel$outboundSchema.optional(),

@@ -282,6 +282,42 @@ export type ListAgentsResponseFormat =
   | ListAgentsResponseFormatAgentsJSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const ListAgentsReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type ListAgentsReasoningEffort = ClosedEnum<
+  typeof ListAgentsReasoningEffort
+>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsStop = string | Array<string>;
@@ -397,9 +433,18 @@ export type ListAgentsParameters = {
     | ListAgentsResponseFormatAgentsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?: ListAgentsReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -565,6 +610,42 @@ export type ListAgentsFallbackModelConfigurationResponseFormat =
   | ListAgentsResponseFormatAgentsResponse200JSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const ListAgentsFallbackModelConfigurationReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type ListAgentsFallbackModelConfigurationReasoningEffort = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationReasoningEffort
+>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
@@ -684,9 +765,20 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | ListAgentsResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?:
+    | ListAgentsFallbackModelConfigurationReasoningEffort
+    | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -1573,6 +1665,15 @@ export function listAgentsResponseFormatFromJSON(
 }
 
 /** @internal */
+export const ListAgentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsReasoningEffort
+> = z.nativeEnum(ListAgentsReasoningEffort);
+/** @internal */
+export const ListAgentsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsReasoningEffort
+> = ListAgentsReasoningEffort$inboundSchema;
+
+/** @internal */
 export const ListAgentsStop$inboundSchema: z.ZodType<
   ListAgentsStop,
   z.ZodTypeDef,
@@ -1859,7 +1960,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
     z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
   ]).optional(),
-  reasoning_effort: z.string().optional(),
+  reasoning_effort: ListAgentsReasoningEffort$inboundSchema.optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -1947,7 +2048,7 @@ export const ListAgentsParameters$outboundSchema: z.ZodType<
     z.lazy(() => ListAgentsResponseFormatJSONObject$outboundSchema),
     z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$outboundSchema),
   ]).optional(),
-  reasoningEffort: z.string().optional(),
+  reasoningEffort: ListAgentsReasoningEffort$outboundSchema.optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2394,6 +2495,15 @@ export function listAgentsFallbackModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
+export const ListAgentsFallbackModelConfigurationReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationReasoningEffort> =
+    z.nativeEnum(ListAgentsFallbackModelConfigurationReasoningEffort);
+/** @internal */
+export const ListAgentsFallbackModelConfigurationReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationReasoningEffort> =
+    ListAgentsFallbackModelConfigurationReasoningEffort$inboundSchema;
+
+/** @internal */
 export const ListAgentsFallbackModelConfigurationStop$inboundSchema: z.ZodType<
   ListAgentsFallbackModelConfigurationStop,
   z.ZodTypeDef,
@@ -2736,7 +2846,9 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
         ListAgentsResponseFormatAgentsResponse200JSONSchema$inboundSchema
       ),
     ]).optional(),
-    reasoning_effort: z.string().optional(),
+    reasoning_effort:
+      ListAgentsFallbackModelConfigurationReasoningEffort$inboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2835,7 +2947,9 @@ export const ListAgentsFallbackModelConfigurationParameters$outboundSchema:
         ListAgentsResponseFormatAgentsResponse200JSONSchema$outboundSchema
       ),
     ]).optional(),
-    reasoningEffort: z.string().optional(),
+    reasoningEffort:
+      ListAgentsFallbackModelConfigurationReasoningEffort$outboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
