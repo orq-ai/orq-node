@@ -112,7 +112,7 @@ export const RetrieveContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-12T09:28:31.444Z",
+    "2025-12-12T13:23:17.402Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -149,7 +149,7 @@ export const RetrieveContactResponseBody$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-12T09:28:31.444Z"))
+  updated: z.date().default(() => new Date("2025-12-12T13:23:17.402Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
