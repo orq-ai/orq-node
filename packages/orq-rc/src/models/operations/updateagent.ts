@@ -1000,6 +1000,9 @@ export type UpdateAgentUpdateAgentRequest = {
   displayName?: string | undefined;
   projectId?: string | undefined;
   role?: string | undefined;
+  /**
+   * A brief description of what the agent does
+   */
   description?: string | undefined;
   instructions?: string | undefined;
   /**
