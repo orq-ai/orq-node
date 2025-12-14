@@ -3874,7 +3874,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KC479Y55NVS57NC8EXC9E7JM"),
+    id: z.string().default("01KCEYR9Q5KE8W9NP2W48ZZ2TJ"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -3893,7 +3893,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KC479Y55NVS57NC8EXC9E7JM"),
+  id: z.string().default("01KCEYR9Q5KE8W9NP2W48ZZ2TJ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
