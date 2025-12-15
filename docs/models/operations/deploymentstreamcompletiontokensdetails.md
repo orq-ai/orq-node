@@ -1,11 +1,11 @@
-# CompletionTokensDetails
+# DeploymentStreamCompletionTokensDetails
 
 ## Example Usage
 
 ```typescript
-import { CompletionTokensDetails } from "@orq-ai/node/models/operations";
+import { DeploymentStreamCompletionTokensDetails } from "@orq-ai/node/models/operations";
 
-let value: CompletionTokensDetails = {};
+let value: DeploymentStreamCompletionTokensDetails = {};
 ```
 
 ## Fields

@@ -192,7 +192,7 @@ export type Output = {
   metadata?: { [k: string]: any } | undefined;
 };
 
-export type PromptTokensDetails = {
+export type CreateAgentResponseRequestPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -201,7 +201,7 @@ export type PromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CompletionTokensDetails = {
+export type CreateAgentResponseRequestCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -227,8 +227,14 @@ export type CreateAgentResponseRequestUsage = {
    * Total number of tokens used in the request (prompt + completion).
    */
   totalTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | null | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  promptTokensDetails?:
+    | CreateAgentResponseRequestPromptTokensDetails
+    | null
+    | undefined;
+  completionTokensDetails?:
+    | CreateAgentResponseRequestCompletionTokensDetails
+    | null
+    | undefined;
 };
 
 /**
@@ -806,82 +812,94 @@ export function outputFromJSON(
 }
 
 /** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
+export const CreateAgentResponseRequestPromptTokensDetails$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestPromptTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type PromptTokensDetails$Outbound = {
+export type CreateAgentResponseRequestPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
   cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
 /** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
+export const CreateAgentResponseRequestPromptTokensDetails$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestPromptTokensDetails$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseRequestPromptTokensDetails
+  > = z.object({
+    cachedTokens: z.nullable(z.number().int()).optional(),
+    cacheCreationTokens: z.nullable(z.number().int()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cachedTokens: "cached_tokens",
+      cacheCreationTokens: "cache_creation_tokens",
+      audioTokens: "audio_tokens",
+    });
   });
-});
 
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
+export function createAgentResponseRequestPromptTokensDetailsToJSON(
+  createAgentResponseRequestPromptTokensDetails:
+    CreateAgentResponseRequestPromptTokensDetails,
 ): string {
   return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
+    CreateAgentResponseRequestPromptTokensDetails$outboundSchema.parse(
+      createAgentResponseRequestPromptTokensDetails,
+    ),
   );
 }
-export function promptTokensDetailsFromJSON(
+export function createAgentResponseRequestPromptTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentResponseRequestPromptTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
+    (x) =>
+      CreateAgentResponseRequestPromptTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseRequestPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
+export const CreateAgentResponseRequestCompletionTokensDetails$inboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestCompletionTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type CompletionTokensDetails$Outbound = {
+export type CreateAgentResponseRequestCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | null | undefined;
   accepted_prediction_tokens?: number | null | undefined;
   rejected_prediction_tokens?: number | null | undefined;
@@ -889,38 +907,48 @@ export type CompletionTokensDetails$Outbound = {
 };
 
 /** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
+export const CreateAgentResponseRequestCompletionTokensDetails$outboundSchema:
+  z.ZodType<
+    CreateAgentResponseRequestCompletionTokensDetails$Outbound,
+    z.ZodTypeDef,
+    CreateAgentResponseRequestCompletionTokensDetails
+  > = z.object({
+    reasoningTokens: z.nullable(z.number()).optional(),
+    acceptedPredictionTokens: z.nullable(z.number()).optional(),
+    rejectedPredictionTokens: z.nullable(z.number()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningTokens: "reasoning_tokens",
+      acceptedPredictionTokens: "accepted_prediction_tokens",
+      rejectedPredictionTokens: "rejected_prediction_tokens",
+      audioTokens: "audio_tokens",
+    });
   });
-});
 
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
+export function createAgentResponseRequestCompletionTokensDetailsToJSON(
+  createAgentResponseRequestCompletionTokensDetails:
+    CreateAgentResponseRequestCompletionTokensDetails,
 ): string {
   return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
+    CreateAgentResponseRequestCompletionTokensDetails$outboundSchema.parse(
+      createAgentResponseRequestCompletionTokensDetails,
+    ),
   );
 }
-export function completionTokensDetailsFromJSON(
+export function createAgentResponseRequestCompletionTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  CreateAgentResponseRequestCompletionTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
+    (x) =>
+      CreateAgentResponseRequestCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentResponseRequestCompletionTokensDetails' from JSON`,
   );
 }
 
@@ -934,10 +962,12 @@ export const CreateAgentResponseRequestUsage$inboundSchema: z.ZodType<
   prompt_tokens: z.number().optional(),
   total_tokens: z.number().optional(),
   prompt_tokens_details: z.nullable(
-    z.lazy(() => PromptTokensDetails$inboundSchema),
+    z.lazy(() => CreateAgentResponseRequestPromptTokensDetails$inboundSchema),
   ).optional(),
   completion_tokens_details: z.nullable(
-    z.lazy(() => CompletionTokensDetails$inboundSchema),
+    z.lazy(() =>
+      CreateAgentResponseRequestCompletionTokensDetails$inboundSchema
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -953,9 +983,12 @@ export type CreateAgentResponseRequestUsage$Outbound = {
   completion_tokens?: number | undefined;
   prompt_tokens?: number | undefined;
   total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
+  prompt_tokens_details?:
+    | CreateAgentResponseRequestPromptTokensDetails$Outbound
+    | null
+    | undefined;
   completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
+    | CreateAgentResponseRequestCompletionTokensDetails$Outbound
     | null
     | undefined;
 };
@@ -970,10 +1003,12 @@ export const CreateAgentResponseRequestUsage$outboundSchema: z.ZodType<
   promptTokens: z.number().optional(),
   totalTokens: z.number().optional(),
   promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
+    z.lazy(() => CreateAgentResponseRequestPromptTokensDetails$outboundSchema),
   ).optional(),
   completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
+    z.lazy(() =>
+      CreateAgentResponseRequestCompletionTokensDetails$outboundSchema
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {

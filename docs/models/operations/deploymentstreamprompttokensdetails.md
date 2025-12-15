@@ -1,11 +1,11 @@
-# PromptTokensDetails
+# DeploymentStreamPromptTokensDetails
 
 ## Example Usage
 
 ```typescript
-import { PromptTokensDetails } from "@orq-ai/node/models/operations";
+import { DeploymentStreamPromptTokensDetails } from "@orq-ai/node/models/operations";
 
-let value: PromptTokensDetails = {};
+let value: DeploymentStreamPromptTokensDetails = {};
 ```
 
 ## Fields
