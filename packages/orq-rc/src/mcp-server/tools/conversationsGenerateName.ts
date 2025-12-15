@@ -16,7 +16,7 @@ export const tool$conversationsGenerateName: ToolDefinition<typeof args> = {
   name: "conversations-generate-name",
   description: `Generate conversation name
 
-Generates a display name for a conversation using AI based on the provided context. Updates the conversation with the generated name and sets generating_title to false.`,
+Generates a display name for a conversation using AI based on the provided context. Updates the conversation with the generated name and sets generatingTitle to false.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await conversationsGenerateName(

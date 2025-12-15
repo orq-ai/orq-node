@@ -103,9 +103,9 @@ async function $do(
   const path = pathToFunc("/v2/conversations")();
 
   const query = encodeFormQuery({
-    "ending_before": payload?.ending_before,
+    "endingBefore": payload?.endingBefore,
     "limit": payload?.limit,
-    "starting_after": payload?.starting_after,
+    "startingAfter": payload?.startingAfter,
   });
 
   const headers = new Headers(compactMap({

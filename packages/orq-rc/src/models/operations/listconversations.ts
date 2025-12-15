@@ -16,11 +16,11 @@ export type ListConversationsRequest = {
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is a conversation ID that defines your place in the list.
+   * A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is a conversation ID that defines your place in the list.
+   * A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list.
    */
   endingBefore?: string | undefined;
 };
@@ -48,19 +48,14 @@ export const ListConversationsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   limit: z.number().int().optional(),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
+  startingAfter: z.string().optional(),
+  endingBefore: z.string().optional(),
 });
 /** @internal */
 export type ListConversationsRequest$Outbound = {
   limit?: number | undefined;
-  starting_after?: string | undefined;
-  ending_before?: string | undefined;
+  startingAfter?: string | undefined;
+  endingBefore?: string | undefined;
 };
 
 /** @internal */
@@ -72,11 +67,6 @@ export const ListConversationsRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
 });
 
 export function listConversationsRequestToJSON(

@@ -109,18 +109,13 @@ export const UpdateConversationMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  generating_title: z.boolean().optional(),
-  entity_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "generating_title": "generatingTitle",
-    "entity_id": "entityId",
-  });
+  generatingTitle: z.boolean().optional(),
+  entityId: z.string().optional(),
 });
 /** @internal */
 export type UpdateConversationMetadata$Outbound = {
-  generating_title?: boolean | undefined;
-  entity_id?: string | undefined;
+  generatingTitle?: boolean | undefined;
+  entityId?: string | undefined;
 };
 
 /** @internal */
@@ -131,11 +126,6 @@ export const UpdateConversationMetadata$outboundSchema: z.ZodType<
 > = z.object({
   generatingTitle: z.boolean().optional(),
   entityId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generatingTitle: "generating_title",
-    entityId: "entity_id",
-  });
 });
 
 export function updateConversationMetadataToJSON(
@@ -161,16 +151,12 @@ export const UpdateConversationRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  display_name: z.string().optional(),
+  displayName: z.string().optional(),
   metadata: z.lazy(() => UpdateConversationMetadata$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
 });
 /** @internal */
 export type UpdateConversationRequestBody$Outbound = {
-  display_name?: string | undefined;
+  displayName?: string | undefined;
   metadata?: UpdateConversationMetadata$Outbound | undefined;
 };
 
@@ -182,10 +168,6 @@ export const UpdateConversationRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string().optional(),
   metadata: z.lazy(() => UpdateConversationMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
 });
 
 export function updateConversationRequestBodyToJSON(
@@ -274,18 +256,13 @@ export const UpdateConversationConversationsMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  generating_title: z.boolean().optional(),
-  entity_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "generating_title": "generatingTitle",
-    "entity_id": "entityId",
-  });
+  generatingTitle: z.boolean().optional(),
+  entityId: z.string().optional(),
 });
 /** @internal */
 export type UpdateConversationConversationsMetadata$Outbound = {
-  generating_title?: boolean | undefined;
-  entity_id?: string | undefined;
+  generatingTitle?: boolean | undefined;
+  entityId?: string | undefined;
 };
 
 /** @internal */
@@ -296,11 +273,6 @@ export const UpdateConversationConversationsMetadata$outboundSchema: z.ZodType<
 > = z.object({
   generatingTitle: z.boolean().optional(),
   entityId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generatingTitle: "generating_title",
-    entityId: "entity_id",
-  });
 });
 
 export function updateConversationConversationsMetadataToJSON(
@@ -335,37 +307,31 @@ export const UpdateConversationResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kc9bp7ffbbzcven03yc0f0t1"),
-  entity_id: z.string(),
+  _id: z.string().default("conv_01kcg9y1rvdbr2m3k90tp5syv9"),
+  entityId: z.string(),
   kind: UpdateConversationKind$inboundSchema,
-  display_name: z.string(),
-  created_at: z.number(),
-  updated_at: z.number(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  displayName: z.string(),
+  createdAt: z.number(),
+  updatedAt: z.number(),
+  createdById: z.string().optional(),
+  updatedById: z.string().optional(),
   metadata: z.lazy(() => UpdateConversationConversationsMetadata$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "entity_id": "entityId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
   });
 });
 /** @internal */
 export type UpdateConversationResponseBody$Outbound = {
   _id: string;
-  entity_id: string;
+  entityId: string;
   kind: string;
-  display_name: string;
-  created_at: number;
-  updated_at: number;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  displayName: string;
+  createdAt: number;
+  updatedAt: number;
+  createdById?: string | undefined;
+  updatedById?: string | undefined;
   metadata?: UpdateConversationConversationsMetadata$Outbound | undefined;
 };
 
@@ -375,7 +341,7 @@ export const UpdateConversationResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateConversationResponseBody
 > = z.object({
-  id: z.string().default("conv_01kc9bp7ffbbzcven03yc0f0t1"),
+  id: z.string().default("conv_01kcg9y1rvdbr2m3k90tp5syv9"),
   entityId: z.string(),
   kind: UpdateConversationKind$outboundSchema,
   displayName: z.string(),
@@ -388,12 +354,6 @@ export const UpdateConversationResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    entityId: "entity_id",
-    displayName: "display_name",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
   });
 });
 

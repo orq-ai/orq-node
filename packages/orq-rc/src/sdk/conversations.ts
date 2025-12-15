@@ -55,7 +55,7 @@ export class Conversations extends ClientSDK {
    * Generate conversation name
    *
    * @remarks
-   * Generates a display name for a conversation using AI based on the provided context. Updates the conversation with the generated name and sets generating_title to false.
+   * Generates a display name for a conversation using AI based on the provided context. Updates the conversation with the generated name and sets generatingTitle to false.
    */
   async generateName(
     requestBody: operations.GenerateConversationNameRequestBody,

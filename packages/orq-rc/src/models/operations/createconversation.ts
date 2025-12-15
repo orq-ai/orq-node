@@ -98,18 +98,13 @@ export const CreateConversationMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  generating_title: z.boolean().optional(),
-  entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "generating_title": "generatingTitle",
-    "entity_id": "entityId",
-  });
+  generatingTitle: z.boolean().optional(),
+  entityId: z.string(),
 });
 /** @internal */
 export type CreateConversationMetadata$Outbound = {
-  generating_title?: boolean | undefined;
-  entity_id: string;
+  generatingTitle?: boolean | undefined;
+  entityId: string;
 };
 
 /** @internal */
@@ -120,11 +115,6 @@ export const CreateConversationMetadata$outboundSchema: z.ZodType<
 > = z.object({
   generatingTitle: z.boolean().optional(),
   entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    generatingTitle: "generating_title",
-    entityId: "entity_id",
-  });
 });
 
 export function createConversationMetadataToJSON(
@@ -150,16 +140,12 @@ export const CreateConversationRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  display_name: z.string().default("Untitled"),
+  displayName: z.string().default("Untitled"),
   metadata: z.lazy(() => CreateConversationMetadata$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
 });
 /** @internal */
 export type CreateConversationRequestBody$Outbound = {
-  display_name: string;
+  displayName: string;
   metadata: CreateConversationMetadata$Outbound;
 };
 
@@ -171,10 +157,6 @@ export const CreateConversationRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string().default("Untitled"),
   metadata: z.lazy(() => CreateConversationMetadata$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
 });
 
 export function createConversationRequestBodyToJSON(
@@ -211,18 +193,13 @@ export const CreateConversationConversationsMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  generating_title: z.boolean().optional(),
-  entity_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "generating_title": "generatingTitle",
-    "entity_id": "entityId",
-  });
+  generatingTitle: z.boolean().optional(),
+  entityId: z.string().optional(),
 });
 /** @internal */
 export type CreateConversationConversationsMetadata$Outbound = {
-  generating_title?: boolean | undefined;
-  entity_id?: string | undefined;
+  generatingTitle?: boolean | undefined;
+  entityId?: string | undefined;
 };
 
 /** @internal */
@@ -233,11 +210,6 @@ export const CreateConversationConversationsMetadata$outboundSchema: z.ZodType<
 > = z.object({
   generatingTitle: z.boolean().optional(),
   entityId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generatingTitle: "generating_title",
-    entityId: "entity_id",
-  });
 });
 
 export function createConversationConversationsMetadataToJSON(
@@ -272,37 +244,31 @@ export const CreateConversationResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kc9bp7f1q1dkaznymh79504e"),
-  entity_id: z.string(),
+  _id: z.string().default("conv_01kcg9y1rcw7smgcgmdqbqc7j4"),
+  entityId: z.string(),
   kind: CreateConversationKind$inboundSchema,
-  display_name: z.string(),
-  created_at: z.number(),
-  updated_at: z.number(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  displayName: z.string(),
+  createdAt: z.number(),
+  updatedAt: z.number(),
+  createdById: z.string().optional(),
+  updatedById: z.string().optional(),
   metadata: z.lazy(() => CreateConversationConversationsMetadata$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "entity_id": "entityId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
   });
 });
 /** @internal */
 export type CreateConversationResponseBody$Outbound = {
   _id: string;
-  entity_id: string;
+  entityId: string;
   kind: string;
-  display_name: string;
-  created_at: number;
-  updated_at: number;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  displayName: string;
+  createdAt: number;
+  updatedAt: number;
+  createdById?: string | undefined;
+  updatedById?: string | undefined;
   metadata?: CreateConversationConversationsMetadata$Outbound | undefined;
 };
 
@@ -312,7 +278,7 @@ export const CreateConversationResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateConversationResponseBody
 > = z.object({
-  id: z.string().default("conv_01kc9bp7f1q1dkaznymh79504e"),
+  id: z.string().default("conv_01kcg9y1rcw7smgcgmdqbqc7j4"),
   entityId: z.string(),
   kind: CreateConversationKind$outboundSchema,
   displayName: z.string(),
@@ -325,12 +291,6 @@ export const CreateConversationResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    entityId: "entity_id",
-    displayName: "display_name",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
   });
 });
 
