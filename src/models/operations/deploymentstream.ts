@@ -9338,7 +9338,8 @@ export const DeploymentStreamResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.string().transform((v, ctx) => {
+  data: z.string().optional().transform((v, ctx) => {
+    if (v === undefined) return undefined;
     try {
       return JSON.parse(v);
     } catch (err) {
