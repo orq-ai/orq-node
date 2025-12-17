@@ -18,6 +18,7 @@ import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
+import { Router } from "./router.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
@@ -99,5 +100,10 @@ export class Orq extends ClientSDK {
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
+  }
+
+  private _router?: Router;
+  get router(): Router {
+    return (this._router ??= new Router(this._options));
   }
 }

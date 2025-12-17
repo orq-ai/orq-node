@@ -567,7 +567,7 @@ export type GetAllPromptsMetadata = {
 /**
  * A prompt entity with configuration, metadata, and versioning.
  */
-export type Prompt = {
+export type GetAllPromptsPrompt = {
   id: string;
   type: GetAllPromptsType;
   owner: string;
@@ -596,7 +596,7 @@ export type Prompt = {
  */
 export type GetAllPromptsResponseBody = {
   object: GetAllPromptsObject;
-  data: Array<Prompt>;
+  data: Array<GetAllPromptsPrompt>;
   hasMore: boolean;
 };
 
@@ -1847,32 +1847,35 @@ export function getAllPromptsMetadataFromJSON(
 }
 
 /** @internal */
-export const Prompt$inboundSchema: z.ZodType<Prompt, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    type: GetAllPromptsType$inboundSchema,
-    owner: z.string(),
-    domain_id: z.string(),
-    created: z.string(),
-    updated: z.string(),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    display_name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
-    metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "domain_id": "domainId",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "display_name": "displayName",
-      "prompt_config": "promptConfig",
-    });
+export const GetAllPromptsPrompt$inboundSchema: z.ZodType<
+  GetAllPromptsPrompt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  type: GetAllPromptsType$inboundSchema,
+  owner: z.string(),
+  domain_id: z.string(),
+  created: z.string(),
+  updated: z.string(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  display_name: z.string(),
+  description: z.nullable(z.string()).optional(),
+  prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
+  metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "display_name": "displayName",
+    "prompt_config": "promptConfig",
   });
+});
 /** @internal */
-export type Prompt$Outbound = {
+export type GetAllPromptsPrompt$Outbound = {
   _id: string;
   type: string;
   owner: string;
@@ -1888,10 +1891,10 @@ export type Prompt$Outbound = {
 };
 
 /** @internal */
-export const Prompt$outboundSchema: z.ZodType<
-  Prompt$Outbound,
+export const GetAllPromptsPrompt$outboundSchema: z.ZodType<
+  GetAllPromptsPrompt$Outbound,
   z.ZodTypeDef,
-  Prompt
+  GetAllPromptsPrompt
 > = z.object({
   id: z.string(),
   type: GetAllPromptsType$outboundSchema,
@@ -1916,16 +1919,20 @@ export const Prompt$outboundSchema: z.ZodType<
   });
 });
 
-export function promptToJSON(prompt: Prompt): string {
-  return JSON.stringify(Prompt$outboundSchema.parse(prompt));
+export function getAllPromptsPromptToJSON(
+  getAllPromptsPrompt: GetAllPromptsPrompt,
+): string {
+  return JSON.stringify(
+    GetAllPromptsPrompt$outboundSchema.parse(getAllPromptsPrompt),
+  );
 }
-export function promptFromJSON(
+export function getAllPromptsPromptFromJSON(
   jsonString: string,
-): SafeParseResult<Prompt, SDKValidationError> {
+): SafeParseResult<GetAllPromptsPrompt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Prompt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Prompt' from JSON`,
+    (x) => GetAllPromptsPrompt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPrompt' from JSON`,
   );
 }
 
@@ -1936,7 +1943,7 @@ export const GetAllPromptsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   object: GetAllPromptsObject$inboundSchema,
-  data: z.array(z.lazy(() => Prompt$inboundSchema)),
+  data: z.array(z.lazy(() => GetAllPromptsPrompt$inboundSchema)),
   has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -1946,7 +1953,7 @@ export const GetAllPromptsResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsResponseBody$Outbound = {
   object: string;
-  data: Array<Prompt$Outbound>;
+  data: Array<GetAllPromptsPrompt$Outbound>;
   has_more: boolean;
 };
 
@@ -1957,7 +1964,7 @@ export const GetAllPromptsResponseBody$outboundSchema: z.ZodType<
   GetAllPromptsResponseBody
 > = z.object({
   object: GetAllPromptsObject$outboundSchema,
-  data: z.array(z.lazy(() => Prompt$outboundSchema)),
+  data: z.array(z.lazy(() => GetAllPromptsPrompt$outboundSchema)),
   hasMore: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

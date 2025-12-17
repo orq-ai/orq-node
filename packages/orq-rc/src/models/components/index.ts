@@ -27,6 +27,7 @@ export * from "./invokedeploymentrequest.js";
 export * from "./partdelta.js";
 export * from "./partdeltaevent.js";
 export * from "./partdoneevent.js";
+export * from "./publiccontact.js";
 export * from "./reasoningpart.js";
 export * from "./reasoningpartschema.js";
 export * from "./redactedreasoningpartschema.js";

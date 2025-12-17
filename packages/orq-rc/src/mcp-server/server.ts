@@ -109,6 +109,8 @@ import { tool$promptsListVersions } from "./tools/promptsListVersions.js";
 import { tool$promptsRetrieve } from "./tools/promptsRetrieve.js";
 import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
+import { tool$routerChatCompletions } from "./tools/routerChatCompletions.js";
+import { tool$routerImagesGenerate } from "./tools/routerImagesGenerate.js";
 import { tool$toolsCreate } from "./tools/toolsCreate.js";
 import { tool$toolsDelete } from "./tools/toolsDelete.js";
 import { tool$toolsList } from "./tools/toolsList.js";
@@ -127,7 +129,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.1.0-rc.45",
+    version: "4.1.0-rc.50",
   });
 
   const client = new OrqCore({
@@ -258,6 +260,8 @@ export function createMCPServer(deps: {
   tool(tool$datasetsUpdateDatapoint);
   tool(tool$datasetsDeleteDatapoint);
   tool(tool$datasetsClear);
+  tool(tool$routerChatCompletions);
+  tool(tool$routerImagesGenerate);
   tool(tool$deploymentsMetricsCreate);
   tool(tool$agentsResponsesCreate);
 

@@ -225,6 +225,41 @@ export type StreamRunAgentModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const StreamRunAgentId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type StreamRunAgentId1 = ClosedEnum<typeof StreamRunAgentId1>;
+
+export type StreamRunAgentModelConfigurationId = StreamRunAgentId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const StreamRunAgentModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type StreamRunAgentModelConfigurationExecuteOn = ClosedEnum<
+  typeof StreamRunAgentModelConfigurationExecuteOn
+>;
+
+export type StreamRunAgentModelConfigurationGuardrails = {
+  id: StreamRunAgentId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: StreamRunAgentModelConfigurationExecuteOn;
+};
+
+/**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type StreamRunAgentModelConfigurationParameters = {
@@ -338,6 +373,10 @@ export type StreamRunAgentModelConfigurationParameters = {
     | Array<StreamRunAgentModelConfigurationModalities>
     | null
     | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<StreamRunAgentModelConfigurationGuardrails> | undefined;
 };
 
 /**
@@ -594,6 +633,45 @@ export type StreamRunAgentFallbackModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const StreamRunAgentIdAgents1 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type StreamRunAgentIdAgents1 = ClosedEnum<
+  typeof StreamRunAgentIdAgents1
+>;
+
+export type StreamRunAgentFallbackModelConfigurationId =
+  | StreamRunAgentIdAgents1
+  | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const StreamRunAgentFallbackModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type StreamRunAgentFallbackModelConfigurationExecuteOn = ClosedEnum<
+  typeof StreamRunAgentFallbackModelConfigurationExecuteOn
+>;
+
+export type StreamRunAgentFallbackModelConfigurationGuardrails = {
+  id: StreamRunAgentIdAgents1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: StreamRunAgentFallbackModelConfigurationExecuteOn;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type StreamRunAgentFallbackModelConfigurationParameters = {
@@ -708,6 +786,12 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
   modalities?:
     | Array<StreamRunAgentFallbackModelConfigurationModalities>
     | null
+    | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?:
+    | Array<StreamRunAgentFallbackModelConfigurationGuardrails>
     | undefined;
 };
 
@@ -2235,6 +2319,118 @@ export const StreamRunAgentModelConfigurationModalities$outboundSchema:
     StreamRunAgentModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentId1$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentId1
+> = z.nativeEnum(StreamRunAgentId1);
+/** @internal */
+export const StreamRunAgentId1$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentId1
+> = StreamRunAgentId1$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentModelConfigurationId$inboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([StreamRunAgentId1$inboundSchema, z.string()]);
+/** @internal */
+export type StreamRunAgentModelConfigurationId$Outbound = string | string;
+
+/** @internal */
+export const StreamRunAgentModelConfigurationId$outboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationId$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelConfigurationId
+> = z.union([StreamRunAgentId1$outboundSchema, z.string()]);
+
+export function streamRunAgentModelConfigurationIdToJSON(
+  streamRunAgentModelConfigurationId: StreamRunAgentModelConfigurationId,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationId$outboundSchema.parse(
+      streamRunAgentModelConfigurationId,
+    ),
+  );
+}
+export function streamRunAgentModelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentModelConfigurationId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentModelConfigurationExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationExecuteOn> = z
+    .nativeEnum(StreamRunAgentModelConfigurationExecuteOn);
+/** @internal */
+export const StreamRunAgentModelConfigurationExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationExecuteOn> =
+    StreamRunAgentModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentModelConfigurationGuardrails$inboundSchema:
+  z.ZodType<StreamRunAgentModelConfigurationGuardrails, z.ZodTypeDef, unknown> =
+    z.object({
+      id: z.union([StreamRunAgentId1$inboundSchema, z.string()]),
+      execute_on: StreamRunAgentModelConfigurationExecuteOn$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "execute_on": "executeOn",
+      });
+    });
+/** @internal */
+export type StreamRunAgentModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamRunAgentModelConfigurationGuardrails$outboundSchema:
+  z.ZodType<
+    StreamRunAgentModelConfigurationGuardrails$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentModelConfigurationGuardrails
+  > = z.object({
+    id: z.union([StreamRunAgentId1$outboundSchema, z.string()]),
+    executeOn: StreamRunAgentModelConfigurationExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  });
+
+export function streamRunAgentModelConfigurationGuardrailsToJSON(
+  streamRunAgentModelConfigurationGuardrails:
+    StreamRunAgentModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationGuardrails$outboundSchema.parse(
+      streamRunAgentModelConfigurationGuardrails,
+    ),
+  );
+}
+export function streamRunAgentModelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentModelConfigurationGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentModelConfigurationGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentModelConfigurationParameters$inboundSchema:
   z.ZodType<StreamRunAgentModelConfigurationParameters, z.ZodTypeDef, unknown> =
     z.object({
@@ -2278,6 +2474,9 @@ export const StreamRunAgentModelConfigurationParameters$inboundSchema:
       parallel_tool_calls: z.boolean().optional(),
       modalities: z.nullable(
         z.array(StreamRunAgentModelConfigurationModalities$inboundSchema),
+      ).optional(),
+      guardrails: z.array(
+        z.lazy(() => StreamRunAgentModelConfigurationGuardrails$inboundSchema),
       ).optional(),
     }).transform((v) => {
       return remap$(v, {
@@ -2328,6 +2527,9 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
   tool_choice?: StreamRunAgentToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?:
+    | Array<StreamRunAgentModelConfigurationGuardrails$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -2376,6 +2578,9 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     parallelToolCalls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(StreamRunAgentModelConfigurationModalities$outboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => StreamRunAgentModelConfigurationGuardrails$outboundSchema),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3249,6 +3454,128 @@ export const StreamRunAgentFallbackModelConfigurationModalities$outboundSchema:
     StreamRunAgentFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const StreamRunAgentIdAgents1$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentIdAgents1
+> = z.nativeEnum(StreamRunAgentIdAgents1);
+/** @internal */
+export const StreamRunAgentIdAgents1$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentIdAgents1
+> = StreamRunAgentIdAgents1$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationId$inboundSchema:
+  z.ZodType<StreamRunAgentFallbackModelConfigurationId, z.ZodTypeDef, unknown> =
+    z.union([StreamRunAgentIdAgents1$inboundSchema, z.string()]);
+/** @internal */
+export type StreamRunAgentFallbackModelConfigurationId$Outbound =
+  | string
+  | string;
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationId$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationId$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationId
+  > = z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()]);
+
+export function streamRunAgentFallbackModelConfigurationIdToJSON(
+  streamRunAgentFallbackModelConfigurationId:
+    StreamRunAgentFallbackModelConfigurationId,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationId$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationId,
+    ),
+  );
+}
+export function streamRunAgentFallbackModelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelConfigurationId,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelConfigurationId$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationExecuteOn> = z
+    .nativeEnum(StreamRunAgentFallbackModelConfigurationExecuteOn);
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationExecuteOn> =
+    StreamRunAgentFallbackModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationGuardrails$inboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationGuardrails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.union([StreamRunAgentIdAgents1$inboundSchema, z.string()]),
+    execute_on: StreamRunAgentFallbackModelConfigurationExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  });
+/** @internal */
+export type StreamRunAgentFallbackModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationGuardrails$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationGuardrails
+  > = z.object({
+    id: z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()]),
+    executeOn: StreamRunAgentFallbackModelConfigurationExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  });
+
+export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
+  streamRunAgentFallbackModelConfigurationGuardrails:
+    StreamRunAgentFallbackModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationGuardrails,
+    ),
+  );
+}
+export function streamRunAgentFallbackModelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelConfigurationGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelConfigurationGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     StreamRunAgentFallbackModelConfigurationParameters,
@@ -3297,6 +3624,11 @@ export const StreamRunAgentFallbackModelConfigurationParameters$inboundSchema:
     parallel_tool_calls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(StreamRunAgentFallbackModelConfigurationModalities$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationGuardrails$inboundSchema
+      ),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3350,6 +3682,9 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   tool_choice?: StreamRunAgentToolChoiceAgents2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?:
+    | Array<StreamRunAgentFallbackModelConfigurationGuardrails$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -3404,6 +3739,11 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     modalities: z.nullable(
       z.array(
         StreamRunAgentFallbackModelConfigurationModalities$outboundSchema,
+      ),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema
       ),
     ).optional(),
   }).transform((v) => {
@@ -4091,7 +4431,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KCKC7B1B6B35T85M8EHJ3T1R"),
+  id: z.string().default("01KCCAY59DJZVJSJY3Z11Z9KE3"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4110,7 +4450,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KCKC7B1B6B35T85M8EHJ3T1R"),
+  id: z.string().default("01KCCAY59DJZVJSJY3Z11Z9KE3"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

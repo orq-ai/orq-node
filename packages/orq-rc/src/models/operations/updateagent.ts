@@ -220,6 +220,41 @@ export type ModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const UpdateAgentId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type UpdateAgentId1 = ClosedEnum<typeof UpdateAgentId1>;
+
+export type ModelConfigurationId = UpdateAgentId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const ModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type ModelConfigurationExecuteOn = ClosedEnum<
+  typeof ModelConfigurationExecuteOn
+>;
+
+export type ModelConfigurationGuardrails = {
+  id: UpdateAgentId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: ModelConfigurationExecuteOn;
+};
+
+/**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type ModelConfigurationParameters = {
@@ -324,6 +359,10 @@ export type ModelConfigurationParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<ModelConfigurationModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<ModelConfigurationGuardrails> | undefined;
 };
 
 /**
@@ -579,6 +618,43 @@ export type UpdateAgentFallbackModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const UpdateAgentIdAgents1 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type UpdateAgentIdAgents1 = ClosedEnum<typeof UpdateAgentIdAgents1>;
+
+export type UpdateAgentFallbackModelConfigurationId =
+  | UpdateAgentIdAgents1
+  | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const UpdateAgentFallbackModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type UpdateAgentFallbackModelConfigurationExecuteOn = ClosedEnum<
+  typeof UpdateAgentFallbackModelConfigurationExecuteOn
+>;
+
+export type UpdateAgentFallbackModelConfigurationGuardrails = {
+  id: UpdateAgentIdAgents1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: UpdateAgentFallbackModelConfigurationExecuteOn;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type UpdateAgentFallbackModelConfigurationParameters = {
@@ -693,6 +769,12 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
   modalities?:
     | Array<UpdateAgentFallbackModelConfigurationModalities>
     | null
+    | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?:
+    | Array<UpdateAgentFallbackModelConfigurationGuardrails>
     | undefined;
 };
 
@@ -1664,6 +1746,43 @@ export const UpdateAgentModalities = {
 export type UpdateAgentModalities = ClosedEnum<typeof UpdateAgentModalities>;
 
 /**
+ * The key of the guardrail.
+ */
+export const UpdateAgentIdAgentsResponse1 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type UpdateAgentIdAgentsResponse1 = ClosedEnum<
+  typeof UpdateAgentIdAgentsResponse1
+>;
+
+export type UpdateAgentId = UpdateAgentIdAgentsResponse1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type UpdateAgentAgentsResponse200ApplicationJSONExecuteOn = ClosedEnum<
+  typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn
+>;
+
+export type UpdateAgentAgentsResponseGuardrails = {
+  id: UpdateAgentIdAgentsResponse1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: UpdateAgentAgentsResponse200ApplicationJSONExecuteOn;
+};
+
+/**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type UpdateAgentParameters = {
@@ -1771,6 +1890,10 @@ export type UpdateAgentParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<UpdateAgentModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<UpdateAgentAgentsResponseGuardrails> | undefined;
 };
 
 /**
@@ -2003,6 +2126,45 @@ export type UpdateAgentFallbackModelConfigurationAgentsModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const UpdateAgentIdAgentsResponse2001 = {
+  OrqPiiDetection: "orq_pii_detection",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type UpdateAgentIdAgentsResponse2001 = ClosedEnum<
+  typeof UpdateAgentIdAgentsResponse2001
+>;
+
+export type UpdateAgentFallbackModelConfigurationAgentsId =
+  | UpdateAgentIdAgentsResponse2001
+  | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const UpdateAgentFallbackModelConfigurationAgentsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type UpdateAgentFallbackModelConfigurationAgentsExecuteOn = ClosedEnum<
+  typeof UpdateAgentFallbackModelConfigurationAgentsExecuteOn
+>;
+
+export type UpdateAgentFallbackModelConfigurationAgentsGuardrails = {
+  id: UpdateAgentIdAgentsResponse2001 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: UpdateAgentFallbackModelConfigurationAgentsExecuteOn;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
@@ -2117,6 +2279,12 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
   modalities?:
     | Array<UpdateAgentFallbackModelConfigurationAgentsModalities>
     | null
+    | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?:
+    | Array<UpdateAgentFallbackModelConfigurationAgentsGuardrails>
     | undefined;
 };
 
@@ -2840,6 +3008,109 @@ export const ModelConfigurationModalities$outboundSchema: z.ZodNativeEnum<
 > = ModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const UpdateAgentId1$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentId1
+> = z.nativeEnum(UpdateAgentId1);
+/** @internal */
+export const UpdateAgentId1$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentId1
+> = UpdateAgentId1$inboundSchema;
+
+/** @internal */
+export const ModelConfigurationId$inboundSchema: z.ZodType<
+  ModelConfigurationId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([UpdateAgentId1$inboundSchema, z.string()]);
+/** @internal */
+export type ModelConfigurationId$Outbound = string | string;
+
+/** @internal */
+export const ModelConfigurationId$outboundSchema: z.ZodType<
+  ModelConfigurationId$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationId
+> = z.union([UpdateAgentId1$outboundSchema, z.string()]);
+
+export function modelConfigurationIdToJSON(
+  modelConfigurationId: ModelConfigurationId,
+): string {
+  return JSON.stringify(
+    ModelConfigurationId$outboundSchema.parse(modelConfigurationId),
+  );
+}
+export function modelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<ModelConfigurationId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const ModelConfigurationExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationExecuteOn
+> = z.nativeEnum(ModelConfigurationExecuteOn);
+/** @internal */
+export const ModelConfigurationExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof ModelConfigurationExecuteOn
+> = ModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const ModelConfigurationGuardrails$inboundSchema: z.ZodType<
+  ModelConfigurationGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([UpdateAgentId1$inboundSchema, z.string()]),
+  execute_on: ModelConfigurationExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type ModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const ModelConfigurationGuardrails$outboundSchema: z.ZodType<
+  ModelConfigurationGuardrails$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationGuardrails
+> = z.object({
+  id: z.union([UpdateAgentId1$outboundSchema, z.string()]),
+  executeOn: ModelConfigurationExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function modelConfigurationGuardrailsToJSON(
+  modelConfigurationGuardrails: ModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    ModelConfigurationGuardrails$outboundSchema.parse(
+      modelConfigurationGuardrails,
+    ),
+  );
+}
+export function modelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<ModelConfigurationGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ModelConfigurationGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const ModelConfigurationParameters$inboundSchema: z.ZodType<
   ModelConfigurationParameters,
   z.ZodTypeDef,
@@ -2880,6 +3151,8 @@ export const ModelConfigurationParameters$inboundSchema: z.ZodType<
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(ModelConfigurationModalities$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$inboundSchema))
     .optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2927,6 +3200,7 @@ export type ModelConfigurationParameters$Outbound = {
   tool_choice?: UpdateAgentToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2970,6 +3244,8 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
   ]).optional(),
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(ModelConfigurationModalities$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$outboundSchema))
     .optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -3821,6 +4097,127 @@ export const UpdateAgentFallbackModelConfigurationModalities$outboundSchema:
     UpdateAgentFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const UpdateAgentIdAgents1$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgents1
+> = z.nativeEnum(UpdateAgentIdAgents1);
+/** @internal */
+export const UpdateAgentIdAgents1$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgents1
+> = UpdateAgentIdAgents1$inboundSchema;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationId$inboundSchema: z.ZodType<
+  UpdateAgentFallbackModelConfigurationId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([UpdateAgentIdAgents1$inboundSchema, z.string()]);
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationId$Outbound = string | string;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationId$outboundSchema: z.ZodType<
+  UpdateAgentFallbackModelConfigurationId$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentFallbackModelConfigurationId
+> = z.union([UpdateAgentIdAgents1$outboundSchema, z.string()]);
+
+export function updateAgentFallbackModelConfigurationIdToJSON(
+  updateAgentFallbackModelConfigurationId:
+    UpdateAgentFallbackModelConfigurationId,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationId$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationId,
+    ),
+  );
+}
+export function updateAgentFallbackModelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationId,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationId$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationExecuteOn> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationExecuteOn);
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationExecuteOn> =
+    UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationGuardrails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.union([UpdateAgentIdAgents1$inboundSchema, z.string()]),
+    execute_on: UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  });
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationGuardrails$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationGuardrails$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationGuardrails
+  > = z.object({
+    id: z.union([UpdateAgentIdAgents1$outboundSchema, z.string()]),
+    executeOn: UpdateAgentFallbackModelConfigurationExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  });
+
+export function updateAgentFallbackModelConfigurationGuardrailsToJSON(
+  updateAgentFallbackModelConfigurationGuardrails:
+    UpdateAgentFallbackModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationGuardrails$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationGuardrails,
+    ),
+  );
+}
+export function updateAgentFallbackModelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateAgentFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     UpdateAgentFallbackModelConfigurationParameters,
@@ -3869,6 +4266,11 @@ export const UpdateAgentFallbackModelConfigurationParameters$inboundSchema:
     parallel_tool_calls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(UpdateAgentFallbackModelConfigurationModalities$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema
+      ),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3922,6 +4324,9 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   tool_choice?: UpdateAgentToolChoiceAgents2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?:
+    | Array<UpdateAgentFallbackModelConfigurationGuardrails$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -3973,6 +4378,11 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     parallelToolCalls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(UpdateAgentFallbackModelConfigurationModalities$outboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationGuardrails$outboundSchema
+      ),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -6771,6 +7181,108 @@ export const UpdateAgentModalities$outboundSchema: z.ZodNativeEnum<
 > = UpdateAgentModalities$inboundSchema;
 
 /** @internal */
+export const UpdateAgentIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgentsResponse1
+> = z.nativeEnum(UpdateAgentIdAgentsResponse1);
+/** @internal */
+export const UpdateAgentIdAgentsResponse1$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgentsResponse1
+> = UpdateAgentIdAgentsResponse1$inboundSchema;
+
+/** @internal */
+export const UpdateAgentId$inboundSchema: z.ZodType<
+  UpdateAgentId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([UpdateAgentIdAgentsResponse1$inboundSchema, z.string()]);
+/** @internal */
+export type UpdateAgentId$Outbound = string | string;
+
+/** @internal */
+export const UpdateAgentId$outboundSchema: z.ZodType<
+  UpdateAgentId$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentId
+> = z.union([UpdateAgentIdAgentsResponse1$outboundSchema, z.string()]);
+
+export function updateAgentIdToJSON(updateAgentId: UpdateAgentId): string {
+  return JSON.stringify(UpdateAgentId$outboundSchema.parse(updateAgentId));
+}
+export function updateAgentIdFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentId' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn> =
+    z.nativeEnum(UpdateAgentAgentsResponse200ApplicationJSONExecuteOn);
+/** @internal */
+export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn> =
+    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema;
+
+/** @internal */
+export const UpdateAgentAgentsResponseGuardrails$inboundSchema: z.ZodType<
+  UpdateAgentAgentsResponseGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([UpdateAgentIdAgentsResponse1$inboundSchema, z.string()]),
+  execute_on:
+    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type UpdateAgentAgentsResponseGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const UpdateAgentAgentsResponseGuardrails$outboundSchema: z.ZodType<
+  UpdateAgentAgentsResponseGuardrails$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentAgentsResponseGuardrails
+> = z.object({
+  id: z.union([UpdateAgentIdAgentsResponse1$outboundSchema, z.string()]),
+  executeOn:
+    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function updateAgentAgentsResponseGuardrailsToJSON(
+  updateAgentAgentsResponseGuardrails: UpdateAgentAgentsResponseGuardrails,
+): string {
+  return JSON.stringify(
+    UpdateAgentAgentsResponseGuardrails$outboundSchema.parse(
+      updateAgentAgentsResponseGuardrails,
+    ),
+  );
+}
+export function updateAgentAgentsResponseGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentAgentsResponseGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentAgentsResponseGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsResponseGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateAgentParameters$inboundSchema: z.ZodType<
   UpdateAgentParameters,
   z.ZodTypeDef,
@@ -6814,6 +7326,9 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(UpdateAgentModalities$inboundSchema))
     .optional(),
+  guardrails: z.array(
+    z.lazy(() => UpdateAgentAgentsResponseGuardrails$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -6863,6 +7378,7 @@ export type UpdateAgentParameters$Outbound = {
     | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?: Array<UpdateAgentAgentsResponseGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -6909,6 +7425,9 @@ export const UpdateAgentParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(UpdateAgentModalities$outboundSchema))
     .optional(),
+  guardrails: z.array(
+    z.lazy(() => UpdateAgentAgentsResponseGuardrails$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -7705,6 +8224,133 @@ export const UpdateAgentFallbackModelConfigurationAgentsModalities$outboundSchem
   > = UpdateAgentFallbackModelConfigurationAgentsModalities$inboundSchema;
 
 /** @internal */
+export const UpdateAgentIdAgentsResponse2001$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgentsResponse2001
+> = z.nativeEnum(UpdateAgentIdAgentsResponse2001);
+/** @internal */
+export const UpdateAgentIdAgentsResponse2001$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentIdAgentsResponse2001
+> = UpdateAgentIdAgentsResponse2001$inboundSchema;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsId$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsId,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([UpdateAgentIdAgentsResponse2001$inboundSchema, z.string()]);
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationAgentsId$Outbound =
+  | string
+  | string;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsId$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsId$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationAgentsId
+  > = z.union([UpdateAgentIdAgentsResponse2001$outboundSchema, z.string()]);
+
+export function updateAgentFallbackModelConfigurationAgentsIdToJSON(
+  updateAgentFallbackModelConfigurationAgentsId:
+    UpdateAgentFallbackModelConfigurationAgentsId,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationAgentsId$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationAgentsId,
+    ),
+  );
+}
+export function updateAgentFallbackModelConfigurationAgentsIdFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsId,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsId$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsId' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsExecuteOn> =
+    z.nativeEnum(UpdateAgentFallbackModelConfigurationAgentsExecuteOn);
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsExecuteOn> =
+    UpdateAgentFallbackModelConfigurationAgentsExecuteOn$inboundSchema;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsGuardrails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.union([UpdateAgentIdAgentsResponse2001$inboundSchema, z.string()]),
+    execute_on:
+      UpdateAgentFallbackModelConfigurationAgentsExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  });
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationAgentsGuardrails
+  > = z.object({
+    id: z.union([UpdateAgentIdAgentsResponse2001$outboundSchema, z.string()]),
+    executeOn:
+      UpdateAgentFallbackModelConfigurationAgentsExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  });
+
+export function updateAgentFallbackModelConfigurationAgentsGuardrailsToJSON(
+  updateAgentFallbackModelConfigurationAgentsGuardrails:
+    UpdateAgentFallbackModelConfigurationAgentsGuardrails,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationAgentsGuardrails,
+    ),
+  );
+}
+export function updateAgentFallbackModelConfigurationAgentsGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema:
   z.ZodType<
     UpdateAgentFallbackModelConfigurationAgentsParameters,
@@ -7762,6 +8408,11 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
         UpdateAgentFallbackModelConfigurationAgentsModalities$inboundSchema,
       ),
     ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema
+      ),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "frequency_penalty": "frequencyPenalty",
@@ -7817,6 +8468,9 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters$Outbound = {
     | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?:
+    | Array<UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -7875,6 +8529,11 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$outboundSchem
     modalities: z.nullable(
       z.array(
         UpdateAgentFallbackModelConfigurationAgentsModalities$outboundSchema,
+      ),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema
       ),
     ).optional(),
   }).transform((v) => {

@@ -403,6 +403,11 @@ run();
 
 * [retrieve](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
 
+### [Router](docs/sdks/router/README.md)
+
+* [chatCompletions](docs/sdks/router/README.md#chatcompletions) - Create chat completion
+* [imagesGenerate](docs/sdks/router/README.md#imagesgenerate) - Create image
+
 ### [Tools](docs/sdks/tools/README.md)
 
 * [list](docs/sdks/tools/README.md#list) - List tools
@@ -521,6 +526,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`promptsRetrieve`](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
 - [`remoteconfigsRetrieve`](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
+- [`routerChatCompletions`](docs/sdks/router/README.md#chatcompletions) - Create chat completion
+- [`routerImagesGenerate`](docs/sdks/router/README.md#imagesgenerate) - Create image
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
@@ -767,30 +774,30 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 101 methods.*
-* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 101 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 101 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 101 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 101 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 101 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 101 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 101 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 101 methods.*
-* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 101 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 101 methods.*
-* [`CreateAgentRequestResponseBody`](./src/models/errors/createagentrequestresponsebody.ts): Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management. Status code `409`. Applicable to 1 of 101 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 101 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 103 methods.*
+* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 103 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 103 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 103 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 103 methods.*
+* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 103 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 103 methods.*
+* [`CreateAgentRequestResponseBody`](./src/models/errors/createagentrequestresponsebody.ts): Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management. Status code `409`. Applicable to 1 of 103 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 103 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
