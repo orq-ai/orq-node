@@ -99,7 +99,7 @@ export type TwoFile = {
   filename?: string | undefined;
 };
 
-export type Three = {
+export type Two3 = {
   /**
    * The type of the content part. Always `file`.
    */
@@ -107,7 +107,7 @@ export type Three = {
   file: TwoFile;
 };
 
-export type ImageUrl = {
+export type TwoImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded data URI.
    */
@@ -121,9 +121,9 @@ export type ImageUrl = {
 /**
  * The image part of the prompt message. Only supported with vision models.
  */
-export type Two2 = {
+export type CreatePrompt22 = {
   type: "image_url";
-  imageUrl: ImageUrl;
+  imageUrl: TwoImageUrl;
 };
 
 /**
@@ -134,12 +134,14 @@ export type CreatePrompt21 = {
   text: string;
 };
 
-export type CreatePromptContent2 = CreatePrompt21 | Two2 | Three;
+export type CreatePromptContent2 = CreatePrompt21 | CreatePrompt22 | Two3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
-export type CreatePromptContent = string | Array<CreatePrompt21 | Two2 | Three>;
+export type CreatePromptContent =
+  | string
+  | Array<CreatePrompt21 | CreatePrompt22 | Two3>;
 
 export const CreatePromptType = {
   Function: "function",
@@ -169,7 +171,7 @@ export type CreatePromptMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content: string | Array<CreatePrompt21 | Two2 | Three> | null;
+  content: string | Array<CreatePrompt21 | CreatePrompt22 | Two3> | null;
   toolCalls?: Array<CreatePromptToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1584,7 +1586,7 @@ export type CreatePrompt2ImageUrl = {
 /**
  * The image part of the prompt message. Only supported with vision models.
  */
-export type CreatePrompt22 = {
+export type CreatePrompt2Prompts2 = {
   type: "image_url";
   imageUrl: CreatePrompt2ImageUrl;
 };
@@ -1599,7 +1601,7 @@ export type CreatePrompt2PromptsResponse1 = {
 
 export type CreatePromptContentPromptsResponse2 =
   | CreatePrompt2PromptsResponse1
-  | CreatePrompt22
+  | CreatePrompt2Prompts2
   | CreatePrompt23;
 
 /**
@@ -1607,7 +1609,9 @@ export type CreatePromptContentPromptsResponse2 =
  */
 export type CreatePromptPromptsContent =
   | string
-  | Array<CreatePrompt2PromptsResponse1 | CreatePrompt22 | CreatePrompt23>;
+  | Array<
+    CreatePrompt2PromptsResponse1 | CreatePrompt2Prompts2 | CreatePrompt23
+  >;
 
 export const CreatePromptPromptsResponseType = {
   Function: "function",
@@ -1641,7 +1645,9 @@ export type CreatePromptPromptsResponseMessages = {
    */
   content:
     | string
-    | Array<CreatePrompt2PromptsResponse1 | CreatePrompt22 | CreatePrompt23>
+    | Array<
+      CreatePrompt2PromptsResponse1 | CreatePrompt2Prompts2 | CreatePrompt23
+    >
     | null;
   toolCalls?: Array<CreatePromptPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
@@ -1880,43 +1886,40 @@ export function twoFileFromJSON(
 }
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
+export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("file"),
     file: z.lazy(() => TwoFile$inboundSchema),
   });
 /** @internal */
-export type Three$Outbound = {
+export type Two3$Outbound = {
   type: "file";
   file: TwoFile$Outbound;
 };
 
 /** @internal */
-export const Three$outboundSchema: z.ZodType<
-  Three$Outbound,
-  z.ZodTypeDef,
-  Three
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => TwoFile$outboundSchema),
-});
+export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
+  z.object({
+    type: z.literal("file"),
+    file: z.lazy(() => TwoFile$outboundSchema),
+  });
 
-export function threeToJSON(three: Three): string {
-  return JSON.stringify(Three$outboundSchema.parse(three));
+export function two3ToJSON(two3: Two3): string {
+  return JSON.stringify(Two3$outboundSchema.parse(two3));
 }
-export function threeFromJSON(
+export function two3FromJSON(
   jsonString: string,
-): SafeParseResult<Three, SDKValidationError> {
+): SafeParseResult<Two3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three' from JSON`,
+    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two3' from JSON`,
   );
 }
 
 /** @internal */
-export const ImageUrl$inboundSchema: z.ZodType<
-  ImageUrl,
+export const TwoImageUrl$inboundSchema: z.ZodType<
+  TwoImageUrl,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1924,71 +1927,77 @@ export const ImageUrl$inboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 /** @internal */
-export type ImageUrl$Outbound = {
+export type TwoImageUrl$Outbound = {
   url: string;
   detail?: string | undefined;
 };
 
 /** @internal */
-export const ImageUrl$outboundSchema: z.ZodType<
-  ImageUrl$Outbound,
+export const TwoImageUrl$outboundSchema: z.ZodType<
+  TwoImageUrl$Outbound,
   z.ZodTypeDef,
-  ImageUrl
+  TwoImageUrl
 > = z.object({
   url: z.string(),
   detail: z.string().optional(),
 });
 
-export function imageUrlToJSON(imageUrl: ImageUrl): string {
-  return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
+export function twoImageUrlToJSON(twoImageUrl: TwoImageUrl): string {
+  return JSON.stringify(TwoImageUrl$outboundSchema.parse(twoImageUrl));
 }
-export function imageUrlFromJSON(
+export function twoImageUrlFromJSON(
   jsonString: string,
-): SafeParseResult<ImageUrl, SDKValidationError> {
+): SafeParseResult<TwoImageUrl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ImageUrl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ImageUrl' from JSON`,
+    (x) => TwoImageUrl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoImageUrl' from JSON`,
   );
 }
 
 /** @internal */
-export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("image_url"),
-    image_url: z.lazy(() => ImageUrl$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "image_url": "imageUrl",
-    });
+export const CreatePrompt22$inboundSchema: z.ZodType<
+  CreatePrompt22,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("image_url"),
+  image_url: z.lazy(() => TwoImageUrl$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "image_url": "imageUrl",
   });
+});
 /** @internal */
-export type Two2$Outbound = {
+export type CreatePrompt22$Outbound = {
   type: "image_url";
-  image_url: ImageUrl$Outbound;
+  image_url: TwoImageUrl$Outbound;
 };
 
 /** @internal */
-export const Two2$outboundSchema: z.ZodType<Two2$Outbound, z.ZodTypeDef, Two2> =
-  z.object({
-    type: z.literal("image_url"),
-    imageUrl: z.lazy(() => ImageUrl$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      imageUrl: "image_url",
-    });
+export const CreatePrompt22$outboundSchema: z.ZodType<
+  CreatePrompt22$Outbound,
+  z.ZodTypeDef,
+  CreatePrompt22
+> = z.object({
+  type: z.literal("image_url"),
+  imageUrl: z.lazy(() => TwoImageUrl$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    imageUrl: "image_url",
   });
+});
 
-export function two2ToJSON(two2: Two2): string {
-  return JSON.stringify(Two2$outboundSchema.parse(two2));
+export function createPrompt22ToJSON(createPrompt22: CreatePrompt22): string {
+  return JSON.stringify(CreatePrompt22$outboundSchema.parse(createPrompt22));
 }
-export function two2FromJSON(
+export function createPrompt22FromJSON(
   jsonString: string,
-): SafeParseResult<Two2, SDKValidationError> {
+): SafeParseResult<CreatePrompt22, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two2' from JSON`,
+    (x) => CreatePrompt22$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt22' from JSON`,
   );
 }
 
@@ -2037,14 +2046,14 @@ export const CreatePromptContent2$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => CreatePrompt21$inboundSchema),
-  z.lazy(() => Two2$inboundSchema),
-  z.lazy(() => Three$inboundSchema),
+  z.lazy(() => CreatePrompt22$inboundSchema),
+  z.lazy(() => Two3$inboundSchema),
 ]);
 /** @internal */
 export type CreatePromptContent2$Outbound =
   | CreatePrompt21$Outbound
-  | Two2$Outbound
-  | Three$Outbound;
+  | CreatePrompt22$Outbound
+  | Two3$Outbound;
 
 /** @internal */
 export const CreatePromptContent2$outboundSchema: z.ZodType<
@@ -2053,8 +2062,8 @@ export const CreatePromptContent2$outboundSchema: z.ZodType<
   CreatePromptContent2
 > = z.union([
   z.lazy(() => CreatePrompt21$outboundSchema),
-  z.lazy(() => Two2$outboundSchema),
-  z.lazy(() => Three$outboundSchema),
+  z.lazy(() => CreatePrompt22$outboundSchema),
+  z.lazy(() => Two3$outboundSchema),
 ]);
 
 export function createPromptContent2ToJSON(
@@ -2083,14 +2092,14 @@ export const CreatePromptContent$inboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => CreatePrompt21$inboundSchema),
-    z.lazy(() => Two2$inboundSchema),
-    z.lazy(() => Three$inboundSchema),
+    z.lazy(() => CreatePrompt22$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ])),
 ]);
 /** @internal */
 export type CreatePromptContent$Outbound =
   | string
-  | Array<CreatePrompt21$Outbound | Two2$Outbound | Three$Outbound>;
+  | Array<CreatePrompt21$Outbound | CreatePrompt22$Outbound | Two3$Outbound>;
 
 /** @internal */
 export const CreatePromptContent$outboundSchema: z.ZodType<
@@ -2101,8 +2110,8 @@ export const CreatePromptContent$outboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => CreatePrompt21$outboundSchema),
-    z.lazy(() => Two2$outboundSchema),
-    z.lazy(() => Three$outboundSchema),
+    z.lazy(() => CreatePrompt22$outboundSchema),
+    z.lazy(() => Two3$outboundSchema),
   ])),
 ]);
 
@@ -2234,8 +2243,8 @@ export const CreatePromptMessages$inboundSchema: z.ZodType<
       z.string(),
       z.array(z.union([
         z.lazy(() => CreatePrompt21$inboundSchema),
-        z.lazy(() => Two2$inboundSchema),
-        z.lazy(() => Three$inboundSchema),
+        z.lazy(() => CreatePrompt22$inboundSchema),
+        z.lazy(() => Two3$inboundSchema),
       ])),
     ]),
   ),
@@ -2253,7 +2262,7 @@ export type CreatePromptMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<CreatePrompt21$Outbound | Two2$Outbound | Three$Outbound>
+    | Array<CreatePrompt21$Outbound | CreatePrompt22$Outbound | Two3$Outbound>
     | null;
   tool_calls?: Array<CreatePromptToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
@@ -2271,8 +2280,8 @@ export const CreatePromptMessages$outboundSchema: z.ZodType<
       z.string(),
       z.array(z.union([
         z.lazy(() => CreatePrompt21$outboundSchema),
-        z.lazy(() => Two2$outboundSchema),
-        z.lazy(() => Three$outboundSchema),
+        z.lazy(() => CreatePrompt22$outboundSchema),
+        z.lazy(() => Two3$outboundSchema),
       ])),
     ]),
   ),
@@ -5492,8 +5501,8 @@ export function createPrompt2ImageUrlFromJSON(
 }
 
 /** @internal */
-export const CreatePrompt22$inboundSchema: z.ZodType<
-  CreatePrompt22,
+export const CreatePrompt2Prompts2$inboundSchema: z.ZodType<
+  CreatePrompt2Prompts2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5505,16 +5514,16 @@ export const CreatePrompt22$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type CreatePrompt22$Outbound = {
+export type CreatePrompt2Prompts2$Outbound = {
   type: "image_url";
   image_url: CreatePrompt2ImageUrl$Outbound;
 };
 
 /** @internal */
-export const CreatePrompt22$outboundSchema: z.ZodType<
-  CreatePrompt22$Outbound,
+export const CreatePrompt2Prompts2$outboundSchema: z.ZodType<
+  CreatePrompt2Prompts2$Outbound,
   z.ZodTypeDef,
-  CreatePrompt22
+  CreatePrompt2Prompts2
 > = z.object({
   type: z.literal("image_url"),
   imageUrl: z.lazy(() => CreatePrompt2ImageUrl$outboundSchema),
@@ -5524,16 +5533,20 @@ export const CreatePrompt22$outboundSchema: z.ZodType<
   });
 });
 
-export function createPrompt22ToJSON(createPrompt22: CreatePrompt22): string {
-  return JSON.stringify(CreatePrompt22$outboundSchema.parse(createPrompt22));
+export function createPrompt2Prompts2ToJSON(
+  createPrompt2Prompts2: CreatePrompt2Prompts2,
+): string {
+  return JSON.stringify(
+    CreatePrompt2Prompts2$outboundSchema.parse(createPrompt2Prompts2),
+  );
 }
-export function createPrompt22FromJSON(
+export function createPrompt2Prompts2FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePrompt22, SDKValidationError> {
+): SafeParseResult<CreatePrompt2Prompts2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePrompt22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePrompt22' from JSON`,
+    (x) => CreatePrompt2Prompts2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2Prompts2' from JSON`,
   );
 }
 
@@ -5588,13 +5601,13 @@ export const CreatePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => CreatePrompt2PromptsResponse1$inboundSchema),
-  z.lazy(() => CreatePrompt22$inboundSchema),
+  z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
   z.lazy(() => CreatePrompt23$inboundSchema),
 ]);
 /** @internal */
 export type CreatePromptContentPromptsResponse2$Outbound =
   | CreatePrompt2PromptsResponse1$Outbound
-  | CreatePrompt22$Outbound
+  | CreatePrompt2Prompts2$Outbound
   | CreatePrompt23$Outbound;
 
 /** @internal */
@@ -5604,7 +5617,7 @@ export const CreatePromptContentPromptsResponse2$outboundSchema: z.ZodType<
   CreatePromptContentPromptsResponse2
 > = z.union([
   z.lazy(() => CreatePrompt2PromptsResponse1$outboundSchema),
-  z.lazy(() => CreatePrompt22$outboundSchema),
+  z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
   z.lazy(() => CreatePrompt23$outboundSchema),
 ]);
 
@@ -5637,7 +5650,7 @@ export const CreatePromptPromptsContent$inboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => CreatePrompt2PromptsResponse1$inboundSchema),
-    z.lazy(() => CreatePrompt22$inboundSchema),
+    z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
     z.lazy(() => CreatePrompt23$inboundSchema),
   ])),
 ]);
@@ -5646,7 +5659,7 @@ export type CreatePromptPromptsContent$Outbound =
   | string
   | Array<
     | CreatePrompt2PromptsResponse1$Outbound
-    | CreatePrompt22$Outbound
+    | CreatePrompt2Prompts2$Outbound
     | CreatePrompt23$Outbound
   >;
 
@@ -5659,7 +5672,7 @@ export const CreatePromptPromptsContent$outboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => CreatePrompt2PromptsResponse1$outboundSchema),
-    z.lazy(() => CreatePrompt22$outboundSchema),
+    z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
     z.lazy(() => CreatePrompt23$outboundSchema),
   ])),
 ]);
@@ -5797,7 +5810,7 @@ export const CreatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
       z.array(
         z.union([
           z.lazy(() => CreatePrompt2PromptsResponse1$inboundSchema),
-          z.lazy(() => CreatePrompt22$inboundSchema),
+          z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
           z.lazy(() => CreatePrompt23$inboundSchema),
         ]),
       ),
@@ -5819,7 +5832,7 @@ export type CreatePromptPromptsResponseMessages$Outbound = {
     | string
     | Array<
       | CreatePrompt2PromptsResponse1$Outbound
-      | CreatePrompt22$Outbound
+      | CreatePrompt2Prompts2$Outbound
       | CreatePrompt23$Outbound
     >
     | null;
@@ -5840,7 +5853,7 @@ export const CreatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
       z.array(
         z.union([
           z.lazy(() => CreatePrompt2PromptsResponse1$outboundSchema),
-          z.lazy(() => CreatePrompt22$outboundSchema),
+          z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
           z.lazy(() => CreatePrompt23$outboundSchema),
         ]),
       ),

@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesContent
 
-The contents of the user message.
+The contents of the developer message.
 
 
 ## Supported Types
@@ -16,11 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentGetConfigContent2[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "mp3",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

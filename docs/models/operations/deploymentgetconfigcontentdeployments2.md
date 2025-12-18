@@ -12,30 +12,35 @@ const value: operations.Two1 = {
 };
 ```
 
-### `components.RefusalPartSchema`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: components.RefusalPartSchema = {
-  type: "refusal",
+const value: components.ImageContentPartSchema = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fatal-overload.name/",
+  },
 };
 ```
 
-### `components.ReasoningPartSchema`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: components.ReasoningPartSchema = {
-  type: "reasoning",
-  reasoning: "<value>",
-  signature: "<value>",
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
 };
 ```
 
-### `components.RedactedReasoningPartSchema`
+### `operations.Four`
 
 ```typescript
-const value: components.RedactedReasoningPartSchema = {
-  type: "redacted_reasoning",
-  data: "<value>",
+const value: operations.Four = {
+  type: "file",
+  file: {},
 };
 ```
 

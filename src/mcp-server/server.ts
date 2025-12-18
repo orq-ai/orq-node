@@ -53,6 +53,7 @@ import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
 import { tool$evalsAll } from "./tools/evalsAll.js";
 import { tool$evalsCreate } from "./tools/evalsCreate.js";
 import { tool$evalsDelete } from "./tools/evalsDelete.js";
+import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
 import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
@@ -120,7 +121,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.43",
+    version: "4.0.44",
   });
 
   const client = new OrqCore({
@@ -162,6 +163,7 @@ export function createMCPServer(deps: {
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);
   tool(tool$evalsDelete);
+  tool(tool$evalsInvoke);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);

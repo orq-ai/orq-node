@@ -3,12 +3,13 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig2DeploymentsRequestRequestBody1`
+### `operations.DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1`
 
 ```typescript
-const value: operations.DeploymentGetConfig2DeploymentsRequestRequestBody1 = {
-  type: "text",
-  text: "<value>",
-};
+const value:
+  operations.DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1 = {
+    type: "text",
+    text: "<value>",
+  };
 ```
 

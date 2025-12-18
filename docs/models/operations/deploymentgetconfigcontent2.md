@@ -1,46 +1,20 @@
 # DeploymentGetConfigContent2
 
-
-## Supported Types
-
-### `operations.One`
+## Example Usage
 
 ```typescript
-const value: operations.One = {
+import { DeploymentGetConfigContent2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigContent2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.ImageContentPartSchema`
+## Fields
 
-```typescript
-const value: components.ImageContentPartSchema = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://fatal-overload.name/",
-  },
-};
-```
-
-### `components.AudioContentPartSchema`
-
-```typescript
-const value: components.AudioContentPartSchema = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
-};
-```
-
-### `operations.Four`
-
-```typescript
-const value: operations.Four = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                       | [operations.DeploymentGetConfigContentDeploymentsType](../../models/operations/deploymentgetconfigcontentdeploymentstype.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `text`                                                                                                                       | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `cacheControl`                                                                                                               | [operations.ContentCacheControl](../../models/operations/contentcachecontrol.md)                                             | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |

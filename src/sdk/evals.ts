@@ -5,6 +5,7 @@
 import { evalsAll } from "../funcs/evalsAll.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
 import { evalsDelete } from "../funcs/evalsDelete.js";
+import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -61,6 +62,20 @@ export class Evals extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(evalsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Invoke a Custom Evaluator
+   */
+  async invoke(
+    request: operations.InvokeEvalRequest,
+    options?: RequestOptions,
+  ): Promise<operations.InvokeEvalResponseBody> {
+    return unwrapAsync(evalsInvoke(
       this,
       request,
       options,

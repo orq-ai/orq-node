@@ -11,10 +11,11 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeploymentsRequestRequestBody2[]`
+### `operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2[]`
 
 ```typescript
 const value:
-  operations.DeploymentGetConfigContentDeploymentsRequestRequestBody2[] = [];
+  operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2[] =
+    [];
 ```
 

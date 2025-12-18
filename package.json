@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.0.43",
+  "version": "4.0.44",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"
@@ -33,7 +33,7 @@
     "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": ">=1.5.0 <1.10.0",
+    "@modelcontextprotocol/sdk": "^1.24.0",
     "zod": "^3.25.0 || ^4.0.0"
   }
 }
