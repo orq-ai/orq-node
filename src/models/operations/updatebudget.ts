@@ -63,6 +63,7 @@ export type UpdateBudgetRequest = {
 export const UpdateBudgetType = {
   ApiKey: "api_key",
   Contact: "contact",
+  Workspace: "workspace",
 } as const;
 /**
  * Budget entity type
@@ -132,10 +133,6 @@ export type UpdateBudgetResponseBody = {
    * Budget entity type
    */
   type: UpdateBudgetType;
-  /**
-   * API Key identifier (present when type is "api_key")
-   */
-  apiKeyId?: string | undefined;
   /**
    * Contact external identifier (present when type is "contact")
    */
@@ -432,7 +429,6 @@ export const UpdateBudgetResponseBody$inboundSchema: z.ZodType<
   _id: z.string(),
   workspace_id: z.string(),
   type: UpdateBudgetType$inboundSchema,
-  api_key_id: z.string().optional(),
   contact_id: z.string().optional(),
   budget: z.lazy(() => UpdateBudgetBudget$inboundSchema),
   is_active: z.boolean(),
@@ -440,13 +436,12 @@ export const UpdateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-13T17:08:01.358Z",
+    "2025-12-19T09:53:18.876Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "workspace_id": "workspaceId",
-    "api_key_id": "apiKeyId",
     "contact_id": "contactId",
     "is_active": "isActive",
   });
@@ -456,7 +451,6 @@ export type UpdateBudgetResponseBody$Outbound = {
   _id: string;
   workspace_id: string;
   type: string;
-  api_key_id?: string | undefined;
   contact_id?: string | undefined;
   budget: UpdateBudgetBudget$Outbound;
   is_active: boolean;
@@ -474,19 +468,17 @@ export const UpdateBudgetResponseBody$outboundSchema: z.ZodType<
   id: z.string(),
   workspaceId: z.string(),
   type: UpdateBudgetType$outboundSchema,
-  apiKeyId: z.string().optional(),
   contactId: z.string().optional(),
   budget: z.lazy(() => UpdateBudgetBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => UpdateBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-13T17:08:01.358Z"))
+  updated: z.date().default(() => new Date("2025-12-19T09:53:18.876Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     workspaceId: "workspace_id",
-    apiKeyId: "api_key_id",
     contactId: "contact_id",
     isActive: "is_active",
   });

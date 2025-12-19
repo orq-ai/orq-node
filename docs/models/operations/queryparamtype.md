@@ -1,6 +1,6 @@
 # QueryParamType
 
-Filter by budget entity type (contact or api_key)
+Filter by budget entity type (contact or workspace)
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: QueryParamType = "contact";
 ## Values
 
 ```typescript
-"contact" | "api_key"
+"contact" | "workspace"
 ```

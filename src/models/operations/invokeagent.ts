@@ -212,7 +212,7 @@ export const ExtendedMessageRole = {
  */
 export type ExtendedMessageRole = ClosedEnum<typeof ExtendedMessageRole>;
 
-export type Parts =
+export type InvokeAgentParts =
   | components.TextPart
   | components.DataPart
   | components.FilePart
@@ -752,16 +752,19 @@ export const ExtendedMessageRole$outboundSchema: z.ZodNativeEnum<
 > = ExtendedMessageRole$inboundSchema;
 
 /** @internal */
-export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
-  .union([
-    components.TextPart$inboundSchema,
-    components.DataPart$inboundSchema,
-    components.FilePart$inboundSchema,
-    components.ToolCallPart$inboundSchema,
-    components.ToolResultPart$inboundSchema,
-  ]);
+export const InvokeAgentParts$inboundSchema: z.ZodType<
+  InvokeAgentParts,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextPart$inboundSchema,
+  components.DataPart$inboundSchema,
+  components.FilePart$inboundSchema,
+  components.ToolCallPart$inboundSchema,
+  components.ToolResultPart$inboundSchema,
+]);
 /** @internal */
-export type Parts$Outbound =
+export type InvokeAgentParts$Outbound =
   | components.TextPart$Outbound
   | components.DataPart$Outbound
   | components.FilePart$Outbound
@@ -769,10 +772,10 @@ export type Parts$Outbound =
   | components.ToolResultPart$Outbound;
 
 /** @internal */
-export const Parts$outboundSchema: z.ZodType<
-  Parts$Outbound,
+export const InvokeAgentParts$outboundSchema: z.ZodType<
+  InvokeAgentParts$Outbound,
   z.ZodTypeDef,
-  Parts
+  InvokeAgentParts
 > = z.union([
   components.TextPart$outboundSchema,
   components.DataPart$outboundSchema,
@@ -781,16 +784,20 @@ export const Parts$outboundSchema: z.ZodType<
   components.ToolResultPart$outboundSchema,
 ]);
 
-export function partsToJSON(parts: Parts): string {
-  return JSON.stringify(Parts$outboundSchema.parse(parts));
+export function invokeAgentPartsToJSON(
+  invokeAgentParts: InvokeAgentParts,
+): string {
+  return JSON.stringify(
+    InvokeAgentParts$outboundSchema.parse(invokeAgentParts),
+  );
 }
-export function partsFromJSON(
+export function invokeAgentPartsFromJSON(
   jsonString: string,
-): SafeParseResult<Parts, SDKValidationError> {
+): SafeParseResult<InvokeAgentParts, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Parts$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Parts' from JSON`,
+    (x) => InvokeAgentParts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeAgentParts' from JSON`,
   );
 }
 

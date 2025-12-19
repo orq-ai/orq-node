@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `operations.CreatePrompt21`
 
 ```typescript
-const value: operations.Two1 = {
+const value: operations.CreatePrompt21 = {
   type: "text",
   text: "<value>",
 };

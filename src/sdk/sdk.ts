@@ -7,7 +7,6 @@ import { Agents } from "./agents.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
-import { Conversations } from "./conversations.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
@@ -18,7 +17,6 @@ import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
-import { Router } from "./router.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
@@ -45,11 +43,6 @@ export class Orq extends ClientSDK {
   private _agents?: Agents;
   get agents(): Agents {
     return (this._agents ??= new Agents(this._options));
-  }
-
-  private _conversations?: Conversations;
-  get conversations(): Conversations {
-    return (this._conversations ??= new Conversations(this._options));
   }
 
   private _files?: Files;
@@ -100,10 +93,5 @@ export class Orq extends ClientSDK {
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
-  }
-
-  private _router?: Router;
-  get router(): Router {
-    return (this._router ??= new Router(this._options));
   }
 }

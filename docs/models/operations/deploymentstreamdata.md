@@ -10,7 +10,7 @@ let value: DeploymentStreamData = {
   created: new Date("2025-05-08T16:39:48.977Z"),
   object: "completion",
   model: "ATS",
-  provider: "deepseek",
+  provider: "openailike",
   isFinal: false,
   choices: [
     {

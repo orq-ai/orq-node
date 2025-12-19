@@ -11,9 +11,19 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeploymentsRequest2[]`
+### `operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32[]`
 
 ```typescript
-const value: operations.DeploymentGetConfigContentDeploymentsRequest2[] = [];
+const value:
+  operations.DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32[] =
+    [
+      {
+        type: "input_audio",
+        inputAudio: {
+          data: "<value>",
+          format: "mp3",
+        },
+      },
+    ];
 ```
 

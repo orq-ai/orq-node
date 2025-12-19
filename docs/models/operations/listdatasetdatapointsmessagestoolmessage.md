@@ -8,7 +8,7 @@ import { ListDatasetDatapointsMessagesToolMessage } from "@orq-ai/node/models/op
 let value: ListDatasetDatapointsMessagesToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: null,
+  toolCallId: "<id>",
 };
 ```
 

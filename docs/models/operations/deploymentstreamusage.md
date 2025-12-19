@@ -7,17 +7,15 @@ Usage metrics for the response
 ```typescript
 import { DeploymentStreamUsage } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamUsage = {
-  inputTokens: 126.62,
-  outputTokens: 5552.54,
-  totalTokens: 1192.11,
-};
+let value: DeploymentStreamUsage = {};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `inputTokens`      | *number*           | :heavy_check_mark: | N/A                |
-| `outputTokens`     | *number*           | :heavy_check_mark: | N/A                |
-| `totalTokens`      | *number*           | :heavy_check_mark: | N/A                |
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `totalTokens`                                                                                                            | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `promptTokens`                                                                                                           | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `completionTokens`                                                                                                       | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `promptTokensDetails`                                                                                                    | [operations.DeploymentStreamPromptTokensDetails](../../models/operations/deploymentstreamprompttokensdetails.md)         | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `completionTokensDetails`                                                                                                | [operations.DeploymentStreamCompletionTokensDetails](../../models/operations/deploymentstreamcompletiontokensdetails.md) | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |

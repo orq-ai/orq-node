@@ -3,12 +3,14 @@
 
 ## Supported Types
 
-### `components.TextContentPartSchema`
+### `operations.DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices51`
 
 ```typescript
-const value: components.TextContentPartSchema = {
-  type: "text",
-  text: "<value>",
-};
+const value:
+  operations.DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices51 =
+    {
+      type: "text",
+      text: "<value>",
+    };
 ```
 

@@ -11,9 +11,15 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.UpdateDatapointContentDatasetsRequest2[]`
+### `operations.UpdateDatapointContentDatasetsRequestRequestBodyMessages2[]`
 
 ```typescript
-const value: operations.UpdateDatapointContentDatasetsRequest2[] = [];
+const value:
+  operations.UpdateDatapointContentDatasetsRequestRequestBodyMessages2[] = [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ];
 ```
 

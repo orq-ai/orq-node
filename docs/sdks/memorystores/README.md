@@ -265,6 +265,9 @@ async function run() {
   const result = await orq.memoryStores.update({
     memoryStoreKey: "<value>",
     requestBody: {
+      embeddingConfig: {
+        model: "google/text-multilingual-embedding-002",
+      },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",
     },
@@ -294,6 +297,9 @@ async function run() {
   const res = await memoryStoresUpdate(orq, {
     memoryStoreKey: "<value>",
     requestBody: {
+      embeddingConfig: {
+        model: "google/text-multilingual-embedding-002",
+      },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",
     },

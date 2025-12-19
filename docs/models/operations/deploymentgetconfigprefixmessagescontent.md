@@ -11,9 +11,14 @@ The contents of the developer message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.DeploymentGetConfigContent2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: operations.DeploymentGetConfigContent2[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

@@ -11,9 +11,14 @@ The contents of the developer message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.ListDatasetDatapointsContentDatasets2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: operations.ListDatasetDatapointsContentDatasets2[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

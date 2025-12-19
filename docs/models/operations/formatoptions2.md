@@ -13,7 +13,7 @@ let value: FormatOptions2 = {
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `style`                                                                        | [operations.FormatOptionsStyle](../../models/operations/formatoptionsstyle.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `currency`                                                                     | [operations.Currency](../../models/operations/currency.md)                     | :heavy_check_mark:                                                             | N/A                                                                            |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `style`                                                    | [operations.Style](../../models/operations/style.md)       | :heavy_check_mark:                                         | N/A                                                        |
+| `currency`                                                 | [operations.Currency](../../models/operations/currency.md) | :heavy_check_mark:                                         | N/A                                                        |

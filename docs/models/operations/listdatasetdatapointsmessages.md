@@ -49,7 +49,7 @@ const value: operations.ListDatasetDatapointsMessagesAssistantMessage = {
 const value: operations.ListDatasetDatapointsMessagesToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: null,
+  toolCallId: "<id>",
 };
 ```
 

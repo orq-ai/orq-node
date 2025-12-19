@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type AgentExecutionStartedStreamingEventData = {
+export type Data = {
   /**
    * Agent execution task ID (ULID)
    */
@@ -32,72 +32,53 @@ export type AgentExecutionStartedStreamingEvent = {
    * ISO timestamp of the event
    */
   timestamp: string;
-  data: AgentExecutionStartedStreamingEventData;
+  data: Data;
 };
 
 /** @internal */
-export const AgentExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
-  AgentExecutionStartedStreamingEventData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_task_id: z.string(),
-  workspace_id: z.string(),
-  trace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_task_id": "agentTaskId",
-    "workspace_id": "workspaceId",
-    "trace_id": "traceId",
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
+  .object({
+    agent_task_id: z.string(),
+    workspace_id: z.string(),
+    trace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_task_id": "agentTaskId",
+      "workspace_id": "workspaceId",
+      "trace_id": "traceId",
+    });
   });
-});
 /** @internal */
-export type AgentExecutionStartedStreamingEventData$Outbound = {
+export type Data$Outbound = {
   agent_task_id: string;
   workspace_id: string;
   trace_id: string;
 };
 
 /** @internal */
-export const AgentExecutionStartedStreamingEventData$outboundSchema: z.ZodType<
-  AgentExecutionStartedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentExecutionStartedStreamingEventData
-> = z.object({
-  agentTaskId: z.string(),
-  workspaceId: z.string(),
-  traceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentTaskId: "agent_task_id",
-    workspaceId: "workspace_id",
-    traceId: "trace_id",
+export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
+  z.object({
+    agentTaskId: z.string(),
+    workspaceId: z.string(),
+    traceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentTaskId: "agent_task_id",
+      workspaceId: "workspace_id",
+      traceId: "trace_id",
+    });
   });
-});
 
-export function agentExecutionStartedStreamingEventDataToJSON(
-  agentExecutionStartedStreamingEventData:
-    AgentExecutionStartedStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentExecutionStartedStreamingEventData$outboundSchema.parse(
-      agentExecutionStartedStreamingEventData,
-    ),
-  );
+export function dataToJSON(data: Data): string {
+  return JSON.stringify(Data$outboundSchema.parse(data));
 }
-export function agentExecutionStartedStreamingEventDataFromJSON(
+export function dataFromJSON(
   jsonString: string,
-): SafeParseResult<
-  AgentExecutionStartedStreamingEventData,
-  SDKValidationError
-> {
+): SafeParseResult<Data, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentExecutionStartedStreamingEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentExecutionStartedStreamingEventData' from JSON`,
+    (x) => Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data' from JSON`,
   );
 }
 
@@ -109,13 +90,13 @@ export const AgentExecutionStartedStreamingEvent$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("agents.execution_started"),
   timestamp: z.string(),
-  data: z.lazy(() => AgentExecutionStartedStreamingEventData$inboundSchema),
+  data: z.lazy(() => Data$inboundSchema),
 });
 /** @internal */
 export type AgentExecutionStartedStreamingEvent$Outbound = {
   type: "agents.execution_started";
   timestamp: string;
-  data: AgentExecutionStartedStreamingEventData$Outbound;
+  data: Data$Outbound;
 };
 
 /** @internal */
@@ -126,7 +107,7 @@ export const AgentExecutionStartedStreamingEvent$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("agents.execution_started"),
   timestamp: z.string(),
-  data: z.lazy(() => AgentExecutionStartedStreamingEventData$outboundSchema),
+  data: z.lazy(() => Data$outboundSchema),
 });
 
 export function agentExecutionStartedStreamingEventToJSON(

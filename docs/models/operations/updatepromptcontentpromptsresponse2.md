@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.UpdatePrompt2Prompts1`
+### `operations.UpdatePrompt2PromptsResponse1`
 
 ```typescript
-const value: operations.UpdatePrompt2Prompts1 = {
+const value: operations.UpdatePrompt2PromptsResponse1 = {
   type: "text",
   text: "<value>",
 };

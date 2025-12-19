@@ -96,25 +96,32 @@ const value: operations.AgentToolInputCRUDCurrentDateTool = {
 ### `operations.AgentToolInputCRUDHTTPTool`
 
 ```typescript
-const value: operations.AgentToolInputCRUDHTTPTool = {};
+const value: operations.AgentToolInputCRUDHTTPTool = {
+  type: "http",
+};
 ```
 
 ### `operations.AgentToolInputCRUDCodeExecutionTool`
 
 ```typescript
-const value: operations.AgentToolInputCRUDCodeExecutionTool = {};
+const value: operations.AgentToolInputCRUDCodeExecutionTool = {
+  type: "code",
+};
 ```
 
 ### `operations.AgentToolInputCRUDFunctionTool`
 
 ```typescript
-const value: operations.AgentToolInputCRUDFunctionTool = {};
+const value: operations.AgentToolInputCRUDFunctionTool = {
+  type: "function",
+};
 ```
 
 ### `operations.AgentToolInputCRUDMCPTool`
 
 ```typescript
 const value: operations.AgentToolInputCRUDMCPTool = {
+  type: "mcp",
   id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
   toolId: "01KXYZ123456789",
 };

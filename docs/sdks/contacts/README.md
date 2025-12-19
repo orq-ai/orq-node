@@ -127,7 +127,6 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.list({
-    search: "john",
     filterBy: {
       tags: [
         "premium",
@@ -158,7 +157,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await contactsList(orq, {
-    search: "john",
     filterBy: {
       tags: [
         "premium",

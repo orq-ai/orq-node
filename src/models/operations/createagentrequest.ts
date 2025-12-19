@@ -108,40 +108,6 @@ export type Text = {
 export type ResponseFormat = Text | JSONObject | JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const ReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type Stop = string | Array<string>;
@@ -205,39 +171,6 @@ export const Modalities = {
 export type Modalities = ClosedEnum<typeof Modalities>;
 
 /**
- * The key of the guardrail.
- */
-export const Id1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type Id1 = ClosedEnum<typeof Id1>;
-
-export type Id = Id1 | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const ExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
-
-export type Guardrails = {
-  id: Id1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: ExecuteOn;
-};
-
-/**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type ParametersT = {
@@ -282,18 +215,9 @@ export type ParametersT = {
    */
   responseFormat?: Text | JSONObject | JSONSchema | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: ReasoningEffort | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -338,10 +262,6 @@ export type ParametersT = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<Modalities> | null | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?: Array<Guardrails> | undefined;
 };
 
 /**
@@ -488,42 +408,6 @@ export type FallbackModelConfigurationResponseFormat =
   | CreateAgentRequestResponseFormatJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const FallbackModelConfigurationReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type FallbackModelConfigurationReasoningEffort = ClosedEnum<
-  typeof FallbackModelConfigurationReasoningEffort
->;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type FallbackModelConfigurationStop = string | Array<string>;
@@ -595,41 +479,6 @@ export type FallbackModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
- * The key of the guardrail.
- */
-export const CreateAgentRequestId1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type CreateAgentRequestId1 = ClosedEnum<typeof CreateAgentRequestId1>;
-
-export type FallbackModelConfigurationId = CreateAgentRequestId1 | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const FallbackModelConfigurationExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type FallbackModelConfigurationExecuteOn = ClosedEnum<
-  typeof FallbackModelConfigurationExecuteOn
->;
-
-export type FallbackModelConfigurationGuardrails = {
-  id: CreateAgentRequestId1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: FallbackModelConfigurationExecuteOn;
-};
-
-/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type FallbackModelConfigurationParameters = {
@@ -678,18 +527,9 @@ export type FallbackModelConfigurationParameters = {
     | CreateAgentRequestResponseFormatJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: FallbackModelConfigurationReasoningEffort | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -737,10 +577,6 @@ export type FallbackModelConfigurationParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<FallbackModelConfigurationModalities> | null | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?: Array<FallbackModelConfigurationGuardrails> | undefined;
 };
 
 /**
@@ -776,30 +612,13 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
- * MCP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  {
-    Mcp: "mcp",
-  } as const;
-/**
- * MCP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  >;
-
-/**
  * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
  */
 export type MCPTool = {
   /**
    * MCP tool type
    */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-    | undefined;
+  type: "mcp";
   /**
    * The key of the parent MCP tool
    */
@@ -819,30 +638,13 @@ export type MCPTool = {
 };
 
 /**
- * Function tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  {
-    Function: "function",
-  } as const;
-/**
- * Function tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  >;
-
-/**
  * Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id.
  */
 export type FunctionTool = {
   /**
    * Function tool type
    */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-    | undefined;
+  type: "function";
   /**
    * The key of the pre-created function tool
    */
@@ -858,30 +660,13 @@ export type FunctionTool = {
 };
 
 /**
- * Code execution tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  {
-    Code: "code",
-  } as const;
-/**
- * Code execution tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  >;
-
-/**
  * Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id.
  */
 export type CodeExecutionTool = {
   /**
    * Code execution tool type
    */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-    | undefined;
+  type: "code";
   /**
    * The key of the pre-created code tool
    */
@@ -897,30 +682,13 @@ export type CodeExecutionTool = {
 };
 
 /**
- * HTTP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  {
-    Http: "http",
-  } as const;
-/**
- * HTTP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  >;
-
-/**
  * Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id.
  */
 export type HTTPTool = {
   /**
    * HTTP tool type
    */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-    | undefined;
+  type: "http";
   /**
    * The key of the pre-created HTTP tool
    */
@@ -935,216 +703,121 @@ export type HTTPTool = {
   requiresApproval?: boolean | undefined;
 };
 
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  {
-    CurrentDate: "current_date",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  >;
-
 /**
  * Returns the current date and time
  */
 export type CurrentDateTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type;
+  type: "current_date";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  {
-    QueryKnowledgeBase: "query_knowledge_base",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  >;
 
 /**
  * Queries knowledge bases for information
  */
 export type QueryKnowledgeBaseTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type;
+  type: "query_knowledge_base";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  {
-    RetrieveKnowledgeBases: "retrieve_knowledge_bases",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  >;
 
 /**
  * Lists available knowledge bases
  */
 export type RetrieveKnowledgeBasesTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type;
+  type: "retrieve_knowledge_bases";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  {
-    DeleteMemoryDocument: "delete_memory_document",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  >;
 
 /**
  * Deletes documents from memory stores
  */
 export type DeleteMemoryDocumentTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type;
+  type: "delete_memory_document";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  {
-    RetrieveMemoryStores: "retrieve_memory_stores",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  >;
 
 /**
  * Lists available memory stores
  */
 export type RetrieveMemoryStoresTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType;
+  type: "retrieve_memory_stores";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  {
-    WriteMemoryStore: "write_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  >;
 
 /**
  * Writes information to agent memory stores
  */
 export type WriteMemoryStoreTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType;
+  type: "write_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  {
-    QueryMemoryStore: "query_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  >;
 
 /**
  * Queries agent memory stores for context
  */
 export type QueryMemoryStoreTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType;
+  type: "query_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType = {
-  RetrieveAgents: "retrieve_agents",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
->;
 
 /**
  * Retrieves available agents in the system
  */
 export type RetrieveAgentsTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType;
+  type: "retrieve_agents";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsType = {
-  CallSubAgent: "call_sub_agent",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsType
->;
 
 /**
  * Delegates tasks to specialized sub-agents
  */
 export type CallSubAgentTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType;
+  type: "call_sub_agent";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
-
-export const CreateAgentRequestAgentToolInputCRUDType = {
-  WebScraper: "web_scraper",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDType
->;
 
 /**
  * Scrapes and extracts content from web pages
  */
 export type WebScraperTool = {
-  type: CreateAgentRequestAgentToolInputCRUDType;
+  type: "web_scraper";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
 };
 
-export const AgentToolInputCRUDType = {
-  GoogleSearch: "google_search",
-} as const;
-export type AgentToolInputCRUDType = ClosedEnum<typeof AgentToolInputCRUDType>;
-
 /**
  * Performs Google searches to retrieve web content
  */
 export type GoogleSearchTool = {
-  type: AgentToolInputCRUDType;
+  type: "google_search";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1166,10 +839,37 @@ export type AgentToolInputCRUD =
   | RetrieveKnowledgeBasesTool
   | QueryKnowledgeBaseTool
   | CurrentDateTool
-  | MCPTool
   | HTTPTool
   | CodeExecutionTool
-  | FunctionTool;
+  | FunctionTool
+  | MCPTool;
+
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export const ExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+ */
+export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
+
+export type Evaluators = {
+  /**
+   * Unique key or identifier of the evaluator
+   */
+  id: string;
+  /**
+   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
+   */
+  sampleRate?: number | undefined;
+  /**
+   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+   */
+  executeOn: ExecuteOn;
+};
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1185,7 +885,7 @@ export type CreateAgentRequestExecuteOn = ClosedEnum<
   typeof CreateAgentRequestExecuteOn
 >;
 
-export type Evaluators = {
+export type Guardrails = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -1198,35 +898,6 @@ export type Evaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: CreateAgentRequestExecuteOn;
-};
-
-/**
- * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
- */
-export const CreateAgentRequestAgentsExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
- */
-export type CreateAgentRequestAgentsExecuteOn = ClosedEnum<
-  typeof CreateAgentRequestAgentsExecuteOn
->;
-
-export type CreateAgentRequestGuardrails = {
-  /**
-   * Unique key or identifier of the evaluator
-   */
-  id: string;
-  /**
-   * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
-   */
-  sampleRate?: number | undefined;
-  /**
-   * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
-   */
-  executeOn: CreateAgentRequestAgentsExecuteOn;
 };
 
 /**
@@ -1261,10 +932,10 @@ export type Settings = {
       | RetrieveKnowledgeBasesTool
       | QueryKnowledgeBaseTool
       | CurrentDateTool
-      | MCPTool
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
+      | MCPTool
     >
     | undefined;
   /**
@@ -1274,7 +945,7 @@ export type Settings = {
   /**
    * Configuration for a guardrail applied to the agent
    */
-  guardrails?: Array<CreateAgentRequestGuardrails> | undefined;
+  guardrails?: Array<Guardrails> | undefined;
 };
 
 export type KnowledgeBases = {
@@ -1431,15 +1102,15 @@ export type CreateAgentRequestTools = {
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const CreateAgentRequestAgentsResponseExecuteOn = {
+export const CreateAgentRequestAgentsExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type CreateAgentRequestAgentsResponseExecuteOn = ClosedEnum<
-  typeof CreateAgentRequestAgentsResponseExecuteOn
+export type CreateAgentRequestAgentsExecuteOn = ClosedEnum<
+  typeof CreateAgentRequestAgentsExecuteOn
 >;
 
 export type CreateAgentRequestEvaluators = {
@@ -1454,24 +1125,24 @@ export type CreateAgentRequestEvaluators = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: CreateAgentRequestAgentsResponseExecuteOn;
+  executeOn: CreateAgentRequestAgentsExecuteOn;
 };
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const CreateAgentRequestAgentsResponse201ExecuteOn = {
+export const CreateAgentRequestAgentsResponseExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type CreateAgentRequestAgentsResponse201ExecuteOn = ClosedEnum<
-  typeof CreateAgentRequestAgentsResponse201ExecuteOn
+export type CreateAgentRequestAgentsResponseExecuteOn = ClosedEnum<
+  typeof CreateAgentRequestAgentsResponseExecuteOn
 >;
 
-export type CreateAgentRequestAgentsGuardrails = {
+export type CreateAgentRequestGuardrails = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -1483,7 +1154,7 @@ export type CreateAgentRequestAgentsGuardrails = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: CreateAgentRequestAgentsResponse201ExecuteOn;
+  executeOn: CreateAgentRequestAgentsResponseExecuteOn;
 };
 
 export type CreateAgentRequestSettings = {
@@ -1507,7 +1178,7 @@ export type CreateAgentRequestSettings = {
   /**
    * Configuration for a guardrail applied to the agent
    */
-  guardrails?: Array<CreateAgentRequestAgentsGuardrails> | undefined;
+  guardrails?: Array<CreateAgentRequestGuardrails> | undefined;
 };
 
 /**
@@ -1615,42 +1286,6 @@ export type CreateAgentRequestResponseFormat =
   | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const CreateAgentRequestReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type CreateAgentRequestReasoningEffort = ClosedEnum<
-  typeof CreateAgentRequestReasoningEffort
->;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type CreateAgentRequestStop = string | Array<string>;
@@ -1722,44 +1357,6 @@ export type CreateAgentRequestModalities = ClosedEnum<
 >;
 
 /**
- * The key of the guardrail.
- */
-export const CreateAgentRequestIdAgents1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type CreateAgentRequestIdAgents1 = ClosedEnum<
-  typeof CreateAgentRequestIdAgents1
->;
-
-export type CreateAgentRequestId = CreateAgentRequestIdAgents1 | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn
-  >;
-
-export type CreateAgentRequestAgentsResponseGuardrails = {
-  id: CreateAgentRequestIdAgents1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn;
-};
-
-/**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type CreateAgentRequestParameters = {
@@ -1808,18 +1405,9 @@ export type CreateAgentRequestParameters = {
     | CreateAgentRequestResponseFormatAgentsResponse201JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: CreateAgentRequestReasoningEffort | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -1867,10 +1455,6 @@ export type CreateAgentRequestParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<CreateAgentRequestModalities> | null | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?: Array<CreateAgentRequestAgentsResponseGuardrails> | undefined;
 };
 
 /**
@@ -1995,43 +1579,6 @@ export type CreateAgentRequestFallbackModelConfigurationResponseFormat =
   | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const CreateAgentRequestFallbackModelConfigurationReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type CreateAgentRequestFallbackModelConfigurationReasoningEffort =
-  ClosedEnum<
-    typeof CreateAgentRequestFallbackModelConfigurationReasoningEffort
-  >;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type CreateAgentRequestFallbackModelConfigurationStop =
@@ -2105,45 +1652,6 @@ export type CreateAgentRequestFallbackModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
- * The key of the guardrail.
- */
-export const CreateAgentRequestIdAgentsResponse1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type CreateAgentRequestIdAgentsResponse1 = ClosedEnum<
-  typeof CreateAgentRequestIdAgentsResponse1
->;
-
-export type CreateAgentRequestFallbackModelConfigurationId =
-  | CreateAgentRequestIdAgentsResponse1
-  | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const CreateAgentRequestFallbackModelConfigurationExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type CreateAgentRequestFallbackModelConfigurationExecuteOn = ClosedEnum<
-  typeof CreateAgentRequestFallbackModelConfigurationExecuteOn
->;
-
-export type CreateAgentRequestFallbackModelConfigurationGuardrails = {
-  id: CreateAgentRequestIdAgentsResponse1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: CreateAgentRequestFallbackModelConfigurationExecuteOn;
-};
-
-/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type CreateAgentRequestFallbackModelConfigurationParameters = {
@@ -2192,20 +1700,9 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
     | CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?:
-    | CreateAgentRequestFallbackModelConfigurationReasoningEffort
-    | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -2258,12 +1755,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
   modalities?:
     | Array<CreateAgentRequestFallbackModelConfigurationModalities>
     | null
-    | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?:
-    | Array<CreateAgentRequestFallbackModelConfigurationGuardrails>
     | undefined;
 };
 
@@ -2343,9 +1834,6 @@ export type CreateAgentRequestKnowledgeBases = {
  */
 export type CreateAgentRequestResponseBody = {
   id: string;
-  /**
-   * Unique identifier for the agent within the workspace
-   */
   key: string;
   displayName: string;
   projectId: string;
@@ -2649,15 +2137,6 @@ export function responseFormatFromJSON(
 }
 
 /** @internal */
-export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof ReasoningEffort
-> = z.nativeEnum(ReasoningEffort);
-/** @internal */
-export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof ReasoningEffort
-> = ReasoningEffort$inboundSchema;
-
-/** @internal */
 export const Stop$inboundSchema: z.ZodType<Stop, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.array(z.string())]);
 /** @internal */
@@ -2896,90 +2375,6 @@ export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> =
   Modalities$inboundSchema;
 
 /** @internal */
-export const Id1$inboundSchema: z.ZodNativeEnum<typeof Id1> = z.nativeEnum(Id1);
-/** @internal */
-export const Id1$outboundSchema: z.ZodNativeEnum<typeof Id1> =
-  Id1$inboundSchema;
-
-/** @internal */
-export const Id$inboundSchema: z.ZodType<Id, z.ZodTypeDef, unknown> = z.union([
-  Id1$inboundSchema,
-  z.string(),
-]);
-/** @internal */
-export type Id$Outbound = string | string;
-
-/** @internal */
-export const Id$outboundSchema: z.ZodType<Id$Outbound, z.ZodTypeDef, Id> = z
-  .union([Id1$outboundSchema, z.string()]);
-
-export function idToJSON(id: Id): string {
-  return JSON.stringify(Id$outboundSchema.parse(id));
-}
-export function idFromJSON(
-  jsonString: string,
-): SafeParseResult<Id, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Id$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Id' from JSON`,
-  );
-}
-
-/** @internal */
-export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
-  .nativeEnum(ExecuteOn);
-/** @internal */
-export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
-  ExecuteOn$inboundSchema;
-
-/** @internal */
-export const Guardrails$inboundSchema: z.ZodType<
-  Guardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([Id1$inboundSchema, z.string()]),
-  execute_on: ExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
-/** @internal */
-export type Guardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
-
-/** @internal */
-export const Guardrails$outboundSchema: z.ZodType<
-  Guardrails$Outbound,
-  z.ZodTypeDef,
-  Guardrails
-> = z.object({
-  id: z.union([Id1$outboundSchema, z.string()]),
-  executeOn: ExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function guardrailsToJSON(guardrails: Guardrails): string {
-  return JSON.stringify(Guardrails$outboundSchema.parse(guardrails));
-}
-export function guardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<Guardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Guardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Guardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const ParametersT$inboundSchema: z.ZodType<
   ParametersT,
   z.ZodTypeDef,
@@ -2999,7 +2394,7 @@ export const ParametersT$inboundSchema: z.ZodType<
     z.lazy(() => JSONObject$inboundSchema),
     z.lazy(() => JSONSchema$inboundSchema),
   ]).optional(),
-  reasoning_effort: ReasoningEffort$inboundSchema.optional(),
+  reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3018,7 +2413,6 @@ export const ParametersT$inboundSchema: z.ZodType<
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(Modalities$inboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -3065,7 +2459,6 @@ export type ParametersT$Outbound = {
   tool_choice?: ToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  guardrails?: Array<Guardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -3088,7 +2481,7 @@ export const ParametersT$outboundSchema: z.ZodType<
     z.lazy(() => JSONObject$outboundSchema),
     z.lazy(() => JSONSchema$outboundSchema),
   ]).optional(),
-  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3107,7 +2500,6 @@ export const ParametersT$outboundSchema: z.ZodType<
   ]).optional(),
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -3574,15 +2966,6 @@ export function fallbackModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
-export const FallbackModelConfigurationReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationReasoningEffort> = z
-    .nativeEnum(FallbackModelConfigurationReasoningEffort);
-/** @internal */
-export const FallbackModelConfigurationReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationReasoningEffort> =
-    FallbackModelConfigurationReasoningEffort$inboundSchema;
-
-/** @internal */
 export const FallbackModelConfigurationStop$inboundSchema: z.ZodType<
   FallbackModelConfigurationStop,
   z.ZodTypeDef,
@@ -3876,112 +3259,6 @@ export const FallbackModelConfigurationModalities$outboundSchema:
     FallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestId1$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestId1
-> = z.nativeEnum(CreateAgentRequestId1);
-/** @internal */
-export const CreateAgentRequestId1$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestId1
-> = CreateAgentRequestId1$inboundSchema;
-
-/** @internal */
-export const FallbackModelConfigurationId$inboundSchema: z.ZodType<
-  FallbackModelConfigurationId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([CreateAgentRequestId1$inboundSchema, z.string()]);
-/** @internal */
-export type FallbackModelConfigurationId$Outbound = string | string;
-
-/** @internal */
-export const FallbackModelConfigurationId$outboundSchema: z.ZodType<
-  FallbackModelConfigurationId$Outbound,
-  z.ZodTypeDef,
-  FallbackModelConfigurationId
-> = z.union([CreateAgentRequestId1$outboundSchema, z.string()]);
-
-export function fallbackModelConfigurationIdToJSON(
-  fallbackModelConfigurationId: FallbackModelConfigurationId,
-): string {
-  return JSON.stringify(
-    FallbackModelConfigurationId$outboundSchema.parse(
-      fallbackModelConfigurationId,
-    ),
-  );
-}
-export function fallbackModelConfigurationIdFromJSON(
-  jsonString: string,
-): SafeParseResult<FallbackModelConfigurationId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FallbackModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelConfigurationId' from JSON`,
-  );
-}
-
-/** @internal */
-export const FallbackModelConfigurationExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelConfigurationExecuteOn
-> = z.nativeEnum(FallbackModelConfigurationExecuteOn);
-/** @internal */
-export const FallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationExecuteOn> =
-    FallbackModelConfigurationExecuteOn$inboundSchema;
-
-/** @internal */
-export const FallbackModelConfigurationGuardrails$inboundSchema: z.ZodType<
-  FallbackModelConfigurationGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([CreateAgentRequestId1$inboundSchema, z.string()]),
-  execute_on: FallbackModelConfigurationExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
-/** @internal */
-export type FallbackModelConfigurationGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
-
-/** @internal */
-export const FallbackModelConfigurationGuardrails$outboundSchema: z.ZodType<
-  FallbackModelConfigurationGuardrails$Outbound,
-  z.ZodTypeDef,
-  FallbackModelConfigurationGuardrails
-> = z.object({
-  id: z.union([CreateAgentRequestId1$outboundSchema, z.string()]),
-  executeOn: FallbackModelConfigurationExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function fallbackModelConfigurationGuardrailsToJSON(
-  fallbackModelConfigurationGuardrails: FallbackModelConfigurationGuardrails,
-): string {
-  return JSON.stringify(
-    FallbackModelConfigurationGuardrails$outboundSchema.parse(
-      fallbackModelConfigurationGuardrails,
-    ),
-  );
-}
-export function fallbackModelConfigurationGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<FallbackModelConfigurationGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      FallbackModelConfigurationGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FallbackModelConfigurationGuardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const FallbackModelConfigurationParameters$inboundSchema: z.ZodType<
   FallbackModelConfigurationParameters,
   z.ZodTypeDef,
@@ -4001,8 +3278,7 @@ export const FallbackModelConfigurationParameters$inboundSchema: z.ZodType<
     z.lazy(() => ResponseFormatJSONObject$inboundSchema),
     z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$inboundSchema),
   ]).optional(),
-  reasoning_effort: FallbackModelConfigurationReasoningEffort$inboundSchema
-    .optional(),
+  reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -4023,9 +3299,6 @@ export const FallbackModelConfigurationParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(
     z.array(FallbackModelConfigurationModalities$inboundSchema),
-  ).optional(),
-  guardrails: z.array(
-    z.lazy(() => FallbackModelConfigurationGuardrails$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4076,7 +3349,6 @@ export type FallbackModelConfigurationParameters$Outbound = {
   tool_choice?: CreateAgentRequestToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  guardrails?: Array<FallbackModelConfigurationGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -4100,8 +3372,7 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
     z.lazy(() => ResponseFormatJSONObject$outboundSchema),
     z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
-  reasoningEffort: FallbackModelConfigurationReasoningEffort$outboundSchema
-    .optional(),
+  reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -4122,9 +3393,6 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(
     z.array(FallbackModelConfigurationModalities$outboundSchema),
-  ).optional(),
-  guardrails: z.array(
-    z.lazy(() => FallbackModelConfigurationGuardrails$outboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4260,25 +3528,9 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = ToolApprovalRequired$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
-
-/** @internal */
 export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   z.object({
-    type:
-      CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema
-        .default("mcp"),
+    type: z.literal("mcp"),
     key: z.string().optional(),
     id: z.string().optional(),
     tool_id: z.string(),
@@ -4291,7 +3543,7 @@ export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   });
 /** @internal */
 export type MCPTool$Outbound = {
-  type: string;
+  type: "mcp";
   key?: string | undefined;
   id?: string | undefined;
   tool_id: string;
@@ -4304,9 +3556,7 @@ export const MCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
-      .default("mcp"),
+  type: z.literal("mcp"),
   key: z.string().optional(),
   id: z.string().optional(),
   toolId: z.string(),
@@ -4332,28 +3582,12 @@ export function mcpToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
-
-/** @internal */
 export const FunctionTool$inboundSchema: z.ZodType<
   FunctionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema
-      .default("function"),
+  type: z.literal("function"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4364,7 +3598,7 @@ export const FunctionTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type FunctionTool$Outbound = {
-  type: string;
+  type: "function";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4376,9 +3610,7 @@ export const FunctionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema
-      .default("function"),
+  type: z.literal("function"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4402,28 +3634,12 @@ export function functionToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
-
-/** @internal */
 export const CodeExecutionTool$inboundSchema: z.ZodType<
   CodeExecutionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema
-      .default("code"),
+  type: z.literal("code"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4434,7 +3650,7 @@ export const CodeExecutionTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CodeExecutionTool$Outbound = {
-  type: string;
+  type: "code";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4446,9 +3662,7 @@ export const CodeExecutionTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CodeExecutionTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema
-      .default("code"),
+  type: z.literal("code"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4476,28 +3690,12 @@ export function codeExecutionToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
-
-/** @internal */
 export const HTTPTool$inboundSchema: z.ZodType<
   HTTPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema
-      .default("http"),
+  type: z.literal("http"),
   key: z.string().optional(),
   id: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -4508,7 +3706,7 @@ export const HTTPTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type HTTPTool$Outbound = {
-  type: string;
+  type: "http";
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
@@ -4520,9 +3718,7 @@ export const HTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema
-      .default("http"),
+  type: z.literal("http"),
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -4546,27 +3742,12 @@ export function httpToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
-
-/** @internal */
 export const CurrentDateTool$inboundSchema: z.ZodType<
   CurrentDateTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
+  type: z.literal("current_date"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4575,7 +3756,7 @@ export const CurrentDateTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CurrentDateTool$Outbound = {
-  type: string;
+  type: "current_date";
   requires_approval?: boolean | undefined;
 };
 
@@ -4585,8 +3766,7 @@ export const CurrentDateTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CurrentDateTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
+  type: z.literal("current_date"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4610,27 +3790,12 @@ export function currentDateToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
-
-/** @internal */
 export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
   QueryKnowledgeBaseTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
+  type: z.literal("query_knowledge_base"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4639,7 +3804,7 @@ export const QueryKnowledgeBaseTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type QueryKnowledgeBaseTool$Outbound = {
-  type: string;
+  type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
 };
 
@@ -4649,8 +3814,7 @@ export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QueryKnowledgeBaseTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
+  type: z.literal("query_knowledge_base"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4676,27 +3840,12 @@ export function queryKnowledgeBaseToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
-
-/** @internal */
 export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
   RetrieveKnowledgeBasesTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
+  type: z.literal("retrieve_knowledge_bases"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4705,7 +3854,7 @@ export const RetrieveKnowledgeBasesTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveKnowledgeBasesTool$Outbound = {
-  type: string;
+  type: "retrieve_knowledge_bases";
   requires_approval?: boolean | undefined;
 };
 
@@ -4715,8 +3864,7 @@ export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveKnowledgeBasesTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
+  type: z.literal("retrieve_knowledge_bases"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4742,27 +3890,12 @@ export function retrieveKnowledgeBasesToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
-
-/** @internal */
 export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
   DeleteMemoryDocumentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
+  type: z.literal("delete_memory_document"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4771,7 +3904,7 @@ export const DeleteMemoryDocumentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type DeleteMemoryDocumentTool$Outbound = {
-  type: string;
+  type: "delete_memory_document";
   requires_approval?: boolean | undefined;
 };
 
@@ -4781,8 +3914,7 @@ export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteMemoryDocumentTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
+  type: z.literal("delete_memory_document"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4808,27 +3940,12 @@ export function deleteMemoryDocumentToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
-
-/** @internal */
 export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
   RetrieveMemoryStoresTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema,
+  type: z.literal("retrieve_memory_stores"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4837,7 +3954,7 @@ export const RetrieveMemoryStoresTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveMemoryStoresTool$Outbound = {
-  type: string;
+  type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
 };
 
@@ -4847,8 +3964,7 @@ export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveMemoryStoresTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema,
+  type: z.literal("retrieve_memory_stores"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4874,27 +3990,12 @@ export function retrieveMemoryStoresToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
-
-/** @internal */
 export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
   WriteMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema,
+  type: z.literal("write_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4903,7 +4004,7 @@ export const WriteMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type WriteMemoryStoreTool$Outbound = {
-  type: string;
+  type: "write_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -4913,8 +4014,7 @@ export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WriteMemoryStoreTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema,
+  type: z.literal("write_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4940,27 +4040,12 @@ export function writeMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType,
-  );
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
 export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
   QueryMemoryStoreTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema,
+  type: z.literal("query_memory_store"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4969,7 +4054,7 @@ export const QueryMemoryStoreTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type QueryMemoryStoreTool$Outbound = {
-  type: string;
+  type: "query_memory_store";
   requires_approval?: boolean | undefined;
 };
 
@@ -4979,8 +4064,7 @@ export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QueryMemoryStoreTool
 > = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema,
+  type: z.literal("query_memory_store"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5006,23 +4090,12 @@ export function queryMemoryStoreToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
-  > = z.nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsRequestType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
-  > = CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentsTool$inboundSchema: z.ZodType<
   RetrieveAgentsTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$inboundSchema,
+  type: z.literal("retrieve_agents"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5031,7 +4104,7 @@ export const RetrieveAgentsTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type RetrieveAgentsTool$Outbound = {
-  type: string;
+  type: "retrieve_agents";
   requires_approval?: boolean | undefined;
 };
 
@@ -5041,7 +4114,7 @@ export const RetrieveAgentsTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveAgentsTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema,
+  type: z.literal("retrieve_agents"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5067,21 +4140,12 @@ export function retrieveAgentsToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDAgentsType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDAgentsType> =
-    CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema;
-
-/** @internal */
 export const CallSubAgentTool$inboundSchema: z.ZodType<
   CallSubAgentTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType$inboundSchema,
+  type: z.literal("call_sub_agent"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5090,7 +4154,7 @@ export const CallSubAgentTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CallSubAgentTool$Outbound = {
-  type: string;
+  type: "call_sub_agent";
   requires_approval?: boolean | undefined;
 };
 
@@ -5100,7 +4164,7 @@ export const CallSubAgentTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CallSubAgentTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema,
+  type: z.literal("call_sub_agent"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5126,21 +4190,12 @@ export function callSubAgentToolFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDType);
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDType> =
-    CreateAgentRequestAgentToolInputCRUDType$inboundSchema;
-
-/** @internal */
 export const WebScraperTool$inboundSchema: z.ZodType<
   WebScraperTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDType$inboundSchema,
+  type: z.literal("web_scraper"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5149,7 +4204,7 @@ export const WebScraperTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type WebScraperTool$Outbound = {
-  type: string;
+  type: "web_scraper";
   requires_approval?: boolean | undefined;
 };
 
@@ -5159,7 +4214,7 @@ export const WebScraperTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebScraperTool
 > = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDType$outboundSchema,
+  type: z.literal("web_scraper"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5181,21 +4236,12 @@ export function webScraperToolFromJSON(
 }
 
 /** @internal */
-export const AgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCRUDType
-> = z.nativeEnum(AgentToolInputCRUDType);
-/** @internal */
-export const AgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCRUDType
-> = AgentToolInputCRUDType$inboundSchema;
-
-/** @internal */
 export const GoogleSearchTool$inboundSchema: z.ZodType<
   GoogleSearchTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentToolInputCRUDType$inboundSchema,
+  type: z.literal("google_search"),
   requires_approval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5204,7 +4250,7 @@ export const GoogleSearchTool$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GoogleSearchTool$Outbound = {
-  type: string;
+  type: "google_search";
   requires_approval?: boolean | undefined;
 };
 
@@ -5214,7 +4260,7 @@ export const GoogleSearchTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GoogleSearchTool
 > = z.object({
-  type: AgentToolInputCRUDType$outboundSchema,
+  type: z.literal("google_search"),
   requiresApproval: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5256,10 +4302,10 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => RetrieveKnowledgeBasesTool$inboundSchema),
   z.lazy(() => QueryKnowledgeBaseTool$inboundSchema),
   z.lazy(() => CurrentDateTool$inboundSchema),
-  z.lazy(() => MCPTool$inboundSchema),
   z.lazy(() => HTTPTool$inboundSchema),
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
+  z.lazy(() => MCPTool$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
@@ -5274,10 +4320,10 @@ export type AgentToolInputCRUD$Outbound =
   | RetrieveKnowledgeBasesTool$Outbound
   | QueryKnowledgeBaseTool$Outbound
   | CurrentDateTool$Outbound
-  | MCPTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound;
+  | FunctionTool$Outbound
+  | MCPTool$Outbound;
 
 /** @internal */
 export const AgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -5296,10 +4342,10 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => CurrentDateTool$outboundSchema),
-  z.lazy(() => MCPTool$outboundSchema),
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function agentToolInputCRUDToJSON(
@@ -5320,13 +4366,11 @@ export function agentToolInputCRUDFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestExecuteOn
-> = z.nativeEnum(CreateAgentRequestExecuteOn);
+export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
+  .nativeEnum(ExecuteOn);
 /** @internal */
-export const CreateAgentRequestExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestExecuteOn
-> = CreateAgentRequestExecuteOn$inboundSchema;
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
+  ExecuteOn$inboundSchema;
 
 /** @internal */
 export const Evaluators$inboundSchema: z.ZodType<
@@ -5336,7 +4380,7 @@ export const Evaluators$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestExecuteOn$inboundSchema,
+  execute_on: ExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5358,7 +4402,7 @@ export const Evaluators$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestExecuteOn$outboundSchema,
+  executeOn: ExecuteOn$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -5380,23 +4424,23 @@ export function evaluatorsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestAgentsExecuteOn
-> = z.nativeEnum(CreateAgentRequestAgentsExecuteOn);
+export const CreateAgentRequestExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestExecuteOn
+> = z.nativeEnum(CreateAgentRequestExecuteOn);
 /** @internal */
-export const CreateAgentRequestAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestAgentsExecuteOn
-> = CreateAgentRequestAgentsExecuteOn$inboundSchema;
+export const CreateAgentRequestExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestExecuteOn
+> = CreateAgentRequestExecuteOn$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestGuardrails$inboundSchema: z.ZodType<
-  CreateAgentRequestGuardrails,
+export const Guardrails$inboundSchema: z.ZodType<
+  Guardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestAgentsExecuteOn$inboundSchema,
+  execute_on: CreateAgentRequestExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5404,21 +4448,21 @@ export const CreateAgentRequestGuardrails$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type CreateAgentRequestGuardrails$Outbound = {
+export type Guardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
 };
 
 /** @internal */
-export const CreateAgentRequestGuardrails$outboundSchema: z.ZodType<
-  CreateAgentRequestGuardrails$Outbound,
+export const Guardrails$outboundSchema: z.ZodType<
+  Guardrails$Outbound,
   z.ZodTypeDef,
-  CreateAgentRequestGuardrails
+  Guardrails
 > = z.object({
   id: z.string(),
   sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestAgentsExecuteOn$outboundSchema,
+  executeOn: CreateAgentRequestExecuteOn$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -5426,22 +4470,16 @@ export const CreateAgentRequestGuardrails$outboundSchema: z.ZodType<
   });
 });
 
-export function createAgentRequestGuardrailsToJSON(
-  createAgentRequestGuardrails: CreateAgentRequestGuardrails,
-): string {
-  return JSON.stringify(
-    CreateAgentRequestGuardrails$outboundSchema.parse(
-      createAgentRequestGuardrails,
-    ),
-  );
+export function guardrailsToJSON(guardrails: Guardrails): string {
+  return JSON.stringify(Guardrails$outboundSchema.parse(guardrails));
 }
-export function createAgentRequestGuardrailsFromJSON(
+export function guardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentRequestGuardrails, SDKValidationError> {
+): SafeParseResult<Guardrails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentRequestGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestGuardrails' from JSON`,
+    (x) => Guardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Guardrails' from JSON`,
   );
 }
 
@@ -5452,7 +4490,7 @@ export const Settings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -5469,15 +4507,14 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => RetrieveKnowledgeBasesTool$inboundSchema),
       z.lazy(() => QueryKnowledgeBaseTool$inboundSchema),
       z.lazy(() => CurrentDateTool$inboundSchema),
-      z.lazy(() => MCPTool$inboundSchema),
       z.lazy(() => HTTPTool$inboundSchema),
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
+      z.lazy(() => MCPTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$inboundSchema))
-    .optional(),
+  guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -5503,14 +4540,14 @@ export type Settings$Outbound = {
       | RetrieveKnowledgeBasesTool$Outbound
       | QueryKnowledgeBaseTool$Outbound
       | CurrentDateTool$Outbound
-      | MCPTool$Outbound
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
+      | MCPTool$Outbound
     >
     | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
-  guardrails?: Array<CreateAgentRequestGuardrails$Outbound> | undefined;
+  guardrails?: Array<Guardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -5520,7 +4557,7 @@ export const Settings$outboundSchema: z.ZodType<
   Settings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -5537,15 +4574,14 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => CurrentDateTool$outboundSchema),
-      z.lazy(() => MCPTool$outboundSchema),
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
+      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$outboundSchema))
-    .optional(),
+  guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -5901,13 +4937,13 @@ export function createAgentRequestToolsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentsResponseExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> = z
-    .nativeEnum(CreateAgentRequestAgentsResponseExecuteOn);
+export const CreateAgentRequestAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestAgentsExecuteOn
+> = z.nativeEnum(CreateAgentRequestAgentsExecuteOn);
 /** @internal */
-export const CreateAgentRequestAgentsResponseExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> =
-    CreateAgentRequestAgentsResponseExecuteOn$inboundSchema;
+export const CreateAgentRequestAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestAgentsExecuteOn
+> = CreateAgentRequestAgentsExecuteOn$inboundSchema;
 
 /** @internal */
 export const CreateAgentRequestEvaluators$inboundSchema: z.ZodType<
@@ -5917,7 +4953,7 @@ export const CreateAgentRequestEvaluators$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestAgentsResponseExecuteOn$inboundSchema,
+  execute_on: CreateAgentRequestAgentsExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5939,7 +4975,7 @@ export const CreateAgentRequestEvaluators$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestAgentsResponseExecuteOn$outboundSchema,
+  executeOn: CreateAgentRequestAgentsExecuteOn$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -5967,23 +5003,23 @@ export function createAgentRequestEvaluatorsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponse201ExecuteOn> = z
-    .nativeEnum(CreateAgentRequestAgentsResponse201ExecuteOn);
+export const CreateAgentRequestAgentsResponseExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> = z
+    .nativeEnum(CreateAgentRequestAgentsResponseExecuteOn);
 /** @internal */
-export const CreateAgentRequestAgentsResponse201ExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponse201ExecuteOn> =
-    CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema;
+export const CreateAgentRequestAgentsResponseExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> =
+    CreateAgentRequestAgentsResponseExecuteOn$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
-  CreateAgentRequestAgentsGuardrails,
+export const CreateAgentRequestGuardrails$inboundSchema: z.ZodType<
+  CreateAgentRequestGuardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema,
+  execute_on: CreateAgentRequestAgentsResponseExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5991,21 +5027,21 @@ export const CreateAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type CreateAgentRequestAgentsGuardrails$Outbound = {
+export type CreateAgentRequestGuardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
 };
 
 /** @internal */
-export const CreateAgentRequestAgentsGuardrails$outboundSchema: z.ZodType<
-  CreateAgentRequestAgentsGuardrails$Outbound,
+export const CreateAgentRequestGuardrails$outboundSchema: z.ZodType<
+  CreateAgentRequestGuardrails$Outbound,
   z.ZodTypeDef,
-  CreateAgentRequestAgentsGuardrails
+  CreateAgentRequestGuardrails
 > = z.object({
   id: z.string(),
   sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestAgentsResponse201ExecuteOn$outboundSchema,
+  executeOn: CreateAgentRequestAgentsResponseExecuteOn$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -6013,23 +5049,22 @@ export const CreateAgentRequestAgentsGuardrails$outboundSchema: z.ZodType<
   });
 });
 
-export function createAgentRequestAgentsGuardrailsToJSON(
-  createAgentRequestAgentsGuardrails: CreateAgentRequestAgentsGuardrails,
+export function createAgentRequestGuardrailsToJSON(
+  createAgentRequestGuardrails: CreateAgentRequestGuardrails,
 ): string {
   return JSON.stringify(
-    CreateAgentRequestAgentsGuardrails$outboundSchema.parse(
-      createAgentRequestAgentsGuardrails,
+    CreateAgentRequestGuardrails$outboundSchema.parse(
+      createAgentRequestGuardrails,
     ),
   );
 }
-export function createAgentRequestAgentsGuardrailsFromJSON(
+export function createAgentRequestGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentRequestAgentsGuardrails, SDKValidationError> {
+): SafeParseResult<CreateAgentRequestGuardrails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreateAgentRequestAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestAgentsGuardrails' from JSON`,
+    (x) => CreateAgentRequestGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentRequestGuardrails' from JSON`,
   );
 }
 
@@ -6040,16 +5075,15 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
     .optional(),
   evaluators: z.array(z.lazy(() => CreateAgentRequestEvaluators$inboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsGuardrails$inboundSchema),
-  ).optional(),
+  guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -6064,7 +5098,7 @@ export type CreateAgentRequestSettings$Outbound = {
   tool_approval_required: string;
   tools?: Array<CreateAgentRequestTools$Outbound> | undefined;
   evaluators?: Array<CreateAgentRequestEvaluators$Outbound> | undefined;
-  guardrails?: Array<CreateAgentRequestAgentsGuardrails$Outbound> | undefined;
+  guardrails?: Array<CreateAgentRequestGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -6074,16 +5108,15 @@ export const CreateAgentRequestSettings$outboundSchema: z.ZodType<
   CreateAgentRequestSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: CreateAgentRequestToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$outboundSchema))
     .optional(),
   evaluators: z.array(z.lazy(() => CreateAgentRequestEvaluators$outboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsGuardrails$outboundSchema),
-  ).optional(),
+  guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -6432,15 +5465,6 @@ export function createAgentRequestResponseFormatFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestReasoningEffort
-> = z.nativeEnum(CreateAgentRequestReasoningEffort);
-/** @internal */
-export const CreateAgentRequestReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestReasoningEffort
-> = CreateAgentRequestReasoningEffort$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestStop$inboundSchema: z.ZodType<
   CreateAgentRequestStop,
   z.ZodTypeDef,
@@ -6731,119 +5755,6 @@ export const CreateAgentRequestModalities$outboundSchema: z.ZodNativeEnum<
 > = CreateAgentRequestModalities$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestIdAgents1$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestIdAgents1
-> = z.nativeEnum(CreateAgentRequestIdAgents1);
-/** @internal */
-export const CreateAgentRequestIdAgents1$outboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestIdAgents1
-> = CreateAgentRequestIdAgents1$inboundSchema;
-
-/** @internal */
-export const CreateAgentRequestId$inboundSchema: z.ZodType<
-  CreateAgentRequestId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()]);
-/** @internal */
-export type CreateAgentRequestId$Outbound = string | string;
-
-/** @internal */
-export const CreateAgentRequestId$outboundSchema: z.ZodType<
-  CreateAgentRequestId$Outbound,
-  z.ZodTypeDef,
-  CreateAgentRequestId
-> = z.union([CreateAgentRequestIdAgents1$outboundSchema, z.string()]);
-
-export function createAgentRequestIdToJSON(
-  createAgentRequestId: CreateAgentRequestId,
-): string {
-  return JSON.stringify(
-    CreateAgentRequestId$outboundSchema.parse(createAgentRequestId),
-  );
-}
-export function createAgentRequestIdFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentRequestId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentRequestId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestId' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn
-  > = z.nativeEnum(CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn);
-/** @internal */
-export const CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn
-  > = CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema;
-
-/** @internal */
-export const CreateAgentRequestAgentsResponseGuardrails$inboundSchema:
-  z.ZodType<CreateAgentRequestAgentsResponseGuardrails, z.ZodTypeDef, unknown> =
-    z.object({
-      id: z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()]),
-      execute_on:
-        CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        "execute_on": "executeOn",
-      });
-    });
-/** @internal */
-export type CreateAgentRequestAgentsResponseGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
-
-/** @internal */
-export const CreateAgentRequestAgentsResponseGuardrails$outboundSchema:
-  z.ZodType<
-    CreateAgentRequestAgentsResponseGuardrails$Outbound,
-    z.ZodTypeDef,
-    CreateAgentRequestAgentsResponseGuardrails
-  > = z.object({
-    id: z.union([CreateAgentRequestIdAgents1$outboundSchema, z.string()]),
-    executeOn:
-      CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
-
-export function createAgentRequestAgentsResponseGuardrailsToJSON(
-  createAgentRequestAgentsResponseGuardrails:
-    CreateAgentRequestAgentsResponseGuardrails,
-): string {
-  return JSON.stringify(
-    CreateAgentRequestAgentsResponseGuardrails$outboundSchema.parse(
-      createAgentRequestAgentsResponseGuardrails,
-    ),
-  );
-}
-export function createAgentRequestAgentsResponseGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestAgentsResponseGuardrails,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestAgentsResponseGuardrails$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAgentRequestAgentsResponseGuardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   CreateAgentRequestParameters,
   z.ZodTypeDef,
@@ -6865,7 +5776,7 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
       CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
     ),
   ]).optional(),
-  reasoning_effort: CreateAgentRequestReasoningEffort$inboundSchema.optional(),
+  reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -6886,9 +5797,6 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(CreateAgentRequestModalities$inboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsResponseGuardrails$inboundSchema),
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -6938,9 +5846,6 @@ export type CreateAgentRequestParameters$Outbound = {
     | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  guardrails?:
-    | Array<CreateAgentRequestAgentsResponseGuardrails$Outbound>
-    | undefined;
 };
 
 /** @internal */
@@ -6965,7 +5870,7 @@ export const CreateAgentRequestParameters$outboundSchema: z.ZodType<
       CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$outboundSchema
     ),
   ]).optional(),
-  reasoningEffort: CreateAgentRequestReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -6986,9 +5891,6 @@ export const CreateAgentRequestParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(CreateAgentRequestModalities$outboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsResponseGuardrails$outboundSchema),
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -7432,17 +6334,6 @@ export function createAgentRequestFallbackModelConfigurationResponseFormatFromJS
 }
 
 /** @internal */
-export const CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestFallbackModelConfigurationReasoningEffort
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationReasoningEffort);
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestFallbackModelConfigurationReasoningEffort
-  > = CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema;
-
-/** @internal */
 export const CreateAgentRequestFallbackModelConfigurationStop$inboundSchema:
   z.ZodType<
     CreateAgentRequestFallbackModelConfigurationStop,
@@ -7787,140 +6678,6 @@ export const CreateAgentRequestFallbackModelConfigurationModalities$outboundSche
   > = CreateAgentRequestFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestIdAgentsResponse1
-> = z.nativeEnum(CreateAgentRequestIdAgentsResponse1);
-/** @internal */
-export const CreateAgentRequestIdAgentsResponse1$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestIdAgentsResponse1> =
-    CreateAgentRequestIdAgentsResponse1$inboundSchema;
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationId$inboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationId,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([CreateAgentRequestIdAgentsResponse1$inboundSchema, z.string()]);
-/** @internal */
-export type CreateAgentRequestFallbackModelConfigurationId$Outbound =
-  | string
-  | string;
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationId$outboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationId$Outbound,
-    z.ZodTypeDef,
-    CreateAgentRequestFallbackModelConfigurationId
-  > = z.union([CreateAgentRequestIdAgentsResponse1$outboundSchema, z.string()]);
-
-export function createAgentRequestFallbackModelConfigurationIdToJSON(
-  createAgentRequestFallbackModelConfigurationId:
-    CreateAgentRequestFallbackModelConfigurationId,
-): string {
-  return JSON.stringify(
-    CreateAgentRequestFallbackModelConfigurationId$outboundSchema.parse(
-      createAgentRequestFallbackModelConfigurationId,
-    ),
-  );
-}
-export function createAgentRequestFallbackModelConfigurationIdFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationId,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestFallbackModelConfigurationId$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationId' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestFallbackModelConfigurationExecuteOn
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationExecuteOn);
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestFallbackModelConfigurationExecuteOn
-  > = CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema;
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationGuardrails,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.union([
-      CreateAgentRequestIdAgentsResponse1$inboundSchema,
-      z.string(),
-    ]),
-    execute_on:
-      CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "execute_on": "executeOn",
-    });
-  });
-/** @internal */
-export type CreateAgentRequestFallbackModelConfigurationGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationGuardrails$outboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationGuardrails$Outbound,
-    z.ZodTypeDef,
-    CreateAgentRequestFallbackModelConfigurationGuardrails
-  > = z.object({
-    id: z.union([
-      CreateAgentRequestIdAgentsResponse1$outboundSchema,
-      z.string(),
-    ]),
-    executeOn:
-      CreateAgentRequestFallbackModelConfigurationExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
-
-export function createAgentRequestFallbackModelConfigurationGuardrailsToJSON(
-  createAgentRequestFallbackModelConfigurationGuardrails:
-    CreateAgentRequestFallbackModelConfigurationGuardrails,
-): string {
-  return JSON.stringify(
-    CreateAgentRequestFallbackModelConfigurationGuardrails$outboundSchema.parse(
-      createAgentRequestFallbackModelConfigurationGuardrails,
-    ),
-  );
-}
-export function createAgentRequestFallbackModelConfigurationGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationGuardrails,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationGuardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     CreateAgentRequestFallbackModelConfigurationParameters,
@@ -7948,9 +6705,7 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
         CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
       ),
     ]).optional(),
-    reasoning_effort:
-      CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
-        .optional(),
+    reasoning_effort: z.string().optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -7974,11 +6729,6 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     modalities: z.nullable(
       z.array(
         CreateAgentRequestFallbackModelConfigurationModalities$inboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
       ),
     ).optional(),
   }).transform((v) => {
@@ -8036,9 +6786,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  guardrails?:
-    | Array<CreateAgentRequestFallbackModelConfigurationGuardrails$Outbound>
-    | undefined;
 };
 
 /** @internal */
@@ -8069,9 +6816,7 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$outboundSche
         CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$outboundSchema
       ),
     ]).optional(),
-    reasoningEffort:
-      CreateAgentRequestFallbackModelConfigurationReasoningEffort$outboundSchema
-        .optional(),
+    reasoningEffort: z.string().optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -8095,11 +6840,6 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$outboundSche
     modalities: z.nullable(
       z.array(
         CreateAgentRequestFallbackModelConfigurationModalities$outboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        CreateAgentRequestFallbackModelConfigurationGuardrails$outboundSchema
       ),
     ).optional(),
   }).transform((v) => {

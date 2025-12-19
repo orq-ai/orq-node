@@ -78,7 +78,7 @@ export type LastMessageFull = {
 /**
  * The reason why the agent execution became inactive
  */
-export const AgentInactiveStreamingEventFinishReason = {
+export const FinishReason = {
   Stop: "stop",
   Length: "length",
   ToolCalls: "tool_calls",
@@ -90,9 +90,7 @@ export const AgentInactiveStreamingEventFinishReason = {
 /**
  * The reason why the agent execution became inactive
  */
-export type AgentInactiveStreamingEventFinishReason = ClosedEnum<
-  typeof AgentInactiveStreamingEventFinishReason
->;
+export type FinishReason = ClosedEnum<typeof FinishReason>;
 
 export const AgentInactiveStreamingEventDataType = {
   Function: "function",
@@ -101,15 +99,15 @@ export type AgentInactiveStreamingEventDataType = ClosedEnum<
   typeof AgentInactiveStreamingEventDataType
 >;
 
-export type AgentInactiveStreamingEventFunction = {
+export type FunctionT = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
-export type AgentInactiveStreamingEventPendingToolCalls = {
+export type PendingToolCalls = {
   id: string;
   type: AgentInactiveStreamingEventDataType;
-  function: AgentInactiveStreamingEventFunction;
+  function: FunctionT;
 };
 
 export type AgentInactiveStreamingEventPromptTokensDetails = {
@@ -166,13 +164,11 @@ export type AgentInactiveStreamingEventData = {
   /**
    * The reason why the agent execution became inactive
    */
-  finishReason: AgentInactiveStreamingEventFinishReason;
+  finishReason: FinishReason;
   /**
    * Tool calls that are pending user response (for function_call finish reason)
    */
-  pendingToolCalls?:
-    | Array<AgentInactiveStreamingEventPendingToolCalls>
-    | undefined;
+  pendingToolCalls?: Array<PendingToolCalls> | undefined;
   /**
    * Token usage from the last agent message
    */
@@ -326,13 +322,11 @@ export function lastMessageFullFromJSON(
 }
 
 /** @internal */
-export const AgentInactiveStreamingEventFinishReason$inboundSchema:
-  z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> = z
-    .nativeEnum(AgentInactiveStreamingEventFinishReason);
+export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
+  z.nativeEnum(FinishReason);
 /** @internal */
-export const AgentInactiveStreamingEventFinishReason$outboundSchema:
-  z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> =
-    AgentInactiveStreamingEventFinishReason$inboundSchema;
+export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
+  FinishReason$inboundSchema;
 
 /** @internal */
 export const AgentInactiveStreamingEventDataType$inboundSchema: z.ZodNativeEnum<
@@ -344,8 +338,8 @@ export const AgentInactiveStreamingEventDataType$outboundSchema:
     AgentInactiveStreamingEventDataType$inboundSchema;
 
 /** @internal */
-export const AgentInactiveStreamingEventFunction$inboundSchema: z.ZodType<
-  AgentInactiveStreamingEventFunction,
+export const FunctionT$inboundSchema: z.ZodType<
+  FunctionT,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -353,94 +347,76 @@ export const AgentInactiveStreamingEventFunction$inboundSchema: z.ZodType<
   arguments: z.string().optional(),
 });
 /** @internal */
-export type AgentInactiveStreamingEventFunction$Outbound = {
+export type FunctionT$Outbound = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
 /** @internal */
-export const AgentInactiveStreamingEventFunction$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEventFunction$Outbound,
+export const FunctionT$outboundSchema: z.ZodType<
+  FunctionT$Outbound,
   z.ZodTypeDef,
-  AgentInactiveStreamingEventFunction
+  FunctionT
 > = z.object({
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
 
-export function agentInactiveStreamingEventFunctionToJSON(
-  agentInactiveStreamingEventFunction: AgentInactiveStreamingEventFunction,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventFunction$outboundSchema.parse(
-      agentInactiveStreamingEventFunction,
-    ),
-  );
+export function functionToJSON(functionT: FunctionT): string {
+  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
-export function agentInactiveStreamingEventFunctionFromJSON(
+export function functionFromJSON(
   jsonString: string,
-): SafeParseResult<AgentInactiveStreamingEventFunction, SDKValidationError> {
+): SafeParseResult<FunctionT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentInactiveStreamingEventFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentInactiveStreamingEventFunction' from JSON`,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
   );
 }
 
 /** @internal */
-export const AgentInactiveStreamingEventPendingToolCalls$inboundSchema:
-  z.ZodType<
-    AgentInactiveStreamingEventPendingToolCalls,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.string(),
-    type: AgentInactiveStreamingEventDataType$inboundSchema,
-    function: z.lazy(() => AgentInactiveStreamingEventFunction$inboundSchema),
-  });
+export const PendingToolCalls$inboundSchema: z.ZodType<
+  PendingToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: AgentInactiveStreamingEventDataType$inboundSchema,
+  function: z.lazy(() => FunctionT$inboundSchema),
+});
 /** @internal */
-export type AgentInactiveStreamingEventPendingToolCalls$Outbound = {
+export type PendingToolCalls$Outbound = {
   id: string;
   type: string;
-  function: AgentInactiveStreamingEventFunction$Outbound;
+  function: FunctionT$Outbound;
 };
 
 /** @internal */
-export const AgentInactiveStreamingEventPendingToolCalls$outboundSchema:
-  z.ZodType<
-    AgentInactiveStreamingEventPendingToolCalls$Outbound,
-    z.ZodTypeDef,
-    AgentInactiveStreamingEventPendingToolCalls
-  > = z.object({
-    id: z.string(),
-    type: AgentInactiveStreamingEventDataType$outboundSchema,
-    function: z.lazy(() => AgentInactiveStreamingEventFunction$outboundSchema),
-  });
+export const PendingToolCalls$outboundSchema: z.ZodType<
+  PendingToolCalls$Outbound,
+  z.ZodTypeDef,
+  PendingToolCalls
+> = z.object({
+  id: z.string(),
+  type: AgentInactiveStreamingEventDataType$outboundSchema,
+  function: z.lazy(() => FunctionT$outboundSchema),
+});
 
-export function agentInactiveStreamingEventPendingToolCallsToJSON(
-  agentInactiveStreamingEventPendingToolCalls:
-    AgentInactiveStreamingEventPendingToolCalls,
+export function pendingToolCallsToJSON(
+  pendingToolCalls: PendingToolCalls,
 ): string {
   return JSON.stringify(
-    AgentInactiveStreamingEventPendingToolCalls$outboundSchema.parse(
-      agentInactiveStreamingEventPendingToolCalls,
-    ),
+    PendingToolCalls$outboundSchema.parse(pendingToolCalls),
   );
 }
-export function agentInactiveStreamingEventPendingToolCallsFromJSON(
+export function pendingToolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<
-  AgentInactiveStreamingEventPendingToolCalls,
-  SDKValidationError
-> {
+): SafeParseResult<PendingToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentInactiveStreamingEventPendingToolCalls$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentInactiveStreamingEventPendingToolCalls' from JSON`,
+    (x) => PendingToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PendingToolCalls' from JSON`,
   );
 }
 
@@ -680,10 +656,9 @@ export const AgentInactiveStreamingEventData$inboundSchema: z.ZodType<
 > = z.object({
   last_message: z.string(),
   last_message_full: z.lazy(() => LastMessageFull$inboundSchema).optional(),
-  finish_reason: AgentInactiveStreamingEventFinishReason$inboundSchema,
-  pending_tool_calls: z.array(
-    z.lazy(() => AgentInactiveStreamingEventPendingToolCalls$inboundSchema),
-  ).optional(),
+  finish_reason: FinishReason$inboundSchema,
+  pending_tool_calls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
+    .optional(),
   usage: z.lazy(() => AgentInactiveStreamingEventUsage$inboundSchema)
     .optional(),
   workflowRunId: z.string(),
@@ -701,9 +676,7 @@ export type AgentInactiveStreamingEventData$Outbound = {
   last_message: string;
   last_message_full?: LastMessageFull$Outbound | undefined;
   finish_reason: string;
-  pending_tool_calls?:
-    | Array<AgentInactiveStreamingEventPendingToolCalls$Outbound>
-    | undefined;
+  pending_tool_calls?: Array<PendingToolCalls$Outbound> | undefined;
   usage?: AgentInactiveStreamingEventUsage$Outbound | undefined;
   workflowRunId: string;
   responseId?: string | undefined;
@@ -717,10 +690,9 @@ export const AgentInactiveStreamingEventData$outboundSchema: z.ZodType<
 > = z.object({
   lastMessage: z.string(),
   lastMessageFull: z.lazy(() => LastMessageFull$outboundSchema).optional(),
-  finishReason: AgentInactiveStreamingEventFinishReason$outboundSchema,
-  pendingToolCalls: z.array(
-    z.lazy(() => AgentInactiveStreamingEventPendingToolCalls$outboundSchema),
-  ).optional(),
+  finishReason: FinishReason$outboundSchema,
+  pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$outboundSchema))
+    .optional(),
   usage: z.lazy(() => AgentInactiveStreamingEventUsage$outboundSchema)
     .optional(),
   workflowRunId: z.string(),

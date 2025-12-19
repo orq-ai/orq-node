@@ -11,15 +11,16 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.CreateDatasetItemContentDatasetsResponse200ApplicationJson2[]`
+### `operations.CreateDatasetItemContentDatasetsResponse200ApplicationJSONResponseBodyMessages2[]`
 
 ```typescript
 const value:
-  operations.CreateDatasetItemContentDatasetsResponse200ApplicationJson2[] = [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ];
+  operations.CreateDatasetItemContentDatasetsResponse200ApplicationJSONResponseBodyMessages2[] =
+    [
+      {
+        type: "text",
+        text: "<value>",
+      },
+    ];
 ```
 

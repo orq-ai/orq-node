@@ -11,9 +11,14 @@ The contents of the system message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `components.Two[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: components.Two[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

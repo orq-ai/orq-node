@@ -1,46 +1,20 @@
 # CreateDatasetItemContentDatasetsResponse2
 
-
-## Supported Types
-
-### `components.TextContentPartSchema`
+## Example Usage
 
 ```typescript
-const value: components.TextContentPartSchema = {
+import { CreateDatasetItemContentDatasetsResponse2 } from "@orq-ai/node/models/operations";
+
+let value: CreateDatasetItemContentDatasetsResponse2 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.ImageContentPartSchema`
+## Fields
 
-```typescript
-const value: components.ImageContentPartSchema = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://fatal-overload.name/",
-  },
-};
-```
-
-### `components.AudioContentPartSchema`
-
-```typescript
-const value: components.AudioContentPartSchema = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
-};
-```
-
-### `operations.CreateDatasetItem2Datasets4`
-
-```typescript
-const value: operations.CreateDatasetItem2Datasets4 = {
-  type: "file",
-  file: {},
-};
-```
-
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                             | [operations.CreateDatasetItemContentDatasetsResponseType](../../models/operations/createdatasetitemcontentdatasetsresponsetype.md)                 | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `text`                                                                                                                                             | *string*                                                                                                                                           | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `cacheControl`                                                                                                                                     | [operations.CreateDatasetItemContentDatasetsResponseCacheControl](../../models/operations/createdatasetitemcontentdatasetsresponsecachecontrol.md) | :heavy_minus_sign:                                                                                                                                 | N/A                                                                                                                                                |

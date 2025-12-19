@@ -7,17 +7,15 @@ Usage metrics for the response
 ```typescript
 import { DeploymentInvokeUsage } from "@orq-ai/node/models/operations";
 
-let value: DeploymentInvokeUsage = {
-  inputTokens: 3912.15,
-  outputTokens: 1466.74,
-  totalTokens: 7968,
-};
+let value: DeploymentInvokeUsage = {};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `inputTokens`      | *number*           | :heavy_check_mark: | N/A                |
-| `outputTokens`     | *number*           | :heavy_check_mark: | N/A                |
-| `totalTokens`      | *number*           | :heavy_check_mark: | N/A                |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `totalTokens`                                                                            | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `promptTokens`                                                                           | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `completionTokens`                                                                       | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `promptTokensDetails`                                                                    | [operations.PromptTokensDetails](../../models/operations/prompttokensdetails.md)         | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `completionTokensDetails`                                                                | [operations.CompletionTokensDetails](../../models/operations/completiontokensdetails.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

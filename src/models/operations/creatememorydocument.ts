@@ -16,7 +16,7 @@ export type CreateMemoryDocumentRequestBody = {
   /**
    * Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies.
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata: { [k: string]: string };
 };
 
 export type CreateMemoryDocumentRequest = {
@@ -57,12 +57,12 @@ export const CreateMemoryDocumentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string()),
 });
 /** @internal */
 export type CreateMemoryDocumentRequestBody$Outbound = {
   text: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata: { [k: string]: string };
 };
 
 /** @internal */
@@ -72,7 +72,7 @@ export const CreateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
   CreateMemoryDocumentRequestBody
 > = z.object({
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string()),
 });
 
 export function createMemoryDocumentRequestBodyToJSON(

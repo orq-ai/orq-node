@@ -277,42 +277,6 @@ export type RetrieveAgentRequestResponseFormat =
   | RetrieveAgentRequestResponseFormatAgentsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const RetrieveAgentRequestReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type RetrieveAgentRequestReasoningEffort = ClosedEnum<
-  typeof RetrieveAgentRequestReasoningEffort
->;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RetrieveAgentRequestStop = string | Array<string>;
@@ -384,43 +348,6 @@ export type RetrieveAgentRequestModalities = ClosedEnum<
 >;
 
 /**
- * The key of the guardrail.
- */
-export const RetrieveAgentRequestId1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type RetrieveAgentRequestId1 = ClosedEnum<
-  typeof RetrieveAgentRequestId1
->;
-
-export type RetrieveAgentRequestId = RetrieveAgentRequestId1 | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const RetrieveAgentRequestAgentsResponseExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type RetrieveAgentRequestAgentsResponseExecuteOn = ClosedEnum<
-  typeof RetrieveAgentRequestAgentsResponseExecuteOn
->;
-
-export type RetrieveAgentRequestAgentsGuardrails = {
-  id: RetrieveAgentRequestId1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: RetrieveAgentRequestAgentsResponseExecuteOn;
-};
-
-/**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type RetrieveAgentRequestParameters = {
@@ -469,18 +396,9 @@ export type RetrieveAgentRequestParameters = {
     | RetrieveAgentRequestResponseFormatAgentsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: RetrieveAgentRequestReasoningEffort | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -528,10 +446,6 @@ export type RetrieveAgentRequestParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<RetrieveAgentRequestModalities> | null | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?: Array<RetrieveAgentRequestAgentsGuardrails> | undefined;
 };
 
 /**
@@ -653,43 +567,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationResponseFormat =
   | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort = {
-  None: "none",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-  Xhigh: "xhigh",
-} as const;
-/**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- *
- * @remarks
- *
- * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
- * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
- * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
- * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
- *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
- */
-export type RetrieveAgentRequestFallbackModelConfigurationReasoningEffort =
-  ClosedEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
-  >;
-
-/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RetrieveAgentRequestFallbackModelConfigurationStop =
@@ -762,44 +639,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationModalities =
   ClosedEnum<typeof RetrieveAgentRequestFallbackModelConfigurationModalities>;
 
 /**
- * The key of the guardrail.
- */
-export const RetrieveAgentRequestIdAgents1 = {
-  OrqPiiDetection: "orq_pii_detection",
-} as const;
-/**
- * The key of the guardrail.
- */
-export type RetrieveAgentRequestIdAgents1 = ClosedEnum<
-  typeof RetrieveAgentRequestIdAgents1
->;
-
-export type RetrieveAgentRequestFallbackModelConfigurationId =
-  | RetrieveAgentRequestIdAgents1
-  | string;
-
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export const RetrieveAgentRequestFallbackModelConfigurationExecuteOn = {
-  Input: "input",
-  Output: "output",
-} as const;
-/**
- * Determines whether the guardrail runs on the input (user message) or output (model response).
- */
-export type RetrieveAgentRequestFallbackModelConfigurationExecuteOn =
-  ClosedEnum<typeof RetrieveAgentRequestFallbackModelConfigurationExecuteOn>;
-
-export type RetrieveAgentRequestFallbackModelConfigurationGuardrails = {
-  id: RetrieveAgentRequestIdAgents1 | string;
-  /**
-   * Determines whether the guardrail runs on the input (user message) or output (model response).
-   */
-  executeOn: RetrieveAgentRequestFallbackModelConfigurationExecuteOn;
-};
-
-/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
@@ -851,20 +690,9 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
     | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   *
-   * @remarks
-   *
-   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
-   *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?:
-    | RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
-    | undefined;
+  reasoningEffort?: string | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -917,12 +745,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
   modalities?:
     | Array<RetrieveAgentRequestFallbackModelConfigurationModalities>
     | null
-    | undefined;
-  /**
-   * A list of guardrails to apply to the request.
-   */
-  guardrails?:
-    | Array<RetrieveAgentRequestFallbackModelConfigurationGuardrails>
     | undefined;
 };
 
@@ -1002,9 +824,6 @@ export type RetrieveAgentRequestKnowledgeBases = {
  */
 export type RetrieveAgentRequestResponseBody = {
   id: string;
-  /**
-   * Unique identifier for the agent within the workspace
-   */
   key: string;
   displayName: string;
   workspaceId: string;
@@ -1387,7 +1206,7 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: RetrieveAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
@@ -1422,7 +1241,7 @@ export const RetrieveAgentRequestSettings$outboundSchema: z.ZodType<
   RetrieveAgentRequestSettings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: RetrieveAgentRequestToolApprovalRequired$outboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => RetrieveAgentRequestTools$outboundSchema))
@@ -1789,15 +1608,6 @@ export function retrieveAgentRequestResponseFormatFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestReasoningEffort
-> = z.nativeEnum(RetrieveAgentRequestReasoningEffort);
-/** @internal */
-export const RetrieveAgentRequestReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestReasoningEffort> =
-    RetrieveAgentRequestReasoningEffort$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestStop$inboundSchema: z.ZodType<
   RetrieveAgentRequestStop,
   z.ZodTypeDef,
@@ -2080,110 +1890,6 @@ export const RetrieveAgentRequestModalities$outboundSchema: z.ZodNativeEnum<
 > = RetrieveAgentRequestModalities$inboundSchema;
 
 /** @internal */
-export const RetrieveAgentRequestId1$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestId1
-> = z.nativeEnum(RetrieveAgentRequestId1);
-/** @internal */
-export const RetrieveAgentRequestId1$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestId1
-> = RetrieveAgentRequestId1$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestId$inboundSchema: z.ZodType<
-  RetrieveAgentRequestId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]);
-/** @internal */
-export type RetrieveAgentRequestId$Outbound = string | string;
-
-/** @internal */
-export const RetrieveAgentRequestId$outboundSchema: z.ZodType<
-  RetrieveAgentRequestId$Outbound,
-  z.ZodTypeDef,
-  RetrieveAgentRequestId
-> = z.union([RetrieveAgentRequestId1$outboundSchema, z.string()]);
-
-export function retrieveAgentRequestIdToJSON(
-  retrieveAgentRequestId: RetrieveAgentRequestId,
-): string {
-  return JSON.stringify(
-    RetrieveAgentRequestId$outboundSchema.parse(retrieveAgentRequestId),
-  );
-}
-export function retrieveAgentRequestIdFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestId' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseExecuteOn> = z
-    .nativeEnum(RetrieveAgentRequestAgentsResponseExecuteOn);
-/** @internal */
-export const RetrieveAgentRequestAgentsResponseExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseExecuteOn> =
-    RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
-  RetrieveAgentRequestAgentsGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]),
-  execute_on: RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
-/** @internal */
-export type RetrieveAgentRequestAgentsGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
-
-/** @internal */
-export const RetrieveAgentRequestAgentsGuardrails$outboundSchema: z.ZodType<
-  RetrieveAgentRequestAgentsGuardrails$Outbound,
-  z.ZodTypeDef,
-  RetrieveAgentRequestAgentsGuardrails
-> = z.object({
-  id: z.union([RetrieveAgentRequestId1$outboundSchema, z.string()]),
-  executeOn: RetrieveAgentRequestAgentsResponseExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function retrieveAgentRequestAgentsGuardrailsToJSON(
-  retrieveAgentRequestAgentsGuardrails: RetrieveAgentRequestAgentsGuardrails,
-): string {
-  return JSON.stringify(
-    RetrieveAgentRequestAgentsGuardrails$outboundSchema.parse(
-      retrieveAgentRequestAgentsGuardrails,
-    ),
-  );
-}
-export function retrieveAgentRequestAgentsGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestAgentsGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestAgentsGuardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   RetrieveAgentRequestParameters,
   z.ZodTypeDef,
@@ -2205,8 +1911,7 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
       RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
     ),
   ]).optional(),
-  reasoning_effort: RetrieveAgentRequestReasoningEffort$inboundSchema
-    .optional(),
+  reasoning_effort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2227,9 +1932,6 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(z.array(RetrieveAgentRequestModalities$inboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestAgentsGuardrails$inboundSchema),
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -2279,7 +1981,6 @@ export type RetrieveAgentRequestParameters$Outbound = {
   tool_choice?: RetrieveAgentRequestToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
-  guardrails?: Array<RetrieveAgentRequestAgentsGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2304,8 +2005,7 @@ export const RetrieveAgentRequestParameters$outboundSchema: z.ZodType<
       RetrieveAgentRequestResponseFormatAgentsJSONSchema$outboundSchema
     ),
   ]).optional(),
-  reasoningEffort: RetrieveAgentRequestReasoningEffort$outboundSchema
-    .optional(),
+  reasoningEffort: z.string().optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2326,9 +2026,6 @@ export const RetrieveAgentRequestParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(RetrieveAgentRequestModalities$outboundSchema))
     .optional(),
-  guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestAgentsGuardrails$outboundSchema),
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -2771,20 +2468,6 @@ export function retrieveAgentRequestFallbackModelConfigurationResponseFormatFrom
 }
 
 /** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
-  > = z.nativeEnum(
-    RetrieveAgentRequestFallbackModelConfigurationReasoningEffort,
-  );
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
-  > =
-    RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema;
-
-/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationStop$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfigurationStop,
@@ -3118,134 +2801,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationModalities$outboundSc
   > = RetrieveAgentRequestFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
-export const RetrieveAgentRequestIdAgents1$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestIdAgents1
-> = z.nativeEnum(RetrieveAgentRequestIdAgents1);
-/** @internal */
-export const RetrieveAgentRequestIdAgents1$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestIdAgents1
-> = RetrieveAgentRequestIdAgents1$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationId$inboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationId,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()]);
-/** @internal */
-export type RetrieveAgentRequestFallbackModelConfigurationId$Outbound =
-  | string
-  | string;
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationId$outboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationId$Outbound,
-    z.ZodTypeDef,
-    RetrieveAgentRequestFallbackModelConfigurationId
-  > = z.union([RetrieveAgentRequestIdAgents1$outboundSchema, z.string()]);
-
-export function retrieveAgentRequestFallbackModelConfigurationIdToJSON(
-  retrieveAgentRequestFallbackModelConfigurationId:
-    RetrieveAgentRequestFallbackModelConfigurationId,
-): string {
-  return JSON.stringify(
-    RetrieveAgentRequestFallbackModelConfigurationId$outboundSchema.parse(
-      retrieveAgentRequestFallbackModelConfigurationId,
-    ),
-  );
-}
-export function retrieveAgentRequestFallbackModelConfigurationIdFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfigurationId,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestFallbackModelConfigurationId$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationId' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationExecuteOn
-  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationExecuteOn);
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveAgentRequestFallbackModelConfigurationExecuteOn
-  > = RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema;
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationGuardrails,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()]),
-    execute_on:
-      RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "execute_on": "executeOn",
-    });
-  });
-/** @internal */
-export type RetrieveAgentRequestFallbackModelConfigurationGuardrails$Outbound =
-  {
-    id: string | string;
-    execute_on: string;
-  };
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationGuardrails$outboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationGuardrails$Outbound,
-    z.ZodTypeDef,
-    RetrieveAgentRequestFallbackModelConfigurationGuardrails
-  > = z.object({
-    id: z.union([RetrieveAgentRequestIdAgents1$outboundSchema, z.string()]),
-    executeOn:
-      RetrieveAgentRequestFallbackModelConfigurationExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
-
-export function retrieveAgentRequestFallbackModelConfigurationGuardrailsToJSON(
-  retrieveAgentRequestFallbackModelConfigurationGuardrails:
-    RetrieveAgentRequestFallbackModelConfigurationGuardrails,
-): string {
-  return JSON.stringify(
-    RetrieveAgentRequestFallbackModelConfigurationGuardrails$outboundSchema
-      .parse(retrieveAgentRequestFallbackModelConfigurationGuardrails),
-  );
-}
-export function retrieveAgentRequestFallbackModelConfigurationGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfigurationGuardrails,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationGuardrails' from JSON`,
-  );
-}
-
-/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfigurationParameters,
@@ -3273,9 +2828,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
         RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
       ),
     ]).optional(),
-    reasoning_effort:
-      RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
-        .optional(),
+    reasoning_effort: z.string().optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3299,11 +2852,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     modalities: z.nullable(
       z.array(
         RetrieveAgentRequestFallbackModelConfigurationModalities$inboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
       ),
     ).optional(),
   }).transform((v) => {
@@ -3362,9 +2910,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters$Outbound =
       | undefined;
     parallel_tool_calls?: boolean | undefined;
     modalities?: Array<string> | null | undefined;
-    guardrails?:
-      | Array<RetrieveAgentRequestFallbackModelConfigurationGuardrails$Outbound>
-      | undefined;
   };
 
 /** @internal */
@@ -3395,9 +2940,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$outboundSc
         RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$outboundSchema
       ),
     ]).optional(),
-    reasoningEffort:
-      RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$outboundSchema
-        .optional(),
+    reasoningEffort: z.string().optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3421,11 +2964,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$outboundSc
     modalities: z.nullable(
       z.array(
         RetrieveAgentRequestFallbackModelConfigurationModalities$outboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationGuardrails$outboundSchema
       ),
     ).optional(),
   }).transform((v) => {

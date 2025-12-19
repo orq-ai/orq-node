@@ -55,7 +55,7 @@ export type AgentStartedStreamingEventRole = ClosedEnum<
   typeof AgentStartedStreamingEventRole
 >;
 
-export type AgentStartedStreamingEventParts =
+export type Parts =
   | TextPart
   | DataPart
   | FilePart
@@ -246,19 +246,16 @@ export const AgentStartedStreamingEventRole$outboundSchema: z.ZodNativeEnum<
 > = AgentStartedStreamingEventRole$inboundSchema;
 
 /** @internal */
-export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
-  AgentStartedStreamingEventParts,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  TextPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
+  .union([
+    TextPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ]);
 /** @internal */
-export type AgentStartedStreamingEventParts$Outbound =
+export type Parts$Outbound =
   | TextPart$Outbound
   | DataPart$Outbound
   | FilePart$Outbound
@@ -266,10 +263,10 @@ export type AgentStartedStreamingEventParts$Outbound =
   | ToolResultPart$Outbound;
 
 /** @internal */
-export const AgentStartedStreamingEventParts$outboundSchema: z.ZodType<
-  AgentStartedStreamingEventParts$Outbound,
+export const Parts$outboundSchema: z.ZodType<
+  Parts$Outbound,
   z.ZodTypeDef,
-  AgentStartedStreamingEventParts
+  Parts
 > = z.union([
   TextPart$outboundSchema,
   DataPart$outboundSchema,
@@ -278,22 +275,16 @@ export const AgentStartedStreamingEventParts$outboundSchema: z.ZodType<
   ToolResultPart$outboundSchema,
 ]);
 
-export function agentStartedStreamingEventPartsToJSON(
-  agentStartedStreamingEventParts: AgentStartedStreamingEventParts,
-): string {
-  return JSON.stringify(
-    AgentStartedStreamingEventParts$outboundSchema.parse(
-      agentStartedStreamingEventParts,
-    ),
-  );
+export function partsToJSON(parts: Parts): string {
+  return JSON.stringify(Parts$outboundSchema.parse(parts));
 }
-export function agentStartedStreamingEventPartsFromJSON(
+export function partsFromJSON(
   jsonString: string,
-): SafeParseResult<AgentStartedStreamingEventParts, SDKValidationError> {
+): SafeParseResult<Parts, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AgentStartedStreamingEventParts$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentStartedStreamingEventParts' from JSON`,
+    (x) => Parts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Parts' from JSON`,
   );
 }
 
@@ -619,7 +610,7 @@ export const Settings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -650,7 +641,7 @@ export const Settings$outboundSchema: z.ZodType<
   Settings
 > = z.object({
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),

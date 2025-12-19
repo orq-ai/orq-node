@@ -11,10 +11,10 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.ListDatasetDatapointsContent2[]`
+### `operations.ListDatasetDatapointsContentDatasetsResponse2[]`
 
 ```typescript
-const value: operations.ListDatasetDatapointsContent2[] = [
+const value: operations.ListDatasetDatapointsContentDatasetsResponse2[] = [
   {
     type: "input_audio",
     inputAudio: {

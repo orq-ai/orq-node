@@ -11,9 +11,9 @@ The contents of the developer message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `components.InvokeDeploymentRequestContentMessages22[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: components.InvokeDeploymentRequestContentMessages22[] = [];
 ```
 
