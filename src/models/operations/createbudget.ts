@@ -25,13 +25,17 @@ export const RequestBodyPeriod = {
 export type RequestBodyPeriod = ClosedEnum<typeof RequestBodyPeriod>;
 
 /**
- * Budget configuration for the entire workspace
+ * Budget configuration for a specific contact
  */
-export type WorkspaceBudget = {
+export type ContactBudget = {
   /**
-   * Workspace budget type
+   * Contact budget type
    */
-  type: "workspace";
+  type: "contact";
+  /**
+   * Contact external ID
+   */
+  entityId: string;
   /**
    * Budget period type
    */
@@ -59,15 +63,15 @@ export type CreateBudgetRequestBodyPeriod = ClosedEnum<
 >;
 
 /**
- * Budget configuration for a specific contact
+ * Budget configuration for a specific API key
  */
-export type ContactBudget = {
+export type APIKeyBudget = {
   /**
-   * Contact budget type
+   * API Key budget type
    */
-  type: "contact";
+  type: "api_key";
   /**
-   * Contact external ID
+   * API Key token
    */
   entityId: string;
   /**
@@ -81,9 +85,9 @@ export type ContactBudget = {
 };
 
 /**
- * Create budget configuration for contact or workspace
+ * Create budget configuration for API key or contact
  */
-export type CreateBudgetRequestBody = ContactBudget | WorkspaceBudget;
+export type CreateBudgetRequestBody = APIKeyBudget | ContactBudget;
 
 /**
  * Budget entity type
@@ -91,7 +95,6 @@ export type CreateBudgetRequestBody = ContactBudget | WorkspaceBudget;
 export const CreateBudgetType = {
   ApiKey: "api_key",
   Contact: "contact",
-  Workspace: "workspace",
 } as const;
 /**
  * Budget entity type
@@ -162,6 +165,10 @@ export type CreateBudgetResponseBody = {
    */
   type: CreateBudgetType;
   /**
+   * API Key identifier (present when type is "api_key")
+   */
+  apiKeyId?: string | undefined;
+  /**
    * Contact external identifier (present when type is "contact")
    */
   contactId?: string | undefined;
@@ -194,58 +201,6 @@ export const RequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
 > = RequestBodyPeriod$inboundSchema;
 
 /** @internal */
-export const WorkspaceBudget$inboundSchema: z.ZodType<
-  WorkspaceBudget,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("workspace"),
-  period: RequestBodyPeriod$inboundSchema,
-  amount: z.number(),
-});
-/** @internal */
-export type WorkspaceBudget$Outbound = {
-  type: "workspace";
-  period: string;
-  amount: number;
-};
-
-/** @internal */
-export const WorkspaceBudget$outboundSchema: z.ZodType<
-  WorkspaceBudget$Outbound,
-  z.ZodTypeDef,
-  WorkspaceBudget
-> = z.object({
-  type: z.literal("workspace"),
-  period: RequestBodyPeriod$outboundSchema,
-  amount: z.number(),
-});
-
-export function workspaceBudgetToJSON(
-  workspaceBudget: WorkspaceBudget,
-): string {
-  return JSON.stringify(WorkspaceBudget$outboundSchema.parse(workspaceBudget));
-}
-export function workspaceBudgetFromJSON(
-  jsonString: string,
-): SafeParseResult<WorkspaceBudget, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WorkspaceBudget$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WorkspaceBudget' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateBudgetRequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof CreateBudgetRequestBodyPeriod
-> = z.nativeEnum(CreateBudgetRequestBodyPeriod);
-/** @internal */
-export const CreateBudgetRequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof CreateBudgetRequestBodyPeriod
-> = CreateBudgetRequestBodyPeriod$inboundSchema;
-
-/** @internal */
 export const ContactBudget$inboundSchema: z.ZodType<
   ContactBudget,
   z.ZodTypeDef,
@@ -253,7 +208,7 @@ export const ContactBudget$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("contact"),
   entity_id: z.string(),
-  period: CreateBudgetRequestBodyPeriod$inboundSchema,
+  period: RequestBodyPeriod$inboundSchema,
   amount: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -276,7 +231,7 @@ export const ContactBudget$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("contact"),
   entityId: z.string(),
-  period: CreateBudgetRequestBodyPeriod$outboundSchema,
+  period: RequestBodyPeriod$outboundSchema,
   amount: z.number(),
 }).transform((v) => {
   return remap$(v, {
@@ -298,18 +253,79 @@ export function contactBudgetFromJSON(
 }
 
 /** @internal */
+export const CreateBudgetRequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
+  typeof CreateBudgetRequestBodyPeriod
+> = z.nativeEnum(CreateBudgetRequestBodyPeriod);
+/** @internal */
+export const CreateBudgetRequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
+  typeof CreateBudgetRequestBodyPeriod
+> = CreateBudgetRequestBodyPeriod$inboundSchema;
+
+/** @internal */
+export const APIKeyBudget$inboundSchema: z.ZodType<
+  APIKeyBudget,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("api_key"),
+  entity_id: z.string(),
+  period: CreateBudgetRequestBodyPeriod$inboundSchema,
+  amount: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
+  });
+});
+/** @internal */
+export type APIKeyBudget$Outbound = {
+  type: "api_key";
+  entity_id: string;
+  period: string;
+  amount: number;
+};
+
+/** @internal */
+export const APIKeyBudget$outboundSchema: z.ZodType<
+  APIKeyBudget$Outbound,
+  z.ZodTypeDef,
+  APIKeyBudget
+> = z.object({
+  type: z.literal("api_key"),
+  entityId: z.string(),
+  period: CreateBudgetRequestBodyPeriod$outboundSchema,
+  amount: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    entityId: "entity_id",
+  });
+});
+
+export function apiKeyBudgetToJSON(apiKeyBudget: APIKeyBudget): string {
+  return JSON.stringify(APIKeyBudget$outboundSchema.parse(apiKeyBudget));
+}
+export function apiKeyBudgetFromJSON(
+  jsonString: string,
+): SafeParseResult<APIKeyBudget, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => APIKeyBudget$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'APIKeyBudget' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateBudgetRequestBody$inboundSchema: z.ZodType<
   CreateBudgetRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => APIKeyBudget$inboundSchema),
   z.lazy(() => ContactBudget$inboundSchema),
-  z.lazy(() => WorkspaceBudget$inboundSchema),
 ]);
 /** @internal */
 export type CreateBudgetRequestBody$Outbound =
-  | ContactBudget$Outbound
-  | WorkspaceBudget$Outbound;
+  | APIKeyBudget$Outbound
+  | ContactBudget$Outbound;
 
 /** @internal */
 export const CreateBudgetRequestBody$outboundSchema: z.ZodType<
@@ -317,8 +333,8 @@ export const CreateBudgetRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateBudgetRequestBody
 > = z.union([
+  z.lazy(() => APIKeyBudget$outboundSchema),
   z.lazy(() => ContactBudget$outboundSchema),
-  z.lazy(() => WorkspaceBudget$outboundSchema),
 ]);
 
 export function createBudgetRequestBodyToJSON(
@@ -465,6 +481,7 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
   _id: z.string(),
   workspace_id: z.string(),
   type: CreateBudgetType$inboundSchema,
+  api_key_id: z.string().optional(),
   contact_id: z.string().optional(),
   budget: z.lazy(() => CreateBudgetBudget$inboundSchema),
   is_active: z.boolean(),
@@ -472,12 +489,13 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-12-18T15:20:56.693Z",
+    "2025-12-13T17:08:01.358Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "workspace_id": "workspaceId",
+    "api_key_id": "apiKeyId",
     "contact_id": "contactId",
     "is_active": "isActive",
   });
@@ -487,6 +505,7 @@ export type CreateBudgetResponseBody$Outbound = {
   _id: string;
   workspace_id: string;
   type: string;
+  api_key_id?: string | undefined;
   contact_id?: string | undefined;
   budget: CreateBudgetBudget$Outbound;
   is_active: boolean;
@@ -504,17 +523,19 @@ export const CreateBudgetResponseBody$outboundSchema: z.ZodType<
   id: z.string(),
   workspaceId: z.string(),
   type: CreateBudgetType$outboundSchema,
+  apiKeyId: z.string().optional(),
   contactId: z.string().optional(),
   budget: z.lazy(() => CreateBudgetBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => Consumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-12-18T15:20:56.693Z"))
+  updated: z.date().default(() => new Date("2025-12-13T17:08:01.358Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     workspaceId: "workspace_id",
+    apiKeyId: "api_key_id",
     contactId: "contact_id",
     isActive: "is_active",
   });

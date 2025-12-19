@@ -34,6 +34,12 @@ import { tool$contactsDelete } from "./tools/contactsDelete.js";
 import { tool$contactsList } from "./tools/contactsList.js";
 import { tool$contactsRetrieve } from "./tools/contactsRetrieve.js";
 import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
+import { tool$conversationsCreate } from "./tools/conversationsCreate.js";
+import { tool$conversationsDelete } from "./tools/conversationsDelete.js";
+import { tool$conversationsGenerateName } from "./tools/conversationsGenerateName.js";
+import { tool$conversationsList } from "./tools/conversationsList.js";
+import { tool$conversationsRetrieve } from "./tools/conversationsRetrieve.js";
+import { tool$conversationsUpdate } from "./tools/conversationsUpdate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
@@ -103,6 +109,8 @@ import { tool$promptsListVersions } from "./tools/promptsListVersions.js";
 import { tool$promptsRetrieve } from "./tools/promptsRetrieve.js";
 import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
+import { tool$routerChatCompletions } from "./tools/routerChatCompletions.js";
+import { tool$routerImagesGenerate } from "./tools/routerImagesGenerate.js";
 import { tool$toolsCreate } from "./tools/toolsCreate.js";
 import { tool$toolsDelete } from "./tools/toolsDelete.js";
 import { tool$toolsList } from "./tools/toolsList.js";
@@ -121,7 +129,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.0.45",
+    version: "4.1.0",
   });
 
   const client = new OrqCore({
@@ -177,6 +185,12 @@ export function createMCPServer(deps: {
   tool(tool$agentsRun);
   tool(tool$agentsStreamRun);
   tool(tool$agentsStream);
+  tool(tool$conversationsList);
+  tool(tool$conversationsCreate);
+  tool(tool$conversationsGenerateName);
+  tool(tool$conversationsRetrieve);
+  tool(tool$conversationsUpdate);
+  tool(tool$conversationsDelete);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -246,6 +260,8 @@ export function createMCPServer(deps: {
   tool(tool$datasetsUpdateDatapoint);
   tool(tool$datasetsDeleteDatapoint);
   tool(tool$datasetsClear);
+  tool(tool$routerChatCompletions);
+  tool(tool$routerImagesGenerate);
   tool(tool$deploymentsMetricsCreate);
   tool(tool$agentsResponsesCreate);
 

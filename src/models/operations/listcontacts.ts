@@ -30,6 +30,10 @@ export type ListContactsRequest = {
    */
   endingBefore?: string | undefined;
   /**
+   * Search contacts by display name or email address. Minimum 2 characters required.
+   */
+  search?: string | undefined;
+  /**
    * Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
    */
   filterBy?: QueryParamFilterBy | undefined;
@@ -160,6 +164,7 @@ export const ListContactsRequest$inboundSchema: z.ZodType<
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
+  search: z.string().optional(),
   filter_by: z.lazy(() => QueryParamFilterBy$inboundSchema).optional(),
   include_metrics: z.nullable(z.boolean().default(false)),
 }).transform((v) => {
@@ -175,6 +180,7 @@ export type ListContactsRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  search?: string | undefined;
   filter_by?: QueryParamFilterBy$Outbound | undefined;
   include_metrics: boolean | null;
 };
@@ -188,6 +194,7 @@ export const ListContactsRequest$outboundSchema: z.ZodType<
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  search: z.string().optional(),
   filterBy: z.lazy(() => QueryParamFilterBy$outboundSchema).optional(),
   includeMetrics: z.nullable(z.boolean().default(false)),
 }).transform((v) => {
@@ -298,7 +305,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-12-18T15:20:56.298Z",
+      "2025-12-13T17:08:00.934Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
@@ -334,7 +341,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-12-18T15:20:56.298Z"))
+    updated: z.date().default(() => new Date("2025-12-13T17:08:00.934Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
   }).transform((v) => {

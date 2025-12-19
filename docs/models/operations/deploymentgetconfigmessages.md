@@ -49,7 +49,7 @@ const value: operations.MessagesAssistantMessage = {
 const value: operations.MessagesToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: "<id>",
+  toolCallId: null,
 };
 ```
 

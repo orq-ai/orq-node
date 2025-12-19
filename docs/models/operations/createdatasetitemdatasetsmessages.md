@@ -49,7 +49,7 @@ const value: operations.CreateDatasetItemMessagesDatasetsAssistantMessage = {
 const value: operations.CreateDatasetItemMessagesDatasetsToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: "<id>",
+  toolCallId: null,
 };
 ```
 

@@ -10,92 +10,15 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type =
-  {
-    Text: "text",
-  } as const;
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type
-  >;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2DeploymentsRequestTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2DeploymentsRequestTtl = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsRequestTtl
->;
-
-export type DeploymentGetConfig2DeploymentsRequestCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentGetConfig2DeploymentsRequestTtl | undefined;
-};
-
-export type DeploymentGetConfig2Deployments1 = {
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type;
-  text: string;
-  cacheControl?: DeploymentGetConfig2DeploymentsRequestCacheControl | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequestRequestBody2 =
-  DeploymentGetConfig2Deployments1;
+export type DeploymentGetConfigContentDeployments2 =
+  components.TextContentPartSchema;
 
 /**
  * The contents of the tool message.
  */
 export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent =
   | string
-  | Array<DeploymentGetConfig2Deployments1>;
+  | Array<components.TextContentPartSchema>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -162,83 +85,16 @@ export type ToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content: string | Array<DeploymentGetConfig2Deployments1>;
+  content: string | Array<components.TextContentPartSchema>;
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: PrefixMessagesCacheControl | undefined;
 };
 
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2DeploymentsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2DeploymentsTtl = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsTtl
->;
-
-export type DeploymentGetConfig2DeploymentsCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentGetConfig2DeploymentsTtl | undefined;
-};
-
-export type DeploymentGetConfig21 = {
-  type: "text";
-  text: string;
-  cacheControl?: DeploymentGetConfig2DeploymentsCacheControl | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequest2 =
-  | DeploymentGetConfig21
+export type DeploymentGetConfigContent2 =
+  | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -249,7 +105,7 @@ export type DeploymentGetConfigContentDeploymentsRequest2 =
 export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent =
   | string
   | Array<
-    | DeploymentGetConfig21
+    | (components.TextContentPartSchema & { type: "text" })
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -310,7 +166,7 @@ export type AssistantMessage = {
   content?:
     | string
     | Array<
-      | DeploymentGetConfig21
+      | (components.TextContentPartSchema & { type: "text" })
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -342,77 +198,6 @@ export type AssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2Ttl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2Ttl = ClosedEnum<
-  typeof DeploymentGetConfig2Ttl
->;
-
-export type DeploymentGetConfig2CacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentGetConfig2Ttl | undefined;
-};
-
-export type Four = {
-  /**
-   * The type of the content part. Always `file`.
-   */
-  type: "file";
-  cacheControl?: DeploymentGetConfig2CacheControl | undefined;
-  /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
-   */
-  file: components.FileContentPartSchema;
-};
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
 export const DeploymentGetConfig2DeploymentsType = {
   Ephemeral: "ephemeral",
 } as const;
@@ -421,206 +206,6 @@ export const DeploymentGetConfig2DeploymentsType = {
  */
 export type DeploymentGetConfig2DeploymentsType = ClosedEnum<
   typeof DeploymentGetConfig2DeploymentsType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const TwoTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type TwoTtl = ClosedEnum<typeof TwoTtl>;
-
-export type TwoCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfig2DeploymentsType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: TwoTtl | undefined;
-};
-
-export type Two1 = {
-  type: "text";
-  text: string;
-  cacheControl?: TwoCacheControl | undefined;
-};
-
-export type DeploymentGetConfigContentDeployments2 =
-  | Two1
-  | components.ImageContentPartSchema
-  | components.AudioContentPartSchema
-  | Four;
-
-/**
- * The contents of the user message.
- */
-export type DeploymentGetConfigPrefixMessagesDeploymentsContent =
-  | string
-  | Array<
-    | Two1
-    | components.ImageContentPartSchema
-    | components.AudioContentPartSchema
-    | Four
-  >;
-
-export type UserMessage = {
-  /**
-   * The role of the messages author, in this case `user`.
-   */
-  role: "user";
-  /**
-   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
-   */
-  name?: string | undefined;
-  /**
-   * The contents of the user message.
-   */
-  content:
-    | string
-    | Array<
-      | Two1
-      | components.ImageContentPartSchema
-      | components.AudioContentPartSchema
-      | Four
-    >;
-};
-
-export const DeploymentGetConfigContentDeploymentsType = {
-  Text: "text",
-} as const;
-export type DeploymentGetConfigContentDeploymentsType = ClosedEnum<
-  typeof DeploymentGetConfigContentDeploymentsType
->;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfigContentDeploymentsRequestType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfigContentDeploymentsRequestType = ClosedEnum<
-  typeof DeploymentGetConfigContentDeploymentsRequestType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const ContentTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type ContentTtl = ClosedEnum<typeof ContentTtl>;
-
-export type ContentCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfigContentDeploymentsRequestType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: ContentTtl | undefined;
-};
-
-export type DeploymentGetConfigContent2 = {
-  type: DeploymentGetConfigContentDeploymentsType;
-  text: string;
-  cacheControl?: ContentCacheControl | undefined;
-};
-
-/**
- * The contents of the developer message.
- */
-export type DeploymentGetConfigPrefixMessagesContent =
-  | string
-  | Array<DeploymentGetConfigContent2>;
-
-export type DeveloperMessage = {
-  /**
-   * The role of the messages author, in this case  `developer`.
-   */
-  role: "developer";
-  /**
-   * The contents of the developer message.
-   */
-  content: string | Array<DeploymentGetConfigContent2>;
-  /**
-   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
-   */
-  name?: string | undefined;
-};
-
-export const ContentType = {
-  Text: "text",
-} as const;
-export type ContentType = ClosedEnum<typeof ContentType>;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfigContentType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfigContentType = ClosedEnum<
-  typeof DeploymentGetConfigContentType
 >;
 
 /**
@@ -653,7 +238,7 @@ export type CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: DeploymentGetConfigContentType;
+  type: DeploymentGetConfig2DeploymentsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -667,16 +252,86 @@ export type CacheControl = {
   ttl?: Ttl | undefined;
 };
 
-export type Content2 = {
-  type: ContentType;
-  text: string;
+export type Four = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
   cacheControl?: CacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
+};
+
+export type Content2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.ImageContentPartSchema
+  | components.AudioContentPartSchema
+  | Four;
+
+/**
+ * The contents of the user message.
+ */
+export type DeploymentGetConfigPrefixMessagesDeploymentsContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.ImageContentPartSchema
+    | components.AudioContentPartSchema
+    | Four
+  >;
+
+export type UserMessage = {
+  /**
+   * The role of the messages author, in this case `user`.
+   */
+  role: "user";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * The contents of the user message.
+   */
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.ImageContentPartSchema
+      | components.AudioContentPartSchema
+      | Four
+    >;
+};
+
+/**
+ * The contents of the developer message.
+ */
+export type DeploymentGetConfigPrefixMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+export type DeveloperMessage = {
+  /**
+   * The role of the messages author, in this case  `developer`.
+   */
+  role: "developer";
+  /**
+   * The contents of the developer message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
 };
 
 /**
  * The contents of the system message.
  */
-export type PrefixMessagesContent = string | Array<Content2>;
+export type PrefixMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -689,7 +344,7 @@ export type SystemMessage = {
   /**
    * The contents of the system message.
    */
-  content: string | Array<Content2>;
+  content: string | Array<components.TextContentPartSchema>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -703,96 +358,15 @@ export type PrefixMessages =
   | AssistantMessage
   | ToolMessage;
 
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type = {
-  Text: "text",
-} as const;
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type
-  >;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl
-  >;
-
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl =
-  {
-    /**
-     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-     */
-    type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType;
-    /**
-     * The time-to-live for the cache control breakpoint. This may be one of the following values:
-     *
-     * @remarks
-     *
-     * - `5m`: 5 minutes
-     * - `1h`: 1 hour
-     *
-     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-     */
-    ttl?:
-      | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl
-      | undefined;
-  };
-
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1 = {
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type;
-  text: string;
-  cacheControl?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl
-    | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52 =
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1;
+export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 =
+  components.TextContentPartSchema;
 
 /**
  * The contents of the tool message.
  */
 export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent =
   | string
-  | Array<DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1>;
+  | Array<components.TextContentPartSchema>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -859,91 +433,16 @@ export type MessagesToolMessage = {
   /**
    * The contents of the tool message.
    */
-  content:
-    | string
-    | Array<DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1>;
+  content: string | Array<components.TextContentPartSchema>;
   /**
    * Tool call that this message is responding to.
    */
-  toolCallId: string;
+  toolCallId: string | null;
   cacheControl?: MessagesCacheControl | undefined;
 };
 
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl
-  >;
-
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl =
-  {
-    /**
-     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-     */
-    type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType;
-    /**
-     * The time-to-live for the cache control breakpoint. This may be one of the following values:
-     *
-     * @remarks
-     *
-     * - `5m`: 5 minutes
-     * - `1h`: 1 hour
-     *
-     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-     */
-    ttl?:
-      | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl
-      | undefined;
-  };
-
-export type DeploymentGetConfig2DeploymentsRequestRequestBody1 = {
-  type: "text";
-  text: string;
-  cacheControl?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl
-    | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42 =
-  | DeploymentGetConfig2DeploymentsRequestRequestBody1
+export type DeploymentGetConfigContentDeploymentsRequestRequestBody2 =
+  | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
   | components.RedactedReasoningPartSchema;
@@ -954,7 +453,7 @@ export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42 =
 export type DeploymentGetConfigMessagesDeploymentsRequestContent =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsRequestRequestBody1
+    | (components.TextContentPartSchema & { type: "text" })
     | components.RefusalPartSchema
     | components.ReasoningPartSchema
     | components.RedactedReasoningPartSchema
@@ -1015,7 +514,7 @@ export type MessagesAssistantMessage = {
   content?:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsRequestRequestBody1
+      | (components.TextContentPartSchema & { type: "text" })
       | components.RefusalPartSchema
       | components.ReasoningPartSchema
       | components.RedactedReasoningPartSchema
@@ -1047,96 +546,15 @@ export type MessagesAssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl
-  >;
-
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl =
-  {
-    /**
-     * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-     */
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type;
-    /**
-     * The time-to-live for the cache control breakpoint. This may be one of the following values:
-     *
-     * @remarks
-     *
-     * - `5m`: 5 minutes
-     * - `1h`: 1 hour
-     *
-     * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-     */
-    ttl?:
-      | DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl
-      | undefined;
-  };
-
-export type Two4 = {
-  /**
-   * The type of the content part. Always `file`.
-   */
-  type: "file";
-  cacheControl?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl
-    | undefined;
-  /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
-   */
-  file: components.FileContentPartSchema;
-};
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type = {
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  >;
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+>;
 
 /**
  * The time-to-live for the cache control breakpoint. This may be one of the following values:
@@ -1148,7 +566,7 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type =
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyTtl = {
+export const TwoTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -1162,15 +580,13 @@ export const DeploymentGetConfig2DeploymentsRequestRequestBodyTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyTtl = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsRequestRequestBodyTtl
->;
+export type TwoTtl = ClosedEnum<typeof TwoTtl>;
 
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl = {
+export type TwoCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type;
+  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -1181,19 +597,23 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: DeploymentGetConfig2DeploymentsRequestRequestBodyTtl | undefined;
+  ttl?: TwoTtl | undefined;
 };
 
-export type DeploymentGetConfig2DeploymentsRequest1 = {
-  type: "text";
-  text: string;
-  cacheControl?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl
-    | undefined;
+export type Two4 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: TwoCacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
 };
 
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32 =
-  | DeploymentGetConfig2DeploymentsRequest1
+export type DeploymentGetConfigContentDeploymentsRequest2 =
+  | (components.TextContentPartSchema & { type: "text" })
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
   | Two4;
@@ -1204,7 +624,7 @@ export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32 =
 export type DeploymentGetConfigMessagesDeploymentsContent =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsRequest1
+    | (components.TextContentPartSchema & { type: "text" })
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
     | Two4
@@ -1225,98 +645,19 @@ export type MessagesUserMessage = {
   content:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsRequest1
+      | (components.TextContentPartSchema & { type: "text" })
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
       | Two4
     >;
 };
 
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type =
-  {
-    Text: "text",
-  } as const;
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type =
-  ClosedEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type
-  >;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type =
-  ClosedEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfigContentDeploymentsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfigContentDeploymentsTtl = ClosedEnum<
-  typeof DeploymentGetConfigContentDeploymentsTtl
->;
-
-export type DeploymentGetConfigContentDeploymentsCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentGetConfigContentDeploymentsTtl | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22 =
-  {
-    type: DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type;
-    text: string;
-    cacheControl?:
-      | DeploymentGetConfigContentDeploymentsCacheControl
-      | undefined;
-  };
-
 /**
  * The contents of the developer message.
  */
 export type DeploymentGetConfigMessagesContent =
   | string
-  | Array<DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22>;
+  | Array<components.TextContentPartSchema>;
 
 export type MessagesDeveloperMessage = {
   /**
@@ -1326,96 +667,17 @@ export type MessagesDeveloperMessage = {
   /**
    * The contents of the developer message.
    */
-  content:
-    | string
-    | Array<DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22>;
+  content: string | Array<components.TextContentPartSchema>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
   name?: string | undefined;
 };
 
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyType = {
-  Text: "text",
-} as const;
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyType =
-  ClosedEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyType
-  >;
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType =
-  {
-    Ephemeral: "ephemeral",
-  } as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType =
-  ClosedEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfigContentTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfigContentTtl = ClosedEnum<
-  typeof DeploymentGetConfigContentTtl
->;
-
-export type DeploymentGetConfigContentCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: DeploymentGetConfigContentTtl | undefined;
-};
-
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 = {
-  type: DeploymentGetConfigContentDeploymentsRequestRequestBodyType;
-  text: string;
-  cacheControl?: DeploymentGetConfigContentCacheControl | undefined;
-};
-
 /**
  * The contents of the system message.
  */
-export type MessagesContent =
-  | string
-  | Array<DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2>;
+export type MessagesContent = string | Array<components.TextContentPartSchema>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -1428,9 +690,7 @@ export type MessagesSystemMessage = {
   /**
    * The contents of the system message.
    */
-  content:
-    | string
-    | Array<DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2>;
+  content: string | Array<components.TextContentPartSchema>;
   /**
    * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
    */
@@ -1949,13 +1209,13 @@ export type DeploymentGetConfig22 = {
 /**
  * Text content part of a prompt message
  */
-export type DeploymentGetConfig2DeploymentsResponse1 = {
+export type DeploymentGetConfig21 = {
   type: "text";
   text: string;
 };
 
 export type DeploymentGetConfigContentDeploymentsResponse2 =
-  | DeploymentGetConfig2DeploymentsResponse1
+  | DeploymentGetConfig21
   | DeploymentGetConfig22
   | DeploymentGetConfig23;
 
@@ -1965,9 +1225,7 @@ export type DeploymentGetConfigContentDeploymentsResponse2 =
 export type DeploymentGetConfigContent =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsResponse1
-    | DeploymentGetConfig22
-    | DeploymentGetConfig23
+    DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
   >;
 
 export const DeploymentGetConfigDeploymentsResponseType = {
@@ -2003,13 +1261,11 @@ export type DeploymentGetConfigDeploymentsMessages = {
   content:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsResponse1
-      | DeploymentGetConfig22
-      | DeploymentGetConfig23
+      DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
     >
     | null;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -2368,200 +1624,40 @@ export type DeploymentGetConfigResponseBody = {
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestTtl$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestTtl> = z
-    .nativeEnum(DeploymentGetConfig2DeploymentsRequestTtl);
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestTtl> =
-    DeploymentGetConfig2DeploymentsRequestTtl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestCacheControl$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType$inboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsRequestTtl$inboundSchema.default("5m"),
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequestCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestCacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestCacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestCacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5ContentType$outboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsRequestTtl$outboundSchema.default("5m"),
-  });
-
-export function deploymentGetConfig2DeploymentsRequestCacheControlToJSON(
-  deploymentGetConfig2DeploymentsRequestCacheControl:
-    DeploymentGetConfig2DeploymentsRequestCacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestCacheControl$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsRequestCacheControl,
-    ),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequestCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig2Deployments1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments1,
+export const DeploymentGetConfigContentDeployments2$inboundSchema: z.ZodType<
+  DeploymentGetConfigContentDeployments2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type$inboundSchema,
-  text: z.string(),
-  cache_control: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
+> = components.TextContentPartSchema$inboundSchema;
 /** @internal */
-export type DeploymentGetConfig2Deployments1$Outbound = {
-  type: string;
-  text: string;
-  cache_control?:
-    | DeploymentGetConfig2DeploymentsRequestCacheControl$Outbound
-    | undefined;
-};
+export type DeploymentGetConfigContentDeployments2$Outbound =
+  components.TextContentPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentGetConfig2Deployments1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments1$Outbound,
+export const DeploymentGetConfigContentDeployments2$outboundSchema: z.ZodType<
+  DeploymentGetConfigContentDeployments2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2Deployments1
-> = z.object({
-  type:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages5Type$outboundSchema,
-  text: z.string(),
-  cacheControl: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
+  DeploymentGetConfigContentDeployments2
+> = components.TextContentPartSchema$outboundSchema;
 
-export function deploymentGetConfig2Deployments1ToJSON(
-  deploymentGetConfig2Deployments1: DeploymentGetConfig2Deployments1,
+export function deploymentGetConfigContentDeployments2ToJSON(
+  deploymentGetConfigContentDeployments2:
+    DeploymentGetConfigContentDeployments2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2Deployments1$outboundSchema.parse(
-      deploymentGetConfig2Deployments1,
+    DeploymentGetConfigContentDeployments2$outboundSchema.parse(
+      deploymentGetConfigContentDeployments2,
     ),
   );
 }
-export function deploymentGetConfig2Deployments1FromJSON(
+export function deploymentGetConfigContentDeployments2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2Deployments1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentGetConfig2Deployments1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2Deployments1' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBody2,
-    z.ZodTypeDef,
-    unknown
-  > = z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema);
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBody2$Outbound =
-  DeploymentGetConfig2Deployments1$Outbound;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBody2$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBody2
-  > = z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema);
-
-export function deploymentGetConfigContentDeploymentsRequestRequestBody2ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBody2:
-    DeploymentGetConfigContentDeploymentsRequestRequestBody2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBody2),
-  );
-}
-export function deploymentGetConfigContentDeploymentsRequestRequestBody2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBody2,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfigContentDeployments2, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBody2$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBody2' from JSON`,
+      DeploymentGetConfigContentDeployments2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigContentDeployments2' from JSON`,
   );
 }
 
@@ -2573,12 +1669,12 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyConte
     unknown
   > = z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema)),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]);
 /** @internal */
 export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
-  | Array<DeploymentGetConfig2Deployments1$Outbound>;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent$outboundSchema:
@@ -2588,7 +1684,7 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyConte
     DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema)),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
 export function deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -2687,9 +1783,9 @@ export const ToolMessage$inboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema)),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => PrefixMessagesCacheControl$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -2701,8 +1797,8 @@ export const ToolMessage$inboundSchema: z.ZodType<
 /** @internal */
 export type ToolMessage$Outbound = {
   role: "tool";
-  content: string | Array<DeploymentGetConfig2Deployments1$Outbound>;
-  tool_call_id: string;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
   cache_control?: PrefixMessagesCacheControl$Outbound | undefined;
 };
 
@@ -2715,9 +1811,9 @@ export const ToolMessage$outboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema)),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => PrefixMessagesCacheControl$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -2741,197 +1837,55 @@ export function toolMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2DeploymentsTtl
-> = z.nativeEnum(DeploymentGetConfig2DeploymentsTtl);
-/** @internal */
-export const DeploymentGetConfig2DeploymentsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2DeploymentsTtl
-> = DeploymentGetConfig2DeploymentsTtl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsCacheControl$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsTtl$inboundSchema.default("5m"),
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsCacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsCacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsCacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsTtl$outboundSchema.default("5m"),
-  });
-
-export function deploymentGetConfig2DeploymentsCacheControlToJSON(
-  deploymentGetConfig2DeploymentsCacheControl:
-    DeploymentGetConfig2DeploymentsCacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsCacheControl$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsCacheControl,
-    ),
-  );
-}
-export function deploymentGetConfig2DeploymentsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig21$inboundSchema: z.ZodType<
-  DeploymentGetConfig21,
+export const DeploymentGetConfigContent2$inboundSchema: z.ZodType<
+  DeploymentGetConfigContent2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-  cache_control: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$inboundSchema,
+  components.ReasoningPartSchema$inboundSchema,
+  components.RedactedReasoningPartSchema$inboundSchema,
+]);
 /** @internal */
-export type DeploymentGetConfig21$Outbound = {
-  type: "text";
-  text: string;
-  cache_control?:
-    | DeploymentGetConfig2DeploymentsCacheControl$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const DeploymentGetConfig21$outboundSchema: z.ZodType<
-  DeploymentGetConfig21$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-  cacheControl: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function deploymentGetConfig21ToJSON(
-  deploymentGetConfig21: DeploymentGetConfig21,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig21$outboundSchema.parse(deploymentGetConfig21),
-  );
-}
-export function deploymentGetConfig21FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig21' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequest2$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequest2,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
-    components.RefusalPartSchema$inboundSchema,
-    components.ReasoningPartSchema$inboundSchema,
-    components.RedactedReasoningPartSchema$inboundSchema,
-  ]);
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequest2$Outbound =
-  | DeploymentGetConfig21$Outbound
+export type DeploymentGetConfigContent2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequest2$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequest2$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequest2
-  > = z.union([
-    z.lazy(() => DeploymentGetConfig21$outboundSchema),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
-  ]);
+export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
+  DeploymentGetConfigContent2$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigContent2
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$outboundSchema,
+  components.ReasoningPartSchema$outboundSchema,
+  components.RedactedReasoningPartSchema$outboundSchema,
+]);
 
-export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
-  deploymentGetConfigContentDeploymentsRequest2:
-    DeploymentGetConfigContentDeploymentsRequest2,
+export function deploymentGetConfigContent2ToJSON(
+  deploymentGetConfigContent2: DeploymentGetConfigContent2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema.parse(
-      deploymentGetConfigContentDeploymentsRequest2,
+    DeploymentGetConfigContent2$outboundSchema.parse(
+      deploymentGetConfigContent2,
     ),
   );
 }
-export function deploymentGetConfigContentDeploymentsRequest2FromJSON(
+export function deploymentGetConfigContent2FromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequest2,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfigContent2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeploymentsRequest2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequest2' from JSON`,
+    (x) => DeploymentGetConfigContent2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigContent2' from JSON`,
   );
 }
 
@@ -2943,18 +1897,22 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$inboundS
     unknown
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig21$inboundSchema),
-      components.RefusalPartSchema$inboundSchema,
-      components.ReasoningPartSchema$inboundSchema,
-      components.RedactedReasoningPartSchema$inboundSchema,
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$inboundSchema,
+        components.ReasoningPartSchema$inboundSchema,
+        components.RedactedReasoningPartSchema$inboundSchema,
+      ]),
+    ),
   ]);
 /** @internal */
 export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
-    | DeploymentGetConfig21$Outbound
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -2968,12 +1926,16 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$outbound
     DeploymentGetConfigPrefixMessagesDeploymentsRequestContent
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig21$outboundSchema),
-      components.RefusalPartSchema$outboundSchema,
-      components.ReasoningPartSchema$outboundSchema,
-      components.RedactedReasoningPartSchema$outboundSchema,
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigPrefixMessagesDeploymentsRequestContentToJSON(
@@ -3150,7 +2112,9 @@ export const AssistantMessage$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() => DeploymentGetConfig21$inboundSchema),
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
           components.RefusalPartSchema$inboundSchema,
           components.ReasoningPartSchema$inboundSchema,
           components.RedactedReasoningPartSchema$inboundSchema,
@@ -3174,7 +2138,7 @@ export type AssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | DeploymentGetConfig21$Outbound
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -3199,7 +2163,9 @@ export const AssistantMessage$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() => DeploymentGetConfig21$outboundSchema),
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
           components.RefusalPartSchema$outboundSchema,
           components.ReasoningPartSchema$outboundSchema,
           components.RedactedReasoningPartSchema$outboundSchema,
@@ -3237,66 +2203,55 @@ export function assistantMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
-  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
+export const DeploymentGetConfig2DeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2DeploymentsType
+> = z.nativeEnum(DeploymentGetConfig2DeploymentsType);
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
-  > = DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
+export const DeploymentGetConfig2DeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsType> =
+    DeploymentGetConfig2DeploymentsType$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfig2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2Ttl
-> = z.nativeEnum(DeploymentGetConfig2Ttl);
+export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
 /** @internal */
-export const DeploymentGetConfig2Ttl$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2Ttl
-> = DeploymentGetConfig2Ttl$inboundSchema;
+export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
+  Ttl$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfig2CacheControl$inboundSchema: z.ZodType<
-  DeploymentGetConfig2CacheControl,
+export const CacheControl$inboundSchema: z.ZodType<
+  CacheControl,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema,
-  ttl: DeploymentGetConfig2Ttl$inboundSchema.default("5m"),
+  type: DeploymentGetConfig2DeploymentsType$inboundSchema,
+  ttl: Ttl$inboundSchema.default("5m"),
 });
 /** @internal */
-export type DeploymentGetConfig2CacheControl$Outbound = {
+export type CacheControl$Outbound = {
   type: string;
   ttl: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2CacheControl$outboundSchema: z.ZodType<
-  DeploymentGetConfig2CacheControl$Outbound,
+export const CacheControl$outboundSchema: z.ZodType<
+  CacheControl$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2CacheControl
+  CacheControl
 > = z.object({
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
-  ttl: DeploymentGetConfig2Ttl$outboundSchema.default("5m"),
+  type: DeploymentGetConfig2DeploymentsType$outboundSchema,
+  ttl: Ttl$outboundSchema.default("5m"),
 });
 
-export function deploymentGetConfig2CacheControlToJSON(
-  deploymentGetConfig2CacheControl: DeploymentGetConfig2CacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2CacheControl$outboundSchema.parse(
-      deploymentGetConfig2CacheControl,
-    ),
-  );
+export function cacheControlToJSON(cacheControl: CacheControl): string {
+  return JSON.stringify(CacheControl$outboundSchema.parse(cacheControl));
 }
-export function deploymentGetConfig2CacheControlFromJSON(
+export function cacheControlFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2CacheControl, SDKValidationError> {
+): SafeParseResult<CacheControl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2CacheControl' from JSON`,
+    (x) => CacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CacheControl' from JSON`,
   );
 }
 
@@ -3304,8 +2259,7 @@ export function deploymentGetConfig2CacheControlFromJSON(
 export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("file"),
-    cache_control: z.lazy(() => DeploymentGetConfig2CacheControl$inboundSchema)
-      .optional(),
+    cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
     file: components.FileContentPartSchema$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -3315,7 +2269,7 @@ export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
 /** @internal */
 export type Four$Outbound = {
   type: "file";
-  cache_control?: DeploymentGetConfig2CacheControl$Outbound | undefined;
+  cache_control?: CacheControl$Outbound | undefined;
   file: components.FileContentPartSchema$Outbound;
 };
 
@@ -3323,8 +2277,7 @@ export type Four$Outbound = {
 export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
   z.object({
     type: z.literal("file"),
-    cacheControl: z.lazy(() => DeploymentGetConfig2CacheControl$outboundSchema)
-      .optional(),
+    cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
     file: components.FileContentPartSchema$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -3346,152 +2299,49 @@ export function fourFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2DeploymentsType
-> = z.nativeEnum(DeploymentGetConfig2DeploymentsType);
-/** @internal */
-export const DeploymentGetConfig2DeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsType> =
-    DeploymentGetConfig2DeploymentsType$inboundSchema;
-
-/** @internal */
-export const TwoTtl$inboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
-  .nativeEnum(TwoTtl);
-/** @internal */
-export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> =
-  TwoTtl$inboundSchema;
-
-/** @internal */
-export const TwoCacheControl$inboundSchema: z.ZodType<
-  TwoCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfig2DeploymentsType$inboundSchema,
-  ttl: TwoTtl$inboundSchema.default("5m"),
-});
-/** @internal */
-export type TwoCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const TwoCacheControl$outboundSchema: z.ZodType<
-  TwoCacheControl$Outbound,
-  z.ZodTypeDef,
-  TwoCacheControl
-> = z.object({
-  type: DeploymentGetConfig2DeploymentsType$outboundSchema,
-  ttl: TwoTtl$outboundSchema.default("5m"),
-});
-
-export function twoCacheControlToJSON(
-  twoCacheControl: TwoCacheControl,
-): string {
-  return JSON.stringify(TwoCacheControl$outboundSchema.parse(twoCacheControl));
-}
-export function twoCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<TwoCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TwoCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwoCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("text"),
-    text: z.string(),
-    cache_control: z.lazy(() => TwoCacheControl$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
-/** @internal */
-export type Two1$Outbound = {
-  type: "text";
-  text: string;
-  cache_control?: TwoCacheControl$Outbound | undefined;
-};
-
-/** @internal */
-export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
-  z.object({
-    type: z.literal("text"),
-    text: z.string(),
-    cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function two1ToJSON(two1: Two1): string {
-  return JSON.stringify(Two1$outboundSchema.parse(two1));
-}
-export function two1FromJSON(
-  jsonString: string,
-): SafeParseResult<Two1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two1' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeployments2$inboundSchema: z.ZodType<
-  DeploymentGetConfigContentDeployments2,
+export const Content2$inboundSchema: z.ZodType<
+  Content2,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => Two1$inboundSchema),
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
   components.ImageContentPartSchema$inboundSchema,
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => Four$inboundSchema),
 ]);
 /** @internal */
-export type DeploymentGetConfigContentDeployments2$Outbound =
-  | Two1$Outbound
+export type Content2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | Four$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeployments2$outboundSchema: z.ZodType<
-  DeploymentGetConfigContentDeployments2$Outbound,
+export const Content2$outboundSchema: z.ZodType<
+  Content2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigContentDeployments2
+  Content2
 > = z.union([
-  z.lazy(() => Two1$outboundSchema),
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
   components.ImageContentPartSchema$outboundSchema,
   components.AudioContentPartSchema$outboundSchema,
   z.lazy(() => Four$outboundSchema),
 ]);
 
-export function deploymentGetConfigContentDeployments2ToJSON(
-  deploymentGetConfigContentDeployments2:
-    DeploymentGetConfigContentDeployments2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeployments2$outboundSchema.parse(
-      deploymentGetConfigContentDeployments2,
-    ),
-  );
+export function content2ToJSON(content2: Content2): string {
+  return JSON.stringify(Content2$outboundSchema.parse(content2));
 }
-export function deploymentGetConfigContentDeployments2FromJSON(
+export function content2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigContentDeployments2, SDKValidationError> {
+): SafeParseResult<Content2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeployments2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeployments2' from JSON`,
+    (x) => Content2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content2' from JSON`,
   );
 }
 
@@ -3503,18 +2353,22 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => Two1$inboundSchema),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => Four$inboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => Four$inboundSchema),
+      ]),
+    ),
   ]);
 /** @internal */
 export type DeploymentGetConfigPrefixMessagesDeploymentsContent$Outbound =
   | string
   | Array<
-    | Two1$Outbound
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | Four$Outbound
@@ -3528,12 +2382,16 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsContent$outboundSchema:
     DeploymentGetConfigPrefixMessagesDeploymentsContent
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => Two1$outboundSchema),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Four$outboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => Four$outboundSchema),
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigPrefixMessagesDeploymentsContentToJSON(
@@ -3572,12 +2430,16 @@ export const UserMessage$inboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => Two1$inboundSchema),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => Four$inboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => Four$inboundSchema),
+      ]),
+    ),
   ]),
 });
 /** @internal */
@@ -3587,7 +2449,7 @@ export type UserMessage$Outbound = {
   content:
     | string
     | Array<
-      | Two1$Outbound
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | Four$Outbound
@@ -3604,12 +2466,16 @@ export const UserMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => Two1$outboundSchema),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Four$outboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => Four$outboundSchema),
+      ]),
+    ),
   ]),
 });
 
@@ -3627,140 +2493,18 @@ export function userMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsType> = z
-    .nativeEnum(DeploymentGetConfigContentDeploymentsType);
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsType> =
-    DeploymentGetConfigContentDeploymentsType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsRequestType> = z
-    .nativeEnum(DeploymentGetConfigContentDeploymentsRequestType);
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsRequestType> =
-    DeploymentGetConfigContentDeploymentsRequestType$inboundSchema;
-
-/** @internal */
-export const ContentTtl$inboundSchema: z.ZodNativeEnum<typeof ContentTtl> = z
-  .nativeEnum(ContentTtl);
-/** @internal */
-export const ContentTtl$outboundSchema: z.ZodNativeEnum<typeof ContentTtl> =
-  ContentTtl$inboundSchema;
-
-/** @internal */
-export const ContentCacheControl$inboundSchema: z.ZodType<
-  ContentCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigContentDeploymentsRequestType$inboundSchema,
-  ttl: ContentTtl$inboundSchema.default("5m"),
-});
-/** @internal */
-export type ContentCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const ContentCacheControl$outboundSchema: z.ZodType<
-  ContentCacheControl$Outbound,
-  z.ZodTypeDef,
-  ContentCacheControl
-> = z.object({
-  type: DeploymentGetConfigContentDeploymentsRequestType$outboundSchema,
-  ttl: ContentTtl$outboundSchema.default("5m"),
-});
-
-export function contentCacheControlToJSON(
-  contentCacheControl: ContentCacheControl,
-): string {
-  return JSON.stringify(
-    ContentCacheControl$outboundSchema.parse(contentCacheControl),
-  );
-}
-export function contentCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<ContentCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ContentCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContentCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContent2$inboundSchema: z.ZodType<
-  DeploymentGetConfigContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigContentDeploymentsType$inboundSchema,
-  text: z.string(),
-  cache_control: z.lazy(() => ContentCacheControl$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
-/** @internal */
-export type DeploymentGetConfigContent2$Outbound = {
-  type: string;
-  text: string;
-  cache_control?: ContentCacheControl$Outbound | undefined;
-};
-
-/** @internal */
-export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
-  DeploymentGetConfigContent2$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfigContent2
-> = z.object({
-  type: DeploymentGetConfigContentDeploymentsType$outboundSchema,
-  text: z.string(),
-  cacheControl: z.lazy(() => ContentCacheControl$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function deploymentGetConfigContent2ToJSON(
-  deploymentGetConfigContent2: DeploymentGetConfigContent2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContent2$outboundSchema.parse(
-      deploymentGetConfigContent2,
-    ),
-  );
-}
-export function deploymentGetConfigContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfigContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentGetConfigContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContent2' from JSON`,
-  );
-}
-
-/** @internal */
 export const DeploymentGetConfigPrefixMessagesContent$inboundSchema: z.ZodType<
   DeploymentGetConfigPrefixMessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(z.lazy(() => DeploymentGetConfigContent2$inboundSchema)),
+  z.array(components.TextContentPartSchema$inboundSchema),
 ]);
 /** @internal */
 export type DeploymentGetConfigPrefixMessagesContent$Outbound =
   | string
-  | Array<DeploymentGetConfigContent2$Outbound>;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigPrefixMessagesContent$outboundSchema: z.ZodType<
@@ -3769,7 +2513,7 @@ export const DeploymentGetConfigPrefixMessagesContent$outboundSchema: z.ZodType<
   DeploymentGetConfigPrefixMessagesContent
 > = z.union([
   z.string(),
-  z.array(z.lazy(() => DeploymentGetConfigContent2$outboundSchema)),
+  z.array(components.TextContentPartSchema$outboundSchema),
 ]);
 
 export function deploymentGetConfigPrefixMessagesContentToJSON(
@@ -3807,14 +2551,14 @@ export const DeveloperMessage$inboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfigContent2$inboundSchema)),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type DeveloperMessage$Outbound = {
   role: "developer";
-  content: string | Array<DeploymentGetConfigContent2$Outbound>;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
@@ -3827,7 +2571,7 @@ export const DeveloperMessage$outboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() => DeploymentGetConfigContent2$outboundSchema)),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
   name: z.string().optional(),
 });
@@ -3850,129 +2594,28 @@ export function developerMessageFromJSON(
 }
 
 /** @internal */
-export const ContentType$inboundSchema: z.ZodNativeEnum<typeof ContentType> = z
-  .nativeEnum(ContentType);
-/** @internal */
-export const ContentType$outboundSchema: z.ZodNativeEnum<typeof ContentType> =
-  ContentType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigContentType
-> = z.nativeEnum(DeploymentGetConfigContentType);
-/** @internal */
-export const DeploymentGetConfigContentType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigContentType
-> = DeploymentGetConfigContentType$inboundSchema;
-
-/** @internal */
-export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
-/** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
-  Ttl$inboundSchema;
-
-/** @internal */
-export const CacheControl$inboundSchema: z.ZodType<
-  CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigContentType$inboundSchema,
-  ttl: Ttl$inboundSchema.default("5m"),
-});
-/** @internal */
-export type CacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const CacheControl$outboundSchema: z.ZodType<
-  CacheControl$Outbound,
-  z.ZodTypeDef,
-  CacheControl
-> = z.object({
-  type: DeploymentGetConfigContentType$outboundSchema,
-  ttl: Ttl$outboundSchema.default("5m"),
-});
-
-export function cacheControlToJSON(cacheControl: CacheControl): string {
-  return JSON.stringify(CacheControl$outboundSchema.parse(cacheControl));
-}
-export function cacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const Content2$inboundSchema: z.ZodType<
-  Content2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ContentType$inboundSchema,
-  text: z.string(),
-  cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
-/** @internal */
-export type Content2$Outbound = {
-  type: string;
-  text: string;
-  cache_control?: CacheControl$Outbound | undefined;
-};
-
-/** @internal */
-export const Content2$outboundSchema: z.ZodType<
-  Content2$Outbound,
-  z.ZodTypeDef,
-  Content2
-> = z.object({
-  type: ContentType$outboundSchema,
-  text: z.string(),
-  cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function content2ToJSON(content2: Content2): string {
-  return JSON.stringify(Content2$outboundSchema.parse(content2));
-}
-export function content2FromJSON(
-  jsonString: string,
-): SafeParseResult<Content2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Content2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Content2' from JSON`,
-  );
-}
-
-/** @internal */
 export const PrefixMessagesContent$inboundSchema: z.ZodType<
   PrefixMessagesContent,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.lazy(() => Content2$inboundSchema))]);
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$inboundSchema),
+]);
 /** @internal */
-export type PrefixMessagesContent$Outbound = string | Array<Content2$Outbound>;
+export type PrefixMessagesContent$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const PrefixMessagesContent$outboundSchema: z.ZodType<
   PrefixMessagesContent$Outbound,
   z.ZodTypeDef,
   PrefixMessagesContent
-> = z.union([z.string(), z.array(z.lazy(() => Content2$outboundSchema))]);
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$outboundSchema),
+]);
 
 export function prefixMessagesContentToJSON(
   prefixMessagesContent: PrefixMessagesContent,
@@ -3998,13 +2641,16 @@ export const SystemMessage$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   role: z.literal("system"),
-  content: z.union([z.string(), z.array(z.lazy(() => Content2$inboundSchema))]),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type SystemMessage$Outbound = {
   role: "system";
-  content: string | Array<Content2$Outbound>;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
@@ -4017,7 +2663,7 @@ export const SystemMessage$outboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() => Content2$outboundSchema)),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
   name: z.string().optional(),
 });
@@ -4082,222 +2728,45 @@ export function prefixMessagesFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema:
   z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl,
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType$inboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl$inboundSchema
-        .default("5m"),
-  });
+  > = components.TextContentPartSchema$inboundSchema;
 /** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound =
-  {
-    type: string;
-    ttl: string;
-  };
+export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound =
+  components.TextContentPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema:
   z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound,
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound,
     z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5ContentType$outboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Ttl$outboundSchema
-        .default("5m"),
-  });
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2
+  > = components.TextContentPartSchema$outboundSchema;
 
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControlToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl,
+export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2ToJSON(
+  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2:
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema
-      .parse(
-        deploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl,
-      ),
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema
+      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2),
   );
 }
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControlFromJSON(
+export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl,
+  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema
+      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type$inboundSchema,
-    text: z.string(),
-    cache_control: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$Outbound =
-  {
-    type: string;
-    text: string;
-    cache_control?:
-      | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5Type$outboundSchema,
-    text: z.string(),
-    cacheControl: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages5CacheControl$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages1ToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBodyMessages1:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$outboundSchema
-      .parse(deploymentGetConfig2DeploymentsRequestRequestBodyMessages1),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages1FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52,
-    z.ZodTypeDef,
-    unknown
-  > = z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$inboundSchema
-  );
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$Outbound =
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$Outbound;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52
-  > = z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$outboundSchema
-  );
-
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52),
-  );
-}
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52' from JSON`,
+    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2' from JSON`,
   );
 }
 
@@ -4309,14 +2778,12 @@ export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$inb
     unknown
   > = z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$inboundSchema
-    )),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]);
 /** @internal */
 export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
-  | Array<DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$Outbound>;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$outboundSchema:
@@ -4326,9 +2793,7 @@ export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$out
     DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$outboundSchema
-    )),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
 export function deploymentGetConfigMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -4422,11 +2887,9 @@ export const MessagesToolMessage$inboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$inboundSchema
-    )),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]),
-  tool_call_id: z.string(),
+  tool_call_id: z.nullable(z.string()),
   cache_control: z.lazy(() => MessagesCacheControl$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4437,12 +2900,8 @@ export const MessagesToolMessage$inboundSchema: z.ZodType<
 /** @internal */
 export type MessagesToolMessage$Outbound = {
   role: "tool";
-  content:
-    | string
-    | Array<
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$Outbound
-    >;
-  tool_call_id: string;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
   cache_control?: MessagesCacheControl$Outbound | undefined;
 };
 
@@ -4455,11 +2914,9 @@ export const MessagesToolMessage$outboundSchema: z.ZodType<
   role: z.literal("tool"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages1$outboundSchema
-    )),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
-  toolCallId: z.string(),
+  toolCallId: z.nullable(z.string()),
   cacheControl: z.lazy(() => MessagesCacheControl$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4486,220 +2943,62 @@ export function messagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$inboundSchema:
   z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl$inboundSchema
-        .default("5m"),
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound =
-  {
-    type: string;
-    ttl: string;
-  };
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Ttl$outboundSchema
-        .default("5m"),
-  });
-
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControlToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema
-      .parse(
-        deploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl,
-      ),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBody1$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBody1,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: z.literal("text"),
-    text: z.string(),
-    cache_control: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBody1$Outbound = {
-  type: "text";
-  text: string;
-  cache_control?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBody1$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBody1$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBody1
-  > = z.object({
-    type: z.literal("text"),
-    text: z.string(),
-    cacheControl: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4CacheControl$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function deploymentGetConfig2DeploymentsRequestRequestBody1ToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBody1:
-    DeploymentGetConfig2DeploymentsRequestRequestBody1,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBody1$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsRequestRequestBody1,
-    ),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequestRequestBody1FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBody1,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBody1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBody1' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42,
+    DeploymentGetConfigContentDeploymentsRequestRequestBody2,
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBody1$inboundSchema
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
     ),
     components.RefusalPartSchema$inboundSchema,
     components.ReasoningPartSchema$inboundSchema,
     components.RedactedReasoningPartSchema$inboundSchema,
   ]);
 /** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$Outbound =
-  | DeploymentGetConfig2DeploymentsRequestRequestBody1$Outbound
+export type DeploymentGetConfigContentDeploymentsRequestRequestBody2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$outboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSchema:
   z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$Outbound,
+    DeploymentGetConfigContentDeploymentsRequestRequestBody2$Outbound,
     z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42
+    DeploymentGetConfigContentDeploymentsRequestRequestBody2
   > = z.union([
-    z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBody1$outboundSchema
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
     ),
     components.RefusalPartSchema$outboundSchema,
     components.ReasoningPartSchema$outboundSchema,
     components.RedactedReasoningPartSchema$outboundSchema,
   ]);
 
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages42ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages42:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42,
+export function deploymentGetConfigContentDeploymentsRequestRequestBody2ToJSON(
+  deploymentGetConfigContentDeploymentsRequestRequestBody2:
+    DeploymentGetConfigContentDeploymentsRequestRequestBody2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages42),
+    DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSchema
+      .parse(deploymentGetConfigContentDeploymentsRequestRequestBody2),
   );
 }
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages42FromJSON(
+export function deploymentGetConfigContentDeploymentsRequestRequestBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42,
+  DeploymentGetConfigContentDeploymentsRequestRequestBody2,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42$inboundSchema
+      DeploymentGetConfigContentDeploymentsRequestRequestBody2$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages42' from JSON`,
+    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBody2' from JSON`,
   );
 }
 
@@ -4711,20 +3010,22 @@ export const DeploymentGetConfigMessagesDeploymentsRequestContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() =>
-        DeploymentGetConfig2DeploymentsRequestRequestBody1$inboundSchema
-      ),
-      components.RefusalPartSchema$inboundSchema,
-      components.ReasoningPartSchema$inboundSchema,
-      components.RedactedReasoningPartSchema$inboundSchema,
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$inboundSchema,
+        components.ReasoningPartSchema$inboundSchema,
+        components.RedactedReasoningPartSchema$inboundSchema,
+      ]),
+    ),
   ]);
 /** @internal */
 export type DeploymentGetConfigMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsRequestRequestBody1$Outbound
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
     | components.RefusalPartSchema$Outbound
     | components.ReasoningPartSchema$Outbound
     | components.RedactedReasoningPartSchema$Outbound
@@ -4738,14 +3039,16 @@ export const DeploymentGetConfigMessagesDeploymentsRequestContent$outboundSchema
     DeploymentGetConfigMessagesDeploymentsRequestContent
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() =>
-        DeploymentGetConfig2DeploymentsRequestRequestBody1$outboundSchema
-      ),
-      components.RefusalPartSchema$outboundSchema,
-      components.ReasoningPartSchema$outboundSchema,
-      components.RedactedReasoningPartSchema$outboundSchema,
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigMessagesDeploymentsRequestContentToJSON(
@@ -4925,8 +3228,8 @@ export const MessagesAssistantMessage$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() =>
-            DeploymentGetConfig2DeploymentsRequestRequestBody1$inboundSchema
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
           ),
           components.RefusalPartSchema$inboundSchema,
           components.ReasoningPartSchema$inboundSchema,
@@ -4950,7 +3253,7 @@ export type MessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsRequestRequestBody1$Outbound
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
       | components.RefusalPartSchema$Outbound
       | components.ReasoningPartSchema$Outbound
       | components.RedactedReasoningPartSchema$Outbound
@@ -4975,8 +3278,8 @@ export const MessagesAssistantMessage$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() =>
-            DeploymentGetConfig2DeploymentsRequestRequestBody1$outboundSchema
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
           ),
           components.RefusalPartSchema$outboundSchema,
           components.ReasoningPartSchema$outboundSchema,
@@ -5014,90 +3317,60 @@ export function messagesAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type,
-  );
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+  > = DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl,
-  );
+export const TwoTtl$inboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
+  .nativeEnum(TwoTtl);
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema;
+export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> =
+  TwoTtl$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl$inboundSchema
-        .default("5m"),
-  });
+export const TwoCacheControl$inboundSchema: z.ZodType<
+  TwoCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema,
+  ttl: TwoTtl$inboundSchema.default("5m"),
+});
 /** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound =
-  {
-    type: string;
-    ttl: string;
-  };
+export type TwoCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema,
-    ttl:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesTtl$outboundSchema
-        .default("5m"),
-  });
+export const TwoCacheControl$outboundSchema: z.ZodType<
+  TwoCacheControl$Outbound,
+  z.ZodTypeDef,
+  TwoCacheControl
+> = z.object({
+  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
+  ttl: TwoTtl$outboundSchema.default("5m"),
+});
 
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControlToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl,
+export function twoCacheControlToJSON(
+  twoCacheControl: TwoCacheControl,
 ): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema
-      .parse(
-        deploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl,
-      ),
-  );
+  return JSON.stringify(TwoCacheControl$outboundSchema.parse(twoCacheControl));
 }
-export function deploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControlFromJSON(
+export function twoCacheControlFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl,
-  SDKValidationError
-> {
+): SafeParseResult<TwoCacheControl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl' from JSON`,
+    (x) => TwoCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoCacheControl' from JSON`,
   );
 }
 
@@ -5105,9 +3378,7 @@ export function deploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheCo
 export const Two4$inboundSchema: z.ZodType<Two4, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("file"),
-    cache_control: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$inboundSchema
-    ).optional(),
+    cache_control: z.lazy(() => TwoCacheControl$inboundSchema).optional(),
     file: components.FileContentPartSchema$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -5117,9 +3388,7 @@ export const Two4$inboundSchema: z.ZodType<Two4, z.ZodTypeDef, unknown> = z
 /** @internal */
 export type Two4$Outbound = {
   type: "file";
-  cache_control?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$Outbound
-    | undefined;
+  cache_control?: TwoCacheControl$Outbound | undefined;
   file: components.FileContentPartSchema$Outbound;
 };
 
@@ -5127,9 +3396,7 @@ export type Two4$Outbound = {
 export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
   z.object({
     type: z.literal("file"),
-    cacheControl: z.lazy(() =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesCacheControl$outboundSchema
-    ).optional(),
+    cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
     file: components.FileContentPartSchema$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -5151,205 +3418,64 @@ export function two4FromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type,
-  );
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyTtl$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestRequestBodyTtl> =
-    z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyTtl);
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyTtl$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestRequestBodyTtl> =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyTtl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$inboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequest2$inboundSchema:
   z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsRequestRequestBodyTtl$inboundSchema
-      .default("5m"),
-  });
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$Outbound =
-  {
-    type: string;
-    ttl: string;
-  };
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema,
-    ttl: DeploymentGetConfig2DeploymentsRequestRequestBodyTtl$outboundSchema
-      .default("5m"),
-  });
-
-export function deploymentGetConfig2DeploymentsRequestRequestBodyCacheControlToJSON(
-  deploymentGetConfig2DeploymentsRequestRequestBodyCacheControl:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$outboundSchema
-      .parse(deploymentGetConfig2DeploymentsRequestRequestBodyCacheControl),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequestRequestBodyCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequest1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-  cache_control: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
-/** @internal */
-export type DeploymentGetConfig2DeploymentsRequest1$Outbound = {
-  type: "text";
-  text: string;
-  cache_control?:
-    | DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequest1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest1$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsRequest1
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-  cacheControl: z.lazy(() =>
-    DeploymentGetConfig2DeploymentsRequestRequestBodyCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function deploymentGetConfig2DeploymentsRequest1ToJSON(
-  deploymentGetConfig2DeploymentsRequest1:
-    DeploymentGetConfig2DeploymentsRequest1,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequest1$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsRequest1,
-    ),
-  );
-}
-export function deploymentGetConfig2DeploymentsRequest1FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequest1,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequest1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequest1' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32,
+    DeploymentGetConfigContentDeploymentsRequest2,
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
     components.ImageContentPartSchema$inboundSchema,
     components.AudioContentPartSchema$inboundSchema,
     z.lazy(() => Two4$inboundSchema),
   ]);
 /** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$Outbound =
-  | DeploymentGetConfig2DeploymentsRequest1$Outbound
+export type DeploymentGetConfigContentDeploymentsRequest2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | Two4$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$outboundSchema:
+export const DeploymentGetConfigContentDeploymentsRequest2$outboundSchema:
   z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$Outbound,
+    DeploymentGetConfigContentDeploymentsRequest2$Outbound,
     z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32
+    DeploymentGetConfigContentDeploymentsRequest2
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
     components.ImageContentPartSchema$outboundSchema,
     components.AudioContentPartSchema$outboundSchema,
     z.lazy(() => Two4$outboundSchema),
   ]);
 
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages32ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages32:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32,
+export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
+  deploymentGetConfigContentDeploymentsRequest2:
+    DeploymentGetConfigContentDeploymentsRequest2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages32),
+    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema.parse(
+      deploymentGetConfigContentDeploymentsRequest2,
+    ),
   );
 }
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages32FromJSON(
+export function deploymentGetConfigContentDeploymentsRequest2FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32,
+  DeploymentGetConfigContentDeploymentsRequest2,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages32' from JSON`,
+      DeploymentGetConfigContentDeploymentsRequest2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequest2' from JSON`,
   );
 }
 
@@ -5361,18 +3487,22 @@ export const DeploymentGetConfigMessagesDeploymentsContent$inboundSchema:
     unknown
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => Two4$inboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => Two4$inboundSchema),
+      ]),
+    ),
   ]);
 /** @internal */
 export type DeploymentGetConfigMessagesDeploymentsContent$Outbound =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsRequest1$Outbound
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
     | Two4$Outbound
@@ -5386,12 +3516,16 @@ export const DeploymentGetConfigMessagesDeploymentsContent$outboundSchema:
     DeploymentGetConfigMessagesDeploymentsContent
   > = z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Two4$outboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => Two4$outboundSchema),
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigMessagesDeploymentsContentToJSON(
@@ -5430,12 +3564,16 @@ export const MessagesUserMessage$inboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => Two4$inboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => Two4$inboundSchema),
+      ]),
+    ),
   ]),
 });
 /** @internal */
@@ -5445,7 +3583,7 @@ export type MessagesUserMessage$Outbound = {
   content:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsRequest1$Outbound
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
       | components.ImageContentPartSchema$Outbound
       | components.AudioContentPartSchema$Outbound
       | Two4$Outbound
@@ -5462,12 +3600,16 @@ export const MessagesUserMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
   content: z.union([
     z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Two4$outboundSchema),
-    ])),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => Two4$outboundSchema),
+      ]),
+    ),
   ]),
 });
 
@@ -5489,185 +3631,18 @@ export function messagesUserMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type
-  > = z.nativeEnum(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type,
-  );
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type
-  > =
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type
-  > = z.nativeEnum(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type,
-  );
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type
-  > =
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsTtl$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsTtl> = z
-    .nativeEnum(DeploymentGetConfigContentDeploymentsTtl);
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsTtl$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigContentDeploymentsTtl> =
-    DeploymentGetConfigContentDeploymentsTtl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsCacheControl$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type$inboundSchema,
-    ttl: DeploymentGetConfigContentDeploymentsTtl$inboundSchema.default("5m"),
-  });
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsCacheControl$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsCacheControl$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsCacheControl
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22Type$outboundSchema,
-    ttl: DeploymentGetConfigContentDeploymentsTtl$outboundSchema.default("5m"),
-  });
-
-export function deploymentGetConfigContentDeploymentsCacheControlToJSON(
-  deploymentGetConfigContentDeploymentsCacheControl:
-    DeploymentGetConfigContentDeploymentsCacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsCacheControl$outboundSchema.parse(
-      deploymentGetConfigContentDeploymentsCacheControl,
-    ),
-  );
-}
-export function deploymentGetConfigContentDeploymentsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeploymentsCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type$inboundSchema,
-    text: z.string(),
-    cache_control: z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsCacheControl$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$Outbound =
-  {
-    type: string;
-    text: string;
-    cache_control?:
-      | DeploymentGetConfigContentDeploymentsCacheControl$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2Type$outboundSchema,
-    text: z.string(),
-    cacheControl: z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsCacheControl$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages22ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages22:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages22),
-  );
-}
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages22FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22' from JSON`,
-  );
-}
-
-/** @internal */
 export const DeploymentGetConfigMessagesContent$inboundSchema: z.ZodType<
   DeploymentGetConfigMessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(z.lazy(() =>
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$inboundSchema
-  )),
+  z.array(components.TextContentPartSchema$inboundSchema),
 ]);
 /** @internal */
 export type DeploymentGetConfigMessagesContent$Outbound =
   | string
-  | Array<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$Outbound
-  >;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigMessagesContent$outboundSchema: z.ZodType<
@@ -5676,9 +3651,7 @@ export const DeploymentGetConfigMessagesContent$outboundSchema: z.ZodType<
   DeploymentGetConfigMessagesContent
 > = z.union([
   z.string(),
-  z.array(z.lazy(() =>
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$outboundSchema
-  )),
+  z.array(components.TextContentPartSchema$outboundSchema),
 ]);
 
 export function deploymentGetConfigMessagesContentToJSON(
@@ -5710,20 +3683,14 @@ export const MessagesDeveloperMessage$inboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$inboundSchema
-    )),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type MessagesDeveloperMessage$Outbound = {
   role: "developer";
-  content:
-    | string
-    | Array<
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$Outbound
-    >;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
@@ -5736,9 +3703,7 @@ export const MessagesDeveloperMessage$outboundSchema: z.ZodType<
   role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages22$outboundSchema
-    )),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
   name: z.string().optional(),
 });
@@ -5761,173 +3726,18 @@ export function messagesDeveloperMessageFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyType
-  > = z.nativeEnum(DeploymentGetConfigContentDeploymentsRequestRequestBodyType);
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyType
-  > = DeploymentGetConfigContentDeploymentsRequestRequestBodyType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType
-  > = z.nativeEnum(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType,
-  );
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType
-  > =
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentTtl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigContentTtl
-> = z.nativeEnum(DeploymentGetConfigContentTtl);
-/** @internal */
-export const DeploymentGetConfigContentTtl$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigContentTtl
-> = DeploymentGetConfigContentTtl$inboundSchema;
-
-/** @internal */
-export const DeploymentGetConfigContentCacheControl$inboundSchema: z.ZodType<
-  DeploymentGetConfigContentCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType$inboundSchema,
-  ttl: DeploymentGetConfigContentTtl$inboundSchema.default("5m"),
-});
-/** @internal */
-export type DeploymentGetConfigContentCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const DeploymentGetConfigContentCacheControl$outboundSchema: z.ZodType<
-  DeploymentGetConfigContentCacheControl$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfigContentCacheControl
-> = z.object({
-  type:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessagesType$outboundSchema,
-  ttl: DeploymentGetConfigContentTtl$outboundSchema.default("5m"),
-});
-
-export function deploymentGetConfigContentCacheControlToJSON(
-  deploymentGetConfigContentCacheControl:
-    DeploymentGetConfigContentCacheControl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentCacheControl$outboundSchema.parse(
-      deploymentGetConfigContentCacheControl,
-    ),
-  );
-}
-export function deploymentGetConfigContentCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfigContentCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigContentCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyType$inboundSchema,
-    text: z.string(),
-    cache_control: z.lazy(() =>
-      DeploymentGetConfigContentCacheControl$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound =
-  {
-    type: string;
-    text: string;
-    cache_control?: DeploymentGetConfigContentCacheControl$Outbound | undefined;
-  };
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2
-  > = z.object({
-    type:
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyType$outboundSchema,
-    text: z.string(),
-    cacheControl: z.lazy(() =>
-      DeploymentGetConfigContentCacheControl$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2ToJSON(
-  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2:
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema
-      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2),
-  );
-}
-export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2' from JSON`,
-  );
-}
-
-/** @internal */
 export const MessagesContent$inboundSchema: z.ZodType<
   MessagesContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
-  z.array(z.lazy(() =>
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema
-  )),
+  z.array(components.TextContentPartSchema$inboundSchema),
 ]);
 /** @internal */
 export type MessagesContent$Outbound =
   | string
-  | Array<
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound
-  >;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const MessagesContent$outboundSchema: z.ZodType<
@@ -5936,9 +3746,7 @@ export const MessagesContent$outboundSchema: z.ZodType<
   MessagesContent
 > = z.union([
   z.string(),
-  z.array(z.lazy(() =>
-    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema
-  )),
+  z.array(components.TextContentPartSchema$outboundSchema),
 ]);
 
 export function messagesContentToJSON(
@@ -5965,20 +3773,14 @@ export const MessagesSystemMessage$inboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$inboundSchema
-    )),
+    z.array(components.TextContentPartSchema$inboundSchema),
   ]),
   name: z.string().optional(),
 });
 /** @internal */
 export type MessagesSystemMessage$Outbound = {
   role: "system";
-  content:
-    | string
-    | Array<
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound
-    >;
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
@@ -5991,9 +3793,7 @@ export const MessagesSystemMessage$outboundSchema: z.ZodType<
   role: z.literal("system"),
   content: z.union([
     z.string(),
-    z.array(z.lazy(() =>
-      DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema
-    )),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
   name: z.string().optional(),
 });
@@ -8226,8 +6026,8 @@ export function deploymentGetConfig22FromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse1,
+export const DeploymentGetConfig21$inboundSchema: z.ZodType<
+  DeploymentGetConfig21,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -8235,44 +6035,35 @@ export const DeploymentGetConfig2DeploymentsResponse1$inboundSchema: z.ZodType<
   text: z.string(),
 });
 /** @internal */
-export type DeploymentGetConfig2DeploymentsResponse1$Outbound = {
+export type DeploymentGetConfig21$Outbound = {
   type: "text";
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse1$Outbound,
+export const DeploymentGetConfig21$outboundSchema: z.ZodType<
+  DeploymentGetConfig21$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsResponse1
+  DeploymentGetConfig21
 > = z.object({
   type: z.literal("text"),
   text: z.string(),
 });
 
-export function deploymentGetConfig2DeploymentsResponse1ToJSON(
-  deploymentGetConfig2DeploymentsResponse1:
-    DeploymentGetConfig2DeploymentsResponse1,
+export function deploymentGetConfig21ToJSON(
+  deploymentGetConfig21: DeploymentGetConfig21,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsResponse1$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsResponse1,
-    ),
+    DeploymentGetConfig21$outboundSchema.parse(deploymentGetConfig21),
   );
 }
-export function deploymentGetConfig2DeploymentsResponse1FromJSON(
+export function deploymentGetConfig21FromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsResponse1,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsResponse1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsResponse1' from JSON`,
+    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig21' from JSON`,
   );
 }
 
@@ -8283,13 +6074,13 @@ export const DeploymentGetConfigContentDeploymentsResponse2$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
+    z.lazy(() => DeploymentGetConfig21$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
     z.lazy(() => DeploymentGetConfig23$inboundSchema),
   ]);
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsResponse2$Outbound =
-  | DeploymentGetConfig2DeploymentsResponse1$Outbound
+  | DeploymentGetConfig21$Outbound
   | DeploymentGetConfig22$Outbound
   | DeploymentGetConfig23$Outbound;
 
@@ -8300,7 +6091,7 @@ export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
     z.ZodTypeDef,
     DeploymentGetConfigContentDeploymentsResponse2
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
+    z.lazy(() => DeploymentGetConfig21$outboundSchema),
     z.lazy(() => DeploymentGetConfig22$outboundSchema),
     z.lazy(() => DeploymentGetConfig23$outboundSchema),
   ]);
@@ -8339,7 +6130,7 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
+    z.lazy(() => DeploymentGetConfig21$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
     z.lazy(() => DeploymentGetConfig23$inboundSchema),
   ])),
@@ -8348,7 +6139,7 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 export type DeploymentGetConfigContent$Outbound =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsResponse1$Outbound
+    | DeploymentGetConfig21$Outbound
     | DeploymentGetConfig22$Outbound
     | DeploymentGetConfig23$Outbound
   >;
@@ -8361,7 +6152,7 @@ export const DeploymentGetConfigContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
+    z.lazy(() => DeploymentGetConfig21$outboundSchema),
     z.lazy(() => DeploymentGetConfig22$outboundSchema),
     z.lazy(() => DeploymentGetConfig23$outboundSchema),
   ])),
@@ -8501,7 +6292,7 @@ export const DeploymentGetConfigDeploymentsMessages$inboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
+          z.lazy(() => DeploymentGetConfig21$inboundSchema),
           z.lazy(() => DeploymentGetConfig22$inboundSchema),
           z.lazy(() => DeploymentGetConfig23$inboundSchema),
         ]),
@@ -8510,7 +6301,7 @@ export const DeploymentGetConfigDeploymentsMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -8523,13 +6314,13 @@ export type DeploymentGetConfigDeploymentsMessages$Outbound = {
   content:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsResponse1$Outbound
+      | DeploymentGetConfig21$Outbound
       | DeploymentGetConfig22$Outbound
       | DeploymentGetConfig23$Outbound
     >
     | null;
   tool_calls?: Array<DeploymentGetConfigToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -8544,7 +6335,7 @@ export const DeploymentGetConfigDeploymentsMessages$outboundSchema: z.ZodType<
       z.string(),
       z.array(
         z.union([
-          z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
+          z.lazy(() => DeploymentGetConfig21$outboundSchema),
           z.lazy(() => DeploymentGetConfig22$outboundSchema),
           z.lazy(() => DeploymentGetConfig23$outboundSchema),
         ]),
@@ -8553,7 +6344,7 @@ export const DeploymentGetConfigDeploymentsMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

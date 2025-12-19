@@ -1,0 +1,26 @@
+# APIKeyBudget
+
+Budget configuration for a specific API key
+
+## Example Usage
+
+```typescript
+import { APIKeyBudget } from "@orq-ai/node/models/operations";
+
+let value: APIKeyBudget = {
+  type: "api_key",
+  entityId:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3b3Jrc3BhY2VJZCI6IjYxNGJiMTQ0LTE5NzgtNGMzNS05ODM1LWFkY2Q5NjM3ZmI2ZiIsImlzcyI6Im9ycSIsImlhdCI6MTc1NzA1NDE5Nn0...",
+  period: "monthly",
+  amount: 100,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                   | Type                                                                                                                                                    | Required                                                                                                                                                | Description                                                                                                                                             | Example                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                  | *"api_key"*                                                                                                                                             | :heavy_check_mark:                                                                                                                                      | API Key budget type                                                                                                                                     | api_key                                                                                                                                                 |
+| `entityId`                                                                                                                                              | *string*                                                                                                                                                | :heavy_check_mark:                                                                                                                                      | API Key token                                                                                                                                           | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3b3Jrc3BhY2VJZCI6IjYxNGJiMTQ0LTE5NzgtNGMzNS05ODM1LWFkY2Q5NjM3ZmI2ZiIsImlzcyI6Im9ycSIsImlhdCI6MTc1NzA1NDE5Nn0... |
+| `period`                                                                                                                                                | [operations.CreateBudgetRequestBodyPeriod](../../models/operations/createbudgetrequestbodyperiod.md)                                                    | :heavy_check_mark:                                                                                                                                      | Budget period type                                                                                                                                      | monthly                                                                                                                                                 |
+| `amount`                                                                                                                                                | *number*                                                                                                                                                | :heavy_check_mark:                                                                                                                                      | Budget amount in USD for the specified period                                                                                                           | 100                                                                                                                                                     |

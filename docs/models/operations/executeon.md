@@ -1,6 +1,6 @@
 # ExecuteOn
 
-Determines whether the evaluator runs on the agent input (user message) or output (agent response).
+Determines whether the guardrail runs on the input (user message) or output (model response).
 
 ## Example Usage
 

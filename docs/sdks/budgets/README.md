@@ -12,7 +12,7 @@
 
 ## list
 
-Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
+Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact).
 
 ### Example Usage
 
@@ -89,7 +89,7 @@ run();
 
 ## create
 
-Create a new budget configuration for a contact or workspace. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.
+Create a new budget configuration for an API key or contact. For API keys, provide the API key value (e.g., sk_live_xxx) in entity_id field. For contacts, provide the external ID in entity_id field.
 
 ### Example Usage
 
@@ -103,7 +103,8 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.budgets.create({
-    type: "workspace",
+    type: "contact",
+    entityId: "user_123",
     period: "monthly",
     amount: 250,
   });
@@ -130,7 +131,8 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await budgetsCreate(orq, {
-    type: "workspace",
+    type: "contact",
+    entityId: "user_123",
     period: "monthly",
     amount: 250,
   });

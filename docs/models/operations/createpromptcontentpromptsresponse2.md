@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.CreatePrompt2PromptsResponse1`
+### `operations.CreatePrompt21`
 
 ```typescript
-const value: operations.CreatePrompt2PromptsResponse1 = {
+const value: operations.CreatePrompt21 = {
   type: "text",
   text: "<value>",
 };

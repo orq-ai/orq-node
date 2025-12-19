@@ -318,29 +318,31 @@ export type GetOnePromptModelParameters = {
 };
 
 export const GetOnePromptProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
 
@@ -467,7 +469,7 @@ export type GetOnePromptMessages = {
     | Array<GetOnePrompt21 | GetOnePrompt22 | GetOnePrompt23>
     | null;
   toolCalls?: Array<GetOnePromptToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -1568,7 +1570,7 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => GetOnePromptToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -1587,7 +1589,7 @@ export type GetOnePromptMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<GetOnePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -1609,7 +1611,7 @@ export const GetOnePromptMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => GetOnePromptToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

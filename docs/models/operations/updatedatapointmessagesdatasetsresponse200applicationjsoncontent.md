@@ -11,10 +11,14 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.UpdateDatapointContentDatasetsResponse200ApplicationJson2[]`
+### `operations.UpdateDatapointContentDatasetsResponse2[]`
 
 ```typescript
-const value:
-  operations.UpdateDatapointContentDatasetsResponse200ApplicationJson2[] = [];
+const value: operations.UpdateDatapointContentDatasetsResponse2[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

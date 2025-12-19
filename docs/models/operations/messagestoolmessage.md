@@ -8,7 +8,7 @@ import { MessagesToolMessage } from "@orq-ai/node/models/operations";
 let value: MessagesToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: "<id>",
+  toolCallId: null,
 };
 ```
 

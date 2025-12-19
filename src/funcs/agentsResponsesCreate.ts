@@ -24,6 +24,11 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+export enum CreateAcceptEnum {
+  applicationJson = "application/json",
+  textEventStream = "text/event-stream",
+}
+
 /**
  * Create response
  *
@@ -34,10 +39,10 @@ export function agentsResponsesCreate(
   client: OrqCore,
   requestBody: operations.CreateAgentResponseRequestRequestBody,
   agentKey: string,
-  options?: RequestOptions,
+  options?: RequestOptions & { acceptHeaderOverride?: CreateAcceptEnum },
 ): APIPromise<
   Result<
-    operations.CreateAgentResponseRequestResponseBody,
+    operations.CreateAgentResponseRequestResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -60,11 +65,11 @@ async function $do(
   client: OrqCore,
   requestBody: operations.CreateAgentResponseRequestRequestBody,
   agentKey: string,
-  options?: RequestOptions,
+  options?: RequestOptions & { acceptHeaderOverride?: CreateAcceptEnum },
 ): Promise<
   [
     Result<
-      operations.CreateAgentResponseRequestResponseBody,
+      operations.CreateAgentResponseRequestResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -105,7 +110,8 @@ async function $do(
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
-    Accept: "application/json",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, text/event-stream;q=0",
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -154,7 +160,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateAgentResponseRequestResponseBody,
+    operations.CreateAgentResponseRequestResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,10 +170,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations.CreateAgentResponseRequestResponseBody$inboundSchema,
-    ),
+    M.json(200, operations.CreateAgentResponseRequestResponse$inboundSchema),
+    M.sse(200, operations.CreateAgentResponseRequestResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -8,7 +8,7 @@ import { CreateDatasetItemMessagesDatasetsToolMessage } from "@orq-ai/node/model
 let value: CreateDatasetItemMessagesDatasetsToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: "<id>",
+  toolCallId: null,
 };
 ```
 

@@ -14,7 +14,7 @@ let value: GoogleSearchTool = {
 
 ## Fields
 
-| Field                                                | Type                                                 | Required                                             | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `type`                                               | *"google_search"*                                    | :heavy_check_mark:                                   | N/A                                                  |
-| `requiresApproval`                                   | *boolean*                                            | :heavy_minus_sign:                                   | Whether this tool requires approval before execution |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `type`                                                                                 | [operations.AgentToolInputCRUDType](../../models/operations/agenttoolinputcrudtype.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `requiresApproval`                                                                     | *boolean*                                                                              | :heavy_minus_sign:                                                                     | Whether this tool requires approval before execution                                   |

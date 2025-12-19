@@ -96,32 +96,25 @@ const value: operations.CurrentDateTool = {
 ### `operations.HTTPTool`
 
 ```typescript
-const value: operations.HTTPTool = {
-  type: "http",
-};
+const value: operations.HTTPTool = {};
 ```
 
 ### `operations.CodeExecutionTool`
 
 ```typescript
-const value: operations.CodeExecutionTool = {
-  type: "code",
-};
+const value: operations.CodeExecutionTool = {};
 ```
 
 ### `operations.FunctionTool`
 
 ```typescript
-const value: operations.FunctionTool = {
-  type: "function",
-};
+const value: operations.FunctionTool = {};
 ```
 
 ### `operations.MCPTool`
 
 ```typescript
 const value: operations.MCPTool = {
-  type: "mcp",
   id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
   toolId: "01KXYZ123456789",
 };

@@ -1,6 +1,6 @@
 # Usage
 
-Usage statistics for the completion request.
+Token usage from the agent execution
 
 ## Example Usage
 

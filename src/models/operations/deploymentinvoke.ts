@@ -31,29 +31,31 @@ export type DeploymentInvokeObject = ClosedEnum<typeof DeploymentInvokeObject>;
  * The provider used to generate the response
  */
 export const DeploymentInvokeProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
+  Zai: "zai",
 } as const;
 /**
  * The provider used to generate the response
@@ -99,23 +101,13 @@ export type Retrievals = {
   metadata: DeploymentInvokeMetadata;
 };
 
-export type PromptTokensDetails = {
-  cachedTokens?: number | null | undefined;
-};
-
-export type CompletionTokensDetails = {
-  reasoningTokens?: number | null | undefined;
-};
-
 /**
  * Usage metrics for the response
  */
 export type DeploymentInvokeUsage = {
-  totalTokens?: number | undefined;
-  promptTokens?: number | undefined;
-  completionTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  inputTokens: number;
+  outputTokens: number;
+  totalTokens: number;
 };
 
 /**
@@ -482,132 +474,26 @@ export function retrievalsFromJSON(
 }
 
 /** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-  });
-});
-/** @internal */
-export type PromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-};
-
-/** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-  });
-});
-
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
-): string {
-  return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
-  );
-}
-export function promptTokensDetailsFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-  });
-});
-/** @internal */
-export type CompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-};
-
-/** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-  });
-});
-
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
-  );
-}
-export function completionTokensDetailsFromJSON(
-  jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
 export const DeploymentInvokeUsage$inboundSchema: z.ZodType<
   DeploymentInvokeUsage,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  completion_tokens: z.number().optional(),
-  prompt_tokens_details: z.lazy(() => PromptTokensDetails$inboundSchema)
-    .optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => CompletionTokensDetails$inboundSchema),
-  ).optional(),
+  input_tokens: z.number(),
+  output_tokens: z.number(),
+  total_tokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
+    "input_tokens": "inputTokens",
+    "output_tokens": "outputTokens",
     "total_tokens": "totalTokens",
-    "prompt_tokens": "promptTokens",
-    "completion_tokens": "completionTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
   });
 });
 /** @internal */
 export type DeploymentInvokeUsage$Outbound = {
-  total_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  completion_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | undefined;
-  completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
-    | null
-    | undefined;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
 };
 
 /** @internal */
@@ -616,21 +502,14 @@ export const DeploymentInvokeUsage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentInvokeUsage
 > = z.object({
-  totalTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  completionTokens: z.number().optional(),
-  promptTokensDetails: z.lazy(() => PromptTokensDetails$outboundSchema)
-    .optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
-  ).optional(),
+  inputTokens: z.number(),
+  outputTokens: z.number(),
+  totalTokens: z.number(),
 }).transform((v) => {
   return remap$(v, {
+    inputTokens: "input_tokens",
+    outputTokens: "output_tokens",
     totalTokens: "total_tokens",
-    promptTokens: "prompt_tokens",
-    completionTokens: "completion_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
   });
 });
 

@@ -11,9 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeployments2[]`
+### `operations.Content2[]`
 
 ```typescript
-const value: operations.DeploymentGetConfigContentDeployments2[] = [];
+const value: operations.Content2[] = [];
 ```
 

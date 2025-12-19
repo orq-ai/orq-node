@@ -118,7 +118,7 @@ export type Messages = {
    */
   content: string | Array<One | Two2 | Three> | null;
   toolCalls?: Array<ToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 export type InvokeEvalRequestBody = {
@@ -238,10 +238,10 @@ export type ResponseBodyBoolean = {
   value: boolean | string | number | null;
 };
 
-export const Style = {
+export const FormatOptionsStyle = {
   Currency: "currency",
 } as const;
-export type Style = ClosedEnum<typeof Style>;
+export type FormatOptionsStyle = ClosedEnum<typeof FormatOptionsStyle>;
 
 export const Currency = {
   Usd: "USD",
@@ -249,7 +249,7 @@ export const Currency = {
 export type Currency = ClosedEnum<typeof Currency>;
 
 export type FormatOptions2 = {
-  style: Style;
+  style: FormatOptionsStyle;
   currency: Currency;
 };
 
@@ -670,7 +670,7 @@ export const Messages$inboundSchema: z.ZodType<
     ]),
   ),
   tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -682,7 +682,7 @@ export type Messages$Outbound = {
   role: string;
   content: string | Array<One$Outbound | Two2$Outbound | Three$Outbound> | null;
   tool_calls?: Array<ToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -703,7 +703,7 @@ export const Messages$outboundSchema: z.ZodType<
     ]),
   ),
   toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
@@ -1572,12 +1572,13 @@ export function responseBodyBooleanFromJSON(
 }
 
 /** @internal */
-export const Style$inboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
-  Style,
-);
+export const FormatOptionsStyle$inboundSchema: z.ZodNativeEnum<
+  typeof FormatOptionsStyle
+> = z.nativeEnum(FormatOptionsStyle);
 /** @internal */
-export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> =
-  Style$inboundSchema;
+export const FormatOptionsStyle$outboundSchema: z.ZodNativeEnum<
+  typeof FormatOptionsStyle
+> = FormatOptionsStyle$inboundSchema;
 
 /** @internal */
 export const Currency$inboundSchema: z.ZodNativeEnum<typeof Currency> = z
@@ -1592,7 +1593,7 @@ export const FormatOptions2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  style: Style$inboundSchema,
+  style: FormatOptionsStyle$inboundSchema,
   currency: Currency$inboundSchema,
 });
 /** @internal */
@@ -1607,7 +1608,7 @@ export const FormatOptions2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FormatOptions2
 > = z.object({
-  style: Style$outboundSchema,
+  style: FormatOptionsStyle$outboundSchema,
   currency: Currency$outboundSchema,
 });
 

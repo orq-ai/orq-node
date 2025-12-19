@@ -1,0 +1,19 @@
+# CreateChatCompletionRouterToolCalls
+
+## Example Usage
+
+```typescript
+import { CreateChatCompletionRouterToolCalls } from "@orq-ai/node/models/operations";
+
+let value: CreateChatCompletionRouterToolCalls = {};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `index`                                                                                                                        | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | The index of the tool call.                                                                                                    |
+| `id`                                                                                                                           | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | The ID of the tool call.                                                                                                       |
+| `type`                                                                                                                         | [operations.CreateChatCompletionRouterResponse200Type](../../models/operations/createchatcompletionrouterresponse200type.md)   | :heavy_minus_sign:                                                                                                             | The type of the tool. Currently, only `function` is supported.                                                                 |
+| `function`                                                                                                                     | [operations.CreateChatCompletionRouterResponseFunction](../../models/operations/createchatcompletionrouterresponsefunction.md) | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `thoughtSignature`                                                                                                             | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.           |

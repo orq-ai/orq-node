@@ -11,16 +11,11 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages42[]`
+### `operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages2[]`
 
 ```typescript
 const value:
-  operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages42[] =
-    [
-      {
-        type: "redacted_reasoning",
-        data: "<value>",
-      },
-    ];
+  operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages2[] =
+    [];
 ```
 
