@@ -23,11 +23,6 @@ import { tool$agentsRun } from "./tools/agentsRun.js";
 import { tool$agentsStream } from "./tools/agentsStream.js";
 import { tool$agentsStreamRun } from "./tools/agentsStreamRun.js";
 import { tool$agentsUpdate } from "./tools/agentsUpdate.js";
-import { tool$budgetsCreate } from "./tools/budgetsCreate.js";
-import { tool$budgetsDelete } from "./tools/budgetsDelete.js";
-import { tool$budgetsGet } from "./tools/budgetsGet.js";
-import { tool$budgetsList } from "./tools/budgetsList.js";
-import { tool$budgetsUpdate } from "./tools/budgetsUpdate.js";
 import { tool$chunkingParse } from "./tools/chunkingParse.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
 import { tool$contactsDelete } from "./tools/contactsDelete.js";
@@ -61,6 +56,8 @@ import { tool$evalsCreate } from "./tools/evalsCreate.js";
 import { tool$evalsDelete } from "./tools/evalsDelete.js";
 import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
 import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
+import { tool$evaluatorsGetV2EvaluatorsIdVersions } from "./tools/evaluatorsGetV2EvaluatorsIdVersions.js";
+import { tool$evaluatorsGetV2EvaluatorsIdVersionsVersionId } from "./tools/evaluatorsGetV2EvaluatorsIdVersionsVersionId.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -113,6 +110,8 @@ import { tool$routerChatCompletions } from "./tools/routerChatCompletions.js";
 import { tool$routerImagesGenerate } from "./tools/routerImagesGenerate.js";
 import { tool$toolsCreate } from "./tools/toolsCreate.js";
 import { tool$toolsDelete } from "./tools/toolsDelete.js";
+import { tool$toolsGetV2ToolsToolIdVersions } from "./tools/toolsGetV2ToolsToolIdVersions.js";
+import { tool$toolsGetV2ToolsToolIdVersionsVersionId } from "./tools/toolsGetV2ToolsToolIdVersionsVersionId.js";
 import { tool$toolsList } from "./tools/toolsList.js";
 import { tool$toolsRetrieve } from "./tools/toolsRetrieve.js";
 import { tool$toolsUpdate } from "./tools/toolsUpdate.js";
@@ -129,7 +128,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.1.0-rc.50",
+    version: "4.2.0-rc.2",
   });
 
   const client = new OrqCore({
@@ -172,6 +171,8 @@ export function createMCPServer(deps: {
   tool(tool$evalsUpdate);
   tool(tool$evalsDelete);
   tool(tool$evalsInvoke);
+  tool(tool$evaluatorsGetV2EvaluatorsIdVersions);
+  tool(tool$evaluatorsGetV2EvaluatorsIdVersionsVersionId);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
@@ -209,11 +210,8 @@ export function createMCPServer(deps: {
   tool(tool$toolsUpdate);
   tool(tool$toolsDelete);
   tool(tool$toolsRetrieve);
-  tool(tool$budgetsList);
-  tool(tool$budgetsCreate);
-  tool(tool$budgetsGet);
-  tool(tool$budgetsUpdate);
-  tool(tool$budgetsDelete);
+  tool(tool$toolsGetV2ToolsToolIdVersions);
+  tool(tool$toolsGetV2ToolsToolIdVersionsVersionId);
   tool(tool$knowledgeList);
   tool(tool$knowledgeCreate);
   tool(tool$knowledgeRetrieve);

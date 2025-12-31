@@ -225,6 +225,8 @@ export type RunAgentModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -621,6 +623,8 @@ export type RunAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -4303,7 +4307,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KCCAY58YNHV25FA85DJ4BDP0"),
+    id: z.string().default("01KDSSBXNQE3RD2H4W8YYSHQE6"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4322,7 +4326,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KCCAY58YNHV25FA85DJ4BDP0"),
+  id: z.string().default("01KDSSBXNQE3RD2H4W8YYSHQE6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),

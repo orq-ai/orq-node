@@ -7,7 +7,7 @@ import { RunAgentModelConfigurationGuardrails } from "@orq-ai/node/models/operat
 
 let value: RunAgentModelConfigurationGuardrails = {
   id: "orq_pii_detection",
-  executeOn: "input",
+  executeOn: "output",
 };
 ```
 

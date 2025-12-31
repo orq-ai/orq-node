@@ -6,7 +6,7 @@
 import { StreamRunAgentFallbackModelConfigurationGuardrails } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentFallbackModelConfigurationGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_harmful_moderation",
   executeOn: "output",
 };
 ```

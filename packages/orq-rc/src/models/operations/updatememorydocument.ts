@@ -10,11 +10,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryDocumentRequestBody = {
   /**
-   * The content of the memory document
+   * The content of the memory document (whitespace trimmed).
    */
   text: string;
   /**
-   * Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies.
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
    */
   metadata?: { [k: string]: string } | undefined;
 };
@@ -42,6 +42,9 @@ export type UpdateMemoryDocumentResponseBody = {
   id: string;
   memoryId: string;
   storeId: string;
+  /**
+   * The content of the memory document (whitespace trimmed).
+   */
   text: string;
   created: string;
   updated: string;

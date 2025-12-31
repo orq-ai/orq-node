@@ -6,7 +6,7 @@
 import { RetrieveAgentRequestAgentsGuardrails } from "@orq-ai/node/models/operations";
 
 let value: RetrieveAgentRequestAgentsGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_sexual_moderation",
   executeOn: "input",
 };
 ```

@@ -55,6 +55,7 @@ export const UpdateMemoryStoreProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Slack: "slack",
 } as const;
 export type UpdateMemoryStoreProvider = ClosedEnum<
   typeof UpdateMemoryStoreProvider

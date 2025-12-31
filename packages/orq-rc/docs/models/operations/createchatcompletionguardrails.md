@@ -6,7 +6,7 @@
 import { CreateChatCompletionGuardrails } from "@orq-ai/node/models/operations";
 
 let value: CreateChatCompletionGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_harmful_moderation",
   executeOn: "output",
 };
 ```

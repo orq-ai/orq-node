@@ -6,7 +6,7 @@
 ### `operations.CreateAgentRequestIdAgents1`
 
 ```typescript
-const value: operations.CreateAgentRequestIdAgents1 = "orq_pii_detection";
+const value: operations.CreateAgentRequestIdAgents1 = "orq_sexual_moderation";
 ```
 
 ### `string`

@@ -13,5 +13,5 @@ let value: RetrieveAgentRequestIdAgents1 = "orq_pii_detection";
 ## Values
 
 ```typescript
-"orq_pii_detection"
+"orq_pii_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
 ```

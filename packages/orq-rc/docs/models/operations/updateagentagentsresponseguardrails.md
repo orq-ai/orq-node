@@ -6,7 +6,7 @@
 import { UpdateAgentAgentsResponseGuardrails } from "@orq-ai/node/models/operations";
 
 let value: UpdateAgentAgentsResponseGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_sexual_moderation",
   executeOn: "output",
 };
 ```

@@ -6,7 +6,7 @@
 ### `operations.ListAgentsId1`
 
 ```typescript
-const value: operations.ListAgentsId1 = "orq_pii_detection";
+const value: operations.ListAgentsId1 = "orq_harmful_moderation";
 ```
 
 ### `string`

@@ -209,6 +209,8 @@ export type Modalities = ClosedEnum<typeof Modalities>;
  */
 export const Id1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -599,6 +601,8 @@ export type FallbackModelConfigurationModalities = ClosedEnum<
  */
 export const CreateAgentRequestId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -1726,6 +1730,8 @@ export type CreateAgentRequestModalities = ClosedEnum<
  */
 export const CreateAgentRequestIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -2109,6 +2115,8 @@ export type CreateAgentRequestFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const CreateAgentRequestIdAgentsResponse1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.

@@ -51,6 +51,9 @@ export type GetAllMemoryDocumentsData = {
   id: string;
   memoryId: string;
   storeId: string;
+  /**
+   * The content of the memory document (whitespace trimmed).
+   */
   text: string;
   created: string;
   updated: string;

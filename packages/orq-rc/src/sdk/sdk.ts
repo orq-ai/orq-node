@@ -4,13 +4,13 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
-import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
 import { Conversations } from "./conversations.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
+import { Evaluators } from "./evaluators.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
@@ -35,6 +35,11 @@ export class Orq extends ClientSDK {
   private _evals?: Evals;
   get evals(): Evals {
     return (this._evals ??= new Evals(this._options));
+  }
+
+  private _evaluators?: Evaluators;
+  get evaluators(): Evaluators {
+    return (this._evaluators ??= new Evaluators(this._options));
   }
 
   private _deployments?: Deployments;
@@ -75,11 +80,6 @@ export class Orq extends ClientSDK {
   private _tools?: Tools;
   get tools(): Tools {
     return (this._tools ??= new Tools(this._options));
-  }
-
-  private _budgets?: Budgets;
-  get budgets(): Budgets {
-    return (this._budgets ??= new Budgets(this._options));
   }
 
   private _knowledge?: Knowledge;

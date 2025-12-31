@@ -6,7 +6,7 @@
 ### `operations.CreateChatCompletionId1`
 
 ```typescript
-const value: operations.CreateChatCompletionId1 = "orq_pii_detection";
+const value: operations.CreateChatCompletionId1 = "orq_sexual_moderation";
 ```
 
 ### `string`

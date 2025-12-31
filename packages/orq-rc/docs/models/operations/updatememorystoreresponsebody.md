@@ -16,7 +16,7 @@ let value: UpdateMemoryStoreResponseBody = {
   updated: "<value>",
   embeddingConfig: {
     modelId: "35d3af03-ea6f-4b5d-95df-1e510a034acd",
-    provider: "bytedance",
+    provider: "mistral",
   },
 };
 ```

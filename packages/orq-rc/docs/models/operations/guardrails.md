@@ -6,8 +6,8 @@
 import { Guardrails } from "@orq-ai/node/models/operations";
 
 let value: Guardrails = {
-  id: "orq_pii_detection",
-  executeOn: "output",
+  id: "orq_sexual_moderation",
+  executeOn: "input",
 };
 ```
 

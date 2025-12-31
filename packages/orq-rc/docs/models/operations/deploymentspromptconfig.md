@@ -10,7 +10,7 @@ let value: DeploymentsPromptConfig = {
   model: "Grand Caravan",
   modelType: "image",
   modelParameters: {},
-  provider: "leonardoai",
+  provider: "fal",
   messages: [
     {
       role: "system",

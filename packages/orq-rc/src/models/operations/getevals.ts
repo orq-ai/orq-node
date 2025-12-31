@@ -44,6 +44,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator =
 
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator;
@@ -51,6 +52,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
 
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "boolean";
   value: boolean;
 };
@@ -87,6 +89,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200Operator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsResponse200Number = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponse200Operator;
@@ -94,6 +97,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200Number = {
 
 export type GetEvalsGuardrailConfigEvalsResponse200Boolean = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "boolean";
   value: boolean;
 };
@@ -147,6 +151,7 @@ export type GetEvalsGuardrailConfigEvalsResponseOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsResponseNumber = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsResponseOperator;
@@ -154,6 +159,7 @@ export type GetEvalsGuardrailConfigEvalsResponseNumber = {
 
 export type GetEvalsGuardrailConfigEvalsResponseBoolean = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "boolean";
   value: boolean;
 };
@@ -396,6 +402,7 @@ export type GetEvalsGuardrailConfigEvalsOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigEvalsNumber = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigEvalsOperator;
@@ -403,6 +410,7 @@ export type GetEvalsGuardrailConfigEvalsNumber = {
 
 export type GetEvalsGuardrailConfigEvalsBoolean = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "boolean";
   value: boolean;
 };
@@ -439,6 +447,7 @@ export type GetEvalsGuardrailConfigOperator = ClosedEnum<
 
 export type GetEvalsGuardrailConfigNumber = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "number";
   value: number;
   operator: GetEvalsGuardrailConfigOperator;
@@ -446,6 +455,7 @@ export type GetEvalsGuardrailConfigNumber = {
 
 export type GetEvalsGuardrailConfigBoolean = {
   enabled: boolean;
+  alertOnFailure?: boolean | undefined;
   type: "boolean";
   value: boolean;
 };
@@ -494,6 +504,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDa
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber =
   {
     enabled: boolean;
+    alertOnFailure?: boolean | undefined;
     type: "number";
     value: number;
     operator:
@@ -503,6 +514,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDa
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean =
   {
     enabled: boolean;
+    alertOnFailure?: boolean | undefined;
     type: "boolean";
     value: boolean;
   };
@@ -542,6 +554,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOp
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
   {
     enabled: boolean;
+    alertOnFailure?: boolean | undefined;
     type: "number";
     value: number;
     operator:
@@ -551,6 +564,7 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNu
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
   {
     enabled: boolean;
+    alertOnFailure?: boolean | undefined;
     type: "boolean";
     value: boolean;
   };
@@ -684,15 +698,21 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboun
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "number";
     value: number;
     operator: string;
@@ -706,10 +726,15 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outbou
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumberToJSON(
@@ -744,13 +769,19 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inbou
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "boolean";
     value: boolean;
   };
@@ -763,8 +794,13 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outbo
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONBooleanToJSON(
@@ -857,8 +893,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
@@ -899,8 +935,8 @@ export const DataTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
@@ -949,13 +985,19 @@ export const GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponse200Operator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200Number$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "number";
   value: number;
   operator: string;
@@ -969,9 +1011,14 @@ export const GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponse200Number
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponse200Operator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200NumberToJSON(
@@ -1008,12 +1055,18 @@ export const GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200Boolean$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "boolean";
   value: boolean;
 };
@@ -1026,8 +1079,13 @@ export const GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponse200Boolean
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200BooleanToJSON(
@@ -1125,8 +1183,8 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
@@ -1166,8 +1224,8 @@ export const DataRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
@@ -1211,13 +1269,19 @@ export const GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema:
   z.ZodType<GetEvalsGuardrailConfigEvalsResponseNumber, z.ZodTypeDef, unknown> =
     z.object({
       enabled: z.boolean(),
+      alert_on_failure: z.boolean().default(false),
       type: z.literal("number"),
       value: z.number(),
       operator: GetEvalsGuardrailConfigEvalsResponseOperator$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "alert_on_failure": "alertOnFailure",
+      });
     });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponseNumber$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "number";
   value: number;
   operator: string;
@@ -1231,9 +1295,14 @@ export const GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponseNumber
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator: GetEvalsGuardrailConfigEvalsResponseOperator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponseNumberToJSON(
@@ -1270,12 +1339,18 @@ export const GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema:
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponseBoolean$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "boolean";
   value: boolean;
 };
@@ -1288,8 +1363,13 @@ export const GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema:
     GetEvalsGuardrailConfigEvalsResponseBoolean
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponseBooleanToJSON(
@@ -2791,8 +2871,8 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
@@ -2895,8 +2975,8 @@ export const DataFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
@@ -2975,13 +3055,19 @@ export const GetEvalsGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
+  alert_on_failure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigEvalsOperator$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "alert_on_failure": "alertOnFailure",
+  });
 });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsNumber$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "number";
   value: number;
   operator: string;
@@ -2994,9 +3080,14 @@ export const GetEvalsGuardrailConfigEvalsNumber$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigEvalsNumber
 > = z.object({
   enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigEvalsOperator$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
 });
 
 export function getEvalsGuardrailConfigEvalsNumberToJSON(
@@ -3026,12 +3117,18 @@ export const GetEvalsGuardrailConfigEvalsBoolean$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
+  alert_on_failure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    "alert_on_failure": "alertOnFailure",
+  });
 });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsBoolean$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "boolean";
   value: boolean;
 };
@@ -3043,8 +3140,13 @@ export const GetEvalsGuardrailConfigEvalsBoolean$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigEvalsBoolean
 > = z.object({
   enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
 });
 
 export function getEvalsGuardrailConfigEvalsBooleanToJSON(
@@ -3118,8 +3220,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
@@ -3156,8 +3258,8 @@ export const DataPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
@@ -3201,13 +3303,19 @@ export const GetEvalsGuardrailConfigNumber$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
+  alert_on_failure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigOperator$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "alert_on_failure": "alertOnFailure",
+  });
 });
 /** @internal */
 export type GetEvalsGuardrailConfigNumber$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "number";
   value: number;
   operator: string;
@@ -3220,9 +3328,14 @@ export const GetEvalsGuardrailConfigNumber$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigNumber
 > = z.object({
   enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
   operator: GetEvalsGuardrailConfigOperator$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
 });
 
 export function getEvalsGuardrailConfigNumberToJSON(
@@ -3251,12 +3364,18 @@ export const GetEvalsGuardrailConfigBoolean$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean(),
+  alert_on_failure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    "alert_on_failure": "alertOnFailure",
+  });
 });
 /** @internal */
 export type GetEvalsGuardrailConfigBoolean$Outbound = {
   enabled: boolean;
+  alert_on_failure: boolean;
   type: "boolean";
   value: boolean;
 };
@@ -3268,8 +3387,13 @@ export const GetEvalsGuardrailConfigBoolean$outboundSchema: z.ZodType<
   GetEvalsGuardrailConfigBoolean
 > = z.object({
   enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
 });
 
 export function getEvalsGuardrailConfigBooleanToJSON(
@@ -3349,8 +3473,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
@@ -3393,8 +3517,8 @@ export const DataHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigBoolean$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
@@ -3447,15 +3571,21 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "number";
     value: number;
     operator: string;
@@ -3469,10 +3599,15 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataOperator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumberToJSON(
@@ -3509,13 +3644,19 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "boolean";
     value: boolean;
   };
@@ -3528,8 +3669,13 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBooleanToJSON(
@@ -3615,8 +3761,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
@@ -3657,8 +3803,8 @@ export const DataJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$outboundSchema
@@ -3712,15 +3858,21 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "number";
     value: number;
     operator: string;
@@ -3734,10 +3886,15 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumberToJSON(
@@ -3774,13 +3931,19 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     unknown
   > = z.object({
     enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
   });
 /** @internal */
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound =
   {
     enabled: boolean;
+    alert_on_failure: boolean;
     type: "boolean";
     value: boolean;
   };
@@ -3793,8 +3956,13 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
   > = z.object({
     enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
   });
 
 export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBooleanToJSON(
@@ -3888,8 +4056,8 @@ export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
   z.object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-12-13T17:08:02.559Z"),
-    updated: z.string().default("2025-12-13T17:08:02.559Z"),
+    created: z.string().default("2025-12-31T08:45:57.726Z"),
+    updated: z.string().default("2025-12-31T08:45:57.726Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
@@ -3932,8 +4100,8 @@ export const DataLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-12-13T17:08:02.559Z"),
-  updated: z.string().default("2025-12-13T17:08:02.559Z"),
+  created: z.string().default("2025-12-31T08:45:57.726Z"),
+  updated: z.string().default("2025-12-31T08:45:57.726Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema

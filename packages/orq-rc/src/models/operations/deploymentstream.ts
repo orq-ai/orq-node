@@ -1199,6 +1199,7 @@ export const DeploymentStreamProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Slack: "slack",
 } as const;
 /**
  * The provider used to generate the response
@@ -1244,13 +1245,26 @@ export type DeploymentStreamRetrievals = {
   metadata: DeploymentStreamDeploymentsMetadata;
 };
 
+export type DeploymentStreamPromptTokensDetails = {
+  cachedTokens?: number | null | undefined;
+};
+
+export type DeploymentStreamCompletionTokensDetails = {
+  reasoningTokens?: number | null | undefined;
+};
+
 /**
  * Usage metrics for the response
  */
 export type DeploymentStreamUsage = {
-  inputTokens: number;
-  outputTokens: number;
-  totalTokens: number;
+  totalTokens?: number | undefined;
+  promptTokens?: number | undefined;
+  completionTokens?: number | undefined;
+  promptTokensDetails?: DeploymentStreamPromptTokensDetails | undefined;
+  completionTokensDetails?:
+    | DeploymentStreamCompletionTokensDetails
+    | null
+    | undefined;
 };
 
 /**
@@ -6370,26 +6384,147 @@ export function deploymentStreamRetrievalsFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamPromptTokensDetails$inboundSchema: z.ZodType<
+  DeploymentStreamPromptTokensDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  cached_tokens: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cached_tokens": "cachedTokens",
+  });
+});
+/** @internal */
+export type DeploymentStreamPromptTokensDetails$Outbound = {
+  cached_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const DeploymentStreamPromptTokensDetails$outboundSchema: z.ZodType<
+  DeploymentStreamPromptTokensDetails$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamPromptTokensDetails
+> = z.object({
+  cachedTokens: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cachedTokens: "cached_tokens",
+  });
+});
+
+export function deploymentStreamPromptTokensDetailsToJSON(
+  deploymentStreamPromptTokensDetails: DeploymentStreamPromptTokensDetails,
+): string {
+  return JSON.stringify(
+    DeploymentStreamPromptTokensDetails$outboundSchema.parse(
+      deploymentStreamPromptTokensDetails,
+    ),
+  );
+}
+export function deploymentStreamPromptTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamPromptTokensDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamPromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamPromptTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamCompletionTokensDetails$inboundSchema: z.ZodType<
+  DeploymentStreamCompletionTokensDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  reasoning_tokens: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "reasoning_tokens": "reasoningTokens",
+  });
+});
+/** @internal */
+export type DeploymentStreamCompletionTokensDetails$Outbound = {
+  reasoning_tokens?: number | null | undefined;
+};
+
+/** @internal */
+export const DeploymentStreamCompletionTokensDetails$outboundSchema: z.ZodType<
+  DeploymentStreamCompletionTokensDetails$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamCompletionTokensDetails
+> = z.object({
+  reasoningTokens: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    reasoningTokens: "reasoning_tokens",
+  });
+});
+
+export function deploymentStreamCompletionTokensDetailsToJSON(
+  deploymentStreamCompletionTokensDetails:
+    DeploymentStreamCompletionTokensDetails,
+): string {
+  return JSON.stringify(
+    DeploymentStreamCompletionTokensDetails$outboundSchema.parse(
+      deploymentStreamCompletionTokensDetails,
+    ),
+  );
+}
+export function deploymentStreamCompletionTokensDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamCompletionTokensDetails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamCompletionTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamUsage$inboundSchema: z.ZodType<
   DeploymentStreamUsage,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input_tokens: z.number(),
-  output_tokens: z.number(),
-  total_tokens: z.number(),
+  total_tokens: z.number().optional(),
+  prompt_tokens: z.number().optional(),
+  completion_tokens: z.number().optional(),
+  prompt_tokens_details: z.lazy(() =>
+    DeploymentStreamPromptTokensDetails$inboundSchema
+  ).optional(),
+  completion_tokens_details: z.nullable(
+    z.lazy(() => DeploymentStreamCompletionTokensDetails$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
     "total_tokens": "totalTokens",
+    "prompt_tokens": "promptTokens",
+    "completion_tokens": "completionTokens",
+    "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
   });
 });
 /** @internal */
 export type DeploymentStreamUsage$Outbound = {
-  input_tokens: number;
-  output_tokens: number;
-  total_tokens: number;
+  total_tokens?: number | undefined;
+  prompt_tokens?: number | undefined;
+  completion_tokens?: number | undefined;
+  prompt_tokens_details?:
+    | DeploymentStreamPromptTokensDetails$Outbound
+    | undefined;
+  completion_tokens_details?:
+    | DeploymentStreamCompletionTokensDetails$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -6398,14 +6533,22 @@ export const DeploymentStreamUsage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamUsage
 > = z.object({
-  inputTokens: z.number(),
-  outputTokens: z.number(),
-  totalTokens: z.number(),
+  totalTokens: z.number().optional(),
+  promptTokens: z.number().optional(),
+  completionTokens: z.number().optional(),
+  promptTokensDetails: z.lazy(() =>
+    DeploymentStreamPromptTokensDetails$outboundSchema
+  ).optional(),
+  completionTokensDetails: z.nullable(
+    z.lazy(() => DeploymentStreamCompletionTokensDetails$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
     totalTokens: "total_tokens",
+    promptTokens: "prompt_tokens",
+    completionTokens: "completion_tokens",
+    promptTokensDetails: "prompt_tokens_details",
+    completionTokensDetails: "completion_tokens_details",
   });
 });
 

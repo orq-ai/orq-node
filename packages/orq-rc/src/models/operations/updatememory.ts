@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryRequestBody = {
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID). Must be a valid UUID or ULID.
+   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
    */
   entityId: string;
   /**
@@ -36,6 +36,9 @@ export type UpdateMemoryRequest = {
  */
 export type UpdateMemoryResponseBody = {
   id: string;
+  /**
+   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
+   */
   entityId: string;
   created: string;
   updated: string;

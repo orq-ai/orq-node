@@ -6,7 +6,7 @@
 import { FallbackModelConfigurationGuardrails } from "@orq-ai/node/models/operations";
 
 let value: FallbackModelConfigurationGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_harmful_moderation",
   executeOn: "output",
 };
 ```

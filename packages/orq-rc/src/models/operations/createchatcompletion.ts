@@ -638,6 +638,8 @@ export type CreateChatCompletionModalities = ClosedEnum<
  */
 export const CreateChatCompletionId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -737,7 +739,7 @@ export type Inputs2 = {
 };
 
 /**
- * Values to replace in the prompt messages using {{"{{"}}variableName}} syntax
+ * Values to replace in the prompt messages using {{variableName}} syntax
  */
 export type Inputs = { [k: string]: any } | Array<Inputs2>;
 
@@ -1237,7 +1239,7 @@ export type Orq = {
    */
   thread?: CreateChatCompletionThread | undefined;
   /**
-   * Values to replace in the prompt messages using {{"{{"}}variableName}} syntax
+   * Values to replace in the prompt messages using {{variableName}} syntax
    */
   inputs?: { [k: string]: any } | Array<Inputs2> | undefined;
   /**
@@ -1601,7 +1603,7 @@ export type CreateChatCompletionRouterChoices = {
   delta: Delta;
 };
 
-export type CreateChatCompletionPromptTokensDetails = {
+export type CreateChatCompletionRouterPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -1610,7 +1612,7 @@ export type CreateChatCompletionPromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CreateChatCompletionCompletionTokensDetails = {
+export type CreateChatCompletionRouterCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -1637,11 +1639,11 @@ export type CreateChatCompletionRouterUsage = {
    */
   totalTokens?: number | undefined;
   promptTokensDetails?:
-    | CreateChatCompletionPromptTokensDetails
+    | CreateChatCompletionRouterPromptTokensDetails
     | null
     | undefined;
   completionTokensDetails?:
-    | CreateChatCompletionCompletionTokensDetails
+    | CreateChatCompletionRouterCompletionTokensDetails
     | null
     | undefined;
 };
@@ -1882,7 +1884,7 @@ export type CreateChatCompletionChoices = {
   logprobs?: Logprobs | null | undefined;
 };
 
-export type PromptTokensDetails = {
+export type CreateChatCompletionPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -1891,7 +1893,7 @@ export type PromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CompletionTokensDetails = {
+export type CreateChatCompletionCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -1917,8 +1919,14 @@ export type CreateChatCompletionUsage = {
    * Total number of tokens used in the request (prompt + completion).
    */
   totalTokens?: number | undefined;
-  promptTokensDetails?: PromptTokensDetails | null | undefined;
-  completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  promptTokensDetails?:
+    | CreateChatCompletionPromptTokensDetails
+    | null
+    | undefined;
+  completionTokensDetails?:
+    | CreateChatCompletionCompletionTokensDetails
+    | null
+    | undefined;
 };
 
 export const CreateChatCompletionObject = {
@@ -7659,75 +7667,77 @@ export function createChatCompletionRouterChoicesFromJSON(
 }
 
 /** @internal */
-export const CreateChatCompletionPromptTokensDetails$inboundSchema: z.ZodType<
-  CreateChatCompletionPromptTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
+export const CreateChatCompletionRouterPromptTokensDetails$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterPromptTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type CreateChatCompletionPromptTokensDetails$Outbound = {
+export type CreateChatCompletionRouterPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
   cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
 /** @internal */
-export const CreateChatCompletionPromptTokensDetails$outboundSchema: z.ZodType<
-  CreateChatCompletionPromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionPromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
+export const CreateChatCompletionRouterPromptTokensDetails$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterPromptTokensDetails$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterPromptTokensDetails
+  > = z.object({
+    cachedTokens: z.nullable(z.number().int()).optional(),
+    cacheCreationTokens: z.nullable(z.number().int()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cachedTokens: "cached_tokens",
+      cacheCreationTokens: "cache_creation_tokens",
+      audioTokens: "audio_tokens",
+    });
   });
-});
 
-export function createChatCompletionPromptTokensDetailsToJSON(
-  createChatCompletionPromptTokensDetails:
-    CreateChatCompletionPromptTokensDetails,
+export function createChatCompletionRouterPromptTokensDetailsToJSON(
+  createChatCompletionRouterPromptTokensDetails:
+    CreateChatCompletionRouterPromptTokensDetails,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionPromptTokensDetails$outboundSchema.parse(
-      createChatCompletionPromptTokensDetails,
+    CreateChatCompletionRouterPromptTokensDetails$outboundSchema.parse(
+      createChatCompletionRouterPromptTokensDetails,
     ),
   );
 }
-export function createChatCompletionPromptTokensDetailsFromJSON(
+export function createChatCompletionRouterPromptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionPromptTokensDetails,
+  CreateChatCompletionRouterPromptTokensDetails,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionPromptTokensDetails$inboundSchema.parse(
+      CreateChatCompletionRouterPromptTokensDetails$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateChatCompletionPromptTokensDetails' from JSON`,
+    `Failed to parse 'CreateChatCompletionRouterPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionCompletionTokensDetails$inboundSchema:
+export const CreateChatCompletionRouterCompletionTokensDetails$inboundSchema:
   z.ZodType<
-    CreateChatCompletionCompletionTokensDetails,
+    CreateChatCompletionRouterCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -7744,7 +7754,7 @@ export const CreateChatCompletionCompletionTokensDetails$inboundSchema:
     });
   });
 /** @internal */
-export type CreateChatCompletionCompletionTokensDetails$Outbound = {
+export type CreateChatCompletionRouterCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | null | undefined;
   accepted_prediction_tokens?: number | null | undefined;
   rejected_prediction_tokens?: number | null | undefined;
@@ -7752,11 +7762,11 @@ export type CreateChatCompletionCompletionTokensDetails$Outbound = {
 };
 
 /** @internal */
-export const CreateChatCompletionCompletionTokensDetails$outboundSchema:
+export const CreateChatCompletionRouterCompletionTokensDetails$outboundSchema:
   z.ZodType<
-    CreateChatCompletionCompletionTokensDetails$Outbound,
+    CreateChatCompletionRouterCompletionTokensDetails$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionCompletionTokensDetails
+    CreateChatCompletionRouterCompletionTokensDetails
   > = z.object({
     reasoningTokens: z.nullable(z.number()).optional(),
     acceptedPredictionTokens: z.nullable(z.number()).optional(),
@@ -7771,29 +7781,29 @@ export const CreateChatCompletionCompletionTokensDetails$outboundSchema:
     });
   });
 
-export function createChatCompletionCompletionTokensDetailsToJSON(
-  createChatCompletionCompletionTokensDetails:
-    CreateChatCompletionCompletionTokensDetails,
+export function createChatCompletionRouterCompletionTokensDetailsToJSON(
+  createChatCompletionRouterCompletionTokensDetails:
+    CreateChatCompletionRouterCompletionTokensDetails,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionCompletionTokensDetails$outboundSchema.parse(
-      createChatCompletionCompletionTokensDetails,
+    CreateChatCompletionRouterCompletionTokensDetails$outboundSchema.parse(
+      createChatCompletionRouterCompletionTokensDetails,
     ),
   );
 }
-export function createChatCompletionCompletionTokensDetailsFromJSON(
+export function createChatCompletionRouterCompletionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionCompletionTokensDetails,
+  CreateChatCompletionRouterCompletionTokensDetails,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionCompletionTokensDetails$inboundSchema.parse(
+      CreateChatCompletionRouterCompletionTokensDetails$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateChatCompletionCompletionTokensDetails' from JSON`,
+    `Failed to parse 'CreateChatCompletionRouterCompletionTokensDetails' from JSON`,
   );
 }
 
@@ -7807,10 +7817,12 @@ export const CreateChatCompletionRouterUsage$inboundSchema: z.ZodType<
   prompt_tokens: z.number().optional(),
   total_tokens: z.number().optional(),
   prompt_tokens_details: z.nullable(
-    z.lazy(() => CreateChatCompletionPromptTokensDetails$inboundSchema),
+    z.lazy(() => CreateChatCompletionRouterPromptTokensDetails$inboundSchema),
   ).optional(),
   completion_tokens_details: z.nullable(
-    z.lazy(() => CreateChatCompletionCompletionTokensDetails$inboundSchema),
+    z.lazy(() =>
+      CreateChatCompletionRouterCompletionTokensDetails$inboundSchema
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -7827,11 +7839,11 @@ export type CreateChatCompletionRouterUsage$Outbound = {
   prompt_tokens?: number | undefined;
   total_tokens?: number | undefined;
   prompt_tokens_details?:
-    | CreateChatCompletionPromptTokensDetails$Outbound
+    | CreateChatCompletionRouterPromptTokensDetails$Outbound
     | null
     | undefined;
   completion_tokens_details?:
-    | CreateChatCompletionCompletionTokensDetails$Outbound
+    | CreateChatCompletionRouterCompletionTokensDetails$Outbound
     | null
     | undefined;
 };
@@ -7846,10 +7858,12 @@ export const CreateChatCompletionRouterUsage$outboundSchema: z.ZodType<
   promptTokens: z.number().optional(),
   totalTokens: z.number().optional(),
   promptTokensDetails: z.nullable(
-    z.lazy(() => CreateChatCompletionPromptTokensDetails$outboundSchema),
+    z.lazy(() => CreateChatCompletionRouterPromptTokensDetails$outboundSchema),
   ).optional(),
   completionTokensDetails: z.nullable(
-    z.lazy(() => CreateChatCompletionCompletionTokensDetails$outboundSchema),
+    z.lazy(() =>
+      CreateChatCompletionRouterCompletionTokensDetails$outboundSchema
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -8583,8 +8597,8 @@ export function createChatCompletionChoicesFromJSON(
 }
 
 /** @internal */
-export const PromptTokensDetails$inboundSchema: z.ZodType<
-  PromptTokensDetails,
+export const CreateChatCompletionPromptTokensDetails$inboundSchema: z.ZodType<
+  CreateChatCompletionPromptTokensDetails,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -8599,17 +8613,17 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type PromptTokensDetails$Outbound = {
+export type CreateChatCompletionPromptTokensDetails$Outbound = {
   cached_tokens?: number | null | undefined;
   cache_creation_tokens?: number | null | undefined;
   audio_tokens?: number | null | undefined;
 };
 
 /** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
+export const CreateChatCompletionPromptTokensDetails$outboundSchema: z.ZodType<
+  CreateChatCompletionPromptTokensDetails$Outbound,
   z.ZodTypeDef,
-  PromptTokensDetails
+  CreateChatCompletionPromptTokensDetails
 > = z.object({
   cachedTokens: z.nullable(z.number().int()).optional(),
   cacheCreationTokens: z.nullable(z.number().int()).optional(),
@@ -8622,43 +8636,53 @@ export const PromptTokensDetails$outboundSchema: z.ZodType<
   });
 });
 
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
+export function createChatCompletionPromptTokensDetailsToJSON(
+  createChatCompletionPromptTokensDetails:
+    CreateChatCompletionPromptTokensDetails,
 ): string {
   return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
+    CreateChatCompletionPromptTokensDetails$outboundSchema.parse(
+      createChatCompletionPromptTokensDetails,
+    ),
   );
 }
-export function promptTokensDetailsFromJSON(
+export function createChatCompletionPromptTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<PromptTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionPromptTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PromptTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTokensDetails' from JSON`,
+    (x) =>
+      CreateChatCompletionPromptTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CompletionTokensDetails$inboundSchema: z.ZodType<
-  CompletionTokensDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
+export const CreateChatCompletionCompletionTokensDetails$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionCompletionTokensDetails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
   });
-});
 /** @internal */
-export type CompletionTokensDetails$Outbound = {
+export type CreateChatCompletionCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | null | undefined;
   accepted_prediction_tokens?: number | null | undefined;
   rejected_prediction_tokens?: number | null | undefined;
@@ -8666,38 +8690,48 @@ export type CompletionTokensDetails$Outbound = {
 };
 
 /** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
+export const CreateChatCompletionCompletionTokensDetails$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionCompletionTokensDetails$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionCompletionTokensDetails
+  > = z.object({
+    reasoningTokens: z.nullable(z.number()).optional(),
+    acceptedPredictionTokens: z.nullable(z.number()).optional(),
+    rejectedPredictionTokens: z.nullable(z.number()).optional(),
+    audioTokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningTokens: "reasoning_tokens",
+      acceptedPredictionTokens: "accepted_prediction_tokens",
+      rejectedPredictionTokens: "rejected_prediction_tokens",
+      audioTokens: "audio_tokens",
+    });
   });
-});
 
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
+export function createChatCompletionCompletionTokensDetailsToJSON(
+  createChatCompletionCompletionTokensDetails:
+    CreateChatCompletionCompletionTokensDetails,
 ): string {
   return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
+    CreateChatCompletionCompletionTokensDetails$outboundSchema.parse(
+      createChatCompletionCompletionTokensDetails,
+    ),
   );
 }
-export function completionTokensDetailsFromJSON(
+export function createChatCompletionCompletionTokensDetailsFromJSON(
   jsonString: string,
-): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionCompletionTokensDetails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CompletionTokensDetails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompletionTokensDetails' from JSON`,
+    (x) =>
+      CreateChatCompletionCompletionTokensDetails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionCompletionTokensDetails' from JSON`,
   );
 }
 
@@ -8711,10 +8745,10 @@ export const CreateChatCompletionUsage$inboundSchema: z.ZodType<
   prompt_tokens: z.number().optional(),
   total_tokens: z.number().optional(),
   prompt_tokens_details: z.nullable(
-    z.lazy(() => PromptTokensDetails$inboundSchema),
+    z.lazy(() => CreateChatCompletionPromptTokensDetails$inboundSchema),
   ).optional(),
   completion_tokens_details: z.nullable(
-    z.lazy(() => CompletionTokensDetails$inboundSchema),
+    z.lazy(() => CreateChatCompletionCompletionTokensDetails$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -8730,9 +8764,12 @@ export type CreateChatCompletionUsage$Outbound = {
   completion_tokens?: number | undefined;
   prompt_tokens?: number | undefined;
   total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
+  prompt_tokens_details?:
+    | CreateChatCompletionPromptTokensDetails$Outbound
+    | null
+    | undefined;
   completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
+    | CreateChatCompletionCompletionTokensDetails$Outbound
     | null
     | undefined;
 };
@@ -8747,10 +8784,10 @@ export const CreateChatCompletionUsage$outboundSchema: z.ZodType<
   promptTokens: z.number().optional(),
   totalTokens: z.number().optional(),
   promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
+    z.lazy(() => CreateChatCompletionPromptTokensDetails$outboundSchema),
   ).optional(),
   completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
+    z.lazy(() => CreateChatCompletionCompletionTokensDetails$outboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {

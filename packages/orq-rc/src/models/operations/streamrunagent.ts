@@ -229,6 +229,8 @@ export type StreamRunAgentModelConfigurationModalities = ClosedEnum<
  */
 export const StreamRunAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -637,6 +639,8 @@ export type StreamRunAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const StreamRunAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -4431,7 +4435,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KCCAY59DJZVJSJY3Z11Z9KE3"),
+  id: z.string().default("01KDSSBXQMCAN5W8C6FZDWD7DX"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4450,7 +4454,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KCCAY59DJZVJSJY3Z11Z9KE3"),
+  id: z.string().default("01KDSSBXQMCAN5W8C6FZDWD7DX"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

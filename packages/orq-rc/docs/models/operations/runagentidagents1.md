@@ -7,11 +7,11 @@ The key of the guardrail.
 ```typescript
 import { RunAgentIdAgents1 } from "@orq-ai/node/models/operations";
 
-let value: RunAgentIdAgents1 = "orq_pii_detection";
+let value: RunAgentIdAgents1 = "orq_harmful_moderation";
 ```
 
 ## Values
 
 ```typescript
-"orq_pii_detection"
+"orq_pii_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
 ```

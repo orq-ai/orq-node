@@ -7,7 +7,7 @@ import { ListAgentsAgentsGuardrails } from "@orq-ai/node/models/operations";
 
 let value: ListAgentsAgentsGuardrails = {
   id: "orq_pii_detection",
-  executeOn: "input",
+  executeOn: "output",
 };
 ```
 

@@ -272,14 +272,6 @@ run();
 
 * [create](docs/sdks/responses/README.md#create) - Create response
 
-### [Budgets](docs/sdks/budgets/README.md)
-
-* [list](docs/sdks/budgets/README.md#list) - List budget configurations
-* [create](docs/sdks/budgets/README.md#create) - Create budget configuration
-* [get](docs/sdks/budgets/README.md#get) - Get budget configuration
-* [update](docs/sdks/budgets/README.md#update) - Update budget configuration
-* [delete](docs/sdks/budgets/README.md#delete) - Delete budget configuration
-
 ### [Chunking](docs/sdks/chunking/README.md)
 
 * [parse](docs/sdks/chunking/README.md#parse) - Parse text
@@ -333,6 +325,11 @@ run();
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 * [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+
+### [Evaluators](docs/sdks/evaluators/README.md)
+
+* [getV2EvaluatorsIdVersions](docs/sdks/evaluators/README.md#getv2evaluatorsidversions) - List evaluator versions
+* [getV2EvaluatorsIdVersionsVersionId](docs/sdks/evaluators/README.md#getv2evaluatorsidversionsversionid) - Get evaluator version
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
@@ -415,6 +412,8 @@ run();
 * [update](docs/sdks/tools/README.md#update) - Update tool
 * [delete](docs/sdks/tools/README.md#delete) - Delete tool
 * [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
+* [getV2ToolsToolIdVersions](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
+* [getV2ToolsToolIdVersionsVersionId](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -440,11 +439,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsResponsesCreate`](docs/sdks/responses/README.md#create) - Create response
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 - [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
-- [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create budget configuration
-- [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete budget configuration
-- [`budgetsGet`](docs/sdks/budgets/README.md#get) - Get budget configuration
-- [`budgetsList`](docs/sdks/budgets/README.md#list) - List budget configurations
-- [`budgetsUpdate`](docs/sdks/budgets/README.md#update) - Update budget configuration
 - [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Create a contact
 - [`contactsDelete`](docs/sdks/contacts/README.md#delete) - Delete a contact
@@ -478,6 +472,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
+- [`evaluatorsGetV2EvaluatorsIdVersions`](docs/sdks/evaluators/README.md#getv2evaluatorsidversions) - List evaluator versions
+- [`evaluatorsGetV2EvaluatorsIdVersionsVersionId`](docs/sdks/evaluators/README.md#getv2evaluatorsidversionsversionid) - Get evaluator version
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
@@ -530,6 +526,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`routerImagesGenerate`](docs/sdks/router/README.md#imagesgenerate) - Create image
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
+- [`toolsGetV2ToolsToolIdVersions`](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
+- [`toolsGetV2ToolsToolIdVersionsVersionId`](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
 - [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 - [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
@@ -761,7 +759,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (30)</summary>
+<details><summary>Less common errors (34)</summary>
 
 <br />
 
@@ -774,30 +772,34 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 103 methods.*
-* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 103 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 103 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 103 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 103 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 103 methods.*
-* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 103 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 103 methods.*
-* [`CreateAgentRequestResponseBody`](./src/models/errors/createagentrequestresponsebody.ts): Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management. Status code `409`. Applicable to 1 of 103 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 103 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 102 methods.*
+* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 102 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 102 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 102 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 102 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetV2EvaluatorsIdVersionsVersionIdResponseBody`](./src/models/errors/getv2evaluatorsidversionsversionidresponsebody.ts): Evaluator or version not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 102 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 102 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 102 methods.*
+* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 102 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 102 methods.*
+* [`CreateAgentRequestResponseBody`](./src/models/errors/createagentrequestresponsebody.ts): Conflict - An agent with the specified key already exists in this workspace. Each agent must have a unique key within a workspace to ensure proper identification and management. Status code `409`. Applicable to 1 of 102 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 102 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

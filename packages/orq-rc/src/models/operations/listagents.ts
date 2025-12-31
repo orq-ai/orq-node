@@ -389,6 +389,8 @@ export type ListAgentsModalities = ClosedEnum<typeof ListAgentsModalities>;
  */
 export const ListAgentsId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.
@@ -760,6 +762,8 @@ export type ListAgentsFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const ListAgentsIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
 /**
  * The key of the guardrail.

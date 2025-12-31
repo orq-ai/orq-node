@@ -6,7 +6,7 @@
 import { UpdateAgentFallbackModelConfigurationGuardrails } from "@orq-ai/node/models/operations";
 
 let value: UpdateAgentFallbackModelConfigurationGuardrails = {
-  id: "orq_pii_detection",
+  id: "orq_sexual_moderation",
   executeOn: "output",
 };
 ```
