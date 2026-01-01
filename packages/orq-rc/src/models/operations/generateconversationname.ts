@@ -248,7 +248,7 @@ export const GenerateConversationNameResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kdw0p5pfvfbjw0jzppdb320k"),
+  _id: z.string().default("conv_01kdwqh4ewcdh3dtphyz4scztc"),
   entityId: z.string(),
   kind: GenerateConversationNameKind$inboundSchema,
   displayName: z.string(),
@@ -282,7 +282,7 @@ export const GenerateConversationNameResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GenerateConversationNameResponseBody
 > = z.object({
-  id: z.string().default("conv_01kdw0p5pfvfbjw0jzppdb320k"),
+  id: z.string().default("conv_01kdwqh4ewcdh3dtphyz4scztc"),
   entityId: z.string(),
   kind: GenerateConversationNameKind$outboundSchema,
   displayName: z.string(),

@@ -79,7 +79,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01kdw0p5dds81gt0cz2x2xc1eb"),
+  _id: z.string().default("reasoning_01kdwqh44yqyp70a1nppdcscd6"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$inboundSchema,
   reasoning: z.string(),
@@ -104,7 +104,7 @@ export const PartReasoningPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PartReasoningPart
 > = z.object({
-  id: z.string().default("reasoning_01kdw0p5dds81gt0cz2x2xc1eb"),
+  id: z.string().default("reasoning_01kdwqh44yqyp70a1nppdcscd6"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$outboundSchema,
   reasoning: z.string(),
