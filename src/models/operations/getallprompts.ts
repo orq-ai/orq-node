@@ -331,29 +331,32 @@ export type GetAllPromptsModelParameters = {
 };
 
 export const GetAllPromptsProvider = {
-  Cohere: "cohere",
   Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
+  Groq: "groq",
+  Cohere: "cohere",
   Azure: "azure",
   Aws: "aws",
-  Anyscale: "anyscale",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Huggingface: "huggingface",
+  Togetherai: "togetherai",
   Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
+  Anthropic: "anthropic",
   Leonardoai: "leonardoai",
+  Fal: "fal",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
-  Openailike: "openailike",
   Cerebras: "cerebras",
+  Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
+  Deepseek: "deepseek",
+  Contextualai: "contextualai",
+  Moonshotai: "moonshotai",
+  Zai: "zai",
+  Slack: "slack",
 } as const;
 export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
 
@@ -480,7 +483,7 @@ export type GetAllPromptsMessages = {
     | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>
     | null;
   toolCalls?: Array<GetAllPromptsToolCalls> | undefined;
-  toolCallId?: string | undefined;
+  toolCallId?: string | null | undefined;
 };
 
 /**
@@ -565,7 +568,7 @@ export type GetAllPromptsMetadata = {
 /**
  * A prompt entity with configuration, metadata, and versioning.
  */
-export type Prompt = {
+export type GetAllPromptsPrompt = {
   id: string;
   type: GetAllPromptsType;
   owner: string;
@@ -594,7 +597,7 @@ export type Prompt = {
  */
 export type GetAllPromptsResponseBody = {
   object: GetAllPromptsObject;
-  data: Array<Prompt>;
+  data: Array<GetAllPromptsPrompt>;
   hasMore: boolean;
 };
 
@@ -1629,7 +1632,7 @@ export const GetAllPromptsMessages$inboundSchema: z.ZodType<
   ),
   tool_calls: z.array(z.lazy(() => GetAllPromptsToolCalls$inboundSchema))
     .optional(),
-  tool_call_id: z.string().optional(),
+  tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -1648,7 +1651,7 @@ export type GetAllPromptsMessages$Outbound = {
     >
     | null;
   tool_calls?: Array<GetAllPromptsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | undefined;
+  tool_call_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -1672,7 +1675,7 @@ export const GetAllPromptsMessages$outboundSchema: z.ZodType<
   ),
   toolCalls: z.array(z.lazy(() => GetAllPromptsToolCalls$outboundSchema))
     .optional(),
-  toolCallId: z.string().optional(),
+  toolCallId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
@@ -1845,32 +1848,35 @@ export function getAllPromptsMetadataFromJSON(
 }
 
 /** @internal */
-export const Prompt$inboundSchema: z.ZodType<Prompt, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    type: GetAllPromptsType$inboundSchema,
-    owner: z.string(),
-    domain_id: z.string(),
-    created: z.string(),
-    updated: z.string(),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    display_name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
-    metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "domain_id": "domainId",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "display_name": "displayName",
-      "prompt_config": "promptConfig",
-    });
+export const GetAllPromptsPrompt$inboundSchema: z.ZodType<
+  GetAllPromptsPrompt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  type: GetAllPromptsType$inboundSchema,
+  owner: z.string(),
+  domain_id: z.string(),
+  created: z.string(),
+  updated: z.string(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  display_name: z.string(),
+  description: z.nullable(z.string()).optional(),
+  prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
+  metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "display_name": "displayName",
+    "prompt_config": "promptConfig",
   });
+});
 /** @internal */
-export type Prompt$Outbound = {
+export type GetAllPromptsPrompt$Outbound = {
   _id: string;
   type: string;
   owner: string;
@@ -1886,10 +1892,10 @@ export type Prompt$Outbound = {
 };
 
 /** @internal */
-export const Prompt$outboundSchema: z.ZodType<
-  Prompt$Outbound,
+export const GetAllPromptsPrompt$outboundSchema: z.ZodType<
+  GetAllPromptsPrompt$Outbound,
   z.ZodTypeDef,
-  Prompt
+  GetAllPromptsPrompt
 > = z.object({
   id: z.string(),
   type: GetAllPromptsType$outboundSchema,
@@ -1914,16 +1920,20 @@ export const Prompt$outboundSchema: z.ZodType<
   });
 });
 
-export function promptToJSON(prompt: Prompt): string {
-  return JSON.stringify(Prompt$outboundSchema.parse(prompt));
+export function getAllPromptsPromptToJSON(
+  getAllPromptsPrompt: GetAllPromptsPrompt,
+): string {
+  return JSON.stringify(
+    GetAllPromptsPrompt$outboundSchema.parse(getAllPromptsPrompt),
+  );
 }
-export function promptFromJSON(
+export function getAllPromptsPromptFromJSON(
   jsonString: string,
-): SafeParseResult<Prompt, SDKValidationError> {
+): SafeParseResult<GetAllPromptsPrompt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Prompt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Prompt' from JSON`,
+    (x) => GetAllPromptsPrompt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPrompt' from JSON`,
   );
 }
 
@@ -1934,7 +1944,7 @@ export const GetAllPromptsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   object: GetAllPromptsObject$inboundSchema,
-  data: z.array(z.lazy(() => Prompt$inboundSchema)),
+  data: z.array(z.lazy(() => GetAllPromptsPrompt$inboundSchema)),
   has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -1944,7 +1954,7 @@ export const GetAllPromptsResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsResponseBody$Outbound = {
   object: string;
-  data: Array<Prompt$Outbound>;
+  data: Array<GetAllPromptsPrompt$Outbound>;
   has_more: boolean;
 };
 
@@ -1955,7 +1965,7 @@ export const GetAllPromptsResponseBody$outboundSchema: z.ZodType<
   GetAllPromptsResponseBody
 > = z.object({
   object: GetAllPromptsObject$outboundSchema,
-  data: z.array(z.lazy(() => Prompt$outboundSchema)),
+  data: z.array(z.lazy(() => GetAllPromptsPrompt$outboundSchema)),
   hasMore: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

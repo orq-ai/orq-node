@@ -1,6 +1,6 @@
 # FinishReason
 
-The reason why the agent execution became inactive
+The reason why the agent stopped generating
 
 ## Example Usage
 

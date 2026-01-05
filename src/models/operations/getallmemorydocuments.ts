@@ -30,6 +30,14 @@ export type GetAllMemoryDocumentsRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter documents updated after this ISO datetime
+   */
+  updatedAfter?: Date | undefined;
+  /**
+   * Filter documents updated before this ISO datetime
+   */
+  updatedBefore?: Date | undefined;
 };
 
 export const GetAllMemoryDocumentsObject = {
@@ -43,6 +51,9 @@ export type GetAllMemoryDocumentsData = {
   id: string;
   memoryId: string;
   storeId: string;
+  /**
+   * The content of the memory document (whitespace trimmed).
+   */
   text: string;
   created: string;
   updated: string;
@@ -75,12 +86,20 @@ export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
+  updated_after: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  updated_before: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
     "memory_id": "memoryId",
     "starting_after": "startingAfter",
     "ending_before": "endingBefore",
+    "updated_after": "updatedAfter",
+    "updated_before": "updatedBefore",
   });
 });
 /** @internal */
@@ -90,6 +109,8 @@ export type GetAllMemoryDocumentsRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  updated_after?: string | undefined;
+  updated_before?: string | undefined;
 };
 
 /** @internal */
@@ -103,12 +124,16 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  updatedAfter: z.date().transform(v => v.toISOString()).optional(),
+  updatedBefore: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
     memoryId: "memory_id",
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    updatedAfter: "updated_after",
+    updatedBefore: "updated_before",
   });
 });
 

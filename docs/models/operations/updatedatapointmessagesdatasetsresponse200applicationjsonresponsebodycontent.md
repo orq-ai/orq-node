@@ -11,15 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2[]`
+### `operations.UpdateDatapointContentDatasetsResponse2002[]`
 
 ```typescript
-const value:
-  operations.UpdateDatapointContentDatasetsResponse200ApplicationJSONResponseBody2[] =
-    [
-      {
-        type: "refusal",
-      },
-    ];
+const value: operations.UpdateDatapointContentDatasetsResponse2002[] = [];
 ```
 

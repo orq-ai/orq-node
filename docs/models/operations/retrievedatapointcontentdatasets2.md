@@ -1,20 +1,41 @@
 # RetrieveDatapointContentDatasets2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { RetrieveDatapointContentDatasets2 } from "@orq-ai/node/models/operations";
-
-let value: RetrieveDatapointContentDatasets2 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-## Fields
+### `components.RefusalPartSchema`
 
-| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                             | [operations.RetrieveDatapointContentDatasetsType](../../models/operations/retrievedatapointcontentdatasetstype.md)                 | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
-| `text`                                                                                                                             | *string*                                                                                                                           | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
-| `cacheControl`                                                                                                                     | [operations.RetrieveDatapointContentDatasetsCacheControl](../../models/operations/retrievedatapointcontentdatasetscachecontrol.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+```typescript
+const value: components.RefusalPartSchema = {
+  type: "refusal",
+};
+```
+
+### `components.ReasoningPartSchema`
+
+```typescript
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
+};
+```
+
+### `components.RedactedReasoningPartSchema`
+
+```typescript
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
+};
+```
+

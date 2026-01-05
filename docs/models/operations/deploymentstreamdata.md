@@ -10,7 +10,7 @@ let value: DeploymentStreamData = {
   created: new Date("2026-05-08T16:39:48.977Z"),
   object: "completion",
   model: "ATS",
-  provider: "openailike",
+  provider: "contextualai",
   isFinal: false,
   choices: [
     {

@@ -118,6 +118,42 @@ export type RunAgentModelConfigurationResponseFormat =
   | RunAgentResponseFormatJSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const RunAgentModelConfigurationReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type RunAgentModelConfigurationReasoningEffort = ClosedEnum<
+  typeof RunAgentModelConfigurationReasoningEffort
+>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RunAgentModelConfigurationStop = string | Array<string>;
@@ -185,6 +221,43 @@ export type RunAgentModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const RunAgentId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type RunAgentId1 = ClosedEnum<typeof RunAgentId1>;
+
+export type RunAgentModelConfigurationId = RunAgentId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const RunAgentModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type RunAgentModelConfigurationExecuteOn = ClosedEnum<
+  typeof RunAgentModelConfigurationExecuteOn
+>;
+
+export type RunAgentModelConfigurationGuardrails = {
+  id: RunAgentId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: RunAgentModelConfigurationExecuteOn;
+};
+
+/**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type RunAgentModelConfigurationParameters = {
@@ -233,9 +306,18 @@ export type RunAgentModelConfigurationParameters = {
     | RunAgentResponseFormatJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?: RunAgentModelConfigurationReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -280,6 +362,10 @@ export type RunAgentModelConfigurationParameters = {
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
   modalities?: Array<RunAgentModelConfigurationModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<RunAgentModelConfigurationGuardrails> | undefined;
 };
 
 /**
@@ -426,6 +512,42 @@ export type RunAgentFallbackModelConfigurationResponseFormat =
   | RunAgentResponseFormatAgentsRequestJSONSchema;
 
 /**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const RunAgentFallbackModelConfigurationReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type RunAgentFallbackModelConfigurationReasoningEffort = ClosedEnum<
+  typeof RunAgentFallbackModelConfigurationReasoningEffort
+>;
+
+/**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RunAgentFallbackModelConfigurationStop = string | Array<string>;
@@ -497,6 +619,43 @@ export type RunAgentFallbackModelConfigurationModalities = ClosedEnum<
 >;
 
 /**
+ * The key of the guardrail.
+ */
+export const RunAgentIdAgents1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type RunAgentIdAgents1 = ClosedEnum<typeof RunAgentIdAgents1>;
+
+export type RunAgentFallbackModelConfigurationId = RunAgentIdAgents1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const RunAgentFallbackModelConfigurationExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type RunAgentFallbackModelConfigurationExecuteOn = ClosedEnum<
+  typeof RunAgentFallbackModelConfigurationExecuteOn
+>;
+
+export type RunAgentFallbackModelConfigurationGuardrails = {
+  id: RunAgentIdAgents1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: RunAgentFallbackModelConfigurationExecuteOn;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RunAgentFallbackModelConfigurationParameters = {
@@ -545,9 +704,20 @@ export type RunAgentFallbackModelConfigurationParameters = {
     | RunAgentResponseFormatAgentsRequestJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: string | undefined;
+  reasoningEffort?:
+    | RunAgentFallbackModelConfigurationReasoningEffort
+    | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -601,6 +771,10 @@ export type RunAgentFallbackModelConfigurationParameters = {
     | Array<RunAgentFallbackModelConfigurationModalities>
     | null
     | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<RunAgentFallbackModelConfigurationGuardrails> | undefined;
 };
 
 /**
@@ -1853,6 +2027,15 @@ export function runAgentModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
+export const RunAgentModelConfigurationReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentModelConfigurationReasoningEffort> = z
+    .nativeEnum(RunAgentModelConfigurationReasoningEffort);
+/** @internal */
+export const RunAgentModelConfigurationReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentModelConfigurationReasoningEffort> =
+    RunAgentModelConfigurationReasoningEffort$inboundSchema;
+
+/** @internal */
 export const RunAgentModelConfigurationStop$inboundSchema: z.ZodType<
   RunAgentModelConfigurationStop,
   z.ZodTypeDef,
@@ -2141,6 +2324,110 @@ export const RunAgentModelConfigurationModalities$outboundSchema:
     RunAgentModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const RunAgentId1$inboundSchema: z.ZodNativeEnum<typeof RunAgentId1> = z
+  .nativeEnum(RunAgentId1);
+/** @internal */
+export const RunAgentId1$outboundSchema: z.ZodNativeEnum<typeof RunAgentId1> =
+  RunAgentId1$inboundSchema;
+
+/** @internal */
+export const RunAgentModelConfigurationId$inboundSchema: z.ZodType<
+  RunAgentModelConfigurationId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([RunAgentId1$inboundSchema, z.string()]);
+/** @internal */
+export type RunAgentModelConfigurationId$Outbound = string | string;
+
+/** @internal */
+export const RunAgentModelConfigurationId$outboundSchema: z.ZodType<
+  RunAgentModelConfigurationId$Outbound,
+  z.ZodTypeDef,
+  RunAgentModelConfigurationId
+> = z.union([RunAgentId1$outboundSchema, z.string()]);
+
+export function runAgentModelConfigurationIdToJSON(
+  runAgentModelConfigurationId: RunAgentModelConfigurationId,
+): string {
+  return JSON.stringify(
+    RunAgentModelConfigurationId$outboundSchema.parse(
+      runAgentModelConfigurationId,
+    ),
+  );
+}
+export function runAgentModelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentModelConfigurationId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentModelConfigurationExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentModelConfigurationExecuteOn
+> = z.nativeEnum(RunAgentModelConfigurationExecuteOn);
+/** @internal */
+export const RunAgentModelConfigurationExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentModelConfigurationExecuteOn> =
+    RunAgentModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const RunAgentModelConfigurationGuardrails$inboundSchema: z.ZodType<
+  RunAgentModelConfigurationGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([RunAgentId1$inboundSchema, z.string()]),
+  execute_on: RunAgentModelConfigurationExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type RunAgentModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const RunAgentModelConfigurationGuardrails$outboundSchema: z.ZodType<
+  RunAgentModelConfigurationGuardrails$Outbound,
+  z.ZodTypeDef,
+  RunAgentModelConfigurationGuardrails
+> = z.object({
+  id: z.union([RunAgentId1$outboundSchema, z.string()]),
+  executeOn: RunAgentModelConfigurationExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function runAgentModelConfigurationGuardrailsToJSON(
+  runAgentModelConfigurationGuardrails: RunAgentModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    RunAgentModelConfigurationGuardrails$outboundSchema.parse(
+      runAgentModelConfigurationGuardrails,
+    ),
+  );
+}
+export function runAgentModelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentModelConfigurationGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RunAgentModelConfigurationGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentModelConfigurationParameters$inboundSchema: z.ZodType<
   RunAgentModelConfigurationParameters,
   z.ZodTypeDef,
@@ -2160,7 +2447,8 @@ export const RunAgentModelConfigurationParameters$inboundSchema: z.ZodType<
     z.lazy(() => RunAgentResponseFormatJSONObject$inboundSchema),
     z.lazy(() => RunAgentResponseFormatJSONSchema$inboundSchema),
   ]).optional(),
-  reasoning_effort: z.string().optional(),
+  reasoning_effort: RunAgentModelConfigurationReasoningEffort$inboundSchema
+    .optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2181,6 +2469,9 @@ export const RunAgentModelConfigurationParameters$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean().optional(),
   modalities: z.nullable(
     z.array(RunAgentModelConfigurationModalities$inboundSchema),
+  ).optional(),
+  guardrails: z.array(
+    z.lazy(() => RunAgentModelConfigurationGuardrails$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2231,6 +2522,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   tool_choice?: RunAgentToolChoice2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?: Array<RunAgentModelConfigurationGuardrails$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2254,7 +2546,8 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     z.lazy(() => RunAgentResponseFormatJSONObject$outboundSchema),
     z.lazy(() => RunAgentResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
-  reasoningEffort: z.string().optional(),
+  reasoningEffort: RunAgentModelConfigurationReasoningEffort$outboundSchema
+    .optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -2275,6 +2568,9 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(
     z.array(RunAgentModelConfigurationModalities$outboundSchema),
+  ).optional(),
+  guardrails: z.array(
+    z.lazy(() => RunAgentModelConfigurationGuardrails$outboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2789,6 +3085,15 @@ export function runAgentFallbackModelConfigurationResponseFormatFromJSON(
 }
 
 /** @internal */
+export const RunAgentFallbackModelConfigurationReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationReasoningEffort> = z
+    .nativeEnum(RunAgentFallbackModelConfigurationReasoningEffort);
+/** @internal */
+export const RunAgentFallbackModelConfigurationReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationReasoningEffort> =
+    RunAgentFallbackModelConfigurationReasoningEffort$inboundSchema;
+
+/** @internal */
 export const RunAgentFallbackModelConfigurationStop$inboundSchema: z.ZodType<
   RunAgentFallbackModelConfigurationStop,
   z.ZodTypeDef,
@@ -3097,6 +3402,121 @@ export const RunAgentFallbackModelConfigurationModalities$outboundSchema:
     RunAgentFallbackModelConfigurationModalities$inboundSchema;
 
 /** @internal */
+export const RunAgentIdAgents1$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentIdAgents1
+> = z.nativeEnum(RunAgentIdAgents1);
+/** @internal */
+export const RunAgentIdAgents1$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentIdAgents1
+> = RunAgentIdAgents1$inboundSchema;
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationId$inboundSchema: z.ZodType<
+  RunAgentFallbackModelConfigurationId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([RunAgentIdAgents1$inboundSchema, z.string()]);
+/** @internal */
+export type RunAgentFallbackModelConfigurationId$Outbound = string | string;
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationId$outboundSchema: z.ZodType<
+  RunAgentFallbackModelConfigurationId$Outbound,
+  z.ZodTypeDef,
+  RunAgentFallbackModelConfigurationId
+> = z.union([RunAgentIdAgents1$outboundSchema, z.string()]);
+
+export function runAgentFallbackModelConfigurationIdToJSON(
+  runAgentFallbackModelConfigurationId: RunAgentFallbackModelConfigurationId,
+): string {
+  return JSON.stringify(
+    RunAgentFallbackModelConfigurationId$outboundSchema.parse(
+      runAgentFallbackModelConfigurationId,
+    ),
+  );
+}
+export function runAgentFallbackModelConfigurationIdFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentFallbackModelConfigurationId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RunAgentFallbackModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentFallbackModelConfigurationId' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationExecuteOn> = z
+    .nativeEnum(RunAgentFallbackModelConfigurationExecuteOn);
+/** @internal */
+export const RunAgentFallbackModelConfigurationExecuteOn$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationExecuteOn> =
+    RunAgentFallbackModelConfigurationExecuteOn$inboundSchema;
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationGuardrails$inboundSchema:
+  z.ZodType<
+    RunAgentFallbackModelConfigurationGuardrails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.union([RunAgentIdAgents1$inboundSchema, z.string()]),
+    execute_on: RunAgentFallbackModelConfigurationExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  });
+/** @internal */
+export type RunAgentFallbackModelConfigurationGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationGuardrails$outboundSchema:
+  z.ZodType<
+    RunAgentFallbackModelConfigurationGuardrails$Outbound,
+    z.ZodTypeDef,
+    RunAgentFallbackModelConfigurationGuardrails
+  > = z.object({
+    id: z.union([RunAgentIdAgents1$outboundSchema, z.string()]),
+    executeOn: RunAgentFallbackModelConfigurationExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  });
+
+export function runAgentFallbackModelConfigurationGuardrailsToJSON(
+  runAgentFallbackModelConfigurationGuardrails:
+    RunAgentFallbackModelConfigurationGuardrails,
+): string {
+  return JSON.stringify(
+    RunAgentFallbackModelConfigurationGuardrails$outboundSchema.parse(
+      runAgentFallbackModelConfigurationGuardrails,
+    ),
+  );
+}
+export function runAgentFallbackModelConfigurationGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RunAgentFallbackModelConfigurationGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RunAgentFallbackModelConfigurationGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RunAgentFallbackModelConfigurationGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     RunAgentFallbackModelConfigurationParameters,
@@ -3118,7 +3538,9 @@ export const RunAgentFallbackModelConfigurationParameters$inboundSchema:
       z.lazy(() => RunAgentResponseFormatAgentsJSONObject$inboundSchema),
       z.lazy(() => RunAgentResponseFormatAgentsRequestJSONSchema$inboundSchema),
     ]).optional(),
-    reasoning_effort: z.string().optional(),
+    reasoning_effort:
+      RunAgentFallbackModelConfigurationReasoningEffort$inboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3141,6 +3563,9 @@ export const RunAgentFallbackModelConfigurationParameters$inboundSchema:
     parallel_tool_calls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(RunAgentFallbackModelConfigurationModalities$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => RunAgentFallbackModelConfigurationGuardrails$inboundSchema),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3191,6 +3616,9 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   tool_choice?: RunAgentToolChoiceAgents2$Outbound | string | undefined;
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
+  guardrails?:
+    | Array<RunAgentFallbackModelConfigurationGuardrails$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -3217,7 +3645,9 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
         RunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
       ),
     ]).optional(),
-    reasoningEffort: z.string().optional(),
+    reasoningEffort:
+      RunAgentFallbackModelConfigurationReasoningEffort$outboundSchema
+        .optional(),
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -3240,6 +3670,9 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     parallelToolCalls: z.boolean().optional(),
     modalities: z.nullable(
       z.array(RunAgentFallbackModelConfigurationModalities$outboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => RunAgentFallbackModelConfigurationGuardrails$outboundSchema),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3874,7 +4307,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KDXAAMNGAB0QZMS17WQ22AKY"),
+    id: z.string().default("01KE6QFGBWZ3W0TGESVERWHYD4"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -3893,7 +4326,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KDXAAMNGAB0QZMS17WQ22AKY"),
+  id: z.string().default("01KE6QFGBWZ3W0TGESVERWHYD4"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -5590,7 +6023,7 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
     "none",
   ),
   max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(300),
+  max_execution_time: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$inboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$inboundSchema))
@@ -5659,7 +6092,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
     "none",
   ),
   maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(300),
+  maxExecutionTime: z.number().int().default(600),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$outboundSchema))

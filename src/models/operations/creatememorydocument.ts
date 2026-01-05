@@ -10,13 +10,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateMemoryDocumentRequestBody = {
   /**
-   * The content of the memory document
+   * The content of the memory document (whitespace trimmed).
    */
   text: string;
   /**
-   * Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies.
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
    */
-  metadata: { [k: string]: string };
+  metadata?: { [k: string]: string } | undefined;
 };
 
 export type CreateMemoryDocumentRequest = {
@@ -38,6 +38,9 @@ export type CreateMemoryDocumentResponseBody = {
   id: string;
   memoryId: string;
   storeId: string;
+  /**
+   * The content of the memory document (whitespace trimmed).
+   */
   text: string;
   created: string;
   updated: string;
@@ -57,12 +60,12 @@ export const CreateMemoryDocumentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
-  metadata: z.record(z.string()),
+  metadata: z.record(z.string()).optional(),
 });
 /** @internal */
 export type CreateMemoryDocumentRequestBody$Outbound = {
   text: string;
-  metadata: { [k: string]: string };
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -72,7 +75,7 @@ export const CreateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
   CreateMemoryDocumentRequestBody
 > = z.object({
   text: z.string(),
-  metadata: z.record(z.string()),
+  metadata: z.record(z.string()).optional(),
 });
 
 export function createMemoryDocumentRequestBodyToJSON(

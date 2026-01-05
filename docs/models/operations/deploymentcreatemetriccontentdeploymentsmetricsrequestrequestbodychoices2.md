@@ -1,21 +1,41 @@
 # DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2
 
-## Example Usage
+
+## Supported Types
+
+### `components.TextContentPartSchema`
 
 ```typescript
-import { DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2 } from "@orq-ai/node/models/operations";
-
-let value:
-  DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2 = {
-    type: "text",
-    text: "<value>",
-  };
+const value: components.TextContentPartSchema = {
+  type: "text",
+  text: "<value>",
+};
 ```
 
-## Fields
+### `components.RefusalPartSchema`
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoicesType](../../models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestrequestbodychoicestype.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `text`                                                                                                                                                                                             | *string*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `cacheControl`                                                                                                                                                                                     | [operations.DeploymentCreateMetricContentDeploymentsMetricsRequestCacheControl](../../models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestcachecontrol.md)                     | :heavy_minus_sign:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+const value: components.RefusalPartSchema = {
+  type: "refusal",
+};
+```
+
+### `components.ReasoningPartSchema`
+
+```typescript
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
+};
+```
+
+### `components.RedactedReasoningPartSchema`
+
+```typescript
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
+};
+```
+
