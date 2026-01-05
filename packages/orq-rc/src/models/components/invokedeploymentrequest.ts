@@ -1137,7 +1137,7 @@ export type InvokeDeploymentRequest = {
    */
   extraParams?: { [k: string]: any } | undefined;
   /**
-   * A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings.
+   * A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context.
    */
   documents?: Array<Documents> | undefined;
   invokeOptions?: InvokeOptions | undefined;

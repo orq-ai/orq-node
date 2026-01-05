@@ -560,6 +560,24 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.stream({
     key: "<key>",
+    documents: [
+      {
+        text:
+          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
 
   for await (const event of result) {
