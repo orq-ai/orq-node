@@ -20,11 +20,31 @@ let value: StreamRunAgentRequestBody = {
       ],
     },
   },
+  fallbackModels: [
+    {
+      id: "<id>",
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
   role: "<value>",
   instructions: "<value>",
   message: {
-    role: "tool",
-    parts: [],
+    role: "user",
+    parts: [
+      {
+        kind: "text",
+        text: "<value>",
+      },
+    ],
   },
   contact: {
     id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",

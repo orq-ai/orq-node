@@ -24,6 +24,9 @@ let value: ListAgentsData = {
         504,
       ],
     },
+    fallbackModels: [
+      "<value>",
+    ],
   },
   path: "Default",
   memoryStores: [

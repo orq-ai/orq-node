@@ -28,11 +28,27 @@ let value: RetrieveAgentRequestResponseBody = {
         504,
       ],
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
   },
   path: "Default",
   memoryStores: [
     "<value 1>",
     "<value 2>",
+    "<value 3>",
   ],
   teamOfAgents: [
     {

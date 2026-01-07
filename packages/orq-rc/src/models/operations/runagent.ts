@@ -778,7 +778,21 @@ export type RunAgentFallbackModelConfigurationParameters = {
 };
 
 /**
- * Fallback model configuration with optional parameters.
+ * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ */
+export type RunAgentFallbackModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
+ * Fallback model configuration with optional parameters and retry settings.
  */
 export type RunAgentFallbackModelConfiguration2 = {
   /**
@@ -789,6 +803,10 @@ export type RunAgentFallbackModelConfiguration2 = {
    * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
    */
   parameters?: RunAgentFallbackModelConfigurationParameters | undefined;
+  /**
+   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   */
+  retry?: RunAgentFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -3718,6 +3736,65 @@ export function runAgentFallbackModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
+export const RunAgentFallbackModelConfigurationRetry$inboundSchema: z.ZodType<
+  RunAgentFallbackModelConfigurationRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type RunAgentFallbackModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationRetry$outboundSchema: z.ZodType<
+  RunAgentFallbackModelConfigurationRetry$Outbound,
+  z.ZodTypeDef,
+  RunAgentFallbackModelConfigurationRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function runAgentFallbackModelConfigurationRetryToJSON(
+  runAgentFallbackModelConfigurationRetry:
+    RunAgentFallbackModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    RunAgentFallbackModelConfigurationRetry$outboundSchema.parse(
+      runAgentFallbackModelConfigurationRetry,
+    ),
+  );
+}
+export function runAgentFallbackModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RunAgentFallbackModelConfigurationRetry,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RunAgentFallbackModelConfigurationRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RunAgentFallbackModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
   RunAgentFallbackModelConfiguration2,
   z.ZodTypeDef,
@@ -3727,6 +3804,8 @@ export const RunAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     RunAgentFallbackModelConfigurationParameters$inboundSchema
   ).optional(),
+  retry: z.lazy(() => RunAgentFallbackModelConfigurationRetry$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type RunAgentFallbackModelConfiguration2$Outbound = {
@@ -3734,6 +3813,7 @@ export type RunAgentFallbackModelConfiguration2$Outbound = {
   parameters?:
     | RunAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
+  retry?: RunAgentFallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3746,6 +3826,8 @@ export const RunAgentFallbackModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     RunAgentFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
+  retry: z.lazy(() => RunAgentFallbackModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function runAgentFallbackModelConfiguration2ToJSON(
@@ -4307,7 +4389,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KE9HJVAJ511NE6TRD24W25A7"),
+    id: z.string().default("01KEBD76JYEN07DCRE7P14A8MW"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4326,7 +4408,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KE9HJVAJ511NE6TRD24W25A7"),
+  id: z.string().default("01KEBD76JYEN07DCRE7P14A8MW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),

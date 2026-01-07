@@ -28,11 +28,15 @@ let value: UpdateAgentResponseBody = {
         504,
       ],
     },
+    fallbackModels: [
+      "<value>",
+    ],
   },
   path: "Default",
   memoryStores: [
     "<value 1>",
     "<value 2>",
+    "<value 3>",
   ],
   teamOfAgents: [],
   knowledgeBases: [

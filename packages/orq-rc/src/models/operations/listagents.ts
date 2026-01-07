@@ -921,7 +921,21 @@ export type ListAgentsFallbackModelConfigurationParameters = {
 };
 
 /**
- * Fallback model configuration with optional parameters.
+ * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ */
+export type ListAgentsFallbackModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
+ * Fallback model configuration with optional parameters and retry settings.
  */
 export type ListAgentsFallbackModelConfiguration2 = {
   /**
@@ -932,6 +946,10 @@ export type ListAgentsFallbackModelConfiguration2 = {
    * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
    */
   parameters?: ListAgentsFallbackModelConfigurationParameters | undefined;
+  /**
+   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   */
+  retry?: ListAgentsFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -3334,6 +3352,66 @@ export function listAgentsFallbackModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
+export const ListAgentsFallbackModelConfigurationRetry$inboundSchema: z.ZodType<
+  ListAgentsFallbackModelConfigurationRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+/** @internal */
+export type ListAgentsFallbackModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationRetry$outboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationRetry$Outbound,
+    z.ZodTypeDef,
+    ListAgentsFallbackModelConfigurationRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function listAgentsFallbackModelConfigurationRetryToJSON(
+  listAgentsFallbackModelConfigurationRetry:
+    ListAgentsFallbackModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    ListAgentsFallbackModelConfigurationRetry$outboundSchema.parse(
+      listAgentsFallbackModelConfigurationRetry,
+    ),
+  );
+}
+export function listAgentsFallbackModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationRetry,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsFallbackModelConfigurationRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsFallbackModelConfiguration2$inboundSchema: z.ZodType<
   ListAgentsFallbackModelConfiguration2,
   z.ZodTypeDef,
@@ -3343,6 +3421,8 @@ export const ListAgentsFallbackModelConfiguration2$inboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     ListAgentsFallbackModelConfigurationParameters$inboundSchema
   ).optional(),
+  retry: z.lazy(() => ListAgentsFallbackModelConfigurationRetry$inboundSchema)
+    .optional(),
 });
 /** @internal */
 export type ListAgentsFallbackModelConfiguration2$Outbound = {
@@ -3350,6 +3430,7 @@ export type ListAgentsFallbackModelConfiguration2$Outbound = {
   parameters?:
     | ListAgentsFallbackModelConfigurationParameters$Outbound
     | undefined;
+  retry?: ListAgentsFallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3362,6 +3443,8 @@ export const ListAgentsFallbackModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     ListAgentsFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
+  retry: z.lazy(() => ListAgentsFallbackModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function listAgentsFallbackModelConfiguration2ToJSON(

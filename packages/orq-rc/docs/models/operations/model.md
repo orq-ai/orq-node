@@ -16,6 +16,9 @@ let value: Model = {
       504,
     ],
   },
+  fallbackModels: [
+    "<value>",
+  ],
 };
 ```
 

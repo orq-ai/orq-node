@@ -1,6 +1,6 @@
 # RetrieveAgentRequestFallbackModelConfiguration2
 
-Fallback model configuration with optional parameters.
+Fallback model configuration with optional parameters and retry settings.
 
 ## Example Usage
 
@@ -9,6 +9,15 @@ import { RetrieveAgentRequestFallbackModelConfiguration2 } from "@orq-ai/node/mo
 
 let value: RetrieveAgentRequestFallbackModelConfiguration2 = {
   id: "<id>",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
 };
 ```
 
@@ -18,3 +27,4 @@ let value: RetrieveAgentRequestFallbackModelConfiguration2 = {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                                                                       | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | A fallback model ID string. Must support tool calling.                                                                                                     |
 | `parameters`                                                                                                                                               | [operations.RetrieveAgentRequestFallbackModelConfigurationParameters](../../models/operations/retrieveagentrequestfallbackmodelconfigurationparameters.md) | :heavy_minus_sign:                                                                                                                                         | Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.                                    |
+| `retry`                                                                                                                                                    | [operations.RetrieveAgentRequestFallbackModelConfigurationRetry](../../models/operations/retrieveagentrequestfallbackmodelconfigurationretry.md)           | :heavy_minus_sign:                                                                                                                                         | Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.                              |

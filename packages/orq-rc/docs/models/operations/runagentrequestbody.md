@@ -8,10 +8,25 @@ import { RunAgentRequestBody } from "@orq-ai/node/models/operations";
 let value: RunAgentRequestBody = {
   key: "<key>",
   model: "Camaro",
+  fallbackModels: [
+    {
+      id: "<id>",
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
   role: "<value>",
   instructions: "<value>",
   message: {
-    role: "tool",
+    role: "user",
     parts: [],
   },
   contact: {

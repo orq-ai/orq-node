@@ -800,7 +800,21 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
 };
 
 /**
- * Fallback model configuration with optional parameters.
+ * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ */
+export type StreamRunAgentFallbackModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
+ * Fallback model configuration with optional parameters and retry settings.
  */
 export type StreamRunAgentFallbackModelConfiguration2 = {
   /**
@@ -811,6 +825,10 @@ export type StreamRunAgentFallbackModelConfiguration2 = {
    * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
    */
   parameters?: StreamRunAgentFallbackModelConfigurationParameters | undefined;
+  /**
+   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   */
+  retry?: StreamRunAgentFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -3794,6 +3812,67 @@ export function streamRunAgentFallbackModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentFallbackModelConfigurationRetry$inboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationRetry,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  });
+/** @internal */
+export type StreamRunAgentFallbackModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationRetry$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationRetry$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function streamRunAgentFallbackModelConfigurationRetryToJSON(
+  streamRunAgentFallbackModelConfigurationRetry:
+    StreamRunAgentFallbackModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationRetry$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationRetry,
+    ),
+  );
+}
+export function streamRunAgentFallbackModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentFallbackModelConfigurationRetry,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentFallbackModelConfigurationRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentFallbackModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
   StreamRunAgentFallbackModelConfiguration2,
   z.ZodTypeDef,
@@ -3803,6 +3882,9 @@ export const StreamRunAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     StreamRunAgentFallbackModelConfigurationParameters$inboundSchema
   ).optional(),
+  retry: z.lazy(() =>
+    StreamRunAgentFallbackModelConfigurationRetry$inboundSchema
+  ).optional(),
 });
 /** @internal */
 export type StreamRunAgentFallbackModelConfiguration2$Outbound = {
@@ -3810,6 +3892,7 @@ export type StreamRunAgentFallbackModelConfiguration2$Outbound = {
   parameters?:
     | StreamRunAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
+  retry?: StreamRunAgentFallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3822,6 +3905,9 @@ export const StreamRunAgentFallbackModelConfiguration2$outboundSchema:
     id: z.string(),
     parameters: z.lazy(() =>
       StreamRunAgentFallbackModelConfigurationParameters$outboundSchema
+    ).optional(),
+    retry: z.lazy(() =>
+      StreamRunAgentFallbackModelConfigurationRetry$outboundSchema
     ).optional(),
   });
 
@@ -4435,7 +4521,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KE9HJVCAHE5SNMANP659GJ74"),
+  id: z.string().default("01KEBD76NBWT9KWM55NJ5A29JA"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4454,7 +4540,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KE9HJVCAHE5SNMANP659GJ74"),
+  id: z.string().default("01KEBD76NBWT9KWM55NJ5A29JA"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

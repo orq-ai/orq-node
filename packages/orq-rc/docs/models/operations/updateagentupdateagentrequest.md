@@ -21,6 +21,9 @@ let value: UpdateAgentUpdateAgentRequest = {
       ],
     },
   },
+  fallbackModels: [
+    "<value>",
+  ],
   settings: {
     tools: [
       {

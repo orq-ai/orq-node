@@ -48,6 +48,21 @@ async function run() {
         ],
       },
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
     settings: {
       tools: [
         {
@@ -105,6 +120,21 @@ async function run() {
         ],
       },
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
     settings: {
       tools: [
         {
@@ -309,6 +339,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.update({
     model: "El Camino",
+    fallbackModels: [
+      "<value>",
+    ],
     settings: {
       tools: [
         {
@@ -350,6 +383,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsUpdate(orq, {
     model: "El Camino",
+    fallbackModels: [
+      "<value>",
+    ],
     settings: {
       tools: [
         {
@@ -618,6 +654,9 @@ async function run() {
   const result = await orq.agents.run({
     key: "<key>",
     model: "F-150",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -687,6 +726,9 @@ async function run() {
   const res = await agentsRun(orq, {
     key: "<key>",
     model: "F-150",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -781,6 +823,9 @@ async function run() {
   const result = await orq.agents.streamRun({
     key: "<key>",
     model: "Alpine",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -852,6 +897,9 @@ async function run() {
   const res = await agentsStreamRun(orq, {
     key: "<key>",
     model: "Alpine",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {

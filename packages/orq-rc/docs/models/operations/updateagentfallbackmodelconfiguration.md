@@ -16,6 +16,15 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdateAgentFallbackModelConfiguration2 = {
   id: "<id>",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
 };
 ```
 

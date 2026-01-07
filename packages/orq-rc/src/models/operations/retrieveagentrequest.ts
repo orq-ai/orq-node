@@ -931,7 +931,21 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
 };
 
 /**
- * Fallback model configuration with optional parameters.
+ * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ */
+export type RetrieveAgentRequestFallbackModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+/**
+ * Fallback model configuration with optional parameters and retry settings.
  */
 export type RetrieveAgentRequestFallbackModelConfiguration2 = {
   /**
@@ -944,6 +958,10 @@ export type RetrieveAgentRequestFallbackModelConfiguration2 = {
   parameters?:
     | RetrieveAgentRequestFallbackModelConfigurationParameters
     | undefined;
+  /**
+   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   */
+  retry?: RetrieveAgentRequestFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -3474,6 +3492,67 @@ export function retrieveAgentRequestFallbackModelConfigurationParametersFromJSON
 }
 
 /** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestFallbackModelConfigurationRetry,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  });
+/** @internal */
+export type RetrieveAgentRequestFallbackModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationRetry$outboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestFallbackModelConfigurationRetry$Outbound,
+    z.ZodTypeDef,
+    RetrieveAgentRequestFallbackModelConfigurationRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function retrieveAgentRequestFallbackModelConfigurationRetryToJSON(
+  retrieveAgentRequestFallbackModelConfigurationRetry:
+    RetrieveAgentRequestFallbackModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    RetrieveAgentRequestFallbackModelConfigurationRetry$outboundSchema.parse(
+      retrieveAgentRequestFallbackModelConfigurationRetry,
+    ),
+  );
+}
+export function retrieveAgentRequestFallbackModelConfigurationRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestFallbackModelConfigurationRetry,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationRetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfiguration2,
@@ -3484,12 +3563,18 @@ export const RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema:
     parameters: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSchema
     ).optional(),
+    retry: z.lazy(() =>
+      RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema
+    ).optional(),
   });
 /** @internal */
 export type RetrieveAgentRequestFallbackModelConfiguration2$Outbound = {
   id: string;
   parameters?:
     | RetrieveAgentRequestFallbackModelConfigurationParameters$Outbound
+    | undefined;
+  retry?:
+    | RetrieveAgentRequestFallbackModelConfigurationRetry$Outbound
     | undefined;
 };
 
@@ -3503,6 +3588,9 @@ export const RetrieveAgentRequestFallbackModelConfiguration2$outboundSchema:
     id: z.string(),
     parameters: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationParameters$outboundSchema
+    ).optional(),
+    retry: z.lazy(() =>
+      RetrieveAgentRequestFallbackModelConfigurationRetry$outboundSchema
     ).optional(),
   });
 

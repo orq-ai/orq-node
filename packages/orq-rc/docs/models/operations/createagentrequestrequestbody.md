@@ -12,6 +12,21 @@ let value: CreateAgentRequestRequestBody = {
   instructions: "<value>",
   path: "Default",
   model: "A4",
+  fallbackModels: [
+    {
+      id: "<id>",
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
   settings: {
     tools: [
       {

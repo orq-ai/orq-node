@@ -16,6 +16,21 @@ let value: UpdateAgentModel = {
       504,
     ],
   },
+  fallbackModels: [
+    {
+      id: "<id>",
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
 };
 ```
 

@@ -46,6 +46,7 @@ typescript:
   enumFormat: union
   envVarPrefix: ORQ
   exportZodModelNamespace: false
+  flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: body-first
   formStringArrayEncodeMode: encoded-string

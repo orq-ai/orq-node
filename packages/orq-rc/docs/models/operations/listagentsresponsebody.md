@@ -30,6 +30,9 @@ let value: ListAgentsResponseBody = {
             504,
           ],
         },
+        fallbackModels: [
+          "<value>",
+        ],
       },
       path: "Default",
       memoryStores: [
