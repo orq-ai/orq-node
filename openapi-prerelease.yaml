@@ -708,8 +708,7 @@ components:
                 description: "Metadata about the document"
             required:
               - "text"
-          description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
-          example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
+          description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
         "invoke_options":
           type: "object"
           properties:
@@ -1166,22 +1165,6 @@ components:
         - "text"
       title: "Text Part"
       description: "A text content part containing plain text or markdown. Used for agent messages, user input, and text-based responses."
-    "ErrorPart":
-      type: "object"
-      properties:
-        "kind":
-          type: "string"
-          enum:
-            - "error"
-        "error":
-          type: "string"
-        "code":
-          type: "number"
-      required:
-        - "kind"
-        - "error"
-      title: "Error Part"
-      description: "An error content part containing error information. Used when an error occurs during agent execution."
     "DataPart":
       type: "object"
       properties:
@@ -1309,7 +1292,6 @@ components:
           items:
             oneOf:
               - {"$ref": "#/components/schemas/TextPart"}
-              - {"$ref": "#/components/schemas/ErrorPart"}
               - {"$ref": "#/components/schemas/DataPart"}
               - {"$ref": "#/components/schemas/FilePart"}
               - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -1318,7 +1300,6 @@ components:
               propertyName: "kind"
               mapping:
                 "text": "#/components/schemas/TextPart"
-                "error": "#/components/schemas/ErrorPart"
                 "data": "#/components/schemas/DataPart"
                 "file": "#/components/schemas/FilePart"
                 "tool_call": "#/components/schemas/ToolCallPart"
@@ -1441,12 +1422,6 @@ components:
             "workflowRunId":
               type: "string"
               description: "Trace ID for this turn of the conversation (new for each continuation)"
-            "userMessageId":
-              type: "string"
-              description: "Server-generated ID for the user message. Use this ID for frontend state consistency."
-            "assistantMessageId":
-              type: "string"
-              description: "Server-generated ID for the assistant message. Use this ID for frontend state consistency."
           required:
             - "responseId"
             - "taskId"
@@ -1795,7 +1770,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kecbxz5pky50azh7szpetr6m"
+              default: "reasoning_01kecfq70mdesr2s3v7v21mjdy"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1879,7 +1854,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kecbxz5nyj7m3qqj6wzkap6f"
+                      default: "text_01kecfq70kfppk6xtf7akq3mq8"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1905,7 +1880,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kecbxz5qrbxya192eayzt42z"
+                      default: "file_01kecfq70p1nkq29q90f2350nk"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -1936,7 +1911,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kecbxz5sg44k7hg87n3q5j1v"
+                      default: "data_01kecfq70rk61c1byqg1c31e90"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -2018,7 +1993,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kecbxz5vv69nefm703cy9tn0"
+                                  default: "text_01kecfq70tt3qrtg8g4jpw68g7"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2043,7 +2018,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kecbxz5ymcpdvfe0gxexgtv2"
+                                  default: "reasoning_01kecfq70vyt8pzz30v1nr6s8g"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2071,7 +2046,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kecbxz60qhkmmctkp7jt73as"
+                                  default: "file_01kecfq70xanmrxbrrcct89xpf"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2102,7 +2077,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kecbxz62xvbsy8vnprw2bksx"
+                                  default: "data_01kecfq70zper3hqvsw9ebb0wg"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -2224,7 +2199,6 @@ components:
                   items:
                     oneOf:
                       - {"$ref": "#/components/schemas/TextPart"}
-                      - {"$ref": "#/components/schemas/ErrorPart"}
                       - {"$ref": "#/components/schemas/DataPart"}
                       - {"$ref": "#/components/schemas/FilePart"}
                       - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -2233,7 +2207,6 @@ components:
                       propertyName: "kind"
                       mapping:
                         "text": "#/components/schemas/TextPart"
-                        "error": "#/components/schemas/ErrorPart"
                         "data": "#/components/schemas/DataPart"
                         "file": "#/components/schemas/FilePart"
                         "tool_call": "#/components/schemas/ToolCallPart"
@@ -2445,7 +2418,6 @@ components:
                     items:
                       oneOf:
                         - {"$ref": "#/components/schemas/TextPart"}
-                        - {"$ref": "#/components/schemas/ErrorPart"}
                         - {"$ref": "#/components/schemas/DataPart"}
                         - {"$ref": "#/components/schemas/FilePart"}
                         - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -2454,7 +2426,6 @@ components:
                         propertyName: "kind"
                         mapping:
                           "text": "#/components/schemas/TextPart"
-                          "error": "#/components/schemas/ErrorPart"
                           "data": "#/components/schemas/DataPart"
                           "file": "#/components/schemas/FilePart"
                           "tool_call": "#/components/schemas/ToolCallPart"
@@ -2781,7 +2752,6 @@ components:
                   items:
                     oneOf:
                       - {"$ref": "#/components/schemas/TextPart"}
-                      - {"$ref": "#/components/schemas/ErrorPart"}
                       - {"$ref": "#/components/schemas/DataPart"}
                       - {"$ref": "#/components/schemas/FilePart"}
                       - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -2790,7 +2760,6 @@ components:
                       propertyName: "kind"
                       mapping:
                         "text": "#/components/schemas/TextPart"
-                        "error": "#/components/schemas/ErrorPart"
                         "data": "#/components/schemas/DataPart"
                         "file": "#/components/schemas/FilePart"
                         "tool_call": "#/components/schemas/ToolCallPart"
@@ -3197,7 +3166,6 @@ components:
                     items:
                       oneOf:
                         - {"$ref": "#/components/schemas/TextPart"}
-                        - {"$ref": "#/components/schemas/ErrorPart"}
                         - {"$ref": "#/components/schemas/DataPart"}
                         - {"$ref": "#/components/schemas/FilePart"}
                         - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -3206,7 +3174,6 @@ components:
                         propertyName: "kind"
                         mapping:
                           "text": "#/components/schemas/TextPart"
-                          "error": "#/components/schemas/ErrorPart"
                           "data": "#/components/schemas/DataPart"
                           "file": "#/components/schemas/FilePart"
                           "tool_call": "#/components/schemas/ToolCallPart"
@@ -3284,7 +3251,6 @@ components:
                     - "generic"
                     - "evaluators"
                     - "otel"
-                    - "ai-chat"
                   description: "Orquesta product"
                 "memory":
                   type: "object"
@@ -3368,7 +3334,6 @@ components:
                     - "generic"
                     - "evaluators"
                     - "otel"
-                    - "ai-chat"
                   description: "Orquesta product"
                 "memory":
                   type: "object"
@@ -3458,7 +3423,6 @@ components:
                     - "generic"
                     - "evaluators"
                     - "otel"
-                    - "ai-chat"
                   description: "Orquesta product"
                 "memory":
                   type: "object"
@@ -3547,178 +3511,48 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kecbxzek7862amxpsqz2can6"
-          description: "Unique conversation identifier with `conv_` prefix."
-          example: "conv_01jj1hdhn79xas7a01wb3hysdb"
+          default: "conv_01kecfq79c0c4vt2q5zth6y0nf"
+          description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
+        "entityId":
+          type: "string"
+          description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
         "kind":
           type: "string"
           enum:
             - "conversation"
-          description: "Resource type discriminator."
+          description: "Type discriminator indicating this is a conversation"
         "displayName":
           type: "string"
           maxLength: 100
-          description: "Human-readable name for the conversation. Maximum 100 characters."
-          example: "Product Feature Discussion"
+          description: "Display name for the conversation. Can be auto-generated or set by the user."
         "createdAt":
           type: "number"
-          description: "Unix timestamp in milliseconds when the conversation was created."
-          example: 1734789600000
+          description: "Unix timestamp (in milliseconds) when the conversation was created"
         "updatedAt":
           type: "number"
-          description: "Unix timestamp in milliseconds when the conversation was last modified."
-          example: 1734793200000
+          description: "Unix timestamp (in milliseconds) when the conversation was last updated"
         "createdById":
           type: "string"
-          description: "Identifier of the user or system that created the conversation."
-          example: "user_01jj1hdhn79xas7a01wb3hysdb"
+          description: "Optional identifier of the user or agent that created the conversation"
         "updatedById":
           type: "string"
-          description: "Identifier of the user or system that last modified the conversation."
-          example: "user_01jj1hdhn79xas7a01wb3hysdb"
+          description: "Optional identifier of the user or agent that last updated the conversation"
         "metadata":
           type: "object"
           properties:
             "generatingTitle":
               type: "boolean"
-              description: "When `true`, indicates the conversation title is being auto-generated."
+              description: "Indicates whether the conversation title is currently being generated by AI."
             "entityId":
-              type:
-                - "string"
-                - "null"
-              description: "Parent entity identifier (e.g., agent or deployment). Set to `null` for standalone conversations."
-              example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-            "model":
-              type:
-                - "string"
-                - "null"
-              description: "Model identifier for standalone conversations in `provider/model_id` format. Set to `null` for entity-bound conversations."
-              example: "openai/gpt-4o"
-          description: "Additional conversation metadata."
+              type: "string"
+              description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to. Used for filtering conversations by entity."
+          description: "Optional metadata associated with the conversation."
       required:
+        - "entityId"
         - "kind"
         - "displayName"
         - "createdAt"
         - "updatedAt"
-    "MessageResponse":
-      type: "object"
-      properties:
-        "_id":
-          type: "string"
-          description: "Unique message identifier with `msg_` prefix."
-          example: "msg_01kcpsnav10ehqgwmh86ghea1k"
-        "conversationId":
-          type: "string"
-          description: "Conversation identifier this message belongs to."
-          example: "conv_01kcpsnaq3barznzh4ba1xm41s"
-        "createdAt":
-          type: "number"
-          description: "Unix timestamp in milliseconds when the message was created."
-          example: 1734789600000
-        "createdById":
-          type: "string"
-          description: "Identifier of the message author. User ID for user messages, \"system\" for assistant messages."
-          example: "user_01jj1hdhn79xas7a01wb3hysdb"
-        "parts":
-          type: "array"
-          items:
-            oneOf:
-              - allOf:
-                  - {"$ref": "#/components/schemas/TextPart"}
-                  - description: "Text content part. Use this to send text messages to the agent."
-              - allOf:
-                  - {"$ref": "#/components/schemas/FilePart"}
-                  - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-              - allOf:
-                  - {"$ref": "#/components/schemas/ToolResultPart"}
-                  - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-              - allOf:
-                  - {"$ref": "#/components/schemas/ErrorPart"}
-                  - description: "Error content part. Generated by the system when an error occurs during agent execution."
-            discriminator:
-              propertyName: "kind"
-              mapping:
-                "text": "#/components/schemas/TextPart"
-                "file": "#/components/schemas/FilePart"
-                "tool_result": "#/components/schemas/ToolResultPart"
-                "error": "#/components/schemas/ErrorPart"
-            title: "Public Message Part"
-            description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
-          description: "Content parts composing the message. Supports multiple content types (text, images, files, tool results)."
-        "role":
-          type: "string"
-          enum:
-            - "user"
-            - "assistant"
-          description: "Message author role. `user` for end-user messages, `assistant` for AI-generated responses."
-          example: "user"
-      required:
-        - "_id"
-        - "conversationId"
-        - "createdAt"
-        - "createdById"
-        - "parts"
-        - "role"
-    "ConversationWithMessagesResponse":
-      allOf:
-        - {"$ref": "#/components/schemas/ConversationResponse"}
-        - type: "object"
-          properties:
-            "_id":
-              type: "string"
-              default: "conv_01kecbxzerscacfjsxs1fneng9"
-              description: "Unique conversation identifier with `conv_` prefix."
-              example: "conv_01jj1hdhn79xas7a01wb3hysdb"
-            "messages":
-              type: "array"
-              items: {"$ref": "#/components/schemas/MessageResponse"}
-              description: "Conversation messages ordered chronologically (oldest first)."
-          required:
-            - "messages"
-    "UserMessageRequest":
-      type: "object"
-      properties:
-        "messageId":
-          type: "string"
-          description: "Optional message ID in ULID format"
-        "role":
-          type: "string"
-          enum:
-            - "user"
-          description: "Role indicating this message is from a user"
-          example: "user"
-        "parts":
-          type: "array"
-          items:
-            oneOf:
-              - allOf:
-                  - {"$ref": "#/components/schemas/TextPart"}
-                  - description: "Text content part. Use this to send text messages to the agent."
-              - allOf:
-                  - {"$ref": "#/components/schemas/FilePart"}
-                  - description: "File attachment part. Use this to send files (images, documents, etc.) to the agent for processing."
-              - allOf:
-                  - {"$ref": "#/components/schemas/ToolResultPart"}
-                  - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-              - allOf:
-                  - {"$ref": "#/components/schemas/ErrorPart"}
-                  - description: "Error content part. Generated by the system when an error occurs during agent execution."
-            discriminator:
-              propertyName: "kind"
-              mapping:
-                "text": "#/components/schemas/TextPart"
-                "file": "#/components/schemas/FilePart"
-                "tool_result": "#/components/schemas/ToolResultPart"
-                "error": "#/components/schemas/ErrorPart"
-            title: "Public Message Part"
-            description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
-          description: "Array of message parts. User messages can contain text, file, tool_result, and error parts."
-          example: [{"kind": "text", "text": "Hello!"}]
-      required:
-        - "role"
-        - "parts"
-      title: "User Message Request"
-      description: "The user message to send to the model"
     "PublicContact":
       type: "object"
       properties:
@@ -3873,7 +3707,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3881,7 +3715,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4024,7 +3858,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-07T13:56:41.626Z"
+                          default: "2026-01-07T15:02:52.633Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -4032,7 +3866,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:41.626Z"
+                              default: "2026-01-07T15:02:52.634Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -4200,10 +4034,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4280,10 +4114,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4357,10 +4191,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4449,10 +4283,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4526,10 +4360,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4903,10 +4737,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4996,10 +4830,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-07T13:56:43.801Z"
+                              default: "2026-01-07T15:02:55.078Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5446,10 +5280,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5526,10 +5360,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5603,10 +5437,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5695,10 +5529,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5772,10 +5606,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6149,10 +5983,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6242,10 +6076,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6679,10 +6513,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6759,10 +6593,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6836,10 +6670,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6928,10 +6762,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7005,10 +6839,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7382,10 +7216,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7475,10 +7309,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-07T13:56:43.801Z"
+                        default: "2026-01-07T15:02:55.078Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -8265,7 +8099,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8273,7 +8107,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8409,7 +8243,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8417,7 +8251,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9792,8 +9626,7 @@ paths:
                         description: "Metadata about the document"
                     required:
                       - "text"
-                  description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
-                  example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
+                  description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
                 "invoke_options":
                   type: "object"
                   properties:
@@ -11617,8 +11450,7 @@ paths:
                         description: "Metadata about the document"
                     required:
                       - "text"
-                  description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
-                  example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
+                  description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
                 "invoke_options":
                   type: "object"
                   properties:
@@ -12915,30 +12747,9 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                          "retry":
-                            type: "object"
-                            properties:
-                              "count":
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              "on_codes":
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default: [429]
-                                description: "HTTP status codes that trigger retry logic"
-                                example: [429, 500, 502, 503, 504]
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters and retry settings."
+                        description: "Fallback model configuration with optional parameters."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -14024,30 +13835,9 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                                "retry":
-                                  type: "object"
-                                  properties:
-                                    "count":
-                                      type: "number"
-                                      minimum: 1
-                                      maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
-                                    "on_codes":
-                                      type: "array"
-                                      items:
-                                        type: "number"
-                                        minimum: 100
-                                        maximum: 599
-                                      minItems: 1
-                                      default: [429]
-                                      description: "HTTP status codes that trigger retry logic"
-                                      example: [429, 500, 502, 503, 504]
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters and retry settings."
+                              description: "Fallback model configuration with optional parameters."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -14189,16 +13979,12 @@ paths:
                           - allOf:
                               - {"$ref": "#/components/schemas/ToolResultPart"}
                               - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-                          - allOf:
-                              - {"$ref": "#/components/schemas/ErrorPart"}
-                              - description: "Error content part. Generated by the system when an error occurs during agent execution."
                         discriminator:
                           propertyName: "kind"
                           mapping:
                             "text": "#/components/schemas/TextPart"
                             "file": "#/components/schemas/FilePart"
                             "tool_result": "#/components/schemas/ToolResultPart"
-                            "error": "#/components/schemas/ErrorPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -14293,7 +14079,6 @@ paths:
                       description: "Unique ULID identifier for the conversation, prefixed with \"conv_\". Used to link agent executions to a specific conversation thread."
                   required:
                     - "_id"
-                  description: "Conversation context for chat studio integration"
               required:
                 - "message"
       responses:
@@ -15086,30 +14871,9 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                                "retry":
-                                  type: "object"
-                                  properties:
-                                    "count":
-                                      type: "number"
-                                      minimum: 1
-                                      maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
-                                    "on_codes":
-                                      type: "array"
-                                      items:
-                                        type: "number"
-                                        minimum: 100
-                                        maximum: 599
-                                      minItems: 1
-                                      default: [429]
-                                      description: "HTTP status codes that trigger retry logic"
-                                      example: [429, 500, 502, 503, 504]
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters and retry settings."
+                              description: "Fallback model configuration with optional parameters."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -15779,30 +15543,9 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                          "retry":
-                            type: "object"
-                            properties:
-                              "count":
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              "on_codes":
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default: [429]
-                                description: "HTTP status codes that trigger retry logic"
-                                example: [429, 500, 502, 503, 504]
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters and retry settings."
+                        description: "Fallback model configuration with optional parameters."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -16884,30 +16627,9 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                                "retry":
-                                  type: "object"
-                                  properties:
-                                    "count":
-                                      type: "number"
-                                      minimum: 1
-                                      maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
-                                    "on_codes":
-                                      type: "array"
-                                      items:
-                                        type: "number"
-                                        minimum: 100
-                                        maximum: 599
-                                      minItems: 1
-                                      default: [429]
-                                      description: "HTTP status codes that trigger retry logic"
-                                      example: [429, 500, 502, 503, 504]
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters and retry settings."
+                              description: "Fallback model configuration with optional parameters."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -17049,16 +16771,12 @@ paths:
                           - allOf:
                               - {"$ref": "#/components/schemas/ToolResultPart"}
                               - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-                          - allOf:
-                              - {"$ref": "#/components/schemas/ErrorPart"}
-                              - description: "Error content part. Generated by the system when an error occurs during agent execution."
                         discriminator:
                           propertyName: "kind"
                           mapping:
                             "text": "#/components/schemas/TextPart"
                             "file": "#/components/schemas/FilePart"
                             "tool_result": "#/components/schemas/ToolResultPart"
-                            "error": "#/components/schemas/ErrorPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -17199,7 +16917,6 @@ paths:
                             items:
                               oneOf:
                                 - {"$ref": "#/components/schemas/TextPart"}
-                                - {"$ref": "#/components/schemas/ErrorPart"}
                                 - {"$ref": "#/components/schemas/DataPart"}
                                 - {"$ref": "#/components/schemas/FilePart"}
                                 - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -17208,7 +16925,6 @@ paths:
                                 propertyName: "kind"
                                 mapping:
                                   "text": "#/components/schemas/TextPart"
-                                  "error": "#/components/schemas/ErrorPart"
                                   "data": "#/components/schemas/DataPart"
                                   "file": "#/components/schemas/FilePart"
                                   "tool_call": "#/components/schemas/ToolCallPart"
@@ -18001,30 +17717,9 @@ paths:
                                                 - "execute_on"
                                             description: "A list of guardrails to apply to the request."
                                         description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                                      "retry":
-                                        type: "object"
-                                        properties:
-                                          "count":
-                                            type: "number"
-                                            minimum: 1
-                                            maximum: 5
-                                            default: 3
-                                            description: "Number of retry attempts (1-5)"
-                                            example: 3
-                                          "on_codes":
-                                            type: "array"
-                                            items:
-                                              type: "number"
-                                              minimum: 100
-                                              maximum: 599
-                                            minItems: 1
-                                            default: [429]
-                                            description: "HTTP status codes that trigger retry logic"
-                                            example: [429, 500, 502, 503, 504]
-                                        description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                                     required:
                                       - "id"
-                                    description: "Fallback model configuration with optional parameters and retry settings."
+                                    description: "Fallback model configuration with optional parameters."
                                 title: "Fallback Model Configuration"
                                 description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                               description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -18669,30 +18364,9 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                          "retry":
-                            type: "object"
-                            properties:
-                              "count":
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              "on_codes":
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default: [429]
-                                description: "HTTP status codes that trigger retry logic"
-                                example: [429, 500, 502, 503, 504]
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters and retry settings."
+                        description: "Fallback model configuration with optional parameters."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -18736,16 +18410,12 @@ paths:
                           - allOf:
                               - {"$ref": "#/components/schemas/ToolResultPart"}
                               - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-                          - allOf:
-                              - {"$ref": "#/components/schemas/ErrorPart"}
-                              - description: "Error content part. Generated by the system when an error occurs during agent execution."
                         discriminator:
                           propertyName: "kind"
                           mapping:
                             "text": "#/components/schemas/TextPart"
                             "file": "#/components/schemas/FilePart"
                             "tool_result": "#/components/schemas/ToolResultPart"
-                            "error": "#/components/schemas/ErrorPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -19294,7 +18964,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KECBXZA6MTGH7CB3ENT9DXMS"
+                                          default: "01KECFQ75J7R0P26QYVBDBT240"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19488,7 +19158,6 @@ paths:
                             items:
                               oneOf:
                                 - {"$ref": "#/components/schemas/TextPart"}
-                                - {"$ref": "#/components/schemas/ErrorPart"}
                                 - {"$ref": "#/components/schemas/DataPart"}
                                 - {"$ref": "#/components/schemas/FilePart"}
                                 - {"$ref": "#/components/schemas/ToolCallPart"}
@@ -19497,7 +19166,6 @@ paths:
                                 propertyName: "kind"
                                 mapping:
                                   "text": "#/components/schemas/TextPart"
-                                  "error": "#/components/schemas/ErrorPart"
                                   "data": "#/components/schemas/DataPart"
                                   "file": "#/components/schemas/FilePart"
                                   "tool_call": "#/components/schemas/ToolCallPart"
@@ -20096,30 +19764,9 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
-                          "retry":
-                            type: "object"
-                            properties:
-                              "count":
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              "on_codes":
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default: [429]
-                                description: "HTTP status codes that trigger retry logic"
-                                example: [429, 500, 502, 503, 504]
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters and retry settings."
+                        description: "Fallback model configuration with optional parameters."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -20163,16 +19810,12 @@ paths:
                           - allOf:
                               - {"$ref": "#/components/schemas/ToolResultPart"}
                               - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-                          - allOf:
-                              - {"$ref": "#/components/schemas/ErrorPart"}
-                              - description: "Error content part. Generated by the system when an error occurs during agent execution."
                         discriminator:
                           propertyName: "kind"
                           mapping:
                             "text": "#/components/schemas/TextPart"
                             "file": "#/components/schemas/FilePart"
                             "tool_result": "#/components/schemas/ToolResultPart"
-                            "error": "#/components/schemas/ErrorPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -20721,7 +20364,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KECBXZCSMGKDJ32QDS0D34Q4"
+                                          default: "01KECFQ77EQ8NJNJSP03K80JPQ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -20983,16 +20626,12 @@ paths:
                           - allOf:
                               - {"$ref": "#/components/schemas/ToolResultPart"}
                               - description: "Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request."
-                          - allOf:
-                              - {"$ref": "#/components/schemas/ErrorPart"}
-                              - description: "Error content part. Generated by the system when an error occurs during agent execution."
                         discriminator:
                           propertyName: "kind"
                           mapping:
                             "text": "#/components/schemas/TextPart"
                             "file": "#/components/schemas/FilePart"
                             "tool_result": "#/components/schemas/ToolResultPart"
-                            "error": "#/components/schemas/ErrorPart"
                         title: "Public Message Part"
                         description: "Message part that can be provided by users. Use \"text\" for regular messages, \"file\" for attachments, or \"tool_result\" when responding to tool call requests."
                       description: "A2A message parts (text, file, or tool_result only)"
@@ -21140,13 +20779,13 @@ paths:
                   - "message"
       security:
         - ApiKey: []
-  "/v2/conversations/":
+  "/v2/conversations":
     get:
       tags:
         - "Conversations"
       x-speakeasy-group: "conversations"
       x-speakeasy-name-override: "list"
-      x-speakeasy-max-method-params: 4
+      x-speakeasy-max-method-params: 3
       operationId: "ListConversations"
       x-code-samples: [{"lang": "typescript", "label": "List conversations", "source": "const conversations = await orq.conversations.list({ limit: 10 });"}, {"lang": "python", "label": "List conversations", "source": "conversations = orq.conversations.list(limit=10)"}]
       summary: "List conversations"
@@ -21157,35 +20796,27 @@ paths:
             exclusiveMinimum: 0
             minimum: 1
             maximum: 100
-            description: "Maximum number of conversations to return. Range: 1-100. Default: 10."
-            example: 25
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10."
+            example: 10
           required: false
-          description: "Maximum number of conversations to return. Range: 1-100. Default: 10."
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10."
           name: "limit"
           in: "query"
         - schema:
             type: "string"
-            description: "Pagination cursor. Returns conversations created after the specified conversation ID."
+            description: "A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list."
             example: "conv_01jj1hdhn79xas7a01wb3hysdb"
           required: false
-          description: "Pagination cursor. Returns conversations created after the specified conversation ID."
+          description: "A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list."
           name: "startingAfter"
           in: "query"
         - schema:
             type: "string"
-            description: "Pagination cursor. Returns conversations created before the specified conversation ID."
+            description: "A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list."
             example: "conv_01jj1hdhn79xas7a01wb3hysdb"
           required: false
-          description: "Pagination cursor. Returns conversations created before the specified conversation ID."
+          description: "A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list."
           name: "endingBefore"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "Filter by parent entity. When specified, returns only conversations associated with this entity. When omitted, returns standalone conversations."
-            example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-          required: false
-          description: "Filter by parent entity. When specified, returns only conversations associated with this entity. When omitted, returns standalone conversations."
-          name: "entityId"
           in: "query"
       responses:
         "200":
@@ -21210,15 +20841,14 @@ paths:
                   - "has_more"
       security:
         - ApiKey: []
-  "/v2/conversations":
     post:
       tags:
         - "Conversations"
       x-speakeasy-group: "conversations"
       x-speakeasy-name-override: "create"
-      x-speakeasy-max-method-params: 3
+      x-speakeasy-max-method-params: 2
       operationId: "CreateConversation"
-      x-code-samples: [{"lang": "typescript", "label": "Create conversation with agent", "source": "const conversation = await orq.conversations.create({\n  projectId: \"project_01jj1hdhn79xas7a01wb3hysdb\",\n  displayName: \"Support Chat #1234\",\n  metadata: { entityId: \"agent_01jj1hdhn79xas7a01wb3hysdb\" }\n});"}, {"lang": "typescript", "label": "Create freeform conversation", "source": "const conversation = await orq.conversations.create({\n  projectId: \"project_01jj1hdhn79xas7a01wb3hysdb\",\n  displayName: \"Freeform Chat\"\n});"}, {"lang": "python", "label": "Create conversation with agent", "source": "conversation = orq.conversations.create(\n    project_id=\"project_01jj1hdhn79xas7a01wb3hysdb\",\n    display_name=\"Support Chat #1234\",\n    metadata={\"entity_id\": \"agent_01jj1hdhn79xas7a01wb3hysdb\"}\n)"}, {"lang": "python", "label": "Create freeform conversation", "source": "conversation = orq.conversations.create(\n    project_id=\"project_01jj1hdhn79xas7a01wb3hysdb\",\n    display_name=\"Freeform Chat\"\n)"}]
+      x-code-samples: [{"lang": "typescript", "label": "Create conversation", "source": "const conversation = await orq.conversations.create({\n  displayName: \"Support Chat #1234\",\n  metadata: { entityId: \"agent_01jj1hdhn79xas7a01wb3hysdb\" }\n});"}, {"lang": "python", "label": "Create conversation", "source": "conversation = orq.conversations.create(\n    display_name=\"Support Chat #1234\",\n    metadata={\"entity_id\": \"agent_01jj1hdhn79xas7a01wb3hysdb\"}\n)"}]
       summary: "Create conversation"
       description: "Creates a new conversation in the workspace. Conversations serve as containers for organizing related messages and interactions. Each conversation is assigned a unique identifier and timestamps for tracking."
       requestBody:
@@ -21232,33 +20862,20 @@ paths:
                   type: "string"
                   maxLength: 100
                   default: "Untitled"
-                  description: "Human-readable name for the conversation. Defaults to \"Untitled\" if omitted."
-                  example: "Customer Support Session"
-                "projectId":
-                  type: "string"
-                  description: "Project identifier to associate the conversation with."
-                  example: "prj_01jj1hdhn79xas7a01wb3hysdb"
+                  description: "Display name for the conversation. Defaults to \"Untitled\" if not provided."
+                  example: "Support Chat #1234"
                 "metadata":
                   type: "object"
                   properties:
                     "generatingTitle":
                       type: "boolean"
-                      description: "Set to `true` to indicate the title is being auto-generated."
                     "entityId":
-                      type:
-                        - "string"
-                        - "null"
-                      description: "Parent entity identifier to associate the conversation with. Omit or set to `null` for standalone conversations."
-                      example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-                    "model":
-                      type:
-                        - "string"
-                        - "null"
-                      description: "Model identifier in `provider/model_id` format for standalone conversations. Omit or set to `null` for entity-bound conversations."
-                      example: "openai/gpt-4o"
-                  description: "Optional metadata to attach to the conversation."
+                      type: "string"
+                      description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
+                  required:
+                    - "entityId"
               required:
-                - "projectId"
+                - "metadata"
       responses:
         "201":
           description: "Conversation successfully created. Returns the complete conversation object including the generated ID and timestamps."
@@ -21270,54 +20887,42 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kecbxzenp5hkz83f4wpeh6hg"
-                        description: "Unique conversation identifier with `conv_` prefix."
-                        example: "conv_01jj1hdhn79xas7a01wb3hysdb"
+                        default: "conv_01kecfq79e981a0tj7ypef2vq1"
+                        description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
+                      "entityId":
+                        type: "string"
+                        description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
                       "kind":
                         type: "string"
                         enum:
                           - "conversation"
-                        description: "Resource type discriminator."
+                        description: "Type discriminator indicating this is a conversation"
                       "displayName":
                         type: "string"
                         maxLength: 100
-                        description: "Human-readable name for the conversation. Maximum 100 characters."
-                        example: "Product Feature Discussion"
+                        description: "Display name for the conversation. Can be auto-generated or set by the user."
                       "createdAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was created."
-                        example: 1734789600000
+                        description: "Unix timestamp (in milliseconds) when the conversation was created"
                       "updatedAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was last modified."
-                        example: 1734793200000
+                        description: "Unix timestamp (in milliseconds) when the conversation was last updated"
                       "createdById":
                         type: "string"
-                        description: "Identifier of the user or system that created the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that created the conversation"
                       "updatedById":
                         type: "string"
-                        description: "Identifier of the user or system that last modified the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that last updated the conversation"
                       "metadata":
                         type: "object"
                         properties:
                           "generatingTitle":
                             type: "boolean"
-                            description: "When `true`, indicates the conversation title is being auto-generated."
+                            description: "Indicates whether the conversation title is currently being generated by AI."
                           "entityId":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Parent entity identifier (e.g., agent or deployment). Set to `null` for standalone conversations."
-                            example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-                          "model":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Model identifier for standalone conversations in `provider/model_id` format. Set to `null` for entity-bound conversations."
-                            example: "openai/gpt-4o"
-                        description: "Additional conversation metadata."
+                            type: "string"
+                            description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to. Used for filtering conversations by entity."
+                        description: "Optional metadata associated with the conversation."
       security:
         - ApiKey: []
   "/v2/conversations/{conversation_id}/generate-name":
@@ -21349,8 +20954,8 @@ paths:
                 "context":
                   type: "string"
                   minLength: 1
-                  description: "Conversation context used to generate a meaningful display name. Typically the first user message or a conversation summary."
-                  example: "How do I integrate the SDK with my Node.js application?"
+                  description: "The conversation context (e.g., user message or conversation summary) to generate a display name from"
+                  example: "What is the weather in San Francisco?"
               required:
                 - "context"
       responses:
@@ -21364,54 +20969,42 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kecbxzepqjws6qsdtnvfvkv0"
-                        description: "Unique conversation identifier with `conv_` prefix."
-                        example: "conv_01jj1hdhn79xas7a01wb3hysdb"
+                        default: "conv_01kecfq79gt8ffy8q95ag06mh4"
+                        description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
+                      "entityId":
+                        type: "string"
+                        description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
                       "kind":
                         type: "string"
                         enum:
                           - "conversation"
-                        description: "Resource type discriminator."
+                        description: "Type discriminator indicating this is a conversation"
                       "displayName":
                         type: "string"
                         maxLength: 100
-                        description: "Human-readable name for the conversation. Maximum 100 characters."
-                        example: "Product Feature Discussion"
+                        description: "Display name for the conversation. Can be auto-generated or set by the user."
                       "createdAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was created."
-                        example: 1734789600000
+                        description: "Unix timestamp (in milliseconds) when the conversation was created"
                       "updatedAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was last modified."
-                        example: 1734793200000
+                        description: "Unix timestamp (in milliseconds) when the conversation was last updated"
                       "createdById":
                         type: "string"
-                        description: "Identifier of the user or system that created the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that created the conversation"
                       "updatedById":
                         type: "string"
-                        description: "Identifier of the user or system that last modified the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that last updated the conversation"
                       "metadata":
                         type: "object"
                         properties:
                           "generatingTitle":
                             type: "boolean"
-                            description: "When `true`, indicates the conversation title is being auto-generated."
+                            description: "Indicates whether the conversation title is currently being generated by AI."
                           "entityId":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Parent entity identifier (e.g., agent or deployment). Set to `null` for standalone conversations."
-                            example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-                          "model":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Model identifier for standalone conversations in `provider/model_id` format. Set to `null` for entity-bound conversations."
-                            example: "openai/gpt-4o"
-                        description: "Additional conversation metadata."
+                            type: "string"
+                            description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to. Used for filtering conversations by entity."
+                        description: "Optional metadata associated with the conversation."
         "400":
           description: "Conversation already has a display name. This endpoint only generates names for conversations with empty display names."
           content:
@@ -21458,10 +21051,51 @@ paths:
           in: "path"
       responses:
         "200":
-          description: "Conversation successfully retrieved. Returns the complete conversation object with all metadata and messages."
+          description: "Conversation successfully retrieved. Returns the complete conversation object with all metadata."
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/ConversationWithMessagesResponse"}
+              schema:
+                allOf:
+                  - {"$ref": "#/components/schemas/ConversationResponse"}
+                  - properties:
+                      "_id":
+                        type: "string"
+                        default: "conv_01kecfq79jhp69py672t3yjdyp"
+                        description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
+                      "entityId":
+                        type: "string"
+                        description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
+                      "kind":
+                        type: "string"
+                        enum:
+                          - "conversation"
+                        description: "Type discriminator indicating this is a conversation"
+                      "displayName":
+                        type: "string"
+                        maxLength: 100
+                        description: "Display name for the conversation. Can be auto-generated or set by the user."
+                      "createdAt":
+                        type: "number"
+                        description: "Unix timestamp (in milliseconds) when the conversation was created"
+                      "updatedAt":
+                        type: "number"
+                        description: "Unix timestamp (in milliseconds) when the conversation was last updated"
+                      "createdById":
+                        type: "string"
+                        description: "Optional identifier of the user or agent that created the conversation"
+                      "updatedById":
+                        type: "string"
+                        description: "Optional identifier of the user or agent that last updated the conversation"
+                      "metadata":
+                        type: "object"
+                        properties:
+                          "generatingTitle":
+                            type: "boolean"
+                            description: "Indicates whether the conversation title is currently being generated by AI."
+                          "entityId":
+                            type: "string"
+                            description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to. Used for filtering conversations by entity."
+                        description: "Optional metadata associated with the conversation."
         "404":
           description: "Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it."
           content:
@@ -21504,20 +21138,16 @@ paths:
                 "displayName":
                   type: "string"
                   maxLength: 100
-                  description: "New display name for the conversation. Maximum 100 characters."
-                  example: "Updated Support Session"
+                  description: "Updated display name for the conversation."
+                  example: "Renamed Conversation"
                 "metadata":
                   type: "object"
                   properties:
                     "generatingTitle":
                       type: "boolean"
-                      description: "Set to `true` to indicate the title is being auto-generated."
                     "entityId":
-                      type:
-                        - "string"
-                        - "null"
-                      description: "Parent entity identifier. Set to `null` to detach from an entity."
-                  description: "Metadata fields to update. Only provided fields are modified."
+                      type: "string"
+                  description: "Optional metadata to update for the conversation."
       responses:
         "200":
           description: "Conversation successfully updated. Returns the complete updated conversation object."
@@ -21529,54 +21159,42 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kecbxzez3a6r33pyj7dv03f8"
-                        description: "Unique conversation identifier with `conv_` prefix."
-                        example: "conv_01jj1hdhn79xas7a01wb3hysdb"
+                        default: "conv_01kecfq79meyghmvytc8q8stg3"
+                        description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
+                      "entityId":
+                        type: "string"
+                        description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to."
                       "kind":
                         type: "string"
                         enum:
                           - "conversation"
-                        description: "Resource type discriminator."
+                        description: "Type discriminator indicating this is a conversation"
                       "displayName":
                         type: "string"
                         maxLength: 100
-                        description: "Human-readable name for the conversation. Maximum 100 characters."
-                        example: "Product Feature Discussion"
+                        description: "Display name for the conversation. Can be auto-generated or set by the user."
                       "createdAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was created."
-                        example: 1734789600000
+                        description: "Unix timestamp (in milliseconds) when the conversation was created"
                       "updatedAt":
                         type: "number"
-                        description: "Unix timestamp in milliseconds when the conversation was last modified."
-                        example: 1734793200000
+                        description: "Unix timestamp (in milliseconds) when the conversation was last updated"
                       "createdById":
                         type: "string"
-                        description: "Identifier of the user or system that created the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that created the conversation"
                       "updatedById":
                         type: "string"
-                        description: "Identifier of the user or system that last modified the conversation."
-                        example: "user_01jj1hdhn79xas7a01wb3hysdb"
+                        description: "Optional identifier of the user or agent that last updated the conversation"
                       "metadata":
                         type: "object"
                         properties:
                           "generatingTitle":
                             type: "boolean"
-                            description: "When `true`, indicates the conversation title is being auto-generated."
+                            description: "Indicates whether the conversation title is currently being generated by AI."
                           "entityId":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Parent entity identifier (e.g., agent or deployment). Set to `null` for standalone conversations."
-                            example: "agent_01jj1hdhn79xas7a01wb3hysdb"
-                          "model":
-                            type:
-                              - "string"
-                              - "null"
-                            description: "Model identifier for standalone conversations in `provider/model_id` format. Set to `null` for entity-bound conversations."
-                            example: "openai/gpt-4o"
-                        description: "Additional conversation metadata."
+                            type: "string"
+                            description: "Identifier of the parent entity (agent, deployment, etc.) this conversation belongs to. Used for filtering conversations by entity."
+                        description: "Optional metadata associated with the conversation."
         "404":
           description: "Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it."
           content:
@@ -21623,332 +21241,6 @@ paths:
                     type: "string"
                 required:
                   - "message"
-      security:
-        - ApiKey: []
-  "/v2/conversations/{conversation_id}/responses":
-    post:
-      tags:
-        - "Conversations"
-        - "internal"
-      operationId: "CreateConversationResponse"
-      summary: "Create internal response"
-      description: "Creates a response for a freeform conversation without an agent. Uses a default model for generation."
-      parameters:
-        - schema:
-            type: "string"
-            description: "The unique identifier of the conversation"
-          required: true
-          description: "The unique identifier of the conversation"
-          name: "conversation_id"
-          in: "path"
-      requestBody:
-        required: true
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "message": {"$ref": "#/components/schemas/UserMessageRequest"}
-                "model":
-                  type: "string"
-                  description: "The model to use for generation in format provider/model_id (e.g., openai/gpt-4o)."
-                "task_id":
-                  type: "string"
-                  description: "Task ID for continuing a previous conversation turn"
-                "stream":
-                  type: "boolean"
-                  default: true
-                  description: "Whether to stream the response (default: true)"
-              required:
-                - "message"
-                - "model"
-      responses:
-        "200":
-          description: "Response successfully created."
-          content:
-            "text/event-stream":
-              schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/ResponseStreamingEvent"}
-                  - oneOf:
-                      - {"$ref": "#/components/schemas/ResponseStartedEvent"}
-                      - {"$ref": "#/components/schemas/ResponseDoneEvent"}
-                      - {"$ref": "#/components/schemas/ResponseFailedEvent"}
-                      - {"$ref": "#/components/schemas/ToolStartedEvent"}
-                      - {"$ref": "#/components/schemas/ToolDoneEvent"}
-                      - {"$ref": "#/components/schemas/ToolFailedEvent"}
-                      - {"$ref": "#/components/schemas/ToolReviewRequestedEvent"}
-                      - {"$ref": "#/components/schemas/ToolReviewDoneEvent"}
-                      - allOf:
-                          - {"$ref": "#/components/schemas/PartDeltaEvent"}
-                          - properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "part.delta"
-                              "timestamp":
-                                type: "string"
-                                description: "ISO timestamp of when the event occurred"
-                              "data":
-                                type: "object"
-                                properties:
-                                  "partId":
-                                    type: "string"
-                                    description: "Unique identifier for this part. Format: {kind}_{ulid}. Use to correlate with part.done event."
-                                    example: "text_01hxyz123abc"
-                                  "delta":
-                                    allOf:
-                                      - {"$ref": "#/components/schemas/PartDelta"}
-                                      - oneOf:
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/TextPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "text_01kecbxzfex2qev2wa9yqfg3rx"
-                                                        description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
-                                                        example: "text_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "text"
-                                                        description: "Type discriminator indicating this is a text part"
-                                                        example: "text"
-                                                      "text":
-                                                        type: "string"
-                                                        description: "The text content of the message part"
-                                                        example: "Hello, how can I help you today?"
-                                                    required:
-                                                      - "kind"
-                                                      - "text"
-                                                description: "A message part containing text content"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/ReasoningPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "reasoning_01kecbxzffshgdzygn3gp154hh"
-                                                        description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
-                                                        example: "reasoning_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "reasoning"
-                                                        description: "Type discriminator indicating this is a reasoning part"
-                                                        example: "reasoning"
-                                                      "reasoning":
-                                                        type: "string"
-                                                        description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
-                                                        example: "Let me analyze this step by step..."
-                                                      "signature":
-                                                        type: "string"
-                                                        description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
-                                                        example: "sha256:a1b2c3d4e5f6..."
-                                                    required:
-                                                      - "kind"
-                                                      - "reasoning"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/FilePart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "file_01kecbxzfgj3kpnsm01vctpdn3"
-                                                        description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
-                                                        example: "file_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "file"
-                                                        description: "Type discriminator indicating this is a file part"
-                                                        example: "file"
-                                                      "file":
-                                                        oneOf:
-                                                          - {"$ref": "#/components/schemas/FilePartFileBytes"}
-                                                          - {"$ref": "#/components/schemas/FilePartFileUri"}
-                                                        discriminator:
-                                                          propertyName: "type"
-                                                          mapping:
-                                                            "bytes": "#/components/schemas/FilePartFileBytes"
-                                                            "uri": "#/components/schemas/FilePartFileUri"
-                                                        description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
-                                                    required:
-                                                      - "kind"
-                                                      - "file"
-                                                description: "A message part containing file content, either embedded or referenced"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/DataPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "data_01kecbxzfj9sg1gfwj7pc2mm5s"
-                                                        description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
-                                                        example: "data_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "data"
-                                                        description: "Type discriminator indicating this is a data part"
-                                                        example: "data"
-                                                      "data":
-                                                        type: "object"
-                                                        additionalProperties: {}
-                                                        description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
-                                                        example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
-                                                    required:
-                                                      - "kind"
-                                                      - "data"
-                                                description: "A message part containing arbitrary structured data as key-value pairs"
-                                required:
-                                  - "partId"
-                                  - "delta"
-                      - allOf:
-                          - {"$ref": "#/components/schemas/PartDoneEvent"}
-                          - properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "part.done"
-                              "timestamp":
-                                type: "string"
-                                description: "ISO timestamp of when the event occurred"
-                              "data":
-                                type: "object"
-                                properties:
-                                  "partId":
-                                    type: "string"
-                                    description: "Unique identifier for this part. Matches the partId from part.delta events."
-                                    example: "text_01hxyz123abc"
-                                  "part":
-                                    allOf:
-                                      - {"$ref": "#/components/schemas/PartDelta"}
-                                      - oneOf:
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/TextPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "text_01kecbxzfmr6c6662xt4ea8vf3"
-                                                        description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
-                                                        example: "text_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "text"
-                                                        description: "Type discriminator indicating this is a text part"
-                                                        example: "text"
-                                                      "text":
-                                                        type: "string"
-                                                        description: "The text content of the message part"
-                                                        example: "Hello, how can I help you today?"
-                                                    required:
-                                                      - "kind"
-                                                      - "text"
-                                                description: "A message part containing text content"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/ReasoningPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "reasoning_01kecbxzfnqsn7hgb1ydbn7spv"
-                                                        description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
-                                                        example: "reasoning_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "reasoning"
-                                                        description: "Type discriminator indicating this is a reasoning part"
-                                                        example: "reasoning"
-                                                      "reasoning":
-                                                        type: "string"
-                                                        description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
-                                                        example: "Let me analyze this step by step..."
-                                                      "signature":
-                                                        type: "string"
-                                                        description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
-                                                        example: "sha256:a1b2c3d4e5f6..."
-                                                    required:
-                                                      - "kind"
-                                                      - "reasoning"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/FilePart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "file_01kecbxzfnannkz6gmjp2ec7mw"
-                                                        description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
-                                                        example: "file_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "file"
-                                                        description: "Type discriminator indicating this is a file part"
-                                                        example: "file"
-                                                      "file":
-                                                        oneOf:
-                                                          - {"$ref": "#/components/schemas/FilePartFileBytes"}
-                                                          - {"$ref": "#/components/schemas/FilePartFileUri"}
-                                                        discriminator:
-                                                          propertyName: "type"
-                                                          mapping:
-                                                            "bytes": "#/components/schemas/FilePartFileBytes"
-                                                            "uri": "#/components/schemas/FilePartFileUri"
-                                                        description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
-                                                    required:
-                                                      - "kind"
-                                                      - "file"
-                                                description: "A message part containing file content, either embedded or referenced"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/DataPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "data_01kecbxzfp9twcdnevfepsrded"
-                                                        description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
-                                                        example: "data_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "data"
-                                                        description: "Type discriminator indicating this is a data part"
-                                                        example: "data"
-                                                      "data":
-                                                        type: "object"
-                                                        additionalProperties: {}
-                                                        description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
-                                                        example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
-                                                    required:
-                                                      - "kind"
-                                                      - "data"
-                                                description: "A message part containing arbitrary structured data as key-value pairs"
-                                        description: "The complete part. Discriminated by kind field (text, reasoning, file, data)."
-                                required:
-                                  - "partId"
-                                  - "part"
-              x-speakeasy-sse-sentinel: "[DONE]"
       security:
         - ApiKey: []
   "/v2/files":
@@ -22014,7 +21306,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-07T13:56:44.869Z"
+                    default: "2026-01-07T15:02:56.368Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -22103,7 +21395,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2026-01-07T13:56:44.869Z"
+                          default: "2026-01-07T15:02:56.368Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -22171,7 +21463,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-07T13:56:44.869Z"
+                    default: "2026-01-07T15:02:56.368Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -26612,7 +25904,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KECBXZN3E6XZ3AYXCX84615Q"
+                              default: "tool_01KECFQ7GG9BFTPA10C5VD3NTW"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26711,7 +26003,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KECBXZN5E33BMAH5EENDDBTA"
+                              default: "tool_01KECFQ7GHF44X3TSC2FB3F9GX"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26812,7 +26104,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KECBXZN76BHMKB0VMXCV8BBZ"
+                              default: "tool_01KECFQ7GK5XK0JHRXW8REK6PQ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26946,7 +26238,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KECBXZNG3KZW0R248WGGG02D"
+                              default: "tool_01KECFQ7GNEV7DA9MEXR1CCT3P"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27020,7 +26312,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KECBXZNJXB48KGYVFYMC0SZ1"
+                                        default: "01KECFQ7GQGDM6CPY82N183BYH"
                                       "name":
                                         type: "string"
                                       "description":
@@ -27071,7 +26363,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KECBXZNMB46PZ72RJ1Z0KXQV"
+                              default: "tool_01KECFQ7GRSFND6XTG9KQ6BJBQ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27614,7 +26906,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZNZTMNAM505A2ADVTFH"
+                        default: "tool_01KECFQ7HAS4E6XAN201MC46X7"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27713,7 +27005,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZP1759F83MJ3A7PE09M"
+                        default: "tool_01KECFQ7HCJJ1H1QXSA384VN3A"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27814,7 +27106,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZP31N2BPCKF31EB172D"
+                        default: "tool_01KECFQ7HFPBC7PMPFN9GCTGNG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27948,7 +27240,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZP6E5RNC0F29M33E18H"
+                        default: "tool_01KECFQ7HJPE2GECBXPRDVG5N5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28022,7 +27314,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KECBXZP819J49PGWJ9NZ0E47"
+                                  default: "01KECFQ7HM0FGA8JD7R8THH8M6"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28073,7 +27365,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZP9B95009BYWAMW82GD"
+                        default: "tool_01KECFQ7HNEMQBT9WYMMMPB6FV"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28513,7 +27805,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KECBXZQCA43J9JR8TDBFQVZ6"
+                                default: "01KECFQ7JQ8Q4P4PTY5EEJDXV0"
                               "name":
                                 type: "string"
                               "description":
@@ -28631,7 +27923,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZPKF25FA3Z54QKH0WWR"
+                        default: "tool_01KECFQ7J8VK7F7M677G5BJ9P1"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28730,7 +28022,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZPN3D8BGPV9YNZ5QD3J"
+                        default: "tool_01KECFQ7JAY8BF26JQBFGXG8TX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28831,7 +28123,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZPP5BAX4AJPBM62BXA4"
+                        default: "tool_01KECFQ7JC9488NXZZ04M5XGR4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28965,7 +28257,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZPQTHV0BEQ1EV46MJ1P"
+                        default: "tool_01KECFQ7JE1REPHFS7ND2RHZ0B"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29039,7 +28331,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KECBXZPRXHEW4D4SN0CR9KKK"
+                                  default: "01KECFQ7JGJE1V20Q31SRXGEVT"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29090,7 +28382,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZPSYZPH787XHV151NEG"
+                        default: "tool_01KECFQ7JG7DSYRW3JHD5NNETX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29244,7 +28536,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZQSWJCHD7F77D5NFMGQ"
+                        default: "tool_01KECFQ7K5EMJ5E1MTT6DA5F92"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29343,7 +28635,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZQTV8N874XH51H8QWVY"
+                        default: "tool_01KECFQ7K6WY2CAP7249WXG6MY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29444,7 +28736,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZQV12J1Q76JXPBAXZEP"
+                        default: "tool_01KECFQ7K7EFAS49H4541WFY72"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29578,7 +28870,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZQWFZYP6G9045SPPHP4"
+                        default: "tool_01KECFQ7K9JD7YD2KJAK8FGKGN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29652,7 +28944,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KECBXZQXRNWQSDG90595KCEV"
+                                  default: "01KECFQ7KAN1D2HNHF6982QPGQ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29703,7 +28995,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KECBXZQYCHTKQWK8EXE4W6WN"
+                        default: "tool_01KECFQ7KBXTSJ8ZQ8A0DT259K"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -31839,7 +31131,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KECBXZTRFXTWTF7D2NG7X0HR"
+                          default: "01KECFQ7QC7CXBE5KMADRY2XME"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -32005,7 +31297,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KECBXZTTM19WX4PSF74R2FQY"
+                    default: "01KECFQ7QG8SS7ZHEWAF2H41FF"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32101,7 +31393,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KECBXZTS39ZFKXK4KD559YYY"
+                    default: "01KECFQ7QE2X3CJ16JBGRPQS2D"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32233,7 +31525,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KECBXZTWZ2AZTKVE3FNQ7GXQ"
+                    default: "01KECFQ7QKMKKV4TBHRBP79X2N"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -34761,7 +34053,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-07T13:56:41.626Z"
+                          default: "2026-01-07T15:02:52.633Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34769,7 +34061,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:41.626Z"
+                              default: "2026-01-07T15:02:52.634Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34905,7 +34197,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34913,7 +34205,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35036,7 +34328,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35044,7 +34336,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35197,7 +34489,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35205,7 +34497,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35578,7 +34870,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-07T13:56:52.766Z"
+                                    default: "2026-01-07T15:03:05.815Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35618,7 +34910,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-07T13:56:52.767Z"
+                                    default: "2026-01-07T15:03:05.815Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35658,7 +34950,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-07T13:56:52.768Z"
+                                    default: "2026-01-07T15:03:05.816Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35694,7 +34986,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-07T13:56:41.626Z"
+                          default: "2026-01-07T15:02:52.633Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35702,7 +34994,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:41.626Z"
+                              default: "2026-01-07T15:02:52.634Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -36268,7 +35560,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-07T13:56:52.785Z"
+                                default: "2026-01-07T15:03:05.861Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36308,7 +35600,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-07T13:56:52.785Z"
+                                default: "2026-01-07T15:03:05.862Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36348,7 +35640,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-07T13:56:52.785Z"
+                                default: "2026-01-07T15:03:05.862Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36384,7 +35676,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-01-07T13:56:41.626Z"
+                      default: "2026-01-07T15:02:52.633Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -36392,7 +35684,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-01-07T13:56:41.626Z"
+                          default: "2026-01-07T15:02:52.634Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36709,7 +36001,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.778Z"
+                              default: "2026-01-07T15:03:05.826Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36749,7 +36041,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.778Z"
+                              default: "2026-01-07T15:03:05.836Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36789,7 +36081,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.778Z"
+                              default: "2026-01-07T15:03:05.837Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36825,7 +36117,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36833,7 +36125,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37397,7 +36689,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.828Z"
+                              default: "2026-01-07T15:03:05.917Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37437,7 +36729,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.829Z"
+                              default: "2026-01-07T15:03:05.918Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37477,7 +36769,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-07T13:56:52.829Z"
+                              default: "2026-01-07T15:03:05.918Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37513,7 +36805,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-07T13:56:41.626Z"
+                    default: "2026-01-07T15:02:52.633Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37521,7 +36813,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-07T13:56:41.626Z"
+                        default: "2026-01-07T15:02:52.634Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -41342,10 +40634,13 @@ paths:
                     - "standard"
                   description: "The quality of the image that will be generated. Auto will automatically select the best quality for the given model."
                 "response_format":
-                  type: "string"
+                  type:
+                    - "string"
+                    - "null"
                   enum:
                     - "url"
                     - "b64_json"
+                  default: "url"
                   description: "The format in which the generated images are returned. Some of the models only return the image in base64 format."
                 "user":
                   type: "string"
