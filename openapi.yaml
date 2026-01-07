@@ -708,7 +708,8 @@ components:
                 description: "Metadata about the document"
             required:
               - "text"
-          description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
+          description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
+          example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
         "invoke_options":
           type: "object"
           properties:
@@ -1770,7 +1771,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kea6c9zmkqgx78wbfzws1wnt"
+              default: "reasoning_01kebd76d59s1ck7an4cmx9k07"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1854,7 +1855,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kea6c9zhpez60wxsdv6smxsw"
+                      default: "text_01kebd76d1rrrpsdk0c1g3bfz5"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1880,7 +1881,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kea6c9zp6p0ars5w0yyrdnc7"
+                      default: "file_01kebd76d8f20pedt1jmamhs33"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -1911,7 +1912,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kea6c9zsa1xheh25jpmd6hbz"
+                      default: "data_01kebd76dbv5jx0c8xth19nr5h"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -1993,7 +1994,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kea6c9zvmfs249byapbymxmc"
+                                  default: "text_01kebd76dhpgdb1c8426wezpen"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2018,7 +2019,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kea6c9zway2486mdtpbtjqc0"
+                                  default: "reasoning_01kebd76dkf6t9k0vvaawe6ta9"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2046,7 +2047,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kea6c9zx41ewgcg1bjytayv8"
+                                  default: "file_01kebd76dm89s3x727mwsr694a"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2077,7 +2078,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kea6ca008kfzv8mjtgymbr46"
+                                  default: "data_01kebd76dpn22mxcbs6v09eh7h"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -3511,7 +3512,7 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kea6ca9by0b3yjcpc69k9002"
+          default: "conv_01kebd76qb17fyvrrta9ewam0g"
           description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
         "entityId":
           type: "string"
@@ -3707,7 +3708,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3715,7 +3716,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -3858,7 +3859,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-06T17:41:08.052Z"
+                          default: "2026-01-07T04:59:57.149Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -3866,7 +3867,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:08.053Z"
+                              default: "2026-01-07T04:59:57.150Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -4034,10 +4035,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4114,10 +4115,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4191,10 +4192,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4283,10 +4284,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4360,10 +4361,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4737,10 +4738,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4830,10 +4831,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-06T17:41:10.333Z"
+                              default: "2026-01-07T04:59:59.500Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5280,10 +5281,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5360,10 +5361,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5437,10 +5438,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5529,10 +5530,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5606,10 +5607,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5983,10 +5984,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6076,10 +6077,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6513,10 +6514,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6593,10 +6594,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6670,10 +6671,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6762,10 +6763,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6839,10 +6840,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7216,10 +7217,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7309,10 +7310,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-06T17:41:10.333Z"
+                        default: "2026-01-07T04:59:59.500Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -8099,7 +8100,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8107,7 +8108,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8243,7 +8244,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8251,7 +8252,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9626,7 +9627,8 @@ paths:
                         description: "Metadata about the document"
                     required:
                       - "text"
-                  description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
+                  description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
+                  example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
                 "invoke_options":
                   type: "object"
                   properties:
@@ -11450,7 +11452,8 @@ paths:
                         description: "Metadata about the document"
                     required:
                       - "text"
-                  description: "A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings."
+                  description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
+                  example: [{"text": "The refund policy allows customers to return items within 30 days of purchase for a full refund.", "metadata": {"file_name": "refund_policy.pdf", "file_type": "application/pdf", "page_number": 1}}, {"text": "Premium members receive free shipping on all orders over $50.", "metadata": {"file_name": "membership_benefits.md", "file_type": "text/markdown"}}]
                 "invoke_options":
                   type: "object"
                   properties:
@@ -12747,9 +12750,30 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                          "retry":
+                            type: "object"
+                            properties:
+                              "count":
+                                type: "number"
+                                minimum: 1
+                                maximum: 5
+                                default: 3
+                                description: "Number of retry attempts (1-5)"
+                                example: 3
+                              "on_codes":
+                                type: "array"
+                                items:
+                                  type: "number"
+                                  minimum: 100
+                                  maximum: 599
+                                minItems: 1
+                                default: [429]
+                                description: "HTTP status codes that trigger retry logic"
+                                example: [429, 500, 502, 503, 504]
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters."
+                        description: "Fallback model configuration with optional parameters and retry settings."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -13835,9 +13859,30 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                                "retry":
+                                  type: "object"
+                                  properties:
+                                    "count":
+                                      type: "number"
+                                      minimum: 1
+                                      maximum: 5
+                                      default: 3
+                                      description: "Number of retry attempts (1-5)"
+                                      example: 3
+                                    "on_codes":
+                                      type: "array"
+                                      items:
+                                        type: "number"
+                                        minimum: 100
+                                        maximum: 599
+                                      minItems: 1
+                                      default: [429]
+                                      description: "HTTP status codes that trigger retry logic"
+                                      example: [429, 500, 502, 503, 504]
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters."
+                              description: "Fallback model configuration with optional parameters and retry settings."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -14871,9 +14916,30 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                                "retry":
+                                  type: "object"
+                                  properties:
+                                    "count":
+                                      type: "number"
+                                      minimum: 1
+                                      maximum: 5
+                                      default: 3
+                                      description: "Number of retry attempts (1-5)"
+                                      example: 3
+                                    "on_codes":
+                                      type: "array"
+                                      items:
+                                        type: "number"
+                                        minimum: 100
+                                        maximum: 599
+                                      minItems: 1
+                                      default: [429]
+                                      description: "HTTP status codes that trigger retry logic"
+                                      example: [429, 500, 502, 503, 504]
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters."
+                              description: "Fallback model configuration with optional parameters and retry settings."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -15543,9 +15609,30 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                          "retry":
+                            type: "object"
+                            properties:
+                              "count":
+                                type: "number"
+                                minimum: 1
+                                maximum: 5
+                                default: 3
+                                description: "Number of retry attempts (1-5)"
+                                example: 3
+                              "on_codes":
+                                type: "array"
+                                items:
+                                  type: "number"
+                                  minimum: 100
+                                  maximum: 599
+                                minItems: 1
+                                default: [429]
+                                description: "HTTP status codes that trigger retry logic"
+                                example: [429, 500, 502, 503, 504]
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters."
+                        description: "Fallback model configuration with optional parameters and retry settings."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -16627,9 +16714,30 @@ paths:
                                           - "execute_on"
                                       description: "A list of guardrails to apply to the request."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                                "retry":
+                                  type: "object"
+                                  properties:
+                                    "count":
+                                      type: "number"
+                                      minimum: 1
+                                      maximum: 5
+                                      default: 3
+                                      description: "Number of retry attempts (1-5)"
+                                      example: 3
+                                    "on_codes":
+                                      type: "array"
+                                      items:
+                                        type: "number"
+                                        minimum: 100
+                                        maximum: 599
+                                      minItems: 1
+                                      default: [429]
+                                      description: "HTTP status codes that trigger retry logic"
+                                      example: [429, 500, 502, 503, 504]
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
-                              description: "Fallback model configuration with optional parameters."
+                              description: "Fallback model configuration with optional parameters and retry settings."
                           title: "Fallback Model Configuration"
                           description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -17717,9 +17825,30 @@ paths:
                                                 - "execute_on"
                                             description: "A list of guardrails to apply to the request."
                                         description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                                      "retry":
+                                        type: "object"
+                                        properties:
+                                          "count":
+                                            type: "number"
+                                            minimum: 1
+                                            maximum: 5
+                                            default: 3
+                                            description: "Number of retry attempts (1-5)"
+                                            example: 3
+                                          "on_codes":
+                                            type: "array"
+                                            items:
+                                              type: "number"
+                                              minimum: 100
+                                              maximum: 599
+                                            minItems: 1
+                                            default: [429]
+                                            description: "HTTP status codes that trigger retry logic"
+                                            example: [429, 500, 502, 503, 504]
+                                        description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                                     required:
                                       - "id"
-                                    description: "Fallback model configuration with optional parameters."
+                                    description: "Fallback model configuration with optional parameters and retry settings."
                                 title: "Fallback Model Configuration"
                                 description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                               description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
@@ -18364,9 +18493,30 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                          "retry":
+                            type: "object"
+                            properties:
+                              "count":
+                                type: "number"
+                                minimum: 1
+                                maximum: 5
+                                default: 3
+                                description: "Number of retry attempts (1-5)"
+                                example: 3
+                              "on_codes":
+                                type: "array"
+                                items:
+                                  type: "number"
+                                  minimum: 100
+                                  maximum: 599
+                                minItems: 1
+                                default: [429]
+                                description: "HTTP status codes that trigger retry logic"
+                                example: [429, 500, 502, 503, 504]
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters."
+                        description: "Fallback model configuration with optional parameters and retry settings."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -18964,7 +19114,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KEA6CA52CTMSB5ETDKVQY1JG"
+                                          default: "01KEBD76JYEN07DCRE7P14A8MW"
                                         "name":
                                           type: "string"
                                         "description":
@@ -19764,9 +19914,30 @@ paths:
                                     - "execute_on"
                                 description: "A list of guardrails to apply to the request."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
+                          "retry":
+                            type: "object"
+                            properties:
+                              "count":
+                                type: "number"
+                                minimum: 1
+                                maximum: 5
+                                default: 3
+                                description: "Number of retry attempts (1-5)"
+                                example: 3
+                              "on_codes":
+                                type: "array"
+                                items:
+                                  type: "number"
+                                  minimum: 100
+                                  maximum: 599
+                                minItems: 1
+                                default: [429]
+                                description: "HTTP status codes that trigger retry logic"
+                                example: [429, 500, 502, 503, 504]
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
-                        description: "Fallback model configuration with optional parameters."
+                        description: "Fallback model configuration with optional parameters and retry settings."
                     title: "Fallback Model Configuration"
                     description: "Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order."
                   description: "Optional array of fallback models used when the primary model fails. Fallbacks are attempted in order. All models must support tool calling."
@@ -20364,7 +20535,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KEA6CA70B0PQCSEJ8Q7R7687"
+                                          default: "01KEBD76NBWT9KWM55NJ5A29JA"
                                         "name":
                                           type: "string"
                                         "description":
@@ -20887,7 +21058,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kea6ca9djrnjhn31sqame6h7"
+                        default: "conv_01kebd76qdfdddzex75339szmn"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entityId":
                         type: "string"
@@ -20969,7 +21140,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kea6ca9fpxnd6dbkqhw5h0r3"
+                        default: "conv_01kebd76qe3qh9rkfdkpadme96"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entityId":
                         type: "string"
@@ -21060,7 +21231,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kea6ca9hvsvg2c1vh4cwj94e"
+                        default: "conv_01kebd76qh7490qsq0ge3zt5qm"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entityId":
                         type: "string"
@@ -21159,7 +21330,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kea6ca9kr1z0pxcr7nyvktne"
+                        default: "conv_01kebd76qjn054n0emx0x68rbz"
                         description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the conversation, prefixed with \"conv_\""
                       "entityId":
                         type: "string"
@@ -21306,7 +21477,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-06T17:41:11.875Z"
+                    default: "2026-01-07T05:00:00.701Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -21395,7 +21566,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2026-01-06T17:41:11.875Z"
+                          default: "2026-01-07T05:00:00.701Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -21463,7 +21634,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-06T17:41:11.875Z"
+                    default: "2026-01-07T05:00:00.701Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -25904,7 +26075,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEA6CAH9JSZE0V69X171R1JB"
+                              default: "tool_01KEBD76YYDZEYTBZ28YJR6MMJ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26003,7 +26174,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEA6CAHBPD7P8NEJ04XEPHNB"
+                              default: "tool_01KEBD76Z066N4PKTN39GJ5PBM"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26104,7 +26275,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEA6CAHC6K5MDGEBP9K8R7E6"
+                              default: "tool_01KEBD76Z23HMVE3QX805QWPBQ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26238,7 +26409,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEA6CAHEYBSFX5K8JCG8N4NM"
+                              default: "tool_01KEBD76Z5FJTDE2YTZ32PK0HK"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26312,7 +26483,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KEA6CAHGSKZHWJR6TXGRFKNJ"
+                                        default: "01KEBD76Z7J1FRGXC865R0CCGT"
                                       "name":
                                         type: "string"
                                       "description":
@@ -26363,7 +26534,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEA6CAHH7SR4E93KNH0KAG6X"
+                              default: "tool_01KEBD76Z95VWX8BSAS10JAXHG"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26906,7 +27077,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAJ2QMP41K390SVQCEMJ"
+                        default: "tool_01KEBD76ZVESZA6RACBQGHBPR4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27005,7 +27176,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAJ4N175NQ59JAW9CEKA"
+                        default: "tool_01KEBD76ZXE1XRF48CT5Y8RW4A"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27106,7 +27277,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAJ7D58KD6E2324YQBCZ"
+                        default: "tool_01KEBD770083GVSQMW5X7EJPMK"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27240,7 +27411,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAJAA0G2FJ1T7Y46SM1X"
+                        default: "tool_01KEBD7703J90GCJG11A6PB69M"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27314,7 +27485,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEA6CAJC5V4X8WKR52B5YJXF"
+                                  default: "01KEBD770CSSBRTK4X544NKVE9"
                                 "name":
                                   type: "string"
                                 "description":
@@ -27365,7 +27536,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAJD3FSVE0ZVC0ZFR576"
+                        default: "tool_01KEBD770D7EN1WMP6Y03JHNSQ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27805,7 +27976,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KEA6CAKJZK7RKR96C4PD3BBG"
+                                default: "01KEBD7712FBATP88MBMZYPFQ6"
                               "name":
                                 type: "string"
                               "description":
@@ -27923,7 +28094,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAK3Y4TFMHYHERD3DXKA"
+                        default: "tool_01KEBD770PTB52K66XHT22NAA4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28022,7 +28193,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAK53DMHEZBCREB5HHGT"
+                        default: "tool_01KEBD770QM1XA4122A8HRG3D6"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28123,7 +28294,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAK8AP6DG7DC3RNA99CG"
+                        default: "tool_01KEBD770SK5W0TY7DVCRZR2PY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28257,7 +28428,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAKAYHEKDGBPTZTHQN4B"
+                        default: "tool_01KEBD770TMAZCE25CFD57JH1D"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28331,7 +28502,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEA6CAKBN65YKHRW8EZV7EVY"
+                                  default: "01KEBD770VB1BWB7EB7WN94JP2"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28382,7 +28553,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAKCDQ89FJQQM0CYJTY7"
+                        default: "tool_01KEBD770W3JBCNZK1M459VE0V"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28536,7 +28707,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAKZ4CHG8ME12XKWT00Z"
+                        default: "tool_01KEBD771FP8S7CR87793RGT9T"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28635,7 +28806,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAM0V3GK12EGKAMFR6PV"
+                        default: "tool_01KEBD771GMP36DCRVMB2CR0GW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28736,7 +28907,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAM25FFWSPNA5NHA99VY"
+                        default: "tool_01KEBD771J15RPZJG6YKAD6EZA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28870,7 +29041,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAM34W3WS6NF1RWF9YE8"
+                        default: "tool_01KEBD771NNQ74P9AX6V9TA7X4"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28944,7 +29115,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEA6CAM47G9AM8EJSKXMNQB1"
+                                  default: "01KEBD771YZEMRPAXMHYEPYF3J"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28995,7 +29166,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEA6CAM51Z5BFATD0YZJGF37"
+                        default: "tool_01KEBD771Z3E3FWPTE6PS9CVYW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -31131,7 +31302,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KEA6CARK53268BTKP3N9R3Q0"
+                          default: "01KEBD7751SCWG84DS6D68GZXH"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -31297,7 +31468,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEA6CARP9S0B131YTVFSHZ22"
+                    default: "01KEBD775489TZ74CNH2P7ETYR"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31393,7 +31564,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEA6CARNP69E0XKGT9B6M3NZ"
+                    default: "01KEBD7753E6SYHKVPM2HABQJP"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -31525,7 +31696,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEA6CARRJX4KHJCXJR7PH503"
+                    default: "01KEBD77568QKEQ81XXCVD4FZS"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -34053,7 +34224,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-06T17:41:08.052Z"
+                          default: "2026-01-07T04:59:57.149Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34061,7 +34232,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:08.053Z"
+                              default: "2026-01-07T04:59:57.150Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -34197,7 +34368,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34205,7 +34376,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34328,7 +34499,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34336,7 +34507,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34489,7 +34660,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -34497,7 +34668,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -34870,7 +35041,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-06T17:41:22.401Z"
+                                    default: "2026-01-07T05:00:09.324Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34910,7 +35081,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-06T17:41:22.402Z"
+                                    default: "2026-01-07T05:00:09.324Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34950,7 +35121,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-06T17:41:22.403Z"
+                                    default: "2026-01-07T05:00:09.325Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -34986,7 +35157,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-06T17:41:08.052Z"
+                          default: "2026-01-07T04:59:57.149Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34994,7 +35165,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:08.053Z"
+                              default: "2026-01-07T04:59:57.150Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35560,7 +35731,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-06T17:41:22.438Z"
+                                default: "2026-01-07T05:00:09.359Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35600,7 +35771,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-06T17:41:22.438Z"
+                                default: "2026-01-07T05:00:09.360Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35640,7 +35811,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-06T17:41:22.439Z"
+                                default: "2026-01-07T05:00:09.360Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -35676,7 +35847,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-01-06T17:41:08.052Z"
+                      default: "2026-01-07T04:59:57.149Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -35684,7 +35855,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-01-06T17:41:08.053Z"
+                          default: "2026-01-07T04:59:57.150Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36001,7 +36172,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.416Z"
+                              default: "2026-01-07T05:00:09.343Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36041,7 +36212,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.416Z"
+                              default: "2026-01-07T05:00:09.346Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36081,7 +36252,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.417Z"
+                              default: "2026-01-07T05:00:09.348Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36117,7 +36288,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36125,7 +36296,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -36689,7 +36860,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.491Z"
+                              default: "2026-01-07T05:00:09.402Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36729,7 +36900,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.492Z"
+                              default: "2026-01-07T05:00:09.402Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36769,7 +36940,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-06T17:41:22.493Z"
+                              default: "2026-01-07T05:00:09.403Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36805,7 +36976,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-06T17:41:08.052Z"
+                    default: "2026-01-07T04:59:57.149Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36813,7 +36984,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-06T17:41:08.053Z"
+                        default: "2026-01-07T04:59:57.150Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -40634,13 +40805,10 @@ paths:
                     - "standard"
                   description: "The quality of the image that will be generated. Auto will automatically select the best quality for the given model."
                 "response_format":
-                  type:
-                    - "string"
-                    - "null"
+                  type: "string"
                   enum:
                     - "url"
                     - "b64_json"
-                  default: "url"
                   description: "The format in which the generated images are returned. Some of the models only return the image in base64 format."
                 "user":
                   type: "string"
