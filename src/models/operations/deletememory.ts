@@ -16,7 +16,7 @@ export type DeleteMemoryRequest = {
   /**
    * The unique identifier of the memory
    */
-  memoryId: string;
+  memoryEntityId: string;
 };
 
 /** @internal */
@@ -26,17 +26,17 @@ export const DeleteMemoryRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
   });
 });
 /** @internal */
 export type DeleteMemoryRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
 };
 
 /** @internal */
@@ -46,11 +46,11 @@ export const DeleteMemoryRequest$outboundSchema: z.ZodType<
   DeleteMemoryRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
   });
 });
 

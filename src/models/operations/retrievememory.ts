@@ -16,7 +16,7 @@ export type RetrieveMemoryRequest = {
   /**
    * The unique identifier of the memory
    */
-  memoryId: string;
+  memoryEntityId: string;
 };
 
 /**
@@ -25,7 +25,9 @@ export type RetrieveMemoryRequest = {
 export type RetrieveMemoryResponseBody = {
   id: string;
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
+   * This property have been deprecated and moved to `_id`. Please refer to `_id` for future operations
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   entityId: string;
   created: string;
@@ -33,10 +35,6 @@ export type RetrieveMemoryResponseBody = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   storeId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
-   */
-  metadata: { [k: string]: string };
   workspaceId: string;
   /**
    * The number of memories in the entity
@@ -51,17 +49,17 @@ export const RetrieveMemoryRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
   });
 });
 /** @internal */
 export type RetrieveMemoryRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
 };
 
 /** @internal */
@@ -71,11 +69,11 @@ export const RetrieveMemoryRequest$outboundSchema: z.ZodType<
   RetrieveMemoryRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
   });
 });
 
@@ -109,7 +107,6 @@ export const RetrieveMemoryResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   store_id: z.string(),
-  metadata: z.record(z.string()),
   workspace_id: z.string(),
   documents_count: z.number(),
 }).transform((v) => {
@@ -132,7 +129,6 @@ export type RetrieveMemoryResponseBody$Outbound = {
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   store_id: string;
-  metadata: { [k: string]: string };
   workspace_id: string;
   documents_count: number;
 };
@@ -150,7 +146,6 @@ export const RetrieveMemoryResponseBody$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   storeId: z.string(),
-  metadata: z.record(z.string()),
   workspaceId: z.string(),
   documentsCount: z.number(),
 }).transform((v) => {

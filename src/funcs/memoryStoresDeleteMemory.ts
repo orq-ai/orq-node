@@ -92,10 +92,11 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    memory_id: encodeSimple("memory_id", payload.memory_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    memory_entity_id: encodeSimple(
+      "memory_entity_id",
+      payload.memory_entity_id,
+      { explode: false, charEncoding: "percent" },
+    ),
     memory_store_key: encodeSimple(
       "memory_store_key",
       payload.memory_store_key,
@@ -104,7 +105,7 @@ async function $do(
   };
 
   const path = pathToFunc(
-    "/v2/memory-stores/{memory_store_key}/memories/{memory_id}",
+    "/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}",
   )(pathParams);
 
   const headers = new Headers(compactMap({

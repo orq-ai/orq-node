@@ -74,6 +74,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@orq-ai/node'
   preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
