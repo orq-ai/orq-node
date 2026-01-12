@@ -1797,7 +1797,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kerccfp4d1r03ahph3ry3p9s"
+              default: "reasoning_01kergt7nt0t5haqf22rtvb5f5"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1881,7 +1881,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kerccfp204z6aymzajrjhc9e"
+                      default: "text_01kergt7nra766bkf5083czbmc"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1907,7 +1907,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kerccfp529mwk7xwnk7jmw2y"
+                      default: "file_01kergt7nvq2jgc5xzscxgy906"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -1938,7 +1938,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kerccfp7adbr8tw05586p7cs"
+                      default: "data_01kergt7nxat502sbg8712184r"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -2020,7 +2020,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kerccfp9w96phv8rnbt5450a"
+                                  default: "text_01kergt7nzsd0nn4nzfwhxxrhf"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2045,7 +2045,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kerccfpaenw45b1917234k1a"
+                                  default: "reasoning_01kergt7p1cjnytbyq4vzv5e2j"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2073,7 +2073,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kerccfpc4v6xjkex65spmw38"
+                                  default: "file_01kergt7p3se7q6291kt2ks4gr"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2104,7 +2104,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kerccfpeh0xj5qqmdh4a4xyg"
+                                  default: "data_01kergt7p5qcc2xx543mhjmhd0"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -3549,7 +3549,7 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kerccfzn93qrrkvdf3082eza"
+          default: "conv_01kergt7zczrqeskkt03k9wp4y"
           description: "Unique conversation identifier with `conv_` prefix."
           example: "conv_01jj1hdhn79xas7a01wb3hysdb"
         "kind":
@@ -3668,7 +3668,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "conv_01kerccfzs3k000049mh8zv5jm"
+              default: "conv_01kergt7zgwgrxhb96bpn4qw3e"
               description: "Unique conversation identifier with `conv_` prefix."
               example: "conv_01jj1hdhn79xas7a01wb3hysdb"
             "messages":
@@ -3875,7 +3875,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3883,7 +3883,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4026,7 +4026,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-12T05:55:28.633Z"
+                          default: "2026-01-12T07:12:53.135Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -4034,7 +4034,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:28.633Z"
+                              default: "2026-01-12T07:12:53.135Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -4202,10 +4202,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4282,10 +4282,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4359,10 +4359,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4451,10 +4451,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4528,10 +4528,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4905,10 +4905,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4998,10 +4998,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-12T05:55:31.099Z"
+                              default: "2026-01-12T07:12:55.651Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5448,10 +5448,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5528,10 +5528,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5605,10 +5605,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5697,10 +5697,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5774,10 +5774,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6151,10 +6151,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6244,10 +6244,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6681,10 +6681,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6761,10 +6761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6838,10 +6838,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6930,10 +6930,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7007,10 +7007,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7384,10 +7384,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7477,10 +7477,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-12T05:55:31.099Z"
+                        default: "2026-01-12T07:12:55.651Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -8193,7 +8193,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8201,7 +8201,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8337,7 +8337,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8345,7 +8345,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -19355,7 +19355,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KERCCFVDR4R5K9M7XH8Z3FMJ"
+                                          default: "01KERGT7V1BHWWB7TCQZN7RVWZ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -20819,7 +20819,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KERCCFXPENE54JBYTDGBJ3BY"
+                                          default: "01KERGT7X98XTZTDMWXAGJ4X8B"
                                         "name":
                                           type: "string"
                                         "description":
@@ -21405,7 +21405,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kerccfzqpgfjycqfzjryrkpa"
+                        default: "conv_01kergt7zemjn0dy6m47k8xkym"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21499,7 +21499,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kerccfzr1namzqczpvsgthwq"
+                        default: "conv_01kergt7zf4g5vzv3xt5a9tbf2"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21664,7 +21664,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kerccfzz7m2ph1kxbzejtb96"
+                        default: "conv_01kergt7zn36h9grqb5m3v86ge"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21803,286 +21803,289 @@ paths:
           content:
             "text/event-stream":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/ResponseStreamingEvent"}
-                  - oneOf:
-                      - {"$ref": "#/components/schemas/ResponseStartedEvent"}
-                      - {"$ref": "#/components/schemas/ResponseDoneEvent"}
-                      - {"$ref": "#/components/schemas/ResponseFailedEvent"}
-                      - {"$ref": "#/components/schemas/ToolStartedEvent"}
-                      - {"$ref": "#/components/schemas/ToolDoneEvent"}
-                      - {"$ref": "#/components/schemas/ToolFailedEvent"}
-                      - {"$ref": "#/components/schemas/ToolReviewRequestedEvent"}
-                      - {"$ref": "#/components/schemas/ToolReviewDoneEvent"}
-                      - allOf:
-                          - {"$ref": "#/components/schemas/PartDeltaEvent"}
-                          - properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "part.delta"
-                              "timestamp":
-                                type: "string"
-                                description: "ISO timestamp of when the event occurred"
-                              "data":
-                                type: "object"
-                                properties:
-                                  "partId":
+                type: "object"
+                properties:
+                  "data":
+                    allOf:
+                      - {"$ref": "#/components/schemas/ResponseStreamingEvent"}
+                      - oneOf:
+                          - {"$ref": "#/components/schemas/ResponseStartedEvent"}
+                          - {"$ref": "#/components/schemas/ResponseDoneEvent"}
+                          - {"$ref": "#/components/schemas/ResponseFailedEvent"}
+                          - {"$ref": "#/components/schemas/ToolStartedEvent"}
+                          - {"$ref": "#/components/schemas/ToolDoneEvent"}
+                          - {"$ref": "#/components/schemas/ToolFailedEvent"}
+                          - {"$ref": "#/components/schemas/ToolReviewRequestedEvent"}
+                          - {"$ref": "#/components/schemas/ToolReviewDoneEvent"}
+                          - allOf:
+                              - {"$ref": "#/components/schemas/PartDeltaEvent"}
+                              - properties:
+                                  "type":
                                     type: "string"
-                                    description: "Unique identifier for this part. Format: {kind}_{ulid}. Use to correlate with part.done event."
-                                    example: "text_01hxyz123abc"
-                                  "delta":
-                                    allOf:
-                                      - {"$ref": "#/components/schemas/PartDelta"}
-                                      - oneOf:
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/TextPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "text_01kerccg08afg5e7j4p2fkb7hc"
-                                                        description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
-                                                        example: "text_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "text"
-                                                        description: "Type discriminator indicating this is a text part"
-                                                        example: "text"
-                                                      "text":
-                                                        type: "string"
-                                                        description: "The text content of the message part"
-                                                        example: "Hello, how can I help you today?"
-                                                    required:
-                                                      - "kind"
-                                                      - "text"
-                                                description: "A message part containing text content"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/ReasoningPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "reasoning_01kerccg0ac5gg0xwwg295rtb7"
-                                                        description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
-                                                        example: "reasoning_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "reasoning"
-                                                        description: "Type discriminator indicating this is a reasoning part"
-                                                        example: "reasoning"
-                                                      "reasoning":
-                                                        type: "string"
-                                                        description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
-                                                        example: "Let me analyze this step by step..."
-                                                      "signature":
-                                                        type: "string"
-                                                        description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
-                                                        example: "sha256:a1b2c3d4e5f6..."
-                                                    required:
-                                                      - "kind"
-                                                      - "reasoning"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/FilePart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "file_01kerccg0bbk9szd08es6ccc4r"
-                                                        description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
-                                                        example: "file_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "file"
-                                                        description: "Type discriminator indicating this is a file part"
-                                                        example: "file"
-                                                      "file":
-                                                        oneOf:
-                                                          - {"$ref": "#/components/schemas/FilePartFileBytes"}
-                                                          - {"$ref": "#/components/schemas/FilePartFileUri"}
-                                                        discriminator:
-                                                          propertyName: "type"
-                                                          mapping:
-                                                            "bytes": "#/components/schemas/FilePartFileBytes"
-                                                            "uri": "#/components/schemas/FilePartFileUri"
-                                                        description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
-                                                    required:
-                                                      - "kind"
-                                                      - "file"
-                                                description: "A message part containing file content, either embedded or referenced"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/DataPart"}
-                                              - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "data_01kerccg0dk24avq7q6c2zf4vf"
-                                                        description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
-                                                        example: "data_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
-                                                          - "data"
-                                                        description: "Type discriminator indicating this is a data part"
-                                                        example: "data"
-                                                      "data":
-                                                        type: "object"
-                                                        additionalProperties: {}
-                                                        description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
-                                                        example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
-                                                    required:
-                                                      - "kind"
-                                                      - "data"
-                                                description: "A message part containing arbitrary structured data as key-value pairs"
-                                required:
-                                  - "partId"
-                                  - "delta"
-                      - allOf:
-                          - {"$ref": "#/components/schemas/PartDoneEvent"}
-                          - properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "part.done"
-                              "timestamp":
-                                type: "string"
-                                description: "ISO timestamp of when the event occurred"
-                              "data":
-                                type: "object"
-                                properties:
-                                  "partId":
+                                    enum:
+                                      - "part.delta"
+                                  "timestamp":
                                     type: "string"
-                                    description: "Unique identifier for this part. Matches the partId from part.delta events."
-                                    example: "text_01hxyz123abc"
-                                  "part":
-                                    allOf:
-                                      - {"$ref": "#/components/schemas/PartDelta"}
-                                      - oneOf:
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/TextPart"}
+                                    description: "ISO timestamp of when the event occurred"
+                                  "data":
+                                    type: "object"
+                                    properties:
+                                      "partId":
+                                        type: "string"
+                                        description: "Unique identifier for this part. Format: {kind}_{ulid}. Use to correlate with part.done event."
+                                        example: "text_01hxyz123abc"
+                                      "delta":
+                                        allOf:
+                                          - {"$ref": "#/components/schemas/PartDelta"}
+                                          - oneOf:
                                               - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "text_01kerccg0e72eqqd17cy8xd40q"
-                                                        description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
-                                                        example: "text_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
+                                                  - {"$ref": "#/components/schemas/TextPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "text_01kergt7ztjz4ywk0yeys1mmz9"
+                                                            description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
+                                                            example: "text_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "text"
+                                                            description: "Type discriminator indicating this is a text part"
+                                                            example: "text"
+                                                          "text":
+                                                            type: "string"
+                                                            description: "The text content of the message part"
+                                                            example: "Hello, how can I help you today?"
+                                                        required:
+                                                          - "kind"
                                                           - "text"
-                                                        description: "Type discriminator indicating this is a text part"
-                                                        example: "text"
-                                                      "text":
-                                                        type: "string"
-                                                        description: "The text content of the message part"
-                                                        example: "Hello, how can I help you today?"
-                                                    required:
-                                                      - "kind"
-                                                      - "text"
-                                                description: "A message part containing text content"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/ReasoningPart"}
+                                                    description: "A message part containing text content"
                                               - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "reasoning_01kerccg0fpxrcxxq3r9qjdrzn"
-                                                        description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
-                                                        example: "reasoning_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
+                                                  - {"$ref": "#/components/schemas/ReasoningPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "reasoning_01kergt7zvganmg6dtp0p0bcpv"
+                                                            description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
+                                                            example: "reasoning_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "reasoning"
+                                                            description: "Type discriminator indicating this is a reasoning part"
+                                                            example: "reasoning"
+                                                          "reasoning":
+                                                            type: "string"
+                                                            description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
+                                                            example: "Let me analyze this step by step..."
+                                                          "signature":
+                                                            type: "string"
+                                                            description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
+                                                            example: "sha256:a1b2c3d4e5f6..."
+                                                        required:
+                                                          - "kind"
                                                           - "reasoning"
-                                                        description: "Type discriminator indicating this is a reasoning part"
-                                                        example: "reasoning"
-                                                      "reasoning":
-                                                        type: "string"
-                                                        description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
-                                                        example: "Let me analyze this step by step..."
-                                                      "signature":
-                                                        type: "string"
-                                                        description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
-                                                        example: "sha256:a1b2c3d4e5f6..."
-                                                    required:
-                                                      - "kind"
-                                                      - "reasoning"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/FilePart"}
                                               - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "file_01kerccg0f7whan5vz30p7h3y7"
-                                                        description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
-                                                        example: "file_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
+                                                  - {"$ref": "#/components/schemas/FilePart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "file_01kergt7zwdz34w1xj3wqmeq3z"
+                                                            description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
+                                                            example: "file_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "file"
+                                                            description: "Type discriminator indicating this is a file part"
+                                                            example: "file"
+                                                          "file":
+                                                            oneOf:
+                                                              - {"$ref": "#/components/schemas/FilePartFileBytes"}
+                                                              - {"$ref": "#/components/schemas/FilePartFileUri"}
+                                                            discriminator:
+                                                              propertyName: "type"
+                                                              mapping:
+                                                                "bytes": "#/components/schemas/FilePartFileBytes"
+                                                                "uri": "#/components/schemas/FilePartFileUri"
+                                                            description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
+                                                        required:
+                                                          - "kind"
                                                           - "file"
-                                                        description: "Type discriminator indicating this is a file part"
-                                                        example: "file"
-                                                      "file":
-                                                        oneOf:
-                                                          - {"$ref": "#/components/schemas/FilePartFileBytes"}
-                                                          - {"$ref": "#/components/schemas/FilePartFileUri"}
-                                                        discriminator:
-                                                          propertyName: "type"
-                                                          mapping:
-                                                            "bytes": "#/components/schemas/FilePartFileBytes"
-                                                            "uri": "#/components/schemas/FilePartFileUri"
-                                                        description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
-                                                    required:
-                                                      - "kind"
-                                                      - "file"
-                                                description: "A message part containing file content, either embedded or referenced"
-                                          - allOf:
-                                              - {"$ref": "#/components/schemas/DataPart"}
+                                                    description: "A message part containing file content, either embedded or referenced"
                                               - allOf:
-                                                  - {"$ref": "#/components/schemas/BasePart"}
-                                                  - type: "object"
-                                                    properties:
-                                                      "_id":
-                                                        type: "string"
-                                                        default: "data_01kerccg0hkxsywh9zzgtefp6h"
-                                                        description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
-                                                        example: "data_01hxyz123abc"
-                                                      "kind":
-                                                        type: "string"
-                                                        enum:
+                                                  - {"$ref": "#/components/schemas/DataPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "data_01kergt7zx7z7vjqcbac3nhw8f"
+                                                            description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
+                                                            example: "data_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "data"
+                                                            description: "Type discriminator indicating this is a data part"
+                                                            example: "data"
+                                                          "data":
+                                                            type: "object"
+                                                            additionalProperties: {}
+                                                            description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
+                                                            example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
+                                                        required:
+                                                          - "kind"
                                                           - "data"
-                                                        description: "Type discriminator indicating this is a data part"
-                                                        example: "data"
-                                                      "data":
-                                                        type: "object"
-                                                        additionalProperties: {}
-                                                        description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
-                                                        example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
-                                                    required:
-                                                      - "kind"
-                                                      - "data"
-                                                description: "A message part containing arbitrary structured data as key-value pairs"
-                                        description: "The complete part. Discriminated by kind field (text, reasoning, file, data)."
-                                required:
-                                  - "partId"
-                                  - "part"
+                                                    description: "A message part containing arbitrary structured data as key-value pairs"
+                                    required:
+                                      - "partId"
+                                      - "delta"
+                          - allOf:
+                              - {"$ref": "#/components/schemas/PartDoneEvent"}
+                              - properties:
+                                  "type":
+                                    type: "string"
+                                    enum:
+                                      - "part.done"
+                                  "timestamp":
+                                    type: "string"
+                                    description: "ISO timestamp of when the event occurred"
+                                  "data":
+                                    type: "object"
+                                    properties:
+                                      "partId":
+                                        type: "string"
+                                        description: "Unique identifier for this part. Matches the partId from part.delta events."
+                                        example: "text_01hxyz123abc"
+                                      "part":
+                                        allOf:
+                                          - {"$ref": "#/components/schemas/PartDelta"}
+                                          - oneOf:
+                                              - allOf:
+                                                  - {"$ref": "#/components/schemas/TextPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "text_01kergt7zyfd45np55r9q52gam"
+                                                            description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
+                                                            example: "text_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "text"
+                                                            description: "Type discriminator indicating this is a text part"
+                                                            example: "text"
+                                                          "text":
+                                                            type: "string"
+                                                            description: "The text content of the message part"
+                                                            example: "Hello, how can I help you today?"
+                                                        required:
+                                                          - "kind"
+                                                          - "text"
+                                                    description: "A message part containing text content"
+                                              - allOf:
+                                                  - {"$ref": "#/components/schemas/ReasoningPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "reasoning_01kergt7zz5ne1jcg96xqjtgwg"
+                                                            description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
+                                                            example: "reasoning_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "reasoning"
+                                                            description: "Type discriminator indicating this is a reasoning part"
+                                                            example: "reasoning"
+                                                          "reasoning":
+                                                            type: "string"
+                                                            description: "The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
+                                                            example: "Let me analyze this step by step..."
+                                                          "signature":
+                                                            type: "string"
+                                                            description: "Optional cryptographic signature to verify the authenticity and integrity of the reasoning content"
+                                                            example: "sha256:a1b2c3d4e5f6..."
+                                                        required:
+                                                          - "kind"
+                                                          - "reasoning"
+                                              - allOf:
+                                                  - {"$ref": "#/components/schemas/FilePart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "file_01kergt800ps7q6wfxp836fr30"
+                                                            description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
+                                                            example: "file_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "file"
+                                                            description: "Type discriminator indicating this is a file part"
+                                                            example: "file"
+                                                          "file":
+                                                            oneOf:
+                                                              - {"$ref": "#/components/schemas/FilePartFileBytes"}
+                                                              - {"$ref": "#/components/schemas/FilePartFileUri"}
+                                                            discriminator:
+                                                              propertyName: "type"
+                                                              mapping:
+                                                                "bytes": "#/components/schemas/FilePartFileBytes"
+                                                                "uri": "#/components/schemas/FilePartFileUri"
+                                                            description: "File content, either as base64-encoded bytes or as a URI reference. Discriminated by the \"type\" field."
+                                                        required:
+                                                          - "kind"
+                                                          - "file"
+                                                    description: "A message part containing file content, either embedded or referenced"
+                                              - allOf:
+                                                  - {"$ref": "#/components/schemas/DataPart"}
+                                                  - allOf:
+                                                      - {"$ref": "#/components/schemas/BasePart"}
+                                                      - type: "object"
+                                                        properties:
+                                                          "_id":
+                                                            type: "string"
+                                                            default: "data_01kergt801wb6jec0h177drj5h"
+                                                            description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
+                                                            example: "data_01hxyz123abc"
+                                                          "kind":
+                                                            type: "string"
+                                                            enum:
+                                                              - "data"
+                                                            description: "Type discriminator indicating this is a data part"
+                                                            example: "data"
+                                                          "data":
+                                                            type: "object"
+                                                            additionalProperties: {}
+                                                            description: "Arbitrary structured data as key-value pairs. Used to pass data objects between messages."
+                                                            example: {"user_id": "12345", "preferences": {"theme": "dark", "language": "en"}, "session_data": {"start_time": "2024-01-15T10:30:00Z"}}
+                                                        required:
+                                                          - "kind"
+                                                          - "data"
+                                                    description: "A message part containing arbitrary structured data as key-value pairs"
+                                            description: "The complete part. Discriminated by kind field (text, reasoning, file, data)."
+                                    required:
+                                      - "partId"
+                                      - "part"
               x-speakeasy-sse-sentinel: "[DONE]"
       security:
         - ApiKey: []
@@ -22149,7 +22152,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-12T05:55:32.207Z"
+                    default: "2026-01-12T07:12:56.774Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -22238,7 +22241,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2026-01-12T05:55:32.207Z"
+                          default: "2026-01-12T07:12:56.774Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -22306,7 +22309,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-12T05:55:32.207Z"
+                    default: "2026-01-12T07:12:56.774Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -26747,7 +26750,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KERCCG7RZ2868KA5TQVF4PBG"
+                              default: "tool_01KERGT86RWX6CBCJ57YJM7964"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26846,7 +26849,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KERCCG7TCAVBGADVYB551KGK"
+                              default: "tool_01KERGT86TXE9YP27NN32JCDWW"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26947,7 +26950,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KERCCG7WJYW59AMHHCY52G3P"
+                              default: "tool_01KERGT86XX83J2QS4APB0GB1A"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27081,7 +27084,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KERCCG806DY6G3BKJJV982BJ"
+                              default: "tool_01KERGT87021P0V7AVDSKC6870"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27155,7 +27158,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KERCCG8243ZC3K9A9RC55JYV"
+                                        default: "01KERGT8729921FK9AVWXDMCEK"
                                       "name":
                                         type: "string"
                                       "description":
@@ -27206,7 +27209,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KERCCG83VX4Y3YJS5AGRT2VN"
+                              default: "tool_01KERGT873GGY36A7SVA1SM5PJ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27749,7 +27752,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG8QD9R8GNND449N7VYZ"
+                        default: "tool_01KERGT87RNVNSKN8BPAAAF8RJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27848,7 +27851,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG8TTG5V5WCA1VVPQJDX"
+                        default: "tool_01KERGT87TTFWRTSNE0PZGSRFT"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27949,7 +27952,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG8WNX73N9NP139X25KX"
+                        default: "tool_01KERGT87XS3NPVBCGXN2PFSR9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28083,7 +28086,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG8Z69V26NJNXHJ668YN"
+                        default: "tool_01KERGT880V78MYPSTFG62EWNG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28157,7 +28160,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KERCCG933X5STB6N5XYXWQJW"
+                                  default: "01KERGT8824MPZXKFSWBSEEEN9"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28208,7 +28211,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG96N456C3ME2H9BS6SE"
+                        default: "tool_01KERGT884RBDW3ER96D2KD9ND"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28648,7 +28651,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KERCCGAD50BNJ29DPW4FWEBZ"
+                                default: "01KERGT88YFPYQ6XSR2CBTNQ6K"
                               "name":
                                 type: "string"
                               "description":
@@ -28766,7 +28769,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG9PS30DAYE88XNJVNC1"
+                        default: "tool_01KERGT88D9PY6RXFP592WKH69"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28865,7 +28868,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG9RKGJAMWBW0YSF5A30"
+                        default: "tool_01KERGT88ETN8D95C11T922X6V"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28966,7 +28969,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG9SXFVK5DA8TRQ2ZBTA"
+                        default: "tool_01KERGT88FJ2RMAD2345P265E2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29100,7 +29103,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCG9WRTDKQP3AGNH3WZGY"
+                        default: "tool_01KERGT88KGVESMSCWBVAY4SJN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29174,7 +29177,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KERCCG9YV39AJ4Y3MEKYA02F"
+                                  default: "01KERGT88N2EBWHRWJRP2T0JJ8"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29225,7 +29228,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGA0VDTK0MJQBTVR7G7P"
+                        default: "tool_01KERGT88PAF1JRA62T9ZGJFA2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29379,7 +29382,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGAZ2FWAZH5E333PRPDW"
+                        default: "tool_01KERGT89GBH8ZS942KQ0F08E9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29478,7 +29481,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGB0DKGKMA5VBVFZBZH9"
+                        default: "tool_01KERGT89HJGEJQQ2TY19Q33A9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29579,7 +29582,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGB1YZX943D8YJ8N4KV4"
+                        default: "tool_01KERGT89JKWDNBS2VR9A6B2NY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29713,7 +29716,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGB41DTC67XQ4HZ5FTK5"
+                        default: "tool_01KERGT89NZ39GNVZF1A90VSB1"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29787,7 +29790,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KERCCGB6R9BR59X3CN5BEMBH"
+                                  default: "01KERGT89PSF9G166ZPTXB6ACB"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29838,7 +29841,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KERCCGB78NRGD813ZJG1CMRE"
+                        default: "tool_01KERGT89PAHKAKYTY8KYBT6QT"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -31974,7 +31977,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KERCCGF4J9HSQPD90FTCK806"
+                          default: "01KERGT8D0GD80AHTWMWQ3G92K"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -32140,7 +32143,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KERCCGF712G4JJGV70NX8EW1"
+                    default: "01KERGT8D3Q4867X0JCCQ7JGW7"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32236,7 +32239,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KERCCGF6ZMDC8BM0N7MEGYWG"
+                    default: "01KERGT8D2ZWJV05A4T5S781ZR"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32368,7 +32371,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KERCCGFA5REDZG1Q53GNB1SJ"
+                    default: "01KERGT8D7371S66DPB318RRBQ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -34910,7 +34913,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-12T05:55:28.633Z"
+                          default: "2026-01-12T07:12:53.135Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34918,7 +34921,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:28.633Z"
+                              default: "2026-01-12T07:12:53.135Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35054,7 +35057,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35062,7 +35065,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35185,7 +35188,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35193,7 +35196,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35346,7 +35349,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35354,7 +35357,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35727,7 +35730,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-12T05:55:41.760Z"
+                                    default: "2026-01-12T07:13:06.542Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35767,7 +35770,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-12T05:55:41.761Z"
+                                    default: "2026-01-12T07:13:06.543Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35807,7 +35810,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-12T05:55:41.762Z"
+                                    default: "2026-01-12T07:13:06.544Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35843,7 +35846,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-12T05:55:28.633Z"
+                          default: "2026-01-12T07:12:53.135Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35851,7 +35854,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:28.633Z"
+                              default: "2026-01-12T07:12:53.135Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -36417,7 +36420,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-12T05:55:41.790Z"
+                                default: "2026-01-12T07:13:06.570Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36457,7 +36460,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-12T05:55:41.791Z"
+                                default: "2026-01-12T07:13:06.571Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36497,7 +36500,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-12T05:55:41.792Z"
+                                default: "2026-01-12T07:13:06.571Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36533,7 +36536,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-01-12T05:55:28.633Z"
+                      default: "2026-01-12T07:12:53.135Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -36541,7 +36544,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-01-12T05:55:28.633Z"
+                          default: "2026-01-12T07:12:53.135Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36858,7 +36861,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.771Z"
+                              default: "2026-01-12T07:13:06.562Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36898,7 +36901,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.772Z"
+                              default: "2026-01-12T07:13:06.562Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36938,7 +36941,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.772Z"
+                              default: "2026-01-12T07:13:06.563Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36974,7 +36977,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36982,7 +36985,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37546,7 +37549,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.844Z"
+                              default: "2026-01-12T07:13:06.617Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37586,7 +37589,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.844Z"
+                              default: "2026-01-12T07:13:06.617Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37626,7 +37629,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-12T05:55:41.845Z"
+                              default: "2026-01-12T07:13:06.618Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37662,7 +37665,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-12T05:55:28.633Z"
+                    default: "2026-01-12T07:12:53.135Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37670,7 +37673,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-12T05:55:28.633Z"
+                        default: "2026-01-12T07:12:53.135Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
