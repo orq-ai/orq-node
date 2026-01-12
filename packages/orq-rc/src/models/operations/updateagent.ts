@@ -2403,6 +2403,13 @@ export type UpdateAgentAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
+export const UpdateAgentSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type UpdateAgentSource = ClosedEnum<typeof UpdateAgentSource>;
+
 /**
  * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
  */
@@ -2457,6 +2464,7 @@ export type UpdateAgentResponseBody = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<UpdateAgentAgentsKnowledgeBases> | undefined;
+  source?: UpdateAgentSource | undefined;
 };
 
 /** @internal */
@@ -9080,6 +9088,15 @@ export function updateAgentAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentSource
+> = z.nativeEnum(UpdateAgentSource);
+/** @internal */
+export const UpdateAgentSource$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentSource
+> = UpdateAgentSource$inboundSchema;
+
+/** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   UpdateAgentResponseBody,
   z.ZodTypeDef,
@@ -9112,6 +9129,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$inboundSchema),
   ).optional(),
+  source: UpdateAgentSource$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -9152,6 +9170,7 @@ export type UpdateAgentResponseBody$Outbound = {
   metrics?: UpdateAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<UpdateAgentAgentsKnowledgeBases$Outbound> | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -9187,6 +9206,7 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$outboundSchema),
   ).optional(),
+  source: UpdateAgentSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

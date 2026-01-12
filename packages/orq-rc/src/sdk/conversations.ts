@@ -3,12 +3,15 @@
  */
 
 import { conversationsCreate } from "../funcs/conversationsCreate.js";
+import { conversationsCreateConversationResponse } from "../funcs/conversationsCreateConversationResponse.js";
 import { conversationsDelete } from "../funcs/conversationsDelete.js";
 import { conversationsGenerateName } from "../funcs/conversationsGenerateName.js";
 import { conversationsList } from "../funcs/conversationsList.js";
 import { conversationsRetrieve } from "../funcs/conversationsRetrieve.js";
 import { conversationsUpdate } from "../funcs/conversationsUpdate.js";
+import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,6 +26,7 @@ export class Conversations extends ClientSDK {
     limit?: number | undefined,
     startingAfter?: string | undefined,
     endingBefore?: string | undefined,
+    entityId?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.ListConversationsResponseBody> {
     return unwrapAsync(conversationsList(
@@ -30,6 +34,7 @@ export class Conversations extends ClientSDK {
       limit,
       startingAfter,
       endingBefore,
+      entityId,
       options,
     ));
   }
@@ -79,7 +84,7 @@ export class Conversations extends ClientSDK {
   async retrieve(
     conversationId: string,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveConversationResponseBody> {
+  ): Promise<components.ConversationWithMessagesResponse> {
     return unwrapAsync(conversationsRetrieve(
       this,
       conversationId,
@@ -119,6 +124,23 @@ export class Conversations extends ClientSDK {
     return unwrapAsync(conversationsDelete(
       this,
       conversationId,
+      options,
+    ));
+  }
+
+  /**
+   * Create internal response
+   *
+   * @remarks
+   * Creates a response for a freeform conversation without an agent. Uses a default model for generation.
+   */
+  async createConversationResponse(
+    request: operations.CreateConversationResponseRequest,
+    options?: RequestOptions,
+  ): Promise<EventStream<operations.CreateConversationResponseResponseBody>> {
+    return unwrapAsync(conversationsCreateConversationResponse(
+      this,
+      request,
       options,
     ));
   }

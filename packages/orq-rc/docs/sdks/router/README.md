@@ -41,8 +41,8 @@ async function run() {
           model: "anthropic/claude-4-opus",
         },
       ],
-      contact: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      identity: {
+        id: "identity_01ARZ3NDEKTSV4RRFFQ69G5FAV",
         displayName: "Jane Doe",
         email: "jane.doe@example.com",
       },
@@ -112,8 +112,8 @@ async function run() {
           model: "anthropic/claude-4-opus",
         },
       ],
-      contact: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      identity: {
+        id: "identity_01ARZ3NDEKTSV4RRFFQ69G5FAV",
         displayName: "Jane Doe",
         email: "jane.doe@example.com",
       },
@@ -205,6 +205,22 @@ async function run() {
           model: "openai/gpt-4o-mini",
         },
       ],
+      identity: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
       contact: {
         id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
         displayName: "Jane Doe",
@@ -282,6 +298,22 @@ async function run() {
           model: "openai/gpt-4o-mini",
         },
       ],
+      identity: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
       contact: {
         id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
         displayName: "Jane Doe",

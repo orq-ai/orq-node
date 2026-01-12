@@ -877,7 +877,8 @@ export type StreamRunAgentRole =
 export type StreamRunAgentPublicMessagePart =
   | components.TextPart
   | components.FilePart
-  | components.ToolResultPart;
+  | components.ToolResultPart
+  | components.ErrorPart;
 
 /**
  * The A2A format message containing the task for the agent to perform.
@@ -895,12 +896,47 @@ export type StreamRunAgentA2AMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    components.TextPart | components.FilePart | components.ToolResultPart
+    | components.TextPart
+    | components.FilePart
+    | components.ToolResultPart
+    | components.ErrorPart
   >;
 };
 
 /**
- * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+ */
+export type StreamRunAgentIdentity = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
+ * @deprecated Use identity instead. Information about the contact making the request.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type StreamRunAgentContact = {
   /**
@@ -1610,7 +1646,13 @@ export type StreamRunAgentRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   /**
-   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: StreamRunAgentIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   contact?: StreamRunAgentContact | undefined;
   /**
@@ -4053,12 +4095,14 @@ export const StreamRunAgentPublicMessagePart$inboundSchema: z.ZodType<
   components.TextPart$inboundSchema,
   components.FilePart$inboundSchema,
   components.ToolResultPart$inboundSchema,
+  components.ErrorPart$inboundSchema,
 ]);
 /** @internal */
 export type StreamRunAgentPublicMessagePart$Outbound =
   | components.TextPart$Outbound
   | components.FilePart$Outbound
-  | components.ToolResultPart$Outbound;
+  | components.ToolResultPart$Outbound
+  | components.ErrorPart$Outbound;
 
 /** @internal */
 export const StreamRunAgentPublicMessagePart$outboundSchema: z.ZodType<
@@ -4069,6 +4113,7 @@ export const StreamRunAgentPublicMessagePart$outboundSchema: z.ZodType<
   components.TextPart$outboundSchema,
   components.FilePart$outboundSchema,
   components.ToolResultPart$outboundSchema,
+  components.ErrorPart$outboundSchema,
 ]);
 
 export function streamRunAgentPublicMessagePartToJSON(
@@ -4106,6 +4151,7 @@ export const StreamRunAgentA2AMessage$inboundSchema: z.ZodType<
       components.TextPart$inboundSchema,
       components.FilePart$inboundSchema,
       components.ToolResultPart$inboundSchema,
+      components.ErrorPart$inboundSchema,
     ]),
   ),
 });
@@ -4117,6 +4163,7 @@ export type StreamRunAgentA2AMessage$Outbound = {
     | components.TextPart$Outbound
     | components.FilePart$Outbound
     | components.ToolResultPart$Outbound
+    | components.ErrorPart$Outbound
   >;
 };
 
@@ -4136,6 +4183,7 @@ export const StreamRunAgentA2AMessage$outboundSchema: z.ZodType<
       components.TextPart$outboundSchema,
       components.FilePart$outboundSchema,
       components.ToolResultPart$outboundSchema,
+      components.ErrorPart$outboundSchema,
     ]),
   ),
 });
@@ -4154,6 +4202,70 @@ export function streamRunAgentA2AMessageFromJSON(
     jsonString,
     (x) => StreamRunAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'StreamRunAgentA2AMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentIdentity$inboundSchema: z.ZodType<
+  StreamRunAgentIdentity,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
+  });
+});
+/** @internal */
+export type StreamRunAgentIdentity$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentIdentity$outboundSchema: z.ZodType<
+  StreamRunAgentIdentity$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentIdentity
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+export function streamRunAgentIdentityToJSON(
+  streamRunAgentIdentity: StreamRunAgentIdentity,
+): string {
+  return JSON.stringify(
+    StreamRunAgentIdentity$outboundSchema.parse(streamRunAgentIdentity),
+  );
+}
+export function streamRunAgentIdentityFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentIdentity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentIdentity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentIdentity' from JSON`,
   );
 }
 
@@ -4521,7 +4633,7 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KEBD76NBWT9KWM55NJ5A29JA"),
+  id: z.string().default("01KERGT7X98XTZTDMWXAGJ4X8B"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4540,7 +4652,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KEBD76NBWT9KWM55NJ5A29JA"),
+  id: z.string().default("01KERGT7X98XTZTDMWXAGJ4X8B"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -6612,6 +6724,7 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => StreamRunAgentIdentity$inboundSchema).optional(),
   contact: z.lazy(() => StreamRunAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => StreamRunAgentThread$inboundSchema).optional(),
   memory: z.lazy(() => StreamRunAgentMemory$inboundSchema).optional(),
@@ -6651,6 +6764,7 @@ export type StreamRunAgentRequestBody$Outbound = {
   instructions: string;
   message: StreamRunAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
+  identity?: StreamRunAgentIdentity$Outbound | undefined;
   contact?: StreamRunAgentContact$Outbound | undefined;
   thread?: StreamRunAgentThread$Outbound | undefined;
   memory?: StreamRunAgentMemory$Outbound | undefined;
@@ -6687,6 +6801,7 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => StreamRunAgentIdentity$outboundSchema).optional(),
   contact: z.lazy(() => StreamRunAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => StreamRunAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),

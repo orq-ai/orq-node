@@ -3,7 +3,6 @@
  */
 
 import { evaluatorsGetV2EvaluatorsIdVersions } from "../funcs/evaluatorsGetV2EvaluatorsIdVersions.js";
-import { evaluatorsGetV2EvaluatorsIdVersionsVersionId } from "../funcs/evaluatorsGetV2EvaluatorsIdVersionsVersionId.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -20,23 +19,6 @@ export class Evaluators extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetV2EvaluatorsIdVersionsResponseBody> {
     return unwrapAsync(evaluatorsGetV2EvaluatorsIdVersions(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get evaluator version
-   *
-   * @remarks
-   * Returns a specific version of an evaluator
-   */
-  async getV2EvaluatorsIdVersionsVersionId(
-    request: operations.GetV2EvaluatorsIdVersionsVersionIdRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetV2EvaluatorsIdVersionsVersionIdResponseBody> {
-    return unwrapAsync(evaluatorsGetV2EvaluatorsIdVersionsVersionId(
       this,
       request,
       options,

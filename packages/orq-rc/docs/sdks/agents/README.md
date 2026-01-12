@@ -457,7 +457,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -508,7 +508,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -670,7 +670,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -742,7 +742,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -839,7 +839,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -913,7 +913,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -999,7 +999,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -1052,7 +1052,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",

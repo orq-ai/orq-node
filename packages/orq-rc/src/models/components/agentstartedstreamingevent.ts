@@ -15,6 +15,12 @@ import {
   DataPart$outboundSchema,
 } from "./datapart.js";
 import {
+  ErrorPart,
+  ErrorPart$inboundSchema,
+  ErrorPart$Outbound,
+  ErrorPart$outboundSchema,
+} from "./errorpart.js";
+import {
   FilePart,
   FilePart$inboundSchema,
   FilePart$Outbound,
@@ -57,6 +63,7 @@ export type AgentStartedStreamingEventRole = ClosedEnum<
 
 export type AgentStartedStreamingEventParts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -68,7 +75,9 @@ export type InputMessage = {
    * Extended A2A message role
    */
   role: AgentStartedStreamingEventRole;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -252,6 +261,7 @@ export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   TextPart$inboundSchema,
+  ErrorPart$inboundSchema,
   DataPart$inboundSchema,
   FilePart$inboundSchema,
   ToolCallPart$inboundSchema,
@@ -260,6 +270,7 @@ export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentStartedStreamingEventParts$Outbound =
   | TextPart$Outbound
+  | ErrorPart$Outbound
   | DataPart$Outbound
   | FilePart$Outbound
   | ToolCallPart$Outbound
@@ -272,6 +283,7 @@ export const AgentStartedStreamingEventParts$outboundSchema: z.ZodType<
   AgentStartedStreamingEventParts
 > = z.union([
   TextPart$outboundSchema,
+  ErrorPart$outboundSchema,
   DataPart$outboundSchema,
   FilePart$outboundSchema,
   ToolCallPart$outboundSchema,
@@ -308,6 +320,7 @@ export const InputMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
       DataPart$inboundSchema,
       FilePart$inboundSchema,
       ToolCallPart$inboundSchema,
@@ -322,6 +335,7 @@ export type InputMessage$Outbound = {
   role: string;
   parts: Array<
     | TextPart$Outbound
+    | ErrorPart$Outbound
     | DataPart$Outbound
     | FilePart$Outbound
     | ToolCallPart$Outbound
@@ -341,6 +355,7 @@ export const InputMessage$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$outboundSchema,
+      ErrorPart$outboundSchema,
       DataPart$outboundSchema,
       FilePart$outboundSchema,
       ToolCallPart$outboundSchema,

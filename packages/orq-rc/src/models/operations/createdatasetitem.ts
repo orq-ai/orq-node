@@ -757,12 +757,12 @@ export type CreateDatasetItemEvaluationsEvaluationType = ClosedEnum<
   typeof CreateDatasetItemEvaluationsEvaluationType
 >;
 
-export const CreateDatasetItemEvaluationsSource = {
+export const CreateDatasetItemEvaluationsDatasetsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type CreateDatasetItemEvaluationsSource = ClosedEnum<
-  typeof CreateDatasetItemEvaluationsSource
+export type CreateDatasetItemEvaluationsDatasetsSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsSource
 >;
 
 export type Evaluations3 = {
@@ -778,7 +778,7 @@ export type Evaluations3 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: CreateDatasetItemEvaluationsSource | undefined;
+  source?: CreateDatasetItemEvaluationsDatasetsSource | undefined;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -804,11 +804,13 @@ export type EvaluationsEvaluationType = ClosedEnum<
   typeof EvaluationsEvaluationType
 >;
 
-export const EvaluationsSource = {
+export const CreateDatasetItemEvaluationsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type EvaluationsSource = ClosedEnum<typeof EvaluationsSource>;
+export type CreateDatasetItemEvaluationsSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsSource
+>;
 
 export type Evaluations2 = {
   /**
@@ -823,7 +825,7 @@ export type Evaluations2 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: EvaluationsSource | undefined;
+  source?: CreateDatasetItemEvaluationsSource | undefined;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -847,11 +849,11 @@ export const EvaluationType = {
  */
 export type EvaluationType = ClosedEnum<typeof EvaluationType>;
 
-export const Source = {
+export const EvaluationsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type Source = ClosedEnum<typeof Source>;
+export type EvaluationsSource = ClosedEnum<typeof EvaluationsSource>;
 
 export type Evaluations1 = {
   /**
@@ -866,7 +868,7 @@ export type Evaluations1 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: Source | undefined;
+  source?: EvaluationsSource | undefined;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -3592,13 +3594,13 @@ export const CreateDatasetItemEvaluationsEvaluationType$outboundSchema:
     CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
 
 /** @internal */
-export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemEvaluationsSource
-> = z.nativeEnum(CreateDatasetItemEvaluationsSource);
+export const CreateDatasetItemEvaluationsDatasetsSource$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsSource> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsSource);
 /** @internal */
-export const CreateDatasetItemEvaluationsSource$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemEvaluationsSource
-> = CreateDatasetItemEvaluationsSource$inboundSchema;
+export const CreateDatasetItemEvaluationsDatasetsSource$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsSource> =
+    CreateDatasetItemEvaluationsDatasetsSource$inboundSchema;
 
 /** @internal */
 export const Evaluations3$inboundSchema: z.ZodType<
@@ -3609,10 +3611,12 @@ export const Evaluations3$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: CreateDatasetItemEvaluationsEvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsDatasetsSource$inboundSchema.default(
+    "orq",
+  ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-07T05:00:09.360Z",
+    "2026-01-12T07:13:06.571Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3645,9 +3649,11 @@ export const Evaluations3$outboundSchema: z.ZodType<
   id: z.string(),
   evaluationType: CreateDatasetItemEvaluationsEvaluationType$outboundSchema,
   humanReviewId: z.string(),
-  source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsDatasetsSource$outboundSchema.default(
+    "orq",
+  ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-07T05:00:09.360Z"))
+  reviewedAt: z.date().default(() => new Date("2026-01-12T07:13:06.571Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3683,13 +3689,13 @@ export const EvaluationsEvaluationType$outboundSchema: z.ZodNativeEnum<
 > = EvaluationsEvaluationType$inboundSchema;
 
 /** @internal */
-export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
-  typeof EvaluationsSource
-> = z.nativeEnum(EvaluationsSource);
+export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsSource
+> = z.nativeEnum(CreateDatasetItemEvaluationsSource);
 /** @internal */
-export const EvaluationsSource$outboundSchema: z.ZodNativeEnum<
-  typeof EvaluationsSource
-> = EvaluationsSource$inboundSchema;
+export const CreateDatasetItemEvaluationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsSource
+> = CreateDatasetItemEvaluationsSource$inboundSchema;
 
 /** @internal */
 export const Evaluations2$inboundSchema: z.ZodType<
@@ -3700,10 +3706,10 @@ export const Evaluations2$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: EvaluationsEvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: EvaluationsSource$inboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-07T05:00:09.360Z",
+    "2026-01-12T07:13:06.571Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3736,9 +3742,9 @@ export const Evaluations2$outboundSchema: z.ZodType<
   id: z.string(),
   evaluationType: EvaluationsEvaluationType$outboundSchema,
   humanReviewId: z.string(),
-  source: EvaluationsSource$outboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-07T05:00:09.360Z"))
+  reviewedAt: z.date().default(() => new Date("2026-01-12T07:13:06.571Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -3774,11 +3780,13 @@ export const EvaluationType$outboundSchema: z.ZodNativeEnum<
 > = EvaluationType$inboundSchema;
 
 /** @internal */
-export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
+export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsSource
+> = z.nativeEnum(EvaluationsSource);
 /** @internal */
-export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
-  Source$inboundSchema;
+export const EvaluationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsSource
+> = EvaluationsSource$inboundSchema;
 
 /** @internal */
 export const Evaluations1$inboundSchema: z.ZodType<
@@ -3789,10 +3797,10 @@ export const Evaluations1$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: EvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: Source$inboundSchema.default("orq"),
+  source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-07T05:00:09.359Z",
+    "2026-01-12T07:13:06.570Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3825,9 +3833,9 @@ export const Evaluations1$outboundSchema: z.ZodType<
   id: z.string(),
   evaluationType: EvaluationType$outboundSchema,
   humanReviewId: z.string(),
-  source: Source$outboundSchema.default("orq"),
+  source: EvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-07T05:00:09.359Z"))
+  reviewedAt: z.date().default(() => new Date("2026-01-12T07:13:06.570Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -3932,7 +3940,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-07T04:59:57.150Z",
+    "2026-01-12T07:12:53.135Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -4010,7 +4018,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-07T04:59:57.150Z"))
+  updated: z.date().default(() => new Date("2026-01-12T07:12:53.135Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

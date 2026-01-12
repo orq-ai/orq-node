@@ -52,3 +52,12 @@ const value: operations.AgenticChunkerStrategy = {
 };
 ```
 
+### `operations.FastChunkerStrategy`
+
+```typescript
+const value: operations.FastChunkerStrategy = {
+  text: "<value>",
+  strategy: "fast",
+};
+```
+

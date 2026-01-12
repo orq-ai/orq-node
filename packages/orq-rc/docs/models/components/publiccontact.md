@@ -1,6 +1,6 @@
 # PublicContact
 
-Information about the contact making the request. If the contact does not exist, it will be created automatically.
+Information about the identity making the request. If the identity does not exist, it will be created automatically.
 
 ## Example Usage
 

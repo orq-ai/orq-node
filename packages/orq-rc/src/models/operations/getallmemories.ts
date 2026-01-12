@@ -40,7 +40,9 @@ export type GetAllMemoriesObject = ClosedEnum<typeof GetAllMemoriesObject>;
 export type GetAllMemoriesData = {
   id: string;
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
+   * This property have been deprecated and moved to `_id`. Please refer to `_id` for future operations
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   entityId: string;
   created: string;
@@ -48,10 +50,6 @@ export type GetAllMemoriesData = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   storeId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
-   */
-  metadata: { [k: string]: string };
   workspaceId: string;
   /**
    * The number of memories in the entity
@@ -153,7 +151,6 @@ export const GetAllMemoriesData$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   store_id: z.string(),
-  metadata: z.record(z.string()),
   workspace_id: z.string(),
   documents_count: z.number(),
 }).transform((v) => {
@@ -176,7 +173,6 @@ export type GetAllMemoriesData$Outbound = {
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   store_id: string;
-  metadata: { [k: string]: string };
   workspace_id: string;
   documents_count: number;
 };
@@ -194,7 +190,6 @@ export const GetAllMemoriesData$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   storeId: z.string(),
-  metadata: z.record(z.string()),
   workspaceId: z.string(),
   documentsCount: z.number(),
 }).transform((v) => {

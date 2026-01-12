@@ -30,6 +30,7 @@ import { tool$contactsList } from "./tools/contactsList.js";
 import { tool$contactsRetrieve } from "./tools/contactsRetrieve.js";
 import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
 import { tool$conversationsCreate } from "./tools/conversationsCreate.js";
+import { tool$conversationsCreateConversationResponse } from "./tools/conversationsCreateConversationResponse.js";
 import { tool$conversationsDelete } from "./tools/conversationsDelete.js";
 import { tool$conversationsGenerateName } from "./tools/conversationsGenerateName.js";
 import { tool$conversationsList } from "./tools/conversationsList.js";
@@ -57,7 +58,6 @@ import { tool$evalsDelete } from "./tools/evalsDelete.js";
 import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
 import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
 import { tool$evaluatorsGetV2EvaluatorsIdVersions } from "./tools/evaluatorsGetV2EvaluatorsIdVersions.js";
-import { tool$evaluatorsGetV2EvaluatorsIdVersionsVersionId } from "./tools/evaluatorsGetV2EvaluatorsIdVersionsVersionId.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -128,7 +128,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.2.0-rc.13",
+    version: "4.2.0-rc.21",
   });
 
   const client = new OrqCore({
@@ -172,7 +172,6 @@ export function createMCPServer(deps: {
   tool(tool$evalsDelete);
   tool(tool$evalsInvoke);
   tool(tool$evaluatorsGetV2EvaluatorsIdVersions);
-  tool(tool$evaluatorsGetV2EvaluatorsIdVersionsVersionId);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
@@ -192,6 +191,7 @@ export function createMCPServer(deps: {
   tool(tool$conversationsRetrieve);
   tool(tool$conversationsUpdate);
   tool(tool$conversationsDelete);
+  tool(tool$conversationsCreateConversationResponse);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);

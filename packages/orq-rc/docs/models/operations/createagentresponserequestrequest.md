@@ -12,12 +12,12 @@ let value: CreateAgentResponseRequestRequest = {
       role: "tool",
       parts: [
         {
-          kind: "tool_result",
-          toolCallId: "<id>",
+          kind: "error",
+          error: "<value>",
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",

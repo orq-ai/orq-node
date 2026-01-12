@@ -16,11 +16,8 @@ let value: GetAllMemoriesResponseBody = {
       created: "<value>",
       updated: "<value>",
       storeId: "<id>",
-      metadata: {
-        "key": "<value>",
-      },
       workspaceId: "<id>",
-      documentsCount: 7217.29,
+      documentsCount: 2741.39,
     },
   ],
   hasMore: false,

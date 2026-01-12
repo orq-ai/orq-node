@@ -13,7 +13,6 @@ export * from "./generateconversationname.js";
 export * from "./getevals.js";
 export * from "./getpromptversion.js";
 export * from "./getv2evaluatorsidversions.js";
-export * from "./getv2evaluatorsidversionsversionid.js";
 export * from "./getv2toolstoolidversions.js";
 export * from "./getv2toolstoolidversionsversionid.js";
 export * from "./honoapierror.js";

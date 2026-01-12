@@ -27,7 +27,7 @@ export type UpdateMemoryDocumentRequest = {
   /**
    * The unique identifier of the memory
    */
-  memoryId: string;
+  memoryEntityId: string;
   /**
    * The unique identifier of the document
    */
@@ -108,14 +108,14 @@ export const UpdateMemoryDocumentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
   document_id: z.string(),
   RequestBody: z.lazy(() => UpdateMemoryDocumentRequestBody$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
     "document_id": "documentId",
     "RequestBody": "requestBody",
   });
@@ -123,7 +123,7 @@ export const UpdateMemoryDocumentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
   document_id: string;
   RequestBody?: UpdateMemoryDocumentRequestBody$Outbound | undefined;
 };
@@ -135,14 +135,14 @@ export const UpdateMemoryDocumentRequest$outboundSchema: z.ZodType<
   UpdateMemoryDocumentRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
   documentId: z.string(),
   requestBody: z.lazy(() => UpdateMemoryDocumentRequestBody$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
     documentId: "document_id",
     requestBody: "RequestBody",
   });

@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ * Information about the identity making the request. If the identity does not exist, it will be created automatically.
  */
 export type PublicContact = {
   /**

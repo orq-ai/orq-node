@@ -11,7 +11,7 @@ let value: ToolExecutionContext = {
   workspaceId: "<id>",
   agentManifestId: "<id>",
   agentExecutionId: "<id>",
-  product: "router",
+  product: "workflows",
 };
 ```
 

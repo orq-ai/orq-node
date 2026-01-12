@@ -10,6 +10,7 @@
 * [retrieve](#retrieve) - Retrieve conversation
 * [update](#update) - Update conversation
 * [delete](#delete) - Delete conversation
+* [createConversationResponse](#createconversationresponse) - Create internal response
 
 ## list
 
@@ -17,7 +18,7 @@ Retrieves a paginated list of conversations in your workspace. Conversations are
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ListConversations" method="get" path="/v2/conversations" -->
+<!-- UsageSnippet language="typescript" operationID="ListConversations" method="get" path="/v2/conversations/" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -26,7 +27,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.conversations.list(10, "conv_01jj1hdhn79xas7a01wb3hysdb", "conv_01jj1hdhn79xas7a01wb3hysdb");
+  const result = await orq.conversations.list(25, "conv_01jj1hdhn79xas7a01wb3hysdb", "conv_01jj1hdhn79xas7a01wb3hysdb", "agent_01jj1hdhn79xas7a01wb3hysdb");
 
   console.log(result);
 }
@@ -49,7 +50,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await conversationsList(orq, 10, "conv_01jj1hdhn79xas7a01wb3hysdb", "conv_01jj1hdhn79xas7a01wb3hysdb");
+  const res = await conversationsList(orq, 25, "conv_01jj1hdhn79xas7a01wb3hysdb", "conv_01jj1hdhn79xas7a01wb3hysdb", "agent_01jj1hdhn79xas7a01wb3hysdb");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -65,9 +66,10 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.                                                                     | [object Object]                                                                                                                                                                |
-| `startingAfter`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list.                                                                      | [object Object]                                                                                                                                                                |
-| `endingBefore`                                                                                                                                                                 | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list.                                                                       | [object Object]                                                                                                                                                                |
+| `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Maximum number of conversations to return. Range: 1-100. Default: 10.                                                                                                          | [object Object]                                                                                                                                                                |
+| `startingAfter`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Pagination cursor. Returns conversations created after the specified conversation ID.                                                                                          | [object Object]                                                                                                                                                                |
+| `endingBefore`                                                                                                                                                                 | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Pagination cursor. Returns conversations created before the specified conversation ID.                                                                                         | [object Object]                                                                                                                                                                |
+| `entityId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Filter by parent entity. When specified, returns only conversations associated with this entity. When omitted, returns standalone conversations.                               | [object Object]                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |                                                                                                                                                                                |
@@ -98,9 +100,11 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.conversations.create({
-    displayName: "Support Chat #1234",
+    displayName: "Customer Support Session",
+    projectId: "prj_01jj1hdhn79xas7a01wb3hysdb",
     metadata: {
-      entityId: "<id>",
+      entityId: "agent_01jj1hdhn79xas7a01wb3hysdb",
+      model: "openai/gpt-4o",
     },
   });
 
@@ -126,9 +130,11 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await conversationsCreate(orq, {
-    displayName: "Support Chat #1234",
+    displayName: "Customer Support Session",
+    projectId: "prj_01jj1hdhn79xas7a01wb3hysdb",
     metadata: {
-      entityId: "<id>",
+      entityId: "agent_01jj1hdhn79xas7a01wb3hysdb",
+      model: "openai/gpt-4o",
     },
   });
   if (res.ok) {
@@ -177,7 +183,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.conversations.generateName({
-    context: "What is the weather in San Francisco?",
+    context: "How do I integrate the SDK with my Node.js application?",
   }, "conv_01jj1hdhn79xas7a01wb3hysdb");
 
   console.log(result);
@@ -202,7 +208,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await conversationsGenerateName(orq, {
-    context: "What is the weather in San Francisco?",
+    context: "How do I integrate the SDK with my Node.js application?",
   }, "conv_01jj1hdhn79xas7a01wb3hysdb");
   if (res.ok) {
     const { value: result } = res;
@@ -298,7 +304,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveConversationResponseBody](../../models/operations/retrieveconversationresponsebody.md)\>**
+**Promise\<[components.ConversationWithMessagesResponse](../../models/components/conversationwithmessagesresponse.md)\>**
 
 ### Errors
 
@@ -323,7 +329,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.conversations.update({
-    displayName: "Renamed Conversation",
+    displayName: "Updated Support Session",
   }, "conv_01jj1hdhn79xas7a01wb3hysdb");
 
   console.log(result);
@@ -348,7 +354,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await conversationsUpdate(orq, {
-    displayName: "Renamed Conversation",
+    displayName: "Updated Support Session",
   }, "conv_01jj1hdhn79xas7a01wb3hysdb");
   if (res.ok) {
     const { value: result } = res;
@@ -451,3 +457,104 @@ run();
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | errors.DeleteConversationResponseBody | 404                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## createConversationResponse
+
+Creates a response for a freeform conversation without an agent. Uses a default model for generation.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="CreateConversationResponse" method="post" path="/v2/conversations/{conversation_id}/responses" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.conversations.createConversationResponse({
+    conversationId: "<id>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [
+          {
+            kind: "text",
+            text: "Hello!",
+          },
+        ],
+      },
+      model: "Prius",
+    },
+  });
+
+  for await (const event of result) {
+    console.log(event);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { conversationsCreateConversationResponse } from "@orq-ai/node/funcs/conversationsCreateConversationResponse.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await conversationsCreateConversationResponse(orq, {
+    conversationId: "<id>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [
+          {
+            kind: "text",
+            text: "Hello!",
+          },
+        ],
+      },
+      model: "Prius",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
+    console.log(event);
+  }
+  } else {
+    console.log("conversationsCreateConversationResponse failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateConversationResponseRequest](../../models/operations/createconversationresponserequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[EventStream<operations.CreateConversationResponseResponseBody>](../../models/.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

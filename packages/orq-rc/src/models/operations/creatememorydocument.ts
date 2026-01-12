@@ -25,9 +25,9 @@ export type CreateMemoryDocumentRequest = {
    */
   memoryStoreKey: string;
   /**
-   * The unique identifier of the memory
+   * The unique entity_id provided during the memory store creation
    */
-  memoryId: string;
+  memoryEntityId: string;
   requestBody?: CreateMemoryDocumentRequestBody | undefined;
 };
 
@@ -104,20 +104,20 @@ export const CreateMemoryDocumentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
   RequestBody: z.lazy(() => CreateMemoryDocumentRequestBody$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
     "RequestBody": "requestBody",
   });
 });
 /** @internal */
 export type CreateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
   RequestBody?: CreateMemoryDocumentRequestBody$Outbound | undefined;
 };
 
@@ -128,13 +128,13 @@ export const CreateMemoryDocumentRequest$outboundSchema: z.ZodType<
   CreateMemoryDocumentRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
   requestBody: z.lazy(() => CreateMemoryDocumentRequestBody$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
     requestBody: "RequestBody",
   });
 });

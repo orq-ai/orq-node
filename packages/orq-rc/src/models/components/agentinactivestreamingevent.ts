@@ -15,6 +15,12 @@ import {
   DataPart$outboundSchema,
 } from "./datapart.js";
 import {
+  ErrorPart,
+  ErrorPart$inboundSchema,
+  ErrorPart$Outbound,
+  ErrorPart$outboundSchema,
+} from "./errorpart.js";
+import {
   FilePart,
   FilePart$inboundSchema,
   FilePart$Outbound,
@@ -57,6 +63,7 @@ export type AgentInactiveStreamingEventRole = ClosedEnum<
 
 export type AgentInactiveStreamingEventParts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -71,7 +78,9 @@ export type LastMessageFull = {
    * Extended A2A message role
    */
   role: AgentInactiveStreamingEventRole;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -212,6 +221,7 @@ export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   TextPart$inboundSchema,
+  ErrorPart$inboundSchema,
   DataPart$inboundSchema,
   FilePart$inboundSchema,
   ToolCallPart$inboundSchema,
@@ -220,6 +230,7 @@ export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentInactiveStreamingEventParts$Outbound =
   | TextPart$Outbound
+  | ErrorPart$Outbound
   | DataPart$Outbound
   | FilePart$Outbound
   | ToolCallPart$Outbound
@@ -232,6 +243,7 @@ export const AgentInactiveStreamingEventParts$outboundSchema: z.ZodType<
   AgentInactiveStreamingEventParts
 > = z.union([
   TextPart$outboundSchema,
+  ErrorPart$outboundSchema,
   DataPart$outboundSchema,
   FilePart$outboundSchema,
   ToolCallPart$outboundSchema,
@@ -268,6 +280,7 @@ export const LastMessageFull$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
       DataPart$inboundSchema,
       FilePart$inboundSchema,
       ToolCallPart$inboundSchema,
@@ -282,6 +295,7 @@ export type LastMessageFull$Outbound = {
   role: string;
   parts: Array<
     | TextPart$Outbound
+    | ErrorPart$Outbound
     | DataPart$Outbound
     | FilePart$Outbound
     | ToolCallPart$Outbound
@@ -301,6 +315,7 @@ export const LastMessageFull$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$outboundSchema,
+      ErrorPart$outboundSchema,
       DataPart$outboundSchema,
       FilePart$outboundSchema,
       ToolCallPart$outboundSchema,

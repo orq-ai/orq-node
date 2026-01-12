@@ -29,6 +29,7 @@ export const Product = {
   Generic: "generic",
   Evaluators: "evaluators",
   Otel: "otel",
+  AiChat: "ai-chat",
 } as const;
 /**
  * Orquesta product

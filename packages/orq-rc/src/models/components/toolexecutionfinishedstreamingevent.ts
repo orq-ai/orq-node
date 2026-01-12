@@ -29,6 +29,7 @@ export const ToolExecutionFinishedStreamingEventProduct = {
   Generic: "generic",
   Evaluators: "evaluators",
   Otel: "otel",
+  AiChat: "ai-chat",
 } as const;
 /**
  * Orquesta product

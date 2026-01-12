@@ -8,7 +8,7 @@ import { UpdateConversationRequest } from "@orq-ai/node/models/operations";
 let value: UpdateConversationRequest = {
   conversationId: "conv_01jj1hdhn79xas7a01wb3hysdb",
   requestBody: {
-    displayName: "Renamed Conversation",
+    displayName: "Updated Support Session",
   },
 };
 ```

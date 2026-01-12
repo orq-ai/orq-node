@@ -200,7 +200,7 @@ const value: components.ToolExecutionStartedStreamingEvent = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "generic",
+      product: "evaluators",
     },
     workflowRunId: "<id>",
   },

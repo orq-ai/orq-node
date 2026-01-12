@@ -553,7 +553,7 @@ Retrieves details of a specific memory by its ID
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="RetrieveMemory" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}" -->
+<!-- UsageSnippet language="typescript" operationID="RetrieveMemory" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -564,7 +564,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.retrieveMemory({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
 
   console.log(result);
@@ -590,7 +590,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresRetrieveMemory(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -628,7 +628,7 @@ Updates the details of a specific memory.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="UpdateMemory" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}" -->
+<!-- UsageSnippet language="typescript" operationID="UpdateMemory" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -639,7 +639,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.updateMemory({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
 
   console.log(result);
@@ -665,7 +665,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresUpdateMemory(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -708,7 +708,7 @@ Permanently deletes a specific memory.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DeleteMemory" method="delete" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}" -->
+<!-- UsageSnippet language="typescript" operationID="DeleteMemory" method="delete" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -719,7 +719,7 @@ const orq = new Orq({
 async function run() {
   await orq.memoryStores.deleteMemory({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
 
 
@@ -745,7 +745,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresDeleteMemory(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -783,7 +783,7 @@ Retrieves a paginated list of documents associated with a specific memory.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="GetAllMemoryDocuments" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}/documents" -->
+<!-- UsageSnippet language="typescript" operationID="GetAllMemoryDocuments" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -794,7 +794,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.listDocuments({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
 
   console.log(result);
@@ -820,7 +820,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresListDocuments(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -858,7 +858,7 @@ Creates a new document in the specified memory.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="CreateMemoryDocument" method="post" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}/documents" -->
+<!-- UsageSnippet language="typescript" operationID="CreateMemoryDocument" method="post" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -869,7 +869,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.createDocument({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
 
   console.log(result);
@@ -895,7 +895,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresCreateDocument(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -933,7 +933,7 @@ Retrieves details of a specific memory document by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="RetrieveMemoryDocument" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}/documents/{document_id}" -->
+<!-- UsageSnippet language="typescript" operationID="RetrieveMemoryDocument" method="get" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -944,7 +944,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.retrieveDocument({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
 
@@ -971,7 +971,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresRetrieveDocument(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
   if (res.ok) {
@@ -1010,7 +1010,7 @@ Updates the details of a specific memory document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="UpdateMemoryDocument" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}/documents/{document_id}" -->
+<!-- UsageSnippet language="typescript" operationID="UpdateMemoryDocument" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1021,7 +1021,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.updateDocument({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
 
@@ -1048,7 +1048,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresUpdateDocument(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
   if (res.ok) {
@@ -1092,7 +1092,7 @@ Permanently deletes a specific memory document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DeleteMemoryDocument" method="delete" path="/v2/memory-stores/{memory_store_key}/memories/{memory_id}/documents/{document_id}" -->
+<!-- UsageSnippet language="typescript" operationID="DeleteMemoryDocument" method="delete" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1103,7 +1103,7 @@ const orq = new Orq({
 async function run() {
   await orq.memoryStores.deleteDocument({
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
 
@@ -1130,7 +1130,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresDeleteDocument(orq, {
     memoryStoreKey: "<value>",
-    memoryId: "<id>",
+    memoryEntityId: "<id>",
     documentId: "<id>",
   });
   if (res.ok) {

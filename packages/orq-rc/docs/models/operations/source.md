@@ -5,11 +5,11 @@
 ```typescript
 import { Source } from "@orq-ai/node/models/operations";
 
-let value: Source = "orq";
+let value: Source = "internal";
 ```
 
 ## Values
 
 ```typescript
-"orq" | "external"
+"internal" | "external" | "experiment"
 ```

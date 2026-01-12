@@ -12,6 +12,64 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ParseChunkingRequestChunkingRequestRequestBodyReturnType =
+  ClosedEnum<typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType>;
+
+/**
+ * High-performance SIMD-optimized byte-level chunking. Best for large files (>1MB) where speed and memory efficiency are critical. 2x faster and 3x less memory than token-based chunking.
+ */
+export type FastChunkerStrategy = {
+  /**
+   * The text content to be chunked
+   */
+  text: string;
+  /**
+   * Whether to include metadata for each chunk
+   */
+  metadata?: boolean | undefined;
+  /**
+   * Return format: chunks (with metadata) or texts (plain strings)
+   */
+  returnType?:
+    | ParseChunkingRequestChunkingRequestRequestBodyReturnType
+    | undefined;
+  strategy: "fast";
+  /**
+   * Target chunk size in bytes
+   */
+  targetSize?: number | undefined;
+  /**
+   * Single-byte delimiter characters. Each character is treated as a separate delimiter (e.g., ".?!" splits on period, question mark, or exclamation). Use escaped sequences for special chars.
+   */
+  delimiters?: string | undefined;
+  /**
+   * Multi-byte pattern for splitting (e.g., "▁" for SentencePiece tokenizers). Takes precedence over delimiters if set.
+   */
+  pattern?: string | undefined;
+  /**
+   * Attach delimiter to start of next chunk instead of end of current chunk
+   */
+  prefix?: boolean | undefined;
+  /**
+   * When true, splits at the START of consecutive delimiter runs, keeping the run with the following chunk (e.g., splits before "\n\n\n" not in the middle)
+   */
+  consecutive?: boolean | undefined;
+  /**
+   * Search forward if no delimiter found in backward search window
+   */
+  forwardFallback?: boolean | undefined;
+};
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
 export const ParseChunkingRequestChunkingRequestReturnType = {
   Chunks: "chunks",
   Texts: "texts",
@@ -278,7 +336,8 @@ export type ParseChunkingRequest =
   | SentenceChunkerStrategy
   | RecursiveChunkerStrategy
   | SemanticChunkerStrategy
-  | AgenticChunkerStrategy;
+  | AgenticChunkerStrategy
+  | FastChunkerStrategy;
 
 export type ParseMetadata = {
   startIndex: number | null;
@@ -304,6 +363,99 @@ export type Chunks = {
 export type ParseResponseBody = {
   chunks: Array<Chunks>;
 };
+
+/** @internal */
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType);
+/** @internal */
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
+
+/** @internal */
+export const FastChunkerStrategy$inboundSchema: z.ZodType<
+  FastChunkerStrategy,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  text: z.string(),
+  metadata: z.boolean().default(true),
+  return_type:
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema
+      .default("chunks"),
+  strategy: z.literal("fast"),
+  target_size: z.number().int().default(4096),
+  delimiters: z.string().default("\n.?"),
+  pattern: z.string().optional(),
+  prefix: z.boolean().default(false),
+  consecutive: z.boolean().default(false),
+  forward_fallback: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "return_type": "returnType",
+    "target_size": "targetSize",
+    "forward_fallback": "forwardFallback",
+  });
+});
+/** @internal */
+export type FastChunkerStrategy$Outbound = {
+  text: string;
+  metadata: boolean;
+  return_type: string;
+  strategy: "fast";
+  target_size: number;
+  delimiters: string;
+  pattern?: string | undefined;
+  prefix: boolean;
+  consecutive: boolean;
+  forward_fallback: boolean;
+};
+
+/** @internal */
+export const FastChunkerStrategy$outboundSchema: z.ZodType<
+  FastChunkerStrategy$Outbound,
+  z.ZodTypeDef,
+  FastChunkerStrategy
+> = z.object({
+  text: z.string(),
+  metadata: z.boolean().default(true),
+  returnType:
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema
+      .default("chunks"),
+  strategy: z.literal("fast"),
+  targetSize: z.number().int().default(4096),
+  delimiters: z.string().default("\n.?"),
+  pattern: z.string().optional(),
+  prefix: z.boolean().default(false),
+  consecutive: z.boolean().default(false),
+  forwardFallback: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    returnType: "return_type",
+    targetSize: "target_size",
+    forwardFallback: "forward_fallback",
+  });
+});
+
+export function fastChunkerStrategyToJSON(
+  fastChunkerStrategy: FastChunkerStrategy,
+): string {
+  return JSON.stringify(
+    FastChunkerStrategy$outboundSchema.parse(fastChunkerStrategy),
+  );
+}
+export function fastChunkerStrategyFromJSON(
+  jsonString: string,
+): SafeParseResult<FastChunkerStrategy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FastChunkerStrategy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FastChunkerStrategy' from JSON`,
+  );
+}
 
 /** @internal */
 export const ParseChunkingRequestChunkingRequestReturnType$inboundSchema:
@@ -775,6 +927,7 @@ export const ParseChunkingRequest$inboundSchema: z.ZodType<
   z.lazy(() => RecursiveChunkerStrategy$inboundSchema),
   z.lazy(() => SemanticChunkerStrategy$inboundSchema),
   z.lazy(() => AgenticChunkerStrategy$inboundSchema),
+  z.lazy(() => FastChunkerStrategy$inboundSchema),
 ]);
 /** @internal */
 export type ParseChunkingRequest$Outbound =
@@ -782,7 +935,8 @@ export type ParseChunkingRequest$Outbound =
   | SentenceChunkerStrategy$Outbound
   | RecursiveChunkerStrategy$Outbound
   | SemanticChunkerStrategy$Outbound
-  | AgenticChunkerStrategy$Outbound;
+  | AgenticChunkerStrategy$Outbound
+  | FastChunkerStrategy$Outbound;
 
 /** @internal */
 export const ParseChunkingRequest$outboundSchema: z.ZodType<
@@ -795,6 +949,7 @@ export const ParseChunkingRequest$outboundSchema: z.ZodType<
   z.lazy(() => RecursiveChunkerStrategy$outboundSchema),
   z.lazy(() => SemanticChunkerStrategy$outboundSchema),
   z.lazy(() => AgenticChunkerStrategy$outboundSchema),
+  z.lazy(() => FastChunkerStrategy$outboundSchema),
 ]);
 
 export function parseChunkingRequestToJSON(

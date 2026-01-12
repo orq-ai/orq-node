@@ -26,6 +26,14 @@ export type Data = {
    * Trace ID for this turn of the conversation (new for each continuation)
    */
   workflowRunId: string;
+  /**
+   * Server-generated ID for the user message. Use this ID for frontend state consistency.
+   */
+  userMessageId?: string | undefined;
+  /**
+   * Server-generated ID for the assistant message. Use this ID for frontend state consistency.
+   */
+  assistantMessageId?: string | undefined;
 };
 
 /**
@@ -47,6 +55,8 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     taskId: z.string(),
     model: z.string(),
     workflowRunId: z.string(),
+    userMessageId: z.string().optional(),
+    assistantMessageId: z.string().optional(),
   });
 /** @internal */
 export type Data$Outbound = {
@@ -54,6 +64,8 @@ export type Data$Outbound = {
   taskId: string;
   model: string;
   workflowRunId: string;
+  userMessageId?: string | undefined;
+  assistantMessageId?: string | undefined;
 };
 
 /** @internal */
@@ -63,6 +75,8 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     taskId: z.string(),
     model: z.string(),
     workflowRunId: z.string(),
+    userMessageId: z.string().optional(),
+    assistantMessageId: z.string().optional(),
   });
 
 export function dataToJSON(data: Data): string {

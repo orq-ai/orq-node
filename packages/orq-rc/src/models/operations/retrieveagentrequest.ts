@@ -1019,6 +1019,15 @@ export type RetrieveAgentRequestKnowledgeBases = {
   knowledgeId: string;
 };
 
+export const RetrieveAgentRequestSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type RetrieveAgentRequestSource = ClosedEnum<
+  typeof RetrieveAgentRequestSource
+>;
+
 /**
  * Agent successfully retrieved. Returns the complete agent manifest with all configuration details, including models, tools, knowledge bases, and execution settings.
  */
@@ -1073,6 +1082,7 @@ export type RetrieveAgentRequestResponseBody = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<RetrieveAgentRequestKnowledgeBases> | undefined;
+  source?: RetrieveAgentRequestSource | undefined;
 };
 
 /** @internal */
@@ -3898,6 +3908,15 @@ export function retrieveAgentRequestKnowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const RetrieveAgentRequestSource$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAgentRequestSource
+> = z.nativeEnum(RetrieveAgentRequestSource);
+/** @internal */
+export const RetrieveAgentRequestSource$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAgentRequestSource
+> = RetrieveAgentRequestSource$inboundSchema;
+
+/** @internal */
 export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   RetrieveAgentRequestResponseBody,
   z.ZodTypeDef,
@@ -3930,6 +3949,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => RetrieveAgentRequestKnowledgeBases$inboundSchema),
   ).optional(),
+  source: RetrieveAgentRequestSource$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3972,6 +3992,7 @@ export type RetrieveAgentRequestResponseBody$Outbound = {
   knowledge_bases?:
     | Array<RetrieveAgentRequestKnowledgeBases$Outbound>
     | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -4008,6 +4029,7 @@ export const RetrieveAgentRequestResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => RetrieveAgentRequestKnowledgeBases$outboundSchema),
   ).optional(),
+  source: RetrieveAgentRequestSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

@@ -1007,6 +1007,13 @@ export type ListAgentsKnowledgeBases = {
   knowledgeId: string;
 };
 
+export const ListAgentsSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type ListAgentsSource = ClosedEnum<typeof ListAgentsSource>;
+
 export type ListAgentsData = {
   id: string;
   /**
@@ -1056,6 +1063,7 @@ export type ListAgentsData = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
+  source?: ListAgentsSource | undefined;
 };
 
 /**
@@ -3720,6 +3728,15 @@ export function listAgentsKnowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const ListAgentsSource$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsSource
+> = z.nativeEnum(ListAgentsSource);
+/** @internal */
+export const ListAgentsSource$outboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsSource
+> = ListAgentsSource$inboundSchema;
+
+/** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
@@ -3747,6 +3764,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
+  source: ListAgentsSource$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -3783,6 +3801,7 @@ export type ListAgentsData$Outbound = {
   metrics?: ListAgentsMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<ListAgentsKnowledgeBases$Outbound> | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -3813,6 +3832,7 @@ export const ListAgentsData$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => ListAgentsKnowledgeBases$outboundSchema))
     .optional(),
+  source: ListAgentsSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

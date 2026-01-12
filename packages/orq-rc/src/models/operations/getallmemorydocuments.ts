@@ -17,7 +17,7 @@ export type GetAllMemoryDocumentsRequest = {
   /**
    * The unique identifier of the memory
    */
-  memoryId: string;
+  memoryEntityId: string;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -82,7 +82,7 @@ export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -95,7 +95,7 @@ export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
     "starting_after": "startingAfter",
     "ending_before": "endingBefore",
     "updated_after": "updatedAfter",
@@ -105,7 +105,7 @@ export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllMemoryDocumentsRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -120,7 +120,7 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
   GetAllMemoryDocumentsRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -129,7 +129,7 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     updatedAfter: "updated_after",

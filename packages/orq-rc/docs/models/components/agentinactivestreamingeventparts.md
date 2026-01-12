@@ -12,6 +12,15 @@ const value: components.TextPart = {
 };
 ```
 
+### `components.ErrorPart`
+
+```typescript
+const value: components.ErrorPart = {
+  kind: "error",
+  error: "<value>",
+};
+```
+
 ### `components.DataPart`
 
 ```typescript

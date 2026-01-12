@@ -9,13 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryRequestBody = {
-  /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
-   */
-  entityId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
-   */
   metadata?: { [k: string]: string } | undefined;
 };
 
@@ -27,7 +20,7 @@ export type UpdateMemoryRequest = {
   /**
    * The unique identifier of the memory
    */
-  memoryId: string;
+  memoryEntityId: string;
   requestBody?: UpdateMemoryRequestBody | undefined;
 };
 
@@ -37,7 +30,9 @@ export type UpdateMemoryRequest = {
 export type UpdateMemoryResponseBody = {
   id: string;
   /**
-   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID).
+   * This property have been deprecated and moved to `_id`. Please refer to `_id` for future operations
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   entityId: string;
   created: string;
@@ -45,10 +40,6 @@ export type UpdateMemoryResponseBody = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   storeId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
-   */
-  metadata: { [k: string]: string };
   workspaceId: string;
   /**
    * The number of memories in the entity
@@ -62,16 +53,10 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  entity_id: z.string(),
   metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-  });
 });
 /** @internal */
 export type UpdateMemoryRequestBody$Outbound = {
-  entity_id: string;
   metadata?: { [k: string]: string } | undefined;
 };
 
@@ -81,12 +66,7 @@ export const UpdateMemoryRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateMemoryRequestBody
 > = z.object({
-  entityId: z.string(),
   metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
 });
 
 export function updateMemoryRequestBodyToJSON(
@@ -113,19 +93,19 @@ export const UpdateMemoryRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory_store_key: z.string(),
-  memory_id: z.string(),
+  memory_entity_id: z.string(),
   RequestBody: z.lazy(() => UpdateMemoryRequestBody$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "memory_store_key": "memoryStoreKey",
-    "memory_id": "memoryId",
+    "memory_entity_id": "memoryEntityId",
     "RequestBody": "requestBody",
   });
 });
 /** @internal */
 export type UpdateMemoryRequest$Outbound = {
   memory_store_key: string;
-  memory_id: string;
+  memory_entity_id: string;
   RequestBody?: UpdateMemoryRequestBody$Outbound | undefined;
 };
 
@@ -136,12 +116,12 @@ export const UpdateMemoryRequest$outboundSchema: z.ZodType<
   UpdateMemoryRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  memoryId: z.string(),
+  memoryEntityId: z.string(),
   requestBody: z.lazy(() => UpdateMemoryRequestBody$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    memoryId: "memory_id",
+    memoryEntityId: "memory_entity_id",
     requestBody: "RequestBody",
   });
 });
@@ -176,7 +156,6 @@ export const UpdateMemoryResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   store_id: z.string(),
-  metadata: z.record(z.string()),
   workspace_id: z.string(),
   documents_count: z.number(),
 }).transform((v) => {
@@ -199,7 +178,6 @@ export type UpdateMemoryResponseBody$Outbound = {
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   store_id: string;
-  metadata: { [k: string]: string };
   workspace_id: string;
   documents_count: number;
 };
@@ -217,7 +195,6 @@ export const UpdateMemoryResponseBody$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   storeId: z.string(),
-  metadata: z.record(z.string()),
   workspaceId: z.string(),
   documentsCount: z.number(),
 }).transform((v) => {

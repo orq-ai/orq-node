@@ -1317,6 +1317,13 @@ export type TeamOfAgents = {
   role?: string | undefined;
 };
 
+export const Source = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type Source = ClosedEnum<typeof Source>;
+
 export type CreateAgentRequestRequestBody = {
   /**
    * Unique identifier for the agent within the workspace
@@ -1375,6 +1382,7 @@ export type CreateAgentRequestRequestBody = {
    */
   teamOfAgents?: Array<TeamOfAgents> | undefined;
   variables?: { [k: string]: any } | undefined;
+  source?: Source | undefined;
 };
 
 /**
@@ -2382,6 +2390,15 @@ export type CreateAgentRequestKnowledgeBases = {
   knowledgeId: string;
 };
 
+export const CreateAgentRequestSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type CreateAgentRequestSource = ClosedEnum<
+  typeof CreateAgentRequestSource
+>;
+
 /**
  * Agent successfully created and ready for use. Returns the complete agent manifest including the generated ID, configuration, and all settings.
  */
@@ -2435,6 +2452,7 @@ export type CreateAgentRequestResponseBody = {
    * Agent knowledge bases reference
    */
   knowledgeBases?: Array<CreateAgentRequestKnowledgeBases> | undefined;
+  source?: CreateAgentRequestSource | undefined;
 };
 
 /** @internal */
@@ -5749,6 +5767,13 @@ export function teamOfAgentsFromJSON(
 }
 
 /** @internal */
+export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
+  .nativeEnum(Source);
+/** @internal */
+export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
+  Source$inboundSchema;
+
+/** @internal */
 export const CreateAgentRequestRequestBody$inboundSchema: z.ZodType<
   CreateAgentRequestRequestBody,
   z.ZodTypeDef,
@@ -5774,6 +5799,7 @@ export const CreateAgentRequestRequestBody$inboundSchema: z.ZodType<
     .optional(),
   team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
   variables: z.record(z.any()).optional(),
+  source: Source$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -5802,6 +5828,7 @@ export type CreateAgentRequestRequestBody$Outbound = {
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -5833,6 +5860,7 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
     .optional(),
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
   variables: z.record(z.any()).optional(),
+  source: Source$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -8632,6 +8660,15 @@ export function createAgentRequestKnowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const CreateAgentRequestSource$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestSource
+> = z.nativeEnum(CreateAgentRequestSource);
+/** @internal */
+export const CreateAgentRequestSource$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestSource
+> = CreateAgentRequestSource$inboundSchema;
+
+/** @internal */
 export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   CreateAgentRequestResponseBody,
   z.ZodTypeDef,
@@ -8663,6 +8700,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => CreateAgentRequestKnowledgeBases$inboundSchema),
   ).optional(),
+  source: CreateAgentRequestSource$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -8703,6 +8741,7 @@ export type CreateAgentRequestResponseBody$Outbound = {
   knowledge_bases?:
     | Array<CreateAgentRequestKnowledgeBases$Outbound>
     | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -8737,6 +8776,7 @@ export const CreateAgentRequestResponseBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => CreateAgentRequestKnowledgeBases$outboundSchema),
   ).optional(),
+  source: CreateAgentRequestSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

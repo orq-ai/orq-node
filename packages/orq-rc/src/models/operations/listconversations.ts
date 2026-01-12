@@ -12,17 +12,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListConversationsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+   * Maximum number of conversations to return. Range: 1-100. Default: 10.
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list.
+   * Pagination cursor. Returns conversations created after the specified conversation ID.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list.
+   * Pagination cursor. Returns conversations created before the specified conversation ID.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter by parent entity. When specified, returns only conversations associated with this entity. When omitted, returns standalone conversations.
+   */
+  entityId?: string | undefined;
 };
 
 export const ListConversationsObject = {
@@ -50,12 +54,14 @@ export const ListConversationsRequest$inboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  entityId: z.string().optional(),
 });
 /** @internal */
 export type ListConversationsRequest$Outbound = {
   limit?: number | undefined;
   startingAfter?: string | undefined;
   endingBefore?: string | undefined;
+  entityId?: string | undefined;
 };
 
 /** @internal */
@@ -67,6 +73,7 @@ export const ListConversationsRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  entityId: z.string().optional(),
 });
 
 export function listConversationsRequestToJSON(

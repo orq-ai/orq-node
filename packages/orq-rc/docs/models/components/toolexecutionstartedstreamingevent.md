@@ -24,7 +24,7 @@ let value: ToolExecutionStartedStreamingEvent = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "generic",
+      product: "evaluators",
     },
     workflowRunId: "<id>",
   },

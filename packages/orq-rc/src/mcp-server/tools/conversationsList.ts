@@ -10,6 +10,7 @@ const args = {
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  entityId: z.string().optional(),
 };
 
 export const tool$conversationsList: ToolDefinition<typeof args> = {
@@ -24,6 +25,7 @@ Retrieves a paginated list of conversations in your workspace. Conversations are
       args.limit,
       args.startingAfter,
       args.endingBefore,
+      args.entityId,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 

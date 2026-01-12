@@ -8,7 +8,7 @@ import { GenerateConversationNameRequest } from "@orq-ai/node/models/operations"
 let value: GenerateConversationNameRequest = {
   conversationId: "conv_01jj1hdhn79xas7a01wb3hysdb",
   requestBody: {
-    context: "What is the weather in San Francisco?",
+    context: "How do I integrate the SDK with my Node.js application?",
   },
 };
 ```

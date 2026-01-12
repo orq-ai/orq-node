@@ -853,7 +853,8 @@ export type RunAgentRole = RunAgentRoleUserMessage | RunAgentRoleToolMessage;
 export type RunAgentPublicMessagePart =
   | components.TextPart
   | components.FilePart
-  | components.ToolResultPart;
+  | components.ToolResultPart
+  | components.ErrorPart;
 
 /**
  * The A2A format message containing the task for the agent to perform.
@@ -871,12 +872,47 @@ export type RunAgentA2AMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    components.TextPart | components.FilePart | components.ToolResultPart
+    | components.TextPart
+    | components.FilePart
+    | components.ToolResultPart
+    | components.ErrorPart
   >;
 };
 
 /**
- * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+ */
+export type RunAgentIdentity = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
+ * @deprecated Use identity instead. Information about the contact making the request.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type RunAgentContact = {
   /**
@@ -1573,7 +1609,13 @@ export type RunAgentRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   /**
-   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: RunAgentIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   contact?: RunAgentContact | undefined;
   /**
@@ -1673,6 +1715,7 @@ export type RunAgentExtendedMessageRole = ClosedEnum<
 
 export type RunAgentParts =
   | components.TextPart
+  | components.ErrorPart
   | components.DataPart
   | components.FilePart
   | components.ToolCallPart
@@ -1690,6 +1733,7 @@ export type RunAgentTaskStatusMessage = {
   role: RunAgentExtendedMessageRole;
   parts: Array<
     | components.TextPart
+    | components.ErrorPart
     | components.DataPart
     | components.FilePart
     | components.ToolCallPart
@@ -3956,12 +4000,14 @@ export const RunAgentPublicMessagePart$inboundSchema: z.ZodType<
   components.TextPart$inboundSchema,
   components.FilePart$inboundSchema,
   components.ToolResultPart$inboundSchema,
+  components.ErrorPart$inboundSchema,
 ]);
 /** @internal */
 export type RunAgentPublicMessagePart$Outbound =
   | components.TextPart$Outbound
   | components.FilePart$Outbound
-  | components.ToolResultPart$Outbound;
+  | components.ToolResultPart$Outbound
+  | components.ErrorPart$Outbound;
 
 /** @internal */
 export const RunAgentPublicMessagePart$outboundSchema: z.ZodType<
@@ -3972,6 +4018,7 @@ export const RunAgentPublicMessagePart$outboundSchema: z.ZodType<
   components.TextPart$outboundSchema,
   components.FilePart$outboundSchema,
   components.ToolResultPart$outboundSchema,
+  components.ErrorPart$outboundSchema,
 ]);
 
 export function runAgentPublicMessagePartToJSON(
@@ -4007,6 +4054,7 @@ export const RunAgentA2AMessage$inboundSchema: z.ZodType<
       components.TextPart$inboundSchema,
       components.FilePart$inboundSchema,
       components.ToolResultPart$inboundSchema,
+      components.ErrorPart$inboundSchema,
     ]),
   ),
 });
@@ -4018,6 +4066,7 @@ export type RunAgentA2AMessage$Outbound = {
     | components.TextPart$Outbound
     | components.FilePart$Outbound
     | components.ToolResultPart$Outbound
+    | components.ErrorPart$Outbound
   >;
 };
 
@@ -4037,6 +4086,7 @@ export const RunAgentA2AMessage$outboundSchema: z.ZodType<
       components.TextPart$outboundSchema,
       components.FilePart$outboundSchema,
       components.ToolResultPart$outboundSchema,
+      components.ErrorPart$outboundSchema,
     ]),
   ),
 });
@@ -4055,6 +4105,70 @@ export function runAgentA2AMessageFromJSON(
     jsonString,
     (x) => RunAgentA2AMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RunAgentA2AMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentIdentity$inboundSchema: z.ZodType<
+  RunAgentIdentity,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
+  });
+});
+/** @internal */
+export type RunAgentIdentity$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const RunAgentIdentity$outboundSchema: z.ZodType<
+  RunAgentIdentity$Outbound,
+  z.ZodTypeDef,
+  RunAgentIdentity
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+export function runAgentIdentityToJSON(
+  runAgentIdentity: RunAgentIdentity,
+): string {
+  return JSON.stringify(
+    RunAgentIdentity$outboundSchema.parse(runAgentIdentity),
+  );
+}
+export function runAgentIdentityFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentIdentity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentIdentity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentIdentity' from JSON`,
   );
 }
 
@@ -4389,7 +4503,7 @@ export function schemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KEBD76JYEN07DCRE7P14A8MW"),
+    id: z.string().default("01KERGT7V1BHWWB7TCQZN7RVWZ"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => Schema$inboundSchema),
@@ -4408,7 +4522,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KEBD76JYEN07DCRE7P14A8MW"),
+  id: z.string().default("01KERGT7V1BHWWB7TCQZN7RVWZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => Schema$outboundSchema),
@@ -6226,6 +6340,7 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => RunAgentA2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => RunAgentIdentity$inboundSchema).optional(),
   contact: z.lazy(() => RunAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$inboundSchema).optional(),
   memory: z.lazy(() => RunAgentMemory$inboundSchema).optional(),
@@ -6261,6 +6376,7 @@ export type RunAgentRequestBody$Outbound = {
   instructions: string;
   message: RunAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
+  identity?: RunAgentIdentity$Outbound | undefined;
   contact?: RunAgentContact$Outbound | undefined;
   thread?: RunAgentThread$Outbound | undefined;
   memory?: RunAgentMemory$Outbound | undefined;
@@ -6296,6 +6412,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => RunAgentA2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => RunAgentIdentity$outboundSchema).optional(),
   contact: z.lazy(() => RunAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => RunAgentMemory$outboundSchema).optional(),
@@ -6378,6 +6495,7 @@ export const RunAgentParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   components.TextPart$inboundSchema,
+  components.ErrorPart$inboundSchema,
   components.DataPart$inboundSchema,
   components.FilePart$inboundSchema,
   components.ToolCallPart$inboundSchema,
@@ -6386,6 +6504,7 @@ export const RunAgentParts$inboundSchema: z.ZodType<
 /** @internal */
 export type RunAgentParts$Outbound =
   | components.TextPart$Outbound
+  | components.ErrorPart$Outbound
   | components.DataPart$Outbound
   | components.FilePart$Outbound
   | components.ToolCallPart$Outbound
@@ -6398,6 +6517,7 @@ export const RunAgentParts$outboundSchema: z.ZodType<
   RunAgentParts
 > = z.union([
   components.TextPart$outboundSchema,
+  components.ErrorPart$outboundSchema,
   components.DataPart$outboundSchema,
   components.FilePart$outboundSchema,
   components.ToolCallPart$outboundSchema,
@@ -6429,6 +6549,7 @@ export const RunAgentTaskStatusMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$inboundSchema,
+      components.ErrorPart$inboundSchema,
       components.DataPart$inboundSchema,
       components.FilePart$inboundSchema,
       components.ToolCallPart$inboundSchema,
@@ -6443,6 +6564,7 @@ export type RunAgentTaskStatusMessage$Outbound = {
   role: string;
   parts: Array<
     | components.TextPart$Outbound
+    | components.ErrorPart$Outbound
     | components.DataPart$Outbound
     | components.FilePart$Outbound
     | components.ToolCallPart$Outbound
@@ -6462,6 +6584,7 @@ export const RunAgentTaskStatusMessage$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       components.TextPart$outboundSchema,
+      components.ErrorPart$outboundSchema,
       components.DataPart$outboundSchema,
       components.FilePart$outboundSchema,
       components.ToolCallPart$outboundSchema,

@@ -10,6 +10,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function conversationsRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RetrieveConversationResponseBody,
+    components.ConversationWithMessagesResponse,
     | errors.RetrieveConversationResponseBody
     | OrqError
     | ResponseValidationError
@@ -63,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RetrieveConversationResponseBody,
+      components.ConversationWithMessagesResponse,
       | errors.RetrieveConversationResponseBody
       | OrqError
       | ResponseValidationError
@@ -156,7 +157,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RetrieveConversationResponseBody,
+    components.ConversationWithMessagesResponse,
     | errors.RetrieveConversationResponseBody
     | OrqError
     | ResponseValidationError
@@ -167,7 +168,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RetrieveConversationResponseBody$inboundSchema),
+    M.json(200, components.ConversationWithMessagesResponse$inboundSchema),
     M.jsonErr(404, errors.RetrieveConversationResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

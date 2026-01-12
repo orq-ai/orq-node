@@ -6,7 +6,7 @@
 import { UpdateConversationRequestBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateConversationRequestBody = {
-  displayName: "Renamed Conversation",
+  displayName: "Updated Support Session",
 };
 ```
 
@@ -14,5 +14,5 @@ let value: UpdateConversationRequestBody = {
 
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `displayName`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | Updated display name for the conversation.                                                     | Renamed Conversation                                                                           |
-| `metadata`                                                                                     | [operations.UpdateConversationMetadata](../../models/operations/updateconversationmetadata.md) | :heavy_minus_sign:                                                                             | Optional metadata to update for the conversation.                                              |                                                                                                |
+| `displayName`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | New display name for the conversation. Maximum 100 characters.                                 | Updated Support Session                                                                        |
+| `metadata`                                                                                     | [operations.UpdateConversationMetadata](../../models/operations/updateconversationmetadata.md) | :heavy_minus_sign:                                                                             | Metadata fields to update. Only provided fields are modified.                                  |                                                                                                |

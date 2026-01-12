@@ -14,6 +14,12 @@ import {
   DataPart$outboundSchema,
 } from "./datapart.js";
 import {
+  ErrorPart,
+  ErrorPart$inboundSchema,
+  ErrorPart$Outbound,
+  ErrorPart$outboundSchema,
+} from "./errorpart.js";
+import {
   FilePart,
   FilePart$inboundSchema,
   FilePart$Outbound,
@@ -48,6 +54,7 @@ export type Role = ClosedEnum<typeof Role>;
 
 export type Parts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -59,7 +66,9 @@ export type Parts =
 export type AgentResponseMessage = {
   messageId: string;
   role: Role;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -75,6 +84,7 @@ export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
 export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
   .union([
     TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
     DataPart$inboundSchema,
     FilePart$inboundSchema,
     ToolCallPart$inboundSchema,
@@ -83,6 +93,7 @@ export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
 /** @internal */
 export type Parts$Outbound =
   | TextPart$Outbound
+  | ErrorPart$Outbound
   | DataPart$Outbound
   | FilePart$Outbound
   | ToolCallPart$Outbound
@@ -95,6 +106,7 @@ export const Parts$outboundSchema: z.ZodType<
   Parts
 > = z.union([
   TextPart$outboundSchema,
+  ErrorPart$outboundSchema,
   DataPart$outboundSchema,
   FilePart$outboundSchema,
   ToolCallPart$outboundSchema,
@@ -125,6 +137,7 @@ export const AgentResponseMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
       DataPart$inboundSchema,
       FilePart$inboundSchema,
       ToolCallPart$inboundSchema,
@@ -139,6 +152,7 @@ export type AgentResponseMessage$Outbound = {
   role: string;
   parts: Array<
     | TextPart$Outbound
+    | ErrorPart$Outbound
     | DataPart$Outbound
     | FilePart$Outbound
     | ToolCallPart$Outbound
@@ -158,6 +172,7 @@ export const AgentResponseMessage$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$outboundSchema,
+      ErrorPart$outboundSchema,
       DataPart$outboundSchema,
       FilePart$outboundSchema,
       ToolCallPart$outboundSchema,

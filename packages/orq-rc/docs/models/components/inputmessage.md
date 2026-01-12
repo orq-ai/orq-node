@@ -9,9 +9,9 @@ let value: InputMessage = {
   role: "agent",
   parts: [
     {
-      kind: "file",
-      file: {
-        bytes: "<value>",
+      kind: "data",
+      data: {
+        "key": "<value>",
       },
     },
   ],

@@ -15,6 +15,12 @@ import {
   DataPart$outboundSchema,
 } from "./datapart.js";
 import {
+  ErrorPart,
+  ErrorPart$inboundSchema,
+  ErrorPart$Outbound,
+  ErrorPart$outboundSchema,
+} from "./errorpart.js";
+import {
   FilePart,
   FilePart$inboundSchema,
   FilePart$Outbound,
@@ -51,6 +57,7 @@ export type AgentThoughtStreamingEventRole = ClosedEnum<
 
 export type AgentThoughtStreamingEventParts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -59,7 +66,9 @@ export type AgentThoughtStreamingEventParts =
 export type MessageDifference = {
   messageId: string;
   role: AgentThoughtStreamingEventRole;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
   agentId: string;
   agentExecutionId: string;
@@ -343,6 +352,7 @@ export const AgentThoughtStreamingEventParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   TextPart$inboundSchema,
+  ErrorPart$inboundSchema,
   DataPart$inboundSchema,
   FilePart$inboundSchema,
   ToolCallPart$inboundSchema,
@@ -351,6 +361,7 @@ export const AgentThoughtStreamingEventParts$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentThoughtStreamingEventParts$Outbound =
   | TextPart$Outbound
+  | ErrorPart$Outbound
   | DataPart$Outbound
   | FilePart$Outbound
   | ToolCallPart$Outbound
@@ -363,6 +374,7 @@ export const AgentThoughtStreamingEventParts$outboundSchema: z.ZodType<
   AgentThoughtStreamingEventParts
 > = z.union([
   TextPart$outboundSchema,
+  ErrorPart$outboundSchema,
   DataPart$outboundSchema,
   FilePart$outboundSchema,
   ToolCallPart$outboundSchema,
@@ -399,6 +411,7 @@ export const MessageDifference$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
       DataPart$inboundSchema,
       FilePart$inboundSchema,
       ToolCallPart$inboundSchema,
@@ -422,6 +435,7 @@ export type MessageDifference$Outbound = {
   role: string;
   parts: Array<
     | TextPart$Outbound
+    | ErrorPart$Outbound
     | DataPart$Outbound
     | FilePart$Outbound
     | ToolCallPart$Outbound
@@ -444,6 +458,7 @@ export const MessageDifference$outboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$outboundSchema,
+      ErrorPart$outboundSchema,
       DataPart$outboundSchema,
       FilePart$outboundSchema,
       ToolCallPart$outboundSchema,

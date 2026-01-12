@@ -1,6 +1,8 @@
-# StreamAgentContact
+# ~~StreamAgentContact~~
 
-Information about the contact making the request. If the contact does not exist, it will be created automatically.
+@deprecated Use identity instead. Information about the contact making the request.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ## Example Usage
 

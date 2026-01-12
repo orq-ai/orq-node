@@ -44,7 +44,8 @@ export type CreateAgentResponseRequestRole = RoleUserMessage | RoleToolMessage;
 export type PublicMessagePart =
   | components.TextPart
   | components.FilePart
-  | components.ToolResultPart;
+  | components.ToolResultPart
+  | components.ErrorPart;
 
 /**
  * The A2A message to send to the agent (user input or tool results)
@@ -62,12 +63,47 @@ export type A2AMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    components.TextPart | components.FilePart | components.ToolResultPart
+    | components.TextPart
+    | components.FilePart
+    | components.ToolResultPart
+    | components.ErrorPart
   >;
 };
 
 /**
- * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+ */
+export type Identity = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
+ * @deprecated Use identity instead. Information about the contact making the request.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type Contact = {
   /**
@@ -120,6 +156,9 @@ export type Memory = {
   entityId: string;
 };
 
+/**
+ * Conversation context for chat studio integration
+ */
 export type Conversation = {
   /**
    * Unique ULID identifier for the conversation, prefixed with "conv_". Used to link agent executions to a specific conversation thread.
@@ -141,7 +180,13 @@ export type CreateAgentResponseRequestRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   /**
-   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: Identity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   contact?: Contact | undefined;
   /**
@@ -164,6 +209,9 @@ export type CreateAgentResponseRequestRequestBody = {
    * If true, returns Server-Sent Events (SSE) streaming response with real-time events. If false (default), returns standard JSON response.
    */
   stream?: boolean | undefined;
+  /**
+   * Conversation context for chat studio integration
+   */
   conversation?: Conversation | undefined;
 };
 
@@ -251,12 +299,14 @@ export const PublicMessagePart$inboundSchema: z.ZodType<
   components.TextPart$inboundSchema,
   components.FilePart$inboundSchema,
   components.ToolResultPart$inboundSchema,
+  components.ErrorPart$inboundSchema,
 ]);
 /** @internal */
 export type PublicMessagePart$Outbound =
   | components.TextPart$Outbound
   | components.FilePart$Outbound
-  | components.ToolResultPart$Outbound;
+  | components.ToolResultPart$Outbound
+  | components.ErrorPart$Outbound;
 
 /** @internal */
 export const PublicMessagePart$outboundSchema: z.ZodType<
@@ -267,6 +317,7 @@ export const PublicMessagePart$outboundSchema: z.ZodType<
   components.TextPart$outboundSchema,
   components.FilePart$outboundSchema,
   components.ToolResultPart$outboundSchema,
+  components.ErrorPart$outboundSchema,
 ]);
 
 export function publicMessagePartToJSON(
@@ -299,6 +350,7 @@ export const A2AMessage$inboundSchema: z.ZodType<
       components.TextPart$inboundSchema,
       components.FilePart$inboundSchema,
       components.ToolResultPart$inboundSchema,
+      components.ErrorPart$inboundSchema,
     ]),
   ),
 });
@@ -310,6 +362,7 @@ export type A2AMessage$Outbound = {
     | components.TextPart$Outbound
     | components.FilePart$Outbound
     | components.ToolResultPart$Outbound
+    | components.ErrorPart$Outbound
   >;
 };
 
@@ -329,6 +382,7 @@ export const A2AMessage$outboundSchema: z.ZodType<
       components.TextPart$outboundSchema,
       components.FilePart$outboundSchema,
       components.ToolResultPart$outboundSchema,
+      components.ErrorPart$outboundSchema,
     ]),
   ),
 });
@@ -343,6 +397,66 @@ export function a2AMessageFromJSON(
     jsonString,
     (x) => A2AMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'A2AMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const Identity$inboundSchema: z.ZodType<
+  Identity,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
+  });
+});
+/** @internal */
+export type Identity$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Identity$outboundSchema: z.ZodType<
+  Identity$Outbound,
+  z.ZodTypeDef,
+  Identity
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+export function identityToJSON(identity: Identity): string {
+  return JSON.stringify(Identity$outboundSchema.parse(identity));
+}
+export function identityFromJSON(
+  jsonString: string,
+): SafeParseResult<Identity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Identity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Identity' from JSON`,
   );
 }
 
@@ -539,6 +653,7 @@ export const CreateAgentResponseRequestRequestBody$inboundSchema: z.ZodType<
   task_id: z.string().optional(),
   message: z.lazy(() => A2AMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => Identity$inboundSchema).optional(),
   contact: z.lazy(() => Contact$inboundSchema).optional(),
   thread: z.lazy(() => CreateAgentResponseRequestThread$inboundSchema)
     .optional(),
@@ -557,6 +672,7 @@ export type CreateAgentResponseRequestRequestBody$Outbound = {
   task_id?: string | undefined;
   message: A2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
+  identity?: Identity$Outbound | undefined;
   contact?: Contact$Outbound | undefined;
   thread?: CreateAgentResponseRequestThread$Outbound | undefined;
   memory?: Memory$Outbound | undefined;
@@ -575,6 +691,7 @@ export const CreateAgentResponseRequestRequestBody$outboundSchema: z.ZodType<
   taskId: z.string().optional(),
   message: z.lazy(() => A2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
+  identity: z.lazy(() => Identity$outboundSchema).optional(),
   contact: z.lazy(() => Contact$outboundSchema).optional(),
   thread: z.lazy(() => CreateAgentResponseRequestThread$outboundSchema)
     .optional(),
