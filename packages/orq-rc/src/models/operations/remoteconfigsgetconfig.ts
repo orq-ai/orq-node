@@ -23,6 +23,9 @@ export type RemoteConfigsGetConfigRequestBody = {
   metadata?: { [k: string]: any } | undefined;
 };
 
+/**
+ * The return type of the rule
+ */
 export const RemoteConfigsGetConfigType = {
   Boolean: "boolean",
   String: "string",
@@ -32,6 +35,9 @@ export const RemoteConfigsGetConfigType = {
   Json: "json",
   Deployment: "deployment",
 } as const;
+/**
+ * The return type of the rule
+ */
 export type RemoteConfigsGetConfigType = ClosedEnum<
   typeof RemoteConfigsGetConfigType
 >;
@@ -40,6 +46,9 @@ export type RemoteConfigsGetConfigType = ClosedEnum<
  * An individual remote config
  */
 export type RemoteConfigsGetConfigResponseBody = {
+  /**
+   * The return type of the rule
+   */
   type: RemoteConfigsGetConfigType;
   value?: any | undefined;
 };
