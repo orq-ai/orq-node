@@ -10,11 +10,11 @@ sources:
             - "2.0"
     orq-ai-prerelease-node:
         sourceNamespace: orq-ai-prerelease-node
-        sourceRevisionDigest: sha256:42268e9952b21e433c3f2377e4f4b090392b8dcee8942e8159923aa38a22ca90
-        sourceBlobDigest: sha256:4bf195c09a9683f3e5b553c8ea9af5922a4063318fbed6736e77584a185840ab
+        sourceRevisionDigest: sha256:6b04364abab8fd6212289f85c5c3ca513f8412792e5b7c4917fe477532c5556f
+        sourceBlobDigest: sha256:211b8ca520ef4b31e6ffcaffe4089e369d240b07774568d43e6a1443e46af439
         tags:
             - latest
-            - speakeasy-sdk-regen-1768294355
+            - speakeasy-sdk-regen-1768299654
             - "2.0"
 targets:
     orq-ai-node:
@@ -27,10 +27,10 @@ targets:
     orq-ai-prerelease-node:
         source: orq-ai-prerelease-node
         sourceNamespace: orq-ai-prerelease-node
-        sourceRevisionDigest: sha256:42268e9952b21e433c3f2377e4f4b090392b8dcee8942e8159923aa38a22ca90
-        sourceBlobDigest: sha256:4bf195c09a9683f3e5b553c8ea9af5922a4063318fbed6736e77584a185840ab
+        sourceRevisionDigest: sha256:6b04364abab8fd6212289f85c5c3ca513f8412792e5b7c4917fe477532c5556f
+        sourceBlobDigest: sha256:211b8ca520ef4b31e6ffcaffe4089e369d240b07774568d43e6a1443e46af439
         codeSamplesNamespace: orq-ai-prerelease-node-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:34247b77d9c6d5e3e63346738b29e9e634453ced29612594111b36f6253b9166
+        codeSamplesRevisionDigest: sha256:e085e3301dc59d54b8a91c9a674e2595d670df5d41109ed53e96d6fd5949f76a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
