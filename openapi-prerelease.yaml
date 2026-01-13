@@ -1797,7 +1797,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kev8pw4j4ywkvqyzjd4fxsw8"
+              default: "reasoning_01kevdrr61csh37bpxfa9afw75"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1881,7 +1881,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kev8pw4h5q09bknrdym6dxvz"
+                      default: "text_01kevdrr603a7wgc0r6h9gbsk9"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1907,7 +1907,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kev8pw4msfkqdq56vwytqbzh"
+                      default: "file_01kevdrr63jyq7pcevyn297773"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -1938,7 +1938,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kev8pw4p5cym30813nwq89zc"
+                      default: "data_01kevdrr655pynkz2ts4gg5rtf"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -2020,7 +2020,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kev8pw4r4vxc1e965hqmt8ta"
+                                  default: "text_01kevdrr66nws2t648qekn7p40"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2045,7 +2045,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kev8pw4skcfa3hf27hnajnd8"
+                                  default: "reasoning_01kevdrr67yzq21s74r891v807"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2073,7 +2073,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kev8pw4va6s4d1rn8jkzmy8a"
+                                  default: "file_01kevdrr699krfnsb8tsnv8g2e"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2104,7 +2104,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kev8pw4xksf1ks44s9y8d9em"
+                                  default: "data_01kevdrr6qd898b5evvydj6zgb"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -3549,7 +3549,7 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kev8pwdrf3nr8rjhrmhqsg1a"
+          default: "conv_01kevdrrebsp3rexefz786p7e0"
           description: "Unique conversation identifier with `conv_` prefix."
           example: "conv_01jj1hdhn79xas7a01wb3hysdb"
         "kind":
@@ -3668,7 +3668,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "conv_01kev8pwdxg7hb99gw3539m23d"
+              default: "conv_01kevdrrepx6vjhp21jmzdsetm"
               description: "Unique conversation identifier with `conv_` prefix."
               example: "conv_01jj1hdhn79xas7a01wb3hysdb"
             "messages":
@@ -3875,7 +3875,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3883,7 +3883,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4026,7 +4026,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-13T08:48:57.408Z"
+                          default: "2026-01-13T10:17:23.749Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -4034,7 +4034,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:48:57.409Z"
+                              default: "2026-01-13T10:17:23.749Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -4202,10 +4202,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4282,10 +4282,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4359,10 +4359,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4451,10 +4451,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4528,10 +4528,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4905,10 +4905,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4998,10 +4998,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-13T08:48:59.751Z"
+                              default: "2026-01-13T10:17:25.893Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5448,10 +5448,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5528,10 +5528,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5605,10 +5605,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5697,10 +5697,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5774,10 +5774,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6151,10 +6151,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6244,10 +6244,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6681,10 +6681,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6761,10 +6761,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6838,10 +6838,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6930,10 +6930,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7007,10 +7007,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7384,10 +7384,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7477,10 +7477,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-13T08:48:59.751Z"
+                        default: "2026-01-13T10:17:25.893Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -8192,7 +8192,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8200,7 +8200,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8336,7 +8336,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8344,7 +8344,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -19343,7 +19343,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KEV8PW9QSRA4KBEQMZR3ZNE1"
+                                          default: "01KEVDRRAJ4MSQ8E0XTQMT2MYN"
                                         "name":
                                           type: "string"
                                         "description":
@@ -20807,7 +20807,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KEV8PWBQBE1THV67563X3GD6"
+                                          default: "01KEVDRRCJYHDRRMG8NGN4VV3H"
                                         "name":
                                           type: "string"
                                         "description":
@@ -21393,7 +21393,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kev8pwdtwq1p10zbe3c820rc"
+                        default: "conv_01kevdrredpyp5vxpe13yymphd"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21487,7 +21487,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kev8pwdvh29sd3wqzg83x164"
+                        default: "conv_01kevdrrenswksjwsc1geeezff"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21652,7 +21652,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kev8pwe1ebmpdjb36x4mc47t"
+                        default: "conv_01kevdrret43q1bxjc2q3g4hpn"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -21834,7 +21834,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "text_01kev8pwe68qh35sdexqsc09zp"
+                                                            default: "text_01kevdrrezt0fxqs45scf8jye6"
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: "text_01hxyz123abc"
                                                           "kind":
@@ -21859,7 +21859,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "reasoning_01kev8pwe7kpst19c9xm153hjy"
+                                                            default: "reasoning_01kevdrrez7erb457w1e5wxkh8"
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: "reasoning_01hxyz123abc"
                                                           "kind":
@@ -21887,7 +21887,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "file_01kev8pwe8zafgncpga2m2jhq9"
+                                                            default: "file_01kevdrrf05hp62medqtzkkyfc"
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: "file_01hxyz123abc"
                                                           "kind":
@@ -21918,7 +21918,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "data_01kev8pwe99638ewxa81nhs489"
+                                                            default: "data_01kevdrrf1enst96rndknbn599"
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: "data_01hxyz123abc"
                                                           "kind":
@@ -21968,7 +21968,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "text_01kev8pweak73kh3v5wssmw1w9"
+                                                            default: "text_01kevdrrf2g0wb5vx70mrf574b"
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: "text_01hxyz123abc"
                                                           "kind":
@@ -21993,7 +21993,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "reasoning_01kev8pwebsjqgnbnfz3t5e1aj"
+                                                            default: "reasoning_01kevdrrf2x4717jcg54a4wc95"
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: "reasoning_01hxyz123abc"
                                                           "kind":
@@ -22021,7 +22021,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "file_01kev8pwecbgtczgpdf6y69451"
+                                                            default: "file_01kevdrrf30h3hxw30cd02yw7p"
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: "file_01hxyz123abc"
                                                           "kind":
@@ -22052,7 +22052,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "data_01kev8pwedwy7q2vkp2y72xv8s"
+                                                            default: "data_01kevdrrf4spr2ekwj3edh6q9a"
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: "data_01hxyz123abc"
                                                           "kind":
@@ -22140,7 +22140,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-13T08:49:02.086Z"
+                    default: "2026-01-13T10:17:26.970Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -22229,7 +22229,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2026-01-13T08:49:02.086Z"
+                          default: "2026-01-13T10:17:26.970Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -22297,7 +22297,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-13T08:49:02.086Z"
+                    default: "2026-01-13T10:17:26.970Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -26738,7 +26738,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEV8PWNFGF8QV34918PYXRZK"
+                              default: "tool_01KEVDRRNDXDYQH1PGYSC7JQF6"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26837,7 +26837,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEV8PWNJ6V9J38B72H9VNXPT"
+                              default: "tool_01KEVDRRNFTZ6SDSY9GZB2K98R"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -26938,7 +26938,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEV8PWNM4P7H1TX37AKYJP5H"
+                              default: "tool_01KEVDRRNH5D16PB7552A3WA6G"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27072,7 +27072,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEV8PWNQXJK88RHH0F70C8A8"
+                              default: "tool_01KEVDRRNM1XPBS1V0SYFT3MYZ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27146,7 +27146,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KEV8PWNSDV0WRMAZAJQPKC6H"
+                                        default: "01KEVDRRNPVGT5YQBEPX8RWKYK"
                                       "name":
                                         type: "string"
                                       "description":
@@ -27197,7 +27197,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KEV8PWNVP2JWC13M1KGZ03PJ"
+                              default: "tool_01KEVDRRNQEZYZC3ST0N6NZ590"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27740,7 +27740,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWPCM7XHS02J1CFJM9VE"
+                        default: "tool_01KEVDRRP7TPB7DFXQS0Y3VY9V"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27839,7 +27839,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWPFWM0ZFEGBEAHCYG3D"
+                        default: "tool_01KEVDRRP9EVG5AP90T38V2XKC"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -27940,7 +27940,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWPH67VV987826H78VWR"
+                        default: "tool_01KEVDRRPCDCBWRGKYKFT87P1H"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28074,7 +28074,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWPW6WFA25YN7CVGYJQS"
+                        default: "tool_01KEVDRRPE5C0RZQE6T8DG3VHD"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28148,7 +28148,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEV8PWPY287Z4XGXAN2FVTDF"
+                                  default: "01KEVDRRPMPKY2JNH5VXA0VESC"
                                 "name":
                                   type: "string"
                                 "description":
@@ -28199,7 +28199,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQ0BQQPMX4969YSWPBR"
+                        default: "tool_01KEVDRRPNEC99P3SV038AASRG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28629,7 +28629,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KEV8PWQXPRESP47178YHA7ZQ"
+                                default: "01KEVDRRQRJV5TKS39411VZ3SK"
                               "name":
                                 type: "string"
                               "description":
@@ -28747,7 +28747,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQB7MR6653H2GHA29AS"
+                        default: "tool_01KEVDRRPTFRHZ86XV4B7ZBYTY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28846,7 +28846,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQD2282TV438Z43EAQQ"
+                        default: "tool_01KEVDRRPV25B0B5FQ3960JFX2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -28947,7 +28947,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQEF2EEXX5QC8RKNA50"
+                        default: "tool_01KEVDRRQ3PWDQP92B7ZPY06JP"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29081,7 +29081,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQJR5GTRMB776772GJR"
+                        default: "tool_01KEVDRRQ672HXTZBYRP06B5R9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29155,7 +29155,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEV8PWQK2K3EVAVGFHQA5D1B"
+                                  default: "01KEVDRRQ73G8TVPM2EJAHBSJJ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29206,7 +29206,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWQMFTBN8RJXK6PY09TJ"
+                        default: "tool_01KEVDRRQ846WD9JZZ06A0EQKA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29360,7 +29360,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWRBHBGHZHP369Z58BFQ"
+                        default: "tool_01KEVDRRRK1C8E1GR9M5DKRBRV"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29459,7 +29459,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWRDM3HQ01G49RPMX784"
+                        default: "tool_01KEVDRRRNTWSZ655SM79QYAC3"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29560,7 +29560,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWREMC3P8HA39B44V3GR"
+                        default: "tool_01KEVDRRRRZGMMV8B66RGM5JKX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29694,7 +29694,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWRQ9MJREG0Q3A2CFPMM"
+                        default: "tool_01KEVDRRRTNQ9SFNZZ455ZBEBA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -29768,7 +29768,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KEV8PWRR2S697AEZ7JN2H57M"
+                                  default: "01KEVDRRRVMMCXMQ0689TSHF32"
                                 "name":
                                   type: "string"
                                 "description":
@@ -29819,7 +29819,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KEV8PWRS47GCKKX5AGB4EB00"
+                        default: "tool_01KEVDRRRVNJ9DM4M7HKYVQ6KM"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -31953,7 +31953,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KEV8PWWTQE19FK31WRS6XX65"
+                          default: "01KEVDRRW4CRY9DYEP2T2EZFHT"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -32119,7 +32119,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEV8PWWXESW1D0ERH6QZJR2E"
+                    default: "01KEVDRRW6DYN7PTN16HVKZPPH"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32215,7 +32215,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEV8PWWW7KNKBTAGFBHN42ZX"
+                    default: "01KEVDRRW5GAVX1F7P1WDMRWNP"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -32347,7 +32347,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KEV8PWWZ9ASB1DSVHNC1EJRF"
+                    default: "01KEVDRRWGCS1017RNR3C9Y1T1"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -34889,7 +34889,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-13T08:48:57.408Z"
+                          default: "2026-01-13T10:17:23.749Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -34897,7 +34897,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:48:57.409Z"
+                              default: "2026-01-13T10:17:23.749Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -35033,7 +35033,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35041,7 +35041,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35164,7 +35164,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35172,7 +35172,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35325,7 +35325,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -35333,7 +35333,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -35706,7 +35706,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-13T08:49:11.157Z"
+                                    default: "2026-01-13T10:17:35.440Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35746,7 +35746,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-13T08:49:11.158Z"
+                                    default: "2026-01-13T10:17:35.441Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35786,7 +35786,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-13T08:49:11.159Z"
+                                    default: "2026-01-13T10:17:35.442Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -35822,7 +35822,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-13T08:48:57.408Z"
+                          default: "2026-01-13T10:17:23.749Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -35830,7 +35830,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:48:57.409Z"
+                              default: "2026-01-13T10:17:23.749Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -36396,7 +36396,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-13T08:49:11.186Z"
+                                default: "2026-01-13T10:17:35.463Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36436,7 +36436,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-13T08:49:11.186Z"
+                                default: "2026-01-13T10:17:35.464Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36476,7 +36476,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-13T08:49:11.187Z"
+                                default: "2026-01-13T10:17:35.464Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -36512,7 +36512,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-01-13T08:48:57.408Z"
+                      default: "2026-01-13T10:17:23.749Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -36520,7 +36520,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-01-13T08:48:57.409Z"
+                          default: "2026-01-13T10:17:23.749Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -36837,7 +36837,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.176Z"
+                              default: "2026-01-13T10:17:35.450Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36877,7 +36877,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.177Z"
+                              default: "2026-01-13T10:17:35.450Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36917,7 +36917,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.177Z"
+                              default: "2026-01-13T10:17:35.451Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -36953,7 +36953,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -36961,7 +36961,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -37525,7 +37525,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.243Z"
+                              default: "2026-01-13T10:17:35.498Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37565,7 +37565,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.244Z"
+                              default: "2026-01-13T10:17:35.499Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37605,7 +37605,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-13T08:49:11.247Z"
+                              default: "2026-01-13T10:17:35.499Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -37641,7 +37641,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-13T08:48:57.408Z"
+                    default: "2026-01-13T10:17:23.749Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -37649,7 +37649,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-13T08:48:57.409Z"
+                        default: "2026-01-13T10:17:23.749Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -39504,212 +39504,300 @@ paths:
                   "results":
                     type: "array"
                     items:
-                      type: "object"
-                      properties:
-                        "flagged":
-                          type: "boolean"
-                          description: "Whether any of the categories are flagged"
-                        "categories":
-                          type: "object"
+                      anyOf:
+                        - type: "object"
                           properties:
-                            "hate":
+                            "flagged":
                               type: "boolean"
-                              description: "Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste."
-                            "hate/threatening":
-                              type: "boolean"
-                              description: "Hateful content that also includes violence or serious harm towards the targeted group."
-                            "harassment":
-                              type: "boolean"
-                              description: "Content that expresses, incites, or promotes harassing language towards any target."
-                            "harassment/threatening":
-                              type: "boolean"
-                              description: "Harassment content that also includes violence or serious harm towards any target."
-                            "illicit":
-                              type: "boolean"
-                              description: "Content that includes instructions or advice that facilitate the planning or execution of wrongdoing."
-                            "illicit/violent":
-                              type: "boolean"
-                              description: "Content that includes instructions or advice that facilitate the planning or execution of wrongdoing that also includes violence."
-                            "self-harm":
-                              type: "boolean"
-                              description: "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders."
-                            "self-harm/intent":
-                              type: "boolean"
-                              description: "Content where the speaker expresses that they are engaging or intend to engage in acts of self-harm."
-                            "self-harm/instructions":
-                              type: "boolean"
-                              description: "Content that encourages performing acts of self-harm, or that gives instructions or advice on how to commit such acts."
-                            "sexual":
-                              type: "boolean"
-                              description: "Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services."
-                            "sexual/minors":
-                              type: "boolean"
-                              description: "Sexual content that includes an individual who is under 18 years old."
-                            "violence":
-                              type: "boolean"
-                              description: "Content that depicts death, violence, or physical injury."
-                            "violence/graphic":
-                              type: "boolean"
-                              description: "Content that depicts death, violence, or physical injury in graphic detail."
+                              description: "Whether any of the categories are flagged"
+                            "categories":
+                              type: "object"
+                              properties:
+                                "hate":
+                                  type: "boolean"
+                                  description: "Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste."
+                                "hate/threatening":
+                                  type: "boolean"
+                                  description: "Hateful content that also includes violence or serious harm towards the targeted group."
+                                "harassment":
+                                  type: "boolean"
+                                  description: "Content that expresses, incites, or promotes harassing language towards any target."
+                                "harassment/threatening":
+                                  type: "boolean"
+                                  description: "Harassment content that also includes violence or serious harm towards any target."
+                                "illicit":
+                                  type: "boolean"
+                                  description: "Content that includes instructions or advice that facilitate the planning or execution of wrongdoing."
+                                "illicit/violent":
+                                  type: "boolean"
+                                  description: "Content that includes instructions or advice that facilitate the planning or execution of wrongdoing that also includes violence."
+                                "self-harm":
+                                  type: "boolean"
+                                  description: "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders."
+                                "self-harm/intent":
+                                  type: "boolean"
+                                  description: "Content where the speaker expresses that they are engaging or intend to engage in acts of self-harm."
+                                "self-harm/instructions":
+                                  type: "boolean"
+                                  description: "Content that encourages performing acts of self-harm, or that gives instructions or advice on how to commit such acts."
+                                "sexual":
+                                  type: "boolean"
+                                  description: "Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services."
+                                "sexual/minors":
+                                  type: "boolean"
+                                  description: "Sexual content that includes an individual who is under 18 years old."
+                                "violence":
+                                  type: "boolean"
+                                  description: "Content that depicts death, violence, or physical injury."
+                                "violence/graphic":
+                                  type: "boolean"
+                                  description: "Content that depicts death, violence, or physical injury in graphic detail."
+                              required:
+                                - "hate"
+                                - "hate/threatening"
+                                - "harassment"
+                                - "harassment/threatening"
+                                - "illicit"
+                                - "illicit/violent"
+                                - "self-harm"
+                                - "self-harm/intent"
+                                - "self-harm/instructions"
+                                - "sexual"
+                                - "sexual/minors"
+                                - "violence"
+                                - "violence/graphic"
+                              description: "A list of the categories, and whether they are flagged or not"
+                            "category_scores":
+                              type: "object"
+                              properties:
+                                "hate":
+                                  type: "number"
+                                  description: "The score for the category hate"
+                                "hate/threatening":
+                                  type: "number"
+                                  description: "The score for the category hate/threatening"
+                                "harassment":
+                                  type: "number"
+                                  description: "The score for the category harassment"
+                                "harassment/threatening":
+                                  type: "number"
+                                  description: "The score for the category harassment/threatening"
+                                "illicit":
+                                  type: "number"
+                                  description: "The score for the category illicit"
+                                "illicit/violent":
+                                  type: "number"
+                                  description: "The score for the category illicit/violent"
+                                "self-harm":
+                                  type: "number"
+                                  description: "The score for the category self-harm"
+                                "self-harm/intent":
+                                  type: "number"
+                                  description: "The score for the category self-harm/intent"
+                                "self-harm/instructions":
+                                  type: "number"
+                                  description: "The score for the category self-harm/instructions"
+                                "sexual":
+                                  type: "number"
+                                  description: "The score for the category sexual"
+                                "sexual/minors":
+                                  type: "number"
+                                  description: "The score for the category sexual/minors"
+                                "violence":
+                                  type: "number"
+                                  description: "The score for the category violence"
+                                "violence/graphic":
+                                  type: "number"
+                                  description: "The score for the category violence/graphic"
+                              required:
+                                - "hate"
+                                - "hate/threatening"
+                                - "harassment"
+                                - "harassment/threatening"
+                                - "illicit"
+                                - "illicit/violent"
+                                - "self-harm"
+                                - "self-harm/intent"
+                                - "self-harm/instructions"
+                                - "sexual"
+                                - "sexual/minors"
+                                - "violence"
+                                - "violence/graphic"
+                              description: "A list of the categories along with their scores as predicted by model"
+                            "category_applied_input_types":
+                              type: "object"
+                              properties:
+                                "hate":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category hate"
+                                "hate/threatening":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category hate/threatening"
+                                "harassment":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category harassment"
+                                "harassment/threatening":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category harassment/threatening"
+                                "illicit":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category illicit"
+                                "illicit/violent":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category illicit/violent"
+                                "self-harm":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category self-harm"
+                                "self-harm/intent":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category self-harm/intent"
+                                "self-harm/instructions":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category self-harm/instructions"
+                                "sexual":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category sexual"
+                                "sexual/minors":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category sexual/minors"
+                                "violence":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category violence"
+                                "violence/graphic":
+                                  type: "array"
+                                  items:
+                                    type: "string"
+                                  description: "The applied input type(s) for the category violence/graphic"
+                              required:
+                                - "hate"
+                                - "hate/threatening"
+                                - "harassment"
+                                - "harassment/threatening"
+                                - "illicit"
+                                - "illicit/violent"
+                                - "self-harm"
+                                - "self-harm/intent"
+                                - "self-harm/instructions"
+                                - "sexual"
+                                - "sexual/minors"
+                                - "violence"
+                                - "violence/graphic"
+                              description: "A list of the categories along with the input type(s) that the score applies to"
                           required:
-                            - "hate"
-                            - "hate/threatening"
-                            - "harassment"
-                            - "harassment/threatening"
-                            - "illicit"
-                            - "illicit/violent"
-                            - "self-harm"
-                            - "self-harm/intent"
-                            - "self-harm/instructions"
-                            - "sexual"
-                            - "sexual/minors"
-                            - "violence"
-                            - "violence/graphic"
-                          description: "A list of the categories, and whether they are flagged or not"
-                        "category_scores":
-                          type: "object"
+                            - "flagged"
+                            - "categories"
+                            - "category_scores"
+                        - type: "object"
                           properties:
-                            "hate":
-                              type: "number"
-                              description: "The score for the category hate"
-                            "hate/threatening":
-                              type: "number"
-                              description: "The score for the category hate/threatening"
-                            "harassment":
-                              type: "number"
-                              description: "The score for the category harassment"
-                            "harassment/threatening":
-                              type: "number"
-                              description: "The score for the category harassment/threatening"
-                            "illicit":
-                              type: "number"
-                              description: "The score for the category illicit"
-                            "illicit/violent":
-                              type: "number"
-                              description: "The score for the category illicit/violent"
-                            "self-harm":
-                              type: "number"
-                              description: "The score for the category self-harm"
-                            "self-harm/intent":
-                              type: "number"
-                              description: "The score for the category self-harm/intent"
-                            "self-harm/instructions":
-                              type: "number"
-                              description: "The score for the category self-harm/instructions"
-                            "sexual":
-                              type: "number"
-                              description: "The score for the category sexual"
-                            "sexual/minors":
-                              type: "number"
-                              description: "The score for the category sexual/minors"
-                            "violence":
-                              type: "number"
-                              description: "The score for the category violence"
-                            "violence/graphic":
-                              type: "number"
-                              description: "The score for the category violence/graphic"
+                            "categories":
+                              type: "object"
+                              properties:
+                                "sexual":
+                                  type: "boolean"
+                                  description: "Sexual content detected"
+                                "hate_and_discrimination":
+                                  type: "boolean"
+                                  description: "Hate and discrimination content detected"
+                                "violence_and_threats":
+                                  type: "boolean"
+                                  description: "Violence and threats content detected"
+                                "dangerous_and_criminal_content":
+                                  type: "boolean"
+                                  description: "Dangerous and criminal content detected"
+                                "selfharm":
+                                  type: "boolean"
+                                  description: "Self-harm content detected"
+                                "health":
+                                  type: "boolean"
+                                  description: "Unqualified health advice detected"
+                                "financial":
+                                  type: "boolean"
+                                  description: "Unqualified financial advice detected"
+                                "law":
+                                  type: "boolean"
+                                  description: "Unqualified legal advice detected"
+                                "pii":
+                                  type: "boolean"
+                                  description: "Personally identifiable information detected"
+                              required:
+                                - "sexual"
+                                - "hate_and_discrimination"
+                                - "violence_and_threats"
+                                - "dangerous_and_criminal_content"
+                                - "selfharm"
+                                - "health"
+                                - "financial"
+                                - "law"
+                                - "pii"
+                              description: "A list of the categories, and whether they are flagged or not"
+                            "category_scores":
+                              type: "object"
+                              properties:
+                                "sexual":
+                                  type: "number"
+                                  description: "The score for sexual content"
+                                "hate_and_discrimination":
+                                  type: "number"
+                                  description: "The score for hate and discrimination content"
+                                "violence_and_threats":
+                                  type: "number"
+                                  description: "The score for violence and threats content"
+                                "dangerous_and_criminal_content":
+                                  type: "number"
+                                  description: "The score for dangerous and criminal content"
+                                "selfharm":
+                                  type: "number"
+                                  description: "The score for self-harm content"
+                                "health":
+                                  type: "number"
+                                  description: "The score for unqualified health advice"
+                                "financial":
+                                  type: "number"
+                                  description: "The score for unqualified financial advice"
+                                "law":
+                                  type: "number"
+                                  description: "The score for unqualified legal advice"
+                                "pii":
+                                  type: "number"
+                                  description: "The score for personally identifiable information"
+                              required:
+                                - "sexual"
+                                - "hate_and_discrimination"
+                                - "violence_and_threats"
+                                - "dangerous_and_criminal_content"
+                                - "selfharm"
+                                - "health"
+                                - "financial"
+                                - "law"
+                                - "pii"
+                              description: "A list of the categories along with their scores as predicted by model"
                           required:
-                            - "hate"
-                            - "hate/threatening"
-                            - "harassment"
-                            - "harassment/threatening"
-                            - "illicit"
-                            - "illicit/violent"
-                            - "self-harm"
-                            - "self-harm/intent"
-                            - "self-harm/instructions"
-                            - "sexual"
-                            - "sexual/minors"
-                            - "violence"
-                            - "violence/graphic"
-                          description: "A list of the categories along with their scores as predicted by model"
-                        "category_applied_input_types":
-                          type: "object"
-                          properties:
-                            "hate":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category hate"
-                            "hate/threatening":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category hate/threatening"
-                            "harassment":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category harassment"
-                            "harassment/threatening":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category harassment/threatening"
-                            "illicit":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category illicit"
-                            "illicit/violent":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category illicit/violent"
-                            "self-harm":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category self-harm"
-                            "self-harm/intent":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category self-harm/intent"
-                            "self-harm/instructions":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category self-harm/instructions"
-                            "sexual":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category sexual"
-                            "sexual/minors":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category sexual/minors"
-                            "violence":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category violence"
-                            "violence/graphic":
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The applied input type(s) for the category violence/graphic"
-                          required:
-                            - "hate"
-                            - "hate/threatening"
-                            - "harassment"
-                            - "harassment/threatening"
-                            - "illicit"
-                            - "illicit/violent"
-                            - "self-harm"
-                            - "self-harm/intent"
-                            - "self-harm/instructions"
-                            - "sexual"
-                            - "sexual/minors"
-                            - "violence"
-                            - "violence/graphic"
-                          description: "A list of the categories along with the input type(s) that the score applies to"
-                      required:
-                        - "flagged"
-                        - "categories"
-                        - "category_scores"
+                            - "categories"
+                            - "category_scores"
                     description: "A list of moderation objects"
                 required:
                   - "id"
