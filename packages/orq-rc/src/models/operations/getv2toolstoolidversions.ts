@@ -37,7 +37,7 @@ export type GetV2ToolsToolIdVersionsData = {
   createdAt: string;
   updatedAt: string;
   createdById?: string | undefined;
-  updatedById: string;
+  updatedById?: string | undefined;
   version: string;
   description?: string | undefined;
   checksum: string;
@@ -137,7 +137,7 @@ export const GetV2ToolsToolIdVersionsData$inboundSchema: z.ZodType<
   created_at: z.string(),
   updated_at: z.string(),
   created_by_id: z.string().optional(),
-  updated_by_id: z.string(),
+  updated_by_id: z.string().optional(),
   version: z.string(),
   description: z.string().optional(),
   checksum: z.string(),
@@ -161,7 +161,7 @@ export type GetV2ToolsToolIdVersionsData$Outbound = {
   created_at: string;
   updated_at: string;
   created_by_id?: string | undefined;
-  updated_by_id: string;
+  updated_by_id?: string | undefined;
   version: string;
   description?: string | undefined;
   checksum: string;
@@ -181,7 +181,7 @@ export const GetV2ToolsToolIdVersionsData$outboundSchema: z.ZodType<
   createdAt: z.string(),
   updatedAt: z.string(),
   createdById: z.string().optional(),
-  updatedById: z.string(),
+  updatedById: z.string().optional(),
   version: z.string(),
   description: z.string().optional(),
   checksum: z.string(),

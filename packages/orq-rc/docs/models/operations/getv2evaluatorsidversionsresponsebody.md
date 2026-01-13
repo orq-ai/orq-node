@@ -14,7 +14,6 @@ let value: GetV2EvaluatorsIdVersionsResponseBody = {
       id: "<id>",
       createdAt: "1705480751606",
       updatedAt: "1735644349842",
-      updatedById: "<id>",
       version: "<value>",
       checksum: "<value>",
       entityType: "<value>",

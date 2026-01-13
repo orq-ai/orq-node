@@ -11,7 +11,6 @@ let value: GetV2ToolsToolIdVersionsVersionIdResponseBody = {
   id: "<id>",
   createdAt: "1705386953750",
   updatedAt: "1735659521237",
-  updatedById: "<id>",
   version: "<value>",
   checksum: "<value>",
   entityType: "<value>",
@@ -32,7 +31,7 @@ let value: GetV2ToolsToolIdVersionsVersionIdResponseBody = {
 | `createdAt`           | *string*              | :heavy_check_mark:    | N/A                   |
 | `updatedAt`           | *string*              | :heavy_check_mark:    | N/A                   |
 | `createdById`         | *string*              | :heavy_minus_sign:    | N/A                   |
-| `updatedById`         | *string*              | :heavy_check_mark:    | N/A                   |
+| `updatedById`         | *string*              | :heavy_minus_sign:    | N/A                   |
 | `version`             | *string*              | :heavy_check_mark:    | N/A                   |
 | `description`         | *string*              | :heavy_minus_sign:    | N/A                   |
 | `checksum`            | *string*              | :heavy_check_mark:    | N/A                   |

@@ -3,7 +3,6 @@
  */
 
 export * from "./apierror.js";
-export * from "./createagentrequest.js";
 export * from "./createeval.js";
 export * from "./deleteagent.js";
 export * from "./deletecontact.js";

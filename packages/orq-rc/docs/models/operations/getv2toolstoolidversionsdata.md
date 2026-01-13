@@ -9,7 +9,6 @@ let value: GetV2ToolsToolIdVersionsData = {
   id: "<id>",
   createdAt: "1705590981001",
   updatedAt: "1735663858100",
-  updatedById: "<id>",
   version: "<value>",
   checksum: "<value>",
   entityType: "<value>",
@@ -27,7 +26,7 @@ let value: GetV2ToolsToolIdVersionsData = {
 | `createdAt`           | *string*              | :heavy_check_mark:    | N/A                   |
 | `updatedAt`           | *string*              | :heavy_check_mark:    | N/A                   |
 | `createdById`         | *string*              | :heavy_minus_sign:    | N/A                   |
-| `updatedById`         | *string*              | :heavy_check_mark:    | N/A                   |
+| `updatedById`         | *string*              | :heavy_minus_sign:    | N/A                   |
 | `version`             | *string*              | :heavy_check_mark:    | N/A                   |
 | `description`         | *string*              | :heavy_minus_sign:    | N/A                   |
 | `checksum`            | *string*              | :heavy_check_mark:    | N/A                   |
