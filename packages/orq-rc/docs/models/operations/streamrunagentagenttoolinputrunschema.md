@@ -1,13 +1,13 @@
-# Schema
+# StreamRunAgentAgentToolInputRunSchema
 
 The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
 
 ## Example Usage
 
 ```typescript
-import { Schema } from "@orq-ai/node/models/operations";
+import { StreamRunAgentAgentToolInputRunSchema } from "@orq-ai/node/models/operations";
 
-let value: Schema = {
+let value: StreamRunAgentAgentToolInputRunSchema = {
   type: "<value>",
   properties: {
     "key": "<value>",

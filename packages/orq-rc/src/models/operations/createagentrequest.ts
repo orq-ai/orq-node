@@ -800,16 +800,16 @@ export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 /**
  * MCP tool type
  */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
   {
     Mcp: "mcp",
   } as const;
 /**
  * MCP tool type
  */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
   ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   >;
 
 /**
@@ -820,7 +820,7 @@ export type MCPTool = {
    * MCP tool type
    */
   type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
     | undefined;
   /**
    * The key of the parent MCP tool
@@ -834,6 +834,45 @@ export type MCPTool = {
    * The ID of the specific nested tool within the MCP server
    */
   toolId: string;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+};
+
+/**
+ * JSON Schema tool type
+ */
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+  {
+    JsonSchema: "json_schema",
+  } as const;
+/**
+ * JSON Schema tool type
+ */
+export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+  ClosedEnum<
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  >;
+
+/**
+ * Enforces structured output format using JSON Schema. Must reference a pre-created JSON Schema tool by key or id.
+ */
+export type JSONSchemaTool = {
+  /**
+   * JSON Schema tool type
+   */
+  type?:
+    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    | undefined;
+  /**
+   * The key of the pre-created JSON Schema tool
+   */
+  key?: string | undefined;
+  /**
+   * The ID of the pre-created JSON Schema tool
+   */
+  id?: string | undefined;
   /**
    * Whether this tool requires approval before execution
    */
@@ -1174,7 +1213,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, MCP) must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool
@@ -1191,7 +1230,8 @@ export type AgentToolInputCRUD =
   | MCPTool
   | HTTPTool
   | CodeExecutionTool
-  | FunctionTool;
+  | FunctionTool
+  | JSONSchemaTool;
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
@@ -1287,6 +1327,7 @@ export type Settings = {
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
+      | JSONSchemaTool
     >
     | undefined;
   /**
@@ -4378,24 +4419,24 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = ToolApprovalRequired$inboundSchema;
 
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type,
   );
 /** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   > =
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema;
 
 /** @internal */
 export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   z.object({
     type:
-      CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema
+      CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema
         .default("mcp"),
     key: z.string().optional(),
     id: z.string().optional(),
@@ -4423,7 +4464,7 @@ export const MCPTool$outboundSchema: z.ZodType<
   MCPTool
 > = z.object({
   type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema
       .default("mcp"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4446,6 +4487,76 @@ export function mcpToolFromJSON(
     jsonString,
     (x) => MCPTool$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'MCPTool' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  > = z.nativeEnum(
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
+  );
+/** @internal */
+export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+  > =
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
+
+/** @internal */
+export const JSONSchemaTool$inboundSchema: z.ZodType<
+  JSONSchemaTool,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema
+      .default("json_schema"),
+  key: z.string().optional(),
+  id: z.string().optional(),
+  requires_approval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "requires_approval": "requiresApproval",
+  });
+});
+/** @internal */
+export type JSONSchemaTool$Outbound = {
+  type: string;
+  key?: string | undefined;
+  id?: string | undefined;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const JSONSchemaTool$outboundSchema: z.ZodType<
+  JSONSchemaTool$Outbound,
+  z.ZodTypeDef,
+  JSONSchemaTool
+> = z.object({
+  type:
+    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
+      .default("json_schema"),
+  key: z.string().optional(),
+  id: z.string().optional(),
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
+  return JSON.stringify(JSONSchemaTool$outboundSchema.parse(jsonSchemaTool));
+}
+export function jsonSchemaToolFromJSON(
+  jsonString: string,
+): SafeParseResult<JSONSchemaTool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JSONSchemaTool' from JSON`,
   );
 }
 
@@ -5378,6 +5489,7 @@ export const AgentToolInputCRUD$inboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$inboundSchema),
   z.lazy(() => CodeExecutionTool$inboundSchema),
   z.lazy(() => FunctionTool$inboundSchema),
+  z.lazy(() => JSONSchemaTool$inboundSchema),
 ]);
 /** @internal */
 export type AgentToolInputCRUD$Outbound =
@@ -5395,7 +5507,8 @@ export type AgentToolInputCRUD$Outbound =
   | MCPTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound;
+  | FunctionTool$Outbound
+  | JSONSchemaTool$Outbound;
 
 /** @internal */
 export const AgentToolInputCRUD$outboundSchema: z.ZodType<
@@ -5418,6 +5531,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
+  z.lazy(() => JSONSchemaTool$outboundSchema),
 ]);
 
 export function agentToolInputCRUDToJSON(
@@ -5591,6 +5705,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$inboundSchema),
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
+      z.lazy(() => JSONSchemaTool$inboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
@@ -5625,6 +5740,7 @@ export type Settings$Outbound = {
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
+      | JSONSchemaTool$Outbound
     >
     | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
@@ -5659,6 +5775,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
+      z.lazy(() => JSONSchemaTool$outboundSchema),
     ]),
   ).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),

@@ -1012,18 +1012,18 @@ export type StreamRunAgentAgentToolInputRunAgentsHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType =
   {
     Object: "object",
   } as const;
-export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType =
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType =
   ClosedEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType
   >;
 
-export type AgentToolInputRunSchema = {
+export type StreamRunAgentAgentToolInputRunAgentsSchema = {
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1032,7 +1032,7 @@ export type AgentToolInputRunTools = {
   id?: string | undefined;
   name: string;
   description?: string | undefined;
-  schema: AgentToolInputRunSchema;
+  schema: StreamRunAgentAgentToolInputRunAgentsSchema;
 };
 
 /**
@@ -1086,6 +1086,63 @@ export type AgentToolInputRunMCPToolRun = {
    */
   description: string;
   mcp: AgentToolInputRunMcp;
+  requiresApproval?: boolean | undefined;
+};
+
+/**
+ * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+ */
+export type StreamRunAgentAgentToolInputRunSchema = {
+  /**
+   * The JSON Schema type
+   */
+  type: string;
+  /**
+   * The properties of the JSON Schema object
+   */
+  properties: { [k: string]: any };
+  /**
+   * Array of required property names
+   */
+  required: Array<string>;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
+export type StreamRunAgentAgentToolInputRunJsonSchema = {
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * A description of what the response format is for. This will be shown to the user.
+   */
+  description: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+   */
+  schema: StreamRunAgentAgentToolInputRunSchema;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. Only compatible with `OpenAI` models.
+   */
+  strict?: boolean | undefined;
+};
+
+/**
+ * JSON Schema tool with inline definition for on-the-fly creation in run endpoint
+ */
+export type AgentToolInputRunJSONSchemaToolRun = {
+  type: "json_schema";
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key: string;
+  id?: string | undefined;
+  displayName?: string | undefined;
+  /**
+   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
+   */
+  description: string;
+  jsonSchema: StreamRunAgentAgentToolInputRunJsonSchema;
   requiresApproval?: boolean | undefined;
 };
 
@@ -1473,7 +1530,7 @@ export type StreamRunAgentAgentToolInputRunGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
+ * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, JSON Schema, MCP) support full inline definitions for on-the-fly creation.
  */
 export type StreamRunAgentAgentToolInputRun =
   | StreamRunAgentAgentToolInputRunGoogleSearchTool
@@ -1490,6 +1547,7 @@ export type StreamRunAgentAgentToolInputRun =
   | AgentToolInputRunHTTPToolRun
   | AgentToolInputRunCodeToolRun
   | AgentToolInputRunFunctionToolRun
+  | AgentToolInputRunJSONSchemaToolRun
   | AgentToolInputRunMCPToolRun;
 
 /**
@@ -1585,6 +1643,7 @@ export type StreamRunAgentSettings = {
       | AgentToolInputRunHTTPToolRun
       | AgentToolInputRunCodeToolRun
       | AgentToolInputRunFunctionToolRun
+      | AgentToolInputRunJSONSchemaToolRun
       | AgentToolInputRunMCPToolRun
     >
     | undefined;
@@ -4567,63 +4626,74 @@ export function streamRunAgentAgentToolInputRunAgentsHeadersFromJSON(
 }
 
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$inboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType
   > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType,
   );
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType
   > =
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$inboundSchema;
 
 /** @internal */
-export const AgentToolInputRunSchema$inboundSchema: z.ZodType<
-  AgentToolInputRunSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$inboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
+export const StreamRunAgentAgentToolInputRunAgentsSchema$inboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$inboundSchema,
+    properties: z.record(z.any()).optional(),
+    required: z.array(z.string()).optional(),
+  });
 /** @internal */
-export type AgentToolInputRunSchema$Outbound = {
+export type StreamRunAgentAgentToolInputRunAgentsSchema$Outbound = {
   type: string;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
-  AgentToolInputRunSchema$Outbound,
-  z.ZodTypeDef,
-  AgentToolInputRunSchema
-> = z.object({
-  type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType$outboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
+export const StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunAgentsSchema$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentAgentToolInputRunAgentsSchema
+  > = z.object({
+    type:
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$outboundSchema,
+    properties: z.record(z.any()).optional(),
+    required: z.array(z.string()).optional(),
+  });
 
-export function agentToolInputRunSchemaToJSON(
-  agentToolInputRunSchema: AgentToolInputRunSchema,
+export function streamRunAgentAgentToolInputRunAgentsSchemaToJSON(
+  streamRunAgentAgentToolInputRunAgentsSchema:
+    StreamRunAgentAgentToolInputRunAgentsSchema,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunSchema$outboundSchema.parse(agentToolInputRunSchema),
+    StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunAgentsSchema,
+    ),
   );
 }
-export function agentToolInputRunSchemaFromJSON(
+export function streamRunAgentAgentToolInputRunAgentsSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<AgentToolInputRunSchema, SDKValidationError> {
+): SafeParseResult<
+  StreamRunAgentAgentToolInputRunAgentsSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => AgentToolInputRunSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputRunSchema' from JSON`,
+    (x) =>
+      StreamRunAgentAgentToolInputRunAgentsSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunAgentsSchema' from JSON`,
   );
 }
 
@@ -4633,17 +4703,19 @@ export const AgentToolInputRunTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KEXRJ7NDSYG7V3YEZKK55TE9"),
+  id: z.string().default("01KEYB6F5YM71SS1938HYST5P2"),
   name: z.string(),
   description: z.string().optional(),
-  schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
+  schema: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunAgentsSchema$inboundSchema
+  ),
 });
 /** @internal */
 export type AgentToolInputRunTools$Outbound = {
   id: string;
   name: string;
   description?: string | undefined;
-  schema: AgentToolInputRunSchema$Outbound;
+  schema: StreamRunAgentAgentToolInputRunAgentsSchema$Outbound;
 };
 
 /** @internal */
@@ -4652,10 +4724,12 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KEXRJ7NDSYG7V3YEZKK55TE9"),
+  id: z.string().default("01KEYB6F5YM71SS1938HYST5P2"),
   name: z.string(),
   description: z.string().optional(),
-  schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
+  schema: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema
+  ),
 });
 
 export function agentToolInputRunToolsToJSON(
@@ -4816,6 +4890,203 @@ export function agentToolInputRunMCPToolRunFromJSON(
     jsonString,
     (x) => AgentToolInputRunMCPToolRun$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AgentToolInputRunMCPToolRun' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunSchema$inboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunSchema,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+/** @internal */
+export type StreamRunAgentAgentToolInputRunSchema$Outbound = {
+  type: string;
+  properties: { [k: string]: any };
+  required: Array<string>;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunSchema$outboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunSchema$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentAgentToolInputRunSchema
+> = z.object({
+  type: z.string(),
+  properties: z.record(z.any()),
+  required: z.array(z.string()),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function streamRunAgentAgentToolInputRunSchemaToJSON(
+  streamRunAgentAgentToolInputRunSchema: StreamRunAgentAgentToolInputRunSchema,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunSchema$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunSchema,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentAgentToolInputRunSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunJsonSchema$inboundSchema: z.ZodType<
+  StreamRunAgentAgentToolInputRunJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  description: z.string(),
+  schema: z.lazy(() => StreamRunAgentAgentToolInputRunSchema$inboundSchema),
+  strict: z.boolean().optional(),
+});
+/** @internal */
+export type StreamRunAgentAgentToolInputRunJsonSchema$Outbound = {
+  name: string;
+  description: string;
+  schema: StreamRunAgentAgentToolInputRunSchema$Outbound;
+  strict?: boolean | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema:
+  z.ZodType<
+    StreamRunAgentAgentToolInputRunJsonSchema$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentAgentToolInputRunJsonSchema
+  > = z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => StreamRunAgentAgentToolInputRunSchema$outboundSchema),
+    strict: z.boolean().optional(),
+  });
+
+export function streamRunAgentAgentToolInputRunJsonSchemaToJSON(
+  streamRunAgentAgentToolInputRunJsonSchema:
+    StreamRunAgentAgentToolInputRunJsonSchema,
+): string {
+  return JSON.stringify(
+    StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema.parse(
+      streamRunAgentAgentToolInputRunJsonSchema,
+    ),
+  );
+}
+export function streamRunAgentAgentToolInputRunJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  StreamRunAgentAgentToolInputRunJsonSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StreamRunAgentAgentToolInputRunJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentAgentToolInputRunJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const AgentToolInputRunJSONSchemaToolRun$inboundSchema: z.ZodType<
+  AgentToolInputRunJSONSchemaToolRun,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("json_schema"),
+  key: z.string(),
+  _id: z.string().optional(),
+  display_name: z.string().optional(),
+  description: z.string(),
+  json_schema: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunJsonSchema$inboundSchema
+  ),
+  requires_approval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "json_schema": "jsonSchema",
+    "requires_approval": "requiresApproval",
+  });
+});
+/** @internal */
+export type AgentToolInputRunJSONSchemaToolRun$Outbound = {
+  type: "json_schema";
+  key: string;
+  _id?: string | undefined;
+  display_name?: string | undefined;
+  description: string;
+  json_schema: StreamRunAgentAgentToolInputRunJsonSchema$Outbound;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const AgentToolInputRunJSONSchemaToolRun$outboundSchema: z.ZodType<
+  AgentToolInputRunJSONSchemaToolRun$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunJSONSchemaToolRun
+> = z.object({
+  type: z.literal("json_schema"),
+  key: z.string(),
+  id: z.string().optional(),
+  displayName: z.string().optional(),
+  description: z.string(),
+  jsonSchema: z.lazy(() =>
+    StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema
+  ),
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    displayName: "display_name",
+    jsonSchema: "json_schema",
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputRunJSONSchemaToolRunToJSON(
+  agentToolInputRunJSONSchemaToolRun: AgentToolInputRunJSONSchemaToolRun,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunJSONSchemaToolRun$outboundSchema.parse(
+      agentToolInputRunJSONSchemaToolRun,
+    ),
+  );
+}
+export function agentToolInputRunJSONSchemaToolRunFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentToolInputRunJSONSchemaToolRun, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AgentToolInputRunJSONSchemaToolRun$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentToolInputRunJSONSchemaToolRun' from JSON`,
   );
 }
 
@@ -6321,6 +6592,7 @@ export const StreamRunAgentAgentToolInputRun$inboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputRunHTTPToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunCodeToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunFunctionToolRun$inboundSchema),
+  z.lazy(() => AgentToolInputRunJSONSchemaToolRun$inboundSchema),
   z.lazy(() => AgentToolInputRunMCPToolRun$inboundSchema),
 ]);
 /** @internal */
@@ -6339,6 +6611,7 @@ export type StreamRunAgentAgentToolInputRun$Outbound =
   | AgentToolInputRunHTTPToolRun$Outbound
   | AgentToolInputRunCodeToolRun$Outbound
   | AgentToolInputRunFunctionToolRun$Outbound
+  | AgentToolInputRunJSONSchemaToolRun$Outbound
   | AgentToolInputRunMCPToolRun$Outbound;
 
 /** @internal */
@@ -6375,6 +6648,7 @@ export const StreamRunAgentAgentToolInputRun$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
+  z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
 ]);
 
@@ -6576,6 +6850,7 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunHTTPToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunCodeToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunFunctionToolRun$inboundSchema),
+      z.lazy(() => AgentToolInputRunJSONSchemaToolRun$inboundSchema),
       z.lazy(() => AgentToolInputRunMCPToolRun$inboundSchema),
     ]),
   ).optional(),
@@ -6612,6 +6887,7 @@ export type StreamRunAgentSettings$Outbound = {
       | AgentToolInputRunHTTPToolRun$Outbound
       | AgentToolInputRunCodeToolRun$Outbound
       | AgentToolInputRunFunctionToolRun$Outbound
+      | AgentToolInputRunJSONSchemaToolRun$Outbound
       | AgentToolInputRunMCPToolRun$Outbound
     >
     | undefined;
@@ -6666,6 +6942,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
+      z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
     ]),
   ).optional(),

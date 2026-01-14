@@ -1,0 +1,44 @@
+# AgentToolInputRunJSONSchemaToolRun
+
+JSON Schema tool with inline definition for on-the-fly creation in run endpoint
+
+## Example Usage
+
+```typescript
+import { AgentToolInputRunJSONSchemaToolRun } from "@orq-ai/node/models/operations";
+
+let value: AgentToolInputRunJSONSchemaToolRun = {
+  type: "json_schema",
+  key: "<key>",
+  description: "bathhouse republican respectful cinema place yet oof",
+  jsonSchema: {
+    name: "<value>",
+    description: "and courageous ah whoa boohoo swill whenever",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+    },
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                      | *"json_schema"*                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                         |
+| `key`                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                          | Unique key of the tool as it will be displayed in the UI                                                                                                                                                                    |
+| `id`                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                         |
+| `displayName`                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                         |
+| `description`                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                          | A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision. |
+| `jsonSchema`                                                                                                                                                                                                                | [operations.StreamRunAgentAgentToolInputRunJsonSchema](../../models/operations/streamrunagentagenttoolinputrunjsonschema.md)                                                                                                | :heavy_check_mark:                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                         |
+| `requiresApproval`                                                                                                                                                                                                          | *boolean*                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                         |
