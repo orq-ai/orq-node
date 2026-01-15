@@ -4569,7 +4569,7 @@ export function agentToolInputRunSchemaFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().default("01KF08B1BWY20V46PB1TGN369Y"),
+    id: z.string().default("01KF0T8NWGYXEDR1DQT12XQMS2"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => AgentToolInputRunSchema$inboundSchema),
@@ -4588,7 +4588,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KF08B1BWY20V46PB1TGN369Y"),
+  id: z.string().default("01KF0T8NWGYXEDR1DQT12XQMS2"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
