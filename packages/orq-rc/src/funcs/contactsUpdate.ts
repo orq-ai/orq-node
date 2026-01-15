@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Updates specific fields of an existing contact. Only the fields provided in the request body will be updated.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function contactsUpdate(
   client: OrqCore,

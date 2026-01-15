@@ -17,6 +17,8 @@ export class Contacts extends ClientSDK {
    *
    * @remarks
    * Creates a new contact with a unique external_id. If a contact with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async create(
     request?: operations.CreateContactRequestBody | undefined,
@@ -34,6 +36,8 @@ export class Contacts extends ClientSDK {
    *
    * @remarks
    * Retrieves a paginated list of contacts in your workspace. Use pagination parameters to navigate through large contact lists efficiently.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async list(
     request?: operations.ListContactsRequest | undefined,
@@ -51,6 +55,8 @@ export class Contacts extends ClientSDK {
    *
    * @remarks
    * Retrieves detailed information about a specific contact using their contact ID or external ID from your system.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async retrieve(
     request: operations.RetrieveContactRequest,
@@ -68,6 +74,8 @@ export class Contacts extends ClientSDK {
    *
    * @remarks
    * Updates specific fields of an existing contact. Only the fields provided in the request body will be updated.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async update(
     request: operations.UpdateContactRequest,
@@ -85,6 +93,8 @@ export class Contacts extends ClientSDK {
    *
    * @remarks
    * Permanently deletes a contact from your workspace and cleans up associated budget configurations. This action cannot be undone.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async delete(
     request: operations.DeleteContactRequest,

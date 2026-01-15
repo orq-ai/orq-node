@@ -1,6 +1,6 @@
 # QueryParamFilterBy
 
-Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
+Filter identities by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
 
 ## Example Usage
 

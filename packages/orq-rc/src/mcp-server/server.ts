@@ -63,6 +63,11 @@ import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
 import { tool$filesGet } from "./tools/filesGet.js";
 import { tool$filesList } from "./tools/filesList.js";
+import { tool$identitiesCreate } from "./tools/identitiesCreate.js";
+import { tool$identitiesDelete } from "./tools/identitiesDelete.js";
+import { tool$identitiesList } from "./tools/identitiesList.js";
+import { tool$identitiesRetrieve } from "./tools/identitiesRetrieve.js";
+import { tool$identitiesUpdate } from "./tools/identitiesUpdate.js";
 import { tool$knowledgeCreate } from "./tools/knowledgeCreate.js";
 import { tool$knowledgeCreateChunks } from "./tools/knowledgeCreateChunks.js";
 import { tool$knowledgeCreateDatasource } from "./tools/knowledgeCreateDatasource.js";
@@ -128,7 +133,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "4.2.0-rc.29",
+    version: "4.2.0-rc.30",
   });
 
   const client = new OrqCore({
@@ -172,6 +177,11 @@ export function createMCPServer(deps: {
   tool(tool$evalsDelete);
   tool(tool$evalsInvoke);
   tool(tool$evaluatorsGetV2EvaluatorsIdVersions);
+  tool(tool$identitiesList);
+  tool(tool$identitiesCreate);
+  tool(tool$identitiesRetrieve);
+  tool(tool$identitiesUpdate);
+  tool(tool$identitiesDelete);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);

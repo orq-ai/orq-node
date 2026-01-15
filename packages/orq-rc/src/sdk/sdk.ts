@@ -13,6 +13,7 @@ import { Evals } from "./evals.js";
 import { Evaluators } from "./evaluators.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
+import { Identities } from "./identities.js";
 import { Internal } from "./internal.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
@@ -41,6 +42,11 @@ export class Orq extends ClientSDK {
   private _evaluators?: Evaluators;
   get evaluators(): Evaluators {
     return (this._evaluators ??= new Evaluators(this._options));
+  }
+
+  private _identities?: Identities;
+  get identities(): Identities {
+    return (this._identities ??= new Identities(this._options));
   }
 
   private _deployments?: Deployments;

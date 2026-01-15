@@ -337,7 +337,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01keyb6f90ywd3v4z9cnjy470w"),
+  _id: z.string().default("reasoning_01kezxqgbzrp6wwpv7s4gys90p"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$inboundSchema,
   reasoning: z.string(),
@@ -362,7 +362,7 @@ export const PartReasoningPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PartReasoningPart
 > = z.object({
-  id: z.string().default("reasoning_01keyb6f90ywd3v4z9cnjy470w"),
+  id: z.string().default("reasoning_01kezxqgbzrp6wwpv7s4gys90p"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$outboundSchema,
   reasoning: z.string(),
@@ -510,7 +510,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01keyb6f8w7mnyenkngdj0wy4x"),
+  _id: z.string().default("reasoning_01kezxqgbva58jpqg7btdv9g5j"),
   metadata: z.record(z.any()).optional(),
   kind: DeltaKind$inboundSchema,
   reasoning: z.string(),
@@ -535,7 +535,7 @@ export const ReasoningPart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReasoningPart
 > = z.object({
-  id: z.string().default("reasoning_01keyb6f8w7mnyenkngdj0wy4x"),
+  id: z.string().default("reasoning_01kezxqgbva58jpqg7btdv9g5j"),
   metadata: z.record(z.any()).optional(),
   kind: DeltaKind$outboundSchema,
   reasoning: z.string(),
