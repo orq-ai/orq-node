@@ -13,8 +13,8 @@ let value: GetEvalsResponseBody = {
     {
       id: "<id>",
       description: "ah boo tame ethyl without consequently",
-      created: "2026-01-19T15:09:20.409Z",
-      updated: "2026-01-19T15:09:20.409Z",
+      created: "2026-01-19T15:37:07.712Z",
+      updated: "2026-01-19T15:37:07.712Z",
       type: "function_eval",
       functionParams: {
         type: "meteor_score",
