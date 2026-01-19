@@ -167,7 +167,7 @@ export const CreateIdentityResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-17T09:50:54.473Z",
+    "2026-01-19T00:48:48.487Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -207,7 +207,7 @@ export const CreateIdentityResponseBody$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-17T09:50:54.473Z"))
+  updated: z.date().default(() => new Date("2026-01-19T00:48:48.487Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
