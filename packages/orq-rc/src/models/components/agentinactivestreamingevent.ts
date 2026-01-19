@@ -164,6 +164,7 @@ export type AgentInactiveStreamingEventUsage = {
     | AgentInactiveStreamingEventCompletionTokensDetails
     | null
     | undefined;
+  timeToFirstToken?: number | undefined;
 };
 
 export type AgentInactiveStreamingEventData = {
@@ -617,6 +618,7 @@ export const AgentInactiveStreamingEventUsage$inboundSchema: z.ZodType<
       AgentInactiveStreamingEventCompletionTokensDetails$inboundSchema
     ),
   ).optional(),
+  time_to_first_token: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "completion_tokens": "completionTokens",
@@ -624,6 +626,7 @@ export const AgentInactiveStreamingEventUsage$inboundSchema: z.ZodType<
     "total_tokens": "totalTokens",
     "prompt_tokens_details": "promptTokensDetails",
     "completion_tokens_details": "completionTokensDetails",
+    "time_to_first_token": "timeToFirstToken",
   });
 });
 /** @internal */
@@ -639,6 +642,7 @@ export type AgentInactiveStreamingEventUsage$Outbound = {
     | AgentInactiveStreamingEventCompletionTokensDetails$Outbound
     | null
     | undefined;
+  time_to_first_token?: number | undefined;
 };
 
 /** @internal */
@@ -658,6 +662,7 @@ export const AgentInactiveStreamingEventUsage$outboundSchema: z.ZodType<
       AgentInactiveStreamingEventCompletionTokensDetails$outboundSchema
     ),
   ).optional(),
+  timeToFirstToken: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     completionTokens: "completion_tokens",
@@ -665,6 +670,7 @@ export const AgentInactiveStreamingEventUsage$outboundSchema: z.ZodType<
     totalTokens: "total_tokens",
     promptTokensDetails: "prompt_tokens_details",
     completionTokensDetails: "completion_tokens_details",
+    timeToFirstToken: "time_to_first_token",
   });
 });
 
