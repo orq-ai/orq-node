@@ -167,6 +167,17 @@ export type AgentInactiveStreamingEventUsage = {
   timeToFirstToken?: number | undefined;
 };
 
+/**
+ * Billing information for the agent execution
+ */
+export type Billing = {
+  totalCost: number;
+  inputCost: number;
+  outputCost: number;
+  billable: boolean;
+  integrationId: string | null;
+};
+
 export type AgentInactiveStreamingEventData = {
   lastMessage: string;
   /**
@@ -187,6 +198,10 @@ export type AgentInactiveStreamingEventData = {
    * Token usage from the last agent message
    */
   usage?: AgentInactiveStreamingEventUsage | undefined;
+  /**
+   * Billing information for the agent execution
+   */
+  billing?: Billing | undefined;
   workflowRunId: string;
   /**
    * ID of the response tracking this execution
@@ -694,6 +709,64 @@ export function agentInactiveStreamingEventUsageFromJSON(
 }
 
 /** @internal */
+export const Billing$inboundSchema: z.ZodType<Billing, z.ZodTypeDef, unknown> =
+  z.object({
+    total_cost: z.number(),
+    input_cost: z.number(),
+    output_cost: z.number(),
+    billable: z.boolean(),
+    integration_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+      "input_cost": "inputCost",
+      "output_cost": "outputCost",
+      "integration_id": "integrationId",
+    });
+  });
+/** @internal */
+export type Billing$Outbound = {
+  total_cost: number;
+  input_cost: number;
+  output_cost: number;
+  billable: boolean;
+  integration_id: string | null;
+};
+
+/** @internal */
+export const Billing$outboundSchema: z.ZodType<
+  Billing$Outbound,
+  z.ZodTypeDef,
+  Billing
+> = z.object({
+  totalCost: z.number(),
+  inputCost: z.number(),
+  outputCost: z.number(),
+  billable: z.boolean(),
+  integrationId: z.nullable(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    totalCost: "total_cost",
+    inputCost: "input_cost",
+    outputCost: "output_cost",
+    integrationId: "integration_id",
+  });
+});
+
+export function billingToJSON(billing: Billing): string {
+  return JSON.stringify(Billing$outboundSchema.parse(billing));
+}
+export function billingFromJSON(
+  jsonString: string,
+): SafeParseResult<Billing, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Billing$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Billing' from JSON`,
+  );
+}
+
+/** @internal */
 export const AgentInactiveStreamingEventData$inboundSchema: z.ZodType<
   AgentInactiveStreamingEventData,
   z.ZodTypeDef,
@@ -707,6 +780,7 @@ export const AgentInactiveStreamingEventData$inboundSchema: z.ZodType<
   ).optional(),
   usage: z.lazy(() => AgentInactiveStreamingEventUsage$inboundSchema)
     .optional(),
+  billing: z.lazy(() => Billing$inboundSchema).optional(),
   workflowRunId: z.string(),
   responseId: z.string().optional(),
 }).transform((v) => {
@@ -726,6 +800,7 @@ export type AgentInactiveStreamingEventData$Outbound = {
     | Array<AgentInactiveStreamingEventPendingToolCalls$Outbound>
     | undefined;
   usage?: AgentInactiveStreamingEventUsage$Outbound | undefined;
+  billing?: Billing$Outbound | undefined;
   workflowRunId: string;
   responseId?: string | undefined;
 };
@@ -744,6 +819,7 @@ export const AgentInactiveStreamingEventData$outboundSchema: z.ZodType<
   ).optional(),
   usage: z.lazy(() => AgentInactiveStreamingEventUsage$outboundSchema)
     .optional(),
+  billing: z.lazy(() => Billing$outboundSchema).optional(),
   workflowRunId: z.string(),
   responseId: z.string().optional(),
 }).transform((v) => {
