@@ -175,7 +175,7 @@ export type OriginalValue = number | boolean | string;
 
 export type InvokeEvalResponseBodyEvalsResponseValue = {
   workflowRunId: string;
-  value: number | boolean | string;
+  value: number | boolean | string | null;
   explanation?: string | null | undefined;
   originalValue?: number | boolean | string | null | undefined;
   originalExplanation?: string | null | undefined;
@@ -1052,7 +1052,7 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   workflow_run_id: z.string(),
-  value: z.union([z.number(), z.boolean(), z.string()]),
+  value: z.nullable(z.union([z.number(), z.boolean(), z.string()])),
   explanation: z.nullable(z.string()).optional(),
   original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
     .optional(),
@@ -1067,7 +1067,7 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
 /** @internal */
 export type InvokeEvalResponseBodyEvalsResponseValue$Outbound = {
   workflow_run_id: string;
-  value: number | boolean | string;
+  value: number | boolean | string | null;
   explanation?: string | null | undefined;
   original_value?: number | boolean | string | null | undefined;
   original_explanation?: string | null | undefined;
@@ -1080,7 +1080,7 @@ export const InvokeEvalResponseBodyEvalsResponseValue$outboundSchema: z.ZodType<
   InvokeEvalResponseBodyEvalsResponseValue
 > = z.object({
   workflowRunId: z.string(),
-  value: z.union([z.number(), z.boolean(), z.string()]),
+  value: z.nullable(z.union([z.number(), z.boolean(), z.string()])),
   explanation: z.nullable(z.string()).optional(),
   originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
     .optional(),

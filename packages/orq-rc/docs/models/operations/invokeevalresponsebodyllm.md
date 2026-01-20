@@ -9,7 +9,7 @@ let value: InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
     workflowRunId: "<id>",
-    value: "<value>",
+    value: 2734.06,
   },
 };
 ```
