@@ -3,30 +3,42 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.Two1 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreatePrompt22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.CreatePrompt22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://picsum.photos/id/1/200/300",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.Two3`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.Two3 = {
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.CreatePrompt24`
+
+```typescript
+const value: operations.CreatePrompt24 = {
   type: "file",
   file: {},
 };

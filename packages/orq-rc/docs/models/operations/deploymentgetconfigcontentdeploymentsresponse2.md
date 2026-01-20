@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig21`
+### `operations.Two1`
 
 ```typescript
-const value: operations.DeploymentGetConfig21 = {
+const value: operations.Two1 = {
   type: "text",
   text: "<value>",
 };
@@ -23,10 +23,10 @@ const value: operations.DeploymentGetConfig22 = {
 };
 ```
 
-### `operations.DeploymentGetConfig23`
+### `operations.Two3`
 
 ```typescript
-const value: operations.DeploymentGetConfig23 = {
+const value: operations.Two3 = {
   type: "file",
   file: {},
 };

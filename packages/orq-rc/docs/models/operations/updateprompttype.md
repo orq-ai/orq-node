@@ -5,11 +5,11 @@
 ```typescript
 import { UpdatePromptType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptType = "function";
+let value: UpdatePromptType = "prompt";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"prompt"
 ```

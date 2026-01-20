@@ -12,35 +12,30 @@ const value: components.TextContentPartSchema = {
 };
 ```
 
-### `components.ImageContentPartSchema`
+### `components.RefusalPartSchema`
 
 ```typescript
-const value: components.ImageContentPartSchema = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://fatal-overload.name/",
-  },
+const value: components.RefusalPartSchema = {
+  type: "refusal",
 };
 ```
 
-### `components.AudioContentPartSchema`
+### `components.ReasoningPartSchema`
 
 ```typescript
-const value: components.AudioContentPartSchema = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
+const value: components.ReasoningPartSchema = {
+  type: "reasoning",
+  reasoning: "<value>",
+  signature: "<value>",
 };
 ```
 
-### `operations.UpdatePrompt24`
+### `components.RedactedReasoningPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt24 = {
-  type: "file",
-  file: {},
+const value: components.RedactedReasoningPartSchema = {
+  type: "redacted_reasoning",
+  data: "<value>",
 };
 ```
 

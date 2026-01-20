@@ -46,18 +46,18 @@ const value: operations.CreateEvalFunctionParams4 = {
 };
 ```
 
-### `operations.CreateEvalFunctionParams5`
+### `operations.Five`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams5 = {
+const value: operations.Five = {
   type: "contains_email",
 };
 ```
 
-### `operations.CreateEvalFunctionParams6`
+### `operations.Six`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams6 = {
+const value: operations.Six = {
   type: "contains_url",
 };
 ```

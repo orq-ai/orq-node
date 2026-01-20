@@ -1156,7 +1156,7 @@ export type DeploymentGetConfigRole = ClosedEnum<
   typeof DeploymentGetConfigRole
 >;
 
-export type DeploymentGetConfig2File = {
+export type TwoFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
@@ -1175,15 +1175,15 @@ export type DeploymentGetConfig2File = {
   filename?: string | undefined;
 };
 
-export type DeploymentGetConfig23 = {
+export type Two3 = {
   /**
    * The type of the content part. Always `file`.
    */
   type: "file";
-  file: DeploymentGetConfig2File;
+  file: TwoFile;
 };
 
-export type DeploymentGetConfig2ImageUrl = {
+export type TwoImageUrl = {
   /**
    * The orq.ai id of the image
    */
@@ -1203,30 +1203,28 @@ export type DeploymentGetConfig2ImageUrl = {
  */
 export type DeploymentGetConfig22 = {
   type: "image_url";
-  imageUrl: DeploymentGetConfig2ImageUrl;
+  imageUrl: TwoImageUrl;
 };
 
 /**
  * Text content part of a prompt message
  */
-export type DeploymentGetConfig21 = {
+export type Two1 = {
   type: "text";
   text: string;
 };
 
 export type DeploymentGetConfigContentDeploymentsResponse2 =
-  | DeploymentGetConfig21
+  | Two1
   | DeploymentGetConfig22
-  | DeploymentGetConfig23;
+  | Two3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type DeploymentGetConfigContent =
   | string
-  | Array<
-    DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
-  >;
+  | Array<Two1 | DeploymentGetConfig22 | Two3>;
 
 export const DeploymentGetConfigDeploymentsResponseType = {
   Function: "function",
@@ -1258,12 +1256,7 @@ export type DeploymentGetConfigDeploymentsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content:
-    | string
-    | Array<
-      DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
-    >
-    | null;
+  content: string | Array<Two1 | DeploymentGetConfig22 | Two3> | null;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
   toolCallId?: string | null | undefined;
 };
@@ -1284,26 +1277,22 @@ export type DeploymentGetConfigFormat = ClosedEnum<
   typeof DeploymentGetConfigFormat
 >;
 
-export const DeploymentGetConfigResponseFormat6 = {
+export const ResponseFormat6 = {
   Json: "json",
   Text: "text",
   Srt: "srt",
   VerboseJson: "verbose_json",
   Vtt: "vtt",
 } as const;
-export type DeploymentGetConfigResponseFormat6 = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormat6
->;
+export type ResponseFormat6 = ClosedEnum<typeof ResponseFormat6>;
 
-export const DeploymentGetConfigResponseFormat5 = {
+export const ResponseFormat5 = {
   Url: "url",
   Base64Json: "base64_json",
 } as const;
-export type DeploymentGetConfigResponseFormat5 = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormat5
->;
+export type ResponseFormat5 = ClosedEnum<typeof ResponseFormat5>;
 
-export const DeploymentGetConfigResponseFormat4 = {
+export const ResponseFormat4 = {
   Mp3: "mp3",
   Opus: "opus",
   Aac: "aac",
@@ -1311,9 +1300,7 @@ export const DeploymentGetConfigResponseFormat4 = {
   Wav: "wav",
   Pcm: "pcm",
 } as const;
-export type DeploymentGetConfigResponseFormat4 = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormat4
->;
+export type ResponseFormat4 = ClosedEnum<typeof ResponseFormat4>;
 
 export const DeploymentGetConfigResponseFormatDeploymentsType = {
   Text: "text",
@@ -1322,7 +1309,7 @@ export type DeploymentGetConfigResponseFormatDeploymentsType = ClosedEnum<
   typeof DeploymentGetConfigResponseFormatDeploymentsType
 >;
 
-export type DeploymentGetConfigResponseFormat3 = {
+export type ResponseFormat3 = {
   type: DeploymentGetConfigResponseFormatDeploymentsType;
 };
 
@@ -1333,7 +1320,7 @@ export type DeploymentGetConfigResponseFormatType = ClosedEnum<
   typeof DeploymentGetConfigResponseFormatType
 >;
 
-export type DeploymentGetConfigResponseFormat2 = {
+export type ResponseFormat2 = {
   type: DeploymentGetConfigResponseFormatType;
 };
 
@@ -1350,7 +1337,7 @@ export type DeploymentGetConfigResponseFormatJsonSchema = {
   schema: { [k: string]: any };
 };
 
-export type DeploymentGetConfigResponseFormat1 = {
+export type ResponseFormat1 = {
   type: DeploymentGetConfigResponseFormatDeploymentsResponseType;
   displayName?: string | undefined;
   jsonSchema: DeploymentGetConfigResponseFormatJsonSchema;
@@ -1368,40 +1355,36 @@ export type DeploymentGetConfigResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type DeploymentGetConfigResponseFormat =
-  | DeploymentGetConfigResponseFormat1
-  | DeploymentGetConfigResponseFormat2
-  | DeploymentGetConfigResponseFormat3
-  | DeploymentGetConfigResponseFormat4
-  | DeploymentGetConfigResponseFormat5
-  | DeploymentGetConfigResponseFormat6;
+  | ResponseFormat1
+  | ResponseFormat2
+  | ResponseFormat3
+  | ResponseFormat4
+  | ResponseFormat5
+  | ResponseFormat6;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
  */
-export const DeploymentGetConfigPhotoRealVersion = {
+export const PhotoRealVersion = {
   V1: "v1",
   V2: "v2",
 } as const;
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
  */
-export type DeploymentGetConfigPhotoRealVersion = ClosedEnum<
-  typeof DeploymentGetConfigPhotoRealVersion
->;
+export type PhotoRealVersion = ClosedEnum<typeof PhotoRealVersion>;
 
 /**
  * The format to return the embeddings
  */
-export const DeploymentGetConfigEncodingFormat = {
+export const EncodingFormat = {
   Float: "float",
   Base64: "base64",
 } as const;
 /**
  * The format to return the embeddings
  */
-export type DeploymentGetConfigEncodingFormat = ClosedEnum<
-  typeof DeploymentGetConfigEncodingFormat
->;
+export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
 
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1424,7 +1407,7 @@ export type DeploymentGetConfigReasoningEffort = ClosedEnum<
 /**
  * Controls the verbosity of the model output.
  */
-export const DeploymentGetConfigVerbosity = {
+export const Verbosity = {
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -1432,23 +1415,19 @@ export const DeploymentGetConfigVerbosity = {
 /**
  * Controls the verbosity of the model output.
  */
-export type DeploymentGetConfigVerbosity = ClosedEnum<
-  typeof DeploymentGetConfigVerbosity
->;
+export type Verbosity = ClosedEnum<typeof Verbosity>;
 
 /**
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
-export const DeploymentGetConfigThinkingLevel = {
+export const ThinkingLevel = {
   Low: "low",
   High: "high",
 } as const;
 /**
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
-export type DeploymentGetConfigThinkingLevel = ClosedEnum<
-  typeof DeploymentGetConfigThinkingLevel
->;
+export type ThinkingLevel = ClosedEnum<typeof ThinkingLevel>;
 
 /**
  * Model Parameters: Not all parameters apply to every model
@@ -1514,22 +1493,22 @@ export type DeploymentGetConfigParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | DeploymentGetConfigResponseFormat1
-    | DeploymentGetConfigResponseFormat2
-    | DeploymentGetConfigResponseFormat3
-    | DeploymentGetConfigResponseFormat4
-    | DeploymentGetConfigResponseFormat5
-    | DeploymentGetConfigResponseFormat6
+    | ResponseFormat1
+    | ResponseFormat2
+    | ResponseFormat3
+    | ResponseFormat4
+    | ResponseFormat5
+    | ResponseFormat6
     | null
     | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
-  photoRealVersion?: DeploymentGetConfigPhotoRealVersion | undefined;
+  photoRealVersion?: PhotoRealVersion | undefined;
   /**
    * The format to return the embeddings
    */
-  encodingFormat?: DeploymentGetConfigEncodingFormat | undefined;
+  encodingFormat?: EncodingFormat | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
@@ -1541,11 +1520,11 @@ export type DeploymentGetConfigParameters = {
   /**
    * Controls the verbosity of the model output.
    */
-  verbosity?: DeploymentGetConfigVerbosity | undefined;
+  verbosity?: Verbosity | undefined;
   /**
    * The level of thinking to use for the model. Only supported by `Google AI`
    */
-  thinkingLevel?: DeploymentGetConfigThinkingLevel | undefined;
+  thinkingLevel?: ThinkingLevel | undefined;
 };
 
 /**
@@ -5831,22 +5810,19 @@ export const DeploymentGetConfigRole$outboundSchema: z.ZodNativeEnum<
 > = DeploymentGetConfigRole$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfig2File$inboundSchema: z.ZodType<
-  DeploymentGetConfig2File,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
+export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
+  z.object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+    });
   });
-});
 /** @internal */
-export type DeploymentGetConfig2File$Outbound = {
+export type TwoFile$Outbound = {
   file_data?: string | undefined;
   uri?: string | undefined;
   mimeType?: string | undefined;
@@ -5854,10 +5830,10 @@ export type DeploymentGetConfig2File$Outbound = {
 };
 
 /** @internal */
-export const DeploymentGetConfig2File$outboundSchema: z.ZodType<
-  DeploymentGetConfig2File$Outbound,
+export const TwoFile$outboundSchema: z.ZodType<
+  TwoFile$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2File
+  TwoFile
 > = z.object({
   fileData: z.string().optional(),
   uri: z.string().optional(),
@@ -5869,68 +5845,54 @@ export const DeploymentGetConfig2File$outboundSchema: z.ZodType<
   });
 });
 
-export function deploymentGetConfig2FileToJSON(
-  deploymentGetConfig2File: DeploymentGetConfig2File,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2File$outboundSchema.parse(deploymentGetConfig2File),
-  );
+export function twoFileToJSON(twoFile: TwoFile): string {
+  return JSON.stringify(TwoFile$outboundSchema.parse(twoFile));
 }
-export function deploymentGetConfig2FileFromJSON(
+export function twoFileFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2File, SDKValidationError> {
+): SafeParseResult<TwoFile, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig2File$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2File' from JSON`,
+    (x) => TwoFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoFile' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentGetConfig23$inboundSchema: z.ZodType<
-  DeploymentGetConfig23,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => DeploymentGetConfig2File$inboundSchema),
-});
+export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("file"),
+    file: z.lazy(() => TwoFile$inboundSchema),
+  });
 /** @internal */
-export type DeploymentGetConfig23$Outbound = {
+export type Two3$Outbound = {
   type: "file";
-  file: DeploymentGetConfig2File$Outbound;
+  file: TwoFile$Outbound;
 };
 
 /** @internal */
-export const DeploymentGetConfig23$outboundSchema: z.ZodType<
-  DeploymentGetConfig23$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => DeploymentGetConfig2File$outboundSchema),
-});
+export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
+  z.object({
+    type: z.literal("file"),
+    file: z.lazy(() => TwoFile$outboundSchema),
+  });
 
-export function deploymentGetConfig23ToJSON(
-  deploymentGetConfig23: DeploymentGetConfig23,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig23$outboundSchema.parse(deploymentGetConfig23),
-  );
+export function two3ToJSON(two3: Two3): string {
+  return JSON.stringify(Two3$outboundSchema.parse(two3));
 }
-export function deploymentGetConfig23FromJSON(
+export function two3FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig23, SDKValidationError> {
+): SafeParseResult<Two3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig23' from JSON`,
+    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two3' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentGetConfig2ImageUrl$inboundSchema: z.ZodType<
-  DeploymentGetConfig2ImageUrl,
+export const TwoImageUrl$inboundSchema: z.ZodType<
+  TwoImageUrl,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5939,39 +5901,33 @@ export const DeploymentGetConfig2ImageUrl$inboundSchema: z.ZodType<
   detail: z.string().optional(),
 });
 /** @internal */
-export type DeploymentGetConfig2ImageUrl$Outbound = {
+export type TwoImageUrl$Outbound = {
   id?: string | undefined;
   url: string;
   detail?: string | undefined;
 };
 
 /** @internal */
-export const DeploymentGetConfig2ImageUrl$outboundSchema: z.ZodType<
-  DeploymentGetConfig2ImageUrl$Outbound,
+export const TwoImageUrl$outboundSchema: z.ZodType<
+  TwoImageUrl$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2ImageUrl
+  TwoImageUrl
 > = z.object({
   id: z.string().optional(),
   url: z.string(),
   detail: z.string().optional(),
 });
 
-export function deploymentGetConfig2ImageUrlToJSON(
-  deploymentGetConfig2ImageUrl: DeploymentGetConfig2ImageUrl,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2ImageUrl$outboundSchema.parse(
-      deploymentGetConfig2ImageUrl,
-    ),
-  );
+export function twoImageUrlToJSON(twoImageUrl: TwoImageUrl): string {
+  return JSON.stringify(TwoImageUrl$outboundSchema.parse(twoImageUrl));
 }
-export function deploymentGetConfig2ImageUrlFromJSON(
+export function twoImageUrlFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2ImageUrl, SDKValidationError> {
+): SafeParseResult<TwoImageUrl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig2ImageUrl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2ImageUrl' from JSON`,
+    (x) => TwoImageUrl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoImageUrl' from JSON`,
   );
 }
 
@@ -5982,7 +5938,7 @@ export const DeploymentGetConfig22$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("image_url"),
-  image_url: z.lazy(() => DeploymentGetConfig2ImageUrl$inboundSchema),
+  image_url: z.lazy(() => TwoImageUrl$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "image_url": "imageUrl",
@@ -5991,7 +5947,7 @@ export const DeploymentGetConfig22$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentGetConfig22$Outbound = {
   type: "image_url";
-  image_url: DeploymentGetConfig2ImageUrl$Outbound;
+  image_url: TwoImageUrl$Outbound;
 };
 
 /** @internal */
@@ -6001,7 +5957,7 @@ export const DeploymentGetConfig22$outboundSchema: z.ZodType<
   DeploymentGetConfig22
 > = z.object({
   type: z.literal("image_url"),
-  imageUrl: z.lazy(() => DeploymentGetConfig2ImageUrl$outboundSchema),
+  imageUrl: z.lazy(() => TwoImageUrl$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     imageUrl: "image_url",
@@ -6026,44 +5982,34 @@ export function deploymentGetConfig22FromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig21$inboundSchema: z.ZodType<
-  DeploymentGetConfig21,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("text"),
+    text: z.string(),
+  });
 /** @internal */
-export type DeploymentGetConfig21$Outbound = {
+export type Two1$Outbound = {
   type: "text";
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig21$outboundSchema: z.ZodType<
-  DeploymentGetConfig21$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  });
 
-export function deploymentGetConfig21ToJSON(
-  deploymentGetConfig21: DeploymentGetConfig21,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig21$outboundSchema.parse(deploymentGetConfig21),
-  );
+export function two1ToJSON(two1: Two1): string {
+  return JSON.stringify(Two1$outboundSchema.parse(two1));
 }
-export function deploymentGetConfig21FromJSON(
+export function two1FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
+): SafeParseResult<Two1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig21' from JSON`,
+    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two1' from JSON`,
   );
 }
 
@@ -6074,15 +6020,15 @@ export const DeploymentGetConfigContentDeploymentsResponse2$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => Two1$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
-    z.lazy(() => DeploymentGetConfig23$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ]);
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsResponse2$Outbound =
-  | DeploymentGetConfig21$Outbound
+  | Two1$Outbound
   | DeploymentGetConfig22$Outbound
-  | DeploymentGetConfig23$Outbound;
+  | Two3$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
@@ -6091,9 +6037,9 @@ export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
     z.ZodTypeDef,
     DeploymentGetConfigContentDeploymentsResponse2
   > = z.union([
-    z.lazy(() => DeploymentGetConfig21$outboundSchema),
+    z.lazy(() => Two1$outboundSchema),
     z.lazy(() => DeploymentGetConfig22$outboundSchema),
-    z.lazy(() => DeploymentGetConfig23$outboundSchema),
+    z.lazy(() => Two3$outboundSchema),
   ]);
 
 export function deploymentGetConfigContentDeploymentsResponse2ToJSON(
@@ -6130,19 +6076,15 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => Two1$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
-    z.lazy(() => DeploymentGetConfig23$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ])),
 ]);
 /** @internal */
 export type DeploymentGetConfigContent$Outbound =
   | string
-  | Array<
-    | DeploymentGetConfig21$Outbound
-    | DeploymentGetConfig22$Outbound
-    | DeploymentGetConfig23$Outbound
-  >;
+  | Array<Two1$Outbound | DeploymentGetConfig22$Outbound | Two3$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigContent$outboundSchema: z.ZodType<
@@ -6152,9 +6094,9 @@ export const DeploymentGetConfigContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig21$outboundSchema),
+    z.lazy(() => Two1$outboundSchema),
     z.lazy(() => DeploymentGetConfig22$outboundSchema),
-    z.lazy(() => DeploymentGetConfig23$outboundSchema),
+    z.lazy(() => Two3$outboundSchema),
   ])),
 ]);
 
@@ -6290,13 +6232,11 @@ export const DeploymentGetConfigDeploymentsMessages$inboundSchema: z.ZodType<
   content: z.nullable(
     z.union([
       z.string(),
-      z.array(
-        z.union([
-          z.lazy(() => DeploymentGetConfig21$inboundSchema),
-          z.lazy(() => DeploymentGetConfig22$inboundSchema),
-          z.lazy(() => DeploymentGetConfig23$inboundSchema),
-        ]),
-      ),
+      z.array(z.union([
+        z.lazy(() => Two1$inboundSchema),
+        z.lazy(() => DeploymentGetConfig22$inboundSchema),
+        z.lazy(() => Two3$inboundSchema),
+      ])),
     ]),
   ),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))
@@ -6313,11 +6253,7 @@ export type DeploymentGetConfigDeploymentsMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<
-      | DeploymentGetConfig21$Outbound
-      | DeploymentGetConfig22$Outbound
-      | DeploymentGetConfig23$Outbound
-    >
+    | Array<Two1$Outbound | DeploymentGetConfig22$Outbound | Two3$Outbound>
     | null;
   tool_calls?: Array<DeploymentGetConfigToolCalls$Outbound> | undefined;
   tool_call_id?: string | null | undefined;
@@ -6333,13 +6269,11 @@ export const DeploymentGetConfigDeploymentsMessages$outboundSchema: z.ZodType<
   content: z.nullable(
     z.union([
       z.string(),
-      z.array(
-        z.union([
-          z.lazy(() => DeploymentGetConfig21$outboundSchema),
-          z.lazy(() => DeploymentGetConfig22$outboundSchema),
-          z.lazy(() => DeploymentGetConfig23$outboundSchema),
-        ]),
-      ),
+      z.array(z.union([
+        z.lazy(() => Two1$outboundSchema),
+        z.lazy(() => DeploymentGetConfig22$outboundSchema),
+        z.lazy(() => Two3$outboundSchema),
+      ])),
     ]),
   ),
   toolCalls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$outboundSchema))
@@ -6383,31 +6317,31 @@ export const DeploymentGetConfigFormat$outboundSchema: z.ZodNativeEnum<
 > = DeploymentGetConfigFormat$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat6$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat6
-> = z.nativeEnum(DeploymentGetConfigResponseFormat6);
+export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat6
+> = z.nativeEnum(ResponseFormat6);
 /** @internal */
-export const DeploymentGetConfigResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat6
-> = DeploymentGetConfigResponseFormat6$inboundSchema;
+export const ResponseFormat6$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat6
+> = ResponseFormat6$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat5$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat5
-> = z.nativeEnum(DeploymentGetConfigResponseFormat5);
+export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat5
+> = z.nativeEnum(ResponseFormat5);
 /** @internal */
-export const DeploymentGetConfigResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat5
-> = DeploymentGetConfigResponseFormat5$inboundSchema;
+export const ResponseFormat5$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat5
+> = ResponseFormat5$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat4$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat4
-> = z.nativeEnum(DeploymentGetConfigResponseFormat4);
+export const ResponseFormat4$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat4
+> = z.nativeEnum(ResponseFormat4);
 /** @internal */
-export const DeploymentGetConfigResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigResponseFormat4
-> = DeploymentGetConfigResponseFormat4$inboundSchema;
+export const ResponseFormat4$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat4
+> = ResponseFormat4$inboundSchema;
 
 /** @internal */
 export const DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema:
@@ -6419,44 +6353,39 @@ export const DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema:
     DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat3$inboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat3,
+export const ResponseFormat3$inboundSchema: z.ZodType<
+  ResponseFormat3,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema,
 });
 /** @internal */
-export type DeploymentGetConfigResponseFormat3$Outbound = {
+export type ResponseFormat3$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat3$outboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat3$Outbound,
+export const ResponseFormat3$outboundSchema: z.ZodType<
+  ResponseFormat3$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigResponseFormat3
+  ResponseFormat3
 > = z.object({
   type: DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema,
 });
 
-export function deploymentGetConfigResponseFormat3ToJSON(
-  deploymentGetConfigResponseFormat3: DeploymentGetConfigResponseFormat3,
+export function responseFormat3ToJSON(
+  responseFormat3: ResponseFormat3,
 ): string {
-  return JSON.stringify(
-    DeploymentGetConfigResponseFormat3$outboundSchema.parse(
-      deploymentGetConfigResponseFormat3,
-    ),
-  );
+  return JSON.stringify(ResponseFormat3$outboundSchema.parse(responseFormat3));
 }
-export function deploymentGetConfigResponseFormat3FromJSON(
+export function responseFormat3FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigResponseFormat3, SDKValidationError> {
+): SafeParseResult<ResponseFormat3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigResponseFormat3' from JSON`,
+    (x) => ResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat3' from JSON`,
   );
 }
 
@@ -6471,44 +6400,39 @@ export const DeploymentGetConfigResponseFormatType$outboundSchema:
     DeploymentGetConfigResponseFormatType$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat2$inboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat2,
+export const ResponseFormat2$inboundSchema: z.ZodType<
+  ResponseFormat2,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: DeploymentGetConfigResponseFormatType$inboundSchema,
 });
 /** @internal */
-export type DeploymentGetConfigResponseFormat2$Outbound = {
+export type ResponseFormat2$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat2$outboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat2$Outbound,
+export const ResponseFormat2$outboundSchema: z.ZodType<
+  ResponseFormat2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigResponseFormat2
+  ResponseFormat2
 > = z.object({
   type: DeploymentGetConfigResponseFormatType$outboundSchema,
 });
 
-export function deploymentGetConfigResponseFormat2ToJSON(
-  deploymentGetConfigResponseFormat2: DeploymentGetConfigResponseFormat2,
+export function responseFormat2ToJSON(
+  responseFormat2: ResponseFormat2,
 ): string {
-  return JSON.stringify(
-    DeploymentGetConfigResponseFormat2$outboundSchema.parse(
-      deploymentGetConfigResponseFormat2,
-    ),
-  );
+  return JSON.stringify(ResponseFormat2$outboundSchema.parse(responseFormat2));
 }
-export function deploymentGetConfigResponseFormat2FromJSON(
+export function responseFormat2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigResponseFormat2, SDKValidationError> {
+): SafeParseResult<ResponseFormat2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigResponseFormat2' from JSON`,
+    (x) => ResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat2' from JSON`,
   );
 }
 
@@ -6583,8 +6507,8 @@ export function deploymentGetConfigResponseFormatJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat1$inboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat1,
+export const ResponseFormat1$inboundSchema: z.ZodType<
+  ResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6600,17 +6524,17 @@ export const DeploymentGetConfigResponseFormat1$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type DeploymentGetConfigResponseFormat1$Outbound = {
+export type ResponseFormat1$Outbound = {
   type: string;
   display_name?: string | undefined;
   json_schema: DeploymentGetConfigResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat1$outboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat1$Outbound,
+export const ResponseFormat1$outboundSchema: z.ZodType<
+  ResponseFormat1$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigResponseFormat1
+  ResponseFormat1
 > = z.object({
   type: DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema,
   displayName: z.string().optional(),
@@ -6624,23 +6548,18 @@ export const DeploymentGetConfigResponseFormat1$outboundSchema: z.ZodType<
   });
 });
 
-export function deploymentGetConfigResponseFormat1ToJSON(
-  deploymentGetConfigResponseFormat1: DeploymentGetConfigResponseFormat1,
+export function responseFormat1ToJSON(
+  responseFormat1: ResponseFormat1,
 ): string {
-  return JSON.stringify(
-    DeploymentGetConfigResponseFormat1$outboundSchema.parse(
-      deploymentGetConfigResponseFormat1,
-    ),
-  );
+  return JSON.stringify(ResponseFormat1$outboundSchema.parse(responseFormat1));
 }
-export function deploymentGetConfigResponseFormat1FromJSON(
+export function responseFormat1FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigResponseFormat1, SDKValidationError> {
+): SafeParseResult<ResponseFormat1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigResponseFormat1' from JSON`,
+    (x) => ResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat1' from JSON`,
   );
 }
 
@@ -6650,18 +6569,18 @@ export const DeploymentGetConfigResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat3$inboundSchema),
-  DeploymentGetConfigResponseFormat4$inboundSchema,
-  DeploymentGetConfigResponseFormat5$inboundSchema,
-  DeploymentGetConfigResponseFormat6$inboundSchema,
+  z.lazy(() => ResponseFormat1$inboundSchema),
+  z.lazy(() => ResponseFormat2$inboundSchema),
+  z.lazy(() => ResponseFormat3$inboundSchema),
+  ResponseFormat4$inboundSchema,
+  ResponseFormat5$inboundSchema,
+  ResponseFormat6$inboundSchema,
 ]);
 /** @internal */
 export type DeploymentGetConfigResponseFormat$Outbound =
-  | DeploymentGetConfigResponseFormat1$Outbound
-  | DeploymentGetConfigResponseFormat2$Outbound
-  | DeploymentGetConfigResponseFormat3$Outbound
+  | ResponseFormat1$Outbound
+  | ResponseFormat2$Outbound
+  | ResponseFormat3$Outbound
   | string
   | string
   | string;
@@ -6672,12 +6591,12 @@ export const DeploymentGetConfigResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentGetConfigResponseFormat
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat3$outboundSchema),
-  DeploymentGetConfigResponseFormat4$outboundSchema,
-  DeploymentGetConfigResponseFormat5$outboundSchema,
-  DeploymentGetConfigResponseFormat6$outboundSchema,
+  z.lazy(() => ResponseFormat1$outboundSchema),
+  z.lazy(() => ResponseFormat2$outboundSchema),
+  z.lazy(() => ResponseFormat3$outboundSchema),
+  ResponseFormat4$outboundSchema,
+  ResponseFormat5$outboundSchema,
+  ResponseFormat6$outboundSchema,
 ]);
 
 export function deploymentGetConfigResponseFormatToJSON(
@@ -6700,22 +6619,22 @@ export function deploymentGetConfigResponseFormatFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigPhotoRealVersion
-> = z.nativeEnum(DeploymentGetConfigPhotoRealVersion);
+export const PhotoRealVersion$inboundSchema: z.ZodNativeEnum<
+  typeof PhotoRealVersion
+> = z.nativeEnum(PhotoRealVersion);
 /** @internal */
-export const DeploymentGetConfigPhotoRealVersion$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPhotoRealVersion> =
-    DeploymentGetConfigPhotoRealVersion$inboundSchema;
+export const PhotoRealVersion$outboundSchema: z.ZodNativeEnum<
+  typeof PhotoRealVersion
+> = PhotoRealVersion$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigEncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigEncodingFormat
-> = z.nativeEnum(DeploymentGetConfigEncodingFormat);
+export const EncodingFormat$inboundSchema: z.ZodNativeEnum<
+  typeof EncodingFormat
+> = z.nativeEnum(EncodingFormat);
 /** @internal */
-export const DeploymentGetConfigEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigEncodingFormat
-> = DeploymentGetConfigEncodingFormat$inboundSchema;
+export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof EncodingFormat
+> = EncodingFormat$inboundSchema;
 
 /** @internal */
 export const DeploymentGetConfigReasoningEffort$inboundSchema: z.ZodNativeEnum<
@@ -6727,22 +6646,20 @@ export const DeploymentGetConfigReasoningEffort$outboundSchema: z.ZodNativeEnum<
 > = DeploymentGetConfigReasoningEffort$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigVerbosity$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigVerbosity
-> = z.nativeEnum(DeploymentGetConfigVerbosity);
+export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
+  .nativeEnum(Verbosity);
 /** @internal */
-export const DeploymentGetConfigVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigVerbosity
-> = DeploymentGetConfigVerbosity$inboundSchema;
+export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
+  Verbosity$inboundSchema;
 
 /** @internal */
-export const DeploymentGetConfigThinkingLevel$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigThinkingLevel
-> = z.nativeEnum(DeploymentGetConfigThinkingLevel);
+export const ThinkingLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ThinkingLevel
+> = z.nativeEnum(ThinkingLevel);
 /** @internal */
-export const DeploymentGetConfigThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigThinkingLevel
-> = DeploymentGetConfigThinkingLevel$inboundSchema;
+export const ThinkingLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ThinkingLevel
+> = ThinkingLevel$inboundSchema;
 
 /** @internal */
 export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
@@ -6764,21 +6681,20 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat3$inboundSchema),
-      DeploymentGetConfigResponseFormat4$inboundSchema,
-      DeploymentGetConfigResponseFormat5$inboundSchema,
-      DeploymentGetConfigResponseFormat6$inboundSchema,
+      z.lazy(() => ResponseFormat1$inboundSchema),
+      z.lazy(() => ResponseFormat2$inboundSchema),
+      z.lazy(() => ResponseFormat3$inboundSchema),
+      ResponseFormat4$inboundSchema,
+      ResponseFormat5$inboundSchema,
+      ResponseFormat6$inboundSchema,
     ]),
   ).optional(),
-  photoRealVersion: DeploymentGetConfigPhotoRealVersion$inboundSchema
-    .optional(),
-  encoding_format: DeploymentGetConfigEncodingFormat$inboundSchema.optional(),
+  photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
+  encoding_format: EncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentGetConfigReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
-  verbosity: DeploymentGetConfigVerbosity$inboundSchema.optional(),
-  thinkingLevel: DeploymentGetConfigThinkingLevel$inboundSchema.optional(),
+  verbosity: Verbosity$inboundSchema.optional(),
+  thinkingLevel: ThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -6799,9 +6715,9 @@ export type DeploymentGetConfigParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | DeploymentGetConfigResponseFormat1$Outbound
-    | DeploymentGetConfigResponseFormat2$Outbound
-    | DeploymentGetConfigResponseFormat3$Outbound
+    | ResponseFormat1$Outbound
+    | ResponseFormat2$Outbound
+    | ResponseFormat3$Outbound
     | string
     | string
     | string
@@ -6835,21 +6751,20 @@ export const DeploymentGetConfigParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat3$outboundSchema),
-      DeploymentGetConfigResponseFormat4$outboundSchema,
-      DeploymentGetConfigResponseFormat5$outboundSchema,
-      DeploymentGetConfigResponseFormat6$outboundSchema,
+      z.lazy(() => ResponseFormat1$outboundSchema),
+      z.lazy(() => ResponseFormat2$outboundSchema),
+      z.lazy(() => ResponseFormat3$outboundSchema),
+      ResponseFormat4$outboundSchema,
+      ResponseFormat5$outboundSchema,
+      ResponseFormat6$outboundSchema,
     ]),
   ).optional(),
-  photoRealVersion: DeploymentGetConfigPhotoRealVersion$outboundSchema
-    .optional(),
-  encodingFormat: DeploymentGetConfigEncodingFormat$outboundSchema.optional(),
+  photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
+  encodingFormat: EncodingFormat$outboundSchema.optional(),
   reasoningEffort: DeploymentGetConfigReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
-  verbosity: DeploymentGetConfigVerbosity$outboundSchema.optional(),
-  thinkingLevel: DeploymentGetConfigThinkingLevel$outboundSchema.optional(),
+  verbosity: Verbosity$outboundSchema.optional(),
+  thinkingLevel: ThinkingLevel$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

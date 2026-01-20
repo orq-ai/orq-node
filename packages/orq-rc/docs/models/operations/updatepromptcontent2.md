@@ -3,30 +3,42 @@
 
 ## Supported Types
 
-### `operations.UpdatePrompt21`
+### `components.TextContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt21 = {
+const value: components.TextContentPartSchema = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdatePrompt22`
+### `components.ImageContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt22 = {
+const value: components.ImageContentPartSchema = {
   type: "image_url",
   imageUrl: {
-    url: "https://picsum.photos/id/1/200/300",
+    url: "https://fatal-overload.name/",
   },
 };
 ```
 
-### `operations.UpdatePrompt23`
+### `components.AudioContentPartSchema`
 
 ```typescript
-const value: operations.UpdatePrompt23 = {
+const value: components.AudioContentPartSchema = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.UpdatePrompt24`
+
+```typescript
+const value: operations.UpdatePrompt24 = {
   type: "file",
   file: {},
 };

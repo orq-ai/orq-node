@@ -9,6 +9,7 @@ export * from "./deletecontact.js";
 export * from "./deleteconversation.js";
 export * from "./deleteeval.js";
 export * from "./deleteidentity.js";
+export * from "./deleteprompt.js";
 export * from "./generateconversationname.js";
 export * from "./getevals.js";
 export * from "./getpromptversion.js";

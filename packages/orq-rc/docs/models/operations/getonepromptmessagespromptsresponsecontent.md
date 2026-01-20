@@ -1,0 +1,24 @@
+# GetOnePromptMessagesPromptsResponseContent
+
+The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+
+
+## Supported Types
+
+### `string`
+
+```typescript
+const value: string = "<value>";
+```
+
+### `operations.GetOnePromptContentPromptsResponse2[]`
+
+```typescript
+const value: operations.GetOnePromptContentPromptsResponse2[] = [
+  {
+    type: "redacted_reasoning",
+    data: "<value>",
+  },
+];
+```
+

@@ -12,8 +12,8 @@ let value: ListPromptVersionsResponseBody = {
   data: [
     {
       id: "<id>",
-      promptConfig: {
-        messages: [],
+      prompt: {
+        model: "openai/gpt-4o",
       },
       timestamp: "<value>",
     },

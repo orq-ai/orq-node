@@ -1,46 +1,28 @@
 # UpdatePromptPromptsMessages
 
-
-## Supported Types
-
-### `operations.UpdatePromptMessagesSystemMessage`
+## Example Usage
 
 ```typescript
-const value: operations.UpdatePromptMessagesSystemMessage = {
-  role: "system",
-  content: "<value>",
-};
-```
+import { UpdatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
-### `operations.UpdatePromptMessagesUserMessage`
-
-```typescript
-const value: operations.UpdatePromptMessagesUserMessage = {
-  role: "user",
+let value: UpdatePromptPromptsMessages = {
+  role: "prompt",
   content: [
     {
-      type: "file",
-      file: {},
+      type: "image_url",
+      imageUrl: {
+        url: "https://picsum.photos/id/1/200/300",
+      },
     },
   ],
 };
 ```
 
-### `operations.UpdatePromptMessagesAssistantMessage`
+## Fields
 
-```typescript
-const value: operations.UpdatePromptMessagesAssistantMessage = {
-  role: "assistant",
-};
-```
-
-### `operations.UpdatePromptMessagesToolMessage`
-
-```typescript
-const value: operations.UpdatePromptMessagesToolMessage = {
-  role: "tool",
-  content: [],
-  toolCallId: "<id>",
-};
-```
-
+| Field                                                                                                                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                                                                                                                                                      | [operations.UpdatePromptRole](../../models/operations/updatepromptrole.md)                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The role of the prompt message                                                                                                                                                                                                                                                                                              |
+| `content`                                                                                                                                                                                                                                                                                                                   | *operations.UpdatePromptContent*                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios. |
+| `toolCalls`                                                                                                                                                                                                                                                                                                                 | [operations.UpdatePromptToolCalls](../../models/operations/updateprompttoolcalls.md)[]                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |
+| `toolCallId`                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |

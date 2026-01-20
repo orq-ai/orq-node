@@ -1,56 +1,21 @@
 # CreatePromptPromptsMessages
 
-
-## Supported Types
-
-### `operations.CreatePromptMessagesSystemMessage`
+## Example Usage
 
 ```typescript
-const value: operations.CreatePromptMessagesSystemMessage = {
-  role: "system",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+import { CreatePromptPromptsMessages } from "@orq-ai/node/models/operations";
+
+let value: CreatePromptPromptsMessages = {
+  role: "prompt",
+  content: null,
 };
 ```
 
-### `operations.CreatePromptMessagesUserMessage`
+## Fields
 
-```typescript
-const value: operations.CreatePromptMessagesUserMessage = {
-  role: "user",
-  content: [
-    {
-      type: "file",
-      file: {},
-    },
-  ],
-};
-```
-
-### `operations.CreatePromptMessagesAssistantMessage`
-
-```typescript
-const value: operations.CreatePromptMessagesAssistantMessage = {
-  role: "assistant",
-};
-```
-
-### `operations.CreatePromptMessagesToolMessage`
-
-```typescript
-const value: operations.CreatePromptMessagesToolMessage = {
-  role: "tool",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
-  toolCallId: "<id>",
-};
-```
-
+| Field                                                                                                                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                                                                                                                                                      | [operations.CreatePromptRole](../../models/operations/createpromptrole.md)                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The role of the prompt message                                                                                                                                                                                                                                                                                              |
+| `content`                                                                                                                                                                                                                                                                                                                   | *operations.CreatePromptContent*                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios. |
+| `toolCalls`                                                                                                                                                                                                                                                                                                                 | [operations.CreatePromptToolCalls](../../models/operations/createprompttoolcalls.md)[]                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |
+| `toolCallId`                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |

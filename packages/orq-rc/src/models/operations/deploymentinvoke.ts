@@ -30,7 +30,7 @@ export type DeploymentInvokeObject = ClosedEnum<typeof DeploymentInvokeObject>;
 /**
  * The provider used to generate the response
  */
-export const DeploymentInvokeProvider = {
+export const Provider = {
   Openai: "openai",
   Groq: "groq",
   Cohere: "cohere",
@@ -61,9 +61,7 @@ export const DeploymentInvokeProvider = {
 /**
  * The provider used to generate the response
  */
-export type DeploymentInvokeProvider = ClosedEnum<
-  typeof DeploymentInvokeProvider
->;
+export type Provider = ClosedEnum<typeof Provider>;
 
 /**
  * Metadata of the retrieved chunk from the knowledge base
@@ -284,7 +282,7 @@ export type DeploymentInvokeResponseBody = {
   /**
    * The provider used to generate the response
    */
-  provider: DeploymentInvokeProvider;
+  provider: Provider;
   /**
    * Indicates if the response is the final response
    */
@@ -371,13 +369,11 @@ export const DeploymentInvokeObject$outboundSchema: z.ZodNativeEnum<
 > = DeploymentInvokeObject$inboundSchema;
 
 /** @internal */
-export const DeploymentInvokeProvider$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeProvider
-> = z.nativeEnum(DeploymentInvokeProvider);
+export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
+  .nativeEnum(Provider);
 /** @internal */
-export const DeploymentInvokeProvider$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeProvider
-> = DeploymentInvokeProvider$inboundSchema;
+export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
+  Provider$inboundSchema;
 
 /** @internal */
 export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
@@ -1051,7 +1047,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   object: DeploymentInvokeObject$inboundSchema,
   model: z.string(),
-  provider: DeploymentInvokeProvider$inboundSchema,
+  provider: Provider$inboundSchema,
   is_final: z.boolean(),
   integration_id: z.string().optional(),
   finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -1097,7 +1093,7 @@ export const DeploymentInvokeResponseBody$outboundSchema: z.ZodType<
   created: z.date().transform(v => v.toISOString()),
   object: DeploymentInvokeObject$outboundSchema,
   model: z.string(),
-  provider: DeploymentInvokeProvider$outboundSchema,
+  provider: Provider$outboundSchema,
   isFinal: z.boolean(),
   integrationId: z.string().optional(),
   finalized: z.date().transform(v => v.toISOString()).optional(),

@@ -1,6 +1,8 @@
-# ListPromptVersionsPromptConfig
+# ~~ListPromptVersionsPromptConfig~~
 
-A list of messages compatible with the openAI schema
+[DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ## Example Usage
 

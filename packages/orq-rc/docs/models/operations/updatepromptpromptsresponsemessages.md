@@ -1,21 +1,41 @@
 # UpdatePromptPromptsResponseMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.UpdatePromptMessagesPromptsSystemMessage`
 
 ```typescript
-import { UpdatePromptPromptsResponseMessages } from "@orq-ai/node/models/operations";
-
-let value: UpdatePromptPromptsResponseMessages = {
+const value: operations.UpdatePromptMessagesPromptsSystemMessage = {
   role: "system",
-  content: null,
+  content: "<value>",
 };
 ```
 
-## Fields
+### `operations.UpdatePromptMessagesPromptsUserMessage`
 
-| Field                                                                                                                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `role`                                                                                                                                                                                                                                                                                                                      | [operations.UpdatePromptPromptsRole](../../models/operations/updatepromptpromptsrole.md)                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The role of the prompt message                                                                                                                                                                                                                                                                                              |
-| `content`                                                                                                                                                                                                                                                                                                                   | *operations.UpdatePromptPromptsContent*                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                          | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios. |
-| `toolCalls`                                                                                                                                                                                                                                                                                                                 | [operations.UpdatePromptPromptsToolCalls](../../models/operations/updatepromptpromptstoolcalls.md)[]                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |
-| `toolCallId`                                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                         |
+```typescript
+const value: operations.UpdatePromptMessagesPromptsUserMessage = {
+  role: "user",
+  content: [],
+};
+```
+
+### `operations.UpdatePromptMessagesPromptsAssistantMessage`
+
+```typescript
+const value: operations.UpdatePromptMessagesPromptsAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.UpdatePromptMessagesPromptsToolMessage`
+
+```typescript
+const value: operations.UpdatePromptMessagesPromptsToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

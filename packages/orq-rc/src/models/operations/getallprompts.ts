@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllPromptsRequest = {
@@ -98,36 +99,41 @@ export type GetAllPromptsResponseFormat4 = ClosedEnum<
   typeof GetAllPromptsResponseFormat4
 >;
 
-export const GetAllPromptsResponseFormatPromptsResponseType = {
-  Text: "text",
-} as const;
-export type GetAllPromptsResponseFormatPromptsResponseType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatPromptsResponseType
->;
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  {
+    Text: "text",
+  } as const;
+export type GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  >;
 
 export type GetAllPromptsResponseFormat3 = {
-  type: GetAllPromptsResponseFormatPromptsResponseType;
+  type:
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType;
 };
 
-export const GetAllPromptsResponseFormatPromptsType = {
-  JsonObject: "json_object",
-} as const;
-export type GetAllPromptsResponseFormatPromptsType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatPromptsType
->;
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType =
+  {
+    JsonObject: "json_object",
+  } as const;
+export type GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType
+  >;
 
 export type GetAllPromptsResponseFormat2 = {
-  type: GetAllPromptsResponseFormatPromptsType;
+  type: GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType;
 };
 
-export const GetAllPromptsResponseFormatType = {
+export const GetAllPromptsResponseFormatPromptsResponse200Type = {
   JsonSchema: "json_schema",
 } as const;
-export type GetAllPromptsResponseFormatType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatType
+export type GetAllPromptsResponseFormatPromptsResponse200Type = ClosedEnum<
+  typeof GetAllPromptsResponseFormatPromptsResponse200Type
 >;
 
-export type GetAllPromptsResponseFormatJsonSchema = {
+export type GetAllPromptsResponseFormatPromptsResponseJsonSchema = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -135,9 +141,9 @@ export type GetAllPromptsResponseFormatJsonSchema = {
 };
 
 export type GetAllPromptsResponseFormat1 = {
-  type: GetAllPromptsResponseFormatType;
+  type: GetAllPromptsResponseFormatPromptsResponse200Type;
   displayName?: string | undefined;
-  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
+  jsonSchema: GetAllPromptsResponseFormatPromptsResponseJsonSchema;
 };
 
 /**
@@ -151,7 +157,7 @@ export type GetAllPromptsResponseFormat1 = {
  *
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
-export type GetAllPromptsResponseFormat =
+export type GetAllPromptsPromptsResponseFormat =
   | GetAllPromptsResponseFormat1
   | GetAllPromptsResponseFormat2
   | GetAllPromptsResponseFormat3
@@ -190,7 +196,7 @@ export type GetAllPromptsEncodingFormat = ClosedEnum<
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const GetAllPromptsReasoningEffort = {
+export const GetAllPromptsPromptsReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -201,8 +207,8 @@ export const GetAllPromptsReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type GetAllPromptsReasoningEffort = ClosedEnum<
-  typeof GetAllPromptsReasoningEffort
+export type GetAllPromptsPromptsReasoningEffort = ClosedEnum<
+  typeof GetAllPromptsPromptsReasoningEffort
 >;
 
 /**
@@ -315,7 +321,7 @@ export type GetAllPromptsModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: GetAllPromptsReasoningEffort | undefined;
+  reasoningEffort?: GetAllPromptsPromptsReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -487,11 +493,13 @@ export type GetAllPromptsMessages = {
 };
 
 /**
- * A list of messages compatible with the openAI schema
+ * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type GetAllPromptsPromptConfig = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   /**
    * The id of the resource
    */
@@ -504,13 +512,713 @@ export type GetAllPromptsPromptConfig = {
    * Model Parameters: Not all parameters apply to every model
    */
   modelParameters?: GetAllPromptsModelParameters | undefined;
-  provider?: GetAllPromptsProvider | undefined;
+  provider?: GetAllPromptsProvider | null | undefined;
   /**
    * The ID of the integration to use
    */
   integrationId?: string | null | undefined;
   version?: string | undefined;
   messages: Array<GetAllPromptsMessages>;
+};
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const GetAllPromptsVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type GetAllPromptsVoice = ClosedEnum<typeof GetAllPromptsVoice>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const GetAllPromptsPromptsFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type GetAllPromptsPromptsFormat = ClosedEnum<
+  typeof GetAllPromptsPromptsFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type GetAllPromptsAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: GetAllPromptsVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: GetAllPromptsPromptsFormat;
+};
+
+export type GetAllPromptsResponseFormatJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type GetAllPromptsResponseFormatPromptsJSONSchema = {
+  type: "json_schema";
+  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
+};
+
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type GetAllPromptsResponseFormatJSONObject = {
+  type: "json_object";
+};
+
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type GetAllPromptsResponseFormatText = {
+  type: "text";
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type GetAllPromptsResponseFormat =
+  | GetAllPromptsResponseFormatText
+  | GetAllPromptsResponseFormatJSONObject
+  | GetAllPromptsResponseFormatPromptsJSONSchema;
+
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const GetAllPromptsReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type GetAllPromptsReasoningEffort = ClosedEnum<
+  typeof GetAllPromptsReasoningEffort
+>;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type GetAllPromptsStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type GetAllPromptsStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+export type GetAllPromptsThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const GetAllPromptsToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type GetAllPromptsToolChoiceType = ClosedEnum<
+  typeof GetAllPromptsToolChoiceType
+>;
+
+export type GetAllPromptsToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+};
+
+export type GetAllPromptsToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: GetAllPromptsToolChoiceType | undefined;
+  function: GetAllPromptsToolChoiceFunction;
+};
+
+export const GetAllPromptsToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type GetAllPromptsToolChoice1 = ClosedEnum<
+  typeof GetAllPromptsToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type GetAllPromptsToolChoice =
+  | GetAllPromptsToolChoice2
+  | GetAllPromptsToolChoice1;
+
+export const GetAllPromptsModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type GetAllPromptsModalities = ClosedEnum<
+  typeof GetAllPromptsModalities
+>;
+
+/**
+ * The key of the guardrail.
+ */
+export const GetAllPromptsId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type GetAllPromptsId1 = ClosedEnum<typeof GetAllPromptsId1>;
+
+export type GetAllPromptsId = GetAllPromptsId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const GetAllPromptsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type GetAllPromptsExecuteOn = ClosedEnum<typeof GetAllPromptsExecuteOn>;
+
+export type GetAllPromptsGuardrails = {
+  id: GetAllPromptsId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: GetAllPromptsExecuteOn;
+};
+
+export type GetAllPromptsContentPromptsResponse2002 =
+  components.TextContentPartSchema;
+
+/**
+ * The contents of the tool message.
+ */
+export type GetAllPromptsMessagesPromptsResponse200Content =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetAllPromptsMessagesPromptsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetAllPromptsMessagesPromptsType = ClosedEnum<
+  typeof GetAllPromptsMessagesPromptsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetAllPromptsMessagesTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPromptsMessagesTtl = ClosedEnum<
+  typeof GetAllPromptsMessagesTtl
+>;
+
+export type GetAllPromptsMessagesCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetAllPromptsMessagesPromptsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: GetAllPromptsMessagesTtl | undefined;
+};
+
+export type GetAllPromptsMessagesToolMessage = {
+  /**
+   * The role of the messages author, in this case tool.
+   */
+  role: "tool";
+  /**
+   * The contents of the tool message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * Tool call that this message is responding to.
+   */
+  toolCallId: string | null;
+  cacheControl?: GetAllPromptsMessagesCacheControl | undefined;
+};
+
+export type GetAllPromptsContentPromptsResponse2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.RefusalPartSchema
+  | components.ReasoningPartSchema
+  | components.RedactedReasoningPartSchema;
+
+/**
+ * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+ */
+export type GetAllPromptsMessagesPromptsResponseContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.RefusalPartSchema
+    | components.ReasoningPartSchema
+    | components.RedactedReasoningPartSchema
+  >;
+
+/**
+ * Data about a previous audio response from the model.
+ */
+export type GetAllPromptsMessagesAudio = {
+  /**
+   * Unique identifier for a previous audio response from the model.
+   */
+  id: string;
+};
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const GetAllPromptsMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type GetAllPromptsMessagesType = ClosedEnum<
+  typeof GetAllPromptsMessagesType
+>;
+
+export type GetAllPromptsMessagesFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+  /**
+   * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+   */
+  arguments?: string | undefined;
+};
+
+export type GetAllPromptsMessagesToolCalls = {
+  /**
+   * The ID of the tool call.
+   */
+  id: string;
+  /**
+   * The type of the tool. Currently, only `function` is supported.
+   */
+  type: GetAllPromptsMessagesType;
+  function: GetAllPromptsMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+export type GetAllPromptsMessagesAssistantMessage = {
+  /**
+   * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+   */
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.RefusalPartSchema
+      | components.ReasoningPartSchema
+      | components.RedactedReasoningPartSchema
+    >
+    | null
+    | undefined;
+  /**
+   * The refusal message by the assistant.
+   */
+  refusal?: string | null | undefined;
+  /**
+   * The role of the messages author, in this case `assistant`.
+   */
+  role: "assistant";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * Data about a previous audio response from the model.
+   */
+  audio?: GetAllPromptsMessagesAudio | null | undefined;
+  /**
+   * The tool calls generated by the model, such as function calls.
+   */
+  toolCalls?: Array<GetAllPromptsMessagesToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetAllPrompts2PromptsResponse200ApplicationJSONType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetAllPrompts2PromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetAllPrompts2PromptsResponse200ApplicationJSONType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetAllPrompts2Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPrompts2Ttl = ClosedEnum<typeof GetAllPrompts2Ttl>;
+
+export type GetAllPrompts2CacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetAllPrompts2PromptsResponse200ApplicationJSONType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: GetAllPrompts2Ttl | undefined;
+};
+
+export type GetAllPrompts24 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: GetAllPrompts2CacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
+};
+
+export type GetAllPromptsContentPrompts2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.ImageContentPartSchema
+  | components.AudioContentPartSchema
+  | GetAllPrompts24;
+
+/**
+ * The contents of the user message.
+ */
+export type GetAllPromptsMessagesPromptsContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.ImageContentPartSchema
+    | components.AudioContentPartSchema
+    | GetAllPrompts24
+  >;
+
+export type GetAllPromptsMessagesUserMessage = {
+  /**
+   * The role of the messages author, in this case `user`.
+   */
+  role: "user";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * The contents of the user message.
+   */
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.ImageContentPartSchema
+      | components.AudioContentPartSchema
+      | GetAllPrompts24
+    >;
+};
+
+/**
+ * The contents of the system message.
+ */
+export type GetAllPromptsMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+ */
+export type GetAllPromptsMessagesSystemMessage = {
+  /**
+   * The role of the messages author, in this case `system`.
+   */
+  role: "system";
+  /**
+   * The contents of the system message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+};
+
+export type GetAllPromptsPromptsMessages =
+  | GetAllPromptsMessagesSystemMessage
+  | GetAllPromptsMessagesUserMessage
+  | GetAllPromptsMessagesAssistantMessage
+  | GetAllPromptsMessagesToolMessage;
+
+/**
+ * Prompt configuration with model and messages. Use this instead of prompt_config.
+ */
+export type GetAllPromptsPromptField = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: GetAllPromptsAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | GetAllPromptsResponseFormatText
+    | GetAllPromptsResponseFormatJSONObject
+    | GetAllPromptsResponseFormatPromptsJSONSchema
+    | undefined;
+  /**
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   */
+  reasoningEffort?: GetAllPromptsReasoningEffort | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: GetAllPromptsStreamOptions | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?: GetAllPromptsToolChoice2 | GetAllPromptsToolChoice1 | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<GetAllPromptsModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<GetAllPromptsGuardrails> | undefined;
+  /**
+   * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
+   */
+  messages?:
+    | Array<
+      | GetAllPromptsMessagesSystemMessage
+      | GetAllPromptsMessagesUserMessage
+      | GetAllPromptsMessagesAssistantMessage
+      | GetAllPromptsMessagesToolMessage
+    >
+    | undefined;
+  /**
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   */
+  model?: string | null | undefined;
+  version?: string | undefined;
 };
 
 export const GetAllPromptsUseCases = {
@@ -586,9 +1294,15 @@ export type GetAllPromptsPrompt = {
    */
   description?: string | null | undefined;
   /**
-   * A list of messages compatible with the openAI schema
+   * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  promptConfig: GetAllPromptsPromptConfig;
+  promptConfig?: GetAllPromptsPromptConfig | undefined;
+  /**
+   * Prompt configuration with model and messages. Use this instead of prompt_config.
+   */
+  prompt: GetAllPromptsPromptField;
   metadata?: GetAllPromptsMetadata | undefined;
 };
 
@@ -720,13 +1434,18 @@ export const GetAllPromptsResponseFormat4$outboundSchema: z.ZodNativeEnum<
 > = GetAllPromptsResponseFormat4$inboundSchema;
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> = z
-    .nativeEnum(GetAllPromptsResponseFormatPromptsResponseType);
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  );
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> =
-    GetAllPromptsResponseFormatPromptsResponseType$inboundSchema;
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > =
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
 export const GetAllPromptsResponseFormat3$inboundSchema: z.ZodType<
@@ -734,7 +1453,8 @@ export const GetAllPromptsResponseFormat3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPromptsResponseFormatPromptsResponseType$inboundSchema,
+  type:
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
 });
 /** @internal */
 export type GetAllPromptsResponseFormat3$Outbound = {
@@ -747,7 +1467,8 @@ export const GetAllPromptsResponseFormat3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat3
 > = z.object({
-  type: GetAllPromptsResponseFormatPromptsResponseType$outboundSchema,
+  type:
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema,
 });
 
 export function getAllPromptsResponseFormat3ToJSON(
@@ -770,14 +1491,18 @@ export function getAllPromptsResponseFormat3FromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> = z.nativeEnum(
-    GetAllPromptsResponseFormatPromptsType,
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType,
   );
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> =
-    GetAllPromptsResponseFormatPromptsType$inboundSchema;
+export const GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType
+  > =
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
@@ -785,7 +1510,8 @@ export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$inboundSchema,
+  type:
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
 });
 /** @internal */
 export type GetAllPromptsResponseFormat2$Outbound = {
@@ -798,7 +1524,8 @@ export const GetAllPromptsResponseFormat2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat2
 > = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$outboundSchema,
+  type:
+    GetAllPromptsResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
 });
 
 export function getAllPromptsResponseFormat2ToJSON(
@@ -821,27 +1548,28 @@ export function getAllPromptsResponseFormat2FromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = z.nativeEnum(GetAllPromptsResponseFormatType);
+export const GetAllPromptsResponseFormatPromptsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponse200Type> = z
+    .nativeEnum(GetAllPromptsResponseFormatPromptsResponse200Type);
 /** @internal */
-export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = GetAllPromptsResponseFormatType$inboundSchema;
+export const GetAllPromptsResponseFormatPromptsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponse200Type> =
+    GetAllPromptsResponseFormatPromptsResponse200Type$inboundSchema;
 
 /** @internal */
-export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormatJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
+export const GetAllPromptsResponseFormatPromptsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    schema: z.record(z.any()),
+  });
 /** @internal */
-export type GetAllPromptsResponseFormatJsonSchema$Outbound = {
+export type GetAllPromptsResponseFormatPromptsResponseJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -849,34 +1577,41 @@ export type GetAllPromptsResponseFormatJsonSchema$Outbound = {
 };
 
 /** @internal */
-export const GetAllPromptsResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  GetAllPromptsResponseFormatJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
+export const GetAllPromptsResponseFormatPromptsResponseJsonSchema$outboundSchema:
+  z.ZodType<
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema$Outbound,
+    z.ZodTypeDef,
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema
+  > = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    schema: z.record(z.any()),
+  });
 
-export function getAllPromptsResponseFormatJsonSchemaToJSON(
-  getAllPromptsResponseFormatJsonSchema: GetAllPromptsResponseFormatJsonSchema,
+export function getAllPromptsResponseFormatPromptsResponseJsonSchemaToJSON(
+  getAllPromptsResponseFormatPromptsResponseJsonSchema:
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema,
 ): string {
   return JSON.stringify(
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema.parse(
-      getAllPromptsResponseFormatJsonSchema,
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema$outboundSchema.parse(
+      getAllPromptsResponseFormatPromptsResponseJsonSchema,
     ),
   );
 }
-export function getAllPromptsResponseFormatJsonSchemaFromJSON(
+export function getAllPromptsResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<
+  GetAllPromptsResponseFormatPromptsResponseJsonSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      GetAllPromptsResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormatJsonSchema' from JSON`,
+      GetAllPromptsResponseFormatPromptsResponseJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetAllPromptsResponseFormatPromptsResponseJsonSchema' from JSON`,
   );
 }
 
@@ -886,10 +1621,10 @@ export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPromptsResponseFormatType$inboundSchema,
+  type: GetAllPromptsResponseFormatPromptsResponse200Type$inboundSchema,
   display_name: z.string().optional(),
   json_schema: z.lazy(() =>
-    GetAllPromptsResponseFormatJsonSchema$inboundSchema
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -901,7 +1636,7 @@ export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
 export type GetAllPromptsResponseFormat1$Outbound = {
   type: string;
   display_name?: string | undefined;
-  json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
+  json_schema: GetAllPromptsResponseFormatPromptsResponseJsonSchema$Outbound;
 };
 
 /** @internal */
@@ -910,10 +1645,10 @@ export const GetAllPromptsResponseFormat1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat1
 > = z.object({
-  type: GetAllPromptsResponseFormatType$outboundSchema,
+  type: GetAllPromptsResponseFormatPromptsResponse200Type$outboundSchema,
   displayName: z.string().optional(),
   jsonSchema: z.lazy(() =>
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema
+    GetAllPromptsResponseFormatPromptsResponseJsonSchema$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -942,8 +1677,8 @@ export function getAllPromptsResponseFormat1FromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat,
+export const GetAllPromptsPromptsResponseFormat$inboundSchema: z.ZodType<
+  GetAllPromptsPromptsResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -955,7 +1690,7 @@ export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
   GetAllPromptsResponseFormat6$inboundSchema,
 ]);
 /** @internal */
-export type GetAllPromptsResponseFormat$Outbound =
+export type GetAllPromptsPromptsResponseFormat$Outbound =
   | GetAllPromptsResponseFormat1$Outbound
   | GetAllPromptsResponseFormat2$Outbound
   | GetAllPromptsResponseFormat3$Outbound
@@ -964,10 +1699,10 @@ export type GetAllPromptsResponseFormat$Outbound =
   | string;
 
 /** @internal */
-export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat$Outbound,
+export const GetAllPromptsPromptsResponseFormat$outboundSchema: z.ZodType<
+  GetAllPromptsPromptsResponseFormat$Outbound,
   z.ZodTypeDef,
-  GetAllPromptsResponseFormat
+  GetAllPromptsPromptsResponseFormat
 > = z.union([
   z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
@@ -977,22 +1712,23 @@ export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
   GetAllPromptsResponseFormat6$outboundSchema,
 ]);
 
-export function getAllPromptsResponseFormatToJSON(
-  getAllPromptsResponseFormat: GetAllPromptsResponseFormat,
+export function getAllPromptsPromptsResponseFormatToJSON(
+  getAllPromptsPromptsResponseFormat: GetAllPromptsPromptsResponseFormat,
 ): string {
   return JSON.stringify(
-    GetAllPromptsResponseFormat$outboundSchema.parse(
-      getAllPromptsResponseFormat,
+    GetAllPromptsPromptsResponseFormat$outboundSchema.parse(
+      getAllPromptsPromptsResponseFormat,
     ),
   );
 }
-export function getAllPromptsResponseFormatFromJSON(
+export function getAllPromptsPromptsResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormat, SDKValidationError> {
+): SafeParseResult<GetAllPromptsPromptsResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormat' from JSON`,
+    (x) =>
+      GetAllPromptsPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPromptsResponseFormat' from JSON`,
   );
 }
 
@@ -1015,13 +1751,13 @@ export const GetAllPromptsEncodingFormat$outboundSchema: z.ZodNativeEnum<
 > = GetAllPromptsEncodingFormat$inboundSchema;
 
 /** @internal */
-export const GetAllPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsReasoningEffort
-> = z.nativeEnum(GetAllPromptsReasoningEffort);
+export const GetAllPromptsPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsReasoningEffort
+> = z.nativeEnum(GetAllPromptsPromptsReasoningEffort);
 /** @internal */
-export const GetAllPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsReasoningEffort
-> = GetAllPromptsReasoningEffort$inboundSchema;
+export const GetAllPromptsPromptsReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsPromptsReasoningEffort> =
+    GetAllPromptsPromptsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const GetAllPromptsVerbosity$inboundSchema: z.ZodNativeEnum<
@@ -1071,7 +1807,7 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetAllPromptsEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: GetAllPromptsReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: GetAllPromptsPromptsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetAllPromptsVerbosity$inboundSchema.optional(),
   thinkingLevel: GetAllPromptsThinkingLevel$inboundSchema.optional(),
@@ -1141,7 +1877,8 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: GetAllPromptsEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: GetAllPromptsReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: GetAllPromptsPromptsReasoningEffort$outboundSchema
+    .optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetAllPromptsVerbosity$outboundSchema.optional(),
   thinkingLevel: GetAllPromptsThinkingLevel$outboundSchema.optional(),
@@ -1707,12 +2444,12 @@ export const GetAllPromptsPromptConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   stream: z.boolean().optional(),
-  model: z.string().optional(),
+  model: z.nullable(z.string()).optional(),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(GetAllPromptsModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetAllPromptsModelParameters$inboundSchema)
     .optional(),
-  provider: GetAllPromptsProvider$inboundSchema.optional(),
+  provider: z.nullable(GetAllPromptsProvider$inboundSchema).optional(),
   integration_id: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => GetAllPromptsMessages$inboundSchema)),
@@ -1727,11 +2464,11 @@ export const GetAllPromptsPromptConfig$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsPromptConfig$Outbound = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   model_db_id?: string | null | undefined;
   model_type?: string | null | undefined;
   model_parameters?: GetAllPromptsModelParameters$Outbound | undefined;
-  provider?: string | undefined;
+  provider?: string | null | undefined;
   integration_id?: string | null | undefined;
   version?: string | undefined;
   messages: Array<GetAllPromptsMessages$Outbound>;
@@ -1744,12 +2481,12 @@ export const GetAllPromptsPromptConfig$outboundSchema: z.ZodType<
   GetAllPromptsPromptConfig
 > = z.object({
   stream: z.boolean().optional(),
-  model: z.string().optional(),
+  model: z.nullable(z.string()).optional(),
   modelDbId: z.nullable(z.string()).optional(),
   modelType: z.nullable(GetAllPromptsModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => GetAllPromptsModelParameters$outboundSchema)
     .optional(),
-  provider: GetAllPromptsProvider$outboundSchema.optional(),
+  provider: z.nullable(GetAllPromptsProvider$outboundSchema).optional(),
   integrationId: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => GetAllPromptsMessages$outboundSchema)),
@@ -1776,6 +2513,1957 @@ export function getAllPromptsPromptConfigFromJSON(
     jsonString,
     (x) => GetAllPromptsPromptConfig$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPromptsPromptConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsVoice$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsVoice
+> = z.nativeEnum(GetAllPromptsVoice);
+/** @internal */
+export const GetAllPromptsVoice$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsVoice
+> = GetAllPromptsVoice$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsFormat
+> = z.nativeEnum(GetAllPromptsPromptsFormat);
+/** @internal */
+export const GetAllPromptsPromptsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsFormat
+> = GetAllPromptsPromptsFormat$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsAudio$inboundSchema: z.ZodType<
+  GetAllPromptsAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: GetAllPromptsVoice$inboundSchema,
+  format: GetAllPromptsPromptsFormat$inboundSchema,
+});
+/** @internal */
+export type GetAllPromptsAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const GetAllPromptsAudio$outboundSchema: z.ZodType<
+  GetAllPromptsAudio$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsAudio
+> = z.object({
+  voice: GetAllPromptsVoice$outboundSchema,
+  format: GetAllPromptsPromptsFormat$outboundSchema,
+});
+
+export function getAllPromptsAudioToJSON(
+  getAllPromptsAudio: GetAllPromptsAudio,
+): string {
+  return JSON.stringify(
+    GetAllPromptsAudio$outboundSchema.parse(getAllPromptsAudio),
+  );
+}
+export function getAllPromptsAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().default(false),
+});
+/** @internal */
+export type GetAllPromptsResponseFormatJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict: boolean;
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatJsonSchema$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormatJsonSchema
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().default(false),
+});
+
+export function getAllPromptsResponseFormatJsonSchemaToJSON(
+  getAllPromptsResponseFormatJsonSchema: GetAllPromptsResponseFormatJsonSchema,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormatJsonSchema$outboundSchema.parse(
+      getAllPromptsResponseFormatJsonSchema,
+    ),
+  );
+}
+export function getAllPromptsResponseFormatJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormatJsonSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormatJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatPromptsJSONSchema$inboundSchema:
+  z.ZodType<
+    GetAllPromptsResponseFormatPromptsJSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() =>
+      GetAllPromptsResponseFormatJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
+  });
+/** @internal */
+export type GetAllPromptsResponseFormatPromptsJSONSchema$Outbound = {
+  type: "json_schema";
+  json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormatPromptsJSONSchema$outboundSchema:
+  z.ZodType<
+    GetAllPromptsResponseFormatPromptsJSONSchema$Outbound,
+    z.ZodTypeDef,
+    GetAllPromptsResponseFormatPromptsJSONSchema
+  > = z.object({
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() =>
+      GetAllPromptsResponseFormatJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
+  });
+
+export function getAllPromptsResponseFormatPromptsJSONSchemaToJSON(
+  getAllPromptsResponseFormatPromptsJSONSchema:
+    GetAllPromptsResponseFormatPromptsJSONSchema,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormatPromptsJSONSchema$outboundSchema.parse(
+      getAllPromptsResponseFormatPromptsJSONSchema,
+    ),
+  );
+}
+export function getAllPromptsResponseFormatPromptsJSONSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetAllPromptsResponseFormatPromptsJSONSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsResponseFormatPromptsJSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetAllPromptsResponseFormatPromptsJSONSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatJSONObject$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatJSONObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("json_object"),
+});
+/** @internal */
+export type GetAllPromptsResponseFormatJSONObject$Outbound = {
+  type: "json_object";
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormatJSONObject$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatJSONObject$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormatJSONObject
+> = z.object({
+  type: z.literal("json_object"),
+});
+
+export function getAllPromptsResponseFormatJSONObjectToJSON(
+  getAllPromptsResponseFormatJSONObject: GetAllPromptsResponseFormatJSONObject,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormatJSONObject$outboundSchema.parse(
+      getAllPromptsResponseFormatJSONObject,
+    ),
+  );
+}
+export function getAllPromptsResponseFormatJSONObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormatJSONObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormatJSONObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatText$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatText,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+});
+/** @internal */
+export type GetAllPromptsResponseFormatText$Outbound = {
+  type: "text";
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormatText$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormatText$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormatText
+> = z.object({
+  type: z.literal("text"),
+});
+
+export function getAllPromptsResponseFormatTextToJSON(
+  getAllPromptsResponseFormatText: GetAllPromptsResponseFormatText,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormatText$outboundSchema.parse(
+      getAllPromptsResponseFormatText,
+    ),
+  );
+}
+export function getAllPromptsResponseFormatTextFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormatText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormatText' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetAllPromptsResponseFormatText$inboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormatPromptsJSONSchema$inboundSchema),
+]);
+/** @internal */
+export type GetAllPromptsResponseFormat$Outbound =
+  | GetAllPromptsResponseFormatText$Outbound
+  | GetAllPromptsResponseFormatJSONObject$Outbound
+  | GetAllPromptsResponseFormatPromptsJSONSchema$Outbound;
+
+/** @internal */
+export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormat
+> = z.union([
+  z.lazy(() => GetAllPromptsResponseFormatText$outboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormatJSONObject$outboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormatPromptsJSONSchema$outboundSchema),
+]);
+
+export function getAllPromptsResponseFormatToJSON(
+  getAllPromptsResponseFormat: GetAllPromptsResponseFormat,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormat$outboundSchema.parse(
+      getAllPromptsResponseFormat,
+    ),
+  );
+}
+export function getAllPromptsResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsReasoningEffort
+> = z.nativeEnum(GetAllPromptsReasoningEffort);
+/** @internal */
+export const GetAllPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsReasoningEffort
+> = GetAllPromptsReasoningEffort$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsStop$inboundSchema: z.ZodType<
+  GetAllPromptsStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+/** @internal */
+export type GetAllPromptsStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const GetAllPromptsStop$outboundSchema: z.ZodType<
+  GetAllPromptsStop$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsStop
+> = z.union([z.string(), z.array(z.string())]);
+
+export function getAllPromptsStopToJSON(
+  getAllPromptsStop: GetAllPromptsStop,
+): string {
+  return JSON.stringify(
+    GetAllPromptsStop$outboundSchema.parse(getAllPromptsStop),
+  );
+}
+export function getAllPromptsStopFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsStreamOptions$inboundSchema: z.ZodType<
+  GetAllPromptsStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+/** @internal */
+export type GetAllPromptsStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsStreamOptions$outboundSchema: z.ZodType<
+  GetAllPromptsStreamOptions$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsStreamOptions
+> = z.object({
+  includeUsage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    includeUsage: "include_usage",
+  });
+});
+
+export function getAllPromptsStreamOptionsToJSON(
+  getAllPromptsStreamOptions: GetAllPromptsStreamOptions,
+): string {
+  return JSON.stringify(
+    GetAllPromptsStreamOptions$outboundSchema.parse(getAllPromptsStreamOptions),
+  );
+}
+export function getAllPromptsStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsThinking$inboundSchema: z.ZodType<
+  GetAllPromptsThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
+/** @internal */
+export type GetAllPromptsThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
+
+/** @internal */
+export const GetAllPromptsThinking$outboundSchema: z.ZodType<
+  GetAllPromptsThinking$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsThinking
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
+
+export function getAllPromptsThinkingToJSON(
+  getAllPromptsThinking: GetAllPromptsThinking,
+): string {
+  return JSON.stringify(
+    GetAllPromptsThinking$outboundSchema.parse(getAllPromptsThinking),
+  );
+}
+export function getAllPromptsThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsToolChoiceType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsToolChoiceType
+> = z.nativeEnum(GetAllPromptsToolChoiceType);
+/** @internal */
+export const GetAllPromptsToolChoiceType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsToolChoiceType
+> = GetAllPromptsToolChoiceType$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsToolChoiceFunction$inboundSchema: z.ZodType<
+  GetAllPromptsToolChoiceFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+});
+/** @internal */
+export type GetAllPromptsToolChoiceFunction$Outbound = {
+  name: string;
+};
+
+/** @internal */
+export const GetAllPromptsToolChoiceFunction$outboundSchema: z.ZodType<
+  GetAllPromptsToolChoiceFunction$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsToolChoiceFunction
+> = z.object({
+  name: z.string(),
+});
+
+export function getAllPromptsToolChoiceFunctionToJSON(
+  getAllPromptsToolChoiceFunction: GetAllPromptsToolChoiceFunction,
+): string {
+  return JSON.stringify(
+    GetAllPromptsToolChoiceFunction$outboundSchema.parse(
+      getAllPromptsToolChoiceFunction,
+    ),
+  );
+}
+export function getAllPromptsToolChoiceFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsToolChoiceFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsToolChoiceFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsToolChoice2$inboundSchema: z.ZodType<
+  GetAllPromptsToolChoice2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsToolChoiceType$inboundSchema.optional(),
+  function: z.lazy(() => GetAllPromptsToolChoiceFunction$inboundSchema),
+});
+/** @internal */
+export type GetAllPromptsToolChoice2$Outbound = {
+  type?: string | undefined;
+  function: GetAllPromptsToolChoiceFunction$Outbound;
+};
+
+/** @internal */
+export const GetAllPromptsToolChoice2$outboundSchema: z.ZodType<
+  GetAllPromptsToolChoice2$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsToolChoice2
+> = z.object({
+  type: GetAllPromptsToolChoiceType$outboundSchema.optional(),
+  function: z.lazy(() => GetAllPromptsToolChoiceFunction$outboundSchema),
+});
+
+export function getAllPromptsToolChoice2ToJSON(
+  getAllPromptsToolChoice2: GetAllPromptsToolChoice2,
+): string {
+  return JSON.stringify(
+    GetAllPromptsToolChoice2$outboundSchema.parse(getAllPromptsToolChoice2),
+  );
+}
+export function getAllPromptsToolChoice2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsToolChoice2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsToolChoice2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsToolChoice2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsToolChoice1$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsToolChoice1
+> = z.nativeEnum(GetAllPromptsToolChoice1);
+/** @internal */
+export const GetAllPromptsToolChoice1$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsToolChoice1
+> = GetAllPromptsToolChoice1$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsToolChoice$inboundSchema: z.ZodType<
+  GetAllPromptsToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetAllPromptsToolChoice2$inboundSchema),
+  GetAllPromptsToolChoice1$inboundSchema,
+]);
+/** @internal */
+export type GetAllPromptsToolChoice$Outbound =
+  | GetAllPromptsToolChoice2$Outbound
+  | string;
+
+/** @internal */
+export const GetAllPromptsToolChoice$outboundSchema: z.ZodType<
+  GetAllPromptsToolChoice$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsToolChoice
+> = z.union([
+  z.lazy(() => GetAllPromptsToolChoice2$outboundSchema),
+  GetAllPromptsToolChoice1$outboundSchema,
+]);
+
+export function getAllPromptsToolChoiceToJSON(
+  getAllPromptsToolChoice: GetAllPromptsToolChoice,
+): string {
+  return JSON.stringify(
+    GetAllPromptsToolChoice$outboundSchema.parse(getAllPromptsToolChoice),
+  );
+}
+export function getAllPromptsToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsModalities$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsModalities
+> = z.nativeEnum(GetAllPromptsModalities);
+/** @internal */
+export const GetAllPromptsModalities$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsModalities
+> = GetAllPromptsModalities$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsId1$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsId1
+> = z.nativeEnum(GetAllPromptsId1);
+/** @internal */
+export const GetAllPromptsId1$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsId1
+> = GetAllPromptsId1$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsId$inboundSchema: z.ZodType<
+  GetAllPromptsId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([GetAllPromptsId1$inboundSchema, z.string()]);
+/** @internal */
+export type GetAllPromptsId$Outbound = string | string;
+
+/** @internal */
+export const GetAllPromptsId$outboundSchema: z.ZodType<
+  GetAllPromptsId$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsId
+> = z.union([GetAllPromptsId1$outboundSchema, z.string()]);
+
+export function getAllPromptsIdToJSON(
+  getAllPromptsId: GetAllPromptsId,
+): string {
+  return JSON.stringify(GetAllPromptsId$outboundSchema.parse(getAllPromptsId));
+}
+export function getAllPromptsIdFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsId' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsExecuteOn
+> = z.nativeEnum(GetAllPromptsExecuteOn);
+/** @internal */
+export const GetAllPromptsExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsExecuteOn
+> = GetAllPromptsExecuteOn$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsGuardrails$inboundSchema: z.ZodType<
+  GetAllPromptsGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([GetAllPromptsId1$inboundSchema, z.string()]),
+  execute_on: GetAllPromptsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type GetAllPromptsGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const GetAllPromptsGuardrails$outboundSchema: z.ZodType<
+  GetAllPromptsGuardrails$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsGuardrails
+> = z.object({
+  id: z.union([GetAllPromptsId1$outboundSchema, z.string()]),
+  executeOn: GetAllPromptsExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function getAllPromptsGuardrailsToJSON(
+  getAllPromptsGuardrails: GetAllPromptsGuardrails,
+): string {
+  return JSON.stringify(
+    GetAllPromptsGuardrails$outboundSchema.parse(getAllPromptsGuardrails),
+  );
+}
+export function getAllPromptsGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsContentPromptsResponse2002$inboundSchema: z.ZodType<
+  GetAllPromptsContentPromptsResponse2002,
+  z.ZodTypeDef,
+  unknown
+> = components.TextContentPartSchema$inboundSchema;
+/** @internal */
+export type GetAllPromptsContentPromptsResponse2002$Outbound =
+  components.TextContentPartSchema$Outbound;
+
+/** @internal */
+export const GetAllPromptsContentPromptsResponse2002$outboundSchema: z.ZodType<
+  GetAllPromptsContentPromptsResponse2002$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsContentPromptsResponse2002
+> = components.TextContentPartSchema$outboundSchema;
+
+export function getAllPromptsContentPromptsResponse2002ToJSON(
+  getAllPromptsContentPromptsResponse2002:
+    GetAllPromptsContentPromptsResponse2002,
+): string {
+  return JSON.stringify(
+    GetAllPromptsContentPromptsResponse2002$outboundSchema.parse(
+      getAllPromptsContentPromptsResponse2002,
+    ),
+  );
+}
+export function getAllPromptsContentPromptsResponse2002FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetAllPromptsContentPromptsResponse2002,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsContentPromptsResponse2002$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetAllPromptsContentPromptsResponse2002' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsResponse200Content$inboundSchema:
+  z.ZodType<
+    GetAllPromptsMessagesPromptsResponse200Content,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]);
+/** @internal */
+export type GetAllPromptsMessagesPromptsResponse200Content$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsResponse200Content$outboundSchema:
+  z.ZodType<
+    GetAllPromptsMessagesPromptsResponse200Content$Outbound,
+    z.ZodTypeDef,
+    GetAllPromptsMessagesPromptsResponse200Content
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]);
+
+export function getAllPromptsMessagesPromptsResponse200ContentToJSON(
+  getAllPromptsMessagesPromptsResponse200Content:
+    GetAllPromptsMessagesPromptsResponse200Content,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesPromptsResponse200Content$outboundSchema.parse(
+      getAllPromptsMessagesPromptsResponse200Content,
+    ),
+  );
+}
+export function getAllPromptsMessagesPromptsResponse200ContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetAllPromptsMessagesPromptsResponse200Content,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsMessagesPromptsResponse200Content$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetAllPromptsMessagesPromptsResponse200Content' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesPromptsType
+> = z.nativeEnum(GetAllPromptsMessagesPromptsType);
+/** @internal */
+export const GetAllPromptsMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesPromptsType
+> = GetAllPromptsMessagesPromptsType$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsMessagesTtl$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesTtl
+> = z.nativeEnum(GetAllPromptsMessagesTtl);
+/** @internal */
+export const GetAllPromptsMessagesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesTtl
+> = GetAllPromptsMessagesTtl$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsMessagesCacheControl$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsMessagesPromptsType$inboundSchema,
+  ttl: GetAllPromptsMessagesTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type GetAllPromptsMessagesCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesCacheControl$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesCacheControl$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesCacheControl
+> = z.object({
+  type: GetAllPromptsMessagesPromptsType$outboundSchema,
+  ttl: GetAllPromptsMessagesTtl$outboundSchema.default("5m"),
+});
+
+export function getAllPromptsMessagesCacheControlToJSON(
+  getAllPromptsMessagesCacheControl: GetAllPromptsMessagesCacheControl,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesCacheControl$outboundSchema.parse(
+      getAllPromptsMessagesCacheControl,
+    ),
+  );
+}
+export function getAllPromptsMessagesCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesToolMessage$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesToolMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  tool_call_id: z.nullable(z.string()),
+  cache_control: z.lazy(() => GetAllPromptsMessagesCacheControl$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type GetAllPromptsMessagesToolMessage$Outbound = {
+  role: "tool";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
+  cache_control?: GetAllPromptsMessagesCacheControl$Outbound | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesToolMessage$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesToolMessage$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesToolMessage
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  toolCallId: z.nullable(z.string()),
+  cacheControl: z.lazy(() => GetAllPromptsMessagesCacheControl$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+    cacheControl: "cache_control",
+  });
+});
+
+export function getAllPromptsMessagesToolMessageToJSON(
+  getAllPromptsMessagesToolMessage: GetAllPromptsMessagesToolMessage,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesToolMessage$outboundSchema.parse(
+      getAllPromptsMessagesToolMessage,
+    ),
+  );
+}
+export function getAllPromptsMessagesToolMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesToolMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesToolMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsContentPromptsResponse2$inboundSchema: z.ZodType<
+  GetAllPromptsContentPromptsResponse2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$inboundSchema,
+  components.ReasoningPartSchema$inboundSchema,
+  components.RedactedReasoningPartSchema$inboundSchema,
+]);
+/** @internal */
+export type GetAllPromptsContentPromptsResponse2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.RefusalPartSchema$Outbound
+  | components.ReasoningPartSchema$Outbound
+  | components.RedactedReasoningPartSchema$Outbound;
+
+/** @internal */
+export const GetAllPromptsContentPromptsResponse2$outboundSchema: z.ZodType<
+  GetAllPromptsContentPromptsResponse2$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsContentPromptsResponse2
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$outboundSchema,
+  components.ReasoningPartSchema$outboundSchema,
+  components.RedactedReasoningPartSchema$outboundSchema,
+]);
+
+export function getAllPromptsContentPromptsResponse2ToJSON(
+  getAllPromptsContentPromptsResponse2: GetAllPromptsContentPromptsResponse2,
+): string {
+  return JSON.stringify(
+    GetAllPromptsContentPromptsResponse2$outboundSchema.parse(
+      getAllPromptsContentPromptsResponse2,
+    ),
+  );
+}
+export function getAllPromptsContentPromptsResponse2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsContentPromptsResponse2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsContentPromptsResponse2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsContentPromptsResponse2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsResponseContent$inboundSchema:
+  z.ZodType<
+    GetAllPromptsMessagesPromptsResponseContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$inboundSchema,
+        components.ReasoningPartSchema$inboundSchema,
+        components.RedactedReasoningPartSchema$inboundSchema,
+      ]),
+    ),
+  ]);
+/** @internal */
+export type GetAllPromptsMessagesPromptsResponseContent$Outbound =
+  | string
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.RefusalPartSchema$Outbound
+    | components.ReasoningPartSchema$Outbound
+    | components.RedactedReasoningPartSchema$Outbound
+  >;
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsResponseContent$outboundSchema:
+  z.ZodType<
+    GetAllPromptsMessagesPromptsResponseContent$Outbound,
+    z.ZodTypeDef,
+    GetAllPromptsMessagesPromptsResponseContent
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
+  ]);
+
+export function getAllPromptsMessagesPromptsResponseContentToJSON(
+  getAllPromptsMessagesPromptsResponseContent:
+    GetAllPromptsMessagesPromptsResponseContent,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesPromptsResponseContent$outboundSchema.parse(
+      getAllPromptsMessagesPromptsResponseContent,
+    ),
+  );
+}
+export function getAllPromptsMessagesPromptsResponseContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetAllPromptsMessagesPromptsResponseContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsMessagesPromptsResponseContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetAllPromptsMessagesPromptsResponseContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesAudio$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+});
+/** @internal */
+export type GetAllPromptsMessagesAudio$Outbound = {
+  id: string;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesAudio$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesAudio$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesAudio
+> = z.object({
+  id: z.string(),
+});
+
+export function getAllPromptsMessagesAudioToJSON(
+  getAllPromptsMessagesAudio: GetAllPromptsMessagesAudio,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesAudio$outboundSchema.parse(getAllPromptsMessagesAudio),
+  );
+}
+export function getAllPromptsMessagesAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesType
+> = z.nativeEnum(GetAllPromptsMessagesType);
+/** @internal */
+export const GetAllPromptsMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsMessagesType
+> = GetAllPromptsMessagesType$inboundSchema;
+
+/** @internal */
+export const GetAllPromptsMessagesFunction$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+/** @internal */
+export type GetAllPromptsMessagesFunction$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesFunction$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesFunction$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesFunction
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function getAllPromptsMessagesFunctionToJSON(
+  getAllPromptsMessagesFunction: GetAllPromptsMessagesFunction,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesFunction$outboundSchema.parse(
+      getAllPromptsMessagesFunction,
+    ),
+  );
+}
+export function getAllPromptsMessagesFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesToolCalls$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: GetAllPromptsMessagesType$inboundSchema,
+  function: z.lazy(() => GetAllPromptsMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+/** @internal */
+export type GetAllPromptsMessagesToolCalls$Outbound = {
+  id: string;
+  type: string;
+  function: GetAllPromptsMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesToolCalls$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesToolCalls$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesToolCalls
+> = z.object({
+  id: z.string(),
+  type: GetAllPromptsMessagesType$outboundSchema,
+  function: z.lazy(() => GetAllPromptsMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function getAllPromptsMessagesToolCallsToJSON(
+  getAllPromptsMessagesToolCalls: GetAllPromptsMessagesToolCalls,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesToolCalls$outboundSchema.parse(
+      getAllPromptsMessagesToolCalls,
+    ),
+  );
+}
+export function getAllPromptsMessagesToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesAssistantMessage$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesAssistantMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$inboundSchema,
+          components.ReasoningPartSchema$inboundSchema,
+          components.RedactedReasoningPartSchema$inboundSchema,
+        ]),
+      ),
+    ]),
+  ).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: z.literal("assistant"),
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => GetAllPromptsMessagesAudio$inboundSchema))
+    .optional(),
+  tool_calls: z.array(
+    z.lazy(() => GetAllPromptsMessagesToolCalls$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
+  });
+});
+/** @internal */
+export type GetAllPromptsMessagesAssistantMessage$Outbound = {
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.RefusalPartSchema$Outbound
+      | components.ReasoningPartSchema$Outbound
+      | components.RedactedReasoningPartSchema$Outbound
+    >
+    | null
+    | undefined;
+  refusal?: string | null | undefined;
+  role: "assistant";
+  name?: string | undefined;
+  audio?: GetAllPromptsMessagesAudio$Outbound | null | undefined;
+  tool_calls?: Array<GetAllPromptsMessagesToolCalls$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesAssistantMessage$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesAssistantMessage$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesAssistantMessage
+> = z.object({
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$outboundSchema,
+          components.ReasoningPartSchema$outboundSchema,
+          components.RedactedReasoningPartSchema$outboundSchema,
+        ]),
+      ),
+    ]),
+  ).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: z.literal("assistant"),
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => GetAllPromptsMessagesAudio$outboundSchema))
+    .optional(),
+  toolCalls: z.array(
+    z.lazy(() => GetAllPromptsMessagesToolCalls$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCalls: "tool_calls",
+  });
+});
+
+export function getAllPromptsMessagesAssistantMessageToJSON(
+  getAllPromptsMessagesAssistantMessage: GetAllPromptsMessagesAssistantMessage,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesAssistantMessage$outboundSchema.parse(
+      getAllPromptsMessagesAssistantMessage,
+    ),
+  );
+}
+export function getAllPromptsMessagesAssistantMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesAssistantMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsMessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts2PromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPrompts2PromptsResponse200ApplicationJSONType> =
+    z.nativeEnum(GetAllPrompts2PromptsResponse200ApplicationJSONType);
+/** @internal */
+export const GetAllPrompts2PromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPrompts2PromptsResponse200ApplicationJSONType> =
+    GetAllPrompts2PromptsResponse200ApplicationJSONType$inboundSchema;
+
+/** @internal */
+export const GetAllPrompts2Ttl$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2Ttl
+> = z.nativeEnum(GetAllPrompts2Ttl);
+/** @internal */
+export const GetAllPrompts2Ttl$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2Ttl
+> = GetAllPrompts2Ttl$inboundSchema;
+
+/** @internal */
+export const GetAllPrompts2CacheControl$inboundSchema: z.ZodType<
+  GetAllPrompts2CacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPrompts2PromptsResponse200ApplicationJSONType$inboundSchema,
+  ttl: GetAllPrompts2Ttl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type GetAllPrompts2CacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const GetAllPrompts2CacheControl$outboundSchema: z.ZodType<
+  GetAllPrompts2CacheControl$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts2CacheControl
+> = z.object({
+  type: GetAllPrompts2PromptsResponse200ApplicationJSONType$outboundSchema,
+  ttl: GetAllPrompts2Ttl$outboundSchema.default("5m"),
+});
+
+export function getAllPrompts2CacheControlToJSON(
+  getAllPrompts2CacheControl: GetAllPrompts2CacheControl,
+): string {
+  return JSON.stringify(
+    GetAllPrompts2CacheControl$outboundSchema.parse(getAllPrompts2CacheControl),
+  );
+}
+export function getAllPrompts2CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts2CacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts2CacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts2CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts24$inboundSchema: z.ZodType<
+  GetAllPrompts24,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() => GetAllPrompts2CacheControl$inboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type GetAllPrompts24$Outbound = {
+  type: "file";
+  cache_control?: GetAllPrompts2CacheControl$Outbound | undefined;
+  file: components.FileContentPartSchema$Outbound;
+};
+
+/** @internal */
+export const GetAllPrompts24$outboundSchema: z.ZodType<
+  GetAllPrompts24$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() => GetAllPrompts2CacheControl$outboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function getAllPrompts24ToJSON(
+  getAllPrompts24: GetAllPrompts24,
+): string {
+  return JSON.stringify(GetAllPrompts24$outboundSchema.parse(getAllPrompts24));
+}
+export function getAllPrompts24FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts24, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts24' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsContentPrompts2$inboundSchema: z.ZodType<
+  GetAllPromptsContentPrompts2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$inboundSchema,
+  components.AudioContentPartSchema$inboundSchema,
+  z.lazy(() => GetAllPrompts24$inboundSchema),
+]);
+/** @internal */
+export type GetAllPromptsContentPrompts2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.ImageContentPartSchema$Outbound
+  | components.AudioContentPartSchema$Outbound
+  | GetAllPrompts24$Outbound;
+
+/** @internal */
+export const GetAllPromptsContentPrompts2$outboundSchema: z.ZodType<
+  GetAllPromptsContentPrompts2$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsContentPrompts2
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$outboundSchema,
+  components.AudioContentPartSchema$outboundSchema,
+  z.lazy(() => GetAllPrompts24$outboundSchema),
+]);
+
+export function getAllPromptsContentPrompts2ToJSON(
+  getAllPromptsContentPrompts2: GetAllPromptsContentPrompts2,
+): string {
+  return JSON.stringify(
+    GetAllPromptsContentPrompts2$outboundSchema.parse(
+      getAllPromptsContentPrompts2,
+    ),
+  );
+}
+export function getAllPromptsContentPrompts2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsContentPrompts2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsContentPrompts2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsContentPrompts2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsContent$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesPromptsContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      components.TextContentPartSchema$inboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => GetAllPrompts24$inboundSchema),
+    ]),
+  ),
+]);
+/** @internal */
+export type GetAllPromptsMessagesPromptsContent$Outbound =
+  | string
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.ImageContentPartSchema$Outbound
+    | components.AudioContentPartSchema$Outbound
+    | GetAllPrompts24$Outbound
+  >;
+
+/** @internal */
+export const GetAllPromptsMessagesPromptsContent$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesPromptsContent$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesPromptsContent
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      components.TextContentPartSchema$outboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => GetAllPrompts24$outboundSchema),
+    ]),
+  ),
+]);
+
+export function getAllPromptsMessagesPromptsContentToJSON(
+  getAllPromptsMessagesPromptsContent: GetAllPromptsMessagesPromptsContent,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesPromptsContent$outboundSchema.parse(
+      getAllPromptsMessagesPromptsContent,
+    ),
+  );
+}
+export function getAllPromptsMessagesPromptsContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesPromptsContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsMessagesPromptsContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesPromptsContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesUserMessage$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesUserMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => GetAllPrompts24$inboundSchema),
+      ]),
+    ),
+  ]),
+});
+/** @internal */
+export type GetAllPromptsMessagesUserMessage$Outbound = {
+  role: "user";
+  name?: string | undefined;
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.ImageContentPartSchema$Outbound
+      | components.AudioContentPartSchema$Outbound
+      | GetAllPrompts24$Outbound
+    >;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesUserMessage$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesUserMessage$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesUserMessage
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => GetAllPrompts24$outboundSchema),
+      ]),
+    ),
+  ]),
+});
+
+export function getAllPromptsMessagesUserMessageToJSON(
+  getAllPromptsMessagesUserMessage: GetAllPromptsMessagesUserMessage,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesUserMessage$outboundSchema.parse(
+      getAllPromptsMessagesUserMessage,
+    ),
+  );
+}
+export function getAllPromptsMessagesUserMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesUserMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesUserMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesContent$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$inboundSchema),
+]);
+/** @internal */
+export type GetAllPromptsMessagesContent$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const GetAllPromptsMessagesContent$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesContent$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesContent
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$outboundSchema),
+]);
+
+export function getAllPromptsMessagesContentToJSON(
+  getAllPromptsMessagesContent: GetAllPromptsMessagesContent,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesContent$outboundSchema.parse(
+      getAllPromptsMessagesContent,
+    ),
+  );
+}
+export function getAllPromptsMessagesContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesSystemMessage$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesSystemMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+/** @internal */
+export type GetAllPromptsMessagesSystemMessage$Outbound = {
+  role: "system";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsMessagesSystemMessage$outboundSchema: z.ZodType<
+  GetAllPromptsMessagesSystemMessage$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsMessagesSystemMessage
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+
+export function getAllPromptsMessagesSystemMessageToJSON(
+  getAllPromptsMessagesSystemMessage: GetAllPromptsMessagesSystemMessage,
+): string {
+  return JSON.stringify(
+    GetAllPromptsMessagesSystemMessage$outboundSchema.parse(
+      getAllPromptsMessagesSystemMessage,
+    ),
+  );
+}
+export function getAllPromptsMessagesSystemMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesSystemMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllPromptsMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesSystemMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsPromptsMessages$inboundSchema: z.ZodType<
+  GetAllPromptsPromptsMessages,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetAllPromptsMessagesSystemMessage$inboundSchema),
+  z.lazy(() => GetAllPromptsMessagesUserMessage$inboundSchema),
+  z.lazy(() => GetAllPromptsMessagesAssistantMessage$inboundSchema),
+  z.lazy(() => GetAllPromptsMessagesToolMessage$inboundSchema),
+]);
+/** @internal */
+export type GetAllPromptsPromptsMessages$Outbound =
+  | GetAllPromptsMessagesSystemMessage$Outbound
+  | GetAllPromptsMessagesUserMessage$Outbound
+  | GetAllPromptsMessagesAssistantMessage$Outbound
+  | GetAllPromptsMessagesToolMessage$Outbound;
+
+/** @internal */
+export const GetAllPromptsPromptsMessages$outboundSchema: z.ZodType<
+  GetAllPromptsPromptsMessages$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsPromptsMessages
+> = z.union([
+  z.lazy(() => GetAllPromptsMessagesSystemMessage$outboundSchema),
+  z.lazy(() => GetAllPromptsMessagesUserMessage$outboundSchema),
+  z.lazy(() => GetAllPromptsMessagesAssistantMessage$outboundSchema),
+  z.lazy(() => GetAllPromptsMessagesToolMessage$outboundSchema),
+]);
+
+export function getAllPromptsPromptsMessagesToJSON(
+  getAllPromptsPromptsMessages: GetAllPromptsPromptsMessages,
+): string {
+  return JSON.stringify(
+    GetAllPromptsPromptsMessages$outboundSchema.parse(
+      getAllPromptsPromptsMessages,
+    ),
+  );
+}
+export function getAllPromptsPromptsMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsPromptsMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsPromptsMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPromptsMessages' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
+  GetAllPromptsPromptField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(z.lazy(() => GetAllPromptsAudio$inboundSchema)).optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => GetAllPromptsResponseFormatText$inboundSchema),
+    z.lazy(() => GetAllPromptsResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => GetAllPromptsResponseFormatPromptsJSONSchema$inboundSchema),
+  ]).optional(),
+  reasoning_effort: GetAllPromptsReasoningEffort$inboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => GetAllPromptsStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => GetAllPromptsToolChoice2$inboundSchema),
+    GetAllPromptsToolChoice1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(GetAllPromptsModalities$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetAllPromptsGuardrails$inboundSchema))
+    .optional(),
+  messages: z.array(
+    z.union([
+      z.lazy(() => GetAllPromptsMessagesSystemMessage$inboundSchema),
+      z.lazy(() => GetAllPromptsMessagesUserMessage$inboundSchema),
+      z.lazy(() => GetAllPromptsMessagesAssistantMessage$inboundSchema),
+      z.lazy(() => GetAllPromptsMessagesToolMessage$inboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+  });
+});
+/** @internal */
+export type GetAllPromptsPromptField$Outbound = {
+  audio?: GetAllPromptsAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | GetAllPromptsResponseFormatText$Outbound
+    | GetAllPromptsResponseFormatJSONObject$Outbound
+    | GetAllPromptsResponseFormatPromptsJSONSchema$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?: GetAllPromptsStreamOptions$Outbound | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: GetAllPromptsToolChoice2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  guardrails?: Array<GetAllPromptsGuardrails$Outbound> | undefined;
+  messages?:
+    | Array<
+      | GetAllPromptsMessagesSystemMessage$Outbound
+      | GetAllPromptsMessagesUserMessage$Outbound
+      | GetAllPromptsMessagesAssistantMessage$Outbound
+      | GetAllPromptsMessagesToolMessage$Outbound
+    >
+    | undefined;
+  model?: string | null | undefined;
+  version?: string | undefined;
+};
+
+/** @internal */
+export const GetAllPromptsPromptField$outboundSchema: z.ZodType<
+  GetAllPromptsPromptField$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsPromptField
+> = z.object({
+  audio: z.nullable(z.lazy(() => GetAllPromptsAudio$outboundSchema)).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => GetAllPromptsResponseFormatText$outboundSchema),
+    z.lazy(() => GetAllPromptsResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => GetAllPromptsResponseFormatPromptsJSONSchema$outboundSchema),
+  ]).optional(),
+  reasoningEffort: GetAllPromptsReasoningEffort$outboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => GetAllPromptsStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => GetAllPromptsToolChoice2$outboundSchema),
+    GetAllPromptsToolChoice1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(z.array(GetAllPromptsModalities$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetAllPromptsGuardrails$outboundSchema))
+    .optional(),
+  messages: z.array(
+    z.union([
+      z.lazy(() => GetAllPromptsMessagesSystemMessage$outboundSchema),
+      z.lazy(() => GetAllPromptsMessagesUserMessage$outboundSchema),
+      z.lazy(() => GetAllPromptsMessagesAssistantMessage$outboundSchema),
+      z.lazy(() => GetAllPromptsMessagesToolMessage$outboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+  });
+});
+
+export function getAllPromptsPromptFieldToJSON(
+  getAllPromptsPromptField: GetAllPromptsPromptField,
+): string {
+  return JSON.stringify(
+    GetAllPromptsPromptField$outboundSchema.parse(getAllPromptsPromptField),
+  );
+}
+export function getAllPromptsPromptFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsPromptField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsPromptField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPromptField' from JSON`,
   );
 }
 
@@ -1863,7 +4551,9 @@ export const GetAllPromptsPrompt$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema)
+    .optional(),
+  prompt: z.lazy(() => GetAllPromptsPromptField$inboundSchema),
   metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1887,7 +4577,8 @@ export type GetAllPromptsPrompt$Outbound = {
   updated_by_id?: string | null | undefined;
   display_name: string;
   description?: string | null | undefined;
-  prompt_config: GetAllPromptsPromptConfig$Outbound;
+  prompt_config?: GetAllPromptsPromptConfig$Outbound | undefined;
+  prompt: GetAllPromptsPromptField$Outbound;
   metadata?: GetAllPromptsMetadata$Outbound | undefined;
 };
 
@@ -1907,7 +4598,9 @@ export const GetAllPromptsPrompt$outboundSchema: z.ZodType<
   updatedById: z.nullable(z.string()).optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => GetAllPromptsPromptConfig$outboundSchema),
+  promptConfig: z.lazy(() => GetAllPromptsPromptConfig$outboundSchema)
+    .optional(),
+  prompt: z.lazy(() => GetAllPromptsPromptField$outboundSchema),
   metadata: z.lazy(() => GetAllPromptsMetadata$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

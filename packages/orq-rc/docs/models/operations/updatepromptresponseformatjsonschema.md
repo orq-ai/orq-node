@@ -1,24 +1,25 @@
-# UpdatePromptResponseFormatJsonSchema
+# UpdatePromptResponseFormatJSONSchema
+
+
+
+JSON Schema response format. Used to generate structured JSON responses
 
 ## Example Usage
 
 ```typescript
-import { UpdatePromptResponseFormatJsonSchema } from "@orq-ai/node/models/operations";
+import { UpdatePromptResponseFormatJSONSchema } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormatJsonSchema = {
-  name: "<value>",
-  schema: {
-    "key": "<value>",
-    "key1": "<value>",
+let value: UpdatePromptResponseFormatJSONSchema = {
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
   },
 };
 ```
 
 ## Fields
 
-| Field                 | Type                  | Required              | Description           |
-| --------------------- | --------------------- | --------------------- | --------------------- |
-| `name`                | *string*              | :heavy_check_mark:    | N/A                   |
-| `description`         | *string*              | :heavy_minus_sign:    | N/A                   |
-| `strict`              | *boolean*             | :heavy_minus_sign:    | N/A                   |
-| `schema`              | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| Field                                                                                                                            | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                           | *"json_schema"*                                                                                                                  | :heavy_check_mark:                                                                                                               | N/A                                                                                                                              |
+| `jsonSchema`                                                                                                                     | [operations.UpdatePromptResponseFormatPromptsJsonSchema](../../models/operations/updatepromptresponseformatpromptsjsonschema.md) | :heavy_check_mark:                                                                                                               | N/A                                                                                                                              |

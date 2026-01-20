@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetOnePromptRequest = {
@@ -85,36 +86,40 @@ export type GetOnePromptResponseFormat4 = ClosedEnum<
   typeof GetOnePromptResponseFormat4
 >;
 
-export const GetOnePromptResponseFormatPromptsResponseType = {
-  Text: "text",
-} as const;
-export type GetOnePromptResponseFormatPromptsResponseType = ClosedEnum<
-  typeof GetOnePromptResponseFormatPromptsResponseType
->;
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  {
+    Text: "text",
+  } as const;
+export type GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  >;
 
 export type GetOnePromptResponseFormat3 = {
-  type: GetOnePromptResponseFormatPromptsResponseType;
+  type:
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType;
 };
 
-export const GetOnePromptResponseFormatPromptsType = {
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType = {
   JsonObject: "json_object",
 } as const;
-export type GetOnePromptResponseFormatPromptsType = ClosedEnum<
-  typeof GetOnePromptResponseFormatPromptsType
->;
+export type GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType
+  >;
 
 export type GetOnePromptResponseFormat2 = {
-  type: GetOnePromptResponseFormatPromptsType;
+  type: GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType;
 };
 
-export const GetOnePromptResponseFormatType = {
+export const GetOnePromptResponseFormatPromptsResponse200Type = {
   JsonSchema: "json_schema",
 } as const;
-export type GetOnePromptResponseFormatType = ClosedEnum<
-  typeof GetOnePromptResponseFormatType
+export type GetOnePromptResponseFormatPromptsResponse200Type = ClosedEnum<
+  typeof GetOnePromptResponseFormatPromptsResponse200Type
 >;
 
-export type GetOnePromptResponseFormatJsonSchema = {
+export type GetOnePromptResponseFormatPromptsResponseJsonSchema = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -122,9 +127,9 @@ export type GetOnePromptResponseFormatJsonSchema = {
 };
 
 export type GetOnePromptResponseFormat1 = {
-  type: GetOnePromptResponseFormatType;
+  type: GetOnePromptResponseFormatPromptsResponse200Type;
   displayName?: string | undefined;
-  jsonSchema: GetOnePromptResponseFormatJsonSchema;
+  jsonSchema: GetOnePromptResponseFormatPromptsResponseJsonSchema;
 };
 
 /**
@@ -138,7 +143,7 @@ export type GetOnePromptResponseFormat1 = {
  *
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
-export type GetOnePromptResponseFormat =
+export type GetOnePromptPromptsResponseFormat =
   | GetOnePromptResponseFormat1
   | GetOnePromptResponseFormat2
   | GetOnePromptResponseFormat3
@@ -177,7 +182,7 @@ export type GetOnePromptEncodingFormat = ClosedEnum<
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const GetOnePromptReasoningEffort = {
+export const GetOnePromptPromptsReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -188,8 +193,8 @@ export const GetOnePromptReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type GetOnePromptReasoningEffort = ClosedEnum<
-  typeof GetOnePromptReasoningEffort
+export type GetOnePromptPromptsReasoningEffort = ClosedEnum<
+  typeof GetOnePromptPromptsReasoningEffort
 >;
 
 /**
@@ -302,7 +307,7 @@ export type GetOnePromptModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: GetOnePromptReasoningEffort | undefined;
+  reasoningEffort?: GetOnePromptPromptsReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -474,11 +479,13 @@ export type GetOnePromptMessages = {
 };
 
 /**
- * A list of messages compatible with the openAI schema
+ * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type GetOnePromptPromptConfig = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   /**
    * The id of the resource
    */
@@ -491,13 +498,711 @@ export type GetOnePromptPromptConfig = {
    * Model Parameters: Not all parameters apply to every model
    */
   modelParameters?: GetOnePromptModelParameters | undefined;
-  provider?: GetOnePromptProvider | undefined;
+  provider?: GetOnePromptProvider | null | undefined;
   /**
    * The ID of the integration to use
    */
   integrationId?: string | null | undefined;
   version?: string | undefined;
   messages: Array<GetOnePromptMessages>;
+};
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const GetOnePromptVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type GetOnePromptVoice = ClosedEnum<typeof GetOnePromptVoice>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const GetOnePromptPromptsFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type GetOnePromptPromptsFormat = ClosedEnum<
+  typeof GetOnePromptPromptsFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type GetOnePromptAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: GetOnePromptVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: GetOnePromptPromptsFormat;
+};
+
+export type GetOnePromptResponseFormatJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict?: boolean | undefined;
+};
+
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type GetOnePromptResponseFormatPromptsJSONSchema = {
+  type: "json_schema";
+  jsonSchema: GetOnePromptResponseFormatJsonSchema;
+};
+
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type GetOnePromptResponseFormatJSONObject = {
+  type: "json_object";
+};
+
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type GetOnePromptResponseFormatText = {
+  type: "text";
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type GetOnePromptResponseFormat =
+  | GetOnePromptResponseFormatText
+  | GetOnePromptResponseFormatJSONObject
+  | GetOnePromptResponseFormatPromptsJSONSchema;
+
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const GetOnePromptReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type GetOnePromptReasoningEffort = ClosedEnum<
+  typeof GetOnePromptReasoningEffort
+>;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type GetOnePromptStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type GetOnePromptStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+export type GetOnePromptThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const GetOnePromptToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type GetOnePromptToolChoiceType = ClosedEnum<
+  typeof GetOnePromptToolChoiceType
+>;
+
+export type GetOnePromptToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+};
+
+export type GetOnePromptToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: GetOnePromptToolChoiceType | undefined;
+  function: GetOnePromptToolChoiceFunction;
+};
+
+export const GetOnePromptToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type GetOnePromptToolChoice1 = ClosedEnum<
+  typeof GetOnePromptToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type GetOnePromptToolChoice =
+  | GetOnePromptToolChoice2
+  | GetOnePromptToolChoice1;
+
+export const GetOnePromptModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type GetOnePromptModalities = ClosedEnum<typeof GetOnePromptModalities>;
+
+/**
+ * The key of the guardrail.
+ */
+export const GetOnePromptId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type GetOnePromptId1 = ClosedEnum<typeof GetOnePromptId1>;
+
+export type GetOnePromptId = GetOnePromptId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const GetOnePromptExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type GetOnePromptExecuteOn = ClosedEnum<typeof GetOnePromptExecuteOn>;
+
+export type GetOnePromptGuardrails = {
+  id: GetOnePromptId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: GetOnePromptExecuteOn;
+};
+
+export type GetOnePromptContentPromptsResponse2002 =
+  components.TextContentPartSchema;
+
+/**
+ * The contents of the tool message.
+ */
+export type GetOnePromptMessagesPromptsResponse200Content =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetOnePromptMessagesPromptsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetOnePromptMessagesPromptsType = ClosedEnum<
+  typeof GetOnePromptMessagesPromptsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetOnePromptMessagesTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetOnePromptMessagesTtl = ClosedEnum<
+  typeof GetOnePromptMessagesTtl
+>;
+
+export type GetOnePromptMessagesCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetOnePromptMessagesPromptsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: GetOnePromptMessagesTtl | undefined;
+};
+
+export type GetOnePromptMessagesToolMessage = {
+  /**
+   * The role of the messages author, in this case tool.
+   */
+  role: "tool";
+  /**
+   * The contents of the tool message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * Tool call that this message is responding to.
+   */
+  toolCallId: string | null;
+  cacheControl?: GetOnePromptMessagesCacheControl | undefined;
+};
+
+export type GetOnePromptContentPromptsResponse2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.RefusalPartSchema
+  | components.ReasoningPartSchema
+  | components.RedactedReasoningPartSchema;
+
+/**
+ * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+ */
+export type GetOnePromptMessagesPromptsResponseContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.RefusalPartSchema
+    | components.ReasoningPartSchema
+    | components.RedactedReasoningPartSchema
+  >;
+
+/**
+ * Data about a previous audio response from the model.
+ */
+export type GetOnePromptMessagesAudio = {
+  /**
+   * Unique identifier for a previous audio response from the model.
+   */
+  id: string;
+};
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const GetOnePromptMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type GetOnePromptMessagesType = ClosedEnum<
+  typeof GetOnePromptMessagesType
+>;
+
+export type GetOnePromptMessagesFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+  /**
+   * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+   */
+  arguments?: string | undefined;
+};
+
+export type GetOnePromptMessagesToolCalls = {
+  /**
+   * The ID of the tool call.
+   */
+  id: string;
+  /**
+   * The type of the tool. Currently, only `function` is supported.
+   */
+  type: GetOnePromptMessagesType;
+  function: GetOnePromptMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+export type GetOnePromptMessagesAssistantMessage = {
+  /**
+   * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+   */
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.RefusalPartSchema
+      | components.ReasoningPartSchema
+      | components.RedactedReasoningPartSchema
+    >
+    | null
+    | undefined;
+  /**
+   * The refusal message by the assistant.
+   */
+  refusal?: string | null | undefined;
+  /**
+   * The role of the messages author, in this case `assistant`.
+   */
+  role: "assistant";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * Data about a previous audio response from the model.
+   */
+  audio?: GetOnePromptMessagesAudio | null | undefined;
+  /**
+   * The tool calls generated by the model, such as function calls.
+   */
+  toolCalls?: Array<GetOnePromptMessagesToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetOnePrompt2PromptsResponse200ApplicationJSONType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetOnePrompt2PromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetOnePrompt2PromptsResponse200ApplicationJSONType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetOnePrompt2Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetOnePrompt2Ttl = ClosedEnum<typeof GetOnePrompt2Ttl>;
+
+export type GetOnePrompt2CacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetOnePrompt2PromptsResponse200ApplicationJSONType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: GetOnePrompt2Ttl | undefined;
+};
+
+export type GetOnePrompt24 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: GetOnePrompt2CacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
+};
+
+export type GetOnePromptContentPrompts2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.ImageContentPartSchema
+  | components.AudioContentPartSchema
+  | GetOnePrompt24;
+
+/**
+ * The contents of the user message.
+ */
+export type GetOnePromptMessagesPromptsContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.ImageContentPartSchema
+    | components.AudioContentPartSchema
+    | GetOnePrompt24
+  >;
+
+export type GetOnePromptMessagesUserMessage = {
+  /**
+   * The role of the messages author, in this case `user`.
+   */
+  role: "user";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * The contents of the user message.
+   */
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.ImageContentPartSchema
+      | components.AudioContentPartSchema
+      | GetOnePrompt24
+    >;
+};
+
+/**
+ * The contents of the system message.
+ */
+export type GetOnePromptMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+ */
+export type GetOnePromptMessagesSystemMessage = {
+  /**
+   * The role of the messages author, in this case `system`.
+   */
+  role: "system";
+  /**
+   * The contents of the system message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+};
+
+export type GetOnePromptPromptsMessages =
+  | GetOnePromptMessagesSystemMessage
+  | GetOnePromptMessagesUserMessage
+  | GetOnePromptMessagesAssistantMessage
+  | GetOnePromptMessagesToolMessage;
+
+/**
+ * Prompt configuration with model and messages. Use this instead of prompt_config.
+ */
+export type GetOnePromptPromptField = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: GetOnePromptAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | GetOnePromptResponseFormatText
+    | GetOnePromptResponseFormatJSONObject
+    | GetOnePromptResponseFormatPromptsJSONSchema
+    | undefined;
+  /**
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   */
+  reasoningEffort?: GetOnePromptReasoningEffort | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: GetOnePromptStreamOptions | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?: GetOnePromptToolChoice2 | GetOnePromptToolChoice1 | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<GetOnePromptModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<GetOnePromptGuardrails> | undefined;
+  /**
+   * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
+   */
+  messages?:
+    | Array<
+      | GetOnePromptMessagesSystemMessage
+      | GetOnePromptMessagesUserMessage
+      | GetOnePromptMessagesAssistantMessage
+      | GetOnePromptMessagesToolMessage
+    >
+    | undefined;
+  /**
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   */
+  model?: string | null | undefined;
+  version?: string | undefined;
 };
 
 export const GetOnePromptUseCases = {
@@ -573,9 +1278,15 @@ export type GetOnePromptPrompt = {
    */
   description?: string | null | undefined;
   /**
-   * A list of messages compatible with the openAI schema
+   * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  promptConfig: GetOnePromptPromptConfig;
+  promptConfig?: GetOnePromptPromptConfig | undefined;
+  /**
+   * Prompt configuration with model and messages. Use this instead of prompt_config.
+   */
+  prompt: GetOnePromptPromptField;
   metadata?: GetOnePromptMetadata | undefined;
 };
 
@@ -673,13 +1384,18 @@ export const GetOnePromptResponseFormat4$outboundSchema: z.ZodNativeEnum<
 > = GetOnePromptResponseFormat4$inboundSchema;
 
 /** @internal */
-export const GetOnePromptResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponseType> = z
-    .nativeEnum(GetOnePromptResponseFormatPromptsResponseType);
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  );
 /** @internal */
-export const GetOnePromptResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponseType> =
-    GetOnePromptResponseFormatPromptsResponseType$inboundSchema;
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > =
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
@@ -687,7 +1403,8 @@ export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePromptResponseFormatPromptsResponseType$inboundSchema,
+  type:
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
 });
 /** @internal */
 export type GetOnePromptResponseFormat3$Outbound = {
@@ -700,7 +1417,8 @@ export const GetOnePromptResponseFormat3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePromptResponseFormat3
 > = z.object({
-  type: GetOnePromptResponseFormatPromptsResponseType$outboundSchema,
+  type:
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema,
 });
 
 export function getOnePromptResponseFormat3ToJSON(
@@ -723,14 +1441,18 @@ export function getOnePromptResponseFormat3FromJSON(
 }
 
 /** @internal */
-export const GetOnePromptResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsType> = z.nativeEnum(
-    GetOnePromptResponseFormatPromptsType,
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType,
   );
 /** @internal */
-export const GetOnePromptResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsType> =
-    GetOnePromptResponseFormatPromptsType$inboundSchema;
+export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType
+  > =
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat2$inboundSchema: z.ZodType<
@@ -738,7 +1460,8 @@ export const GetOnePromptResponseFormat2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePromptResponseFormatPromptsType$inboundSchema,
+  type:
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
 });
 /** @internal */
 export type GetOnePromptResponseFormat2$Outbound = {
@@ -751,7 +1474,8 @@ export const GetOnePromptResponseFormat2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePromptResponseFormat2
 > = z.object({
-  type: GetOnePromptResponseFormatPromptsType$outboundSchema,
+  type:
+    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
 });
 
 export function getOnePromptResponseFormat2ToJSON(
@@ -774,27 +1498,28 @@ export function getOnePromptResponseFormat2FromJSON(
 }
 
 /** @internal */
-export const GetOnePromptResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptResponseFormatType
-> = z.nativeEnum(GetOnePromptResponseFormatType);
+export const GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> = z
+    .nativeEnum(GetOnePromptResponseFormatPromptsResponse200Type);
 /** @internal */
-export const GetOnePromptResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptResponseFormatType
-> = GetOnePromptResponseFormatType$inboundSchema;
+export const GetOnePromptResponseFormatPromptsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> =
+    GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema;
 
 /** @internal */
-export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  GetOnePromptResponseFormatJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
+export const GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    GetOnePromptResponseFormatPromptsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    schema: z.record(z.any()),
+  });
 /** @internal */
-export type GetOnePromptResponseFormatJsonSchema$Outbound = {
+export type GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -802,34 +1527,41 @@ export type GetOnePromptResponseFormatJsonSchema$Outbound = {
 };
 
 /** @internal */
-export const GetOnePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormatJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
+export const GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema:
+  z.ZodType<
+    GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound,
+    z.ZodTypeDef,
+    GetOnePromptResponseFormatPromptsResponseJsonSchema
+  > = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    schema: z.record(z.any()),
+  });
 
-export function getOnePromptResponseFormatJsonSchemaToJSON(
-  getOnePromptResponseFormatJsonSchema: GetOnePromptResponseFormatJsonSchema,
+export function getOnePromptResponseFormatPromptsResponseJsonSchemaToJSON(
+  getOnePromptResponseFormatPromptsResponseJsonSchema:
+    GetOnePromptResponseFormatPromptsResponseJsonSchema,
 ): string {
   return JSON.stringify(
-    GetOnePromptResponseFormatJsonSchema$outboundSchema.parse(
-      getOnePromptResponseFormatJsonSchema,
+    GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema.parse(
+      getOnePromptResponseFormatPromptsResponseJsonSchema,
     ),
   );
 }
-export function getOnePromptResponseFormatJsonSchemaFromJSON(
+export function getOnePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<GetOnePromptResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<
+  GetOnePromptResponseFormatPromptsResponseJsonSchema,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      GetOnePromptResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptResponseFormatJsonSchema' from JSON`,
+      GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOnePromptResponseFormatPromptsResponseJsonSchema' from JSON`,
   );
 }
 
@@ -839,9 +1571,11 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetOnePromptResponseFormatType$inboundSchema,
+  type: GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema,
   display_name: z.string().optional(),
-  json_schema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$inboundSchema),
+  json_schema: z.lazy(() =>
+    GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -852,7 +1586,7 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
 export type GetOnePromptResponseFormat1$Outbound = {
   type: string;
   display_name?: string | undefined;
-  json_schema: GetOnePromptResponseFormatJsonSchema$Outbound;
+  json_schema: GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound;
 };
 
 /** @internal */
@@ -861,9 +1595,11 @@ export const GetOnePromptResponseFormat1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePromptResponseFormat1
 > = z.object({
-  type: GetOnePromptResponseFormatType$outboundSchema,
+  type: GetOnePromptResponseFormatPromptsResponse200Type$outboundSchema,
   displayName: z.string().optional(),
-  jsonSchema: z.lazy(() => GetOnePromptResponseFormatJsonSchema$outboundSchema),
+  jsonSchema: z.lazy(() =>
+    GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -891,8 +1627,8 @@ export function getOnePromptResponseFormat1FromJSON(
 }
 
 /** @internal */
-export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
-  GetOnePromptResponseFormat,
+export const GetOnePromptPromptsResponseFormat$inboundSchema: z.ZodType<
+  GetOnePromptPromptsResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -904,7 +1640,7 @@ export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat6$inboundSchema,
 ]);
 /** @internal */
-export type GetOnePromptResponseFormat$Outbound =
+export type GetOnePromptPromptsResponseFormat$Outbound =
   | GetOnePromptResponseFormat1$Outbound
   | GetOnePromptResponseFormat2$Outbound
   | GetOnePromptResponseFormat3$Outbound
@@ -913,10 +1649,10 @@ export type GetOnePromptResponseFormat$Outbound =
   | string;
 
 /** @internal */
-export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormat$Outbound,
+export const GetOnePromptPromptsResponseFormat$outboundSchema: z.ZodType<
+  GetOnePromptPromptsResponseFormat$Outbound,
   z.ZodTypeDef,
-  GetOnePromptResponseFormat
+  GetOnePromptPromptsResponseFormat
 > = z.union([
   z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
   z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
@@ -926,20 +1662,22 @@ export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
   GetOnePromptResponseFormat6$outboundSchema,
 ]);
 
-export function getOnePromptResponseFormatToJSON(
-  getOnePromptResponseFormat: GetOnePromptResponseFormat,
+export function getOnePromptPromptsResponseFormatToJSON(
+  getOnePromptPromptsResponseFormat: GetOnePromptPromptsResponseFormat,
 ): string {
   return JSON.stringify(
-    GetOnePromptResponseFormat$outboundSchema.parse(getOnePromptResponseFormat),
+    GetOnePromptPromptsResponseFormat$outboundSchema.parse(
+      getOnePromptPromptsResponseFormat,
+    ),
   );
 }
-export function getOnePromptResponseFormatFromJSON(
+export function getOnePromptPromptsResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetOnePromptResponseFormat, SDKValidationError> {
+): SafeParseResult<GetOnePromptPromptsResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetOnePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptResponseFormat' from JSON`,
+    (x) => GetOnePromptPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptPromptsResponseFormat' from JSON`,
   );
 }
 
@@ -962,13 +1700,13 @@ export const GetOnePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
 > = GetOnePromptEncodingFormat$inboundSchema;
 
 /** @internal */
-export const GetOnePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptReasoningEffort
-> = z.nativeEnum(GetOnePromptReasoningEffort);
+export const GetOnePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsReasoningEffort
+> = z.nativeEnum(GetOnePromptPromptsReasoningEffort);
 /** @internal */
-export const GetOnePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptReasoningEffort
-> = GetOnePromptReasoningEffort$inboundSchema;
+export const GetOnePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsReasoningEffort
+> = GetOnePromptPromptsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const GetOnePromptVerbosity$inboundSchema: z.ZodNativeEnum<
@@ -1018,7 +1756,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetOnePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: GetOnePromptReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: GetOnePromptPromptsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
   thinkingLevel: GetOnePromptThinkingLevel$inboundSchema.optional(),
@@ -1088,7 +1826,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: GetOnePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
+  reasoningEffort: GetOnePromptPromptsReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetOnePromptVerbosity$outboundSchema.optional(),
   thinkingLevel: GetOnePromptThinkingLevel$outboundSchema.optional(),
@@ -1644,12 +2382,12 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   stream: z.boolean().optional(),
-  model: z.string().optional(),
+  model: z.nullable(z.string()).optional(),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(GetOnePromptModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetOnePromptModelParameters$inboundSchema)
     .optional(),
-  provider: GetOnePromptProvider$inboundSchema.optional(),
+  provider: z.nullable(GetOnePromptProvider$inboundSchema).optional(),
   integration_id: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => GetOnePromptMessages$inboundSchema)),
@@ -1664,11 +2402,11 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
 /** @internal */
 export type GetOnePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   model_db_id?: string | null | undefined;
   model_type?: string | null | undefined;
   model_parameters?: GetOnePromptModelParameters$Outbound | undefined;
-  provider?: string | undefined;
+  provider?: string | null | undefined;
   integration_id?: string | null | undefined;
   version?: string | undefined;
   messages: Array<GetOnePromptMessages$Outbound>;
@@ -1681,12 +2419,12 @@ export const GetOnePromptPromptConfig$outboundSchema: z.ZodType<
   GetOnePromptPromptConfig
 > = z.object({
   stream: z.boolean().optional(),
-  model: z.string().optional(),
+  model: z.nullable(z.string()).optional(),
   modelDbId: z.nullable(z.string()).optional(),
   modelType: z.nullable(GetOnePromptModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => GetOnePromptModelParameters$outboundSchema)
     .optional(),
-  provider: GetOnePromptProvider$outboundSchema.optional(),
+  provider: z.nullable(GetOnePromptProvider$outboundSchema).optional(),
   integrationId: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => GetOnePromptMessages$outboundSchema)),
@@ -1713,6 +2451,1940 @@ export function getOnePromptPromptConfigFromJSON(
     jsonString,
     (x) => GetOnePromptPromptConfig$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOnePromptPromptConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptVoice$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptVoice
+> = z.nativeEnum(GetOnePromptVoice);
+/** @internal */
+export const GetOnePromptVoice$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptVoice
+> = GetOnePromptVoice$inboundSchema;
+
+/** @internal */
+export const GetOnePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsFormat
+> = z.nativeEnum(GetOnePromptPromptsFormat);
+/** @internal */
+export const GetOnePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsFormat
+> = GetOnePromptPromptsFormat$inboundSchema;
+
+/** @internal */
+export const GetOnePromptAudio$inboundSchema: z.ZodType<
+  GetOnePromptAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: GetOnePromptVoice$inboundSchema,
+  format: GetOnePromptPromptsFormat$inboundSchema,
+});
+/** @internal */
+export type GetOnePromptAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const GetOnePromptAudio$outboundSchema: z.ZodType<
+  GetOnePromptAudio$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptAudio
+> = z.object({
+  voice: GetOnePromptVoice$outboundSchema,
+  format: GetOnePromptPromptsFormat$outboundSchema,
+});
+
+export function getOnePromptAudioToJSON(
+  getOnePromptAudio: GetOnePromptAudio,
+): string {
+  return JSON.stringify(
+    GetOnePromptAudio$outboundSchema.parse(getOnePromptAudio),
+  );
+}
+export function getOnePromptAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  GetOnePromptResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().default(false),
+});
+/** @internal */
+export type GetOnePromptResponseFormatJsonSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema?: any | undefined;
+  strict: boolean;
+};
+
+/** @internal */
+export const GetOnePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  GetOnePromptResponseFormatJsonSchema$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptResponseFormatJsonSchema
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().default(false),
+});
+
+export function getOnePromptResponseFormatJsonSchemaToJSON(
+  getOnePromptResponseFormatJsonSchema: GetOnePromptResponseFormatJsonSchema,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormatJsonSchema$outboundSchema.parse(
+      getOnePromptResponseFormatJsonSchema,
+    ),
+  );
+}
+export function getOnePromptResponseFormatJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptResponseFormatJsonSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptResponseFormatJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema:
+  z.ZodType<
+    GetOnePromptResponseFormatPromptsJSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() =>
+      GetOnePromptResponseFormatJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
+  });
+/** @internal */
+export type GetOnePromptResponseFormatPromptsJSONSchema$Outbound = {
+  type: "json_schema";
+  json_schema: GetOnePromptResponseFormatJsonSchema$Outbound;
+};
+
+/** @internal */
+export const GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema:
+  z.ZodType<
+    GetOnePromptResponseFormatPromptsJSONSchema$Outbound,
+    z.ZodTypeDef,
+    GetOnePromptResponseFormatPromptsJSONSchema
+  > = z.object({
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() =>
+      GetOnePromptResponseFormatJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
+  });
+
+export function getOnePromptResponseFormatPromptsJSONSchemaToJSON(
+  getOnePromptResponseFormatPromptsJSONSchema:
+    GetOnePromptResponseFormatPromptsJSONSchema,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema.parse(
+      getOnePromptResponseFormatPromptsJSONSchema,
+    ),
+  );
+}
+export function getOnePromptResponseFormatPromptsJSONSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOnePromptResponseFormatPromptsJSONSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOnePromptResponseFormatPromptsJSONSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
+  GetOnePromptResponseFormatJSONObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("json_object"),
+});
+/** @internal */
+export type GetOnePromptResponseFormatJSONObject$Outbound = {
+  type: "json_object";
+};
+
+/** @internal */
+export const GetOnePromptResponseFormatJSONObject$outboundSchema: z.ZodType<
+  GetOnePromptResponseFormatJSONObject$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptResponseFormatJSONObject
+> = z.object({
+  type: z.literal("json_object"),
+});
+
+export function getOnePromptResponseFormatJSONObjectToJSON(
+  getOnePromptResponseFormatJSONObject: GetOnePromptResponseFormatJSONObject,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormatJSONObject$outboundSchema.parse(
+      getOnePromptResponseFormatJSONObject,
+    ),
+  );
+}
+export function getOnePromptResponseFormatJSONObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptResponseFormatJSONObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptResponseFormatJSONObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptResponseFormatText$inboundSchema: z.ZodType<
+  GetOnePromptResponseFormatText,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+});
+/** @internal */
+export type GetOnePromptResponseFormatText$Outbound = {
+  type: "text";
+};
+
+/** @internal */
+export const GetOnePromptResponseFormatText$outboundSchema: z.ZodType<
+  GetOnePromptResponseFormatText$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptResponseFormatText
+> = z.object({
+  type: z.literal("text"),
+});
+
+export function getOnePromptResponseFormatTextToJSON(
+  getOnePromptResponseFormatText: GetOnePromptResponseFormatText,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormatText$outboundSchema.parse(
+      getOnePromptResponseFormatText,
+    ),
+  );
+}
+export function getOnePromptResponseFormatTextFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptResponseFormatText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptResponseFormatText' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
+  GetOnePromptResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
+  z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
+]);
+/** @internal */
+export type GetOnePromptResponseFormat$Outbound =
+  | GetOnePromptResponseFormatText$Outbound
+  | GetOnePromptResponseFormatJSONObject$Outbound
+  | GetOnePromptResponseFormatPromptsJSONSchema$Outbound;
+
+/** @internal */
+export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
+  GetOnePromptResponseFormat$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptResponseFormat
+> = z.union([
+  z.lazy(() => GetOnePromptResponseFormatText$outboundSchema),
+  z.lazy(() => GetOnePromptResponseFormatJSONObject$outboundSchema),
+  z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema),
+]);
+
+export function getOnePromptResponseFormatToJSON(
+  getOnePromptResponseFormat: GetOnePromptResponseFormat,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormat$outboundSchema.parse(getOnePromptResponseFormat),
+  );
+}
+export function getOnePromptResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptReasoningEffort
+> = z.nativeEnum(GetOnePromptReasoningEffort);
+/** @internal */
+export const GetOnePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptReasoningEffort
+> = GetOnePromptReasoningEffort$inboundSchema;
+
+/** @internal */
+export const GetOnePromptStop$inboundSchema: z.ZodType<
+  GetOnePromptStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+/** @internal */
+export type GetOnePromptStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const GetOnePromptStop$outboundSchema: z.ZodType<
+  GetOnePromptStop$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptStop
+> = z.union([z.string(), z.array(z.string())]);
+
+export function getOnePromptStopToJSON(
+  getOnePromptStop: GetOnePromptStop,
+): string {
+  return JSON.stringify(
+    GetOnePromptStop$outboundSchema.parse(getOnePromptStop),
+  );
+}
+export function getOnePromptStopFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptStreamOptions$inboundSchema: z.ZodType<
+  GetOnePromptStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+/** @internal */
+export type GetOnePromptStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const GetOnePromptStreamOptions$outboundSchema: z.ZodType<
+  GetOnePromptStreamOptions$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptStreamOptions
+> = z.object({
+  includeUsage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    includeUsage: "include_usage",
+  });
+});
+
+export function getOnePromptStreamOptionsToJSON(
+  getOnePromptStreamOptions: GetOnePromptStreamOptions,
+): string {
+  return JSON.stringify(
+    GetOnePromptStreamOptions$outboundSchema.parse(getOnePromptStreamOptions),
+  );
+}
+export function getOnePromptStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptThinking$inboundSchema: z.ZodType<
+  GetOnePromptThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
+/** @internal */
+export type GetOnePromptThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
+
+/** @internal */
+export const GetOnePromptThinking$outboundSchema: z.ZodType<
+  GetOnePromptThinking$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptThinking
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
+
+export function getOnePromptThinkingToJSON(
+  getOnePromptThinking: GetOnePromptThinking,
+): string {
+  return JSON.stringify(
+    GetOnePromptThinking$outboundSchema.parse(getOnePromptThinking),
+  );
+}
+export function getOnePromptThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptToolChoiceType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptToolChoiceType
+> = z.nativeEnum(GetOnePromptToolChoiceType);
+/** @internal */
+export const GetOnePromptToolChoiceType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptToolChoiceType
+> = GetOnePromptToolChoiceType$inboundSchema;
+
+/** @internal */
+export const GetOnePromptToolChoiceFunction$inboundSchema: z.ZodType<
+  GetOnePromptToolChoiceFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+});
+/** @internal */
+export type GetOnePromptToolChoiceFunction$Outbound = {
+  name: string;
+};
+
+/** @internal */
+export const GetOnePromptToolChoiceFunction$outboundSchema: z.ZodType<
+  GetOnePromptToolChoiceFunction$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptToolChoiceFunction
+> = z.object({
+  name: z.string(),
+});
+
+export function getOnePromptToolChoiceFunctionToJSON(
+  getOnePromptToolChoiceFunction: GetOnePromptToolChoiceFunction,
+): string {
+  return JSON.stringify(
+    GetOnePromptToolChoiceFunction$outboundSchema.parse(
+      getOnePromptToolChoiceFunction,
+    ),
+  );
+}
+export function getOnePromptToolChoiceFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptToolChoiceFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptToolChoiceFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptToolChoice2$inboundSchema: z.ZodType<
+  GetOnePromptToolChoice2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePromptToolChoiceType$inboundSchema.optional(),
+  function: z.lazy(() => GetOnePromptToolChoiceFunction$inboundSchema),
+});
+/** @internal */
+export type GetOnePromptToolChoice2$Outbound = {
+  type?: string | undefined;
+  function: GetOnePromptToolChoiceFunction$Outbound;
+};
+
+/** @internal */
+export const GetOnePromptToolChoice2$outboundSchema: z.ZodType<
+  GetOnePromptToolChoice2$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptToolChoice2
+> = z.object({
+  type: GetOnePromptToolChoiceType$outboundSchema.optional(),
+  function: z.lazy(() => GetOnePromptToolChoiceFunction$outboundSchema),
+});
+
+export function getOnePromptToolChoice2ToJSON(
+  getOnePromptToolChoice2: GetOnePromptToolChoice2,
+): string {
+  return JSON.stringify(
+    GetOnePromptToolChoice2$outboundSchema.parse(getOnePromptToolChoice2),
+  );
+}
+export function getOnePromptToolChoice2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptToolChoice2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptToolChoice2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptToolChoice2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptToolChoice1$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptToolChoice1
+> = z.nativeEnum(GetOnePromptToolChoice1);
+/** @internal */
+export const GetOnePromptToolChoice1$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptToolChoice1
+> = GetOnePromptToolChoice1$inboundSchema;
+
+/** @internal */
+export const GetOnePromptToolChoice$inboundSchema: z.ZodType<
+  GetOnePromptToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
+  GetOnePromptToolChoice1$inboundSchema,
+]);
+/** @internal */
+export type GetOnePromptToolChoice$Outbound =
+  | GetOnePromptToolChoice2$Outbound
+  | string;
+
+/** @internal */
+export const GetOnePromptToolChoice$outboundSchema: z.ZodType<
+  GetOnePromptToolChoice$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptToolChoice
+> = z.union([
+  z.lazy(() => GetOnePromptToolChoice2$outboundSchema),
+  GetOnePromptToolChoice1$outboundSchema,
+]);
+
+export function getOnePromptToolChoiceToJSON(
+  getOnePromptToolChoice: GetOnePromptToolChoice,
+): string {
+  return JSON.stringify(
+    GetOnePromptToolChoice$outboundSchema.parse(getOnePromptToolChoice),
+  );
+}
+export function getOnePromptToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptModalities$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptModalities
+> = z.nativeEnum(GetOnePromptModalities);
+/** @internal */
+export const GetOnePromptModalities$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptModalities
+> = GetOnePromptModalities$inboundSchema;
+
+/** @internal */
+export const GetOnePromptId1$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptId1
+> = z.nativeEnum(GetOnePromptId1);
+/** @internal */
+export const GetOnePromptId1$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptId1
+> = GetOnePromptId1$inboundSchema;
+
+/** @internal */
+export const GetOnePromptId$inboundSchema: z.ZodType<
+  GetOnePromptId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([GetOnePromptId1$inboundSchema, z.string()]);
+/** @internal */
+export type GetOnePromptId$Outbound = string | string;
+
+/** @internal */
+export const GetOnePromptId$outboundSchema: z.ZodType<
+  GetOnePromptId$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptId
+> = z.union([GetOnePromptId1$outboundSchema, z.string()]);
+
+export function getOnePromptIdToJSON(getOnePromptId: GetOnePromptId): string {
+  return JSON.stringify(GetOnePromptId$outboundSchema.parse(getOnePromptId));
+}
+export function getOnePromptIdFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptId' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptExecuteOn
+> = z.nativeEnum(GetOnePromptExecuteOn);
+/** @internal */
+export const GetOnePromptExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptExecuteOn
+> = GetOnePromptExecuteOn$inboundSchema;
+
+/** @internal */
+export const GetOnePromptGuardrails$inboundSchema: z.ZodType<
+  GetOnePromptGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([GetOnePromptId1$inboundSchema, z.string()]),
+  execute_on: GetOnePromptExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+/** @internal */
+export type GetOnePromptGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const GetOnePromptGuardrails$outboundSchema: z.ZodType<
+  GetOnePromptGuardrails$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptGuardrails
+> = z.object({
+  id: z.union([GetOnePromptId1$outboundSchema, z.string()]),
+  executeOn: GetOnePromptExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function getOnePromptGuardrailsToJSON(
+  getOnePromptGuardrails: GetOnePromptGuardrails,
+): string {
+  return JSON.stringify(
+    GetOnePromptGuardrails$outboundSchema.parse(getOnePromptGuardrails),
+  );
+}
+export function getOnePromptGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
+  GetOnePromptContentPromptsResponse2002,
+  z.ZodTypeDef,
+  unknown
+> = components.TextContentPartSchema$inboundSchema;
+/** @internal */
+export type GetOnePromptContentPromptsResponse2002$Outbound =
+  components.TextContentPartSchema$Outbound;
+
+/** @internal */
+export const GetOnePromptContentPromptsResponse2002$outboundSchema: z.ZodType<
+  GetOnePromptContentPromptsResponse2002$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptContentPromptsResponse2002
+> = components.TextContentPartSchema$outboundSchema;
+
+export function getOnePromptContentPromptsResponse2002ToJSON(
+  getOnePromptContentPromptsResponse2002:
+    GetOnePromptContentPromptsResponse2002,
+): string {
+  return JSON.stringify(
+    GetOnePromptContentPromptsResponse2002$outboundSchema.parse(
+      getOnePromptContentPromptsResponse2002,
+    ),
+  );
+}
+export function getOnePromptContentPromptsResponse2002FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptContentPromptsResponse2002, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptContentPromptsResponse2002$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptContentPromptsResponse2002' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesPromptsResponse200Content$inboundSchema:
+  z.ZodType<
+    GetOnePromptMessagesPromptsResponse200Content,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]);
+/** @internal */
+export type GetOnePromptMessagesPromptsResponse200Content$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const GetOnePromptMessagesPromptsResponse200Content$outboundSchema:
+  z.ZodType<
+    GetOnePromptMessagesPromptsResponse200Content$Outbound,
+    z.ZodTypeDef,
+    GetOnePromptMessagesPromptsResponse200Content
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]);
+
+export function getOnePromptMessagesPromptsResponse200ContentToJSON(
+  getOnePromptMessagesPromptsResponse200Content:
+    GetOnePromptMessagesPromptsResponse200Content,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesPromptsResponse200Content$outboundSchema.parse(
+      getOnePromptMessagesPromptsResponse200Content,
+    ),
+  );
+}
+export function getOnePromptMessagesPromptsResponse200ContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOnePromptMessagesPromptsResponse200Content,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptMessagesPromptsResponse200Content$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOnePromptMessagesPromptsResponse200Content' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesPromptsType
+> = z.nativeEnum(GetOnePromptMessagesPromptsType);
+/** @internal */
+export const GetOnePromptMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesPromptsType
+> = GetOnePromptMessagesPromptsType$inboundSchema;
+
+/** @internal */
+export const GetOnePromptMessagesTtl$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesTtl
+> = z.nativeEnum(GetOnePromptMessagesTtl);
+/** @internal */
+export const GetOnePromptMessagesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesTtl
+> = GetOnePromptMessagesTtl$inboundSchema;
+
+/** @internal */
+export const GetOnePromptMessagesCacheControl$inboundSchema: z.ZodType<
+  GetOnePromptMessagesCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePromptMessagesPromptsType$inboundSchema,
+  ttl: GetOnePromptMessagesTtl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type GetOnePromptMessagesCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const GetOnePromptMessagesCacheControl$outboundSchema: z.ZodType<
+  GetOnePromptMessagesCacheControl$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesCacheControl
+> = z.object({
+  type: GetOnePromptMessagesPromptsType$outboundSchema,
+  ttl: GetOnePromptMessagesTtl$outboundSchema.default("5m"),
+});
+
+export function getOnePromptMessagesCacheControlToJSON(
+  getOnePromptMessagesCacheControl: GetOnePromptMessagesCacheControl,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesCacheControl$outboundSchema.parse(
+      getOnePromptMessagesCacheControl,
+    ),
+  );
+}
+export function getOnePromptMessagesCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesToolMessage$inboundSchema: z.ZodType<
+  GetOnePromptMessagesToolMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  tool_call_id: z.nullable(z.string()),
+  cache_control: z.lazy(() => GetOnePromptMessagesCacheControl$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type GetOnePromptMessagesToolMessage$Outbound = {
+  role: "tool";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
+  cache_control?: GetOnePromptMessagesCacheControl$Outbound | undefined;
+};
+
+/** @internal */
+export const GetOnePromptMessagesToolMessage$outboundSchema: z.ZodType<
+  GetOnePromptMessagesToolMessage$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesToolMessage
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  toolCallId: z.nullable(z.string()),
+  cacheControl: z.lazy(() => GetOnePromptMessagesCacheControl$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+    cacheControl: "cache_control",
+  });
+});
+
+export function getOnePromptMessagesToolMessageToJSON(
+  getOnePromptMessagesToolMessage: GetOnePromptMessagesToolMessage,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesToolMessage$outboundSchema.parse(
+      getOnePromptMessagesToolMessage,
+    ),
+  );
+}
+export function getOnePromptMessagesToolMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesToolMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesToolMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptContentPromptsResponse2$inboundSchema: z.ZodType<
+  GetOnePromptContentPromptsResponse2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$inboundSchema,
+  components.ReasoningPartSchema$inboundSchema,
+  components.RedactedReasoningPartSchema$inboundSchema,
+]);
+/** @internal */
+export type GetOnePromptContentPromptsResponse2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.RefusalPartSchema$Outbound
+  | components.ReasoningPartSchema$Outbound
+  | components.RedactedReasoningPartSchema$Outbound;
+
+/** @internal */
+export const GetOnePromptContentPromptsResponse2$outboundSchema: z.ZodType<
+  GetOnePromptContentPromptsResponse2$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptContentPromptsResponse2
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$outboundSchema,
+  components.ReasoningPartSchema$outboundSchema,
+  components.RedactedReasoningPartSchema$outboundSchema,
+]);
+
+export function getOnePromptContentPromptsResponse2ToJSON(
+  getOnePromptContentPromptsResponse2: GetOnePromptContentPromptsResponse2,
+): string {
+  return JSON.stringify(
+    GetOnePromptContentPromptsResponse2$outboundSchema.parse(
+      getOnePromptContentPromptsResponse2,
+    ),
+  );
+}
+export function getOnePromptContentPromptsResponse2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptContentPromptsResponse2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptContentPromptsResponse2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptContentPromptsResponse2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesPromptsResponseContent$inboundSchema:
+  z.ZodType<GetOnePromptMessagesPromptsResponseContent, z.ZodTypeDef, unknown> =
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$inboundSchema,
+          components.ReasoningPartSchema$inboundSchema,
+          components.RedactedReasoningPartSchema$inboundSchema,
+        ]),
+      ),
+    ]);
+/** @internal */
+export type GetOnePromptMessagesPromptsResponseContent$Outbound =
+  | string
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.RefusalPartSchema$Outbound
+    | components.ReasoningPartSchema$Outbound
+    | components.RedactedReasoningPartSchema$Outbound
+  >;
+
+/** @internal */
+export const GetOnePromptMessagesPromptsResponseContent$outboundSchema:
+  z.ZodType<
+    GetOnePromptMessagesPromptsResponseContent$Outbound,
+    z.ZodTypeDef,
+    GetOnePromptMessagesPromptsResponseContent
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
+  ]);
+
+export function getOnePromptMessagesPromptsResponseContentToJSON(
+  getOnePromptMessagesPromptsResponseContent:
+    GetOnePromptMessagesPromptsResponseContent,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesPromptsResponseContent$outboundSchema.parse(
+      getOnePromptMessagesPromptsResponseContent,
+    ),
+  );
+}
+export function getOnePromptMessagesPromptsResponseContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOnePromptMessagesPromptsResponseContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptMessagesPromptsResponseContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOnePromptMessagesPromptsResponseContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesAudio$inboundSchema: z.ZodType<
+  GetOnePromptMessagesAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+});
+/** @internal */
+export type GetOnePromptMessagesAudio$Outbound = {
+  id: string;
+};
+
+/** @internal */
+export const GetOnePromptMessagesAudio$outboundSchema: z.ZodType<
+  GetOnePromptMessagesAudio$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesAudio
+> = z.object({
+  id: z.string(),
+});
+
+export function getOnePromptMessagesAudioToJSON(
+  getOnePromptMessagesAudio: GetOnePromptMessagesAudio,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesAudio$outboundSchema.parse(getOnePromptMessagesAudio),
+  );
+}
+export function getOnePromptMessagesAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesType
+> = z.nativeEnum(GetOnePromptMessagesType);
+/** @internal */
+export const GetOnePromptMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptMessagesType
+> = GetOnePromptMessagesType$inboundSchema;
+
+/** @internal */
+export const GetOnePromptMessagesFunction$inboundSchema: z.ZodType<
+  GetOnePromptMessagesFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+/** @internal */
+export type GetOnePromptMessagesFunction$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+/** @internal */
+export const GetOnePromptMessagesFunction$outboundSchema: z.ZodType<
+  GetOnePromptMessagesFunction$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesFunction
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function getOnePromptMessagesFunctionToJSON(
+  getOnePromptMessagesFunction: GetOnePromptMessagesFunction,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesFunction$outboundSchema.parse(
+      getOnePromptMessagesFunction,
+    ),
+  );
+}
+export function getOnePromptMessagesFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesToolCalls$inboundSchema: z.ZodType<
+  GetOnePromptMessagesToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: GetOnePromptMessagesType$inboundSchema,
+  function: z.lazy(() => GetOnePromptMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+/** @internal */
+export type GetOnePromptMessagesToolCalls$Outbound = {
+  id: string;
+  type: string;
+  function: GetOnePromptMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const GetOnePromptMessagesToolCalls$outboundSchema: z.ZodType<
+  GetOnePromptMessagesToolCalls$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesToolCalls
+> = z.object({
+  id: z.string(),
+  type: GetOnePromptMessagesType$outboundSchema,
+  function: z.lazy(() => GetOnePromptMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function getOnePromptMessagesToolCallsToJSON(
+  getOnePromptMessagesToolCalls: GetOnePromptMessagesToolCalls,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesToolCalls$outboundSchema.parse(
+      getOnePromptMessagesToolCalls,
+    ),
+  );
+}
+export function getOnePromptMessagesToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
+  GetOnePromptMessagesAssistantMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$inboundSchema,
+          components.ReasoningPartSchema$inboundSchema,
+          components.RedactedReasoningPartSchema$inboundSchema,
+        ]),
+      ),
+    ]),
+  ).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: z.literal("assistant"),
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => GetOnePromptMessagesAudio$inboundSchema))
+    .optional(),
+  tool_calls: z.array(z.lazy(() => GetOnePromptMessagesToolCalls$inboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
+  });
+});
+/** @internal */
+export type GetOnePromptMessagesAssistantMessage$Outbound = {
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.RefusalPartSchema$Outbound
+      | components.ReasoningPartSchema$Outbound
+      | components.RedactedReasoningPartSchema$Outbound
+    >
+    | null
+    | undefined;
+  refusal?: string | null | undefined;
+  role: "assistant";
+  name?: string | undefined;
+  audio?: GetOnePromptMessagesAudio$Outbound | null | undefined;
+  tool_calls?: Array<GetOnePromptMessagesToolCalls$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetOnePromptMessagesAssistantMessage$outboundSchema: z.ZodType<
+  GetOnePromptMessagesAssistantMessage$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesAssistantMessage
+> = z.object({
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$outboundSchema,
+          components.ReasoningPartSchema$outboundSchema,
+          components.RedactedReasoningPartSchema$outboundSchema,
+        ]),
+      ),
+    ]),
+  ).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: z.literal("assistant"),
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => GetOnePromptMessagesAudio$outboundSchema))
+    .optional(),
+  toolCalls: z.array(z.lazy(() => GetOnePromptMessagesToolCalls$outboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCalls: "tool_calls",
+  });
+});
+
+export function getOnePromptMessagesAssistantMessageToJSON(
+  getOnePromptMessagesAssistantMessage: GetOnePromptMessagesAssistantMessage,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesAssistantMessage$outboundSchema.parse(
+      getOnePromptMessagesAssistantMessage,
+    ),
+  );
+}
+export function getOnePromptMessagesAssistantMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesAssistantMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptMessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> = z
+    .nativeEnum(GetOnePrompt2PromptsResponse200ApplicationJSONType);
+/** @internal */
+export const GetOnePrompt2PromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> =
+    GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
+
+/** @internal */
+export const GetOnePrompt2Ttl$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePrompt2Ttl
+> = z.nativeEnum(GetOnePrompt2Ttl);
+/** @internal */
+export const GetOnePrompt2Ttl$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePrompt2Ttl
+> = GetOnePrompt2Ttl$inboundSchema;
+
+/** @internal */
+export const GetOnePrompt2CacheControl$inboundSchema: z.ZodType<
+  GetOnePrompt2CacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
+  ttl: GetOnePrompt2Ttl$inboundSchema.default("5m"),
+});
+/** @internal */
+export type GetOnePrompt2CacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const GetOnePrompt2CacheControl$outboundSchema: z.ZodType<
+  GetOnePrompt2CacheControl$Outbound,
+  z.ZodTypeDef,
+  GetOnePrompt2CacheControl
+> = z.object({
+  type: GetOnePrompt2PromptsResponse200ApplicationJSONType$outboundSchema,
+  ttl: GetOnePrompt2Ttl$outboundSchema.default("5m"),
+});
+
+export function getOnePrompt2CacheControlToJSON(
+  getOnePrompt2CacheControl: GetOnePrompt2CacheControl,
+): string {
+  return JSON.stringify(
+    GetOnePrompt2CacheControl$outboundSchema.parse(getOnePrompt2CacheControl),
+  );
+}
+export function getOnePrompt2CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePrompt2CacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePrompt2CacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePrompt2CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePrompt24$inboundSchema: z.ZodType<
+  GetOnePrompt24,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() => GetOnePrompt2CacheControl$inboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+/** @internal */
+export type GetOnePrompt24$Outbound = {
+  type: "file";
+  cache_control?: GetOnePrompt2CacheControl$Outbound | undefined;
+  file: components.FileContentPartSchema$Outbound;
+};
+
+/** @internal */
+export const GetOnePrompt24$outboundSchema: z.ZodType<
+  GetOnePrompt24$Outbound,
+  z.ZodTypeDef,
+  GetOnePrompt24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() => GetOnePrompt2CacheControl$outboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
+});
+
+export function getOnePrompt24ToJSON(getOnePrompt24: GetOnePrompt24): string {
+  return JSON.stringify(GetOnePrompt24$outboundSchema.parse(getOnePrompt24));
+}
+export function getOnePrompt24FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePrompt24, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePrompt24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePrompt24' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptContentPrompts2$inboundSchema: z.ZodType<
+  GetOnePromptContentPrompts2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$inboundSchema,
+  components.AudioContentPartSchema$inboundSchema,
+  z.lazy(() => GetOnePrompt24$inboundSchema),
+]);
+/** @internal */
+export type GetOnePromptContentPrompts2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.ImageContentPartSchema$Outbound
+  | components.AudioContentPartSchema$Outbound
+  | GetOnePrompt24$Outbound;
+
+/** @internal */
+export const GetOnePromptContentPrompts2$outboundSchema: z.ZodType<
+  GetOnePromptContentPrompts2$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptContentPrompts2
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$outboundSchema,
+  components.AudioContentPartSchema$outboundSchema,
+  z.lazy(() => GetOnePrompt24$outboundSchema),
+]);
+
+export function getOnePromptContentPrompts2ToJSON(
+  getOnePromptContentPrompts2: GetOnePromptContentPrompts2,
+): string {
+  return JSON.stringify(
+    GetOnePromptContentPrompts2$outboundSchema.parse(
+      getOnePromptContentPrompts2,
+    ),
+  );
+}
+export function getOnePromptContentPrompts2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptContentPrompts2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptContentPrompts2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptContentPrompts2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesPromptsContent$inboundSchema: z.ZodType<
+  GetOnePromptMessagesPromptsContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      components.TextContentPartSchema$inboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => GetOnePrompt24$inboundSchema),
+    ]),
+  ),
+]);
+/** @internal */
+export type GetOnePromptMessagesPromptsContent$Outbound =
+  | string
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.ImageContentPartSchema$Outbound
+    | components.AudioContentPartSchema$Outbound
+    | GetOnePrompt24$Outbound
+  >;
+
+/** @internal */
+export const GetOnePromptMessagesPromptsContent$outboundSchema: z.ZodType<
+  GetOnePromptMessagesPromptsContent$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesPromptsContent
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      components.TextContentPartSchema$outboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.ImageContentPartSchema$outboundSchema,
+      components.AudioContentPartSchema$outboundSchema,
+      z.lazy(() => GetOnePrompt24$outboundSchema),
+    ]),
+  ),
+]);
+
+export function getOnePromptMessagesPromptsContentToJSON(
+  getOnePromptMessagesPromptsContent: GetOnePromptMessagesPromptsContent,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesPromptsContent$outboundSchema.parse(
+      getOnePromptMessagesPromptsContent,
+    ),
+  );
+}
+export function getOnePromptMessagesPromptsContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesPromptsContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOnePromptMessagesPromptsContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesPromptsContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesUserMessage$inboundSchema: z.ZodType<
+  GetOnePromptMessagesUserMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => GetOnePrompt24$inboundSchema),
+      ]),
+    ),
+  ]),
+});
+/** @internal */
+export type GetOnePromptMessagesUserMessage$Outbound = {
+  role: "user";
+  name?: string | undefined;
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.ImageContentPartSchema$Outbound
+      | components.AudioContentPartSchema$Outbound
+      | GetOnePrompt24$Outbound
+    >;
+};
+
+/** @internal */
+export const GetOnePromptMessagesUserMessage$outboundSchema: z.ZodType<
+  GetOnePromptMessagesUserMessage$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesUserMessage
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => GetOnePrompt24$outboundSchema),
+      ]),
+    ),
+  ]),
+});
+
+export function getOnePromptMessagesUserMessageToJSON(
+  getOnePromptMessagesUserMessage: GetOnePromptMessagesUserMessage,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesUserMessage$outboundSchema.parse(
+      getOnePromptMessagesUserMessage,
+    ),
+  );
+}
+export function getOnePromptMessagesUserMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesUserMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesUserMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesContent$inboundSchema: z.ZodType<
+  GetOnePromptMessagesContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$inboundSchema),
+]);
+/** @internal */
+export type GetOnePromptMessagesContent$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const GetOnePromptMessagesContent$outboundSchema: z.ZodType<
+  GetOnePromptMessagesContent$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesContent
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$outboundSchema),
+]);
+
+export function getOnePromptMessagesContentToJSON(
+  getOnePromptMessagesContent: GetOnePromptMessagesContent,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesContent$outboundSchema.parse(
+      getOnePromptMessagesContent,
+    ),
+  );
+}
+export function getOnePromptMessagesContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptMessagesSystemMessage$inboundSchema: z.ZodType<
+  GetOnePromptMessagesSystemMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+/** @internal */
+export type GetOnePromptMessagesSystemMessage$Outbound = {
+  role: "system";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const GetOnePromptMessagesSystemMessage$outboundSchema: z.ZodType<
+  GetOnePromptMessagesSystemMessage$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptMessagesSystemMessage
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+
+export function getOnePromptMessagesSystemMessageToJSON(
+  getOnePromptMessagesSystemMessage: GetOnePromptMessagesSystemMessage,
+): string {
+  return JSON.stringify(
+    GetOnePromptMessagesSystemMessage$outboundSchema.parse(
+      getOnePromptMessagesSystemMessage,
+    ),
+  );
+}
+export function getOnePromptMessagesSystemMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptMessagesSystemMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptMessagesSystemMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptPromptsMessages$inboundSchema: z.ZodType<
+  GetOnePromptPromptsMessages,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
+  z.lazy(() => GetOnePromptMessagesUserMessage$inboundSchema),
+  z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
+  z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
+]);
+/** @internal */
+export type GetOnePromptPromptsMessages$Outbound =
+  | GetOnePromptMessagesSystemMessage$Outbound
+  | GetOnePromptMessagesUserMessage$Outbound
+  | GetOnePromptMessagesAssistantMessage$Outbound
+  | GetOnePromptMessagesToolMessage$Outbound;
+
+/** @internal */
+export const GetOnePromptPromptsMessages$outboundSchema: z.ZodType<
+  GetOnePromptPromptsMessages$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptPromptsMessages
+> = z.union([
+  z.lazy(() => GetOnePromptMessagesSystemMessage$outboundSchema),
+  z.lazy(() => GetOnePromptMessagesUserMessage$outboundSchema),
+  z.lazy(() => GetOnePromptMessagesAssistantMessage$outboundSchema),
+  z.lazy(() => GetOnePromptMessagesToolMessage$outboundSchema),
+]);
+
+export function getOnePromptPromptsMessagesToJSON(
+  getOnePromptPromptsMessages: GetOnePromptPromptsMessages,
+): string {
+  return JSON.stringify(
+    GetOnePromptPromptsMessages$outboundSchema.parse(
+      getOnePromptPromptsMessages,
+    ),
+  );
+}
+export function getOnePromptPromptsMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptPromptsMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptPromptsMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptPromptsMessages' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptPromptField$inboundSchema: z.ZodType<
+  GetOnePromptPromptField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(z.lazy(() => GetOnePromptAudio$inboundSchema)).optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
+  ]).optional(),
+  reasoning_effort: GetOnePromptReasoningEffort$inboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => GetOnePromptStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
+    GetOnePromptToolChoice1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(GetOnePromptModalities$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$inboundSchema))
+    .optional(),
+  messages: z.array(
+    z.union([
+      z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
+      z.lazy(() => GetOnePromptMessagesUserMessage$inboundSchema),
+      z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
+      z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+  });
+});
+/** @internal */
+export type GetOnePromptPromptField$Outbound = {
+  audio?: GetOnePromptAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
+  max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
+  response_format?:
+    | GetOnePromptResponseFormatText$Outbound
+    | GetOnePromptResponseFormatJSONObject$Outbound
+    | GetOnePromptResponseFormatPromptsJSONSchema$Outbound
+    | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?: GetOnePromptStreamOptions$Outbound | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: GetOnePromptToolChoice2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  guardrails?: Array<GetOnePromptGuardrails$Outbound> | undefined;
+  messages?:
+    | Array<
+      | GetOnePromptMessagesSystemMessage$Outbound
+      | GetOnePromptMessagesUserMessage$Outbound
+      | GetOnePromptMessagesAssistantMessage$Outbound
+      | GetOnePromptMessagesToolMessage$Outbound
+    >
+    | undefined;
+  model?: string | null | undefined;
+  version?: string | undefined;
+};
+
+/** @internal */
+export const GetOnePromptPromptField$outboundSchema: z.ZodType<
+  GetOnePromptPromptField$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptPromptField
+> = z.object({
+  audio: z.nullable(z.lazy(() => GetOnePromptAudio$outboundSchema)).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
+  maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  responseFormat: z.union([
+    z.lazy(() => GetOnePromptResponseFormatText$outboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema),
+  ]).optional(),
+  reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => GetOnePromptStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => GetOnePromptToolChoice2$outboundSchema),
+    GetOnePromptToolChoice1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(z.array(GetOnePromptModalities$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$outboundSchema))
+    .optional(),
+  messages: z.array(
+    z.union([
+      z.lazy(() => GetOnePromptMessagesSystemMessage$outboundSchema),
+      z.lazy(() => GetOnePromptMessagesUserMessage$outboundSchema),
+      z.lazy(() => GetOnePromptMessagesAssistantMessage$outboundSchema),
+      z.lazy(() => GetOnePromptMessagesToolMessage$outboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
+    maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
+    responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+  });
+});
+
+export function getOnePromptPromptFieldToJSON(
+  getOnePromptPromptField: GetOnePromptPromptField,
+): string {
+  return JSON.stringify(
+    GetOnePromptPromptField$outboundSchema.parse(getOnePromptPromptField),
+  );
+}
+export function getOnePromptPromptFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptPromptField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptPromptField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptPromptField' from JSON`,
   );
 }
 
@@ -1800,7 +4472,9 @@ export const GetOnePromptPrompt$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => GetOnePromptPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => GetOnePromptPromptConfig$inboundSchema)
+    .optional(),
+  prompt: z.lazy(() => GetOnePromptPromptField$inboundSchema),
   metadata: z.lazy(() => GetOnePromptMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1824,7 +4498,8 @@ export type GetOnePromptPrompt$Outbound = {
   updated_by_id?: string | null | undefined;
   display_name: string;
   description?: string | null | undefined;
-  prompt_config: GetOnePromptPromptConfig$Outbound;
+  prompt_config?: GetOnePromptPromptConfig$Outbound | undefined;
+  prompt: GetOnePromptPromptField$Outbound;
   metadata?: GetOnePromptMetadata$Outbound | undefined;
 };
 
@@ -1844,7 +4519,9 @@ export const GetOnePromptPrompt$outboundSchema: z.ZodType<
   updatedById: z.nullable(z.string()).optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => GetOnePromptPromptConfig$outboundSchema),
+  promptConfig: z.lazy(() => GetOnePromptPromptConfig$outboundSchema)
+    .optional(),
+  prompt: z.lazy(() => GetOnePromptPromptField$outboundSchema),
   metadata: z.lazy(() => GetOnePromptMetadata$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

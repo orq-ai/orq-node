@@ -5,30 +5,31 @@ An object specifying the format that the model must output
 
 ## Supported Types
 
-### `operations.CreatePromptResponseFormatText`
+### `operations.CreatePromptResponseFormatPromptsText`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatText = {
+const value: operations.CreatePromptResponseFormatPromptsText = {
   type: "text",
 };
 ```
 
-### `operations.CreatePromptResponseFormatJSONObject`
+### `operations.CreatePromptResponseFormatPromptsJSONObject`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatJSONObject = {
+const value: operations.CreatePromptResponseFormatPromptsJSONObject = {
   type: "json_object",
 };
 ```
 
-### `operations.CreatePromptResponseFormatPromptsJSONSchema`
+### `operations.CreatePromptResponseFormatPromptsResponse200JSONSchema`
 
 ```typescript
-const value: operations.CreatePromptResponseFormatPromptsJSONSchema = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-  },
-};
+const value: operations.CreatePromptResponseFormatPromptsResponse200JSONSchema =
+  {
+    type: "json_schema",
+    jsonSchema: {
+      name: "<value>",
+    },
+  };
 ```
 
