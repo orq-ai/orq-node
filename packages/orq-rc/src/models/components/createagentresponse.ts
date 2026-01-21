@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,6 +55,41 @@ export type Usage = {
 };
 
 /**
+ * The reason why the agent stopped generating
+ */
+export const FinishReason = {
+  Stop: "stop",
+  Length: "length",
+  ToolCalls: "tool_calls",
+  ContentFilter: "content_filter",
+  FunctionCall: "function_call",
+  MaxIterations: "max_iterations",
+  MaxTime: "max_time",
+} as const;
+/**
+ * The reason why the agent stopped generating
+ */
+export type FinishReason = ClosedEnum<typeof FinishReason>;
+
+export const CreateAgentResponseType = {
+  Function: "function",
+} as const;
+export type CreateAgentResponseType = ClosedEnum<
+  typeof CreateAgentResponseType
+>;
+
+export type FunctionT = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+export type PendingToolCalls = {
+  id: string;
+  type: CreateAgentResponseType;
+  function: FunctionT;
+};
+
+/**
  * Response type from the create-response endpoint.
  */
 export type CreateAgentResponse = {
@@ -81,6 +117,14 @@ export type CreateAgentResponse = {
    * Token usage from the agent execution
    */
   usage?: Usage | null | undefined;
+  /**
+   * The reason why the agent stopped generating
+   */
+  finishReason?: FinishReason | undefined;
+  /**
+   * Tool calls awaiting user response (when finish_reason is function_call)
+   */
+  pendingToolCalls?: Array<PendingToolCalls> | undefined;
 };
 
 /** @internal */
@@ -274,6 +318,105 @@ export function usageFromJSON(
 }
 
 /** @internal */
+export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
+  z.nativeEnum(FinishReason);
+/** @internal */
+export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
+  FinishReason$inboundSchema;
+
+/** @internal */
+export const CreateAgentResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentResponseType
+> = z.nativeEnum(CreateAgentResponseType);
+/** @internal */
+export const CreateAgentResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentResponseType
+> = CreateAgentResponseType$inboundSchema;
+
+/** @internal */
+export const FunctionT$inboundSchema: z.ZodType<
+  FunctionT,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+/** @internal */
+export type FunctionT$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+/** @internal */
+export const FunctionT$outboundSchema: z.ZodType<
+  FunctionT$Outbound,
+  z.ZodTypeDef,
+  FunctionT
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function functionToJSON(functionT: FunctionT): string {
+  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
+}
+export function functionFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
+  );
+}
+
+/** @internal */
+export const PendingToolCalls$inboundSchema: z.ZodType<
+  PendingToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: CreateAgentResponseType$inboundSchema,
+  function: z.lazy(() => FunctionT$inboundSchema),
+});
+/** @internal */
+export type PendingToolCalls$Outbound = {
+  id: string;
+  type: string;
+  function: FunctionT$Outbound;
+};
+
+/** @internal */
+export const PendingToolCalls$outboundSchema: z.ZodType<
+  PendingToolCalls$Outbound,
+  z.ZodTypeDef,
+  PendingToolCalls
+> = z.object({
+  id: z.string(),
+  type: CreateAgentResponseType$outboundSchema,
+  function: z.lazy(() => FunctionT$outboundSchema),
+});
+
+export function pendingToolCallsToJSON(
+  pendingToolCalls: PendingToolCalls,
+): string {
+  return JSON.stringify(
+    PendingToolCalls$outboundSchema.parse(pendingToolCalls),
+  );
+}
+export function pendingToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<PendingToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PendingToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PendingToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentResponse$inboundSchema: z.ZodType<
   CreateAgentResponse,
   z.ZodTypeDef,
@@ -285,11 +428,16 @@ export const CreateAgentResponse$inboundSchema: z.ZodType<
   created_at: z.string(),
   model: z.string(),
   usage: z.nullable(z.lazy(() => Usage$inboundSchema)).optional(),
+  finish_reason: FinishReason$inboundSchema.optional(),
+  pending_tool_calls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "task_id": "taskId",
     "created_at": "createdAt",
+    "finish_reason": "finishReason",
+    "pending_tool_calls": "pendingToolCalls",
   });
 });
 /** @internal */
@@ -300,6 +448,8 @@ export type CreateAgentResponse$Outbound = {
   created_at: string;
   model: string;
   usage?: Usage$Outbound | null | undefined;
+  finish_reason?: string | undefined;
+  pending_tool_calls?: Array<PendingToolCalls$Outbound> | undefined;
 };
 
 /** @internal */
@@ -314,11 +464,16 @@ export const CreateAgentResponse$outboundSchema: z.ZodType<
   createdAt: z.string(),
   model: z.string(),
   usage: z.nullable(z.lazy(() => Usage$outboundSchema)).optional(),
+  finishReason: FinishReason$outboundSchema.optional(),
+  pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     taskId: "task_id",
     createdAt: "created_at",
+    finishReason: "finish_reason",
+    pendingToolCalls: "pending_tool_calls",
   });
 });
 
