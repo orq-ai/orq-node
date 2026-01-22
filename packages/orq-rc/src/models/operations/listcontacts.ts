@@ -309,7 +309,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2026-01-21T13:10:29.486Z",
+      "2026-01-22T05:45:08.395Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
@@ -345,7 +345,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2026-01-21T13:10:29.486Z"))
+    updated: z.date().default(() => new Date("2026-01-22T05:45:08.395Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
   }).transform((v) => {
