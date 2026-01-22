@@ -66,22 +66,9 @@ export type CreateDatasetResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const CreateDatasetRequestBody$inboundSchema: z.ZodType<
-  CreateDatasetRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.string(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
 /** @internal */
 export type CreateDatasetRequestBody$Outbound = {
   display_name: string;
@@ -109,15 +96,6 @@ export function createDatasetRequestBodyToJSON(
     CreateDatasetRequestBody$outboundSchema.parse(createDatasetRequestBody),
   );
 }
-export function createDatasetRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateDatasetMetadata$inboundSchema: z.ZodType<
@@ -133,34 +111,7 @@ export const CreateDatasetMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-/** @internal */
-export type CreateDatasetMetadata$Outbound = {
-  total_versions: number;
-  datapoints_count: number;
-};
 
-/** @internal */
-export const CreateDatasetMetadata$outboundSchema: z.ZodType<
-  CreateDatasetMetadata$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetMetadata
-> = z.object({
-  totalVersions: z.number(),
-  datapointsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    totalVersions: "total_versions",
-    datapointsCount: "datapoints_count",
-  });
-});
-
-export function createDatasetMetadataToJSON(
-  createDatasetMetadata: CreateDatasetMetadata,
-): string {
-  return JSON.stringify(
-    CreateDatasetMetadata$outboundSchema.parse(createDatasetMetadata),
-  );
-}
 export function createDatasetMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetMetadata, SDKValidationError> {
@@ -187,7 +138,7 @@ export const CreateDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:31.576Z",
+    "2026-01-22T11:24:22.432Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -199,53 +150,7 @@ export const CreateDatasetResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-/** @internal */
-export type CreateDatasetResponseBody$Outbound = {
-  _id: string;
-  display_name: string;
-  project_id: string;
-  workspace_id: string;
-  metadata: CreateDatasetMetadata$Outbound;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const CreateDatasetResponseBody$outboundSchema: z.ZodType<
-  CreateDatasetResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetResponseBody
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  metadata: z.lazy(() => CreateDatasetMetadata$outboundSchema),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
-
-export function createDatasetResponseBodyToJSON(
-  createDatasetResponseBody: CreateDatasetResponseBody,
-): string {
-  return JSON.stringify(
-    CreateDatasetResponseBody$outboundSchema.parse(createDatasetResponseBody),
-  );
-}
 export function createDatasetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetResponseBody, SDKValidationError> {

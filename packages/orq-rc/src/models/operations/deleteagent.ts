@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteAgentRequest = {
   /**
@@ -15,18 +12,6 @@ export type DeleteAgentRequest = {
   agentKey: string;
 };
 
-/** @internal */
-export const DeleteAgentRequest$inboundSchema: z.ZodType<
-  DeleteAgentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_key": "agentKey",
-  });
-});
 /** @internal */
 export type DeleteAgentRequest$Outbound = {
   agent_key: string;
@@ -50,14 +35,5 @@ export function deleteAgentRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteAgentRequest$outboundSchema.parse(deleteAgentRequest),
-  );
-}
-export function deleteAgentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAgentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAgentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAgentRequest' from JSON`,
   );
 }

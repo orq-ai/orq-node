@@ -49,19 +49,3 @@ export const DeletePromptResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type DeletePromptResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const DeletePromptResponseBody$outboundSchema: z.ZodType<
-  DeletePromptResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeletePromptResponseBody
-> = z.instanceof(DeletePromptResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

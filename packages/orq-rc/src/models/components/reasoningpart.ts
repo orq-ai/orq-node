@@ -15,7 +15,7 @@ export type ReasoningPart = {
   /**
    * Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Optional metadata associated with the message part. Can store arbitrary key-value pairs for custom data. Maximum size of 50KB and maximum of 20 keys.
    */
@@ -40,7 +40,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01kfjan669wmk4qzmbr1sjn1wt"),
+  _id: z.string().default("reasoning_01kfjq5x5745qzeh0zb8h5sc03"),
   metadata: z.record(z.any()).optional(),
   kind: z.literal("reasoning"),
   reasoning: z.string(),
@@ -50,35 +50,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type ReasoningPart$Outbound = {
-  _id: string;
-  metadata?: { [k: string]: any } | undefined;
-  kind: "reasoning";
-  reasoning: string;
-  signature?: string | undefined;
-};
 
-/** @internal */
-export const ReasoningPart$outboundSchema: z.ZodType<
-  ReasoningPart$Outbound,
-  z.ZodTypeDef,
-  ReasoningPart
-> = z.object({
-  id: z.string().default("reasoning_01kfjan669wmk4qzmbr1sjn1wt"),
-  metadata: z.record(z.any()).optional(),
-  kind: z.literal("reasoning"),
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function reasoningPartToJSON(reasoningPart: ReasoningPart): string {
-  return JSON.stringify(ReasoningPart$outboundSchema.parse(reasoningPart));
-}
 export function reasoningPartFromJSON(
   jsonString: string,
 ): SafeParseResult<ReasoningPart, SDKValidationError> {

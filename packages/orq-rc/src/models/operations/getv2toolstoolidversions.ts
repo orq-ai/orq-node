@@ -57,23 +57,6 @@ export type GetV2ToolsToolIdVersionsResponseBody = {
 };
 
 /** @internal */
-export const GetV2ToolsToolIdVersionsRequest$inboundSchema: z.ZodType<
-  GetV2ToolsToolIdVersionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tool_id: z.string(),
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
-/** @internal */
 export type GetV2ToolsToolIdVersionsRequest$Outbound = {
   tool_id: string;
   limit: number;
@@ -108,24 +91,11 @@ export function getV2ToolsToolIdVersionsRequestToJSON(
     ),
   );
 }
-export function getV2ToolsToolIdVersionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV2ToolsToolIdVersionsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV2ToolsToolIdVersionsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV2ToolsToolIdVersionsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetV2ToolsToolIdVersionsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetV2ToolsToolIdVersionsObject
 > = z.nativeEnum(GetV2ToolsToolIdVersionsObject);
-/** @internal */
-export const GetV2ToolsToolIdVersionsObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetV2ToolsToolIdVersionsObject
-> = GetV2ToolsToolIdVersionsObject$inboundSchema;
 
 /** @internal */
 export const GetV2ToolsToolIdVersionsData$inboundSchema: z.ZodType<
@@ -155,60 +125,7 @@ export const GetV2ToolsToolIdVersionsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type GetV2ToolsToolIdVersionsData$Outbound = {
-  _id: string;
-  created_at: string;
-  updated_at: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  version: string;
-  description?: string | undefined;
-  checksum: string;
-  entityType: string;
-  entityId: string;
-  data: { [k: string]: any };
-  workspace_id: string;
-};
 
-/** @internal */
-export const GetV2ToolsToolIdVersionsData$outboundSchema: z.ZodType<
-  GetV2ToolsToolIdVersionsData$Outbound,
-  z.ZodTypeDef,
-  GetV2ToolsToolIdVersionsData
-> = z.object({
-  id: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  version: z.string(),
-  description: z.string().optional(),
-  checksum: z.string(),
-  entityType: z.string(),
-  entityId: z.string(),
-  data: z.record(z.any()),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function getV2ToolsToolIdVersionsDataToJSON(
-  getV2ToolsToolIdVersionsData: GetV2ToolsToolIdVersionsData,
-): string {
-  return JSON.stringify(
-    GetV2ToolsToolIdVersionsData$outboundSchema.parse(
-      getV2ToolsToolIdVersionsData,
-    ),
-  );
-}
 export function getV2ToolsToolIdVersionsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetV2ToolsToolIdVersionsData, SDKValidationError> {
@@ -233,37 +150,7 @@ export const GetV2ToolsToolIdVersionsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetV2ToolsToolIdVersionsResponseBody$Outbound = {
-  object: string;
-  data: Array<GetV2ToolsToolIdVersionsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetV2ToolsToolIdVersionsResponseBody$outboundSchema: z.ZodType<
-  GetV2ToolsToolIdVersionsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetV2ToolsToolIdVersionsResponseBody
-> = z.object({
-  object: GetV2ToolsToolIdVersionsObject$outboundSchema,
-  data: z.array(z.lazy(() => GetV2ToolsToolIdVersionsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getV2ToolsToolIdVersionsResponseBodyToJSON(
-  getV2ToolsToolIdVersionsResponseBody: GetV2ToolsToolIdVersionsResponseBody,
-): string {
-  return JSON.stringify(
-    GetV2ToolsToolIdVersionsResponseBody$outboundSchema.parse(
-      getV2ToolsToolIdVersionsResponseBody,
-    ),
-  );
-}
 export function getV2ToolsToolIdVersionsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetV2ToolsToolIdVersionsResponseBody, SDKValidationError> {

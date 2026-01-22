@@ -62,7 +62,7 @@ export type PartReasoningPart = {
   /**
    * Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Optional metadata associated with the message part. Can store arbitrary key-value pairs for custom data. Maximum size of 50KB and maximum of 20 keys.
    */
@@ -126,7 +126,7 @@ export type ReasoningPart = {
   /**
    * Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Optional metadata associated with the message part. Can store arbitrary key-value pairs for custom data. Maximum size of 50KB and maximum of 20 keys.
    */
@@ -199,21 +199,6 @@ export type CreateConversationResponseResponseBody = {
 };
 
 /** @internal */
-export const CreateConversationResponseRequestBody$inboundSchema: z.ZodType<
-  CreateConversationResponseRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: components.UserMessageRequest$inboundSchema,
-  model: z.string(),
-  task_id: z.string().optional(),
-  stream: z.boolean().default(true),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-  });
-});
-/** @internal */
 export type CreateConversationResponseRequestBody$Outbound = {
   message: components.UserMessageRequest$Outbound;
   model: string;
@@ -246,33 +231,7 @@ export function createConversationResponseRequestBodyToJSON(
     ),
   );
 }
-export function createConversationResponseRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateConversationResponseRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateConversationResponseRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateConversationResponseRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateConversationResponseRequest$inboundSchema: z.ZodType<
-  CreateConversationResponseRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  conversation_id: z.string(),
-  RequestBody: z.lazy(() =>
-    CreateConversationResponseRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateConversationResponseRequest$Outbound = {
   conversation_id: string;
@@ -305,31 +264,15 @@ export function createConversationResponseRequestToJSON(
     ),
   );
 }
-export function createConversationResponseRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateConversationResponseRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateConversationResponseRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateConversationResponseRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateConversationResponseResponseStreamingEventType$inboundSchema:
   z.ZodNativeEnum<typeof CreateConversationResponseResponseStreamingEventType> =
     z.nativeEnum(CreateConversationResponseResponseStreamingEventType);
-/** @internal */
-export const CreateConversationResponseResponseStreamingEventType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateConversationResponseResponseStreamingEventType> =
-    CreateConversationResponseResponseStreamingEventType$inboundSchema;
 
 /** @internal */
 export const PartKind$inboundSchema: z.ZodNativeEnum<typeof PartKind> = z
   .nativeEnum(PartKind);
-/** @internal */
-export const PartKind$outboundSchema: z.ZodNativeEnum<typeof PartKind> =
-  PartKind$inboundSchema;
 
 /** @internal */
 export const PartReasoningPart$inboundSchema: z.ZodType<
@@ -337,7 +280,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01kfjan6j68nmfcc712aahcrhj"),
+  _id: z.string().default("reasoning_01kfjq5xjrg1nhsyyg3cry3p4t"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$inboundSchema,
   reasoning: z.string(),
@@ -347,39 +290,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type PartReasoningPart$Outbound = {
-  _id: string;
-  metadata?: { [k: string]: any } | undefined;
-  kind: string;
-  reasoning: string;
-  signature?: string | undefined;
-};
 
-/** @internal */
-export const PartReasoningPart$outboundSchema: z.ZodType<
-  PartReasoningPart$Outbound,
-  z.ZodTypeDef,
-  PartReasoningPart
-> = z.object({
-  id: z.string().default("reasoning_01kfjan6j68nmfcc712aahcrhj"),
-  metadata: z.record(z.any()).optional(),
-  kind: PartKind$outboundSchema,
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function partReasoningPartToJSON(
-  partReasoningPart: PartReasoningPart,
-): string {
-  return JSON.stringify(
-    PartReasoningPart$outboundSchema.parse(partReasoningPart),
-  );
-}
 export function partReasoningPartFromJSON(
   jsonString: string,
 ): SafeParseResult<PartReasoningPart, SDKValidationError> {
@@ -400,33 +311,7 @@ export const CreateConversationResponseResponseStreamingEventData$inboundSchema:
     partId: z.string(),
     part: z.any().optional(),
   });
-/** @internal */
-export type CreateConversationResponseResponseStreamingEventData$Outbound = {
-  partId: string;
-  part?: any | undefined;
-};
 
-/** @internal */
-export const CreateConversationResponseResponseStreamingEventData$outboundSchema:
-  z.ZodType<
-    CreateConversationResponseResponseStreamingEventData$Outbound,
-    z.ZodTypeDef,
-    CreateConversationResponseResponseStreamingEventData
-  > = z.object({
-    partId: z.string(),
-    part: z.any().optional(),
-  });
-
-export function createConversationResponseResponseStreamingEventDataToJSON(
-  createConversationResponseResponseStreamingEventData:
-    CreateConversationResponseResponseStreamingEventData,
-): string {
-  return JSON.stringify(
-    CreateConversationResponseResponseStreamingEventData$outboundSchema.parse(
-      createConversationResponseResponseStreamingEventData,
-    ),
-  );
-}
 export function createConversationResponseResponseStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -455,29 +340,7 @@ export const PartDoneEvent$inboundSchema: z.ZodType<
     CreateConversationResponseResponseStreamingEventData$inboundSchema
   ),
 });
-/** @internal */
-export type PartDoneEvent$Outbound = {
-  type: string;
-  timestamp: string;
-  data: CreateConversationResponseResponseStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const PartDoneEvent$outboundSchema: z.ZodType<
-  PartDoneEvent$Outbound,
-  z.ZodTypeDef,
-  PartDoneEvent
-> = z.object({
-  type: CreateConversationResponseResponseStreamingEventType$outboundSchema,
-  timestamp: z.string(),
-  data: z.lazy(() =>
-    CreateConversationResponseResponseStreamingEventData$outboundSchema
-  ),
-});
-
-export function partDoneEventToJSON(partDoneEvent: PartDoneEvent): string {
-  return JSON.stringify(PartDoneEvent$outboundSchema.parse(partDoneEvent));
-}
 export function partDoneEventFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDoneEvent, SDKValidationError> {
@@ -492,17 +355,10 @@ export function partDoneEventFromJSON(
 export const ResponseStreamingEventType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseStreamingEventType
 > = z.nativeEnum(ResponseStreamingEventType);
-/** @internal */
-export const ResponseStreamingEventType$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseStreamingEventType
-> = ResponseStreamingEventType$inboundSchema;
 
 /** @internal */
 export const DeltaKind$inboundSchema: z.ZodNativeEnum<typeof DeltaKind> = z
   .nativeEnum(DeltaKind);
-/** @internal */
-export const DeltaKind$outboundSchema: z.ZodNativeEnum<typeof DeltaKind> =
-  DeltaKind$inboundSchema;
 
 /** @internal */
 export const ReasoningPart$inboundSchema: z.ZodType<
@@ -510,7 +366,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01kfjan6hyavgnvyyanzd2j0dz"),
+  _id: z.string().default("reasoning_01kfjq5xjh9qkecv7vxxtacecd"),
   metadata: z.record(z.any()).optional(),
   kind: DeltaKind$inboundSchema,
   reasoning: z.string(),
@@ -520,35 +376,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type ReasoningPart$Outbound = {
-  _id: string;
-  metadata?: { [k: string]: any } | undefined;
-  kind: string;
-  reasoning: string;
-  signature?: string | undefined;
-};
 
-/** @internal */
-export const ReasoningPart$outboundSchema: z.ZodType<
-  ReasoningPart$Outbound,
-  z.ZodTypeDef,
-  ReasoningPart
-> = z.object({
-  id: z.string().default("reasoning_01kfjan6hyavgnvyyanzd2j0dz"),
-  metadata: z.record(z.any()).optional(),
-  kind: DeltaKind$outboundSchema,
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function reasoningPartToJSON(reasoningPart: ReasoningPart): string {
-  return JSON.stringify(ReasoningPart$outboundSchema.parse(reasoningPart));
-}
 export function reasoningPartFromJSON(
   jsonString: string,
 ): SafeParseResult<ReasoningPart, SDKValidationError> {
@@ -568,29 +396,7 @@ export const ResponseStreamingEventData$inboundSchema: z.ZodType<
   partId: z.string(),
   delta: z.any().optional(),
 });
-/** @internal */
-export type ResponseStreamingEventData$Outbound = {
-  partId: string;
-  delta?: any | undefined;
-};
 
-/** @internal */
-export const ResponseStreamingEventData$outboundSchema: z.ZodType<
-  ResponseStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ResponseStreamingEventData
-> = z.object({
-  partId: z.string(),
-  delta: z.any().optional(),
-});
-
-export function responseStreamingEventDataToJSON(
-  responseStreamingEventData: ResponseStreamingEventData,
-): string {
-  return JSON.stringify(
-    ResponseStreamingEventData$outboundSchema.parse(responseStreamingEventData),
-  );
-}
 export function responseStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseStreamingEventData, SDKValidationError> {
@@ -611,27 +417,7 @@ export const PartDeltaEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ResponseStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type PartDeltaEvent$Outbound = {
-  type: string;
-  timestamp: string;
-  data: ResponseStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const PartDeltaEvent$outboundSchema: z.ZodType<
-  PartDeltaEvent$Outbound,
-  z.ZodTypeDef,
-  PartDeltaEvent
-> = z.object({
-  type: ResponseStreamingEventType$outboundSchema,
-  timestamp: z.string(),
-  data: z.lazy(() => ResponseStreamingEventData$outboundSchema),
-});
-
-export function partDeltaEventToJSON(partDeltaEvent: PartDeltaEvent): string {
-  return JSON.stringify(PartDeltaEvent$outboundSchema.parse(partDeltaEvent));
-}
 export function partDeltaEventFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDeltaEvent, SDKValidationError> {
@@ -659,44 +445,7 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
   components.PartDeltaEvent$inboundSchema,
   components.PartDoneEvent$inboundSchema,
 ]);
-/** @internal */
-export type ResponseStreamingEvent$Outbound =
-  | components.ResponseStartedEvent$Outbound
-  | components.ResponseDoneEvent$Outbound
-  | components.ResponseFailedEvent$Outbound
-  | components.ToolStartedEvent$Outbound
-  | components.ToolDoneEvent$Outbound
-  | components.ToolFailedEvent$Outbound
-  | components.ToolReviewRequestedEvent$Outbound
-  | components.ToolReviewDoneEvent$Outbound
-  | components.PartDeltaEvent$Outbound
-  | components.PartDoneEvent$Outbound;
 
-/** @internal */
-export const ResponseStreamingEvent$outboundSchema: z.ZodType<
-  ResponseStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ResponseStreamingEvent
-> = z.union([
-  components.ResponseStartedEvent$outboundSchema,
-  components.ResponseDoneEvent$outboundSchema,
-  components.ResponseFailedEvent$outboundSchema,
-  components.ToolStartedEvent$outboundSchema,
-  components.ToolDoneEvent$outboundSchema,
-  components.ToolFailedEvent$outboundSchema,
-  components.ToolReviewRequestedEvent$outboundSchema,
-  components.ToolReviewDoneEvent$outboundSchema,
-  components.PartDeltaEvent$outboundSchema,
-  components.PartDoneEvent$outboundSchema,
-]);
-
-export function responseStreamingEventToJSON(
-  responseStreamingEvent: ResponseStreamingEvent,
-): string {
-  return JSON.stringify(
-    ResponseStreamingEvent$outboundSchema.parse(responseStreamingEvent),
-  );
-}
 export function responseStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseStreamingEvent, SDKValidationError> {
@@ -736,52 +485,7 @@ export const CreateConversationResponseResponseBody$inboundSchema: z.ZodType<
     ]).optional(),
   ),
 });
-/** @internal */
-export type CreateConversationResponseResponseBody$Outbound = {
-  data?:
-    | components.ResponseStartedEvent$Outbound
-    | components.ResponseDoneEvent$Outbound
-    | components.ResponseFailedEvent$Outbound
-    | components.ToolStartedEvent$Outbound
-    | components.ToolDoneEvent$Outbound
-    | components.ToolFailedEvent$Outbound
-    | components.ToolReviewRequestedEvent$Outbound
-    | components.ToolReviewDoneEvent$Outbound
-    | components.PartDeltaEvent$Outbound
-    | components.PartDoneEvent$Outbound
-    | undefined;
-};
 
-/** @internal */
-export const CreateConversationResponseResponseBody$outboundSchema: z.ZodType<
-  CreateConversationResponseResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateConversationResponseResponseBody
-> = z.object({
-  data: z.union([
-    components.ResponseStartedEvent$outboundSchema,
-    components.ResponseDoneEvent$outboundSchema,
-    components.ResponseFailedEvent$outboundSchema,
-    components.ToolStartedEvent$outboundSchema,
-    components.ToolDoneEvent$outboundSchema,
-    components.ToolFailedEvent$outboundSchema,
-    components.ToolReviewRequestedEvent$outboundSchema,
-    components.ToolReviewDoneEvent$outboundSchema,
-    components.PartDeltaEvent$outboundSchema,
-    components.PartDoneEvent$outboundSchema,
-  ]).optional(),
-});
-
-export function createConversationResponseResponseBodyToJSON(
-  createConversationResponseResponseBody:
-    CreateConversationResponseResponseBody,
-): string {
-  return JSON.stringify(
-    CreateConversationResponseResponseBody$outboundSchema.parse(
-      createConversationResponseResponseBody,
-    ),
-  );
-}
 export function createConversationResponseResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateConversationResponseResponseBody, SDKValidationError> {

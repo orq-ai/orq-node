@@ -57,22 +57,6 @@ export type GetV2EvaluatorsIdVersionsResponseBody = {
 };
 
 /** @internal */
-export const GetV2EvaluatorsIdVersionsRequest$inboundSchema: z.ZodType<
-  GetV2EvaluatorsIdVersionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
-/** @internal */
 export type GetV2EvaluatorsIdVersionsRequest$Outbound = {
   id: string;
   limit: number;
@@ -106,24 +90,11 @@ export function getV2EvaluatorsIdVersionsRequestToJSON(
     ),
   );
 }
-export function getV2EvaluatorsIdVersionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV2EvaluatorsIdVersionsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV2EvaluatorsIdVersionsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV2EvaluatorsIdVersionsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetV2EvaluatorsIdVersionsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetV2EvaluatorsIdVersionsObject
 > = z.nativeEnum(GetV2EvaluatorsIdVersionsObject);
-/** @internal */
-export const GetV2EvaluatorsIdVersionsObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetV2EvaluatorsIdVersionsObject
-> = GetV2EvaluatorsIdVersionsObject$inboundSchema;
 
 /** @internal */
 export const GetV2EvaluatorsIdVersionsData$inboundSchema: z.ZodType<
@@ -153,60 +124,7 @@ export const GetV2EvaluatorsIdVersionsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type GetV2EvaluatorsIdVersionsData$Outbound = {
-  _id: string;
-  created_at: string;
-  updated_at: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  version: string;
-  description?: string | undefined;
-  checksum: string;
-  entityType: string;
-  entityId: string;
-  data: { [k: string]: any };
-  workspace_id: string;
-};
 
-/** @internal */
-export const GetV2EvaluatorsIdVersionsData$outboundSchema: z.ZodType<
-  GetV2EvaluatorsIdVersionsData$Outbound,
-  z.ZodTypeDef,
-  GetV2EvaluatorsIdVersionsData
-> = z.object({
-  id: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  version: z.string(),
-  description: z.string().optional(),
-  checksum: z.string(),
-  entityType: z.string(),
-  entityId: z.string(),
-  data: z.record(z.any()),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function getV2EvaluatorsIdVersionsDataToJSON(
-  getV2EvaluatorsIdVersionsData: GetV2EvaluatorsIdVersionsData,
-): string {
-  return JSON.stringify(
-    GetV2EvaluatorsIdVersionsData$outboundSchema.parse(
-      getV2EvaluatorsIdVersionsData,
-    ),
-  );
-}
 export function getV2EvaluatorsIdVersionsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetV2EvaluatorsIdVersionsData, SDKValidationError> {
@@ -231,37 +149,7 @@ export const GetV2EvaluatorsIdVersionsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetV2EvaluatorsIdVersionsResponseBody$Outbound = {
-  object: string;
-  data: Array<GetV2EvaluatorsIdVersionsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetV2EvaluatorsIdVersionsResponseBody$outboundSchema: z.ZodType<
-  GetV2EvaluatorsIdVersionsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetV2EvaluatorsIdVersionsResponseBody
-> = z.object({
-  object: GetV2EvaluatorsIdVersionsObject$outboundSchema,
-  data: z.array(z.lazy(() => GetV2EvaluatorsIdVersionsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getV2EvaluatorsIdVersionsResponseBodyToJSON(
-  getV2EvaluatorsIdVersionsResponseBody: GetV2EvaluatorsIdVersionsResponseBody,
-): string {
-  return JSON.stringify(
-    GetV2EvaluatorsIdVersionsResponseBody$outboundSchema.parse(
-      getV2EvaluatorsIdVersionsResponseBody,
-    ),
-  );
-}
 export function getV2EvaluatorsIdVersionsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetV2EvaluatorsIdVersionsResponseBody, SDKValidationError> {

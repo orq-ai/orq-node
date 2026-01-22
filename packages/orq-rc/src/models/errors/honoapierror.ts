@@ -57,21 +57,3 @@ export const HonoApiError$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type HonoApiError$Outbound = {
-  code?: string | undefined;
-  message: string;
-};
-
-/** @internal */
-export const HonoApiError$outboundSchema: z.ZodType<
-  HonoApiError$Outbound,
-  z.ZodTypeDef,
-  HonoApiError
-> = z.instanceof(HonoApiError)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    code: z.string().optional(),
-    message: z.string(),
-  }));

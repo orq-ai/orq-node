@@ -76,33 +76,6 @@ export type GetAllMemoryDocumentsResponseBody = {
 };
 
 /** @internal */
-export const GetAllMemoryDocumentsRequest$inboundSchema: z.ZodType<
-  GetAllMemoryDocumentsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  memory_entity_id: z.string(),
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  updated_after: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  updated_before: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "memory_entity_id": "memoryEntityId",
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-    "updated_after": "updatedAfter",
-    "updated_before": "updatedBefore",
-  });
-});
-/** @internal */
 export type GetAllMemoryDocumentsRequest$Outbound = {
   memory_store_key: string;
   memory_entity_id: string;
@@ -146,24 +119,11 @@ export function getAllMemoryDocumentsRequestToJSON(
     ),
   );
 }
-export function getAllMemoryDocumentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryDocumentsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryDocumentsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryDocumentsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetAllMemoryDocumentsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoryDocumentsObject
 > = z.nativeEnum(GetAllMemoryDocumentsObject);
-/** @internal */
-export const GetAllMemoryDocumentsObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllMemoryDocumentsObject
-> = GetAllMemoryDocumentsObject$inboundSchema;
 
 /** @internal */
 export const GetAllMemoryDocumentsData$inboundSchema: z.ZodType<
@@ -191,54 +151,7 @@ export const GetAllMemoryDocumentsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type GetAllMemoryDocumentsData$Outbound = {
-  _id: string;
-  memory_id: string;
-  store_id: string;
-  text: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  workspace_id: string;
-  metadata?: { [k: string]: string } | undefined;
-};
 
-/** @internal */
-export const GetAllMemoryDocumentsData$outboundSchema: z.ZodType<
-  GetAllMemoryDocumentsData$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoryDocumentsData
-> = z.object({
-  id: z.string(),
-  memoryId: z.string(),
-  storeId: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  workspaceId: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    memoryId: "memory_id",
-    storeId: "store_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function getAllMemoryDocumentsDataToJSON(
-  getAllMemoryDocumentsData: GetAllMemoryDocumentsData,
-): string {
-  return JSON.stringify(
-    GetAllMemoryDocumentsData$outboundSchema.parse(getAllMemoryDocumentsData),
-  );
-}
 export function getAllMemoryDocumentsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryDocumentsData, SDKValidationError> {
@@ -263,37 +176,7 @@ export const GetAllMemoryDocumentsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetAllMemoryDocumentsResponseBody$Outbound = {
-  object: string;
-  data: Array<GetAllMemoryDocumentsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetAllMemoryDocumentsResponseBody$outboundSchema: z.ZodType<
-  GetAllMemoryDocumentsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoryDocumentsResponseBody
-> = z.object({
-  object: GetAllMemoryDocumentsObject$outboundSchema,
-  data: z.array(z.lazy(() => GetAllMemoryDocumentsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getAllMemoryDocumentsResponseBodyToJSON(
-  getAllMemoryDocumentsResponseBody: GetAllMemoryDocumentsResponseBody,
-): string {
-  return JSON.stringify(
-    GetAllMemoryDocumentsResponseBody$outboundSchema.parse(
-      getAllMemoryDocumentsResponseBody,
-    ),
-  );
-}
 export function getAllMemoryDocumentsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryDocumentsResponseBody, SDKValidationError> {

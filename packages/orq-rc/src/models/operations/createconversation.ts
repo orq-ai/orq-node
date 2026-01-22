@@ -78,7 +78,7 @@ export type CreateConversationResponseBody = {
   /**
    * Unique conversation identifier with `conv_` prefix.
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Resource type discriminator.
    */
@@ -110,16 +110,6 @@ export type CreateConversationResponseBody = {
 };
 
 /** @internal */
-export const CreateConversationMetadata$inboundSchema: z.ZodType<
-  CreateConversationMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-/** @internal */
 export type CreateConversationMetadata$Outbound = {
   generatingTitle?: boolean | undefined;
   entityId?: string | null | undefined;
@@ -144,26 +134,7 @@ export function createConversationMetadataToJSON(
     CreateConversationMetadata$outboundSchema.parse(createConversationMetadata),
   );
 }
-export function createConversationMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateConversationMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateConversationMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateConversationMetadata' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateConversationRequestBody$inboundSchema: z.ZodType<
-  CreateConversationRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  displayName: z.string().default("Untitled"),
-  projectId: z.string(),
-  metadata: z.lazy(() => CreateConversationMetadata$inboundSchema).optional(),
-});
 /** @internal */
 export type CreateConversationRequestBody$Outbound = {
   displayName: string;
@@ -191,24 +162,11 @@ export function createConversationRequestBodyToJSON(
     ),
   );
 }
-export function createConversationRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateConversationRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateConversationRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateConversationRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateConversationKind$inboundSchema: z.ZodNativeEnum<
   typeof CreateConversationKind
 > = z.nativeEnum(CreateConversationKind);
-/** @internal */
-export const CreateConversationKind$outboundSchema: z.ZodNativeEnum<
-  typeof CreateConversationKind
-> = CreateConversationKind$inboundSchema;
 
 /** @internal */
 export const CreateConversationConversationsMetadata$inboundSchema: z.ZodType<
@@ -220,34 +178,7 @@ export const CreateConversationConversationsMetadata$inboundSchema: z.ZodType<
   entityId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type CreateConversationConversationsMetadata$Outbound = {
-  generatingTitle?: boolean | undefined;
-  entityId?: string | null | undefined;
-  model?: string | null | undefined;
-};
 
-/** @internal */
-export const CreateConversationConversationsMetadata$outboundSchema: z.ZodType<
-  CreateConversationConversationsMetadata$Outbound,
-  z.ZodTypeDef,
-  CreateConversationConversationsMetadata
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-
-export function createConversationConversationsMetadataToJSON(
-  createConversationConversationsMetadata:
-    CreateConversationConversationsMetadata,
-): string {
-  return JSON.stringify(
-    CreateConversationConversationsMetadata$outboundSchema.parse(
-      createConversationConversationsMetadata,
-    ),
-  );
-}
 export function createConversationConversationsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -270,7 +201,7 @@ export const CreateConversationResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kfjan6hghyqm787bms9r0rcj"),
+  _id: z.string().default("conv_01kfjq5xhtp7k463fr537eh2x8"),
   kind: CreateConversationKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
@@ -284,48 +215,7 @@ export const CreateConversationResponseBody$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type CreateConversationResponseBody$Outbound = {
-  _id: string;
-  kind: string;
-  displayName: string;
-  createdAt: number;
-  updatedAt: number;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
-  metadata?: CreateConversationConversationsMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const CreateConversationResponseBody$outboundSchema: z.ZodType<
-  CreateConversationResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateConversationResponseBody
-> = z.object({
-  id: z.string().default("conv_01kfjan6hghyqm787bms9r0rcj"),
-  kind: CreateConversationKind$outboundSchema,
-  displayName: z.string(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  metadata: z.lazy(() => CreateConversationConversationsMetadata$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function createConversationResponseBodyToJSON(
-  createConversationResponseBody: CreateConversationResponseBody,
-): string {
-  return JSON.stringify(
-    CreateConversationResponseBody$outboundSchema.parse(
-      createConversationResponseBody,
-    ),
-  );
-}
 export function createConversationResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateConversationResponseBody, SDKValidationError> {

@@ -25,6 +25,7 @@ export const ListModelsType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
@@ -80,26 +81,15 @@ export type ListModelsResponseBody = {
 export const ListModelsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsObject
 > = z.nativeEnum(ListModelsObject);
-/** @internal */
-export const ListModelsObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListModelsObject
-> = ListModelsObject$inboundSchema;
 
 /** @internal */
 export const ListModelsType$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsType
 > = z.nativeEnum(ListModelsType);
-/** @internal */
-export const ListModelsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListModelsType
-> = ListModelsType$inboundSchema;
 
 /** @internal */
 export const OwnedBy$inboundSchema: z.ZodNativeEnum<typeof OwnedBy> = z
   .nativeEnum(OwnedBy);
-/** @internal */
-export const OwnedBy$outboundSchema: z.ZodNativeEnum<typeof OwnedBy> =
-  OwnedBy$inboundSchema;
 
 /** @internal */
 export const ListModelsData$inboundSchema: z.ZodType<
@@ -116,33 +106,7 @@ export const ListModelsData$inboundSchema: z.ZodType<
     "owned_by": "ownedBy",
   });
 });
-/** @internal */
-export type ListModelsData$Outbound = {
-  id: string;
-  created: number;
-  type: string;
-  owned_by: string;
-};
 
-/** @internal */
-export const ListModelsData$outboundSchema: z.ZodType<
-  ListModelsData$Outbound,
-  z.ZodTypeDef,
-  ListModelsData
-> = z.object({
-  id: z.string(),
-  created: z.number(),
-  type: ListModelsType$outboundSchema,
-  ownedBy: OwnedBy$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    ownedBy: "owned_by",
-  });
-});
-
-export function listModelsDataToJSON(listModelsData: ListModelsData): string {
-  return JSON.stringify(ListModelsData$outboundSchema.parse(listModelsData));
-}
 export function listModelsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListModelsData, SDKValidationError> {
@@ -167,35 +131,7 @@ export const ListModelsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListModelsResponseBody$Outbound = {
-  object: string;
-  data: Array<ListModelsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListModelsResponseBody$outboundSchema: z.ZodType<
-  ListModelsResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListModelsResponseBody
-> = z.object({
-  object: ListModelsObject$outboundSchema,
-  data: z.array(z.lazy(() => ListModelsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listModelsResponseBodyToJSON(
-  listModelsResponseBody: ListModelsResponseBody,
-): string {
-  return JSON.stringify(
-    ListModelsResponseBody$outboundSchema.parse(listModelsResponseBody),
-  );
-}
 export function listModelsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListModelsResponseBody, SDKValidationError> {

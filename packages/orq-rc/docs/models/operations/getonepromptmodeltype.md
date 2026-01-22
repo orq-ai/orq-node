@@ -7,11 +7,11 @@ The modality of the model
 ```typescript
 import { GetOnePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptModelType = "image";
+let value: GetOnePromptModelType = "tts";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "moderation" | "vision"
+"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "ocr" | "moderation" | "vision"
 ```

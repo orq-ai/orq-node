@@ -1,17 +1,17 @@
 # EncodingFormat
 
-The format to return the embeddings
+Type of the document element
 
 ## Example Usage
 
 ```typescript
 import { EncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: EncodingFormat = "float";
+let value: EncodingFormat = "base64";
 ```
 
 ## Values
 
 ```typescript
-"float" | "base64"
+"base64" | "float"
 ```

@@ -38,35 +38,7 @@ export const AgentHandedOffStreamingEventData$inboundSchema: z.ZodType<
     "agent_id": "agentId",
   });
 });
-/** @internal */
-export type AgentHandedOffStreamingEventData$Outbound = {
-  agent_id: string;
-  input: string;
-};
 
-/** @internal */
-export const AgentHandedOffStreamingEventData$outboundSchema: z.ZodType<
-  AgentHandedOffStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentHandedOffStreamingEventData
-> = z.object({
-  agentId: z.string(),
-  input: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-  });
-});
-
-export function agentHandedOffStreamingEventDataToJSON(
-  agentHandedOffStreamingEventData: AgentHandedOffStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentHandedOffStreamingEventData$outboundSchema.parse(
-      agentHandedOffStreamingEventData,
-    ),
-  );
-}
 export function agentHandedOffStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentHandedOffStreamingEventData, SDKValidationError> {
@@ -87,33 +59,7 @@ export const AgentHandedOffStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentHandedOffStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentHandedOffStreamingEvent$Outbound = {
-  type: "event.agents.handed_off";
-  timestamp: string;
-  data: AgentHandedOffStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentHandedOffStreamingEvent$outboundSchema: z.ZodType<
-  AgentHandedOffStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentHandedOffStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.handed_off"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentHandedOffStreamingEventData$outboundSchema),
-});
-
-export function agentHandedOffStreamingEventToJSON(
-  agentHandedOffStreamingEvent: AgentHandedOffStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentHandedOffStreamingEvent$outboundSchema.parse(
-      agentHandedOffStreamingEvent,
-    ),
-  );
-}
 export function agentHandedOffStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentHandedOffStreamingEvent, SDKValidationError> {

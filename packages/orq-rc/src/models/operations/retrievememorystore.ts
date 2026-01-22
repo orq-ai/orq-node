@@ -62,18 +62,6 @@ export type RetrieveMemoryStoreResponseBody = {
 };
 
 /** @internal */
-export const RetrieveMemoryStoreRequest$inboundSchema: z.ZodType<
-  RetrieveMemoryStoreRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-  });
-});
-/** @internal */
 export type RetrieveMemoryStoreRequest$Outbound = {
   memory_store_key: string;
 };
@@ -98,15 +86,6 @@ export function retrieveMemoryStoreRequestToJSON(
     RetrieveMemoryStoreRequest$outboundSchema.parse(retrieveMemoryStoreRequest),
   );
 }
-export function retrieveMemoryStoreRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveMemoryStoreRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveMemoryStoreRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveMemoryStoreRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const RetrieveMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
@@ -116,29 +95,7 @@ export const RetrieveMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-/** @internal */
-export type RetrieveMemoryStoreEmbeddingConfig$Outbound = {
-  model: string;
-};
 
-/** @internal */
-export const RetrieveMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
-  RetrieveMemoryStoreEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryStoreEmbeddingConfig
-> = z.object({
-  model: z.string(),
-});
-
-export function retrieveMemoryStoreEmbeddingConfigToJSON(
-  retrieveMemoryStoreEmbeddingConfig: RetrieveMemoryStoreEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryStoreEmbeddingConfig$outboundSchema.parse(
-      retrieveMemoryStoreEmbeddingConfig,
-    ),
-  );
-}
 export function retrieveMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryStoreEmbeddingConfig, SDKValidationError> {
@@ -175,54 +132,7 @@ export const RetrieveMemoryStoreResponseBody$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-/** @internal */
-export type RetrieveMemoryStoreResponseBody$Outbound = {
-  _id: string;
-  key: string;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created: string;
-  updated: string;
-  ttl?: number | undefined;
-  embedding_config: RetrieveMemoryStoreEmbeddingConfig$Outbound;
-};
 
-/** @internal */
-export const RetrieveMemoryStoreResponseBody$outboundSchema: z.ZodType<
-  RetrieveMemoryStoreResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryStoreResponseBody
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.number().optional(),
-  embeddingConfig: z.lazy(() =>
-    RetrieveMemoryStoreEmbeddingConfig$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    embeddingConfig: "embedding_config",
-  });
-});
-
-export function retrieveMemoryStoreResponseBodyToJSON(
-  retrieveMemoryStoreResponseBody: RetrieveMemoryStoreResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryStoreResponseBody$outboundSchema.parse(
-      retrieveMemoryStoreResponseBody,
-    ),
-  );
-}
 export function retrieveMemoryStoreResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryStoreResponseBody, SDKValidationError> {

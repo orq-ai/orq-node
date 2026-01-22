@@ -38,35 +38,7 @@ export const ExecutionNamedStreamingEventData$inboundSchema: z.ZodType<
     "agent_manifest_id": "agentManifestId",
   });
 });
-/** @internal */
-export type ExecutionNamedStreamingEventData$Outbound = {
-  name: string;
-  agent_manifest_id: string;
-};
 
-/** @internal */
-export const ExecutionNamedStreamingEventData$outboundSchema: z.ZodType<
-  ExecutionNamedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ExecutionNamedStreamingEventData
-> = z.object({
-  name: z.string(),
-  agentManifestId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentManifestId: "agent_manifest_id",
-  });
-});
-
-export function executionNamedStreamingEventDataToJSON(
-  executionNamedStreamingEventData: ExecutionNamedStreamingEventData,
-): string {
-  return JSON.stringify(
-    ExecutionNamedStreamingEventData$outboundSchema.parse(
-      executionNamedStreamingEventData,
-    ),
-  );
-}
 export function executionNamedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecutionNamedStreamingEventData, SDKValidationError> {
@@ -87,33 +59,7 @@ export const ExecutionNamedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ExecutionNamedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ExecutionNamedStreamingEvent$Outbound = {
-  type: "event.agents.execution_named";
-  timestamp: string;
-  data: ExecutionNamedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ExecutionNamedStreamingEvent$outboundSchema: z.ZodType<
-  ExecutionNamedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ExecutionNamedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.execution_named"),
-  timestamp: z.string(),
-  data: z.lazy(() => ExecutionNamedStreamingEventData$outboundSchema),
-});
-
-export function executionNamedStreamingEventToJSON(
-  executionNamedStreamingEvent: ExecutionNamedStreamingEvent,
-): string {
-  return JSON.stringify(
-    ExecutionNamedStreamingEvent$outboundSchema.parse(
-      executionNamedStreamingEvent,
-    ),
-  );
-}
 export function executionNamedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecutionNamedStreamingEvent, SDKValidationError> {

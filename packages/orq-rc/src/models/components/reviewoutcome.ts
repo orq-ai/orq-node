@@ -21,7 +21,3 @@ export type ReviewOutcome = ClosedEnum<typeof ReviewOutcome>;
 export const ReviewOutcome$inboundSchema: z.ZodNativeEnum<
   typeof ReviewOutcome
 > = z.nativeEnum(ReviewOutcome);
-/** @internal */
-export const ReviewOutcome$outboundSchema: z.ZodNativeEnum<
-  typeof ReviewOutcome
-> = ReviewOutcome$inboundSchema;

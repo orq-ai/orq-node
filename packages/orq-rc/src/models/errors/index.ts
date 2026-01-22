@@ -4,6 +4,9 @@
 
 export * from "./apierror.js";
 export * from "./createeval.js";
+export * from "./createmoderation.js";
+export * from "./createtranscription.js";
+export * from "./createtranslation.js";
 export * from "./deleteagent.js";
 export * from "./deletecontact.js";
 export * from "./deleteconversation.js";

@@ -1,0 +1,15 @@
+# ListPromptVersionsLoadBalancer
+
+
+## Supported Types
+
+### `operations.ListPromptVersionsLoadBalancer1`
+
+```typescript
+const value: operations.ListPromptVersionsLoadBalancer1 = {
+  type: "weight_based",
+  model: "openai/gpt-4o",
+  weight: 0.7,
+};
+```
+

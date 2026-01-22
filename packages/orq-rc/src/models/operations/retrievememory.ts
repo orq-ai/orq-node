@@ -46,20 +46,6 @@ export type RetrieveMemoryResponseBody = {
 };
 
 /** @internal */
-export const RetrieveMemoryRequest$inboundSchema: z.ZodType<
-  RetrieveMemoryRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  memory_entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "memory_entity_id": "memoryEntityId",
-  });
-});
-/** @internal */
 export type RetrieveMemoryRequest$Outbound = {
   memory_store_key: string;
   memory_entity_id: string;
@@ -85,15 +71,6 @@ export function retrieveMemoryRequestToJSON(
 ): string {
   return JSON.stringify(
     RetrieveMemoryRequest$outboundSchema.parse(retrieveMemoryRequest),
-  );
-}
-export function retrieveMemoryRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveMemoryRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveMemoryRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveMemoryRequest' from JSON`,
   );
 }
 
@@ -123,53 +100,7 @@ export const RetrieveMemoryResponseBody$inboundSchema: z.ZodType<
     "documents_count": "documentsCount",
   });
 });
-/** @internal */
-export type RetrieveMemoryResponseBody$Outbound = {
-  _id: string;
-  entity_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  store_id: string;
-  workspace_id: string;
-  documents_count: number;
-};
 
-/** @internal */
-export const RetrieveMemoryResponseBody$outboundSchema: z.ZodType<
-  RetrieveMemoryResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryResponseBody
-> = z.object({
-  id: z.string(),
-  entityId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  storeId: z.string(),
-  workspaceId: z.string(),
-  documentsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    entityId: "entity_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    storeId: "store_id",
-    workspaceId: "workspace_id",
-    documentsCount: "documents_count",
-  });
-});
-
-export function retrieveMemoryResponseBodyToJSON(
-  retrieveMemoryResponseBody: RetrieveMemoryResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryResponseBody$outboundSchema.parse(retrieveMemoryResponseBody),
-  );
-}
 export function retrieveMemoryResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryResponseBody, SDKValidationError> {

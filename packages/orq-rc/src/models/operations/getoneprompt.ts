@@ -33,6 +33,7 @@ export const GetOnePromptModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
@@ -440,11 +441,11 @@ export type GetOnePromptContent =
   | string
   | Array<GetOnePrompt21 | GetOnePrompt22 | GetOnePrompt23>;
 
-export const GetOnePromptPromptsType = {
+export const GetOnePromptPromptsResponseType = {
   Function: "function",
 } as const;
-export type GetOnePromptPromptsType = ClosedEnum<
-  typeof GetOnePromptPromptsType
+export type GetOnePromptPromptsResponseType = ClosedEnum<
+  typeof GetOnePromptPromptsResponseType
 >;
 
 export type GetOnePromptFunction = {
@@ -458,7 +459,7 @@ export type GetOnePromptFunction = {
 export type GetOnePromptToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: GetOnePromptPromptsType;
+  type: GetOnePromptPromptsResponseType;
   function: GetOnePromptFunction;
 };
 
@@ -570,7 +571,7 @@ export type GetOnePromptResponseFormatJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /**
@@ -749,6 +750,76 @@ export type GetOnePromptGuardrails = {
   executeOn: GetOnePromptExecuteOn;
 };
 
+export type GetOnePromptFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type GetOnePromptRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const GetOnePromptPromptsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type GetOnePromptPromptsType = ClosedEnum<
+  typeof GetOnePromptPromptsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type GetOnePromptCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: GetOnePromptPromptsType;
+};
+
+export const GetOnePromptLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type GetOnePromptLoadBalancerType = ClosedEnum<
+  typeof GetOnePromptLoadBalancerType
+>;
+
+export type GetOnePromptLoadBalancer1 = {
+  type: GetOnePromptLoadBalancerType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type GetOnePromptLoadBalancer = GetOnePromptLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type GetOnePromptTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 export type GetOnePromptContentPromptsResponse2002 =
   components.TextContentPartSchema;
 
@@ -815,7 +886,7 @@ export type GetOnePromptMessagesCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: GetOnePromptMessagesTtl | undefined;
+  ttl: GetOnePromptMessagesTtl;
 };
 
 export type GetOnePromptMessagesToolMessage = {
@@ -992,7 +1063,7 @@ export type GetOnePrompt2CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: GetOnePrompt2Ttl | undefined;
+  ttl: GetOnePrompt2Ttl;
 };
 
 export type GetOnePrompt24 = {
@@ -1188,6 +1259,26 @@ export type GetOnePromptPromptField = {
    */
   guardrails?: Array<GetOnePromptGuardrails> | undefined;
   /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<GetOnePromptFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: GetOnePromptRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: GetOnePromptCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<GetOnePromptLoadBalancer1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: GetOnePromptTimeout | undefined;
+  /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
   messages?:
@@ -1291,14 +1382,6 @@ export type GetOnePromptPrompt = {
 };
 
 /** @internal */
-export const GetOnePromptRequest$inboundSchema: z.ZodType<
-  GetOnePromptRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
-/** @internal */
 export type GetOnePromptRequest$Outbound = {
   id: string;
 };
@@ -1319,69 +1402,36 @@ export function getOnePromptRequestToJSON(
     GetOnePromptRequest$outboundSchema.parse(getOnePromptRequest),
   );
 }
-export function getOnePromptRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOnePromptRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOnePromptRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetOnePromptType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptType
 > = z.nativeEnum(GetOnePromptType);
-/** @internal */
-export const GetOnePromptType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptType
-> = GetOnePromptType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptModelType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptModelType
 > = z.nativeEnum(GetOnePromptModelType);
-/** @internal */
-export const GetOnePromptModelType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptModelType
-> = GetOnePromptModelType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptFormat
 > = z.nativeEnum(GetOnePromptFormat);
-/** @internal */
-export const GetOnePromptFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptFormat
-> = GetOnePromptFormat$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat6
 > = z.nativeEnum(GetOnePromptResponseFormat6);
-/** @internal */
-export const GetOnePromptResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptResponseFormat6
-> = GetOnePromptResponseFormat6$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat5
 > = z.nativeEnum(GetOnePromptResponseFormat5);
-/** @internal */
-export const GetOnePromptResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptResponseFormat5
-> = GetOnePromptResponseFormat5$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat4
 > = z.nativeEnum(GetOnePromptResponseFormat4);
-/** @internal */
-export const GetOnePromptResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptResponseFormat4
-> = GetOnePromptResponseFormat4$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
@@ -1390,12 +1440,6 @@ export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
   );
-/** @internal */
-export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
-  > =
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
@@ -1406,30 +1450,7 @@ export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
   type:
     GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
 });
-/** @internal */
-export type GetOnePromptResponseFormat3$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const GetOnePromptResponseFormat3$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormat3
-> = z.object({
-  type:
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema,
-});
-
-export function getOnePromptResponseFormat3ToJSON(
-  getOnePromptResponseFormat3: GetOnePromptResponseFormat3,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormat3$outboundSchema.parse(
-      getOnePromptResponseFormat3,
-    ),
-  );
-}
 export function getOnePromptResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormat3, SDKValidationError> {
@@ -1447,12 +1468,6 @@ export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inb
   > = z.nativeEnum(
     GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType,
   );
-/** @internal */
-export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType
-  > =
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormat2$inboundSchema: z.ZodType<
@@ -1463,30 +1478,7 @@ export const GetOnePromptResponseFormat2$inboundSchema: z.ZodType<
   type:
     GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
 });
-/** @internal */
-export type GetOnePromptResponseFormat2$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const GetOnePromptResponseFormat2$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormat2
-> = z.object({
-  type:
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
-});
-
-export function getOnePromptResponseFormat2ToJSON(
-  getOnePromptResponseFormat2: GetOnePromptResponseFormat2,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormat2$outboundSchema.parse(
-      getOnePromptResponseFormat2,
-    ),
-  );
-}
 export function getOnePromptResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormat2, SDKValidationError> {
@@ -1501,10 +1493,6 @@ export function getOnePromptResponseFormat2FromJSON(
 export const GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> = z
     .nativeEnum(GetOnePromptResponseFormatPromptsResponse200Type);
-/** @internal */
-export const GetOnePromptResponseFormatPromptsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> =
-    GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema;
 
 /** @internal */
 export const GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
@@ -1518,37 +1506,7 @@ export const GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
-/** @internal */
-export type GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
 
-/** @internal */
-export const GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema:
-  z.ZodType<
-    GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound,
-    z.ZodTypeDef,
-    GetOnePromptResponseFormatPromptsResponseJsonSchema
-  > = z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
-
-export function getOnePromptResponseFormatPromptsResponseJsonSchemaToJSON(
-  getOnePromptResponseFormatPromptsResponseJsonSchema:
-    GetOnePromptResponseFormatPromptsResponseJsonSchema,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema.parse(
-      getOnePromptResponseFormatPromptsResponseJsonSchema,
-    ),
-  );
-}
 export function getOnePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1582,40 +1540,7 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type GetOnePromptResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema: GetOnePromptResponseFormatPromptsResponseJsonSchema$Outbound;
-};
 
-/** @internal */
-export const GetOnePromptResponseFormat1$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormat1
-> = z.object({
-  type: GetOnePromptResponseFormatPromptsResponse200Type$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() =>
-    GetOnePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function getOnePromptResponseFormat1ToJSON(
-  getOnePromptResponseFormat1: GetOnePromptResponseFormat1,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormat1$outboundSchema.parse(
-      getOnePromptResponseFormat1,
-    ),
-  );
-}
 export function getOnePromptResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormat1, SDKValidationError> {
@@ -1639,38 +1564,7 @@ export const GetOnePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat5$inboundSchema,
   GetOnePromptResponseFormat6$inboundSchema,
 ]);
-/** @internal */
-export type GetOnePromptPromptsResponseFormat$Outbound =
-  | GetOnePromptResponseFormat1$Outbound
-  | GetOnePromptResponseFormat2$Outbound
-  | GetOnePromptResponseFormat3$Outbound
-  | string
-  | string
-  | string;
 
-/** @internal */
-export const GetOnePromptPromptsResponseFormat$outboundSchema: z.ZodType<
-  GetOnePromptPromptsResponseFormat$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptPromptsResponseFormat
-> = z.union([
-  z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
-  z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
-  z.lazy(() => GetOnePromptResponseFormat3$outboundSchema),
-  GetOnePromptResponseFormat4$outboundSchema,
-  GetOnePromptResponseFormat5$outboundSchema,
-  GetOnePromptResponseFormat6$outboundSchema,
-]);
-
-export function getOnePromptPromptsResponseFormatToJSON(
-  getOnePromptPromptsResponseFormat: GetOnePromptPromptsResponseFormat,
-): string {
-  return JSON.stringify(
-    GetOnePromptPromptsResponseFormat$outboundSchema.parse(
-      getOnePromptPromptsResponseFormat,
-    ),
-  );
-}
 export function getOnePromptPromptsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptPromptsResponseFormat, SDKValidationError> {
@@ -1685,46 +1579,26 @@ export function getOnePromptPromptsResponseFormatFromJSON(
 export const GetOnePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPhotoRealVersion
 > = z.nativeEnum(GetOnePromptPhotoRealVersion);
-/** @internal */
-export const GetOnePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPhotoRealVersion
-> = GetOnePromptPhotoRealVersion$inboundSchema;
 
 /** @internal */
 export const GetOnePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptEncodingFormat
 > = z.nativeEnum(GetOnePromptEncodingFormat);
-/** @internal */
-export const GetOnePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptEncodingFormat
-> = GetOnePromptEncodingFormat$inboundSchema;
 
 /** @internal */
 export const GetOnePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsReasoningEffort
 > = z.nativeEnum(GetOnePromptPromptsReasoningEffort);
-/** @internal */
-export const GetOnePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsReasoningEffort
-> = GetOnePromptPromptsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const GetOnePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptVerbosity
 > = z.nativeEnum(GetOnePromptVerbosity);
-/** @internal */
-export const GetOnePromptVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptVerbosity
-> = GetOnePromptVerbosity$inboundSchema;
 
 /** @internal */
 export const GetOnePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptThinkingLevel
 > = z.nativeEnum(GetOnePromptThinkingLevel);
-/** @internal */
-export const GetOnePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptThinkingLevel
-> = GetOnePromptThinkingLevel$inboundSchema;
 
 /** @internal */
 export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
@@ -1765,86 +1639,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-/** @internal */
-export type GetOnePromptModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | GetOnePromptResponseFormat1$Outbound
-    | GetOnePromptResponseFormat2$Outbound
-    | GetOnePromptResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
-  GetOnePromptModelParameters$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: GetOnePromptFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
-      z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
-      z.lazy(() => GetOnePromptResponseFormat3$outboundSchema),
-      GetOnePromptResponseFormat4$outboundSchema,
-      GetOnePromptResponseFormat5$outboundSchema,
-      GetOnePromptResponseFormat6$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: GetOnePromptPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: GetOnePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: GetOnePromptPromptsReasoningEffort$outboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: GetOnePromptVerbosity$outboundSchema.optional(),
-  thinkingLevel: GetOnePromptThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function getOnePromptModelParametersToJSON(
-  getOnePromptModelParameters: GetOnePromptModelParameters,
-): string {
-  return JSON.stringify(
-    GetOnePromptModelParameters$outboundSchema.parse(
-      getOnePromptModelParameters,
-    ),
-  );
-}
 export function getOnePromptModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptModelParameters, SDKValidationError> {
@@ -1859,19 +1654,11 @@ export function getOnePromptModelParametersFromJSON(
 export const GetOnePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptProvider
 > = z.nativeEnum(GetOnePromptProvider);
-/** @internal */
-export const GetOnePromptProvider$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptProvider
-> = GetOnePromptProvider$inboundSchema;
 
 /** @internal */
 export const GetOnePromptRole$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptRole
 > = z.nativeEnum(GetOnePromptRole);
-/** @internal */
-export const GetOnePromptRole$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptRole
-> = GetOnePromptRole$inboundSchema;
 
 /** @internal */
 export const GetOnePrompt2File$inboundSchema: z.ZodType<
@@ -1888,37 +1675,7 @@ export const GetOnePrompt2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-/** @internal */
-export type GetOnePrompt2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePrompt2File$outboundSchema: z.ZodType<
-  GetOnePrompt2File$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function getOnePrompt2FileToJSON(
-  getOnePrompt2File: GetOnePrompt2File,
-): string {
-  return JSON.stringify(
-    GetOnePrompt2File$outboundSchema.parse(getOnePrompt2File),
-  );
-}
 export function getOnePrompt2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt2File, SDKValidationError> {
@@ -1938,25 +1695,7 @@ export const GetOnePrompt23$inboundSchema: z.ZodType<
   type: z.literal("file"),
   file: z.lazy(() => GetOnePrompt2File$inboundSchema),
 });
-/** @internal */
-export type GetOnePrompt23$Outbound = {
-  type: "file";
-  file: GetOnePrompt2File$Outbound;
-};
 
-/** @internal */
-export const GetOnePrompt23$outboundSchema: z.ZodType<
-  GetOnePrompt23$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => GetOnePrompt2File$outboundSchema),
-});
-
-export function getOnePrompt23ToJSON(getOnePrompt23: GetOnePrompt23): string {
-  return JSON.stringify(GetOnePrompt23$outboundSchema.parse(getOnePrompt23));
-}
 export function getOnePrompt23FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt23, SDKValidationError> {
@@ -1977,31 +1716,7 @@ export const GetOnePrompt2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-/** @internal */
-export type GetOnePrompt2ImageUrl$Outbound = {
-  id?: string | undefined;
-  url: string;
-  detail?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePrompt2ImageUrl$outboundSchema: z.ZodType<
-  GetOnePrompt2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt2ImageUrl
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function getOnePrompt2ImageUrlToJSON(
-  getOnePrompt2ImageUrl: GetOnePrompt2ImageUrl,
-): string {
-  return JSON.stringify(
-    GetOnePrompt2ImageUrl$outboundSchema.parse(getOnePrompt2ImageUrl),
-  );
-}
 export function getOnePrompt2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt2ImageUrl, SDKValidationError> {
@@ -2025,29 +1740,7 @@ export const GetOnePrompt22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-/** @internal */
-export type GetOnePrompt22$Outbound = {
-  type: "image_url";
-  image_url: GetOnePrompt2ImageUrl$Outbound;
-};
 
-/** @internal */
-export const GetOnePrompt22$outboundSchema: z.ZodType<
-  GetOnePrompt22$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt22
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => GetOnePrompt2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function getOnePrompt22ToJSON(getOnePrompt22: GetOnePrompt22): string {
-  return JSON.stringify(GetOnePrompt22$outboundSchema.parse(getOnePrompt22));
-}
 export function getOnePrompt22FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt22, SDKValidationError> {
@@ -2067,25 +1760,7 @@ export const GetOnePrompt21$inboundSchema: z.ZodType<
   type: z.literal("text"),
   text: z.string(),
 });
-/** @internal */
-export type GetOnePrompt21$Outbound = {
-  type: "text";
-  text: string;
-};
 
-/** @internal */
-export const GetOnePrompt21$outboundSchema: z.ZodType<
-  GetOnePrompt21$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-export function getOnePrompt21ToJSON(getOnePrompt21: GetOnePrompt21): string {
-  return JSON.stringify(GetOnePrompt21$outboundSchema.parse(getOnePrompt21));
-}
 export function getOnePrompt21FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt21, SDKValidationError> {
@@ -2106,30 +1781,7 @@ export const GetOnePromptContent2$inboundSchema: z.ZodType<
   z.lazy(() => GetOnePrompt22$inboundSchema),
   z.lazy(() => GetOnePrompt23$inboundSchema),
 ]);
-/** @internal */
-export type GetOnePromptContent2$Outbound =
-  | GetOnePrompt21$Outbound
-  | GetOnePrompt22$Outbound
-  | GetOnePrompt23$Outbound;
 
-/** @internal */
-export const GetOnePromptContent2$outboundSchema: z.ZodType<
-  GetOnePromptContent2$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptContent2
-> = z.union([
-  z.lazy(() => GetOnePrompt21$outboundSchema),
-  z.lazy(() => GetOnePrompt22$outboundSchema),
-  z.lazy(() => GetOnePrompt23$outboundSchema),
-]);
-
-export function getOnePromptContent2ToJSON(
-  getOnePromptContent2: GetOnePromptContent2,
-): string {
-  return JSON.stringify(
-    GetOnePromptContent2$outboundSchema.parse(getOnePromptContent2),
-  );
-}
 export function getOnePromptContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptContent2, SDKValidationError> {
@@ -2153,34 +1805,7 @@ export const GetOnePromptContent$inboundSchema: z.ZodType<
     z.lazy(() => GetOnePrompt23$inboundSchema),
   ])),
 ]);
-/** @internal */
-export type GetOnePromptContent$Outbound =
-  | string
-  | Array<
-    GetOnePrompt21$Outbound | GetOnePrompt22$Outbound | GetOnePrompt23$Outbound
-  >;
 
-/** @internal */
-export const GetOnePromptContent$outboundSchema: z.ZodType<
-  GetOnePromptContent$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => GetOnePrompt21$outboundSchema),
-    z.lazy(() => GetOnePrompt22$outboundSchema),
-    z.lazy(() => GetOnePrompt23$outboundSchema),
-  ])),
-]);
-
-export function getOnePromptContentToJSON(
-  getOnePromptContent: GetOnePromptContent,
-): string {
-  return JSON.stringify(
-    GetOnePromptContent$outboundSchema.parse(getOnePromptContent),
-  );
-}
 export function getOnePromptContentFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptContent, SDKValidationError> {
@@ -2192,13 +1817,9 @@ export function getOnePromptContentFromJSON(
 }
 
 /** @internal */
-export const GetOnePromptPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsType
-> = z.nativeEnum(GetOnePromptPromptsType);
-/** @internal */
-export const GetOnePromptPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsType
-> = GetOnePromptPromptsType$inboundSchema;
+export const GetOnePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsResponseType
+> = z.nativeEnum(GetOnePromptPromptsResponseType);
 
 /** @internal */
 export const GetOnePromptFunction$inboundSchema: z.ZodType<
@@ -2209,29 +1830,7 @@ export const GetOnePromptFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type GetOnePromptFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const GetOnePromptFunction$outboundSchema: z.ZodType<
-  GetOnePromptFunction$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function getOnePromptFunctionToJSON(
-  getOnePromptFunction: GetOnePromptFunction,
-): string {
-  return JSON.stringify(
-    GetOnePromptFunction$outboundSchema.parse(getOnePromptFunction),
-  );
-}
 export function getOnePromptFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptFunction, SDKValidationError> {
@@ -2250,36 +1849,10 @@ export const GetOnePromptToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: GetOnePromptPromptsType$inboundSchema,
+  type: GetOnePromptPromptsResponseType$inboundSchema,
   function: z.lazy(() => GetOnePromptFunction$inboundSchema),
 });
-/** @internal */
-export type GetOnePromptToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: GetOnePromptFunction$Outbound;
-};
 
-/** @internal */
-export const GetOnePromptToolCalls$outboundSchema: z.ZodType<
-  GetOnePromptToolCalls$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: GetOnePromptPromptsType$outboundSchema,
-  function: z.lazy(() => GetOnePromptFunction$outboundSchema),
-});
-
-export function getOnePromptToolCallsToJSON(
-  getOnePromptToolCalls: GetOnePromptToolCalls,
-): string {
-  return JSON.stringify(
-    GetOnePromptToolCalls$outboundSchema.parse(getOnePromptToolCalls),
-  );
-}
 export function getOnePromptToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptToolCalls, SDKValidationError> {
@@ -2316,55 +1889,7 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-/** @internal */
-export type GetOnePromptMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<
-      | GetOnePrompt21$Outbound
-      | GetOnePrompt22$Outbound
-      | GetOnePrompt23$Outbound
-    >
-    | null;
-  tool_calls?: Array<GetOnePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessages$outboundSchema: z.ZodType<
-  GetOnePromptMessages$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessages
-> = z.object({
-  role: GetOnePromptRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => GetOnePrompt21$outboundSchema),
-        z.lazy(() => GetOnePrompt22$outboundSchema),
-        z.lazy(() => GetOnePrompt23$outboundSchema),
-      ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => GetOnePromptToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function getOnePromptMessagesToJSON(
-  getOnePromptMessages: GetOnePromptMessages,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessages$outboundSchema.parse(getOnePromptMessages),
-  );
-}
 export function getOnePromptMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessages, SDKValidationError> {
@@ -2399,51 +1924,7 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-/** @internal */
-export type GetOnePromptPromptConfig$Outbound = {
-  stream?: boolean | undefined;
-  model?: string | null | undefined;
-  model_db_id?: string | null | undefined;
-  model_type?: string | null | undefined;
-  model_parameters?: GetOnePromptModelParameters$Outbound | undefined;
-  provider?: string | null | undefined;
-  integration_id?: string | null | undefined;
-  version?: string | undefined;
-  messages: Array<GetOnePromptMessages$Outbound>;
-};
 
-/** @internal */
-export const GetOnePromptPromptConfig$outboundSchema: z.ZodType<
-  GetOnePromptPromptConfig$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptPromptConfig
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.nullable(z.string()).optional(),
-  modelDbId: z.nullable(z.string()).optional(),
-  modelType: z.nullable(GetOnePromptModelType$outboundSchema).optional(),
-  modelParameters: z.lazy(() => GetOnePromptModelParameters$outboundSchema)
-    .optional(),
-  provider: z.nullable(GetOnePromptProvider$outboundSchema).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(z.lazy(() => GetOnePromptMessages$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
-  });
-});
-
-export function getOnePromptPromptConfigToJSON(
-  getOnePromptPromptConfig: GetOnePromptPromptConfig,
-): string {
-  return JSON.stringify(
-    GetOnePromptPromptConfig$outboundSchema.parse(getOnePromptPromptConfig),
-  );
-}
 export function getOnePromptPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptPromptConfig, SDKValidationError> {
@@ -2458,19 +1939,11 @@ export function getOnePromptPromptConfigFromJSON(
 export const GetOnePromptVoice$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptVoice
 > = z.nativeEnum(GetOnePromptVoice);
-/** @internal */
-export const GetOnePromptVoice$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptVoice
-> = GetOnePromptVoice$inboundSchema;
 
 /** @internal */
 export const GetOnePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsFormat
 > = z.nativeEnum(GetOnePromptPromptsFormat);
-/** @internal */
-export const GetOnePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsFormat
-> = GetOnePromptPromptsFormat$inboundSchema;
 
 /** @internal */
 export const GetOnePromptAudio$inboundSchema: z.ZodType<
@@ -2481,29 +1954,7 @@ export const GetOnePromptAudio$inboundSchema: z.ZodType<
   voice: GetOnePromptVoice$inboundSchema,
   format: GetOnePromptPromptsFormat$inboundSchema,
 });
-/** @internal */
-export type GetOnePromptAudio$Outbound = {
-  voice: string;
-  format: string;
-};
 
-/** @internal */
-export const GetOnePromptAudio$outboundSchema: z.ZodType<
-  GetOnePromptAudio$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptAudio
-> = z.object({
-  voice: GetOnePromptVoice$outboundSchema,
-  format: GetOnePromptPromptsFormat$outboundSchema,
-});
-
-export function getOnePromptAudioToJSON(
-  getOnePromptAudio: GetOnePromptAudio,
-): string {
-  return JSON.stringify(
-    GetOnePromptAudio$outboundSchema.parse(getOnePromptAudio),
-  );
-}
 export function getOnePromptAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptAudio, SDKValidationError> {
@@ -2525,35 +1976,7 @@ export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   schema: z.any().optional(),
   strict: z.boolean().default(false),
 });
-/** @internal */
-export type GetOnePromptResponseFormatJsonSchema$Outbound = {
-  description?: string | undefined;
-  name: string;
-  schema?: any | undefined;
-  strict: boolean;
-};
 
-/** @internal */
-export const GetOnePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormatJsonSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().default(false),
-});
-
-export function getOnePromptResponseFormatJsonSchemaToJSON(
-  getOnePromptResponseFormatJsonSchema: GetOnePromptResponseFormatJsonSchema,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormatJsonSchema$outboundSchema.parse(
-      getOnePromptResponseFormatJsonSchema,
-    ),
-  );
-}
 export function getOnePromptResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormatJsonSchema, SDKValidationError> {
@@ -2581,39 +2004,7 @@ export const GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema:
       "json_schema": "jsonSchema",
     });
   });
-/** @internal */
-export type GetOnePromptResponseFormatPromptsJSONSchema$Outbound = {
-  type: "json_schema";
-  json_schema: GetOnePromptResponseFormatJsonSchema$Outbound;
-};
 
-/** @internal */
-export const GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema:
-  z.ZodType<
-    GetOnePromptResponseFormatPromptsJSONSchema$Outbound,
-    z.ZodTypeDef,
-    GetOnePromptResponseFormatPromptsJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      GetOnePromptResponseFormatJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
-
-export function getOnePromptResponseFormatPromptsJSONSchemaToJSON(
-  getOnePromptResponseFormatPromptsJSONSchema:
-    GetOnePromptResponseFormatPromptsJSONSchema,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema.parse(
-      getOnePromptResponseFormatPromptsJSONSchema,
-    ),
-  );
-}
 export function getOnePromptResponseFormatPromptsJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2638,29 +2029,7 @@ export const GetOnePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("json_object"),
 });
-/** @internal */
-export type GetOnePromptResponseFormatJSONObject$Outbound = {
-  type: "json_object";
-};
 
-/** @internal */
-export const GetOnePromptResponseFormatJSONObject$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormatJSONObject$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormatJSONObject
-> = z.object({
-  type: z.literal("json_object"),
-});
-
-export function getOnePromptResponseFormatJSONObjectToJSON(
-  getOnePromptResponseFormatJSONObject: GetOnePromptResponseFormatJSONObject,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormatJSONObject$outboundSchema.parse(
-      getOnePromptResponseFormatJSONObject,
-    ),
-  );
-}
 export function getOnePromptResponseFormatJSONObjectFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormatJSONObject, SDKValidationError> {
@@ -2680,29 +2049,7 @@ export const GetOnePromptResponseFormatText$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("text"),
 });
-/** @internal */
-export type GetOnePromptResponseFormatText$Outbound = {
-  type: "text";
-};
 
-/** @internal */
-export const GetOnePromptResponseFormatText$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormatText$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormatText
-> = z.object({
-  type: z.literal("text"),
-});
-
-export function getOnePromptResponseFormatTextToJSON(
-  getOnePromptResponseFormatText: GetOnePromptResponseFormatText,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormatText$outboundSchema.parse(
-      getOnePromptResponseFormatText,
-    ),
-  );
-}
 export function getOnePromptResponseFormatTextFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormatText, SDKValidationError> {
@@ -2723,30 +2070,7 @@ export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
   z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
 ]);
-/** @internal */
-export type GetOnePromptResponseFormat$Outbound =
-  | GetOnePromptResponseFormatText$Outbound
-  | GetOnePromptResponseFormatJSONObject$Outbound
-  | GetOnePromptResponseFormatPromptsJSONSchema$Outbound;
 
-/** @internal */
-export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
-  GetOnePromptResponseFormat$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptResponseFormat
-> = z.union([
-  z.lazy(() => GetOnePromptResponseFormatText$outboundSchema),
-  z.lazy(() => GetOnePromptResponseFormatJSONObject$outboundSchema),
-  z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema),
-]);
-
-export function getOnePromptResponseFormatToJSON(
-  getOnePromptResponseFormat: GetOnePromptResponseFormat,
-): string {
-  return JSON.stringify(
-    GetOnePromptResponseFormat$outboundSchema.parse(getOnePromptResponseFormat),
-  );
-}
 export function getOnePromptResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptResponseFormat, SDKValidationError> {
@@ -2761,10 +2085,6 @@ export function getOnePromptResponseFormatFromJSON(
 export const GetOnePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptReasoningEffort
 > = z.nativeEnum(GetOnePromptReasoningEffort);
-/** @internal */
-export const GetOnePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptReasoningEffort
-> = GetOnePromptReasoningEffort$inboundSchema;
 
 /** @internal */
 export const GetOnePromptStop$inboundSchema: z.ZodType<
@@ -2772,23 +2092,7 @@ export const GetOnePromptStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-/** @internal */
-export type GetOnePromptStop$Outbound = string | Array<string>;
 
-/** @internal */
-export const GetOnePromptStop$outboundSchema: z.ZodType<
-  GetOnePromptStop$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptStop
-> = z.union([z.string(), z.array(z.string())]);
-
-export function getOnePromptStopToJSON(
-  getOnePromptStop: GetOnePromptStop,
-): string {
-  return JSON.stringify(
-    GetOnePromptStop$outboundSchema.parse(getOnePromptStop),
-  );
-}
 export function getOnePromptStopFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptStop, SDKValidationError> {
@@ -2811,31 +2115,7 @@ export const GetOnePromptStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-/** @internal */
-export type GetOnePromptStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
 
-/** @internal */
-export const GetOnePromptStreamOptions$outboundSchema: z.ZodType<
-  GetOnePromptStreamOptions$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function getOnePromptStreamOptionsToJSON(
-  getOnePromptStreamOptions: GetOnePromptStreamOptions,
-): string {
-  return JSON.stringify(
-    GetOnePromptStreamOptions$outboundSchema.parse(getOnePromptStreamOptions),
-  );
-}
 export function getOnePromptStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptStreamOptions, SDKValidationError> {
@@ -2855,28 +2135,7 @@ export const GetOnePromptThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
-/** @internal */
-export type GetOnePromptThinking$Outbound =
-  | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
 
-/** @internal */
-export const GetOnePromptThinking$outboundSchema: z.ZodType<
-  GetOnePromptThinking$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-]);
-
-export function getOnePromptThinkingToJSON(
-  getOnePromptThinking: GetOnePromptThinking,
-): string {
-  return JSON.stringify(
-    GetOnePromptThinking$outboundSchema.parse(getOnePromptThinking),
-  );
-}
 export function getOnePromptThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptThinking, SDKValidationError> {
@@ -2891,10 +2150,6 @@ export function getOnePromptThinkingFromJSON(
 export const GetOnePromptToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptToolChoiceType
 > = z.nativeEnum(GetOnePromptToolChoiceType);
-/** @internal */
-export const GetOnePromptToolChoiceType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptToolChoiceType
-> = GetOnePromptToolChoiceType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptToolChoiceFunction$inboundSchema: z.ZodType<
@@ -2904,29 +2159,7 @@ export const GetOnePromptToolChoiceFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
 });
-/** @internal */
-export type GetOnePromptToolChoiceFunction$Outbound = {
-  name: string;
-};
 
-/** @internal */
-export const GetOnePromptToolChoiceFunction$outboundSchema: z.ZodType<
-  GetOnePromptToolChoiceFunction$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
-
-export function getOnePromptToolChoiceFunctionToJSON(
-  getOnePromptToolChoiceFunction: GetOnePromptToolChoiceFunction,
-): string {
-  return JSON.stringify(
-    GetOnePromptToolChoiceFunction$outboundSchema.parse(
-      getOnePromptToolChoiceFunction,
-    ),
-  );
-}
 export function getOnePromptToolChoiceFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptToolChoiceFunction, SDKValidationError> {
@@ -2946,29 +2179,7 @@ export const GetOnePromptToolChoice2$inboundSchema: z.ZodType<
   type: GetOnePromptToolChoiceType$inboundSchema.optional(),
   function: z.lazy(() => GetOnePromptToolChoiceFunction$inboundSchema),
 });
-/** @internal */
-export type GetOnePromptToolChoice2$Outbound = {
-  type?: string | undefined;
-  function: GetOnePromptToolChoiceFunction$Outbound;
-};
 
-/** @internal */
-export const GetOnePromptToolChoice2$outboundSchema: z.ZodType<
-  GetOnePromptToolChoice2$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptToolChoice2
-> = z.object({
-  type: GetOnePromptToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => GetOnePromptToolChoiceFunction$outboundSchema),
-});
-
-export function getOnePromptToolChoice2ToJSON(
-  getOnePromptToolChoice2: GetOnePromptToolChoice2,
-): string {
-  return JSON.stringify(
-    GetOnePromptToolChoice2$outboundSchema.parse(getOnePromptToolChoice2),
-  );
-}
 export function getOnePromptToolChoice2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptToolChoice2, SDKValidationError> {
@@ -2983,10 +2194,6 @@ export function getOnePromptToolChoice2FromJSON(
 export const GetOnePromptToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptToolChoice1
 > = z.nativeEnum(GetOnePromptToolChoice1);
-/** @internal */
-export const GetOnePromptToolChoice1$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptToolChoice1
-> = GetOnePromptToolChoice1$inboundSchema;
 
 /** @internal */
 export const GetOnePromptToolChoice$inboundSchema: z.ZodType<
@@ -2997,28 +2204,7 @@ export const GetOnePromptToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
   GetOnePromptToolChoice1$inboundSchema,
 ]);
-/** @internal */
-export type GetOnePromptToolChoice$Outbound =
-  | GetOnePromptToolChoice2$Outbound
-  | string;
 
-/** @internal */
-export const GetOnePromptToolChoice$outboundSchema: z.ZodType<
-  GetOnePromptToolChoice$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptToolChoice
-> = z.union([
-  z.lazy(() => GetOnePromptToolChoice2$outboundSchema),
-  GetOnePromptToolChoice1$outboundSchema,
-]);
-
-export function getOnePromptToolChoiceToJSON(
-  getOnePromptToolChoice: GetOnePromptToolChoice,
-): string {
-  return JSON.stringify(
-    GetOnePromptToolChoice$outboundSchema.parse(getOnePromptToolChoice),
-  );
-}
 export function getOnePromptToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptToolChoice, SDKValidationError> {
@@ -3033,19 +2219,11 @@ export function getOnePromptToolChoiceFromJSON(
 export const GetOnePromptModalities$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptModalities
 > = z.nativeEnum(GetOnePromptModalities);
-/** @internal */
-export const GetOnePromptModalities$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptModalities
-> = GetOnePromptModalities$inboundSchema;
 
 /** @internal */
 export const GetOnePromptId1$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptId1
 > = z.nativeEnum(GetOnePromptId1);
-/** @internal */
-export const GetOnePromptId1$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptId1
-> = GetOnePromptId1$inboundSchema;
 
 /** @internal */
 export const GetOnePromptId$inboundSchema: z.ZodType<
@@ -3053,19 +2231,7 @@ export const GetOnePromptId$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([GetOnePromptId1$inboundSchema, z.string()]);
-/** @internal */
-export type GetOnePromptId$Outbound = string | string;
 
-/** @internal */
-export const GetOnePromptId$outboundSchema: z.ZodType<
-  GetOnePromptId$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptId
-> = z.union([GetOnePromptId1$outboundSchema, z.string()]);
-
-export function getOnePromptIdToJSON(getOnePromptId: GetOnePromptId): string {
-  return JSON.stringify(GetOnePromptId$outboundSchema.parse(getOnePromptId));
-}
 export function getOnePromptIdFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptId, SDKValidationError> {
@@ -3080,10 +2246,6 @@ export function getOnePromptIdFromJSON(
 export const GetOnePromptExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptExecuteOn
 > = z.nativeEnum(GetOnePromptExecuteOn);
-/** @internal */
-export const GetOnePromptExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptExecuteOn
-> = GetOnePromptExecuteOn$inboundSchema;
 
 /** @internal */
 export const GetOnePromptGuardrails$inboundSchema: z.ZodType<
@@ -3098,33 +2260,7 @@ export const GetOnePromptGuardrails$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type GetOnePromptGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
 
-/** @internal */
-export const GetOnePromptGuardrails$outboundSchema: z.ZodType<
-  GetOnePromptGuardrails$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptGuardrails
-> = z.object({
-  id: z.union([GetOnePromptId1$outboundSchema, z.string()]),
-  executeOn: GetOnePromptExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function getOnePromptGuardrailsToJSON(
-  getOnePromptGuardrails: GetOnePromptGuardrails,
-): string {
-  return JSON.stringify(
-    GetOnePromptGuardrails$outboundSchema.parse(getOnePromptGuardrails),
-  );
-}
 export function getOnePromptGuardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptGuardrails, SDKValidationError> {
@@ -3136,32 +2272,146 @@ export function getOnePromptGuardrailsFromJSON(
 }
 
 /** @internal */
+export const GetOnePromptFallbacks$inboundSchema: z.ZodType<
+  GetOnePromptFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function getOnePromptFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptRetry$inboundSchema: z.ZodType<
+  GetOnePromptRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function getOnePromptRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsType
+> = z.nativeEnum(GetOnePromptPromptsType);
+
+/** @internal */
+export const GetOnePromptCache$inboundSchema: z.ZodType<
+  GetOnePromptCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: GetOnePromptPromptsType$inboundSchema,
+});
+
+export function getOnePromptCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptLoadBalancerType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptLoadBalancerType
+> = z.nativeEnum(GetOnePromptLoadBalancerType);
+
+/** @internal */
+export const GetOnePromptLoadBalancer1$inboundSchema: z.ZodType<
+  GetOnePromptLoadBalancer1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePromptLoadBalancerType$inboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function getOnePromptLoadBalancer1FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptLoadBalancer1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptLoadBalancer1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptLoadBalancer1' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptLoadBalancer$inboundSchema: z.ZodType<
+  GetOnePromptLoadBalancer,
+  z.ZodTypeDef,
+  unknown
+> = z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema);
+
+export function getOnePromptLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptLoadBalancer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePromptTimeout$inboundSchema: z.ZodType<
+  GetOnePromptTimeout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  call_timeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_timeout": "callTimeout",
+  });
+});
+
+export function getOnePromptTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptTimeout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptTimeout' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOnePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
   GetOnePromptContentPromptsResponse2002,
   z.ZodTypeDef,
   unknown
 > = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type GetOnePromptContentPromptsResponse2002$Outbound =
-  components.TextContentPartSchema$Outbound;
 
-/** @internal */
-export const GetOnePromptContentPromptsResponse2002$outboundSchema: z.ZodType<
-  GetOnePromptContentPromptsResponse2002$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptContentPromptsResponse2002
-> = components.TextContentPartSchema$outboundSchema;
-
-export function getOnePromptContentPromptsResponse2002ToJSON(
-  getOnePromptContentPromptsResponse2002:
-    GetOnePromptContentPromptsResponse2002,
-): string {
-  return JSON.stringify(
-    GetOnePromptContentPromptsResponse2002$outboundSchema.parse(
-      getOnePromptContentPromptsResponse2002,
-    ),
-  );
-}
 export function getOnePromptContentPromptsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptContentPromptsResponse2002, SDKValidationError> {
@@ -3183,32 +2433,7 @@ export const GetOnePromptMessagesPromptsResponse200Content$inboundSchema:
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type GetOnePromptMessagesPromptsResponse200Content$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const GetOnePromptMessagesPromptsResponse200Content$outboundSchema:
-  z.ZodType<
-    GetOnePromptMessagesPromptsResponse200Content$Outbound,
-    z.ZodTypeDef,
-    GetOnePromptMessagesPromptsResponse200Content
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function getOnePromptMessagesPromptsResponse200ContentToJSON(
-  getOnePromptMessagesPromptsResponse200Content:
-    GetOnePromptMessagesPromptsResponse200Content,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesPromptsResponse200Content$outboundSchema.parse(
-      getOnePromptMessagesPromptsResponse200Content,
-    ),
-  );
-}
 export function getOnePromptMessagesPromptsResponse200ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3229,19 +2454,11 @@ export function getOnePromptMessagesPromptsResponse200ContentFromJSON(
 export const GetOnePromptMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesPromptsType
 > = z.nativeEnum(GetOnePromptMessagesPromptsType);
-/** @internal */
-export const GetOnePromptMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptMessagesPromptsType
-> = GetOnePromptMessagesPromptsType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptMessagesTtl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesTtl
 > = z.nativeEnum(GetOnePromptMessagesTtl);
-/** @internal */
-export const GetOnePromptMessagesTtl$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptMessagesTtl
-> = GetOnePromptMessagesTtl$inboundSchema;
 
 /** @internal */
 export const GetOnePromptMessagesCacheControl$inboundSchema: z.ZodType<
@@ -3252,31 +2469,7 @@ export const GetOnePromptMessagesCacheControl$inboundSchema: z.ZodType<
   type: GetOnePromptMessagesPromptsType$inboundSchema,
   ttl: GetOnePromptMessagesTtl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type GetOnePromptMessagesCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const GetOnePromptMessagesCacheControl$outboundSchema: z.ZodType<
-  GetOnePromptMessagesCacheControl$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesCacheControl
-> = z.object({
-  type: GetOnePromptMessagesPromptsType$outboundSchema,
-  ttl: GetOnePromptMessagesTtl$outboundSchema.default("5m"),
-});
-
-export function getOnePromptMessagesCacheControlToJSON(
-  getOnePromptMessagesCacheControl: GetOnePromptMessagesCacheControl,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesCacheControl$outboundSchema.parse(
-      getOnePromptMessagesCacheControl,
-    ),
-  );
-}
 export function getOnePromptMessagesCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesCacheControl, SDKValidationError> {
@@ -3307,44 +2500,7 @@ export const GetOnePromptMessagesToolMessage$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type GetOnePromptMessagesToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?: GetOnePromptMessagesCacheControl$Outbound | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessagesToolMessage$outboundSchema: z.ZodType<
-  GetOnePromptMessagesToolMessage$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => GetOnePromptMessagesCacheControl$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
-
-export function getOnePromptMessagesToolMessageToJSON(
-  getOnePromptMessagesToolMessage: GetOnePromptMessagesToolMessage,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesToolMessage$outboundSchema.parse(
-      getOnePromptMessagesToolMessage,
-    ),
-  );
-}
 export function getOnePromptMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesToolMessage, SDKValidationError> {
@@ -3368,36 +2524,7 @@ export const GetOnePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   components.ReasoningPartSchema$inboundSchema,
   components.RedactedReasoningPartSchema$inboundSchema,
 ]);
-/** @internal */
-export type GetOnePromptContentPromptsResponse2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
 
-/** @internal */
-export const GetOnePromptContentPromptsResponse2$outboundSchema: z.ZodType<
-  GetOnePromptContentPromptsResponse2$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptContentPromptsResponse2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
-
-export function getOnePromptContentPromptsResponse2ToJSON(
-  getOnePromptContentPromptsResponse2: GetOnePromptContentPromptsResponse2,
-): string {
-  return JSON.stringify(
-    GetOnePromptContentPromptsResponse2$outboundSchema.parse(
-      getOnePromptContentPromptsResponse2,
-    ),
-  );
-}
 export function getOnePromptContentPromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptContentPromptsResponse2, SDKValidationError> {
@@ -3425,46 +2552,7 @@ export const GetOnePromptMessagesPromptsResponseContent$inboundSchema:
         ]),
       ),
     ]);
-/** @internal */
-export type GetOnePromptMessagesPromptsResponseContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
-  >;
 
-/** @internal */
-export const GetOnePromptMessagesPromptsResponseContent$outboundSchema:
-  z.ZodType<
-    GetOnePromptMessagesPromptsResponseContent$Outbound,
-    z.ZodTypeDef,
-    GetOnePromptMessagesPromptsResponseContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
-
-export function getOnePromptMessagesPromptsResponseContentToJSON(
-  getOnePromptMessagesPromptsResponseContent:
-    GetOnePromptMessagesPromptsResponseContent,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesPromptsResponseContent$outboundSchema.parse(
-      getOnePromptMessagesPromptsResponseContent,
-    ),
-  );
-}
 export function getOnePromptMessagesPromptsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3489,27 +2577,7 @@ export const GetOnePromptMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-/** @internal */
-export type GetOnePromptMessagesAudio$Outbound = {
-  id: string;
-};
 
-/** @internal */
-export const GetOnePromptMessagesAudio$outboundSchema: z.ZodType<
-  GetOnePromptMessagesAudio$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesAudio
-> = z.object({
-  id: z.string(),
-});
-
-export function getOnePromptMessagesAudioToJSON(
-  getOnePromptMessagesAudio: GetOnePromptMessagesAudio,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesAudio$outboundSchema.parse(getOnePromptMessagesAudio),
-  );
-}
 export function getOnePromptMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesAudio, SDKValidationError> {
@@ -3524,10 +2592,6 @@ export function getOnePromptMessagesAudioFromJSON(
 export const GetOnePromptMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesType
 > = z.nativeEnum(GetOnePromptMessagesType);
-/** @internal */
-export const GetOnePromptMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptMessagesType
-> = GetOnePromptMessagesType$inboundSchema;
 
 /** @internal */
 export const GetOnePromptMessagesFunction$inboundSchema: z.ZodType<
@@ -3538,31 +2602,7 @@ export const GetOnePromptMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type GetOnePromptMessagesFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessagesFunction$outboundSchema: z.ZodType<
-  GetOnePromptMessagesFunction$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function getOnePromptMessagesFunctionToJSON(
-  getOnePromptMessagesFunction: GetOnePromptMessagesFunction,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesFunction$outboundSchema.parse(
-      getOnePromptMessagesFunction,
-    ),
-  );
-}
 export function getOnePromptMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesFunction, SDKValidationError> {
@@ -3588,39 +2628,7 @@ export const GetOnePromptMessagesToolCalls$inboundSchema: z.ZodType<
     "thought_signature": "thoughtSignature",
   });
 });
-/** @internal */
-export type GetOnePromptMessagesToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: GetOnePromptMessagesFunction$Outbound;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessagesToolCalls$outboundSchema: z.ZodType<
-  GetOnePromptMessagesToolCalls$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: GetOnePromptMessagesType$outboundSchema,
-  function: z.lazy(() => GetOnePromptMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function getOnePromptMessagesToolCallsToJSON(
-  getOnePromptMessagesToolCalls: GetOnePromptMessagesToolCalls,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesToolCalls$outboundSchema.parse(
-      getOnePromptMessagesToolCalls,
-    ),
-  );
-}
 export function getOnePromptMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesToolCalls, SDKValidationError> {
@@ -3664,68 +2672,7 @@ export const GetOnePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
     "tool_calls": "toolCalls",
   });
 });
-/** @internal */
-export type GetOnePromptMessagesAssistantMessage$Outbound = {
-  content?:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.RefusalPartSchema$Outbound
-      | components.ReasoningPartSchema$Outbound
-      | components.RedactedReasoningPartSchema$Outbound
-    >
-    | null
-    | undefined;
-  refusal?: string | null | undefined;
-  role: "assistant";
-  name?: string | undefined;
-  audio?: GetOnePromptMessagesAudio$Outbound | null | undefined;
-  tool_calls?: Array<GetOnePromptMessagesToolCalls$Outbound> | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessagesAssistantMessage$outboundSchema: z.ZodType<
-  GetOnePromptMessagesAssistantMessage$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesAssistantMessage
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$outboundSchema,
-          components.ReasoningPartSchema$outboundSchema,
-          components.RedactedReasoningPartSchema$outboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => GetOnePromptMessagesAudio$outboundSchema))
-    .optional(),
-  toolCalls: z.array(z.lazy(() => GetOnePromptMessagesToolCalls$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-  });
-});
-
-export function getOnePromptMessagesAssistantMessageToJSON(
-  getOnePromptMessagesAssistantMessage: GetOnePromptMessagesAssistantMessage,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesAssistantMessage$outboundSchema.parse(
-      getOnePromptMessagesAssistantMessage,
-    ),
-  );
-}
 export function getOnePromptMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesAssistantMessage, SDKValidationError> {
@@ -3741,19 +2688,11 @@ export function getOnePromptMessagesAssistantMessageFromJSON(
 export const GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> = z
     .nativeEnum(GetOnePrompt2PromptsResponse200ApplicationJSONType);
-/** @internal */
-export const GetOnePrompt2PromptsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> =
-    GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const GetOnePrompt2Ttl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePrompt2Ttl
 > = z.nativeEnum(GetOnePrompt2Ttl);
-/** @internal */
-export const GetOnePrompt2Ttl$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePrompt2Ttl
-> = GetOnePrompt2Ttl$inboundSchema;
 
 /** @internal */
 export const GetOnePrompt2CacheControl$inboundSchema: z.ZodType<
@@ -3764,29 +2703,7 @@ export const GetOnePrompt2CacheControl$inboundSchema: z.ZodType<
   type: GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
   ttl: GetOnePrompt2Ttl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type GetOnePrompt2CacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const GetOnePrompt2CacheControl$outboundSchema: z.ZodType<
-  GetOnePrompt2CacheControl$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt2CacheControl
-> = z.object({
-  type: GetOnePrompt2PromptsResponse200ApplicationJSONType$outboundSchema,
-  ttl: GetOnePrompt2Ttl$outboundSchema.default("5m"),
-});
-
-export function getOnePrompt2CacheControlToJSON(
-  getOnePrompt2CacheControl: GetOnePrompt2CacheControl,
-): string {
-  return JSON.stringify(
-    GetOnePrompt2CacheControl$outboundSchema.parse(getOnePrompt2CacheControl),
-  );
-}
 export function getOnePrompt2CacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt2CacheControl, SDKValidationError> {
@@ -3812,32 +2729,7 @@ export const GetOnePrompt24$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type GetOnePrompt24$Outbound = {
-  type: "file";
-  cache_control?: GetOnePrompt2CacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
-};
 
-/** @internal */
-export const GetOnePrompt24$outboundSchema: z.ZodType<
-  GetOnePrompt24$Outbound,
-  z.ZodTypeDef,
-  GetOnePrompt24
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => GetOnePrompt2CacheControl$outboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function getOnePrompt24ToJSON(getOnePrompt24: GetOnePrompt24): string {
-  return JSON.stringify(GetOnePrompt24$outboundSchema.parse(getOnePrompt24));
-}
 export function getOnePrompt24FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePrompt24, SDKValidationError> {
@@ -3861,36 +2753,7 @@ export const GetOnePromptContentPrompts2$inboundSchema: z.ZodType<
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => GetOnePrompt24$inboundSchema),
 ]);
-/** @internal */
-export type GetOnePromptContentPrompts2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | GetOnePrompt24$Outbound;
 
-/** @internal */
-export const GetOnePromptContentPrompts2$outboundSchema: z.ZodType<
-  GetOnePromptContentPrompts2$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptContentPrompts2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => GetOnePrompt24$outboundSchema),
-]);
-
-export function getOnePromptContentPrompts2ToJSON(
-  getOnePromptContentPrompts2: GetOnePromptContentPrompts2,
-): string {
-  return JSON.stringify(
-    GetOnePromptContentPrompts2$outboundSchema.parse(
-      getOnePromptContentPrompts2,
-    ),
-  );
-}
 export function getOnePromptContentPrompts2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptContentPrompts2, SDKValidationError> {
@@ -3919,44 +2782,7 @@ export const GetOnePromptMessagesPromptsContent$inboundSchema: z.ZodType<
     ]),
   ),
 ]);
-/** @internal */
-export type GetOnePromptMessagesPromptsContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.ImageContentPartSchema$Outbound
-    | components.AudioContentPartSchema$Outbound
-    | GetOnePrompt24$Outbound
-  >;
 
-/** @internal */
-export const GetOnePromptMessagesPromptsContent$outboundSchema: z.ZodType<
-  GetOnePromptMessagesPromptsContent$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesPromptsContent
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$outboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => GetOnePrompt24$outboundSchema),
-    ]),
-  ),
-]);
-
-export function getOnePromptMessagesPromptsContentToJSON(
-  getOnePromptMessagesPromptsContent: GetOnePromptMessagesPromptsContent,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesPromptsContent$outboundSchema.parse(
-      getOnePromptMessagesPromptsContent,
-    ),
-  );
-}
 export function getOnePromptMessagesPromptsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesPromptsContent, SDKValidationError> {
@@ -3990,52 +2816,7 @@ export const GetOnePromptMessagesUserMessage$inboundSchema: z.ZodType<
     ),
   ]),
 });
-/** @internal */
-export type GetOnePromptMessagesUserMessage$Outbound = {
-  role: "user";
-  name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | GetOnePrompt24$Outbound
-    >;
-};
 
-/** @internal */
-export const GetOnePromptMessagesUserMessage$outboundSchema: z.ZodType<
-  GetOnePromptMessagesUserMessage$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => GetOnePrompt24$outboundSchema),
-      ]),
-    ),
-  ]),
-});
-
-export function getOnePromptMessagesUserMessageToJSON(
-  getOnePromptMessagesUserMessage: GetOnePromptMessagesUserMessage,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesUserMessage$outboundSchema.parse(
-      getOnePromptMessagesUserMessage,
-    ),
-  );
-}
 export function getOnePromptMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesUserMessage, SDKValidationError> {
@@ -4055,30 +2836,7 @@ export const GetOnePromptMessagesContent$inboundSchema: z.ZodType<
   z.string(),
   z.array(components.TextContentPartSchema$inboundSchema),
 ]);
-/** @internal */
-export type GetOnePromptMessagesContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const GetOnePromptMessagesContent$outboundSchema: z.ZodType<
-  GetOnePromptMessagesContent$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
-
-export function getOnePromptMessagesContentToJSON(
-  getOnePromptMessagesContent: GetOnePromptMessagesContent,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesContent$outboundSchema.parse(
-      getOnePromptMessagesContent,
-    ),
-  );
-}
 export function getOnePromptMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesContent, SDKValidationError> {
@@ -4102,36 +2860,7 @@ export const GetOnePromptMessagesSystemMessage$inboundSchema: z.ZodType<
   ]),
   name: z.string().optional(),
 });
-/** @internal */
-export type GetOnePromptMessagesSystemMessage$Outbound = {
-  role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMessagesSystemMessage$outboundSchema: z.ZodType<
-  GetOnePromptMessagesSystemMessage$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMessagesSystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
-
-export function getOnePromptMessagesSystemMessageToJSON(
-  getOnePromptMessagesSystemMessage: GetOnePromptMessagesSystemMessage,
-): string {
-  return JSON.stringify(
-    GetOnePromptMessagesSystemMessage$outboundSchema.parse(
-      getOnePromptMessagesSystemMessage,
-    ),
-  );
-}
 export function getOnePromptMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMessagesSystemMessage, SDKValidationError> {
@@ -4153,34 +2882,7 @@ export const GetOnePromptPromptsMessages$inboundSchema: z.ZodType<
   z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
   z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
 ]);
-/** @internal */
-export type GetOnePromptPromptsMessages$Outbound =
-  | GetOnePromptMessagesSystemMessage$Outbound
-  | GetOnePromptMessagesUserMessage$Outbound
-  | GetOnePromptMessagesAssistantMessage$Outbound
-  | GetOnePromptMessagesToolMessage$Outbound;
 
-/** @internal */
-export const GetOnePromptPromptsMessages$outboundSchema: z.ZodType<
-  GetOnePromptPromptsMessages$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptPromptsMessages
-> = z.union([
-  z.lazy(() => GetOnePromptMessagesSystemMessage$outboundSchema),
-  z.lazy(() => GetOnePromptMessagesUserMessage$outboundSchema),
-  z.lazy(() => GetOnePromptMessagesAssistantMessage$outboundSchema),
-  z.lazy(() => GetOnePromptMessagesToolMessage$outboundSchema),
-]);
-
-export function getOnePromptPromptsMessagesToJSON(
-  getOnePromptPromptsMessages: GetOnePromptPromptsMessages,
-): string {
-  return JSON.stringify(
-    GetOnePromptPromptsMessages$outboundSchema.parse(
-      getOnePromptPromptsMessages,
-    ),
-  );
-}
 export function getOnePromptPromptsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptPromptsMessages, SDKValidationError> {
@@ -4233,6 +2935,13 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$inboundSchema))
     .optional(),
+  fallbacks: z.array(z.lazy(() => GetOnePromptFallbacks$inboundSchema))
+    .optional(),
+  retry: z.lazy(() => GetOnePromptRetry$inboundSchema).optional(),
+  cache: z.lazy(() => GetOnePromptCache$inboundSchema).optional(),
+  load_balancer: z.array(z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema))
+    .optional(),
+  timeout: z.lazy(() => GetOnePromptTimeout$inboundSchema).optional(),
   messages: z.array(
     z.union([
       z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
@@ -4257,127 +2966,10 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-  });
-});
-/** @internal */
-export type GetOnePromptPromptField$Outbound = {
-  audio?: GetOnePromptAudio$Outbound | null | undefined;
-  frequency_penalty?: number | null | undefined;
-  max_tokens?: number | null | undefined;
-  max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
-  presence_penalty?: number | null | undefined;
-  response_format?:
-    | GetOnePromptResponseFormatText$Outbound
-    | GetOnePromptResponseFormatJSONObject$Outbound
-    | GetOnePromptResponseFormatPromptsJSONSchema$Outbound
-    | undefined;
-  reasoning_effort?: string | undefined;
-  verbosity?: string | undefined;
-  seed?: number | null | undefined;
-  stop?: string | Array<string> | null | undefined;
-  stream_options?: GetOnePromptStreamOptions$Outbound | null | undefined;
-  thinking?:
-    | components.ThinkingConfigDisabledSchema$Outbound
-    | components.ThinkingConfigEnabledSchema$Outbound
-    | undefined;
-  temperature?: number | null | undefined;
-  top_p?: number | null | undefined;
-  top_k?: number | null | undefined;
-  tool_choice?: GetOnePromptToolChoice2$Outbound | string | undefined;
-  parallel_tool_calls?: boolean | undefined;
-  modalities?: Array<string> | null | undefined;
-  guardrails?: Array<GetOnePromptGuardrails$Outbound> | undefined;
-  messages?:
-    | Array<
-      | GetOnePromptMessagesSystemMessage$Outbound
-      | GetOnePromptMessagesUserMessage$Outbound
-      | GetOnePromptMessagesAssistantMessage$Outbound
-      | GetOnePromptMessagesToolMessage$Outbound
-    >
-    | undefined;
-  model?: string | null | undefined;
-  version?: string | undefined;
-};
-
-/** @internal */
-export const GetOnePromptPromptField$outboundSchema: z.ZodType<
-  GetOnePromptPromptField$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptPromptField
-> = z.object({
-  audio: z.nullable(z.lazy(() => GetOnePromptAudio$outboundSchema)).optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => GetOnePromptResponseFormatText$outboundSchema),
-    z.lazy(() => GetOnePromptResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$outboundSchema),
-  ]).optional(),
-  reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => GetOnePromptStreamOptions$outboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => GetOnePromptToolChoice2$outboundSchema),
-    GetOnePromptToolChoice1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(GetOnePromptModalities$outboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$outboundSchema))
-    .optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => GetOnePromptMessagesSystemMessage$outboundSchema),
-      z.lazy(() => GetOnePromptMessagesUserMessage$outboundSchema),
-      z.lazy(() => GetOnePromptMessagesAssistantMessage$outboundSchema),
-      z.lazy(() => GetOnePromptMessagesToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
+    "load_balancer": "loadBalancer",
   });
 });
 
-export function getOnePromptPromptFieldToJSON(
-  getOnePromptPromptField: GetOnePromptPromptField,
-): string {
-  return JSON.stringify(
-    GetOnePromptPromptField$outboundSchema.parse(getOnePromptPromptField),
-  );
-}
 export function getOnePromptPromptFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptPromptField, SDKValidationError> {
@@ -4392,19 +2984,11 @@ export function getOnePromptPromptFieldFromJSON(
 export const GetOnePromptUseCases$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptUseCases
 > = z.nativeEnum(GetOnePromptUseCases);
-/** @internal */
-export const GetOnePromptUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptUseCases
-> = GetOnePromptUseCases$inboundSchema;
 
 /** @internal */
 export const GetOnePromptLanguage$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptLanguage
 > = z.nativeEnum(GetOnePromptLanguage);
-/** @internal */
-export const GetOnePromptLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptLanguage
-> = GetOnePromptLanguage$inboundSchema;
 
 /** @internal */
 export const GetOnePromptMetadata$inboundSchema: z.ZodType<
@@ -4419,33 +3003,7 @@ export const GetOnePromptMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-/** @internal */
-export type GetOnePromptMetadata$Outbound = {
-  use_cases?: Array<string> | undefined;
-  language?: string | null | undefined;
-};
 
-/** @internal */
-export const GetOnePromptMetadata$outboundSchema: z.ZodType<
-  GetOnePromptMetadata$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptMetadata
-> = z.object({
-  useCases: z.array(GetOnePromptUseCases$outboundSchema).optional(),
-  language: z.nullable(GetOnePromptLanguage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    useCases: "use_cases",
-  });
-});
-
-export function getOnePromptMetadataToJSON(
-  getOnePromptMetadata: GetOnePromptMetadata,
-): string {
-  return JSON.stringify(
-    GetOnePromptMetadata$outboundSchema.parse(getOnePromptMetadata),
-  );
-}
 export function getOnePromptMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptMetadata, SDKValidationError> {
@@ -4486,61 +3044,7 @@ export const GetOnePromptPrompt$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-/** @internal */
-export type GetOnePromptPrompt$Outbound = {
-  _id: string;
-  type: string;
-  owner: string;
-  domain_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  display_name: string;
-  description?: string | null | undefined;
-  prompt_config?: GetOnePromptPromptConfig$Outbound | undefined;
-  prompt: GetOnePromptPromptField$Outbound;
-  metadata?: GetOnePromptMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const GetOnePromptPrompt$outboundSchema: z.ZodType<
-  GetOnePromptPrompt$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptPrompt
-> = z.object({
-  id: z.string(),
-  type: GetOnePromptType$outboundSchema,
-  owner: z.string(),
-  domainId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => GetOnePromptPromptConfig$outboundSchema)
-    .optional(),
-  prompt: z.lazy(() => GetOnePromptPromptField$outboundSchema),
-  metadata: z.lazy(() => GetOnePromptMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    displayName: "display_name",
-    promptConfig: "prompt_config",
-  });
-});
-
-export function getOnePromptPromptToJSON(
-  getOnePromptPrompt: GetOnePromptPrompt,
-): string {
-  return JSON.stringify(
-    GetOnePromptPrompt$outboundSchema.parse(getOnePromptPrompt),
-  );
-}
 export function getOnePromptPromptFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOnePromptPrompt, SDKValidationError> {

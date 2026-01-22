@@ -103,7 +103,7 @@ export type ListIdentitiesData = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
   metrics: ListIdentitiesMetrics;
 };
 
@@ -116,14 +116,6 @@ export type ListIdentitiesResponseBody = {
   hasMore: boolean;
 };
 
-/** @internal */
-export const QueryParamFilterBy$inboundSchema: z.ZodType<
-  QueryParamFilterBy,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tags: z.array(z.string()).optional(),
-});
 /** @internal */
 export type QueryParamFilterBy$Outbound = {
   tags?: Array<string> | undefined;
@@ -145,36 +137,7 @@ export function queryParamFilterByToJSON(
     QueryParamFilterBy$outboundSchema.parse(queryParamFilterBy),
   );
 }
-export function queryParamFilterByFromJSON(
-  jsonString: string,
-): SafeParseResult<QueryParamFilterBy, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => QueryParamFilterBy$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamFilterBy' from JSON`,
-  );
-}
 
-/** @internal */
-export const ListIdentitiesRequest$inboundSchema: z.ZodType<
-  ListIdentitiesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  search: z.string().optional(),
-  filter_by: z.lazy(() => QueryParamFilterBy$inboundSchema).optional(),
-  include_metrics: z.nullable(z.boolean().default(false)),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-    "filter_by": "filterBy",
-    "include_metrics": "includeMetrics",
-  });
-});
 /** @internal */
 export type ListIdentitiesRequest$Outbound = {
   limit: number;
@@ -213,24 +176,11 @@ export function listIdentitiesRequestToJSON(
     ListIdentitiesRequest$outboundSchema.parse(listIdentitiesRequest),
   );
 }
-export function listIdentitiesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListIdentitiesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListIdentitiesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListIdentitiesRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListIdentitiesObject$inboundSchema: z.ZodNativeEnum<
   typeof ListIdentitiesObject
 > = z.nativeEnum(ListIdentitiesObject);
-/** @internal */
-export const ListIdentitiesObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListIdentitiesObject
-> = ListIdentitiesObject$inboundSchema;
 
 /** @internal */
 export const ListIdentitiesMetrics$inboundSchema: z.ZodType<
@@ -250,40 +200,7 @@ export const ListIdentitiesMetrics$inboundSchema: z.ZodType<
     "error_rate": "errorRate",
   });
 });
-/** @internal */
-export type ListIdentitiesMetrics$Outbound = {
-  total_cost: number;
-  total_tokens: number;
-  total_requests: number;
-  error_rate: number;
-};
 
-/** @internal */
-export const ListIdentitiesMetrics$outboundSchema: z.ZodType<
-  ListIdentitiesMetrics$Outbound,
-  z.ZodTypeDef,
-  ListIdentitiesMetrics
-> = z.object({
-  totalCost: z.number(),
-  totalTokens: z.number(),
-  totalRequests: z.number(),
-  errorRate: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    totalCost: "total_cost",
-    totalTokens: "total_tokens",
-    totalRequests: "total_requests",
-    errorRate: "error_rate",
-  });
-});
-
-export function listIdentitiesMetricsToJSON(
-  listIdentitiesMetrics: ListIdentitiesMetrics,
-): string {
-  return JSON.stringify(
-    ListIdentitiesMetrics$outboundSchema.parse(listIdentitiesMetrics),
-  );
-}
 export function listIdentitiesMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListIdentitiesMetrics, SDKValidationError> {
@@ -310,7 +227,7 @@ export const ListIdentitiesData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:31.576Z",
+    "2026-01-22T11:24:22.432Z",
   ).transform(v => new Date(v)),
   metrics: z.lazy(() => ListIdentitiesMetrics$inboundSchema),
 }).transform((v) => {
@@ -321,53 +238,7 @@ export const ListIdentitiesData$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-/** @internal */
-export type ListIdentitiesData$Outbound = {
-  _id: string;
-  external_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-  metrics: ListIdentitiesMetrics$Outbound;
-};
 
-/** @internal */
-export const ListIdentitiesData$outboundSchema: z.ZodType<
-  ListIdentitiesData$Outbound,
-  z.ZodTypeDef,
-  ListIdentitiesData
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatarUrl: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-    .transform(v => v.toISOString()),
-  metrics: z.lazy(() => ListIdentitiesMetrics$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    externalId: "external_id",
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
-
-export function listIdentitiesDataToJSON(
-  listIdentitiesData: ListIdentitiesData,
-): string {
-  return JSON.stringify(
-    ListIdentitiesData$outboundSchema.parse(listIdentitiesData),
-  );
-}
 export function listIdentitiesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListIdentitiesData, SDKValidationError> {
@@ -392,35 +263,7 @@ export const ListIdentitiesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListIdentitiesResponseBody$Outbound = {
-  object: string;
-  data: Array<ListIdentitiesData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListIdentitiesResponseBody$outboundSchema: z.ZodType<
-  ListIdentitiesResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListIdentitiesResponseBody
-> = z.object({
-  object: ListIdentitiesObject$outboundSchema,
-  data: z.array(z.lazy(() => ListIdentitiesData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listIdentitiesResponseBodyToJSON(
-  listIdentitiesResponseBody: ListIdentitiesResponseBody,
-): string {
-  return JSON.stringify(
-    ListIdentitiesResponseBody$outboundSchema.parse(listIdentitiesResponseBody),
-  );
-}
 export function listIdentitiesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListIdentitiesResponseBody, SDKValidationError> {

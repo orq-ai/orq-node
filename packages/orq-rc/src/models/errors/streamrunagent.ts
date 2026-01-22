@@ -49,19 +49,3 @@ export const StreamRunAgentResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type StreamRunAgentResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const StreamRunAgentResponseBody$outboundSchema: z.ZodType<
-  StreamRunAgentResponseBody$Outbound,
-  z.ZodTypeDef,
-  StreamRunAgentResponseBody
-> = z.instanceof(StreamRunAgentResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

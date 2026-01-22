@@ -132,7 +132,7 @@ export type CreateDatasourceResponseBody = {
   /**
    * The unique identifier of the data source
    */
-  id?: string | undefined;
+  id: string;
   /**
    * The display name of the datasource. Normally the name of the uploaded file
    */
@@ -173,21 +173,6 @@ export type CreateDatasourceResponseBody = {
 };
 
 /** @internal */
-export const ChunkingConfiguration2$inboundSchema: z.ZodType<
-  ChunkingConfiguration2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("advanced"),
-  chunk_max_characters: z.number().default(500),
-  chunk_overlap: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "chunk_max_characters": "chunkMaxCharacters",
-    "chunk_overlap": "chunkOverlap",
-  });
-});
-/** @internal */
 export type ChunkingConfiguration2$Outbound = {
   type: "advanced";
   chunk_max_characters: number;
@@ -217,24 +202,7 @@ export function chunkingConfiguration2ToJSON(
     ChunkingConfiguration2$outboundSchema.parse(chunkingConfiguration2),
   );
 }
-export function chunkingConfiguration2FromJSON(
-  jsonString: string,
-): SafeParseResult<ChunkingConfiguration2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChunkingConfiguration2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkingConfiguration2' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChunkingConfiguration1$inboundSchema: z.ZodType<
-  ChunkingConfiguration1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("default"),
-});
 /** @internal */
 export type ChunkingConfiguration1$Outbound = {
   type: "default";
@@ -256,25 +224,7 @@ export function chunkingConfiguration1ToJSON(
     ChunkingConfiguration1$outboundSchema.parse(chunkingConfiguration1),
   );
 }
-export function chunkingConfiguration1FromJSON(
-  jsonString: string,
-): SafeParseResult<ChunkingConfiguration1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChunkingConfiguration1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkingConfiguration1' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChunkingConfiguration$inboundSchema: z.ZodType<
-  ChunkingConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ChunkingConfiguration1$inboundSchema),
-  z.lazy(() => ChunkingConfiguration2$inboundSchema),
-]);
 /** @internal */
 export type ChunkingConfiguration$Outbound =
   | ChunkingConfiguration1$Outbound
@@ -297,42 +247,7 @@ export function chunkingConfigurationToJSON(
     ChunkingConfiguration$outboundSchema.parse(chunkingConfiguration),
   );
 }
-export function chunkingConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<ChunkingConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChunkingConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkingConfiguration' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChunkingCleanupOptions$inboundSchema: z.ZodType<
-  ChunkingCleanupOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  delete_emails: z.boolean().optional(),
-  delete_credit_cards: z.boolean().optional(),
-  delete_phone_numbers: z.boolean().optional(),
-  clean_bullet_points: z.boolean().optional(),
-  clean_numbered_list: z.boolean().optional(),
-  clean_unicode: z.boolean().optional(),
-  clean_dashes: z.boolean().optional(),
-  clean_whitespaces: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "delete_emails": "deleteEmails",
-    "delete_credit_cards": "deleteCreditCards",
-    "delete_phone_numbers": "deletePhoneNumbers",
-    "clean_bullet_points": "cleanBulletPoints",
-    "clean_numbered_list": "cleanNumberedList",
-    "clean_unicode": "cleanUnicode",
-    "clean_dashes": "cleanDashes",
-    "clean_whitespaces": "cleanWhitespaces",
-  });
-});
 /** @internal */
 export type ChunkingCleanupOptions$Outbound = {
   delete_emails?: boolean | undefined;
@@ -379,34 +294,7 @@ export function chunkingCleanupOptionsToJSON(
     ChunkingCleanupOptions$outboundSchema.parse(chunkingCleanupOptions),
   );
 }
-export function chunkingCleanupOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ChunkingCleanupOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChunkingCleanupOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkingCleanupOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChunkingOptions$inboundSchema: z.ZodType<
-  ChunkingOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  chunking_configuration: z.union([
-    z.lazy(() => ChunkingConfiguration1$inboundSchema),
-    z.lazy(() => ChunkingConfiguration2$inboundSchema),
-  ]).optional(),
-  chunking_cleanup_options: z.lazy(() => ChunkingCleanupOptions$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "chunking_configuration": "chunkingConfiguration",
-    "chunking_cleanup_options": "chunkingCleanupOptions",
-  });
-});
 /** @internal */
 export type ChunkingOptions$Outbound = {
   chunking_configuration?:
@@ -440,32 +328,7 @@ export function chunkingOptionsToJSON(
 ): string {
   return JSON.stringify(ChunkingOptions$outboundSchema.parse(chunkingOptions));
 }
-export function chunkingOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ChunkingOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChunkingOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkingOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasourceRequestBody$inboundSchema: z.ZodType<
-  CreateDatasourceRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.string().optional(),
-  file_id: z.string().optional(),
-  chunking_options: z.lazy(() => ChunkingOptions$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "file_id": "fileId",
-    "chunking_options": "chunkingOptions",
-  });
-});
 /** @internal */
 export type CreateDatasourceRequestBody$Outbound = {
   display_name?: string | undefined;
@@ -499,30 +362,7 @@ export function createDatasourceRequestBodyToJSON(
     ),
   );
 }
-export function createDatasourceRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasourceRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasourceRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasourceRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasourceRequest$inboundSchema: z.ZodType<
-  CreateDatasourceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  RequestBody: z.lazy(() => CreateDatasourceRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateDatasourceRequest$Outbound = {
   knowledge_id: string;
@@ -551,24 +391,11 @@ export function createDatasourceRequestToJSON(
     CreateDatasourceRequest$outboundSchema.parse(createDatasourceRequest),
   );
 }
-export function createDatasourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasourceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasourceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasourceRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasourceStatus
 > = z.nativeEnum(CreateDatasourceStatus);
-/** @internal */
-export const CreateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasourceStatus
-> = CreateDatasourceStatus$inboundSchema;
 
 /** @internal */
 export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -576,7 +403,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KFJAN72J6104V5F3JPW59H3V"),
+  _id: z.string().default("01KFJQ5Y5ZCMJYMF52BT7J8A4C"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -598,59 +425,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-/** @internal */
-export type CreateDatasourceResponseBody$Outbound = {
-  _id: string;
-  display_name: string;
-  description?: string | undefined;
-  status: string;
-  file_id?: string | null | undefined;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-  knowledge_id: string;
-  chunks_count: number;
-};
 
-/** @internal */
-export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
-  CreateDatasourceResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateDatasourceResponseBody
-> = z.object({
-  id: z.string().default("01KFJAN72J6104V5F3JPW59H3V"),
-  displayName: z.string(),
-  description: z.string().optional(),
-  status: CreateDatasourceStatus$outboundSchema,
-  fileId: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-  knowledgeId: z.string(),
-  chunksCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    fileId: "file_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-    knowledgeId: "knowledge_id",
-    chunksCount: "chunks_count",
-  });
-});
-
-export function createDatasourceResponseBodyToJSON(
-  createDatasourceResponseBody: CreateDatasourceResponseBody,
-): string {
-  return JSON.stringify(
-    CreateDatasourceResponseBody$outboundSchema.parse(
-      createDatasourceResponseBody,
-    ),
-  );
-}
 export function createDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasourceResponseBody, SDKValidationError> {

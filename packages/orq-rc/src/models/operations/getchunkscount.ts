@@ -43,16 +43,6 @@ export type GetChunksCountResponseBody = {
 };
 
 /** @internal */
-export const GetChunksCountRequestBody$inboundSchema: z.ZodType<
-  GetChunksCountRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: z.string().optional(),
-});
-/** @internal */
 export type GetChunksCountRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
@@ -77,32 +67,7 @@ export function getChunksCountRequestBodyToJSON(
     GetChunksCountRequestBody$outboundSchema.parse(getChunksCountRequestBody),
   );
 }
-export function getChunksCountRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetChunksCountRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetChunksCountRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetChunksCountRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const GetChunksCountRequest$inboundSchema: z.ZodType<
-  GetChunksCountRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  RequestBody: z.lazy(() => GetChunksCountRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type GetChunksCountRequest$Outbound = {
   knowledge_id: string;
@@ -135,15 +100,6 @@ export function getChunksCountRequestToJSON(
     GetChunksCountRequest$outboundSchema.parse(getChunksCountRequest),
   );
 }
-export function getChunksCountRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetChunksCountRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetChunksCountRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetChunksCountRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetChunksCountResponseBody$inboundSchema: z.ZodType<
@@ -153,27 +109,7 @@ export const GetChunksCountResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   count: z.number(),
 });
-/** @internal */
-export type GetChunksCountResponseBody$Outbound = {
-  count: number;
-};
 
-/** @internal */
-export const GetChunksCountResponseBody$outboundSchema: z.ZodType<
-  GetChunksCountResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetChunksCountResponseBody
-> = z.object({
-  count: z.number(),
-});
-
-export function getChunksCountResponseBodyToJSON(
-  getChunksCountResponseBody: GetChunksCountResponseBody,
-): string {
-  return JSON.stringify(
-    GetChunksCountResponseBody$outboundSchema.parse(getChunksCountResponseBody),
-  );
-}
 export function getChunksCountResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetChunksCountResponseBody, SDKValidationError> {

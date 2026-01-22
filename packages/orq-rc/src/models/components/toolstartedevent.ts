@@ -49,33 +49,7 @@ export const ToolStartedEventData$inboundSchema: z.ZodType<
   toolCallId: z.string(),
   arguments: z.record(z.any()),
 });
-/** @internal */
-export type ToolStartedEventData$Outbound = {
-  toolId: string;
-  toolName?: string | undefined;
-  toolCallId: string;
-  arguments: { [k: string]: any };
-};
 
-/** @internal */
-export const ToolStartedEventData$outboundSchema: z.ZodType<
-  ToolStartedEventData$Outbound,
-  z.ZodTypeDef,
-  ToolStartedEventData
-> = z.object({
-  toolId: z.string(),
-  toolName: z.string().optional(),
-  toolCallId: z.string(),
-  arguments: z.record(z.any()),
-});
-
-export function toolStartedEventDataToJSON(
-  toolStartedEventData: ToolStartedEventData,
-): string {
-  return JSON.stringify(
-    ToolStartedEventData$outboundSchema.parse(toolStartedEventData),
-  );
-}
 export function toolStartedEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolStartedEventData, SDKValidationError> {
@@ -96,31 +70,7 @@ export const ToolStartedEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ToolStartedEventData$inboundSchema),
 });
-/** @internal */
-export type ToolStartedEvent$Outbound = {
-  type: "tool.started";
-  timestamp: string;
-  data: ToolStartedEventData$Outbound;
-};
 
-/** @internal */
-export const ToolStartedEvent$outboundSchema: z.ZodType<
-  ToolStartedEvent$Outbound,
-  z.ZodTypeDef,
-  ToolStartedEvent
-> = z.object({
-  type: z.literal("tool.started"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolStartedEventData$outboundSchema),
-});
-
-export function toolStartedEventToJSON(
-  toolStartedEvent: ToolStartedEvent,
-): string {
-  return JSON.stringify(
-    ToolStartedEvent$outboundSchema.parse(toolStartedEvent),
-  );
-}
 export function toolStartedEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolStartedEvent, SDKValidationError> {

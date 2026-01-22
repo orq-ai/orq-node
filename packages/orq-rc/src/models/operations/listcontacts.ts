@@ -103,7 +103,7 @@ export type Data = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
   metrics: ListContactsMetrics;
 };
 
@@ -116,14 +116,6 @@ export type ListContactsResponseBody = {
   hasMore: boolean;
 };
 
-/** @internal */
-export const ListContactsQueryParamFilterBy$inboundSchema: z.ZodType<
-  ListContactsQueryParamFilterBy,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tags: z.array(z.string()).optional(),
-});
 /** @internal */
 export type ListContactsQueryParamFilterBy$Outbound = {
   tags?: Array<string> | undefined;
@@ -147,37 +139,7 @@ export function listContactsQueryParamFilterByToJSON(
     ),
   );
 }
-export function listContactsQueryParamFilterByFromJSON(
-  jsonString: string,
-): SafeParseResult<ListContactsQueryParamFilterBy, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListContactsQueryParamFilterBy$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListContactsQueryParamFilterBy' from JSON`,
-  );
-}
 
-/** @internal */
-export const ListContactsRequest$inboundSchema: z.ZodType<
-  ListContactsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  search: z.string().optional(),
-  filter_by: z.lazy(() => ListContactsQueryParamFilterBy$inboundSchema)
-    .optional(),
-  include_metrics: z.nullable(z.boolean().default(false)),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-    "filter_by": "filterBy",
-    "include_metrics": "includeMetrics",
-  });
-});
 /** @internal */
 export type ListContactsRequest$Outbound = {
   limit: number;
@@ -217,22 +179,10 @@ export function listContactsRequestToJSON(
     ListContactsRequest$outboundSchema.parse(listContactsRequest),
   );
 }
-export function listContactsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListContactsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListContactsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListContactsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
   .nativeEnum(ObjectT);
-/** @internal */
-export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
-  ObjectT$inboundSchema;
 
 /** @internal */
 export const ListContactsMetrics$inboundSchema: z.ZodType<
@@ -252,40 +202,7 @@ export const ListContactsMetrics$inboundSchema: z.ZodType<
     "error_rate": "errorRate",
   });
 });
-/** @internal */
-export type ListContactsMetrics$Outbound = {
-  total_cost: number;
-  total_tokens: number;
-  total_requests: number;
-  error_rate: number;
-};
 
-/** @internal */
-export const ListContactsMetrics$outboundSchema: z.ZodType<
-  ListContactsMetrics$Outbound,
-  z.ZodTypeDef,
-  ListContactsMetrics
-> = z.object({
-  totalCost: z.number(),
-  totalTokens: z.number(),
-  totalRequests: z.number(),
-  errorRate: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    totalCost: "total_cost",
-    totalTokens: "total_tokens",
-    totalRequests: "total_requests",
-    errorRate: "error_rate",
-  });
-});
-
-export function listContactsMetricsToJSON(
-  listContactsMetrics: ListContactsMetrics,
-): string {
-  return JSON.stringify(
-    ListContactsMetrics$outboundSchema.parse(listContactsMetrics),
-  );
-}
 export function listContactsMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<ListContactsMetrics, SDKValidationError> {
@@ -309,7 +226,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2026-01-22T07:45:31.576Z",
+      "2026-01-22T11:24:22.432Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
@@ -320,46 +237,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
       "avatar_url": "avatarUrl",
     });
   });
-/** @internal */
-export type Data$Outbound = {
-  _id: string;
-  external_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-  metrics: ListContactsMetrics$Outbound;
-};
 
-/** @internal */
-export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
-  z.object({
-    id: z.string(),
-    externalId: z.string(),
-    displayName: z.nullable(z.string()).optional(),
-    email: z.nullable(z.string()).optional(),
-    avatarUrl: z.nullable(z.string()).optional(),
-    tags: z.array(z.string()).optional(),
-    metadata: z.record(z.any()).optional(),
-    created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-      .transform(v => v.toISOString()),
-    metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      id: "_id",
-      externalId: "external_id",
-      displayName: "display_name",
-      avatarUrl: "avatar_url",
-    });
-  });
-
-export function dataToJSON(data: Data): string {
-  return JSON.stringify(Data$outboundSchema.parse(data));
-}
 export function dataFromJSON(
   jsonString: string,
 ): SafeParseResult<Data, SDKValidationError> {
@@ -384,35 +262,7 @@ export const ListContactsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListContactsResponseBody$Outbound = {
-  object: string;
-  data: Array<Data$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListContactsResponseBody$outboundSchema: z.ZodType<
-  ListContactsResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListContactsResponseBody
-> = z.object({
-  object: ObjectT$outboundSchema,
-  data: z.array(z.lazy(() => Data$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listContactsResponseBodyToJSON(
-  listContactsResponseBody: ListContactsResponseBody,
-): string {
-  return JSON.stringify(
-    ListContactsResponseBody$outboundSchema.parse(listContactsResponseBody),
-  );
-}
 export function listContactsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListContactsResponseBody, SDKValidationError> {

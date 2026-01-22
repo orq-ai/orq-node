@@ -6,11 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ReviewOutcome,
-  ReviewOutcome$inboundSchema,
-  ReviewOutcome$outboundSchema,
-} from "./reviewoutcome.js";
+import { ReviewOutcome, ReviewOutcome$inboundSchema } from "./reviewoutcome.js";
 
 export type ToolReviewDoneEventData = {
   /**
@@ -49,31 +45,7 @@ export const ToolReviewDoneEventData$inboundSchema: z.ZodType<
   toolCallId: z.string(),
   review: ReviewOutcome$inboundSchema,
 });
-/** @internal */
-export type ToolReviewDoneEventData$Outbound = {
-  toolId: string;
-  toolCallId: string;
-  review: string;
-};
 
-/** @internal */
-export const ToolReviewDoneEventData$outboundSchema: z.ZodType<
-  ToolReviewDoneEventData$Outbound,
-  z.ZodTypeDef,
-  ToolReviewDoneEventData
-> = z.object({
-  toolId: z.string(),
-  toolCallId: z.string(),
-  review: ReviewOutcome$outboundSchema,
-});
-
-export function toolReviewDoneEventDataToJSON(
-  toolReviewDoneEventData: ToolReviewDoneEventData,
-): string {
-  return JSON.stringify(
-    ToolReviewDoneEventData$outboundSchema.parse(toolReviewDoneEventData),
-  );
-}
 export function toolReviewDoneEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolReviewDoneEventData, SDKValidationError> {
@@ -94,31 +66,7 @@ export const ToolReviewDoneEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ToolReviewDoneEventData$inboundSchema),
 });
-/** @internal */
-export type ToolReviewDoneEvent$Outbound = {
-  type: "tool.review.done";
-  timestamp: string;
-  data: ToolReviewDoneEventData$Outbound;
-};
 
-/** @internal */
-export const ToolReviewDoneEvent$outboundSchema: z.ZodType<
-  ToolReviewDoneEvent$Outbound,
-  z.ZodTypeDef,
-  ToolReviewDoneEvent
-> = z.object({
-  type: z.literal("tool.review.done"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolReviewDoneEventData$outboundSchema),
-});
-
-export function toolReviewDoneEventToJSON(
-  toolReviewDoneEvent: ToolReviewDoneEvent,
-): string {
-  return JSON.stringify(
-    ToolReviewDoneEvent$outboundSchema.parse(toolReviewDoneEvent),
-  );
-}
 export function toolReviewDoneEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolReviewDoneEvent, SDKValidationError> {

@@ -31,27 +31,7 @@ export const TimeoutStreamingEventData$inboundSchema: z.ZodType<
 > = z.object({
   message: z.string(),
 });
-/** @internal */
-export type TimeoutStreamingEventData$Outbound = {
-  message: string;
-};
 
-/** @internal */
-export const TimeoutStreamingEventData$outboundSchema: z.ZodType<
-  TimeoutStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  TimeoutStreamingEventData
-> = z.object({
-  message: z.string(),
-});
-
-export function timeoutStreamingEventDataToJSON(
-  timeoutStreamingEventData: TimeoutStreamingEventData,
-): string {
-  return JSON.stringify(
-    TimeoutStreamingEventData$outboundSchema.parse(timeoutStreamingEventData),
-  );
-}
 export function timeoutStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<TimeoutStreamingEventData, SDKValidationError> {
@@ -72,31 +52,7 @@ export const TimeoutStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => TimeoutStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type TimeoutStreamingEvent$Outbound = {
-  type: "agents.timeout";
-  timestamp: string;
-  data: TimeoutStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const TimeoutStreamingEvent$outboundSchema: z.ZodType<
-  TimeoutStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  TimeoutStreamingEvent
-> = z.object({
-  type: z.literal("agents.timeout"),
-  timestamp: z.string(),
-  data: z.lazy(() => TimeoutStreamingEventData$outboundSchema),
-});
-
-export function timeoutStreamingEventToJSON(
-  timeoutStreamingEvent: TimeoutStreamingEvent,
-): string {
-  return JSON.stringify(
-    TimeoutStreamingEvent$outboundSchema.parse(timeoutStreamingEvent),
-  );
-}
 export function timeoutStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<TimeoutStreamingEvent, SDKValidationError> {

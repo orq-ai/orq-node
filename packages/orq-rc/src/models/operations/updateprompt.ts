@@ -579,6 +579,74 @@ export type UpdatePromptGuardrails = {
   executeOn: UpdatePromptExecuteOn;
 };
 
+export type UpdatePromptFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdatePromptRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdatePromptType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdatePromptType = ClosedEnum<typeof UpdatePromptType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type UpdatePromptCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: UpdatePromptType;
+};
+
+export const UpdatePromptLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdatePromptLoadBalancerType = ClosedEnum<
+  typeof UpdatePromptLoadBalancerType
+>;
+
+export type UpdatePromptLoadBalancer1 = {
+  type: UpdatePromptLoadBalancerType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type UpdatePromptLoadBalancer = UpdatePromptLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type UpdatePromptTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 /**
  * Prompt configuration with model and messages. Use this to update the prompt.
  */
@@ -703,6 +771,26 @@ export type UpdatePromptPromptInput = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<UpdatePromptGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<UpdatePromptFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: UpdatePromptRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: UpdatePromptCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdatePromptLoadBalancer1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: UpdatePromptTimeout | undefined;
 };
 
 export const UpdatePromptUseCases = {
@@ -797,10 +885,12 @@ export type UpdatePromptRequest = {
   requestBody?: UpdatePromptRequestBody | undefined;
 };
 
-export const UpdatePromptType = {
+export const UpdatePromptPromptsType = {
   Prompt: "prompt",
 } as const;
-export type UpdatePromptType = ClosedEnum<typeof UpdatePromptType>;
+export type UpdatePromptPromptsType = ClosedEnum<
+  typeof UpdatePromptPromptsType
+>;
 
 /**
  * The modality of the model
@@ -813,6 +903,7 @@ export const UpdatePromptModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
@@ -1229,11 +1320,11 @@ export type UpdatePromptContent =
   | string
   | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>;
 
-export const UpdatePromptPromptsType = {
+export const UpdatePromptPromptsResponse200Type = {
   Function: "function",
 } as const;
-export type UpdatePromptPromptsType = ClosedEnum<
-  typeof UpdatePromptPromptsType
+export type UpdatePromptPromptsResponse200Type = ClosedEnum<
+  typeof UpdatePromptPromptsResponse200Type
 >;
 
 export type UpdatePromptFunction = {
@@ -1247,7 +1338,7 @@ export type UpdatePromptFunction = {
 export type UpdatePromptToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: UpdatePromptPromptsType;
+  type: UpdatePromptPromptsResponse200Type;
   function: UpdatePromptFunction;
 };
 
@@ -1361,7 +1452,7 @@ export type UpdatePromptResponseFormatPromptsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /**
@@ -1544,6 +1635,76 @@ export type UpdatePromptPromptsGuardrails = {
   executeOn: UpdatePromptPromptsExecuteOn;
 };
 
+export type UpdatePromptPromptsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdatePromptPromptsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdatePromptPromptsResponseType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdatePromptPromptsResponseType = ClosedEnum<
+  typeof UpdatePromptPromptsResponseType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type UpdatePromptPromptsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: UpdatePromptPromptsResponseType;
+};
+
+export const UpdatePromptLoadBalancerPromptsType = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdatePromptLoadBalancerPromptsType = ClosedEnum<
+  typeof UpdatePromptLoadBalancerPromptsType
+>;
+
+export type UpdatePromptLoadBalancerPrompts1 = {
+  type: UpdatePromptLoadBalancerPromptsType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type UpdatePromptPromptsLoadBalancer = UpdatePromptLoadBalancerPrompts1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type UpdatePromptPromptsTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 export type UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2 =
   components.TextContentPartSchema;
 
@@ -1610,7 +1771,7 @@ export type UpdatePromptMessagesPromptsCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: UpdatePromptMessagesPromptsTtl | undefined;
+  ttl: UpdatePromptMessagesPromptsTtl;
 };
 
 export type UpdatePromptMessagesPromptsToolMessage = {
@@ -1791,7 +1952,7 @@ export type UpdatePrompt2PromptsCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: UpdatePrompt2PromptsTtl | undefined;
+  ttl: UpdatePrompt2PromptsTtl;
 };
 
 export type UpdatePrompt2Prompts4 = {
@@ -1990,6 +2151,26 @@ export type UpdatePromptPromptField = {
    */
   guardrails?: Array<UpdatePromptPromptsGuardrails> | undefined;
   /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<UpdatePromptPromptsFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: UpdatePromptPromptsRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: UpdatePromptPromptsCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdatePromptLoadBalancerPrompts1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: UpdatePromptPromptsTimeout | undefined;
+  /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
   messages?:
@@ -2068,7 +2249,7 @@ export type UpdatePromptPromptsMetadata = {
  */
 export type UpdatePromptPrompt = {
   id: string;
-  type: UpdatePromptType;
+  type: UpdatePromptPromptsType;
   owner: string;
   domainId: string;
   created: string;
@@ -2097,12 +2278,6 @@ export type UpdatePromptPrompt = {
 };
 
 /** @internal */
-export const UpdatePromptContentPromptsRequest2$inboundSchema: z.ZodType<
-  UpdatePromptContentPromptsRequest2,
-  z.ZodTypeDef,
-  unknown
-> = components.TextContentPartSchema$inboundSchema;
-/** @internal */
 export type UpdatePromptContentPromptsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
 
@@ -2122,27 +2297,7 @@ export function updatePromptContentPromptsRequest2ToJSON(
     ),
   );
 }
-export function updatePromptContentPromptsRequest2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptContentPromptsRequest2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptContentPromptsRequest2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptContentPromptsRequest2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesPromptsRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type UpdatePromptMessagesPromptsRequestRequestBodyContent$Outbound =
   | string
@@ -2169,49 +2324,17 @@ export function updatePromptMessagesPromptsRequestRequestBodyContentToJSON(
     ),
   );
 }
-export function updatePromptMessagesPromptsRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdatePromptMessagesPromptsRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptMessagesPromptsRequestRequestBodyContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdatePromptMessagesPromptsRequestRequestBodyContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptMessagesPromptsType
-> = z.nativeEnum(UpdatePromptMessagesPromptsType);
 /** @internal */
 export const UpdatePromptMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsType
-> = UpdatePromptMessagesPromptsType$inboundSchema;
+> = z.nativeEnum(UpdatePromptMessagesPromptsType);
 
-/** @internal */
-export const UpdatePromptMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptMessagesTtl
-> = z.nativeEnum(UpdatePromptMessagesTtl);
 /** @internal */
 export const UpdatePromptMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesTtl
-> = UpdatePromptMessagesTtl$inboundSchema;
+> = z.nativeEnum(UpdatePromptMessagesTtl);
 
-/** @internal */
-export const UpdatePromptMessagesCacheControl$inboundSchema: z.ZodType<
-  UpdatePromptMessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdatePromptMessagesPromptsType$inboundSchema,
-  ttl: UpdatePromptMessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type UpdatePromptMessagesCacheControl$Outbound = {
   type: string;
@@ -2237,36 +2360,7 @@ export function updatePromptMessagesCacheControlToJSON(
     ),
   );
 }
-export function updatePromptMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesToolMessage$inboundSchema: z.ZodType<
-  UpdatePromptMessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => UpdatePromptMessagesCacheControl$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type UpdatePromptMessagesToolMessage$Outbound = {
   role: "tool";
@@ -2305,29 +2399,7 @@ export function updatePromptMessagesToolMessageToJSON(
     ),
   );
 }
-export function updatePromptMessagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptContentPrompts2$inboundSchema: z.ZodType<
-  UpdatePromptContentPrompts2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
 /** @internal */
 export type UpdatePromptContentPrompts2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2358,34 +2430,7 @@ export function updatePromptContentPrompts2ToJSON(
     ),
   );
 }
-export function updatePromptContentPrompts2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptContentPrompts2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptContentPrompts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptContentPrompts2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesPromptsRequestContent$inboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsRequestContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.RefusalPartSchema$inboundSchema,
-      components.ReasoningPartSchema$inboundSchema,
-      components.RedactedReasoningPartSchema$inboundSchema,
-    ]),
-  ),
-]);
 /** @internal */
 export type UpdatePromptMessagesPromptsRequestContent$Outbound =
   | string
@@ -2426,30 +2471,7 @@ export function updatePromptMessagesPromptsRequestContentToJSON(
     ),
   );
 }
-export function updatePromptMessagesPromptsRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdatePromptMessagesPromptsRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptMessagesPromptsRequestContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdatePromptMessagesPromptsRequestContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesAudio$inboundSchema: z.ZodType<
-  UpdatePromptMessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type UpdatePromptMessagesAudio$Outbound = {
   id: string;
@@ -2471,34 +2493,12 @@ export function updatePromptMessagesAudioToJSON(
     UpdatePromptMessagesAudio$outboundSchema.parse(updatePromptMessagesAudio),
   );
 }
-export function updatePromptMessagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptMessagesType
-> = z.nativeEnum(UpdatePromptMessagesType);
 /** @internal */
 export const UpdatePromptMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesType
-> = UpdatePromptMessagesType$inboundSchema;
+> = z.nativeEnum(UpdatePromptMessagesType);
 
-/** @internal */
-export const UpdatePromptMessagesFunction$inboundSchema: z.ZodType<
-  UpdatePromptMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type UpdatePromptMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2524,31 +2524,7 @@ export function updatePromptMessagesFunctionToJSON(
     ),
   );
 }
-export function updatePromptMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesToolCalls$inboundSchema: z.ZodType<
-  UpdatePromptMessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: UpdatePromptMessagesType$inboundSchema,
-  function: z.lazy(() => UpdatePromptMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type UpdatePromptMessagesToolCalls$Outbound = {
   id: string;
@@ -2582,49 +2558,7 @@ export function updatePromptMessagesToolCallsToJSON(
     ),
   );
 }
-export function updatePromptMessagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
-  UpdatePromptMessagesAssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => UpdatePromptMessagesAudio$inboundSchema))
-    .optional(),
-  tool_calls: z.array(z.lazy(() => UpdatePromptMessagesToolCalls$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type UpdatePromptMessagesAssistantMessage$Outbound = {
   content?:
@@ -2687,44 +2621,17 @@ export function updatePromptMessagesAssistantMessageToJSON(
     ),
   );
 }
-export function updatePromptMessagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesAssistantMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptMessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesAssistantMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePrompt2PromptsType
-> = z.nativeEnum(UpdatePrompt2PromptsType);
 /** @internal */
 export const UpdatePrompt2PromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsType
-> = UpdatePrompt2PromptsType$inboundSchema;
+> = z.nativeEnum(UpdatePrompt2PromptsType);
 
-/** @internal */
-export const UpdatePrompt2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePrompt2Ttl
-> = z.nativeEnum(UpdatePrompt2Ttl);
 /** @internal */
 export const UpdatePrompt2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Ttl
-> = UpdatePrompt2Ttl$inboundSchema;
+> = z.nativeEnum(UpdatePrompt2Ttl);
 
-/** @internal */
-export const UpdatePrompt2CacheControl$inboundSchema: z.ZodType<
-  UpdatePrompt2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdatePrompt2PromptsType$inboundSchema,
-  ttl: UpdatePrompt2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type UpdatePrompt2CacheControl$Outbound = {
   type: string;
@@ -2748,31 +2655,7 @@ export function updatePrompt2CacheControlToJSON(
     UpdatePrompt2CacheControl$outboundSchema.parse(updatePrompt2CacheControl),
   );
 }
-export function updatePrompt2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePrompt2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePrompt2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePrompt2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePrompt24$inboundSchema: z.ZodType<
-  UpdatePrompt24,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => UpdatePrompt2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type UpdatePrompt24$Outbound = {
   type: "file";
@@ -2799,29 +2682,7 @@ export const UpdatePrompt24$outboundSchema: z.ZodType<
 export function updatePrompt24ToJSON(updatePrompt24: UpdatePrompt24): string {
   return JSON.stringify(UpdatePrompt24$outboundSchema.parse(updatePrompt24));
 }
-export function updatePrompt24FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePrompt24, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePrompt24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePrompt24' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptContent2$inboundSchema: z.ZodType<
-  UpdatePromptContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => UpdatePrompt24$inboundSchema),
-]);
 /** @internal */
 export type UpdatePromptContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2850,34 +2711,7 @@ export function updatePromptContent2ToJSON(
     UpdatePromptContent2$outboundSchema.parse(updatePromptContent2),
   );
 }
-export function updatePromptContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptContent2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesPromptsContent$inboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => UpdatePrompt24$inboundSchema),
-    ]),
-  ),
-]);
 /** @internal */
 export type UpdatePromptMessagesPromptsContent$Outbound =
   | string
@@ -2916,39 +2750,7 @@ export function updatePromptMessagesPromptsContentToJSON(
     ),
   );
 }
-export function updatePromptMessagesPromptsContentFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesPromptsContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptMessagesPromptsContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesPromptsContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesUserMessage$inboundSchema: z.ZodType<
-  UpdatePromptMessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdatePrompt24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type UpdatePromptMessagesUserMessage$Outbound = {
   role: "user";
@@ -2995,25 +2797,7 @@ export function updatePromptMessagesUserMessageToJSON(
     ),
   );
 }
-export function updatePromptMessagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesUserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesContent$inboundSchema: z.ZodType<
-  UpdatePromptMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type UpdatePromptMessagesContent$Outbound =
   | string
@@ -3038,29 +2822,7 @@ export function updatePromptMessagesContentToJSON(
     ),
   );
 }
-export function updatePromptMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessagesSystemMessage$inboundSchema: z.ZodType<
-  UpdatePromptMessagesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type UpdatePromptMessagesSystemMessage$Outbound = {
   role: "system";
@@ -3091,27 +2853,7 @@ export function updatePromptMessagesSystemMessageToJSON(
     ),
   );
 }
-export function updatePromptMessagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessagesSystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessagesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptMessages$inboundSchema: z.ZodType<
-  UpdatePromptMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdatePromptMessagesSystemMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesUserMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesToolMessage$inboundSchema),
-]);
 /** @internal */
 export type UpdatePromptMessages$Outbound =
   | UpdatePromptMessagesSystemMessage$Outbound
@@ -3138,43 +2880,17 @@ export function updatePromptMessagesToJSON(
     UpdatePromptMessages$outboundSchema.parse(updatePromptMessages),
   );
 }
-export function updatePromptMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMessages' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptVoice$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptVoice
-> = z.nativeEnum(UpdatePromptVoice);
 /** @internal */
 export const UpdatePromptVoice$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVoice
-> = UpdatePromptVoice$inboundSchema;
+> = z.nativeEnum(UpdatePromptVoice);
 
-/** @internal */
-export const UpdatePromptFormat$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptFormat
-> = z.nativeEnum(UpdatePromptFormat);
 /** @internal */
 export const UpdatePromptFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptFormat
-> = UpdatePromptFormat$inboundSchema;
+> = z.nativeEnum(UpdatePromptFormat);
 
-/** @internal */
-export const UpdatePromptAudio$inboundSchema: z.ZodType<
-  UpdatePromptAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: UpdatePromptVoice$inboundSchema,
-  format: UpdatePromptFormat$inboundSchema,
-});
 /** @internal */
 export type UpdatePromptAudio$Outbound = {
   voice: string;
@@ -3198,28 +2914,7 @@ export function updatePromptAudioToJSON(
     UpdatePromptAudio$outboundSchema.parse(updatePromptAudio),
   );
 }
-export function updatePromptAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema:
-  z.ZodType<
-    UpdatePromptResponseFormatPromptsJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
 /** @internal */
 export type UpdatePromptResponseFormatPromptsJsonSchema$Outbound = {
   description?: string | undefined;
@@ -3251,37 +2946,7 @@ export function updatePromptResponseFormatPromptsJsonSchemaToJSON(
     ),
   );
 }
-export function updatePromptResponseFormatPromptsJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdatePromptResponseFormatPromptsJsonSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdatePromptResponseFormatPromptsJsonSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptResponseFormatJSONSchema$inboundSchema: z.ZodType<
-  UpdatePromptResponseFormatJSONSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() =>
-    UpdatePromptResponseFormatPromptsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
-  });
-});
 /** @internal */
 export type UpdatePromptResponseFormatJSONSchema$Outbound = {
   type: "json_schema";
@@ -3313,25 +2978,7 @@ export function updatePromptResponseFormatJSONSchemaToJSON(
     ),
   );
 }
-export function updatePromptResponseFormatJSONSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptResponseFormatJSONSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptResponseFormatJSONSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptResponseFormatJSONSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
-  UpdatePromptResponseFormatJSONObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_object"),
-});
 /** @internal */
 export type UpdatePromptResponseFormatJSONObject$Outbound = {
   type: "json_object";
@@ -3355,25 +3002,7 @@ export function updatePromptResponseFormatJSONObjectToJSON(
     ),
   );
 }
-export function updatePromptResponseFormatJSONObjectFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptResponseFormatJSONObject, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptResponseFormatJSONObject' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptResponseFormatText$inboundSchema: z.ZodType<
-  UpdatePromptResponseFormatText,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-});
 /** @internal */
 export type UpdatePromptResponseFormatText$Outbound = {
   type: "text";
@@ -3397,26 +3026,7 @@ export function updatePromptResponseFormatTextToJSON(
     ),
   );
 }
-export function updatePromptResponseFormatTextFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptResponseFormatText, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptResponseFormatText$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptResponseFormatText' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptResponseFormat$inboundSchema: z.ZodType<
-  UpdatePromptResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdatePromptResponseFormatText$inboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatJSONObject$inboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatJSONSchema$inboundSchema),
-]);
 /** @internal */
 export type UpdatePromptResponseFormat$Outbound =
   | UpdatePromptResponseFormatText$Outbound
@@ -3441,31 +3051,12 @@ export function updatePromptResponseFormatToJSON(
     UpdatePromptResponseFormat$outboundSchema.parse(updatePromptResponseFormat),
   );
 }
-export function updatePromptResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptResponseFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptResponseFormat' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptReasoningEffort
-> = z.nativeEnum(UpdatePromptReasoningEffort);
 /** @internal */
 export const UpdatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptReasoningEffort
-> = UpdatePromptReasoningEffort$inboundSchema;
+> = z.nativeEnum(UpdatePromptReasoningEffort);
 
-/** @internal */
-export const UpdatePromptStop$inboundSchema: z.ZodType<
-  UpdatePromptStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
 /** @internal */
 export type UpdatePromptStop$Outbound = string | Array<string>;
 
@@ -3483,28 +3074,7 @@ export function updatePromptStopToJSON(
     UpdatePromptStop$outboundSchema.parse(updatePromptStop),
   );
 }
-export function updatePromptStopFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptStop, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptStop' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptStreamOptions$inboundSchema: z.ZodType<
-  UpdatePromptStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
 /** @internal */
 export type UpdatePromptStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -3530,25 +3100,7 @@ export function updatePromptStreamOptionsToJSON(
     UpdatePromptStreamOptions$outboundSchema.parse(updatePromptStreamOptions),
   );
 }
-export function updatePromptStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptStreamOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptThinking$inboundSchema: z.ZodType<
-  UpdatePromptThinking,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-]);
 /** @internal */
 export type UpdatePromptThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
@@ -3571,33 +3123,12 @@ export function updatePromptThinkingToJSON(
     UpdatePromptThinking$outboundSchema.parse(updatePromptThinking),
   );
 }
-export function updatePromptThinkingFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptThinking, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptThinking' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptToolChoiceType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptToolChoiceType
-> = z.nativeEnum(UpdatePromptToolChoiceType);
 /** @internal */
 export const UpdatePromptToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoiceType
-> = UpdatePromptToolChoiceType$inboundSchema;
+> = z.nativeEnum(UpdatePromptToolChoiceType);
 
-/** @internal */
-export const UpdatePromptToolChoiceFunction$inboundSchema: z.ZodType<
-  UpdatePromptToolChoiceFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-});
 /** @internal */
 export type UpdatePromptToolChoiceFunction$Outbound = {
   name: string;
@@ -3621,25 +3152,7 @@ export function updatePromptToolChoiceFunctionToJSON(
     ),
   );
 }
-export function updatePromptToolChoiceFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptToolChoiceFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptToolChoiceFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptToolChoice2$inboundSchema: z.ZodType<
-  UpdatePromptToolChoice2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdatePromptToolChoiceType$inboundSchema.optional(),
-  function: z.lazy(() => UpdatePromptToolChoiceFunction$inboundSchema),
-});
 /** @internal */
 export type UpdatePromptToolChoice2$Outbound = {
   type?: string | undefined;
@@ -3663,34 +3176,12 @@ export function updatePromptToolChoice2ToJSON(
     UpdatePromptToolChoice2$outboundSchema.parse(updatePromptToolChoice2),
   );
 }
-export function updatePromptToolChoice2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptToolChoice2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptToolChoice2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptToolChoice2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptToolChoice1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptToolChoice1
-> = z.nativeEnum(UpdatePromptToolChoice1);
 /** @internal */
 export const UpdatePromptToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoice1
-> = UpdatePromptToolChoice1$inboundSchema;
+> = z.nativeEnum(UpdatePromptToolChoice1);
 
-/** @internal */
-export const UpdatePromptToolChoice$inboundSchema: z.ZodType<
-  UpdatePromptToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdatePromptToolChoice2$inboundSchema),
-  UpdatePromptToolChoice1$inboundSchema,
-]);
 /** @internal */
 export type UpdatePromptToolChoice$Outbound =
   | UpdatePromptToolChoice2$Outbound
@@ -3713,40 +3204,17 @@ export function updatePromptToolChoiceToJSON(
     UpdatePromptToolChoice$outboundSchema.parse(updatePromptToolChoice),
   );
 }
-export function updatePromptToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptToolChoice' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptModalities$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptModalities
-> = z.nativeEnum(UpdatePromptModalities);
 /** @internal */
 export const UpdatePromptModalities$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModalities
-> = UpdatePromptModalities$inboundSchema;
+> = z.nativeEnum(UpdatePromptModalities);
 
-/** @internal */
-export const UpdatePromptId1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptId1
-> = z.nativeEnum(UpdatePromptId1);
 /** @internal */
 export const UpdatePromptId1$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptId1
-> = UpdatePromptId1$inboundSchema;
+> = z.nativeEnum(UpdatePromptId1);
 
-/** @internal */
-export const UpdatePromptId$inboundSchema: z.ZodType<
-  UpdatePromptId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([UpdatePromptId1$inboundSchema, z.string()]);
 /** @internal */
 export type UpdatePromptId$Outbound = string | string;
 
@@ -3760,38 +3228,12 @@ export const UpdatePromptId$outboundSchema: z.ZodType<
 export function updatePromptIdToJSON(updatePromptId: UpdatePromptId): string {
   return JSON.stringify(UpdatePromptId$outboundSchema.parse(updatePromptId));
 }
-export function updatePromptIdFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptId' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptExecuteOn
-> = z.nativeEnum(UpdatePromptExecuteOn);
 /** @internal */
 export const UpdatePromptExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptExecuteOn
-> = UpdatePromptExecuteOn$inboundSchema;
+> = z.nativeEnum(UpdatePromptExecuteOn);
 
-/** @internal */
-export const UpdatePromptGuardrails$inboundSchema: z.ZodType<
-  UpdatePromptGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([UpdatePromptId1$inboundSchema, z.string()]),
-  execute_on: UpdatePromptExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
 /** @internal */
 export type UpdatePromptGuardrails$Outbound = {
   id: string | string;
@@ -3819,83 +3261,162 @@ export function updatePromptGuardrailsToJSON(
     UpdatePromptGuardrails$outboundSchema.parse(updatePromptGuardrails),
   );
 }
-export function updatePromptGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptGuardrails' from JSON`,
+
+/** @internal */
+export type UpdatePromptFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdatePromptFallbacks$outboundSchema: z.ZodType<
+  UpdatePromptFallbacks$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function updatePromptFallbacksToJSON(
+  updatePromptFallbacks: UpdatePromptFallbacks,
+): string {
+  return JSON.stringify(
+    UpdatePromptFallbacks$outboundSchema.parse(updatePromptFallbacks),
   );
 }
 
 /** @internal */
-export const UpdatePromptPromptInput$inboundSchema: z.ZodType<
-  UpdatePromptPromptInput,
+export type UpdatePromptRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const UpdatePromptRetry$outboundSchema: z.ZodType<
+  UpdatePromptRetry$Outbound,
   z.ZodTypeDef,
-  unknown
+  UpdatePromptRetry
 > = z.object({
-  messages: z.array(
-    z.union([
-      z.lazy(() => UpdatePromptMessagesSystemMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesUserMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesAssistantMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  audio: z.nullable(z.lazy(() => UpdatePromptAudio$inboundSchema)).optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => UpdatePromptResponseFormatText$inboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatJSONObject$inboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatJSONSchema$inboundSchema),
-  ]).optional(),
-  reasoning_effort: UpdatePromptReasoningEffort$inboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => UpdatePromptStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => UpdatePromptToolChoice2$inboundSchema),
-    UpdatePromptToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdatePromptModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => UpdatePromptGuardrails$inboundSchema))
-    .optional(),
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
+    onCodes: "on_codes",
   });
 });
+
+export function updatePromptRetryToJSON(
+  updatePromptRetry: UpdatePromptRetry,
+): string {
+  return JSON.stringify(
+    UpdatePromptRetry$outboundSchema.parse(updatePromptRetry),
+  );
+}
+
+/** @internal */
+export const UpdatePromptType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptType
+> = z.nativeEnum(UpdatePromptType);
+
+/** @internal */
+export type UpdatePromptCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const UpdatePromptCache$outboundSchema: z.ZodType<
+  UpdatePromptCache$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: UpdatePromptType$outboundSchema,
+});
+
+export function updatePromptCacheToJSON(
+  updatePromptCache: UpdatePromptCache,
+): string {
+  return JSON.stringify(
+    UpdatePromptCache$outboundSchema.parse(updatePromptCache),
+  );
+}
+
+/** @internal */
+export const UpdatePromptLoadBalancerType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptLoadBalancerType
+> = z.nativeEnum(UpdatePromptLoadBalancerType);
+
+/** @internal */
+export type UpdatePromptLoadBalancer1$Outbound = {
+  type: string;
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const UpdatePromptLoadBalancer1$outboundSchema: z.ZodType<
+  UpdatePromptLoadBalancer1$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptLoadBalancer1
+> = z.object({
+  type: UpdatePromptLoadBalancerType$outboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updatePromptLoadBalancer1ToJSON(
+  updatePromptLoadBalancer1: UpdatePromptLoadBalancer1,
+): string {
+  return JSON.stringify(
+    UpdatePromptLoadBalancer1$outboundSchema.parse(updatePromptLoadBalancer1),
+  );
+}
+
+/** @internal */
+export type UpdatePromptLoadBalancer$Outbound =
+  UpdatePromptLoadBalancer1$Outbound;
+
+/** @internal */
+export const UpdatePromptLoadBalancer$outboundSchema: z.ZodType<
+  UpdatePromptLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptLoadBalancer
+> = z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema);
+
+export function updatePromptLoadBalancerToJSON(
+  updatePromptLoadBalancer: UpdatePromptLoadBalancer,
+): string {
+  return JSON.stringify(
+    UpdatePromptLoadBalancer$outboundSchema.parse(updatePromptLoadBalancer),
+  );
+}
+
+/** @internal */
+export type UpdatePromptTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const UpdatePromptTimeout$outboundSchema: z.ZodType<
+  UpdatePromptTimeout$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function updatePromptTimeoutToJSON(
+  updatePromptTimeout: UpdatePromptTimeout,
+): string {
+  return JSON.stringify(
+    UpdatePromptTimeout$outboundSchema.parse(updatePromptTimeout),
+  );
+}
+
 /** @internal */
 export type UpdatePromptPromptInput$Outbound = {
   messages?:
@@ -3936,6 +3457,11 @@ export type UpdatePromptPromptInput$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<UpdatePromptGuardrails$Outbound> | undefined;
+  fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
+  retry?: UpdatePromptRetry$Outbound | undefined;
+  cache?: UpdatePromptCache$Outbound | undefined;
+  load_balancer?: Array<UpdatePromptLoadBalancer1$Outbound> | undefined;
+  timeout?: UpdatePromptTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -3989,6 +3515,13 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => UpdatePromptGuardrails$outboundSchema))
     .optional(),
+  fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
+  cache: z.lazy(() => UpdatePromptCache$outboundSchema).optional(),
+  loadBalancer: z.array(z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema))
+    .optional(),
+  timeout: z.lazy(() => UpdatePromptTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -4003,6 +3536,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    loadBalancer: "load_balancer",
   });
 });
 
@@ -4013,47 +3547,17 @@ export function updatePromptPromptInputToJSON(
     UpdatePromptPromptInput$outboundSchema.parse(updatePromptPromptInput),
   );
 }
-export function updatePromptPromptInputFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptPromptInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptPromptInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptPromptInput' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptUseCases$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptUseCases
-> = z.nativeEnum(UpdatePromptUseCases);
 /** @internal */
 export const UpdatePromptUseCases$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptUseCases
-> = UpdatePromptUseCases$inboundSchema;
+> = z.nativeEnum(UpdatePromptUseCases);
 
-/** @internal */
-export const UpdatePromptLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptLanguage
-> = z.nativeEnum(UpdatePromptLanguage);
 /** @internal */
 export const UpdatePromptLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLanguage
-> = UpdatePromptLanguage$inboundSchema;
+> = z.nativeEnum(UpdatePromptLanguage);
 
-/** @internal */
-export const UpdatePromptMetadata$inboundSchema: z.ZodType<
-  UpdatePromptMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  use_cases: z.array(UpdatePromptUseCases$inboundSchema).optional(),
-  language: z.nullable(UpdatePromptLanguage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "use_cases": "useCases",
-  });
-});
 /** @internal */
 export type UpdatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
@@ -4081,41 +3585,7 @@ export function updatePromptMetadataToJSON(
     UpdatePromptMetadata$outboundSchema.parse(updatePromptMetadata),
   );
 }
-export function updatePromptMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptMetadata' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptRequestBody$inboundSchema: z.ZodType<
-  UpdatePromptRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  owner: z.string().optional(),
-  domain_id: z.string().optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  display_name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  prompt: z.lazy(() => UpdatePromptPromptInput$inboundSchema).optional(),
-  metadata: z.lazy(() => UpdatePromptMetadata$inboundSchema).optional(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "display_name": "displayName",
-  });
-});
 /** @internal */
 export type UpdatePromptRequestBody$Outbound = {
   owner?: string | undefined;
@@ -4164,29 +3634,7 @@ export function updatePromptRequestBodyToJSON(
     UpdatePromptRequestBody$outboundSchema.parse(updatePromptRequestBody),
   );
 }
-export function updatePromptRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdatePromptRequest$inboundSchema: z.ZodType<
-  UpdatePromptRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => UpdatePromptRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdatePromptRequest$Outbound = {
   id: string;
@@ -4214,69 +3662,36 @@ export function updatePromptRequestToJSON(
     UpdatePromptRequest$outboundSchema.parse(updatePromptRequest),
   );
 }
-export function updatePromptRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptRequest' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdatePromptType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptType
-> = z.nativeEnum(UpdatePromptType);
-/** @internal */
-export const UpdatePromptType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptType
-> = UpdatePromptType$inboundSchema;
+export const UpdatePromptPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsType
+> = z.nativeEnum(UpdatePromptPromptsType);
 
 /** @internal */
 export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModelType
 > = z.nativeEnum(UpdatePromptModelType);
-/** @internal */
-export const UpdatePromptModelType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptModelType
-> = UpdatePromptModelType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsFormat
 > = z.nativeEnum(UpdatePromptPromptsFormat);
-/** @internal */
-export const UpdatePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsFormat
-> = UpdatePromptPromptsFormat$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat6
 > = z.nativeEnum(UpdatePromptResponseFormat6);
-/** @internal */
-export const UpdatePromptResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptResponseFormat6
-> = UpdatePromptResponseFormat6$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat5
 > = z.nativeEnum(UpdatePromptResponseFormat5);
-/** @internal */
-export const UpdatePromptResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptResponseFormat5
-> = UpdatePromptResponseFormat5$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat4
 > = z.nativeEnum(UpdatePromptResponseFormat4);
-/** @internal */
-export const UpdatePromptResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptResponseFormat4
-> = UpdatePromptResponseFormat4$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema:
@@ -4285,12 +3700,6 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType,
   );
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType
-  > =
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormat3$inboundSchema: z.ZodType<
@@ -4301,30 +3710,7 @@ export const UpdatePromptResponseFormat3$inboundSchema: z.ZodType<
   type:
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema,
 });
-/** @internal */
-export type UpdatePromptResponseFormat3$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const UpdatePromptResponseFormat3$outboundSchema: z.ZodType<
-  UpdatePromptResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptResponseFormat3
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$outboundSchema,
-});
-
-export function updatePromptResponseFormat3ToJSON(
-  updatePromptResponseFormat3: UpdatePromptResponseFormat3,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormat3$outboundSchema.parse(
-      updatePromptResponseFormat3,
-    ),
-  );
-}
 export function updatePromptResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat3, SDKValidationError> {
@@ -4342,12 +3728,6 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
   );
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
-  > =
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormat2$inboundSchema: z.ZodType<
@@ -4358,30 +3738,7 @@ export const UpdatePromptResponseFormat2$inboundSchema: z.ZodType<
   type:
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
 });
-/** @internal */
-export type UpdatePromptResponseFormat2$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const UpdatePromptResponseFormat2$outboundSchema: z.ZodType<
-  UpdatePromptResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptResponseFormat2
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$outboundSchema,
-});
-
-export function updatePromptResponseFormat2ToJSON(
-  updatePromptResponseFormat2: UpdatePromptResponseFormat2,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormat2$outboundSchema.parse(
-      updatePromptResponseFormat2,
-    ),
-  );
-}
 export function updatePromptResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat2, SDKValidationError> {
@@ -4399,12 +3756,6 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponse
   > = z.nativeEnum(
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
   );
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
-  > =
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema:
@@ -4418,39 +3769,7 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSche
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
-/** @internal */
-export type UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$Outbound =
-  {
-    name: string;
-    description?: string | undefined;
-    strict?: boolean | undefined;
-    schema: { [k: string]: any };
-  };
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$outboundSchema:
-  z.ZodType<
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema
-  > = z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
-
-export function updatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchemaToJSON(
-  updatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$outboundSchema
-      .parse(
-        updatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema,
-      ),
-  );
-}
 export function updatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4484,42 +3803,7 @@ export const UpdatePromptResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type UpdatePromptResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$Outbound;
-};
 
-/** @internal */
-export const UpdatePromptResponseFormat1$outboundSchema: z.ZodType<
-  UpdatePromptResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptResponseFormat1
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() =>
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function updatePromptResponseFormat1ToJSON(
-  updatePromptResponseFormat1: UpdatePromptResponseFormat1,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormat1$outboundSchema.parse(
-      updatePromptResponseFormat1,
-    ),
-  );
-}
 export function updatePromptResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormat1, SDKValidationError> {
@@ -4543,40 +3827,7 @@ export const UpdatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   UpdatePromptResponseFormat5$inboundSchema,
   UpdatePromptResponseFormat6$inboundSchema,
 ]);
-/** @internal */
-export type UpdatePromptPromptsResponseResponseFormat$Outbound =
-  | UpdatePromptResponseFormat1$Outbound
-  | UpdatePromptResponseFormat2$Outbound
-  | UpdatePromptResponseFormat3$Outbound
-  | string
-  | string
-  | string;
 
-/** @internal */
-export const UpdatePromptPromptsResponseResponseFormat$outboundSchema:
-  z.ZodType<
-    UpdatePromptPromptsResponseResponseFormat$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptPromptsResponseResponseFormat
-  > = z.union([
-    z.lazy(() => UpdatePromptResponseFormat1$outboundSchema),
-    z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
-    z.lazy(() => UpdatePromptResponseFormat3$outboundSchema),
-    UpdatePromptResponseFormat4$outboundSchema,
-    UpdatePromptResponseFormat5$outboundSchema,
-    UpdatePromptResponseFormat6$outboundSchema,
-  ]);
-
-export function updatePromptPromptsResponseResponseFormatToJSON(
-  updatePromptPromptsResponseResponseFormat:
-    UpdatePromptPromptsResponseResponseFormat,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsResponseResponseFormat$outboundSchema.parse(
-      updatePromptPromptsResponseResponseFormat,
-    ),
-  );
-}
 export function updatePromptPromptsResponseResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4597,46 +3848,26 @@ export function updatePromptPromptsResponseResponseFormatFromJSON(
 export const UpdatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPhotoRealVersion
 > = z.nativeEnum(UpdatePromptPhotoRealVersion);
-/** @internal */
-export const UpdatePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPhotoRealVersion
-> = UpdatePromptPhotoRealVersion$inboundSchema;
 
 /** @internal */
 export const UpdatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptEncodingFormat
 > = z.nativeEnum(UpdatePromptEncodingFormat);
-/** @internal */
-export const UpdatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptEncodingFormat
-> = UpdatePromptEncodingFormat$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsResponseReasoningEffort$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> = z
     .nativeEnum(UpdatePromptPromptsResponseReasoningEffort);
-/** @internal */
-export const UpdatePromptPromptsResponseReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> =
-    UpdatePromptPromptsResponseReasoningEffort$inboundSchema;
 
 /** @internal */
 export const UpdatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVerbosity
 > = z.nativeEnum(UpdatePromptVerbosity);
-/** @internal */
-export const UpdatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptVerbosity
-> = UpdatePromptVerbosity$inboundSchema;
 
 /** @internal */
 export const UpdatePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptThinkingLevel
 > = z.nativeEnum(UpdatePromptThinkingLevel);
-/** @internal */
-export const UpdatePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptThinkingLevel
-> = UpdatePromptThinkingLevel$inboundSchema;
 
 /** @internal */
 export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
@@ -4678,87 +3909,7 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-/** @internal */
-export type UpdatePromptModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | UpdatePromptResponseFormat1$Outbound
-    | UpdatePromptResponseFormat2$Outbound
-    | UpdatePromptResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
-  UpdatePromptModelParameters$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: UpdatePromptPromptsFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => UpdatePromptResponseFormat1$outboundSchema),
-      z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
-      z.lazy(() => UpdatePromptResponseFormat3$outboundSchema),
-      UpdatePromptResponseFormat4$outboundSchema,
-      UpdatePromptResponseFormat5$outboundSchema,
-      UpdatePromptResponseFormat6$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: UpdatePromptPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: UpdatePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: UpdatePromptPromptsResponseReasoningEffort$outboundSchema
-    .optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: UpdatePromptVerbosity$outboundSchema.optional(),
-  thinkingLevel: UpdatePromptThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function updatePromptModelParametersToJSON(
-  updatePromptModelParameters: UpdatePromptModelParameters,
-): string {
-  return JSON.stringify(
-    UpdatePromptModelParameters$outboundSchema.parse(
-      updatePromptModelParameters,
-    ),
-  );
-}
 export function updatePromptModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptModelParameters, SDKValidationError> {
@@ -4773,19 +3924,11 @@ export function updatePromptModelParametersFromJSON(
 export const UpdatePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptProvider
 > = z.nativeEnum(UpdatePromptProvider);
-/** @internal */
-export const UpdatePromptProvider$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptProvider
-> = UpdatePromptProvider$inboundSchema;
 
 /** @internal */
 export const UpdatePromptRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptRole
 > = z.nativeEnum(UpdatePromptRole);
-/** @internal */
-export const UpdatePromptRole$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptRole
-> = UpdatePromptRole$inboundSchema;
 
 /** @internal */
 export const UpdatePrompt2File$inboundSchema: z.ZodType<
@@ -4802,37 +3945,7 @@ export const UpdatePrompt2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-/** @internal */
-export type UpdatePrompt2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePrompt2File$outboundSchema: z.ZodType<
-  UpdatePrompt2File$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function updatePrompt2FileToJSON(
-  updatePrompt2File: UpdatePrompt2File,
-): string {
-  return JSON.stringify(
-    UpdatePrompt2File$outboundSchema.parse(updatePrompt2File),
-  );
-}
 export function updatePrompt2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2File, SDKValidationError> {
@@ -4852,25 +3965,7 @@ export const UpdatePrompt23$inboundSchema: z.ZodType<
   type: z.literal("file"),
   file: z.lazy(() => UpdatePrompt2File$inboundSchema),
 });
-/** @internal */
-export type UpdatePrompt23$Outbound = {
-  type: "file";
-  file: UpdatePrompt2File$Outbound;
-};
 
-/** @internal */
-export const UpdatePrompt23$outboundSchema: z.ZodType<
-  UpdatePrompt23$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => UpdatePrompt2File$outboundSchema),
-});
-
-export function updatePrompt23ToJSON(updatePrompt23: UpdatePrompt23): string {
-  return JSON.stringify(UpdatePrompt23$outboundSchema.parse(updatePrompt23));
-}
 export function updatePrompt23FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt23, SDKValidationError> {
@@ -4891,31 +3986,7 @@ export const UpdatePrompt2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-/** @internal */
-export type UpdatePrompt2ImageUrl$Outbound = {
-  id?: string | undefined;
-  url: string;
-  detail?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePrompt2ImageUrl$outboundSchema: z.ZodType<
-  UpdatePrompt2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt2ImageUrl
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function updatePrompt2ImageUrlToJSON(
-  updatePrompt2ImageUrl: UpdatePrompt2ImageUrl,
-): string {
-  return JSON.stringify(
-    UpdatePrompt2ImageUrl$outboundSchema.parse(updatePrompt2ImageUrl),
-  );
-}
 export function updatePrompt2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2ImageUrl, SDKValidationError> {
@@ -4939,29 +4010,7 @@ export const UpdatePrompt22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-/** @internal */
-export type UpdatePrompt22$Outbound = {
-  type: "image_url";
-  image_url: UpdatePrompt2ImageUrl$Outbound;
-};
 
-/** @internal */
-export const UpdatePrompt22$outboundSchema: z.ZodType<
-  UpdatePrompt22$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt22
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => UpdatePrompt2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function updatePrompt22ToJSON(updatePrompt22: UpdatePrompt22): string {
-  return JSON.stringify(UpdatePrompt22$outboundSchema.parse(updatePrompt22));
-}
 export function updatePrompt22FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt22, SDKValidationError> {
@@ -4981,25 +4030,7 @@ export const UpdatePrompt21$inboundSchema: z.ZodType<
   type: z.literal("text"),
   text: z.string(),
 });
-/** @internal */
-export type UpdatePrompt21$Outbound = {
-  type: "text";
-  text: string;
-};
 
-/** @internal */
-export const UpdatePrompt21$outboundSchema: z.ZodType<
-  UpdatePrompt21$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-export function updatePrompt21ToJSON(updatePrompt21: UpdatePrompt21): string {
-  return JSON.stringify(UpdatePrompt21$outboundSchema.parse(updatePrompt21));
-}
 export function updatePrompt21FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt21, SDKValidationError> {
@@ -5020,32 +4051,7 @@ export const UpdatePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePrompt22$inboundSchema),
   z.lazy(() => UpdatePrompt23$inboundSchema),
 ]);
-/** @internal */
-export type UpdatePromptContentPromptsResponse2$Outbound =
-  | UpdatePrompt21$Outbound
-  | UpdatePrompt22$Outbound
-  | UpdatePrompt23$Outbound;
 
-/** @internal */
-export const UpdatePromptContentPromptsResponse2$outboundSchema: z.ZodType<
-  UpdatePromptContentPromptsResponse2$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptContentPromptsResponse2
-> = z.union([
-  z.lazy(() => UpdatePrompt21$outboundSchema),
-  z.lazy(() => UpdatePrompt22$outboundSchema),
-  z.lazy(() => UpdatePrompt23$outboundSchema),
-]);
-
-export function updatePromptContentPromptsResponse2ToJSON(
-  updatePromptContentPromptsResponse2: UpdatePromptContentPromptsResponse2,
-): string {
-  return JSON.stringify(
-    UpdatePromptContentPromptsResponse2$outboundSchema.parse(
-      updatePromptContentPromptsResponse2,
-    ),
-  );
-}
 export function updatePromptContentPromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContentPromptsResponse2, SDKValidationError> {
@@ -5070,34 +4076,7 @@ export const UpdatePromptContent$inboundSchema: z.ZodType<
     z.lazy(() => UpdatePrompt23$inboundSchema),
   ])),
 ]);
-/** @internal */
-export type UpdatePromptContent$Outbound =
-  | string
-  | Array<
-    UpdatePrompt21$Outbound | UpdatePrompt22$Outbound | UpdatePrompt23$Outbound
-  >;
 
-/** @internal */
-export const UpdatePromptContent$outboundSchema: z.ZodType<
-  UpdatePromptContent$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => UpdatePrompt21$outboundSchema),
-    z.lazy(() => UpdatePrompt22$outboundSchema),
-    z.lazy(() => UpdatePrompt23$outboundSchema),
-  ])),
-]);
-
-export function updatePromptContentToJSON(
-  updatePromptContent: UpdatePromptContent,
-): string {
-  return JSON.stringify(
-    UpdatePromptContent$outboundSchema.parse(updatePromptContent),
-  );
-}
 export function updatePromptContentFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContent, SDKValidationError> {
@@ -5109,13 +4088,9 @@ export function updatePromptContentFromJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsType
-> = z.nativeEnum(UpdatePromptPromptsType);
-/** @internal */
-export const UpdatePromptPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsType
-> = UpdatePromptPromptsType$inboundSchema;
+export const UpdatePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsResponse200Type
+> = z.nativeEnum(UpdatePromptPromptsResponse200Type);
 
 /** @internal */
 export const UpdatePromptFunction$inboundSchema: z.ZodType<
@@ -5126,29 +4101,7 @@ export const UpdatePromptFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type UpdatePromptFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const UpdatePromptFunction$outboundSchema: z.ZodType<
-  UpdatePromptFunction$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function updatePromptFunctionToJSON(
-  updatePromptFunction: UpdatePromptFunction,
-): string {
-  return JSON.stringify(
-    UpdatePromptFunction$outboundSchema.parse(updatePromptFunction),
-  );
-}
 export function updatePromptFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptFunction, SDKValidationError> {
@@ -5167,36 +4120,10 @@ export const UpdatePromptToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: UpdatePromptPromptsType$inboundSchema,
+  type: UpdatePromptPromptsResponse200Type$inboundSchema,
   function: z.lazy(() => UpdatePromptFunction$inboundSchema),
 });
-/** @internal */
-export type UpdatePromptToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: UpdatePromptFunction$Outbound;
-};
 
-/** @internal */
-export const UpdatePromptToolCalls$outboundSchema: z.ZodType<
-  UpdatePromptToolCalls$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: UpdatePromptPromptsType$outboundSchema,
-  function: z.lazy(() => UpdatePromptFunction$outboundSchema),
-});
-
-export function updatePromptToolCallsToJSON(
-  updatePromptToolCalls: UpdatePromptToolCalls,
-): string {
-  return JSON.stringify(
-    UpdatePromptToolCalls$outboundSchema.parse(updatePromptToolCalls),
-  );
-}
 export function updatePromptToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptToolCalls, SDKValidationError> {
@@ -5233,57 +4160,7 @@ export const UpdatePromptPromptsMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-/** @internal */
-export type UpdatePromptPromptsMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<
-      | UpdatePrompt21$Outbound
-      | UpdatePrompt22$Outbound
-      | UpdatePrompt23$Outbound
-    >
-    | null;
-  tool_calls?: Array<UpdatePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
 
-/** @internal */
-export const UpdatePromptPromptsMessages$outboundSchema: z.ZodType<
-  UpdatePromptPromptsMessages$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsMessages
-> = z.object({
-  role: UpdatePromptRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => UpdatePrompt21$outboundSchema),
-        z.lazy(() => UpdatePrompt22$outboundSchema),
-        z.lazy(() => UpdatePrompt23$outboundSchema),
-      ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => UpdatePromptToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function updatePromptPromptsMessagesToJSON(
-  updatePromptPromptsMessages: UpdatePromptPromptsMessages,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsMessages$outboundSchema.parse(
-      updatePromptPromptsMessages,
-    ),
-  );
-}
 export function updatePromptPromptsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsMessages, SDKValidationError> {
@@ -5318,51 +4195,7 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-/** @internal */
-export type UpdatePromptPromptConfig$Outbound = {
-  stream?: boolean | undefined;
-  model?: string | null | undefined;
-  model_db_id?: string | null | undefined;
-  model_type?: string | null | undefined;
-  model_parameters?: UpdatePromptModelParameters$Outbound | undefined;
-  provider?: string | null | undefined;
-  integration_id?: string | null | undefined;
-  version?: string | undefined;
-  messages: Array<UpdatePromptPromptsMessages$Outbound>;
-};
 
-/** @internal */
-export const UpdatePromptPromptConfig$outboundSchema: z.ZodType<
-  UpdatePromptPromptConfig$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptConfig
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.nullable(z.string()).optional(),
-  modelDbId: z.nullable(z.string()).optional(),
-  modelType: z.nullable(UpdatePromptModelType$outboundSchema).optional(),
-  modelParameters: z.lazy(() => UpdatePromptModelParameters$outboundSchema)
-    .optional(),
-  provider: z.nullable(UpdatePromptProvider$outboundSchema).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(z.lazy(() => UpdatePromptPromptsMessages$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
-  });
-});
-
-export function updatePromptPromptConfigToJSON(
-  updatePromptPromptConfig: UpdatePromptPromptConfig,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptConfig$outboundSchema.parse(updatePromptPromptConfig),
-  );
-}
 export function updatePromptPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptConfig, SDKValidationError> {
@@ -5377,20 +4210,12 @@ export function updatePromptPromptConfigFromJSON(
 export const UpdatePromptPromptsVoice$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsVoice
 > = z.nativeEnum(UpdatePromptPromptsVoice);
-/** @internal */
-export const UpdatePromptPromptsVoice$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsVoice
-> = UpdatePromptPromptsVoice$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsResponse200Format$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200Format> = z.nativeEnum(
     UpdatePromptPromptsResponse200Format,
   );
-/** @internal */
-export const UpdatePromptPromptsResponse200Format$outboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200Format> =
-    UpdatePromptPromptsResponse200Format$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsAudio$inboundSchema: z.ZodType<
@@ -5401,29 +4226,7 @@ export const UpdatePromptPromptsAudio$inboundSchema: z.ZodType<
   voice: UpdatePromptPromptsVoice$inboundSchema,
   format: UpdatePromptPromptsResponse200Format$inboundSchema,
 });
-/** @internal */
-export type UpdatePromptPromptsAudio$Outbound = {
-  voice: string;
-  format: string;
-};
 
-/** @internal */
-export const UpdatePromptPromptsAudio$outboundSchema: z.ZodType<
-  UpdatePromptPromptsAudio$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsAudio
-> = z.object({
-  voice: UpdatePromptPromptsVoice$outboundSchema,
-  format: UpdatePromptPromptsResponse200Format$outboundSchema,
-});
-
-export function updatePromptPromptsAudioToJSON(
-  updatePromptPromptsAudio: UpdatePromptPromptsAudio,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsAudio$outboundSchema.parse(updatePromptPromptsAudio),
-  );
-}
 export function updatePromptPromptsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsAudio, SDKValidationError> {
@@ -5446,37 +4249,7 @@ export const UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     schema: z.any().optional(),
     strict: z.boolean().default(false),
   });
-/** @internal */
-export type UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound = {
-  description?: string | undefined;
-  name: string;
-  schema?: any | undefined;
-  strict: boolean;
-};
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema:
-  z.ZodType<
-    UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptResponseFormatPromptsResponseJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
-
-export function updatePromptResponseFormatPromptsResponseJsonSchemaToJSON(
-  updatePromptResponseFormatPromptsResponseJsonSchema:
-    UpdatePromptResponseFormatPromptsResponseJsonSchema,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema.parse(
-      updatePromptResponseFormatPromptsResponseJsonSchema,
-    ),
-  );
-}
 export function updatePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5509,39 +4282,7 @@ export const UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchem
       "json_schema": "jsonSchema",
     });
   });
-/** @internal */
-export type UpdatePromptResponseFormatPromptsResponse200JSONSchema$Outbound = {
-  type: "json_schema";
-  json_schema: UpdatePromptResponseFormatPromptsResponseJsonSchema$Outbound;
-};
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsResponse200JSONSchema$outboundSchema:
-  z.ZodType<
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      UpdatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
-
-export function updatePromptResponseFormatPromptsResponse200JSONSchemaToJSON(
-  updatePromptResponseFormatPromptsResponse200JSONSchema:
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema$outboundSchema.parse(
-      updatePromptResponseFormatPromptsResponse200JSONSchema,
-    ),
-  );
-}
 export function updatePromptResponseFormatPromptsResponse200JSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5566,31 +4307,7 @@ export const UpdatePromptResponseFormatPromptsJSONObject$inboundSchema:
   > = z.object({
     type: z.literal("json_object"),
   });
-/** @internal */
-export type UpdatePromptResponseFormatPromptsJSONObject$Outbound = {
-  type: "json_object";
-};
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsJSONObject$outboundSchema:
-  z.ZodType<
-    UpdatePromptResponseFormatPromptsJSONObject$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptResponseFormatPromptsJSONObject
-  > = z.object({
-    type: z.literal("json_object"),
-  });
-
-export function updatePromptResponseFormatPromptsJSONObjectToJSON(
-  updatePromptResponseFormatPromptsJSONObject:
-    UpdatePromptResponseFormatPromptsJSONObject,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormatPromptsJSONObject$outboundSchema.parse(
-      updatePromptResponseFormatPromptsJSONObject,
-    ),
-  );
-}
 export function updatePromptResponseFormatPromptsJSONObjectFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -5615,29 +4332,7 @@ export const UpdatePromptResponseFormatPromptsText$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("text"),
 });
-/** @internal */
-export type UpdatePromptResponseFormatPromptsText$Outbound = {
-  type: "text";
-};
 
-/** @internal */
-export const UpdatePromptResponseFormatPromptsText$outboundSchema: z.ZodType<
-  UpdatePromptResponseFormatPromptsText$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptResponseFormatPromptsText
-> = z.object({
-  type: z.literal("text"),
-});
-
-export function updatePromptResponseFormatPromptsTextToJSON(
-  updatePromptResponseFormatPromptsText: UpdatePromptResponseFormatPromptsText,
-): string {
-  return JSON.stringify(
-    UpdatePromptResponseFormatPromptsText$outboundSchema.parse(
-      updatePromptResponseFormatPromptsText,
-    ),
-  );
-}
 export function updatePromptResponseFormatPromptsTextFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptResponseFormatPromptsText, SDKValidationError> {
@@ -5661,34 +4356,7 @@ export const UpdatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
     UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
   ),
 ]);
-/** @internal */
-export type UpdatePromptPromptsResponseFormat$Outbound =
-  | UpdatePromptResponseFormatPromptsText$Outbound
-  | UpdatePromptResponseFormatPromptsJSONObject$Outbound
-  | UpdatePromptResponseFormatPromptsResponse200JSONSchema$Outbound;
 
-/** @internal */
-export const UpdatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
-  UpdatePromptPromptsResponseFormat$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsResponseFormat
-> = z.union([
-  z.lazy(() => UpdatePromptResponseFormatPromptsText$outboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$outboundSchema),
-  z.lazy(() =>
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema$outboundSchema
-  ),
-]);
-
-export function updatePromptPromptsResponseFormatToJSON(
-  updatePromptPromptsResponseFormat: UpdatePromptPromptsResponseFormat,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsResponseFormat$outboundSchema.parse(
-      updatePromptPromptsResponseFormat,
-    ),
-  );
-}
 export function updatePromptPromptsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsResponseFormat, SDKValidationError> {
@@ -5703,10 +4371,6 @@ export function updatePromptPromptsResponseFormatFromJSON(
 export const UpdatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsReasoningEffort
 > = z.nativeEnum(UpdatePromptPromptsReasoningEffort);
-/** @internal */
-export const UpdatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsReasoningEffort
-> = UpdatePromptPromptsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsStop$inboundSchema: z.ZodType<
@@ -5714,23 +4378,7 @@ export const UpdatePromptPromptsStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-/** @internal */
-export type UpdatePromptPromptsStop$Outbound = string | Array<string>;
 
-/** @internal */
-export const UpdatePromptPromptsStop$outboundSchema: z.ZodType<
-  UpdatePromptPromptsStop$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsStop
-> = z.union([z.string(), z.array(z.string())]);
-
-export function updatePromptPromptsStopToJSON(
-  updatePromptPromptsStop: UpdatePromptPromptsStop,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsStop$outboundSchema.parse(updatePromptPromptsStop),
-  );
-}
 export function updatePromptPromptsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsStop, SDKValidationError> {
@@ -5753,33 +4401,7 @@ export const UpdatePromptPromptsStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-/** @internal */
-export type UpdatePromptPromptsStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
 
-/** @internal */
-export const UpdatePromptPromptsStreamOptions$outboundSchema: z.ZodType<
-  UpdatePromptPromptsStreamOptions$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function updatePromptPromptsStreamOptionsToJSON(
-  updatePromptPromptsStreamOptions: UpdatePromptPromptsStreamOptions,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsStreamOptions$outboundSchema.parse(
-      updatePromptPromptsStreamOptions,
-    ),
-  );
-}
 export function updatePromptPromptsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsStreamOptions, SDKValidationError> {
@@ -5799,30 +4421,7 @@ export const UpdatePromptPromptsThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
-/** @internal */
-export type UpdatePromptPromptsThinking$Outbound =
-  | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
 
-/** @internal */
-export const UpdatePromptPromptsThinking$outboundSchema: z.ZodType<
-  UpdatePromptPromptsThinking$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-]);
-
-export function updatePromptPromptsThinkingToJSON(
-  updatePromptPromptsThinking: UpdatePromptPromptsThinking,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsThinking$outboundSchema.parse(
-      updatePromptPromptsThinking,
-    ),
-  );
-}
 export function updatePromptPromptsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsThinking, SDKValidationError> {
@@ -5837,10 +4436,6 @@ export function updatePromptPromptsThinkingFromJSON(
 export const UpdatePromptToolChoicePromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoicePromptsType
 > = z.nativeEnum(UpdatePromptToolChoicePromptsType);
-/** @internal */
-export const UpdatePromptToolChoicePromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptToolChoicePromptsType
-> = UpdatePromptToolChoicePromptsType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptToolChoicePromptsFunction$inboundSchema: z.ZodType<
@@ -5850,29 +4445,7 @@ export const UpdatePromptToolChoicePromptsFunction$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
 });
-/** @internal */
-export type UpdatePromptToolChoicePromptsFunction$Outbound = {
-  name: string;
-};
 
-/** @internal */
-export const UpdatePromptToolChoicePromptsFunction$outboundSchema: z.ZodType<
-  UpdatePromptToolChoicePromptsFunction$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptToolChoicePromptsFunction
-> = z.object({
-  name: z.string(),
-});
-
-export function updatePromptToolChoicePromptsFunctionToJSON(
-  updatePromptToolChoicePromptsFunction: UpdatePromptToolChoicePromptsFunction,
-): string {
-  return JSON.stringify(
-    UpdatePromptToolChoicePromptsFunction$outboundSchema.parse(
-      updatePromptToolChoicePromptsFunction,
-    ),
-  );
-}
 export function updatePromptToolChoicePromptsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptToolChoicePromptsFunction, SDKValidationError> {
@@ -5893,31 +4466,7 @@ export const UpdatePromptToolChoicePrompts2$inboundSchema: z.ZodType<
   type: UpdatePromptToolChoicePromptsType$inboundSchema.optional(),
   function: z.lazy(() => UpdatePromptToolChoicePromptsFunction$inboundSchema),
 });
-/** @internal */
-export type UpdatePromptToolChoicePrompts2$Outbound = {
-  type?: string | undefined;
-  function: UpdatePromptToolChoicePromptsFunction$Outbound;
-};
 
-/** @internal */
-export const UpdatePromptToolChoicePrompts2$outboundSchema: z.ZodType<
-  UpdatePromptToolChoicePrompts2$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptToolChoicePrompts2
-> = z.object({
-  type: UpdatePromptToolChoicePromptsType$outboundSchema.optional(),
-  function: z.lazy(() => UpdatePromptToolChoicePromptsFunction$outboundSchema),
-});
-
-export function updatePromptToolChoicePrompts2ToJSON(
-  updatePromptToolChoicePrompts2: UpdatePromptToolChoicePrompts2,
-): string {
-  return JSON.stringify(
-    UpdatePromptToolChoicePrompts2$outboundSchema.parse(
-      updatePromptToolChoicePrompts2,
-    ),
-  );
-}
 export function updatePromptToolChoicePrompts2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptToolChoicePrompts2, SDKValidationError> {
@@ -5932,10 +4481,6 @@ export function updatePromptToolChoicePrompts2FromJSON(
 export const UpdatePromptToolChoicePrompts1$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoicePrompts1
 > = z.nativeEnum(UpdatePromptToolChoicePrompts1);
-/** @internal */
-export const UpdatePromptToolChoicePrompts1$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptToolChoicePrompts1
-> = UpdatePromptToolChoicePrompts1$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsToolChoice$inboundSchema: z.ZodType<
@@ -5946,30 +4491,7 @@ export const UpdatePromptPromptsToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptToolChoicePrompts2$inboundSchema),
   UpdatePromptToolChoicePrompts1$inboundSchema,
 ]);
-/** @internal */
-export type UpdatePromptPromptsToolChoice$Outbound =
-  | UpdatePromptToolChoicePrompts2$Outbound
-  | string;
 
-/** @internal */
-export const UpdatePromptPromptsToolChoice$outboundSchema: z.ZodType<
-  UpdatePromptPromptsToolChoice$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsToolChoice
-> = z.union([
-  z.lazy(() => UpdatePromptToolChoicePrompts2$outboundSchema),
-  UpdatePromptToolChoicePrompts1$outboundSchema,
-]);
-
-export function updatePromptPromptsToolChoiceToJSON(
-  updatePromptPromptsToolChoice: UpdatePromptPromptsToolChoice,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsToolChoice$outboundSchema.parse(
-      updatePromptPromptsToolChoice,
-    ),
-  );
-}
 export function updatePromptPromptsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsToolChoice, SDKValidationError> {
@@ -5984,19 +4506,11 @@ export function updatePromptPromptsToolChoiceFromJSON(
 export const UpdatePromptPromptsModalities$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsModalities
 > = z.nativeEnum(UpdatePromptPromptsModalities);
-/** @internal */
-export const UpdatePromptPromptsModalities$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsModalities
-> = UpdatePromptPromptsModalities$inboundSchema;
 
 /** @internal */
 export const UpdatePromptIdPrompts1$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptIdPrompts1
 > = z.nativeEnum(UpdatePromptIdPrompts1);
-/** @internal */
-export const UpdatePromptIdPrompts1$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptIdPrompts1
-> = UpdatePromptIdPrompts1$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsId$inboundSchema: z.ZodType<
@@ -6004,23 +4518,7 @@ export const UpdatePromptPromptsId$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([UpdatePromptIdPrompts1$inboundSchema, z.string()]);
-/** @internal */
-export type UpdatePromptPromptsId$Outbound = string | string;
 
-/** @internal */
-export const UpdatePromptPromptsId$outboundSchema: z.ZodType<
-  UpdatePromptPromptsId$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsId
-> = z.union([UpdatePromptIdPrompts1$outboundSchema, z.string()]);
-
-export function updatePromptPromptsIdToJSON(
-  updatePromptPromptsId: UpdatePromptPromptsId,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsId$outboundSchema.parse(updatePromptPromptsId),
-  );
-}
 export function updatePromptPromptsIdFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsId, SDKValidationError> {
@@ -6035,10 +4533,6 @@ export function updatePromptPromptsIdFromJSON(
 export const UpdatePromptPromptsExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsExecuteOn
 > = z.nativeEnum(UpdatePromptPromptsExecuteOn);
-/** @internal */
-export const UpdatePromptPromptsExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsExecuteOn
-> = UpdatePromptPromptsExecuteOn$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsGuardrails$inboundSchema: z.ZodType<
@@ -6053,35 +4547,7 @@ export const UpdatePromptPromptsGuardrails$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type UpdatePromptPromptsGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
 
-/** @internal */
-export const UpdatePromptPromptsGuardrails$outboundSchema: z.ZodType<
-  UpdatePromptPromptsGuardrails$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsGuardrails
-> = z.object({
-  id: z.union([UpdatePromptIdPrompts1$outboundSchema, z.string()]),
-  executeOn: UpdatePromptPromptsExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function updatePromptPromptsGuardrailsToJSON(
-  updatePromptPromptsGuardrails: UpdatePromptPromptsGuardrails,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsGuardrails$outboundSchema.parse(
-      updatePromptPromptsGuardrails,
-    ),
-  );
-}
 export function updatePromptPromptsGuardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsGuardrails, SDKValidationError> {
@@ -6093,33 +4559,147 @@ export function updatePromptPromptsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const UpdatePromptPromptsFallbacks$inboundSchema: z.ZodType<
+  UpdatePromptPromptsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function updatePromptPromptsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePromptPromptsRetry$inboundSchema: z.ZodType<
+  UpdatePromptPromptsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function updatePromptPromptsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsResponseType
+> = z.nativeEnum(UpdatePromptPromptsResponseType);
+
+/** @internal */
+export const UpdatePromptPromptsCache$inboundSchema: z.ZodType<
+  UpdatePromptPromptsCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: UpdatePromptPromptsResponseType$inboundSchema,
+});
+
+export function updatePromptPromptsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePromptLoadBalancerPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptLoadBalancerPromptsType
+> = z.nativeEnum(UpdatePromptLoadBalancerPromptsType);
+
+/** @internal */
+export const UpdatePromptLoadBalancerPrompts1$inboundSchema: z.ZodType<
+  UpdatePromptLoadBalancerPrompts1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdatePromptLoadBalancerPromptsType$inboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updatePromptLoadBalancerPrompts1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptLoadBalancerPrompts1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptLoadBalancerPrompts1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptLoadBalancerPrompts1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePromptPromptsLoadBalancer$inboundSchema: z.ZodType<
+  UpdatePromptPromptsLoadBalancer,
+  z.ZodTypeDef,
+  unknown
+> = z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema);
+
+export function updatePromptPromptsLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsLoadBalancer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePromptPromptsTimeout$inboundSchema: z.ZodType<
+  UpdatePromptPromptsTimeout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  call_timeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_timeout": "callTimeout",
+  });
+});
+
+export function updatePromptPromptsTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsTimeout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsTimeout' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$inboundSchema:
   z.ZodType<
     UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2,
     z.ZodTypeDef,
     unknown
   > = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$Outbound =
-  components.TextContentPartSchema$Outbound;
 
-/** @internal */
-export const UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$outboundSchema:
-  z.ZodType<
-    UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2
-  > = components.TextContentPartSchema$outboundSchema;
-
-export function updatePromptContentPromptsResponse200ApplicationJSONResponseBody2ToJSON(
-  updatePromptContentPromptsResponse200ApplicationJSONResponseBody2:
-    UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2,
-): string {
-  return JSON.stringify(
-    UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$outboundSchema
-      .parse(updatePromptContentPromptsResponse200ApplicationJSONResponseBody2),
-  );
-}
 export function updatePromptContentPromptsResponse200ApplicationJSONResponseBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6145,33 +4725,7 @@ export const UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyCo
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$outboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function updatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContentToJSON(
-  updatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent:
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$outboundSchema
-      .parse(
-        updatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent,
-      ),
-  );
-}
 export function updatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6191,19 +4745,11 @@ export function updatePromptMessagesPromptsResponse200ApplicationJSONResponseBod
 export const UpdatePromptMessagesPromptsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponse200Type> = z
     .nativeEnum(UpdatePromptMessagesPromptsResponse200Type);
-/** @internal */
-export const UpdatePromptMessagesPromptsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponse200Type> =
-    UpdatePromptMessagesPromptsResponse200Type$inboundSchema;
 
 /** @internal */
 export const UpdatePromptMessagesPromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsTtl
 > = z.nativeEnum(UpdatePromptMessagesPromptsTtl);
-/** @internal */
-export const UpdatePromptMessagesPromptsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptMessagesPromptsTtl
-> = UpdatePromptMessagesPromptsTtl$inboundSchema;
 
 /** @internal */
 export const UpdatePromptMessagesPromptsCacheControl$inboundSchema: z.ZodType<
@@ -6214,32 +4760,7 @@ export const UpdatePromptMessagesPromptsCacheControl$inboundSchema: z.ZodType<
   type: UpdatePromptMessagesPromptsResponse200Type$inboundSchema,
   ttl: UpdatePromptMessagesPromptsTtl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsCacheControl$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsCacheControl$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsCacheControl
-> = z.object({
-  type: UpdatePromptMessagesPromptsResponse200Type$outboundSchema,
-  ttl: UpdatePromptMessagesPromptsTtl$outboundSchema.default("5m"),
-});
-
-export function updatePromptMessagesPromptsCacheControlToJSON(
-  updatePromptMessagesPromptsCacheControl:
-    UpdatePromptMessagesPromptsCacheControl,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsCacheControl$outboundSchema.parse(
-      updatePromptMessagesPromptsCacheControl,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6277,46 +4798,7 @@ export const UpdatePromptMessagesPromptsToolMessage$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?: UpdatePromptMessagesPromptsCacheControl$Outbound | undefined;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsToolMessage$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsToolMessage$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() =>
-    UpdatePromptMessagesPromptsCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
-
-export function updatePromptMessagesPromptsToolMessageToJSON(
-  updatePromptMessagesPromptsToolMessage:
-    UpdatePromptMessagesPromptsToolMessage,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsToolMessage$outboundSchema.parse(
-      updatePromptMessagesPromptsToolMessage,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsToolMessage, SDKValidationError> {
@@ -6342,38 +4824,7 @@ export const UpdatePromptContentPromptsResponse200ApplicationJson2$inboundSchema
     components.ReasoningPartSchema$inboundSchema,
     components.RedactedReasoningPartSchema$inboundSchema,
   ]);
-/** @internal */
-export type UpdatePromptContentPromptsResponse200ApplicationJson2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
 
-/** @internal */
-export const UpdatePromptContentPromptsResponse200ApplicationJson2$outboundSchema:
-  z.ZodType<
-    UpdatePromptContentPromptsResponse200ApplicationJson2$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptContentPromptsResponse200ApplicationJson2
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
-  ]);
-
-export function updatePromptContentPromptsResponse200ApplicationJSON2ToJSON(
-  updatePromptContentPromptsResponse200ApplicationJson2:
-    UpdatePromptContentPromptsResponse200ApplicationJson2,
-): string {
-  return JSON.stringify(
-    UpdatePromptContentPromptsResponse200ApplicationJson2$outboundSchema.parse(
-      updatePromptContentPromptsResponse200ApplicationJson2,
-    ),
-  );
-}
 export function updatePromptContentPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6409,45 +4860,7 @@ export const UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$inboun
       ]),
     ),
   ]);
-/** @internal */
-export type UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
-  >;
 
-/** @internal */
-export const UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$outboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
-
-export function updatePromptMessagesPromptsResponse200ApplicationJSONContentToJSON(
-  updatePromptMessagesPromptsResponse200ApplicationJSONContent:
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONContent,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$outboundSchema
-      .parse(updatePromptMessagesPromptsResponse200ApplicationJSONContent),
-  );
-}
 export function updatePromptMessagesPromptsResponse200ApplicationJSONContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6471,29 +4884,7 @@ export const UpdatePromptMessagesPromptsAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsAudio$Outbound = {
-  id: string;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsAudio$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsAudio$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsAudio
-> = z.object({
-  id: z.string(),
-});
-
-export function updatePromptMessagesPromptsAudioToJSON(
-  updatePromptMessagesPromptsAudio: UpdatePromptMessagesPromptsAudio,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsAudio$outboundSchema.parse(
-      updatePromptMessagesPromptsAudio,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsAudio, SDKValidationError> {
@@ -6508,10 +4899,6 @@ export function updatePromptMessagesPromptsAudioFromJSON(
 export const UpdatePromptMessagesPromptsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponseType> = z
     .nativeEnum(UpdatePromptMessagesPromptsResponseType);
-/** @internal */
-export const UpdatePromptMessagesPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponseType> =
-    UpdatePromptMessagesPromptsResponseType$inboundSchema;
 
 /** @internal */
 export const UpdatePromptMessagesPromptsFunction$inboundSchema: z.ZodType<
@@ -6522,31 +4909,7 @@ export const UpdatePromptMessagesPromptsFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsFunction$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsFunction$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function updatePromptMessagesPromptsFunctionToJSON(
-  updatePromptMessagesPromptsFunction: UpdatePromptMessagesPromptsFunction,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsFunction$outboundSchema.parse(
-      updatePromptMessagesPromptsFunction,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsFunction, SDKValidationError> {
@@ -6573,39 +4936,7 @@ export const UpdatePromptMessagesPromptsToolCalls$inboundSchema: z.ZodType<
     "thought_signature": "thoughtSignature",
   });
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: UpdatePromptMessagesPromptsFunction$Outbound;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsToolCalls$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsToolCalls$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsToolCalls
-> = z.object({
-  id: z.string(),
-  type: UpdatePromptMessagesPromptsResponseType$outboundSchema,
-  function: z.lazy(() => UpdatePromptMessagesPromptsFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function updatePromptMessagesPromptsToolCallsToJSON(
-  updatePromptMessagesPromptsToolCalls: UpdatePromptMessagesPromptsToolCalls,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsToolCalls$outboundSchema.parse(
-      updatePromptMessagesPromptsToolCalls,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsToolCalls, SDKValidationError> {
@@ -6653,72 +4984,7 @@ export const UpdatePromptMessagesPromptsAssistantMessage$inboundSchema:
       "tool_calls": "toolCalls",
     });
   });
-/** @internal */
-export type UpdatePromptMessagesPromptsAssistantMessage$Outbound = {
-  content?:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.RefusalPartSchema$Outbound
-      | components.ReasoningPartSchema$Outbound
-      | components.RedactedReasoningPartSchema$Outbound
-    >
-    | null
-    | undefined;
-  refusal?: string | null | undefined;
-  role: "assistant";
-  name?: string | undefined;
-  audio?: UpdatePromptMessagesPromptsAudio$Outbound | null | undefined;
-  tool_calls?: Array<UpdatePromptMessagesPromptsToolCalls$Outbound> | undefined;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsAssistantMessage$outboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsAssistantMessage$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptMessagesPromptsAssistantMessage
-  > = z.object({
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$outboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$outboundSchema,
-            components.ReasoningPartSchema$outboundSchema,
-            components.RedactedReasoningPartSchema$outboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => UpdatePromptMessagesPromptsAudio$outboundSchema),
-    ).optional(),
-    toolCalls: z.array(
-      z.lazy(() => UpdatePromptMessagesPromptsToolCalls$outboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCalls: "tool_calls",
-    });
-  });
-
-export function updatePromptMessagesPromptsAssistantMessageToJSON(
-  updatePromptMessagesPromptsAssistantMessage:
-    UpdatePromptMessagesPromptsAssistantMessage,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsAssistantMessage$outboundSchema.parse(
-      updatePromptMessagesPromptsAssistantMessage,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6742,21 +5008,11 @@ export const UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptTyp
   > = z.nativeEnum(
     UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType,
   );
-/** @internal */
-export const UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType
-  > =
-    UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema;
 
 /** @internal */
 export const UpdatePrompt2PromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsTtl
 > = z.nativeEnum(UpdatePrompt2PromptsTtl);
-/** @internal */
-export const UpdatePrompt2PromptsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePrompt2PromptsTtl
-> = UpdatePrompt2PromptsTtl$inboundSchema;
 
 /** @internal */
 export const UpdatePrompt2PromptsCacheControl$inboundSchema: z.ZodType<
@@ -6768,32 +5024,7 @@ export const UpdatePrompt2PromptsCacheControl$inboundSchema: z.ZodType<
     UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema,
   ttl: UpdatePrompt2PromptsTtl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type UpdatePrompt2PromptsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const UpdatePrompt2PromptsCacheControl$outboundSchema: z.ZodType<
-  UpdatePrompt2PromptsCacheControl$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt2PromptsCacheControl
-> = z.object({
-  type:
-    UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$outboundSchema,
-  ttl: UpdatePrompt2PromptsTtl$outboundSchema.default("5m"),
-});
-
-export function updatePrompt2PromptsCacheControlToJSON(
-  updatePrompt2PromptsCacheControl: UpdatePrompt2PromptsCacheControl,
-): string {
-  return JSON.stringify(
-    UpdatePrompt2PromptsCacheControl$outboundSchema.parse(
-      updatePrompt2PromptsCacheControl,
-    ),
-  );
-}
 export function updatePrompt2PromptsCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2PromptsCacheControl, SDKValidationError> {
@@ -6819,36 +5050,7 @@ export const UpdatePrompt2Prompts4$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type UpdatePrompt2Prompts4$Outbound = {
-  type: "file";
-  cache_control?: UpdatePrompt2PromptsCacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
-};
 
-/** @internal */
-export const UpdatePrompt2Prompts4$outboundSchema: z.ZodType<
-  UpdatePrompt2Prompts4$Outbound,
-  z.ZodTypeDef,
-  UpdatePrompt2Prompts4
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => UpdatePrompt2PromptsCacheControl$outboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function updatePrompt2Prompts4ToJSON(
-  updatePrompt2Prompts4: UpdatePrompt2Prompts4,
-): string {
-  return JSON.stringify(
-    UpdatePrompt2Prompts4$outboundSchema.parse(updatePrompt2Prompts4),
-  );
-}
 export function updatePrompt2Prompts4FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePrompt2Prompts4, SDKValidationError> {
@@ -6872,37 +5074,7 @@ export const UpdatePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
 ]);
-/** @internal */
-export type UpdatePromptContentPromptsResponse2002$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | UpdatePrompt2Prompts4$Outbound;
 
-/** @internal */
-export const UpdatePromptContentPromptsResponse2002$outboundSchema: z.ZodType<
-  UpdatePromptContentPromptsResponse2002$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptContentPromptsResponse2002
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => UpdatePrompt2Prompts4$outboundSchema),
-]);
-
-export function updatePromptContentPromptsResponse2002ToJSON(
-  updatePromptContentPromptsResponse2002:
-    UpdatePromptContentPromptsResponse2002,
-): string {
-  return JSON.stringify(
-    UpdatePromptContentPromptsResponse2002$outboundSchema.parse(
-      updatePromptContentPromptsResponse2002,
-    ),
-  );
-}
 export function updatePromptContentPromptsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptContentPromptsResponse2002, SDKValidationError> {
@@ -6933,46 +5105,7 @@ export const UpdatePromptMessagesPromptsResponse200Content$inboundSchema:
       ]),
     ),
   ]);
-/** @internal */
-export type UpdatePromptMessagesPromptsResponse200Content$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.ImageContentPartSchema$Outbound
-    | components.AudioContentPartSchema$Outbound
-    | UpdatePrompt2Prompts4$Outbound
-  >;
 
-/** @internal */
-export const UpdatePromptMessagesPromptsResponse200Content$outboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsResponse200Content$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptMessagesPromptsResponse200Content
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdatePrompt2Prompts4$outboundSchema),
-      ]),
-    ),
-  ]);
-
-export function updatePromptMessagesPromptsResponse200ContentToJSON(
-  updatePromptMessagesPromptsResponse200Content:
-    UpdatePromptMessagesPromptsResponse200Content,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsResponse200Content$outboundSchema.parse(
-      updatePromptMessagesPromptsResponse200Content,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsResponse200ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7011,53 +5144,7 @@ export const UpdatePromptMessagesPromptsUserMessage$inboundSchema: z.ZodType<
     ),
   ]),
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsUserMessage$Outbound = {
-  role: "user";
-  name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | UpdatePrompt2Prompts4$Outbound
-    >;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsUserMessage$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsUserMessage$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdatePrompt2Prompts4$outboundSchema),
-      ]),
-    ),
-  ]),
-});
-
-export function updatePromptMessagesPromptsUserMessageToJSON(
-  updatePromptMessagesPromptsUserMessage:
-    UpdatePromptMessagesPromptsUserMessage,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsUserMessage$outboundSchema.parse(
-      updatePromptMessagesPromptsUserMessage,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptMessagesPromptsUserMessage, SDKValidationError> {
@@ -7076,32 +5163,7 @@ export const UpdatePromptMessagesPromptsResponseContent$inboundSchema:
       z.string(),
       z.array(components.TextContentPartSchema$inboundSchema),
     ]);
-/** @internal */
-export type UpdatePromptMessagesPromptsResponseContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const UpdatePromptMessagesPromptsResponseContent$outboundSchema:
-  z.ZodType<
-    UpdatePromptMessagesPromptsResponseContent$Outbound,
-    z.ZodTypeDef,
-    UpdatePromptMessagesPromptsResponseContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function updatePromptMessagesPromptsResponseContentToJSON(
-  updatePromptMessagesPromptsResponseContent:
-    UpdatePromptMessagesPromptsResponseContent,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsResponseContent$outboundSchema.parse(
-      updatePromptMessagesPromptsResponseContent,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7131,37 +5193,7 @@ export const UpdatePromptMessagesPromptsSystemMessage$inboundSchema: z.ZodType<
   ]),
   name: z.string().optional(),
 });
-/** @internal */
-export type UpdatePromptMessagesPromptsSystemMessage$Outbound = {
-  role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const UpdatePromptMessagesPromptsSystemMessage$outboundSchema: z.ZodType<
-  UpdatePromptMessagesPromptsSystemMessage$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptMessagesPromptsSystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
-
-export function updatePromptMessagesPromptsSystemMessageToJSON(
-  updatePromptMessagesPromptsSystemMessage:
-    UpdatePromptMessagesPromptsSystemMessage,
-): string {
-  return JSON.stringify(
-    UpdatePromptMessagesPromptsSystemMessage$outboundSchema.parse(
-      updatePromptMessagesPromptsSystemMessage,
-    ),
-  );
-}
 export function updatePromptMessagesPromptsSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7189,34 +5221,7 @@ export const UpdatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
   z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$inboundSchema),
   z.lazy(() => UpdatePromptMessagesPromptsToolMessage$inboundSchema),
 ]);
-/** @internal */
-export type UpdatePromptPromptsResponseMessages$Outbound =
-  | UpdatePromptMessagesPromptsSystemMessage$Outbound
-  | UpdatePromptMessagesPromptsUserMessage$Outbound
-  | UpdatePromptMessagesPromptsAssistantMessage$Outbound
-  | UpdatePromptMessagesPromptsToolMessage$Outbound;
 
-/** @internal */
-export const UpdatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
-  UpdatePromptPromptsResponseMessages$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsResponseMessages
-> = z.union([
-  z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsUserMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsToolMessage$outboundSchema),
-]);
-
-export function updatePromptPromptsResponseMessagesToJSON(
-  updatePromptPromptsResponseMessages: UpdatePromptPromptsResponseMessages,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsResponseMessages$outboundSchema.parse(
-      updatePromptPromptsResponseMessages,
-    ),
-  );
-}
 export function updatePromptPromptsResponseMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsResponseMessages, SDKValidationError> {
@@ -7273,6 +5278,14 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => UpdatePromptPromptsGuardrails$inboundSchema))
     .optional(),
+  fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
+    .optional(),
+  retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),
+  cache: z.lazy(() => UpdatePromptPromptsCache$inboundSchema).optional(),
+  load_balancer: z.array(
+    z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema),
+  ).optional(),
+  timeout: z.lazy(() => UpdatePromptPromptsTimeout$inboundSchema).optional(),
   messages: z.array(
     z.union([
       z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
@@ -7297,131 +5310,10 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-  });
-});
-/** @internal */
-export type UpdatePromptPromptField$Outbound = {
-  audio?: UpdatePromptPromptsAudio$Outbound | null | undefined;
-  frequency_penalty?: number | null | undefined;
-  max_tokens?: number | null | undefined;
-  max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
-  presence_penalty?: number | null | undefined;
-  response_format?:
-    | UpdatePromptResponseFormatPromptsText$Outbound
-    | UpdatePromptResponseFormatPromptsJSONObject$Outbound
-    | UpdatePromptResponseFormatPromptsResponse200JSONSchema$Outbound
-    | undefined;
-  reasoning_effort?: string | undefined;
-  verbosity?: string | undefined;
-  seed?: number | null | undefined;
-  stop?: string | Array<string> | null | undefined;
-  stream_options?: UpdatePromptPromptsStreamOptions$Outbound | null | undefined;
-  thinking?:
-    | components.ThinkingConfigDisabledSchema$Outbound
-    | components.ThinkingConfigEnabledSchema$Outbound
-    | undefined;
-  temperature?: number | null | undefined;
-  top_p?: number | null | undefined;
-  top_k?: number | null | undefined;
-  tool_choice?: UpdatePromptToolChoicePrompts2$Outbound | string | undefined;
-  parallel_tool_calls?: boolean | undefined;
-  modalities?: Array<string> | null | undefined;
-  guardrails?: Array<UpdatePromptPromptsGuardrails$Outbound> | undefined;
-  messages?:
-    | Array<
-      | UpdatePromptMessagesPromptsSystemMessage$Outbound
-      | UpdatePromptMessagesPromptsUserMessage$Outbound
-      | UpdatePromptMessagesPromptsAssistantMessage$Outbound
-      | UpdatePromptMessagesPromptsToolMessage$Outbound
-    >
-    | undefined;
-  model?: string | null | undefined;
-  version?: string | undefined;
-};
-
-/** @internal */
-export const UpdatePromptPromptField$outboundSchema: z.ZodType<
-  UpdatePromptPromptField$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptField
-> = z.object({
-  audio: z.nullable(z.lazy(() => UpdatePromptPromptsAudio$outboundSchema))
-    .optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => UpdatePromptResponseFormatPromptsText$outboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$outboundSchema),
-    z.lazy(() =>
-      UpdatePromptResponseFormatPromptsResponse200JSONSchema$outboundSchema
-    ),
-  ]).optional(),
-  reasoningEffort: UpdatePromptPromptsReasoningEffort$outboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => UpdatePromptPromptsStreamOptions$outboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => UpdatePromptToolChoicePrompts2$outboundSchema),
-    UpdatePromptToolChoicePrompts1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdatePromptPromptsModalities$outboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => UpdatePromptPromptsGuardrails$outboundSchema),
-  ).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$outboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsUserMessage$outboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$outboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
+    "load_balancer": "loadBalancer",
   });
 });
 
-export function updatePromptPromptFieldToJSON(
-  updatePromptPromptField: UpdatePromptPromptField,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptField$outboundSchema.parse(updatePromptPromptField),
-  );
-}
 export function updatePromptPromptFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptField, SDKValidationError> {
@@ -7436,19 +5328,11 @@ export function updatePromptPromptFieldFromJSON(
 export const UpdatePromptPromptsUseCases$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsUseCases
 > = z.nativeEnum(UpdatePromptPromptsUseCases);
-/** @internal */
-export const UpdatePromptPromptsUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsUseCases
-> = UpdatePromptPromptsUseCases$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsLanguage
 > = z.nativeEnum(UpdatePromptPromptsLanguage);
-/** @internal */
-export const UpdatePromptPromptsLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsLanguage
-> = UpdatePromptPromptsLanguage$inboundSchema;
 
 /** @internal */
 export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
@@ -7463,35 +5347,7 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-/** @internal */
-export type UpdatePromptPromptsMetadata$Outbound = {
-  use_cases?: Array<string> | undefined;
-  language?: string | null | undefined;
-};
 
-/** @internal */
-export const UpdatePromptPromptsMetadata$outboundSchema: z.ZodType<
-  UpdatePromptPromptsMetadata$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPromptsMetadata
-> = z.object({
-  useCases: z.array(UpdatePromptPromptsUseCases$outboundSchema).optional(),
-  language: z.nullable(UpdatePromptPromptsLanguage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    useCases: "use_cases",
-  });
-});
-
-export function updatePromptPromptsMetadataToJSON(
-  updatePromptPromptsMetadata: UpdatePromptPromptsMetadata,
-): string {
-  return JSON.stringify(
-    UpdatePromptPromptsMetadata$outboundSchema.parse(
-      updatePromptPromptsMetadata,
-    ),
-  );
-}
 export function updatePromptPromptsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPromptsMetadata, SDKValidationError> {
@@ -7509,7 +5365,7 @@ export const UpdatePromptPrompt$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  type: UpdatePromptType$inboundSchema,
+  type: UpdatePromptPromptsType$inboundSchema,
   owner: z.string(),
   domain_id: z.string(),
   created: z.string(),
@@ -7532,61 +5388,7 @@ export const UpdatePromptPrompt$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-/** @internal */
-export type UpdatePromptPrompt$Outbound = {
-  _id: string;
-  type: string;
-  owner: string;
-  domain_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  display_name: string;
-  description?: string | null | undefined;
-  prompt_config?: UpdatePromptPromptConfig$Outbound | undefined;
-  prompt: UpdatePromptPromptField$Outbound;
-  metadata?: UpdatePromptPromptsMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const UpdatePromptPrompt$outboundSchema: z.ZodType<
-  UpdatePromptPrompt$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptPrompt
-> = z.object({
-  id: z.string(),
-  type: UpdatePromptType$outboundSchema,
-  owner: z.string(),
-  domainId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => UpdatePromptPromptConfig$outboundSchema)
-    .optional(),
-  prompt: z.lazy(() => UpdatePromptPromptField$outboundSchema),
-  metadata: z.lazy(() => UpdatePromptPromptsMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    displayName: "display_name",
-    promptConfig: "prompt_config",
-  });
-});
-
-export function updatePromptPromptToJSON(
-  updatePromptPrompt: UpdatePromptPrompt,
-): string {
-  return JSON.stringify(
-    UpdatePromptPrompt$outboundSchema.parse(updatePromptPrompt),
-  );
-}
 export function updatePromptPromptFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdatePromptPrompt, SDKValidationError> {

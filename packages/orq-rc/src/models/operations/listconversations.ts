@@ -46,17 +46,6 @@ export type ListConversationsResponseBody = {
 };
 
 /** @internal */
-export const ListConversationsRequest$inboundSchema: z.ZodType<
-  ListConversationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  entityId: z.string().optional(),
-});
-/** @internal */
 export type ListConversationsRequest$Outbound = {
   limit?: number | undefined;
   startingAfter?: string | undefined;
@@ -83,24 +72,11 @@ export function listConversationsRequestToJSON(
     ListConversationsRequest$outboundSchema.parse(listConversationsRequest),
   );
 }
-export function listConversationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListConversationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListConversationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListConversationsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListConversationsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListConversationsObject
 > = z.nativeEnum(ListConversationsObject);
-/** @internal */
-export const ListConversationsObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListConversationsObject
-> = ListConversationsObject$inboundSchema;
 
 /** @internal */
 export const ListConversationsResponseBody$inboundSchema: z.ZodType<
@@ -116,37 +92,7 @@ export const ListConversationsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListConversationsResponseBody$Outbound = {
-  object: string;
-  data: Array<components.ConversationResponse$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListConversationsResponseBody$outboundSchema: z.ZodType<
-  ListConversationsResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListConversationsResponseBody
-> = z.object({
-  object: ListConversationsObject$outboundSchema,
-  data: z.array(components.ConversationResponse$outboundSchema),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listConversationsResponseBodyToJSON(
-  listConversationsResponseBody: ListConversationsResponseBody,
-): string {
-  return JSON.stringify(
-    ListConversationsResponseBody$outboundSchema.parse(
-      listConversationsResponseBody,
-    ),
-  );
-}
 export function listConversationsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListConversationsResponseBody, SDKValidationError> {

@@ -74,23 +74,9 @@ export type FileUploadResponseBody = {
   /**
    * The date and time the resource was created
    */
-  created?: Date | undefined;
+  created: Date;
 };
 
-/** @internal */
-export const FileUploadFile$inboundSchema: z.ZodType<
-  FileUploadFile,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
 /** @internal */
 export type FileUploadFile$Outbound = {
   fileName: string;
@@ -115,32 +101,11 @@ export const FileUploadFile$outboundSchema: z.ZodType<
 export function fileUploadFileToJSON(fileUploadFile: FileUploadFile): string {
   return JSON.stringify(FileUploadFile$outboundSchema.parse(fileUploadFile));
 }
-export function fileUploadFileFromJSON(
-  jsonString: string,
-): SafeParseResult<FileUploadFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileUploadFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileUploadFile' from JSON`,
-  );
-}
 
 /** @internal */
-export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
+export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> = z
   .nativeEnum(Purpose);
-/** @internal */
-export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
-  Purpose$inboundSchema;
 
-/** @internal */
-export const FileUploadRequestBody$inboundSchema: z.ZodType<
-  FileUploadRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file: z.lazy(() => FileUploadFile$inboundSchema),
-  purpose: Purpose$inboundSchema.default("retrieval"),
-});
 /** @internal */
 export type FileUploadRequestBody$Outbound = {
   file: FileUploadFile$Outbound | Blob;
@@ -164,24 +129,11 @@ export function fileUploadRequestBodyToJSON(
     FileUploadRequestBody$outboundSchema.parse(fileUploadRequestBody),
   );
 }
-export function fileUploadRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<FileUploadRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileUploadRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileUploadRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileUploadPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileUploadPurpose
 > = z.nativeEnum(FileUploadPurpose);
-/** @internal */
-export const FileUploadPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileUploadPurpose
-> = FileUploadPurpose$inboundSchema;
 
 /** @internal */
 export const FileUploadResponseBody$inboundSchema: z.ZodType<
@@ -196,7 +148,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:35.020Z",
+    "2026-01-22T11:24:25.787Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -206,47 +158,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type FileUploadResponseBody$Outbound = {
-  _id: string;
-  object_name: string;
-  purpose: string;
-  bytes: number;
-  file_name: string;
-  workspace_id: string;
-  created: string;
-};
 
-/** @internal */
-export const FileUploadResponseBody$outboundSchema: z.ZodType<
-  FileUploadResponseBody$Outbound,
-  z.ZodTypeDef,
-  FileUploadResponseBody
-> = z.object({
-  id: z.string(),
-  objectName: z.string(),
-  purpose: FileUploadPurpose$outboundSchema,
-  bytes: z.number(),
-  fileName: z.string(),
-  workspaceId: z.string(),
-  created: z.date().default(() => new Date("2026-01-22T07:45:35.020Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    objectName: "object_name",
-    fileName: "file_name",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function fileUploadResponseBodyToJSON(
-  fileUploadResponseBody: FileUploadResponseBody,
-): string {
-  return JSON.stringify(
-    FileUploadResponseBody$outboundSchema.parse(fileUploadResponseBody),
-  );
-}
 export function fileUploadResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileUploadResponseBody, SDKValidationError> {

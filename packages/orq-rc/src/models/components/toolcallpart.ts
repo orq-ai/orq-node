@@ -39,39 +39,7 @@ export const ToolCallPart$inboundSchema: z.ZodType<
     "thought_signature": "thoughtSignature",
   });
 });
-/** @internal */
-export type ToolCallPart$Outbound = {
-  kind: "tool_call";
-  tool_name: string;
-  tool_call_id: string;
-  arguments: { [k: string]: any };
-  thought_signature?: string | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const ToolCallPart$outboundSchema: z.ZodType<
-  ToolCallPart$Outbound,
-  z.ZodTypeDef,
-  ToolCallPart
-> = z.object({
-  kind: z.literal("tool_call"),
-  toolName: z.string(),
-  toolCallId: z.string(),
-  arguments: z.record(z.any()),
-  thoughtSignature: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolName: "tool_name",
-    toolCallId: "tool_call_id",
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function toolCallPartToJSON(toolCallPart: ToolCallPart): string {
-  return JSON.stringify(ToolCallPart$outboundSchema.parse(toolCallPart));
-}
 export function toolCallPartFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolCallPart, SDKValidationError> {

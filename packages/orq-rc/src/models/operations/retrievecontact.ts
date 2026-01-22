@@ -54,17 +54,9 @@ export type RetrieveContactResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const RetrieveContactRequest$inboundSchema: z.ZodType<
-  RetrieveContactRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type RetrieveContactRequest$Outbound = {
   id: string;
@@ -86,15 +78,6 @@ export function retrieveContactRequestToJSON(
     RetrieveContactRequest$outboundSchema.parse(retrieveContactRequest),
   );
 }
-export function retrieveContactRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveContactRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveContactRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveContactRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const RetrieveContactResponseBody$inboundSchema: z.ZodType<
@@ -112,7 +95,7 @@ export const RetrieveContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:31.576Z",
+    "2026-01-22T11:24:22.432Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -122,53 +105,7 @@ export const RetrieveContactResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-/** @internal */
-export type RetrieveContactResponseBody$Outbound = {
-  _id: string;
-  external_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const RetrieveContactResponseBody$outboundSchema: z.ZodType<
-  RetrieveContactResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveContactResponseBody
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatarUrl: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    externalId: "external_id",
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
-
-export function retrieveContactResponseBodyToJSON(
-  retrieveContactResponseBody: RetrieveContactResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveContactResponseBody$outboundSchema.parse(
-      retrieveContactResponseBody,
-    ),
-  );
-}
 export function retrieveContactResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveContactResponseBody, SDKValidationError> {

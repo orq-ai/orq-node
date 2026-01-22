@@ -84,21 +84,6 @@ export type GetAllMemoryStoresResponseBody = {
 };
 
 /** @internal */
-export const GetAllMemoryStoresRequest$inboundSchema: z.ZodType<
-  GetAllMemoryStoresRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
-/** @internal */
 export type GetAllMemoryStoresRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
@@ -128,24 +113,11 @@ export function getAllMemoryStoresRequestToJSON(
     GetAllMemoryStoresRequest$outboundSchema.parse(getAllMemoryStoresRequest),
   );
 }
-export function getAllMemoryStoresRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryStoresRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryStoresRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryStoresRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetAllMemoryStoresObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoryStoresObject
 > = z.nativeEnum(GetAllMemoryStoresObject);
-/** @internal */
-export const GetAllMemoryStoresObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllMemoryStoresObject
-> = GetAllMemoryStoresObject$inboundSchema;
 
 /** @internal */
 export const GetAllMemoryStoresEmbeddingConfig$inboundSchema: z.ZodType<
@@ -155,29 +127,7 @@ export const GetAllMemoryStoresEmbeddingConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-/** @internal */
-export type GetAllMemoryStoresEmbeddingConfig$Outbound = {
-  model: string;
-};
 
-/** @internal */
-export const GetAllMemoryStoresEmbeddingConfig$outboundSchema: z.ZodType<
-  GetAllMemoryStoresEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoryStoresEmbeddingConfig
-> = z.object({
-  model: z.string(),
-});
-
-export function getAllMemoryStoresEmbeddingConfigToJSON(
-  getAllMemoryStoresEmbeddingConfig: GetAllMemoryStoresEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    GetAllMemoryStoresEmbeddingConfig$outboundSchema.parse(
-      getAllMemoryStoresEmbeddingConfig,
-    ),
-  );
-}
 export function getAllMemoryStoresEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryStoresEmbeddingConfig, SDKValidationError> {
@@ -213,52 +163,7 @@ export const GetAllMemoryStoresData$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-/** @internal */
-export type GetAllMemoryStoresData$Outbound = {
-  _id: string;
-  key: string;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created: string;
-  updated: string;
-  ttl?: number | undefined;
-  embedding_config: GetAllMemoryStoresEmbeddingConfig$Outbound;
-};
 
-/** @internal */
-export const GetAllMemoryStoresData$outboundSchema: z.ZodType<
-  GetAllMemoryStoresData$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoryStoresData
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.number().optional(),
-  embeddingConfig: z.lazy(() =>
-    GetAllMemoryStoresEmbeddingConfig$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    embeddingConfig: "embedding_config",
-  });
-});
-
-export function getAllMemoryStoresDataToJSON(
-  getAllMemoryStoresData: GetAllMemoryStoresData,
-): string {
-  return JSON.stringify(
-    GetAllMemoryStoresData$outboundSchema.parse(getAllMemoryStoresData),
-  );
-}
 export function getAllMemoryStoresDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryStoresData, SDKValidationError> {
@@ -283,37 +188,7 @@ export const GetAllMemoryStoresResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetAllMemoryStoresResponseBody$Outbound = {
-  object: string;
-  data: Array<GetAllMemoryStoresData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetAllMemoryStoresResponseBody$outboundSchema: z.ZodType<
-  GetAllMemoryStoresResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoryStoresResponseBody
-> = z.object({
-  object: GetAllMemoryStoresObject$outboundSchema,
-  data: z.array(z.lazy(() => GetAllMemoryStoresData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getAllMemoryStoresResponseBodyToJSON(
-  getAllMemoryStoresResponseBody: GetAllMemoryStoresResponseBody,
-): string {
-  return JSON.stringify(
-    GetAllMemoryStoresResponseBody$outboundSchema.parse(
-      getAllMemoryStoresResponseBody,
-    ),
-  );
-}
 export function getAllMemoryStoresResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoryStoresResponseBody, SDKValidationError> {

@@ -88,14 +88,6 @@ export type CreateMemoryStoreResponseBody = {
 };
 
 /** @internal */
-export const EmbeddingConfig$inboundSchema: z.ZodType<
-  EmbeddingConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
-/** @internal */
 export type EmbeddingConfig$Outbound = {
   model: string;
 };
@@ -114,32 +106,7 @@ export function embeddingConfigToJSON(
 ): string {
   return JSON.stringify(EmbeddingConfig$outboundSchema.parse(embeddingConfig));
 }
-export function embeddingConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<EmbeddingConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmbeddingConfig' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateMemoryStoreRequestBody$inboundSchema: z.ZodType<
-  CreateMemoryStoreRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  embedding_config: z.lazy(() => EmbeddingConfig$inboundSchema),
-  description: z.string(),
-  ttl: z.number().optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "embedding_config": "embeddingConfig",
-  });
-});
 /** @internal */
 export type CreateMemoryStoreRequestBody$Outbound = {
   key: string;
@@ -175,15 +142,6 @@ export function createMemoryStoreRequestBodyToJSON(
     ),
   );
 }
-export function createMemoryStoreRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateMemoryStoreRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateMemoryStoreRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMemoryStoreRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
@@ -193,29 +151,7 @@ export const CreateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
 });
-/** @internal */
-export type CreateMemoryStoreEmbeddingConfig$Outbound = {
-  model: string;
-};
 
-/** @internal */
-export const CreateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
-  CreateMemoryStoreEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  CreateMemoryStoreEmbeddingConfig
-> = z.object({
-  model: z.string(),
-});
-
-export function createMemoryStoreEmbeddingConfigToJSON(
-  createMemoryStoreEmbeddingConfig: CreateMemoryStoreEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    CreateMemoryStoreEmbeddingConfig$outboundSchema.parse(
-      createMemoryStoreEmbeddingConfig,
-    ),
-  );
-}
 export function createMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryStoreEmbeddingConfig, SDKValidationError> {
@@ -251,54 +187,7 @@ export const CreateMemoryStoreResponseBody$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-/** @internal */
-export type CreateMemoryStoreResponseBody$Outbound = {
-  _id: string;
-  key: string;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created: string;
-  updated: string;
-  ttl?: number | undefined;
-  embedding_config: CreateMemoryStoreEmbeddingConfig$Outbound;
-};
 
-/** @internal */
-export const CreateMemoryStoreResponseBody$outboundSchema: z.ZodType<
-  CreateMemoryStoreResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateMemoryStoreResponseBody
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.number().optional(),
-  embeddingConfig: z.lazy(() =>
-    CreateMemoryStoreEmbeddingConfig$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    embeddingConfig: "embedding_config",
-  });
-});
-
-export function createMemoryStoreResponseBodyToJSON(
-  createMemoryStoreResponseBody: CreateMemoryStoreResponseBody,
-): string {
-  return JSON.stringify(
-    CreateMemoryStoreResponseBody$outboundSchema.parse(
-      createMemoryStoreResponseBody,
-    ),
-  );
-}
 export function createMemoryStoreResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryStoreResponseBody, SDKValidationError> {

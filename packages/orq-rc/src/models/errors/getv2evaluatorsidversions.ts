@@ -49,19 +49,3 @@ export const GetV2EvaluatorsIdVersionsResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type GetV2EvaluatorsIdVersionsResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const GetV2EvaluatorsIdVersionsResponseBody$outboundSchema: z.ZodType<
-  GetV2EvaluatorsIdVersionsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetV2EvaluatorsIdVersionsResponseBody
-> = z.instanceof(GetV2EvaluatorsIdVersionsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

@@ -116,12 +116,6 @@ export type ListChunksResponseBody = {
 };
 
 /** @internal */
-export const QueryParamStatus$inboundSchema: z.ZodType<
-  QueryParamStatus,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.array(z.string()), z.string()]);
-/** @internal */
 export type QueryParamStatus$Outbound = Array<string> | string;
 
 /** @internal */
@@ -138,37 +132,7 @@ export function queryParamStatusToJSON(
     QueryParamStatus$outboundSchema.parse(queryParamStatus),
   );
 }
-export function queryParamStatusFromJSON(
-  jsonString: string,
-): SafeParseResult<QueryParamStatus, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamStatus' from JSON`,
-  );
-}
 
-/** @internal */
-export const ListChunksRequest$inboundSchema: z.ZodType<
-  ListChunksRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  q: z.string().optional(),
-  status: z.union([z.array(z.string()), z.string()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
 /** @internal */
 export type ListChunksRequest$Outbound = {
   knowledge_id: string;
@@ -209,24 +173,11 @@ export function listChunksRequestToJSON(
     ListChunksRequest$outboundSchema.parse(listChunksRequest),
   );
 }
-export function listChunksRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListChunksObject$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksObject
 > = z.nativeEnum(ListChunksObject);
-/** @internal */
-export const ListChunksObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksObject
-> = ListChunksObject$inboundSchema;
 
 /** @internal */
 export const ListChunksMetadata$inboundSchema: z.ZodType<
@@ -234,23 +185,7 @@ export const ListChunksMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type ListChunksMetadata$Outbound = string | number | boolean;
 
-/** @internal */
-export const ListChunksMetadata$outboundSchema: z.ZodType<
-  ListChunksMetadata$Outbound,
-  z.ZodTypeDef,
-  ListChunksMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function listChunksMetadataToJSON(
-  listChunksMetadata: ListChunksMetadata,
-): string {
-  return JSON.stringify(
-    ListChunksMetadata$outboundSchema.parse(listChunksMetadata),
-  );
-}
 export function listChunksMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksMetadata, SDKValidationError> {
@@ -265,10 +200,6 @@ export function listChunksMetadataFromJSON(
 export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksStatus
 > = z.nativeEnum(ListChunksStatus);
-/** @internal */
-export const ListChunksStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksStatus
-> = ListChunksStatus$inboundSchema;
 
 /** @internal */
 export const ListChunksData$inboundSchema: z.ZodType<
@@ -292,45 +223,7 @@ export const ListChunksData$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-/** @internal */
-export type ListChunksData$Outbound = {
-  _id: string;
-  text: string;
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  enabled: boolean;
-  status: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-};
 
-/** @internal */
-export const ListChunksData$outboundSchema: z.ZodType<
-  ListChunksData$Outbound,
-  z.ZodTypeDef,
-  ListChunksData
-> = z.object({
-  id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: ListChunksStatus$outboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-  });
-});
-
-export function listChunksDataToJSON(listChunksData: ListChunksData): string {
-  return JSON.stringify(ListChunksData$outboundSchema.parse(listChunksData));
-}
 export function listChunksDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksData, SDKValidationError> {
@@ -355,35 +248,7 @@ export const ListChunksResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListChunksResponseBody$Outbound = {
-  object: string;
-  data: Array<ListChunksData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListChunksResponseBody$outboundSchema: z.ZodType<
-  ListChunksResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListChunksResponseBody
-> = z.object({
-  object: ListChunksObject$outboundSchema,
-  data: z.array(z.lazy(() => ListChunksData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listChunksResponseBodyToJSON(
-  listChunksResponseBody: ListChunksResponseBody,
-): string {
-  return JSON.stringify(
-    ListChunksResponseBody$outboundSchema.parse(listChunksResponseBody),
-  );
-}
 export function listChunksResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksResponseBody, SDKValidationError> {

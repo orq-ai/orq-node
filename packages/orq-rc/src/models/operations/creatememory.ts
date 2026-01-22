@@ -50,18 +50,6 @@ export type CreateMemoryResponseBody = {
 };
 
 /** @internal */
-export const CreateMemoryRequestBody$inboundSchema: z.ZodType<
-  CreateMemoryRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-  });
-});
-/** @internal */
 export type CreateMemoryRequestBody$Outbound = {
   entity_id: string;
 };
@@ -86,30 +74,7 @@ export function createMemoryRequestBodyToJSON(
     CreateMemoryRequestBody$outboundSchema.parse(createMemoryRequestBody),
   );
 }
-export function createMemoryRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateMemoryRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateMemoryRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMemoryRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateMemoryRequest$inboundSchema: z.ZodType<
-  CreateMemoryRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  RequestBody: z.lazy(() => CreateMemoryRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateMemoryRequest$Outbound = {
   memory_store_key: string;
@@ -136,15 +101,6 @@ export function createMemoryRequestToJSON(
 ): string {
   return JSON.stringify(
     CreateMemoryRequest$outboundSchema.parse(createMemoryRequest),
-  );
-}
-export function createMemoryRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateMemoryRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateMemoryRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMemoryRequest' from JSON`,
   );
 }
 
@@ -174,53 +130,7 @@ export const CreateMemoryResponseBody$inboundSchema: z.ZodType<
     "documents_count": "documentsCount",
   });
 });
-/** @internal */
-export type CreateMemoryResponseBody$Outbound = {
-  _id: string;
-  entity_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  store_id: string;
-  workspace_id: string;
-  documents_count: number;
-};
 
-/** @internal */
-export const CreateMemoryResponseBody$outboundSchema: z.ZodType<
-  CreateMemoryResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateMemoryResponseBody
-> = z.object({
-  id: z.string(),
-  entityId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  storeId: z.string(),
-  workspaceId: z.string(),
-  documentsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    entityId: "entity_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    storeId: "store_id",
-    workspaceId: "workspace_id",
-    documentsCount: "documents_count",
-  });
-});
-
-export function createMemoryResponseBodyToJSON(
-  createMemoryResponseBody: CreateMemoryResponseBody,
-): string {
-  return JSON.stringify(
-    CreateMemoryResponseBody$outboundSchema.parse(createMemoryResponseBody),
-  );
-}
 export function createMemoryResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateMemoryResponseBody, SDKValidationError> {

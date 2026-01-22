@@ -56,9 +56,6 @@ export type CreateFeedbackResponseBody = {
 };
 
 /** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.array(z.string())]);
-/** @internal */
 export type Value$Outbound = string | number | Array<string>;
 
 /** @internal */
@@ -71,31 +68,7 @@ export const Value$outboundSchema: z.ZodType<
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
 }
-export function valueFromJSON(
-  jsonString: string,
-): SafeParseResult<Value, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Value$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Value' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateFeedbackRequestBody$inboundSchema: z.ZodType<
-  CreateFeedbackRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  property: z.string(),
-  value: z.union([z.string(), z.number(), z.array(z.string())]),
-  trace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "property": "field",
-    "trace_id": "traceId",
-  });
-});
 /** @internal */
 export type CreateFeedbackRequestBody$Outbound = {
   property: string;
@@ -126,15 +99,6 @@ export function createFeedbackRequestBodyToJSON(
     CreateFeedbackRequestBody$outboundSchema.parse(createFeedbackRequestBody),
   );
 }
-export function createFeedbackRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateFeedbackRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateFeedbackRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateFeedbackRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateFeedbackValue$inboundSchema: z.ZodType<
@@ -142,23 +106,7 @@ export const CreateFeedbackValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.array(z.string())]);
-/** @internal */
-export type CreateFeedbackValue$Outbound = string | number | Array<string>;
 
-/** @internal */
-export const CreateFeedbackValue$outboundSchema: z.ZodType<
-  CreateFeedbackValue$Outbound,
-  z.ZodTypeDef,
-  CreateFeedbackValue
-> = z.union([z.string(), z.number(), z.array(z.string())]);
-
-export function createFeedbackValueToJSON(
-  createFeedbackValue: CreateFeedbackValue,
-): string {
-  return JSON.stringify(
-    CreateFeedbackValue$outboundSchema.parse(createFeedbackValue),
-  );
-}
 export function createFeedbackValueFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateFeedbackValue, SDKValidationError> {
@@ -184,37 +132,7 @@ export const CreateFeedbackResponseBody$inboundSchema: z.ZodType<
     "trace_id": "traceId",
   });
 });
-/** @internal */
-export type CreateFeedbackResponseBody$Outbound = {
-  property: string;
-  value: string | number | Array<string>;
-  trace_id: string;
-  id: string;
-};
 
-/** @internal */
-export const CreateFeedbackResponseBody$outboundSchema: z.ZodType<
-  CreateFeedbackResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateFeedbackResponseBody
-> = z.object({
-  property: z.string(),
-  value: z.union([z.string(), z.number(), z.array(z.string())]),
-  traceId: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-  });
-});
-
-export function createFeedbackResponseBodyToJSON(
-  createFeedbackResponseBody: CreateFeedbackResponseBody,
-): string {
-  return JSON.stringify(
-    CreateFeedbackResponseBody$outboundSchema.parse(createFeedbackResponseBody),
-  );
-}
 export function createFeedbackResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateFeedbackResponseBody, SDKValidationError> {

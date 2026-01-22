@@ -62,7 +62,7 @@ export type GenerateConversationNameResponseBody = {
   /**
    * Unique conversation identifier with `conv_` prefix.
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Resource type discriminator.
    */
@@ -94,14 +94,6 @@ export type GenerateConversationNameResponseBody = {
 };
 
 /** @internal */
-export const GenerateConversationNameRequestBody$inboundSchema: z.ZodType<
-  GenerateConversationNameRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  context: z.string(),
-});
-/** @internal */
 export type GenerateConversationNameRequestBody$Outbound = {
   context: string;
 };
@@ -124,31 +116,7 @@ export function generateConversationNameRequestBodyToJSON(
     ),
   );
 }
-export function generateConversationNameRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GenerateConversationNameRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GenerateConversationNameRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GenerateConversationNameRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const GenerateConversationNameRequest$inboundSchema: z.ZodType<
-  GenerateConversationNameRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  conversation_id: z.string(),
-  RequestBody: z.lazy(() => GenerateConversationNameRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type GenerateConversationNameRequest$Outbound = {
   conversation_id: string;
@@ -179,24 +147,11 @@ export function generateConversationNameRequestToJSON(
     ),
   );
 }
-export function generateConversationNameRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GenerateConversationNameRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GenerateConversationNameRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GenerateConversationNameRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GenerateConversationNameKind$inboundSchema: z.ZodNativeEnum<
   typeof GenerateConversationNameKind
 > = z.nativeEnum(GenerateConversationNameKind);
-/** @internal */
-export const GenerateConversationNameKind$outboundSchema: z.ZodNativeEnum<
-  typeof GenerateConversationNameKind
-> = GenerateConversationNameKind$inboundSchema;
 
 /** @internal */
 export const GenerateConversationNameMetadata$inboundSchema: z.ZodType<
@@ -208,33 +163,7 @@ export const GenerateConversationNameMetadata$inboundSchema: z.ZodType<
   entityId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type GenerateConversationNameMetadata$Outbound = {
-  generatingTitle?: boolean | undefined;
-  entityId?: string | null | undefined;
-  model?: string | null | undefined;
-};
 
-/** @internal */
-export const GenerateConversationNameMetadata$outboundSchema: z.ZodType<
-  GenerateConversationNameMetadata$Outbound,
-  z.ZodTypeDef,
-  GenerateConversationNameMetadata
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-
-export function generateConversationNameMetadataToJSON(
-  generateConversationNameMetadata: GenerateConversationNameMetadata,
-): string {
-  return JSON.stringify(
-    GenerateConversationNameMetadata$outboundSchema.parse(
-      generateConversationNameMetadata,
-    ),
-  );
-}
 export function generateConversationNameMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GenerateConversationNameMetadata, SDKValidationError> {
@@ -251,7 +180,7 @@ export const GenerateConversationNameResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kfjan6hhn3dr94qsk282gvww"),
+  _id: z.string().default("conv_01kfjq5xhwtwb64mvfc2v6axhq"),
   kind: GenerateConversationNameKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
@@ -265,48 +194,7 @@ export const GenerateConversationNameResponseBody$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type GenerateConversationNameResponseBody$Outbound = {
-  _id: string;
-  kind: string;
-  displayName: string;
-  createdAt: number;
-  updatedAt: number;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
-  metadata?: GenerateConversationNameMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const GenerateConversationNameResponseBody$outboundSchema: z.ZodType<
-  GenerateConversationNameResponseBody$Outbound,
-  z.ZodTypeDef,
-  GenerateConversationNameResponseBody
-> = z.object({
-  id: z.string().default("conv_01kfjan6hhn3dr94qsk282gvww"),
-  kind: GenerateConversationNameKind$outboundSchema,
-  displayName: z.string(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  metadata: z.lazy(() => GenerateConversationNameMetadata$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function generateConversationNameResponseBodyToJSON(
-  generateConversationNameResponseBody: GenerateConversationNameResponseBody,
-): string {
-  return JSON.stringify(
-    GenerateConversationNameResponseBody$outboundSchema.parse(
-      generateConversationNameResponseBody,
-    ),
-  );
-}
 export function generateConversationNameResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GenerateConversationNameResponseBody, SDKValidationError> {

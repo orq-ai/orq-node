@@ -1,0 +1,22 @@
+# CreateRerankResults
+
+## Example Usage
+
+```typescript
+import { CreateRerankResults } from "@orq-ai/node/models/operations";
+
+let value: CreateRerankResults = {
+  object: "rerank",
+  index: 6359.34,
+  relevanceScore: 1568.86,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                               | Type                                                                                                                                                                | Required                                                                                                                                                            | Description                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `object`                                                                                                                                                            | [operations.CreateRerankRouterRerankObject](../../models/operations/creatererankrouterrerankobject.md)                                                              | :heavy_check_mark:                                                                                                                                                  | The object type, which is always `rerank`.                                                                                                                          |
+| `index`                                                                                                                                                             | *number*                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                  | Corresponds to the index in the original list of documents to which the ranked document belongs.                                                                    |
+| `relevanceScore`                                                                                                                                                    | *number*                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                  | Relevance scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. |
+| `document`                                                                                                                                                          | [operations.CreateRerankDocument](../../models/operations/creatererankdocument.md)                                                                                  | :heavy_minus_sign:                                                                                                                                                  | If return_documents is set as false this will return none, if true it will return the documents passed in                                                           |

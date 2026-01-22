@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteConversationRequest = {
   /**
@@ -15,18 +12,6 @@ export type DeleteConversationRequest = {
   conversationId: string;
 };
 
-/** @internal */
-export const DeleteConversationRequest$inboundSchema: z.ZodType<
-  DeleteConversationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  conversation_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-  });
-});
 /** @internal */
 export type DeleteConversationRequest$Outbound = {
   conversation_id: string;
@@ -50,14 +35,5 @@ export function deleteConversationRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteConversationRequest$outboundSchema.parse(deleteConversationRequest),
-  );
-}
-export function deleteConversationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteConversationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteConversationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteConversationRequest' from JSON`,
   );
 }

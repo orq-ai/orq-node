@@ -30,11 +30,11 @@ export type GetOneKnowledgeResponseBodyKnowledgeRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
-  topK?: number | undefined;
+  topK: number;
   /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
-  rerankThreshold?: number | undefined;
+  rerankThreshold: number;
   /**
    * The rerank model to use for the knowledge base.
    */
@@ -58,11 +58,11 @@ export type GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings = {
   /**
    * The number of results to return from the search.
    */
-  topK?: number | undefined;
+  topK: number;
   /**
    * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
    */
-  threshold?: number | undefined;
+  threshold: number;
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
@@ -127,7 +127,7 @@ export type GetOneKnowledgeResponseBody2 = {
    * The last update date of the knowledge base.
    */
   updated: string;
-  type?: GetOneKnowledgeResponseBodyKnowledgeType | undefined;
+  type: GetOneKnowledgeResponseBodyKnowledgeType;
   /**
    * The retrieval settings for the knowledge base.
    */
@@ -166,11 +166,11 @@ export type GetOneKnowledgeResponseBodyRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
-  topK?: number | undefined;
+  topK: number;
   /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
-  rerankThreshold?: number | undefined;
+  rerankThreshold: number;
   /**
    * The rerank model to use for the knowledge base.
    */
@@ -194,15 +194,15 @@ export type GetOneKnowledgeResponseBodyRetrievalSettings = {
   /**
    * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
-  retrievalType?: GetOneKnowledgeResponseBodyRetrievalType | undefined;
+  retrievalType: GetOneKnowledgeResponseBodyRetrievalType;
   /**
    * The number of results to return from the search.
    */
-  topK?: number | undefined;
+  topK: number;
   /**
    * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
    */
-  threshold?: number | undefined;
+  threshold: number;
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
@@ -253,7 +253,7 @@ export type GetOneKnowledgeResponseBody1 = {
    * The last update date of the knowledge base.
    */
   updated: string;
-  type?: GetOneKnowledgeResponseBodyType | undefined;
+  type: GetOneKnowledgeResponseBodyType;
   /**
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
@@ -271,18 +271,6 @@ export type GetOneKnowledgeResponseBody =
   | GetOneKnowledgeResponseBody1
   | GetOneKnowledgeResponseBody2;
 
-/** @internal */
-export const GetOneKnowledgeRequest$inboundSchema: z.ZodType<
-  GetOneKnowledgeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
 /** @internal */
 export type GetOneKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -308,24 +296,11 @@ export function getOneKnowledgeRequestToJSON(
     GetOneKnowledgeRequest$outboundSchema.parse(getOneKnowledgeRequest),
   );
 }
-export function getOneKnowledgeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneKnowledgeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneKnowledgeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema:
   z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyKnowledgeType> = z
     .nativeEnum(GetOneKnowledgeResponseBodyKnowledgeType);
-/** @internal */
-export const GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyKnowledgeType> =
-    GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema;
 
 /** @internal */
 export const GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
@@ -344,41 +319,7 @@ export const GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
       "rerank_model": "rerankModel",
     });
   });
-/** @internal */
-export type GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound = {
-  top_k: number;
-  rerank_threshold: number;
-  rerank_model: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyKnowledgeRerankConfig
-  > = z.object({
-    topK: z.number().int().default(5),
-    rerankThreshold: z.number().default(0.5),
-    rerankModel: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankThreshold: "rerank_threshold",
-      rerankModel: "rerank_model",
-    });
-  });
-
-export function getOneKnowledgeResponseBodyKnowledgeRerankConfigToJSON(
-  getOneKnowledgeResponseBodyKnowledgeRerankConfig:
-    GetOneKnowledgeResponseBodyKnowledgeRerankConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema.parse(
-      getOneKnowledgeResponseBodyKnowledgeRerankConfig,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyKnowledgeRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -404,31 +345,7 @@ export const GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema:
   > = z.object({
     model: z.string(),
   });
-/** @internal */
-export type GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound = {
-  model: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig
-  > = z.object({
-    model: z.string(),
-  });
-
-export function getOneKnowledgeResponseBodyKnowledgeAgenticRagConfigToJSON(
-  getOneKnowledgeResponseBodyKnowledgeAgenticRagConfig:
-    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema.parse(
-      getOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyKnowledgeAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -471,57 +388,7 @@ export const GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema
       "agentic_rag_config": "agenticRagConfig",
     });
   });
-/** @internal */
-export type GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound = {
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound
-    | null
-    | undefined;
-  agentic_rag_config?:
-    | GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings
-  > = z.object({
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
-    rerankConfig: z.nullable(
-      z.lazy(() =>
-        GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema
-      ),
-    ).optional(),
-    agenticRagConfig: z.nullable(
-      z.lazy(() =>
-        GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankConfig: "rerank_config",
-      agenticRagConfig: "agentic_rag_config",
-    });
-  });
-
-export function getOneKnowledgeResponseBodyKnowledgeRetrievalSettingsToJSON(
-  getOneKnowledgeResponseBodyKnowledgeRetrievalSettings:
-    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema.parse(
-      getOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyKnowledgeRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -551,37 +418,7 @@ export const GetOneKnowledgeResponseBodyExternalConfig$inboundSchema: z.ZodType<
     "api_url": "apiUrl",
   });
 });
-/** @internal */
-export type GetOneKnowledgeResponseBodyExternalConfig$Outbound = {
-  name: string;
-  api_url: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyExternalConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyExternalConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyExternalConfig
-  > = z.object({
-    name: z.string(),
-    apiUrl: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      apiUrl: "api_url",
-    });
-  });
-
-export function getOneKnowledgeResponseBodyExternalConfigToJSON(
-  getOneKnowledgeResponseBodyExternalConfig:
-    GetOneKnowledgeResponseBodyExternalConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyExternalConfig$outboundSchema.parse(
-      getOneKnowledgeResponseBodyExternalConfig,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyExternalConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -632,68 +469,7 @@ export const GetOneKnowledgeResponseBody2$inboundSchema: z.ZodType<
     "external_config": "externalConfig",
   });
 });
-/** @internal */
-export type GetOneKnowledgeResponseBody2$Outbound = {
-  _id: string;
-  created: string;
-  description?: string | undefined;
-  key: string;
-  domain_id: string;
-  path?: string | undefined;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  updated: string;
-  type: string;
-  retrieval_settings?:
-    | GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound
-    | undefined;
-  external_config: GetOneKnowledgeResponseBodyExternalConfig$Outbound;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBody2$outboundSchema: z.ZodType<
-  GetOneKnowledgeResponseBody2$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeResponseBody2
-> = z.object({
-  id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  domainId: z.string(),
-  path: z.string().optional(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema.default(
-    "external",
-  ),
-  retrievalSettings: z.lazy(() =>
-    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema
-  ).optional(),
-  externalConfig: z.lazy(() =>
-    GetOneKnowledgeResponseBodyExternalConfig$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    retrievalSettings: "retrieval_settings",
-    externalConfig: "external_config",
-  });
-});
-
-export function getOneKnowledgeResponseBody2ToJSON(
-  getOneKnowledgeResponseBody2: GetOneKnowledgeResponseBody2,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBody2$outboundSchema.parse(
-      getOneKnowledgeResponseBody2,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBody2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneKnowledgeResponseBody2, SDKValidationError> {
@@ -708,19 +484,11 @@ export function getOneKnowledgeResponseBody2FromJSON(
 export const GetOneKnowledgeResponseBodyType$inboundSchema: z.ZodNativeEnum<
   typeof GetOneKnowledgeResponseBodyType
 > = z.nativeEnum(GetOneKnowledgeResponseBodyType);
-/** @internal */
-export const GetOneKnowledgeResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOneKnowledgeResponseBodyType
-> = GetOneKnowledgeResponseBodyType$inboundSchema;
 
 /** @internal */
 export const GetOneKnowledgeResponseBodyRetrievalType$inboundSchema:
   z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyRetrievalType> = z
     .nativeEnum(GetOneKnowledgeResponseBodyRetrievalType);
-/** @internal */
-export const GetOneKnowledgeResponseBodyRetrievalType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyRetrievalType> =
-    GetOneKnowledgeResponseBodyRetrievalType$inboundSchema;
 
 /** @internal */
 export const GetOneKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
@@ -738,40 +506,7 @@ export const GetOneKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
     "rerank_model": "rerankModel",
   });
 });
-/** @internal */
-export type GetOneKnowledgeResponseBodyRerankConfig$Outbound = {
-  top_k: number;
-  rerank_threshold: number;
-  rerank_model: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyRerankConfig$outboundSchema: z.ZodType<
-  GetOneKnowledgeResponseBodyRerankConfig$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeResponseBodyRerankConfig
-> = z.object({
-  topK: z.number().int().default(5),
-  rerankThreshold: z.number().default(0.5),
-  rerankModel: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankThreshold: "rerank_threshold",
-    rerankModel: "rerank_model",
-  });
-});
-
-export function getOneKnowledgeResponseBodyRerankConfigToJSON(
-  getOneKnowledgeResponseBodyRerankConfig:
-    GetOneKnowledgeResponseBodyRerankConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyRerankConfig$outboundSchema.parse(
-      getOneKnowledgeResponseBodyRerankConfig,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -797,31 +532,7 @@ export const GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema:
   > = z.object({
     model: z.string(),
   });
-/** @internal */
-export type GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound = {
-  model: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyAgenticRagConfig
-  > = z.object({
-    model: z.string(),
-  });
-
-export function getOneKnowledgeResponseBodyAgenticRagConfigToJSON(
-  getOneKnowledgeResponseBodyAgenticRagConfig:
-    GetOneKnowledgeResponseBodyAgenticRagConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema.parse(
-      getOneKnowledgeResponseBodyAgenticRagConfig,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyAgenticRagConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -863,57 +574,7 @@ export const GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema:
       "agentic_rag_config": "agenticRagConfig",
     });
   });
-/** @internal */
-export type GetOneKnowledgeResponseBodyRetrievalSettings$Outbound = {
-  retrieval_type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | GetOneKnowledgeResponseBodyRerankConfig$Outbound
-    | null
-    | undefined;
-  agentic_rag_config?:
-    | GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeResponseBodyRetrievalSettings$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeResponseBodyRetrievalSettings
-  > = z.object({
-    retrievalType: GetOneKnowledgeResponseBodyRetrievalType$outboundSchema
-      .default("hybrid_search"),
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
-    rerankConfig: z.nullable(
-      z.lazy(() => GetOneKnowledgeResponseBodyRerankConfig$outboundSchema),
-    ).optional(),
-    agenticRagConfig: z.nullable(
-      z.lazy(() => GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      retrievalType: "retrieval_type",
-      topK: "top_k",
-      rerankConfig: "rerank_config",
-      agenticRagConfig: "agentic_rag_config",
-    });
-  });
-
-export function getOneKnowledgeResponseBodyRetrievalSettingsToJSON(
-  getOneKnowledgeResponseBodyRetrievalSettings:
-    GetOneKnowledgeResponseBodyRetrievalSettings,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema.parse(
-      getOneKnowledgeResponseBodyRetrievalSettings,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -959,63 +620,7 @@ export const GetOneKnowledgeResponseBody1$inboundSchema: z.ZodType<
     "retrieval_settings": "retrievalSettings",
   });
 });
-/** @internal */
-export type GetOneKnowledgeResponseBody1$Outbound = {
-  _id: string;
-  created: string;
-  description?: string | undefined;
-  key: string;
-  domain_id: string;
-  path?: string | undefined;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  updated: string;
-  type: string;
-  retrieval_settings?:
-    | GetOneKnowledgeResponseBodyRetrievalSettings$Outbound
-    | undefined;
-  model: string;
-};
 
-/** @internal */
-export const GetOneKnowledgeResponseBody1$outboundSchema: z.ZodType<
-  GetOneKnowledgeResponseBody1$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeResponseBody1
-> = z.object({
-  id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  domainId: z.string(),
-  path: z.string().optional(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: GetOneKnowledgeResponseBodyType$outboundSchema.default("internal"),
-  retrievalSettings: z.lazy(() =>
-    GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema
-  ).optional(),
-  model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    retrievalSettings: "retrieval_settings",
-  });
-});
-
-export function getOneKnowledgeResponseBody1ToJSON(
-  getOneKnowledgeResponseBody1: GetOneKnowledgeResponseBody1,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBody1$outboundSchema.parse(
-      getOneKnowledgeResponseBody1,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBody1FromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneKnowledgeResponseBody1, SDKValidationError> {
@@ -1035,30 +640,7 @@ export const GetOneKnowledgeResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => GetOneKnowledgeResponseBody1$inboundSchema),
   z.lazy(() => GetOneKnowledgeResponseBody2$inboundSchema),
 ]);
-/** @internal */
-export type GetOneKnowledgeResponseBody$Outbound =
-  | GetOneKnowledgeResponseBody1$Outbound
-  | GetOneKnowledgeResponseBody2$Outbound;
 
-/** @internal */
-export const GetOneKnowledgeResponseBody$outboundSchema: z.ZodType<
-  GetOneKnowledgeResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeResponseBody
-> = z.union([
-  z.lazy(() => GetOneKnowledgeResponseBody1$outboundSchema),
-  z.lazy(() => GetOneKnowledgeResponseBody2$outboundSchema),
-]);
-
-export function getOneKnowledgeResponseBodyToJSON(
-  getOneKnowledgeResponseBody: GetOneKnowledgeResponseBody,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeResponseBody$outboundSchema.parse(
-      getOneKnowledgeResponseBody,
-    ),
-  );
-}
 export function getOneKnowledgeResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneKnowledgeResponseBody, SDKValidationError> {

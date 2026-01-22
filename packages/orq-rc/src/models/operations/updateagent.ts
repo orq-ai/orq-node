@@ -256,6 +256,76 @@ export type ModelConfigurationGuardrails = {
   executeOn: ModelConfigurationExecuteOn;
 };
 
+export type ModelConfigurationFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdateAgentModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdateAgentModelConfigurationType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdateAgentModelConfigurationType = ClosedEnum<
+  typeof UpdateAgentModelConfigurationType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type ModelConfigurationCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: UpdateAgentModelConfigurationType;
+};
+
+export const UpdateAgentLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdateAgentLoadBalancerType = ClosedEnum<
+  typeof UpdateAgentLoadBalancerType
+>;
+
+export type UpdateAgentLoadBalancer1 = {
+  type: UpdateAgentLoadBalancerType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type ModelConfigurationLoadBalancer = UpdateAgentLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type ModelConfigurationTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 /**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
@@ -365,12 +435,32 @@ export type ModelConfigurationParameters = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<ModelConfigurationGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: UpdateAgentModelConfigurationRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: ModelConfigurationCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdateAgentLoadBalancer1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: ModelConfigurationTimeout | undefined;
 };
 
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type UpdateAgentModelConfigurationAgentsRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -398,7 +488,7 @@ export type UpdateAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: UpdateAgentModelConfigurationAgentsRetry | undefined;
 };
 
 /**
@@ -658,6 +748,77 @@ export type UpdateAgentFallbackModelConfigurationGuardrails = {
   executeOn: UpdateAgentFallbackModelConfigurationExecuteOn;
 };
 
+export type UpdateAgentFallbackModelConfigurationFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdateAgentFallbackModelConfigurationRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdateAgentFallbackModelConfigurationType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdateAgentFallbackModelConfigurationType = ClosedEnum<
+  typeof UpdateAgentFallbackModelConfigurationType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type UpdateAgentFallbackModelConfigurationCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: UpdateAgentFallbackModelConfigurationType;
+};
+
+export const UpdateAgentLoadBalancerAgentsType = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdateAgentLoadBalancerAgentsType = ClosedEnum<
+  typeof UpdateAgentLoadBalancerAgentsType
+>;
+
+export type UpdateAgentLoadBalancerAgents1 = {
+  type: UpdateAgentLoadBalancerAgentsType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type UpdateAgentFallbackModelConfigurationLoadBalancer =
+  UpdateAgentLoadBalancerAgents1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type UpdateAgentFallbackModelConfigurationTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 /**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
@@ -780,12 +941,32 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
   guardrails?:
     | Array<UpdateAgentFallbackModelConfigurationGuardrails>
     | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<UpdateAgentFallbackModelConfigurationFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: UpdateAgentFallbackModelConfigurationRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: UpdateAgentFallbackModelConfigurationCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdateAgentLoadBalancerAgents1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: UpdateAgentFallbackModelConfigurationTimeout | undefined;
 };
 
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type UpdateAgentFallbackModelConfigurationRetry = {
+export type UpdateAgentFallbackModelConfigurationAgentsRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -811,7 +992,7 @@ export type UpdateAgentFallbackModelConfiguration2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: UpdateAgentFallbackModelConfigurationRetry | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry | undefined;
 };
 
 /**
@@ -1509,7 +1690,7 @@ export type UpdateAgentTools = {
    * Optional tool description
    */
   description?: string | undefined;
-  requiresApproval?: boolean | undefined;
+  requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
@@ -1518,7 +1699,7 @@ export type UpdateAgentTools = {
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
-  timeout?: number | undefined;
+  timeout: number;
 };
 
 /**
@@ -1543,7 +1724,7 @@ export type UpdateAgentAgentsEvaluators = {
   /**
    * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
    */
-  sampleRate?: number | undefined;
+  sampleRate: number;
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
@@ -1572,7 +1753,7 @@ export type UpdateAgentAgentsGuardrails = {
   /**
    * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
    */
-  sampleRate?: number | undefined;
+  sampleRate: number;
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
@@ -1583,15 +1764,15 @@ export type UpdateAgentAgentsSettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
    */
-  maxIterations?: number | undefined;
+  maxIterations: number;
   /**
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
-  maxExecutionTime?: number | undefined;
+  maxExecutionTime: number;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
-  toolApprovalRequired?: UpdateAgentAgentsToolApprovalRequired | undefined;
+  toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired;
   tools?: Array<UpdateAgentTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -1664,7 +1845,7 @@ export type UpdateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | undefined;
+  strict: boolean;
 };
 
 /**
@@ -1847,6 +2028,74 @@ export type UpdateAgentAgentsResponseGuardrails = {
   executeOn: UpdateAgentAgentsResponse200ApplicationJSONExecuteOn;
 };
 
+export type UpdateAgentFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdateAgentAgentsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdateAgentType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type UpdateAgentCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: UpdateAgentType;
+};
+
+export const UpdateAgentLoadBalancerAgentsResponseType = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdateAgentLoadBalancerAgentsResponseType = ClosedEnum<
+  typeof UpdateAgentLoadBalancerAgentsResponseType
+>;
+
+export type UpdateAgentLoadBalancerAgentsResponse1 = {
+  type: UpdateAgentLoadBalancerAgentsResponseType;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type UpdateAgentLoadBalancer = UpdateAgentLoadBalancerAgentsResponse1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type UpdateAgentTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 /**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
@@ -1959,6 +2208,26 @@ export type UpdateAgentParameters = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<UpdateAgentAgentsResponseGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<UpdateAgentFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: UpdateAgentAgentsRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: UpdateAgentCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdateAgentLoadBalancerAgentsResponse1> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: UpdateAgentTimeout | undefined;
 };
 
 /**
@@ -1968,7 +2237,7 @@ export type UpdateAgentRetry = {
   /**
    * Number of retry attempts (1-5)
    */
-  count?: number | undefined;
+  count: number;
   /**
    * HTTP status codes that trigger retry logic
    */
@@ -2041,7 +2310,7 @@ export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema 
     /**
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
      */
-    strict?: boolean | undefined;
+    strict: boolean;
   };
 
 /**
@@ -2231,6 +2500,77 @@ export type UpdateAgentFallbackModelConfigurationAgentsGuardrails = {
   executeOn: UpdateAgentFallbackModelConfigurationAgentsExecuteOn;
 };
 
+export type UpdateAgentFallbackModelConfigurationAgentsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type UpdateAgentFallbackModelConfigurationAgentsResponse200Retry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const UpdateAgentFallbackModelConfigurationAgentsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type UpdateAgentFallbackModelConfigurationAgentsType = ClosedEnum<
+  typeof UpdateAgentFallbackModelConfigurationAgentsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type UpdateAgentFallbackModelConfigurationAgentsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: UpdateAgentFallbackModelConfigurationAgentsType;
+};
+
+export const UpdateAgentLoadBalancerAgentsResponse200Type = {
+  WeightBased: "weight_based",
+} as const;
+export type UpdateAgentLoadBalancerAgentsResponse200Type = ClosedEnum<
+  typeof UpdateAgentLoadBalancerAgentsResponse200Type
+>;
+
+export type UpdateAgentLoadBalancerAgentsResponse2001 = {
+  type: UpdateAgentLoadBalancerAgentsResponse200Type;
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type UpdateAgentFallbackModelConfigurationAgentsLoadBalancer =
+  UpdateAgentLoadBalancerAgentsResponse2001;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type UpdateAgentFallbackModelConfigurationAgentsTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 /**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
@@ -2353,16 +2693,40 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
   guardrails?:
     | Array<UpdateAgentFallbackModelConfigurationAgentsGuardrails>
     | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?:
+    | Array<UpdateAgentFallbackModelConfigurationAgentsFallbacks>
+    | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?:
+    | UpdateAgentFallbackModelConfigurationAgentsResponse200Retry
+    | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: UpdateAgentFallbackModelConfigurationAgentsCache | undefined;
+  /**
+   * Array of models with weights for load balancing requests
+   */
+  loadBalancer?: Array<UpdateAgentLoadBalancerAgentsResponse2001> | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: UpdateAgentFallbackModelConfigurationAgentsTimeout | undefined;
 };
 
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type UpdateAgentFallbackModelConfigurationAgentsRetry = {
+export type UpdateAgentFallbackModelConfigurationAgentsResponseRetry = {
   /**
    * Number of retry attempts (1-5)
    */
-  count?: number | undefined;
+  count: number;
   /**
    * HTTP status codes that trigger retry logic
    */
@@ -2386,7 +2750,7 @@ export type UpdateAgentFallbackModelConfigurationAgents2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationAgentsResponseRetry | undefined;
 };
 
 /**
@@ -2434,7 +2798,7 @@ export type UpdateAgentAgentsTeamOfAgents = {
 };
 
 export type UpdateAgentMetrics = {
-  totalCost?: number | undefined;
+  totalCost: number;
 };
 
 export type UpdateAgentAgentsKnowledgeBases = {
@@ -2509,32 +2873,15 @@ export type UpdateAgentResponseBody = {
 };
 
 /** @internal */
-export const ModelConfigurationVoice$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationVoice
-> = z.nativeEnum(ModelConfigurationVoice);
-/** @internal */
 export const ModelConfigurationVoice$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationVoice
-> = ModelConfigurationVoice$inboundSchema;
+> = z.nativeEnum(ModelConfigurationVoice);
 
-/** @internal */
-export const ModelConfigurationFormat$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationFormat
-> = z.nativeEnum(ModelConfigurationFormat);
 /** @internal */
 export const ModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationFormat
-> = ModelConfigurationFormat$inboundSchema;
+> = z.nativeEnum(ModelConfigurationFormat);
 
-/** @internal */
-export const UpdateAgentModelConfigurationAudio$inboundSchema: z.ZodType<
-  UpdateAgentModelConfigurationAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: ModelConfigurationVoice$inboundSchema,
-  format: ModelConfigurationFormat$inboundSchema,
-});
 /** @internal */
 export type UpdateAgentModelConfigurationAudio$Outbound = {
   voice: string;
@@ -2560,28 +2907,7 @@ export function updateAgentModelConfigurationAudioToJSON(
     ),
   );
 }
-export function updateAgentModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentModelConfigurationAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentModelConfigurationAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentModelConfigurationAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatAgentsJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().default(false),
-});
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
   description?: string | undefined;
@@ -2613,37 +2939,7 @@ export function updateAgentResponseFormatAgentsJsonSchemaToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatAgentsJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentResponseFormatAgentsJsonSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentResponseFormatAgentsJsonSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatJSONSchema$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatJSONSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() =>
-    UpdateAgentResponseFormatAgentsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
-  });
-});
 /** @internal */
 export type UpdateAgentResponseFormatJSONSchema$Outbound = {
   type: "json_schema";
@@ -2675,25 +2971,7 @@ export function updateAgentResponseFormatJSONSchemaToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatJSONSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentResponseFormatJSONSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatJSONSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormatJSONSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatJSONObject$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatJSONObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_object"),
-});
 /** @internal */
 export type UpdateAgentResponseFormatJSONObject$Outbound = {
   type: "json_object";
@@ -2717,25 +2995,7 @@ export function updateAgentResponseFormatJSONObjectToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatJSONObjectFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentResponseFormatJSONObject, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormatJSONObject' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatText$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatText,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-});
 /** @internal */
 export type UpdateAgentResponseFormatText$Outbound = {
   type: "text";
@@ -2759,26 +3019,7 @@ export function updateAgentResponseFormatTextToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatTextFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentResponseFormatText, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentResponseFormatText$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormatText' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationResponseFormat$inboundSchema: z.ZodType<
-  ModelConfigurationResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdateAgentResponseFormatText$inboundSchema),
-  z.lazy(() => UpdateAgentResponseFormatJSONObject$inboundSchema),
-  z.lazy(() => UpdateAgentResponseFormatJSONSchema$inboundSchema),
-]);
 /** @internal */
 export type ModelConfigurationResponseFormat$Outbound =
   | UpdateAgentResponseFormatText$Outbound
@@ -2805,31 +3046,12 @@ export function modelConfigurationResponseFormatToJSON(
     ),
   );
 }
-export function modelConfigurationResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationResponseFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationResponseFormat' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationReasoningEffort
-> = z.nativeEnum(ModelConfigurationReasoningEffort);
 /** @internal */
 export const ModelConfigurationReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationReasoningEffort
-> = ModelConfigurationReasoningEffort$inboundSchema;
+> = z.nativeEnum(ModelConfigurationReasoningEffort);
 
-/** @internal */
-export const ModelConfigurationStop$inboundSchema: z.ZodType<
-  ModelConfigurationStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
 /** @internal */
 export type ModelConfigurationStop$Outbound = string | Array<string>;
 
@@ -2847,28 +3069,7 @@ export function modelConfigurationStopToJSON(
     ModelConfigurationStop$outboundSchema.parse(modelConfigurationStop),
   );
 }
-export function modelConfigurationStopFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationStop, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationStop' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationStreamOptions$inboundSchema: z.ZodType<
-  ModelConfigurationStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
 /** @internal */
 export type ModelConfigurationStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -2896,25 +3097,7 @@ export function modelConfigurationStreamOptionsToJSON(
     ),
   );
 }
-export function modelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationStreamOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationThinking$inboundSchema: z.ZodType<
-  ModelConfigurationThinking,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-]);
 /** @internal */
 export type ModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
@@ -2937,33 +3120,12 @@ export function modelConfigurationThinkingToJSON(
     ModelConfigurationThinking$outboundSchema.parse(modelConfigurationThinking),
   );
 }
-export function modelConfigurationThinkingFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationThinking, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationThinking' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoiceType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentToolChoiceType
-> = z.nativeEnum(UpdateAgentToolChoiceType);
 /** @internal */
 export const UpdateAgentToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceType
-> = UpdateAgentToolChoiceType$inboundSchema;
+> = z.nativeEnum(UpdateAgentToolChoiceType);
 
-/** @internal */
-export const UpdateAgentToolChoiceFunction$inboundSchema: z.ZodType<
-  UpdateAgentToolChoiceFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-});
 /** @internal */
 export type UpdateAgentToolChoiceFunction$Outbound = {
   name: string;
@@ -2987,25 +3149,7 @@ export function updateAgentToolChoiceFunctionToJSON(
     ),
   );
 }
-export function updateAgentToolChoiceFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentToolChoiceFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentToolChoiceFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoice2$inboundSchema: z.ZodType<
-  UpdateAgentToolChoice2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentToolChoiceType$inboundSchema.optional(),
-  function: z.lazy(() => UpdateAgentToolChoiceFunction$inboundSchema),
-});
 /** @internal */
 export type UpdateAgentToolChoice2$Outbound = {
   type?: string | undefined;
@@ -3029,34 +3173,12 @@ export function updateAgentToolChoice2ToJSON(
     UpdateAgentToolChoice2$outboundSchema.parse(updateAgentToolChoice2),
   );
 }
-export function updateAgentToolChoice2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentToolChoice2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentToolChoice2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentToolChoice2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoice1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentToolChoice1
-> = z.nativeEnum(UpdateAgentToolChoice1);
 /** @internal */
 export const UpdateAgentToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoice1
-> = UpdateAgentToolChoice1$inboundSchema;
+> = z.nativeEnum(UpdateAgentToolChoice1);
 
-/** @internal */
-export const ModelConfigurationToolChoice$inboundSchema: z.ZodType<
-  ModelConfigurationToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdateAgentToolChoice2$inboundSchema),
-  UpdateAgentToolChoice1$inboundSchema,
-]);
 /** @internal */
 export type ModelConfigurationToolChoice$Outbound =
   | UpdateAgentToolChoice2$Outbound
@@ -3081,40 +3203,17 @@ export function modelConfigurationToolChoiceToJSON(
     ),
   );
 }
-export function modelConfigurationToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationToolChoice' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationModalities$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationModalities
-> = z.nativeEnum(ModelConfigurationModalities);
 /** @internal */
 export const ModelConfigurationModalities$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationModalities
-> = ModelConfigurationModalities$inboundSchema;
+> = z.nativeEnum(ModelConfigurationModalities);
 
-/** @internal */
-export const UpdateAgentId1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentId1
-> = z.nativeEnum(UpdateAgentId1);
 /** @internal */
 export const UpdateAgentId1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentId1
-> = UpdateAgentId1$inboundSchema;
+> = z.nativeEnum(UpdateAgentId1);
 
-/** @internal */
-export const ModelConfigurationId$inboundSchema: z.ZodType<
-  ModelConfigurationId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([UpdateAgentId1$inboundSchema, z.string()]);
 /** @internal */
 export type ModelConfigurationId$Outbound = string | string;
 
@@ -3132,38 +3231,12 @@ export function modelConfigurationIdToJSON(
     ModelConfigurationId$outboundSchema.parse(modelConfigurationId),
   );
 }
-export function modelConfigurationIdFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationId' from JSON`,
-  );
-}
 
-/** @internal */
-export const ModelConfigurationExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationExecuteOn
-> = z.nativeEnum(ModelConfigurationExecuteOn);
 /** @internal */
 export const ModelConfigurationExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationExecuteOn
-> = ModelConfigurationExecuteOn$inboundSchema;
+> = z.nativeEnum(ModelConfigurationExecuteOn);
 
-/** @internal */
-export const ModelConfigurationGuardrails$inboundSchema: z.ZodType<
-  ModelConfigurationGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([UpdateAgentId1$inboundSchema, z.string()]),
-  execute_on: ModelConfigurationExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
 /** @internal */
 export type ModelConfigurationGuardrails$Outbound = {
   id: string | string;
@@ -3193,76 +3266,168 @@ export function modelConfigurationGuardrailsToJSON(
     ),
   );
 }
-export function modelConfigurationGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationGuardrails' from JSON`,
+
+/** @internal */
+export type ModelConfigurationFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  ModelConfigurationFallbacks$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function modelConfigurationFallbacksToJSON(
+  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+): string {
+  return JSON.stringify(
+    ModelConfigurationFallbacks$outboundSchema.parse(
+      modelConfigurationFallbacks,
+    ),
   );
 }
 
 /** @internal */
-export const ModelConfigurationParameters$inboundSchema: z.ZodType<
-  ModelConfigurationParameters,
+export type UpdateAgentModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const UpdateAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  unknown
+  UpdateAgentModelConfigurationRetry
 > = z.object({
-  audio: z.nullable(
-    z.lazy(() => UpdateAgentModelConfigurationAudio$inboundSchema),
-  ).optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => UpdateAgentResponseFormatText$inboundSchema),
-    z.lazy(() => UpdateAgentResponseFormatJSONObject$inboundSchema),
-    z.lazy(() => UpdateAgentResponseFormatJSONSchema$inboundSchema),
-  ]).optional(),
-  reasoning_effort: ModelConfigurationReasoningEffort$inboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => ModelConfigurationStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => UpdateAgentToolChoice2$inboundSchema),
-    UpdateAgentToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(ModelConfigurationModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$inboundSchema))
-    .optional(),
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
+    onCodes: "on_codes",
   });
 });
+
+export function updateAgentModelConfigurationRetryToJSON(
+  updateAgentModelConfigurationRetry: UpdateAgentModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    UpdateAgentModelConfigurationRetry$outboundSchema.parse(
+      updateAgentModelConfigurationRetry,
+    ),
+  );
+}
+
+/** @internal */
+export const UpdateAgentModelConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentModelConfigurationType
+> = z.nativeEnum(UpdateAgentModelConfigurationType);
+
+/** @internal */
+export type ModelConfigurationCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const ModelConfigurationCache$outboundSchema: z.ZodType<
+  ModelConfigurationCache$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: UpdateAgentModelConfigurationType$outboundSchema,
+});
+
+export function modelConfigurationCacheToJSON(
+  modelConfigurationCache: ModelConfigurationCache,
+): string {
+  return JSON.stringify(
+    ModelConfigurationCache$outboundSchema.parse(modelConfigurationCache),
+  );
+}
+
+/** @internal */
+export const UpdateAgentLoadBalancerType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentLoadBalancerType
+> = z.nativeEnum(UpdateAgentLoadBalancerType);
+
+/** @internal */
+export type UpdateAgentLoadBalancer1$Outbound = {
+  type: string;
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const UpdateAgentLoadBalancer1$outboundSchema: z.ZodType<
+  UpdateAgentLoadBalancer1$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentLoadBalancer1
+> = z.object({
+  type: UpdateAgentLoadBalancerType$outboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updateAgentLoadBalancer1ToJSON(
+  updateAgentLoadBalancer1: UpdateAgentLoadBalancer1,
+): string {
+  return JSON.stringify(
+    UpdateAgentLoadBalancer1$outboundSchema.parse(updateAgentLoadBalancer1),
+  );
+}
+
+/** @internal */
+export type ModelConfigurationLoadBalancer$Outbound =
+  UpdateAgentLoadBalancer1$Outbound;
+
+/** @internal */
+export const ModelConfigurationLoadBalancer$outboundSchema: z.ZodType<
+  ModelConfigurationLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationLoadBalancer
+> = z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema);
+
+export function modelConfigurationLoadBalancerToJSON(
+  modelConfigurationLoadBalancer: ModelConfigurationLoadBalancer,
+): string {
+  return JSON.stringify(
+    ModelConfigurationLoadBalancer$outboundSchema.parse(
+      modelConfigurationLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type ModelConfigurationTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const ModelConfigurationTimeout$outboundSchema: z.ZodType<
+  ModelConfigurationTimeout$Outbound,
+  z.ZodTypeDef,
+  ModelConfigurationTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function modelConfigurationTimeoutToJSON(
+  modelConfigurationTimeout: ModelConfigurationTimeout,
+): string {
+  return JSON.stringify(
+    ModelConfigurationTimeout$outboundSchema.parse(modelConfigurationTimeout),
+  );
+}
+
 /** @internal */
 export type ModelConfigurationParameters$Outbound = {
   audio?: UpdateAgentModelConfigurationAudio$Outbound | null | undefined;
@@ -3294,6 +3459,11 @@ export type ModelConfigurationParameters$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
+  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
+  retry?: UpdateAgentModelConfigurationRetry$Outbound | undefined;
+  cache?: ModelConfigurationCache$Outbound | undefined;
+  load_balancer?: Array<UpdateAgentLoadBalancer1$Outbound> | undefined;
+  timeout?: ModelConfigurationTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -3340,6 +3510,14 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$outboundSchema))
     .optional(),
+  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => UpdateAgentModelConfigurationRetry$outboundSchema)
+    .optional(),
+  cache: z.lazy(() => ModelConfigurationCache$outboundSchema).optional(),
+  loadBalancer: z.array(z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema))
+    .optional(),
+  timeout: z.lazy(() => ModelConfigurationTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -3354,6 +3532,7 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    loadBalancer: "load_balancer",
   });
 });
 
@@ -3366,40 +3545,18 @@ export function modelConfigurationParametersToJSON(
     ),
   );
 }
-export function modelConfigurationParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationParameters' from JSON`,
-  );
-}
 
 /** @internal */
-export const ModelConfigurationRetry$inboundSchema: z.ZodType<
-  ModelConfigurationRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-/** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type UpdateAgentModelConfigurationAgentsRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const UpdateAgentModelConfigurationAgentsRetry$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationAgentsRetry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  UpdateAgentModelConfigurationAgentsRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3409,39 +3566,22 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
+export function updateAgentModelConfigurationAgentsRetryToJSON(
+  updateAgentModelConfigurationAgentsRetry:
+    UpdateAgentModelConfigurationAgentsRetry,
 ): string {
   return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
-  );
-}
-export function modelConfigurationRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelConfigurationRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelConfigurationRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConfigurationRetry' from JSON`,
+    UpdateAgentModelConfigurationAgentsRetry$outboundSchema.parse(
+      updateAgentModelConfigurationAgentsRetry,
+    ),
   );
 }
 
 /** @internal */
-export const UpdateAgentModelConfiguration2$inboundSchema: z.ZodType<
-  UpdateAgentModelConfiguration2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  parameters: z.lazy(() => ModelConfigurationParameters$inboundSchema)
-    .optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$inboundSchema).optional(),
-});
-/** @internal */
 export type UpdateAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: ModelConfigurationParameters$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: UpdateAgentModelConfigurationAgentsRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3453,7 +3593,8 @@ export const UpdateAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => ModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => UpdateAgentModelConfigurationAgentsRetry$outboundSchema)
+    .optional(),
 });
 
 export function updateAgentModelConfiguration2ToJSON(
@@ -3465,25 +3606,7 @@ export function updateAgentModelConfiguration2ToJSON(
     ),
   );
 }
-export function updateAgentModelConfiguration2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentModelConfiguration2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentModelConfiguration2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentModelConfiguration$inboundSchema: z.ZodType<
-  UpdateAgentModelConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdateAgentModelConfiguration2$inboundSchema),
-  z.string(),
-]);
 /** @internal */
 export type UpdateAgentModelConfiguration$Outbound =
   | UpdateAgentModelConfiguration2$Outbound
@@ -3508,41 +3631,17 @@ export function updateAgentModelConfigurationToJSON(
     ),
   );
 }
-export function updateAgentModelConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentModelConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentModelConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentModelConfiguration' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationVoice$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationVoice> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationVoice);
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationVoice$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationVoice> =
-    UpdateAgentFallbackModelConfigurationVoice$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationVoice> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationVoice);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationFormat$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationFormat> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationFormat);
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationFormat$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationFormat> =
-    UpdateAgentFallbackModelConfigurationFormat$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationFormat> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationFormat);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAudio$inboundSchema:
-  z.ZodType<UpdateAgentFallbackModelConfigurationAudio, z.ZodTypeDef, unknown> =
-    z.object({
-      voice: UpdateAgentFallbackModelConfigurationVoice$inboundSchema,
-      format: UpdateAgentFallbackModelConfigurationFormat$inboundSchema,
-    });
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationAudio$Outbound = {
   voice: string;
@@ -3570,34 +3669,7 @@ export function updateAgentFallbackModelConfigurationAudioToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound =
   {
@@ -3629,37 +3701,7 @@ export function updateAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSO
       .parse(updateAgentResponseFormatAgentsRequestRequestBodyJsonSchema),
   );
 }
-export function updateAgentResponseFormatAgentsRequestRequestBodyJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsRequestJSONSchema$inboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsRequestJSONSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
 /** @internal */
 export type UpdateAgentResponseFormatAgentsRequestJSONSchema$Outbound = {
   type: "json_schema";
@@ -3694,30 +3736,7 @@ export function updateAgentResponseFormatAgentsRequestJSONSchemaToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatAgentsRequestJSONSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentResponseFormatAgentsRequestJSONSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatAgentsRequestJSONSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentResponseFormatAgentsRequestJSONSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsJSONObject$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatAgentsJSONObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_object"),
-});
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJSONObject$Outbound = {
   type: "json_object";
@@ -3743,30 +3762,7 @@ export function updateAgentResponseFormatAgentsJSONObjectToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatAgentsJSONObjectFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentResponseFormatAgentsJSONObject,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatAgentsJSONObject$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentResponseFormatAgentsJSONObject' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsText$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormatAgentsText,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-});
 /** @internal */
 export type UpdateAgentResponseFormatAgentsText$Outbound = {
   type: "text";
@@ -3790,30 +3786,7 @@ export function updateAgentResponseFormatAgentsTextToJSON(
     ),
   );
 }
-export function updateAgentResponseFormatAgentsTextFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentResponseFormatAgentsText, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentResponseFormatAgentsText$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormatAgentsText' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationResponseFormat$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationResponseFormat,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.lazy(() => UpdateAgentResponseFormatAgentsText$inboundSchema),
-    z.lazy(() => UpdateAgentResponseFormatAgentsJSONObject$inboundSchema),
-    z.lazy(() =>
-      UpdateAgentResponseFormatAgentsRequestJSONSchema$inboundSchema
-    ),
-  ]);
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationResponseFormat$Outbound =
   | UpdateAgentResponseFormatAgentsText$Outbound
@@ -3844,37 +3817,12 @@ export function updateAgentFallbackModelConfigurationResponseFormatToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationResponseFormat,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationResponseFormat$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationResponseFormat' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationReasoningEffort> =
-    z.nativeEnum(UpdateAgentFallbackModelConfigurationReasoningEffort);
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationReasoningEffort$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationReasoningEffort> =
-    UpdateAgentFallbackModelConfigurationReasoningEffort$inboundSchema;
+    z.nativeEnum(UpdateAgentFallbackModelConfigurationReasoningEffort);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationStop$inboundSchema: z.ZodType<
-  UpdateAgentFallbackModelConfigurationStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationStop$Outbound =
   | string
@@ -3898,35 +3846,7 @@ export function updateAgentFallbackModelConfigurationStopToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationStopFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationStop,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationStop$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationStop' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationStreamOptions$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -3956,32 +3876,7 @@ export function updateAgentFallbackModelConfigurationStreamOptionsToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationStreamOptions$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationStreamOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationThinking$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationThinking,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-  ]);
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
@@ -4008,39 +3903,12 @@ export function updateAgentFallbackModelConfigurationThinkingToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationThinkingFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationThinking,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationThinking$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationThinking' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentToolChoiceAgentsType
-> = z.nativeEnum(UpdateAgentToolChoiceAgentsType);
 /** @internal */
 export const UpdateAgentToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgentsType
-> = UpdateAgentToolChoiceAgentsType$inboundSchema;
+> = z.nativeEnum(UpdateAgentToolChoiceAgentsType);
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsFunction$inboundSchema: z.ZodType<
-  UpdateAgentToolChoiceAgentsFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-});
 /** @internal */
 export type UpdateAgentToolChoiceAgentsFunction$Outbound = {
   name: string;
@@ -4064,26 +3932,7 @@ export function updateAgentToolChoiceAgentsFunctionToJSON(
     ),
   );
 }
-export function updateAgentToolChoiceAgentsFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentToolChoiceAgentsFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentToolChoiceAgentsFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentToolChoiceAgentsFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoiceAgents2$inboundSchema: z.ZodType<
-  UpdateAgentToolChoiceAgents2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentToolChoiceAgentsType$inboundSchema.optional(),
-  function: z.lazy(() => UpdateAgentToolChoiceAgentsFunction$inboundSchema),
-});
 /** @internal */
 export type UpdateAgentToolChoiceAgents2$Outbound = {
   type?: string | undefined;
@@ -4109,35 +3958,12 @@ export function updateAgentToolChoiceAgents2ToJSON(
     ),
   );
 }
-export function updateAgentToolChoiceAgents2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentToolChoiceAgents2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentToolChoiceAgents2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentToolChoiceAgents2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentToolChoiceAgents1
-> = z.nativeEnum(UpdateAgentToolChoiceAgents1);
 /** @internal */
 export const UpdateAgentToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolChoiceAgents1
-> = UpdateAgentToolChoiceAgents1$inboundSchema;
+> = z.nativeEnum(UpdateAgentToolChoiceAgents1);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationToolChoice$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationToolChoice,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.lazy(() => UpdateAgentToolChoiceAgents2$inboundSchema),
-    UpdateAgentToolChoiceAgents1$inboundSchema,
-  ]);
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationToolChoice$Outbound =
   | UpdateAgentToolChoiceAgents2$Outbound
@@ -4164,46 +3990,17 @@ export function updateAgentFallbackModelConfigurationToolChoiceToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationToolChoice,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationToolChoice$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationToolChoice' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationModalities$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationModalities> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationModalities);
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationModalities$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationModalities> =
-    UpdateAgentFallbackModelConfigurationModalities$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationModalities> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationModalities);
 
-/** @internal */
-export const UpdateAgentIdAgents1$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentIdAgents1
-> = z.nativeEnum(UpdateAgentIdAgents1);
 /** @internal */
 export const UpdateAgentIdAgents1$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentIdAgents1
-> = UpdateAgentIdAgents1$inboundSchema;
+> = z.nativeEnum(UpdateAgentIdAgents1);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationId$inboundSchema: z.ZodType<
-  UpdateAgentFallbackModelConfigurationId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([UpdateAgentIdAgents1$inboundSchema, z.string()]);
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationId$Outbound = string | string;
 
@@ -4224,45 +4021,12 @@ export function updateAgentFallbackModelConfigurationIdToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationIdFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationId,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationId$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationId' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationExecuteOn> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationExecuteOn);
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationExecuteOn> =
-    UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationExecuteOn> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationExecuteOn);
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationGuardrails,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.union([UpdateAgentIdAgents1$inboundSchema, z.string()]),
-    execute_on: UpdateAgentFallbackModelConfigurationExecuteOn$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "execute_on": "executeOn",
-    });
-  });
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationGuardrails$Outbound = {
   id: string | string;
@@ -4294,93 +4058,184 @@ export function updateAgentFallbackModelConfigurationGuardrailsToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationGuardrails,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationGuardrails' from JSON`,
+
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationFallbacks$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationFallbacks$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationFallbacks
+  > = z.object({
+    model: z.string(),
+  });
+
+export function updateAgentFallbackModelConfigurationFallbacksToJSON(
+  updateAgentFallbackModelConfigurationFallbacks:
+    UpdateAgentFallbackModelConfigurationFallbacks,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationFallbacks$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationFallbacks,
+    ),
   );
 }
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationParameters$inboundSchema:
+export type UpdateAgentFallbackModelConfigurationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationRetry$outboundSchema:
   z.ZodType<
-    UpdateAgentFallbackModelConfigurationParameters,
+    UpdateAgentFallbackModelConfigurationRetry$Outbound,
     z.ZodTypeDef,
-    unknown
+    UpdateAgentFallbackModelConfigurationRetry
   > = z.object({
-    audio: z.nullable(
-      z.lazy(() => UpdateAgentFallbackModelConfigurationAudio$inboundSchema),
-    ).optional(),
-    frequency_penalty: z.nullable(z.number()).optional(),
-    max_tokens: z.nullable(z.number().int()).optional(),
-    max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
-    presence_penalty: z.nullable(z.number()).optional(),
-    response_format: z.union([
-      z.lazy(() => UpdateAgentResponseFormatAgentsText$inboundSchema),
-      z.lazy(() => UpdateAgentResponseFormatAgentsJSONObject$inboundSchema),
-      z.lazy(() =>
-        UpdateAgentResponseFormatAgentsRequestJSONSchema$inboundSchema
-      ),
-    ]).optional(),
-    reasoning_effort:
-      UpdateAgentFallbackModelConfigurationReasoningEffort$inboundSchema
-        .optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationStreamOptions$inboundSchema
-      ),
-    ).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$inboundSchema,
-      components.ThinkingConfigEnabledSchema$inboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    top_p: z.nullable(z.number()).optional(),
-    top_k: z.nullable(z.number()).optional(),
-    tool_choice: z.union([
-      z.lazy(() => UpdateAgentToolChoiceAgents2$inboundSchema),
-      UpdateAgentToolChoiceAgents1$inboundSchema,
-    ]).optional(),
-    parallel_tool_calls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(UpdateAgentFallbackModelConfigurationModalities$inboundSchema),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationGuardrails$inboundSchema
-      ),
-    ).optional(),
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "frequency_penalty": "frequencyPenalty",
-      "max_tokens": "maxTokens",
-      "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
-      "presence_penalty": "presencePenalty",
-      "response_format": "responseFormat",
-      "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
-      "top_p": "topP",
-      "top_k": "topK",
-      "tool_choice": "toolChoice",
-      "parallel_tool_calls": "parallelToolCalls",
+      onCodes: "on_codes",
     });
   });
+
+export function updateAgentFallbackModelConfigurationRetryToJSON(
+  updateAgentFallbackModelConfigurationRetry:
+    UpdateAgentFallbackModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationRetry$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationRetry,
+    ),
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationType> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationType);
+
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationCache$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationCache$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationCache
+  > = z.object({
+    ttl: z.number().default(1800),
+    type: UpdateAgentFallbackModelConfigurationType$outboundSchema,
+  });
+
+export function updateAgentFallbackModelConfigurationCacheToJSON(
+  updateAgentFallbackModelConfigurationCache:
+    UpdateAgentFallbackModelConfigurationCache,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationCache$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationCache,
+    ),
+  );
+}
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgentsType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentLoadBalancerAgentsType
+> = z.nativeEnum(UpdateAgentLoadBalancerAgentsType);
+
+/** @internal */
+export type UpdateAgentLoadBalancerAgents1$Outbound = {
+  type: string;
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgents1$outboundSchema: z.ZodType<
+  UpdateAgentLoadBalancerAgents1$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentLoadBalancerAgents1
+> = z.object({
+  type: UpdateAgentLoadBalancerAgentsType$outboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updateAgentLoadBalancerAgents1ToJSON(
+  updateAgentLoadBalancerAgents1: UpdateAgentLoadBalancerAgents1,
+): string {
+  return JSON.stringify(
+    UpdateAgentLoadBalancerAgents1$outboundSchema.parse(
+      updateAgentLoadBalancerAgents1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationLoadBalancer$Outbound =
+  UpdateAgentLoadBalancerAgents1$Outbound;
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationLoadBalancer$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationLoadBalancer
+  > = z.lazy(() => UpdateAgentLoadBalancerAgents1$outboundSchema);
+
+export function updateAgentFallbackModelConfigurationLoadBalancerToJSON(
+  updateAgentFallbackModelConfigurationLoadBalancer:
+    UpdateAgentFallbackModelConfigurationLoadBalancer,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationLoadBalancer$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateAgentFallbackModelConfigurationTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationTimeout$outboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationTimeout$Outbound,
+    z.ZodTypeDef,
+    UpdateAgentFallbackModelConfigurationTimeout
+  > = z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  });
+
+export function updateAgentFallbackModelConfigurationTimeoutToJSON(
+  updateAgentFallbackModelConfigurationTimeout:
+    UpdateAgentFallbackModelConfigurationTimeout,
+): string {
+  return JSON.stringify(
+    UpdateAgentFallbackModelConfigurationTimeout$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationTimeout,
+    ),
+  );
+}
+
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   audio?:
@@ -4420,6 +4275,13 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   guardrails?:
     | Array<UpdateAgentFallbackModelConfigurationGuardrails$Outbound>
     | undefined;
+  fallbacks?:
+    | Array<UpdateAgentFallbackModelConfigurationFallbacks$Outbound>
+    | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationRetry$Outbound | undefined;
+  cache?: UpdateAgentFallbackModelConfigurationCache$Outbound | undefined;
+  load_balancer?: Array<UpdateAgentLoadBalancerAgents1$Outbound> | undefined;
+  timeout?: UpdateAgentFallbackModelConfigurationTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -4477,6 +4339,23 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
         UpdateAgentFallbackModelConfigurationGuardrails$outboundSchema
       ),
     ).optional(),
+    fallbacks: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationFallbacks$outboundSchema
+      ),
+    ).optional(),
+    retry: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationRetry$outboundSchema
+    ).optional(),
+    cache: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationCache$outboundSchema
+    ).optional(),
+    loadBalancer: z.array(
+      z.lazy(() => UpdateAgentLoadBalancerAgents1$outboundSchema),
+    ).optional(),
+    timeout: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationTimeout$outboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       frequencyPenalty: "frequency_penalty",
@@ -4491,6 +4370,7 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
       topK: "top_k",
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
+      loadBalancer: "load_balancer",
     });
   });
 
@@ -4504,45 +4384,19 @@ export function updateAgentFallbackModelConfigurationParametersToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationParameters$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationParameters' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationRetry$inboundSchema:
-  z.ZodType<UpdateAgentFallbackModelConfigurationRetry, z.ZodTypeDef, unknown> =
-    z.object({
-      count: z.number().default(3),
-      on_codes: z.array(z.number()).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "on_codes": "onCodes",
-      });
-    });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationRetry$Outbound = {
+export type UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationRetry$outboundSchema:
+export const UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema:
   z.ZodType<
-    UpdateAgentFallbackModelConfigurationRetry$Outbound,
+    UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound,
     z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationRetry
+    UpdateAgentFallbackModelConfigurationAgentsRetry
   > = z.object({
     count: z.number().default(3),
     onCodes: z.array(z.number()).optional(),
@@ -4552,52 +4406,24 @@ export const UpdateAgentFallbackModelConfigurationRetry$outboundSchema:
     });
   });
 
-export function updateAgentFallbackModelConfigurationRetryToJSON(
-  updateAgentFallbackModelConfigurationRetry:
-    UpdateAgentFallbackModelConfigurationRetry,
+export function updateAgentFallbackModelConfigurationAgentsRetryToJSON(
+  updateAgentFallbackModelConfigurationAgentsRetry:
+    UpdateAgentFallbackModelConfigurationAgentsRetry,
 ): string {
   return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationRetry$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationRetry,
+    UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationAgentsRetry,
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationRetry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationRetry$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationRetry' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfiguration2$inboundSchema: z.ZodType<
-  UpdateAgentFallbackModelConfiguration2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  parameters: z.lazy(() =>
-    UpdateAgentFallbackModelConfigurationParameters$inboundSchema
-  ).optional(),
-  retry: z.lazy(() => UpdateAgentFallbackModelConfigurationRetry$inboundSchema)
-    .optional(),
-});
 /** @internal */
 export type UpdateAgentFallbackModelConfiguration2$Outbound = {
   id: string;
   parameters?:
     | UpdateAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
-  retry?: UpdateAgentFallbackModelConfigurationRetry$Outbound | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -4610,8 +4436,9 @@ export const UpdateAgentFallbackModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     UpdateAgentFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
-  retry: z.lazy(() => UpdateAgentFallbackModelConfigurationRetry$outboundSchema)
-    .optional(),
+  retry: z.lazy(() =>
+    UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema
+  ).optional(),
 });
 
 export function updateAgentFallbackModelConfiguration2ToJSON(
@@ -4624,26 +4451,7 @@ export function updateAgentFallbackModelConfiguration2ToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfiguration2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentFallbackModelConfiguration2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfiguration2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbackModelConfiguration2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentFallbackModelConfiguration$inboundSchema: z.ZodType<
-  UpdateAgentFallbackModelConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdateAgentFallbackModelConfiguration2$inboundSchema),
-  z.string(),
-]);
 /** @internal */
 export type UpdateAgentFallbackModelConfiguration$Outbound =
   | UpdateAgentFallbackModelConfiguration2$Outbound
@@ -4668,59 +4476,20 @@ export function updateAgentFallbackModelConfigurationToJSON(
     ),
   );
 }
-export function updateAgentFallbackModelConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentFallbackModelConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbackModelConfiguration' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentToolApprovalRequired
-> = z.nativeEnum(UpdateAgentToolApprovalRequired);
 /** @internal */
 export const UpdateAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentToolApprovalRequired
-> = UpdateAgentToolApprovalRequired$inboundSchema;
+> = z.nativeEnum(UpdateAgentToolApprovalRequired);
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDMCPTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDMCPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$inboundSchema
-      .default("mcp"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  tool_id: z.string(),
-  requires_approval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDMCPTool$Outbound = {
   type: string;
@@ -4757,47 +4526,15 @@ export function agentToolInputCRUDMCPToolToJSON(
     AgentToolInputCRUDMCPTool$outboundSchema.parse(agentToolInputCRUDMCPTool),
   );
 }
-export function agentToolInputCRUDMCPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDMCPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDMCPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDMCPTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDJSONSchemaTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDJSONSchemaTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$inboundSchema
-      .default("json_schema"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requires_approval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDJSONSchemaTool$Outbound = {
   type: string;
@@ -4833,47 +4570,15 @@ export function agentToolInputCRUDJSONSchemaToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDJSONSchemaToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDJSONSchemaTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDJSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDJSONSchemaTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDFunctionTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDFunctionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$inboundSchema
-      .default("function"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requires_approval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDFunctionTool$Outbound = {
   type: string;
@@ -4909,47 +4614,15 @@ export function agentToolInputCRUDFunctionToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDFunctionToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDFunctionTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDFunctionTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDFunctionTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDCodeExecutionTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDCodeExecutionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$inboundSchema
-      .default("code"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requires_approval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDCodeExecutionTool$Outbound = {
   type: string;
@@ -4985,48 +4658,15 @@ export function agentToolInputCRUDCodeExecutionToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDCodeExecutionToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDCodeExecutionTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDCodeExecutionTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDHTTPTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDHTTPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$inboundSchema
-      .default("http"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requires_approval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDHTTPTool$Outbound = {
   type: string;
@@ -5060,44 +4700,15 @@ export function agentToolInputCRUDHTTPToolToJSON(
     AgentToolInputCRUDHTTPTool$outboundSchema.parse(agentToolInputCRUDHTTPTool),
   );
 }
-export function agentToolInputCRUDHTTPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDHTTPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDHTTPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDHTTPTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDCurrentDateTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDCurrentDateTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDCurrentDateTool$Outbound = {
   type: string;
@@ -5128,44 +4739,15 @@ export function agentToolInputCRUDCurrentDateToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDCurrentDateToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDCurrentDateTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDCurrentDateTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDCurrentDateTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDQueryKnowledgeBaseTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound = {
   type: string;
@@ -5197,51 +4779,15 @@ export function agentToolInputCRUDQueryKnowledgeBaseToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDQueryKnowledgeBaseToolFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AgentToolInputCRUDQueryKnowledgeBaseTool,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentToolInputCRUDQueryKnowledgeBaseTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema:
-  z.ZodType<
-    AgentToolInputCRUDRetrieveKnowledgeBasesTool,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$inboundSchema,
-    requires_approval: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "requires_approval": "requiresApproval",
-    });
-  });
 /** @internal */
 export type AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound = {
   type: string;
@@ -5274,48 +4820,15 @@ export function agentToolInputCRUDRetrieveKnowledgeBasesToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDRetrieveKnowledgeBasesToolFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AgentToolInputCRUDRetrieveKnowledgeBasesTool,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentToolInputCRUDRetrieveKnowledgeBasesTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema:
-  z.ZodType<AgentToolInputCRUDDeleteMemoryDocumentTool, z.ZodTypeDef, unknown> =
-    z.object({
-      type:
-        UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$inboundSchema,
-      requires_approval: z.boolean().optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "requires_approval": "requiresApproval",
-      });
-    });
 /** @internal */
 export type AgentToolInputCRUDDeleteMemoryDocumentTool$Outbound = {
   type: string;
@@ -5348,48 +4861,15 @@ export function agentToolInputCRUDDeleteMemoryDocumentToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDDeleteMemoryDocumentToolFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AgentToolInputCRUDDeleteMemoryDocumentTool,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentToolInputCRUDDeleteMemoryDocumentTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema:
-  z.ZodType<AgentToolInputCRUDRetrieveMemoryStoresTool, z.ZodTypeDef, unknown> =
-    z.object({
-      type:
-        UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools7Type$inboundSchema,
-      requires_approval: z.boolean().optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "requires_approval": "requiresApproval",
-      });
-    });
 /** @internal */
 export type AgentToolInputCRUDRetrieveMemoryStoresTool$Outbound = {
   type: string;
@@ -5422,50 +4902,15 @@ export function agentToolInputCRUDRetrieveMemoryStoresToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDRetrieveMemoryStoresToolFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AgentToolInputCRUDRetrieveMemoryStoresTool,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentToolInputCRUDRetrieveMemoryStoresTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDWriteMemoryStoreTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDWriteMemoryStoreTool$Outbound = {
   type: string;
@@ -5497,45 +4942,15 @@ export function agentToolInputCRUDWriteMemoryStoreToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDWriteMemoryStoreToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDWriteMemoryStoreTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDWriteMemoryStoreTool' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType
   > = z.nativeEnum(
     UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
   );
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > =
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema;
 
-/** @internal */
-export const AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDQueryMemoryStoreTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDQueryMemoryStoreTool$Outbound = {
   type: string;
@@ -5567,41 +4982,13 @@ export function agentToolInputCRUDQueryMemoryStoreToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDQueryMemoryStoreToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDQueryMemoryStoreTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDQueryMemoryStoreTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
-  > = z.nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType);
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType
-  > = UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema;
+  > = z.nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType);
 
-/** @internal */
-export const AgentToolInputCRUDRetrieveAgentsTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDRetrieveAgentsTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodyType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDRetrieveAgentsTool$Outbound = {
   type: string;
@@ -5632,39 +5019,12 @@ export function agentToolInputCRUDRetrieveAgentsToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDRetrieveAgentsToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDRetrieveAgentsTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDRetrieveAgentsTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDRetrieveAgentsTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsRequestType> = z
-    .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestType);
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsRequestType> =
-    UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsRequestType> = z
+    .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsRequestType);
 
-/** @internal */
-export const AgentToolInputCRUDCallSubAgentTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDCallSubAgentTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentAgentToolInputCRUDAgentsRequestType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDCallSubAgentTool$Outbound = {
   type: string;
@@ -5694,39 +5054,12 @@ export function agentToolInputCRUDCallSubAgentToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDCallSubAgentToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDCallSubAgentTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDCallSubAgentTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDCallSubAgentTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsType> = z
-    .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsType);
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsType> =
-    UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateAgentAgentToolInputCRUDAgentsType> = z
+    .nativeEnum(UpdateAgentAgentToolInputCRUDAgentsType);
 
-/** @internal */
-export const AgentToolInputCRUDWebScraperTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDWebScraperTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentAgentToolInputCRUDAgentsType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDWebScraperTool$Outbound = {
   type: string;
@@ -5756,38 +5089,12 @@ export function agentToolInputCRUDWebScraperToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDWebScraperToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDWebScraperTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentToolInputCRUDWebScraperTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDWebScraperTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentToolInputCRUDType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentAgentToolInputCRUDType
-> = z.nativeEnum(UpdateAgentAgentToolInputCRUDType);
 /** @internal */
 export const UpdateAgentAgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentAgentToolInputCRUDType
-> = UpdateAgentAgentToolInputCRUDType$inboundSchema;
+> = z.nativeEnum(UpdateAgentAgentToolInputCRUDType);
 
-/** @internal */
-export const AgentToolInputCRUDGoogleSearchTool$inboundSchema: z.ZodType<
-  AgentToolInputCRUDGoogleSearchTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateAgentAgentToolInputCRUDType$inboundSchema,
-  requires_approval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requires_approval": "requiresApproval",
-  });
-});
 /** @internal */
 export type AgentToolInputCRUDGoogleSearchTool$Outbound = {
   type: string;
@@ -5817,40 +5124,7 @@ export function agentToolInputCRUDGoogleSearchToolToJSON(
     ),
   );
 }
-export function agentToolInputCRUDGoogleSearchToolFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentToolInputCRUDGoogleSearchTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AgentToolInputCRUDGoogleSearchTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentToolInputCRUDGoogleSearchTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentToolInputCRUD$inboundSchema: z.ZodType<
-  UpdateAgentAgentToolInputCRUD,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => AgentToolInputCRUDGoogleSearchTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDWebScraperTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDCallSubAgentTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDRetrieveAgentsTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDCurrentDateTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDHTTPTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDCodeExecutionTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDFunctionTool$inboundSchema),
-  z.lazy(() => AgentToolInputCRUDJSONSchemaTool$inboundSchema),
-]);
 /** @internal */
 export type UpdateAgentAgentToolInputCRUD$Outbound =
   | AgentToolInputCRUDGoogleSearchTool$Outbound
@@ -5903,40 +5177,12 @@ export function updateAgentAgentToolInputCRUDToJSON(
     ),
   );
 }
-export function updateAgentAgentToolInputCRUDFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentToolInputCRUD, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentToolInputCRUD$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentToolInputCRUD' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentExecuteOn
-> = z.nativeEnum(UpdateAgentExecuteOn);
 /** @internal */
 export const UpdateAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentExecuteOn
-> = UpdateAgentExecuteOn$inboundSchema;
+> = z.nativeEnum(UpdateAgentExecuteOn);
 
-/** @internal */
-export const UpdateAgentEvaluators$inboundSchema: z.ZodType<
-  UpdateAgentEvaluators,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: UpdateAgentExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
 /** @internal */
 export type UpdateAgentEvaluators$Outbound = {
   id: string;
@@ -5967,40 +5213,12 @@ export function updateAgentEvaluatorsToJSON(
     UpdateAgentEvaluators$outboundSchema.parse(updateAgentEvaluators),
   );
 }
-export function updateAgentEvaluatorsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentEvaluators, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentEvaluators$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentEvaluators' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentAgentsExecuteOn
-> = z.nativeEnum(UpdateAgentAgentsExecuteOn);
 /** @internal */
 export const UpdateAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentAgentsExecuteOn
-> = UpdateAgentAgentsExecuteOn$inboundSchema;
+> = z.nativeEnum(UpdateAgentAgentsExecuteOn);
 
-/** @internal */
-export const UpdateAgentGuardrails$inboundSchema: z.ZodType<
-  UpdateAgentGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: UpdateAgentAgentsExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
 /** @internal */
 export type UpdateAgentGuardrails$Outbound = {
   id: string;
@@ -6031,58 +5249,7 @@ export function updateAgentGuardrailsToJSON(
     UpdateAgentGuardrails$outboundSchema.parse(updateAgentGuardrails),
   );
 }
-export function updateAgentGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentGuardrails' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentSettings$inboundSchema: z.ZodType<
-  UpdateAgentSettings,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
-  tool_approval_required: UpdateAgentToolApprovalRequired$inboundSchema.default(
-    "respect_tool",
-  ),
-  tools: z.array(
-    z.union([
-      z.lazy(() => AgentToolInputCRUDGoogleSearchTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDWebScraperTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDCallSubAgentTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDRetrieveAgentsTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDQueryMemoryStoreTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDWriteMemoryStoreTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDRetrieveMemoryStoresTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDDeleteMemoryDocumentTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDRetrieveKnowledgeBasesTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDCurrentDateTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDMCPTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDHTTPTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDCodeExecutionTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDFunctionTool$inboundSchema),
-      z.lazy(() => AgentToolInputCRUDJSONSchemaTool$inboundSchema),
-    ]),
-  ).optional(),
-  evaluators: z.array(z.lazy(() => UpdateAgentEvaluators$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => UpdateAgentGuardrails$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_iterations": "maxIterations",
-    "max_execution_time": "maxExecutionTime",
-    "tool_approval_required": "toolApprovalRequired",
-  });
-});
 /** @internal */
 export type UpdateAgentSettings$Outbound = {
   max_iterations: number;
@@ -6162,28 +5329,7 @@ export function updateAgentSettingsToJSON(
     UpdateAgentSettings$outboundSchema.parse(updateAgentSettings),
   );
 }
-export function updateAgentSettingsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentSettings, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentSettings' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentKnowledgeBases$inboundSchema: z.ZodType<
-  UpdateAgentKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
 /** @internal */
 export type UpdateAgentKnowledgeBases$Outbound = {
   knowledge_id: string;
@@ -6209,25 +5355,7 @@ export function updateAgentKnowledgeBasesToJSON(
     UpdateAgentKnowledgeBases$outboundSchema.parse(updateAgentKnowledgeBases),
   );
 }
-export function updateAgentKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentKnowledgeBases' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentTeamOfAgents$inboundSchema: z.ZodType<
-  UpdateAgentTeamOfAgents,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
 /** @internal */
 export type UpdateAgentTeamOfAgents$Outbound = {
   key: string;
@@ -6251,59 +5379,7 @@ export function updateAgentTeamOfAgentsToJSON(
     UpdateAgentTeamOfAgents$outboundSchema.parse(updateAgentTeamOfAgents),
   );
 }
-export function updateAgentTeamOfAgentsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentTeamOfAgents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentTeamOfAgents' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentUpdateAgentRequest$inboundSchema: z.ZodType<
-  UpdateAgentUpdateAgentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  project_id: z.string().optional(),
-  role: z.string().optional(),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-  system_prompt: z.string().optional(),
-  model: z.union([
-    z.lazy(() => UpdateAgentModelConfiguration2$inboundSchema),
-    z.string(),
-  ]).optional(),
-  fallback_models: z.array(
-    z.union([
-      z.lazy(() => UpdateAgentFallbackModelConfiguration2$inboundSchema),
-      z.string(),
-    ]),
-  ).optional(),
-  settings: z.lazy(() => UpdateAgentSettings$inboundSchema).optional(),
-  path: z.string().optional(),
-  memory_stores: z.array(z.string()).optional(),
-  knowledge_bases: z.array(
-    z.lazy(() => UpdateAgentKnowledgeBases$inboundSchema),
-  ).optional(),
-  team_of_agents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$inboundSchema))
-    .optional(),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "system_prompt": "systemPrompt",
-    "fallback_models": "fallbackModels",
-    "memory_stores": "memoryStores",
-    "knowledge_bases": "knowledgeBases",
-    "team_of_agents": "teamOfAgents",
-  });
-});
 /** @internal */
 export type UpdateAgentUpdateAgentRequest$Outbound = {
   key?: string | undefined;
@@ -6378,30 +5454,7 @@ export function updateAgentUpdateAgentRequestToJSON(
     ),
   );
 }
-export function updateAgentUpdateAgentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentUpdateAgentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentUpdateAgentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentUpdateAgentRequest' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateAgentRequest$inboundSchema: z.ZodType<
-  UpdateAgentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_key: z.string(),
-  RequestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_key": "agentKey",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
@@ -6430,34 +5483,17 @@ export function updateAgentRequestToJSON(
     UpdateAgentRequest$outboundSchema.parse(updateAgentRequest),
   );
 }
-export function updateAgentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateAgentStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentStatus
 > = z.nativeEnum(UpdateAgentStatus);
-/** @internal */
-export const UpdateAgentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentStatus
-> = UpdateAgentStatus$inboundSchema;
 
 /** @internal */
 export const UpdateAgentAgentsToolApprovalRequired$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentsToolApprovalRequired> = z.nativeEnum(
     UpdateAgentAgentsToolApprovalRequired,
   );
-/** @internal */
-export const UpdateAgentAgentsToolApprovalRequired$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsToolApprovalRequired> =
-    UpdateAgentAgentsToolApprovalRequired$inboundSchema;
 
 /** @internal */
 export const UpdateAgentConditions$inboundSchema: z.ZodType<
@@ -6469,31 +5505,7 @@ export const UpdateAgentConditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-/** @internal */
-export type UpdateAgentConditions$Outbound = {
-  condition: string;
-  operator: string;
-  value: string;
-};
 
-/** @internal */
-export const UpdateAgentConditions$outboundSchema: z.ZodType<
-  UpdateAgentConditions$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentConditions
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
-
-export function updateAgentConditionsToJSON(
-  updateAgentConditions: UpdateAgentConditions,
-): string {
-  return JSON.stringify(
-    UpdateAgentConditions$outboundSchema.parse(updateAgentConditions),
-  );
-}
 export function updateAgentConditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentConditions, SDKValidationError> {
@@ -6528,51 +5540,7 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
     "tool_id": "toolId",
   });
 });
-/** @internal */
-export type UpdateAgentTools$Outbound = {
-  id: string;
-  key?: string | undefined;
-  action_type: string;
-  display_name?: string | undefined;
-  description?: string | undefined;
-  requires_approval: boolean;
-  tool_id?: string | undefined;
-  conditions?: Array<UpdateAgentConditions$Outbound> | undefined;
-  timeout: number;
-};
 
-/** @internal */
-export const UpdateAgentTools$outboundSchema: z.ZodType<
-  UpdateAgentTools$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentTools
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  actionType: z.string(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-  toolId: z.string().optional(),
-  conditions: z.array(z.lazy(() => UpdateAgentConditions$outboundSchema))
-    .optional(),
-  timeout: z.number().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    actionType: "action_type",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-    toolId: "tool_id",
-  });
-});
-
-export function updateAgentToolsToJSON(
-  updateAgentTools: UpdateAgentTools,
-): string {
-  return JSON.stringify(
-    UpdateAgentTools$outboundSchema.parse(updateAgentTools),
-  );
-}
 export function updateAgentToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentTools, SDKValidationError> {
@@ -6587,10 +5555,6 @@ export function updateAgentToolsFromJSON(
 export const UpdateAgentAgentsResponseExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentAgentsResponseExecuteOn
 > = z.nativeEnum(UpdateAgentAgentsResponseExecuteOn);
-/** @internal */
-export const UpdateAgentAgentsResponseExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentAgentsResponseExecuteOn
-> = UpdateAgentAgentsResponseExecuteOn$inboundSchema;
 
 /** @internal */
 export const UpdateAgentAgentsEvaluators$inboundSchema: z.ZodType<
@@ -6607,38 +5571,7 @@ export const UpdateAgentAgentsEvaluators$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type UpdateAgentAgentsEvaluators$Outbound = {
-  id: string;
-  sample_rate: number;
-  execute_on: string;
-};
 
-/** @internal */
-export const UpdateAgentAgentsEvaluators$outboundSchema: z.ZodType<
-  UpdateAgentAgentsEvaluators$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsEvaluators
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: UpdateAgentAgentsResponseExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
-
-export function updateAgentAgentsEvaluatorsToJSON(
-  updateAgentAgentsEvaluators: UpdateAgentAgentsEvaluators,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsEvaluators$outboundSchema.parse(
-      updateAgentAgentsEvaluators,
-    ),
-  );
-}
 export function updateAgentAgentsEvaluatorsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsEvaluators, SDKValidationError> {
@@ -6654,10 +5587,6 @@ export const UpdateAgentAgentsResponse200ExecuteOn$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ExecuteOn> = z.nativeEnum(
     UpdateAgentAgentsResponse200ExecuteOn,
   );
-/** @internal */
-export const UpdateAgentAgentsResponse200ExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ExecuteOn> =
-    UpdateAgentAgentsResponse200ExecuteOn$inboundSchema;
 
 /** @internal */
 export const UpdateAgentAgentsGuardrails$inboundSchema: z.ZodType<
@@ -6674,38 +5603,7 @@ export const UpdateAgentAgentsGuardrails$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type UpdateAgentAgentsGuardrails$Outbound = {
-  id: string;
-  sample_rate: number;
-  execute_on: string;
-};
 
-/** @internal */
-export const UpdateAgentAgentsGuardrails$outboundSchema: z.ZodType<
-  UpdateAgentAgentsGuardrails$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsGuardrails
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: UpdateAgentAgentsResponse200ExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
-
-export function updateAgentAgentsGuardrailsToJSON(
-  updateAgentAgentsGuardrails: UpdateAgentAgentsGuardrails,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsGuardrails$outboundSchema.parse(
-      updateAgentAgentsGuardrails,
-    ),
-  );
-}
 export function updateAgentAgentsGuardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsGuardrails, SDKValidationError> {
@@ -6738,46 +5636,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-/** @internal */
-export type UpdateAgentAgentsSettings$Outbound = {
-  max_iterations: number;
-  max_execution_time: number;
-  tool_approval_required: string;
-  tools?: Array<UpdateAgentTools$Outbound> | undefined;
-  evaluators?: Array<UpdateAgentAgentsEvaluators$Outbound> | undefined;
-  guardrails?: Array<UpdateAgentAgentsGuardrails$Outbound> | undefined;
-};
 
-/** @internal */
-export const UpdateAgentAgentsSettings$outboundSchema: z.ZodType<
-  UpdateAgentAgentsSettings$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsSettings
-> = z.object({
-  maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
-  toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired$outboundSchema
-    .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)).optional(),
-  evaluators: z.array(z.lazy(() => UpdateAgentAgentsEvaluators$outboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => UpdateAgentAgentsGuardrails$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxIterations: "max_iterations",
-    maxExecutionTime: "max_execution_time",
-    toolApprovalRequired: "tool_approval_required",
-  });
-});
-
-export function updateAgentAgentsSettingsToJSON(
-  updateAgentAgentsSettings: UpdateAgentAgentsSettings,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsSettings$outboundSchema.parse(updateAgentAgentsSettings),
-  );
-}
 export function updateAgentAgentsSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsSettings, SDKValidationError> {
@@ -6792,19 +5651,11 @@ export function updateAgentAgentsSettingsFromJSON(
 export const UpdateAgentVoice$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentVoice
 > = z.nativeEnum(UpdateAgentVoice);
-/** @internal */
-export const UpdateAgentVoice$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentVoice
-> = UpdateAgentVoice$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentFormat
 > = z.nativeEnum(UpdateAgentFormat);
-/** @internal */
-export const UpdateAgentFormat$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentFormat
-> = UpdateAgentFormat$inboundSchema;
 
 /** @internal */
 export const UpdateAgentAudio$inboundSchema: z.ZodType<
@@ -6815,29 +5666,7 @@ export const UpdateAgentAudio$inboundSchema: z.ZodType<
   voice: UpdateAgentVoice$inboundSchema,
   format: UpdateAgentFormat$inboundSchema,
 });
-/** @internal */
-export type UpdateAgentAudio$Outbound = {
-  voice: string;
-  format: string;
-};
 
-/** @internal */
-export const UpdateAgentAudio$outboundSchema: z.ZodType<
-  UpdateAgentAudio$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAudio
-> = z.object({
-  voice: UpdateAgentVoice$outboundSchema,
-  format: UpdateAgentFormat$outboundSchema,
-});
-
-export function updateAgentAudioToJSON(
-  updateAgentAudio: UpdateAgentAudio,
-): string {
-  return JSON.stringify(
-    UpdateAgentAudio$outboundSchema.parse(updateAgentAudio),
-  );
-}
 export function updateAgentAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAudio, SDKValidationError> {
@@ -6860,37 +5689,7 @@ export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
     schema: z.any().optional(),
     strict: z.boolean().default(false),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound = {
-  description?: string | undefined;
-  name: string;
-  schema?: any | undefined;
-  strict: boolean;
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponseJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
-
-export function updateAgentResponseFormatAgentsResponseJsonSchemaToJSON(
-  updateAgentResponseFormatAgentsResponseJsonSchema:
-    UpdateAgentResponseFormatAgentsResponseJsonSchema,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponseJsonSchema,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6923,39 +5722,7 @@ export const UpdateAgentResponseFormatAgentsResponse200JSONSchema$inboundSchema:
       "json_schema": "jsonSchema",
     });
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponse200JSONSchema$Outbound = {
-  type: "json_schema";
-  json_schema: UpdateAgentResponseFormatAgentsResponseJsonSchema$Outbound;
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponse200JSONSchema$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponse200JSONSchema$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponse200JSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponseJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
-
-export function updateAgentResponseFormatAgentsResponse200JSONSchemaToJSON(
-  updateAgentResponseFormatAgentsResponse200JSONSchema:
-    UpdateAgentResponseFormatAgentsResponse200JSONSchema,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponse200JSONSchema$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponse200JSONSchema,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponse200JSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -6981,31 +5748,7 @@ export const UpdateAgentResponseFormatAgentsResponseJSONObject$inboundSchema:
   > = z.object({
     type: z.literal("json_object"),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponseJSONObject$Outbound = {
-  type: "json_object";
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponseJSONObject$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponseJSONObject$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponseJSONObject
-  > = z.object({
-    type: z.literal("json_object"),
-  });
-
-export function updateAgentResponseFormatAgentsResponseJSONObjectToJSON(
-  updateAgentResponseFormatAgentsResponseJSONObject:
-    UpdateAgentResponseFormatAgentsResponseJSONObject,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponseJSONObject$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponseJSONObject,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponseJSONObjectFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7031,31 +5774,7 @@ export const UpdateAgentResponseFormatAgentsResponseText$inboundSchema:
   > = z.object({
     type: z.literal("text"),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponseText$Outbound = {
-  type: "text";
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponseText$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponseText$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponseText
-  > = z.object({
-    type: z.literal("text"),
-  });
-
-export function updateAgentResponseFormatAgentsResponseTextToJSON(
-  updateAgentResponseFormatAgentsResponseText:
-    UpdateAgentResponseFormatAgentsResponseText,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponseText$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponseText,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponseTextFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7084,34 +5803,7 @@ export const UpdateAgentResponseFormat$inboundSchema: z.ZodType<
     UpdateAgentResponseFormatAgentsResponse200JSONSchema$inboundSchema
   ),
 ]);
-/** @internal */
-export type UpdateAgentResponseFormat$Outbound =
-  | UpdateAgentResponseFormatAgentsResponseText$Outbound
-  | UpdateAgentResponseFormatAgentsResponseJSONObject$Outbound
-  | UpdateAgentResponseFormatAgentsResponse200JSONSchema$Outbound;
 
-/** @internal */
-export const UpdateAgentResponseFormat$outboundSchema: z.ZodType<
-  UpdateAgentResponseFormat$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentResponseFormat
-> = z.union([
-  z.lazy(() => UpdateAgentResponseFormatAgentsResponseText$outboundSchema),
-  z.lazy(() =>
-    UpdateAgentResponseFormatAgentsResponseJSONObject$outboundSchema
-  ),
-  z.lazy(() =>
-    UpdateAgentResponseFormatAgentsResponse200JSONSchema$outboundSchema
-  ),
-]);
-
-export function updateAgentResponseFormatToJSON(
-  updateAgentResponseFormat: UpdateAgentResponseFormat,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormat$outboundSchema.parse(updateAgentResponseFormat),
-  );
-}
 export function updateAgentResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseFormat, SDKValidationError> {
@@ -7126,10 +5818,6 @@ export function updateAgentResponseFormatFromJSON(
 export const UpdateAgentReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentReasoningEffort
 > = z.nativeEnum(UpdateAgentReasoningEffort);
-/** @internal */
-export const UpdateAgentReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentReasoningEffort
-> = UpdateAgentReasoningEffort$inboundSchema;
 
 /** @internal */
 export const UpdateAgentStop$inboundSchema: z.ZodType<
@@ -7137,21 +5825,7 @@ export const UpdateAgentStop$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
-/** @internal */
-export type UpdateAgentStop$Outbound = string | Array<string>;
 
-/** @internal */
-export const UpdateAgentStop$outboundSchema: z.ZodType<
-  UpdateAgentStop$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentStop
-> = z.union([z.string(), z.array(z.string())]);
-
-export function updateAgentStopToJSON(
-  updateAgentStop: UpdateAgentStop,
-): string {
-  return JSON.stringify(UpdateAgentStop$outboundSchema.parse(updateAgentStop));
-}
 export function updateAgentStopFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentStop, SDKValidationError> {
@@ -7174,31 +5848,7 @@ export const UpdateAgentStreamOptions$inboundSchema: z.ZodType<
     "include_usage": "includeUsage",
   });
 });
-/** @internal */
-export type UpdateAgentStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
 
-/** @internal */
-export const UpdateAgentStreamOptions$outboundSchema: z.ZodType<
-  UpdateAgentStreamOptions$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function updateAgentStreamOptionsToJSON(
-  updateAgentStreamOptions: UpdateAgentStreamOptions,
-): string {
-  return JSON.stringify(
-    UpdateAgentStreamOptions$outboundSchema.parse(updateAgentStreamOptions),
-  );
-}
 export function updateAgentStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentStreamOptions, SDKValidationError> {
@@ -7218,28 +5868,7 @@ export const UpdateAgentThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
-/** @internal */
-export type UpdateAgentThinking$Outbound =
-  | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
 
-/** @internal */
-export const UpdateAgentThinking$outboundSchema: z.ZodType<
-  UpdateAgentThinking$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-]);
-
-export function updateAgentThinkingToJSON(
-  updateAgentThinking: UpdateAgentThinking,
-): string {
-  return JSON.stringify(
-    UpdateAgentThinking$outboundSchema.parse(updateAgentThinking),
-  );
-}
 export function updateAgentThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentThinking, SDKValidationError> {
@@ -7254,10 +5883,6 @@ export function updateAgentThinkingFromJSON(
 export const UpdateAgentToolChoiceAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponseType> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponseType);
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponseType> =
-    UpdateAgentToolChoiceAgentsResponseType$inboundSchema;
 
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema:
@@ -7268,31 +5893,7 @@ export const UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema:
   > = z.object({
     name: z.string(),
   });
-/** @internal */
-export type UpdateAgentToolChoiceAgentsResponseFunction$Outbound = {
-  name: string;
-};
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema:
-  z.ZodType<
-    UpdateAgentToolChoiceAgentsResponseFunction$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentToolChoiceAgentsResponseFunction
-  > = z.object({
-    name: z.string(),
-  });
-
-export function updateAgentToolChoiceAgentsResponseFunctionToJSON(
-  updateAgentToolChoiceAgentsResponseFunction:
-    UpdateAgentToolChoiceAgentsResponseFunction,
-): string {
-  return JSON.stringify(
-    UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema.parse(
-      updateAgentToolChoiceAgentsResponseFunction,
-    ),
-  );
-}
 export function updateAgentToolChoiceAgentsResponseFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7320,33 +5921,7 @@ export const UpdateAgentToolChoiceAgentsResponse2$inboundSchema: z.ZodType<
     UpdateAgentToolChoiceAgentsResponseFunction$inboundSchema
   ),
 });
-/** @internal */
-export type UpdateAgentToolChoiceAgentsResponse2$Outbound = {
-  type?: string | undefined;
-  function: UpdateAgentToolChoiceAgentsResponseFunction$Outbound;
-};
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse2$outboundSchema: z.ZodType<
-  UpdateAgentToolChoiceAgentsResponse2$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentToolChoiceAgentsResponse2
-> = z.object({
-  type: UpdateAgentToolChoiceAgentsResponseType$outboundSchema.optional(),
-  function: z.lazy(() =>
-    UpdateAgentToolChoiceAgentsResponseFunction$outboundSchema
-  ),
-});
-
-export function updateAgentToolChoiceAgentsResponse2ToJSON(
-  updateAgentToolChoiceAgentsResponse2: UpdateAgentToolChoiceAgentsResponse2,
-): string {
-  return JSON.stringify(
-    UpdateAgentToolChoiceAgentsResponse2$outboundSchema.parse(
-      updateAgentToolChoiceAgentsResponse2,
-    ),
-  );
-}
 export function updateAgentToolChoiceAgentsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoiceAgentsResponse2, SDKValidationError> {
@@ -7363,10 +5938,6 @@ export const UpdateAgentToolChoiceAgentsResponse1$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse1> = z.nativeEnum(
     UpdateAgentToolChoiceAgentsResponse1,
   );
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse1$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse1> =
-    UpdateAgentToolChoiceAgentsResponse1$inboundSchema;
 
 /** @internal */
 export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
@@ -7377,28 +5948,7 @@ export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
   z.lazy(() => UpdateAgentToolChoiceAgentsResponse2$inboundSchema),
   UpdateAgentToolChoiceAgentsResponse1$inboundSchema,
 ]);
-/** @internal */
-export type UpdateAgentToolChoice$Outbound =
-  | UpdateAgentToolChoiceAgentsResponse2$Outbound
-  | string;
 
-/** @internal */
-export const UpdateAgentToolChoice$outboundSchema: z.ZodType<
-  UpdateAgentToolChoice$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentToolChoice
-> = z.union([
-  z.lazy(() => UpdateAgentToolChoiceAgentsResponse2$outboundSchema),
-  UpdateAgentToolChoiceAgentsResponse1$outboundSchema,
-]);
-
-export function updateAgentToolChoiceToJSON(
-  updateAgentToolChoice: UpdateAgentToolChoice,
-): string {
-  return JSON.stringify(
-    UpdateAgentToolChoice$outboundSchema.parse(updateAgentToolChoice),
-  );
-}
 export function updateAgentToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentToolChoice, SDKValidationError> {
@@ -7413,19 +5963,11 @@ export function updateAgentToolChoiceFromJSON(
 export const UpdateAgentModalities$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModalities
 > = z.nativeEnum(UpdateAgentModalities);
-/** @internal */
-export const UpdateAgentModalities$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentModalities
-> = UpdateAgentModalities$inboundSchema;
 
 /** @internal */
 export const UpdateAgentIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentIdAgentsResponse1
 > = z.nativeEnum(UpdateAgentIdAgentsResponse1);
-/** @internal */
-export const UpdateAgentIdAgentsResponse1$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentIdAgentsResponse1
-> = UpdateAgentIdAgentsResponse1$inboundSchema;
 
 /** @internal */
 export const UpdateAgentId$inboundSchema: z.ZodType<
@@ -7433,19 +5975,7 @@ export const UpdateAgentId$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([UpdateAgentIdAgentsResponse1$inboundSchema, z.string()]);
-/** @internal */
-export type UpdateAgentId$Outbound = string | string;
 
-/** @internal */
-export const UpdateAgentId$outboundSchema: z.ZodType<
-  UpdateAgentId$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentId
-> = z.union([UpdateAgentIdAgentsResponse1$outboundSchema, z.string()]);
-
-export function updateAgentIdToJSON(updateAgentId: UpdateAgentId): string {
-  return JSON.stringify(UpdateAgentId$outboundSchema.parse(updateAgentId));
-}
 export function updateAgentIdFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentId, SDKValidationError> {
@@ -7460,10 +5990,6 @@ export function updateAgentIdFromJSON(
 export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn> =
     z.nativeEnum(UpdateAgentAgentsResponse200ApplicationJSONExecuteOn);
-/** @internal */
-export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn> =
-    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema;
 
 /** @internal */
 export const UpdateAgentAgentsResponseGuardrails$inboundSchema: z.ZodType<
@@ -7479,36 +6005,7 @@ export const UpdateAgentAgentsResponseGuardrails$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type UpdateAgentAgentsResponseGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
 
-/** @internal */
-export const UpdateAgentAgentsResponseGuardrails$outboundSchema: z.ZodType<
-  UpdateAgentAgentsResponseGuardrails$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsResponseGuardrails
-> = z.object({
-  id: z.union([UpdateAgentIdAgentsResponse1$outboundSchema, z.string()]),
-  executeOn:
-    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
-
-export function updateAgentAgentsResponseGuardrailsToJSON(
-  updateAgentAgentsResponseGuardrails: UpdateAgentAgentsResponseGuardrails,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsResponseGuardrails$outboundSchema.parse(
-      updateAgentAgentsResponseGuardrails,
-    ),
-  );
-}
 export function updateAgentAgentsResponseGuardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsResponseGuardrails, SDKValidationError> {
@@ -7517,6 +6014,141 @@ export function updateAgentAgentsResponseGuardrailsFromJSON(
     (x) =>
       UpdateAgentAgentsResponseGuardrails$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateAgentAgentsResponseGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbacks$inboundSchema: z.ZodType<
+  UpdateAgentFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function updateAgentFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentAgentsRetry$inboundSchema: z.ZodType<
+  UpdateAgentAgentsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function updateAgentAgentsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentAgentsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentAgentsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentType
+> = z.nativeEnum(UpdateAgentType);
+
+/** @internal */
+export const UpdateAgentCache$inboundSchema: z.ZodType<
+  UpdateAgentCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: UpdateAgentType$inboundSchema,
+});
+
+export function updateAgentCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentLoadBalancerAgentsResponseType> = z
+    .nativeEnum(UpdateAgentLoadBalancerAgentsResponseType);
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgentsResponse1$inboundSchema: z.ZodType<
+  UpdateAgentLoadBalancerAgentsResponse1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateAgentLoadBalancerAgentsResponseType$inboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updateAgentLoadBalancerAgentsResponse1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentLoadBalancerAgentsResponse1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentLoadBalancerAgentsResponse1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentLoadBalancerAgentsResponse1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentLoadBalancer$inboundSchema: z.ZodType<
+  UpdateAgentLoadBalancer,
+  z.ZodTypeDef,
+  unknown
+> = z.lazy(() => UpdateAgentLoadBalancerAgentsResponse1$inboundSchema);
+
+export function updateAgentLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentLoadBalancer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentTimeout$inboundSchema: z.ZodType<
+  UpdateAgentTimeout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  call_timeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_timeout": "callTimeout",
+  });
+});
+
+export function updateAgentTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentTimeout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentTimeout' from JSON`,
   );
 }
 
@@ -7567,6 +6199,14 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   guardrails: z.array(
     z.lazy(() => UpdateAgentAgentsResponseGuardrails$inboundSchema),
   ).optional(),
+  fallbacks: z.array(z.lazy(() => UpdateAgentFallbacks$inboundSchema))
+    .optional(),
+  retry: z.lazy(() => UpdateAgentAgentsRetry$inboundSchema).optional(),
+  cache: z.lazy(() => UpdateAgentCache$inboundSchema).optional(),
+  load_balancer: z.array(
+    z.lazy(() => UpdateAgentLoadBalancerAgentsResponse1$inboundSchema),
+  ).optional(),
+  timeout: z.lazy(() => UpdateAgentTimeout$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -7581,115 +6221,10 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
-  });
-});
-/** @internal */
-export type UpdateAgentParameters$Outbound = {
-  audio?: UpdateAgentAudio$Outbound | null | undefined;
-  frequency_penalty?: number | null | undefined;
-  max_tokens?: number | null | undefined;
-  max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
-  presence_penalty?: number | null | undefined;
-  response_format?:
-    | UpdateAgentResponseFormatAgentsResponseText$Outbound
-    | UpdateAgentResponseFormatAgentsResponseJSONObject$Outbound
-    | UpdateAgentResponseFormatAgentsResponse200JSONSchema$Outbound
-    | undefined;
-  reasoning_effort?: string | undefined;
-  verbosity?: string | undefined;
-  seed?: number | null | undefined;
-  stop?: string | Array<string> | null | undefined;
-  stream_options?: UpdateAgentStreamOptions$Outbound | null | undefined;
-  thinking?:
-    | components.ThinkingConfigDisabledSchema$Outbound
-    | components.ThinkingConfigEnabledSchema$Outbound
-    | undefined;
-  temperature?: number | null | undefined;
-  top_p?: number | null | undefined;
-  top_k?: number | null | undefined;
-  tool_choice?:
-    | UpdateAgentToolChoiceAgentsResponse2$Outbound
-    | string
-    | undefined;
-  parallel_tool_calls?: boolean | undefined;
-  modalities?: Array<string> | null | undefined;
-  guardrails?: Array<UpdateAgentAgentsResponseGuardrails$Outbound> | undefined;
-};
-
-/** @internal */
-export const UpdateAgentParameters$outboundSchema: z.ZodType<
-  UpdateAgentParameters$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentParameters
-> = z.object({
-  audio: z.nullable(z.lazy(() => UpdateAgentAudio$outboundSchema)).optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => UpdateAgentResponseFormatAgentsResponseText$outboundSchema),
-    z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponseJSONObject$outboundSchema
-    ),
-    z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponse200JSONSchema$outboundSchema
-    ),
-  ]).optional(),
-  reasoningEffort: UpdateAgentReasoningEffort$outboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => UpdateAgentStreamOptions$outboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => UpdateAgentToolChoiceAgentsResponse2$outboundSchema),
-    UpdateAgentToolChoiceAgentsResponse1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdateAgentModalities$outboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => UpdateAgentAgentsResponseGuardrails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
+    "load_balancer": "loadBalancer",
   });
 });
 
-export function updateAgentParametersToJSON(
-  updateAgentParameters: UpdateAgentParameters,
-): string {
-  return JSON.stringify(
-    UpdateAgentParameters$outboundSchema.parse(updateAgentParameters),
-  );
-}
 export function updateAgentParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentParameters, SDKValidationError> {
@@ -7713,33 +6248,7 @@ export const UpdateAgentRetry$inboundSchema: z.ZodType<
     "on_codes": "onCodes",
   });
 });
-/** @internal */
-export type UpdateAgentRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
 
-/** @internal */
-export const UpdateAgentRetry$outboundSchema: z.ZodType<
-  UpdateAgentRetry$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function updateAgentRetryToJSON(
-  updateAgentRetry: UpdateAgentRetry,
-): string {
-  return JSON.stringify(
-    UpdateAgentRetry$outboundSchema.parse(updateAgentRetry),
-  );
-}
 export function updateAgentRetryFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentRetry, SDKValidationError> {
@@ -7754,19 +6263,11 @@ export function updateAgentRetryFromJSON(
 export const UpdateAgentFallbackModelConfigurationAgentsVoice$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsVoice> = z
     .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsVoice);
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsVoice$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsVoice> =
-    UpdateAgentFallbackModelConfigurationAgentsVoice$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsFormat$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsFormat> = z
     .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsFormat);
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsFormat$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsFormat> =
-    UpdateAgentFallbackModelConfigurationAgentsFormat$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema:
@@ -7778,33 +6279,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema:
     voice: UpdateAgentFallbackModelConfigurationAgentsVoice$inboundSchema,
     format: UpdateAgentFallbackModelConfigurationAgentsFormat$inboundSchema,
   });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsAudio$Outbound = {
-  voice: string;
-  format: string;
-};
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsAudio$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsAudio$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsAudio
-  > = z.object({
-    voice: UpdateAgentFallbackModelConfigurationAgentsVoice$outboundSchema,
-    format: UpdateAgentFallbackModelConfigurationAgentsFormat$outboundSchema,
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsAudioToJSON(
-  updateAgentFallbackModelConfigurationAgentsAudio:
-    UpdateAgentFallbackModelConfigurationAgentsAudio,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsAudio$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsAudio,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7833,39 +6308,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
     schema: z.any().optional(),
     strict: z.boolean().default(false),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$Outbound =
-  {
-    description?: string | undefined;
-    name: string;
-    schema?: any | undefined;
-    strict: boolean;
-  };
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
-
-export function updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchemaToJSON(
-  updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema:
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$outboundSchema
-      .parse(
-        updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema,
-      ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7897,42 +6340,7 @@ export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBo
       "json_schema": "jsonSchema",
     });
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$Outbound =
-  {
-    type: "json_schema";
-    json_schema:
-      UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$Outbound;
-  };
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
-
-export function updateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchemaToJSON(
-  updateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema:
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$outboundSchema
-      .parse(
-        updateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema,
-      ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -7957,31 +6365,7 @@ export const UpdateAgentResponseFormatAgentsResponse200JSONObject$inboundSchema:
   > = z.object({
     type: z.literal("json_object"),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponse200JSONObject$Outbound = {
-  type: "json_object";
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponse200JSONObject$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponse200JSONObject$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponse200JSONObject
-  > = z.object({
-    type: z.literal("json_object"),
-  });
-
-export function updateAgentResponseFormatAgentsResponse200JSONObjectToJSON(
-  updateAgentResponseFormatAgentsResponse200JSONObject:
-    UpdateAgentResponseFormatAgentsResponse200JSONObject,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponse200JSONObject$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponse200JSONObject,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponse200JSONObjectFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8007,31 +6391,7 @@ export const UpdateAgentResponseFormatAgentsResponse200Text$inboundSchema:
   > = z.object({
     type: z.literal("text"),
   });
-/** @internal */
-export type UpdateAgentResponseFormatAgentsResponse200Text$Outbound = {
-  type: "text";
-};
 
-/** @internal */
-export const UpdateAgentResponseFormatAgentsResponse200Text$outboundSchema:
-  z.ZodType<
-    UpdateAgentResponseFormatAgentsResponse200Text$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentResponseFormatAgentsResponse200Text
-  > = z.object({
-    type: z.literal("text"),
-  });
-
-export function updateAgentResponseFormatAgentsResponse200TextToJSON(
-  updateAgentResponseFormatAgentsResponse200Text:
-    UpdateAgentResponseFormatAgentsResponse200Text,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseFormatAgentsResponse200Text$outboundSchema.parse(
-      updateAgentResponseFormatAgentsResponse200Text,
-    ),
-  );
-}
 export function updateAgentResponseFormatAgentsResponse200TextFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8063,37 +6423,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsResponseFormat$inboundSc
       UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$inboundSchema
     ),
   ]);
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsResponseFormat$Outbound =
-  | UpdateAgentResponseFormatAgentsResponse200Text$Outbound
-  | UpdateAgentResponseFormatAgentsResponse200JSONObject$Outbound
-  | UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$Outbound;
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsResponseFormat$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsResponseFormat$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsResponseFormat
-  > = z.union([
-    z.lazy(() => UpdateAgentResponseFormatAgentsResponse200Text$outboundSchema),
-    z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponse200JSONObject$outboundSchema
-    ),
-    z.lazy(() =>
-      UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$outboundSchema
-    ),
-  ]);
-
-export function updateAgentFallbackModelConfigurationAgentsResponseFormatToJSON(
-  updateAgentFallbackModelConfigurationAgentsResponseFormat:
-    UpdateAgentFallbackModelConfigurationAgentsResponseFormat,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsResponseFormat$outboundSchema
-      .parse(updateAgentFallbackModelConfigurationAgentsResponseFormat),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8114,11 +6444,6 @@ export const UpdateAgentFallbackModelConfigurationAgentsReasoningEffort$inboundS
   z.ZodNativeEnum<
     typeof UpdateAgentFallbackModelConfigurationAgentsReasoningEffort
   > = z.nativeEnum(UpdateAgentFallbackModelConfigurationAgentsReasoningEffort);
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentFallbackModelConfigurationAgentsReasoningEffort
-  > = UpdateAgentFallbackModelConfigurationAgentsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsStop$inboundSchema:
@@ -8127,29 +6452,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsStop$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([z.string(), z.array(z.string())]);
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsStop$Outbound =
-  | string
-  | Array<string>;
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsStop$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsStop$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsStop
-  > = z.union([z.string(), z.array(z.string())]);
-
-export function updateAgentFallbackModelConfigurationAgentsStopToJSON(
-  updateAgentFallbackModelConfigurationAgentsStop:
-    UpdateAgentFallbackModelConfigurationAgentsStop,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsStop$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsStop,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsStopFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8179,35 +6482,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsStreamOptions$inboundSch
       "include_usage": "includeUsage",
     });
   });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsStreamOptions$Outbound =
-  {
-    include_usage?: boolean | undefined;
-  };
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsStreamOptions$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsStreamOptions$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsStreamOptions
-  > = z.object({
-    includeUsage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      includeUsage: "include_usage",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsStreamOptionsToJSON(
-  updateAgentFallbackModelConfigurationAgentsStreamOptions:
-    UpdateAgentFallbackModelConfigurationAgentsStreamOptions,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsStreamOptions$outboundSchema
-      .parse(updateAgentFallbackModelConfigurationAgentsStreamOptions),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsStreamOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8233,32 +6508,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsThinking$inboundSchema:
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
   ]);
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsThinking$Outbound =
-  | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsThinking$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsThinking$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsThinking
-  > = z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-  ]);
-
-export function updateAgentFallbackModelConfigurationAgentsThinkingToJSON(
-  updateAgentFallbackModelConfigurationAgentsThinking:
-    UpdateAgentFallbackModelConfigurationAgentsThinking,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsThinking$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsThinking,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsThinkingFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8279,10 +6529,6 @@ export function updateAgentFallbackModelConfigurationAgentsThinkingFromJSON(
 export const UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse200Type> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponse200Type);
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse200Type> =
-    UpdateAgentToolChoiceAgentsResponse200Type$inboundSchema;
 
 /** @internal */
 export const UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema:
@@ -8293,31 +6539,7 @@ export const UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema:
   > = z.object({
     name: z.string(),
   });
-/** @internal */
-export type UpdateAgentToolChoiceAgentsResponse200Function$Outbound = {
-  name: string;
-};
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema:
-  z.ZodType<
-    UpdateAgentToolChoiceAgentsResponse200Function$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentToolChoiceAgentsResponse200Function
-  > = z.object({
-    name: z.string(),
-  });
-
-export function updateAgentToolChoiceAgentsResponse200FunctionToJSON(
-  updateAgentToolChoiceAgentsResponse200Function:
-    UpdateAgentToolChoiceAgentsResponse200Function,
-): string {
-  return JSON.stringify(
-    UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema.parse(
-      updateAgentToolChoiceAgentsResponse200Function,
-    ),
-  );
-}
 export function updateAgentToolChoiceAgentsResponse200FunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8345,34 +6567,7 @@ export const UpdateAgentToolChoiceAgentsResponse2002$inboundSchema: z.ZodType<
     UpdateAgentToolChoiceAgentsResponse200Function$inboundSchema
   ),
 });
-/** @internal */
-export type UpdateAgentToolChoiceAgentsResponse2002$Outbound = {
-  type?: string | undefined;
-  function: UpdateAgentToolChoiceAgentsResponse200Function$Outbound;
-};
 
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse2002$outboundSchema: z.ZodType<
-  UpdateAgentToolChoiceAgentsResponse2002$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentToolChoiceAgentsResponse2002
-> = z.object({
-  type: UpdateAgentToolChoiceAgentsResponse200Type$outboundSchema.optional(),
-  function: z.lazy(() =>
-    UpdateAgentToolChoiceAgentsResponse200Function$outboundSchema
-  ),
-});
-
-export function updateAgentToolChoiceAgentsResponse2002ToJSON(
-  updateAgentToolChoiceAgentsResponse2002:
-    UpdateAgentToolChoiceAgentsResponse2002,
-): string {
-  return JSON.stringify(
-    UpdateAgentToolChoiceAgentsResponse2002$outboundSchema.parse(
-      updateAgentToolChoiceAgentsResponse2002,
-    ),
-  );
-}
 export function updateAgentToolChoiceAgentsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8393,10 +6588,6 @@ export function updateAgentToolChoiceAgentsResponse2002FromJSON(
 export const UpdateAgentToolChoiceAgentsResponse2001$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse2001> = z
     .nativeEnum(UpdateAgentToolChoiceAgentsResponse2001);
-/** @internal */
-export const UpdateAgentToolChoiceAgentsResponse2001$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentToolChoiceAgentsResponse2001> =
-    UpdateAgentToolChoiceAgentsResponse2001$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsToolChoice$inboundSchema:
@@ -8408,32 +6599,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsToolChoice$inboundSchema
     z.lazy(() => UpdateAgentToolChoiceAgentsResponse2002$inboundSchema),
     UpdateAgentToolChoiceAgentsResponse2001$inboundSchema,
   ]);
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsToolChoice$Outbound =
-  | UpdateAgentToolChoiceAgentsResponse2002$Outbound
-  | string;
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsToolChoice$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsToolChoice$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsToolChoice
-  > = z.union([
-    z.lazy(() => UpdateAgentToolChoiceAgentsResponse2002$outboundSchema),
-    UpdateAgentToolChoiceAgentsResponse2001$outboundSchema,
-  ]);
-
-export function updateAgentFallbackModelConfigurationAgentsToolChoiceToJSON(
-  updateAgentFallbackModelConfigurationAgentsToolChoice:
-    UpdateAgentFallbackModelConfigurationAgentsToolChoice,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsToolChoice$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsToolChoice,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsToolChoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8455,20 +6621,11 @@ export const UpdateAgentFallbackModelConfigurationAgentsModalities$inboundSchema
   z.ZodNativeEnum<
     typeof UpdateAgentFallbackModelConfigurationAgentsModalities
   > = z.nativeEnum(UpdateAgentFallbackModelConfigurationAgentsModalities);
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsModalities$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateAgentFallbackModelConfigurationAgentsModalities
-  > = UpdateAgentFallbackModelConfigurationAgentsModalities$inboundSchema;
 
 /** @internal */
 export const UpdateAgentIdAgentsResponse2001$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentIdAgentsResponse2001
 > = z.nativeEnum(UpdateAgentIdAgentsResponse2001);
-/** @internal */
-export const UpdateAgentIdAgentsResponse2001$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentIdAgentsResponse2001
-> = UpdateAgentIdAgentsResponse2001$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsId$inboundSchema:
@@ -8477,29 +6634,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsId$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([UpdateAgentIdAgentsResponse2001$inboundSchema, z.string()]);
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsId$Outbound =
-  | string
-  | string;
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsId$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsId$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsId
-  > = z.union([UpdateAgentIdAgentsResponse2001$outboundSchema, z.string()]);
-
-export function updateAgentFallbackModelConfigurationAgentsIdToJSON(
-  updateAgentFallbackModelConfigurationAgentsId:
-    UpdateAgentFallbackModelConfigurationAgentsId,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsId$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsId,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsIdFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8520,10 +6655,6 @@ export function updateAgentFallbackModelConfigurationAgentsIdFromJSON(
 export const UpdateAgentFallbackModelConfigurationAgentsExecuteOn$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsExecuteOn> =
     z.nativeEnum(UpdateAgentFallbackModelConfigurationAgentsExecuteOn);
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsExecuteOn> =
-    UpdateAgentFallbackModelConfigurationAgentsExecuteOn$inboundSchema;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema:
@@ -8540,38 +6671,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema
       "execute_on": "executeOn",
     });
   });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound = {
-  id: string | string;
-  execute_on: string;
-};
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsGuardrails
-  > = z.object({
-    id: z.union([UpdateAgentIdAgentsResponse2001$outboundSchema, z.string()]),
-    executeOn:
-      UpdateAgentFallbackModelConfigurationAgentsExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsGuardrailsToJSON(
-  updateAgentFallbackModelConfigurationAgentsGuardrails:
-    UpdateAgentFallbackModelConfigurationAgentsGuardrails,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsGuardrails,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsGuardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8585,6 +6685,179 @@ export function updateAgentFallbackModelConfigurationAgentsGuardrailsFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsFallbacks$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsFallbacks,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
+  });
+
+export function updateAgentFallbackModelConfigurationAgentsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsFallbacks,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsFallbacks$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsResponse200Retry,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  });
+
+export function updateAgentFallbackModelConfigurationAgentsResponse200RetryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsResponse200Retry,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsResponse200Retry' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsType> = z
+    .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsType);
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsCache$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsCache,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ttl: z.number().default(1800),
+    type: UpdateAgentFallbackModelConfigurationAgentsType$inboundSchema,
+  });
+
+export function updateAgentFallbackModelConfigurationAgentsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsCache,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsCache$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgentsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentLoadBalancerAgentsResponse200Type> = z
+    .nativeEnum(UpdateAgentLoadBalancerAgentsResponse200Type);
+
+/** @internal */
+export const UpdateAgentLoadBalancerAgentsResponse2001$inboundSchema: z.ZodType<
+  UpdateAgentLoadBalancerAgentsResponse2001,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateAgentLoadBalancerAgentsResponse200Type$inboundSchema,
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updateAgentLoadBalancerAgentsResponse2001FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentLoadBalancerAgentsResponse2001,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentLoadBalancerAgentsResponse2001$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentLoadBalancerAgentsResponse2001' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsLoadBalancer$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsLoadBalancer,
+    z.ZodTypeDef,
+    unknown
+  > = z.lazy(() => UpdateAgentLoadBalancerAgentsResponse2001$inboundSchema);
+
+export function updateAgentFallbackModelConfigurationAgentsLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsLoadBalancer,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsLoadBalancer$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentFallbackModelConfigurationAgentsTimeout$inboundSchema:
+  z.ZodType<
+    UpdateAgentFallbackModelConfigurationAgentsTimeout,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    call_timeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_timeout": "callTimeout",
+    });
+  });
+
+export function updateAgentFallbackModelConfigurationAgentsTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentFallbackModelConfigurationAgentsTimeout,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentFallbackModelConfigurationAgentsTimeout$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsTimeout' from JSON`,
   );
 }
 
@@ -8651,6 +6924,23 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
         UpdateAgentFallbackModelConfigurationAgentsGuardrails$inboundSchema
       ),
     ).optional(),
+    fallbacks: z.array(
+      z.lazy(() =>
+        UpdateAgentFallbackModelConfigurationAgentsFallbacks$inboundSchema
+      ),
+    ).optional(),
+    retry: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema
+    ).optional(),
+    cache: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationAgentsCache$inboundSchema
+    ).optional(),
+    load_balancer: z.array(
+      z.lazy(() => UpdateAgentLoadBalancerAgentsResponse2001$inboundSchema),
+    ).optional(),
+    timeout: z.lazy(() =>
+      UpdateAgentFallbackModelConfigurationAgentsTimeout$inboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "frequency_penalty": "frequencyPenalty",
@@ -8665,142 +6955,10 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
       "top_k": "topK",
       "tool_choice": "toolChoice",
       "parallel_tool_calls": "parallelToolCalls",
-    });
-  });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsParameters$Outbound = {
-  audio?:
-    | UpdateAgentFallbackModelConfigurationAgentsAudio$Outbound
-    | null
-    | undefined;
-  frequency_penalty?: number | null | undefined;
-  max_tokens?: number | null | undefined;
-  max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
-  presence_penalty?: number | null | undefined;
-  response_format?:
-    | UpdateAgentResponseFormatAgentsResponse200Text$Outbound
-    | UpdateAgentResponseFormatAgentsResponse200JSONObject$Outbound
-    | UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$Outbound
-    | undefined;
-  reasoning_effort?: string | undefined;
-  verbosity?: string | undefined;
-  seed?: number | null | undefined;
-  stop?: string | Array<string> | null | undefined;
-  stream_options?:
-    | UpdateAgentFallbackModelConfigurationAgentsStreamOptions$Outbound
-    | null
-    | undefined;
-  thinking?:
-    | components.ThinkingConfigDisabledSchema$Outbound
-    | components.ThinkingConfigEnabledSchema$Outbound
-    | undefined;
-  temperature?: number | null | undefined;
-  top_p?: number | null | undefined;
-  top_k?: number | null | undefined;
-  tool_choice?:
-    | UpdateAgentToolChoiceAgentsResponse2002$Outbound
-    | string
-    | undefined;
-  parallel_tool_calls?: boolean | undefined;
-  modalities?: Array<string> | null | undefined;
-  guardrails?:
-    | Array<UpdateAgentFallbackModelConfigurationAgentsGuardrails$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsParameters$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsParameters$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsParameters
-  > = z.object({
-    audio: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationAgentsAudio$outboundSchema
-      ),
-    ).optional(),
-    frequencyPenalty: z.nullable(z.number()).optional(),
-    maxTokens: z.nullable(z.number().int()).optional(),
-    maxCompletionTokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    topLogprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
-    presencePenalty: z.nullable(z.number()).optional(),
-    responseFormat: z.union([
-      z.lazy(() =>
-        UpdateAgentResponseFormatAgentsResponse200Text$outboundSchema
-      ),
-      z.lazy(() =>
-        UpdateAgentResponseFormatAgentsResponse200JSONObject$outboundSchema
-      ),
-      z.lazy(() =>
-        UpdateAgentResponseFormatAgentsResponse200ApplicationJSONResponseBodyJSONSchema$outboundSchema
-      ),
-    ]).optional(),
-    reasoningEffort:
-      UpdateAgentFallbackModelConfigurationAgentsReasoningEffort$outboundSchema
-        .optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    streamOptions: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationAgentsStreamOptions$outboundSchema
-      ),
-    ).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$outboundSchema,
-      components.ThinkingConfigEnabledSchema$outboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    topP: z.nullable(z.number()).optional(),
-    topK: z.nullable(z.number()).optional(),
-    toolChoice: z.union([
-      z.lazy(() => UpdateAgentToolChoiceAgentsResponse2002$outboundSchema),
-      UpdateAgentToolChoiceAgentsResponse2001$outboundSchema,
-    ]).optional(),
-    parallelToolCalls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(
-        UpdateAgentFallbackModelConfigurationAgentsModalities$outboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationAgentsGuardrails$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      frequencyPenalty: "frequency_penalty",
-      maxTokens: "max_tokens",
-      maxCompletionTokens: "max_completion_tokens",
-      topLogprobs: "top_logprobs",
-      presencePenalty: "presence_penalty",
-      responseFormat: "response_format",
-      reasoningEffort: "reasoning_effort",
-      streamOptions: "stream_options",
-      topP: "top_p",
-      topK: "top_k",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
+      "load_balancer": "loadBalancer",
     });
   });
 
-export function updateAgentFallbackModelConfigurationAgentsParametersToJSON(
-  updateAgentFallbackModelConfigurationAgentsParameters:
-    UpdateAgentFallbackModelConfigurationAgentsParameters,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsParameters$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsParameters,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgentsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8818,9 +6976,9 @@ export function updateAgentFallbackModelConfigurationAgentsParametersFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema:
+export const UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema:
   z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsRetry,
+    UpdateAgentFallbackModelConfigurationAgentsResponseRetry,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -8831,50 +6989,19 @@ export const UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema:
       "on_codes": "onCodes",
     });
   });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
 
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsRetryToJSON(
-  updateAgentFallbackModelConfigurationAgentsRetry:
-    UpdateAgentFallbackModelConfigurationAgentsRetry,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsRetry,
-    ),
-  );
-}
-export function updateAgentFallbackModelConfigurationAgentsRetryFromJSON(
+export function updateAgentFallbackModelConfigurationAgentsResponseRetryFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAgentsRetry,
+  UpdateAgentFallbackModelConfigurationAgentsResponseRetry,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsRetry' from JSON`,
+      UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsResponseRetry' from JSON`,
   );
 }
 
@@ -8890,44 +7017,10 @@ export const UpdateAgentFallbackModelConfigurationAgents2$inboundSchema:
       UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     ).optional(),
     retry: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema
-    ).optional(),
-  });
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAgents2$Outbound = {
-  id: string;
-  parameters?:
-    | UpdateAgentFallbackModelConfigurationAgentsParameters$Outbound
-    | undefined;
-  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound | undefined;
-};
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgents2$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgents2$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgents2
-  > = z.object({
-    id: z.string(),
-    parameters: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationAgentsParameters$outboundSchema
-    ).optional(),
-    retry: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema
+      UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema
     ).optional(),
   });
 
-export function updateAgentFallbackModelConfigurationAgents2ToJSON(
-  updateAgentFallbackModelConfigurationAgents2:
-    UpdateAgentFallbackModelConfigurationAgents2,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgents2$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgents2,
-    ),
-  );
-}
 export function updateAgentFallbackModelConfigurationAgents2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8954,32 +7047,7 @@ export const UpdateAgentAgentsFallbackModelConfiguration$inboundSchema:
     z.lazy(() => UpdateAgentFallbackModelConfigurationAgents2$inboundSchema),
     z.string(),
   ]);
-/** @internal */
-export type UpdateAgentAgentsFallbackModelConfiguration$Outbound =
-  | UpdateAgentFallbackModelConfigurationAgents2$Outbound
-  | string;
 
-/** @internal */
-export const UpdateAgentAgentsFallbackModelConfiguration$outboundSchema:
-  z.ZodType<
-    UpdateAgentAgentsFallbackModelConfiguration$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentAgentsFallbackModelConfiguration
-  > = z.union([
-    z.lazy(() => UpdateAgentFallbackModelConfigurationAgents2$outboundSchema),
-    z.string(),
-  ]);
-
-export function updateAgentAgentsFallbackModelConfigurationToJSON(
-  updateAgentAgentsFallbackModelConfiguration:
-    UpdateAgentAgentsFallbackModelConfiguration,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsFallbackModelConfiguration$outboundSchema.parse(
-      updateAgentAgentsFallbackModelConfiguration,
-    ),
-  );
-}
 export function updateAgentAgentsFallbackModelConfigurationFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -9018,48 +7086,7 @@ export const UpdateAgentModel$inboundSchema: z.ZodType<
     "fallback_models": "fallbackModels",
   });
 });
-/** @internal */
-export type UpdateAgentModel$Outbound = {
-  id: string;
-  integration_id?: string | null | undefined;
-  parameters?: UpdateAgentParameters$Outbound | undefined;
-  retry?: UpdateAgentRetry$Outbound | undefined;
-  fallback_models?:
-    | Array<UpdateAgentFallbackModelConfigurationAgents2$Outbound | string>
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const UpdateAgentModel$outboundSchema: z.ZodType<
-  UpdateAgentModel$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentModel
-> = z.object({
-  id: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => UpdateAgentParameters$outboundSchema).optional(),
-  retry: z.lazy(() => UpdateAgentRetry$outboundSchema).optional(),
-  fallbackModels: z.nullable(
-    z.array(z.union([
-      z.lazy(() => UpdateAgentFallbackModelConfigurationAgents2$outboundSchema),
-      z.string(),
-    ])),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-    fallbackModels: "fallback_models",
-  });
-});
-
-export function updateAgentModelToJSON(
-  updateAgentModel: UpdateAgentModel,
-): string {
-  return JSON.stringify(
-    UpdateAgentModel$outboundSchema.parse(updateAgentModel),
-  );
-}
 export function updateAgentModelFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentModel, SDKValidationError> {
@@ -9079,31 +7106,7 @@ export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
   key: z.string(),
   role: z.string().optional(),
 });
-/** @internal */
-export type UpdateAgentAgentsTeamOfAgents$Outbound = {
-  key: string;
-  role?: string | undefined;
-};
 
-/** @internal */
-export const UpdateAgentAgentsTeamOfAgents$outboundSchema: z.ZodType<
-  UpdateAgentAgentsTeamOfAgents$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsTeamOfAgents
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
-
-export function updateAgentAgentsTeamOfAgentsToJSON(
-  updateAgentAgentsTeamOfAgents: UpdateAgentAgentsTeamOfAgents,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsTeamOfAgents$outboundSchema.parse(
-      updateAgentAgentsTeamOfAgents,
-    ),
-  );
-}
 export function updateAgentAgentsTeamOfAgentsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
@@ -9126,31 +7129,7 @@ export const UpdateAgentMetrics$inboundSchema: z.ZodType<
     "total_cost": "totalCost",
   });
 });
-/** @internal */
-export type UpdateAgentMetrics$Outbound = {
-  total_cost: number;
-};
 
-/** @internal */
-export const UpdateAgentMetrics$outboundSchema: z.ZodType<
-  UpdateAgentMetrics$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentMetrics
-> = z.object({
-  totalCost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    totalCost: "total_cost",
-  });
-});
-
-export function updateAgentMetricsToJSON(
-  updateAgentMetrics: UpdateAgentMetrics,
-): string {
-  return JSON.stringify(
-    UpdateAgentMetrics$outboundSchema.parse(updateAgentMetrics),
-  );
-}
 export function updateAgentMetricsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentMetrics, SDKValidationError> {
@@ -9173,33 +7152,7 @@ export const UpdateAgentAgentsKnowledgeBases$inboundSchema: z.ZodType<
     "knowledge_id": "knowledgeId",
   });
 });
-/** @internal */
-export type UpdateAgentAgentsKnowledgeBases$Outbound = {
-  knowledge_id: string;
-};
 
-/** @internal */
-export const UpdateAgentAgentsKnowledgeBases$outboundSchema: z.ZodType<
-  UpdateAgentAgentsKnowledgeBases$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentAgentsKnowledgeBases
-> = z.object({
-  knowledgeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-  });
-});
-
-export function updateAgentAgentsKnowledgeBasesToJSON(
-  updateAgentAgentsKnowledgeBases: UpdateAgentAgentsKnowledgeBases,
-): string {
-  return JSON.stringify(
-    UpdateAgentAgentsKnowledgeBases$outboundSchema.parse(
-      updateAgentAgentsKnowledgeBases,
-    ),
-  );
-}
 export function updateAgentAgentsKnowledgeBasesFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentAgentsKnowledgeBases, SDKValidationError> {
@@ -9214,10 +7167,6 @@ export function updateAgentAgentsKnowledgeBasesFromJSON(
 export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentSource
 > = z.nativeEnum(UpdateAgentSource);
-/** @internal */
-export const UpdateAgentSource$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentSource
-> = UpdateAgentSource$inboundSchema;
 
 /** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
@@ -9268,91 +7217,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     "knowledge_bases": "knowledgeBases",
   });
 });
-/** @internal */
-export type UpdateAgentResponseBody$Outbound = {
-  _id: string;
-  key: string;
-  display_name: string;
-  workspace_id: string;
-  project_id: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  created?: string | undefined;
-  updated?: string | undefined;
-  role: string;
-  description: string;
-  system_prompt?: string | undefined;
-  instructions: string;
-  status: string;
-  settings?: UpdateAgentAgentsSettings$Outbound | undefined;
-  model: UpdateAgentModel$Outbound;
-  version_hash?: string | undefined;
-  path: string;
-  memory_stores: Array<string>;
-  team_of_agents: Array<UpdateAgentAgentsTeamOfAgents$Outbound>;
-  metrics?: UpdateAgentMetrics$Outbound | undefined;
-  variables?: { [k: string]: any } | undefined;
-  knowledge_bases?: Array<UpdateAgentAgentsKnowledgeBases$Outbound> | undefined;
-  source?: string | undefined;
-};
 
-/** @internal */
-export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
-  UpdateAgentResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentResponseBody
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  displayName: z.string(),
-  workspaceId: z.string(),
-  projectId: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  role: z.string(),
-  description: z.string(),
-  systemPrompt: z.string().optional(),
-  instructions: z.string(),
-  status: UpdateAgentStatus$outboundSchema,
-  settings: z.lazy(() => UpdateAgentAgentsSettings$outboundSchema).optional(),
-  model: z.lazy(() => UpdateAgentModel$outboundSchema),
-  versionHash: z.string().optional(),
-  path: z.string(),
-  memoryStores: z.array(z.string()),
-  teamOfAgents: z.array(
-    z.lazy(() => UpdateAgentAgentsTeamOfAgents$outboundSchema),
-  ),
-  metrics: z.lazy(() => UpdateAgentMetrics$outboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledgeBases: z.array(
-    z.lazy(() => UpdateAgentAgentsKnowledgeBases$outboundSchema),
-  ).optional(),
-  source: UpdateAgentSource$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    workspaceId: "workspace_id",
-    projectId: "project_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    systemPrompt: "system_prompt",
-    versionHash: "version_hash",
-    memoryStores: "memory_stores",
-    teamOfAgents: "team_of_agents",
-    knowledgeBases: "knowledge_bases",
-  });
-});
-
-export function updateAgentResponseBodyToJSON(
-  updateAgentResponseBody: UpdateAgentResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateAgentResponseBody$outboundSchema.parse(updateAgentResponseBody),
-  );
-}
 export function updateAgentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAgentResponseBody, SDKValidationError> {

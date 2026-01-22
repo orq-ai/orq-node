@@ -49,19 +49,3 @@ export const DeleteAgentResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type DeleteAgentResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const DeleteAgentResponseBody$outboundSchema: z.ZodType<
-  DeleteAgentResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeleteAgentResponseBody
-> = z.instanceof(DeleteAgentResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

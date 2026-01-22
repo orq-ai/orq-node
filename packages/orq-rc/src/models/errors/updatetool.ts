@@ -60,19 +60,3 @@ export const UpdateToolResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UpdateToolResponseBody$Outbound = {
-  error: string;
-};
-
-/** @internal */
-export const UpdateToolResponseBody$outboundSchema: z.ZodType<
-  UpdateToolResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBody
-> = z.instanceof(UpdateToolResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.string(),
-  }));

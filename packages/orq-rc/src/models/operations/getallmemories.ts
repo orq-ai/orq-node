@@ -70,24 +70,6 @@ export type GetAllMemoriesResponseBody = {
 };
 
 /** @internal */
-export const GetAllMemoriesRequest$inboundSchema: z.ZodType<
-  GetAllMemoriesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  q: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
-/** @internal */
 export type GetAllMemoriesRequest$Outbound = {
   memory_store_key: string;
   limit: number;
@@ -122,24 +104,11 @@ export function getAllMemoriesRequestToJSON(
     GetAllMemoriesRequest$outboundSchema.parse(getAllMemoriesRequest),
   );
 }
-export function getAllMemoriesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoriesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoriesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoriesRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetAllMemoriesObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllMemoriesObject
 > = z.nativeEnum(GetAllMemoriesObject);
-/** @internal */
-export const GetAllMemoriesObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllMemoriesObject
-> = GetAllMemoriesObject$inboundSchema;
 
 /** @internal */
 export const GetAllMemoriesData$inboundSchema: z.ZodType<
@@ -167,53 +136,7 @@ export const GetAllMemoriesData$inboundSchema: z.ZodType<
     "documents_count": "documentsCount",
   });
 });
-/** @internal */
-export type GetAllMemoriesData$Outbound = {
-  _id: string;
-  entity_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  store_id: string;
-  workspace_id: string;
-  documents_count: number;
-};
 
-/** @internal */
-export const GetAllMemoriesData$outboundSchema: z.ZodType<
-  GetAllMemoriesData$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoriesData
-> = z.object({
-  id: z.string(),
-  entityId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  storeId: z.string(),
-  workspaceId: z.string(),
-  documentsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    entityId: "entity_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    storeId: "store_id",
-    workspaceId: "workspace_id",
-    documentsCount: "documents_count",
-  });
-});
-
-export function getAllMemoriesDataToJSON(
-  getAllMemoriesData: GetAllMemoriesData,
-): string {
-  return JSON.stringify(
-    GetAllMemoriesData$outboundSchema.parse(getAllMemoriesData),
-  );
-}
 export function getAllMemoriesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoriesData, SDKValidationError> {
@@ -238,35 +161,7 @@ export const GetAllMemoriesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetAllMemoriesResponseBody$Outbound = {
-  object: string;
-  data: Array<GetAllMemoriesData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetAllMemoriesResponseBody$outboundSchema: z.ZodType<
-  GetAllMemoriesResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetAllMemoriesResponseBody
-> = z.object({
-  object: GetAllMemoriesObject$outboundSchema,
-  data: z.array(z.lazy(() => GetAllMemoriesData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getAllMemoriesResponseBodyToJSON(
-  getAllMemoriesResponseBody: GetAllMemoriesResponseBody,
-): string {
-  return JSON.stringify(
-    GetAllMemoriesResponseBody$outboundSchema.parse(getAllMemoriesResponseBody),
-  );
-}
 export function getAllMemoriesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllMemoriesResponseBody, SDKValidationError> {

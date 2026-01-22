@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveConversationRequest = {
   /**
@@ -15,18 +12,6 @@ export type RetrieveConversationRequest = {
   conversationId: string;
 };
 
-/** @internal */
-export const RetrieveConversationRequest$inboundSchema: z.ZodType<
-  RetrieveConversationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  conversation_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-  });
-});
 /** @internal */
 export type RetrieveConversationRequest$Outbound = {
   conversation_id: string;
@@ -52,14 +37,5 @@ export function retrieveConversationRequestToJSON(
     RetrieveConversationRequest$outboundSchema.parse(
       retrieveConversationRequest,
     ),
-  );
-}
-export function retrieveConversationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveConversationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveConversationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveConversationRequest' from JSON`,
   );
 }

@@ -51,21 +51,9 @@ export type FileGetResponseBody = {
   /**
    * The date and time the resource was created
    */
-  created?: Date | undefined;
+  created: Date;
 };
 
-/** @internal */
-export const FileGetRequest$inboundSchema: z.ZodType<
-  FileGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
 /** @internal */
 export type FileGetRequest$Outbound = {
   file_id: string;
@@ -87,24 +75,11 @@ export const FileGetRequest$outboundSchema: z.ZodType<
 export function fileGetRequestToJSON(fileGetRequest: FileGetRequest): string {
   return JSON.stringify(FileGetRequest$outboundSchema.parse(fileGetRequest));
 }
-export function fileGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FileGetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileGetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileGetRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileGetPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileGetPurpose
 > = z.nativeEnum(FileGetPurpose);
-/** @internal */
-export const FileGetPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileGetPurpose
-> = FileGetPurpose$inboundSchema;
 
 /** @internal */
 export const FileGetResponseBody$inboundSchema: z.ZodType<
@@ -119,7 +94,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:35.020Z",
+    "2026-01-22T11:24:25.787Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -129,47 +104,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type FileGetResponseBody$Outbound = {
-  _id: string;
-  object_name: string;
-  purpose: string;
-  bytes: number;
-  file_name: string;
-  workspace_id: string;
-  created: string;
-};
 
-/** @internal */
-export const FileGetResponseBody$outboundSchema: z.ZodType<
-  FileGetResponseBody$Outbound,
-  z.ZodTypeDef,
-  FileGetResponseBody
-> = z.object({
-  id: z.string(),
-  objectName: z.string(),
-  purpose: FileGetPurpose$outboundSchema,
-  bytes: z.number(),
-  fileName: z.string(),
-  workspaceId: z.string(),
-  created: z.date().default(() => new Date("2026-01-22T07:45:35.020Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    objectName: "object_name",
-    fileName: "file_name",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function fileGetResponseBodyToJSON(
-  fileGetResponseBody: FileGetResponseBody,
-): string {
-  return JSON.stringify(
-    FileGetResponseBody$outboundSchema.parse(fileGetResponseBody),
-  );
-}
 export function fileGetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileGetResponseBody, SDKValidationError> {

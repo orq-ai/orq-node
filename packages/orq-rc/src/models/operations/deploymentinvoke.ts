@@ -318,62 +318,13 @@ export type DeploymentInvokeResponseBody = {
 };
 
 /** @internal */
-export const DeploymentInvokeGlobals$inboundSchema: z.ZodType<
-  DeploymentInvokeGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  environment: z.string().optional(),
-  contactId: z.string().optional(),
-});
-/** @internal */
-export type DeploymentInvokeGlobals$Outbound = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const DeploymentInvokeGlobals$outboundSchema: z.ZodType<
-  DeploymentInvokeGlobals$Outbound,
-  z.ZodTypeDef,
-  DeploymentInvokeGlobals
-> = z.object({
-  environment: z.string().optional(),
-  contactId: z.string().optional(),
-});
-
-export function deploymentInvokeGlobalsToJSON(
-  deploymentInvokeGlobals: DeploymentInvokeGlobals,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeGlobals$outboundSchema.parse(deploymentInvokeGlobals),
-  );
-}
-export function deploymentInvokeGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentInvokeGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentInvokeGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentInvokeGlobals' from JSON`,
-  );
-}
-
-/** @internal */
 export const DeploymentInvokeObject$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentInvokeObject
 > = z.nativeEnum(DeploymentInvokeObject);
-/** @internal */
-export const DeploymentInvokeObject$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeObject
-> = DeploymentInvokeObject$inboundSchema;
 
 /** @internal */
 export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
   .nativeEnum(Provider);
-/** @internal */
-export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
-  Provider$inboundSchema;
 
 /** @internal */
 export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
@@ -395,43 +346,7 @@ export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
     "search_score": "searchScore",
   });
 });
-/** @internal */
-export type DeploymentInvokeMetadata$Outbound = {
-  file_name: string;
-  page_number: number | null;
-  file_type: string;
-  rerank_score?: number | undefined;
-  search_score: number;
-};
 
-/** @internal */
-export const DeploymentInvokeMetadata$outboundSchema: z.ZodType<
-  DeploymentInvokeMetadata$Outbound,
-  z.ZodTypeDef,
-  DeploymentInvokeMetadata
-> = z.object({
-  fileName: z.string(),
-  pageNumber: z.nullable(z.number()),
-  fileType: z.string(),
-  rerankScore: z.number().optional(),
-  searchScore: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    fileName: "file_name",
-    pageNumber: "page_number",
-    fileType: "file_type",
-    rerankScore: "rerank_score",
-    searchScore: "search_score",
-  });
-});
-
-export function deploymentInvokeMetadataToJSON(
-  deploymentInvokeMetadata: DeploymentInvokeMetadata,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeMetadata$outboundSchema.parse(deploymentInvokeMetadata),
-  );
-}
 export function deploymentInvokeMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentInvokeMetadata, SDKValidationError> {
@@ -451,25 +366,7 @@ export const Retrievals$inboundSchema: z.ZodType<
   document: z.string(),
   metadata: z.lazy(() => DeploymentInvokeMetadata$inboundSchema),
 });
-/** @internal */
-export type Retrievals$Outbound = {
-  document: string;
-  metadata: DeploymentInvokeMetadata$Outbound;
-};
 
-/** @internal */
-export const Retrievals$outboundSchema: z.ZodType<
-  Retrievals$Outbound,
-  z.ZodTypeDef,
-  Retrievals
-> = z.object({
-  document: z.string(),
-  metadata: z.lazy(() => DeploymentInvokeMetadata$outboundSchema),
-});
-
-export function retrievalsToJSON(retrievals: Retrievals): string {
-  return JSON.stringify(Retrievals$outboundSchema.parse(retrievals));
-}
 export function retrievalsFromJSON(
   jsonString: string,
 ): SafeParseResult<Retrievals, SDKValidationError> {
@@ -492,31 +389,7 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
     "cached_tokens": "cachedTokens",
   });
 });
-/** @internal */
-export type PromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-  });
-});
-
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
-): string {
-  return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
-  );
-}
 export function promptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<PromptTokensDetails, SDKValidationError> {
@@ -539,31 +412,7 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
     "reasoning_tokens": "reasoningTokens",
   });
 });
-/** @internal */
-export type CompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-  });
-});
-
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
-  );
-}
 export function completionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
@@ -597,49 +446,7 @@ export const DeploymentInvokeUsage$inboundSchema: z.ZodType<
     "completion_tokens_details": "completionTokensDetails",
   });
 });
-/** @internal */
-export type DeploymentInvokeUsage$Outbound = {
-  total_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  completion_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | undefined;
-  completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const DeploymentInvokeUsage$outboundSchema: z.ZodType<
-  DeploymentInvokeUsage$Outbound,
-  z.ZodTypeDef,
-  DeploymentInvokeUsage
-> = z.object({
-  totalTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  completionTokens: z.number().optional(),
-  promptTokensDetails: z.lazy(() => PromptTokensDetails$outboundSchema)
-    .optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    totalTokens: "total_tokens",
-    promptTokens: "prompt_tokens",
-    completionTokens: "completion_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function deploymentInvokeUsageToJSON(
-  deploymentInvokeUsage: DeploymentInvokeUsage,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeUsage$outboundSchema.parse(deploymentInvokeUsage),
-  );
-}
 export function deploymentInvokeUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentInvokeUsage, SDKValidationError> {
@@ -655,10 +462,6 @@ export const DeploymentInvokeMessageDeploymentsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> = z.nativeEnum(
     DeploymentInvokeMessageDeploymentsRole,
   );
-/** @internal */
-export const DeploymentInvokeMessageDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> =
-    DeploymentInvokeMessageDeploymentsRole$inboundSchema;
 
 /** @internal */
 export const Message3$inboundSchema: z.ZodType<
@@ -670,27 +473,7 @@ export const Message3$inboundSchema: z.ZodType<
   role: DeploymentInvokeMessageDeploymentsRole$inboundSchema,
   url: z.string(),
 });
-/** @internal */
-export type Message3$Outbound = {
-  type: "image";
-  role: string;
-  url: string;
-};
 
-/** @internal */
-export const Message3$outboundSchema: z.ZodType<
-  Message3$Outbound,
-  z.ZodTypeDef,
-  Message3
-> = z.object({
-  type: z.literal("image"),
-  role: DeploymentInvokeMessageDeploymentsRole$outboundSchema,
-  url: z.string(),
-});
-
-export function message3ToJSON(message3: Message3): string {
-  return JSON.stringify(Message3$outboundSchema.parse(message3));
-}
 export function message3FromJSON(
   jsonString: string,
 ): SafeParseResult<Message3, SDKValidationError> {
@@ -705,10 +488,6 @@ export function message3FromJSON(
 export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentInvokeMessageRole
 > = z.nativeEnum(DeploymentInvokeMessageRole);
-/** @internal */
-export const DeploymentInvokeMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeMessageRole
-> = DeploymentInvokeMessageRole$inboundSchema;
 
 /** @internal */
 export const Message2$inboundSchema: z.ZodType<
@@ -728,38 +507,7 @@ export const Message2$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-/** @internal */
-export type Message2$Outbound = {
-  type: "content";
-  role: string;
-  content: string | null;
-  reasoning?: string | undefined;
-  reasoning_signature?: string | undefined;
-  redacted_reasoning?: string | undefined;
-};
 
-/** @internal */
-export const Message2$outboundSchema: z.ZodType<
-  Message2$Outbound,
-  z.ZodTypeDef,
-  Message2
-> = z.object({
-  type: z.literal("content"),
-  role: DeploymentInvokeMessageRole$outboundSchema,
-  content: z.nullable(z.string()),
-  reasoning: z.string().optional(),
-  reasoningSignature: z.string().optional(),
-  redactedReasoning: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningSignature: "reasoning_signature",
-    redactedReasoning: "redacted_reasoning",
-  });
-});
-
-export function message2ToJSON(message2: Message2): string {
-  return JSON.stringify(Message2$outboundSchema.parse(message2));
-}
 export function message2FromJSON(
   jsonString: string,
 ): SafeParseResult<Message2, SDKValidationError> {
@@ -773,18 +521,11 @@ export function message2FromJSON(
 /** @internal */
 export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> = z
   .nativeEnum(MessageRole);
-/** @internal */
-export const MessageRole$outboundSchema: z.ZodNativeEnum<typeof MessageRole> =
-  MessageRole$inboundSchema;
 
 /** @internal */
 export const DeploymentInvokeMessageDeploymentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponseType> = z
     .nativeEnum(DeploymentInvokeMessageDeploymentsResponseType);
-/** @internal */
-export const DeploymentInvokeMessageDeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponseType> =
-    DeploymentInvokeMessageDeploymentsResponseType$inboundSchema;
 
 /** @internal */
 export const MessageFunction$inboundSchema: z.ZodType<
@@ -795,27 +536,7 @@ export const MessageFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type MessageFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const MessageFunction$outboundSchema: z.ZodType<
-  MessageFunction$Outbound,
-  z.ZodTypeDef,
-  MessageFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function messageFunctionToJSON(
-  messageFunction: MessageFunction,
-): string {
-  return JSON.stringify(MessageFunction$outboundSchema.parse(messageFunction));
-}
 export function messageFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<MessageFunction, SDKValidationError> {
@@ -837,33 +558,7 @@ export const MessageToolCalls$inboundSchema: z.ZodType<
   type: DeploymentInvokeMessageDeploymentsResponseType$inboundSchema,
   function: z.lazy(() => MessageFunction$inboundSchema),
 });
-/** @internal */
-export type MessageToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: MessageFunction$Outbound;
-};
 
-/** @internal */
-export const MessageToolCalls$outboundSchema: z.ZodType<
-  MessageToolCalls$Outbound,
-  z.ZodTypeDef,
-  MessageToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: DeploymentInvokeMessageDeploymentsResponseType$outboundSchema,
-  function: z.lazy(() => MessageFunction$outboundSchema),
-});
-
-export function messageToolCallsToJSON(
-  messageToolCalls: MessageToolCalls,
-): string {
-  return JSON.stringify(
-    MessageToolCalls$outboundSchema.parse(messageToolCalls),
-  );
-}
 export function messageToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<MessageToolCalls, SDKValidationError> {
@@ -894,41 +589,7 @@ export const Message1$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-/** @internal */
-export type Message1$Outbound = {
-  type: "tool_calls";
-  role: string;
-  content?: string | null | undefined;
-  tool_calls: Array<MessageToolCalls$Outbound>;
-  reasoning?: string | undefined;
-  reasoning_signature?: string | undefined;
-  redacted_reasoning?: string | undefined;
-};
 
-/** @internal */
-export const Message1$outboundSchema: z.ZodType<
-  Message1$Outbound,
-  z.ZodTypeDef,
-  Message1
-> = z.object({
-  type: z.literal("tool_calls"),
-  role: MessageRole$outboundSchema,
-  content: z.nullable(z.string()).optional(),
-  toolCalls: z.array(z.lazy(() => MessageToolCalls$outboundSchema)),
-  reasoning: z.string().optional(),
-  reasoningSignature: z.string().optional(),
-  redactedReasoning: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    reasoningSignature: "reasoning_signature",
-    redactedReasoning: "redacted_reasoning",
-  });
-});
-
-export function message1ToJSON(message1: Message1): string {
-  return JSON.stringify(Message1$outboundSchema.parse(message1));
-}
 export function message1FromJSON(
   jsonString: string,
 ): SafeParseResult<Message1, SDKValidationError> {
@@ -946,26 +607,7 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
     z.lazy(() => Message2$inboundSchema),
     z.lazy(() => Message3$inboundSchema),
   ]);
-/** @internal */
-export type Message$Outbound =
-  | Message1$Outbound
-  | Message2$Outbound
-  | Message3$Outbound;
 
-/** @internal */
-export const Message$outboundSchema: z.ZodType<
-  Message$Outbound,
-  z.ZodTypeDef,
-  Message
-> = z.union([
-  z.lazy(() => Message1$outboundSchema),
-  z.lazy(() => Message2$outboundSchema),
-  z.lazy(() => Message3$outboundSchema),
-]);
-
-export function messageToJSON(message: Message): string {
-  return JSON.stringify(Message$outboundSchema.parse(message));
-}
 export function messageFromJSON(
   jsonString: string,
 ): SafeParseResult<Message, SDKValidationError> {
@@ -994,39 +636,7 @@ export const DeploymentInvokeChoices$inboundSchema: z.ZodType<
     "finish_reason": "finishReason",
   });
 });
-/** @internal */
-export type DeploymentInvokeChoices$Outbound = {
-  index: number;
-  message: Message1$Outbound | Message2$Outbound | Message3$Outbound;
-  finish_reason?: string | null | undefined;
-};
 
-/** @internal */
-export const DeploymentInvokeChoices$outboundSchema: z.ZodType<
-  DeploymentInvokeChoices$Outbound,
-  z.ZodTypeDef,
-  DeploymentInvokeChoices
-> = z.object({
-  index: z.number(),
-  message: z.union([
-    z.lazy(() => Message1$outboundSchema),
-    z.lazy(() => Message2$outboundSchema),
-    z.lazy(() => Message3$outboundSchema),
-  ]),
-  finishReason: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    finishReason: "finish_reason",
-  });
-});
-
-export function deploymentInvokeChoicesToJSON(
-  deploymentInvokeChoices: DeploymentInvokeChoices,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeChoices$outboundSchema.parse(deploymentInvokeChoices),
-  );
-}
 export function deploymentInvokeChoicesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentInvokeChoices, SDKValidationError> {
@@ -1066,61 +676,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
     "provider_response": "providerResponse",
   });
 });
-/** @internal */
-export type DeploymentInvokeResponseBody$Outbound = {
-  id: string;
-  created: string;
-  object: string;
-  model: string;
-  provider: string;
-  is_final: boolean;
-  integration_id?: string | undefined;
-  finalized?: string | undefined;
-  system_fingerprint?: string | null | undefined;
-  retrievals?: Array<Retrievals$Outbound> | undefined;
-  provider_response?: any | undefined;
-  usage?: DeploymentInvokeUsage$Outbound | null | undefined;
-  choices: Array<DeploymentInvokeChoices$Outbound>;
-};
 
-/** @internal */
-export const DeploymentInvokeResponseBody$outboundSchema: z.ZodType<
-  DeploymentInvokeResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeploymentInvokeResponseBody
-> = z.object({
-  id: z.string(),
-  created: z.date().transform(v => v.toISOString()),
-  object: DeploymentInvokeObject$outboundSchema,
-  model: z.string(),
-  provider: Provider$outboundSchema,
-  isFinal: z.boolean(),
-  integrationId: z.string().optional(),
-  finalized: z.date().transform(v => v.toISOString()).optional(),
-  systemFingerprint: z.nullable(z.string()).optional(),
-  retrievals: z.array(z.lazy(() => Retrievals$outboundSchema)).optional(),
-  providerResponse: z.any().optional(),
-  usage: z.nullable(z.lazy(() => DeploymentInvokeUsage$outboundSchema))
-    .optional(),
-  choices: z.array(z.lazy(() => DeploymentInvokeChoices$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    isFinal: "is_final",
-    integrationId: "integration_id",
-    systemFingerprint: "system_fingerprint",
-    providerResponse: "provider_response",
-  });
-});
-
-export function deploymentInvokeResponseBodyToJSON(
-  deploymentInvokeResponseBody: DeploymentInvokeResponseBody,
-): string {
-  return JSON.stringify(
-    DeploymentInvokeResponseBody$outboundSchema.parse(
-      deploymentInvokeResponseBody,
-    ),
-  );
-}
 export function deploymentInvokeResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentInvokeResponseBody, SDKValidationError> {

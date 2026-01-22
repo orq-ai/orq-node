@@ -61,7 +61,7 @@ export type FileListData = {
   /**
    * The date and time the resource was created
    */
-  created?: Date | undefined;
+  created: Date;
 };
 
 /**
@@ -73,21 +73,6 @@ export type FileListResponseBody = {
   hasMore: boolean;
 };
 
-/** @internal */
-export const FileListRequest$inboundSchema: z.ZodType<
-  FileListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
 /** @internal */
 export type FileListRequest$Outbound = {
   limit: number;
@@ -116,33 +101,16 @@ export function fileListRequestToJSON(
 ): string {
   return JSON.stringify(FileListRequest$outboundSchema.parse(fileListRequest));
 }
-export function fileListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FileListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileListRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileListObject$inboundSchema: z.ZodNativeEnum<
   typeof FileListObject
 > = z.nativeEnum(FileListObject);
-/** @internal */
-export const FileListObject$outboundSchema: z.ZodNativeEnum<
-  typeof FileListObject
-> = FileListObject$inboundSchema;
 
 /** @internal */
 export const FileListPurpose$inboundSchema: z.ZodNativeEnum<
   typeof FileListPurpose
 > = z.nativeEnum(FileListPurpose);
-/** @internal */
-export const FileListPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileListPurpose
-> = FileListPurpose$inboundSchema;
 
 /** @internal */
 export const FileListData$inboundSchema: z.ZodType<
@@ -157,7 +125,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:35.020Z",
+    "2026-01-22T11:24:25.787Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -167,43 +135,7 @@ export const FileListData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type FileListData$Outbound = {
-  _id: string;
-  object_name: string;
-  purpose: string;
-  bytes: number;
-  file_name: string;
-  workspace_id: string;
-  created: string;
-};
 
-/** @internal */
-export const FileListData$outboundSchema: z.ZodType<
-  FileListData$Outbound,
-  z.ZodTypeDef,
-  FileListData
-> = z.object({
-  id: z.string(),
-  objectName: z.string(),
-  purpose: FileListPurpose$outboundSchema,
-  bytes: z.number(),
-  fileName: z.string(),
-  workspaceId: z.string(),
-  created: z.date().default(() => new Date("2026-01-22T07:45:35.020Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    objectName: "object_name",
-    fileName: "file_name",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function fileListDataToJSON(fileListData: FileListData): string {
-  return JSON.stringify(FileListData$outboundSchema.parse(fileListData));
-}
 export function fileListDataFromJSON(
   jsonString: string,
 ): SafeParseResult<FileListData, SDKValidationError> {
@@ -228,35 +160,7 @@ export const FileListResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type FileListResponseBody$Outbound = {
-  object: string;
-  data: Array<FileListData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const FileListResponseBody$outboundSchema: z.ZodType<
-  FileListResponseBody$Outbound,
-  z.ZodTypeDef,
-  FileListResponseBody
-> = z.object({
-  object: FileListObject$outboundSchema,
-  data: z.array(z.lazy(() => FileListData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function fileListResponseBodyToJSON(
-  fileListResponseBody: FileListResponseBody,
-): string {
-  return JSON.stringify(
-    FileListResponseBody$outboundSchema.parse(fileListResponseBody),
-  );
-}
 export function fileListResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<FileListResponseBody, SDKValidationError> {

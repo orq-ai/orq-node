@@ -60,19 +60,3 @@ export const DeleteIdentityResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type DeleteIdentityResponseBody$Outbound = {
-  error: string;
-};
-
-/** @internal */
-export const DeleteIdentityResponseBody$outboundSchema: z.ZodType<
-  DeleteIdentityResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeleteIdentityResponseBody
-> = z.instanceof(DeleteIdentityResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.string(),
-  }));

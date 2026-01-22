@@ -84,26 +84,9 @@ export type UpdateIdentityResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const UpdateIdentityRequestBody$inboundSchema: z.ZodType<
-  UpdateIdentityRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatar_url: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "avatar_url": "avatarUrl",
-  });
-});
 /** @internal */
 export type UpdateIdentityRequestBody$Outbound = {
   display_name?: string | null | undefined;
@@ -138,29 +121,7 @@ export function updateIdentityRequestBodyToJSON(
     UpdateIdentityRequestBody$outboundSchema.parse(updateIdentityRequestBody),
   );
 }
-export function updateIdentityRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateIdentityRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateIdentityRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateIdentityRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateIdentityRequest$inboundSchema: z.ZodType<
-  UpdateIdentityRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => UpdateIdentityRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateIdentityRequest$Outbound = {
   id: string;
@@ -189,15 +150,6 @@ export function updateIdentityRequestToJSON(
     UpdateIdentityRequest$outboundSchema.parse(updateIdentityRequest),
   );
 }
-export function updateIdentityRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateIdentityRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateIdentityRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateIdentityRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateIdentityResponseBody$inboundSchema: z.ZodType<
@@ -215,7 +167,7 @@ export const UpdateIdentityResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:31.576Z",
+    "2026-01-22T11:24:22.432Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -225,51 +177,7 @@ export const UpdateIdentityResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-/** @internal */
-export type UpdateIdentityResponseBody$Outbound = {
-  _id: string;
-  external_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const UpdateIdentityResponseBody$outboundSchema: z.ZodType<
-  UpdateIdentityResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateIdentityResponseBody
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatarUrl: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    externalId: "external_id",
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
-
-export function updateIdentityResponseBodyToJSON(
-  updateIdentityResponseBody: UpdateIdentityResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateIdentityResponseBody$outboundSchema.parse(updateIdentityResponseBody),
-  );
-}
 export function updateIdentityResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateIdentityResponseBody, SDKValidationError> {

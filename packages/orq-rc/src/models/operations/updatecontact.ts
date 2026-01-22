@@ -84,26 +84,9 @@ export type UpdateContactResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const UpdateContactRequestBody$inboundSchema: z.ZodType<
-  UpdateContactRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatar_url: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "avatar_url": "avatarUrl",
-  });
-});
 /** @internal */
 export type UpdateContactRequestBody$Outbound = {
   display_name?: string | null | undefined;
@@ -138,29 +121,7 @@ export function updateContactRequestBodyToJSON(
     UpdateContactRequestBody$outboundSchema.parse(updateContactRequestBody),
   );
 }
-export function updateContactRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateContactRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateContactRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateContactRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateContactRequest$inboundSchema: z.ZodType<
-  UpdateContactRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => UpdateContactRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateContactRequest$Outbound = {
   id: string;
@@ -188,15 +149,6 @@ export function updateContactRequestToJSON(
     UpdateContactRequest$outboundSchema.parse(updateContactRequest),
   );
 }
-export function updateContactRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateContactRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateContactRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateContactRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateContactResponseBody$inboundSchema: z.ZodType<
@@ -214,7 +166,7 @@ export const UpdateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-22T07:45:31.576Z",
+    "2026-01-22T11:24:22.432Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -224,51 +176,7 @@ export const UpdateContactResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-/** @internal */
-export type UpdateContactResponseBody$Outbound = {
-  _id: string;
-  external_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const UpdateContactResponseBody$outboundSchema: z.ZodType<
-  UpdateContactResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateContactResponseBody
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatarUrl: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-22T07:45:31.576Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    externalId: "external_id",
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
-
-export function updateContactResponseBodyToJSON(
-  updateContactResponseBody: UpdateContactResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateContactResponseBody$outboundSchema.parse(updateContactResponseBody),
-  );
-}
 export function updateContactResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateContactResponseBody, SDKValidationError> {

@@ -8,29 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ErrorPart,
-  ErrorPart$inboundSchema,
-  ErrorPart$Outbound,
-  ErrorPart$outboundSchema,
-} from "./errorpart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
+import { ErrorPart, ErrorPart$inboundSchema } from "./errorpart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
 import {
   ToolResultPart,
   ToolResultPart$inboundSchema,
-  ToolResultPart$Outbound,
-  ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
 /**
@@ -92,32 +75,7 @@ export const PublicMessagePart$inboundSchema: z.ZodType<
   ToolResultPart$inboundSchema,
   ErrorPart$inboundSchema,
 ]);
-/** @internal */
-export type PublicMessagePart$Outbound =
-  | TextPart$Outbound
-  | FilePart$Outbound
-  | ToolResultPart$Outbound
-  | ErrorPart$Outbound;
 
-/** @internal */
-export const PublicMessagePart$outboundSchema: z.ZodType<
-  PublicMessagePart$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePart
-> = z.union([
-  TextPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolResultPart$outboundSchema,
-  ErrorPart$outboundSchema,
-]);
-
-export function publicMessagePartToJSON(
-  publicMessagePart: PublicMessagePart,
-): string {
-  return JSON.stringify(
-    PublicMessagePart$outboundSchema.parse(publicMessagePart),
-  );
-}
 export function publicMessagePartFromJSON(
   jsonString: string,
 ): SafeParseResult<PublicMessagePart, SDKValidationError> {
@@ -132,10 +90,6 @@ export function publicMessagePartFromJSON(
 export const MessageResponseRole$inboundSchema: z.ZodNativeEnum<
   typeof MessageResponseRole
 > = z.nativeEnum(MessageResponseRole);
-/** @internal */
-export const MessageResponseRole$outboundSchema: z.ZodNativeEnum<
-  typeof MessageResponseRole
-> = MessageResponseRole$inboundSchema;
 
 /** @internal */
 export const MessageResponse$inboundSchema: z.ZodType<
@@ -161,51 +115,7 @@ export const MessageResponse$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type MessageResponse$Outbound = {
-  _id: string;
-  conversationId: string;
-  createdAt: number;
-  createdById: string;
-  parts: Array<
-    | TextPart$Outbound
-    | FilePart$Outbound
-    | ToolResultPart$Outbound
-    | ErrorPart$Outbound
-  >;
-  role: string;
-};
 
-/** @internal */
-export const MessageResponse$outboundSchema: z.ZodType<
-  MessageResponse$Outbound,
-  z.ZodTypeDef,
-  MessageResponse
-> = z.object({
-  id: z.string(),
-  conversationId: z.string(),
-  createdAt: z.number(),
-  createdById: z.string(),
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolResultPart$outboundSchema,
-      ErrorPart$outboundSchema,
-    ]),
-  ),
-  role: MessageResponseRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function messageResponseToJSON(
-  messageResponse: MessageResponse,
-): string {
-  return JSON.stringify(MessageResponse$outboundSchema.parse(messageResponse));
-}
 export function messageResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<MessageResponse, SDKValidationError> {

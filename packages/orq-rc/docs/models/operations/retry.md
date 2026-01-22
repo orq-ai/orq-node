@@ -1,6 +1,6 @@
 # Retry
 
-Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+Retry configuration for the request
 
 ## Example Usage
 

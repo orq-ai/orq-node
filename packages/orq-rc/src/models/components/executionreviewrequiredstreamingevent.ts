@@ -27,27 +27,7 @@ export const ExecutionReviewRequiredStreamingEventData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-/** @internal */
-export type ExecutionReviewRequiredStreamingEventData$Outbound = {};
 
-/** @internal */
-export const ExecutionReviewRequiredStreamingEventData$outboundSchema:
-  z.ZodType<
-    ExecutionReviewRequiredStreamingEventData$Outbound,
-    z.ZodTypeDef,
-    ExecutionReviewRequiredStreamingEventData
-  > = z.object({});
-
-export function executionReviewRequiredStreamingEventDataToJSON(
-  executionReviewRequiredStreamingEventData:
-    ExecutionReviewRequiredStreamingEventData,
-): string {
-  return JSON.stringify(
-    ExecutionReviewRequiredStreamingEventData$outboundSchema.parse(
-      executionReviewRequiredStreamingEventData,
-    ),
-  );
-}
 export function executionReviewRequiredStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -74,33 +54,7 @@ export const ExecutionReviewRequiredStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ExecutionReviewRequiredStreamingEvent$Outbound = {
-  type: "event.agents.execution_review_required";
-  timestamp: string;
-  data: ExecutionReviewRequiredStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ExecutionReviewRequiredStreamingEvent$outboundSchema: z.ZodType<
-  ExecutionReviewRequiredStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ExecutionReviewRequiredStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.execution_review_required"),
-  timestamp: z.string(),
-  data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$outboundSchema),
-});
-
-export function executionReviewRequiredStreamingEventToJSON(
-  executionReviewRequiredStreamingEvent: ExecutionReviewRequiredStreamingEvent,
-): string {
-  return JSON.stringify(
-    ExecutionReviewRequiredStreamingEvent$outboundSchema.parse(
-      executionReviewRequiredStreamingEvent,
-    ),
-  );
-}
 export function executionReviewRequiredStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecutionReviewRequiredStreamingEvent, SDKValidationError> {

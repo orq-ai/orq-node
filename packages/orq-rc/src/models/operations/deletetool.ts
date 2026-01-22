@@ -4,26 +4,11 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteToolRequest = {
   toolId: string;
 };
 
-/** @internal */
-export const DeleteToolRequest$inboundSchema: z.ZodType<
-  DeleteToolRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tool_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-  });
-});
 /** @internal */
 export type DeleteToolRequest$Outbound = {
   tool_id: string;
@@ -47,14 +32,5 @@ export function deleteToolRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteToolRequest$outboundSchema.parse(deleteToolRequest),
-  );
-}
-export function deleteToolRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteToolRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteToolRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteToolRequest' from JSON`,
   );
 }

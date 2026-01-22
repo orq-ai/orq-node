@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteDatapointRequest = {
   /**
@@ -19,20 +16,6 @@ export type DeleteDatapointRequest = {
   datapointId: string;
 };
 
-/** @internal */
-export const DeleteDatapointRequest$inboundSchema: z.ZodType<
-  DeleteDatapointRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dataset_id: z.string(),
-  datapoint_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_id": "datasetId",
-    "datapoint_id": "datapointId",
-  });
-});
 /** @internal */
 export type DeleteDatapointRequest$Outbound = {
   dataset_id: string;
@@ -59,14 +42,5 @@ export function deleteDatapointRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteDatapointRequest$outboundSchema.parse(deleteDatapointRequest),
-  );
-}
-export function deleteDatapointRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteDatapointRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteDatapointRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteDatapointRequest' from JSON`,
   );
 }

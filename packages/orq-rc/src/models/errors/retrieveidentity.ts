@@ -60,19 +60,3 @@ export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type RetrieveIdentityResponseBody$Outbound = {
-  error: string;
-};
-
-/** @internal */
-export const RetrieveIdentityResponseBody$outboundSchema: z.ZodType<
-  RetrieveIdentityResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveIdentityResponseBody
-> = z.instanceof(RetrieveIdentityResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.string(),
-  }));

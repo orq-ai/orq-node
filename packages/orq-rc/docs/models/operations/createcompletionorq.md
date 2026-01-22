@@ -1,0 +1,74 @@
+# ~~CreateCompletionOrq~~
+
+Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+
+## Example Usage
+
+```typescript
+import { CreateCompletionOrq } from "@orq-ai/node/models/operations";
+
+let value: CreateCompletionOrq = {
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+    ],
+  },
+  fallbacks: [
+    {
+      model: "openai/gpt-5",
+    },
+    {
+      model: "anthropic/claude-4-opus",
+    },
+  ],
+  identity: {
+    id: "identity_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+    displayName: "Jane Doe",
+    email: "jane.doe@example.com",
+  },
+  thread: {
+    id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+    tags: [
+      "customer-support",
+    ],
+  },
+  inputs: {
+    "customer_name": "John Smith",
+    "issue_type": "billing",
+  },
+  cache: {
+    ttl: 3600,
+    type: "exact_match",
+  },
+  knowledgeBases: [
+    {
+      topK: 5,
+      knowledgeId: "knowledge_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+    },
+  ],
+  timeout: {
+    callTimeout: 30000,
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        | Example                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                             | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | The name to display on the trace. If not specified, the default system name will be used.                                                          |                                                                                                                                                    |
+| `retry`                                                                                                                                            | [operations.CreateCompletionRetry](../../models/operations/createcompletionretry.md)                                                               | :heavy_minus_sign:                                                                                                                                 | Retry configuration for the request                                                                                                                |                                                                                                                                                    |
+| `fallbacks`                                                                                                                                        | [operations.CreateCompletionFallbacks](../../models/operations/createcompletionfallbacks.md)[]                                                     | :heavy_minus_sign:                                                                                                                                 | Array of fallback models to use if primary model fails                                                                                             |                                                                                                                                                    |
+| `prompt`                                                                                                                                           | [operations.CreateCompletionPrompt](../../models/operations/createcompletionprompt.md)                                                             | :heavy_minus_sign:                                                                                                                                 | Prompt configuration for the request                                                                                                               |                                                                                                                                                    |
+| `identity`                                                                                                                                         | [components.PublicContact](../../models/components/publiccontact.md)                                                                               | :heavy_minus_sign:                                                                                                                                 | Information about the identity making the request. If the identity does not exist, it will be created automatically.                               |                                                                                                                                                    |
+| `contact`                                                                                                                                          | [operations.CreateCompletionContact](../../models/operations/createcompletioncontact.md)                                                           | :heavy_minus_sign:                                                                                                                                 | N/A                                                                                                                                                |                                                                                                                                                    |
+| `thread`                                                                                                                                           | [operations.CreateCompletionThread](../../models/operations/createcompletionthread.md)                                                             | :heavy_minus_sign:                                                                                                                                 | Thread information to group related requests                                                                                                       |                                                                                                                                                    |
+| `inputs`                                                                                                                                           | *operations.CreateCompletionInputs*                                                                                                                | :heavy_minus_sign:                                                                                                                                 | Values to replace in the prompt messages using {{variableName}} syntax                                                                             | {<br/>"customer_name": "John Smith",<br/>"product_name": "Premium Plan",<br/>"issue_type": "billing"<br/>}                                         |
+| `cache`                                                                                                                                            | [operations.CreateCompletionCache](../../models/operations/createcompletioncache.md)                                                               | :heavy_minus_sign:                                                                                                                                 | Cache configuration for the request.                                                                                                               |                                                                                                                                                    |
+| `knowledgeBases`                                                                                                                                   | [operations.CreateCompletionKnowledgeBases](../../models/operations/createcompletionknowledgebases.md)[]                                           | :heavy_minus_sign:                                                                                                                                 | N/A                                                                                                                                                |                                                                                                                                                    |
+| `loadBalancer`                                                                                                                                     | *operations.CreateCompletionLoadBalancer*[]                                                                                                        | :heavy_minus_sign:                                                                                                                                 | Array of models with weights for load balancing requests                                                                                           | [<br/>{<br/>"model": "openai/gpt-4o",<br/>"weight": 0.7<br/>},<br/>{<br/>"model": "anthropic/claude-3-5-sonnet",<br/>"weight": 0.3<br/>}<br/>]     |
+| `timeout`                                                                                                                                          | [operations.CreateCompletionTimeout](../../models/operations/createcompletiontimeout.md)                                                           | :heavy_minus_sign:                                                                                                                                 | Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured. |                                                                                                                                                    |

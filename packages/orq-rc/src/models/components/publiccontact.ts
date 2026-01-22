@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Information about the identity making the request. If the identity does not exist, it will be created automatically.
@@ -39,24 +36,6 @@ export type PublicContact = {
 };
 
 /** @internal */
-export const PublicContact$inboundSchema: z.ZodType<
-  PublicContact,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  display_name: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logo_url: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "logo_url": "logoUrl",
-  });
-});
-/** @internal */
 export type PublicContact$Outbound = {
   id: string;
   display_name?: string | undefined;
@@ -87,13 +66,4 @@ export const PublicContact$outboundSchema: z.ZodType<
 
 export function publicContactToJSON(publicContact: PublicContact): string {
   return JSON.stringify(PublicContact$outboundSchema.parse(publicContact));
-}
-export function publicContactFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicContact, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicContact$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicContact' from JSON`,
-  );
 }

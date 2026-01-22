@@ -54,37 +54,7 @@ export const ToolReviewRequestedEventData$inboundSchema: z.ZodType<
   arguments: z.record(z.any()),
   requiresApproval: z.boolean(),
 });
-/** @internal */
-export type ToolReviewRequestedEventData$Outbound = {
-  toolId: string;
-  toolCallId: string;
-  toolName?: string | undefined;
-  arguments: { [k: string]: any };
-  requiresApproval: boolean;
-};
 
-/** @internal */
-export const ToolReviewRequestedEventData$outboundSchema: z.ZodType<
-  ToolReviewRequestedEventData$Outbound,
-  z.ZodTypeDef,
-  ToolReviewRequestedEventData
-> = z.object({
-  toolId: z.string(),
-  toolCallId: z.string(),
-  toolName: z.string().optional(),
-  arguments: z.record(z.any()),
-  requiresApproval: z.boolean(),
-});
-
-export function toolReviewRequestedEventDataToJSON(
-  toolReviewRequestedEventData: ToolReviewRequestedEventData,
-): string {
-  return JSON.stringify(
-    ToolReviewRequestedEventData$outboundSchema.parse(
-      toolReviewRequestedEventData,
-    ),
-  );
-}
 export function toolReviewRequestedEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolReviewRequestedEventData, SDKValidationError> {
@@ -105,31 +75,7 @@ export const ToolReviewRequestedEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ToolReviewRequestedEventData$inboundSchema),
 });
-/** @internal */
-export type ToolReviewRequestedEvent$Outbound = {
-  type: "tool.review.requested";
-  timestamp: string;
-  data: ToolReviewRequestedEventData$Outbound;
-};
 
-/** @internal */
-export const ToolReviewRequestedEvent$outboundSchema: z.ZodType<
-  ToolReviewRequestedEvent$Outbound,
-  z.ZodTypeDef,
-  ToolReviewRequestedEvent
-> = z.object({
-  type: z.literal("tool.review.requested"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolReviewRequestedEventData$outboundSchema),
-});
-
-export function toolReviewRequestedEventToJSON(
-  toolReviewRequestedEvent: ToolReviewRequestedEvent,
-): string {
-  return JSON.stringify(
-    ToolReviewRequestedEvent$outboundSchema.parse(toolReviewRequestedEvent),
-  );
-}
 export function toolReviewRequestedEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolReviewRequestedEvent, SDKValidationError> {

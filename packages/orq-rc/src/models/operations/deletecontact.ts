@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteContactRequest = {
   /**
@@ -14,14 +11,6 @@ export type DeleteContactRequest = {
   id: string;
 };
 
-/** @internal */
-export const DeleteContactRequest$inboundSchema: z.ZodType<
-  DeleteContactRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type DeleteContactRequest$Outbound = {
   id: string;
@@ -41,14 +30,5 @@ export function deleteContactRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteContactRequest$outboundSchema.parse(deleteContactRequest),
-  );
-}
-export function deleteContactRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteContactRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteContactRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteContactRequest' from JSON`,
   );
 }

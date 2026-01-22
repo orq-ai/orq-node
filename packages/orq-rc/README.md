@@ -68,95 +68,6 @@ bun add @orq-ai/node
 ```bash
 yarn add @orq-ai/node
 ```
-
-
-
-### Model Context Protocol (MCP) Server
-
-This SDK is also an installable MCP server where the various SDK methods are
-exposed as tools that can be invoked by AI applications.
-
-> Node.js v20 or greater is required to run the MCP server from npm.
-
-<details>
-<summary>Claude installation steps</summary>
-
-Add the following server definition to your `claude_desktop_config.json` file:
-
-```json
-{
-  "mcpServers": {
-    "Orq": {
-      "command": "npx",
-      "args": [
-        "-y", "--package", "@orq-ai/node",
-        "--",
-        "mcp", "start",
-        "--api-key", "...",
-        "--contact-id", "...",
-        "--environment", "..."
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-<details>
-<summary>Cursor installation steps</summary>
-
-Create a `.cursor/mcp.json` file in your project root with the following content:
-
-```json
-{
-  "mcpServers": {
-    "Orq": {
-      "command": "npx",
-      "args": [
-        "-y", "--package", "@orq-ai/node",
-        "--",
-        "mcp", "start",
-        "--api-key", "...",
-        "--contact-id", "...",
-        "--environment", "..."
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-You can also run MCP servers as a standalone binary with no additional dependencies. You must pull these binaries from available Github releases:
-
-```bash
-curl -L -o mcp-server \
-    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
-chmod +x mcp-server
-```
-
-If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
-
-
-```json
-{
-  "mcpServers": {
-    "Todos": {
-      "command": "./DOWNLOAD/PATH/mcp-server",
-      "args": [
-        "start"
-      ]
-    }
-  }
-}
-```
-
-For a full list of server arguments, run:
-
-```sh
-npx -y --package @orq-ai/node -- mcp start --help
-```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -394,8 +305,55 @@ run();
 
 ### [Router](docs/sdks/router/README.md)
 
-* [chatCompletions](docs/sdks/router/README.md#chatcompletions) - Create chat completion
-* [imagesGenerate](docs/sdks/router/README.md#imagesgenerate) - Create image
+* [ocr](docs/sdks/router/README.md#ocr) - Extracts text content while maintaining document structure and hierarchy
+
+#### [Router.Audio.Speech](docs/sdks/speech/README.md)
+
+* [create](docs/sdks/speech/README.md#create) - Create speech
+
+#### [Router.Audio.Transcriptions](docs/sdks/transcriptions/README.md)
+
+* [create](docs/sdks/transcriptions/README.md#create) - Create transcription
+
+#### [Router.Audio.Translations](docs/sdks/translations/README.md)
+
+* [create](docs/sdks/translations/README.md#create) - Create translation
+
+#### [Router.Chat.Completions](docs/sdks/orqcompletions/README.md)
+
+* [create](docs/sdks/orqcompletions/README.md#create) - Create chat completion
+
+#### [Router.Completions](docs/sdks/completions/README.md)
+
+* [create](docs/sdks/completions/README.md#create) - Create completion
+
+#### [Router.Embeddings](docs/sdks/embeddings/README.md)
+
+* [create](docs/sdks/embeddings/README.md#create) - Create embeddings
+
+#### [Router.Images.Edits](docs/sdks/edits/README.md)
+
+* [create](docs/sdks/edits/README.md#create) - Create image edit
+
+#### [Router.Images.Generations](docs/sdks/generations/README.md)
+
+* [create](docs/sdks/generations/README.md#create) - Create image
+
+#### [Router.Images.Variations](docs/sdks/variations/README.md)
+
+* [create](docs/sdks/variations/README.md#create) - Create image variation
+
+#### [Router.Moderations](docs/sdks/moderations/README.md)
+
+* [create](docs/sdks/moderations/README.md#create) - Create moderation
+
+#### [Router.Rerank](docs/sdks/rerank/README.md)
+
+* [create](docs/sdks/rerank/README.md#create) - Create rerank
+
+#### [Router.Responses](docs/sdks/orqresponses/README.md)
+
+* [create](docs/sdks/orqresponses/README.md#create) - Create response
 
 ### [Tools](docs/sdks/tools/README.md)
 
@@ -515,8 +473,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`promptsRetrieve`](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
 - [`remoteconfigsRetrieve`](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
-- [`routerChatCompletions`](docs/sdks/router/README.md#chatcompletions) - Create chat completion
-- [`routerImagesGenerate`](docs/sdks/router/README.md#imagesgenerate) - Create image
+- [`routerAudioSpeechCreate`](docs/sdks/speech/README.md#create) - Create speech
+- [`routerAudioTranscriptionsCreate`](docs/sdks/transcriptions/README.md#create) - Create transcription
+- [`routerAudioTranslationsCreate`](docs/sdks/translations/README.md#create) - Create translation
+- [`routerChatCompletionsCreate`](docs/sdks/orqcompletions/README.md#create) - Create chat completion
+- [`routerCompletionsCreate`](docs/sdks/completions/README.md#create) - Create completion
+- [`routerEmbeddingsCreate`](docs/sdks/embeddings/README.md#create) - Create embeddings
+- [`routerImagesEditsCreate`](docs/sdks/edits/README.md#create) - Create image edit
+- [`routerImagesGenerationsCreate`](docs/sdks/generations/README.md#create) - Create image
+- [`routerImagesVariationsCreate`](docs/sdks/variations/README.md#create) - Create image variation
+- [`routerModerationsCreate`](docs/sdks/moderations/README.md#create) - Create moderation
+- [`routerOcr`](docs/sdks/router/README.md#ocr) - Extracts text content while maintaining document structure and hierarchy
+- [`routerRerankCreate`](docs/sdks/rerank/README.md#create) - Create rerank
+- [`routerResponsesCreate`](docs/sdks/orqresponses/README.md#create) - Create response
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
 - [`toolsGetV2ToolsToolIdVersions`](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
@@ -753,7 +722,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (36)</summary>
+<details><summary>Less common errors (39)</summary>
 
 <br />
 
@@ -766,36 +735,39 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 9 of 108 methods.*
-* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 108 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 108 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 108 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 108 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 108 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 108 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 108 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 108 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 9 of 119 methods.*
+* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 119 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 119 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 119 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 119 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 119 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 119 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

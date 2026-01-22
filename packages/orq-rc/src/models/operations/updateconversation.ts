@@ -78,7 +78,7 @@ export type UpdateConversationResponseBody = {
   /**
    * Unique conversation identifier with `conv_` prefix.
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Resource type discriminator.
    */
@@ -110,15 +110,6 @@ export type UpdateConversationResponseBody = {
 };
 
 /** @internal */
-export const UpdateConversationMetadata$inboundSchema: z.ZodType<
-  UpdateConversationMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-});
-/** @internal */
 export type UpdateConversationMetadata$Outbound = {
   generatingTitle?: boolean | undefined;
   entityId?: string | null | undefined;
@@ -141,25 +132,7 @@ export function updateConversationMetadataToJSON(
     UpdateConversationMetadata$outboundSchema.parse(updateConversationMetadata),
   );
 }
-export function updateConversationMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateConversationMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateConversationMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateConversationMetadata' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateConversationRequestBody$inboundSchema: z.ZodType<
-  UpdateConversationRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  displayName: z.string().optional(),
-  metadata: z.lazy(() => UpdateConversationMetadata$inboundSchema).optional(),
-});
 /** @internal */
 export type UpdateConversationRequestBody$Outbound = {
   displayName?: string | undefined;
@@ -185,30 +158,7 @@ export function updateConversationRequestBodyToJSON(
     ),
   );
 }
-export function updateConversationRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateConversationRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateConversationRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateConversationRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateConversationRequest$inboundSchema: z.ZodType<
-  UpdateConversationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  conversation_id: z.string(),
-  RequestBody: z.lazy(() => UpdateConversationRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateConversationRequest$Outbound = {
   conversation_id: string;
@@ -237,24 +187,11 @@ export function updateConversationRequestToJSON(
     UpdateConversationRequest$outboundSchema.parse(updateConversationRequest),
   );
 }
-export function updateConversationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateConversationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateConversationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateConversationRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateConversationKind$inboundSchema: z.ZodNativeEnum<
   typeof UpdateConversationKind
 > = z.nativeEnum(UpdateConversationKind);
-/** @internal */
-export const UpdateConversationKind$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateConversationKind
-> = UpdateConversationKind$inboundSchema;
 
 /** @internal */
 export const UpdateConversationConversationsMetadata$inboundSchema: z.ZodType<
@@ -266,34 +203,7 @@ export const UpdateConversationConversationsMetadata$inboundSchema: z.ZodType<
   entityId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type UpdateConversationConversationsMetadata$Outbound = {
-  generatingTitle?: boolean | undefined;
-  entityId?: string | null | undefined;
-  model?: string | null | undefined;
-};
 
-/** @internal */
-export const UpdateConversationConversationsMetadata$outboundSchema: z.ZodType<
-  UpdateConversationConversationsMetadata$Outbound,
-  z.ZodTypeDef,
-  UpdateConversationConversationsMetadata
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-
-export function updateConversationConversationsMetadataToJSON(
-  updateConversationConversationsMetadata:
-    UpdateConversationConversationsMetadata,
-): string {
-  return JSON.stringify(
-    UpdateConversationConversationsMetadata$outboundSchema.parse(
-      updateConversationConversationsMetadata,
-    ),
-  );
-}
 export function updateConversationConversationsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -316,7 +226,7 @@ export const UpdateConversationResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kfjan6hpkxn3m0xsanwkk6m0"),
+  _id: z.string().default("conv_01kfjq5xj5q8m1mc3dkaakpx6m"),
   kind: UpdateConversationKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
@@ -330,48 +240,7 @@ export const UpdateConversationResponseBody$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type UpdateConversationResponseBody$Outbound = {
-  _id: string;
-  kind: string;
-  displayName: string;
-  createdAt: number;
-  updatedAt: number;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
-  metadata?: UpdateConversationConversationsMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const UpdateConversationResponseBody$outboundSchema: z.ZodType<
-  UpdateConversationResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateConversationResponseBody
-> = z.object({
-  id: z.string().default("conv_01kfjan6hpkxn3m0xsanwkk6m0"),
-  kind: UpdateConversationKind$outboundSchema,
-  displayName: z.string(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  metadata: z.lazy(() => UpdateConversationConversationsMetadata$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function updateConversationResponseBodyToJSON(
-  updateConversationResponseBody: UpdateConversationResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateConversationResponseBody$outboundSchema.parse(
-      updateConversationResponseBody,
-    ),
-  );
-}
 export function updateConversationResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateConversationResponseBody, SDKValidationError> {

@@ -44,7 +44,7 @@ export type ConversationResponse = {
   /**
    * Unique conversation identifier with `conv_` prefix.
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Resource type discriminator.
    */
@@ -79,10 +79,6 @@ export type ConversationResponse = {
 export const ConversationResponseKind$inboundSchema: z.ZodNativeEnum<
   typeof ConversationResponseKind
 > = z.nativeEnum(ConversationResponseKind);
-/** @internal */
-export const ConversationResponseKind$outboundSchema: z.ZodNativeEnum<
-  typeof ConversationResponseKind
-> = ConversationResponseKind$inboundSchema;
 
 /** @internal */
 export const Metadata$inboundSchema: z.ZodType<
@@ -94,27 +90,7 @@ export const Metadata$inboundSchema: z.ZodType<
   entityId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type Metadata$Outbound = {
-  generatingTitle?: boolean | undefined;
-  entityId?: string | null | undefined;
-  model?: string | null | undefined;
-};
 
-/** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
-  z.ZodTypeDef,
-  Metadata
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
-}
 export function metadataFromJSON(
   jsonString: string,
 ): SafeParseResult<Metadata, SDKValidationError> {
@@ -131,7 +107,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kfjan6het575afkdwawqs3ve"),
+  _id: z.string().default("conv_01kfjq5xhr22ttcd343mvg7khm"),
   kind: ConversationResponseKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
@@ -144,45 +120,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type ConversationResponse$Outbound = {
-  _id: string;
-  kind: string;
-  displayName: string;
-  createdAt: number;
-  updatedAt: number;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
-  metadata?: Metadata$Outbound | undefined;
-};
 
-/** @internal */
-export const ConversationResponse$outboundSchema: z.ZodType<
-  ConversationResponse$Outbound,
-  z.ZodTypeDef,
-  ConversationResponse
-> = z.object({
-  id: z.string().default("conv_01kfjan6het575afkdwawqs3ve"),
-  kind: ConversationResponseKind$outboundSchema,
-  displayName: z.string(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function conversationResponseToJSON(
-  conversationResponse: ConversationResponse,
-): string {
-  return JSON.stringify(
-    ConversationResponse$outboundSchema.parse(conversationResponse),
-  );
-}
 export function conversationResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ConversationResponse, SDKValidationError> {

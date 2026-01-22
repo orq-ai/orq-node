@@ -6,30 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DataPart,
-  DataPart$inboundSchema,
-  DataPart$Outbound,
-  DataPart$outboundSchema,
-} from "./datapart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  ReasoningPart,
-  ReasoningPart$inboundSchema,
-  ReasoningPart$Outbound,
-  ReasoningPart$outboundSchema,
-} from "./reasoningpart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
+import { DataPart, DataPart$inboundSchema } from "./datapart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { ReasoningPart, ReasoningPart$inboundSchema } from "./reasoningpart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
 
 /**
  * The content chunk being streamed. Discriminated by kind field (text or reasoning).
@@ -47,28 +27,7 @@ export const PartDelta$inboundSchema: z.ZodType<
   FilePart$inboundSchema,
   DataPart$inboundSchema,
 ]);
-/** @internal */
-export type PartDelta$Outbound =
-  | TextPart$Outbound
-  | ReasoningPart$Outbound
-  | FilePart$Outbound
-  | DataPart$Outbound;
 
-/** @internal */
-export const PartDelta$outboundSchema: z.ZodType<
-  PartDelta$Outbound,
-  z.ZodTypeDef,
-  PartDelta
-> = z.union([
-  TextPart$outboundSchema,
-  ReasoningPart$outboundSchema,
-  FilePart$outboundSchema,
-  DataPart$outboundSchema,
-]);
-
-export function partDeltaToJSON(partDelta: PartDelta): string {
-  return JSON.stringify(PartDelta$outboundSchema.parse(partDelta));
-}
 export function partDeltaFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDelta, SDKValidationError> {

@@ -316,63 +316,31 @@ export type CreateImageResponseBody = {
 };
 
 /** @internal */
-export const Background$inboundSchema: z.ZodNativeEnum<typeof Background> = z
+export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> = z
   .nativeEnum(Background);
-/** @internal */
-export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> =
-  Background$inboundSchema;
 
 /** @internal */
-export const Moderation$inboundSchema: z.ZodNativeEnum<typeof Moderation> = z
+export const Moderation$outboundSchema: z.ZodNativeEnum<typeof Moderation> = z
   .nativeEnum(Moderation);
-/** @internal */
-export const Moderation$outboundSchema: z.ZodNativeEnum<typeof Moderation> =
-  Moderation$inboundSchema;
 
-/** @internal */
-export const OutputFormat$inboundSchema: z.ZodNativeEnum<typeof OutputFormat> =
-  z.nativeEnum(OutputFormat);
 /** @internal */
 export const OutputFormat$outboundSchema: z.ZodNativeEnum<typeof OutputFormat> =
-  OutputFormat$inboundSchema;
+  z.nativeEnum(OutputFormat);
 
 /** @internal */
-export const Quality$inboundSchema: z.ZodNativeEnum<typeof Quality> = z
+export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> = z
   .nativeEnum(Quality);
-/** @internal */
-export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> =
-  Quality$inboundSchema;
 
-/** @internal */
-export const CreateImageResponseFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreateImageResponseFormat
-> = z.nativeEnum(CreateImageResponseFormat);
 /** @internal */
 export const CreateImageResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageResponseFormat
-> = CreateImageResponseFormat$inboundSchema;
+> = z.nativeEnum(CreateImageResponseFormat);
 
 /** @internal */
-export const Style$inboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
+export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
   Style,
 );
-/** @internal */
-export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> =
-  Style$inboundSchema;
 
-/** @internal */
-export const CreateImageRetry$inboundSchema: z.ZodType<
-  CreateImageRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
 /** @internal */
 export type CreateImageRetry$Outbound = {
   count: number;
@@ -400,24 +368,7 @@ export function createImageRetryToJSON(
     CreateImageRetry$outboundSchema.parse(createImageRetry),
   );
 }
-export function createImageRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageRetry' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageFallbacks$inboundSchema: z.ZodType<
-  CreateImageFallbacks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
 /** @internal */
 export type CreateImageFallbacks$Outbound = {
   model: string;
@@ -439,34 +390,7 @@ export function createImageFallbacksToJSON(
     CreateImageFallbacks$outboundSchema.parse(createImageFallbacks),
   );
 }
-export function createImageFallbacksFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageFallbacks, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageFallbacks' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageContact$inboundSchema: z.ZodType<
-  CreateImageContact,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  display_name: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logo_url: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "logo_url": "logoUrl",
-  });
-});
 /** @internal */
 export type CreateImageContact$Outbound = {
   id: string;
@@ -503,34 +427,12 @@ export function createImageContactToJSON(
     CreateImageContact$outboundSchema.parse(createImageContact),
   );
 }
-export function createImageContactFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageContact, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageContact$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageContact' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateImageType
-> = z.nativeEnum(CreateImageType);
 /** @internal */
 export const CreateImageType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageType
-> = CreateImageType$inboundSchema;
+> = z.nativeEnum(CreateImageType);
 
-/** @internal */
-export const CreateImageCache$inboundSchema: z.ZodType<
-  CreateImageCache,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ttl: z.number().default(1800),
-  type: CreateImageType$inboundSchema,
-});
 /** @internal */
 export type CreateImageCache$Outbound = {
   ttl: number;
@@ -554,35 +456,12 @@ export function createImageCacheToJSON(
     CreateImageCache$outboundSchema.parse(createImageCache),
   );
 }
-export function createImageCacheFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageCache, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageCache$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageCache' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageLoadBalancerType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateImageLoadBalancerType
-> = z.nativeEnum(CreateImageLoadBalancerType);
 /** @internal */
 export const CreateImageLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageLoadBalancerType
-> = CreateImageLoadBalancerType$inboundSchema;
+> = z.nativeEnum(CreateImageLoadBalancerType);
 
-/** @internal */
-export const CreateImageLoadBalancer1$inboundSchema: z.ZodType<
-  CreateImageLoadBalancer1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateImageLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
 /** @internal */
 export type CreateImageLoadBalancer1$Outbound = {
   type: string;
@@ -608,22 +487,7 @@ export function createImageLoadBalancer1ToJSON(
     CreateImageLoadBalancer1$outboundSchema.parse(createImageLoadBalancer1),
   );
 }
-export function createImageLoadBalancer1FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageLoadBalancer1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageLoadBalancer1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageLoadBalancer1' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageLoadBalancer$inboundSchema: z.ZodType<
-  CreateImageLoadBalancer,
-  z.ZodTypeDef,
-  unknown
-> = z.lazy(() => CreateImageLoadBalancer1$inboundSchema);
 /** @internal */
 export type CreateImageLoadBalancer$Outbound =
   CreateImageLoadBalancer1$Outbound;
@@ -642,28 +506,7 @@ export function createImageLoadBalancerToJSON(
     CreateImageLoadBalancer$outboundSchema.parse(createImageLoadBalancer),
   );
 }
-export function createImageLoadBalancerFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageLoadBalancer, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageLoadBalancer$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageLoadBalancer' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageTimeout$inboundSchema: z.ZodType<
-  CreateImageTimeout,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  call_timeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_timeout": "callTimeout",
-  });
-});
 /** @internal */
 export type CreateImageTimeout$Outbound = {
   call_timeout: number;
@@ -689,37 +532,7 @@ export function createImageTimeoutToJSON(
     CreateImageTimeout$outboundSchema.parse(createImageTimeout),
   );
 }
-export function createImageTimeoutFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageTimeout, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageTimeout$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageTimeout' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageOrq$inboundSchema: z.ZodType<
-  CreateImageOrq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  retry: z.lazy(() => CreateImageRetry$inboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageFallbacks$inboundSchema))
-    .optional(),
-  identity: components.PublicContact$inboundSchema.optional(),
-  contact: z.lazy(() => CreateImageContact$inboundSchema).optional(),
-  cache: z.lazy(() => CreateImageCache$inboundSchema).optional(),
-  load_balancer: z.array(z.lazy(() => CreateImageLoadBalancer1$inboundSchema))
-    .optional(),
-  timeout: z.lazy(() => CreateImageTimeout$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "load_balancer": "loadBalancer",
-  });
-});
 /** @internal */
 export type CreateImageOrq$Outbound = {
   name?: string | undefined;
@@ -757,42 +570,7 @@ export const CreateImageOrq$outboundSchema: z.ZodType<
 export function createImageOrqToJSON(createImageOrq: CreateImageOrq): string {
   return JSON.stringify(CreateImageOrq$outboundSchema.parse(createImageOrq));
 }
-export function createImageOrqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageOrq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageOrq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageOrq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateImageRequestBody$inboundSchema: z.ZodType<
-  CreateImageRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  prompt: z.string(),
-  background: z.nullable(Background$inboundSchema).optional(),
-  model: z.string(),
-  moderation: z.nullable(Moderation$inboundSchema).optional(),
-  n: z.nullable(z.number().int().default(1)),
-  output_compression: z.nullable(z.number().int()).optional(),
-  output_format: z.nullable(OutputFormat$inboundSchema).optional(),
-  quality: z.nullable(Quality$inboundSchema).optional(),
-  response_format: z.nullable(CreateImageResponseFormat$inboundSchema)
-    .optional(),
-  size: z.nullable(z.string()).optional(),
-  style: z.nullable(Style$inboundSchema).optional(),
-  orq: z.lazy(() => CreateImageOrq$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "output_compression": "outputCompression",
-    "output_format": "outputFormat",
-    "response_format": "responseFormat",
-  });
-});
 /** @internal */
 export type CreateImageRequestBody$Outbound = {
   prompt: string;
@@ -843,15 +621,6 @@ export function createImageRequestBodyToJSON(
     CreateImageRequestBody$outboundSchema.parse(createImageRequestBody),
   );
 }
-export function createImageRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateImageRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateImageRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateImageRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateImageData$inboundSchema: z.ZodType<
@@ -868,34 +637,7 @@ export const CreateImageData$inboundSchema: z.ZodType<
     "b64_json": "b64Json",
   });
 });
-/** @internal */
-export type CreateImageData$Outbound = {
-  revised_prompt?: string | null | undefined;
-  b64_json?: string | undefined;
-  url?: string | undefined;
-};
 
-/** @internal */
-export const CreateImageData$outboundSchema: z.ZodType<
-  CreateImageData$Outbound,
-  z.ZodTypeDef,
-  CreateImageData
-> = z.object({
-  revisedPrompt: z.nullable(z.string()).optional(),
-  b64Json: z.string().optional(),
-  url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    revisedPrompt: "revised_prompt",
-    b64Json: "b64_json",
-  });
-});
-
-export function createImageDataToJSON(
-  createImageData: CreateImageData,
-): string {
-  return JSON.stringify(CreateImageData$outboundSchema.parse(createImageData));
-}
 export function createImageDataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateImageData, SDKValidationError> {
@@ -920,34 +662,7 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
     "text_tokens": "textTokens",
   });
 });
-/** @internal */
-export type InputTokensDetails$Outbound = {
-  image_tokens?: number | undefined;
-  text_tokens?: number | undefined;
-};
 
-/** @internal */
-export const InputTokensDetails$outboundSchema: z.ZodType<
-  InputTokensDetails$Outbound,
-  z.ZodTypeDef,
-  InputTokensDetails
-> = z.object({
-  imageTokens: z.number().optional(),
-  textTokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imageTokens: "image_tokens",
-    textTokens: "text_tokens",
-  });
-});
-
-export function inputTokensDetailsToJSON(
-  inputTokensDetails: InputTokensDetails,
-): string {
-  return JSON.stringify(
-    InputTokensDetails$outboundSchema.parse(inputTokensDetails),
-  );
-}
 export function inputTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<InputTokensDetails, SDKValidationError> {
@@ -976,40 +691,7 @@ export const CreateImageUsage$inboundSchema: z.ZodType<
     "total_tokens": "totalTokens",
   });
 });
-/** @internal */
-export type CreateImageUsage$Outbound = {
-  input_tokens?: number | undefined;
-  input_tokens_details: InputTokensDetails$Outbound;
-  output_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-};
 
-/** @internal */
-export const CreateImageUsage$outboundSchema: z.ZodType<
-  CreateImageUsage$Outbound,
-  z.ZodTypeDef,
-  CreateImageUsage
-> = z.object({
-  inputTokens: z.number().optional(),
-  inputTokensDetails: z.lazy(() => InputTokensDetails$outboundSchema),
-  outputTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    inputTokensDetails: "input_tokens_details",
-    outputTokens: "output_tokens",
-    totalTokens: "total_tokens",
-  });
-});
-
-export function createImageUsageToJSON(
-  createImageUsage: CreateImageUsage,
-): string {
-  return JSON.stringify(
-    CreateImageUsage$outboundSchema.parse(createImageUsage),
-  );
-}
 export function createImageUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateImageUsage, SDKValidationError> {
@@ -1030,31 +712,7 @@ export const CreateImageResponseBody$inboundSchema: z.ZodType<
   data: z.array(z.lazy(() => CreateImageData$inboundSchema)),
   usage: z.lazy(() => CreateImageUsage$inboundSchema).optional(),
 });
-/** @internal */
-export type CreateImageResponseBody$Outbound = {
-  created: number;
-  data: Array<CreateImageData$Outbound>;
-  usage?: CreateImageUsage$Outbound | undefined;
-};
 
-/** @internal */
-export const CreateImageResponseBody$outboundSchema: z.ZodType<
-  CreateImageResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateImageResponseBody
-> = z.object({
-  created: z.number(),
-  data: z.array(z.lazy(() => CreateImageData$outboundSchema)),
-  usage: z.lazy(() => CreateImageUsage$outboundSchema).optional(),
-});
-
-export function createImageResponseBodyToJSON(
-  createImageResponseBody: CreateImageResponseBody,
-): string {
-  return JSON.stringify(
-    CreateImageResponseBody$outboundSchema.parse(createImageResponseBody),
-  );
-}
 export function createImageResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateImageResponseBody, SDKValidationError> {

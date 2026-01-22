@@ -3,31 +3,24 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ErrorPart,
-  ErrorPart$inboundSchema,
   ErrorPart$Outbound,
   ErrorPart$outboundSchema,
 } from "./errorpart.js";
 import {
   FilePart,
-  FilePart$inboundSchema,
   FilePart$Outbound,
   FilePart$outboundSchema,
 } from "./filepart.js";
 import {
   TextPart,
-  TextPart$inboundSchema,
   TextPart$Outbound,
   TextPart$outboundSchema,
 } from "./textpart.js";
 import {
   ToolResultPart,
-  ToolResultPart$inboundSchema,
   ToolResultPart$Outbound,
   ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
@@ -71,25 +64,10 @@ export type UserMessageRequest = {
 };
 
 /** @internal */
-export const UserMessageRequestRole$inboundSchema: z.ZodNativeEnum<
-  typeof UserMessageRequestRole
-> = z.nativeEnum(UserMessageRequestRole);
-/** @internal */
 export const UserMessageRequestRole$outboundSchema: z.ZodNativeEnum<
   typeof UserMessageRequestRole
-> = UserMessageRequestRole$inboundSchema;
+> = z.nativeEnum(UserMessageRequestRole);
 
-/** @internal */
-export const UserMessageRequestPublicMessagePart$inboundSchema: z.ZodType<
-  UserMessageRequestPublicMessagePart,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  TextPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolResultPart$inboundSchema,
-  ErrorPart$inboundSchema,
-]);
 /** @internal */
 export type UserMessageRequestPublicMessagePart$Outbound =
   | TextPart$Outbound
@@ -118,34 +96,7 @@ export function userMessageRequestPublicMessagePartToJSON(
     ),
   );
 }
-export function userMessageRequestPublicMessagePartFromJSON(
-  jsonString: string,
-): SafeParseResult<UserMessageRequestPublicMessagePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UserMessageRequestPublicMessagePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserMessageRequestPublicMessagePart' from JSON`,
-  );
-}
 
-/** @internal */
-export const UserMessageRequest$inboundSchema: z.ZodType<
-  UserMessageRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  messageId: z.string().optional(),
-  role: UserMessageRequestRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolResultPart$inboundSchema,
-      ErrorPart$inboundSchema,
-    ]),
-  ),
-});
 /** @internal */
 export type UserMessageRequest$Outbound = {
   messageId?: string | undefined;
@@ -181,14 +132,5 @@ export function userMessageRequestToJSON(
 ): string {
   return JSON.stringify(
     UserMessageRequest$outboundSchema.parse(userMessageRequest),
-  );
-}
-export function userMessageRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UserMessageRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UserMessageRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserMessageRequest' from JSON`,
   );
 }

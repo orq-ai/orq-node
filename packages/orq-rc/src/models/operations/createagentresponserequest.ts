@@ -238,29 +238,15 @@ export type CreateAgentResponseRequestResponse =
   | EventStream<CreateAgentResponseRequestResponseBody>;
 
 /** @internal */
-export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
-/** @internal */
 export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleToolMessage
-> = RoleToolMessage$inboundSchema;
+> = z.nativeEnum(RoleToolMessage);
 
-/** @internal */
-export const RoleUserMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
 /** @internal */
 export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleUserMessage
-> = RoleUserMessage$inboundSchema;
+> = z.nativeEnum(RoleUserMessage);
 
-/** @internal */
-export const CreateAgentResponseRequestRole$inboundSchema: z.ZodType<
-  CreateAgentResponseRequestRole,
-  z.ZodTypeDef,
-  unknown
-> = z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]);
 /** @internal */
 export type CreateAgentResponseRequestRole$Outbound = string | string;
 
@@ -280,27 +266,7 @@ export function createAgentResponseRequestRoleToJSON(
     ),
   );
 }
-export function createAgentResponseRequestRoleFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentResponseRequestRole, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentResponseRequestRole$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseRequestRole' from JSON`,
-  );
-}
 
-/** @internal */
-export const PublicMessagePart$inboundSchema: z.ZodType<
-  PublicMessagePart,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextPart$inboundSchema,
-  components.FilePart$inboundSchema,
-  components.ToolResultPart$inboundSchema,
-  components.ErrorPart$inboundSchema,
-]);
 /** @internal */
 export type PublicMessagePart$Outbound =
   | components.TextPart$Outbound
@@ -327,33 +293,7 @@ export function publicMessagePartToJSON(
     PublicMessagePart$outboundSchema.parse(publicMessagePart),
   );
 }
-export function publicMessagePartFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicMessagePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicMessagePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePart' from JSON`,
-  );
-}
 
-/** @internal */
-export const A2AMessage$inboundSchema: z.ZodType<
-  A2AMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]),
-  parts: z.array(
-    z.union([
-      components.TextPart$inboundSchema,
-      components.FilePart$inboundSchema,
-      components.ToolResultPart$inboundSchema,
-      components.ErrorPart$inboundSchema,
-    ]),
-  ),
-});
 /** @internal */
 export type A2AMessage$Outbound = {
   messageId?: string | undefined;
@@ -390,34 +330,7 @@ export const A2AMessage$outboundSchema: z.ZodType<
 export function a2AMessageToJSON(a2AMessage: A2AMessage): string {
   return JSON.stringify(A2AMessage$outboundSchema.parse(a2AMessage));
 }
-export function a2AMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<A2AMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => A2AMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'A2AMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Identity$inboundSchema: z.ZodType<
-  Identity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  display_name: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logo_url: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "logo_url": "logoUrl",
-  });
-});
 /** @internal */
 export type Identity$Outbound = {
   id: string;
@@ -450,31 +363,7 @@ export const Identity$outboundSchema: z.ZodType<
 export function identityToJSON(identity: Identity): string {
   return JSON.stringify(Identity$outboundSchema.parse(identity));
 }
-export function identityFromJSON(
-  jsonString: string,
-): SafeParseResult<Identity, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Identity$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Identity' from JSON`,
-  );
-}
 
-/** @internal */
-export const Contact$inboundSchema: z.ZodType<Contact, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    display_name: z.string().optional(),
-    email: z.string().optional(),
-    metadata: z.array(z.record(z.any())).optional(),
-    logo_url: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "display_name": "displayName",
-      "logo_url": "logoUrl",
-    });
-  });
 /** @internal */
 export type Contact$Outbound = {
   id: string;
@@ -507,25 +396,7 @@ export const Contact$outboundSchema: z.ZodType<
 export function contactToJSON(contact: Contact): string {
   return JSON.stringify(Contact$outboundSchema.parse(contact));
 }
-export function contactFromJSON(
-  jsonString: string,
-): SafeParseResult<Contact, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Contact$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contact' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateAgentResponseRequestThread$inboundSchema: z.ZodType<
-  CreateAgentResponseRequestThread,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
 /** @internal */
 export type CreateAgentResponseRequestThread$Outbound = {
   id: string;
@@ -551,25 +422,7 @@ export function createAgentResponseRequestThreadToJSON(
     ),
   );
 }
-export function createAgentResponseRequestThreadFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentResponseRequestThread, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentResponseRequestThread$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseRequestThread' from JSON`,
-  );
-}
 
-/** @internal */
-export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
-  .object({
-    entity_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "entity_id": "entityId",
-    });
-  });
 /** @internal */
 export type Memory$Outbound = {
   entity_id: string;
@@ -591,28 +444,7 @@ export const Memory$outboundSchema: z.ZodType<
 export function memoryToJSON(memory: Memory): string {
   return JSON.stringify(Memory$outboundSchema.parse(memory));
 }
-export function memoryFromJSON(
-  jsonString: string,
-): SafeParseResult<Memory, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Memory' from JSON`,
-  );
-}
 
-/** @internal */
-export const Conversation$inboundSchema: z.ZodType<
-  Conversation,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
-});
 /** @internal */
 export type Conversation$Outbound = {
   _id: string;
@@ -634,39 +466,7 @@ export const Conversation$outboundSchema: z.ZodType<
 export function conversationToJSON(conversation: Conversation): string {
   return JSON.stringify(Conversation$outboundSchema.parse(conversation));
 }
-export function conversationFromJSON(
-  jsonString: string,
-): SafeParseResult<Conversation, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Conversation$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Conversation' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateAgentResponseRequestRequestBody$inboundSchema: z.ZodType<
-  CreateAgentResponseRequestRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  task_id: z.string().optional(),
-  message: z.lazy(() => A2AMessage$inboundSchema),
-  variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => Identity$inboundSchema).optional(),
-  contact: z.lazy(() => Contact$inboundSchema).optional(),
-  thread: z.lazy(() => CreateAgentResponseRequestThread$inboundSchema)
-    .optional(),
-  memory: z.lazy(() => Memory$inboundSchema).optional(),
-  metadata: z.record(z.any()).optional(),
-  background: z.boolean().default(false),
-  stream: z.boolean().default(false),
-  conversation: z.lazy(() => Conversation$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-  });
-});
 /** @internal */
 export type CreateAgentResponseRequestRequestBody$Outbound = {
   task_id?: string | undefined;
@@ -715,33 +515,7 @@ export function createAgentResponseRequestRequestBodyToJSON(
     ),
   );
 }
-export function createAgentResponseRequestRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentResponseRequestRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentResponseRequestRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseRequestRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateAgentResponseRequestRequest$inboundSchema: z.ZodType<
-  CreateAgentResponseRequestRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_key: z.string(),
-  RequestBody: z.lazy(() =>
-    CreateAgentResponseRequestRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_key": "agentKey",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateAgentResponseRequestRequest$Outbound = {
   agent_key: string;
@@ -774,15 +548,6 @@ export function createAgentResponseRequestRequestToJSON(
     ),
   );
 }
-export function createAgentResponseRequestRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentResponseRequestRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentResponseRequestRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentResponseRequestRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateAgentResponseRequestResponseBody$inboundSchema: z.ZodType<
@@ -800,30 +565,7 @@ export const CreateAgentResponseRequestResponseBody$inboundSchema: z.ZodType<
     }
   }).pipe(components.ResponseStreamingEvent$inboundSchema.optional()),
 });
-/** @internal */
-export type CreateAgentResponseRequestResponseBody$Outbound = {
-  data?: components.ResponseStreamingEvent$Outbound | undefined;
-};
 
-/** @internal */
-export const CreateAgentResponseRequestResponseBody$outboundSchema: z.ZodType<
-  CreateAgentResponseRequestResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseRequestResponseBody
-> = z.object({
-  data: components.ResponseStreamingEvent$outboundSchema.optional(),
-});
-
-export function createAgentResponseRequestResponseBodyToJSON(
-  createAgentResponseRequestResponseBody:
-    CreateAgentResponseRequestResponseBody,
-): string {
-  return JSON.stringify(
-    CreateAgentResponseRequestResponseBody$outboundSchema.parse(
-      createAgentResponseRequestResponseBody,
-    ),
-  );
-}
 export function createAgentResponseRequestResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentResponseRequestResponseBody, SDKValidationError> {
@@ -854,27 +596,7 @@ export const CreateAgentResponseRequestResponse$inboundSchema: z.ZodType<
       });
     }),
 ]);
-/** @internal */
-export type CreateAgentResponseRequestResponse$Outbound =
-  | components.CreateAgentResponse$Outbound
-  | never;
 
-/** @internal */
-export const CreateAgentResponseRequestResponse$outboundSchema: z.ZodType<
-  CreateAgentResponseRequestResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponseRequestResponse
-> = z.union([components.CreateAgentResponse$outboundSchema, z.never()]);
-
-export function createAgentResponseRequestResponseToJSON(
-  createAgentResponseRequestResponse: CreateAgentResponseRequestResponse,
-): string {
-  return JSON.stringify(
-    CreateAgentResponseRequestResponse$outboundSchema.parse(
-      createAgentResponseRequestResponse,
-    ),
-  );
-}
 export function createAgentResponseRequestResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentResponseRequestResponse, SDKValidationError> {

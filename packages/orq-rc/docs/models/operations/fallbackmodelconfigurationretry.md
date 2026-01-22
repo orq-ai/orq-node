@@ -1,6 +1,6 @@
 # FallbackModelConfigurationRetry
 
-Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+Retry configuration for the request
 
 ## Example Usage
 

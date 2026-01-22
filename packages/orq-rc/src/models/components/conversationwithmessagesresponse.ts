@@ -11,8 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageResponse,
   MessageResponse$inboundSchema,
-  MessageResponse$Outbound,
-  MessageResponse$outboundSchema,
 } from "./messageresponse.js";
 
 /**
@@ -50,7 +48,7 @@ export type ConversationWithMessagesResponse = {
   /**
    * Unique conversation identifier with `conv_` prefix.
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Resource type discriminator.
    */
@@ -90,10 +88,6 @@ export const ConversationWithMessagesResponseKind$inboundSchema:
   z.ZodNativeEnum<typeof ConversationWithMessagesResponseKind> = z.nativeEnum(
     ConversationWithMessagesResponseKind,
   );
-/** @internal */
-export const ConversationWithMessagesResponseKind$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationWithMessagesResponseKind> =
-    ConversationWithMessagesResponseKind$inboundSchema;
 
 /** @internal */
 export const ConversationWithMessagesResponseMetadata$inboundSchema: z.ZodType<
@@ -105,34 +99,7 @@ export const ConversationWithMessagesResponseMetadata$inboundSchema: z.ZodType<
   entityId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type ConversationWithMessagesResponseMetadata$Outbound = {
-  generatingTitle?: boolean | undefined;
-  entityId?: string | null | undefined;
-  model?: string | null | undefined;
-};
 
-/** @internal */
-export const ConversationWithMessagesResponseMetadata$outboundSchema: z.ZodType<
-  ConversationWithMessagesResponseMetadata$Outbound,
-  z.ZodTypeDef,
-  ConversationWithMessagesResponseMetadata
-> = z.object({
-  generatingTitle: z.boolean().optional(),
-  entityId: z.nullable(z.string()).optional(),
-  model: z.nullable(z.string()).optional(),
-});
-
-export function conversationWithMessagesResponseMetadataToJSON(
-  conversationWithMessagesResponseMetadata:
-    ConversationWithMessagesResponseMetadata,
-): string {
-  return JSON.stringify(
-    ConversationWithMessagesResponseMetadata$outboundSchema.parse(
-      conversationWithMessagesResponseMetadata,
-    ),
-  );
-}
 export function conversationWithMessagesResponseMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -155,7 +122,7 @@ export const ConversationWithMessagesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kfjan6hjq6dx6mfb7rjtb1gd"),
+  _id: z.string().default("conv_01kfjq5xhyrv90srxzc9yrfm2e"),
   kind: ConversationWithMessagesResponseKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
@@ -170,51 +137,7 @@ export const ConversationWithMessagesResponse$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type ConversationWithMessagesResponse$Outbound = {
-  _id: string;
-  kind: string;
-  displayName: string;
-  createdAt: number;
-  updatedAt: number;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
-  metadata?: ConversationWithMessagesResponseMetadata$Outbound | undefined;
-  messages: Array<MessageResponse$Outbound>;
-};
 
-/** @internal */
-export const ConversationWithMessagesResponse$outboundSchema: z.ZodType<
-  ConversationWithMessagesResponse$Outbound,
-  z.ZodTypeDef,
-  ConversationWithMessagesResponse
-> = z.object({
-  id: z.string().default("conv_01kfjan6hjq6dx6mfb7rjtb1gd"),
-  kind: ConversationWithMessagesResponseKind$outboundSchema,
-  displayName: z.string(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  metadata: z.lazy(() =>
-    ConversationWithMessagesResponseMetadata$outboundSchema
-  ).optional(),
-  messages: z.array(MessageResponse$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function conversationWithMessagesResponseToJSON(
-  conversationWithMessagesResponse: ConversationWithMessagesResponse,
-): string {
-  return JSON.stringify(
-    ConversationWithMessagesResponse$outboundSchema.parse(
-      conversationWithMessagesResponse,
-    ),
-  );
-}
 export function conversationWithMessagesResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ConversationWithMessagesResponse, SDKValidationError> {

@@ -7,41 +7,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DataPart,
-  DataPart$inboundSchema,
-  DataPart$Outbound,
-  DataPart$outboundSchema,
-} from "./datapart.js";
-import {
-  ErrorPart,
-  ErrorPart$inboundSchema,
-  ErrorPart$Outbound,
-  ErrorPart$outboundSchema,
-} from "./errorpart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
-import {
-  ToolCallPart,
-  ToolCallPart$inboundSchema,
-  ToolCallPart$Outbound,
-  ToolCallPart$outboundSchema,
-} from "./toolcallpart.js";
+import { DataPart, DataPart$inboundSchema } from "./datapart.js";
+import { ErrorPart, ErrorPart$inboundSchema } from "./errorpart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
+import { ToolCallPart, ToolCallPart$inboundSchema } from "./toolcallpart.js";
 import {
   ToolResultPart,
   ToolResultPart$inboundSchema,
-  ToolResultPart$Outbound,
-  ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
 export const Role = {
@@ -76,9 +49,6 @@ export type AgentResponseMessage = {
 export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
   Role,
 );
-/** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
 
 /** @internal */
 export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
@@ -90,32 +60,7 @@ export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
     ToolCallPart$inboundSchema,
     ToolResultPart$inboundSchema,
   ]);
-/** @internal */
-export type Parts$Outbound =
-  | TextPart$Outbound
-  | ErrorPart$Outbound
-  | DataPart$Outbound
-  | FilePart$Outbound
-  | ToolCallPart$Outbound
-  | ToolResultPart$Outbound;
 
-/** @internal */
-export const Parts$outboundSchema: z.ZodType<
-  Parts$Outbound,
-  z.ZodTypeDef,
-  Parts
-> = z.union([
-  TextPart$outboundSchema,
-  ErrorPart$outboundSchema,
-  DataPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolCallPart$outboundSchema,
-  ToolResultPart$outboundSchema,
-]);
-
-export function partsToJSON(parts: Parts): string {
-  return JSON.stringify(Parts$outboundSchema.parse(parts));
-}
 export function partsFromJSON(
   jsonString: string,
 ): SafeParseResult<Parts, SDKValidationError> {
@@ -146,49 +91,7 @@ export const AgentResponseMessage$inboundSchema: z.ZodType<
   ),
   metadata: z.record(z.any()).optional(),
 });
-/** @internal */
-export type AgentResponseMessage$Outbound = {
-  messageId: string;
-  role: string;
-  parts: Array<
-    | TextPart$Outbound
-    | ErrorPart$Outbound
-    | DataPart$Outbound
-    | FilePart$Outbound
-    | ToolCallPart$Outbound
-    | ToolResultPart$Outbound
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const AgentResponseMessage$outboundSchema: z.ZodType<
-  AgentResponseMessage$Outbound,
-  z.ZodTypeDef,
-  AgentResponseMessage
-> = z.object({
-  messageId: z.string(),
-  role: Role$outboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      ErrorPart$outboundSchema,
-      DataPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolCallPart$outboundSchema,
-      ToolResultPart$outboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function agentResponseMessageToJSON(
-  agentResponseMessage: AgentResponseMessage,
-): string {
-  return JSON.stringify(
-    AgentResponseMessage$outboundSchema.parse(agentResponseMessage),
-  );
-}
 export function agentResponseMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentResponseMessage, SDKValidationError> {

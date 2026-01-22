@@ -8,41 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DataPart,
-  DataPart$inboundSchema,
-  DataPart$Outbound,
-  DataPart$outboundSchema,
-} from "./datapart.js";
-import {
-  ErrorPart,
-  ErrorPart$inboundSchema,
-  ErrorPart$Outbound,
-  ErrorPart$outboundSchema,
-} from "./errorpart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
-import {
-  ToolCallPart,
-  ToolCallPart$inboundSchema,
-  ToolCallPart$Outbound,
-  ToolCallPart$outboundSchema,
-} from "./toolcallpart.js";
+import { DataPart, DataPart$inboundSchema } from "./datapart.js";
+import { ErrorPart, ErrorPart$inboundSchema } from "./errorpart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
+import { ToolCallPart, ToolCallPart$inboundSchema } from "./toolcallpart.js";
 import {
   ToolResultPart,
   ToolResultPart$inboundSchema,
-  ToolResultPart$Outbound,
-  ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
 /**
@@ -225,10 +198,6 @@ export type AgentInactiveStreamingEvent = {
 export const AgentInactiveStreamingEventRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentInactiveStreamingEventRole
 > = z.nativeEnum(AgentInactiveStreamingEventRole);
-/** @internal */
-export const AgentInactiveStreamingEventRole$outboundSchema: z.ZodNativeEnum<
-  typeof AgentInactiveStreamingEventRole
-> = AgentInactiveStreamingEventRole$inboundSchema;
 
 /** @internal */
 export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
@@ -243,38 +212,7 @@ export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
   ToolCallPart$inboundSchema,
   ToolResultPart$inboundSchema,
 ]);
-/** @internal */
-export type AgentInactiveStreamingEventParts$Outbound =
-  | TextPart$Outbound
-  | ErrorPart$Outbound
-  | DataPart$Outbound
-  | FilePart$Outbound
-  | ToolCallPart$Outbound
-  | ToolResultPart$Outbound;
 
-/** @internal */
-export const AgentInactiveStreamingEventParts$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEventParts$Outbound,
-  z.ZodTypeDef,
-  AgentInactiveStreamingEventParts
-> = z.union([
-  TextPart$outboundSchema,
-  ErrorPart$outboundSchema,
-  DataPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolCallPart$outboundSchema,
-  ToolResultPart$outboundSchema,
-]);
-
-export function agentInactiveStreamingEventPartsToJSON(
-  agentInactiveStreamingEventParts: AgentInactiveStreamingEventParts,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventParts$outboundSchema.parse(
-      agentInactiveStreamingEventParts,
-    ),
-  );
-}
 export function agentInactiveStreamingEventPartsFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentInactiveStreamingEventParts, SDKValidationError> {
@@ -305,47 +243,7 @@ export const LastMessageFull$inboundSchema: z.ZodType<
   ),
   metadata: z.record(z.any()).optional(),
 });
-/** @internal */
-export type LastMessageFull$Outbound = {
-  messageId?: string | undefined;
-  role: string;
-  parts: Array<
-    | TextPart$Outbound
-    | ErrorPart$Outbound
-    | DataPart$Outbound
-    | FilePart$Outbound
-    | ToolCallPart$Outbound
-    | ToolResultPart$Outbound
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const LastMessageFull$outboundSchema: z.ZodType<
-  LastMessageFull$Outbound,
-  z.ZodTypeDef,
-  LastMessageFull
-> = z.object({
-  messageId: z.string().optional(),
-  role: AgentInactiveStreamingEventRole$outboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      ErrorPart$outboundSchema,
-      DataPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolCallPart$outboundSchema,
-      ToolResultPart$outboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function lastMessageFullToJSON(
-  lastMessageFull: LastMessageFull,
-): string {
-  return JSON.stringify(LastMessageFull$outboundSchema.parse(lastMessageFull));
-}
 export function lastMessageFullFromJSON(
   jsonString: string,
 ): SafeParseResult<LastMessageFull, SDKValidationError> {
@@ -360,19 +258,11 @@ export function lastMessageFullFromJSON(
 export const AgentInactiveStreamingEventFinishReason$inboundSchema:
   z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> = z
     .nativeEnum(AgentInactiveStreamingEventFinishReason);
-/** @internal */
-export const AgentInactiveStreamingEventFinishReason$outboundSchema:
-  z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> =
-    AgentInactiveStreamingEventFinishReason$inboundSchema;
 
 /** @internal */
 export const AgentInactiveStreamingEventDataType$inboundSchema: z.ZodNativeEnum<
   typeof AgentInactiveStreamingEventDataType
 > = z.nativeEnum(AgentInactiveStreamingEventDataType);
-/** @internal */
-export const AgentInactiveStreamingEventDataType$outboundSchema:
-  z.ZodNativeEnum<typeof AgentInactiveStreamingEventDataType> =
-    AgentInactiveStreamingEventDataType$inboundSchema;
 
 /** @internal */
 export const AgentInactiveStreamingEventFunction$inboundSchema: z.ZodType<
@@ -383,31 +273,7 @@ export const AgentInactiveStreamingEventFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type AgentInactiveStreamingEventFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventFunction$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEventFunction$Outbound,
-  z.ZodTypeDef,
-  AgentInactiveStreamingEventFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function agentInactiveStreamingEventFunctionToJSON(
-  agentInactiveStreamingEventFunction: AgentInactiveStreamingEventFunction,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventFunction$outboundSchema.parse(
-      agentInactiveStreamingEventFunction,
-    ),
-  );
-}
 export function agentInactiveStreamingEventFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentInactiveStreamingEventFunction, SDKValidationError> {
@@ -430,35 +296,7 @@ export const AgentInactiveStreamingEventPendingToolCalls$inboundSchema:
     type: AgentInactiveStreamingEventDataType$inboundSchema,
     function: z.lazy(() => AgentInactiveStreamingEventFunction$inboundSchema),
   });
-/** @internal */
-export type AgentInactiveStreamingEventPendingToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: AgentInactiveStreamingEventFunction$Outbound;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventPendingToolCalls$outboundSchema:
-  z.ZodType<
-    AgentInactiveStreamingEventPendingToolCalls$Outbound,
-    z.ZodTypeDef,
-    AgentInactiveStreamingEventPendingToolCalls
-  > = z.object({
-    id: z.string(),
-    type: AgentInactiveStreamingEventDataType$outboundSchema,
-    function: z.lazy(() => AgentInactiveStreamingEventFunction$outboundSchema),
-  });
-
-export function agentInactiveStreamingEventPendingToolCallsToJSON(
-  agentInactiveStreamingEventPendingToolCalls:
-    AgentInactiveStreamingEventPendingToolCalls,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventPendingToolCalls$outboundSchema.parse(
-      agentInactiveStreamingEventPendingToolCalls,
-    ),
-  );
-}
 export function agentInactiveStreamingEventPendingToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -492,41 +330,7 @@ export const AgentInactiveStreamingEventPromptTokensDetails$inboundSchema:
       "audio_tokens": "audioTokens",
     });
   });
-/** @internal */
-export type AgentInactiveStreamingEventPromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventPromptTokensDetails$outboundSchema:
-  z.ZodType<
-    AgentInactiveStreamingEventPromptTokensDetails$Outbound,
-    z.ZodTypeDef,
-    AgentInactiveStreamingEventPromptTokensDetails
-  > = z.object({
-    cachedTokens: z.nullable(z.number().int()).optional(),
-    cacheCreationTokens: z.nullable(z.number().int()).optional(),
-    audioTokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cachedTokens: "cached_tokens",
-      cacheCreationTokens: "cache_creation_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
-
-export function agentInactiveStreamingEventPromptTokensDetailsToJSON(
-  agentInactiveStreamingEventPromptTokensDetails:
-    AgentInactiveStreamingEventPromptTokensDetails,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventPromptTokensDetails$outboundSchema.parse(
-      agentInactiveStreamingEventPromptTokensDetails,
-    ),
-  );
-}
 export function agentInactiveStreamingEventPromptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -562,44 +366,7 @@ export const AgentInactiveStreamingEventCompletionTokensDetails$inboundSchema:
       "audio_tokens": "audioTokens",
     });
   });
-/** @internal */
-export type AgentInactiveStreamingEventCompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventCompletionTokensDetails$outboundSchema:
-  z.ZodType<
-    AgentInactiveStreamingEventCompletionTokensDetails$Outbound,
-    z.ZodTypeDef,
-    AgentInactiveStreamingEventCompletionTokensDetails
-  > = z.object({
-    reasoningTokens: z.nullable(z.number()).optional(),
-    acceptedPredictionTokens: z.nullable(z.number()).optional(),
-    rejectedPredictionTokens: z.nullable(z.number()).optional(),
-    audioTokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reasoningTokens: "reasoning_tokens",
-      acceptedPredictionTokens: "accepted_prediction_tokens",
-      rejectedPredictionTokens: "rejected_prediction_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
-
-export function agentInactiveStreamingEventCompletionTokensDetailsToJSON(
-  agentInactiveStreamingEventCompletionTokensDetails:
-    AgentInactiveStreamingEventCompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventCompletionTokensDetails$outboundSchema.parse(
-      agentInactiveStreamingEventCompletionTokensDetails,
-    ),
-  );
-}
 export function agentInactiveStreamingEventCompletionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -644,60 +411,7 @@ export const AgentInactiveStreamingEventUsage$inboundSchema: z.ZodType<
     "time_to_first_token": "timeToFirstToken",
   });
 });
-/** @internal */
-export type AgentInactiveStreamingEventUsage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?:
-    | AgentInactiveStreamingEventPromptTokensDetails$Outbound
-    | null
-    | undefined;
-  completion_tokens_details?:
-    | AgentInactiveStreamingEventCompletionTokensDetails$Outbound
-    | null
-    | undefined;
-  time_to_first_token?: number | undefined;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventUsage$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEventUsage$Outbound,
-  z.ZodTypeDef,
-  AgentInactiveStreamingEventUsage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => AgentInactiveStreamingEventPromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() =>
-      AgentInactiveStreamingEventCompletionTokensDetails$outboundSchema
-    ),
-  ).optional(),
-  timeToFirstToken: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-    timeToFirstToken: "time_to_first_token",
-  });
-});
-
-export function agentInactiveStreamingEventUsageToJSON(
-  agentInactiveStreamingEventUsage: AgentInactiveStreamingEventUsage,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventUsage$outboundSchema.parse(
-      agentInactiveStreamingEventUsage,
-    ),
-  );
-}
 export function agentInactiveStreamingEventUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentInactiveStreamingEventUsage, SDKValidationError> {
@@ -724,38 +438,7 @@ export const Billing$inboundSchema: z.ZodType<Billing, z.ZodTypeDef, unknown> =
       "integration_id": "integrationId",
     });
   });
-/** @internal */
-export type Billing$Outbound = {
-  total_cost: number;
-  input_cost: number;
-  output_cost: number;
-  billable: boolean;
-  integration_id: string | null;
-};
 
-/** @internal */
-export const Billing$outboundSchema: z.ZodType<
-  Billing$Outbound,
-  z.ZodTypeDef,
-  Billing
-> = z.object({
-  totalCost: z.number(),
-  inputCost: z.number(),
-  outputCost: z.number(),
-  billable: z.boolean(),
-  integrationId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    totalCost: "total_cost",
-    inputCost: "input_cost",
-    outputCost: "output_cost",
-    integrationId: "integration_id",
-  });
-});
-
-export function billingToJSON(billing: Billing): string {
-  return JSON.stringify(Billing$outboundSchema.parse(billing));
-}
 export function billingFromJSON(
   jsonString: string,
 ): SafeParseResult<Billing, SDKValidationError> {
@@ -791,55 +474,7 @@ export const AgentInactiveStreamingEventData$inboundSchema: z.ZodType<
     "pending_tool_calls": "pendingToolCalls",
   });
 });
-/** @internal */
-export type AgentInactiveStreamingEventData$Outbound = {
-  last_message: string;
-  last_message_full?: LastMessageFull$Outbound | undefined;
-  finish_reason: string;
-  pending_tool_calls?:
-    | Array<AgentInactiveStreamingEventPendingToolCalls$Outbound>
-    | undefined;
-  usage?: AgentInactiveStreamingEventUsage$Outbound | undefined;
-  billing?: Billing$Outbound | undefined;
-  workflowRunId: string;
-  responseId?: string | undefined;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEventData$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentInactiveStreamingEventData
-> = z.object({
-  lastMessage: z.string(),
-  lastMessageFull: z.lazy(() => LastMessageFull$outboundSchema).optional(),
-  finishReason: AgentInactiveStreamingEventFinishReason$outboundSchema,
-  pendingToolCalls: z.array(
-    z.lazy(() => AgentInactiveStreamingEventPendingToolCalls$outboundSchema),
-  ).optional(),
-  usage: z.lazy(() => AgentInactiveStreamingEventUsage$outboundSchema)
-    .optional(),
-  billing: z.lazy(() => Billing$outboundSchema).optional(),
-  workflowRunId: z.string(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    lastMessage: "last_message",
-    lastMessageFull: "last_message_full",
-    finishReason: "finish_reason",
-    pendingToolCalls: "pending_tool_calls",
-  });
-});
-
-export function agentInactiveStreamingEventDataToJSON(
-  agentInactiveStreamingEventData: AgentInactiveStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEventData$outboundSchema.parse(
-      agentInactiveStreamingEventData,
-    ),
-  );
-}
 export function agentInactiveStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentInactiveStreamingEventData, SDKValidationError> {
@@ -860,33 +495,7 @@ export const AgentInactiveStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentInactiveStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentInactiveStreamingEvent$Outbound = {
-  type: "event.agents.inactive";
-  timestamp: string;
-  data: AgentInactiveStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentInactiveStreamingEvent$outboundSchema: z.ZodType<
-  AgentInactiveStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentInactiveStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.inactive"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentInactiveStreamingEventData$outboundSchema),
-});
-
-export function agentInactiveStreamingEventToJSON(
-  agentInactiveStreamingEvent: AgentInactiveStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentInactiveStreamingEvent$outboundSchema.parse(
-      agentInactiveStreamingEvent,
-    ),
-  );
-}
 export function agentInactiveStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentInactiveStreamingEvent, SDKValidationError> {

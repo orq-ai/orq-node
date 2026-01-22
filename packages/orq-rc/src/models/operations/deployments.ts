@@ -102,6 +102,7 @@ export const DeploymentsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
@@ -590,21 +591,6 @@ export type DeploymentsResponseBody = {
 };
 
 /** @internal */
-export const DeploymentsRequest$inboundSchema: z.ZodType<
-  DeploymentsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
-/** @internal */
 export type DeploymentsRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
@@ -634,42 +620,21 @@ export function deploymentsRequestToJSON(
     DeploymentsRequest$outboundSchema.parse(deploymentsRequest),
   );
 }
-export function deploymentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeploymentsObject$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsObject
 > = z.nativeEnum(DeploymentsObject);
-/** @internal */
-export const DeploymentsObject$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsObject
-> = DeploymentsObject$inboundSchema;
 
 /** @internal */
 export const DeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsType
 > = z.nativeEnum(DeploymentsType);
-/** @internal */
-export const DeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsType
-> = DeploymentsType$inboundSchema;
 
 /** @internal */
 export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsResponseType
 > = z.nativeEnum(DeploymentsDeploymentsResponseType);
-/** @internal */
-export const DeploymentsDeploymentsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsResponseType
-> = DeploymentsDeploymentsResponseType$inboundSchema;
 
 /** @internal */
 export const DeploymentsParameters$inboundSchema: z.ZodType<
@@ -682,33 +647,7 @@ export const DeploymentsParameters$inboundSchema: z.ZodType<
   required: z.array(z.string()).optional(),
   additionalProperties: z.boolean().optional(),
 });
-/** @internal */
-export type DeploymentsParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required?: Array<string> | undefined;
-  additionalProperties?: boolean | undefined;
-};
 
-/** @internal */
-export const DeploymentsParameters$outboundSchema: z.ZodType<
-  DeploymentsParameters$Outbound,
-  z.ZodTypeDef,
-  DeploymentsParameters
-> = z.object({
-  type: DeploymentsDeploymentsResponseType$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
-});
-
-export function deploymentsParametersToJSON(
-  deploymentsParameters: DeploymentsParameters,
-): string {
-  return JSON.stringify(
-    DeploymentsParameters$outboundSchema.parse(deploymentsParameters),
-  );
-}
 export function deploymentsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsParameters, SDKValidationError> {
@@ -730,33 +669,7 @@ export const DeploymentsFunction$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   parameters: z.lazy(() => DeploymentsParameters$inboundSchema),
 });
-/** @internal */
-export type DeploymentsFunction$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  parameters: DeploymentsParameters$Outbound;
-};
 
-/** @internal */
-export const DeploymentsFunction$outboundSchema: z.ZodType<
-  DeploymentsFunction$Outbound,
-  z.ZodTypeDef,
-  DeploymentsFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => DeploymentsParameters$outboundSchema),
-});
-
-export function deploymentsFunctionToJSON(
-  deploymentsFunction: DeploymentsFunction,
-): string {
-  return JSON.stringify(
-    DeploymentsFunction$outboundSchema.parse(deploymentsFunction),
-  );
-}
 export function deploymentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsFunction, SDKValidationError> {
@@ -782,37 +695,7 @@ export const DeploymentsTools$inboundSchema: z.ZodType<
     "display_name": "displayName",
   });
 });
-/** @internal */
-export type DeploymentsTools$Outbound = {
-  display_name?: string | undefined;
-  type: string;
-  function: DeploymentsFunction$Outbound;
-  id?: number | undefined;
-};
 
-/** @internal */
-export const DeploymentsTools$outboundSchema: z.ZodType<
-  DeploymentsTools$Outbound,
-  z.ZodTypeDef,
-  DeploymentsTools
-> = z.object({
-  displayName: z.string().optional(),
-  type: DeploymentsType$outboundSchema,
-  function: z.lazy(() => DeploymentsFunction$outboundSchema),
-  id: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
-
-export function deploymentsToolsToJSON(
-  deploymentsTools: DeploymentsTools,
-): string {
-  return JSON.stringify(
-    DeploymentsTools$outboundSchema.parse(deploymentsTools),
-  );
-}
 export function deploymentsToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsTools, SDKValidationError> {
@@ -827,55 +710,31 @@ export function deploymentsToolsFromJSON(
 export const DeploymentsModelType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsModelType
 > = z.nativeEnum(DeploymentsModelType);
-/** @internal */
-export const DeploymentsModelType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsModelType
-> = DeploymentsModelType$inboundSchema;
 
 /** @internal */
 export const DeploymentsFormat$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsFormat
 > = z.nativeEnum(DeploymentsFormat);
-/** @internal */
-export const DeploymentsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsFormat
-> = DeploymentsFormat$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat6
 > = z.nativeEnum(DeploymentsResponseFormat6);
-/** @internal */
-export const DeploymentsResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsResponseFormat6
-> = DeploymentsResponseFormat6$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat5
 > = z.nativeEnum(DeploymentsResponseFormat5);
-/** @internal */
-export const DeploymentsResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsResponseFormat5
-> = DeploymentsResponseFormat5$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormat4
 > = z.nativeEnum(DeploymentsResponseFormat4);
-/** @internal */
-export const DeploymentsResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsResponseFormat4
-> = DeploymentsResponseFormat4$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormatDeploymentsType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsType> = z
     .nativeEnum(DeploymentsResponseFormatDeploymentsType);
-/** @internal */
-export const DeploymentsResponseFormatDeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsType> =
-    DeploymentsResponseFormatDeploymentsType$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormat3$inboundSchema: z.ZodType<
@@ -885,27 +744,7 @@ export const DeploymentsResponseFormat3$inboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentsResponseFormatDeploymentsType$inboundSchema,
 });
-/** @internal */
-export type DeploymentsResponseFormat3$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const DeploymentsResponseFormat3$outboundSchema: z.ZodType<
-  DeploymentsResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormat3
-> = z.object({
-  type: DeploymentsResponseFormatDeploymentsType$outboundSchema,
-});
-
-export function deploymentsResponseFormat3ToJSON(
-  deploymentsResponseFormat3: DeploymentsResponseFormat3,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormat3$outboundSchema.parse(deploymentsResponseFormat3),
-  );
-}
 export function deploymentsResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat3, SDKValidationError> {
@@ -920,10 +759,6 @@ export function deploymentsResponseFormat3FromJSON(
 export const DeploymentsResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormatType
 > = z.nativeEnum(DeploymentsResponseFormatType);
-/** @internal */
-export const DeploymentsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsResponseFormatType
-> = DeploymentsResponseFormatType$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
@@ -933,27 +768,7 @@ export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentsResponseFormatType$inboundSchema,
 });
-/** @internal */
-export type DeploymentsResponseFormat2$Outbound = {
-  type: string;
-};
 
-/** @internal */
-export const DeploymentsResponseFormat2$outboundSchema: z.ZodType<
-  DeploymentsResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormat2
-> = z.object({
-  type: DeploymentsResponseFormatType$outboundSchema,
-});
-
-export function deploymentsResponseFormat2ToJSON(
-  deploymentsResponseFormat2: DeploymentsResponseFormat2,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormat2$outboundSchema.parse(deploymentsResponseFormat2),
-  );
-}
 export function deploymentsResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat2, SDKValidationError> {
@@ -968,10 +783,6 @@ export function deploymentsResponseFormat2FromJSON(
 export const DeploymentsResponseFormatDeploymentsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> = z
     .nativeEnum(DeploymentsResponseFormatDeploymentsResponseType);
-/** @internal */
-export const DeploymentsResponseFormatDeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> =
-    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
 
 /** @internal */
 export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
@@ -984,35 +795,7 @@ export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
-/** @internal */
-export type DeploymentsResponseFormatJsonSchema$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
 
-/** @internal */
-export const DeploymentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  DeploymentsResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormatJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
-
-export function deploymentsResponseFormatJsonSchemaToJSON(
-  deploymentsResponseFormatJsonSchema: DeploymentsResponseFormatJsonSchema,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormatJsonSchema$outboundSchema.parse(
-      deploymentsResponseFormatJsonSchema,
-    ),
-  );
-}
 export function deploymentsResponseFormatJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormatJsonSchema, SDKValidationError> {
@@ -1039,36 +822,7 @@ export const DeploymentsResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type DeploymentsResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema: DeploymentsResponseFormatJsonSchema$Outbound;
-};
 
-/** @internal */
-export const DeploymentsResponseFormat1$outboundSchema: z.ZodType<
-  DeploymentsResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormat1
-> = z.object({
-  type: DeploymentsResponseFormatDeploymentsResponseType$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() => DeploymentsResponseFormatJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function deploymentsResponseFormat1ToJSON(
-  deploymentsResponseFormat1: DeploymentsResponseFormat1,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormat1$outboundSchema.parse(deploymentsResponseFormat1),
-  );
-}
 export function deploymentsResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat1, SDKValidationError> {
@@ -1092,36 +846,7 @@ export const DeploymentsResponseFormat$inboundSchema: z.ZodType<
   DeploymentsResponseFormat5$inboundSchema,
   DeploymentsResponseFormat6$inboundSchema,
 ]);
-/** @internal */
-export type DeploymentsResponseFormat$Outbound =
-  | DeploymentsResponseFormat1$Outbound
-  | DeploymentsResponseFormat2$Outbound
-  | DeploymentsResponseFormat3$Outbound
-  | string
-  | string
-  | string;
 
-/** @internal */
-export const DeploymentsResponseFormat$outboundSchema: z.ZodType<
-  DeploymentsResponseFormat$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormat
-> = z.union([
-  z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
-  z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
-  z.lazy(() => DeploymentsResponseFormat3$outboundSchema),
-  DeploymentsResponseFormat4$outboundSchema,
-  DeploymentsResponseFormat5$outboundSchema,
-  DeploymentsResponseFormat6$outboundSchema,
-]);
-
-export function deploymentsResponseFormatToJSON(
-  deploymentsResponseFormat: DeploymentsResponseFormat,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormat$outboundSchema.parse(deploymentsResponseFormat),
-  );
-}
 export function deploymentsResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseFormat, SDKValidationError> {
@@ -1136,46 +861,26 @@ export function deploymentsResponseFormatFromJSON(
 export const DeploymentsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsPhotoRealVersion
 > = z.nativeEnum(DeploymentsPhotoRealVersion);
-/** @internal */
-export const DeploymentsPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsPhotoRealVersion
-> = DeploymentsPhotoRealVersion$inboundSchema;
 
 /** @internal */
 export const DeploymentsEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsEncodingFormat
 > = z.nativeEnum(DeploymentsEncodingFormat);
-/** @internal */
-export const DeploymentsEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsEncodingFormat
-> = DeploymentsEncodingFormat$inboundSchema;
 
 /** @internal */
 export const DeploymentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsReasoningEffort
 > = z.nativeEnum(DeploymentsReasoningEffort);
-/** @internal */
-export const DeploymentsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsReasoningEffort
-> = DeploymentsReasoningEffort$inboundSchema;
 
 /** @internal */
 export const DeploymentsVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsVerbosity
 > = z.nativeEnum(DeploymentsVerbosity);
-/** @internal */
-export const DeploymentsVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsVerbosity
-> = DeploymentsVerbosity$inboundSchema;
 
 /** @internal */
 export const DeploymentsThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsThinkingLevel
 > = z.nativeEnum(DeploymentsThinkingLevel);
-/** @internal */
-export const DeploymentsThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsThinkingLevel
-> = DeploymentsThinkingLevel$inboundSchema;
 
 /** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
@@ -1216,84 +921,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-/** @internal */
-export type DeploymentsModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | DeploymentsResponseFormat1$Outbound
-    | DeploymentsResponseFormat2$Outbound
-    | DeploymentsResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
 
-/** @internal */
-export const DeploymentsModelParameters$outboundSchema: z.ZodType<
-  DeploymentsModelParameters$Outbound,
-  z.ZodTypeDef,
-  DeploymentsModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: DeploymentsFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
-      z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
-      z.lazy(() => DeploymentsResponseFormat3$outboundSchema),
-      DeploymentsResponseFormat4$outboundSchema,
-      DeploymentsResponseFormat5$outboundSchema,
-      DeploymentsResponseFormat6$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: DeploymentsPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: DeploymentsEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: DeploymentsVerbosity$outboundSchema.optional(),
-  thinkingLevel: DeploymentsThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function deploymentsModelParametersToJSON(
-  deploymentsModelParameters: DeploymentsModelParameters,
-): string {
-  return JSON.stringify(
-    DeploymentsModelParameters$outboundSchema.parse(deploymentsModelParameters),
-  );
-}
 export function deploymentsModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsModelParameters, SDKValidationError> {
@@ -1308,19 +936,11 @@ export function deploymentsModelParametersFromJSON(
 export const DeploymentsProvider$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsProvider
 > = z.nativeEnum(DeploymentsProvider);
-/** @internal */
-export const DeploymentsProvider$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsProvider
-> = DeploymentsProvider$inboundSchema;
 
 /** @internal */
 export const DeploymentsRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsRole
 > = z.nativeEnum(DeploymentsRole);
-/** @internal */
-export const DeploymentsRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsRole
-> = DeploymentsRole$inboundSchema;
 
 /** @internal */
 export const Deployments2File$inboundSchema: z.ZodType<
@@ -1337,37 +957,7 @@ export const Deployments2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-/** @internal */
-export type Deployments2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
 
-/** @internal */
-export const Deployments2File$outboundSchema: z.ZodType<
-  Deployments2File$Outbound,
-  z.ZodTypeDef,
-  Deployments2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function deployments2FileToJSON(
-  deployments2File: Deployments2File,
-): string {
-  return JSON.stringify(
-    Deployments2File$outboundSchema.parse(deployments2File),
-  );
-}
 export function deployments2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments2File, SDKValidationError> {
@@ -1387,25 +977,7 @@ export const Deployments23$inboundSchema: z.ZodType<
   type: z.literal("file"),
   file: z.lazy(() => Deployments2File$inboundSchema),
 });
-/** @internal */
-export type Deployments23$Outbound = {
-  type: "file";
-  file: Deployments2File$Outbound;
-};
 
-/** @internal */
-export const Deployments23$outboundSchema: z.ZodType<
-  Deployments23$Outbound,
-  z.ZodTypeDef,
-  Deployments23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => Deployments2File$outboundSchema),
-});
-
-export function deployments23ToJSON(deployments23: Deployments23): string {
-  return JSON.stringify(Deployments23$outboundSchema.parse(deployments23));
-}
 export function deployments23FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments23, SDKValidationError> {
@@ -1426,31 +998,7 @@ export const Deployments2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-/** @internal */
-export type Deployments2ImageUrl$Outbound = {
-  id?: string | undefined;
-  url: string;
-  detail?: string | undefined;
-};
 
-/** @internal */
-export const Deployments2ImageUrl$outboundSchema: z.ZodType<
-  Deployments2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  Deployments2ImageUrl
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function deployments2ImageUrlToJSON(
-  deployments2ImageUrl: Deployments2ImageUrl,
-): string {
-  return JSON.stringify(
-    Deployments2ImageUrl$outboundSchema.parse(deployments2ImageUrl),
-  );
-}
 export function deployments2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments2ImageUrl, SDKValidationError> {
@@ -1474,29 +1022,7 @@ export const Deployments22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-/** @internal */
-export type Deployments22$Outbound = {
-  type: "image_url";
-  image_url: Deployments2ImageUrl$Outbound;
-};
 
-/** @internal */
-export const Deployments22$outboundSchema: z.ZodType<
-  Deployments22$Outbound,
-  z.ZodTypeDef,
-  Deployments22
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => Deployments2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function deployments22ToJSON(deployments22: Deployments22): string {
-  return JSON.stringify(Deployments22$outboundSchema.parse(deployments22));
-}
 export function deployments22FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments22, SDKValidationError> {
@@ -1516,25 +1042,7 @@ export const Deployments21$inboundSchema: z.ZodType<
   type: z.literal("text"),
   text: z.string(),
 });
-/** @internal */
-export type Deployments21$Outbound = {
-  type: "text";
-  text: string;
-};
 
-/** @internal */
-export const Deployments21$outboundSchema: z.ZodType<
-  Deployments21$Outbound,
-  z.ZodTypeDef,
-  Deployments21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-export function deployments21ToJSON(deployments21: Deployments21): string {
-  return JSON.stringify(Deployments21$outboundSchema.parse(deployments21));
-}
 export function deployments21FromJSON(
   jsonString: string,
 ): SafeParseResult<Deployments21, SDKValidationError> {
@@ -1555,30 +1063,7 @@ export const DeploymentsContent2$inboundSchema: z.ZodType<
   z.lazy(() => Deployments22$inboundSchema),
   z.lazy(() => Deployments23$inboundSchema),
 ]);
-/** @internal */
-export type DeploymentsContent2$Outbound =
-  | Deployments21$Outbound
-  | Deployments22$Outbound
-  | Deployments23$Outbound;
 
-/** @internal */
-export const DeploymentsContent2$outboundSchema: z.ZodType<
-  DeploymentsContent2$Outbound,
-  z.ZodTypeDef,
-  DeploymentsContent2
-> = z.union([
-  z.lazy(() => Deployments21$outboundSchema),
-  z.lazy(() => Deployments22$outboundSchema),
-  z.lazy(() => Deployments23$outboundSchema),
-]);
-
-export function deploymentsContent2ToJSON(
-  deploymentsContent2: DeploymentsContent2,
-): string {
-  return JSON.stringify(
-    DeploymentsContent2$outboundSchema.parse(deploymentsContent2),
-  );
-}
 export function deploymentsContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsContent2, SDKValidationError> {
@@ -1602,34 +1087,7 @@ export const DeploymentsContent$inboundSchema: z.ZodType<
     z.lazy(() => Deployments23$inboundSchema),
   ])),
 ]);
-/** @internal */
-export type DeploymentsContent$Outbound =
-  | string
-  | Array<
-    Deployments21$Outbound | Deployments22$Outbound | Deployments23$Outbound
-  >;
 
-/** @internal */
-export const DeploymentsContent$outboundSchema: z.ZodType<
-  DeploymentsContent$Outbound,
-  z.ZodTypeDef,
-  DeploymentsContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => Deployments21$outboundSchema),
-    z.lazy(() => Deployments22$outboundSchema),
-    z.lazy(() => Deployments23$outboundSchema),
-  ])),
-]);
-
-export function deploymentsContentToJSON(
-  deploymentsContent: DeploymentsContent,
-): string {
-  return JSON.stringify(
-    DeploymentsContent$outboundSchema.parse(deploymentsContent),
-  );
-}
 export function deploymentsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsContent, SDKValidationError> {
@@ -1644,10 +1102,6 @@ export function deploymentsContentFromJSON(
 export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsDeploymentsType
 > = z.nativeEnum(DeploymentsDeploymentsType);
-/** @internal */
-export const DeploymentsDeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsType
-> = DeploymentsDeploymentsType$inboundSchema;
 
 /** @internal */
 export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
@@ -1658,31 +1112,7 @@ export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type DeploymentsDeploymentsFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const DeploymentsDeploymentsFunction$outboundSchema: z.ZodType<
-  DeploymentsDeploymentsFunction$Outbound,
-  z.ZodTypeDef,
-  DeploymentsDeploymentsFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function deploymentsDeploymentsFunctionToJSON(
-  deploymentsDeploymentsFunction: DeploymentsDeploymentsFunction,
-): string {
-  return JSON.stringify(
-    DeploymentsDeploymentsFunction$outboundSchema.parse(
-      deploymentsDeploymentsFunction,
-    ),
-  );
-}
 export function deploymentsDeploymentsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsDeploymentsFunction, SDKValidationError> {
@@ -1704,33 +1134,7 @@ export const DeploymentsToolCalls$inboundSchema: z.ZodType<
   type: DeploymentsDeploymentsType$inboundSchema,
   function: z.lazy(() => DeploymentsDeploymentsFunction$inboundSchema),
 });
-/** @internal */
-export type DeploymentsToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: DeploymentsDeploymentsFunction$Outbound;
-};
 
-/** @internal */
-export const DeploymentsToolCalls$outboundSchema: z.ZodType<
-  DeploymentsToolCalls$Outbound,
-  z.ZodTypeDef,
-  DeploymentsToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: DeploymentsDeploymentsType$outboundSchema,
-  function: z.lazy(() => DeploymentsDeploymentsFunction$outboundSchema),
-});
-
-export function deploymentsToolCallsToJSON(
-  deploymentsToolCalls: DeploymentsToolCalls,
-): string {
-  return JSON.stringify(
-    DeploymentsToolCalls$outboundSchema.parse(deploymentsToolCalls),
-  );
-}
 export function deploymentsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsToolCalls, SDKValidationError> {
@@ -1767,53 +1171,7 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-/** @internal */
-export type DeploymentsMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<
-      Deployments21$Outbound | Deployments22$Outbound | Deployments23$Outbound
-    >
-    | null;
-  tool_calls?: Array<DeploymentsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
 
-/** @internal */
-export const DeploymentsMessages$outboundSchema: z.ZodType<
-  DeploymentsMessages$Outbound,
-  z.ZodTypeDef,
-  DeploymentsMessages
-> = z.object({
-  role: DeploymentsRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => Deployments21$outboundSchema),
-        z.lazy(() => Deployments22$outboundSchema),
-        z.lazy(() => Deployments23$outboundSchema),
-      ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => DeploymentsToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function deploymentsMessagesToJSON(
-  deploymentsMessages: DeploymentsMessages,
-): string {
-  return JSON.stringify(
-    DeploymentsMessages$outboundSchema.parse(deploymentsMessages),
-  );
-}
 export function deploymentsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsMessages, SDKValidationError> {
@@ -1842,42 +1200,7 @@ export const DeploymentsPromptConfig$inboundSchema: z.ZodType<
     "model_parameters": "modelParameters",
   });
 });
-/** @internal */
-export type DeploymentsPromptConfig$Outbound = {
-  tools: Array<DeploymentsTools$Outbound>;
-  model: string;
-  model_type: string;
-  model_parameters: DeploymentsModelParameters$Outbound;
-  provider: string;
-  messages: Array<DeploymentsMessages$Outbound>;
-};
 
-/** @internal */
-export const DeploymentsPromptConfig$outboundSchema: z.ZodType<
-  DeploymentsPromptConfig$Outbound,
-  z.ZodTypeDef,
-  DeploymentsPromptConfig
-> = z.object({
-  tools: z.array(z.lazy(() => DeploymentsTools$outboundSchema)),
-  model: z.string(),
-  modelType: DeploymentsModelType$outboundSchema,
-  modelParameters: z.lazy(() => DeploymentsModelParameters$outboundSchema),
-  provider: DeploymentsProvider$outboundSchema,
-  messages: z.array(z.lazy(() => DeploymentsMessages$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-  });
-});
-
-export function deploymentsPromptConfigToJSON(
-  deploymentsPromptConfig: DeploymentsPromptConfig,
-): string {
-  return JSON.stringify(
-    DeploymentsPromptConfig$outboundSchema.parse(deploymentsPromptConfig),
-  );
-}
 export function deploymentsPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsPromptConfig, SDKValidationError> {
@@ -1906,41 +1229,7 @@ export const DeploymentsData$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-/** @internal */
-export type DeploymentsData$Outbound = {
-  id: string;
-  created: string;
-  updated: string;
-  key: string;
-  description: string;
-  prompt_config: DeploymentsPromptConfig$Outbound;
-  version: string;
-};
 
-/** @internal */
-export const DeploymentsData$outboundSchema: z.ZodType<
-  DeploymentsData$Outbound,
-  z.ZodTypeDef,
-  DeploymentsData
-> = z.object({
-  id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  key: z.string(),
-  description: z.string(),
-  promptConfig: z.lazy(() => DeploymentsPromptConfig$outboundSchema),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    promptConfig: "prompt_config",
-  });
-});
-
-export function deploymentsDataToJSON(
-  deploymentsData: DeploymentsData,
-): string {
-  return JSON.stringify(DeploymentsData$outboundSchema.parse(deploymentsData));
-}
 export function deploymentsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsData, SDKValidationError> {
@@ -1965,35 +1254,7 @@ export const DeploymentsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type DeploymentsResponseBody$Outbound = {
-  object: string;
-  data: Array<DeploymentsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const DeploymentsResponseBody$outboundSchema: z.ZodType<
-  DeploymentsResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseBody
-> = z.object({
-  object: DeploymentsObject$outboundSchema,
-  data: z.array(z.lazy(() => DeploymentsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function deploymentsResponseBodyToJSON(
-  deploymentsResponseBody: DeploymentsResponseBody,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseBody$outboundSchema.parse(deploymentsResponseBody),
-  );
-}
 export function deploymentsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentsResponseBody, SDKValidationError> {

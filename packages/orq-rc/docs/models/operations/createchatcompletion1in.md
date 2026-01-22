@@ -14,6 +14,6 @@ let value: CreateChatCompletion1In = {
 
 ## Fields
 
-| Field                                        | Type                                         | Required                                     | Description                                  |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| `in`                                         | *operations.CreateChatCompletion1RouterIn*[] | :heavy_check_mark:                           | N/A                                          |
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `in`                                                        | *operations.CreateChatCompletion1RouterChatCompletionsIn*[] | :heavy_check_mark:                                          | N/A                                                         |

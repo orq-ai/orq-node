@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteKnowledgeRequest = {
   /**
@@ -15,18 +12,6 @@ export type DeleteKnowledgeRequest = {
   knowledgeId: string;
 };
 
-/** @internal */
-export const DeleteKnowledgeRequest$inboundSchema: z.ZodType<
-  DeleteKnowledgeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
 /** @internal */
 export type DeleteKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -50,14 +35,5 @@ export function deleteKnowledgeRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteKnowledgeRequest$outboundSchema.parse(deleteKnowledgeRequest),
-  );
-}
-export function deleteKnowledgeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteKnowledgeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteKnowledgeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteKnowledgeRequest' from JSON`,
   );
 }
