@@ -140,8 +140,7 @@ export type CreateImageEditLoadBalancerType = ClosedEnum<
   typeof CreateImageEditLoadBalancerType
 >;
 
-export type CreateImageEditLoadBalancer1 = {
-  type: CreateImageEditLoadBalancerType;
+export type CreateImageEditLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -152,6 +151,14 @@ export type CreateImageEditLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateImageEditLoadBalancer1 = {
+  type: CreateImageEditLoadBalancerType;
+  models: Array<CreateImageEditLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateImageEditLoadBalancer = CreateImageEditLoadBalancer1;
 
 /**
@@ -193,7 +200,7 @@ export type CreateImageEditOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateImageEditLoadBalancer1> | undefined;
+  loadBalancer?: CreateImageEditLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -474,10 +481,35 @@ export const CreateImageEditLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateImageEditLoadBalancerType);
 
 /** @internal */
-export type CreateImageEditLoadBalancer1$Outbound = {
-  type: string;
+export type CreateImageEditLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateImageEditLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateImageEditLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createImageEditLoadBalancerModelsToJSON(
+  createImageEditLoadBalancerModels: CreateImageEditLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateImageEditLoadBalancerModels$outboundSchema.parse(
+      createImageEditLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageEditLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateImageEditLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -487,8 +519,9 @@ export const CreateImageEditLoadBalancer1$outboundSchema: z.ZodType<
   CreateImageEditLoadBalancer1
 > = z.object({
   type: CreateImageEditLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateImageEditLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function createImageEditLoadBalancer1ToJSON(
@@ -557,7 +590,7 @@ export type CreateImageEditOrq$Outbound = {
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateImageEditContact$Outbound | undefined;
   cache?: CreateImageEditCache$Outbound | undefined;
-  load_balancer?: Array<CreateImageEditLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateImageEditLoadBalancer1$Outbound | undefined;
   timeout?: CreateImageEditTimeout$Outbound | undefined;
 };
 
@@ -575,9 +608,8 @@ export const CreateImageEditOrq$outboundSchema: z.ZodType<
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateImageEditContact$outboundSchema).optional(),
   cache: z.lazy(() => CreateImageEditCache$outboundSchema).optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateImageEditLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateImageEditLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => CreateImageEditTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

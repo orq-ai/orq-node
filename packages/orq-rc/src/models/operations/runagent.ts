@@ -300,8 +300,7 @@ export type RunAgentLoadBalancerType = ClosedEnum<
   typeof RunAgentLoadBalancerType
 >;
 
-export type RunAgentLoadBalancer1 = {
-  type: RunAgentLoadBalancerType;
+export type RunAgentLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -312,6 +311,14 @@ export type RunAgentLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type RunAgentLoadBalancer1 = {
+  type: RunAgentLoadBalancerType;
+  models: Array<RunAgentLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type RunAgentModelConfigurationLoadBalancer = RunAgentLoadBalancer1;
 
 /**
@@ -446,9 +453,9 @@ export type RunAgentModelConfigurationParameters = {
    */
   cache?: RunAgentModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<RunAgentLoadBalancer1> | undefined;
+  loadBalancer?: RunAgentLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -788,8 +795,7 @@ export type RunAgentLoadBalancerAgentsType = ClosedEnum<
   typeof RunAgentLoadBalancerAgentsType
 >;
 
-export type RunAgentLoadBalancerAgents1 = {
-  type: RunAgentLoadBalancerAgentsType;
+export type RunAgentLoadBalancerAgentsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -800,6 +806,14 @@ export type RunAgentLoadBalancerAgents1 = {
   weight?: number | undefined;
 };
 
+export type RunAgentLoadBalancerAgents1 = {
+  type: RunAgentLoadBalancerAgentsType;
+  models: Array<RunAgentLoadBalancerAgentsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type RunAgentFallbackModelConfigurationLoadBalancer =
   RunAgentLoadBalancerAgents1;
 
@@ -946,9 +960,9 @@ export type RunAgentFallbackModelConfigurationParameters = {
    */
   cache?: RunAgentFallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<RunAgentLoadBalancerAgents1> | undefined;
+  loadBalancer?: RunAgentLoadBalancerAgents1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2512,10 +2526,33 @@ export const RunAgentLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RunAgentLoadBalancerType);
 
 /** @internal */
-export type RunAgentLoadBalancer1$Outbound = {
-  type: string;
+export type RunAgentLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const RunAgentLoadBalancerModels$outboundSchema: z.ZodType<
+  RunAgentLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  RunAgentLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function runAgentLoadBalancerModelsToJSON(
+  runAgentLoadBalancerModels: RunAgentLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    RunAgentLoadBalancerModels$outboundSchema.parse(runAgentLoadBalancerModels),
+  );
+}
+
+/** @internal */
+export type RunAgentLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<RunAgentLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -2525,8 +2562,7 @@ export const RunAgentLoadBalancer1$outboundSchema: z.ZodType<
   RunAgentLoadBalancer1
 > = z.object({
   type: RunAgentLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => RunAgentLoadBalancerModels$outboundSchema)),
 });
 
 export function runAgentLoadBalancer1ToJSON(
@@ -2624,7 +2660,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
   retry?: RunAgentModelConfigurationRetry$Outbound | undefined;
   cache?: RunAgentModelConfigurationCache$Outbound | undefined;
-  load_balancer?: Array<RunAgentLoadBalancer1$Outbound> | undefined;
+  load_balancer?: RunAgentLoadBalancer1$Outbound | undefined;
   timeout?: RunAgentModelConfigurationTimeout$Outbound | undefined;
 };
 
@@ -2682,8 +2718,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   cache: z.lazy(() => RunAgentModelConfigurationCache$outboundSchema)
     .optional(),
-  loadBalancer: z.array(z.lazy(() => RunAgentLoadBalancer1$outboundSchema))
-    .optional(),
+  loadBalancer: z.lazy(() => RunAgentLoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => RunAgentModelConfigurationTimeout$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -3312,10 +3347,35 @@ export const RunAgentLoadBalancerAgentsType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RunAgentLoadBalancerAgentsType);
 
 /** @internal */
-export type RunAgentLoadBalancerAgents1$Outbound = {
-  type: string;
+export type RunAgentLoadBalancerAgentsModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const RunAgentLoadBalancerAgentsModels$outboundSchema: z.ZodType<
+  RunAgentLoadBalancerAgentsModels$Outbound,
+  z.ZodTypeDef,
+  RunAgentLoadBalancerAgentsModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function runAgentLoadBalancerAgentsModelsToJSON(
+  runAgentLoadBalancerAgentsModels: RunAgentLoadBalancerAgentsModels,
+): string {
+  return JSON.stringify(
+    RunAgentLoadBalancerAgentsModels$outboundSchema.parse(
+      runAgentLoadBalancerAgentsModels,
+    ),
+  );
+}
+
+/** @internal */
+export type RunAgentLoadBalancerAgents1$Outbound = {
+  type: string;
+  models: Array<RunAgentLoadBalancerAgentsModels$Outbound>;
 };
 
 /** @internal */
@@ -3325,8 +3385,9 @@ export const RunAgentLoadBalancerAgents1$outboundSchema: z.ZodType<
   RunAgentLoadBalancerAgents1
 > = z.object({
   type: RunAgentLoadBalancerAgentsType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => RunAgentLoadBalancerAgentsModels$outboundSchema),
+  ),
 });
 
 export function runAgentLoadBalancerAgents1ToJSON(
@@ -3433,7 +3494,7 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   retry?: RunAgentFallbackModelConfigurationRetry$Outbound | undefined;
   cache?: RunAgentFallbackModelConfigurationCache$Outbound | undefined;
-  load_balancer?: Array<RunAgentLoadBalancerAgents1$Outbound> | undefined;
+  load_balancer?: RunAgentLoadBalancerAgents1$Outbound | undefined;
   timeout?: RunAgentFallbackModelConfigurationTimeout$Outbound | undefined;
 };
 
@@ -3497,9 +3558,8 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       .optional(),
     cache: z.lazy(() => RunAgentFallbackModelConfigurationCache$outboundSchema)
       .optional(),
-    loadBalancer: z.array(
-      z.lazy(() => RunAgentLoadBalancerAgents1$outboundSchema),
-    ).optional(),
+    loadBalancer: z.lazy(() => RunAgentLoadBalancerAgents1$outboundSchema)
+      .optional(),
     timeout: z.lazy(() =>
       RunAgentFallbackModelConfigurationTimeout$outboundSchema
     ).optional(),
@@ -3955,7 +4015,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KFJYQG6JN3DK6NJGQ05VTSC5"),
+  id: z.string().default("01KFMNRKE3ZJWC8EQYXDJC06T7"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

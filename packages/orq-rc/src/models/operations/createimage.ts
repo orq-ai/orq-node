@@ -166,8 +166,7 @@ export type CreateImageLoadBalancerType = ClosedEnum<
   typeof CreateImageLoadBalancerType
 >;
 
-export type CreateImageLoadBalancer1 = {
-  type: CreateImageLoadBalancerType;
+export type CreateImageLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -178,6 +177,14 @@ export type CreateImageLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateImageLoadBalancer1 = {
+  type: CreateImageLoadBalancerType;
+  models: Array<CreateImageLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateImageLoadBalancer = CreateImageLoadBalancer1;
 
 /**
@@ -215,7 +222,7 @@ export type CreateImageOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateImageLoadBalancer1> | undefined;
+  loadBalancer?: CreateImageLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -463,10 +470,35 @@ export const CreateImageLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateImageLoadBalancerType);
 
 /** @internal */
-export type CreateImageLoadBalancer1$Outbound = {
-  type: string;
+export type CreateImageLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateImageLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateImageLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateImageLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createImageLoadBalancerModelsToJSON(
+  createImageLoadBalancerModels: CreateImageLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateImageLoadBalancerModels$outboundSchema.parse(
+      createImageLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateImageLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -476,8 +508,7 @@ export const CreateImageLoadBalancer1$outboundSchema: z.ZodType<
   CreateImageLoadBalancer1
 > = z.object({
   type: CreateImageLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => CreateImageLoadBalancerModels$outboundSchema)),
 });
 
 export function createImageLoadBalancer1ToJSON(
@@ -541,7 +572,7 @@ export type CreateImageOrq$Outbound = {
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateImageContact$Outbound | undefined;
   cache?: CreateImageCache$Outbound | undefined;
-  load_balancer?: Array<CreateImageLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateImageLoadBalancer1$Outbound | undefined;
   timeout?: CreateImageTimeout$Outbound | undefined;
 };
 
@@ -558,7 +589,7 @@ export const CreateImageOrq$outboundSchema: z.ZodType<
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateImageContact$outboundSchema).optional(),
   cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
-  loadBalancer: z.array(z.lazy(() => CreateImageLoadBalancer1$outboundSchema))
+  loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
 }).transform((v) => {

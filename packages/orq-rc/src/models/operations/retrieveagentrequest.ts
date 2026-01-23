@@ -468,8 +468,7 @@ export type RetrieveAgentRequestLoadBalancerType = ClosedEnum<
   typeof RetrieveAgentRequestLoadBalancerType
 >;
 
-export type RetrieveAgentRequestLoadBalancer1 = {
-  type: RetrieveAgentRequestLoadBalancerType;
+export type RetrieveAgentRequestLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -480,6 +479,14 @@ export type RetrieveAgentRequestLoadBalancer1 = {
   weight: number;
 };
 
+export type RetrieveAgentRequestLoadBalancer1 = {
+  type: RetrieveAgentRequestLoadBalancerType;
+  models: Array<RetrieveAgentRequestLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type RetrieveAgentRequestLoadBalancer =
   RetrieveAgentRequestLoadBalancer1;
 
@@ -618,9 +625,9 @@ export type RetrieveAgentRequestParameters = {
    */
   cache?: RetrieveAgentRequestCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<RetrieveAgentRequestLoadBalancer1> | undefined;
+  loadBalancer?: RetrieveAgentRequestLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -940,8 +947,7 @@ export type RetrieveAgentRequestLoadBalancerAgentsType = ClosedEnum<
   typeof RetrieveAgentRequestLoadBalancerAgentsType
 >;
 
-export type RetrieveAgentRequestLoadBalancerAgents1 = {
-  type: RetrieveAgentRequestLoadBalancerAgentsType;
+export type RetrieveAgentRequestLoadBalancerAgentsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -952,6 +958,14 @@ export type RetrieveAgentRequestLoadBalancerAgents1 = {
   weight: number;
 };
 
+export type RetrieveAgentRequestLoadBalancerAgents1 = {
+  type: RetrieveAgentRequestLoadBalancerAgentsType;
+  models: Array<RetrieveAgentRequestLoadBalancerAgentsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type RetrieveAgentRequestFallbackModelConfigurationLoadBalancer =
   RetrieveAgentRequestLoadBalancerAgents1;
 
@@ -1105,9 +1119,9 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    */
   cache?: RetrieveAgentRequestFallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<RetrieveAgentRequestLoadBalancerAgents1> | undefined;
+  loadBalancer?: RetrieveAgentRequestLoadBalancerAgents1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -1891,14 +1905,36 @@ export const RetrieveAgentRequestLoadBalancerType$inboundSchema:
   );
 
 /** @internal */
+export const RetrieveAgentRequestLoadBalancerModels$inboundSchema: z.ZodType<
+  RetrieveAgentRequestLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function retrieveAgentRequestLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestLoadBalancer1$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: RetrieveAgentRequestLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => RetrieveAgentRequestLoadBalancerModels$inboundSchema),
+  ),
 });
 
 export function retrieveAgentRequestLoadBalancer1FromJSON(
@@ -2002,9 +2038,8 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => RetrieveAgentRequestAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
-  load_balancer: z.array(
-    z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema),
-  ).optional(),
+  load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
+    .optional(),
   timeout: z.lazy(() => RetrieveAgentRequestTimeout$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2576,14 +2611,42 @@ export const RetrieveAgentRequestLoadBalancerAgentsType$inboundSchema:
     .nativeEnum(RetrieveAgentRequestLoadBalancerAgentsType);
 
 /** @internal */
+export const RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestLoadBalancerAgentsModels,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function retrieveAgentRequestLoadBalancerAgentsModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestLoadBalancerAgentsModels,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestLoadBalancerAgentsModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestLoadBalancerAgents1$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancerAgents1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: RetrieveAgentRequestLoadBalancerAgentsType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema),
+  ),
 });
 
 export function retrieveAgentRequestLoadBalancerAgents1FromJSON(
@@ -2727,8 +2790,8 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     cache: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema
     ).optional(),
-    load_balancer: z.array(
-      z.lazy(() => RetrieveAgentRequestLoadBalancerAgents1$inboundSchema),
+    load_balancer: z.lazy(() =>
+      RetrieveAgentRequestLoadBalancerAgents1$inboundSchema
     ).optional(),
     timeout: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationTimeout$inboundSchema

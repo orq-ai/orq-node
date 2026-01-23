@@ -148,7 +148,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-01-22T13:36:21.569Z",
+    "2026-01-23T05:38:09.460Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

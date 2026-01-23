@@ -99,8 +99,7 @@ export type CreateSpeechLoadBalancerType = ClosedEnum<
   typeof CreateSpeechLoadBalancerType
 >;
 
-export type CreateSpeechLoadBalancer1 = {
-  type: CreateSpeechLoadBalancerType;
+export type CreateSpeechLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -111,6 +110,14 @@ export type CreateSpeechLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateSpeechLoadBalancer1 = {
+  type: CreateSpeechLoadBalancerType;
+  models: Array<CreateSpeechLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateSpeechLoadBalancer = CreateSpeechLoadBalancer1;
 
 /**
@@ -148,7 +155,7 @@ export type CreateSpeechOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateSpeechLoadBalancer1> | undefined;
+  loadBalancer?: CreateSpeechLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -314,10 +321,35 @@ export const CreateSpeechLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateSpeechLoadBalancerType);
 
 /** @internal */
-export type CreateSpeechLoadBalancer1$Outbound = {
-  type: string;
+export type CreateSpeechLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateSpeechLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateSpeechLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createSpeechLoadBalancerModelsToJSON(
+  createSpeechLoadBalancerModels: CreateSpeechLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateSpeechLoadBalancerModels$outboundSchema.parse(
+      createSpeechLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateSpeechLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -327,8 +359,7 @@ export const CreateSpeechLoadBalancer1$outboundSchema: z.ZodType<
   CreateSpeechLoadBalancer1
 > = z.object({
   type: CreateSpeechLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => CreateSpeechLoadBalancerModels$outboundSchema)),
 });
 
 export function createSpeechLoadBalancer1ToJSON(
@@ -392,7 +423,7 @@ export type CreateSpeechOrq$Outbound = {
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateSpeechContact$Outbound | undefined;
   thread?: CreateSpeechThread$Outbound | undefined;
-  load_balancer?: Array<CreateSpeechLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateSpeechLoadBalancer1$Outbound | undefined;
   timeout?: CreateSpeechTimeout$Outbound | undefined;
 };
 
@@ -409,7 +440,7 @@ export const CreateSpeechOrq$outboundSchema: z.ZodType<
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateSpeechContact$outboundSchema).optional(),
   thread: z.lazy(() => CreateSpeechThread$outboundSchema).optional(),
-  loadBalancer: z.array(z.lazy(() => CreateSpeechLoadBalancer1$outboundSchema))
+  loadBalancer: z.lazy(() => CreateSpeechLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateSpeechTimeout$outboundSchema).optional(),
 }).transform((v) => {

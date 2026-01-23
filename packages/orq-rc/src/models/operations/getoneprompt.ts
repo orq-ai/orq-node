@@ -796,8 +796,7 @@ export type GetOnePromptLoadBalancerType = ClosedEnum<
   typeof GetOnePromptLoadBalancerType
 >;
 
-export type GetOnePromptLoadBalancer1 = {
-  type: GetOnePromptLoadBalancerType;
+export type GetOnePromptLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -808,6 +807,14 @@ export type GetOnePromptLoadBalancer1 = {
   weight: number;
 };
 
+export type GetOnePromptLoadBalancer1 = {
+  type: GetOnePromptLoadBalancerType;
+  models: Array<GetOnePromptLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type GetOnePromptLoadBalancer = GetOnePromptLoadBalancer1;
 
 /**
@@ -1271,9 +1278,9 @@ export type GetOnePromptPromptField = {
    */
   cache?: GetOnePromptCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<GetOnePromptLoadBalancer1> | undefined;
+  loadBalancer?: GetOnePromptLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2345,14 +2352,33 @@ export const GetOnePromptLoadBalancerType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetOnePromptLoadBalancerType);
 
 /** @internal */
+export const GetOnePromptLoadBalancerModels$inboundSchema: z.ZodType<
+  GetOnePromptLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function getOnePromptLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOnePromptLoadBalancer1$inboundSchema: z.ZodType<
   GetOnePromptLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: GetOnePromptLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => GetOnePromptLoadBalancerModels$inboundSchema)),
 });
 
 export function getOnePromptLoadBalancer1FromJSON(
@@ -2939,7 +2965,7 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => GetOnePromptRetry$inboundSchema).optional(),
   cache: z.lazy(() => GetOnePromptCache$inboundSchema).optional(),
-  load_balancer: z.array(z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema))
+  load_balancer: z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => GetOnePromptTimeout$inboundSchema).optional(),
   messages: z.array(

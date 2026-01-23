@@ -281,8 +281,7 @@ export const LoadBalancerType = {
 } as const;
 export type LoadBalancerType = ClosedEnum<typeof LoadBalancerType>;
 
-export type LoadBalancer1 = {
-  type: LoadBalancerType;
+export type Models = {
   /**
    * Model identifier for load balancing
    */
@@ -293,6 +292,14 @@ export type LoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type LoadBalancer1 = {
+  type: LoadBalancerType;
+  models: Array<Models>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type LoadBalancer = LoadBalancer1;
 
 /**
@@ -423,9 +430,9 @@ export type ParametersT = {
    */
   cache?: Cache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<LoadBalancer1> | undefined;
+  loadBalancer?: LoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -765,8 +772,7 @@ export type CreateAgentRequestLoadBalancerType = ClosedEnum<
   typeof CreateAgentRequestLoadBalancerType
 >;
 
-export type CreateAgentRequestLoadBalancer1 = {
-  type: CreateAgentRequestLoadBalancerType;
+export type LoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -777,6 +783,14 @@ export type CreateAgentRequestLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateAgentRequestLoadBalancer1 = {
+  type: CreateAgentRequestLoadBalancerType;
+  models: Array<LoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type FallbackModelConfigurationLoadBalancer =
   CreateAgentRequestLoadBalancer1;
 
@@ -915,9 +929,9 @@ export type FallbackModelConfigurationParameters = {
    */
   cache?: FallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<CreateAgentRequestLoadBalancer1> | undefined;
+  loadBalancer?: CreateAgentRequestLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2053,8 +2067,7 @@ export type CreateAgentRequestLoadBalancerAgentsType = ClosedEnum<
   typeof CreateAgentRequestLoadBalancerAgentsType
 >;
 
-export type CreateAgentRequestLoadBalancerAgents1 = {
-  type: CreateAgentRequestLoadBalancerAgentsType;
+export type CreateAgentRequestLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -2065,6 +2078,14 @@ export type CreateAgentRequestLoadBalancerAgents1 = {
   weight: number;
 };
 
+export type CreateAgentRequestLoadBalancerAgents1 = {
+  type: CreateAgentRequestLoadBalancerAgentsType;
+  models: Array<CreateAgentRequestLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type CreateAgentRequestLoadBalancer =
   CreateAgentRequestLoadBalancerAgents1;
 
@@ -2203,9 +2224,9 @@ export type CreateAgentRequestParameters = {
    */
   cache?: CreateAgentRequestCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<CreateAgentRequestLoadBalancerAgents1> | undefined;
+  loadBalancer?: CreateAgentRequestLoadBalancerAgents1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2530,8 +2551,7 @@ export type CreateAgentRequestLoadBalancerAgentsResponseType = ClosedEnum<
   typeof CreateAgentRequestLoadBalancerAgentsResponseType
 >;
 
-export type CreateAgentRequestLoadBalancerAgentsResponse1 = {
-  type: CreateAgentRequestLoadBalancerAgentsResponseType;
+export type CreateAgentRequestLoadBalancerAgentsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -2542,6 +2562,14 @@ export type CreateAgentRequestLoadBalancerAgentsResponse1 = {
   weight: number;
 };
 
+export type CreateAgentRequestLoadBalancerAgentsResponse1 = {
+  type: CreateAgentRequestLoadBalancerAgentsResponseType;
+  models: Array<CreateAgentRequestLoadBalancerAgentsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type CreateAgentRequestFallbackModelConfigurationLoadBalancer =
   CreateAgentRequestLoadBalancerAgentsResponse1;
 
@@ -2694,11 +2722,9 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    */
   cache?: CreateAgentRequestFallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?:
-    | Array<CreateAgentRequestLoadBalancerAgentsResponse1>
-    | undefined;
+  loadBalancer?: CreateAgentRequestLoadBalancerAgentsResponse1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -3244,10 +3270,29 @@ export const LoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(LoadBalancerType);
 
 /** @internal */
-export type LoadBalancer1$Outbound = {
-  type: string;
+export type Models$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const Models$outboundSchema: z.ZodType<
+  Models$Outbound,
+  z.ZodTypeDef,
+  Models
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function modelsToJSON(models: Models): string {
+  return JSON.stringify(Models$outboundSchema.parse(models));
+}
+
+/** @internal */
+export type LoadBalancer1$Outbound = {
+  type: string;
+  models: Array<Models$Outbound>;
 };
 
 /** @internal */
@@ -3257,8 +3302,7 @@ export const LoadBalancer1$outboundSchema: z.ZodType<
   LoadBalancer1
 > = z.object({
   type: LoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => Models$outboundSchema)),
 });
 
 export function loadBalancer1ToJSON(loadBalancer1: LoadBalancer1): string {
@@ -3335,7 +3379,7 @@ export type ParametersT$Outbound = {
   fallbacks?: Array<Fallbacks$Outbound> | undefined;
   retry?: Retry$Outbound | undefined;
   cache?: Cache$Outbound | undefined;
-  load_balancer?: Array<LoadBalancer1$Outbound> | undefined;
+  load_balancer?: LoadBalancer1$Outbound | undefined;
   timeout?: Timeout$Outbound | undefined;
 };
 
@@ -3382,7 +3426,7 @@ export const ParametersT$outboundSchema: z.ZodType<
   fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
   retry: z.lazy(() => Retry$outboundSchema).optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
-  loadBalancer: z.array(z.lazy(() => LoadBalancer1$outboundSchema)).optional(),
+  loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => Timeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -3974,10 +4018,33 @@ export const CreateAgentRequestLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateAgentRequestLoadBalancerType);
 
 /** @internal */
-export type CreateAgentRequestLoadBalancer1$Outbound = {
-  type: string;
+export type LoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const LoadBalancerModels$outboundSchema: z.ZodType<
+  LoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  LoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function loadBalancerModelsToJSON(
+  loadBalancerModels: LoadBalancerModels,
+): string {
+  return JSON.stringify(
+    LoadBalancerModels$outboundSchema.parse(loadBalancerModels),
+  );
+}
+
+/** @internal */
+export type CreateAgentRequestLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<LoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -3987,8 +4054,7 @@ export const CreateAgentRequestLoadBalancer1$outboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancer1
 > = z.object({
   type: CreateAgentRequestLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => LoadBalancerModels$outboundSchema)),
 });
 
 export function createAgentRequestLoadBalancer1ToJSON(
@@ -4088,7 +4154,7 @@ export type FallbackModelConfigurationParameters$Outbound = {
   fallbacks?: Array<FallbackModelConfigurationFallbacks$Outbound> | undefined;
   retry?: FallbackModelConfigurationRetry$Outbound | undefined;
   cache?: FallbackModelConfigurationCache$Outbound | undefined;
-  load_balancer?: Array<CreateAgentRequestLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateAgentRequestLoadBalancer1$Outbound | undefined;
   timeout?: FallbackModelConfigurationTimeout$Outbound | undefined;
 };
 
@@ -4146,9 +4212,8 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   cache: z.lazy(() => FallbackModelConfigurationCache$outboundSchema)
     .optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => FallbackModelConfigurationTimeout$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -5767,14 +5832,36 @@ export const CreateAgentRequestLoadBalancerAgentsType$inboundSchema:
     .nativeEnum(CreateAgentRequestLoadBalancerAgentsType);
 
 /** @internal */
+export const CreateAgentRequestLoadBalancerModels$inboundSchema: z.ZodType<
+  CreateAgentRequestLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createAgentRequestLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentRequestLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentRequestLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentRequestLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentRequestLoadBalancerAgents1$inboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancerAgents1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: CreateAgentRequestLoadBalancerAgentsType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateAgentRequestLoadBalancerModels$inboundSchema),
+  ),
 });
 
 export function createAgentRequestLoadBalancerAgents1FromJSON(
@@ -5878,8 +5965,8 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => CreateAgentRequestAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => CreateAgentRequestCache$inboundSchema).optional(),
-  load_balancer: z.array(
-    z.lazy(() => CreateAgentRequestLoadBalancerAgents1$inboundSchema),
+  load_balancer: z.lazy(() =>
+    CreateAgentRequestLoadBalancerAgents1$inboundSchema
   ).optional(),
   timeout: z.lazy(() => CreateAgentRequestTimeout$inboundSchema).optional(),
 }).transform((v) => {
@@ -6458,6 +6545,30 @@ export const CreateAgentRequestLoadBalancerAgentsResponseType$inboundSchema:
     .nativeEnum(CreateAgentRequestLoadBalancerAgentsResponseType);
 
 /** @internal */
+export const CreateAgentRequestLoadBalancerAgentsModels$inboundSchema:
+  z.ZodType<CreateAgentRequestLoadBalancerAgentsModels, z.ZodTypeDef, unknown> =
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    });
+
+export function createAgentRequestLoadBalancerAgentsModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateAgentRequestLoadBalancerAgentsModels,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAgentRequestLoadBalancerAgentsModels$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentRequestLoadBalancerAgentsModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema:
   z.ZodType<
     CreateAgentRequestLoadBalancerAgentsResponse1,
@@ -6465,8 +6576,9 @@ export const CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema:
     unknown
   > = z.object({
     type: CreateAgentRequestLoadBalancerAgentsResponseType$inboundSchema,
-    model: z.string(),
-    weight: z.number().default(0.5),
+    models: z.array(
+      z.lazy(() => CreateAgentRequestLoadBalancerAgentsModels$inboundSchema),
+    ),
   });
 
 export function createAgentRequestLoadBalancerAgentsResponse1FromJSON(
@@ -6610,8 +6722,8 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     cache: z.lazy(() =>
       CreateAgentRequestFallbackModelConfigurationCache$inboundSchema
     ).optional(),
-    load_balancer: z.array(
-      z.lazy(() => CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema),
+    load_balancer: z.lazy(() =>
+      CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema
     ).optional(),
     timeout: z.lazy(() =>
       CreateAgentRequestFallbackModelConfigurationTimeout$inboundSchema

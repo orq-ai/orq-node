@@ -86,8 +86,7 @@ export type CreateRerankLoadBalancerType = ClosedEnum<
   typeof CreateRerankLoadBalancerType
 >;
 
-export type CreateRerankLoadBalancer1 = {
-  type: CreateRerankLoadBalancerType;
+export type CreateRerankLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -98,6 +97,14 @@ export type CreateRerankLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateRerankLoadBalancer1 = {
+  type: CreateRerankLoadBalancerType;
+  models: Array<CreateRerankLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateRerankLoadBalancer = CreateRerankLoadBalancer1;
 
 /**
@@ -135,7 +142,7 @@ export type CreateRerankOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateRerankLoadBalancer1> | undefined;
+  loadBalancer?: CreateRerankLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -361,10 +368,35 @@ export const CreateRerankLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateRerankLoadBalancerType);
 
 /** @internal */
-export type CreateRerankLoadBalancer1$Outbound = {
-  type: string;
+export type CreateRerankLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateRerankLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateRerankLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateRerankLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createRerankLoadBalancerModelsToJSON(
+  createRerankLoadBalancerModels: CreateRerankLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateRerankLoadBalancerModels$outboundSchema.parse(
+      createRerankLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRerankLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateRerankLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -374,8 +406,7 @@ export const CreateRerankLoadBalancer1$outboundSchema: z.ZodType<
   CreateRerankLoadBalancer1
 > = z.object({
   type: CreateRerankLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => CreateRerankLoadBalancerModels$outboundSchema)),
 });
 
 export function createRerankLoadBalancer1ToJSON(
@@ -439,7 +470,7 @@ export type CreateRerankOrq$Outbound = {
   retry?: CreateRerankRetry$Outbound | undefined;
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateRerankContact$Outbound | undefined;
-  load_balancer?: Array<CreateRerankLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateRerankLoadBalancer1$Outbound | undefined;
   timeout?: CreateRerankTimeout$Outbound | undefined;
 };
 
@@ -456,7 +487,7 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
   retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateRerankContact$outboundSchema).optional(),
-  loadBalancer: z.array(z.lazy(() => CreateRerankLoadBalancer1$outboundSchema))
+  loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
 }).transform((v) => {

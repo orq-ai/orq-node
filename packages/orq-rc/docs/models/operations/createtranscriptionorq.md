@@ -52,18 +52,19 @@ let value: CreateTranscriptionOrq = {
       "engineering",
     ],
   },
-  loadBalancer: [
-    {
-      type: "weight_based",
-      model: "openai/gpt-4o",
-      weight: 0.7,
-    },
-    {
-      type: "weight_based",
-      model: "openai/gpt-4o",
-      weight: 0.7,
-    },
-  ],
+  loadBalancer: {
+    type: "weight_based",
+    models: [
+      {
+        model: "openai/gpt-4o",
+        weight: 0.7,
+      },
+      {
+        model: "anthropic/claude-3-5-sonnet",
+        weight: 0.3,
+      },
+    ],
+  },
   timeout: {
     callTimeout: 30000,
   },
@@ -74,9 +75,10 @@ let value: CreateTranscriptionOrq = {
 
 | Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        | Example                                                                                                                                            |
 | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                             | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | The name to display on the trace. If not specified, the default system name will be used.                                                          |                                                                                                                                                    |
 | `fallbacks`                                                                                                                                        | [operations.CreateTranscriptionFallbacks](../../models/operations/createtranscriptionfallbacks.md)[]                                               | :heavy_minus_sign:                                                                                                                                 | Array of fallback models to use if primary model fails                                                                                             |                                                                                                                                                    |
 | `retry`                                                                                                                                            | [operations.CreateTranscriptionRetry](../../models/operations/createtranscriptionretry.md)                                                         | :heavy_minus_sign:                                                                                                                                 | Retry configuration for the request                                                                                                                |                                                                                                                                                    |
 | `identity`                                                                                                                                         | [components.PublicContact](../../models/components/publiccontact.md)                                                                               | :heavy_minus_sign:                                                                                                                                 | Information about the identity making the request. If the identity does not exist, it will be created automatically.                               |                                                                                                                                                    |
 | `contact`                                                                                                                                          | [operations.CreateTranscriptionContact](../../models/operations/createtranscriptioncontact.md)                                                     | :heavy_minus_sign:                                                                                                                                 | N/A                                                                                                                                                |                                                                                                                                                    |
-| `loadBalancer`                                                                                                                                     | *operations.CreateTranscriptionLoadBalancer*[]                                                                                                     | :heavy_minus_sign:                                                                                                                                 | Array of models with weights for load balancing requests                                                                                           | [<br/>{<br/>"model": "openai/gpt-4o",<br/>"weight": 0.7<br/>},<br/>{<br/>"model": "anthropic/claude-3-5-sonnet",<br/>"weight": 0.3<br/>}<br/>]     |
+| `loadBalancer`                                                                                                                                     | *operations.CreateTranscriptionLoadBalancer*                                                                                                       | :heavy_minus_sign:                                                                                                                                 | Array of models with weights for load balancing requests                                                                                           | {<br/>"type": "weight_based",<br/>"models": [<br/>{<br/>"model": "openai/gpt-4o",<br/>"weight": 0.7<br/>},<br/>{<br/>"model": "anthropic/claude-3-5-sonnet",<br/>"weight": 0.3<br/>}<br/>]<br/>} |
 | `timeout`                                                                                                                                          | [operations.CreateTranscriptionTimeout](../../models/operations/createtranscriptiontimeout.md)                                                     | :heavy_minus_sign:                                                                                                                                 | Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured. |                                                                                                                                                    |

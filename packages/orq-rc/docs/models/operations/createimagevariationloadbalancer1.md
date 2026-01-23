@@ -7,15 +7,22 @@ import { CreateImageVariationLoadBalancer1 } from "@orq-ai/node/models/operation
 
 let value: CreateImageVariationLoadBalancer1 = {
   type: "weight_based",
-  model: "openai/gpt-4o",
-  weight: 0.7,
+  models: [
+    {
+      model: "openai/gpt-4o",
+      weight: 0.7,
+    },
+    {
+      model: "anthropic/claude-3-5-sonnet",
+      weight: 0.3,
+    },
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                             | [operations.CreateImageVariationLoadBalancerType](../../models/operations/createimagevariationloadbalancertype.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
-| `model`                                                                                                            | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | Model identifier for load balancing                                                                                | openai/gpt-4o                                                                                                      |
-| `weight`                                                                                                           | *number*                                                                                                           | :heavy_minus_sign:                                                                                                 | Weight assigned to this model for load balancing                                                                   | 0.7                                                                                                                |
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                   | [operations.CreateImageVariationLoadBalancerType](../../models/operations/createimagevariationloadbalancertype.md)       | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `models`                                                                                                                 | [operations.CreateImageVariationLoadBalancerModels](../../models/operations/createimagevariationloadbalancermodels.md)[] | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |

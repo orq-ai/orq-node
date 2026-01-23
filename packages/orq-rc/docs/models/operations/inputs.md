@@ -18,10 +18,6 @@ const value: { [k: string]: any } = {
 ### `operations.Inputs2[]`
 
 ```typescript
-const value: operations.Inputs2[] = [
-  {
-    key: "<key>",
-  },
-];
+const value: operations.Inputs2[] = [];
 ```
 

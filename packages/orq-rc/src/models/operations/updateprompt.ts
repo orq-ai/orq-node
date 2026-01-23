@@ -623,8 +623,7 @@ export type UpdatePromptLoadBalancerType = ClosedEnum<
   typeof UpdatePromptLoadBalancerType
 >;
 
-export type UpdatePromptLoadBalancer1 = {
-  type: UpdatePromptLoadBalancerType;
+export type UpdatePromptLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -635,6 +634,14 @@ export type UpdatePromptLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type UpdatePromptLoadBalancer1 = {
+  type: UpdatePromptLoadBalancerType;
+  models: Array<UpdatePromptLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type UpdatePromptLoadBalancer = UpdatePromptLoadBalancer1;
 
 /**
@@ -784,9 +791,9 @@ export type UpdatePromptPromptInput = {
    */
   cache?: UpdatePromptCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<UpdatePromptLoadBalancer1> | undefined;
+  loadBalancer?: UpdatePromptLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -1681,8 +1688,7 @@ export type UpdatePromptLoadBalancerPromptsType = ClosedEnum<
   typeof UpdatePromptLoadBalancerPromptsType
 >;
 
-export type UpdatePromptLoadBalancerPrompts1 = {
-  type: UpdatePromptLoadBalancerPromptsType;
+export type UpdatePromptLoadBalancerPromptsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -1693,6 +1699,14 @@ export type UpdatePromptLoadBalancerPrompts1 = {
   weight: number;
 };
 
+export type UpdatePromptLoadBalancerPrompts1 = {
+  type: UpdatePromptLoadBalancerPromptsType;
+  models: Array<UpdatePromptLoadBalancerPromptsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type UpdatePromptPromptsLoadBalancer = UpdatePromptLoadBalancerPrompts1;
 
 /**
@@ -2163,9 +2177,9 @@ export type UpdatePromptPromptField = {
    */
   cache?: UpdatePromptPromptsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<UpdatePromptLoadBalancerPrompts1> | undefined;
+  loadBalancer?: UpdatePromptLoadBalancerPrompts1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -3347,10 +3361,35 @@ export const UpdatePromptLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdatePromptLoadBalancerType);
 
 /** @internal */
-export type UpdatePromptLoadBalancer1$Outbound = {
-  type: string;
+export type UpdatePromptLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const UpdatePromptLoadBalancerModels$outboundSchema: z.ZodType<
+  UpdatePromptLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updatePromptLoadBalancerModelsToJSON(
+  updatePromptLoadBalancerModels: UpdatePromptLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    UpdatePromptLoadBalancerModels$outboundSchema.parse(
+      updatePromptLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdatePromptLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<UpdatePromptLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -3360,8 +3399,7 @@ export const UpdatePromptLoadBalancer1$outboundSchema: z.ZodType<
   UpdatePromptLoadBalancer1
 > = z.object({
   type: UpdatePromptLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => UpdatePromptLoadBalancerModels$outboundSchema)),
 });
 
 export function updatePromptLoadBalancer1ToJSON(
@@ -3460,7 +3498,7 @@ export type UpdatePromptPromptInput$Outbound = {
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
   retry?: UpdatePromptRetry$Outbound | undefined;
   cache?: UpdatePromptCache$Outbound | undefined;
-  load_balancer?: Array<UpdatePromptLoadBalancer1$Outbound> | undefined;
+  load_balancer?: UpdatePromptLoadBalancer1$Outbound | undefined;
   timeout?: UpdatePromptTimeout$Outbound | undefined;
 };
 
@@ -3519,7 +3557,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
   cache: z.lazy(() => UpdatePromptCache$outboundSchema).optional(),
-  loadBalancer: z.array(z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema))
+  loadBalancer: z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => UpdatePromptTimeout$outboundSchema).optional(),
 }).transform((v) => {
@@ -4632,14 +4670,36 @@ export const UpdatePromptLoadBalancerPromptsType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdatePromptLoadBalancerPromptsType);
 
 /** @internal */
+export const UpdatePromptLoadBalancerPromptsModels$inboundSchema: z.ZodType<
+  UpdatePromptLoadBalancerPromptsModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function updatePromptLoadBalancerPromptsModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptLoadBalancerPromptsModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdatePromptLoadBalancerPromptsModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptLoadBalancerPromptsModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdatePromptLoadBalancerPrompts1$inboundSchema: z.ZodType<
   UpdatePromptLoadBalancerPrompts1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: UpdatePromptLoadBalancerPromptsType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => UpdatePromptLoadBalancerPromptsModels$inboundSchema),
+  ),
 });
 
 export function updatePromptLoadBalancerPrompts1FromJSON(
@@ -5282,9 +5342,8 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),
   cache: z.lazy(() => UpdatePromptPromptsCache$inboundSchema).optional(),
-  load_balancer: z.array(
-    z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema),
-  ).optional(),
+  load_balancer: z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema)
+    .optional(),
   timeout: z.lazy(() => UpdatePromptPromptsTimeout$inboundSchema).optional(),
   messages: z.array(
     z.union([

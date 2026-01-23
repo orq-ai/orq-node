@@ -812,8 +812,7 @@ export type GetAllPromptsLoadBalancerType = ClosedEnum<
   typeof GetAllPromptsLoadBalancerType
 >;
 
-export type GetAllPromptsLoadBalancer1 = {
-  type: GetAllPromptsLoadBalancerType;
+export type GetAllPromptsLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -824,6 +823,14 @@ export type GetAllPromptsLoadBalancer1 = {
   weight: number;
 };
 
+export type GetAllPromptsLoadBalancer1 = {
+  type: GetAllPromptsLoadBalancerType;
+  models: Array<GetAllPromptsLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type GetAllPromptsLoadBalancer = GetAllPromptsLoadBalancer1;
 
 /**
@@ -1287,9 +1294,9 @@ export type GetAllPromptsPromptField = {
    */
   cache?: GetAllPromptsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<GetAllPromptsLoadBalancer1> | undefined;
+  loadBalancer?: GetAllPromptsLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2385,14 +2392,33 @@ export const GetAllPromptsLoadBalancerType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetAllPromptsLoadBalancerType);
 
 /** @internal */
+export const GetAllPromptsLoadBalancerModels$inboundSchema: z.ZodType<
+  GetAllPromptsLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function getAllPromptsLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsLoadBalancer1$inboundSchema: z.ZodType<
   GetAllPromptsLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: GetAllPromptsLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => GetAllPromptsLoadBalancerModels$inboundSchema)),
 });
 
 export function getAllPromptsLoadBalancer1FromJSON(
@@ -2989,7 +3015,7 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => GetAllPromptsRetry$inboundSchema).optional(),
   cache: z.lazy(() => GetAllPromptsCache$inboundSchema).optional(),
-  load_balancer: z.array(z.lazy(() => GetAllPromptsLoadBalancer1$inboundSchema))
+  load_balancer: z.lazy(() => GetAllPromptsLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => GetAllPromptsTimeout$inboundSchema).optional(),
   messages: z.array(

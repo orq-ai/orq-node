@@ -719,8 +719,7 @@ export type CreateChatCompletionLoadBalancerType = ClosedEnum<
   typeof CreateChatCompletionLoadBalancerType
 >;
 
-export type CreateChatCompletionLoadBalancer1 = {
-  type: CreateChatCompletionLoadBalancerType;
+export type CreateChatCompletionLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -731,6 +730,14 @@ export type CreateChatCompletionLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateChatCompletionLoadBalancer1 = {
+  type: CreateChatCompletionLoadBalancerType;
+  models: Array<CreateChatCompletionLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type CreateChatCompletionLoadBalancer =
   CreateChatCompletionLoadBalancer1;
 
@@ -1328,8 +1335,7 @@ export const CreateChatCompletionLoadBalancerRouterChatCompletionsType = {
 export type CreateChatCompletionLoadBalancerRouterChatCompletionsType =
   ClosedEnum<typeof CreateChatCompletionLoadBalancerRouterChatCompletionsType>;
 
-export type CreateChatCompletionLoadBalancerRouterChatCompletions1 = {
-  type: CreateChatCompletionLoadBalancerRouterChatCompletionsType;
+export type CreateChatCompletionLoadBalancerRouterChatCompletionsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -1340,6 +1346,14 @@ export type CreateChatCompletionLoadBalancerRouterChatCompletions1 = {
   weight?: number | undefined;
 };
 
+export type CreateChatCompletionLoadBalancerRouterChatCompletions1 = {
+  type: CreateChatCompletionLoadBalancerRouterChatCompletionsType;
+  models: Array<CreateChatCompletionLoadBalancerRouterChatCompletionsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateChatCompletionRouterChatCompletionsLoadBalancer =
   CreateChatCompletionLoadBalancerRouterChatCompletions1;
 
@@ -1399,7 +1413,7 @@ export type Orq = {
    * Array of models with weights for load balancing requests
    */
   loadBalancer?:
-    | Array<CreateChatCompletionLoadBalancerRouterChatCompletions1>
+    | CreateChatCompletionLoadBalancerRouterChatCompletions1
     | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
@@ -1551,9 +1565,9 @@ export type CreateChatCompletionRequestBody = {
    */
   cache?: CreateChatCompletionCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<CreateChatCompletionLoadBalancer1> | undefined;
+  loadBalancer?: CreateChatCompletionLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -3435,10 +3449,36 @@ export const CreateChatCompletionLoadBalancerType$outboundSchema:
   );
 
 /** @internal */
-export type CreateChatCompletionLoadBalancer1$Outbound = {
-  type: string;
+export type CreateChatCompletionLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateChatCompletionLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateChatCompletionLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createChatCompletionLoadBalancerModelsToJSON(
+  createChatCompletionLoadBalancerModels:
+    CreateChatCompletionLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancerModels$outboundSchema.parse(
+      createChatCompletionLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateChatCompletionLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -3448,8 +3488,9 @@ export const CreateChatCompletionLoadBalancer1$outboundSchema: z.ZodType<
   CreateChatCompletionLoadBalancer1
 > = z.object({
   type: CreateChatCompletionLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateChatCompletionLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function createChatCompletionLoadBalancer1ToJSON(
@@ -5095,10 +5136,39 @@ export const CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundS
   > = z.nativeEnum(CreateChatCompletionLoadBalancerRouterChatCompletionsType);
 
 /** @internal */
+export type CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound =
+  {
+    model: string;
+    weight: number;
+  };
+
+/** @internal */
+export const CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createChatCompletionLoadBalancerRouterChatCompletionsModelsToJSON(
+  createChatCompletionLoadBalancerRouterChatCompletionsModels:
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema
+      .parse(createChatCompletionLoadBalancerRouterChatCompletionsModels),
+  );
+}
+
+/** @internal */
 export type CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound = {
   type: string;
-  model: string;
-  weight: number;
+  models: Array<
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound
+  >;
 };
 
 /** @internal */
@@ -5110,8 +5180,11 @@ export const CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSche
   > = z.object({
     type:
       CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema,
-    model: z.string(),
-    weight: z.number().default(0.5),
+    models: z.array(
+      z.lazy(() =>
+        CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema
+      ),
+    ),
   });
 
 export function createChatCompletionLoadBalancerRouterChatCompletions1ToJSON(
@@ -5197,7 +5270,7 @@ export type Orq$Outbound = {
     | Array<CreateChatCompletionKnowledgeBases$Outbound>
     | undefined;
   load_balancer?:
-    | Array<CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound>
+    | CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound
     | undefined;
   timeout?:
     | CreateChatCompletionRouterChatCompletionsTimeout$Outbound
@@ -5231,10 +5304,8 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
     knowledgeBases: z.array(
       z.lazy(() => CreateChatCompletionKnowledgeBases$outboundSchema),
     ).optional(),
-    loadBalancer: z.array(
-      z.lazy(() =>
-        CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
-      ),
+    loadBalancer: z.lazy(() =>
+      CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
     ).optional(),
     timeout: z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema
@@ -5297,7 +5368,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
   retry?: CreateChatCompletionRetry$Outbound | undefined;
   cache?: CreateChatCompletionCache$Outbound | undefined;
-  load_balancer?: Array<CreateChatCompletionLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateChatCompletionLoadBalancer1$Outbound | undefined;
   timeout?: CreateChatCompletionTimeout$Outbound | undefined;
   orq?: Orq$Outbound | undefined;
   stream: boolean;
@@ -5367,9 +5438,8 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
   cache: z.lazy(() => CreateChatCompletionCache$outboundSchema).optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema).optional(),
   orq: z.lazy(() => Orq$outboundSchema).optional(),
   stream: z.boolean().default(false),

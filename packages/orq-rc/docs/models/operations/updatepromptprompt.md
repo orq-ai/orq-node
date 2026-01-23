@@ -34,18 +34,15 @@ let value: UpdatePromptPrompt = {
       ttl: 3600,
       type: "exact_match",
     },
-    loadBalancer: [
-      {
-        type: "weight_based",
-        model: "openai/gpt-4o",
-        weight: 0.7,
-      },
-      {
-        type: "weight_based",
-        model: "openai/gpt-4o",
-        weight: 0.7,
-      },
-    ],
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
     timeout: {
       callTimeout: 30000,
     },

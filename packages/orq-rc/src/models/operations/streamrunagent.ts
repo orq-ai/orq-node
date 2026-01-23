@@ -304,8 +304,7 @@ export type StreamRunAgentLoadBalancerType = ClosedEnum<
   typeof StreamRunAgentLoadBalancerType
 >;
 
-export type StreamRunAgentLoadBalancer1 = {
-  type: StreamRunAgentLoadBalancerType;
+export type StreamRunAgentLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -316,6 +315,14 @@ export type StreamRunAgentLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type StreamRunAgentLoadBalancer1 = {
+  type: StreamRunAgentLoadBalancerType;
+  models: Array<StreamRunAgentLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type StreamRunAgentModelConfigurationLoadBalancer =
   StreamRunAgentLoadBalancer1;
 
@@ -460,9 +467,9 @@ export type StreamRunAgentModelConfigurationParameters = {
    */
   cache?: StreamRunAgentModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<StreamRunAgentLoadBalancer1> | undefined;
+  loadBalancer?: StreamRunAgentLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -809,8 +816,7 @@ export type StreamRunAgentLoadBalancerAgentsType = ClosedEnum<
   typeof StreamRunAgentLoadBalancerAgentsType
 >;
 
-export type StreamRunAgentLoadBalancerAgents1 = {
-  type: StreamRunAgentLoadBalancerAgentsType;
+export type StreamRunAgentLoadBalancerAgentsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -821,6 +827,14 @@ export type StreamRunAgentLoadBalancerAgents1 = {
   weight?: number | undefined;
 };
 
+export type StreamRunAgentLoadBalancerAgents1 = {
+  type: StreamRunAgentLoadBalancerAgentsType;
+  models: Array<StreamRunAgentLoadBalancerAgentsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type StreamRunAgentFallbackModelConfigurationLoadBalancer =
   StreamRunAgentLoadBalancerAgents1;
 
@@ -971,9 +985,9 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    */
   cache?: StreamRunAgentFallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<StreamRunAgentLoadBalancerAgents1> | undefined;
+  loadBalancer?: StreamRunAgentLoadBalancerAgents1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2497,10 +2511,35 @@ export const StreamRunAgentLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(StreamRunAgentLoadBalancerType);
 
 /** @internal */
-export type StreamRunAgentLoadBalancer1$Outbound = {
-  type: string;
+export type StreamRunAgentLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const StreamRunAgentLoadBalancerModels$outboundSchema: z.ZodType<
+  StreamRunAgentLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function streamRunAgentLoadBalancerModelsToJSON(
+  streamRunAgentLoadBalancerModels: StreamRunAgentLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    StreamRunAgentLoadBalancerModels$outboundSchema.parse(
+      streamRunAgentLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type StreamRunAgentLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<StreamRunAgentLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -2510,8 +2549,9 @@ export const StreamRunAgentLoadBalancer1$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancer1
 > = z.object({
   type: StreamRunAgentLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => StreamRunAgentLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function streamRunAgentLoadBalancer1ToJSON(
@@ -2617,7 +2657,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
     | undefined;
   retry?: StreamRunAgentModelConfigurationRetry$Outbound | undefined;
   cache?: StreamRunAgentModelConfigurationCache$Outbound | undefined;
-  load_balancer?: Array<StreamRunAgentLoadBalancer1$Outbound> | undefined;
+  load_balancer?: StreamRunAgentLoadBalancer1$Outbound | undefined;
   timeout?: StreamRunAgentModelConfigurationTimeout$Outbound | undefined;
 };
 
@@ -2678,9 +2718,8 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       .optional(),
     cache: z.lazy(() => StreamRunAgentModelConfigurationCache$outboundSchema)
       .optional(),
-    loadBalancer: z.array(
-      z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema),
-    ).optional(),
+    loadBalancer: z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema)
+      .optional(),
     timeout: z.lazy(() =>
       StreamRunAgentModelConfigurationTimeout$outboundSchema
     ).optional(),
@@ -3333,10 +3372,36 @@ export const StreamRunAgentLoadBalancerAgentsType$outboundSchema:
   );
 
 /** @internal */
-export type StreamRunAgentLoadBalancerAgents1$Outbound = {
-  type: string;
+export type StreamRunAgentLoadBalancerAgentsModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const StreamRunAgentLoadBalancerAgentsModels$outboundSchema: z.ZodType<
+  StreamRunAgentLoadBalancerAgentsModels$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentLoadBalancerAgentsModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function streamRunAgentLoadBalancerAgentsModelsToJSON(
+  streamRunAgentLoadBalancerAgentsModels:
+    StreamRunAgentLoadBalancerAgentsModels,
+): string {
+  return JSON.stringify(
+    StreamRunAgentLoadBalancerAgentsModels$outboundSchema.parse(
+      streamRunAgentLoadBalancerAgentsModels,
+    ),
+  );
+}
+
+/** @internal */
+export type StreamRunAgentLoadBalancerAgents1$Outbound = {
+  type: string;
+  models: Array<StreamRunAgentLoadBalancerAgentsModels$Outbound>;
 };
 
 /** @internal */
@@ -3346,8 +3411,9 @@ export const StreamRunAgentLoadBalancerAgents1$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancerAgents1
 > = z.object({
   type: StreamRunAgentLoadBalancerAgentsType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => StreamRunAgentLoadBalancerAgentsModels$outboundSchema),
+  ),
 });
 
 export function streamRunAgentLoadBalancerAgents1ToJSON(
@@ -3457,7 +3523,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   retry?: StreamRunAgentFallbackModelConfigurationRetry$Outbound | undefined;
   cache?: StreamRunAgentFallbackModelConfigurationCache$Outbound | undefined;
-  load_balancer?: Array<StreamRunAgentLoadBalancerAgents1$Outbound> | undefined;
+  load_balancer?: StreamRunAgentLoadBalancerAgents1$Outbound | undefined;
   timeout?:
     | StreamRunAgentFallbackModelConfigurationTimeout$Outbound
     | undefined;
@@ -3533,9 +3599,8 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     cache: z.lazy(() =>
       StreamRunAgentFallbackModelConfigurationCache$outboundSchema
     ).optional(),
-    loadBalancer: z.array(
-      z.lazy(() => StreamRunAgentLoadBalancerAgents1$outboundSchema),
-    ).optional(),
+    loadBalancer: z.lazy(() => StreamRunAgentLoadBalancerAgents1$outboundSchema)
+      .optional(),
     timeout: z.lazy(() =>
       StreamRunAgentFallbackModelConfigurationTimeout$outboundSchema
     ).optional(),
@@ -4022,7 +4087,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KFJYQG8SEBC963WGPHDB9BZ7"),
+  id: z.string().default("01KFMNRKHFFXSFCB8QFVCQVCC5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

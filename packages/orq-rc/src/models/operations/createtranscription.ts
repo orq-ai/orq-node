@@ -107,8 +107,7 @@ export type CreateTranscriptionLoadBalancerType = ClosedEnum<
   typeof CreateTranscriptionLoadBalancerType
 >;
 
-export type CreateTranscriptionLoadBalancer1 = {
-  type: CreateTranscriptionLoadBalancerType;
+export type CreateTranscriptionLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -119,6 +118,14 @@ export type CreateTranscriptionLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateTranscriptionLoadBalancer1 = {
+  type: CreateTranscriptionLoadBalancerType;
+  models: Array<CreateTranscriptionLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateTranscriptionLoadBalancer = CreateTranscriptionLoadBalancer1;
 
 /**
@@ -132,6 +139,10 @@ export type CreateTranscriptionTimeout = {
 };
 
 export type CreateTranscriptionOrq = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -148,7 +159,7 @@ export type CreateTranscriptionOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateTranscriptionLoadBalancer1> | undefined;
+  loadBalancer?: CreateTranscriptionLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -366,10 +377,35 @@ export const CreateTranscriptionLoadBalancerType$outboundSchema:
   );
 
 /** @internal */
-export type CreateTranscriptionLoadBalancer1$Outbound = {
-  type: string;
+export type CreateTranscriptionLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateTranscriptionLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateTranscriptionLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateTranscriptionLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createTranscriptionLoadBalancerModelsToJSON(
+  createTranscriptionLoadBalancerModels: CreateTranscriptionLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionLoadBalancerModels$outboundSchema.parse(
+      createTranscriptionLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateTranscriptionLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateTranscriptionLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -379,8 +415,9 @@ export const CreateTranscriptionLoadBalancer1$outboundSchema: z.ZodType<
   CreateTranscriptionLoadBalancer1
 > = z.object({
   type: CreateTranscriptionLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateTranscriptionLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function createTranscriptionLoadBalancer1ToJSON(
@@ -442,11 +479,12 @@ export function createTranscriptionTimeoutToJSON(
 
 /** @internal */
 export type CreateTranscriptionOrq$Outbound = {
+  name?: string | undefined;
   fallbacks?: Array<CreateTranscriptionFallbacks$Outbound> | undefined;
   retry?: CreateTranscriptionRetry$Outbound | undefined;
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateTranscriptionContact$Outbound | undefined;
-  load_balancer?: Array<CreateTranscriptionLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateTranscriptionLoadBalancer1$Outbound | undefined;
   timeout?: CreateTranscriptionTimeout$Outbound | undefined;
 };
 
@@ -456,14 +494,14 @@ export const CreateTranscriptionOrq$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateTranscriptionOrq
 > = z.object({
+  name: z.string().optional(),
   fallbacks: z.array(z.lazy(() => CreateTranscriptionFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateTranscriptionContact$outboundSchema).optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

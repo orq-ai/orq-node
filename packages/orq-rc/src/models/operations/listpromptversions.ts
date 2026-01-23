@@ -820,8 +820,7 @@ export type ListPromptVersionsLoadBalancerType = ClosedEnum<
   typeof ListPromptVersionsLoadBalancerType
 >;
 
-export type ListPromptVersionsLoadBalancer1 = {
-  type: ListPromptVersionsLoadBalancerType;
+export type ListPromptVersionsLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -832,6 +831,14 @@ export type ListPromptVersionsLoadBalancer1 = {
   weight: number;
 };
 
+export type ListPromptVersionsLoadBalancer1 = {
+  type: ListPromptVersionsLoadBalancerType;
+  models: Array<ListPromptVersionsLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type ListPromptVersionsLoadBalancer = ListPromptVersionsLoadBalancer1;
 
 /**
@@ -1297,9 +1304,9 @@ export type ListPromptVersionsPromptField = {
    */
   cache?: ListPromptVersionsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<ListPromptVersionsLoadBalancer1> | undefined;
+  loadBalancer?: ListPromptVersionsLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2403,14 +2410,36 @@ export const ListPromptVersionsLoadBalancerType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListPromptVersionsLoadBalancerType);
 
 /** @internal */
+export const ListPromptVersionsLoadBalancerModels$inboundSchema: z.ZodType<
+  ListPromptVersionsLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function listPromptVersionsLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListPromptVersionsLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListPromptVersionsLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListPromptVersionsLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListPromptVersionsLoadBalancer1$inboundSchema: z.ZodType<
   ListPromptVersionsLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListPromptVersionsLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => ListPromptVersionsLoadBalancerModels$inboundSchema),
+  ),
 });
 
 export function listPromptVersionsLoadBalancer1FromJSON(
@@ -3038,9 +3067,8 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => ListPromptVersionsRetry$inboundSchema).optional(),
   cache: z.lazy(() => ListPromptVersionsCache$inboundSchema).optional(),
-  load_balancer: z.array(
-    z.lazy(() => ListPromptVersionsLoadBalancer1$inboundSchema),
-  ).optional(),
+  load_balancer: z.lazy(() => ListPromptVersionsLoadBalancer1$inboundSchema)
+    .optional(),
   timeout: z.lazy(() => ListPromptVersionsTimeout$inboundSchema).optional(),
   messages: z.array(
     z.union([

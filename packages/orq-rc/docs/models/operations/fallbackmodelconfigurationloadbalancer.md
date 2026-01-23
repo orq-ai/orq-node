@@ -1,5 +1,7 @@
 # FallbackModelConfigurationLoadBalancer
 
+Load balancer configuration for the request.
+
 
 ## Supported Types
 
@@ -8,8 +10,12 @@
 ```typescript
 const value: operations.CreateAgentRequestLoadBalancer1 = {
   type: "weight_based",
-  model: "openai/gpt-4o",
-  weight: 0.7,
+  models: [
+    {
+      model: "openai/gpt-4o",
+      weight: 0.7,
+    },
+  ],
 };
 ```
 

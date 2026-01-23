@@ -562,8 +562,7 @@ export type CreateCompletionLoadBalancerType = ClosedEnum<
   typeof CreateCompletionLoadBalancerType
 >;
 
-export type CreateCompletionLoadBalancer1 = {
-  type: CreateCompletionLoadBalancerType;
+export type CreateCompletionLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -574,6 +573,14 @@ export type CreateCompletionLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateCompletionLoadBalancer1 = {
+  type: CreateCompletionLoadBalancerType;
+  models: Array<CreateCompletionLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateCompletionLoadBalancer = CreateCompletionLoadBalancer1;
 
 /**
@@ -629,7 +636,7 @@ export type CreateCompletionOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateCompletionLoadBalancer1> | undefined;
+  loadBalancer?: CreateCompletionLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2489,10 +2496,35 @@ export const CreateCompletionLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateCompletionLoadBalancerType);
 
 /** @internal */
-export type CreateCompletionLoadBalancer1$Outbound = {
-  type: string;
+export type CreateCompletionLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateCompletionLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateCompletionLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createCompletionLoadBalancerModelsToJSON(
+  createCompletionLoadBalancerModels: CreateCompletionLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateCompletionLoadBalancerModels$outboundSchema.parse(
+      createCompletionLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateCompletionLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateCompletionLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -2502,8 +2534,9 @@ export const CreateCompletionLoadBalancer1$outboundSchema: z.ZodType<
   CreateCompletionLoadBalancer1
 > = z.object({
   type: CreateCompletionLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateCompletionLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function createCompletionLoadBalancer1ToJSON(
@@ -2578,7 +2611,7 @@ export type CreateCompletionOrq$Outbound = {
     | undefined;
   cache?: CreateCompletionCache$Outbound | undefined;
   knowledge_bases?: Array<CreateCompletionKnowledgeBases$Outbound> | undefined;
-  load_balancer?: Array<CreateCompletionLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateCompletionLoadBalancer1$Outbound | undefined;
   timeout?: CreateCompletionTimeout$Outbound | undefined;
 };
 
@@ -2604,9 +2637,8 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => CreateCompletionKnowledgeBases$outboundSchema),
   ).optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -103,8 +103,7 @@ export type CreateEmbeddingLoadBalancerType = ClosedEnum<
   typeof CreateEmbeddingLoadBalancerType
 >;
 
-export type CreateEmbeddingLoadBalancer1 = {
-  type: CreateEmbeddingLoadBalancerType;
+export type CreateEmbeddingLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -115,6 +114,14 @@ export type CreateEmbeddingLoadBalancer1 = {
   weight?: number | undefined;
 };
 
+export type CreateEmbeddingLoadBalancer1 = {
+  type: CreateEmbeddingLoadBalancerType;
+  models: Array<CreateEmbeddingLoadBalancerModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
 export type CreateEmbeddingLoadBalancer = CreateEmbeddingLoadBalancer1;
 
 /**
@@ -152,7 +159,7 @@ export type CreateEmbeddingOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<CreateEmbeddingLoadBalancer1> | undefined;
+  loadBalancer?: CreateEmbeddingLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -399,10 +406,35 @@ export const CreateEmbeddingLoadBalancerType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateEmbeddingLoadBalancerType);
 
 /** @internal */
-export type CreateEmbeddingLoadBalancer1$Outbound = {
-  type: string;
+export type CreateEmbeddingLoadBalancerModels$Outbound = {
   model: string;
   weight: number;
+};
+
+/** @internal */
+export const CreateEmbeddingLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateEmbeddingLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateEmbeddingLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createEmbeddingLoadBalancerModelsToJSON(
+  createEmbeddingLoadBalancerModels: CreateEmbeddingLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateEmbeddingLoadBalancerModels$outboundSchema.parse(
+      createEmbeddingLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateEmbeddingLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateEmbeddingLoadBalancerModels$Outbound>;
 };
 
 /** @internal */
@@ -412,8 +444,9 @@ export const CreateEmbeddingLoadBalancer1$outboundSchema: z.ZodType<
   CreateEmbeddingLoadBalancer1
 > = z.object({
   type: CreateEmbeddingLoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => CreateEmbeddingLoadBalancerModels$outboundSchema),
+  ),
 });
 
 export function createEmbeddingLoadBalancer1ToJSON(
@@ -481,7 +514,7 @@ export type CreateEmbeddingOrq$Outbound = {
   retry?: CreateEmbeddingRetry$Outbound | undefined;
   identity?: components.PublicContact$Outbound | undefined;
   contact?: CreateEmbeddingContact$Outbound | undefined;
-  load_balancer?: Array<CreateEmbeddingLoadBalancer1$Outbound> | undefined;
+  load_balancer?: CreateEmbeddingLoadBalancer1$Outbound | undefined;
   timeout?: CreateEmbeddingTimeout$Outbound | undefined;
 };
 
@@ -498,9 +531,8 @@ export const CreateEmbeddingOrq$outboundSchema: z.ZodType<
   retry: z.lazy(() => CreateEmbeddingRetry$outboundSchema).optional(),
   identity: components.PublicContact$outboundSchema.optional(),
   contact: z.lazy(() => CreateEmbeddingContact$outboundSchema).optional(),
-  loadBalancer: z.array(
-    z.lazy(() => CreateEmbeddingLoadBalancer1$outboundSchema),
-  ).optional(),
+  loadBalancer: z.lazy(() => CreateEmbeddingLoadBalancer1$outboundSchema)
+    .optional(),
   timeout: z.lazy(() => CreateEmbeddingTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -465,8 +465,7 @@ export type ListAgentsLoadBalancerType = ClosedEnum<
   typeof ListAgentsLoadBalancerType
 >;
 
-export type ListAgentsLoadBalancer1 = {
-  type: ListAgentsLoadBalancerType;
+export type ListAgentsLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -477,6 +476,14 @@ export type ListAgentsLoadBalancer1 = {
   weight: number;
 };
 
+export type ListAgentsLoadBalancer1 = {
+  type: ListAgentsLoadBalancerType;
+  models: Array<ListAgentsLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type ListAgentsLoadBalancer = ListAgentsLoadBalancer1;
 
 /**
@@ -611,9 +618,9 @@ export type ListAgentsParameters = {
    */
   cache?: ListAgentsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<ListAgentsLoadBalancer1> | undefined;
+  loadBalancer?: ListAgentsLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -930,8 +937,7 @@ export type ListAgentsLoadBalancerAgentsType = ClosedEnum<
   typeof ListAgentsLoadBalancerAgentsType
 >;
 
-export type ListAgentsLoadBalancerAgents1 = {
-  type: ListAgentsLoadBalancerAgentsType;
+export type ListAgentsLoadBalancerAgentsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -942,6 +948,14 @@ export type ListAgentsLoadBalancerAgents1 = {
   weight: number;
 };
 
+export type ListAgentsLoadBalancerAgents1 = {
+  type: ListAgentsLoadBalancerAgentsType;
+  models: Array<ListAgentsLoadBalancerAgentsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type ListAgentsFallbackModelConfigurationLoadBalancer =
   ListAgentsLoadBalancerAgents1;
 
@@ -1090,9 +1104,9 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    */
   cache?: ListAgentsFallbackModelConfigurationCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<ListAgentsLoadBalancerAgents1> | undefined;
+  loadBalancer?: ListAgentsLoadBalancerAgents1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -1859,14 +1873,33 @@ export const ListAgentsLoadBalancerType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAgentsLoadBalancerType);
 
 /** @internal */
+export const ListAgentsLoadBalancerModels$inboundSchema: z.ZodType<
+  ListAgentsLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function listAgentsLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsLoadBalancer1$inboundSchema: z.ZodType<
   ListAgentsLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListAgentsLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(z.lazy(() => ListAgentsLoadBalancerModels$inboundSchema)),
 });
 
 export function listAgentsLoadBalancer1FromJSON(
@@ -1965,8 +1998,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => ListAgentsAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
-  load_balancer: z.array(z.lazy(() => ListAgentsLoadBalancer1$inboundSchema))
-    .optional(),
+  load_balancer: z.lazy(() => ListAgentsLoadBalancer1$inboundSchema).optional(),
   timeout: z.lazy(() => ListAgentsTimeout$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2513,14 +2545,36 @@ export const ListAgentsLoadBalancerAgentsType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAgentsLoadBalancerAgentsType);
 
 /** @internal */
+export const ListAgentsLoadBalancerAgentsModels$inboundSchema: z.ZodType<
+  ListAgentsLoadBalancerAgentsModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function listAgentsLoadBalancerAgentsModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsLoadBalancerAgentsModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsLoadBalancerAgentsModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsLoadBalancerAgentsModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsLoadBalancerAgents1$inboundSchema: z.ZodType<
   ListAgentsLoadBalancerAgents1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ListAgentsLoadBalancerAgentsType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => ListAgentsLoadBalancerAgentsModels$inboundSchema),
+  ),
 });
 
 export function listAgentsLoadBalancerAgents1FromJSON(
@@ -2650,9 +2704,8 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     ).optional(),
     cache: z.lazy(() => ListAgentsFallbackModelConfigurationCache$inboundSchema)
       .optional(),
-    load_balancer: z.array(
-      z.lazy(() => ListAgentsLoadBalancerAgents1$inboundSchema),
-    ).optional(),
+    load_balancer: z.lazy(() => ListAgentsLoadBalancerAgents1$inboundSchema)
+      .optional(),
     timeout: z.lazy(() =>
       ListAgentsFallbackModelConfigurationTimeout$inboundSchema
     ).optional(),

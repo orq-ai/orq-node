@@ -804,8 +804,7 @@ export type GetPromptVersionLoadBalancerType = ClosedEnum<
   typeof GetPromptVersionLoadBalancerType
 >;
 
-export type GetPromptVersionLoadBalancer1 = {
-  type: GetPromptVersionLoadBalancerType;
+export type GetPromptVersionLoadBalancerModels = {
   /**
    * Model identifier for load balancing
    */
@@ -816,6 +815,14 @@ export type GetPromptVersionLoadBalancer1 = {
   weight: number;
 };
 
+export type GetPromptVersionLoadBalancer1 = {
+  type: GetPromptVersionLoadBalancerType;
+  models: Array<GetPromptVersionLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
 export type GetPromptVersionLoadBalancer = GetPromptVersionLoadBalancer1;
 
 /**
@@ -1282,9 +1289,9 @@ export type GetPromptVersionPromptField = {
    */
   cache?: GetPromptVersionCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
-  loadBalancer?: Array<GetPromptVersionLoadBalancer1> | undefined;
+  loadBalancer?: GetPromptVersionLoadBalancer1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
@@ -2370,14 +2377,36 @@ export const GetPromptVersionLoadBalancerType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetPromptVersionLoadBalancerType);
 
 /** @internal */
+export const GetPromptVersionLoadBalancerModels$inboundSchema: z.ZodType<
+  GetPromptVersionLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function getPromptVersionLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetPromptVersionLoadBalancer1$inboundSchema: z.ZodType<
   GetPromptVersionLoadBalancer1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: GetPromptVersionLoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
+  models: z.array(
+    z.lazy(() => GetPromptVersionLoadBalancerModels$inboundSchema),
+  ),
 });
 
 export function getPromptVersionLoadBalancer1FromJSON(
@@ -2988,9 +3017,8 @@ export const GetPromptVersionPromptField$inboundSchema: z.ZodType<
     .optional(),
   retry: z.lazy(() => GetPromptVersionRetry$inboundSchema).optional(),
   cache: z.lazy(() => GetPromptVersionCache$inboundSchema).optional(),
-  load_balancer: z.array(
-    z.lazy(() => GetPromptVersionLoadBalancer1$inboundSchema),
-  ).optional(),
+  load_balancer: z.lazy(() => GetPromptVersionLoadBalancer1$inboundSchema)
+    .optional(),
   timeout: z.lazy(() => GetPromptVersionTimeout$inboundSchema).optional(),
   messages: z.array(
     z.union([
